@@ -28,7 +28,8 @@ import requireAuth from '../components/AuthGuardHoc';
 const routes = (
 	<div>
 		<Switch>
-			<Route exact path={Menu.PLANNING} component={DetailPages} />
+			<Route exact path={Menu.PLANNING_DETAILS} component={DetailPages} />
+			{/* <Route exact path={Menu.PLANNING_DASHBOARD} component={DetailPages} /> */}
 			{/* <Route exact path={Menu.LOGIN} component={LoginPage} />
 			<Route exact path={Menu.DASHBOARD} component={requireAuth(Dashboard)} />
 			<Route exact path={Menu.JOBS_SUMMARY} component={requireAuth(JobsPage)} />
