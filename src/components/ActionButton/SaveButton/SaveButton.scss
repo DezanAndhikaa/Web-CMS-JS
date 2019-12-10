@@ -1,0 +1,48 @@
+@import '../../../themes/functions';
+@import '../../../themes/variables';
+
+.save-button-row{
+    display: flex;
+    justify-content: flex-end;
+    height: vw(30);
+    width: 100%;
+    .save-button{
+        height: vw(30);
+        width: vw(30);
+        background-image: url('../../../assets/icons/save.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 1025px) {
+    .save-button-row{
+        display: flex;
+        justify-content: flex-end;
+        height: vw-tab(30);
+        width: 100%;
+        .save-button{
+            height: vw-tab(30);
+            width: vw-tab(30);
+            background-image: url('../../../assets/icons/save.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+    }
+}
+
+@media (max-width: 599px) {    
+    .save-button-row{
+        display: flex;
+        justify-content: flex-end;
+        height: vw-mobile(20);
+        width: 100%;
+        .save-button{
+            height: vw-mobile(20);
+            width: vw-mobile(20);
+            background-image: url('../../../assets/icons/save.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+    }
+}
