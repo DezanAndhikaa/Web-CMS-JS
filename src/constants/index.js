@@ -6,6 +6,9 @@ export const RequestMethod = {
 };
   
 export const Menu = {
+	PLANNING : '/webcms/planning',
+	PLANNING_DETAILS : '/webcms/planning/details',
+	PLANNING_DASHBOARD : '/webcms/planning/dashboard',
 	LOGIN: '/webdcajs/',
 	DASHBOARD: '/webdcajs/dashboard',
 	ALLOCATION: '/webdcajs/allocation',
