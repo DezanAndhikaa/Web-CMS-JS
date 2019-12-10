@@ -3,6 +3,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
 import { Menu } from '../constants';
+import DetailPages from '../views/planning/details/DetailPages';
 // import { JobsPage } from '../pages/jobs-execution/jobs';
 // import { LoginPage } from '../pages/login';
 // import MasterDataUploader from '../pages/master-data-uploader';
@@ -27,6 +28,7 @@ import requireAuth from '../components/AuthGuardHoc';
 const routes = (
 	<div>
 		<Switch>
+			<Route exact path={Menu.PLANNING} component={DetailPages} />
 			{/* <Route exact path={Menu.LOGIN} component={LoginPage} />
 			<Route exact path={Menu.DASHBOARD} component={requireAuth(Dashboard)} />
 			<Route exact path={Menu.JOBS_SUMMARY} component={requireAuth(JobsPage)} />

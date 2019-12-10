@@ -67,7 +67,7 @@ class SideMenuComponent extends React.Component {
                   ? "menu-item-selected"
                   : "menu-item"
               }
-              onClick={() => this.handleClick(Menu.DASHBOARD, "")}
+              onClick={() => this.handleClick(Menu.PLANNING, "")}
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img

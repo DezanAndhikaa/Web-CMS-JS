@@ -6,6 +6,7 @@ export const RequestMethod = {
 };
   
 export const Menu = {
+	PLANNING : '/planning/details',
 	LOGIN: '/webdcajs/',
 	DASHBOARD: '/webdcajs/dashboard',
 	JOBS: '/webdcajs/jobs',
