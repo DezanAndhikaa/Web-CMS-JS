@@ -10,6 +10,7 @@ import { Menu } from '../constants';
 // import Settings from '../pages/settings';
 import requireAuth from '../components/AuthGuardHoc';
 // import Dashboard from '../pages/dashboard/Dashboard';
+import DetailPages from '../views/planning/details/DetailPages'
 // import FcMonitoring from '../pages/fc-monitoring';
 // import PIDetailPage from '../pages/pi-detail';
 // import ProblemLogDetail from '../pages/pi-detail/components/problemlog-detail';
@@ -31,6 +32,7 @@ const routes = (
 			<Route exact path={Menu.DASHBOARD} component={requireAuth(Dashboard)} />
 			<Route exact path={Menu.JOBS_SUMMARY} component={requireAuth(JobsPage)} />
 			<Route exact path={Menu.JOBS_REPORT} component={requireAuth(JobsReport)} /> */}
+			<Route exact path={Menu.DASHBOARD} component={DetailPages} />
 			{/* Start Add Route For BMS */}
 			{/* <Route exact path={Menu.BACKLOG_MONITORING_WORKCENTER} component={BacklogMonitoringSheet}/>
 			<Route exact path={Menu.BACKLOG_MONITORING_UNITMODEL} component={BacklogMonitoringUnitModel}/>

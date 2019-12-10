@@ -1,0 +1,14 @@
+@import '../../themes/functions';
+@import '../../themes/variables';
+
+.assign-mechanic-modal{
+    width: vw(400);
+    height: vw(155);
+    background-color: white;
+    margin: auto;
+    border-radius: vw(20);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: vw(30);
+}

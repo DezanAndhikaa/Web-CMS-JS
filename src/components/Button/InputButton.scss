@@ -1,0 +1,29 @@
+@import '../../themes/variables';
+@import '../../themes/functions';
+
+.bottom-row{
+    // flex: 1;
+    // display: flex;
+    // flex-direction: row;
+    margin-top: 1vw;
+    .btn-assign{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: vw(84.22) !important;
+        height: vw(33.07) !important;
+        font-size: vw(13) !important;
+        font-weight: bold;
+        line-height: vw(16) !important;
+        font-family: 'Lato-Regular';
+        background-color: map-get($colors , primary);
+        text-transform: none;
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        border-radius: 0.4vw;
+        cursor: pointer;
+    }
+    .btn-assign:hover {
+        background-color: map-get($colors, primary-dark);
+    }
+
+}
