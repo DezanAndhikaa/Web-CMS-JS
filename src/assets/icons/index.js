@@ -87,6 +87,14 @@ import Pencil from './pencil.png';
 import PencilYellow from './edit-yellow.png';
 import Spinner from './spinner.gif';
 import ProblemLog from './problem-log.png';
+import AllocationIcon from './allocation.png';
+import PlanningIcon from './planning.png';
+import DashboardIcon from './dashboard.png';
+import DeliveryIcon from './delivery.png';
+import ExecutionIcon from './execution.png';
+import ProductionIcon from './production.png';
+import SettingIcon from './setting.png';
+import TrackingIcon from './tracking.png';
 
 export {
   AssignmentIcon,
@@ -177,5 +185,13 @@ export {
   Pencil,
   PencilYellow,
   Spinner,
-  ProblemLog
+  ProblemLog,
+  AllocationIcon,
+  PlanningIcon,
+  TrackingIcon,
+  DashboardIcon,
+  DeliveryIcon,
+  ExecutionIcon,
+  ProductionIcon,
+  SettingIcon
 };

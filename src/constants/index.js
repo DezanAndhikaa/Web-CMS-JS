@@ -9,6 +9,7 @@ export const Menu = {
 	PLANNING : '/planning/details',
 	LOGIN: '/webdcajs/',
 	DASHBOARD: '/webdcajs/dashboard',
+	ALLOCATION: '/webdcajs/allocation',
 	JOBS: '/webdcajs/jobs',
 	JOBS_SUMMARY: '/webdcajs/jobs/summary',
 	JOBS_REPORT: '/webdcajs/jobs/report',

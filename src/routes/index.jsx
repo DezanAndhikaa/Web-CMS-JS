@@ -7,7 +7,7 @@ import DetailPages from '../views/planning/details/DetailPages';
 // import { JobsPage } from '../pages/jobs-execution/jobs';
 // import { LoginPage } from '../pages/login';
 // import MasterDataUploader from '../pages/master-data-uploader';
-// import JobsReport from '../pages/jobs-execution/jobs-report';
+// import JobsReport from '../views/planning/details/DetailPages';
 // import Settings from '../pages/settings';
 import requireAuth from '../components/AuthGuardHoc';
 // import Dashboard from '../pages/dashboard/Dashboard';

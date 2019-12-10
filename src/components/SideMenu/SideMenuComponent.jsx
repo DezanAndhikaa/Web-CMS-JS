@@ -9,8 +9,10 @@ import {
   DialogContent,
   Collapse
 } from "@material-ui/core";
-import { DcaLogo } from "../../assets/imgs";
-import { AssignmentIcon, SettingsIcon, LogoutIcon } from "../../assets/icons";
+// import { DcaLogo } from "../../assets/imgs";
+import { UTLogoBlack } from "../../assets/imgs/";
+import { AssignmentIcon, LogoutIcon, AllocationIcon, DeliveryIcon, TrackingIcon,
+SettingIcon, ProductionIcon, ExecutionIcon, DashboardIcon, PlanningIcon } from "../../assets/icons";
 import { Menu, StorageKey } from "../../constants";
 import LogoutModal from "./Logout";
 import "./SideMenuComponent.scss";
@@ -57,8 +59,9 @@ class SideMenuComponent extends React.Component {
           open={this.props.menuDrawerState}
           onClose={() => this.props.closeDrawer()}
         >
-          <img src={DcaLogo} alt="logo" className="dca-logo" />
+          <img src={UTLogoBlack} alt="logo" className="dca-logo" />
           <List>
+            {/* Dashboard */}
             <ListItem
               button
               key="dashboard"
@@ -71,7 +74,7 @@ class SideMenuComponent extends React.Component {
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img
-                  src={AssignmentIcon}
+                  src={DashboardIcon}
                   alt="assignment icon"
                   className="item-icon"
                 />
@@ -81,6 +84,30 @@ class SideMenuComponent extends React.Component {
                 classes={{ primary: "item-text", root: "item-text" }}
               />
             </ListItem>
+            {/* Tracking */}
+            <ListItem
+              button
+              key="jobs"
+              className={
+                this.props.path.includes(Menu.PROBLEMLOG)
+                  ? "menu-item-selected"
+                  : "menu-item"
+              }
+              onClick={() => this.handleClick(Menu.PROBLEMLOG, "")}
+            >
+              <ListItemIcon classes={{ root: "icon-root" }}>
+                <img
+                  src={TrackingIcon}
+                  alt="assignment icon"
+                  className="item-icon"
+                />
+              </ListItemIcon>
+              <ListItemText
+                primary="Tracking"
+                classes={{ primary: "item-text", root: "item-text" }}
+              />
+            </ListItem>
+            {/* Planning */}
             <ListItem
               button
               key="jobs"
@@ -93,13 +120,13 @@ class SideMenuComponent extends React.Component {
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img
-                  src={AssignmentIcon}
+                  src={PlanningIcon}
                   alt="assignment icon"
                   className="item-icon"
                 />
               </ListItemIcon>
               <ListItemText
-                primary="Jobs Execution"
+                primary="Planning"
                 classes={{ primary: "item-text", root: "item-text" }}
               />
             </ListItem>
@@ -127,7 +154,7 @@ class SideMenuComponent extends React.Component {
                     />
                   </ListItemIcon>
                   <ListItemText
-                    primary="Jobs"
+                    primary="Dashboard"
                     classes={{ primary: "item-text", root: "item-text" }}
                   />
                 </ListItem>
@@ -149,17 +176,16 @@ class SideMenuComponent extends React.Component {
                     />
                   </ListItemIcon>
                   <ListItemText
-                    primary="Reports"
+                    primary="Detail"
                     classes={{ primary: "item-text", root: "item-text" }}
                   />
                 </ListItem>
               </List>
             </Collapse>
-            {/* MENU BACKLOG */}
-            {/*
+            {/* Production */}
             <ListItem
               button
-              key="backlog"
+              key="jobs"
               className={
                 this.props.path.includes(Menu.BACKLOG)
                   ? "menu-item-selected"
@@ -169,124 +195,68 @@ class SideMenuComponent extends React.Component {
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img
-                  src={AssignmentIcon}
+                  src={ProductionIcon}
                   alt="assignment icon"
                   className="item-icon"
                 />
               </ListItemIcon>
               <ListItemText
-                primary="Backlog"
+                primary="Production"
                 classes={{ primary: "item-text", root: "item-text" }}
               />
             </ListItem>
-              <Collapse
-                in={this.props.backlogMenuExpanded}
-                timeout="auto"
-                unmountOnExit
-              >
-                <List disablePadding>
-                */}
-                {/* ENTRY SHEET */}
-                {/*<ListItem
-                  button
-                  key="entry-sheet"
-                  className={
-                    this.props.path === Menu.BACKLOG_ENTRYSHEET
-                      ? "sub-menu-selected"
-                      : "sub-menu"
-                  }
-                  onClick={() => this.handleClick(Menu.BACKLOG, Menu.BACKLOG_ENTRYSHEET)}
-                >
-                  <ListItemIcon classes={{ root: "icon-root" }}>
-                    <img
-                      src={AssignmentIcon}
-                      alt="assignment icon"
-                      className="item-icon"
-                    />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Entry Sheet"
-                    classes={{ primary: "item-text", root: "item-text" }}
-                  />
-                </ListItem>
-                */}
-                {/* MONITORING */}
-                {/*
-                <ListItem
-                  button
-                  key="jobs-report"
-                  className={
-                    this.props.path === Menu.BACKLOG_MONITORING_WORKCENTER
-                      ? "sub-menu-selected"
-                      : "sub-menu"
-                  }
-                  onClick={() => this.handleClick(Menu.BACKLOG, Menu.BACKLOG_MONITORING_WORKCENTER)}
-                >
-                  <ListItemIcon classes={{ root: "icon-root" }}>
-                    <img
-                      src={AssignmentIcon}
-                      alt="assignment icon"
-                      className="item-icon"
-                    />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Monitoring"
-                    classes={{ primary: "item-text", root: "item-text" }}
-                  />
-                </ListItem>
-              </List>
-              </Collapse>
-              */}
-            {/* END BACKLOG */}
-            {/* START FC MONITORING */}
-            {/* <ListItem
+            {/* Allocation */}
+            <ListItem
               button
-              key="fc"
+              key="jobs"
               className={
-                this.props.path === Menu.FC ? "menu-item-selected" : "menu-item"
+                this.props.path.includes(Menu.ALLOCATION)
+                  ? "menu-item-selected"
+                  : "menu-item"
+              }
+              onClick={() => this.handleClick(Menu.ALLOCATION, "")}
+            >
+              <ListItemIcon classes={{ root: "icon-root" }}>
+                <img
+                  src={AllocationIcon}
+                  alt="assignment icon"
+                  className="item-icon"
+                />
+              </ListItemIcon>
+              <ListItemText
+                primary="Allocation"
+                classes={{ primary: "item-text", root: "item-text" }}
+              />
+            </ListItem>
+            {/* Delivery */}
+            <ListItem
+              button
+              key="jobs"
+              className={
+                this.props.path.includes(Menu.FC)
+                  ? "menu-item-selected"
+                  : "menu-item"
               }
               onClick={() => this.handleClick(Menu.FC, "")}
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img
-                  src={AssignmentIcon}
+                  src={DeliveryIcon}
                   alt="assignment icon"
                   className="item-icon"
                 />
               </ListItemIcon>
               <ListItemText
-                primary="FC Monitoring"
+                primary="Delivery"
                 classes={{ primary: "item-text", root: "item-text" }}
               />
-            </ListItem> */}
-            {/* END FC MONITORING */}
+            </ListItem>
+            {/* Execution */}
             <ListItem
               button
               key="jobs"
               className={
-                this.props.path.includes(Menu.PROBLEMLOG)
-                  ? "menu-item-selected"
-                  : "menu-item"
-              }
-              onClick={() => this.handleClick(Menu.PROBLEMLOG, "")}
-            >
-              <ListItemIcon classes={{ root: "icon-root" }}>
-                <img
-                  src={AssignmentIcon}
-                  alt="assignment icon"
-                  className="item-icon"
-                />
-              </ListItemIcon>
-              <ListItemText
-                primary="Problemlog Monitoring"
-                classes={{ primary: "item-text", root: "item-text" }}
-              />
-            </ListItem>
-            {/* <ListItem
-              button
-              key="master-data"
-              className={
-                this.props.path === Menu.MASTER_DATA
+                this.props.path.includes(Menu.MASTER_DATA)
                   ? "menu-item-selected"
                   : "menu-item"
               }
@@ -294,16 +264,17 @@ class SideMenuComponent extends React.Component {
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img
-                  src={AssignmentIcon}
+                  src={ExecutionIcon}
                   alt="assignment icon"
                   className="item-icon"
                 />
               </ListItemIcon>
               <ListItemText
-                primary="Master Data Uploader"
+                primary="Execution"
                 classes={{ primary: "item-text", root: "item-text" }}
               />
-            </ListItem> */}
+            </ListItem>
+            {/* Setting */}
             <ListItem
               button
               key="settings"
@@ -316,7 +287,7 @@ class SideMenuComponent extends React.Component {
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img
-                  src={SettingsIcon}
+                  src={SettingIcon}
                   alt="assignment icon"
                   className="item-icon"
                 />
