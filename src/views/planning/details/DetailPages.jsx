@@ -1,5 +1,8 @@
 import React from 'react'
 import InputButton from '../../../components/Button/InputButton'
+import SaveButton from "../../../components/ActionButton/SaveButton/SaveButton";
+import EditButton from "../../../components/ActionButton/EditButton/EditButton";
+
 
 class DetailPages extends React.Component{
 
@@ -7,6 +10,9 @@ class DetailPages extends React.Component{
         return(
             <main className="content">
                 <InputButton/>
+                <SaveButton/>
+                <br></br>
+                <EditButton/>
             </main>
         )
     }
