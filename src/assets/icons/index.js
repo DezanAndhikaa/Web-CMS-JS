@@ -95,7 +95,8 @@ import ExecutionIcon from './execution.png';
 import ProductionIcon from './production.png';
 import SettingIcon from './setting.png';
 import TrackingIcon from './tracking.png';
-
+import SearchIcon from './search.png';
+import FolderIcon from './folder.png';
 export {
   AssignmentIcon,
   SettingsIcon,
@@ -193,5 +194,7 @@ export {
   DeliveryIcon,
   ExecutionIcon,
   ProductionIcon,
-  SettingIcon
+  SettingIcon,
+  SearchIcon,
+  FolderIcon
 };

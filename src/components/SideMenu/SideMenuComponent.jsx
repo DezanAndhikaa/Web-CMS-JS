@@ -9,7 +9,6 @@ import {
   DialogContent,
   Collapse
 } from "@material-ui/core";
-// import { DcaLogo } from "../../assets/imgs";
 import { UTLogoBlack } from "../../assets/imgs/";
 import { AssignmentIcon, LogoutIcon, AllocationIcon, DeliveryIcon, TrackingIcon,
 SettingIcon, ProductionIcon, ExecutionIcon, DashboardIcon, PlanningIcon } from "../../assets/icons";
@@ -35,7 +34,7 @@ class SideMenuComponent extends React.Component {
 
   handleClick(menu, subMenu) {
     this.props.clickMenu(menu, subMenu);
-    if (menu === Menu.JOBS) {
+    if (menu === Menu.PLANNING) {
       if (subMenu !== "") this.props.push(subMenu);
     }else if (menu === Menu.BACKLOG){
       if (subMenu !== "") this.props.push(subMenu);
@@ -140,11 +139,11 @@ class SideMenuComponent extends React.Component {
                   button
                   key="jobs-assignment"
                   className={
-                    this.props.path === Menu.JOBS_SUMMARY
+                    this.props.path === Menu.PLANNING_DASHBOARD
                       ? "sub-menu-selected"
                       : "sub-menu"
                   }
-                  onClick={() => this.handleClick(Menu.JOBS, Menu.JOBS_SUMMARY)}
+                  onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_DASHBOARD)}
                 >
                   <ListItemIcon classes={{ root: "icon-root" }}>
                     <img
@@ -162,11 +161,11 @@ class SideMenuComponent extends React.Component {
                   button
                   key="jobs-report"
                   className={
-                    this.props.path === Menu.JOBS_REPORT
+                    this.props.path === Menu.PLANNING_DETAILS
                       ? "sub-menu-selected"
                       : "sub-menu"
                   }
-                  onClick={() => this.handleClick(Menu.JOBS, Menu.JOBS_REPORT)}
+                  onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_DETAILS)}
                 >
                   <ListItemIcon classes={{ root: "icon-root" }}>
                     <img
