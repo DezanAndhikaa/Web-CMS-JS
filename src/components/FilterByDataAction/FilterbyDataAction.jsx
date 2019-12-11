@@ -3,6 +3,7 @@
 import React from 'react';
 // import { ExpandMore } from '@material-ui/icons';
 import './FilterbyDataAction.scss';
+// import { FolderIcon } from '../../assets/icons/index'
 
 class FilterbyDataAction extends React.Component {
   constructor(props) {
@@ -52,10 +53,10 @@ class FilterbyDataAction extends React.Component {
   renderDropdownList() {
     return (
       <ul className="list-items">
-        {this.props.data
+        {/* {this.props.data
           && this.props.data.map((item, index) => (
             item && <div className="list-item" onClick={() => this.selectItem(item)} key={index}>{this.handleJobType(item)}</div>
-          ))}
+          ))} */}
       </ul>
     );
   }
@@ -78,7 +79,7 @@ class FilterbyDataAction extends React.Component {
       <div className="dropdown">
         {this.renderDropdown()}
         {
-          this.state.displayMenu && this.renderDropdownList()
+          this.state.displayMenu && this.renderDropdownList()  
         }
       </div>
     );

@@ -23,7 +23,7 @@ export default class InputButton extends React.Component{
     render(){
         return(
             <div className="bottom-row">
-            <Button onClick={this.isClicked} className="btn-assign">Input</Button>
+            <Button onClick={this.isClicked} className="btn-assigns">Input</Button>
                 <Modal className="modal-pos" open={this.state.isShowModal} onCancel={this.isClosed} >
                     <div>
                         <InputText 

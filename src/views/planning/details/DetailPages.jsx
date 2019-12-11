@@ -5,21 +5,22 @@ import Searchbar from "../../../components/Searchbar/SearchInput";
 import FilterbyDataAction from '../../../components/FilterByDataAction/FilterbyDataAction';
 import PlanningListHeader from './components/PlanningListHeader/PlanningListHeader';
 import PlanningList from './components/PlanningList/PlanningList';
+import './DetailPages.scss';
 
 class DetailPages extends React.Component{
     state = {
         planningList: [
             {
-            so: '00000',
-            costumer: 'BUMA',
-            site: 'TJG',
-            unitModel: 'PC2000-8',
-            compDesc: 'AXLE ASSY FRONT RIGHT',
-            partNumber: '235-22-00131',
-            unitCode: 'XXXX',
-            serialNumber: 'XXXXX',
-            lifetimeComp: 'XXXXX',
-            planExecution: '17 December 2019'
+                so: '00000',
+                costumer: 'BUMA',
+                site: 'TJG',
+                unitModel: 'PC2000-8',
+                compDesc: 'AXLE ASSY FRONT RIGHT',
+                partNumber: '235-22-00131',
+                unitCode: 'XXXX',
+                serialNumber: 'XXXXX',
+                lifetimeComp: 'XXXXX',
+                planExecution: '17 December 2019'
             },
             {
                 so: '00001',
@@ -62,13 +63,12 @@ class DetailPages extends React.Component{
     render(){
         return(
             <main className="content">
-                <div>
-                    <Searchbar /> &nbsp;&nbsp;&nbsp;&nbsp;
-                    <FilterbyDataAction />
-                    <br></br>
-                </div>
-
                 <div className="table-container">
+                    <div>
+                        <Searchbar /> &nbsp;&nbsp;&nbsp;&nbsp;
+                        {/* <FilterbyDataAction /> */}
+                        <br></br>
+                    </div>
 					{this._renderTableHeader()}
 				</div>
             </main>
