@@ -111,11 +111,11 @@ class SideMenuComponent extends React.Component {
               button
               key="jobs"
               className={
-                this.props.path.includes(Menu.JOBS)
+                this.props.path.includes(Menu.PLANNING)
                   ? "menu-item-selected"
                   : "menu-item"
               }
-              onClick={() => this.handleClick(Menu.JOBS, "")}
+              onClick={() => this.handleClick(Menu.PLANNING, "")}
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img
