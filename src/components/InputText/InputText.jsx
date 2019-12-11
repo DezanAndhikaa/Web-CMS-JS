@@ -13,7 +13,7 @@ class InputText extends React.Component{
                     <p className="select-input-title">{this.props.title}</p>
                     <CloseButton onClose={this.props.onClosed}/>
                 </div>
-                <div className="top-middle">
+                <div className="top-middle"> 
                     <DropDownList/>
                 </div>
                 <div className="bottom-row">
