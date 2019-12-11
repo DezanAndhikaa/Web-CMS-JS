@@ -32,7 +32,7 @@ class DetailPages extends React.Component{
             }
         ],
         selectedPlanningList: [],
-        displayCheckbox: true,
+        displayCheckbox: true
         // selectPlan: []
     }
     
