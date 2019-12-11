@@ -10,7 +10,7 @@ const initialState = {
 
 export default function clickMenuReducer(state = initialState, action) {
 	if (action.type === CLICK_MENU) {
-		if (action.payload.menu === Menu.JOBS && action.payload.subMenu === '') {
+		if (action.payload.menu === Menu.PLANNING && action.payload.subMenu === '') {
 			return {
 				activeMenu: action.payload.menu,
 				activeSubMenu: action.payload.subMenu,
