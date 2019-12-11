@@ -9,9 +9,8 @@ import DetailPages from '../views/planning/details/DetailPages';
 // import MasterDataUploader from '../pages/master-data-uploader';
 // import JobsReport from '../views/planning/details/DetailPages';
 // import Settings from '../pages/settings';
-import requireAuth from '../components/AuthGuardHoc';
+// import requireAuth from '../components/AuthGuardHoc';
 // import Dashboard from '../pages/dashboard/Dashboard';
-import DetailPages from '../views/planning/details/DetailPages'
 // import FcMonitoring from '../pages/fc-monitoring';
 // import PIDetailPage from '../pages/pi-detail';
 // import ProblemLogDetail from '../pages/pi-detail/components/problemlog-detail';
