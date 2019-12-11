@@ -14,7 +14,6 @@ export default class InputButton extends React.Component{
 
     isClicked = () => {
         this.setState({isShowModal: !this.state.isShowModal})
-        console.log("berhasil klik cuy : "+ this.state.isShowModal)
     }
 
     isClosed = () => {
@@ -25,16 +24,13 @@ export default class InputButton extends React.Component{
         return(
             <div className="bottom-row">
             <Button onClick={this.isClicked} className="btn-assign">Input</Button>
-                <Modal
-                    open={this.state.isShowModal}
-                    onClose={this.isClosed}
-                    >
+                <Modal className="modal-pos" open={this.state.isShowModal} onCancel={this.isClosed} >
                     <div>
-                        <InputText/>
-                        {/* <h2 id="simple-modal-title">Text in a modal</h2>
-                        <p id="simple-modal-description">
-                            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                        </p> */}
+                        <InputText 
+                            {...this.props}
+                            title={"Input Unit Data"} 
+                            onClosed={this.isClosed}
+                        />
                     </div>
                 </Modal>
             </div>

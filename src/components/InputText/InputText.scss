@@ -2,6 +2,7 @@
 @import '../../themes/variables';
 
 .assign-mechanic-modal{
+    position: 'absolute';
     width: vw(400);
     height: vw(155);
     background-color: white;
@@ -11,4 +12,77 @@
     justify-content: space-between;
     flex-direction: column;
     padding: vw(30);
+    .ut-underline{
+        margin-top: vw(1.5);
+        margin-bottom: vw(10);
+        width: vw(8);
+        height: vw(20);
+        background-color: map-get($colors, primary);
+    }
+    .top-row{
+        display: flex;
+        justify-content: space-between;
+        // flex-direction: column;
+        height: vw(30);
+    }
+    .top-middle{
+        margin-top: vw(10);
+        height: vw(100)
+    }
+    .top-bottom{
+        display:flex;
+        justify-content: space-between;
+        height: vw (30)
+    }
+    .select-input-title{
+        margin: 0;
+        margin-right: vw(47);
+        font-weight: bold;
+        width: 50%;
+    }
+    
+}
+
+.bottom-row{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    .btn-input{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: vw(15);
+        // width: vw(170.22) !important;
+        width: 50%;
+        height: vw(33.07) !important;
+        font-size: vw(13) !important;
+        font-weight: bold;
+        line-height: vw(16) !important;
+        font-family: 'Lato-Regular';
+        background-color: map-get($colors , primary);
+        text-transform: none;
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        border-radius: 0.4vw;
+        cursor: pointer;
+    }
+    .btn-input:hover {
+        background-color: map-get($colors, primary-dark);
+    }
+    .btn-cancel{
+        margin-left: 45%;
+        background-color: #F2F2F4;
+        text-transform: none;
+        font-family: 'Lato-Regular';
+        font-weight: bold;
+        width: vw(84.22) !important;
+        height: vw(33.07) !important;
+        font-size: vw(12);
+        border-radius: vw(5);
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.161);
+        color: #1D1D1D;
+        cursor: pointer;
+    }
+    .btn-cancel:hover{
+        background-color: rgb(227, 227, 230);
+    }
 }

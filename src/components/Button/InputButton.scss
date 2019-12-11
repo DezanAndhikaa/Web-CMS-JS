@@ -1,6 +1,13 @@
 @import '../../themes/variables';
 @import '../../themes/functions';
 
+.modal-pos{
+    outline: '0';
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
 .bottom-row{
     // flex: 1;
     // display: flex;
@@ -25,5 +32,4 @@
     .btn-assign:hover {
         background-color: map-get($colors, primary-dark);
     }
-
 }
