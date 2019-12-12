@@ -7,7 +7,7 @@
         .drawer-paper{
             border: none;
             box-shadow: 0 vw(15) vw(30) rgba(0, 0, 0, 0.161);
-            width: vw(241) !important;
+            width: vw(281) !important;
             .dca-logo{
                 width: vw(184);
                 left: -vw(30);
@@ -16,7 +16,8 @@
             .menu-item{
                 height: vw(37);
                 margin-bottom: vw(10);
-                margin-left: vw(22);
+                margin-left: vw(12);
+                border-radius: vw(15);
                 .item-text{
                     font-family: 'Lato-Bold' !important;
                     font-style: normal;
@@ -30,6 +31,8 @@
             }
             .menu-item:hover{
                 background-color: map-get($colors , primary);
+                // width: 80%;
+                // margin-right: vw(200);
             }
             .icon-root{
                 min-width: vw(10);
@@ -40,6 +43,7 @@
                 margin-bottom: vw(10);
                 margin-left: vw(22);
                 background-color: map-get($colors , primary);
+                border-radius: vw(15);
                 .item-text{
                     font-family: 'Lato-Bold' !important;
                     font-style: normal;

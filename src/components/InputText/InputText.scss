@@ -27,7 +27,14 @@
     }
     .top-middle{
         margin-top: vw(10);
-        height: vw(100)
+        height: vw(100);
+        .teks{
+            width: 100%;
+        }
+        .label{
+            font-size: 9px;
+            width: 100%
+        }
     }
     .top-bottom{
         display:flex;
@@ -36,9 +43,10 @@
     }
     .select-input-title{
         margin: 0;
-        margin-right: vw(47);
+        margin-right: vw(17);
         font-weight: bold;
-        width: 50%;
+        font-size: 15px; 
+        width: 60%;
     }
     
 }
@@ -47,6 +55,7 @@
     flex: 1;
     display: flex;
     flex-direction: row;
+    margin-top: vw(20);
     .btn-input{
         display: flex;
         align-items: center;
