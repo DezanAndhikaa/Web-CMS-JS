@@ -105,66 +105,66 @@ const initialMechanicsState = { data: [], status: ApiRequestActionsStatus.IDLE }
 // 	return state;
 // }
 
-export function fetchPlansReducer(state = initialPlansState, action) {
-	if (action.type === FetchPlansAction) {
-		switch (action.status) {
-		case ApiRequestActionsStatus.SUCCEEDED:
-			return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
-		case ApiRequestActionsStatus.FAILED:
-			return {
-				data: initialPlansState.data,
-				status: ApiRequestActionsStatus.FAILED,
-				error: action.error,
-			};
-		default:
-			return { data: initialPlansState.data, status: ApiRequestActionsStatus.LOADING };
-		}
-	}
-	return state;
-}
+// export function fetchPlansReducer(state = initialPlansState, action) {
+// 	if (action.type === FetchPlansAction) {
+// 		switch (action.status) {
+// 		case ApiRequestActionsStatus.SUCCEEDED:
+// 			return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+// 		case ApiRequestActionsStatus.FAILED:
+// 			return {
+// 				data: initialPlansState.data,
+// 				status: ApiRequestActionsStatus.FAILED,
+// 				error: action.error,
+// 			};
+// 		default:
+// 			return { data: initialPlansState.data, status: ApiRequestActionsStatus.LOADING };
+// 		}
+// 	}
+// 	return state;
+// }
 
-export function getMechanicsReducer(state = initialMechanicsState, action) {
-	if (action.type === GetMechanicsAction) {
-		switch (action.status) {
-		case ApiRequestActionsStatus.SUCCEEDED:
-			return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
-		case ApiRequestActionsStatus.FAILED:
-			return {
-				data: initialMechanicsState.data,
-				status: ApiRequestActionsStatus.FAILED,
-				error: action.error,
-			};
-		default:
-			return { data: initialMechanicsState.data, status: ApiRequestActionsStatus.LOADING };
-		}
-	}
-	return state;
-}
+// export function getMechanicsReducer(state = initialMechanicsState, action) {
+// 	if (action.type === GetMechanicsAction) {
+// 		switch (action.status) {
+// 		case ApiRequestActionsStatus.SUCCEEDED:
+// 			return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+// 		case ApiRequestActionsStatus.FAILED:
+// 			return {
+// 				data: initialMechanicsState.data,
+// 				status: ApiRequestActionsStatus.FAILED,
+// 				error: action.error,
+// 			};
+// 		default:
+// 			return { data: initialMechanicsState.data, status: ApiRequestActionsStatus.LOADING };
+// 		}
+// 	}
+// 	return state;
+// }
 
-export function plansParameterReducer(state = initialParameter, action) {
-	if (action.type === UpdatePlansParameterAction) return action.payload;
-	return state;
-}
+// export function plansParameterReducer(state = initialParameter, action) {
+// 	if (action.type === UpdatePlansParameterAction) return action.payload;
+// 	return state;
+// }
 
-export function searchPlansReducer(state = '', action) {
-	if (action.type === SearchPlansAction) return action.payload;
-	return state;
-}
+// export function searchPlansReducer(state = '', action) {
+// 	if (action.type === SearchPlansAction) return action.payload;
+// 	return state;
+// }
 
-export function selectedFiltersReducer(state = initialSelectedFilter, action) {
-	switch (action.type) {
-	case SelectPlansTypeFilterAction:
-		return { ...state, planType: action.payload };
-	case SelectUnitModelFilterAction:
-		return { ...state, unitModel: action.payload };
-	case SelectCustomerFilterAction:
-		return { ...state, customer: action.payload };
-	case SelectPlansAssignmentFilterAction:
-		return { ...state, plansAssignment: action.payload };
-	default:
-		return state;
-	}
-}
+// export function selectedFiltersReducer(state = initialSelectedFilter, action) {
+// 	switch (action.type) {
+// 	case SelectPlansTypeFilterAction:
+// 		return { ...state, planType: action.payload };
+// 	case SelectUnitModelFilterAction:
+// 		return { ...state, unitModel: action.payload };
+// 	case SelectCustomerFilterAction:
+// 		return { ...state, customer: action.payload };
+// 	case SelectPlansAssignmentFilterAction:
+// 		return { ...state, plansAssignment: action.payload };
+// 	default:
+// 		return state;
+// 	}
+// }
 
 export function selectPlansReducer(state = [], action) {
 	switch (action.type) {
@@ -283,16 +283,16 @@ export function storePlanDataReducer(state = {}, action) {
 
 const PlansReducers = combineReducers({
 	selectedLeader: selectLeaderReducer,
-	mechanicList: getMechanicsReducer,
+	// mechanicList: getMechanicsReducer,
 	selectedPlans: selectPlansReducer,
 	selectedMechanics: selectMechanicsReducer,
 	// assignPlansStatus: assignPlansReducer,
 	// unassignPlansStatus: unassignPlansReducer,
-	plansParameter: plansParameterReducer,
-	PlansAssignmentSummary: fetchPlansReducer,
-	selectedFilters: selectedFiltersReducer,
-	sortBy: sortPlansByReducer,
-	searchValue: searchPlansReducer,
+	// plansParameter: plansParameterReducer,
+	// PlansAssignmentSummary: fetchPlansReducer,
+	// selectedFilters: selectedFiltersReducer,
+	// sortBy: sortPlansByReducer,
+	// searchValue: searchPlansReducer,
 	selectedPlanData: storePlanDataReducer,
 });
 
