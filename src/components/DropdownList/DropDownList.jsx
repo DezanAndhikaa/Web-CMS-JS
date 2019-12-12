@@ -6,7 +6,7 @@ class DropDownList extends React.Component{
     render(){
         return(
             <div>
-                <Select className="dropdown" labelId="label" id="select">
+                <Select className="dropdowns" labelId="label" id="select">
                     <MenuItem value="0"></MenuItem>
                     <MenuItem value="10">EXKM21034</MenuItem>
                     <MenuItem value="20">EXKM21035</MenuItem>

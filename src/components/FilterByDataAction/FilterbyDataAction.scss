@@ -29,7 +29,9 @@
             color: black;
             cursor: pointer;
             .expand-icon-container{
-                background-color: map-get($colors, primary);
+                background-image: url('../../assets/icons/folder.png');
+                background-color: map-get($colors, third);
+                background-size: 100%;
                 position: absolute;
                 right: 0;
                 height: 100%;
