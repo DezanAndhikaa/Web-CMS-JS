@@ -22,9 +22,9 @@ export default class PlanningList extends React.PureComponent {
 
     isCheckboxAvailable = (data) => {
         let isAvailable = false;
-        if (this.props.selectedPlanList.some((plans) => plans.status === 'Assigned')) {
-          isAvailable = this.props.selectedPlanList.some((plans) => plans.status !== data.status);
-        } else { isAvailable = this.props.selectedPlanList.some((plans) => plans.status !== 'Assigned') && data.status === 'Assigned'; }
+        if (this.props.selectedPlanList.some((plan) => plan.status === 'Assigned')) {
+          isAvailable = this.props.selectedPlanList.some((plan) => plan.status !== data.status);
+        } else { isAvailable = this.props.selectedPlanList.some((plan) => plan.status !== 'Assigned') && data.status === 'Assigned'; }
         return isAvailable;
       }
 
