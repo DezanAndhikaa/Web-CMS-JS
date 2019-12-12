@@ -5,10 +5,10 @@
     width: vw(330);
     position: relative;
     background-color: #ffffff !important;
-    border-radius: vw(20) !important;
+    border-radius: vw(15) !important;
     display: flex;
     align-items: center;
-    height: vw(50);
+    height: vw((45.07));
     box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161) !important;
     .search-icon{
         margin-left: vw(20.97);
@@ -33,7 +33,7 @@
         width: 100%;
         position: relative;
         background-color: #ffffff !important;
-        border-radius: vw-tab(20) !important;
+        border-radius: vw-tab(15) !important;
         display: flex;
         align-items: center;
         height: vw-tab(46);
@@ -62,7 +62,7 @@
         width: 100%;
         position: relative;
         background-color: #ffffff !important;
-        border-radius: vw-mobile(20) !important;
+        border-radius: vw-mobile(15) !important;
         display: flex;
         align-items: center;
         height: vw-mobile(38);

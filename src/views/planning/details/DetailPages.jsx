@@ -66,7 +66,7 @@ class DetailPages extends React.Component{
                 <div className="table-container">
                     <div>
                         <Searchbar /> &nbsp;&nbsp;&nbsp;&nbsp;
-                        {/* <FilterbyDataAction /> */}
+                        <FilterbyDataAction />
                         <br></br>
                     </div>
 					{this._renderTableHeader()}

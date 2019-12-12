@@ -3,7 +3,7 @@
 import React from 'react';
 // import { ExpandMore } from '@material-ui/icons';
 import './FilterbyDataAction.scss';
-// import { FolderIcon } from '../../assets/icons/index'
+import { Button } from '@material-ui/core';
 
 class FilterbyDataAction extends React.Component {
   constructor(props) {
@@ -31,19 +31,11 @@ class FilterbyDataAction extends React.Component {
     this.props.onSelectAction(this.props.onSelectActionType, item);
   }
 
-  handleJobType = (item) => {
-    let newItem = item
-    if(item === 'INS'){
-      newItem = 'Periodic Inspection'
-    }
-    return newItem
-  }
-
   renderDropdown() {
     return (
       <div className="dropdown-button" onClick={this.showDropdownMenu}>
         <div className="dropdown-selected-item">
-          {this.props.selected}
+          Data Action
           <div className="expand-icon-container"></div>
         </div>
       </div>
@@ -52,12 +44,14 @@ class FilterbyDataAction extends React.Component {
 
   renderDropdownList() {
     return (
-      <ul className="list-items">
-        {/* {this.props.data
-          && this.props.data.map((item, index) => (
-            item && <div className="list-item" onClick={() => this.selectItem(item)} key={index}>{this.handleJobType(item)}</div>
-          ))} */}
-      </ul>
+      <div className="list-items">
+          <Button className="button" variant="outlined">
+            Planning Approved
+          </Button>
+          <Button className="button" variant="outlined">
+            Planning Deleted
+          </Button>
+      </div>
     );
   }
 

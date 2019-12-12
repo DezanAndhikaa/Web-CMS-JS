@@ -1,0 +1,62 @@
+@import '../../themes/functions';
+@import '../../themes/variables';
+
+.bottom-inline{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    .btn-download{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: vw(15);
+        width: vw(153.22);
+        height: vw(45.07);;
+        font-size: vw(13) !important;
+        font-weight: bold;
+        line-height: vw(16) !important;
+        font-family: 'Lato-Regular';
+        background-color: white;
+        text-transform: capitalize;
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        border-radius: vw(15) !important;
+        cursor: pointer;
+    }
+    .btn-approve{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: vw(15);
+        width: vw(153.22);
+        height: vw(45.07);;
+        font-size: vw(13) !important;
+        font-weight: bold;
+        line-height: vw(16) !important;
+        font-family: 'Lato-Regular';
+        background-color: map-get($colors , third);
+        text-transform: capitalize;
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        border-radius: vw(15) !important;
+        cursor: pointer;
+    }
+    .btn-cancel{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: vw(15);
+        width: vw(173.22);
+        height: vw(45.07);;
+        font-size: vw(13) !important;
+        font-weight: bold;
+        line-height: vw(16) !important;
+        font-family: 'Lato-Regular';
+        background-color: map-get($colors , rgba(255, 0, 0, 0.699));
+        text-transform: capitalize;
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        border-radius: vw(15) !important;
+        cursor: pointer;
+    }
+    .btn-cancel:hover{
+        background-color: rgb(227, 227, 230);
+    }
+}
