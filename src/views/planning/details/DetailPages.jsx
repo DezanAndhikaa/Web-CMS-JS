@@ -65,7 +65,7 @@ class DetailPages extends React.Component{
     }
 
     _renderSearchBar(){
-        return( <Searchbar > &nbsp;&nbsp;&nbsp;&nbsp;</Searchbar> ); }
+        return( <Searchbar > &nbsp;&nbsp;&nbsp;&nbsp;</Searchbar> ) }
 
     _renderFilterByDataAction(){
         return(
