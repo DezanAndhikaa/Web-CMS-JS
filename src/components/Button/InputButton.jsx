@@ -24,12 +24,14 @@ export default class InputButton extends React.Component{
         return(
             <div className="bottom-row">
             <Button onClick={this.isClicked} className="btn-assigns">Input</Button>
-                <Modal className="modal-pos" open={this.state.isShowModal} onCancel={this.isClosed} >
+                <Modal className="modal-pos" open={this.state.isShowModal} onClose={this.isClosed}>
                     <div>
                         <InputText 
                             {...this.props}
-                            title={"Input Unit Data"} 
+                            {...this.state}
+                            title={this.props.title} 
                             onClosed={this.isClosed}
+                            onStats={this.props.onStats}
                         />
                     </div>
                 </Modal>

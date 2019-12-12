@@ -123,9 +123,14 @@ render(){
                 <TableCell align="left" className="table-cell"> {row.unitModel} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.compDesc} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.partNumber} </TableCell>
-                <TableCell align="left" className="table-cell"> <InputButton /> </TableCell>
-                <TableCell align="left" className="table-cell"> <InputButton /> </TableCell>
-                <TableCell align="left" className="table-cell"> <InputButton /> </TableCell>
+                <TableCell align="left" className="table-cell"> {row.unitCode} </TableCell>
+                <TableCell align="left" className="table-cell"> {row.serialNumber} </TableCell>
+                {/* <TableCell align="left" className="table-cell"> 
+                  {this.props.stats ? <InputButton title={"Input Lifetime Component"} onStats={this.props.onStats}/> : 
+                    <button>klik me!</button>
+                  }
+                </TableCell> */}
+                <TableCell align="center" className="table-cell"> <InputButton title={"Input Lifetime Component"} /></TableCell>
                 <TableCell align="left" className="table-cell"> {row.planExecution} </TableCell>
                 <TableCell align="center" className="table-cell"> <EditButton /></TableCell>
                 <TableCell align="center" className="table-cell"> <SaveButton /></TableCell>

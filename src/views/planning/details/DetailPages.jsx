@@ -9,6 +9,7 @@ import './DetailPages.scss';
 
 class DetailPages extends React.Component{
     state = {
+        stats: true,
         planningList: [
             {
                 so: '00000',
@@ -39,15 +40,22 @@ class DetailPages extends React.Component{
         displayCheckbox: true
     }
     
+    isChangeStat = () =>{
+        this.setState({ stats: !this.state.stats})
+        console.log("nilai mnilai : "+ this.state.stats)
+    }
+
 	_renderTableHeader(){
 		return(
 			<div className="plannings-list-container">
 				<PlanningList
                     {...this.props}
+                    {...this.state}
                     onChoosed={this.updateAssignmentStates}
                     planningList={this.state.planningList}
                     selectedPlanList={this.state.selectedPlanningList}
                     displayCheckbox={this.state.displayCheckbox}
+                    onStats={this.isChangeStat}
 				/>
 			</div>
 		);
