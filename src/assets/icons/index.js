@@ -97,6 +97,7 @@ import SettingIcon from './setting.png';
 import TrackingIcon from './tracking.png';
 import SearchIcon from './search.png';
 import FolderIcon from './folder.png';
+import ApproveIcon from './send.png';
 export {
   AssignmentIcon,
   SettingsIcon,
@@ -196,5 +197,6 @@ export {
   ProductionIcon,
   SettingIcon,
   SearchIcon,
-  FolderIcon
+  FolderIcon,
+  ApproveIcon
 };

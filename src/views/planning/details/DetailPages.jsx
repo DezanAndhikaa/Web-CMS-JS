@@ -1,9 +1,7 @@
 import React from 'react'
-import SaveButton from "../../../components/ActionButton/SaveButton/SaveButton";
-import EditButton from "../../../components/ActionButton/EditButton/EditButton";
+import BaseButton from "../../../components/Button/BaseButton";
 import Searchbar from "../../../components/Searchbar/SearchInput";
 import FilterbyDataAction from '../../../components/FilterByDataAction/FilterbyDataAction';
-import PlanningListHeader from './components/PlanningListHeader/PlanningListHeader';
 import PlanningList from './components/PlanningList/PlanningList';
 import './DetailPages.scss';
 
@@ -67,7 +65,8 @@ class DetailPages extends React.Component{
                     <div>
                         <Searchbar /> &nbsp;&nbsp;&nbsp;&nbsp;
                         <FilterbyDataAction />
-                        <br></br>
+                        <br></br><br></br>
+                        <BaseButton />
                     </div>
 					{this._renderTableHeader()}
 				</div>
