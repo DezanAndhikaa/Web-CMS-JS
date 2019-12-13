@@ -59,6 +59,8 @@ class DetailPages extends React.Component{
         planningList={this.state.planningList}
         selectedPlanList={this.state.selectedPlans}
         displayCheckbox={this.state.displayCheckbox}
+        stats={this.state.stats}
+        onStats={this.isChangeStat}
         />
         </>
         );

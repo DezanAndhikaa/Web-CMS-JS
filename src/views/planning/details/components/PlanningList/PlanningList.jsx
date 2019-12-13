@@ -84,8 +84,9 @@ render(){
               delay={300}
             // //   isAscending={this.props.sortJobsByState.status.isAscending}            
             />
-            <PlanningListHeader
-              name="Lifetime Comp"
+            <InputButton
+              titles="Lifetime Comp"
+              title="Lifetime Component"
             // //   isActive={this.props.sortJobsByState.staging.isActive}
               delay={300}
             // //   isAscending={this.props.sortJobsByState.staging.isAscending}
@@ -125,12 +126,12 @@ render(){
                 <TableCell align="left" className="table-cell"> {row.partNumber} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.unitCode} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.serialNumber} </TableCell>
-                {/* <TableCell align="left" className="table-cell"> 
-                  {this.props.stats ? <InputButton title={"Input Lifetime Component"} onStats={this.props.onStats}/> : 
+                <TableCell align="left" className="table-cell"> 
+                  {this.props.stats ? <InputButton title={"Input Lifetime Component"} titles={"Input"} onStats={this.props.onStats}/> : 
                     <button>klik me!</button>
                   }
-                </TableCell> */}
-                <TableCell align="center" className="table-cell"> <InputButton title={"Input Lifetime Component"} /></TableCell>
+                </TableCell>
+                {/* <TableCell align="center" className="table-cell"> <InputButton title={"Input Lifetime Component"} titles={"Input"}/></TableCell> */}
                 <TableCell align="left" className="table-cell"> {row.planExecution} </TableCell>
                 <TableCell align="center" className="table-cell"> <EditButton /></TableCell>
                 <TableCell align="center" className="table-cell"> <SaveButton /></TableCell>

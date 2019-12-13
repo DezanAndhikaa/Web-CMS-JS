@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Modal } from '@material-ui/core'
 import './InputButton.scss'
 import InputText from '../InputText/InputText'
+import FilterByLifetime from '../FilterByLifetime/FilterByLifetime'
 
 export default class InputButton extends React.Component{
     
@@ -21,21 +22,40 @@ export default class InputButton extends React.Component{
     }
 
     render(){
-        return(
-            <div className="bottom-row">
-            <Button onClick={this.isClicked} className="btn-assigns">Input</Button>
-                <Modal className="modal-pos" open={this.state.isShowModal} onClose={this.isClosed}>
-                    <div>
-                        <InputText 
-                            {...this.props}
-                            {...this.state}
-                            title={this.props.title} 
-                            onClosed={this.isClosed}
-                            onStats={this.props.onStats}
-                        />
-                    </div>
-                </Modal>
-            </div>
-        )
+        if(this.props.titles === "Input"){
+            return(
+                <div className="bottom-row">
+                <Button onClick={this.isClicked} className="btn-assigns">{this.props.titles}</Button>
+                    <Modal className="modal-pos" open={this.state.isShowModal} onClose={this.isClosed}>
+                        <div>
+                            <InputText 
+                                {...this.props}
+                                {...this.state}
+                                title={this.props.title} 
+                                onClosed={this.isClosed}
+                                onStats={this.props.onStats}
+                            />
+                        </div>
+                    </Modal>
+                </div>
+            )
+        }else{
+            return(
+                <div className="bottom-row">
+                <Button onClick={this.isClicked} className="btn-assigns-lifetime">{this.props.titles}</Button>
+                    <Modal className="modal-pos" open={this.state.isShowModal} onClose={this.isClosed}>
+                        <div>
+                            <FilterByLifetime 
+                                {...this.props}
+                                {...this.state}
+                                title={this.props.title} 
+                                onClosed={this.isClosed}
+                                onStats={this.props.onStats}
+                            />
+                        </div>
+                    </Modal>
+                </div>
+            )
+        }
     }
 }
