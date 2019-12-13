@@ -2,7 +2,7 @@ import React from 'react'
 import BaseButton from "../../../components/Button/BaseButton";
 import Searchbar from "../../../components/Searchbar/SearchInput";
 import FilterbyDataAction from '../../../components/FilterByDataAction/FilterbyDataAction';
-import PlanningList from './components/PlanningList/PlanningList';
+import PlanningList from './components/PlanningList/SalesOrderList';
 import './DetailPages.scss';
 import PlanningDetailsTab from './components/Tab/PlanningDetailsTab';
 // import {
@@ -14,32 +14,6 @@ import PlanningDetailsTab from './components/Tab/PlanningDetailsTab';
 class DetailPages extends React.Component{
     state = {
         stats: true,
-        planningList: [
-            {
-            so: '00000',
-            costumer: 'BUMA',
-            site: 'TJG',
-            unitModel: 'PC2000-8',
-            compDesc: 'AXLE ASSY FRONT RIGHT',
-            partNumber: '235-22-00131',
-            unitCode: 'XXXX',
-            serialNumber: 'XXXXX',
-            lifetimeComp: 'XXXXX',
-            planExecution: '17 December 2019'
-            },
-            {
-                so: '00001',
-                costumer: 'PAMA',
-                site: 'JBY',
-                unitModel: 'PC2000-8',
-                compDesc: 'POWER MODULE',
-                partNumber: '561-88-70301',
-                unitCode: 'XXXX',
-                serialNumber: 'XXXXX',
-                lifetimeComp: 'XXXXX',
-                planExecution: '12 April 2020'
-            }
-        ],
         selectedPlans: [],
         displayCheckbox: true
     }
@@ -49,14 +23,13 @@ class DetailPages extends React.Component{
         console.log("nilai mnilai : "+ this.state.stats)
     }
 
-
     _renderSalesOrderTabs(){
         return (
         <>
-        <PlanningDetailsTab 
+        <PlanningDetailsTab
         {...this.props}
         onChoosed={this.updateAssignmentStates}
-        planningList={this.state.planningList}
+        // planningList={this.state.planningList}
         selectedPlanList={this.state.selectedPlans}
         displayCheckbox={this.state.displayCheckbox}
         />
@@ -96,6 +69,7 @@ class DetailPages extends React.Component{
                     </div>
                 <div className="table-container">
 				    {this._renderSalesOrderTabs()}
+                    
 				</div>
                 </div>
             </main>
