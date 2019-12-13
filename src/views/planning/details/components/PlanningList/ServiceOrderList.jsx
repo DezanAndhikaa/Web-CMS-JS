@@ -10,8 +10,9 @@ import SaveButton from '../../../../../components/ActionButton/SaveButton/SaveBu
 import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
 import InputButton from '../../../../../components/Button/InputButton';
 import { booleanLiteral } from '@babel/types';
+import SalesOrderData from '../../../../../planning-data-dummy.json';
 
-export default class PlanningList extends React.PureComponent {
+export default class ServiceOrderList extends React.PureComponent {
 
     openDetail = async (row) => {
       await this.props.saveJobData(row);
@@ -84,9 +85,8 @@ render(){
               delay={300}
             // //   isAscending={this.props.sortJobsByState.status.isAscending}            
             />
-            <InputButton
-              titles="Lifetime Comp"
-              title="Lifetime Component"
+            <PlanningListHeader
+              name="Lifetime Comp"
             // //   isActive={this.props.sortJobsByState.staging.isActive}
               delay={300}
             // //   isAscending={this.props.sortJobsByState.staging.isAscending}
@@ -112,27 +112,27 @@ render(){
           </TableRow>
         </TableHead>
         <TableBody classes={{ root: 'table-body' }}>
-          {this.props.planningList
-            && this.props.planningList.map((row, index) => (
-              <TableRow key={index} classes={{ root: 'table-row' }}>
+          {SalesOrderData.serviceData
+            && SalesOrderData.serviceData.map((row, id) => (
+              <TableRow key={id} classes={{ root: 'table-row' }}>
                 <TableCell padding="checkbox">
                   {this.props.displayCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedPlanList.some((plans) => plans.woNumber === row.woNumber)} onClick={() => this.props.onChoosed(row)} classes={{ checked: 'checkbox-checked' }} />}
                 </TableCell>
-                <TableCell align="left" className="table-cell"> {row.so} </TableCell>
-                <TableCell align="left" className="table-cell"> {row.costumer} </TableCell>
-                <TableCell align="left" className="table-cell"> {row.site} </TableCell>
-                <TableCell align="left" className="table-cell"> {row.unitModel} </TableCell>
-                <TableCell align="left" className="table-cell"> {row.compDesc} </TableCell>
-                <TableCell align="left" className="table-cell"> {row.partNumber} </TableCell>
-                <TableCell align="left" className="table-cell"> {row.unitCode} </TableCell>
-                <TableCell align="left" className="table-cell"> {row.serialNumber} </TableCell>
-                <TableCell align="left" className="table-cell"> 
-                  {this.props.stats ? <InputButton title={"Input Lifetime Component"} titles={"Input"} onStats={this.props.onStats}/> : 
+                <TableCell align="left" className="table-cell"> {row.Pr} </TableCell>
+                <TableCell align="left" className="table-cell"> {row.Costumer} </TableCell>
+                <TableCell align="left" className="table-cell"> {row.Site} </TableCell>
+                <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
+                <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>
+                <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
+                <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
+                <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
+                {/* <TableCell align="left" className="table-cell"> 
+                  {this.props.stats ? <InputButton title={"Input Lifetime Component"} onStats={this.props.onStats}/> : 
                     <button>klik me!</button>
                   }
-                </TableCell>
-                {/* <TableCell align="center" className="table-cell"> <InputButton title={"Input Lifetime Component"} titles={"Input"}/></TableCell> */}
-                <TableCell align="left" className="table-cell"> {row.planExecution} </TableCell>
+                </TableCell> */}
+                <TableCell align="left" className="table-cell"> {row.LifeTimeComponent}</TableCell>
+                <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
                 <TableCell align="center" className="table-cell"> <EditButton /></TableCell>
                 <TableCell align="center" className="table-cell"> <SaveButton /></TableCell>
               </TableRow>

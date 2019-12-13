@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import SwipeableViews from 'react-swipeable-views';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 // import DetailPages from '../../DetailPages';
-import PlanningList from '../PlanningList/PlanningList';
+import SalesOrderList from '../PlanningList/SalesOrderList';
+import ServiceOrderList from '../PlanningList/ServiceOrderList'
 import { ViewWeek } from '@material-ui/icons';
 import './PlanningDetailsTab.scss'
+import SalesOrderData from '../../../../../planning-data-dummy.json';
 
 function TabContainer({ children, dir }) {
   return (
@@ -27,7 +28,6 @@ TabContainer.propTypes = {
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    // backgroundColor: theme.palette.background.paper,
     
   },
   tabsRoot: {
@@ -76,6 +76,17 @@ class PlanningDetailsTab extends React.Component {
     value: 0,
   };
 
+  _renderTotalSalesOrder(){
+    return(
+    <h5>Total Data {SalesOrderData.jumlahDataSalesOrder}</h5>
+    );
+}
+  _renderTotalServiceOrder(){
+    return(
+    <h5>Total Data {SalesOrderData.jumlahDataServiceOrder}</h5>
+    );
+  }
+
 
   handleChange = (event, value) => {
     console.log('ini value',event)
@@ -90,10 +101,19 @@ class PlanningDetailsTab extends React.Component {
   };
 
 
-  _renderDetailPages(){
+  _renderSalesOrderList(){
       return(
           <div className="plannings-list-container">
-      <PlanningList 
+      <SalesOrderList 
+      {...this.props}
+      />
+      </div>
+      );
+    }
+  _renderServiceOrderList(){
+      return(
+          <div className="plannings-list-container">
+      <ServiceOrderList 
       {...this.props}
       stats={this.props.stats}
       onStats={this.props.onStats}
@@ -117,8 +137,8 @@ class PlanningDetailsTab extends React.Component {
             <Tab label="Service Order" classes={{ root: classes.tabRoot, selected: classes.tabSelected }} />
           </Tabs>
         </AppBar>
-        {value === 0 && <TabContainer dir={theme.direction}><div className="table-container">{this._renderDetailPages()}</div></TabContainer>}
-        {value === 1 && <TabContainer dir={theme.direction}>ini bagian Service Order</TabContainer>}
+        {value === 0 && <TabContainer dir={theme.direction}>{this._renderTotalSalesOrder()}<div className="table-container">{this._renderSalesOrderList()}</div></TabContainer>}
+        {value === 1 && <TabContainer dir={theme.direction}>{this._renderTotalServiceOrder()} <div className="table-container">{this._renderServiceOrderList()} </div></TabContainer>}
       </div>
     );
   }
