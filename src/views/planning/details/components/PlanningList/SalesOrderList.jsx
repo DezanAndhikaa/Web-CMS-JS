@@ -132,7 +132,6 @@ render(){
                     <button>klik me!</button>
                   }
                 </TableCell>
-                {/* <TableCell align="center" className="table-cell"> <InputButton title={"Input Lifetime Component"} /></TableCell> */}
                 <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
                 <TableCell align="center" className="table-cell"> <EditButton /></TableCell>
                 <TableCell align="center" className="table-cell"> <SaveButton /></TableCell>
