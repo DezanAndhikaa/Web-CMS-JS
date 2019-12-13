@@ -43,20 +43,16 @@ class InputText extends React.Component{
                     initialValues={this.state}
                     validationSchema={validationSchema}
                 >
-                    {/* {({ isValid }) => ( */}
-                        {/* <Form autoComplete="off"> */}
-                        <div className="top-middle"> 
-                            <NumberFormat 
-                                className="teks"
-                                customInput={TextField}
-                                name="limitText"
-                                value={this.state.limitText}
-                                onChange={this.handleChange}
-                            />
-                            <FormHelperText className="label">* Don't Add Space Before and After Lifetime Component</FormHelperText>
-                        </div>
-                    {/* </Form> */}
-                    {/* )} */}
+                    <div className="top-middle"> 
+                        <NumberFormat 
+                            className="teks"
+                            customInput={TextField}
+                            name="limitText"
+                            value={this.state.limitText}
+                            onChange={this.handleChange}
+                        />
+                        <FormHelperText className="label">* Don't Add Space Before and After Lifetime Component</FormHelperText>
+                    </div>
                 </Formik>
                 <div className="bottom-row">
                     <Button className="btn-cancel" onClick={this.props.onClosed}>Cancel</Button>

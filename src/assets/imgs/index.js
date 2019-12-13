@@ -23,6 +23,9 @@ import ArrowRight from './arrow-right.png';
 import High from './High.png';
 import Medium from './Medium.png';
 import Low from './Low.png';
+import Confirm from './confirm.png';
+import Delete from './delete.png';
+import DelSuccess from './del-success.png';
 
 export {
   DcaLogo,
@@ -50,4 +53,7 @@ export {
   High,
   Medium,
   Low,
+  Confirm,
+  Delete,
+  DelSuccess
 };

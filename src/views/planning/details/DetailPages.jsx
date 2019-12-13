@@ -1,15 +1,9 @@
-import React from 'react'
-import BaseButton from "../../../components/Button/BaseButton";
+import React from 'react';
 import Searchbar from "../../../components/Searchbar/SearchInput";
 import FilterbyDataAction from '../../../components/FilterByDataAction/FilterbyDataAction';
-import PlanningList from './components/PlanningList/PlanningList';
 import './DetailPages.scss';
 import PlanningDetailsTab from './components/Tab/PlanningDetailsTab';
-// import {
-//     ResetSelectedMechanicsAction, SelectCustomerFilterAction,
-//     SelectPlansTypeFilterAction, SelectMechanicAction, SelectUnitModelFilterAction,
-//     UnselectMechanicAction, ResetSelectedLeaderAction, SelectLeaderAction,
-//   } from './DetailPages-action';
+import BaseButton from '../../../components/Button/BaseButton';
 
 class DetailPages extends React.Component{
     state = {
@@ -49,18 +43,17 @@ class DetailPages extends React.Component{
         console.log("nilai mnilai : "+ this.state.stats)
     }
 
-
     _renderSalesOrderTabs(){
         return (
-        <>
-        <PlanningDetailsTab 
-        {...this.props}
-        onChoosed={this.updateAssignmentStates}
-        planningList={this.state.planningList}
-        selectedPlanList={this.state.selectedPlans}
-        displayCheckbox={this.state.displayCheckbox}
-        />
-        </>
+            <>
+                <PlanningDetailsTab 
+                    {...this.props}
+                    onChoosed={this.updateAssignmentStates}
+                    planningList={this.state.planningList}
+                    selectedPlanList={this.state.selectedPlans}
+                    displayCheckbox={this.state.displayCheckbox}
+                />
+            </>
         );
     }
 
@@ -77,13 +70,15 @@ class DetailPages extends React.Component{
         )
     }
 
-
     updateAssignmentStates = (plan) => {
         if (this.state.selectedPlans.some(
           (plans) => plans.woNumber === plan.woNumber,
         )) { return this.props.unselectPlan(plan); }
         return this.props.selectPlan(plan);
     }
+
+    _renderBaseButton(){
+        return( <BaseButton > &nbsp;&nbsp;&nbsp;&nbsp;</BaseButton> ) }
 
     render(){
         return(
@@ -94,9 +89,12 @@ class DetailPages extends React.Component{
                             {this._renderSearchBar()}
                         </div>
                     </div>
-                <div className="table-container">
-				    {this._renderSalesOrderTabs()}
-				</div>
+                    <div className="bottom-row">
+                        {this._renderBaseButton()}
+                    </div>
+                    <div className="table-container">
+                        {this._renderSalesOrderTabs()}
+                    </div>
                 </div>
             </main>
         )
