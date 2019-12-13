@@ -95,6 +95,8 @@ class PlanningDetailsTab extends React.Component {
           <div className="plannings-list-container">
       <PlanningList 
       {...this.props}
+      stats={this.props.stats}
+      onStats={this.props.onStats}
       />
       </div>
       );

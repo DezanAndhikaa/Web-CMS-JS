@@ -45,15 +45,17 @@ class DetailPages extends React.Component{
 
     _renderSalesOrderTabs(){
         return (
-            <>
-                <PlanningDetailsTab 
-                    {...this.props}
-                    onChoosed={this.updateAssignmentStates}
-                    planningList={this.state.planningList}
-                    selectedPlanList={this.state.selectedPlans}
-                    displayCheckbox={this.state.displayCheckbox}
-                />
-            </>
+        <>
+        <PlanningDetailsTab 
+        {...this.props}
+        onChoosed={this.updateAssignmentStates}
+        planningList={this.state.planningList}
+        selectedPlanList={this.state.selectedPlans}
+        displayCheckbox={this.state.displayCheckbox}
+        stats={this.state.stats}
+        onStats={this.isChangeStat}
+        />
+        </>
         );
     }
 
