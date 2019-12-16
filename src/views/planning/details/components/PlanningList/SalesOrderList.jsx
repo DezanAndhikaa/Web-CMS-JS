@@ -117,10 +117,10 @@ render(){
             && SalesOrderData.salesData.map((row, id) => (
               <TableRow key={id} classes={{ root: 'table-row' }}>
                 <TableCell padding="checkbox">
-                  {this.props.displayCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedPlanList.some((plans) => plans.woNumber === row.woNumber)} onClick={() => this.props.onChoosed(row)} classes={{ checked: 'checkbox-checked' }} />}
+                  {this.props.displayCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedPlanList.some((plans) => plans.SerialNumber === row.SerialNumber)} onClick={() => this.props.onChoosed(row)} classes={{ checked: 'checkbox-checked' }} />}
                 </TableCell>
                 <TableCell align="left" className="table-cell"> {row.SO} </TableCell>
-                <TableCell align="left" className="table-cell"> {row.Costumer} </TableCell>
+                <TableCell align="left" className="table-cell"> {row.Customer} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.Site} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>

@@ -171,7 +171,7 @@ export function selectPlansReducer(state = [], action) {
 	case SelectPlanAction:
 		return [...state, action.payload];
 	case UnselectPlanAction: {
-		return [...state.filter(((item) => item.woNumber !== action.payload.woNumber))];
+		return [...state.filter(((item) => item.SerialNumber !== action.payload.SerialNumber))];
 	}
 	case ClearSelectedPlans:
 		return [];

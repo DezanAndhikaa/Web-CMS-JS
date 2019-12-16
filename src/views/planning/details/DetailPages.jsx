@@ -49,7 +49,7 @@ class DetailPages extends React.Component{
 
     updateAssignmentStates = (plan) => {
         if (this.state.selectedPlans.some(
-          (plans) => plans.woNumber === plan.woNumber,
+          (plans) => plans.SerialNumber === plan.SerialNumber,
         )) { return this.props.unselectPlan(plan); }
         return this.props.selectPlan(plan);
     }
