@@ -44,7 +44,7 @@ render(){
             //   isAscending={this.props.sortJobsByState.unitModel.isAscending}
             />
             <PlanningListHeader
-              name="Costumer"
+              name="Customer"
             // //   isActive={this.props.sortJobsByState.unitCode.isActive}
               delay={300}
             // //   isAscending={this.props.sortJobsByState.unitCode.isAscending}
@@ -127,9 +127,9 @@ render(){
                 <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
-                <TableCell align="left" className="table-cell"> 
-                  {this.props.stats ? <InputButton title={"Input Lifetime Component"} onStats={this.props.onStats}/> : 
-                    <button>klik me!</button>
+                <TableCell align="center" className="table-cell"> 
+                  {this.props.stats ? <InputButton title={"Input Lifetime Component"} onStats={this.props.onStats} titles="Input"/> : 
+<div>{this.props.value}</div>
                   }
                 </TableCell>
                 <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>

@@ -10,11 +10,25 @@ class DetailPages extends React.Component{
     state = {
         stats: true,
         selectedPlans: [],
-        displayCheckbox: true
+        displayCheckbox: true,
+        // inputLifetime: '',
+        lifetime: ''
     }
+
+    // isClick = () =>{
+    //     console.log('ke pencet')
+    //     this.setState({
+    //         stats: !this.state.stats, 
+    //         lifetime: this.state.inputLifetime
+    //     })
+    // }
     
-    isChangeStat = () =>{
-        this.setState({ stats: !this.state.stats})
+    isChangeStat = (value) =>{
+        this.setState({ 
+            stats: !this.state.stats,
+            lifetime: value
+        })
+        console.log('ke pencet', this.state.lifetime)
         console.log("nilai mnilai : "+ this.state.stats)
     }
 
@@ -29,6 +43,9 @@ class DetailPages extends React.Component{
         displayCheckbox={this.state.displayCheckbox}
         stats={this.state.stats}
         onStats={this.isChangeStat}
+        value={this.state.lifetime}
+        // lifetime={this.state.lifetime}
+        // diklik={this.isClick}
         />
         </>
         );
@@ -54,9 +71,6 @@ class DetailPages extends React.Component{
         return this.props.selectPlan(plan);
     }
 
-    _renderBaseButton(){
-        return( <BaseButton > &nbsp;&nbsp;&nbsp;&nbsp;</BaseButton> ) }
-
     render(){
         return(
             <main className="content">
@@ -66,10 +80,7 @@ class DetailPages extends React.Component{
                             {this._renderSearchBar()}
                         </div>
                     </div>
-                    <div className="bottom-row">
-                        {this._renderBaseButton()}
-                    </div>
-                    <div className="table-container">
+                    <div>
                         {this._renderSalesOrderTabs()}
                     </div>
                 </div>

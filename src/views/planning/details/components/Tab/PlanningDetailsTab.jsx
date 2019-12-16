@@ -11,6 +11,7 @@ import ServiceOrderList from '../PlanningList/ServiceOrderList'
 import { ViewWeek } from '@material-ui/icons';
 import './PlanningDetailsTab.scss'
 import SalesOrderData from '../../../../../planning-data-dummy.json';
+import BaseButton from '../../../../../components/Button/BaseButton'
 
 function TabContainer({ children, dir }) {
   return (
@@ -100,25 +101,24 @@ class PlanningDetailsTab extends React.Component {
     this.setState({ value: index });
   };
 
-
   _renderSalesOrderList(){
       return(
-          <div className="plannings-list-container">
-      <SalesOrderList 
-      {...this.props}
-      />
-      </div>
+          <div className="plannings-list-containers">
+            <SalesOrderList 
+            {...this.props}
+            />
+          </div>
       );
     }
   _renderServiceOrderList(){
       return(
-          <div className="plannings-list-container">
-      <ServiceOrderList 
-      {...this.props}
-      stats={this.props.stats}
-      onStats={this.props.onStats}
-      />
-      </div>
+          <div className="plannings-list-containers">
+            <ServiceOrderList 
+            {...this.props}
+            // stats={this.props.stats}
+            isClick={this.props.isClick}
+            />
+          </div>
       );
     }
 
@@ -127,9 +127,10 @@ class PlanningDetailsTab extends React.Component {
     const { value } = this.state;
     return (
 
-        <div className={classes.root}>
+        <div className="root">
         <AppBar position="static" color="default" style={{boxShadow: "none"}}>
-          <Tabs classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
+          <Tabs 
+          classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
             value={this.state.value}
             onChange={this.handleChange}
             indicatorColor="primary" >
@@ -137,8 +138,9 @@ class PlanningDetailsTab extends React.Component {
             <Tab label="Service Order" classes={{ root: classes.tabRoot, selected: classes.tabSelected }} />
           </Tabs>
         </AppBar>
-        {value === 0 && <TabContainer dir={theme.direction}>{this._renderTotalSalesOrder()}<div className="table-container">{this._renderSalesOrderList()}</div></TabContainer>}
-        {value === 1 && <TabContainer dir={theme.direction}>{this._renderTotalServiceOrder()} <div className="table-container">{this._renderServiceOrderList()} </div></TabContainer>}
+        <BaseButton > &nbsp;&nbsp;&nbsp;&nbsp;</BaseButton>
+        {value === 0 && <TabContainer dir={theme.direction}>{this._renderTotalSalesOrder()}<div>{this._renderSalesOrderList()}</div></TabContainer>}
+        {value === 1 && <TabContainer dir={theme.direction}>{this._renderTotalServiceOrder()} <div>{this._renderServiceOrderList()} </div></TabContainer>}
       </div>
     );
   }

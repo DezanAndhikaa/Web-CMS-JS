@@ -44,7 +44,7 @@ render(){
             //   isAscending={this.props.sortJobsByState.unitModel.isAscending}
             />
             <PlanningListHeader
-              name="Costumer"
+              name="Customer"
             // //   isActive={this.props.sortJobsByState.unitCode.isActive}
               delay={300}
             // //   isAscending={this.props.sortJobsByState.unitCode.isAscending}
@@ -85,8 +85,9 @@ render(){
               delay={300}
             // //   isAscending={this.props.sortJobsByState.status.isAscending}            
             />
-            <PlanningListHeader
-              name="Lifetime Comp"
+             <InputButton
+              titles="Lifetime Comp"
+              title="Lifetime Component"
             // //   isActive={this.props.sortJobsByState.staging.isActive}
               delay={300}
             // //   isAscending={this.props.sortJobsByState.staging.isAscending}
