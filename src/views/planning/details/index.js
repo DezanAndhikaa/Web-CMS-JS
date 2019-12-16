@@ -4,12 +4,12 @@ import { PlansReducers } from './DetailPages-reducer';
 import { storeDataAction } from '../../../core/storage-helper';
 import { PLAN_DATA, StorageKey } from '../../../common/constants';
 import {
-	// AssignPlansAction, assignPlansAction, 
+	AssignPlansAction, assignPlansAction, 
 	ClearSelectedPlans, FetchPlansAction, fetchPlansAssignment,
 	getMechanicsAction, plansParameterAction, UpdatePlansParameterAction, searchAction,
 	SearchPlansAction, selectFilterAction, SelectPlanAction, selectPlansAction, selectLeaderAction,
 	selectMechanicAction, sortByAction, 
-	// unassignPlansAction, 
+	unassignPlansAction, 
 	UnselectPlanAction, storePlanDataAction,
 } from './DetailPages-action';
 import DetailPages from './DetailPages';
@@ -35,7 +35,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	// assignPlans: (payload, token) => dispatch(assignPlansAction(AssignPlansAction, payload, token)),
+	assignPlans: (payload, token) => dispatch(assignPlansAction(AssignPlansAction, payload, token)),
 	clearSelectedPlans: (payload) => dispatch(selectPlansAction(ClearSelectedPlans, payload)),
 	fetchPlans: (payload, token) => dispatch(fetchPlansAssignment(FetchPlansAction, payload, token)),
 	getMechanics: (token) => dispatch(getMechanicsAction(token)),
@@ -48,7 +48,7 @@ const mapDispatchToProps = (dispatch) => ({
 	selectMechanic: (type, payload) => dispatch(selectMechanicAction(type, payload)),
 	selectPlan: (payload) => dispatch(selectPlansAction(SelectPlanAction, payload)),
 	storePlanData: (payload) => dispatch(storePlanDataAction(payload)),
-	// unassignPlans: (payload, token) => dispatch(unassignPlansAction(payload, token)),
+	unassignPlans: (payload, token) => dispatch(unassignPlansAction(payload, token)),
 	unselectPlan: (payload) => dispatch(selectPlansAction(UnselectPlanAction, payload)),
 	updateParameter: (payload) => dispatch(plansParameterAction(UpdatePlansParameterAction, payload)),
 });

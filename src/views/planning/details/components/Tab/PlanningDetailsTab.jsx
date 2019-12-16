@@ -114,8 +114,8 @@ class PlanningDetailsTab extends React.Component {
           <div className="plannings-list-containers">
             <ServiceOrderList 
             {...this.props}
-            stats={this.props.stats}
-            onStats={this.props.onStats}
+            // stats={this.props.stats}
+            isClick={this.props.isClick}
             />
           </div>
       );
@@ -150,9 +150,10 @@ class PlanningDetailsTab extends React.Component {
     const { value } = this.state;
     return (
 
-        <div className={classes.root}>
+        <div className="root">
         <AppBar position="static" color="default" style={{boxShadow: "none"}}>
-          <Tabs classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
+          <Tabs 
+          classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
             value={this.state.value}
             onChange={this.handleChange}
             indicatorColor="primary" >

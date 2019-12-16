@@ -56,7 +56,7 @@ class InputText extends React.Component{
                 </Formik>
                 <div className="bottom-row">
                     <Button className="btn-cancel" onClick={this.props.onClosed}>Cancel</Button>
-                    <Button className="btn-input" onClick={this.props.onStats}>Input</Button>
+                    <Button className="btn-input" onClick={() => this.props.onStats(this.state.limitText)}>Input</Button>
                 </div>
             </div>
         )

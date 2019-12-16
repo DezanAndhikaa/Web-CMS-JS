@@ -1,6 +1,30 @@
 @import '../../../../../themes/variables';
 @import '../../../../../themes/functions';
 
+
+
+.root {
+    flex-grow: 1;
+    .tabsRoot {
+        border-bottom: 1px solid #e8e8e8;
+      .tabsIndicator{
+        background-color : #1890ff;
+        .tabRoot {
+            text-transform : initial;
+            min-width: 72;
+            font-size: 100;
+            margin-right: spacing unit($number: 4);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple UI Emoji', 'Apple Color Emoji','Segoe UI Symbol';
+                // color: #40a9ff;
+                // opacity: 1;
+                // color: #1890ff;
+                // font-weight: 500;
+        }
+      }
+    }
+}
+
+
 .table-container{
     display: flex;
     flex-direction: column;

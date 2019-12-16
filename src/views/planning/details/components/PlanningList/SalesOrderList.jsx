@@ -117,7 +117,7 @@ render(){
             && SalesOrderData.salesData.map((row, id) => (
               <TableRow key={id} classes={{ root: 'table-row' }}>
                 <TableCell padding="checkbox">
-                  {this.props.displayCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedPlanList.some((plans) => plans.woNumber === row.woNumber)} onClick={() => this.props.onChoosed(row)} classes={{ checked: 'checkbox-checked' }} />}
+                  {this.props.displayCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedPlanList.some((plans) => plans.SerialNumber === row.SerialNumber)} onClick={() => this.props.onChoosed(row)} classes={{ checked: 'checkbox-checked' }} />}
                 </TableCell>
                 <TableCell align="left" className="table-cell"> {row.SO} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.Customer} </TableCell>
@@ -129,7 +129,7 @@ render(){
                 <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
                 <TableCell align="center" className="table-cell"> 
                   {this.props.stats ? <InputButton title={"Input Lifetime Component"} onStats={this.props.onStats} titles="Input"/> : 
-                    <button>klik me!</button>
+<div>{this.props.value}</div>
                   }
                 </TableCell>
                 <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>

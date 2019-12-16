@@ -31,9 +31,9 @@ export default class InputButton extends React.Component{
                             <InputText 
                                 {...this.props}
                                 {...this.state}
-                                title={this.props.title} 
+                                // title={this.props.title} 
                                 onClosed={this.isClosed}
-                                onStats={this.props.onStats}
+                                // isClick={this.props.isClick}
                             />
                         </div>
                     </Modal>
