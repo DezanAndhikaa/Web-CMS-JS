@@ -24,7 +24,7 @@ export default class InputButton extends React.Component{
     render(){
         if(this.props.titles === "Input"){
             return(
-                <div className="bottom-row">
+                <div className="button-row">
                 <Button onClick={this.isClicked} className="btn-assigns">{this.props.titles}</Button>
                     <Modal className="modal-pos" open={this.state.isShowModal} onClose={this.isClosed}>
                         <div>
@@ -41,8 +41,8 @@ export default class InputButton extends React.Component{
             )
         }else{
             return(
-                <div className="bottom-row">
-                <Button onClick={this.isClicked} className="btn-assigns-lifetime">{this.props.titles}</Button>
+                <div className="button-row">
+                <Button onClick={this.isClicked} className="btn-assigns-lifetime" style={{justifyContent: "unset"}}>{this.props.titles}</Button>
                     <Modal className="modal-pos" open={this.state.isShowModal} onClose={this.isClosed}>
                         <div>
                             <FilterByLifetime 

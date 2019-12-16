@@ -2,10 +2,11 @@
 @import '../../themes/variables';
 
 .button-inline{
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-    border-radius: vw(10) !important;
+    // flex: 1;
+    // display: flex;
+    // flex-direction: row;
+    // border-radius: vw(10) !important;
+    margin-top: vw(30);
     .btn-download{
         display: flex;
         align-items: center;
@@ -29,7 +30,7 @@
         color: white;
         justify-content: center;
         width: vw(153.22);
-        height: vw(45.07);;
+        height: vw(45.07);
         font-size: vw(18);
         font-weight: bold;
         line-height: vw(16) !important;

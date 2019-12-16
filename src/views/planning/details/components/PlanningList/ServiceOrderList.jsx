@@ -44,7 +44,7 @@ render(){
             //   isAscending={this.props.sortJobsByState.unitModel.isAscending}
             />
             <PlanningListHeader
-              name="Costumer"
+              name="Customer"
             // //   isActive={this.props.sortJobsByState.unitCode.isActive}
               delay={300}
             // //   isAscending={this.props.sortJobsByState.unitCode.isAscending}
@@ -85,8 +85,9 @@ render(){
               delay={300}
             // //   isAscending={this.props.sortJobsByState.status.isAscending}            
             />
-            <PlanningListHeader
-              name="Lifetime Comp"
+             <InputButton
+              titles="Lifetime Comp"
+              title="Lifetime Component"
             // //   isActive={this.props.sortJobsByState.staging.isActive}
               delay={300}
             // //   isAscending={this.props.sortJobsByState.staging.isAscending}
@@ -119,7 +120,7 @@ render(){
                   {this.props.displayCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedPlanList.some((plans) => plans.woNumber === row.woNumber)} onClick={() => this.props.onChoosed(row)} classes={{ checked: 'checkbox-checked' }} />}
                 </TableCell>
                 <TableCell align="left" className="table-cell"> {row.Pr} </TableCell>
-                <TableCell align="left" className="table-cell"> {row.Costumer} </TableCell>
+                <TableCell align="left" className="table-cell"> {row.Customer} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.Site} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>
