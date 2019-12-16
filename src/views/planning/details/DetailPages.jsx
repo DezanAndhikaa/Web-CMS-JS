@@ -1,10 +1,6 @@
 import React from 'react';
-import Searchbar from "../../../components/Searchbar/SearchInput";
-import FilterbyDataAction from '../../../components/FilterByDataAction/FilterbyDataAction';
-import PlanningList from './components/PlanningList/SalesOrderList';
 import './DetailPages.scss';
 import PlanningDetailsTab from './components/Tab/PlanningDetailsTab';
-import BaseButton from '../../../components/Button/BaseButton';
 
 class DetailPages extends React.Component{
     state = {
@@ -24,7 +20,6 @@ class DetailPages extends React.Component{
         <PlanningDetailsTab
         {...this.props}
         onChoosed={this.updateAssignmentStates}
-        // planningList={this.state.planningList}
         selectedPlanList={this.state.selectedPlans}
         displayCheckbox={this.state.displayCheckbox}
         stats={this.state.stats}
@@ -32,19 +27,6 @@ class DetailPages extends React.Component{
         />
         </>
         );
-    }
-
-    _renderSearchBar(){
-        return( <Searchbar > &nbsp;&nbsp;&nbsp;&nbsp;</Searchbar> ) }
-
-    _renderFilterByDataAction(){
-        return(
-        <div className="dropdowns-container">
-            <div className="dropdown-container">
-                <FilterbyDataAction />
-            </div>
-        </div>
-        )
     }
 
     updateAssignmentStates = (plan) => {
@@ -58,11 +40,6 @@ class DetailPages extends React.Component{
         return(
             <main className="content">
                 <div className="table-container">
-                    <div className="filters-container">
-                        <div className="search-container">
-                            {this._renderSearchBar()}
-                        </div>
-                    </div>
                     <div>
                         {this._renderSalesOrderTabs()}
                     </div>

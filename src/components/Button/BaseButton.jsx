@@ -2,7 +2,8 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import './BaseButton.scss';
 import DeleteSuccess from '../DeleteConfirmation/DeleteSuccess';
-// import DeleteButton from '../ActionButton/DeleteButton/DeleteButton';
+import DeleteButton from '../ActionButton/DeleteButton/DeleteButton';
+import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 
 class BaseButton extends React.Component{
     constructor(props){
@@ -23,13 +24,25 @@ class BaseButton extends React.Component{
     render(){
         return(
             <div className="button-inline">
-                <Button className="btn-approve" onClick={this.isClicked}>Approve</Button>
-                <DeleteSuccess
+                <DeleteButton 
+                    {...this.props}
+                    {...this.state}
+                    onClick={this.isClicked}
+                />
+                <DeleteConfirmation
                     {...this.props}
                     {...this.state}
                     onClose={this.isClosed}
                     openModal={this.state.isShowModal}
                 />
+                <Button className="btn-download" onClick={this.isClicked}>Download</Button>
+                <Button className="btn-approve" onClick={this.isClicked}>Approve</Button>
+                {/* <DeleteSuccess
+                    {...this.props}
+                    {...this.state}
+                    onClose={this.isClosed}
+                    openModal={this.state.isShowModal}
+                /> */}
             </div>
         )
     }

@@ -12,6 +12,8 @@ import { ViewWeek } from '@material-ui/icons';
 import './PlanningDetailsTab.scss'
 import SalesOrderData from '../../../../../planning-data-dummy.json';
 import BaseButton from '../../../../../components/Button/BaseButton'
+import Searchbar from "../../../../../components/Searchbar/SearchInput";
+import FilterbyDataAction from '../../../../../components/FilterByDataAction/FilterbyDataAction';
 
 function TabContainer({ children, dir }) {
   return (
@@ -29,7 +31,6 @@ TabContainer.propTypes = {
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    
   },
   tabsRoot: {
     borderBottom: '1px solid #e8e8e8',
@@ -79,15 +80,14 @@ class PlanningDetailsTab extends React.Component {
 
   _renderTotalSalesOrder(){
     return(
-    <h5>Total Data {SalesOrderData.jumlahDataSalesOrder}</h5>
+    <>Total Data {SalesOrderData.jumlahDataSalesOrder} {this._renderBaseButton()}</>
     );
 }
   _renderTotalServiceOrder(){
     return(
-    <h5>Total Data {SalesOrderData.jumlahDataServiceOrder}</h5>
+    <>Total Data {SalesOrderData.jumlahDataServiceOrder} {this._renderBaseButton()}</>
     );
   }
-
 
   handleChange = (event, value) => {
     console.log('ini value',event)
@@ -96,7 +96,6 @@ class PlanningDetailsTab extends React.Component {
   };
 
   handleChangeIndex = index => {
-    //   console.log('ini index',index)
       console.log('ini index',this.state.value)
     this.setState({ value: index });
   };
@@ -121,6 +120,30 @@ class PlanningDetailsTab extends React.Component {
           </div>
       );
     }
+  
+    _renderSearchBar(){
+      return( 
+        <div className="plannings-list-containers">
+          <Searchbar > &nbsp;&nbsp;&nbsp;&nbsp;</Searchbar>
+        </div> 
+      );
+    }
+      
+  _renderFilterByDataAction(){
+      return(
+      <div className="plannings-list-containers">
+        <FilterbyDataAction />
+      </div>
+      );
+  }
+
+  _renderBaseButton() {
+    return(
+      // <div>
+        <BaseButton />
+      // </div>
+    );
+  }
 
   render() {
     const { classes, theme } = this.props;
@@ -135,39 +158,19 @@ class PlanningDetailsTab extends React.Component {
             indicatorColor="primary" >
             <Tab label="Sales Order" classes={{ root: classes.tabRoot, selected: classes.tabSelected }} />
             <Tab label="Service Order" classes={{ root: classes.tabRoot, selected: classes.tabSelected }} />
+            <Tab classes={{ root: classes.tabRoot }} /><Tab classes={{ root: classes.tabRoot }} />
+            <Tab classes={{ root: classes.tabRoot }} /><Tab classes={{ root: classes.tabRoot }} />
+            {this._renderSearchBar()} 
+            {this._renderFilterByDataAction()}
           </Tabs>
         </AppBar>
-        <BaseButton > &nbsp;&nbsp;&nbsp;&nbsp;</BaseButton>
         {value === 0 && <TabContainer dir={theme.direction}>{this._renderTotalSalesOrder()}<div>{this._renderSalesOrderList()}</div></TabContainer>}
-        {value === 1 && <TabContainer dir={theme.direction}>{this._renderTotalServiceOrder()} <div>{this._renderServiceOrderList()} </div></TabContainer>}
+        {value === 1 && <TabContainer dir={theme.direction}>{this._renderTotalServiceOrder()}<div>{this._renderServiceOrderList()} </div></TabContainer>}
+        {/* <TabContainer>{this._renderBaseButton()}</TabContainer> */}
       </div>
     );
   }
 }
-//       <div className={classes.root}>
-//         <AppBar position="static" color="default" style={{boxShadow: "none"}}>
-//           <Tabs
-//             classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
-//             value={this.state.value}
-//             onChange={this.handleChange}
-//             indicatorColor="primary"
-//           >
-//             <Tab label="Sales Order" classes={{ root: classes.tabRoot, selected: classes.tabSelected }} />
-//             <Tab label="Service Order" classes={{ root: classes.tabRoot, selected: classes.tabSelected }} />
-//           </Tabs>
-//         </AppBar>
-//         <SwipeableViews
-//           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-//           index={this.state.value}
-//           onChangeIndex={this.handleChangeIndex}
-//         >
-//             <TabContainer dir={theme.direction}><div className="table-container">{this._renderDetailPages()}</div></TabContainer>
-//             <TabContainer dir={theme.direction}>ini bagian Service Order</TabContainer>
-//         </SwipeableViews>
-//       </div>
-//     );
-//   }
-// }
 
 PlanningDetailsTab.propTypes = {
   classes: PropTypes.object.isRequired,

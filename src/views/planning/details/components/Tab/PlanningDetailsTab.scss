@@ -17,11 +17,23 @@
             }
             .search-container{
                 flex: 1;
-                align-self: flex-end;
-                margin-left: 1.5vw;
-                width: 45vw !important;
                 display: flex;
-                justify-content: flex-end;
+                flex-direction: row;
+                margin-top: vw(30);
+                margin-left: 75%;
+                .searchbar{
+                    display: flex;
+                }
+                .data-act{
+                    display: flex;
+                    margin-left: vw(15);
+                }
+                // flex: 1;
+                // align-self: flex-end;
+                // margin-left: 1.5vw;
+                // width: 45vw !important;
+                // display: flex;
+                // justify-content: flex-end;
             }
             .dropdown-container:first-child{
                 margin-left: 0;

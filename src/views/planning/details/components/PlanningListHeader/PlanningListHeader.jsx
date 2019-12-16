@@ -14,8 +14,6 @@ export default class PlanningListHeader extends React.PureComponent {
 				>
 					<TableSortLabel
 						active={this.props.isActive}
-						// IconComponent={this.props.isAscending ? KeyboardArrowUp : KeyboardArrowDown}
-						// onClick={this.props.onClick}
 					>
 						{this.props.name}
 					</TableSortLabel>
