@@ -114,7 +114,6 @@ class PlanningDetailsTab extends React.Component {
           <div className="plannings-list-containers">
             <ServiceOrderList 
             {...this.props}
-            // stats={this.props.stats}
             isClick={this.props.isClick}
             />
           </div>
