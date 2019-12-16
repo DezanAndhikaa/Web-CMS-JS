@@ -33,8 +33,7 @@ const routes = (
 			{/* <Route exact path={Menu.LOGIN} component={LoginPage} />
 			<Route exact path={Menu.DASHBOARD} component={requireAuth(Dashboard)} />
 			<Route exact path={Menu.JOBS_SUMMARY} component={requireAuth(JobsPage)} />
-			<Route exact path={Menu.JOBS_REPORT} component={requireAuth(JobsReport)} /> */}
-			<Route exact path={Menu.DASHBOARD} component={DetailPages} />
+			<Route exact path={Menu.JOBS_REPORT} component={requireAuth(JobsReport)} /> */} */}
 			{/* Start Add Route For BMS */}
 			{/* <Route exact path={Menu.BACKLOG_MONITORING_WORKCENTER} component={BacklogMonitoringSheet}/>
 			<Route exact path={Menu.BACKLOG_MONITORING_UNITMODEL} component={BacklogMonitoringUnitModel}/>

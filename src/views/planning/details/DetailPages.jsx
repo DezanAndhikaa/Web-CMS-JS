@@ -54,9 +54,6 @@ class DetailPages extends React.Component{
         return this.props.selectPlan(plan);
     }
 
-    _renderBaseButton(){
-        return( <BaseButton > &nbsp;&nbsp;&nbsp;&nbsp;</BaseButton> ) }
-
     render(){
         return(
             <main className="content">
@@ -66,10 +63,7 @@ class DetailPages extends React.Component{
                             {this._renderSearchBar()}
                         </div>
                     </div>
-                    <div className="bottom-row">
-                        {this._renderBaseButton()}
-                    </div>
-                    <div className="table-container">
+                    <div>
                         {this._renderSalesOrderTabs()}
                     </div>
                 </div>
