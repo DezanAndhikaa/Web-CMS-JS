@@ -8,7 +8,6 @@
     border-radius: vw(10) !important;
     .btn-download{
         display: flex;
-        // background-image: url('../../assets/icons/download.png');
         align-items: center;
         justify-content: center;
         margin-left: vw(15);
@@ -21,41 +20,36 @@
         background-color: white;
         text-transform: capitalize;
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        background-image: url('../../assets/icons/download.png');
         cursor: pointer;
     }
     .btn-approve{
         display: flex;
         align-items: center;
         color: white;
-        background-repeat: no-repeat;
         justify-content: center;
-        margin-left: vw(15);
         width: vw(153.22);
         height: vw(45.07);;
         font-size: vw(18);
         font-weight: bold;
         line-height: vw(16) !important;
         font-family: 'Lato-Regular';
-        background-color: map-get($colors , third);
         text-transform: capitalize;
+        background-color: map-get($colors , third);
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        background-image: url('../../assets/icons/send.png');
+        background-size: 10%;
+        background-position-x: 90%;
+        background-position-y: center;
+        background-repeat: no-repeat;
         cursor: pointer;
-        .btn-approve .icon {
-            // background: url('../../assets/icons/send.png') no-repeat;
-            float: left;
-            width: 20px;
-            height: 20px;
-            margin-right: 10px
-        }  
-        .button .span {
-            float: left;
-            width: 20px;
-            height: 20px;
-        }
+    }
+    .btn-approve:hover{
+        background-color: map-get($colors, third-dark);
     }
     .btn-cancel-approve{
         display: flex;
-        // background-image: url('../../assets/icons/back.png');
+        background-image: url('../../assets/icons/back.png');
         align-items: center;
         justify-content: center;
         background-repeat: no-repeat;

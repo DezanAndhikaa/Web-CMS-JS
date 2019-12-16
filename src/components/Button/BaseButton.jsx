@@ -1,9 +1,8 @@
 import React from 'react';
-import { Button, Modal } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import './BaseButton.scss';
-// import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
-// import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
-import ApproveConfirmation from '../ApproveConfirmation/ApproveConfirmation';
+import DeleteSuccess from '../DeleteConfirmation/DeleteSuccess';
+// import DeleteButton from '../ActionButton/DeleteButton/DeleteButton';
 
 class BaseButton extends React.Component{
     constructor(props){
@@ -25,7 +24,7 @@ class BaseButton extends React.Component{
         return(
             <div className="button-inline">
                 <Button className="btn-approve" onClick={this.isClicked}>Approve</Button>
-                <ApproveConfirmation
+                <DeleteSuccess
                     {...this.props}
                     {...this.state}
                     onClose={this.isClosed}

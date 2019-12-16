@@ -15,7 +15,7 @@ export default class ConfirmationModal extends React.PureComponent {
                 <p className="confirmation-title">Successful</p>
                 <img className="confirmation-image" src={Success} alt="" />
                 <p className="confirmation-caption">You can see the data approve</p>
-                <p className="confirmation-caption">to the Data Action</p>
+                <p className="confirmation-caption">to the <b>Data Action</b></p>
                 <br></br>
                 <Button className="btn-ok" onClick={this.props.onClose}>OK</Button>
               </div>
