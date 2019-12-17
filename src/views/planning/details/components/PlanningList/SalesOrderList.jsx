@@ -86,8 +86,8 @@ render(){
             // //   isAscending={this.props.sortJobsByState.status.isAscending}            
             />
             <InputButton
-              titles="Lifetime Comp"
-              title="Lifetime Component"
+              titles="Plan Execution"
+              title="Plan Execution"
             // //   isActive={this.props.sortJobsByState.staging.isActive}
               delay={300}
             // //   isAscending={this.props.sortJobsByState.staging.isAscending}
@@ -128,8 +128,8 @@ render(){
                 <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
                 <TableCell align="center" className="table-cell"> 
-                  {this.props.stats ? <InputButton title={"Input Lifetime Component"} onStats={this.props.onStats} titles="Input"/> : 
-<div>{this.props.value}</div>
+                {!this.props.value[id] ? <InputButton title={"Input Lifetime Component"} onStats={this.props.onStats} titles="Input"/> : 
+<div>{this.props.value[id]}</div>
                   }
                 </TableCell>
                 <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>

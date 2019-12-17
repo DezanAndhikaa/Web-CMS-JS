@@ -1,6 +1,7 @@
 import React from 'react';
 import './DetailPages.scss';
 import PlanningDetailsTab from './components/Tab/PlanningDetailsTab';
+import { Base } from '../../../base-url'
 
 class DetailPages extends React.Component{
     state = {
@@ -8,21 +9,25 @@ class DetailPages extends React.Component{
         selectedPlans: [],
         displayCheckbox: true,
         // inputLifetime: '',
-        lifetime: ''
+        lifetime: [],
+        salesOrder: []
     }
 
-    // isClick = () =>{
-    //     console.log('ke pencet')
-    //     this.setState({
-    //         stats: !this.state.stats, 
-    //         lifetime: this.state.inputLifetime
-    //     })
-    // }
-    
+    componentDidMount(){
+        console.log("narik data sales order ")
+        Base.get('URLnya').then((res) => {
+            if(res.status === 200){
+                this.setState({ salesOrder: res.data})
+                console.log('hasil tarikan Sales Order', this.state.salesOrder)
+            }
+        })
+    }
+
     isChangeStat = (value) =>{
+        console.log('nilai value kiriman : '+value)
         this.setState({ 
             stats: !this.state.stats,
-            lifetime: value
+            lifetime: [...this.state.lifetime, value]
         })
         console.log('ke pencet', this.state.lifetime)
         console.log("nilai mnilai : "+ this.state.stats)
@@ -39,8 +44,7 @@ class DetailPages extends React.Component{
         stats={this.state.stats}
         onStats={this.isChangeStat}
         value={this.state.lifetime}
-        // lifetime={this.state.lifetime}
-        // diklik={this.isClick}
+        dataSalesOrder={this.state.salesOrder}
         />
         </>
         );
