@@ -5,13 +5,13 @@
     display: flex;
     justify-content: flex;
     .del-button{
-        height: vw(45.07);
-        width: vw(45.07);
+        height: vw(38.07);
+        width: vw(40.07);
         border-radius: vw(10) !important;
         background-image: url('../../../assets/icons/trash.png');
         background-color: map-get($colors, delete );
         background-repeat: no-repeat;
-        background-size: 50%;
+        background-size: 45%;
         background-position: center;
     }
 }

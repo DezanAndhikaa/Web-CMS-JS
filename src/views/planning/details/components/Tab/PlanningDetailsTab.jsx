@@ -5,19 +5,20 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
-// import DetailPages from '../../DetailPages';
 import SalesOrderList from '../PlanningList/SalesOrderList';
-import ServiceOrderList from '../PlanningList/ServiceOrderList'
-import { ViewWeek } from '@material-ui/icons';
+import ServiceOrderList from '../PlanningList/ServiceOrderList';
 import './PlanningDetailsTab.scss'
 import SalesOrderData from '../../../../../planning-data-dummy.json';
 import BaseButton from '../../../../../components/Button/BaseButton'
 import Searchbar from "../../../../../components/Searchbar/SearchInput";
 import FilterbyDataAction from '../../../../../components/FilterByDataAction/FilterbyDataAction';
+import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
+import DeleteButton from '../../../../../components/DeleteConfirmation/DeleteSuccess';
 
 function TabContainer({ children, dir }) {
   return (
-    <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
+    <Typography component="div" dir={dir}>
+      {/* style={{ padding: 8 * 3 }} */}
       {children}
     </Typography>
   );
@@ -80,12 +81,12 @@ class PlanningDetailsTab extends React.Component {
 
   _renderTotalSalesOrder(){
     return(
-    <>Total Data {SalesOrderData.jumlahDataSalesOrder} {this._renderBaseButton()}</>
+    <>Total Data {SalesOrderData.jumlahDataSalesOrder}</>
     );
 }
   _renderTotalServiceOrder(){
     return(
-    <>Total Data {SalesOrderData.jumlahDataServiceOrder} {this._renderBaseButton()}</>
+    <>Total Data {SalesOrderData.jumlahDataServiceOrder}</>
     );
   }
 
@@ -110,23 +111,23 @@ class PlanningDetailsTab extends React.Component {
       );
     }
   _renderServiceOrderList(){
-      return(
-          <div className="plannings-list-containers">
-            <ServiceOrderList 
-            {...this.props}
-            isClick={this.props.isClick}
-            />
-          </div>
-      );
-    }
-  
-    _renderSearchBar(){
-      return( 
+    return(
         <div className="plannings-list-containers">
-          <Searchbar > &nbsp;&nbsp;&nbsp;&nbsp;</Searchbar>
-        </div> 
-      );
-    }
+          <ServiceOrderList 
+          {...this.props}
+          isClick={this.props.isClick}
+          />
+        </div>
+    );
+  }
+  
+  _renderSearchBar(){
+    return( 
+      <div className="plannings-list-containers">
+        <Searchbar > &nbsp;&nbsp;&nbsp;&nbsp;</Searchbar>
+      </div> 
+    );
+  }
       
   _renderFilterByDataAction(){
       return(
@@ -138,9 +139,38 @@ class PlanningDetailsTab extends React.Component {
 
   _renderBaseButton() {
     return(
-      // <div>
-        <BaseButton />
-      // </div>
+      <BaseButton 
+      />
+    );
+  }
+
+  _renderFilter() {
+    return (
+      <div className="dropdowns-container">
+        <div className="dropdown-container">
+          <DropdownFilter
+            // data={this.props.reportList.jobTypeFilter}
+            // selected={this.props.selectedFilters.jobType}
+            // onSelectActionType={SelectJobsTypeFilterAction}
+            // onSelectAction={this.props.selectFilter}
+          />
+        </div>
+        <div className="dropdown-container">
+          <DropdownFilter
+          />
+        </div>
+        <div className="dropdown-container">
+          <DropdownFilter
+          />
+        </div>
+        <div className="dropdown-container">
+          <DropdownFilter
+          />
+        </div>
+        <div className="search-container">
+          {this._renderBaseButton()}
+        </div>
+      </div>
     );
   }
 
@@ -148,7 +178,6 @@ class PlanningDetailsTab extends React.Component {
     const { classes, theme } = this.props;
     const { value } = this.state;
     return (
-
         <div className="root">
         <AppBar position="static" color="default" style={{boxShadow: "none"}}>
           <Tabs 
@@ -158,15 +187,17 @@ class PlanningDetailsTab extends React.Component {
             indicatorColor="primary" >
             <Tab label="Sales Order" classes={{ root: classes.tabRoot, selected: classes.tabSelected }} />
             <Tab label="Service Order" classes={{ root: classes.tabRoot, selected: classes.tabSelected }} />
-            <Tab classes={{ root: classes.tabRoot }} /><Tab classes={{ root: classes.tabRoot }} />
-            <Tab classes={{ root: classes.tabRoot }} /><Tab classes={{ root: classes.tabRoot }} />
+            <Tab disabled classes={{ root: classes.tabRoot }} /><Tab disabled classes={{ root: classes.tabRoot }} />
+            <Tab disabled classes={{ root: classes.tabRoot }} /><Tab disabled classes={{ root: classes.tabRoot }} />
             {this._renderSearchBar()} 
             {this._renderFilterByDataAction()}
           </Tabs>
         </AppBar>
+        <div className="filters-container">
+          {this._renderFilter()}
+        </div>
         {value === 0 && <TabContainer dir={theme.direction}>{this._renderTotalSalesOrder()}<div>{this._renderSalesOrderList()}</div></TabContainer>}
         {value === 1 && <TabContainer dir={theme.direction}>{this._renderTotalServiceOrder()}<div>{this._renderServiceOrderList()} </div></TabContainer>}
-        {/* <TabContainer>{this._renderBaseButton()}</TabContainer> */}
       </div>
     );
   }

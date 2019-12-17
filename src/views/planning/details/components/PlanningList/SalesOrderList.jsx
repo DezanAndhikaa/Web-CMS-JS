@@ -33,7 +33,7 @@ export default class SalesOrderList extends React.PureComponent {
 
 render(){
     return(
-        <Table classes={{ root: 'table' }}>
+        <Table classes={{ root: 'table' }} className="table">
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
           <TableRow>
             <TableCell padding="checkbox" />

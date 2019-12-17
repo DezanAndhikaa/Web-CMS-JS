@@ -1,6 +1,10 @@
 @import '../../../../../themes/variables';
 @import '../../../../../themes/functions';
 
+.table{
+    margin-top: vw(75);
+}
+
 @media (max-width: 599px) {
     .job-list-mobile-card{
         width: 100%;

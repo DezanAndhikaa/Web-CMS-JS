@@ -1,23 +1,15 @@
 import React from 'react';
 import './DetailPages.scss';
 import PlanningDetailsTab from './components/Tab/PlanningDetailsTab';
+import DropdownFilter from '../../../components/FilterByTitle/DropdownFilter';
 
 class DetailPages extends React.Component{
     state = {
         stats: true,
         selectedPlans: [],
         displayCheckbox: true,
-        // inputLifetime: '',
         lifetime: ''
     }
-
-    // isClick = () =>{
-    //     console.log('ke pencet')
-    //     this.setState({
-    //         stats: !this.state.stats, 
-    //         lifetime: this.state.inputLifetime
-    //     })
-    // }
     
     isChangeStat = (value) =>{
         this.setState({ 
@@ -30,19 +22,17 @@ class DetailPages extends React.Component{
 
     _renderSalesOrderTabs(){
         return (
-        <>
-        <PlanningDetailsTab
-        {...this.props}
-        onChoosed={this.updateAssignmentStates}
-        selectedPlanList={this.state.selectedPlans}
-        displayCheckbox={this.state.displayCheckbox}
-        stats={this.state.stats}
-        onStats={this.isChangeStat}
-        value={this.state.lifetime}
-        // lifetime={this.state.lifetime}
-        // diklik={this.isClick}
-        />
-        </>
+            <>
+                <PlanningDetailsTab
+                    {...this.props}
+                    onChoosed={this.updateAssignmentStates}
+                    selectedPlanList={this.state.selectedPlans}
+                    displayCheckbox={this.state.displayCheckbox}
+                    stats={this.state.stats}
+                    onStats={this.isChangeStat}
+                    value={this.state.lifetime}
+                />
+            </>
         );
     }
 
@@ -53,13 +43,56 @@ class DetailPages extends React.Component{
         return this.props.selectPlan(plan);
     }
 
+    _renderFilter() {
+        return (
+          <div className="dropdowns-container">
+            <div className="dropdown-container">
+              <DropdownFilter
+                // data={this.props.reportList.jobTypeFilter}
+                // selected={this.props.selectedFilters.jobType}
+                // onSelectActionType={SelectJobsTypeFilterAction}
+                // onSelectAction={this.props.selectFilter}
+              />
+            </div>
+            <div className="dropdown-container">
+              <DropdownFilter
+                // data={this.props.reportList.unitModelFilter}
+                // selected={this.props.selectedFilters.unitModel}
+                // onSelectActionType={SelectUnitModelFilterAction}
+                // onSelectAction={this.props.selectFilter}
+              />
+            </div>
+            <div className="dropdown-container">
+              <DropdownFilter
+                // data={this.props.reportList.customerFilter}
+                // selected={this.props.selectedFilters.customer}
+                // onSelectActionType={SelectCustomerFilterAction}
+                // onSelectAction={this.props.selectFilter}
+              />
+            </div>
+            <div className="dropdown-container">
+              <DropdownFilter
+                // data={this.props.reportList.customerFilter}
+                // selected={this.props.selectedFilters.customer}
+                // onSelectActionType={SelectCustomerFilterAction}
+                // onSelectAction={this.props.selectFilter}
+              />
+            </div>
+            {/* {this.props.displayMode === "web" && (
+              <div className="search-container">{this.renderSearchInput()}</div>
+            )} */}
+          </div>
+        );
+    }
+
     render(){
         return(
             <main className="content">
                 <div className="table-container">
-                    <div>
+                    {/* <div className="filters-container">{this._renderFilter()}</div> */}
+                    {/* <div> */}
                         {this._renderSalesOrderTabs()}
-                    </div>
+                    {/* </div> */}
                 </div>
             </main>
         )
