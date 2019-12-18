@@ -3,6 +3,7 @@ import { Button, Modal } from '@material-ui/core'
 import './InputButton.scss'
 import InputText from '../InputText/InputText'
 import FilterByLifetime from '../FilterByLifetime/FilterByLifetime'
+import FilterByPeriodeDate from '../FilterByPeriodeDate/FilterByPeriodeDate'
 
 export default class InputButton extends React.Component{
     
@@ -39,13 +40,30 @@ export default class InputButton extends React.Component{
                     </Modal>
                 </div>
             )
-        }else{
+        }else if(this.props.titles === "Lifetime Comp"){
             return(
                 <div className="button-row">
                 <Button onClick={this.isClicked} className="btn-assigns-lifetime" style={{justifyContent: "unset"}}>{this.props.titles}</Button>
                     <Modal className="modal-pos" open={this.state.isShowModal} onClose={this.isClosed}>
                         <div>
                             <FilterByLifetime 
+                                {...this.props}
+                                {...this.state}
+                                title={this.props.title} 
+                                onClosed={this.isClosed}
+                                onStats={this.props.onStats}
+                            />
+                        </div>
+                    </Modal>
+                </div>
+            )
+        }else{
+            return(
+                <div className="button-row">
+                <Button onClick={this.isClicked} className="btn-assigns-lifetime" style={{justifyContent: "unset"}}>{this.props.titles}</Button>
+                    <Modal className="modal-pos" open={this.state.isShowModal} onClose={this.isClosed}>
+                        <div>
+                            <FilterByPeriodeDate 
                                 {...this.props}
                                 {...this.state}
                                 title={this.props.title} 
