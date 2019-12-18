@@ -2,9 +2,9 @@ import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 import { history } from '../configure-store';
 // import { LoginPageReducers } from '../pages/login';
-// import { JobsReducers } from '../pages/jobs-execution/jobs';
+import { PlansReducers } from '../views/planning/details/DetailPages-reducer';
 import { STORAGE_ACTIONS } from '../core/StorageHelper';
-import { USER_DATA, JOB_DATA } from '../constants';
+import { USER_DATA, PLAN_DATA } from '../constants';
 // import { PIDetailReducers } from '../pages/pi-detail/PiDetailPage.reducers';
 // import { ReportReducers } from '../pages/jobs-execution/jobs-report/JobsReport.reducer';
 import { LOGOUT_ACTION } from '../components/SideMenu/SideMenuComponent.actions';
@@ -39,9 +39,9 @@ function userDataReducer(state = initialState, action) {
 	return state;
 }
 
-function selectedJobDataReducer(state = {}, action) {
-	if (action.data && ((action.type === STORAGE_ACTIONS.GET_DATA + JOB_DATA)
-    || action.type === STORAGE_ACTIONS.STORE_DATA + JOB_DATA)) {
+function selectedPlanDataReducer(state = {}, action) {
+	if (action.data && ((action.type === STORAGE_ACTIONS.GET_DATA + PLAN_DATA)
+    || action.type === STORAGE_ACTIONS.STORE_DATA + PLAN_DATA)) {
 		return action.data;
 	}
 	return state;
@@ -60,13 +60,13 @@ const AppReducer = combineReducers({
 	userData: userDataReducer,
 	sideMenuComponentState: clickMenuReducer,
 	// loginPageState: LoginPageReducers,
-	// jobsPageState: JobsReducers,
+	plansPageState: PlansReducers,
 	displayMode: setPageDisplayModeReducer,
 	timezone: setTimezoneReducer,
 	menuDrawerState: toggleMenuReducer,
 	// piPageState: PIDetailReducers,
 	// reportState: ReportReducers,
-	selectedJobData: selectedJobDataReducer,
+	selectedPlanData: selectedPlanDataReducer,
 	//ProblemLog Approval
 	// piDetailState: problemLogReducer,
 	// problemLogDetail: fetchDetailReducer,

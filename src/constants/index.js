@@ -34,13 +34,13 @@ export const Menu = {
 };
   
 export const USER_DATA = 'USER_DATA';
-export const JOB_DATA = 'SELECTED_JOB_DATA';
+export const PLAN_DATA = 'SELECTED_PLAN_DATA';
 export const USER_LOGOUT = 'USER_LOGOUT';
 export const REQUEST_TIME_OUT = 50000;
   
 export const StorageKey = {
 	USER_DATA: 'USER_DATA_STORAGE_KEY',
-	JOB_DATA: 'JOB_DATA_STORAGE_KEY',
+	PLAN_DATA: 'PLAN_DATA_STORAGE_KEY',
 };
   
 export const ApiUrlBase = {

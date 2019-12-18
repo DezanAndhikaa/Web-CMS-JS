@@ -109,7 +109,7 @@ class SideMenuComponent extends React.Component {
             {/* Planning */}
             <ListItem
               button
-              key="jobs"
+              key="plans"
               className={
                 this.props.path.includes(Menu.PLANNING)
                   ? "menu-item-selected"
@@ -130,14 +130,14 @@ class SideMenuComponent extends React.Component {
               />
             </ListItem>
             <Collapse
-              in={this.props.jobsMenuExpanded}
+              in={this.props.plansMenuExpanded}
               timeout="auto"
               unmountOnExit
             >
               <List disablePadding>
                 <ListItem
                   button
-                  key="jobs-assignment"
+                  key="plans-assignment"
                   className={
                     this.props.path === Menu.PLANNING_DASHBOARD
                       ? "sub-menu-selected"

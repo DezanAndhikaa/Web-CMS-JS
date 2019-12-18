@@ -1,18 +1,27 @@
 import React from 'react';
+import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import './DetailPages.scss';
 import PlanningDetailsTab from './components/Tab/PlanningDetailsTab';
 import DropdownFilter from '../../../components/FilterByTitle/DropdownFilter';
 import { Base } from '../../../base-url'
 
 class DetailPages extends React.Component{
-    state = {
+    constructor(props) {
+        super(props)
+    this.state = {
         stats: true,
         selectedPlans: [],
         displayCheckbox: true,
-        // inputLifetime: '',
         lifetime: [],
-        salesOrder: []
-    }
+        salesOrder: [],
+        nextPage: true,
+        prevPage: false,
+        numberOfPage: 2,
+        currentPage: 1,
+
+
+    };
+}
 
     componentDidMount(){
         console.log("narik data sales order ")
@@ -23,7 +32,33 @@ class DetailPages extends React.Component{
             }
         })
     }
+    
+    _renderPagination() {
+        console.log(this.props)
+        const web = this.props.displayMode === 'web';
+        const next = this.state.nextPage;
+        const prev = this.state.prevPage;
+        const currentProps = this.state.currentPage;
+        const { numberOfPage } = this.state;
+    return(
+        <div className="pagination">
+        <div className="paging">
+          {prev && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>}
+          {web && currentProps - 3 > 0 && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps - 3 })} className="page-inactive">{currentProps - 3}</div>}
+          {web && currentProps - 2 > 0 && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps - 2 })} className="page-inactive">{currentProps - 2}</div>}
+          {currentProps - 1 > 0 && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps - 1 })} className="page-inactive">{currentProps - 1}</div>}
+          <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps })} className="page-active">{currentProps}</div>
+          {currentProps + 1 <= numberOfPage && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps + 1 })} className="page-inactive">{currentProps + 1}</div>}
+          {web && currentProps + 2 < numberOfPage && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps + 2 })} className="page-inactive">{currentProps + 2}</div>}
+          {web && currentProps + 3 < numberOfPage && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps + 3 })} className="page-inactive">{currentProps + 3}</div>}
+          {next && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>}
+        </div>
+      </div>
+    )
+    
+    }
 
+    
     isChangeStat = (value) =>{
         console.log('nilai value kiriman : '+value)
         this.setState({ 
@@ -104,11 +139,11 @@ class DetailPages extends React.Component{
         return(
             <main className="content">
                 <div className="table-container">
-                    {/* <div className="filters-container">{this._renderFilter()}</div> */}
-                    {/* <div> */}
-                        {this._renderSalesOrderTabs()}
-                    {/* </div> */}
-                </div>
+                      {this._renderSalesOrderTabs()}
+                  </div>
+                  <div className="bottom-row">
+                      {this._renderPagination()}
+                  </div>
             </main>
         )
     }
