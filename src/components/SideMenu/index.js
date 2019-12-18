@@ -10,7 +10,7 @@ import SideMenuComponent from './SideMenuComponent';
 
 const mapStateToProps = (state) => ({
 	path: state.router.location.pathname,
-	jobsMenuExpanded: state.sideMenuComponentState.jobsMenuExpanded,
+	plansMenuExpanded: state.sideMenuComponentState.plansMenuExpanded,
 	backlogMenuExpanded: state.sideMenuComponentState.backlogMenuExpanded,
 	activeMenu: state.sideMenuComponentState.activeMenu,
 	activeSubMenu: state.sideMenuComponentState.activeSubMenu,

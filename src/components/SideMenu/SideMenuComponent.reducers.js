@@ -4,7 +4,7 @@ import { CLICK_MENU } from './SideMenuComponent.actions';
 const initialState = {
 	activeMenu: Menu.DASHBOARD,
 	activeSubMenu: '',
-	jobsMenuExpanded: false,
+	plansMenuExpanded: false,
 	backlogMenuExpanded: false,
 };
 
@@ -14,7 +14,7 @@ export default function clickMenuReducer(state = initialState, action) {
 			return {
 				activeMenu: action.payload.menu,
 				activeSubMenu: action.payload.subMenu,
-				jobsMenuExpanded: !state.jobsMenuExpanded,
+				plansMenuExpanded: !state.plansMenuExpanded,
 				backlogMenuExpanded: state.backlogMenuExpanded ? false:state.backlogMenuExpanded
 			};
 		}
@@ -22,14 +22,14 @@ export default function clickMenuReducer(state = initialState, action) {
 			return {
 				activeMenu: action.payload.menu,
 				activeSubMenu: action.payload.subMenu,
-				jobsMenuExpanded: state.jobsMenuExpanded ? false:state.jobsMenuExpanded,
+				plansMenuExpanded: state.plansMenuExpanded ? false:state.plansMenuExpanded,
 				backlogMenuExpanded: !state.backlogMenuExpanded
 			};
 		}
 		return {
 			activeMenu: action.payload.menu,
 			activeSubMenu: action.payload.subMenu,
-			jobsMenuExpanded: state.jobsMenuExpanded,
+			plansMenuExpanded: state.plansMenuExpanded,
 			backlogMenuExpanded: state.backlogMenuExpanded
 		};
 	}

@@ -69,7 +69,7 @@ const initialSelectedFilter = {
 const defaultState = { isActive: false, isAscending: true };
 const plansSortbyInitialState = {
 	so: defaultState,
-	costumer: defaultState,
+	customer: defaultState,
 	site: defaultState,
 	unitModel: defaultState,
 	compDesc: defaultState,
@@ -105,23 +105,23 @@ const initialMechanicsState = { data: [], status: ApiRequestActionsStatus.IDLE }
 // 	return state;
 // }
 
-// export function fetchPlansReducer(state = initialPlansState, action) {
-// 	if (action.type === FetchPlansAction) {
-// 		switch (action.status) {
-// 		case ApiRequestActionsStatus.SUCCEEDED:
-// 			return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
-// 		case ApiRequestActionsStatus.FAILED:
-// 			return {
-// 				data: initialPlansState.data,
-// 				status: ApiRequestActionsStatus.FAILED,
-// 				error: action.error,
-// 			};
-// 		default:
-// 			return { data: initialPlansState.data, status: ApiRequestActionsStatus.LOADING };
-// 		}
-// 	}
-// 	return state;
-// }
+export function fetchPlansReducer(state = initialPlansState, action) {
+	if (action.type === FetchPlansAction) {
+		switch (action.status) {
+		case ApiRequestActionsStatus.SUCCEEDED:
+			return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		case ApiRequestActionsStatus.FAILED:
+			return {
+				data: initialPlansState.data,
+				status: ApiRequestActionsStatus.FAILED,
+				error: action.error,
+			};
+		default:
+			return { data: initialPlansState.data, status: ApiRequestActionsStatus.LOADING };
+		}
+	}
+	return state;
+}
 
 // export function getMechanicsReducer(state = initialMechanicsState, action) {
 // 	if (action.type === GetMechanicsAction) {
@@ -289,7 +289,7 @@ const PlansReducers = combineReducers({
 	// assignPlansStatus: assignPlansReducer,
 	// unassignPlansStatus: unassignPlansReducer,
 	// plansParameter: plansParameterReducer,
-	// PlansAssignmentSummary: fetchPlansReducer,
+	PlansAssignmentSummary: fetchPlansReducer,
 	// selectedFilters: selectedFiltersReducer,
 	// sortBy: sortPlansByReducer,
 	// searchValue: searchPlansReducer,

@@ -14,11 +14,11 @@ import SalesOrderData from '../../../../../planning-data-dummy.json';
 
 export default class SalesOrderList extends React.PureComponent {
 
-    openDetail = async (row) => {
-      await this.props.saveJobData(row);
-      this.props.storeJobData(row);
-      return this.props.pushTo(`${Menu.DETAIL_PI}:${row.woNumber || ''}`);
-    }
+    // openDetail = async (row) => {
+    //   await this.props.saveJobData(row);
+    //   this.props.storeJobData(row);
+    //   return this.props.pushTo(`${Menu.DETAIL_PI}:${row.woNumber || ''}`);
+    // }
 
 
     isCheckboxAvailable = (data) => {
