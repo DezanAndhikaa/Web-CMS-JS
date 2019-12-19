@@ -2,7 +2,7 @@ import React from 'react';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import './DetailPages.scss';
 import PlanningDetailsTab from './components/Tab/PlanningDetailsTab';
-import DropdownFilter from '../../../components/FilterByTitle/DropdownFilter';
+import DropDownList from '../../../components/DropdownList/DropDownList';
 import { Base } from '../../../base-url'
 
 class DetailPages extends React.Component{
@@ -93,46 +93,10 @@ class DetailPages extends React.Component{
         return this.props.selectPlan(plan);
     }
 
-    _renderFilter() {
-        return (
-          <div className="dropdowns-container">
-            <div className="dropdown-container">
-              <DropdownFilter
-                // data={this.props.reportList.jobTypeFilter}
-                // selected={this.props.selectedFilters.jobType}
-                // onSelectActionType={SelectJobsTypeFilterAction}
-                // onSelectAction={this.props.selectFilter}
-              />
-            </div>
-            <div className="dropdown-container">
-              <DropdownFilter
-                // data={this.props.reportList.unitModelFilter}
-                // selected={this.props.selectedFilters.unitModel}
-                // onSelectActionType={SelectUnitModelFilterAction}
-                // onSelectAction={this.props.selectFilter}
-              />
-            </div>
-            <div className="dropdown-container">
-              <DropdownFilter
-                // data={this.props.reportList.customerFilter}
-                // selected={this.props.selectedFilters.customer}
-                // onSelectActionType={SelectCustomerFilterAction}
-                // onSelectAction={this.props.selectFilter}
-              />
-            </div>
-            <div className="dropdown-container">
-              <DropdownFilter
-                // data={this.props.reportList.customerFilter}
-                // selected={this.props.selectedFilters.customer}
-                // onSelectActionType={SelectCustomerFilterAction}
-                // onSelectAction={this.props.selectFilter}
-              />
-            </div>
-            {/* {this.props.displayMode === "web" && (
-              <div className="search-container">{this.renderSearchInput()}</div>
-            )} */}
-          </div>
-        );
+    _renderShowPerPage(){
+      return(
+        <DropDownList />
+      )
     }
 
     render(){
@@ -142,7 +106,7 @@ class DetailPages extends React.Component{
                       {this._renderSalesOrderTabs()}
                   </div>
                   <div className="bottom-row">
-                      {this._renderPagination()}
+                      {this._renderShowPerPage()} {this._renderPagination()}
                   </div>
             </main>
         )

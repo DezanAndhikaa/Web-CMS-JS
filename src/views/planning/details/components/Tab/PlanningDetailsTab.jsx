@@ -18,7 +18,6 @@ import DeleteButton from '../../../../../components/DeleteConfirmation/DeleteSuc
 function TabContainer({ children, dir }) {
   return (
     <Typography component="div" dir={dir}>
-      {/* style={{ padding: 8 * 3 }} */}
       {children}
     </Typography>
   );
@@ -124,7 +123,7 @@ class PlanningDetailsTab extends React.Component {
   _renderSearchBar(){
     return( 
       <div className="plannings-list-containers">
-        <Searchbar > &nbsp;&nbsp;&nbsp;&nbsp;</Searchbar>
+        <Searchbar >&nbsp;&nbsp;&nbsp;&nbsp;</Searchbar>
       </div> 
     );
   }
