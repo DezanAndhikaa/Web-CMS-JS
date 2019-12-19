@@ -4,6 +4,7 @@ import './DetailPages.scss';
 import PlanningDetailsTab from './components/Tab/PlanningDetailsTab';
 import DropdownFilter from '../../../components/FilterByTitle/DropdownFilter';
 import { Base } from '../../../base-url'
+import SalesDummy from '../../../../src/dummy.json'
 
 class DetailPages extends React.Component{
     constructor(props) {
@@ -12,7 +13,7 @@ class DetailPages extends React.Component{
         stats: true,
         selectedPlans: [],
         displayCheckbox: true,
-        lifetime: [],
+        lifetime: SalesDummy,
         salesOrder: [],
         nextPage: true,
         prevPage: false,
@@ -25,12 +26,7 @@ class DetailPages extends React.Component{
 
     componentDidMount(){
         console.log("narik data sales order ")
-        Base.get('URLnya').then((res) => {
-            if(res.status === 200){
-                this.setState({ salesOrder: res.data})
-                console.log('hasil tarikan Sales Order', this.state.salesOrder)
-            }
-        })
+        console.log(this.state.lifetime)
     }
     
     _renderPagination() {
@@ -59,12 +55,13 @@ class DetailPages extends React.Component{
     }
 
     
-    isChangeStat = (value) =>{
+    isChangeStat = (value,key) =>{
         console.log('nilai value kiriman : '+value)
-        this.setState({ 
-            stats: !this.state.stats,
-            lifetime: [...this.state.lifetime, value]
-        })
+        console.log('nilai key kiriman : '+key)
+        // }))
+        this.setState({
+          lifetime: { salesData :this.state.lifetime.salesData.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) }
+        });
         console.log('ke pencet', this.state.lifetime)
         console.log("nilai mnilai : "+ this.state.stats)
     }
@@ -136,6 +133,7 @@ class DetailPages extends React.Component{
     }
 
     render(){
+        console.log(this.state.lifetime);
         return(
             <main className="content">
                 <div className="table-container">
