@@ -1,12 +1,13 @@
 
 
-// import { RequestMethod, ApiUrlBase } from '../../../common/constants';
-// import { callApi } from '../../../core/rest-client-helpers';
+import { RequestMethod, ApiUrlBase } from '../../../constants';
+import { callApi } from '../../../core/RestClientHelpers';
 
 export const AssignPlansAction = 'ASSIGN_PLANS';
 export const ClearSelectedPlans = 'CLEAR_SELECTED_PLANS';
 export const FetchPlansAction = 'FETCH_PLANS';
 export const GetMechanicsAction = 'GET_MECHANICS';
+export const GetServiceOrderAction = 'GET_SERVICE_ORDER';
 export const ResetAssignment = 'RESET_ASSIGNMENT';
 export const ResetSelectedMechanicsAction = 'RESET_SELECTED_MECHANICS';
 export const ResetSelectedLeaderAction = 'RESET_SELECTED_LEADER';
@@ -87,6 +88,23 @@ export const UpdatePlansParameterAction = 'PLANS_PARAMETER';
 // 	};
 // 	return async (dispatch) => dispatch(callApi(UnassignPlansAction, requestConfig));
 // }
+
+export function getServiceOrderAction() {
+	const data = {
+		filter:{}
+	};
+	const requestConfig = {
+		method: RequestMethod.POST,
+		url: `${ApiUrlBase.SERVICEORDER_API_URL}`,
+		headers: {
+			'Content-Type':'text/plain;charset=utf-8'
+		},
+		body:JSON.stringify(data),
+		// body:JSON.stringify(data)
+		
+	};
+	return async (dispatch) => dispatch(callApi(GetServiceOrderAction, requestConfig));
+}
 
 export function planParameterAction(type, payload) {
 	return { type, payload };

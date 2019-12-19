@@ -18,28 +18,33 @@ class DetailPages extends React.Component{
         prevPage: false,
         numberOfPage: 2,
         currentPage: 1,
+        filter: {
+          filter : {}
+        }
 
 
     };
 }
 
     componentDidMount(){
-        console.log("narik data sales order ")
-        Base.get('URLnya').then((res) => {
-            if(res.status === 200){
-                this.setState({ salesOrder: res.data})
-                console.log('hasil tarikan Sales Order', this.state.salesOrder)
-            }
-        })
+      console.log('testing',this.props)
+      this.props.getServiceOrder()
+        // console.log("narik data sales order ")
+        // Base.post('',JSON.stringify(this.state.filter)).then((res) => {
+        //     if(res.status === 200){
+        //         this.setState({ salesOrder: res.data})
+        //         console.log('hasil tarikan Sales Order', this.state.salesOrder)
+        //     }
+        // })
     }
-    
+
     _renderPagination() {
         console.log(this.props)
         const web = this.props.displayMode === 'web';
-        const next = this.state.nextPage;
-        const prev = this.state.prevPage;
-        const currentProps = this.state.currentPage;
-        const { numberOfPage } = this.state;
+        const next = this.props.nextPage;
+        const prev = this.props.prevPage;
+        const currentProps = this.props.currentPage;
+        const { numberOfPage } = this.props;
     return(
         <div className="pagination">
         <div className="paging">
@@ -136,6 +141,7 @@ class DetailPages extends React.Component{
     }
 
     render(){
+      console.log('data props',this.props)
         return(
             <main className="content">
                 <div className="table-container">

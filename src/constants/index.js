@@ -44,6 +44,7 @@ export const StorageKey = {
 };
   
 export const ApiUrlBase = {
+	SERVICEORDER_API_URL: process.env.REACT_APP_SERVICE_ORDER_API_URL,
 	AUTH_API_URL: process.env.REACT_APP_AUTH_API_URL,
 	WORK_ORDER_API_URL: process.env.REACT_APP_WORK_ORDER_API_URL,
 	TRACKING_API_URL: process.env.REACT_APP_TRACKING_API_URL,

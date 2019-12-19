@@ -4,11 +4,18 @@ import { combineReducers } from 'redux';
 import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
 import {
 	// AssignPlansAction, 
-	ClearSelectedPlans, FetchPlansAction, GetMechanicsAction,
-	UpdatePlansParameterAction, ResetSelectedMechanicsAction, SearchPlansAction,
-	SelectCustomerFilterAction, SelectPlanAction, SelectPlansAssignmentFilterAction,
-	SelectPlansTypeFilterAction, SelectLeaderAction, SelectMechanicAction,
-	SelectUnitModelFilterAction, SortPlansByBacklogOpen, SortPlansByCustomer,
+	ClearSelectedPlans, FetchPlansAction, 
+	// GetMechanicsAction, 
+	GetServiceOrderAction,
+	UpdatePlansParameterAction, ResetSelectedMechanicsAction, 
+	// SearchPlansAction,
+	// SelectCustomerFilterAction, 
+	SelectPlanAction, 
+	// SelectPlansAssignmentFilterAction,
+	// SelectPlansTypeFilterAction, 
+	SelectLeaderAction, SelectMechanicAction,
+	// SelectUnitModelFilterAction,
+	SortPlansByBacklogOpen, SortPlansByCustomer,
 	SortPlansByPlanType, SortPlansByPlantExecution, SortPlansByStaging,
 	SortPlansByStatus, SortPlansByUnitCode, SortPlansByUnitModel,
 	SortPlansByWorkOrder,
@@ -83,6 +90,7 @@ const plansSortbyInitialState = {
 // const initialAssignmentState = { response: false, status: ApiRequestActionsStatus.IDLE };
 const initialPlansState = { data: initialPlansAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialMechanicsState = { data: [], status: ApiRequestActionsStatus.IDLE };
+const initialServiceOrderState = { data: [], status: ApiRequestActionsStatus.IDLE };
 
 // export function assignPlansReducer(state = initialAssignmentState, action) {
 // 	if (action.type === AssignPlansAction) {
@@ -105,19 +113,37 @@ const initialMechanicsState = { data: [], status: ApiRequestActionsStatus.IDLE }
 // 	return state;
 // }
 
-export function fetchPlansReducer(state = initialPlansState, action) {
-	if (action.type === FetchPlansAction) {
+// export function fetchPlansReducer(state = initialPlansState, action) {
+// 	if (action.type === FetchPlansAction) {
+// 		switch (action.status) {
+// 		case ApiRequestActionsStatus.SUCCEEDED:
+// 			return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+// 		case ApiRequestActionsStatus.FAILED:
+// 			return {
+// 				data: initialPlansState.data,
+// 				status: ApiRequestActionsStatus.FAILED,
+// 				error: action.error,
+// 			};
+// 		default:
+// 			return { data: initialPlansState.data, status: ApiRequestActionsStatus.LOADING };
+// 		}
+// 	}
+// 	return state;
+// }
+
+export function getServiceOrderReducer(state = {}, action) {
+	if (action.type === GetServiceOrderAction) {
 		switch (action.status) {
 		case ApiRequestActionsStatus.SUCCEEDED:
 			return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
 		case ApiRequestActionsStatus.FAILED:
 			return {
-				data: initialPlansState.data,
+				data: initialServiceOrderState.data,
 				status: ApiRequestActionsStatus.FAILED,
 				error: action.error,
 			};
 		default:
-			return { data: initialPlansState.data, status: ApiRequestActionsStatus.LOADING };
+			return { data: initialMechanicsState.data, status: ApiRequestActionsStatus.LOADING };
 		}
 	}
 	return state;
@@ -141,10 +167,10 @@ export function fetchPlansReducer(state = initialPlansState, action) {
 // 	return state;
 // }
 
-// export function plansParameterReducer(state = initialParameter, action) {
-// 	if (action.type === UpdatePlansParameterAction) return action.payload;
-// 	return state;
-// }
+export function plansParameterReducer(state = initialParameter, action) {
+	if (action.type === UpdatePlansParameterAction) return action.payload;
+	return state;
+}
 
 // export function searchPlansReducer(state = '', action) {
 // 	if (action.type === SearchPlansAction) return action.payload;
@@ -283,13 +309,14 @@ export function storePlanDataReducer(state = {}, action) {
 
 const PlansReducers = combineReducers({
 	selectedLeader: selectLeaderReducer,
+	serviceOrderList: getServiceOrderReducer,
 	// mechanicList: getMechanicsReducer,
 	selectedPlans: selectPlansReducer,
 	selectedMechanics: selectMechanicsReducer,
 	// assignPlansStatus: assignPlansReducer,
 	// unassignPlansStatus: unassignPlansReducer,
 	// plansParameter: plansParameterReducer,
-	PlansAssignmentSummary: fetchPlansReducer,
+	// PlansAssignmentSummary: fetchPlansReducer,
 	// selectedFilters: selectedFiltersReducer,
 	// sortBy: sortPlansByReducer,
 	// searchValue: searchPlansReducer,

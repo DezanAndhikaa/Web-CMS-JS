@@ -3,7 +3,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
 import { Menu } from '../constants';
-import DetailPages from '../views/planning/details/DetailPages';
+import { DetailPages } from '../views/planning/details';
 // import { JobsPage } from '../pages/jobs-execution/jobs';
 // import { LoginPage } from '../pages/login';
 // import MasterDataUploader from '../pages/master-data-uploader';
