@@ -3,7 +3,7 @@
 import React from 'react';
 import { AppBar, Toolbar } from '@material-ui/core';
 import { AccountPic, DcaLogo } from '../../assets/imgs';
-import { MenuToggle } from '../../assets/icons';
+import { MenuToggle, Email } from '../../assets/icons';
 import isAccessTokenValid from '../../core/HelpersFunction';
 import './NavBarComponent.scss';
 
@@ -18,8 +18,8 @@ class NavBarComponent extends React.Component {
 							<p>
 								{`Hi, ${this.props.userData.firstName} ${this.props.userData.lastName}`}
 							</p>
-              &nbsp; &nbsp;
 							<img src={AccountPic} className="account-pic" alt="" />
+							<img src={Email} className="icon-email" alt="" />
 						</Toolbar>
 					</AppBar>
 				);

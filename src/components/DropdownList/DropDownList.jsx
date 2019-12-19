@@ -1,20 +1,23 @@
 import React from 'react'
-import { Select, MenuItem, FormHelperText } from '@material-ui/core'
+import { Select, MenuItem, FormLabel } from '@material-ui/core'
 import './DropDownList.scss'
 
 class DropDownList extends React.Component{
     render(){
         return(
-            <div>
-                <Select className="dropdowns" labelId="label" id="select">
-                    <MenuItem value="0"></MenuItem>
-                    <MenuItem value="10">EXKM21034</MenuItem>
-                    <MenuItem value="20">EXKM21035</MenuItem>
-                    <MenuItem value="20">EXKM21036</MenuItem>
-                    <MenuItem value="20">EXKM21037</MenuItem>
-                    <MenuItem value="20">EXKM21038</MenuItem>
-                </Select>
-                <FormHelperText>* Don't Add Space Before and After Unit Code</FormHelperText>
+            <div className="show-per-page">
+                <span>
+                    <FormLabel className="label">Show</FormLabel>
+                    <Select variant="outlined" className="dropdown-list" labelId="label" id="select">
+                        <MenuItem className="dropdown-list" value="0"></MenuItem>
+                        <MenuItem className="dropdown-list" value="10">10</MenuItem>
+                        <MenuItem className="dropdown-list" value="25">25</MenuItem>
+                        <MenuItem className="dropdown-list" value="50">50</MenuItem>
+                        <MenuItem className="dropdown-list" value="100">100</MenuItem>
+                        <MenuItem className="dropdown-list" value="1000">All</MenuItem>
+                    </Select>
+                    <FormLabel className="label">entries</FormLabel>
+                </span>
             </div>
         )
     }

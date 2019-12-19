@@ -98,7 +98,9 @@ import TrackingIcon from './tracking.png';
 import SearchIcon from './search.png';
 import FolderIcon from './folder.png';
 import ApproveIcon from './send.png';
-import Filters from './filters.png'
+import Filters from './filters.png';
+import Email from './email.png';
+
 export {
 	AssignmentIcon,
 	SettingsIcon,
@@ -200,5 +202,6 @@ export {
 	SearchIcon,
 	FolderIcon,
 	ApproveIcon,
-	Filters
+	Filters,
+	Email
 };

@@ -110,12 +110,6 @@ render(){
                 // //   isAscending={this.props.sortJobsByState.staging.isAscending}
                 />
             <PlanningListHeader
-              name=""
-            // //   isActive={this.props.sortJobsByState.staging.isActive}
-              delay={300}
-            // //   isAscending={this.props.sortJobsByState.staging.isAscending}
-            />
-            <PlanningListHeader
               name="Action"
             // //   isActive={this.props.sortJobsByState.staging.isActive}
               delay={300}
@@ -146,7 +140,6 @@ render(){
                 </TableCell>
                 <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
                 <TableCell align="center" className="table-cell"> <EditButton /></TableCell>
-                <TableCell align="center" className="table-cell"> <SaveButton /></TableCell>
               </TableRow>
             ))}
         </TableBody>
