@@ -32,6 +32,7 @@ class InputText extends React.Component{
     }
 
     render(){
+        console.log("key key kye "+ JSON.stringify(this.props))
         return(
             <div className="assign-mechanic-modal">
                 <div className="top-row">
@@ -56,7 +57,7 @@ class InputText extends React.Component{
                 </Formik>
                 <div className="bottom-row">
                     <Button className="btn-cancel" onClick={this.props.onClosed}>Cancel</Button>
-                    <Button className="btn-input" onClick={() => this.props.onStats(this.state.limitText)}>Input</Button>
+                    <Button className="btn-input" onClick={() => this.props.onStats(this.state.limitText, this.props.id)}>Input</Button>
                 </div>
             </div>
         )

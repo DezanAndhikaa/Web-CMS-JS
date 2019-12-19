@@ -4,7 +4,7 @@
 
     "salesData":[
         {
-            "SO": "stringnih",
+            "SO": 1200,
             "Customer": "ali",
             "Site": "aduhh",
             "UnitModel": "CPM123",
@@ -26,7 +26,7 @@
             "IsActive": true
           },
           {
-            "SO": "string",
+            "SO": 1201,
             "Customer": "string",
             "Site": "string",
             "UnitModel": "string",
@@ -48,7 +48,7 @@
             "IsActive": true
           },
           {
-            "SO": "string2",
+            "SO": 1202,
             "Customer": "string",
             "Site": "string",
             "UnitModel": "string",

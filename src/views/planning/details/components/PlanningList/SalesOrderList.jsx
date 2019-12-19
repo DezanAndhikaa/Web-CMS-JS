@@ -32,6 +32,10 @@ export default class SalesOrderList extends React.PureComponent {
       datePlant = (date) => moment.utc(date, ISO_8601).local().format('DD MMMM YYYY')
 
 render(){
+  console.log("this.props.value");
+  console.log(this.props.value);
+  console.log("this.props.onStats");
+  console.log(this.props.onStats);
     return(
         <Table classes={{ root: 'table' }} className="table">
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
@@ -92,12 +96,19 @@ render(){
               delay={300}
             // //   isAscending={this.props.sortJobsByState.staging.isAscending}
             />
-            <PlanningListHeader
-              name="Plan Execution"
+            {/* <InputButton
+              titles="Plan"
+              title="Plan Execution Date"
             // //   isActive={this.props.sortJobsByState.staging.isActive}
               delay={300}
             // //   isAscending={this.props.sortJobsByState.staging.isAscending}
-            />
+            /> */}
+                <PlanningListHeader
+                  name="Plan Execution"
+                // //   isActive={this.props.sortJobsByState.staging.isActive}
+                  delay={300}
+                // //   isAscending={this.props.sortJobsByState.staging.isAscending}
+                />
             <PlanningListHeader
               name="Action"
             // //   isActive={this.props.sortJobsByState.staging.isActive}
@@ -122,9 +133,10 @@ render(){
                 <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
                 <TableCell align="center" className="table-cell"> 
-                {!this.props.value[id] ? <InputButton title={"Input Lifetime Component"} onStats={this.props.onStats} titles="Input"/> : 
-<div>{this.props.value[id]}</div>
+                {!this.props.value.salesData[id].LifeTimeComp ? <InputButton title={"Input Lifetime Component"} onStats={this.props.onStats} titles="Input" key={row.SO} id={row.SO}/> : 
+<div>{this.props.value.salesData[id].LifeTimeComp}</div>
                   }
+                {/* {this.props.value.salesData[id].LifeTimeComp} */}
                 </TableCell>
                 <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
                 <TableCell align="center" className="table-cell"> <EditButton /></TableCell>
