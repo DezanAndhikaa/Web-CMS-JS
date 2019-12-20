@@ -27,26 +27,25 @@ class DetailPages extends React.Component{
     };
 }
 
-    componentDidMount(){
-      console.log("narik data sales order ")
-      console.log(this.state.lifetime)
-      console.log('testing',this.props)
-      this.props.getServiceOrder()
-        // console.log("narik data sales order ")
-        // fetch('http://10.200.201.164:5000/v1/Planning/ServiceOrder/MasterData')
-        // .then((res) => {
-        //   console.log('ini data dari res', res)
-        //   if(res.status === 200){
-        //   return res.json()
-        //   }
-        //   })
-        //   .then( resJson => {
-        //     this.setState({ salesOrder: resJson})
-        //   })
-        //   console.log('data dari api',this.state.salesOrder)
-            }
-    
-
+  componentDidMount(){
+    console.log("narik data sales order ")
+    console.log(this.state.lifetime)
+    console.log('testing',this.props)
+    this.props.getServiceOrder()
+      // console.log("narik data sales order ")
+      // fetch('http://10.200.201.164:5000/v1/Planning/ServiceOrder/MasterData')
+      // .then((res) => {
+      //   console.log('ini data dari res', res)
+      //   if(res.status === 200){
+      //   return res.json()
+      //   }
+      //   })
+      //   .then( resJson => {
+      //     this.setState({ salesOrder: resJson})
+      //   })
+      //   console.log('data dari api',this.state.salesOrder)
+  }
+  
     _renderPagination() {
         console.log(this.props)
         const web = this.props.displayMode === 'web';
