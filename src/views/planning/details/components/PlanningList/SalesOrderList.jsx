@@ -89,26 +89,18 @@ render(){
               delay={300}
             // //   isAscending={this.props.sortJobsByState.status.isAscending}            
             />
-            <InputButton
-              titles="Lifetime Comp"
-              title="Lifetime Component"
+            <PlanningListHeader
+              name="Lifetime"
             // //   isActive={this.props.sortJobsByState.staging.isActive}
               delay={300}
             // //   isAscending={this.props.sortJobsByState.staging.isAscending}
             />
-            {/* <InputButton
-              titles="Plan"
-              title="Plan Execution Date"
+            <PlanningListHeader
+              name="Plan"
             // //   isActive={this.props.sortJobsByState.staging.isActive}
               delay={300}
             // //   isAscending={this.props.sortJobsByState.staging.isAscending}
-            /> */}
-                <PlanningListHeader
-                  name="Plan Execution"
-                // //   isActive={this.props.sortJobsByState.staging.isActive}
-                  delay={300}
-                // //   isAscending={this.props.sortJobsByState.staging.isAscending}
-                />
+            />
             <PlanningListHeader
               name="Action"
             // //   isActive={this.props.sortJobsByState.staging.isActive}
@@ -134,9 +126,8 @@ render(){
                 <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
                 <TableCell align="center" className="table-cell"> 
                 {!this.props.value.salesData[id].LifeTimeComp ? <InputButton title={"Input Lifetime Component"} onStats={this.props.onStats} titles="Input" key={row.SO} id={row.SO}/> : 
-<div>{this.props.value.salesData[id].LifeTimeComp}</div>
-                  }
-                {/* {this.props.value.salesData[id].LifeTimeComp} */}
+                  <div>{this.props.value.salesData[id].LifeTimeComp}</div>
+                }
                 </TableCell>
                 <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
                 <TableCell align="center" className="table-cell"> <EditButton /></TableCell>
