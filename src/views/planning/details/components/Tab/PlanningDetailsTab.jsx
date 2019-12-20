@@ -91,7 +91,6 @@ class PlanningDetailsTab extends React.Component {
   }
 
   handleChange = (event, value) => {
-    console.log('ini value',event)
     console.log('ini index',this.state.value)
     this.setState({ value });
   };
@@ -196,8 +195,8 @@ class PlanningDetailsTab extends React.Component {
         <div className="filters-container">
           {this._renderFilter()}
         </div>
-        {value === 0 && <TabContainer dir={theme.direction}>{this._renderTotalSalesOrder()}<div>{this._renderSalesOrderList()}</div></TabContainer>}
-        {value === 1 && <TabContainer dir={theme.direction}>{this._renderTotalServiceOrder()}<div>{this._renderServiceOrderList()} </div></TabContainer>}
+    {value === 0 && <TabContainer dir={theme.direction}>{this._renderTotalSalesOrder()}<div>{this._renderSalesOrderList()}</div></TabContainer>}
+        {value === 1 && <TabContainer dir={theme.direction}>{this._renderTotalServiceOrder()}<div>{this._renderServiceOrderList()}</div></TabContainer>}
       </div>
     );
   }

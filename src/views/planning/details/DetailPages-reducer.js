@@ -4,9 +4,10 @@ import { combineReducers } from 'redux';
 import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
 import {
 	// AssignPlansAction, 
-	ClearSelectedPlans, FetchPlansAction, 
+	ClearSelectedPlans, 
+	// FetchPlansAction, 
 	// GetMechanicsAction, 
-	GetServiceOrderAction,
+	GetServiceOrderAction, GetSalesOrderAction, 
 	UpdatePlansParameterAction, ResetSelectedMechanicsAction, 
 	// SearchPlansAction,
 	// SelectCustomerFilterAction, 
@@ -67,11 +68,6 @@ const initialParameter = {
 	pageSize: 10,
 };
 
-const initialSelectedFilter = {
-	planType: 'All Plan',
-	unitModel: 'All Model',
-	customer: 'All Customer',
-};
 
 const defaultState = { isActive: false, isAscending: true };
 const plansSortbyInitialState = {
@@ -91,6 +87,7 @@ const plansSortbyInitialState = {
 const initialPlansState = { data: initialPlansAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialMechanicsState = { data: [], status: ApiRequestActionsStatus.IDLE };
 const initialServiceOrderState = { data: [], status: ApiRequestActionsStatus.IDLE };
+const initialSalesOrderState = { data: [], status: ApiRequestActionsStatus.IDLE };
 
 // export function assignPlansReducer(state = initialAssignmentState, action) {
 // 	if (action.type === AssignPlansAction) {
@@ -131,8 +128,26 @@ const initialServiceOrderState = { data: [], status: ApiRequestActionsStatus.IDL
 // 	return state;
 // }
 
-export function getServiceOrderReducer(state = {}, action) {
+export function getServiceOrderReducer(state = initialServiceOrderState, action) {
 	if (action.type === GetServiceOrderAction) {
+		switch (action.status) {
+		case ApiRequestActionsStatus.SUCCEEDED:
+			return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		case ApiRequestActionsStatus.FAILED:
+			return {
+				data: initialServiceOrderState.data,
+				status: ApiRequestActionsStatus.FAILED,
+				error: action.error,
+			};
+		default:
+			return { data: initialMechanicsState.data, status: ApiRequestActionsStatus.LOADING };
+		}
+	}
+	return state;
+}
+
+export function getSalesOrderReducer(state = initialSalesOrderState, action) {
+	if (action.type === GetSalesOrderAction) {
 		switch (action.status) {
 		case ApiRequestActionsStatus.SUCCEEDED:
 			return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
@@ -310,6 +325,7 @@ export function storePlanDataReducer(state = {}, action) {
 const PlansReducers = combineReducers({
 	selectedLeader: selectLeaderReducer,
 	serviceOrderList: getServiceOrderReducer,
+	salesOrderList: getSalesOrderReducer,
 	// mechanicList: getMechanicsReducer,
 	selectedPlans: selectPlansReducer,
 	selectedMechanics: selectMechanicsReducer,

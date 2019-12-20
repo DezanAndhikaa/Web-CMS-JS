@@ -19,7 +19,9 @@ export default class SalesOrderList extends React.PureComponent {
     //   this.props.storeJobData(row);
     //   return this.props.pushTo(`${Menu.DETAIL_PI}:${row.woNumber || ''}`);
     // }
-
+    componentDidMount = async () => {
+      await this.props.onClickSalesOrder();
+     }
 
     isCheckboxAvailable = (data) => {
         let isAvailable = false;
@@ -113,8 +115,8 @@ render(){
           </TableRow>
         </TableHead>
         <TableBody classes={{ root: 'table-body' }}>
-          {SalesOrderData.salesData
-            && SalesOrderData.salesData.map((row, id) => (
+          {this.props.salesOrderList.SalesOrderTypes
+            && this.props.salesOrderList.SalesOrderTypes.map((row, id) => (
               <TableRow key={id} classes={{ root: 'table-row' }}>
                 <TableCell padding="checkbox">
                   {this.props.displayCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedPlanList.some((plans) => plans.SerialNumber === row.SerialNumber)} onClick={() => this.props.onChoosed(row)} classes={{ checked: 'checkbox-checked' }} />}

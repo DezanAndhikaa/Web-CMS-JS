@@ -8,6 +8,7 @@ export const ClearSelectedPlans = 'CLEAR_SELECTED_PLANS';
 export const FetchPlansAction = 'FETCH_PLANS';
 export const GetMechanicsAction = 'GET_MECHANICS';
 export const GetServiceOrderAction = 'GET_SERVICE_ORDER';
+export const GetSalesOrderAction = 'GET_SALES_ORDER';
 export const ResetAssignment = 'RESET_ASSIGNMENT';
 export const ResetSelectedMechanicsAction = 'RESET_SELECTED_MECHANICS';
 export const ResetSelectedLeaderAction = 'RESET_SELECTED_LEADER';
@@ -90,20 +91,36 @@ export const UpdatePlansParameterAction = 'PLANS_PARAMETER';
 // }
 
 export function getServiceOrderAction() {
-	const data = {
-		filter:{}
-	};
+	// const data = {
+	// 	isDeleted: false,
+	// 	filter:{}
+	// };
 	const requestConfig = {
-		method: RequestMethod.POST,
+		method: RequestMethod.GET,
 		url: `${ApiUrlBase.SERVICEORDER_API_URL}`,
-		headers: {
-			'Content-Type':'text/plain;charset=utf-8'
-		},
-		body:JSON.stringify(data),
+		// headers: {
+		// 	Authorization: 'anbiya',
+		// 	'Content-Type':'application/json'
+		// },
+		// data: { payload },
 		// body:JSON.stringify(data)
 		
 	};
 	return async (dispatch) => dispatch(callApi(GetServiceOrderAction, requestConfig));
+}
+export function getSelesOrderAction() {
+	const requestConfig = {
+		method: RequestMethod.GET,
+		url: `${ApiUrlBase.SALESORDER_API_URL}`,
+		// headers: {
+		// 	Authorization: 'anbiya',
+		// 	'Content-Type':'application/json'
+		// },
+		// data: { payload },
+		// body:JSON.stringify(data)
+		
+	};
+	return async (dispatch) => dispatch(callApi(GetSalesOrderAction, requestConfig));
 }
 
 export function planParameterAction(type, payload) {
