@@ -35,12 +35,13 @@ class FilterByPeriodeDate extends React.Component{
                     <div className="box"/>
                     <DatePicker
                         className="dates"
+                        dateFormat="dd-MM-yyyy"
                         selected={this.state.startDate}
                         onChange={this.handleChange}
                     />
                     <DatePicker
                         className="dates2"
-                        dateFormat="dd.MM.yyyy"
+                        dateFormat="dd-MM-yyyy"
                         selected={this.state.startDate}
                         onChange={this.handleChange}
                     />
