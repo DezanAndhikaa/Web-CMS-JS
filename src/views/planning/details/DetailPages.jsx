@@ -28,26 +28,32 @@ class DetailPages extends React.Component{
 }
 
     componentDidMount(){
-        console.log("narik data sales order ")
-        console.log(this.state.lifetime)
+      console.log("narik data sales order ")
+      console.log(this.state.lifetime)
       console.log('testing',this.props)
       this.props.getServiceOrder()
         // console.log("narik data sales order ")
-        // Base.post('',JSON.stringify(this.state.filter)).then((res) => {
-        //     if(res.status === 200){
-        //         this.setState({ salesOrder: res.data})
-        //         console.log('hasil tarikan Sales Order', this.state.salesOrder)
-        //     }
-        // })
-    }
+        // fetch('http://10.200.201.164:5000/v1/Planning/ServiceOrder/MasterData')
+        // .then((res) => {
+        //   console.log('ini data dari res', res)
+        //   if(res.status === 200){
+        //   return res.json()
+        //   }
+        //   })
+        //   .then( resJson => {
+        //     this.setState({ salesOrder: resJson})
+        //   })
+        //   console.log('data dari api',this.state.salesOrder)
+            }
+    
 
     _renderPagination() {
         console.log(this.props)
         const web = this.props.displayMode === 'web';
-        const next = this.props.nextPage;
-        const prev = this.props.prevPage;
-        const currentProps = this.props.currentPage;
-        const { numberOfPage } = this.props;
+        const next = this.state.nextPage;
+        const prev = this.state.prevPage;
+        const currentProps = this.state.currentPage;
+        const { numberOfPage } = this.state;
     return(
         <div className="pagination">
         <div className="paging">
@@ -64,6 +70,17 @@ class DetailPages extends React.Component{
       </div>
     )
     
+    }
+
+
+    onClickServiceOrder = () => {
+      this.props.getServiceOrder();
+      console.log('ini data dari api',this.props.serviceOrderList);
+    }
+
+    onClickSalesOrder = () =>{
+      this.props.getSalesOrder();
+      console.log('ini data dari api',this.props.salesOrderList);
     }
 
     
@@ -83,6 +100,8 @@ class DetailPages extends React.Component{
         <>
         <PlanningDetailsTab
         {...this.props}
+        onClickSalesOrder={this.onClickSalesOrder}
+        onClickServiceOrder={this.onClickServiceOrder}
         onChoosed={this.updateAssignmentStates}
         selectedPlanList={this.state.selectedPlans}
         displayCheckbox={this.state.displayCheckbox}

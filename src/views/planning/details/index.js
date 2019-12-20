@@ -4,18 +4,20 @@ import { PlansReducers } from './DetailPages-reducer';
 import { storeDataAction } from '../../../core/StorageHelper';
 import { PLAN_DATA, StorageKey } from '../../../constants';
 import {
-	AssignPlansAction,
+	// AssignPlansAction,
 	// assignPlansAction,
 	getServiceOrderAction,
-	ClearSelectedPlans, FetchPlansAction,
+	ClearSelectedPlans, 
+	// FetchPlansAction,
 	// fetchPlansAssignment,
 	// getMechanicsAction,
 	// plansParameterAction,
-	UpdatePlansParameterAction, searchAction,
+	// UpdatePlansParameterAction, 
+	searchAction,
 	SearchPlansAction, selectFilterAction, SelectPlanAction, selectPlansAction, selectLeaderAction,
 	selectMechanicAction, sortByAction, 
 	// unassignPlansAction, 
-	UnselectPlanAction, storePlanDataAction,
+	UnselectPlanAction, storePlanDataAction, getSelesOrderAction, 
 } from './DetailPages-action';
 import DetailPages from './DetailPages';
 
@@ -24,6 +26,7 @@ const mapStateToProps = (state) => ({
 	displayMode: state.displayMode,
 	// plansData: state.plansPageState.PlansAssignmentSummary.data,
 	// mechanicList: state.plansPageState.mechanicList.data,
+	salesOrderList: state.plansPageState.salesOrderList.data,
 	serviceOrderList: state.plansPageState.serviceOrderList.data,
 	parameter: state.plansPageState.plansParameter,
 	searchValue: state.plansPageState.searchValue,
@@ -46,6 +49,7 @@ const mapDispatchToProps = (dispatch) => ({
 	// fetchPlans: (payload, token) => dispatch(fetchPlansAssignment(FetchPlansAction, payload, token)),
 	// getMechanics: (token) => dispatch(getMechanicsAction(token)),
 	getServiceOrder: () => dispatch(getServiceOrderAction()),
+	getSalesOrder: () => dispatch(getSelesOrderAction()),
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	onSearch: (keyword) => dispatch(searchAction(SearchPlansAction, keyword)),
 	pushTo: (url) => dispatch(push(url)),

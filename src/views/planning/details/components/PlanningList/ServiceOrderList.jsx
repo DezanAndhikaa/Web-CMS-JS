@@ -20,7 +20,9 @@ export default class ServiceOrderList extends React.PureComponent {
     //   return this.props.pushTo(`${Menu.DETAIL_PI}:${row.woNumber || ''}`);
     // }
 
-
+    componentDidMount = async () => {
+     await this.props.onClickServiceOrder();
+    }
     isCheckboxAvailable = (data) => {
         let isAvailable = false;
         if (this.props.selectedPlanList.some((plan) => plan.status === 'Assigned')) {
@@ -107,13 +109,13 @@ render(){
           </TableRow>
         </TableHead>
         <TableBody classes={{ root: 'table-body' }}>
-          {SalesOrderData.serviceData
-            && SalesOrderData.serviceData.map((row, id) => (
-              <TableRow key={id} classes={{ root: 'table-row' }}>
+          {this.props.serviceOrderList.ServiceOrders
+            && this.props.serviceOrderList.ServiceOrders.map((row, index) => (
+              <TableRow key={index} classes={{ root: 'table-row' }}>
                 <TableCell padding="checkbox">
                   {this.props.displayCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedPlanList.some((plans) => plans.SerialNumber === row.SerialNumber)} onClick={() => this.props.onChoosed(row)} classes={{ checked: 'checkbox-checked' }} />}
                 </TableCell>
-                <TableCell align="left" className="table-cell"> {row.Pr} </TableCell>
+                <TableCell align="left" className="table-cell"> {row.Wo} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.Customer} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.Site} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
