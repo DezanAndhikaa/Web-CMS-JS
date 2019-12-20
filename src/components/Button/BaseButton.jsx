@@ -22,29 +22,31 @@ class BaseButton extends React.Component{
     }
 
     render(){
-        return(
-            <div className="button-inline">
-                <DeleteButton 
-                    {...this.props}
-                    {...this.state}
-                    onClick={this.isClicked}
-                />
-                <DeleteConfirmation
-                    {...this.props}
-                    {...this.state}
-                    onClose={this.isClosed}
-                    openModal={this.state.isShowModal}
-                />
-                <Button className="btn-download" onClick={this.isClicked}>Download</Button>
-                <Button className="btn-approve" onClick={this.isClicked}>Approve</Button>
-                {/* <DeleteSuccess
-                    {...this.props}
-                    {...this.state}
-                    onClose={this.isClosed}
-                    openModal={this.state.isShowModal}
-                /> */}
-            </div>
-        )
+        if(this.props.titles === "Customer"){
+            return(
+                <div className="button-inline">
+                    <Button onClick={this.isClicked} className="btn-assigns">{this.props.titles}</Button>
+                </div>
+            )
+        } else {
+            return(
+                <div className="button-inline">
+                    <DeleteButton 
+                        {...this.props}
+                        {...this.state}
+                        onClick={this.isClicked}
+                    />
+                    <DeleteConfirmation
+                        {...this.props}
+                        {...this.state}
+                        onClose={this.isClosed}
+                        openModal={this.state.isShowModal}
+                    />
+                    <Button className="btn-download" onClick={this.isClicked}>Download</Button>
+                    <Button className="btn-approve" onClick={this.isClicked}>Approve</Button>
+                </div>
+            )
+        }
     }
 }
 
