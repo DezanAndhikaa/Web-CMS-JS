@@ -5,6 +5,12 @@
     margin-top: vw(75);
 }
 
+.is-checkbox{
+    background-color: white;
+    width: vw(124.22) !important;
+    height: vw(35.07) !important;
+}
+
 @media (max-width: 599px) {
     .job-list-mobile-card{
         width: 100%;

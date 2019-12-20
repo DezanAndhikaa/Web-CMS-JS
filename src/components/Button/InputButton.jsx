@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal } from '@material-ui/core'
+import { Button, Modal, TextField } from '@material-ui/core'
 import './InputButton.scss'
 import InputText from '../InputText/InputText'
 import FilterByLifetime from '../FilterByLifetime/FilterByLifetime'
@@ -38,6 +38,10 @@ export default class InputButton extends React.Component{
                     </Modal>
                 </div>
             )
+        }else if(this.props.titles === "SO" || this.props.titles === "Part Number" || this.props.titles === "Unit Code" || this.props.titles === "Serial Number"){
+            return(
+                <TextField className="txt-search" variant="outlined" placeholder={this.props.placeholder}/>
+            )
         }else if(this.props.titles === "Lifetime Comp"){
             return(
                 <div className="button-rows">
@@ -55,7 +59,20 @@ export default class InputButton extends React.Component{
                     </Modal>
                 </div>
             )
-        }else{
+        }else if (this.props.titles === "Customer" || this.props.titles === "Site" || this.props.titles === "Unit Model"){
+            return(    
+                <div className="button-rows">
+                    <Button onClick={this.isClicked} className="btn-header" style={{justifyContent: "unset"}}>{this.props.titles}</Button>
+                </div>
+            )
+        }else if (this.props.titles === "Component Description"){
+            return(
+                <div className="button-rows">
+                    <Button onClick={this.isClicked} className="btn-header-comp" style={{justifyContent: "unset"}}>{this.props.titles}</Button>
+                </div>
+            )
+        }
+        else{
             return(
                 <div className="button-rows">
                 <Button onClick={this.isClicked} className="btn-assigns-lifetime" style={{justifyContent: "unset"}}>{this.props.titles}</Button>

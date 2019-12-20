@@ -40,12 +40,14 @@ render(){
         <Table classes={{ root: 'table' }} className="table">
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
           <TableRow>
-            <TableCell padding="checkbox" />
+            <TableCell padding="checkbox">
+                  {this.props.displayCheckbox && <Checkbox />}
+                </TableCell>
             <PlanningListHeader
               name="SO"
-            //   isActive={this.props.sortJobsByState.unitModel.isActive}
+              // isActive={this.props.sortJobsByState.unitModel.isActive}
               delay={300}
-            //   isAscending={this.props.sortJobsByState.unitModel.isAscending}
+              // isAscending={this.props.sortJobsByState.unitModel.isAscending}
             />
             <PlanningListHeader
               name="Customer"
@@ -66,7 +68,7 @@ render(){
             // //   isAscending={this.props.sortJobsByState.workOrder.isAscending}
             />
             <PlanningListHeader
-              name="Component Description"
+              name="Comp Desc"
             // //   isActive={this.props.sortJobsByState.customer.isActive}
               delay={300}
             // //   isAscending={this.props.sortJobsByState.customer.isAscending}
