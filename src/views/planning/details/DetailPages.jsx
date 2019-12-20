@@ -27,7 +27,6 @@ class DetailPages extends React.Component{
     componentDidMount(){
         console.log("narik data sales order ")
         console.log(this.state.lifetime)
-        
     }
     
     _renderPagination() {
