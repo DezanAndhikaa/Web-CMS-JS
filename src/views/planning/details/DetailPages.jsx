@@ -27,25 +27,29 @@ class DetailPages extends React.Component{
     };
 }
 
-  componentDidMount(){
-    console.log("narik data sales order ")
-    console.log(this.state.lifetime)
-    console.log('testing',this.props)
-    this.props.getServiceOrder()
-      // console.log("narik data sales order ")
-      // fetch('http://10.200.201.164:5000/v1/Planning/ServiceOrder/MasterData')
-      // .then((res) => {
-      //   console.log('ini data dari res', res)
-      //   if(res.status === 200){
-      //   return res.json()
-      //   }
-      //   })
-      //   .then( resJson => {
-      //     this.setState({ salesOrder: resJson})
-      //   })
-      //   console.log('data dari api',this.state.salesOrder)
-  }
-  
+    componentDidMount(){
+      console.log("narik data sales order ")
+      console.log(this.state.lifetime)
+      console.log('testing',this.props)
+      this.props.getServiceOrder()
+        // console.log("narik data sales order ")
+        // fetch('http://10.200.201.164:5000/v1/Planning/ServiceOrder/MasterData')
+        // .then((res) => {
+        //   console.log('ini data dari res', res)
+        //   if(res.status === 200){
+        //   return res.json()
+        //   }
+        //   })
+        //   .then( resJson => {
+        //     this.setState({ salesOrder: resJson})
+        //   })
+        //   console.log('data dari api',this.state.salesOrder)
+    }
+
+    componentDidUpdate(){
+      console.log("data yang di pilih ", this.props.selectedPlans)
+    }
+    
     _renderPagination() {
       console.log(this.props)
       const web = this.props.displayMode === 'web';
@@ -87,32 +91,30 @@ class DetailPages extends React.Component{
         this.setState({
           lifetime: { salesData :this.state.lifetime.salesData.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) }
         });
-        console.log('ke pencet', this.state.lifetime)
-        console.log("nilai mnilai : "+ this.state.stats)
     }
 
     _renderSalesOrderTabs(){
       return (
         <>
-          <PlanningDetailsTab
-          {...this.props}
-          onClickSalesOrder={this.onClickSalesOrder}
-          onClickServiceOrder={this.onClickServiceOrder}
-          onChoosed={this.updateAssignmentStates}
-          selectedPlanList={this.state.selectedPlans}
-          displayCheckbox={this.state.displayCheckbox}
-          stats={this.state.stats}
-          onStats={this.isChangeStat}
-          value={this.state.lifetime}
-          dataSalesOrder={this.state.salesOrder}
-          />
+        <PlanningDetailsTab
+        {...this.props}
+        onClickSalesOrder={this.onClickSalesOrder}
+        onClickServiceOrder={this.onClickServiceOrder}
+        onChoosed={this.updateAssignmentStates}
+        selectedPlanList={this.props.selectedPlans}
+        displayCheckbox={this.state.displayCheckbox}
+        stats={this.state.stats}
+        onStats={this.isChangeStat}
+        value={this.state.lifetime}
+        dataSalesOrder={this.state.salesOrder}
+        />
         </>
       );
     }
 
     updateAssignmentStates = (plan) => {
-        if (this.state.selectedPlans.some(
-          (plans) => plans.SerialNumber === plan.SerialNumber,
+        if (this.props.selectedPlans.some(
+          (plans) => plans.SO === plan.SO,
         )) { return this.props.unselectPlan(plan); }
         return this.props.selectPlan(plan);
     }
