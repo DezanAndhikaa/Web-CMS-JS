@@ -34,10 +34,6 @@ export default class SalesOrderList extends React.PureComponent {
       datePlant = (date) => moment.utc(date, ISO_8601).local().format('DD MMMM YYYY')
 
 render(){
-  // console.log("this.props.value");
-  // console.log(this.props.value);
-  // console.log("this.props.onStats");
-  // console.log(this.props.onStats);
     return(
         <Table classes={{ root: 'table' }} className="table">
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
