@@ -100,14 +100,15 @@ class PlanningDetailsTab extends React.Component {
   };
 
   _renderSalesOrderList(){
-      return(
-          <div className="plannings-list-containers">
-            <SalesOrderList 
-            {...this.props}
-            />
-          </div>
-      );
-    }
+    return(
+      <div className="plannings-list-containers">
+        <SalesOrderList 
+        {...this.props}
+        />
+      </div>
+    );
+  }
+
   _renderServiceOrderList(){
     return(
         <div className="plannings-list-containers">
@@ -119,20 +120,30 @@ class PlanningDetailsTab extends React.Component {
     );
   }
   
+  // _renderSearchBar(){
+  //   return( 
+  //     <div className="plannings-list-containers">
+  //       <Searchbar >&nbsp;&nbsp;&nbsp;&nbsp;</Searchbar>
+  //     </div> 
+  //   );
+  // }
+
   _renderSearchBar(){
-    return( 
-      <div className="plannings-list-containers">
-        <Searchbar >&nbsp;&nbsp;&nbsp;&nbsp;</Searchbar>
-      </div> 
+    return (
+      <Searchbar
+        {...this.props}
+        webInfo="Search by all component"
+        onSearch={this.props.onSearch}
+      />
     );
   }
       
   _renderFilterByDataAction(){
-      return(
+    return(
       <div className="plannings-list-containers">
         <FilterbyDataAction />
       </div>
-      );
+    );
   }
 
   _renderBaseButton() {
@@ -207,6 +218,3 @@ PlanningDetailsTab.propTypes = {
 };
 
 export default withStyles(styles, { withTheme: true })(PlanningDetailsTab);
-
-
-

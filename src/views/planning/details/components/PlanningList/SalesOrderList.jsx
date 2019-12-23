@@ -43,7 +43,7 @@ render(){
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
           <TableRow>
             <TableCell padding="checkbox">
-                  {this.props.displayCheckbox && <Checkbox />}
+                  {this.props.displayCheckbox  && <Checkbox />}
                 </TableCell>
             <PlanningListHeader
               name="SO"
@@ -116,6 +116,7 @@ render(){
         <TableBody classes={{ root: 'table-body' }}>
           {this.props.salesOrderList.SalesOrderTypes
             && this.props.salesOrderList.SalesOrderTypes.map((row, id) => (
+              // {/* {SalesOrderData.salesData && SalesOrderData.salesData.map((row, id) => ( */}
               <TableRow key={id} classes={{ root: 'table-row' }}>
                 <TableCell padding="checkbox">
                   {this.props.displayCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedPlanList.some((plans) => plans.SerialNumber === row.SerialNumber)} onClick={() => this.props.onChoosed(row)} classes={{ checked: 'checkbox-checked' }} />}

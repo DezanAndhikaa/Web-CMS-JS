@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, TextField } from '@material-ui/core'
+import { Button, Modal, InputBase, Paper } from '@material-ui/core'
 import './InputButton.scss'
 import InputText from '../InputText/InputText'
 import FilterByLifetime from '../FilterByLifetime/FilterByLifetime'
@@ -40,7 +40,11 @@ export default class InputButton extends React.Component{
             )
         }else if(this.props.titles === "SO" || this.props.titles === "Part Number" || this.props.titles === "Unit Code" || this.props.titles === "Serial Number"){
             return(
-                <TextField className="txt-search" variant="outlined" placeholder={this.props.placeholder}/>
+                <div className="button-rows">
+                    <Paper className={this.props.className || 'global-search'} elevation={1}>
+                        <InputBase className="txt-search" placeholder={this.props.placeholder}/>
+                    </Paper>
+                </div>
             )
         }else if(this.props.titles === "Lifetime Comp"){
             return(

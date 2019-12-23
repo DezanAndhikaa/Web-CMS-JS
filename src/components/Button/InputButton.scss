@@ -9,7 +9,6 @@
 }
 
 .button-rows{
-    // margin-top: vw(5);
     .btn-assigns{
         display: flex;
         align-items: center;
@@ -20,7 +19,7 @@
         font-weight: bold;
         line-height: vw(16) !important;
         font-family: 'Lato-Regular';
-        background-color: white;
+        background-color: map-get($colors, primary);
         text-transform: none;
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
         border-radius: 0.4vw;
@@ -83,16 +82,21 @@
         border-radius: 0.4vw;
         cursor: pointer;
     }
-    .txt-search{
+
+    .global-search{
         width: vw(124.22) !important;
         height: vw(35.07) !important;
-        font-size: vw(12) !important;
-        font-weight: bold;
-        line-height: vw(16) !important;
-        font-family: 'Lato-Regular';
-        background-color: white; 
+        background-color: white;
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-        // border-radius: 0.4vw;
+        border-radius: 0.4vw;
         cursor: pointer;
+        .txt-search{
+            flex: 1;
+            font-size: vw(12) !important;
+            line-height: vw(16) !important;
+            font-family: 'Lato-Regular';
+            font-weight: bold;
+            padding: vw(3) vw(10) vw(4);
+        }
     }
 }

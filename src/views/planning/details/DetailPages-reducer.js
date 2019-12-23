@@ -1,5 +1,3 @@
-
-
 import { combineReducers } from 'redux';
 import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
 import {
@@ -9,7 +7,7 @@ import {
 	// GetMechanicsAction, 
 	GetServiceOrderAction, GetSalesOrderAction, 
 	UpdatePlansParameterAction, ResetSelectedMechanicsAction, 
-	// SearchPlansAction,
+	SearchPlansAction,
 	// SelectCustomerFilterAction, 
 	SelectPlanAction, 
 	// SelectPlansAssignmentFilterAction,
@@ -299,6 +297,11 @@ export function sortPlansByReducer(state = plansSortbyInitialState, action) {
 	}
 }
 
+export function searchPlansReducer(state = '', action) {
+	if (action.type === SearchPlansAction) return action.payload;
+	return state;
+}
+
 export function storePlanDataReducer(state = {}, action) {
 	if (action.type === StoreSelectedPlanDataAction) return action.payload;
 	return { ...state };
@@ -335,7 +338,7 @@ const PlansReducers = combineReducers({
 	// PlansAssignmentSummary: fetchPlansReducer,
 	// selectedFilters: selectedFiltersReducer,
 	// sortBy: sortPlansByReducer,
-	// searchValue: searchPlansReducer,
+	searchValue: searchPlansReducer,
 	selectedPlanData: storePlanDataReducer,
 });
 
