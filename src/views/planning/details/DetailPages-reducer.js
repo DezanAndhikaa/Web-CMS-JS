@@ -11,7 +11,8 @@ import {
 	UpdatePlansParameterAction, ResetSelectedMechanicsAction, 
 	// SearchPlansAction,
 	// SelectCustomerFilterAction, 
-	SelectPlanAction, 
+	SelectSalesPlanAction,
+	SelectServicePlanAction, 
 	// SelectPlansAssignmentFilterAction,
 	// SelectPlansTypeFilterAction, 
 	SelectLeaderAction, SelectMechanicAction,
@@ -21,7 +22,7 @@ import {
 	SortPlansByStatus, SortPlansByUnitCode, SortPlansByUnitModel,
 	SortPlansByWorkOrder,
 	// UnassignPlansAction, 
-	UnselectPlanAction,
+	UnselectSalesPlanAction, UnselectServicePlanAction,
 	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction,
 } from './DetailPages-action';
 
@@ -68,19 +69,23 @@ const initialParameter = {
 	pageSize: 10,
 };
 
+const initialSelectedAssignment = {
+	selectedService: {},
+	selectedSales: {},
+};
 
 const defaultState = { isActive: false, isAscending: true };
 const plansSortbyInitialState = {
-	so: defaultState,
-	customer: defaultState,
-	site: defaultState,
-	unitModel: defaultState,
-	compDesc: defaultState,
-	partNumber: defaultState,
-	unitCode: defaultState,
-	serialNumber: defaultState,
-	lifetimeComp: defaultState,
-	plantExecution: defaultState,
+	SO: defaultState,
+	Customer: defaultState,
+	Site: defaultState,
+	UnitModel: defaultState,
+	CompDesc: defaultState,
+	PartNumber: defaultState,
+	UnitCode: defaultState,
+	SerialNumber: defaultState,
+	LifetimeComp: defaultState,
+	PlantExecution: defaultState,
 };
 
 // const initialAssignmentState = { response: false, status: ApiRequestActionsStatus.IDLE };
@@ -209,10 +214,15 @@ export function plansParameterReducer(state = initialParameter, action) {
 
 export function selectPlansReducer(state = [], action) {
 	switch (action.type) {
-	case SelectPlanAction:
+	case SelectSalesPlanAction:
 		return [...state, action.payload];
-	case UnselectPlanAction: {
-		return [...state.filter(((item) => item.SerialNumber !== action.payload.SerialNumber))];
+	case SelectServicePlanAction:
+		return [...state, action.payload];
+	case UnselectSalesPlanAction: {
+		return [...state.filter(((item) => item.SO !== action.payload.SO))];
+	}
+	case UnselectServicePlanAction: {
+		return [...state.filter(((item) => item.Wo !== action.payload.Wo))];
 	}
 	case ClearSelectedPlans:
 		return [];
@@ -331,7 +341,7 @@ const PlansReducers = combineReducers({
 	selectedMechanics: selectMechanicsReducer,
 	// assignPlansStatus: assignPlansReducer,
 	// unassignPlansStatus: unassignPlansReducer,
-	// plansParameter: plansParameterReducer,
+	plansParameter: plansParameterReducer,
 	// PlansAssignmentSummary: fetchPlansReducer,
 	// selectedFilters: selectedFiltersReducer,
 	// sortBy: sortPlansByReducer,

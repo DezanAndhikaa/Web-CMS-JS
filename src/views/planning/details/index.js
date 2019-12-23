@@ -14,10 +14,12 @@ import {
 	// plansParameterAction,
 	// UpdatePlansParameterAction, 
 	searchAction,
-	SearchPlansAction, selectFilterAction, SelectPlanAction, selectPlansAction, selectLeaderAction,
+	SearchPlansAction, selectFilterAction, UnselectSalesPlanAction,
+	UnselectServicePlanAction, selectSalesPlansAction, selectServicePlansAction, selectLeaderAction, SelectSalesPlanAction,
+	SelectServicePlanAction,
 	selectMechanicAction, sortByAction, 
 	// unassignPlansAction, 
-	UnselectPlanAction, storePlanDataAction, getSelesOrderAction, 
+	storePlanDataAction, getSelesOrderAction, 
 } from './DetailPages-action';
 import DetailPages from './DetailPages';
 
@@ -35,7 +37,9 @@ const mapStateToProps = (state) => ({
 	// requestMechanics: state.plansPageState.mechanicList.status,
 	// requestUnassignPlans: state.plansPageState.unassignPlansStatus.status,
 	selectedFilters: state.plansPageState.selectedFilters,
-	selectedPlans: state.plansPageState.selectedPlans,
+	// selectedPlans: state.plansPageState.selectedPlans,
+	selectedSalesPlans: state.plansPageState.selectedPlans,
+	selectedServicePlans: state.plansPageState.selectedPlans,
 	selectedLeader: state.plansPageState.selectedLeader,
 	selectedMechanics: state.plansPageState.selectedMechanics,
 	sortBy: state.plansPageState.sortBy,
@@ -45,7 +49,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	// assignPlans: (payload, token) => dispatch(assignPlansAction(AssignPlansAction, payload, token)),
-	clearSelectedPlans: (payload) => dispatch(selectPlansAction(ClearSelectedPlans, payload)),
+	clearSelectedSalesPlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
+	clearSelectedServicePlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
 	// fetchPlans: (payload, token) => dispatch(fetchPlansAssignment(FetchPlansAction, payload, token)),
 	// getMechanics: (token) => dispatch(getMechanicsAction(token)),
 	getServiceOrder: () => dispatch(getServiceOrderAction()),
@@ -57,10 +62,12 @@ const mapDispatchToProps = (dispatch) => ({
 	selectFilter: (type, payload) => dispatch(selectFilterAction(type, payload)),
 	selectLeader: (type, payload) => dispatch(selectLeaderAction(type, payload)),
 	selectMechanic: (type, payload) => dispatch(selectMechanicAction(type, payload)),
-	selectPlan: (payload) => dispatch(selectPlansAction(SelectPlanAction, payload)),
+	selectSalesPlan: (payload) => dispatch(selectSalesPlansAction(SelectSalesPlanAction, payload)),
+	selectServicePlan: (payload) => dispatch(selectServicePlansAction(SelectServicePlanAction, payload)),
 	storePlanData: (payload) => dispatch(storePlanDataAction(payload)),
 	// unassignPlans: (payload, token) => dispatch(unassignPlansAction(payload, token)),
-	unselectPlan: (payload) => dispatch(selectPlansAction(UnselectPlanAction, payload)),
+	unselectServicePlan: (payload) => dispatch(selectServicePlansAction(UnselectServicePlanAction, payload)),
+	unselectSalesPlan: (payload) => dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
 	// updateParameter: (payload) => dispatch(plansParameterAction(UpdatePlansParameterAction, payload)),
 });
 
