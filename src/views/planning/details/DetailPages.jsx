@@ -27,29 +27,30 @@ class DetailPages extends React.Component{
     };
 }
 
-    componentDidMount(){
-      console.log("narik data sales order ")
-      console.log(this.state.lifetime)
-      console.log('testing',this.props)
-      this.props.getServiceOrder()
-        // console.log("narik data sales order ")
-        // fetch('http://10.200.201.164:5000/v1/Planning/ServiceOrder/MasterData')
-        // .then((res) => {
-        //   console.log('ini data dari res', res)
-        //   if(res.status === 200){
-        //   return res.json()
-        //   }
-        //   })
-        //   .then( resJson => {
-        //     this.setState({ salesOrder: resJson})
-        //   })
-        //   console.log('data dari api',this.state.salesOrder)
-    }
+componentDidUpdate(){
+  console.log('ini selected service',this.props.selectedServicePlans)
+  console.log('ini selected sales',this.props.selectedSalesPlans)
+}
 
-    componentDidUpdate(){
-      console.log("data yang di pilih ", this.props.selectedPlans)
-    }
-    
+  componentDidMount(){
+    // console.log("narik data sales order ")
+    // console.log(this.state.lifetime)
+    // console.log('testing',this.props)
+    // this.props.getServiceOrder()
+      // console.log("narik data sales order ")
+      // fetch('http://10.200.201.164:5000/v1/Planning/ServiceOrder/MasterData')
+      // .then((res) => {
+      //   console.log('ini data dari res', res)
+      //   if(res.status === 200){
+      //   return res.json()
+      //   }
+      //   })
+      //   .then( resJson => {
+      //     this.setState({ salesOrder: resJson})
+      //   })
+      //   console.log('data dari api',this.state.salesOrder)
+  }
+  
     _renderPagination() {
       console.log(this.props)
       const web = this.props.displayMode === 'web';
@@ -93,6 +94,20 @@ class DetailPages extends React.Component{
         });
     }
 
+    updateAssignmentServiceStates = (plan) => {
+      if (this.props.selectedServicePlans.some(
+        (plans) => plans.Wo === plan.Wo,
+      )) { return this.props.unselectServicePlan(plan); }
+      return this.props.selectServicePlan(plan);
+  }
+
+  updateAssignmentSalesStates = (plan) => {
+    if (this.props.selectedSalesPlans.some(
+      (plans) => plans.SO === plan.SO,
+    )) { return this.props.unselectSalesPlan(plan); }
+    return this.props.selectSalesPlan(plan);
+}
+
     _renderSalesOrderTabs(){
       return (
         <>
@@ -100,9 +115,12 @@ class DetailPages extends React.Component{
         {...this.props}
         onClickSalesOrder={this.onClickSalesOrder}
         onClickServiceOrder={this.onClickServiceOrder}
-        onChoosed={this.updateAssignmentStates}
-        selectedPlanList={this.props.selectedPlans}
-        displayCheckbox={this.state.displayCheckbox}
+        onChoosedService={this.updateAssignmentServiceStates}
+        onChoosedSales={this.updateAssignmentSalesStates}
+        selectedSalesPlanList={this.props.selectedSalesPlans}
+        selectedServicePlanList={this.props.selectedServicePlans}
+        displayCheckbox={this.props.parameter.assigmentFilter
+          || this.props.parameter.inProgressFilter}
         stats={this.state.stats}
         onStats={this.isChangeStat}
         value={this.state.lifetime}
@@ -110,13 +128,6 @@ class DetailPages extends React.Component{
         />
         </>
       );
-    }
-
-    updateAssignmentStates = (plan) => {
-        if (this.props.selectedPlans.some(
-          (plans) => plans.SO === plan.SO,
-        )) { return this.props.unselectPlan(plan); }
-        return this.props.selectPlan(plan);
     }
 
     _renderShowPerPage(){

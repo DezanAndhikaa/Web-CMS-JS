@@ -25,15 +25,19 @@ export default class SalesOrderList extends React.PureComponent {
 
     isCheckboxAvailable = (data) => {
         let isAvailable = false;
-        if (this.props.selectedPlanList.some((plan) => plan.status === 'Assigned')) {
-          isAvailable = this.props.selectedPlanList.some((plan) => plan.status !== data.status);
-        } else { isAvailable = this.props.selectedPlanList.some((plan) => plan.status !== 'Assigned') && data.status === 'Assigned'; }
+        if (this.props.selectedSalesPlanList.some((plan) => plan.status === 'Assigned')) {
+          isAvailable = this.props.selectedSalesPlanList.some((plan) => plan.status !== data.status);
+        } else { isAvailable = this.props.selectedSalesPlanList.some((plan) => plan.status !== 'Assigned') && data.status === 'Assigned'; }
         return isAvailable;
       }
 
       datePlant = (date) => moment.utc(date, ISO_8601).local().format('DD MMMM YYYY')
 
 render(){
+  // console.log("this.props.value");
+  // console.log(this.props.value);
+  // console.log("this.props.onStats");
+  // console.log(this.props.onStats);
     return(
         <Table classes={{ root: 'table' }} className="table">
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
@@ -115,7 +119,7 @@ render(){
               // {/* {SalesOrderData.salesData && SalesOrderData.salesData.map((row, id) => ( */}
               <TableRow key={id} classes={{ root: 'table-row' }}>
                 <TableCell padding="checkbox">
-                  {this.props.displayCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedPlanList.some((plans) => plans.SO === row.SO)} onClick={() => this.props.onChoosed(row)} classes={{ checked: 'checkbox-checked' }} />}
+                  {this.props.displayCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedSalesPlanList.some((plans) => plans.SO === row.SO)} onClick={() => this.props.onChoosedSales(row)} classes={{ checked: 'checkbox-checked' }} />}
                 </TableCell>
                 <TableCell align="left" className="table-cell"> {row.SO} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.Customer} </TableCell>

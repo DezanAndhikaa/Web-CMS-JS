@@ -14,7 +14,8 @@ export const ResetSelectedMechanicsAction = 'RESET_SELECTED_MECHANICS';
 export const ResetSelectedLeaderAction = 'RESET_SELECTED_LEADER';
 export const SearchPlansAction = 'SEARCH_PLANS';
 export const SelectCustomerFilterAction = 'SELECT_CUSTOMER_FILTER';
-export const SelectPlanAction = 'SELECT_PLANS';
+export const SelectSalesPlanAction = 'SELECT_SALES_PLANS';
+export const SelectServicePlanAction = 'SELECT_SERVICE_PLANS';
 export const SelectPlansAssignmentFilterAction = 'SELECT_PLANS_ASSIGNMENT_FILTER';
 export const SelectPlansTypeFilterAction = 'SELECT_PLANS_TYPE_FILTER';
 export const SelectLeaderAction = 'SELECT_LEADER';
@@ -31,7 +32,8 @@ export const SortPlansByStatus = 'SORT_PLANS_BY_STATUS';
 export const SortPlansByWorkOrder = 'SORT_PLANS_BY_WORK_ORDER';
 export const StoreSelectedPlanDataAction = 'SELECTED_PLAN_DATA';
 export const UnassignPlansAction = 'UNASSIGN_PLANS';
-export const UnselectPlanAction = 'UNSELECT_PLANS';
+export const UnselectSalesPlanAction = 'UNSELECT_SALES_PLANS';
+export const UnselectServicePlanAction = 'UNSELECT_SERVICE_PLANS';
 export const UnselectMechanicAction = 'UNSELECT_MECHANIC';
 export const UpdatePlansParameterAction = 'PLANS_PARAMETER';
 
@@ -97,7 +99,7 @@ export function getServiceOrderAction() {
 	// };
 	const requestConfig = {
 		method: RequestMethod.GET,
-		url: `${ApiUrlBase.SERVICEORDER_API_URL}`,
+		url: `${ApiUrlBase.SERVICEORDER_API_URL}/MasterData`,
 		// headers: {
 		// 	Authorization: 'anbiya',
 		// 	'Content-Type':'application/json'
@@ -135,9 +137,10 @@ export function selectFilterAction(type, payload) {
 	return { type, payload };
 }
 
-export function 
-
-selectPlansAction(type, payload) {
+export function selectSalesPlansAction(type, payload) {
+	return { type, payload };
+}
+export function selectServicePlansAction(type, payload) {
 	return { type, payload };
 }
 
