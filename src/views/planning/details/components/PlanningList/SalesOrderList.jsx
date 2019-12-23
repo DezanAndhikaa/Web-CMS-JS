@@ -34,17 +34,13 @@ export default class SalesOrderList extends React.PureComponent {
       datePlant = (date) => moment.utc(date, ISO_8601).local().format('DD MMMM YYYY')
 
 render(){
-  console.log("this.props.value");
-  console.log(this.props.value);
-  console.log("this.props.onStats");
-  console.log(this.props.onStats);
     return(
         <Table classes={{ root: 'table' }} className="table">
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
-          <TableRow>
+          <TableRow classes={{ root: 'table-row' }}>
             <TableCell padding="checkbox">
-                  {this.props.displayCheckbox && <Checkbox />}
-                </TableCell>
+                {this.props.displayCheckbox && <Checkbox className='checkboxx-checked'/>}
+            </TableCell>
             <PlanningListHeader
               name="SO"
               // isActive={this.props.sortJobsByState.unitModel.isActive}
@@ -114,11 +110,12 @@ render(){
           </TableRow>
         </TableHead>
         <TableBody classes={{ root: 'table-body' }}>
-          {this.props.salesOrderList.SalesOrderTypes
-            && this.props.salesOrderList.SalesOrderTypes.map((row, id) => (
+          {/* {this.props.salesOrderList.SalesOrderTypes
+            && this.props.salesOrderList.SalesOrderTypes.map((row, id) => ( */}
+            {SalesOrderData.salesData && SalesOrderData.salesData.map((row, id) => (
               <TableRow key={id} classes={{ root: 'table-row' }}>
                 <TableCell padding="checkbox">
-                  {this.props.displayCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedPlanList.some((plans) => plans.SerialNumber === row.SerialNumber)} onClick={() => this.props.onChoosed(row)} classes={{ checked: 'checkbox-checked' }} />}
+                  {this.props.displayCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedPlanList.some((plans) => plans.SO === row.SO)} onClick={() => this.props.onChoosed(row)} classes={{ checked: 'checkbox-checked' }} />}
                 </TableCell>
                 <TableCell align="left" className="table-cell"> {row.SO} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.Customer} </TableCell>

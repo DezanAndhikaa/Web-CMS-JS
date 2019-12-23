@@ -44,7 +44,11 @@ class DetailPages extends React.Component{
         //     this.setState({ salesOrder: resJson})
         //   })
         //   console.log('data dari api',this.state.salesOrder)
-            }
+    }
+
+    componentDidUpdate(){
+      console.log("data yang di pilih ", this.props.selectedPlans)
+    }
     
 
     _renderPagination() {
@@ -85,14 +89,9 @@ class DetailPages extends React.Component{
 
     
     isChangeStat = (value,key) =>{
-        console.log('nilai value kiriman : '+value)
-        console.log('nilai key kiriman : '+key)
-        // }))
         this.setState({
           lifetime: { salesData :this.state.lifetime.salesData.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) }
         });
-        console.log('ke pencet', this.state.lifetime)
-        console.log("nilai mnilai : "+ this.state.stats)
     }
 
     _renderSalesOrderTabs(){
@@ -103,7 +102,7 @@ class DetailPages extends React.Component{
         onClickSalesOrder={this.onClickSalesOrder}
         onClickServiceOrder={this.onClickServiceOrder}
         onChoosed={this.updateAssignmentStates}
-        selectedPlanList={this.state.selectedPlans}
+        selectedPlanList={this.props.selectedPlans}
         displayCheckbox={this.state.displayCheckbox}
         stats={this.state.stats}
         onStats={this.isChangeStat}
@@ -115,8 +114,8 @@ class DetailPages extends React.Component{
     }
 
     updateAssignmentStates = (plan) => {
-        if (this.state.selectedPlans.some(
-          (plans) => plans.SerialNumber === plan.SerialNumber,
+        if (this.props.selectedPlans.some(
+          (plans) => plans.SO === plan.SO,
         )) { return this.props.unselectPlan(plan); }
         return this.props.selectPlan(plan);
     }
