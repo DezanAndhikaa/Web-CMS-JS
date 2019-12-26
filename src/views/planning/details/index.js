@@ -8,6 +8,7 @@ import {
 	// assignPlansAction,
 	getServiceOrderAction,
 	ClearSelectedPlans, 
+	fetchJobsAssignment,
 	// FetchPlansAction,
 	// fetchPlansAssignment,
 	// getMechanicsAction,
@@ -19,13 +20,14 @@ import {
 	SelectServicePlanAction,
 	selectMechanicAction, sortByAction, 
 	// unassignPlansAction, 
-	storePlanDataAction, getSelesOrderAction, 
+	storePlanDataAction, getSalesOrderAction, 
 } from './DetailPages-action';
 import DetailPages from './DetailPages';
 
 const mapStateToProps = (state) => ({
 	// assignPlansResponse: state.plansPageState.assignPlansStatus.response,
 	displayMode: state.displayMode,
+	jobsData: state.plansPageState.JosAssigntmentSummary.data,
 	// plansData: state.plansPageState.PlansAssignmentSummary.data,
 	// mechanicList: state.plansPageState.mechanicList.data,
 	salesOrderList: state.plansPageState.salesOrderList.data,
@@ -53,8 +55,9 @@ const mapDispatchToProps = (dispatch) => ({
 	clearSelectedServicePlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
 	// fetchPlans: (payload, token) => dispatch(fetchPlansAssignment(FetchPlansAction, payload, token)),
 	// getMechanics: (token) => dispatch(getMechanicsAction(token)),
+	getFilter: ()=> dispatch(fetchJobsAssignment()),
 	getServiceOrder: () => dispatch(getServiceOrderAction()),
-	getSalesOrder: () => dispatch(getSelesOrderAction()),
+	getSalesOrder: () => dispatch(getSalesOrderAction()),
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	onSearch: (keyword) => dispatch(searchAction(SearchPlansAction, keyword)),
 	pushTo: (url) => dispatch(push(url)),

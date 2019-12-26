@@ -1,11 +1,10 @@
-
-
 import { RequestMethod, ApiUrlBase } from '../../../constants';
 import { callApi } from '../../../core/RestClientHelpers';
 
 export const AssignPlansAction = 'ASSIGN_PLANS';
 export const ClearSelectedPlans = 'CLEAR_SELECTED_PLANS';
 export const FetchPlansAction = 'FETCH_PLANS';
+export const FetchJobsAction = 'FETCH_JOBS';
 export const GetMechanicsAction = 'GET_MECHANICS';
 export const GetServiceOrderAction = 'GET_SERVICE_ORDER';
 export const GetSalesOrderAction = 'GET_SALES_ORDER';
@@ -110,19 +109,33 @@ export function getServiceOrderAction() {
 	};
 	return async (dispatch) => dispatch(callApi(GetServiceOrderAction, requestConfig));
 }
-export function getSelesOrderAction() {
+export function getSalesOrderAction() {
 	const requestConfig = {
-		method: RequestMethod.GET,
-		url: `${ApiUrlBase.SALESORDER_API_URL}`,
-		// headers: {
-		// 	Authorization: 'anbiya',
-		// 	'Content-Type':'application/json'
-		// },
+		method: RequestMethod.POST,
+		url: `${ApiUrlBase.SALESORDER_API_URL}/Filters`,
+		type: {
+			// Authorization: 'anbiya',
+			'Content-Type':'application/json'
+		},
 		// data: { payload },
 		// body:JSON.stringify(data)
 		
 	};
 	return async (dispatch) => dispatch(callApi(GetSalesOrderAction, requestConfig));
+}
+
+export function fetchJobsAssignment(){
+	const requestConfig = {
+		method: RequestMethod.GET,
+		url: `${ApiUrlBase.SALESORDER_API_URL}/Filters`,
+		// data: payload,
+		// headers: {
+		//   Authorization: `Bearer ${accessToken}`,
+		//   'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID, // eslint-disable-line no-undef
+		//   'Content-Type': 'application/json',
+		// },
+	  };
+	  return async (dispatch) => dispatch(callApi(FetchJobsAction, requestConfig));
 }
 
 export function planParameterAction(type, payload) {

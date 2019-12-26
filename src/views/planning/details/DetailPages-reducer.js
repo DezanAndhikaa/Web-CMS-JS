@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
 import {
 	// AssignPlansAction, 
-	ClearSelectedPlans, 
+	ClearSelectedPlans,FetchJobsAction, 
 	// FetchPlansAction, 
 	// GetMechanicsAction, 
 	GetServiceOrderAction, GetSalesOrderAction, 
@@ -24,10 +24,11 @@ import {
 	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction,
 } from './DetailPages-action';
 
-const initialPlansAssignment = {
-	planTypeFilter: ['All Plan'],
+const initialJobsAssignment = {
+	custTypeFilter: ['All Customer'],
+	siteFilter: ['All Site'],
 	unitModelFilter: ['All Model'],
-	customerFilter: ['All Customer'],
+	componentDescFilter: ['All Comp. Desc'],
 	tableValues: [],
 	numberOfPage: 1,
 	currentPage: 1,
@@ -42,7 +43,7 @@ const initialPlansAssignment = {
 	unscheduleBreakdownHandover: 0,
 	unscheduleBreakdownTotal: 0,
 	unscheduleBreakdownUnassign: 0,
-};
+  };
 
 const initialParameter = {
 	searchValue: '',
@@ -87,7 +88,8 @@ const plansSortbyInitialState = {
 };
 
 // const initialAssignmentState = { response: false, status: ApiRequestActionsStatus.IDLE };
-const initialPlansState = { data: initialPlansAssignment, status: ApiRequestActionsStatus.IDLE };
+// const initialPlansState = { data: initialPlansAssignment, status: ApiRequestActionsStatus.IDLE };
+const initialJobsState = { data: initialJobsAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialMechanicsState = { data: [], status: ApiRequestActionsStatus.IDLE };
 const initialServiceOrderState = { data: [], status: ApiRequestActionsStatus.IDLE };
 const initialSalesOrderState = { data: [], status: ApiRequestActionsStatus.IDLE };
@@ -150,6 +152,7 @@ export function getServiceOrderReducer(state = initialServiceOrderState, action)
 }
 
 export function getSalesOrderReducer(state = initialSalesOrderState, action) {
+	console.log('masuk seles selses ',action)
 	if (action.type === GetSalesOrderAction) {
 		switch (action.status) {
 		case ApiRequestActionsStatus.SUCCEEDED:
@@ -166,6 +169,25 @@ export function getSalesOrderReducer(state = initialSalesOrderState, action) {
 	}
 	return state;
 }
+
+export function fetchJobsReducer(state = initialJobsState, action) {
+	console.log('masuk gan gan',action)
+	if (action.type === FetchJobsAction) {
+	  switch (action.status) {
+		case ApiRequestActionsStatus.SUCCEEDED:
+		  return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		case ApiRequestActionsStatus.FAILED:
+		  return {
+			data: initialJobsState.data,
+			status: ApiRequestActionsStatus.FAILED,
+			error: action.error,
+		  };
+		default:
+		  return { data: initialJobsState.data, status: ApiRequestActionsStatus.LOADING };
+	  }
+	}
+	return state;
+  }
 
 // export function getMechanicsReducer(state = initialMechanicsState, action) {
 // 	if (action.type === GetMechanicsAction) {
@@ -345,6 +367,7 @@ const PlansReducers = combineReducers({
 	// assignPlansStatus: assignPlansReducer,
 	// unassignPlansStatus: unassignPlansReducer,
 	plansParameter: plansParameterReducer,
+	JosAssigntmentSummary: fetchJobsReducer,
 	// PlansAssignmentSummary: fetchPlansReducer,
 	// selectedFilters: selectedFiltersReducer,
 	// sortBy: sortPlansByReducer,

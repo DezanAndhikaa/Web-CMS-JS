@@ -33,6 +33,7 @@ componentDidUpdate(){
 }
 
   componentDidMount(){
+    console.log('stat stats stats ',this.props.jobsData)
     // console.log("narik data sales order ")
     // console.log(this.state.lifetime)
     // console.log('testing',this.props)
@@ -119,12 +120,13 @@ componentDidUpdate(){
         onChoosedSales={this.updateAssignmentSalesStates}
         selectedSalesPlanList={this.props.selectedSalesPlans}
         selectedServicePlanList={this.props.selectedServicePlans}
-        displayCheckbox={this.props.parameter.assigmentFilter
-          || this.props.parameter.inProgressFilter}
+        displayCheckbox={this.props.parameter.assigmentFilter || this.props.parameter.inProgressFilter}
         stats={this.state.stats}
         onStats={this.isChangeStat}
         value={this.state.lifetime}
         dataSalesOrder={this.state.salesOrder}
+        dataFilter={this.props.jobsData}
+        // dataFilter={this.props.getFilter()}
         />
         </>
       );
