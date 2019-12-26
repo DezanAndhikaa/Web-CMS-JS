@@ -75,7 +75,7 @@ const AppReducer = combineReducers({
 	// plJobType: plJobTypeReducers,
 	// plJobList: plJobListReducers,
 	// plDetail: plDetailReducers,
-	// BmsReducers,
+	// BmsReducers, 
 	// UnitModelReducers,
 	// UnitCodeReducers,
 	// CustomTableReducers,
