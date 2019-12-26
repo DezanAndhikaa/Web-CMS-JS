@@ -106,7 +106,7 @@ componentDidUpdate(){
       (plans) => plans.SO === plan.SO,
     )) { return this.props.unselectSalesPlan(plan); }
     return this.props.selectSalesPlan(plan);
-}
+} 
 
     _renderSalesOrderTabs(){
       return (
