@@ -27,29 +27,38 @@ class DetailPages extends React.Component{
     };
 }
 
-componentDidUpdate(){
-  console.log('ini selected service',this.props.selectedServicePlans)
-  console.log('ini selected sales',this.props.selectedSalesPlans)
+// componentDidUpdate = (prevProps) => {
+//   if (prevProps.parameter !== this.props.parameter) {
+//     console.log('fetch berjalan')
+//     this.props.fetchSalesOrder(this.props.parameter);
+//   }
+//   console.log('ini selected service',this.props.selectedServicePlans)
+//   console.log('ini selected sales',this.props.selectedSalesPlans)
+// }
+
+componentDidMount = async () => {
+  console.log('fetch berjalan didmount')
+  await this.props.fetchSalesOrder(JSON.stringify(this.props.parameter));
 }
 
-  componentDidMount(){
-    // console.log("narik data sales order ")
-    // console.log(this.state.lifetime)
-    // console.log('testing',this.props)
-    // this.props.getServiceOrder()
-      // console.log("narik data sales order ")
-      // fetch('http://10.200.201.164:5000/v1/Planning/ServiceOrder/MasterData')
-      // .then((res) => {
-      //   console.log('ini data dari res', res)
-      //   if(res.status === 200){
-      //   return res.json()
-      //   }
-      //   })
-      //   .then( resJson => {
-      //     this.setState({ salesOrder: resJson})
-      //   })
-      //   console.log('data dari api',this.state.salesOrder)
-  }
+  // componentDidMount = async() =>{
+  //   // console.log("narik data sales order ")
+  //   // console.log(this.state.lifetime)
+  //   // console.log('testing',this.props)
+  //   // this.props.getServiceOrder()
+  //     // console.log("narik data sales order ")
+  //     // fetch('http://10.200.201.164:5000/v1/Planning/ServiceOrder/MasterData')
+  //     // .then((res) => {
+  //     //   console.log('ini data dari res', res)
+  //     //   if(res.status === 200){
+  //     //   return res.json()
+  //     //   }
+  //     //   })
+  //     //   .then( resJson => {
+  //     //     this.setState({ salesOrder: resJson})
+  //     //   })
+  //     //   console.log('data dari api',this.state.salesOrder)
+  // }
   
     _renderPagination() {
       console.log(this.props)
@@ -80,10 +89,11 @@ componentDidUpdate(){
       console.log('ini data dari api',this.props.serviceOrderList);
     }
 
-    onClickSalesOrder = () =>{
-      this.props.getSalesOrder();
-      console.log('ini data dari api',this.props.salesOrderList);
-    }
+    // onClickSalesOrder = () =>{
+    //   this.props.fetchSalesOrder(this.props.parameter);
+    //   console.log('ini data parameter',JSON.stringify(this.props.parameter));
+    //   console.log('ini data dari api',this.props.salesOrderList);
+    // }
 
     
     isChangeStat = (value,key) =>{
@@ -108,12 +118,13 @@ componentDidUpdate(){
     return this.props.selectSalesPlan(plan);
 }
 
-    _renderSalesOrderTabs(){
+    _renderTabs(){
       return (
         <>
         <PlanningDetailsTab
         {...this.props}
-        onClickSalesOrder={this.onClickSalesOrder}
+        // onClickSalesOrder={this.onClickSalesOrder}
+        parameter={this.props.parameter}
         onClickServiceOrder={this.onClickServiceOrder}
         onChoosedService={this.updateAssignmentServiceStates}
         onChoosedSales={this.updateAssignmentSalesStates}
@@ -142,7 +153,7 @@ componentDidUpdate(){
         return(
             <main className="content">
                 <div className="table-container">
-                      {this._renderSalesOrderTabs()}
+                      {this._renderTabs()}
                   </div>
                   <div className="bottom-row">
                       {this._renderShowPerPage()} {this._renderPagination()}

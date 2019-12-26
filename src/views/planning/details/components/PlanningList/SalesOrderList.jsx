@@ -19,9 +19,9 @@ export default class SalesOrderList extends React.PureComponent {
     //   this.props.storeJobData(row);
     //   return this.props.pushTo(`${Menu.DETAIL_PI}:${row.woNumber || ''}`);
     // }
-    componentDidMount = async () => {
-      await this.props.onClickSalesOrder();
-     }
+    // componentDidMount = async() =>{
+    //   await this.props.onClickSalesOrder();
+    //  }
 
     isCheckboxAvailable = (data) => {
         let isAvailable = false;
