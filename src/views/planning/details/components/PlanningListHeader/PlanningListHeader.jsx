@@ -33,6 +33,8 @@ export default class PlanningListHeader extends React.PureComponent {
 					<InputButton titles="Unit Code" placeholder="Unit Code" /> :
 					this.props.name === "Serial Number" ?
 					<InputButton titles="Serial Number" placeholder="Serial Number" /> :
+					this.props.name === "Work Order" ?
+					<InputButton titles="Work Order" placeholder="WO" /> :
 					<TableSortLabel
 							active={this.props.isActive}
 							// IconComponent={this.props.isAscending ? KeyboardArrowUp : KeyboardArrowDown}

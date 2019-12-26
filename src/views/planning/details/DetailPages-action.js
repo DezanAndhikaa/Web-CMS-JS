@@ -51,19 +51,17 @@ export const UpdatePlansParameterAction = 'PLANS_PARAMETER';
 // 	return async (dispatch) => dispatch(callApi(type, requestConfig));
 // }
 
-// export function fetchPlansAssignment(type, payload, accessToken) {
-// 	const requestConfig = {
-// 		method: RequestMethod.POST,
-// 		url: `${ApiUrlBase.WORK_ORDER_API_URL}ListOfPlanAssignment`,
-// 		data: payload,
-// 		headers: {
-// 			Authorization: `Bearer ${accessToken}`,
-// 			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID, // eslint-disable-line no-undef
-// 			'Content-Type': 'application/json',
-// 		},
-// 	};
-// 	return async (dispatch) => dispatch(callApi(type, requestConfig));
-// }
+export function fetchPlansAssignment(type, payload, accessToken) {
+	const requestConfig = {
+		method: RequestMethod.POST,
+		url: `${ApiUrlBase.SALESORDER_API_URL}`,
+		data: payload,
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	};  
+	return async (dispatch) => dispatch(callApi(type, requestConfig));
+}
 
 // export function getMechanicsAction(accessToken) {
 // 	const requestConfig = {
@@ -112,12 +110,12 @@ export function getServiceOrderAction() {
 }
 export function getSelesOrderAction() {
 	const requestConfig = {
-		method: RequestMethod.GET,
+		method: RequestMethod.POST,
 		url: `${ApiUrlBase.SALESORDER_API_URL}`,
-		// headers: {
-		// 	Authorization: 'anbiya',
-		// 	'Content-Type':'application/json'
-		// },
+		headers: {
+			// Authorization: 'anbiya',
+			'Content-Type':'application/json'
+		},
 		// data: { payload },
 		// body:JSON.stringify(data)
 		

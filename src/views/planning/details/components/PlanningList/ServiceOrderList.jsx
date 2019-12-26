@@ -38,7 +38,9 @@ render(){
         <Table classes={{ root: 'table' }}>
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
           <TableRow>
-            <TableCell padding="checkbox" />
+            <TableCell padding="checkbox">
+              {this.props.displayCheckbox  && <Checkbox />}
+            </TableCell>
             <PlanningListHeader
               name="Work Order"
             //   isActive={this.props.sortJobsByState.unitModel.isActive}
@@ -64,7 +66,7 @@ render(){
             // //   isAscending={this.props.sortJobsByState.workOrder.isAscending}
             />
             <PlanningListHeader
-              name="Component Description"
+              name="Comp Desc"
             // //   isActive={this.props.sortJobsByState.customer.isActive}
               delay={300}
             // //   isAscending={this.props.sortJobsByState.customer.isAscending}
@@ -87,21 +89,21 @@ render(){
               delay={300}
             // //   isAscending={this.props.sortJobsByState.status.isAscending}            
             />
-             <InputButton
-              titles="Lifetime Comp"
-              title="Lifetime Component"
+           <PlanningListHeader
+              name="Lifetime"
             // //   isActive={this.props.sortJobsByState.staging.isActive}
               delay={300}
             // //   isAscending={this.props.sortJobsByState.staging.isAscending}
             />
             <PlanningListHeader
-              name="Plan Execution"
+              name="Plan"
             // //   isActive={this.props.sortJobsByState.staging.isActive}
               delay={300}
             // //   isAscending={this.props.sortJobsByState.staging.isAscending}
             />
             <PlanningListHeader
               name="Action"
+              align="center"
             // //   isActive={this.props.sortJobsByState.staging.isActive}
               delay={300}
             // //   isAscending={this.props.sortJobsByState.staging.isAscending}

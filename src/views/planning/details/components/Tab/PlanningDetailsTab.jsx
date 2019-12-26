@@ -9,7 +9,7 @@ import SalesOrderList from '../PlanningList/SalesOrderList';
 import ServiceOrderList from '../PlanningList/ServiceOrderList';
 import './PlanningDetailsTab.scss'
 import SalesOrderData from '../../../../../planning-data-dummy.json';
-import BaseButton from '../../../../../components/Button/BaseButton'
+import BaseButton from '../../../../../components/Button/BaseButton';
 import Searchbar from "../../../../../components/Searchbar/SearchInput";
 import FilterbyDataAction from '../../../../../components/FilterByDataAction/FilterbyDataAction';
 import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
@@ -119,24 +119,16 @@ class PlanningDetailsTab extends React.Component {
         </div>
     );
   }
-  
+
   // _renderSearchBar(){
-  //   return( 
-  //     <div className="plannings-list-containers">
-  //       <Searchbar >&nbsp;&nbsp;&nbsp;&nbsp;</Searchbar>
-  //     </div> 
+  //   return (
+  //     <Searchbar
+  //       {...this.props}
+  //       webInfo="Search by all component"
+  //       onSearch={this.props.onSearch}
+  //     />
   //   );
   // }
-
-  _renderSearchBar(){
-    return (
-      <Searchbar
-        {...this.props}
-        webInfo="Search by all component"
-        onSearch={this.props.onSearch}
-      />
-    );
-  }
       
   _renderFilterByDataAction(){
     return(
@@ -198,7 +190,7 @@ class PlanningDetailsTab extends React.Component {
             <Tab label="Service Order" classes={{ root: classes.tabRoot, selected: classes.tabSelected }} />
             <Tab disabled classes={{ root: classes.tabRoot }} /><Tab disabled classes={{ root: classes.tabRoot }} />
             <Tab disabled classes={{ root: classes.tabRoot }} /><Tab disabled classes={{ root: classes.tabRoot }} />
-            {this._renderSearchBar()} 
+            {this.props.renderSearch} 
             {this._renderFilterByDataAction()}
           </Tabs>
         </AppBar>

@@ -3,8 +3,9 @@ import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import './DetailPages.scss';
 import PlanningDetailsTab from './components/Tab/PlanningDetailsTab';
 import DropDownList from '../../../components/DropdownList/DropDownList';
-import { Base } from '../../../base-url'
-import SalesDummy from '../../../../src/dummy.json'
+// import { Base } from '../../../base-url';
+import SalesDummy from '../../../../src/dummy.json';
+import SearchInput from "../../../components/Searchbar/SearchInput";
 
 class DetailPages extends React.Component{
     constructor(props) {
@@ -22,35 +23,38 @@ class DetailPages extends React.Component{
         filter: {
           filter : {}
         }
-
-
     };
 }
 
-componentDidUpdate(){
+componentDidMount = async () => {
+  await this.props.token;
+  await this.props.fetchPlans(this.props.parameter, this.props.token);
+}
+
+componentWillUnmount = () => {
+  this.props.onSearch("");
+  this.props.updatePlansParameter({
+    ...this.props.parameter,
+    searchValue: ""
+  });
+};
+
+componentDidUpdate= prevProps => {
+  if (prevProps.searchValue !== this.props.searchValue) {
+    this.props.updatePlansParameter({
+      ...prevProps.parameter,
+      searchValue: this.props.searchValue
+    });
+  }
+
+  // if (prevProps.parameter !== this.props.parameter) {
+  //   this.props.fetchPlans(this.props.parameter, this.props.token);
+  // }
+
   console.log('ini selected service',this.props.selectedServicePlans)
   console.log('ini selected sales',this.props.selectedSalesPlans)
 }
 
-  componentDidMount(){
-    // console.log("narik data sales order ")
-    // console.log(this.state.lifetime)
-    // console.log('testing',this.props)
-    // this.props.getServiceOrder()
-      // console.log("narik data sales order ")
-      // fetch('http://10.200.201.164:5000/v1/Planning/ServiceOrder/MasterData')
-      // .then((res) => {
-      //   console.log('ini data dari res', res)
-      //   if(res.status === 200){
-      //   return res.json()
-      //   }
-      //   })
-      //   .then( resJson => {
-      //     this.setState({ salesOrder: resJson})
-      //   })
-      //   console.log('data dari api',this.state.salesOrder)
-  }
-  
     _renderPagination() {
       console.log(this.props)
       const web = this.props.displayMode === 'web';
@@ -85,6 +89,15 @@ componentDidUpdate(){
       console.log('ini data dari api',this.props.salesOrderList);
     }
 
+    _renderSearchBar(){
+      return (
+        <SearchInput
+          {...this.props}
+          webInfo="Search by all component"
+          onSearch={this.props.onSearch}
+        />
+      );
+    }
     
     isChangeStat = (value,key) =>{
         console.log('nilai value kiriman : '+value)
@@ -112,9 +125,10 @@ componentDidUpdate(){
       return (
         <>
           <PlanningDetailsTab
+            renderSearch={this._renderSearchBar()}
             {...this.props}
             onClickSalesOrder={this.onClickSalesOrder}
-            onClickServiceOrder={this.onClickServiceOrder}
+            onClickServiceOrder={this.onClickServiceOrder} 
             onChoosedService={this.updateAssignmentServiceStates}
             onChoosedSales={this.updateAssignmentSalesStates}
             selectedSalesPlanList={this.props.selectedSalesPlans}
@@ -125,6 +139,7 @@ componentDidUpdate(){
             onStats={this.isChangeStat}
             value={this.state.lifetime}
             dataSalesOrder={this.state.salesOrder}
+            
           />
         </>
       );

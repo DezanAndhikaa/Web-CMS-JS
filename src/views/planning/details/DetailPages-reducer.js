@@ -3,7 +3,7 @@ import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
 import {
 	// AssignPlansAction, 
 	ClearSelectedPlans, 
-	// FetchPlansAction, 
+	FetchPlansAction, 
 	// GetMechanicsAction, 
 	GetServiceOrderAction, GetSalesOrderAction, 
 	UpdatePlansParameterAction, ResetSelectedMechanicsAction, 
@@ -113,23 +113,23 @@ const initialSalesOrderState = { data: [], status: ApiRequestActionsStatus.IDLE 
 // 	return state;
 // }
 
-// export function fetchPlansReducer(state = initialPlansState, action) {
-// 	if (action.type === FetchPlansAction) {
-// 		switch (action.status) {
-// 		case ApiRequestActionsStatus.SUCCEEDED:
-// 			return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
-// 		case ApiRequestActionsStatus.FAILED:
-// 			return {
-// 				data: initialPlansState.data,
-// 				status: ApiRequestActionsStatus.FAILED,
-// 				error: action.error,
-// 			};
-// 		default:
-// 			return { data: initialPlansState.data, status: ApiRequestActionsStatus.LOADING };
-// 		}
-// 	}
-// 	return state;
-// }
+export function fetchPlansReducer(state = initialPlansState, action) {
+	if (action.type === FetchPlansAction) {
+		switch (action.status) {
+		case ApiRequestActionsStatus.SUCCEEDED:
+			return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		case ApiRequestActionsStatus.FAILED:
+			return {
+				data: initialPlansState.data,
+				status: ApiRequestActionsStatus.FAILED,
+				error: action.error,
+			};
+		default:
+			return { data: initialPlansState.data, status: ApiRequestActionsStatus.LOADING };
+		}
+	}
+	return state;
+}
 
 export function getServiceOrderReducer(state = initialServiceOrderState, action) {
 	if (action.type === GetServiceOrderAction) {
@@ -190,10 +190,10 @@ export function plansParameterReducer(state = initialParameter, action) {
 	return state;
 }
 
-// export function searchPlansReducer(state = '', action) {
-// 	if (action.type === SearchPlansAction) return action.payload;
-// 	return state;
-// }
+export function searchPlansReducer(state = '', action) {
+	if (action.type === SearchPlansAction) return action.payload;
+	return state;
+}
 
 // export function selectedFiltersReducer(state = initialSelectedFilter, action) {
 // 	switch (action.type) {
@@ -305,11 +305,6 @@ export function sortPlansByReducer(state = plansSortbyInitialState, action) {
 	default:
 		return state;
 	}
-}
-
-export function searchPlansReducer(state = '', action) {
-	if (action.type === SearchPlansAction) return action.payload;
-	return state;
 }
 
 export function storePlanDataReducer(state = {}, action) {

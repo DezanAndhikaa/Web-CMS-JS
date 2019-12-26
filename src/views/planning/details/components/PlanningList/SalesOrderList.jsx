@@ -39,8 +39,8 @@ render(){
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
           <TableRow classes={{ root: 'table-row' }}>
             <TableCell padding="checkbox">
-                  {this.props.displayCheckbox  && <Checkbox />}
-                </TableCell>
+                {this.props.displayCheckbox  && <Checkbox />}
+              </TableCell>
             <PlanningListHeader
               name="SO"
               // isActive={this.props.sortJobsByState.unitModel.isActive}

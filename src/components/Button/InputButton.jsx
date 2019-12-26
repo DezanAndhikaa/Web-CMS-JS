@@ -38,7 +38,15 @@ export default class InputButton extends React.Component{
                     </Modal>
                 </div>
             )
-        }else if(this.props.titles === "SO" || this.props.titles === "Part Number" || this.props.titles === "Unit Code" || this.props.titles === "Serial Number"){
+        }else if(this.props.titles === "SO" || this.props.titles ==="Work Order"){
+            return(
+                <div className="button-rows">
+                    <Paper className={this.props.className || 'global-search-pk'} elevation={1}>
+                        <InputBase className="txt-search-pk" placeholder={this.props.placeholder}/>
+                    </Paper>
+                </div>
+            )
+        }else if(this.props.titles === "Part Number" || this.props.titles === "Unit Code" || this.props.titles === "Serial Number"){
             return(
                 <div className="button-rows">
                     <Paper className={this.props.className || 'global-search'} elevation={1}>
@@ -63,13 +71,13 @@ export default class InputButton extends React.Component{
                     </Modal>
                 </div>
             )
-        }else if (this.props.titles === "Customer" || this.props.titles === "Site" || this.props.titles === "Unit Model"){
+        }else if (this.props.titles === "Site" || this.props.titles === "Unit Model"){
             return(    
                 <div className="button-rows">
                     <Button onClick={this.isClicked} className="btn-header" style={{justifyContent: "unset"}}>{this.props.titles}</Button>
                 </div>
             )
-        }else if (this.props.titles === "Component Description"){
+        }else if (this.props.titles === "Customer" || this.props.titles === "Component Description"){
             return(
                 <div className="button-rows">
                     <Button onClick={this.isClicked} className="btn-header-comp" style={{justifyContent: "unset"}}>{this.props.titles}</Button>
