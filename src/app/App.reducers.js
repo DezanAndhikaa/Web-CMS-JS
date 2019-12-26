@@ -67,7 +67,7 @@ const AppReducer = combineReducers({
 	// piPageState: PIDetailReducers,
 	// reportState: ReportReducers,
 	selectedPlanData: selectedPlanDataReducer,
-	//ProblemLog Approval
+	//ProblemLog Approval,
 	// piDetailState: problemLogReducer,
 	// problemLogDetail: fetchDetailReducer,
 	//ProblemLog Monitoring
