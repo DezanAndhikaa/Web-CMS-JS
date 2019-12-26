@@ -111,21 +111,21 @@ componentDidUpdate(){
     _renderSalesOrderTabs(){
       return (
         <>
-        <PlanningDetailsTab
-        {...this.props}
-        onClickSalesOrder={this.onClickSalesOrder}
-        onClickServiceOrder={this.onClickServiceOrder}
-        onChoosedService={this.updateAssignmentServiceStates}
-        onChoosedSales={this.updateAssignmentSalesStates}
-        selectedSalesPlanList={this.props.selectedSalesPlans}
-        selectedServicePlanList={this.props.selectedServicePlans}
-        displayCheckbox={this.props.parameter.assigmentFilter
-          || this.props.parameter.inProgressFilter}
-        stats={this.state.stats}
-        onStats={this.isChangeStat}
-        value={this.state.lifetime}
-        dataSalesOrder={this.state.salesOrder}
-        />
+          <PlanningDetailsTab
+            {...this.props}
+            onClickSalesOrder={this.onClickSalesOrder}
+            onClickServiceOrder={this.onClickServiceOrder}
+            onChoosedService={this.updateAssignmentServiceStates}
+            onChoosedSales={this.updateAssignmentSalesStates}
+            selectedSalesPlanList={this.props.selectedSalesPlans}
+            selectedServicePlanList={this.props.selectedServicePlans}
+            displayCheckbox={this.props.parameter.assigmentFilter
+              || this.props.parameter.inProgressFilter}
+            stats={this.state.stats}
+            onStats={this.isChangeStat}
+            value={this.state.lifetime}
+            dataSalesOrder={this.state.salesOrder}
+          />
         </>
       );
     }
