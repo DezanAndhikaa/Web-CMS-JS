@@ -15,13 +15,13 @@ class DetailPages extends React.Component{
         displayCheckbox: true,
         lifetime: SalesDummy,
         salesOrder: [],
-        nextPage: true,
-        prevPage: false,
-        numberOfPage: 2,
-        currentPage: 1,
-        filter: {
-          filter : {}
-        }
+        // nextPage: true,
+        // prevPage: false,
+        // numberOfPage: 2,
+        // currentPage: 1,
+        // filter: {
+        //   filter : {}
+        // }
 
 
     };
@@ -36,10 +36,10 @@ class DetailPages extends React.Component{
 //   console.log('ini selected sales',this.props.selectedSalesPlans)
 // }
 
-componentDidMount = async () => {
-  console.log('fetch berjalan didmount')
-  await this.props.fetchSalesOrder(JSON.stringify(this.props.parameter));
-}
+// componentDidMount = async () => {
+//   console.log('fetch berjalan didmount')
+//   await this.props.fetchSalesOrder(this.props.parameter);
+// }
 
   // componentDidMount = async() =>{
   //   // console.log("narik data sales order ")
@@ -63,10 +63,10 @@ componentDidMount = async () => {
     _renderPagination() {
       console.log(this.props)
       const web = this.props.displayMode === 'web';
-      const next = this.state.nextPage;
-      const prev = this.state.prevPage;
-      const currentProps = this.state.currentPage;
-      const { numberOfPage } = this.state;
+      const next = this.props.serviceOrderList.NextPage;
+      const prev = this.props.serviceOrderList.PrevPage;
+      const currentProps = this.props.serviceOrderList.PageNumber;
+      const { TotalPage } = this.props.serviceOrderList;
       return(
         <div className="pagination">
           <div className="paging">
@@ -75,9 +75,9 @@ componentDidMount = async () => {
             {web && currentProps - 2 > 0 && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps - 2 })} className="page-inactive">{currentProps - 2}</div>}
             {currentProps - 1 > 0 && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps - 1 })} className="page-inactive">{currentProps - 1}</div>}
             <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps })} className="page-active">{currentProps}</div>
-            {currentProps + 1 <= numberOfPage && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps + 1 })} className="page-inactive">{currentProps + 1}</div>}
-            {web && currentProps + 2 < numberOfPage && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps + 2 })} className="page-inactive">{currentProps + 2}</div>}
-            {web && currentProps + 3 < numberOfPage && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps + 3 })} className="page-inactive">{currentProps + 3}</div>}
+            {currentProps + 1 <= TotalPage && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps + 1 })} className="page-inactive">{currentProps + 1}</div>}
+            {web && currentProps + 2 < TotalPage && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps + 2 })} className="page-inactive">{currentProps + 2}</div>}
+            {web && currentProps + 3 < TotalPage && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps + 3 })} className="page-inactive">{currentProps + 3}</div>}
             {next && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>}
           </div>
         </div>
@@ -86,14 +86,14 @@ componentDidMount = async () => {
 
     onClickServiceOrder = () => {
       this.props.getServiceOrder();
-      console.log('ini data dari api',this.props.serviceOrderList);
+      // console.log('ini data dari api',this.props.serviceOrderList);
     }
 
-    // onClickSalesOrder = () =>{
-    //   this.props.fetchSalesOrder(this.props.parameter);
-    //   console.log('ini data parameter',JSON.stringify(this.props.parameter));
-    //   console.log('ini data dari api',this.props.salesOrderList);
-    // }
+    onClickSalesOrder = () =>{
+      this.props.fetchSalesOrder(this.props.parameter);
+      console.log('ini data parameter',JSON.stringify(this.props.parameter.soFilter));
+      console.log('ini data dari api',this.props.salesOrderList);
+    }
 
     
     isChangeStat = (value,key) =>{
@@ -123,7 +123,7 @@ componentDidMount = async () => {
         <>
         <PlanningDetailsTab
         {...this.props}
-        // onClickSalesOrder={this.onClickSalesOrder}
+        onClickSalesOrder={this.onClickSalesOrder}
         parameter={this.props.parameter}
         onClickServiceOrder={this.onClickServiceOrder}
         onChoosedService={this.updateAssignmentServiceStates}
@@ -136,6 +136,7 @@ componentDidMount = async () => {
         onStats={this.isChangeStat}
         value={this.state.lifetime}
         dataSalesOrder={this.state.salesOrder}
+        totalSalesData={this.props.salesOrderList.TotalData}
         />
         </>
       );

@@ -56,7 +56,7 @@ const mapDispatchToProps = (dispatch) => ({
 	// getMechanics: (token) => dispatch(getMechanicsAction(token)),
 	getServiceOrder: () => dispatch(getServiceOrderAction()),
 	// getSalesOrder: () => dispatch(getSalesFilteredAction()),
-	fetchSalesOrder: (payload) => dispatch(fetchSalesAction(FetchSalesAction, payload)),
+	fetchSalesOrder: (payload) => dispatch(fetchSalesAction(payload)),
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	onSearch: (keyword) => dispatch(searchAction(SearchPlansAction, keyword)),
 	pushTo: (url) => dispatch(push(url)),

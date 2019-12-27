@@ -66,15 +66,20 @@ export const SalesOrderFilterAction = 'SALES_ORDER_FILTER';
 // 	};
 // 	return async (dispatch) => dispatch(callApi(type, requestConfig));
 // }
-export function fetchSalesAction(type, payload) {
-	console.log('ini type',type);
+export function fetchSalesAction(payload) {
+	console.log('ini type',FetchSalesAction);
 	console.log(payload);
+	const filter = payload;
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${ApiUrlBase.SALESORDER_API_URL}/Filters`, payload
-		// data: payload,
+		url: `${ApiUrlBase.SALESORDER_API_URL}/Filters`,
+		headers: {
+			'Accept': 'application/json; charset=utf-8',
+			'Content-Type': 'application/json; charset=utf-8',
+		},
+		data: filter,
 	};
-	return async (dispatch) => dispatch(callApi(type, requestConfig));
+	return async (dispatch) => dispatch(callApi(FetchSalesAction, requestConfig));
 }
 
 // export function getMechanicsAction(accessToken) {

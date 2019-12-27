@@ -26,38 +26,39 @@ import {
 } from './DetailPages-action';
 
 const initialSalesAssignment = {
-	// planTypeFilter: ['All Plan'],
-	// unitModelFilter: ['All Model'],
-	// customerFilter: ['All Customer'],
-	tableValues: [],
+	TotalData: 0,
 	TotalPage: 1,
 	PageNumber: 1,
+	PageSize: 10,
+	SalesOrder: [],
+	ServiceOrder: [],
 	NextPage: false,
 	PrevPage: false,
-	PageSize: 10,
-	// periodicInspectionHandover: 0,
-	// periodicInspectionTotal: 0,
-	// periodicInspectionUnassign: 0,
-	// periodicServiceHandover: 0,
-	// periodicServiceTotal: 0,
-	// unscheduleBreakdownHandover: 0,
-	// unscheduleBreakdownTotal: 0,
-	// unscheduleBreakdownUnassign: 0,
+	GroupSo: ['All SO'],
+	GroupCustomer: ['ALL CUSTOMER'],
+	GroupSite: ['ALL SITE'],
+	GroupUnitModel: ['ALL UNIT MODEL'],
+	GroupSerialNumber: [],
+	GroupLifeTimeComponent: [],
+	GroupPlanExecution: [],
 };
 
 const initialParameter = {
-	isDeleted : 'false',
-	filter : {
-		PageNumber : 1,
-		PageSize : 10,
-		Sort : 'asc'
+	soFilter : {
+		isDeleted : 'false',
+		filter : {
+			PageNumber : 1,
+			PageSize : 15,
+			Sort : 'asc'
+		},
 	},
+	
 	// searchValue: '',
 	// plantypeFilter: '',
 	// unitModelFilter: '',
 	// customerFilter: '',
-	// assigmentFilter: true,
-	// inProgressFilter: false,
+	assigmentFilter: true,
+	inProgressFilter: false,
 	// approvalFilter: false,
 	// sortByUnitModel: false,
 	// sortByUnitCode: false,
@@ -141,6 +142,7 @@ export function fetchSalesReducer(state = initialSalesState, action) {
 	if (action.type === FetchSalesAction) {
 	  switch (action.status) {
 		case ApiRequestActionsStatus.SUCCEEDED:
+			console.log('ini balikan dari mantan',action.payload);
 		  return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
 		case ApiRequestActionsStatus.FAILED:
 		  return {
