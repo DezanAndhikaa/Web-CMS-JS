@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { combineReducers } from 'redux';
 import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
 import {
@@ -6,7 +7,7 @@ import {
 	// FetchPlansAction, 
 	// GetMechanicsAction, 
 	GetServiceOrderAction, GetSalesOrderAction, 
-	UpdatePlansParameterAction, ResetSelectedMechanicsAction, 
+	UpdateSalesParameterAction, ResetSelectedMechanicsAction, 
 	SearchPlansAction,
 	// SelectCustomerFilterAction, 
 	SelectSalesPlanAction,
@@ -14,58 +15,74 @@ import {
 	// SelectPlansAssignmentFilterAction,
 	// SelectPlansTypeFilterAction, 
 	SelectLeaderAction, SelectMechanicAction,
+	SelectCustomerFilterAction,SelectComponentFilterAction,
+	SelectSiteFilterAction,SelectUnitModelFilterAction,
 	// SelectUnitModelFilterAction,
 	SortPlansByBacklogOpen, SortPlansByCustomer,
 	SortPlansByPlanType, SortPlansByPlantExecution, SortPlansByStaging,
 	SortPlansByStatus, SortPlansByUnitCode, SortPlansByUnitModel,
-	SortPlansByWorkOrder,
+	SortPlansByWorkOrder, FetchSalesAction,
 	// UnassignPlansAction, 
 	UnselectSalesPlanAction, UnselectServicePlanAction,
 	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction,
 } from './DetailPages-action';
 
-const initialJobsAssignment = {
-	custTypeFilter: ['All Customer'],
-	siteFilter: ['All Site'],
-	unitModelFilter: ['All Model'],
-	componentDescFilter: ['All Comp. Desc'],
-	tableValues: [],
-	numberOfPage: 1,
-	currentPage: 1,
-	nextPage: false,
-	prevPage: false,
-	pageSize: 10,
-	periodicInspectionHandover: 0,
-	periodicInspectionTotal: 0,
-	periodicInspectionUnassign: 0,
-	periodicServiceHandover: 0,
-	periodicServiceTotal: 0,
-	unscheduleBreakdownHandover: 0,
-	unscheduleBreakdownTotal: 0,
-	unscheduleBreakdownUnassign: 0,
-  };
+const initialSalesAssignment = {
+	TotalData: 0,
+	TotalPage: 1,
+	PageNumber: 1,
+	PageSize: 10,
+	SalesOrder: [],
+	ServiceOrder: [],
+	NextPage: false,
+	PrevPage: false,
+	GroupSo: ['All SO'],
+	GroupCustomer: ['ALL CUSTOMER'],
+	GroupSite: ['ALL SITE'],
+	GroupUnitModel: ['ALL UNIT MODEL'],
+	GroupSerialNumber: [],
+	GroupLifeTimeComponent: [],
+	GroupPlanExecution: [],
+};
+
+const initialSelectedFilter = {
+	customerType: 'ALL CUSTOMER',
+	siteType: 'ALL SITE',
+	unitType: 'ALL UNIT MODEL',
+	compType: 'ALL COMPONENT '
+
+}
 
 const initialParameter = {
-	searchValue: '',
-	plantypeFilter: '',
-	unitModelFilter: '',
-	customerFilter: '',
+	soFilter : {
+		isDeleted : 'false',
+		filter : {
+			PageNumber : 1,
+			PageSize : 15,
+			Sort : 'asc'
+		},
+	},
+	
+	// searchValue: '',
+	// plantypeFilter: '',
+	// unitModelFilter: '',
+	// customerFilter: '',
 	assigmentFilter: true,
 	inProgressFilter: false,
-	approvalFilter: false,
-	sortByUnitModel: false,
-	sortByUnitCode: false,
-	sortByPlanType: true,
-	sortByWorkOrder: false,
-	sortByWorkCenter: false,
-	sortByCustomer: false,
-	sortByPlantExecution: false,
-	sortByStatus: false,
-	sortByOpenBacklog: false,
-	sortByStaging: false,
-	orderDesc: false,
-	currentPage: 1,
-	pageSize: 10,
+	// approvalFilter: false,
+	// sortByUnitModel: false,
+	// sortByUnitCode: false,
+	// sortByPlanType: true,
+	// sortByWorkOrder: false,
+	// sortByWorkCenter: false,
+	// sortByCustomer: false,
+	// sortByPlantExecution: false,
+	// sortByStatus: false,
+	// sortByOpenBacklog: false,
+	// sortByStaging: false,
+	// orderDesc: false,
+	// currentPage: 1,
+	// pageSize: 10,
 };
 
 const initialSelectedAssignment = {
@@ -88,8 +105,7 @@ const plansSortbyInitialState = {
 };
 
 // const initialAssignmentState = { response: false, status: ApiRequestActionsStatus.IDLE };
-// const initialPlansState = { data: initialPlansAssignment, status: ApiRequestActionsStatus.IDLE };
-const initialJobsState = { data: initialJobsAssignment, status: ApiRequestActionsStatus.IDLE };
+const initialSalesState = { data: initialSalesAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialMechanicsState = { data: [], status: ApiRequestActionsStatus.IDLE };
 const initialServiceOrderState = { data: [], status: ApiRequestActionsStatus.IDLE };
 const initialSalesOrderState = { data: [], status: ApiRequestActionsStatus.IDLE };
@@ -132,6 +148,24 @@ const initialSalesOrderState = { data: [], status: ApiRequestActionsStatus.IDLE 
 // 	}
 // 	return state;
 // }
+export function fetchSalesReducer(state = initialSalesState, action) {
+	if (action.type === FetchSalesAction) {
+	  switch (action.status) {
+		case ApiRequestActionsStatus.SUCCEEDED:
+			console.log('ini balikan dari mantan',action.payload);
+		  return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		case ApiRequestActionsStatus.FAILED:
+		  return {
+				data: initialSalesState.data,
+				status: ApiRequestActionsStatus.FAILED,
+				error: action.error,
+		  };
+		default:
+		  return { data: initialSalesState.data, status: ApiRequestActionsStatus.LOADING };
+	  }
+	}
+	return state;
+}
 
 export function getServiceOrderReducer(state = initialServiceOrderState, action) {
 	if (action.type === GetServiceOrderAction) {
@@ -151,43 +185,39 @@ export function getServiceOrderReducer(state = initialServiceOrderState, action)
 	return state;
 }
 
-export function getSalesOrderReducer(state = initialSalesOrderState, action) {
-	console.log('masuk seles selses ',action)
-	if (action.type === GetSalesOrderAction) {
-		switch (action.status) {
-		case ApiRequestActionsStatus.SUCCEEDED:
-			return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
-		case ApiRequestActionsStatus.FAILED:
-			return {
-				data: initialServiceOrderState.data,
-				status: ApiRequestActionsStatus.FAILED,
-				error: action.error,
-			};
-		default:
-			return { data: initialMechanicsState.data, status: ApiRequestActionsStatus.LOADING };
-		}
+export function selectedFiltersReducer(state = initialSelectedFilter, action) {
+	console.log('aku adalah aksi: ',action)
+	switch (action.type) {
+	  case SelectCustomerFilterAction:
+		return { ...state, customerType: action.payload };
+	  case SelectSiteFilterAction:
+		return { ...state, siteType: action.payload };
+	  case SelectUnitModelFilterAction:
+		return { ...state, unitType: action.payload };
+      case SelectComponentFilterAction:
+	    return { ...state, compType: action.payload };
+	  default:
+		return state;
 	}
-	return state;
-}
-
-export function fetchJobsReducer(state = initialJobsState, action) {
-	console.log('masuk gan gan',action)
-	if (action.type === FetchJobsAction) {
-	  switch (action.status) {
-		case ApiRequestActionsStatus.SUCCEEDED:
-		  return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
-		case ApiRequestActionsStatus.FAILED:
-		  return {
-			data: initialJobsState.data,
-			status: ApiRequestActionsStatus.FAILED,
-			error: action.error,
-		  };
-		default:
-		  return { data: initialJobsState.data, status: ApiRequestActionsStatus.LOADING };
-	  }
-	}
-	return state;
   }
+
+// export function getSalesOrderReducer(state = initialSalesOrderState, action) {
+// 	if (action.type === GetSalesOrderAction) {
+// 		switch (action.status) {
+// 		case ApiRequestActionsStatus.SUCCEEDED:
+// 			return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+// 		case ApiRequestActionsStatus.FAILED:
+// 			return {
+// 				data: initialServiceOrderState.data,
+// 				status: ApiRequestActionsStatus.FAILED,
+// 				error: action.error,
+// 			};
+// 		default:
+// 			return { data: initialMechanicsState.data, status: ApiRequestActionsStatus.LOADING };
+// 		}
+// 	}
+// 	return state;
+// }
 
 // export function getMechanicsReducer(state = initialMechanicsState, action) {
 // 	if (action.type === GetMechanicsAction) {
@@ -207,8 +237,8 @@ export function fetchJobsReducer(state = initialJobsState, action) {
 // 	return state;
 // }
 
-export function plansParameterReducer(state = initialParameter, action) {
-	if (action.type === UpdatePlansParameterAction) return action.payload;
+export function salesParameterReducer(state = initialParameter, action) {
+	if (action.type === UpdateSalesParameterAction) return action.payload;
 	return state;
 }
 
@@ -359,15 +389,16 @@ export function storePlanDataReducer(state = {}, action) {
 
 const PlansReducers = combineReducers({
 	selectedLeader: selectLeaderReducer,
+	selectedFilters: selectedFiltersReducer,
 	serviceOrderList: getServiceOrderReducer,
-	salesOrderList: getSalesOrderReducer,
+	salesOrderList : fetchSalesReducer,
+	// salesOrderList: getSalesOrderReducer,
 	// mechanicList: getMechanicsReducer,
 	selectedPlans: selectPlansReducer,
 	selectedMechanics: selectMechanicsReducer,
 	// assignPlansStatus: assignPlansReducer,
 	// unassignPlansStatus: unassignPlansReducer,
-	plansParameter: plansParameterReducer,
-	JosAssigntmentSummary: fetchJobsReducer,
+	salesParameter: salesParameterReducer,
 	// PlansAssignmentSummary: fetchPlansReducer,
 	// selectedFilters: selectedFiltersReducer,
 	// sortBy: sortPlansByReducer,

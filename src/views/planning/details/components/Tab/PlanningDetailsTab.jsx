@@ -80,7 +80,7 @@ class PlanningDetailsTab extends React.Component {
 
   _renderTotalSalesOrder(){
     return(
-    <>Total Data {SalesOrderData.jumlahDataSalesOrder}</>
+    <>Total Data {this.props.totalSalesData}</>
     );
 }
   _renderTotalServiceOrder(){
