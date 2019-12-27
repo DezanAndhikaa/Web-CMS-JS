@@ -19,7 +19,7 @@ export default class SalesOrderList extends React.PureComponent {
     //   this.props.storeJobData(row);
     //   return this.props.pushTo(`${Menu.DETAIL_PI}:${row.woNumber || ''}`);
     // }
-    componentDidMount = async () => {
+    componentDidMount = async() =>{
       await this.props.onClickSalesOrder();
      }
 
@@ -110,8 +110,8 @@ render(){
           </TableRow>
         </TableHead>
         <TableBody classes={{ root: 'table-body' }}>
-          {this.props.salesOrderList.SalesOrderTypes
-            && this.props.salesOrderList.SalesOrderTypes.map((row, id) => (
+          {this.props.salesOrderList.SalesOrders
+            && this.props.salesOrderList.SalesOrders.map((row, id) => (
               // {/* {SalesOrderData.salesData && SalesOrderData.salesData.map((row, id) => ( */}
               <TableRow key={id} classes={{ root: 'table-row' }}>
                 <TableCell padding="checkbox">
@@ -125,10 +125,10 @@ render(){
                 <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
-                <TableCell align="center" className="table-cell"> 
-                {!this.props.value.salesData[id].LifeTimeComp ? <InputButton title={"Input Lifetime Component"} onStats={this.props.onStats} titles="Input" key={row.SO} id={row.SO}/> : 
+                <TableCell align="center" className="table-cell"> <InputButton title={"Input Lifetime Component"} onStats={this.props.onStats} titles="Input" key={row.SO} id={row.SO}/>
+                {/* {!this.props.value.salesData[id].LifeTimeComp ? <InputButton title={"Input Lifetime Component"} onStats={this.props.onStats} titles="Input" key={row.SO} id={row.SO}/> : 
                   <div>{this.props.value.salesData[id].LifeTimeComp}</div>
-                }
+                } */}
                 </TableCell>
                 <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
                 <TableCell align="center" className="table-cell"> <EditButton /></TableCell>

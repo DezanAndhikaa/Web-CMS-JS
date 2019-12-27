@@ -6,21 +6,22 @@ import { PLAN_DATA, StorageKey } from '../../../constants';
 import {
 	// AssignPlansAction,
 	// assignPlansAction,
-	getServiceOrderAction,
+	getServiceOrderAction, fetchSalesAction, salesParameterAction,
 	ClearSelectedPlans, 
 	FetchPlansAction,
 	fetchPlansAssignment,
 	// getMechanicsAction,
 	// plansParameterAction,
-	// UpdatePlansParameterAction, 
+	UpdateSalesParameterAction, 
 	searchAction,
 	SearchPlansAction, 
 	selectFilterAction, UnselectSalesPlanAction, planParameterAction, UpdatePlansParameterAction,
 	UnselectServicePlanAction, selectSalesPlansAction, selectServicePlansAction, selectLeaderAction, SelectSalesPlanAction,
-	SelectServicePlanAction,
+	SelectServicePlanAction, FetchSalesAction,
 	selectMechanicAction, sortByAction, 
 	// unassignPlansAction, 
-	storePlanDataAction, getSelesOrderAction, 
+	storePlanDataAction, 
+	// getSelesOrderAction, 
 } from './DetailPages-action';
 import DetailPages from './DetailPages';
 
@@ -31,7 +32,7 @@ const mapStateToProps = (state) => ({
 	// mechanicList: state.plansPageState.mechanicList.data,
 	salesOrderList: state.plansPageState.salesOrderList.data,
 	serviceOrderList: state.plansPageState.serviceOrderList.data,
-	parameter: state.plansPageState.plansParameter,
+	parameter: state.plansPageState.salesParameter,
 	searchValue: state.plansPageState.searchValue,
 	// requestAssignPlans: state.plansPageState.assignPlansStatus.status,
 	// requestPlans: state.plansPageState.PlansAssignmentSummary.status,
@@ -55,10 +56,8 @@ const mapDispatchToProps = (dispatch) => ({
 	fetchPlans: (payload, token) => dispatch(fetchPlansAssignment(FetchPlansAction, payload, token)),
 	// getMechanics: (token) => dispatch(getMechanicsAction(token)),
 	getServiceOrder: () => dispatch(getServiceOrderAction()),
-	updatePlansParameter: (payload) => {
-		dispatch(planParameterAction(UpdatePlansParameterAction, payload));
-	},
-	getSalesOrder: () => dispatch(getSelesOrderAction()),
+	// getSalesOrder: () => dispatch(getSalesFilteredAction()),
+	fetchSalesOrder: (payload) => dispatch(fetchSalesAction(payload)),
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	onSearch: (keyword) => dispatch(searchAction(SearchPlansAction, keyword)),
 	pushTo: (url) => dispatch(push(url)),
@@ -72,7 +71,7 @@ const mapDispatchToProps = (dispatch) => ({
 	// unassignPlans: (payload, token) => dispatch(unassignPlansAction(payload, token)),
 	unselectServicePlan: (payload) => dispatch(selectServicePlansAction(UnselectServicePlanAction, payload)),
 	unselectSalesPlan: (payload) => dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
-	// updateParameter: (payload) => dispatch(plansParameterAction(UpdatePlansParameterAction, payload)),
+	updateParameter: (payload) => dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
 });
 
 const detailPages = connect(mapStateToProps, mapDispatchToProps)(DetailPages);
