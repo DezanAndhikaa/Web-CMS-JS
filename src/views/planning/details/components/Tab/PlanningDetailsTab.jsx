@@ -158,22 +158,29 @@ class PlanningDetailsTab extends React.Component {
       <div className="dropdowns-container">
         <div className="dropdown-container">
           <DropdownFilter
-            data={this.props.dataFilter.custTypeFilter}
-            // selected={this.props.selectedFilters.jobType}
+          // console.log('hasduifhaskfhask;',this.props.salesOrderList.GroupSo)
+            data={this.props.salesOrderList.GroupCustomer}
+            selected={this.props.selectedFilters.customerType}
             // onSelectActionType={SelectJobsTypeFilterAction}
             // onSelectAction={this.props.selectFilter}
           />
         </div>
         <div className="dropdown-container">
           <DropdownFilter
+          data={this.props.salesOrderList.GroupSite}
+          selected={this.props.selectedFilters.siteType}
           />
         </div>
         <div className="dropdown-container">
           <DropdownFilter
+          data={this.props.salesOrderList.GroupUnitModel}
+          selected={this.props.selectedFilters.unitType}
           />
         </div>
         <div className="dropdown-container">
           <DropdownFilter
+          data={this.props.salesOrderList.GroupComponentDescription}
+          selected={this.props.selectedFilters.compType}
           />
         </div>
         <div className="search-container">
@@ -186,7 +193,6 @@ class PlanningDetailsTab extends React.Component {
   render() {
     const { classes, theme } = this.props;
     const { value } = this.state;
-    console.log('dataaaaaaaaaaaaa :',this.props.dataFilter)
     return (
         <div className="root">
         <AppBar position="static" color="default" style={{boxShadow: "none"}}>
