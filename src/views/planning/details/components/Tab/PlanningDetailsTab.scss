@@ -3,6 +3,7 @@
 
 .root {
     flex-grow: 1;
+    z-index: 0;
     .tabsRoot {
         border-bottom: 1px solid #e8e8e8;
       .tabsIndicator{
@@ -18,9 +19,19 @@
     }
 }
 
+.tab-container{
+    display: flex;
+    flex-direction: row;
+    margin-left: 50vw;
+    position: fixed;
+    z-index: 999;
+}
+
 .table-container{
     display: flex;
     flex-direction: column;
+    position: relative;
+    z-index: 0;
     .filters-container{
         display: flex;
         flex-direction: row;
@@ -34,7 +45,7 @@
             .search-container{
                 flex: 1;
                 align-self: flex-end;
-                margin-left: 1.5vw;
+                margin-left: 17vw;
                 display: flex;
                 justify-content: flex-end;
             }

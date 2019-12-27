@@ -188,8 +188,8 @@
             .search-container{
                 flex: 1;
                 align-self: flex-end;
-                margin-left: 1.5vw;
-                width: 45vw !important;
+                // margin-left: 1.5vw;
+                // width: 45vw !important;
                 display: flex;
                 justify-content: flex-end;
             }
@@ -229,7 +229,7 @@
                         font-family: 'Lato-Bold';
                         color: #3C3B3B;
                         background-color: white;
-                    border-bottom: vw(10) !important;
+                        border-bottom: vw(10) !important;
                     }
                     .checkbox-checked{
                         color: #3C3B3B;

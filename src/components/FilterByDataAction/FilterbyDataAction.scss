@@ -62,7 +62,8 @@
     height: vw(150);
     border-radius:vw(10) !important;
     background-color: white;
-    position: fixed 0px;
+    position: absolute;
+    z-index: 100;
     box-shadow: 0px 0.3vw 0.6vw 0px rgba(0,0,0,0.2);
     color: rgb(0, 0, 0);
     display: flex;

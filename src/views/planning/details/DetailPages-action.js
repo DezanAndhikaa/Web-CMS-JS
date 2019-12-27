@@ -51,10 +51,10 @@ export const UpdatePlansParameterAction = 'PLANS_PARAMETER';
 // 	return async (dispatch) => dispatch(callApi(type, requestConfig));
 // }
 
-export function fetchPlansAssignment(type, payload, accessToken) {
+export function fetchPlansAssignment(type, payload) {
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${ApiUrlBase.SALESORDER_API_URL}`,
+		url: `${ApiUrlBase.SALESORDER_API_URL}Filters`,
 		data: payload,
 		headers: {
 			'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ export function getServiceOrderAction() {
 export function getSelesOrderAction() {
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${ApiUrlBase.SALESORDER_API_URL}`,
+		url: `${ApiUrlBase.SALESORDER_API_URL}Filters`,
 		headers: {
 			// Authorization: 'anbiya',
 			'Content-Type':'application/json'

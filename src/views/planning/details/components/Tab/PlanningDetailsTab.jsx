@@ -190,8 +190,12 @@ class PlanningDetailsTab extends React.Component {
             <Tab label="Service Order" classes={{ root: classes.tabRoot, selected: classes.tabSelected }} />
             <Tab disabled classes={{ root: classes.tabRoot }} /><Tab disabled classes={{ root: classes.tabRoot }} />
             <Tab disabled classes={{ root: classes.tabRoot }} /><Tab disabled classes={{ root: classes.tabRoot }} />
-            {this.props.renderSearch} 
-            {this._renderFilterByDataAction()}
+            {/* {this.props.renderSearch} 
+            {this._renderFilterByDataAction()} */}
+            <div className="tab-container">
+              {this.props.renderSearch} 
+              {this._renderFilterByDataAction()}
+            </div>
           </Tabs>
         </AppBar>
         <div className="filters-container">
