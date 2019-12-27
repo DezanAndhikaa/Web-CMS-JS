@@ -42,10 +42,11 @@ componentDidUpdate = (prevProps) => {
   console.log('ini selected sales',this.props.selectedSalesPlans)
 }
 
-// componentDidMount = async () => {
-//   console.log('fetch berjalan didmount')
-//   await this.props.fetchSalesOrder(this.props.parameter);
-// }
+  // componentDidMount = async () => {
+  //   console.log('fetch berjalan didmount')
+    
+  //   // this.onClickSalesOrder();
+  // }
 
   // componentDidMount = async() =>{
   //   // console.log("narik data sales order ")
@@ -99,6 +100,7 @@ componentDidUpdate = (prevProps) => {
       this.props.fetchSalesOrder(this.props.parameter);
       console.log('ini data parameter',JSON.stringify(this.props.parameter.soFilter));
       console.log('ini data dari api',this.props.salesOrderList);
+      console.log('ini data pilihan dari marinka : ', this.props.salesOrderList.GroupSo)
     }
 
     _renderSearchBar(){
@@ -131,7 +133,7 @@ componentDidUpdate = (prevProps) => {
       (plans) => plans.SO === plan.SO,
     )) { return this.props.unselectSalesPlan(plan); }
     return this.props.selectSalesPlan(plan);
-}
+} 
 
     _renderTabs(){
       return (
@@ -146,8 +148,7 @@ componentDidUpdate = (prevProps) => {
         onChoosedSales={this.updateAssignmentSalesStates}
         selectedSalesPlanList={this.props.selectedSalesPlans}
         selectedServicePlanList={this.props.selectedServicePlans}
-        displayCheckbox={this.props.parameter.assigmentFilter
-          || this.props.parameter.inProgressFilter}
+        displayCheckbox={this.props.parameter.assigmentFilter || this.props.parameter.inProgressFilter}
         stats={this.state.stats}
         onStats={this.isChangeStat}
         value={this.state.lifetime}

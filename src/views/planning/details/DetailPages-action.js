@@ -23,7 +23,7 @@ export const SelectPlansAssignmentFilterAction = 'SELECT_PLANS_ASSIGNMENT_FILTER
 export const SelectPlansTypeFilterAction = 'SELECT_PLANS_TYPE_FILTER';
 export const SelectLeaderAction = 'SELECT_LEADER';
 export const SelectMechanicAction = 'SELECT_MECHANIC';
-export const SelectUnitModelFilterAction = 'SELECT_UNIT_MODEL_FILTER';
+// export const SelectUnitModelFilterAction = 'SELECT_UNIT_MODEL_FILTER';
 export const SortPlansByBacklogOpen = 'SORT_PLANS_BY_BACKLOG_OPEN';
 export const SortPlansByCustomer = 'SORT_PLANS_BY_CUSTOMER';
 export const SortPlansByPlanType = 'SORT_PLANS_BY_PLAN_TYPE';
@@ -40,6 +40,12 @@ export const UnselectServicePlanAction = 'UNSELECT_SERVICE_PLANS';
 export const UnselectMechanicAction = 'UNSELECT_MECHANIC';
 export const UpdateSalesParameterAction = 'SALES_PARAMETER';
 export const SalesOrderFilterAction = 'SALES_ORDER_FILTER';
+
+// export const SelectSoTypeFilterAction = 'SELECT_SO_FILTER'
+// export const SelectCustomerFilterAction = 'SELECT_CUSTOMER_FILTER'
+export const SelectSiteFilterAction = 'SELECT_SITE_FILTER'
+export const SelectUnitModelFilterAction ='SELECT_UNIT_MODEL_FILTER'
+export const SelectComponentFilterAction ='SELECT_COMPONENT_FILTER'
 
 // export function assignPlansAction(type, payload, accessToken) {
 // 	const requestConfig = {

@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
 import {
 	// AssignPlansAction, 
-	ClearSelectedPlans, 
+	ClearSelectedPlans,FetchJobsAction, 
 	// FetchPlansAction, 
 	// GetMechanicsAction, 
 	GetServiceOrderAction, GetSalesOrderAction, 
@@ -16,6 +16,8 @@ import {
 	// SelectPlansAssignmentFilterAction,
 	// SelectPlansTypeFilterAction, 
 	SelectLeaderAction, SelectMechanicAction,
+	SelectCustomerFilterAction,SelectComponentFilterAction,
+	SelectSiteFilterAction,SelectUnitModelFilterAction,
 	// SelectUnitModelFilterAction,
 	SortPlansByBacklogOpen, SortPlansByCustomer,
 	SortPlansByPlanType, SortPlansByPlantExecution, SortPlansByStaging,
@@ -43,6 +45,14 @@ const initialSalesAssignment = {
 	GroupLifeTimeComponent: [],
 	GroupPlanExecution: [],
 };
+
+const initialSelectedFilter = {
+	customerType: 'ALL CUSTOMER',
+	siteType: 'ALL SITE',
+	unitType: 'ALL UNIT MODEL',
+	compType: 'ALL COMPONENT '
+
+}
 
 const initialParameter = {
 	soFilter : {
@@ -176,6 +186,22 @@ export function getServiceOrderReducer(state = initialServiceOrderState, action)
 	}
 	return state;
 }
+
+export function selectedFiltersReducer(state = initialSelectedFilter, action) {
+	console.log('aku adalah aksi: ',action)
+	switch (action.type) {
+	  case SelectCustomerFilterAction:
+		return { ...state, customerType: action.payload };
+	  case SelectSiteFilterAction:
+		return { ...state, siteType: action.payload };
+	  case SelectUnitModelFilterAction:
+		return { ...state, unitType: action.payload };
+      case SelectComponentFilterAction:
+	    return { ...state, compType: action.payload };
+	  default:
+		return state;
+	}
+  }
 
 // export function getSalesOrderReducer(state = initialSalesOrderState, action) {
 // 	if (action.type === GetSalesOrderAction) {
@@ -365,6 +391,7 @@ export function storePlanDataReducer(state = {}, action) {
 
 const PlansReducers = combineReducers({
 	selectedLeader: selectLeaderReducer,
+	selectedFilters: selectedFiltersReducer,
 	serviceOrderList: getServiceOrderReducer,
 	salesOrderList : fetchSalesReducer,
 	// salesOrderList: getSalesOrderReducer,

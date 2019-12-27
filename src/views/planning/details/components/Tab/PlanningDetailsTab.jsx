@@ -150,7 +150,7 @@ class PlanningDetailsTab extends React.Component {
       <div className="dropdowns-container">
         <div className="dropdown-container">
           <DropdownFilter
-            // data={this.props.reportList.jobTypeFilter}
+            data={this.props.dataFilter.custTypeFilter}
             // selected={this.props.selectedFilters.jobType}
             // onSelectActionType={SelectJobsTypeFilterAction}
             // onSelectAction={this.props.selectFilter}
@@ -178,6 +178,7 @@ class PlanningDetailsTab extends React.Component {
   render() {
     const { classes, theme } = this.props;
     const { value } = this.state;
+    console.log('dataaaaaaaaaaaaa :',this.props.dataFilter)
     return (
         <div className="root">
         <AppBar position="relative" color="default" style={{boxShadow: "none"}}>
