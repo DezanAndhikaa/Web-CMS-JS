@@ -4,11 +4,12 @@ import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
 import {
 	// AssignPlansAction, 
 	ClearSelectedPlans, 
-	FetchPlansAction, 
+	// FetchPlansAction, 
 	// GetMechanicsAction, 
 	GetServiceOrderAction, GetSalesOrderAction, 
 	UpdateSalesParameterAction, ResetSelectedMechanicsAction, 
-	SearchPlansAction,
+	SearchSalesAction,
+	SearchSoAction,
 	// SelectCustomerFilterAction, 
 	SelectSalesPlanAction,
 	SelectServicePlanAction, 
@@ -53,7 +54,8 @@ const initialParameter = {
 		},
 	},
 	
-	// searchValue: '',
+	searchValue: '',
+	soValue: '',
 	// plantypeFilter: '',
 	// unitModelFilter: '',
 	// customerFilter: '',
@@ -217,7 +219,12 @@ export function salesParameterReducer(state = initialParameter, action) {
 }
 
 export function searchPlansReducer(state = '', action) {
-	if (action.type === SearchPlansAction) return action.payload;
+	if (action.type === SearchSalesAction) return action.payload;
+	return state;
+}
+
+export function searchSoReducer(state = '', action) {
+	if (action.type === SearchSoAction) return action.payload;
 	return state;
 }
 
@@ -371,6 +378,7 @@ const PlansReducers = combineReducers({
 	// selectedFilters: selectedFiltersReducer,
 	// sortBy: sortPlansByReducer,
 	searchValue: searchPlansReducer,
+	soValue: searchSoReducer,
 	selectedPlanData: storePlanDataReducer,
 });
 

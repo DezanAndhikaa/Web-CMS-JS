@@ -180,7 +180,7 @@ class PlanningDetailsTab extends React.Component {
     const { value } = this.state;
     return (
         <div className="root">
-        <AppBar position="static" color="default" style={{boxShadow: "none"}}>
+        <AppBar position="relative" color="default" style={{boxShadow: "none"}}>
           <Tabs 
           classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
             value={this.state.value}
@@ -192,8 +192,8 @@ class PlanningDetailsTab extends React.Component {
             <Tab disabled classes={{ root: classes.tabRoot }} /><Tab disabled classes={{ root: classes.tabRoot }} />
             {/* {this.props.renderSearch} 
             {this._renderFilterByDataAction()} */}
-            <div className="tab-container">
-              {this.props.renderSearch} 
+            <div className="tab-container"> 
+             {this.props.renderSearch} 
               {this._renderFilterByDataAction()}
             </div>
           </Tabs>

@@ -28,14 +28,19 @@ class DetailPages extends React.Component{
     };
 }
 
-// componentDidUpdate = (prevProps) => {
-//   if (prevProps.parameter !== this.props.parameter) {
-//     console.log('fetch berjalan')
-//     this.props.fetchSalesOrder(this.props.parameter);
-//   }
-//   console.log('ini selected service',this.props.selectedServicePlans)
-//   console.log('ini selected sales',this.props.selectedSalesPlans)
-// }
+componentDidUpdate = (prevProps) => {
+  if (prevProps.parameter !== this.props.parameter) {
+    console.log('fetch berjalan')
+    this.props.fetchSalesOrder(this.props.parameter);
+  }
+  if (prevProps.searchValue !== this.props.searchValue) {
+    this.props.updateParameter({
+      ...prevProps.parameter, searchValue: this.props.searchValue, PageNumber: 1,
+    });
+  }
+  console.log('ini selected service',this.props.selectedServicePlans)
+  console.log('ini selected sales',this.props.selectedSalesPlans)
+}
 
 // componentDidMount = async () => {
 //   console.log('fetch berjalan didmount')
@@ -133,6 +138,7 @@ class DetailPages extends React.Component{
         <>
         <PlanningDetailsTab
         {...this.props}
+        renderSearch={this._renderSearchBar()}
         onClickSalesOrder={this.onClickSalesOrder}
         parameter={this.props.parameter}
         onClickServiceOrder={this.onClickServiceOrder}
@@ -163,6 +169,7 @@ class DetailPages extends React.Component{
       console.log('data props',this.props)
         return(
             <main className="content">
+              {/* {this._renderSearchBar()} */}
                 <div className="table-container">
                       {this._renderTabs()}
                   </div>

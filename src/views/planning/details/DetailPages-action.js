@@ -7,13 +7,15 @@ import { callApi } from '../../../core/RestClientHelpers';
 export const AssignPlansAction = 'ASSIGN_PLANS';
 export const ClearSelectedPlans = 'CLEAR_SELECTED_PLANS';
 export const FetchSalesAction = 'FETCH_SALES_ORDER';
+export const FetchPlansAction = 'FETCH_PLANS';
 export const GetMechanicsAction = 'GET_MECHANICS';
 export const GetServiceOrderAction = 'GET_SERVICE_ORDER';
 export const GetSalesOrderAction = 'GET_SALES_ORDER';
 export const ResetAssignment = 'RESET_ASSIGNMENT';
 export const ResetSelectedMechanicsAction = 'RESET_SELECTED_MECHANICS';
 export const ResetSelectedLeaderAction = 'RESET_SELECTED_LEADER';
-export const SearchPlansAction = 'SEARCH_PLANS';
+export const SearchSalesAction = 'SEARCH_PLANS';
+export const SearchSoAction = 'SEARCH_SO';
 export const SelectCustomerFilterAction = 'SELECT_CUSTOMER_FILTER';
 export const SelectSalesPlanAction = 'SELECT_SALES_PLANS';
 export const SelectServicePlanAction = 'SELECT_SERVICE_PLANS';
@@ -56,7 +58,7 @@ export const SalesOrderFilterAction = 'SALES_ORDER_FILTER';
 // export function fetchPlansAssignment(type, payload, accessToken) {
 // 	const requestConfig = {
 // 		method: RequestMethod.POST,
-// 		url: `${ApiUrlBase.WORK_ORDER_API_URL}ListOfPlanAssignment`,
+// 		url: `${ApiUrlBase.SALESORDER_API_URL}Filters`,
 // 		data: payload,
 // 		headers: {
 // 			Authorization: `Bearer ${accessToken}`,
@@ -66,13 +68,14 @@ export const SalesOrderFilterAction = 'SALES_ORDER_FILTER';
 // 	};
 // 	return async (dispatch) => dispatch(callApi(type, requestConfig));
 // }
+
 export function fetchSalesAction(payload) {
 	console.log('ini type',FetchSalesAction);
 	console.log(payload);
 	const filter = payload;
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${ApiUrlBase.SALESORDER_API_URL}/Filters`,
+		url: `${ApiUrlBase.SALESORDER_API_URL}Filters`,
 		headers: {
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
@@ -167,6 +170,10 @@ export function salesParameterAction(type, payload) {
 }
 
 export function searchAction(type, payload) {
+	return { type, payload };
+}
+
+export function searchSo(type, payload){
 	return { type, payload };
 }
 

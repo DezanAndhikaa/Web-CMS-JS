@@ -21,7 +21,7 @@ export default class SalesOrderList extends React.PureComponent {
     // }
     componentDidMount = async() =>{
       await this.props.onClickSalesOrder();
-     }
+    }
 
     isCheckboxAvailable = (data) => {
         let isAvailable = false;
@@ -39,7 +39,7 @@ render(){
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
           <TableRow classes={{ root: 'table-row' }}>
             <TableCell padding="checkbox">
-              {this.props.displayCheckbox && <Checkbox classses={{checked:'checkbox-checked', onClick: 'checkbox-checked'}}/>}
+              {this.props.displayCheckbox && <Checkbox className="checkbox-checked-header"/>}
             </TableCell>
             <PlanningListHeader
               name="SO"
