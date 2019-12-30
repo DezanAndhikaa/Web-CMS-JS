@@ -14,7 +14,8 @@ class DetailPages extends React.Component{
         stats: true,
         selectedPlans: [],
         displayCheckbox: true,
-        lifetime: SalesDummy,
+        // lifetime: SalesDummy,
+        lifetime: this.props.salesOrderList.Lists,
         salesOrder: [],
         // nextPage: true,
         // prevPage: false,
@@ -23,8 +24,6 @@ class DetailPages extends React.Component{
         // filter: {
         //   filter : {}
         // }
-
-
     };
 }
 
@@ -38,6 +37,7 @@ componentDidUpdate = (prevProps) => {
       ...prevProps.parameter, searchValue: this.props.searchValue, PageNumber: 1,
     });
   }
+  console.log('ini si parameter', this.props.parameter)
   console.log('ini selected service',this.props.selectedServicePlans)
   console.log('ini selected sales',this.props.selectedSalesPlans)
 }
@@ -92,7 +92,7 @@ componentDidUpdate = (prevProps) => {
     }
 
     onClickServiceOrder = () => {
-      this.props.getServiceOrder();
+      this.props.getServiceOrder(this.props.parameter);
       // console.log('ini data dari api',this.props.serviceOrderList);
     }
 
@@ -116,8 +116,9 @@ componentDidUpdate = (prevProps) => {
     isChangeStat = (value,key) =>{
         console.log('nilai value kiriman : '+value)
         console.log('nilai key kiriman : '+key)
+        console.log('nilai nilai props : ',this.state.lifetime)
         this.setState({
-          lifetime: { salesData :this.state.lifetime.salesData.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) }
+          lifetime: { Lists :this.state.lifetime.Lists.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) }
         });
     }
 
@@ -154,6 +155,7 @@ componentDidUpdate = (prevProps) => {
         value={this.state.lifetime}
         dataSalesOrder={this.state.salesOrder}
         totalSalesData={this.props.salesOrderList.TotalData}
+        totalServiceData={this.props.serviceOrderList.TotalData}
         />
         </>
       );
@@ -166,7 +168,8 @@ componentDidUpdate = (prevProps) => {
     }
 
     render(){
-        console.log(this.state.lifetime);
+      console.log('ini punya props : ', this.props.salesOrderList.Lists)
+      console.log('ini punya si lifetime setelah :',this.state.lifetime);
       console.log('data props',this.props)
         return(
             <main className="content">

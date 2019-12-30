@@ -45,6 +45,10 @@ export const SalesOrderFilterAction = 'SALES_ORDER_FILTER';
 export const SelectSiteFilterAction = 'SELECT_SITE_FILTER'
 export const SelectUnitModelFilterAction ='SELECT_UNIT_MODEL_FILTER'
 export const SelectComponentFilterAction ='SELECT_COMPONENT_FILTER'
+export const SelectCustTypeFilterAction = 'SELECT_CUST_TYPE_FILTER';
+export const SelectSiteTypeFilterAction = 'SELECT_SITE_TYPE_FILTER';
+export const SelectUnitTypeFilterAction = 'SELECT_UNIT_TYPE_FILTER';
+export const SelectCompTypeFilterAction = 'SELECT_COMP_TYPE_FILTER';
 
 // export function assignPlansAction(type, payload, accessToken) {
 // 	const requestConfig = {
@@ -80,7 +84,7 @@ export function fetchSalesAction(payload) {
 	const filter = payload;
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${ApiUrlBase.SALESORDER_API_URL}Filters`,
+		url: `${ApiUrlBase.SALESORDER_API_URL}/FilterUnapproved`,
 		headers: {
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
@@ -117,21 +121,19 @@ export function fetchSalesAction(payload) {
 // 	return async (dispatch) => dispatch(callApi(UnassignPlansAction, requestConfig));
 // }
 
-export function getServiceOrderAction() {
+export function getServiceOrderAction(payload) {
 	// const data = {
 	// 	isDeleted: false,
 	// 	filter:{}
 	// };
 	const requestConfig = {
-		method: RequestMethod.GET,
+		method: RequestMethod.POST,
 		url: `${ApiUrlBase.SERVICEORDER_API_URL}/MasterData`,
-		// headers: {
-		// 	Authorization: 'anbiya',
-		// 	'Content-Type':'application/json'
-		// },
-		// data: { payload },
-		// body:JSON.stringify(data)
-		
+		headers: {
+			'Accept': 'application/json; charset=utf-8',
+			'Content-Type': 'application/json; charset=utf-8',
+		},
+		data: payload,
 	};
 	return async (dispatch) => dispatch(callApi(GetServiceOrderAction, requestConfig));
 }
