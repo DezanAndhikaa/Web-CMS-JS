@@ -2,7 +2,7 @@
 import { combineReducers } from 'redux';
 import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
 import {
-	// AssignPlansAction, 
+	AssignSalesAction, 
 	ClearSelectedPlans,FetchJobsAction, 
 	// FetchPlansAction, 
 	// GetMechanicsAction, 
@@ -66,6 +66,7 @@ const initialParameter = {
 	
 	searchValue: '',
 	soValue: '',
+	assigmentFilter: true,
 	// plantypeFilter: '',
 	// unitModelFilter: '',
 	// customerFilter: '',
@@ -106,32 +107,32 @@ const plansSortbyInitialState = {
 	PlantExecution: defaultState,
 };
 
-// const initialAssignmentState = { response: false, status: ApiRequestActionsStatus.IDLE };
+const initialAssignmentState = { response: false, status: ApiRequestActionsStatus.IDLE };
 const initialSalesState = { data: initialSalesAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialMechanicsState = { data: [], status: ApiRequestActionsStatus.IDLE };
 const initialServiceOrderState = { data: [], status: ApiRequestActionsStatus.IDLE };
 const initialSalesOrderState = { data: [], status: ApiRequestActionsStatus.IDLE };
 
-// export function assignPlansReducer(state = initialAssignmentState, action) {
-// 	if (action.type === AssignPlansAction) {
-// 		switch (action.status) {
-// 		case ApiRequestActionsStatus.SUCCEEDED:
-// 			return { response: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
-// 		case ApiRequestActionsStatus.FAILED:
-// 			return {
-// 				response: initialAssignmentState.response,
-// 				status: ApiRequestActionsStatus.FAILED,
-// 				error: action.error,
-// 			};
-// 		default:
-// 			return {
-// 				response: initialAssignmentState.response,
-// 				status: ApiRequestActionsStatus.LOADING,
-// 			};
-// 		}
-// 	}
-// 	return state;
-// }
+export function assignSalesReducer(state = initialAssignmentState, action) {
+	if (action.type === AssignSalesAction) {
+		switch (action.status) {
+		case ApiRequestActionsStatus.SUCCEEDED:
+			return { response: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		case ApiRequestActionsStatus.FAILED:
+			return {
+				response: initialAssignmentState.response,
+				status: ApiRequestActionsStatus.FAILED,
+				error: action.error,
+			};
+		default:
+			return {
+				response: initialAssignmentState.response,
+				status: ApiRequestActionsStatus.LOADING,
+			};
+		}
+	}
+	return state;
+}
 
 // export function fetchPlansReducer(state = initialPlansState, action) {
 // 	if (action.type === FetchPlansAction) {

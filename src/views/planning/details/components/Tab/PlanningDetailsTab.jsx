@@ -138,12 +138,12 @@ class PlanningDetailsTab extends React.Component {
     );
   }
 
-  _renderBaseButton() {
-    return(
-      <BaseButton 
-      />
-    );
-  }
+  // _renderBaseButton() {
+  //   return(
+  //     <BaseButton 
+  //     />
+  //   );
+  // }
 
   _renderFilter() {
     return (
@@ -176,7 +176,7 @@ class PlanningDetailsTab extends React.Component {
           />
         </div>
         <div className="search-container">
-          {this._renderBaseButton()}
+          {this.props.renderBaseButton}
         </div>
       </div>
     );

@@ -2,14 +2,15 @@
 @import '../../themes/variables';
 
 .button-inline{
-    flex: 1;
+    // flex: 1;
     display: flex;
-    flex-direction: row;
-    margin-left: 34%;
+    // flex-direction: row;
+    // margin-left: 34%;
     width: auto;
     .btn-download{
         display: flex;
-        padding-left: 6%;
+        padding-left: 10%;
+        padding-right: 0%;
         width: vw(153.22);
         height: vw(38.07);
         margin-left: 0.8vw;
@@ -29,7 +30,7 @@
     }
     .btn-approve{
         display: flex;
-        padding-right: 7%;
+        padding-right: 20%;
         width: vw(153.22);
         height: vw(38.07);
         margin-left: 0.8vw;
