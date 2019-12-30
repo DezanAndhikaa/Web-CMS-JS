@@ -40,7 +40,6 @@ export const UnselectServicePlanAction = 'UNSELECT_SERVICE_PLANS';
 export const UnselectMechanicAction = 'UNSELECT_MECHANIC';
 export const UpdateSalesParameterAction = 'SALES_PARAMETER';
 export const SalesOrderFilterAction = 'SALES_ORDER_FILTER';
-
 // export const SelectSoTypeFilterAction = 'SELECT_SO_FILTER'
 // export const SelectCustomerFilterAction = 'SELECT_CUSTOMER_FILTER'
 export const SelectSiteFilterAction = 'SELECT_SITE_FILTER'
