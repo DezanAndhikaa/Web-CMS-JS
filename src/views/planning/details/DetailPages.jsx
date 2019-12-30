@@ -115,7 +115,6 @@ onClickApproveBtn = () => {
 
   onClickServiceOrder = () => {
     this.props.getServiceOrder(this.props.parameter);
-    // console.log('ini data dari api',this.props.serviceOrderList);
   }
 
   onClickSalesOrder = () =>{
