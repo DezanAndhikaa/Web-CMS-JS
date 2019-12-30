@@ -110,8 +110,8 @@ render(){
           </TableRow>
         </TableHead>
         <TableBody classes={{ root: 'table-body' }}>
-          {this.props.salesOrderList.SalesOrders
-            && this.props.salesOrderList.SalesOrders.map((row, id) => (
+          {this.props.salesOrderList.Lists
+            && this.props.salesOrderList.Lists.map((row, id) => (
               // {/* {SalesOrderData.salesData && SalesOrderData.salesData.map((row, id) => ( */}
               <TableRow key={id} classes={{ root: 'table-row' }}>
                 <TableCell padding="checkbox">

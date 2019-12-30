@@ -6,7 +6,7 @@ import { PLAN_DATA, StorageKey } from '../../../constants';
 import {
 	// AssignPlansAction,
 	// assignPlansAction,
-	getServiceOrderAction, fetchSalesAction, salesParameterAction,
+	getServiceOrderAction, fetchSalesAction, salesParameterAction, fetchServiceAction,
 	ClearSelectedPlans, 
 	// fetchJobsAssignment,
 	// FetchPlansAction,
@@ -54,13 +54,14 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	// assignPlans: (payload, token) => dispatch(assignPlansAction(AssignPlansAction, payload, token)),
-	clearSelectedSalesPlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
-	clearSelectedServicePlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
+	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
+	clearSelectedServicePlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
 	// fetchPlans: (payload, token) => dispatch(fetchPlansAssignment(FetchPlansAction, payload, token)),
 	// getMechanics: (token) => dispatch(getMechanicsAction(token)),
-	getServiceOrder: () => dispatch(getServiceOrderAction()),
+	// getServiceOrder: () => dispatch(getServiceOrderAction()),
 	// getSalesOrder: () => dispatch(getSalesFilteredAction()),
 	fetchSalesOrder: (payload) => dispatch(fetchSalesAction(payload)),
+	fetchServiceOrder: (payload) => dispatch(fetchServiceAction(payload)),
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	onSearch: (keyword) => dispatch(searchAction(SearchSalesAction, keyword)),
 	onSearchSo: (keyword) => dispatch(searchSo(SearchSoAction, keyword)),

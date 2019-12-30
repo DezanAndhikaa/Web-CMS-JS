@@ -7,6 +7,7 @@ import { callApi } from '../../../core/RestClientHelpers';
 export const AssignPlansAction = 'ASSIGN_PLANS';
 export const ClearSelectedPlans = 'CLEAR_SELECTED_PLANS';
 export const FetchSalesAction = 'FETCH_SALES_ORDER';
+export const FetchServiceAction = 'FETCH_SERVICE_ORDER';
 export const FetchPlansAction = 'FETCH_PLANS';
 export const GetMechanicsAction = 'GET_MECHANICS';
 export const GetServiceOrderAction = 'GET_SERVICE_ORDER';
@@ -80,7 +81,7 @@ export function fetchSalesAction(payload) {
 	const filter = payload;
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${ApiUrlBase.SALESORDER_API_URL}Filters`,
+		url: `${ApiUrlBase.SALESORDER_API_URL}/FilterUnapproved`,
 		headers: {
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
@@ -90,6 +91,21 @@ export function fetchSalesAction(payload) {
 	return async (dispatch) => dispatch(callApi(FetchSalesAction, requestConfig));
 }
 
+export function fetchServiceAction(payload) {
+	console.log('ini type',FetchServiceAction);
+	console.log(payload);
+	const filter = payload;
+	const requestConfig = {
+		method: RequestMethod.POST,
+		url: `${ApiUrlBase.SERVICEORDER_API_URL}/MasterData`,
+		headers: {
+			'Accept': 'application/json; charset=utf-8',
+			'Content-Type': 'application/json; charset=utf-8',
+		},
+		data: filter,
+	};
+	return async (dispatch) => dispatch(callApi(FetchServiceAction, requestConfig));
+}
 // export function getMechanicsAction(accessToken) {
 // 	const requestConfig = {
 // 		method: RequestMethod.GET,

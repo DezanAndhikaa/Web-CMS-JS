@@ -111,8 +111,8 @@ render(){
           </TableRow>
         </TableHead>
         <TableBody classes={{ root: 'table-body' }}>
-          {this.props.serviceOrderList.ServiceOrders
-            && this.props.serviceOrderList.ServiceOrders.map((row, index) => (
+          {this.props.serviceOrderList.Lists
+            && this.props.serviceOrderList.Lists.map((row, index) => (
               <TableRow key={index} classes={{ root: 'table-row' }}>
                 <TableCell padding="checkbox">
                   {this.props.displayCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedServicePlanList.some((plans) => plans.Wo === row.Wo)} onClick={() => this.props.onChoosedService(row)} classes={{ checked: 'checkbox-checked' }} />}

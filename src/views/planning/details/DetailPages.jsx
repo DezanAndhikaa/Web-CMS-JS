@@ -31,7 +31,8 @@ class DetailPages extends React.Component{
 componentDidUpdate = (prevProps) => {
   if (prevProps.parameter !== this.props.parameter) {
     console.log('fetch berjalan')
-    this.props.fetchSalesOrder(this.props.parameter);
+    // this.props.fetchServiceOrder(this.props.parameter.dataFilter)
+    this.props.fetchSalesOrder(this.props.parameter.dataFilter);
   }
   if (prevProps.searchValue !== this.props.searchValue) {
     this.props.updateParameter({
@@ -68,36 +69,36 @@ componentDidUpdate = (prevProps) => {
   // }
   
     _renderPagination() {
-      console.log(this.props)
+      console.log('ini data untuk paging',this.props.salesOrderList)
       const web = this.props.displayMode === 'web';
-      const next = this.props.serviceOrderList.NextPage;
-      const prev = this.props.serviceOrderList.PrevPage;
-      const currentProps = this.props.serviceOrderList.PageNumber;
-      const { TotalPage } = this.props.serviceOrderList;
+      const next = this.props.salesOrderList.NextPage;
+      const prev = this.props.salesOrderList.PrevPage;
+      const currentProps = this.props.salesOrderList.PageNumber;
+      const { TotalPage } = this.props.salesOrderList;
       return(
         <div className="pagination">
           <div className="paging">
-            {prev && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>}
-            {web && currentProps - 3 > 0 && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps - 3 })} className="page-inactive">{currentProps - 3}</div>}
-            {web && currentProps - 2 > 0 && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps - 2 })} className="page-inactive">{currentProps - 2}</div>}
-            {currentProps - 1 > 0 && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps - 1 })} className="page-inactive">{currentProps - 1}</div>}
-            <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps })} className="page-active">{currentProps}</div>
-            {currentProps + 1 <= TotalPage && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps + 1 })} className="page-inactive">{currentProps + 1}</div>}
-            {web && currentProps + 2 < TotalPage && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps + 2 })} className="page-inactive">{currentProps + 2}</div>}
-            {web && currentProps + 3 < TotalPage && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps + 3 })} className="page-inactive">{currentProps + 3}</div>}
-            {next && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>}
+            {prev && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, PageNumber: currentProps - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>}
+            {web && currentProps - 3 > 0 && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, PageNumber: currentProps - 3 })} className="page-inactive">{currentProps - 3}</div>}
+            {web && currentProps - 2 > 0 && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, PageNumber: currentProps - 2 })} className="page-inactive">{currentProps - 2}</div>}
+            {currentProps - 1 > 0 && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, PageNumber: currentProps - 1 })} className="page-inactive">{currentProps - 1}</div>}
+            <div onClick={() => this.props.updateParameter({ ...this.props.parameter, PageNumber: currentProps })} className="page-active">{currentProps}</div>
+            {currentProps + 1 <= TotalPage && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, PageNumber: currentProps + 1 })} className="page-inactive">{currentProps + 1}</div>}
+            {web && currentProps + 2 < TotalPage && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, PageNumber: currentProps + 2 })} className="page-inactive">{currentProps + 2}</div>}
+            {web && currentProps + 3 < TotalPage && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, PageNumber: currentProps + 3 })} className="page-inactive">{currentProps + 3}</div>}
+            {next && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, PageNumber: currentProps + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>}
           </div>
         </div>
       )
     }
 
     onClickServiceOrder = () => {
-      this.props.getServiceOrder();
+      this.props.fetchServiceOrder(this.props.parameter.dataFilter);
       // console.log('ini data dari api',this.props.serviceOrderList);
     }
 
     onClickSalesOrder = () =>{
-      this.props.fetchSalesOrder(this.props.parameter);
+      this.props.fetchSalesOrder(this.props.parameter.dataFilter);
       console.log('ini data parameter',JSON.stringify(this.props.parameter.soFilter));
       console.log('ini data dari api',this.props.salesOrderList);
       console.log('ini data pilihan dari marinka : ', this.props.salesOrderList.GroupSo)
@@ -148,12 +149,13 @@ componentDidUpdate = (prevProps) => {
         onChoosedSales={this.updateAssignmentSalesStates}
         selectedSalesPlanList={this.props.selectedSalesPlans}
         selectedServicePlanList={this.props.selectedServicePlans}
-        displayCheckbox={this.props.parameter.assigmentFilter || this.props.parameter.inProgressFilter}
+        displayCheckbox={this.props.parameter.paramsData.assigmentFilter || this.props.parameter.paramsData.inProgressFilter}
         stats={this.state.stats}
         onStats={this.isChangeStat}
         value={this.state.lifetime}
         dataSalesOrder={this.state.salesOrder}
         totalSalesData={this.props.salesOrderList.TotalData}
+        totalServiceData={this.props.serviceOrderList.TotalData}
         />
         </>
       );
