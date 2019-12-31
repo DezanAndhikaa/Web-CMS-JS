@@ -28,15 +28,15 @@ class DetailPages extends React.Component{
     };
 }
 
-componentWillUnmount = () => {
-  this.props.onSearch('');
+// componentWillUnmount = () => {
+//   this.props.onSearch('');
   // this.props.selectFilter(SelectCustomerFilterAction, 'All Customer');
   // this.props.selectFilter(SelectJobsTypeFilterAction, 'All Job');
   // this.props.selectFilter(SelectUnitModelFilterAction, 'All Model');
-  this.props.updateParameter({
-    ...this.props.parameter, searchValue: '',
-  });
-}
+//   this.props.updateParameter({
+//     ...this.props.parameter, SearchValue: '',
+//   });
+// }
 
 componentDidUpdate = (prevProps) => {
   if (prevProps.parameter !== this.props.parameter) {
@@ -44,9 +44,9 @@ componentDidUpdate = (prevProps) => {
     this.props.fetchSalesOrder(this.props.parameter);
     this.props.getServiceOrder(this.props.parameter);
   }
-  if (prevProps.searchValue !== this.props.searchValue) {
+  if (prevProps.Search !== this.props.Search) {
     this.props.updateParameter({
-      ...prevProps.parameter, searchValue: this.props.searchValue, PageNumber: 1,
+      ...prevProps.parameter, Search: this.props.Search, PageNumber: 1,
     });
   }
   if (prevProps.requestAssignSales !== this.props.requestAssignSales
@@ -117,6 +117,10 @@ onClickApproveBtn = () => {
     this.props.getServiceOrder(this.props.parameter);
   }
 
+  onSearchValue = () => {
+    this.props.getSearchValue(this.props.parameter);
+  }
+
   onClickSalesOrder = () =>{
     this.props.fetchSalesOrder(this.props.parameter);
     console.log('ini data parameter',JSON.stringify(this.props.parameter.soFilter));
@@ -140,7 +144,7 @@ onClickApproveBtn = () => {
 				<div className="bottom-row">
           <BaseButton titles="Delete"/>
 					<BaseButton titles="Download"
-            // disabled={this.props.selectedJobs.length < 1 || this.props.selectedJobs.some((job) => job.status === 'Assigned')} 
+            disabled={this.props.selectedSalesPlans.length < 1 || this.props.selectedSalesPlans.some((plans) => plans.status === 'Approved')} 
             className="btn-assign" onClick={this.onClickApproveBtn} />
           <BaseButton titles="Approve"/>
         </div>
@@ -180,6 +184,7 @@ onClickApproveBtn = () => {
           onClickSalesOrder={this.onClickSalesOrder}
           parameter={this.props.parameter}
           onClickServiceOrder={this.onClickServiceOrder}
+          onSearchValue={this.onSearchValue}
           onChoosedService={this.updateAssignmentServiceStates}
           onChoosedSales={this.updateAssignmentSalesStates}
           selectedSalesPlanList={this.props.selectedSalesPlans}

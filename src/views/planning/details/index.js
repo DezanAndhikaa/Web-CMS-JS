@@ -23,7 +23,8 @@ import {
 	UnselectServicePlanAction, selectSalesPlansAction, selectServicePlansAction, selectLeaderAction, SelectSalesPlanAction,
 	SelectServicePlanAction, FetchSalesAction,
 	selectMechanicAction, sortByAction, 
-	storePlanDataAction, 
+	storePlanDataAction,
+	// getSearchValueAction, 
 	// getSelesOrderAction, 
 } from './DetailPages-action';
 import DetailPages from './DetailPages';
@@ -36,7 +37,7 @@ const mapStateToProps = (state) => ({
 	salesOrderList: state.plansPageState.salesOrderList.data,
 	serviceOrderList: state.plansPageState.serviceOrderList.data,
 	parameter: state.plansPageState.salesParameter,
-	searchValue: state.plansPageState.searchValue,
+	Search: state.plansPageState.Search,
 	// requestAssignSales: state.plansPageState.assignSalesStatus.status,
 	// requestPlans: state.plansPageState.PlansAssignmentSummary.status,
 	// requestMechanics: state.plansPageState.mechanicList.status,
@@ -61,6 +62,7 @@ const mapDispatchToProps = (dispatch) => ({
 	// getMechanics: (token) => dispatch(getMechanicsAction(token)),
 	getServiceOrder: (payload) => dispatch(getServiceOrderAction(payload)),
 	// getSalesOrder: () => dispatch(getSalesFilteredAction()),
+	// getSearchValue: (payload) => dispatch(getSearchValueAction(payload)),
 	fetchSalesOrder: (payload) => dispatch(fetchSalesAction(payload)),
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	onSearch: (keyword) => dispatch(searchAction(SearchSalesAction, keyword)),

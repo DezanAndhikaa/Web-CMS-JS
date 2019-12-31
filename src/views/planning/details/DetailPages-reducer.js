@@ -3,7 +3,8 @@ import { combineReducers } from 'redux';
 import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
 import {
 	AssignSalesAction, 
-	ClearSelectedPlans,FetchJobsAction, 
+	ClearSelectedPlans,
+	// FetchSearchValueAction, 
 	// FetchPlansAction, 
 	// GetMechanicsAction, 
 	GetServiceOrderAction, GetSalesOrderAction, 
@@ -25,7 +26,7 @@ import {
 	SortPlansByWorkOrder, FetchSalesAction,
 	// UnassignPlansAction, 
 	UnselectSalesPlanAction, UnselectServicePlanAction,
-	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction,
+	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, getSearchValueAction,
 } from './DetailPages-action';
 
 const initialSalesAssignment = {
@@ -55,16 +56,13 @@ const initialSelectedFilter = {
 }
 
 const initialParameter = {
+
 	soFilter : {
-		isDeleted : 'false',
-		filter : {
-			PageNumber : 1,
-			PageSize : 15,
-			Sort : 'asc'
-		},
+		PageNumber : 1,
+		PageSize : 10,
+		Sort : 'asc',
 	},
-	
-	searchValue: '',
+	Search: '',
 	soValue: '',
 	assigmentFilter: true,
 	// plantypeFilter: '',
@@ -169,6 +167,24 @@ export function fetchSalesReducer(state = initialSalesState, action) {
 	}
 	return state;
 }
+
+// export function getSearchValueReducer(state = initialSalesState, action) {
+// 	if (action.type === FetchSearchValueAction) {
+// 	  switch (action.status) {
+// 		case ApiRequestActionsStatus.SUCCEEDED:
+// 		  return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+// 		case ApiRequestActionsStatus.FAILED:
+// 		  return {
+// 				data: initialSalesState.data,
+// 				status: ApiRequestActionsStatus.FAILED,
+// 				error: action.error,
+// 		  };
+// 		default:
+// 		  return { data: initialSalesState.data, status: ApiRequestActionsStatus.LOADING };
+// 	  }
+// 	}
+// 	return state;
+// }
 
 export function getServiceOrderReducer(state = initialServiceOrderState, action) {
 	if (action.type === GetServiceOrderAction) {
@@ -395,6 +411,7 @@ const PlansReducers = combineReducers({
 	selectedFilters: selectedFiltersReducer,
 	serviceOrderList: getServiceOrderReducer,
 	salesOrderList : fetchSalesReducer,
+	// salesOrderList : getSearchValueReducer,
 	// salesOrderList: getSalesOrderReducer,
 	// mechanicList: getMechanicsReducer,
 	selectedPlans: selectPlansReducer,
@@ -405,7 +422,7 @@ const PlansReducers = combineReducers({
 	// PlansAssignmentSummary: fetchPlansReducer,
 	// selectedFilters: selectedFiltersReducer,
 	// sortBy: sortPlansByReducer,
-	searchValue: searchPlansReducer,
+	Search: searchPlansReducer,
 	soValue: searchSoReducer,
 	selectedPlanData: storePlanDataReducer,
 });

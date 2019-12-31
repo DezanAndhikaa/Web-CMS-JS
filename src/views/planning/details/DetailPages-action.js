@@ -9,6 +9,7 @@ export const UnassignSalesAction = 'UNASSIGN_SALES';
 export const ClearSelectedPlans = 'CLEAR_SELECTED_PLANS';
 export const FetchSalesAction = 'FETCH_SALES_ORDER';
 export const FetchPlansAction = 'FETCH_PLANS';
+// export const FetchSearchValueAction = 'FETCH_SEARCH_VALUE';
 export const GetMechanicsAction = 'GET_MECHANICS';
 export const GetServiceOrderAction = 'GET_SERVICE_ORDER';
 export const GetSalesOrderAction = 'GET_SALES_ORDER';
@@ -101,6 +102,19 @@ export function fetchSalesAction(payload) {
 	};
 	return async (dispatch) => dispatch(callApi(FetchSalesAction, requestConfig));
 }
+
+// export function getSearchValueAction(payload) {
+// 	const requestConfig = {
+// 		method : RequestMethod.POST,
+// 		url: `${ApiUrlBase.SALESORDER_API_URL}/FilterGlobalUnapproved`,
+// 		headers: {
+// 			'Accept': 'application/json; charset=utf-8',
+// 			'Content-Type': 'application/json; charset=utf-8',
+// 		},
+// 		data: payload,
+// 	};
+// 	return async (dispatch) => dispatch(callApi(FetchSearchValueAction, requestConfig));
+// }
 
 // export function getMechanicsAction(accessToken) {
 // 	const requestConfig = {

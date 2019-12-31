@@ -8,8 +8,11 @@ class DropDownList extends React.Component{
             <div className="show-per-page">
                 <span>
                     <FormLabel className="label">Show</FormLabel>
-                    <Select variant="outlined" className="dropdown-list" labelId="label" id="select">
-                        <MenuItem className="dropdown-list" value="0"></MenuItem>
+                    <Select variant="outlined" 
+                        className="dropdown-list" 
+                        labelId="label" id="select" 
+                        defaultValue={10}
+                    >
                         <MenuItem className="dropdown-list" value="10">10</MenuItem>
                         <MenuItem className="dropdown-list" value="25">25</MenuItem>
                         <MenuItem className="dropdown-list" value="50">50</MenuItem>
