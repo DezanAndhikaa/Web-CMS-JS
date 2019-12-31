@@ -69,7 +69,49 @@ const initialSelectedFilter = {
 
 };
 
-const initialParameter = {
+const initialSalesParameter = {
+	dataFilter : {
+		Filter: {
+			  PageNumber : 1,
+			  PageSize: 2,
+			  Sort: '',
+			//   Filter: [
+			// 	{
+			// 	  Field: '',
+			// 	  Operator: '',
+			// 	  Value: '',
+			// 	  Logic: ''
+			// 	}
+			//   ]
+		}
+	},
+	paramsData : {
+		PageNumber: 0,
+		searchValue: '',
+		soValue: '',
+		customerType : '',
+		siteType : '',
+		unitType : '',
+		compType : '',
+		assigmentFilter: true,
+		inProgressFilter: false,
+	}
+	// approvalFilter: false,
+	// sortByUnitModel: false,
+	// sortByUnitCode: false,
+	// sortByPlanType: true,
+	// sortByWorkOrder: false,
+	// sortByWorkCenter: false,
+	// sortByCustomer: false,
+	// sortByPlantExecution: false,
+	// sortByStatus: false,
+	// sortByOpenBacklog: false,
+	// sortByStaging: false,
+	// orderDesc: false,
+	// currentPage: 1,
+	// pageSize: 10,
+};
+const initialServiceParameter = {
 	dataFilter : {
 		Filter: {
 			  PageNumber : 1,
@@ -113,8 +155,8 @@ const initialParameter = {
 };
 
 const initialSelectedAssignment = {
-	selectedService: {},
-	selectedSales: {},
+	selectedService: [],
+	selectedSales: [],
 };
 
 const defaultState = { isActive: false, isAscending: true };
@@ -265,7 +307,12 @@ export function selectedFiltersReducer(state = initialSelectedFilter, action) {
 // 	return state;
 // }
 
-export function salesParameterReducer(state = initialParameter, action) {
+export function salesParameterReducer(state = initialSalesParameter, action) {
+	console.log('ini data reducer action/payload', action.payload);
+	if (action.type === UpdateSalesParameterAction) return  {...state, dataFilter: {Filter: action.payload}};
+	return state;
+}
+export function serviceParameterReducer(state = initialServiceParameter, action) {
 	if (action.type === UpdateSalesParameterAction) return action.payload;
 	return state;
 }

@@ -1,6 +1,10 @@
 @import '../../../../../themes/variables';
 @import '../../../../../themes/functions';
-
+.badge{
+    right: 0px;
+    top: 0px;
+    padding: 0px 10px;
+}
 .root {
     flex-grow: 1;
     z-index: 0;

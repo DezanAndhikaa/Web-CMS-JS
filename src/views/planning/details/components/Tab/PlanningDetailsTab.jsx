@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import SalesOrderList from '../PlanningList/SalesOrderList';
 import ServiceOrderList from '../PlanningList/ServiceOrderList';
+import Badge from '@material-ui/core/Badge';
 import './PlanningDetailsTab.scss'
 import SalesOrderData from '../../../../../planning-data-dummy.json';
 import BaseButton from '../../../../../components/Button/BaseButton';
@@ -76,22 +77,34 @@ const styles = theme => ({
 class PlanningDetailsTab extends React.Component {
   state = {
     value: 0,
+    invisible1: false,
+    invisible2: false,
   };
 
   _renderTotalSalesOrder(){
     return(
-    <>Total Data {this.props.totalSalesData}</>
+    <>{this.props.totalSalesData}</>
     );
 }
   _renderTotalServiceOrder(){
     return(
-    <>Total Data {this.props.totalServiceData}</>
+    <>{this.props.totalServiceData}</>
     );
   }
 
   handleChange = (event, value) => {
-    console.log('ini index',this.state.value)
-    this.setState({ value });
+    console.log('ini index pas di change',this.state.value)
+    if (this.state.invisible2 === false) {
+      this.setState({
+        invisible1 : !this.state.invisible1,
+        value
+      })
+    // if (this.state.invisible2 === true) {
+    //   this.setState({
+    //     invisible1 : this.state.invisible2
+    //   })
+    }
+    // this.setState({ value });
   };
 
   handleChangeIndex = index => {
@@ -198,10 +211,14 @@ class PlanningDetailsTab extends React.Component {
             value={this.state.value}
             onChange={this.handleChange}
             indicatorColor="primary" >
-            <Tab label="Sales Order" classes={{ root: classes.tabRoot, selected: classes.tabSelected }} />
-            <Tab label="Service Order" classes={{ root: classes.tabRoot, selected: classes.tabSelected }} />
-            <Tab disabled classes={{ root: classes.tabRoot }} /><Tab disabled classes={{ root: classes.tabRoot }} />
-            <Tab disabled classes={{ root: classes.tabRoot }} /><Tab disabled classes={{ root: classes.tabRoot }} />
+            <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<Badge badgeContent={this.props.totalSalesData} color="primary" className="badge" invisible={this.state.invisible1}>
+            <>Sales Order</>
+            </Badge >} />
+            <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<Badge badgeContent={this.props.totalServiceData} color="secondary" className="badge" invisible={this.state.invisible2}>
+            <>Service Order</>
+            </Badge >} />
+            {/* <Tab disabled classes={{ root: classes.tabRoot }} /><Tab disabled classes={{ root: classes.tabRoot }} />
+            <Tab disabled classes={{ root: classes.tabRoot }} /><Tab disabled classes={{ root: classes.tabRoot }} /> */}
             {/* {this.props.renderSearch} 
             {this._renderFilterByDataAction()} */}
           </Tabs>
@@ -209,8 +226,8 @@ class PlanningDetailsTab extends React.Component {
         <div className="filters-container">
           {this._renderFilter()}
         </div>
-    {value === 0 && <TabContainer dir={theme.direction}>{this._renderTotalSalesOrder()}<div>{this._renderSalesOrderList()}</div></TabContainer>}
-        {value === 1 && <TabContainer dir={theme.direction}>{this._renderTotalServiceOrder()}<div>{this._renderServiceOrderList()}</div></TabContainer>}
+    {value === 0 && <TabContainer dir={theme.direction}><div>{this._renderSalesOrderList()}</div></TabContainer>}
+        {value === 1 && <TabContainer dir={theme.direction}><div>{this._renderServiceOrderList()}</div></TabContainer>}
       </div>
     );
   }

@@ -7,7 +7,7 @@ import {
 	// AssignPlansAction,
 	// assignPlansAction,
 	getServiceOrderAction, fetchSalesAction, salesParameterAction, fetchServiceAction,
-	ClearSelectedPlans, 
+	ClearSelectedPlans, UpdateServiceParameterAction,
 	// fetchJobsAssignment,
 	// FetchPlansAction,
 	// fetchPlansAssignment,
@@ -18,7 +18,7 @@ import {
 	SearchSalesAction, 
 	searchSo,
 	SearchSoAction,
-	selectFilterAction, UnselectSalesPlanAction, planParameterAction, UpdatePlansParameterAction,
+	selectFilterAction, UnselectSalesPlanAction, planParameterAction, UpdatePlansParameterAction, serviceParameterAction,
 	UnselectServicePlanAction, selectSalesPlansAction, selectServicePlansAction, selectLeaderAction, SelectSalesPlanAction,
 	SelectServicePlanAction, FetchSalesAction,
 	selectMechanicAction, sortByAction, 
@@ -35,7 +35,7 @@ const mapStateToProps = (state) => ({
 	// mechanicList: state.plansPageState.mechanicList.data,
 	salesOrderList: state.plansPageState.salesOrderList.data,
 	serviceOrderList: state.plansPageState.serviceOrderList.data,
-	parameter: state.plansPageState.salesParameter,
+	salesParameter: state.plansPageState.salesParameter,
 	searchValue: state.plansPageState.searchValue,
 	// requestAssignPlans: state.plansPageState.assignPlansStatus.status,
 	// requestPlans: state.plansPageState.PlansAssignmentSummary.status,
@@ -76,7 +76,8 @@ const mapDispatchToProps = (dispatch) => ({
 	// unassignPlans: (payload, token) => dispatch(unassignPlansAction(payload, token)),
 	unselectServicePlan: (payload) => dispatch(selectServicePlansAction(UnselectServicePlanAction, payload)),
 	unselectSalesPlan: (payload) => dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
-	updateParameter: (payload) => dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
+	updateSalesParameter: (payload) => dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
+	updateServiceParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
 });
 
 const detailPages = connect(mapStateToProps, mapDispatchToProps)(DetailPages);
