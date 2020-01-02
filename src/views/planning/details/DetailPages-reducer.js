@@ -26,7 +26,7 @@ import {
 	SortPlansByWorkOrder, FetchSalesAction,
 	// UnassignPlansAction, 
 	UnselectSalesPlanAction, UnselectServicePlanAction,
-	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, getSearchValueAction, fetchServiceAction, FetchServiceAction,
+	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, getSearchValueAction, fetchServiceAction, FetchServiceAction, UpdateFilterUnit
 } from './DetailPages-action';
 
 const initialSalesAssignment = {
@@ -67,11 +67,6 @@ const initialSelectedFilter = {
 	siteType: 'All Site',
 	unitType: 'All Unit Model',
 	compType: 'All Component'
-	// customerType: '',
-	// siteType: '',
-	// unitType: '',
-	// compType: ''
-
 };
 
 const initialSalesParameter = {
@@ -82,14 +77,14 @@ const initialSalesParameter = {
 			  PageNumber : 1,
 			  PageSize: 2,
 			  Sort: '',
-			//   Filter: [
+			  Filter: [
 			// 	{
 			// 	  Field: '',
 			// 	  Operator: '',
 			// 	  Value: '',
 			// 	  Logic: ''
 			// 	}
-			//   ]
+			  ]
 		}
 	},
 	paramsData : {
@@ -263,7 +258,6 @@ export function fetchServiceReducer(state = initialServiceState, action) {
 }
 
 export function selectedFiltersReducer(state = initialSelectedFilter, action) {
-	console.log('aku adalah aksi: ',action);
 	switch (action.type) {
 	  case SelectCustomerFilterAction:
 		return { ...state, customerType: action.payload };
@@ -316,7 +310,12 @@ export function selectedFiltersReducer(state = initialSelectedFilter, action) {
 
 export function salesParameterReducer(state = initialSalesParameter, action) {
 	console.log('ini data reducer action/payload', action.payload);
-	if (action.type === UpdateSalesParameterAction) return  {...state, dataFilter: {Filter: action.payload}};
+	console.log('action action action : ',action)
+	if (action.type === UpdateSalesParameterAction)
+		return  {...state, dataFilter: {Filter: action.payload}};
+	if (action.type === UpdateFilterUnit)
+		// return  {...state, dataFilter: {Filter : {Filter : {Field: "unitmodel", Operator: "eq", Value: action.payload, Logic: "and"} }}}
+		return  {...state, dataFilter: {...state, Filter : action.payload}}
 	return state;
 }
 export function serviceParameterReducer(state = initialServiceParameter, action) {
@@ -333,21 +332,6 @@ export function searchSoReducer(state = '', action) {
 	if (action.type === SearchSoAction) return action.payload;
 	return state;
 }
-
-// export function selectedFiltersReducer(state = initialSelectedFilter, action) {
-// 	switch (action.type) {
-// 	case SelectPlansTypeFilterAction:
-// 		return { ...state, planType: action.payload };
-// 	case SelectUnitModelFilterAction:
-// 		return { ...state, unitModel: action.payload };
-// 	case SelectCustomerFilterAction:
-// 		return { ...state, customer: action.payload };
-// 	case SelectPlansAssignmentFilterAction:
-// 		return { ...state, plansAssignment: action.payload };
-// 	default:
-// 		return state;
-// 	}
-// }
 
 export function selectPlansReducer(state = [], action) {
 	switch (action.type) {

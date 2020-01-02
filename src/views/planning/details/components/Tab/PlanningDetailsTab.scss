@@ -40,7 +40,7 @@
         display: flex;
         flex-direction: row;
         .dropdowns-container{
-            position: absolute;
+            position: inherit;
             display: flex;
             flex-direction: row;
             .dropdown-container{
