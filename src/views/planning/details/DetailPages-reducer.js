@@ -38,20 +38,24 @@ const initialSalesAssignment = {
 	ServiceOrder: [],
 	NextPage: false,
 	PrevPage: false,
-	GroupSo: ['All SO'],
-	GroupCustomer: ['ALL CUSTOMER'],
-	GroupSite: ['ALL SITE'],
-	GroupUnitModel: ['ALL UNIT MODEL'],
+	GroupCustomer: ['All Customer'],
+	GroupSite: ['All Site'],
+	GroupUnitModel: ['All Unit Model'],
+	GroupComponentDescription: ['All Component Description'],
 	GroupSerialNumber: [],
 	GroupLifeTimeComponent: [],
 	GroupPlanExecution: [],
 };
 
 const initialSelectedFilter = {
-	customerType: 'ALL CUSTOMER',
-	siteType: 'ALL SITE',
-	unitType: 'ALL UNIT MODEL',
-	compType: 'ALL COMPONENT '
+	customerType: 'All Customer',
+	siteType: 'All Site',
+	unitType: 'All Unit Model',
+	compType: 'All Component'
+	// customerType: '',
+	// siteType: '',
+	// unitType: '',
+	// compType: ''
 
 }
 
@@ -153,7 +157,7 @@ export function fetchSalesReducer(state = initialSalesState, action) {
 	if (action.type === FetchSalesAction) {
 	  switch (action.status) {
 		case ApiRequestActionsStatus.SUCCEEDED:
-			console.log('ini balikan dari mantan',action.payload);
+			// console.log('ini balikan dari mantan',action.payload);
 		  return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
 		case ApiRequestActionsStatus.FAILED:
 		  return {
@@ -205,7 +209,7 @@ export function getServiceOrderReducer(state = initialServiceOrderState, action)
 }
 
 export function selectedFiltersReducer(state = initialSelectedFilter, action) {
-	console.log('aku adalah aksi: ',action)
+	// console.log('aku adalah aksi: ',action)
 	switch (action.type) {
 	  case SelectCustomerFilterAction:
 		return { ...state, customerType: action.payload };
@@ -420,7 +424,6 @@ const PlansReducers = combineReducers({
 	// unassignPlansStatus: unassignPlansReducer,
 	salesParameter: salesParameterReducer,
 	// PlansAssignmentSummary: fetchPlansReducer,
-	// selectedFilters: selectedFiltersReducer,
 	// sortBy: sortPlansByReducer,
 	Search: searchPlansReducer,
 	soValue: searchSoReducer,

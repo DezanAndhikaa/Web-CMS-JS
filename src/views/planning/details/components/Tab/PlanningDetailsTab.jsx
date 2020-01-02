@@ -14,6 +14,7 @@ import Searchbar from "../../../../../components/Searchbar/SearchInput";
 import FilterbyDataAction from '../../../../../components/FilterByDataAction/FilterbyDataAction';
 import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
 import DeleteButton from '../../../../../components/DeleteConfirmation/DeleteSuccess';
+import { SelectCustTypeFilterAction,SelectSiteTypeFilterAction, SelectUnitTypeFilterAction, SelectCompTypeFilterAction } from '../../DetailPages-action'
 
 function TabContainer({ children, dir }) {
   return (
@@ -85,7 +86,7 @@ class PlanningDetailsTab extends React.Component {
 }
   _renderTotalServiceOrder(){
     return(
-    <>Total Data {SalesOrderData.jumlahDataServiceOrder}</>
+    <>Total Data {this.props.totalServiceData}</>
     );
   }
 
@@ -150,29 +151,34 @@ class PlanningDetailsTab extends React.Component {
       <div className="dropdowns-container">
         <div className="dropdown-container">
           <DropdownFilter
-          // console.log('hasduifhaskfhask;',this.props.salesOrderList.GroupSo)
             data={this.props.salesOrderList.GroupCustomer}
             selected={this.props.selectedFilters.customerType}
-            // onSelectActionType={SelectJobsTypeFilterAction}
-            // onSelectAction={this.props.selectFilter}
+            onSelectActionType={SelectCustTypeFilterAction}
+            onSelectAction={this.props.selectFilter}
           />
         </div>
         <div className="dropdown-container">
           <DropdownFilter
           data={this.props.salesOrderList.GroupSite}
           selected={this.props.selectedFilters.siteType}
+          onSelectActionType={SelectSiteTypeFilterAction}
+          onSelectAction={this.props.selectFilter}
           />
         </div>
         <div className="dropdown-container">
           <DropdownFilter
           data={this.props.salesOrderList.GroupUnitModel}
           selected={this.props.selectedFilters.unitType}
+          onSelectActionType={SelectUnitTypeFilterAction}
+          onSelectAction={this.props.selectFilter}
           />
         </div>
         <div className="dropdown-container">
           <DropdownFilter
           data={this.props.salesOrderList.GroupComponentDescription}
           selected={this.props.selectedFilters.compType}
+          onSelectActionType={SelectCompTypeFilterAction}
+          onSelectAction={this.props.selectFilter}
           />
         </div>
         <div className="search-container">

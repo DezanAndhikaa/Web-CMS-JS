@@ -15,7 +15,8 @@ class DetailPages extends React.Component{
         stats: true,
         selectedPlans: [],
         displayCheckbox: true,
-        lifetime: SalesDummy,
+        // lifetime: SalesDummy,
+        lifetime: this.props.salesOrderList.Lists,
         salesOrder: [],
         isShowAssign: false,
         // nextPage: true,
@@ -151,28 +152,29 @@ onClickApproveBtn = () => {
       );
     }
   }
-  
-  isChangeStat = (value,key) =>{
-      console.log('nilai value kiriman : '+value)
-      console.log('nilai key kiriman : '+key)
-      this.setState({
-        lifetime: { salesData :this.state.lifetime.salesData.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) }
-      });
-  }
+    
+    isChangeStat = (value,key) =>{
+        console.log('nilai value kiriman : '+value)
+        console.log('nilai key kiriman : '+key)
+        console.log('nilai nilai props : ',this.state.lifetime)
+        this.setState({
+          lifetime: { Lists :this.state.lifetime.Lists.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) }
+        });
+    }
 
   updateAssignmentServiceStates = (plan) => {
     if (this.props.selectedServicePlans.some(
       (plans) => plans.Wo === plan.Wo,
     )) { return this.props.unselectServicePlan(plan); }
     return this.props.selectServicePlan(plan);
-  }
+  };
 
   updateAssignmentSalesStates = (plan) => {
     if (this.props.selectedSalesPlans.some(
       (plans) => plans.SO === plan.SO,
     )) { return this.props.unselectSalesPlan(plan); }
     return this.props.selectSalesPlan(plan);
-  } 
+  };
 
   _renderTabs(){
     return (
@@ -195,10 +197,11 @@ onClickApproveBtn = () => {
           value={this.state.lifetime}
           dataSalesOrder={this.state.salesOrder}
           totalSalesData={this.props.salesOrderList.TotalData}
+          totalServiceData={this.props.serviceOrderList.TotalData}
         />
       </>
     );
-  }
+  };
 
   _renderShowPerPage(){
     return(
@@ -206,20 +209,23 @@ onClickApproveBtn = () => {
     )
   }
 
-  render(){
-    console.log(this.state.lifetime);
-    console.log('data props',this.props)
-    return(
-        <main className="content">
-            <div className="table-container">
-                  {this._renderTabs()}
-              </div>
-              <div className="bottom-row">
-                  {this._renderShowPerPage()} {this._renderPagination()}
-              </div>
-        </main>
-    )
+    render(){
+      console.log('ini punya props : ', this.props.salesOrderList.Lists)
+      console.log('ini punya si lifetime setelah :',this.state.lifetime);
+      console.log('data props',this.props)
+        return(
+            <main className="content">
+              {/* {this._renderSearchBar()} */}
+                <div className="table-container">
+                      {this._renderTabs()}
+                  </div>
+                  <div className="bottom-row">
+                      {this._renderShowPerPage()} {this._renderPagination()}
+                  </div>
+            </main>
+        )
+    }
   }
-}
+
 
 export default DetailPages;

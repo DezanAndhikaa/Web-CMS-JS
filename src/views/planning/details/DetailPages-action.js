@@ -46,6 +46,10 @@ export const SalesOrderFilterAction = 'SALES_ORDER_FILTER';
 export const SelectSiteFilterAction = 'SELECT_SITE_FILTER'
 export const SelectUnitModelFilterAction ='SELECT_UNIT_MODEL_FILTER'
 export const SelectComponentFilterAction ='SELECT_COMPONENT_FILTER'
+export const SelectCustTypeFilterAction = 'SELECT_CUST_TYPE_FILTER';
+export const SelectSiteTypeFilterAction = 'SELECT_SITE_TYPE_FILTER';
+export const SelectUnitTypeFilterAction = 'SELECT_UNIT_TYPE_FILTER';
+export const SelectCompTypeFilterAction = 'SELECT_COMP_TYPE_FILTER';
 
 export function assignSalesAction(type, payload) {
 	const requestConfig = {
@@ -130,6 +134,10 @@ export function fetchSalesAction(payload) {
 // }
 
 export function getServiceOrderAction(payload) {
+	// const data = {
+	// 	isDeleted: false,
+	// 	filter:{}
+	// };
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${ApiUrlBase.SERVICEORDER_API_URL}/MasterData`,
