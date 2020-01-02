@@ -78,7 +78,7 @@ class PlanningDetailsTab extends React.Component {
   state = {
     value: 0,
     invisible1: false,
-    invisible2: false,
+    invisible2: true,
   };
 
   _renderTotalSalesOrder(){
@@ -94,21 +94,25 @@ class PlanningDetailsTab extends React.Component {
 
   handleChange = (event, value) => {
     console.log('ini index pas di change',this.state.value)
-    if (this.state.invisible2 === false) {
+    if (this.state.value === 1) {
       this.setState({
         invisible1 : !this.state.invisible1,
+        invisible2 : !this.state.invisible2,
         value
       })
-    // if (this.state.invisible2 === true) {
-    //   this.setState({
-    //     invisible1 : this.state.invisible2
-    //   })
+    }
+    if (this.state.value === 0) {
+      this.setState({
+        invisible1 : !this.state.invisible1,
+        invisible2 : !this.state.invisible2,
+        value
+      })
+    }
     }
     // this.setState({ value });
-  };
 
   handleChangeIndex = index => {
-      console.log('ini index',this.state.value)
+    console.log('change index berjalan')
     this.setState({ value: index });
   };
 
@@ -199,6 +203,9 @@ class PlanningDetailsTab extends React.Component {
   render() {
     const { classes, theme } = this.props;
     const { value } = this.state;
+    console.log('state invis 1', this.state.invisible1);
+    console.log('state invis 2', this.state.invisible2);
+    console.log('ini index',this.state.value);
     return (
         <div className="root">
         <AppBar position="relative" color="default" style={{boxShadow: "none"}}>
