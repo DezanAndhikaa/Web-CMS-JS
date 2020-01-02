@@ -194,10 +194,10 @@ onClickApproveBtn = () => {
           displayCheckbox={this.props.salesParameter.paramsData.assigmentFilter || this.props.salesParameter.paramsData.inProgressFilter}
           stats={this.state.stats}
           onStats={this.isChangeStat}
-          value={this.state.lifetime}
-          dataSalesOrder={this.state.salesOrder}
+          value={this.state.lifetime}       
           totalSalesData={this.props.salesOrderList.TotalData}
           totalServiceData={this.props.serviceOrderList.TotalData}
+          
         />
       </>
     );

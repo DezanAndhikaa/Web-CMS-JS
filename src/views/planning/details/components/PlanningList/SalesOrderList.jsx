@@ -126,7 +126,7 @@ render(){
                 <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
                 <TableCell align="center" className="table-cell"> 
-                {!this.props.salesOrderList.Lists[id].LifeTimeComp ? <InputButton title={"Input Lifetime Component"} onStats={this.props.onStats} titles="Input" key={row.SO} id={row.SO}/> : 
+                {!this.props.salesOrderList.Lists[id].LifeTimeComp ? <InputButton title="Input Lifetime Component" onStats={this.props.onStats} titles="Input" key={row.SO} id={row.SO}/> : 
                   <div>{this.props.salesOrderList.Lists[id].LifeTimeComp}</div>
                 }
                 </TableCell>

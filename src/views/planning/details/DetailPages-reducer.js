@@ -20,10 +20,8 @@ import {
 	SelectCustomerFilterAction,SelectComponentFilterAction,
 	SelectSiteFilterAction,SelectUnitModelFilterAction,
 	// SelectUnitModelFilterAction,
-	SortPlansByBacklogOpen, SortPlansByCustomer,
-	SortPlansByPlanType, SortPlansByPlantExecution, SortPlansByStaging,
-	SortPlansByStatus, SortPlansByUnitCode, SortPlansByUnitModel,
-	SortPlansByWorkOrder, FetchSalesAction,
+	SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByComponentDesc,
+	FetchSalesAction,
 	// UnassignPlansAction, 
 	UnselectSalesPlanAction, UnselectServicePlanAction,
 	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, getSearchValueAction, fetchServiceAction, FetchServiceAction,
@@ -396,51 +394,66 @@ export function selectMechanicsReducer(state = [], action) {
 
 export function sortPlansByReducer(state = plansSortbyInitialState, action) {
 	switch (action.type) {
-	case SortPlansByUnitModel:
+	case SortSalesByCustomer:
 		return {
 			...plansSortbyInitialState,
 			unitModel: { isActive: true, isAscending: !state.unitModel.isAscending },
 		};
-	case SortPlansByUnitCode:
+	case SortSalesBySite:
 		return {
 			...plansSortbyInitialState,
-			unitCode: { isActive: true, isAscending: !state.unitCode.isAscending },
+			unitModel: { isActive: true, isAscending: !state.unitModel.isAscending },
 		};
-	case SortPlansByPlanType:
+	case SortSalesByUnitModel:
 		return {
 			...plansSortbyInitialState,
-			planType: { isActive: true, isAscending: !state.planType.isAscending },
+			unitModel: { isActive: true, isAscending: !state.unitModel.isAscending },
 		};
-	case SortPlansByWorkOrder:
+	case SortSalesByComponentDesc:
 		return {
 			...plansSortbyInitialState,
-			workOrder: { isActive: true, isAscending: !state.workOrder.isAscending },
+			unitModel: { isActive: true, isAscending: !state.unitModel.isAscending },
 		};
-	case SortPlansByCustomer:
-		return {
-			...plansSortbyInitialState,
-			customer: { isActive: true, isAscending: !state.customer.isAscending },
-		};
-	case SortPlansByPlantExecution:
-		return {
-			...plansSortbyInitialState,
-			plantExecution: { isActive: true, isAscending: !state.plantExecution.isAscending },
-		};
-	case SortPlansByBacklogOpen:
-		return {
-			...plansSortbyInitialState,
-			backlogOpen: { isActive: true, isAscending: !state.backlogOpen.isAscending },
-		};
-	case SortPlansByStatus:
-		return {
-			...plansSortbyInitialState,
-			status: { isActive: true, isAscending: !state.status.isAscending },
-		};
-	case SortPlansByStaging:
-		return {
-			...plansSortbyInitialState,
-			staging: { isActive: true, isAscending: !state.staging.isAscending },
-		};
+	// case SortPlansByUnitCode:
+	// 	return {
+	// 		...plansSortbyInitialState,
+	// 		unitCode: { isActive: true, isAscending: !state.unitCode.isAscending },
+	// 	};
+	// case SortPlansByPlanType:
+	// 	return {
+	// 		...plansSortbyInitialState,
+	// 		planType: { isActive: true, isAscending: !state.planType.isAscending },
+	// 	};
+	// case SortPlansByWorkOrder:
+	// 	return {
+	// 		...plansSortbyInitialState,
+	// 		workOrder: { isActive: true, isAscending: !state.workOrder.isAscending },
+	// 	};
+	// case SortPlansByCustomer:
+	// 	return {
+	// 		...plansSortbyInitialState,
+	// 		customer: { isActive: true, isAscending: !state.customer.isAscending },
+	// 	};
+	// case SortPlansByPlantExecution:
+	// 	return {
+	// 		...plansSortbyInitialState,
+	// 		plantExecution: { isActive: true, isAscending: !state.plantExecution.isAscending },
+	// 	};
+	// case SortPlansByBacklogOpen:
+	// 	return {
+	// 		...plansSortbyInitialState,
+	// 		backlogOpen: { isActive: true, isAscending: !state.backlogOpen.isAscending },
+	// 	};
+	// case SortPlansByStatus:
+	// 	return {
+	// 		...plansSortbyInitialState,
+	// 		status: { isActive: true, isAscending: !state.status.isAscending },
+	// 	};
+	// case SortPlansByStaging:
+	// 	return {
+	// 		...plansSortbyInitialState,
+	// 		staging: { isActive: true, isAscending: !state.staging.isAscending },
+	// 	};
 	default:
 		return state;
 	}
