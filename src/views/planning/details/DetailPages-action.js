@@ -213,6 +213,7 @@ export function serviceParameterAction(type, payload) {
 }
 
 export function searchAction(type, payload) {
+	console.log('search parameter', payload)
 	return { type, payload };
 }
 

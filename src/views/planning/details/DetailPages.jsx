@@ -29,27 +29,26 @@ class DetailPages extends React.Component{
     };
 }
 
-// componentWillUnmount = () => {
-//   this.props.onSearch('');
-  // this.props.selectFilter(SelectCustomerFilterAction, 'All Customer');
-  // this.props.selectFilter(SelectJobsTypeFilterAction, 'All Job');
-  // this.props.selectFilter(SelectUnitModelFilterAction, 'All Model');
-//   this.props.updateParameter({
-//     ...this.props.parameter, SearchValue: '',
-//   });
-// }
+componentWillUnmount = () => {
+  this.props.onSearch('');
+
+  this.props.updateParameter({
+    ...this.props.salesParameter, Search: '',
+  });
+}
 
 componentDidUpdate = (prevProps) => {
+  // console.log('fetch berjalan', this.props.salesParameter)
   if (prevProps.salesParameter !== this.props.salesParameter) {
     console.log('fetch berjalan', this.props.salesParameter)
-    // this.props.fetchServiceOrder(this.props.parameter.dataFilter)
+    this.props.fetchServiceOrder(this.props.salesParameter.dataFilter)
     this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
   }
-  if (prevProps.searchValue !== this.props.searchValue) {
+  if (prevProps.Search !== this.props.Search) {
     this.props.updateSalesParameter({
-      ...prevProps.salesParameter, searchValue: this.props.searchValue, PageNumber: 1,
+      ...prevProps.salesParameter.dataFilter, Search: this.props.Search, PageNumber: 1,
     });
-  }
+  }console.log('data filter terupdate', this.props.salesParameter )
   if (prevProps.requestAssignSales !== this.props.requestAssignSales
     // || prevProps.requestUnassignJobs !== this.props.requestUnassignJobs
     ) {
@@ -122,7 +121,7 @@ onClickApproveBtn = () => {
     }
 
     onClickSalesOrder = () =>{
-      console.log('ini filter paging ', this.props.salesParameter.dataFilter.Filter )
+      console.log('ini filter paging ', this.props.salesParameter.dataFilter )
       this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
       // console.log('ini data parameter',JSON.stringify(this.props.salesParameter.soFilter));
       // console.log('ini data dari api',this.props.salesOrderList);
@@ -186,7 +185,7 @@ onClickApproveBtn = () => {
           onClickSalesOrder={this.onClickSalesOrder}
           parameter={this.props.parameter}
           onClickServiceOrder={this.onClickServiceOrder}
-          onSearchValue={this.onSearchValue}
+          // onSearchValue={this.onSearchValue}
           onChoosedService={this.updateAssignmentServiceStates}
           onChoosedSales={this.updateAssignmentSalesStates}
           selectedSalesPlanList={this.props.selectedSalesPlans}
@@ -211,7 +210,7 @@ onClickApproveBtn = () => {
 
     render(){
       //   console.log(this.state.lifetime);
-      // console.log('data props',this.props)
+      console.log('data props',this.props)
         return(
             <main className="content">
               {/* {this._renderSearchBar()} */}

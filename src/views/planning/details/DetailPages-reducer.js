@@ -94,7 +94,7 @@ const initialSalesParameter = {
 	},
 	paramsData : {
 		PageNumber: 0,
-		searchValue: '',
+		Search: '',
 		soValue: '',
 		customerType : '',
 		siteType : '',
@@ -316,7 +316,7 @@ export function selectedFiltersReducer(state = initialSelectedFilter, action) {
 
 export function salesParameterReducer(state = initialSalesParameter, action) {
 	console.log('ini data reducer action/payload', action.payload);
-	if (action.type === UpdateSalesParameterAction) return  {...state, dataFilter: {Filter: action.payload}};
+	if (action.type === UpdateSalesParameterAction) return  {...state, dataFilter: action.payload};
 	return state;
 }
 export function serviceParameterReducer(state = initialServiceParameter, action) {
@@ -325,6 +325,7 @@ export function serviceParameterReducer(state = initialServiceParameter, action)
 }
 
 export function searchPlansReducer(state = '', action) {
+	console.log('ini data untuk search value', action.payload)
 	if (action.type === SearchSalesAction) return action.payload;
 	return state;
 }

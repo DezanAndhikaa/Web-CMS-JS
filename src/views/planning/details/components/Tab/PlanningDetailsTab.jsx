@@ -137,31 +137,12 @@ class PlanningDetailsTab extends React.Component {
         </div>
     );
   }
-
-  // _renderSearchBar(){
-  //   return (
-  //     <Searchbar
-  //       {...this.props}
-  //       webInfo="Search by all component"
-  //       onSearch={this.props.onSearch}
-  //     />
-  //   );
-  // }
       
   _renderFilterByDataAction(){
     return(
-      <div className="plannings-list-containers">
         <FilterbyDataAction />
-      </div>
     );
   }
-
-  // _renderBaseButton() {
-  //   return(
-  //     <BaseButton 
-  //     />
-  //   );
-  // }
 
   _renderFilter() {
     console.log('ini props untuk filter', this.props.salesOrderList)
@@ -216,8 +197,8 @@ class PlanningDetailsTab extends React.Component {
         <div className="root">
         <AppBar position="relative" color="default" style={{boxShadow: "none"}}>
         <div className="tab-container"> 
-             {this.props.renderSearch} 
-              {this._renderFilterByDataAction()}
+            {this.props.renderSearch} 
+            {this._renderFilterByDataAction()}
         </div>
           <Tabs 
           classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
