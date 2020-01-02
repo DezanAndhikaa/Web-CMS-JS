@@ -4,11 +4,10 @@ import { PlansReducers } from './DetailPages-reducer';
 import { storeDataAction } from '../../../core/StorageHelper';
 import { PLAN_DATA, StorageKey } from '../../../constants';
 import {
-	AssignSalesAction,
-	assignSalesAction,
-	unassignSalesAction, 
-	getServiceOrderAction, fetchSalesAction, salesParameterAction,
-	ClearSelectedPlans, 
+	// AssignPlansAction,
+	// assignPlansAction,
+	getServiceOrderAction, fetchSalesAction, salesParameterAction, fetchServiceAction,
+	ClearSelectedPlans, UpdateServiceParameterAction,
 	// fetchJobsAssignment,
 	// FetchPlansAction,
 	// fetchPlansAssignment,
@@ -19,7 +18,7 @@ import {
 	SearchSalesAction, 
 	searchSo,
 	SearchSoAction,
-	selectFilterAction, UnselectSalesPlanAction, planParameterAction, UpdatePlansParameterAction,
+	selectFilterAction, UnselectSalesPlanAction, planParameterAction, UpdatePlansParameterAction, serviceParameterAction,
 	UnselectServicePlanAction, selectSalesPlansAction, selectServicePlansAction, selectLeaderAction, SelectSalesPlanAction,
 	SelectServicePlanAction, FetchSalesAction,
 	selectMechanicAction, sortByAction, 
@@ -36,9 +35,9 @@ const mapStateToProps = (state) => ({
 	// mechanicList: state.plansPageState.mechanicList.data,
 	salesOrderList: state.plansPageState.salesOrderList.data,
 	serviceOrderList: state.plansPageState.serviceOrderList.data,
-	parameter: state.plansPageState.salesParameter,
+	salesParameter: state.plansPageState.salesParameter,
 	Search: state.plansPageState.Search,
-	// requestAssignSales: state.plansPageState.assignSalesStatus.status,
+	// requestAssignPlans: state.plansPageState.assignPlansStatus.status,
 	// requestPlans: state.plansPageState.PlansAssignmentSummary.status,
 	// requestMechanics: state.plansPageState.mechanicList.status,
 	// requestUnassignPlans: state.plansPageState.unassignPlansStatus.status,
@@ -54,16 +53,16 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	assignSales: (payload, token) => dispatch(assignSalesAction(AssignSalesAction, payload, token)),	
-	unassignSales: (payload, token) => dispatch(unassignSalesAction(payload, token)),
-	clearSelectedSalesPlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
-	clearSelectedServicePlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
+	// assignPlans: (payload, token) => dispatch(assignPlansAction(AssignPlansAction, payload, token)),
+	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
+	clearSelectedServicePlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
 	// fetchPlans: (payload, token) => dispatch(fetchPlansAssignment(FetchPlansAction, payload, token)),
 	// getMechanics: (token) => dispatch(getMechanicsAction(token)),
-	getServiceOrder: (payload) => dispatch(getServiceOrderAction(payload)),
+	// getServiceOrder: () => dispatch(getServiceOrderAction()),
 	// getSalesOrder: () => dispatch(getSalesFilteredAction()),
 	// getSearchValue: (payload) => dispatch(getSearchValueAction(payload)),
 	fetchSalesOrder: (payload) => dispatch(fetchSalesAction(payload)),
+	fetchServiceOrder: (payload) => dispatch(fetchServiceAction(payload)),
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	onSearch: (keyword) => dispatch(searchAction(SearchSalesAction, keyword)),
 	onSearchSo: (keyword) => dispatch(searchSo(SearchSoAction, keyword)),
@@ -77,7 +76,8 @@ const mapDispatchToProps = (dispatch) => ({
 	storePlanData: (payload) => dispatch(storePlanDataAction(payload)),
 	unselectServicePlan: (payload) => dispatch(selectServicePlansAction(UnselectServicePlanAction, payload)),
 	unselectSalesPlan: (payload) => dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
-	updateParameter: (payload) => dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
+	updateSalesParameter: (payload) => dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
+	updateServiceParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
 });
 
 const detailPages = connect(mapStateToProps, mapDispatchToProps)(DetailPages);

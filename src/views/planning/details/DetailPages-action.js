@@ -8,6 +8,7 @@ export const AssignSalesAction = 'ASSIGN_SALES';
 export const UnassignSalesAction = 'UNASSIGN_SALES';
 export const ClearSelectedPlans = 'CLEAR_SELECTED_PLANS';
 export const FetchSalesAction = 'FETCH_SALES_ORDER';
+export const FetchServiceAction = 'FETCH_SERVICE_ORDER';
 export const FetchPlansAction = 'FETCH_PLANS';
 // export const FetchSearchValueAction = 'FETCH_SEARCH_VALUE';
 export const GetMechanicsAction = 'GET_MECHANICS';
@@ -40,6 +41,7 @@ export const UnselectSalesPlanAction = 'UNSELECT_SALES_PLANS';
 export const UnselectServicePlanAction = 'UNSELECT_SERVICE_PLANS';
 export const UnselectMechanicAction = 'UNSELECT_MECHANIC';
 export const UpdateSalesParameterAction = 'SALES_PARAMETER';
+export const UpdateServiceParameterAction = 'SERVICE_PARAMETER';
 export const SalesOrderFilterAction = 'SALES_ORDER_FILTER';
 // export const SelectSoTypeFilterAction = 'SELECT_SO_FILTER'
 // export const SelectCustomerFilterAction = 'SELECT_CUSTOMER_FILTER'
@@ -93,8 +95,9 @@ export function unassignSalesAction(payload) {
 
 export function fetchSalesAction(payload) {
 	console.log('ini type',FetchSalesAction);
-	console.log(payload);
+	
 	const filter = payload;
+	console.log(filter);
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${ApiUrlBase.SALESORDER_API_URL}/FilterUnapproved`,
@@ -107,7 +110,22 @@ export function fetchSalesAction(payload) {
 	return async (dispatch) => dispatch(callApi(FetchSalesAction, requestConfig));
 }
 
-// export function getSearchValueAction(payload) {
+export function fetchServiceAction(payload) {
+	console.log('ini type',FetchServiceAction);
+	console.log(payload);
+	const filter = payload;
+	const requestConfig = {
+		method: RequestMethod.POST,
+		url: `${ApiUrlBase.SERVICEORDER_API_URL}/MasterData`,
+		headers: {
+			'Accept': 'application/json; charset=utf-8',
+			'Content-Type': 'application/json; charset=utf-8',
+		},
+		data: filter,
+	};
+	return async (dispatch) => dispatch(callApi(FetchServiceAction, requestConfig));
+}
+// export function getMechanicsAction(accessToken) {
 // 	const requestConfig = {
 // 		method : RequestMethod.POST,
 // 		url: `${ApiUrlBase.SALESORDER_API_URL}/FilterGlobalUnapproved`,
@@ -186,6 +204,11 @@ export function getServiceOrderAction(payload) {
 // }
 
 export function salesParameterAction(type, payload) {
+	// const filter = payload;
+	console.log('ini payload parameter', payload);
+	return { type, payload };
+}
+export function serviceParameterAction(type, payload) {
 	return { type, payload };
 }
 

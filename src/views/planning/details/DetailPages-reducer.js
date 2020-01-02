@@ -26,7 +26,7 @@ import {
 	SortPlansByWorkOrder, FetchSalesAction,
 	// UnassignPlansAction, 
 	UnselectSalesPlanAction, UnselectServicePlanAction,
-	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, getSearchValueAction,
+	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, getSearchValueAction, fetchServiceAction, FetchServiceAction,
 } from './DetailPages-action';
 
 const initialSalesAssignment = {
@@ -34,14 +34,29 @@ const initialSalesAssignment = {
 	TotalPage: 1,
 	PageNumber: 1,
 	PageSize: 10,
-	SalesOrder: [],
-	ServiceOrder: [],
+	Lists: [],
 	NextPage: false,
 	PrevPage: false,
 	GroupCustomer: ['All Customer'],
 	GroupSite: ['All Site'],
 	GroupUnitModel: ['All Unit Model'],
 	GroupComponentDescription: ['All Component Description'],
+	GroupSerialNumber: [],
+	GroupLifeTimeComponent: [],
+	GroupPlanExecution: [],
+};
+const initialServiceAssignment = {
+	TotalData: 0,
+	TotalPage: 1,
+	PageNumber: 1,
+	PageSize: 10,
+	Lists: [],
+	NextPage: false,
+	PrevPage: false,
+	GroupSo: ['All WO'],
+	GroupCustomer: ['ALL CUSTOMER'],
+	GroupSite: ['ALL SITE'],
+	GroupUnitModel: ['ALL UNIT MODEL'],
 	GroupSerialNumber: [],
 	GroupLifeTimeComponent: [],
 	GroupPlanExecution: [],
@@ -57,23 +72,79 @@ const initialSelectedFilter = {
 	// unitType: '',
 	// compType: ''
 
-}
+};
 
-const initialParameter = {
-
-	soFilter : {
-		PageNumber : 1,
-		PageSize : 10,
-		Sort : 'asc',
+const initialSalesParameter = {
+	dataFilter : {
+		Search: '',
+		soValue: '',
+		Filter: {
+			  PageNumber : 1,
+			  PageSize: 2,
+			  Sort: '',
+			//   Filter: [
+			// 	{
+			// 	  Field: '',
+			// 	  Operator: '',
+			// 	  Value: '',
+			// 	  Logic: ''
+			// 	}
+			//   ]
+		}
 	},
-	Search: '',
-	soValue: '',
-	assigmentFilter: true,
-	// plantypeFilter: '',
-	// unitModelFilter: '',
-	// customerFilter: '',
-	assigmentFilter: true,
-	inProgressFilter: false,
+	paramsData : {
+		PageNumber: 0,
+		searchValue: '',
+		soValue: '',
+		customerType : '',
+		siteType : '',
+		unitType : '',
+		compType : '',
+		assigmentFilter: true,
+		inProgressFilter: false,
+	}
+	// approvalFilter: false,
+	// sortByUnitModel: false,
+	// sortByUnitCode: false,
+	// sortByPlanType: true,
+	// sortByWorkOrder: false,
+	// sortByWorkCenter: false,
+	// sortByCustomer: false,
+	// sortByPlantExecution: false,
+	// sortByStatus: false,
+	// sortByOpenBacklog: false,
+	// sortByStaging: false,
+	// orderDesc: false,
+	// currentPage: 1,
+	// pageSize: 10,
+};
+const initialServiceParameter = {
+	dataFilter : {
+		Filter: {
+			  PageNumber : 1,
+			  PageSize: 2,
+			  Sort: '',
+			//   Filter: [
+			// 	{
+			// 	  Field: '',
+			// 	  Operator: '',
+			// 	  Value: '',
+			// 	  Logic: ''
+			// 	}
+			//   ]
+		}
+	},
+	paramsData : {
+		PageNumber: 0,
+		searchValue: '',
+		soValue: '',
+		customerType : '',
+		siteType : '',
+		unitType : '',
+		compType : '',
+		assigmentFilter: true,
+		inProgressFilter: false,
+	}
 	// approvalFilter: false,
 	// sortByUnitModel: false,
 	// sortByUnitCode: false,
@@ -91,8 +162,8 @@ const initialParameter = {
 };
 
 const initialSelectedAssignment = {
-	selectedService: {},
-	selectedSales: {},
+	selectedService: [],
+	selectedSales: [],
 };
 
 const defaultState = { isActive: false, isAscending: true };
@@ -111,9 +182,10 @@ const plansSortbyInitialState = {
 
 const initialAssignmentState = { response: false, status: ApiRequestActionsStatus.IDLE };
 const initialSalesState = { data: initialSalesAssignment, status: ApiRequestActionsStatus.IDLE };
+const initialServiceState = { data: initialServiceAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialMechanicsState = { data: [], status: ApiRequestActionsStatus.IDLE };
-const initialServiceOrderState = { data: [], status: ApiRequestActionsStatus.IDLE };
-const initialSalesOrderState = { data: [], status: ApiRequestActionsStatus.IDLE };
+// const initialServiceOrderState = { data: [], status: ApiRequestActionsStatus.IDLE };
+// const initialSalesOrderState = { data: [], status: ApiRequestActionsStatus.IDLE };
 
 export function assignSalesReducer(state = initialAssignmentState, action) {
 	if (action.type === AssignSalesAction) {
@@ -157,8 +229,8 @@ export function fetchSalesReducer(state = initialSalesState, action) {
 	if (action.type === FetchSalesAction) {
 	  switch (action.status) {
 		case ApiRequestActionsStatus.SUCCEEDED:
-			// console.log('ini balikan dari mantan',action.payload);
-		  return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+			console.log('ini balikan dari mantan',action.payload);
+		  return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
 		case ApiRequestActionsStatus.FAILED:
 		  return {
 				data: initialSalesState.data,
@@ -172,32 +244,14 @@ export function fetchSalesReducer(state = initialSalesState, action) {
 	return state;
 }
 
-// export function getSearchValueReducer(state = initialSalesState, action) {
-// 	if (action.type === FetchSearchValueAction) {
-// 	  switch (action.status) {
-// 		case ApiRequestActionsStatus.SUCCEEDED:
-// 		  return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
-// 		case ApiRequestActionsStatus.FAILED:
-// 		  return {
-// 				data: initialSalesState.data,
-// 				status: ApiRequestActionsStatus.FAILED,
-// 				error: action.error,
-// 		  };
-// 		default:
-// 		  return { data: initialSalesState.data, status: ApiRequestActionsStatus.LOADING };
-// 	  }
-// 	}
-// 	return state;
-// }
-
-export function getServiceOrderReducer(state = initialServiceOrderState, action) {
-	if (action.type === GetServiceOrderAction) {
+export function fetchServiceReducer(state = initialServiceState, action) {
+	if (action.type === FetchServiceAction) {
 		switch (action.status) {
 		case ApiRequestActionsStatus.SUCCEEDED:
-			return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+			return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
 		case ApiRequestActionsStatus.FAILED:
 			return {
-				data: initialServiceOrderState.data,
+				data: initialServiceState.data,
 				status: ApiRequestActionsStatus.FAILED,
 				error: action.error,
 			};
@@ -209,7 +263,7 @@ export function getServiceOrderReducer(state = initialServiceOrderState, action)
 }
 
 export function selectedFiltersReducer(state = initialSelectedFilter, action) {
-	// console.log('aku adalah aksi: ',action)
+	console.log('aku adalah aksi: ',action);
 	switch (action.type) {
 	  case SelectCustomerFilterAction:
 		return { ...state, customerType: action.payload };
@@ -217,12 +271,12 @@ export function selectedFiltersReducer(state = initialSelectedFilter, action) {
 		return { ...state, siteType: action.payload };
 	  case SelectUnitModelFilterAction:
 		return { ...state, unitType: action.payload };
-      case SelectComponentFilterAction:
+	case SelectComponentFilterAction:
 	    return { ...state, compType: action.payload };
 	  default:
 		return state;
 	}
-  }
+}
 
 // export function getSalesOrderReducer(state = initialSalesOrderState, action) {
 // 	if (action.type === GetSalesOrderAction) {
@@ -260,7 +314,12 @@ export function selectedFiltersReducer(state = initialSelectedFilter, action) {
 // 	return state;
 // }
 
-export function salesParameterReducer(state = initialParameter, action) {
+export function salesParameterReducer(state = initialSalesParameter, action) {
+	console.log('ini data reducer action/payload', action.payload);
+	if (action.type === UpdateSalesParameterAction) return  {...state, dataFilter: {Filter: action.payload}};
+	return state;
+}
+export function serviceParameterReducer(state = initialServiceParameter, action) {
 	if (action.type === UpdateSalesParameterAction) return action.payload;
 	return state;
 }
@@ -413,7 +472,7 @@ export function storePlanDataReducer(state = {}, action) {
 const PlansReducers = combineReducers({
 	selectedLeader: selectLeaderReducer,
 	selectedFilters: selectedFiltersReducer,
-	serviceOrderList: getServiceOrderReducer,
+	serviceOrderList: fetchServiceReducer,
 	salesOrderList : fetchSalesReducer,
 	// salesOrderList : getSearchValueReducer,
 	// salesOrderList: getSalesOrderReducer,

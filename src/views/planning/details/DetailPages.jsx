@@ -40,24 +40,24 @@ class DetailPages extends React.Component{
 // }
 
 componentDidUpdate = (prevProps) => {
-  if (prevProps.parameter !== this.props.parameter) {
-    console.log('fetch berjalan')
-    this.props.fetchSalesOrder(this.props.parameter);
-    this.props.getServiceOrder(this.props.parameter);
+  if (prevProps.salesParameter !== this.props.salesParameter) {
+    console.log('fetch berjalan', this.props.salesParameter)
+    // this.props.fetchServiceOrder(this.props.parameter.dataFilter)
+    this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
   }
-  if (prevProps.Search !== this.props.Search) {
-    this.props.updateParameter({
-      ...prevProps.parameter, Search: this.props.Search, PageNumber: 1,
+  if (prevProps.searchValue !== this.props.searchValue) {
+    this.props.updateSalesParameter({
+      ...prevProps.salesParameter, searchValue: this.props.searchValue, PageNumber: 1,
     });
   }
   if (prevProps.requestAssignSales !== this.props.requestAssignSales
     // || prevProps.requestUnassignJobs !== this.props.requestUnassignJobs
     ) {
     this.props.clearSelectedSalesPlans({});
-    this.props.fetchSalesOrder(this.props.parameter);
+    this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
   }
-  console.log('ini selected service',this.props.selectedServicePlans)
-  console.log('ini selected sales',this.props.selectedSalesPlans)
+  // console.log('ini selected service',this.props.selectedServicePlans)
+  // console.log('ini selected sales',this.props.selectedSalesPlans)
 }
 
 onClickApproveBtn = () => {
@@ -91,43 +91,43 @@ onClickApproveBtn = () => {
   // }
   
   _renderPagination() {
-    console.log(this.props)
+    // console.log('ini data untuk paging',this.props.salesOrderList)
     const web = this.props.displayMode === 'web';
-    const next = this.props.serviceOrderList.NextPage;
-    const prev = this.props.serviceOrderList.PrevPage;
-    const currentProps = this.props.serviceOrderList.PageNumber;
-    const { TotalPage } = this.props.serviceOrderList;
+    const nextSales = this.props.salesOrderList.NextPage;
+    const prevSales = this.props.salesOrderList.PrevPage;
+    const currentPropsSales = this.props.salesOrderList.PageNumber;
+    const { TotalPage } = this.props.salesOrderList;
+    
     return(
       <div className="pagination">
         <div className="paging">
-          {prev && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>}
-          {web && currentProps - 3 > 0 && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps - 3 })} className="page-inactive">{currentProps - 3}</div>}
-          {web && currentProps - 2 > 0 && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps - 2 })} className="page-inactive">{currentProps - 2}</div>}
-          {currentProps - 1 > 0 && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps - 1 })} className="page-inactive">{currentProps - 1}</div>}
-          <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps })} className="page-active">{currentProps}</div>
-          {currentProps + 1 <= TotalPage && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps + 1 })} className="page-inactive">{currentProps + 1}</div>}
-          {web && currentProps + 2 < TotalPage && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps + 2 })} className="page-inactive">{currentProps + 2}</div>}
-          {web && currentProps + 3 < TotalPage && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps + 3 })} className="page-inactive">{currentProps + 3}</div>}
-          {next && <div onClick={() => this.props.updateParameter({ ...this.props.parameter, currentPage: currentProps + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>}
+          {prevSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter.Filter, PageNumber: currentPropsSales - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>}
+          {web && currentPropsSales - 3 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter.Filter, PageNumber: currentPropsSales - 3 })} className="page-inactive">{currentPropsSales - 3}</div>}
+          {web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter.Filter, PageNumber: currentPropsSales - 2 })} className="page-inactive">{currentPropsSales - 2}</div>}
+          {currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter.Filter, PageNumber: currentPropsSales - 1 })} className="page-inactive">{currentPropsSales - 1}</div>}
+          <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter.Filter, PageNumber: currentPropsSales })} className="page-active">{currentPropsSales}</div>
+          {currentPropsSales + 1 <= TotalPage && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter.Filter, PageNumber: currentPropsSales + 1 })} className="page-inactive">{currentPropsSales + 1}</div>}
+          {web && currentPropsSales + 2 < TotalPage && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter.Filter, PageNumber: currentPropsSales + 2 })} className="page-inactive">{currentPropsSales + 2}</div>}
+          {web && currentPropsSales + 3 < TotalPage && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter.Filter, PageNumber: currentPropsSales + 3 })} className="page-inactive">{currentPropsSales + 3}</div>}
+          {nextSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter.Filter, PageNumber: currentPropsSales + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>}
         </div>
       </div>
     )
   }
+  
 
-  onClickServiceOrder = () => {
-    this.props.getServiceOrder(this.props.parameter);
-  }
+    onClickServiceOrder = () => {
+      this.props.fetchServiceOrder(this.props.salesParameter.dataFilter);
+      // console.log('ini data dari api',this.props.serviceOrderList);
+    }
 
-  onSearchValue = () => {
-    this.props.getSearchValue(this.props.parameter);
-  }
-
-  onClickSalesOrder = () =>{
-    this.props.fetchSalesOrder(this.props.parameter);
-    console.log('ini data parameter',JSON.stringify(this.props.parameter.soFilter));
-    console.log('ini data dari api',this.props.salesOrderList);
-    console.log('ini data pilihan dari marinka : ', this.props.salesOrderList.GroupSo)
-  }
+    onClickSalesOrder = () =>{
+      console.log('ini filter paging ', this.props.salesParameter.dataFilter.Filter )
+      this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
+      // console.log('ini data parameter',JSON.stringify(this.props.salesParameter.soFilter));
+      // console.log('ini data dari api',this.props.salesOrderList);
+      // console.log('ini data pilihan dari marinka : ', this.props.salesOrderList.GroupSo)
+    }
 
   _renderSearchBar(){
     return (
@@ -140,7 +140,7 @@ onClickApproveBtn = () => {
   }
 
   _renderBaseButton() {
-    if (this.props.parameter.assigmentFilter) {
+    if (this.props.salesParameter.paramsData.assigmentFilter) {
       return(
 				<div className="bottom-row">
           <BaseButton titles="Delete"/>
@@ -191,7 +191,7 @@ onClickApproveBtn = () => {
           onChoosedSales={this.updateAssignmentSalesStates}
           selectedSalesPlanList={this.props.selectedSalesPlans}
           selectedServicePlanList={this.props.selectedServicePlans}
-          displayCheckbox={this.props.parameter.assigmentFilter || this.props.parameter.inProgressFilter}
+          displayCheckbox={this.props.salesParameter.paramsData.assigmentFilter || this.props.salesParameter.paramsData.inProgressFilter}
           stats={this.state.stats}
           onStats={this.isChangeStat}
           value={this.state.lifetime}
@@ -210,9 +210,8 @@ onClickApproveBtn = () => {
   }
 
     render(){
-      console.log('ini punya props : ', this.props.salesOrderList.Lists)
-      console.log('ini punya si lifetime setelah :',this.state.lifetime);
-      console.log('data props',this.props)
+      //   console.log(this.state.lifetime);
+      // console.log('data props',this.props)
         return(
             <main className="content">
               {/* {this._renderSearchBar()} */}
