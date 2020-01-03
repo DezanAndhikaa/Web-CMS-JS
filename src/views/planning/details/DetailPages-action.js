@@ -20,7 +20,7 @@ export const ResetSelectedMechanicsAction = 'RESET_SELECTED_MECHANICS';
 export const ResetSelectedLeaderAction = 'RESET_SELECTED_LEADER';
 export const SearchSalesAction = 'SEARCH_PLANS';
 export const SearchSoAction = 'SEARCH_SO';
-export const SelectCustomerFilterAction = 'SELECT_CUSTOMER_FILTER';
+
 export const SelectSalesPlanAction = 'SELECT_SALES_PLANS';
 export const SelectServicePlanAction = 'SELECT_SERVICE_PLANS';
 export const SelectPlansAssignmentFilterAction = 'SELECT_PLANS_ASSIGNMENT_FILTER';
@@ -44,15 +44,11 @@ export const UnselectMechanicAction = 'UNSELECT_MECHANIC';
 export const UpdateSalesParameterAction = 'SALES_PARAMETER';
 export const UpdateServiceParameterAction = 'SERVICE_PARAMETER';
 export const SalesOrderFilterAction = 'SALES_ORDER_FILTER';
-// export const SelectSoTypeFilterAction = 'SELECT_SO_FILTER'
-// export const SelectCustomerFilterAction = 'SELECT_CUSTOMER_FILTER'
+
+export const SelectCustomerFilterAction = 'SELECT_CUSTOMER_FILTER';
 export const SelectSiteFilterAction = 'SELECT_SITE_FILTER'
 export const SelectUnitModelFilterAction ='SELECT_UNIT_MODEL_FILTER'
 export const SelectComponentFilterAction ='SELECT_COMPONENT_FILTER'
-export const SelectCustTypeFilterAction = 'SELECT_CUST_TYPE_FILTER';
-export const SelectSiteTypeFilterAction = 'SELECT_SITE_TYPE_FILTER';
-export const SelectUnitTypeFilterAction = 'SELECT_UNIT_TYPE_FILTER';
-export const SelectCompTypeFilterAction = 'SELECT_COMP_TYPE_FILTER';
 
 export function approveSalesAction (payload) {
 	const requestConfig = {
@@ -110,7 +106,7 @@ export function fetchSalesAction(payload) {
 	console.log('ini type',FetchSalesAction);
 	
 	const filter = payload;
-	console.log(filter);
+	console.log('isian filter : ',filter);
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${ApiUrlBase.SALESORDER_API_URL}/FilterUnapproved`,
@@ -235,6 +231,8 @@ export function searchSo(type, payload){
 }
 
 export function selectFilterAction(type, payload) {
+	console.log("ini punya si type : ",type)
+	console.log("ini punya si payload : ", payload)
 	return { type, payload };
 }
 

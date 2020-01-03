@@ -34,12 +34,10 @@
 .table-container{
     display: flex;
     flex-direction: column;
-    position: relative;
     .filters-container{
         display: flex;
         flex-direction: row;
         .dropdowns-container{
-            position: absolute;
             display: flex;
             flex-direction: row;
             .dropdown-container{
