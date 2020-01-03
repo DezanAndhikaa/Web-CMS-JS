@@ -11,6 +11,7 @@ import EditButton from '../../../../../components/ActionButton/EditButton/EditBu
 import InputButton from '../../../../../components/Button/InputButton';
 import { booleanLiteral } from '@babel/types';
 import SalesOrderData from '../../../../../planning-data-dummy.json';
+import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc } from '../../DetailPages-action';
 
 export default class ServiceOrderList extends React.PureComponent {
 
@@ -25,9 +26,9 @@ export default class ServiceOrderList extends React.PureComponent {
     }
     isCheckboxAvailable = (data) => {
         let isAvailable = false;
-        if (this.props.selectedServicePlanList.some((plan) => plan.status === 'Assigned')) {
-          isAvailable = this.props.selectedServicePlanList.some((plan) => plan.status !== data.status);
-        } else { isAvailable = this.props.selectedServicePlanList.some((plan) => plan.status !== 'Assigned') && data.status === 'Assigned'; }
+        if (this.props.selectedServicePlanList.selectedService.some((plan) => plan.status === 'Assigned')) {
+          isAvailable = this.props.selectedServicePlanList.selectedService.some((plan) => plan.status !== data.status);
+        } else { isAvailable = this.props.selectedServicePlanList.selectedService.some((plan) => plan.status !== 'Assigned') && data.status === 'Assigned'; }
         return isAvailable;
       }
 
@@ -49,27 +50,31 @@ render(){
             />
             <PlanningListHeader
               name="Customer"
-            // //   isActive={this.props.sortJobsByState.unitCode.isActive}
+              isActive={this.props.sortServiceByState.Customer.isActive}
               delay={300}
-            // //   isAscending={this.props.sortJobsByState.unitCode.isAscending}
+              isAscending={this.props.sortServiceByState.Customer.isAscending}
+              onClick={() => this.props.onClickTabHead(SortServiceByCustomer)}
             />
             <PlanningListHeader
               name="Site"
-            // //   isActive={this.props.sortJobsByState.jobType.isActive}
+              isActive={this.props.sortServiceByState.Site.isActive}
               delay={300}
-            // //   isAscending={this.props.sortJobsByState.jobType.isAscending}
+              isAscending={this.props.sortServiceByState.Site.isAscending}
+              onClick={() => this.props.onClickTabHead(SortServiceBySite)}
             />
             <PlanningListHeader
               name="Unit Model"
-            // //   isActive={this.props.sortJobsByState.workOrder.isActive}
+              isActive={this.props.sortServiceByState.UnitModel.isActive}
               delay={300}
-            // //   isAscending={this.props.sortJobsByState.workOrder.isAscending}
+              isAscending={this.props.sortServiceByState.UnitModel.isAscending}
+              onClick={() => this.props.onClickTabHead(SortServiceByUnitModel)}
             />
             <PlanningListHeader
               name="Comp Desc"
-            // //   isActive={this.props.sortJobsByState.customer.isActive}
+              isActive={this.props.sortServiceByState.CompDesc.isActive}
               delay={300}
-            // //   isAscending={this.props.sortJobsByState.customer.isAscending}
+              isAscending={this.props.sortServiceByState.CompDesc.isAscending}
+              onClick={() => this.props.onClickTabHead(SortServiceByCompDesc)}
             />
             <PlanningListHeader
               name="Part Number"
@@ -115,7 +120,7 @@ render(){
             && this.props.serviceOrderList.Lists.map((row, index) => (
               <TableRow key={index} classes={{ root: 'table-row' }}>
                 <TableCell padding="checkbox">
-                  {this.props.displayCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedServicePlanList.some((plans) => plans.Wo === row.Wo)} onClick={() => this.props.onChoosedService(row)} classes={{ checked: 'checkbox-checked' }} />}
+                  {this.props.displayCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedServicePlanList.selectedService.some((plans) => plans.Wo === row.Wo)} onClick={() => this.props.onChoosedService(row)} classes={{ checked: 'checkbox-checked' }} />}
                 </TableCell>
                 <TableCell align="left" className="table-cell"> {row.Wo} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.Customer} </TableCell>

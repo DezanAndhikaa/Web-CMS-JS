@@ -38,6 +38,7 @@ const mapStateToProps = (state) => ({
 	salesOrderList: state.plansPageState.salesOrderList.data,
 	serviceOrderList: state.plansPageState.serviceOrderList.data,
 	salesParameter: state.plansPageState.salesParameter,
+	serviceParameter: state.plansPageState.serviceParameter,
 	Search: state.plansPageState.Search,
 	// requestPlans: state.plansPageState.PlansAssignmentSummary.status,
 	// requestMechanics: state.plansPageState.mechanicList.status,
@@ -49,7 +50,8 @@ const mapStateToProps = (state) => ({
 	selectedServicePlans: state.plansPageState.selectedPlans,
 	selectedLeader: state.plansPageState.selectedLeader,
 	selectedMechanics: state.plansPageState.selectedMechanics,
-	sortBy: state.plansPageState.sortBy,
+	sortSalesBy: state.plansPageState.sortSalesBy,
+	sortServiceBy: state.plansPageState.sortServiceBy,
 	token: state.userData.tokenResponse.accessToken,
 });
 

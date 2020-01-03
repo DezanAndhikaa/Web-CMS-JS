@@ -7,7 +7,7 @@ import {
 	// FetchSearchValueAction, 
 	// FetchPlansAction, 
 	// GetMechanicsAction, 
-	GetServiceOrderAction, GetSalesOrderAction, 
+	// GetServiceOrderAction, GetSalesOrderAction, 
 	UpdateSalesParameterAction, ResetSelectedMechanicsAction, 
 	SearchSalesAction,
 	SearchSoAction,
@@ -20,10 +20,9 @@ import {
 	SelectCustomerFilterAction,SelectComponentFilterAction,
 	SelectSiteFilterAction,SelectUnitModelFilterAction,
 	// SelectUnitModelFilterAction,
-	SortPlansByBacklogOpen, SortPlansByCustomer,
-	SortPlansByPlanType, SortPlansByPlantExecution, SortPlansByStaging,
-	SortPlansByStatus, SortPlansByUnitCode, SortPlansByUnitModel,
-	SortPlansByWorkOrder, FetchSalesAction,
+	SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, UpdateServiceParameterAction,
+	FetchSalesAction,
+	SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc,
 	// UnassignPlansAction, 
 	UnselectSalesPlanAction, UnselectServicePlanAction,
 	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, getSearchValueAction, fetchServiceAction, FetchServiceAction, 
@@ -72,21 +71,17 @@ const initialSelectedFilter = {
 
 const initialSalesParameter = {
 	dataFilter : {
-		Search: '',
-		soValue: '',
-		Filter: {
-			  PageNumber : 1,
-			  PageSize: 10,
-			  Sort: '',
-			  Filter: [
-				// {
-				//   Field: '',
-				//   Operator: '',
-				//   Value: '',
-				//   Logic: ''
-				// }
-			  ]
-		}
+			PageNumber : 1,
+			PageSize: 10,
+			Sort: '',
+			Filter: [
+			// {
+			//   Field: '',
+			//   Operator: '',
+			//   Value: '',
+			//   Logic: ''
+			// }
+			]
 	},
 	paramsData : {
 		PageNumber: 0,
@@ -163,25 +158,23 @@ const initialSelectedAssignment = {
 };
 
 const defaultState = { isActive: false, isAscending: true };
-const plansSortbyInitialState = {
-	SO: defaultState,
+const salesSortbyInitialState = {	
 	Customer: defaultState,
 	Site: defaultState,
 	UnitModel: defaultState,
 	CompDesc: defaultState,
-	PartNumber: defaultState,
-	UnitCode: defaultState,
-	SerialNumber: defaultState,
-	LifetimeComp: defaultState,
-	PlantExecution: defaultState,
+};
+const serviceSortbyInitialState = {	
+	Customer: defaultState,
+	Site: defaultState,
+	UnitModel: defaultState,
+	CompDesc: defaultState,
 };
 
 const initialAssignmentState = { response: false, status: ApiRequestActionsStatus.IDLE };
 const initialSalesState = { data: initialSalesAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialServiceState = { data: initialServiceAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialMechanicsState = { data: [], status: ApiRequestActionsStatus.IDLE };
-// const initialServiceOrderState = { data: [], status: ApiRequestActionsStatus.IDLE };
-// const initialSalesOrderState = { data: [], status: ApiRequestActionsStatus.IDLE };
 
 export function approveSalesReducer(state = initialAssignmentState, action) {
 	if (action.type === ApproveSalesAction) {
@@ -325,7 +318,7 @@ export function salesParameterReducer(state = initialSalesParameter, action) {
 	return state;
 }
 export function serviceParameterReducer(state = initialServiceParameter, action) {
-	if (action.type === UpdateSalesParameterAction) return action.payload;
+	if (action.type === UpdateServiceParameterAction) return action.payload;
 	return state;
 }
 
@@ -340,12 +333,27 @@ export function searchSoReducer(state = '', action) {
 	return state;
 }
 
-export function selectPlansReducer(state = [], action) {
+// export function selectedFiltersReducer(state = initialSelectedFilter, action) {
+// 	switch (action.type) {
+// 	case SelectPlansTypeFilterAction:
+// 		return { ...state, planType: action.payload };
+// 	case SelectUnitModelFilterAction:
+// 		return { ...state, unitModel: action.payload };
+// 	case SelectCustomerFilterAction:
+// 		return { ...state, customer: action.payload };
+// 	case SelectPlansAssignmentFilterAction:
+// 		return { ...state, plansAssignment: action.payload };
+// 	default:
+// 		return state;
+// 	}
+// }
+
+export function selectPlansReducer(state = initialSelectedAssignment, action) {
 	switch (action.type) {
 	case SelectSalesPlanAction:
-		return [...state, action.payload];
+		return [...state.selectedSales, action.payload];
 	case SelectServicePlanAction:
-		return [...state, action.payload];
+		return [...state.selectedService, action.payload];
 	case UnselectSalesPlanAction: {
 		return [...state.filter(((item) => item.SO !== action.payload.SO))];
 	}
@@ -385,52 +393,57 @@ export function selectMechanicsReducer(state = [], action) {
 	}
 }
 
-export function sortPlansByReducer(state = plansSortbyInitialState, action) {
+export function sortSalesByReducer(state = salesSortbyInitialState, action) {
 	switch (action.type) {
-	case SortPlansByUnitModel:
+	case SortSalesByCustomer:
+		console.log('sort berjalan', action);
 		return {
-			...plansSortbyInitialState,
-			unitModel: { isActive: true, isAscending: !state.unitModel.isAscending },
+			...salesSortbyInitialState,
+			Customer: { isActive: true, isAscending: !state.Customer.isAscending },
 		};
-	case SortPlansByUnitCode:
+	case SortSalesBySite:
 		return {
-			...plansSortbyInitialState,
-			unitCode: { isActive: true, isAscending: !state.unitCode.isAscending },
+			...salesSortbyInitialState,
+			Site: { isActive: true, isAscending: !state.Site.isAscending },
 		};
-	case SortPlansByPlanType:
+	case SortSalesByUnitModel:
 		return {
-			...plansSortbyInitialState,
-			planType: { isActive: true, isAscending: !state.planType.isAscending },
+			...salesSortbyInitialState,
+			UnitModel: { isActive: true, isAscending: !state.UnitModel.isAscending },
 		};
-	case SortPlansByWorkOrder:
+	case SortSalesByCompDesc:
 		return {
-			...plansSortbyInitialState,
-			workOrder: { isActive: true, isAscending: !state.workOrder.isAscending },
+			...salesSortbyInitialState,
+			CompDesc: { isActive: true, isAscending: !state.CompDesc.isAscending },
 		};
-	case SortPlansByCustomer:
+	default:
+		return state;
+	}
+}
+
+
+export function sortServiceByReducer(state = serviceSortbyInitialState, action) {
+	switch (action.type) {
+	case SortServiceByCustomer:
+		console.log('sort berjalan', action);
 		return {
-			...plansSortbyInitialState,
-			customer: { isActive: true, isAscending: !state.customer.isAscending },
+			...serviceSortbyInitialState,
+			Customer: { isActive: true, isAscending: !state.Customer.isAscending },
 		};
-	case SortPlansByPlantExecution:
+	case SortServiceBySite:
 		return {
-			...plansSortbyInitialState,
-			plantExecution: { isActive: true, isAscending: !state.plantExecution.isAscending },
+			...serviceSortbyInitialState,
+			Site: { isActive: true, isAscending: !state.Site.isAscending },
 		};
-	case SortPlansByBacklogOpen:
+	case SortServiceByUnitModel:
 		return {
-			...plansSortbyInitialState,
-			backlogOpen: { isActive: true, isAscending: !state.backlogOpen.isAscending },
+			...serviceSortbyInitialState,
+			UnitModel: { isActive: true, isAscending: !state.UnitModel.isAscending },
 		};
-	case SortPlansByStatus:
+	case SortServiceByCompDesc:
 		return {
-			...plansSortbyInitialState,
-			status: { isActive: true, isAscending: !state.status.isAscending },
-		};
-	case SortPlansByStaging:
-		return {
-			...plansSortbyInitialState,
-			staging: { isActive: true, isAscending: !state.staging.isAscending },
+			...serviceSortbyInitialState,
+			CompDesc: { isActive: true, isAscending: !state.CompDesc.isAscending },
 		};
 	default:
 		return state;
@@ -473,8 +486,10 @@ const PlansReducers = combineReducers({
 	approveSalesStatus: approveSalesReducer,
 	// unapproveSalesStatus: unapproveSalesReducer,
 	salesParameter: salesParameterReducer,
+	serviceParameter: serviceParameterReducer,
 	// PlansAssignmentSummary: fetchPlansReducer,
-	// sortBy: sortPlansByReducer,
+	sortSalesBy: sortSalesByReducer,
+	sortServiceBy: sortServiceByReducer,
 	Search: searchPlansReducer,
 	soValue: searchSoReducer,
 	selectedPlanData: storePlanDataReducer,
