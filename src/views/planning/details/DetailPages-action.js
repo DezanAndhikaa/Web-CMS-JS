@@ -44,8 +44,6 @@ export const UpdateSalesParameterAction = 'SALES_PARAMETER';
 export const UpdateServiceParameterAction = 'SERVICE_PARAMETER';
 export const SalesOrderFilterAction = 'SALES_ORDER_FILTER';
 
-export const UpdateFilterUnit = 'SELECT_UNIT_MODEL_FILTER'
-
 export const SelectCustomerFilterAction = 'SELECT_CUSTOMER_FILTER';
 export const SelectSiteFilterAction = 'SELECT_SITE_FILTER'
 export const SelectUnitModelFilterAction ='SELECT_UNIT_MODEL_FILTER'

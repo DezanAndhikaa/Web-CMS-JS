@@ -26,7 +26,8 @@ import {
 	SortPlansByWorkOrder, FetchSalesAction,
 	// UnassignPlansAction, 
 	UnselectSalesPlanAction, UnselectServicePlanAction,
-	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, getSearchValueAction, fetchServiceAction, FetchServiceAction, UpdateFilterUnit
+	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, getSearchValueAction, fetchServiceAction, FetchServiceAction, 
+	UpdateFilterUnit
 } from './DetailPages-action';
 
 const initialSalesAssignment = {
@@ -75,15 +76,15 @@ const initialSalesParameter = {
 		soValue: '',
 		Filter: {
 			  PageNumber : 1,
-			  PageSize: 2,
+			  PageSize: 10,
 			  Sort: '',
 			  Filter: [
-			// 	{
-			// 	  Field: '',
-			// 	  Operator: '',
-			// 	  Value: '',
-			// 	  Logic: ''
-			// 	}
+				// {
+				//   Field: '',
+				//   Operator: '',
+				//   Value: '',
+				//   Logic: ''
+				// }
 			  ]
 		}
 	},
@@ -312,10 +313,15 @@ export function salesParameterReducer(state = initialSalesParameter, action) {
 	console.log('ini data reducer action/payload', action.payload);
 	console.log('action action action : ',action)
 	if (action.type === UpdateSalesParameterAction)
-		return  {...state, dataFilter: {Filter: action.payload}};
-	if (action.type === UpdateFilterUnit)
-		// return  {...state, dataFilter: {Filter : {Filter : {Field: "unitmodel", Operator: "eq", Value: action.payload, Logic: "and"} }}}
-		return  {...state, dataFilter: {...state, Filter : action.payload}}
+		return {...state, dataFilter: {Filter: action.payload}};
+	if (action.type === SelectCustomerFilterAction)
+		return {...state, dataFilter: {Filter : {Filter : [{Field: "Customer", Operator: "eq", Value: action.payload, Logic: "and"}] }}}
+	if(action.type === SelectSiteFilterAction)
+		return {...state, dataFilter:{Filter :{Filter : [{Field: "Site", Operator: "eq", Value: action.payload, Logic: "and"}] }}}
+	if (action.type === SelectUnitModelFilterAction)
+		return {...state, dataFilter: {Filter : {Filter : [{Field: "UnitModel", Operator: "eq", Value: action.payload, Logic: "and"}] }}}
+	if (action.type === SelectComponentFilterAction)
+		return {...state, dataFilter: {Filter :{Filter : [{Field: "ComponentDescription", Operator: "eq", Value: action.payload, Logic: "and"}] }}}
 	return state;
 }
 export function serviceParameterReducer(state = initialServiceParameter, action) {
