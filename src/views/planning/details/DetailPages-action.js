@@ -4,10 +4,11 @@
 import { RequestMethod, ApiUrlBase } from '../../../constants';
 import { callApi } from '../../../core/RestClientHelpers';
 
-export const AssignSalesAction = 'ASSIGN_SALES';
-export const UnassignSalesAction = 'UNASSIGN_SALES';
+export const ApproveSalesAction = 'APPROVE_SALES';
+export const UnapproveSalesAction = 'UNAPPROVE_SALES';
 export const ClearSelectedPlans = 'CLEAR_SELECTED_PLANS';
 export const FetchSalesAction = 'FETCH_SALES_ORDER';
+export const PutPlanningApprove = 'PUT_PLANNING_APPROVE';
 export const FetchServiceAction = 'FETCH_SERVICE_ORDER';
 export const FetchPlansAction = 'FETCH_PLANS';
 // export const FetchSearchValueAction = 'FETCH_SEARCH_VALUE';
@@ -53,9 +54,9 @@ export const SelectSiteTypeFilterAction = 'SELECT_SITE_TYPE_FILTER';
 export const SelectUnitTypeFilterAction = 'SELECT_UNIT_TYPE_FILTER';
 export const SelectCompTypeFilterAction = 'SELECT_COMP_TYPE_FILTER';
 
-export function assignSalesAction(type, payload) {
+export function approveSalesAction (payload) {
 	const requestConfig = {
-		method: RequestMethod.POST,
+		method: RequestMethod.PUT,
 		url: `${ApiUrlBase.SALESORDER_API_URL}/Approval`,
 		data: payload,
 		headers: {
@@ -63,10 +64,10 @@ export function assignSalesAction(type, payload) {
 			'Content-Type': 'application/json; charset=utf-8',
 		},
 	};
-	return async (dispatch) => dispatch(callApi(type, requestConfig));
+	return async (dispatch) => dispatch(callApi(ApproveSalesAction, requestConfig));
 }
 
-export function unassignSalesAction(payload) {
+export function unapproveSalesAction(payload) {
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${ApiUrlBase.SALESORDER_API_URL}/Approval`,
@@ -76,7 +77,7 @@ export function unassignSalesAction(payload) {
 			'Content-Type': 'application/json; charset=utf-8',
 		},
 	};
-	return async (dispatch) => dispatch(callApi(UnassignSalesAction, requestConfig));
+	return async (dispatch) => dispatch(callApi(UnapproveSalesAction, requestConfig));
 }
 
 // export function fetchPlansAssignment(type, payload, accessToken) {
@@ -92,6 +93,18 @@ export function unassignSalesAction(payload) {
 // 	};
 // 	return async (dispatch) => dispatch(callApi(type, requestConfig));
 // }
+export function putPlanningApprovedAction(payload){
+	const requestConfig = {
+		method: RequestMethod.PUT,
+		url: `${ApiUrlBase.SALESORDER_API_URL}/Approval`,
+		headers: {
+			'Accept': 'application/json; charset=utf-8',
+			'Content-Type': 'application/json; charset=utf-8',
+		},
+		data: payload,
+	};
+	return async (dispatch) => dispatch(callApi(PutPlanningApprove, requestConfig));
+}
 
 export function fetchSalesAction(payload) {
 	console.log('ini type',FetchSalesAction);

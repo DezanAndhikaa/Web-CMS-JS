@@ -4,6 +4,7 @@ import './BaseButton.scss';
 import DeleteSuccess from '../DeleteConfirmation/DeleteSuccess';
 import DeleteButton from '../ActionButton/DeleteButton/DeleteButton';
 import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
+import ApproveConfirmation from '../ApproveConfirmation/ApproveConfirmation';
 
 class BaseButton extends React.Component{
     constructor(props){
@@ -30,6 +31,12 @@ class BaseButton extends React.Component{
                         {...this.state}
                         onClick={this.isClicked}
                     />
+                    <DeleteConfirmation
+                        {...this.props}
+                        {...this.state}
+                        onClose={this.isClosed}
+                        openModal={this.state.isShowModal}
+                    />
                 </div>
             )
         } else if(this.props.titles === "Download"){
@@ -42,6 +49,13 @@ class BaseButton extends React.Component{
             return(
                 <div className="button-inline">
                     <Button className="btn-approve" onClick={this.isClicked}>Approve</Button>
+                    <ApproveConfirmation
+                        {...this.props}
+                        {...this.state}
+                        onClose={this.isClosed}
+                        openModal={this.state.isShowModal}
+                        putOnPlanningApp={this.props.isMoved}
+                    />
                 </div>
             )
         }else {

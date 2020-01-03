@@ -2,7 +2,7 @@
 import { combineReducers } from 'redux';
 import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
 import {
-	AssignSalesAction, 
+	ApproveSalesAction, 
 	ClearSelectedPlans,
 	// FetchSearchValueAction, 
 	// FetchPlansAction, 
@@ -119,7 +119,7 @@ const initialSalesParameter = {
 	// pageSize: 10,
 };
 const initialServiceParameter = {
-	dataFilter : {
+	// dataFilter : {
 		Filter: {
 			  PageNumber : 1,
 			  PageSize: 2,
@@ -132,8 +132,8 @@ const initialServiceParameter = {
 			// 	  Logic: ''
 			// 	}
 			//   ]
-		}
-	},
+		},
+	// },
 	paramsData : {
 		PageNumber: 0,
 		searchValue: '',
@@ -187,8 +187,8 @@ const initialMechanicsState = { data: [], status: ApiRequestActionsStatus.IDLE }
 // const initialServiceOrderState = { data: [], status: ApiRequestActionsStatus.IDLE };
 // const initialSalesOrderState = { data: [], status: ApiRequestActionsStatus.IDLE };
 
-export function assignSalesReducer(state = initialAssignmentState, action) {
-	if (action.type === AssignSalesAction) {
+export function approveSalesReducer(state = initialAssignmentState, action) {
+	if (action.type === ApproveSalesAction) {
 		switch (action.status) {
 		case ApiRequestActionsStatus.SUCCEEDED:
 			return { response: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
@@ -452,8 +452,8 @@ export function storePlanDataReducer(state = {}, action) {
 	return { ...state };
 }
 
-// export function unassignPlansReducer(state = initialAssignmentState, action) {
-// 	if (action.type === UnassignPlansAction) {
+// export function unapproveSalesReducer(state = initialAssignmentState, action) {
+// 	if (action.type === UnapproveSalesAction) {
 // 		switch (action.status) {
 // 		case ApiRequestActionsStatus.SUCCEEDED:
 // 			return { response: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
@@ -480,8 +480,8 @@ const PlansReducers = combineReducers({
 	// mechanicList: getMechanicsReducer,
 	selectedPlans: selectPlansReducer,
 	selectedMechanics: selectMechanicsReducer,
-	// assignPlansStatus: assignPlansReducer,
-	// unassignPlansStatus: unassignPlansReducer,
+	approveSalesStatus: approveSalesReducer,
+	// unapproveSalesStatus: unapproveSalesReducer,
 	salesParameter: salesParameterReducer,
 	// PlansAssignmentSummary: fetchPlansReducer,
 	// sortBy: sortPlansByReducer,

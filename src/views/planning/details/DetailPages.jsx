@@ -49,7 +49,7 @@ componentDidUpdate = (prevProps) => {
       ...prevProps.salesParameter.dataFilter, Search: this.props.Search, PageNumber: 1,
     });
   }console.log('data filter terupdate', this.props.salesParameter )
-  if (prevProps.requestAssignSales !== this.props.requestAssignSales
+  if (prevProps.requestApproveSales !== this.props.requestApproveSales
     // || prevProps.requestUnassignJobs !== this.props.requestUnassignJobs
     ) {
     this.props.clearSelectedSalesPlans({});
@@ -62,6 +62,7 @@ componentDidUpdate = (prevProps) => {
 onClickApproveBtn = () => {
   // this.props.getMechanics(this.props.token);
   this.setState({ isShowAssign: true });
+  this.props.approveSales(this.props.salesParameter.dataFilter);
 }
 
   // componentDidMount = async () => {
@@ -143,23 +144,24 @@ onClickApproveBtn = () => {
       return(
 				<div className="bottom-row">
           <BaseButton titles="Delete"/>
-					<BaseButton titles="Download"
+					<BaseButton titles="Download" />
+          <BaseButton titles="Approve"
             disabled={this.props.selectedSalesPlans.length < 1 || this.props.selectedSalesPlans.some((plans) => plans.status === 'Approved')} 
-            className="btn-assign" onClick={this.onClickApproveBtn} />
-          <BaseButton titles="Approve"/>
+            isMoved={this.onClickApproveBtn} 
+          />
         </div>
       );
     }
   }
     
-    isChangeStat = (value,key) =>{
-        console.log('nilai value kiriman : '+value)
-        console.log('nilai key kiriman : '+key)
-        console.log('nilai nilai props : ',this.state.lifetime)
-        this.setState({
-          lifetime: { Lists :this.state.lifetime.Lists.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) }
-        });
-    }
+  isChangeStat = (value,key) =>{
+    console.log('nilai value kiriman : '+value)
+    console.log('nilai key kiriman : '+key)
+    console.log('nilai nilai props : ',this.state.lifetime)
+    this.setState({
+      lifetime: { Lists :this.state.lifetime.Lists.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) }
+    });
+  }
 
   updateAssignmentServiceStates = (plan) => {
     if (this.props.selectedServicePlans.some(
@@ -209,11 +211,9 @@ onClickApproveBtn = () => {
   }
 
     render(){
-      //   console.log(this.state.lifetime);
       console.log('data props',this.props)
         return(
             <main className="content">
-              {/* {this._renderSearchBar()} */}
                 <div className="table-container">
                       {this._renderTabs()}
                   </div>

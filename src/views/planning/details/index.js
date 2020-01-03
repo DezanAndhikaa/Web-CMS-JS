@@ -4,8 +4,9 @@ import { PlansReducers } from './DetailPages-reducer';
 import { storeDataAction } from '../../../core/StorageHelper';
 import { PLAN_DATA, StorageKey } from '../../../constants';
 import {
-	// AssignPlansAction,
-	// assignPlansAction,
+	approveSalesAction,
+	unapproveSalesAction,
+	putPlanningApprovedAction,
 	getServiceOrderAction, fetchSalesAction, salesParameterAction, fetchServiceAction,
 	ClearSelectedPlans, UpdateServiceParameterAction,
 	// fetchJobsAssignment,
@@ -30,6 +31,7 @@ import DetailPages from './DetailPages';
 
 const mapStateToProps = (state) => ({
 	// assignPlansResponse: state.plansPageState.assignPlansStatus.response,
+	// requestApproveSales: state.plansPageState.assignPlansStatus.status,
 	displayMode: state.displayMode,
 	// plansData: state.plansPageState.PlansAssignmentSummary.data,
 	// mechanicList: state.plansPageState.mechanicList.data,
@@ -37,10 +39,10 @@ const mapStateToProps = (state) => ({
 	serviceOrderList: state.plansPageState.serviceOrderList.data,
 	salesParameter: state.plansPageState.salesParameter,
 	Search: state.plansPageState.Search,
-	// requestAssignPlans: state.plansPageState.assignPlansStatus.status,
 	// requestPlans: state.plansPageState.PlansAssignmentSummary.status,
 	// requestMechanics: state.plansPageState.mechanicList.status,
-	// requestUnassignPlans: state.plansPageState.unassignPlansStatus.status,
+	// requestUnapproveSales: state.plansPageState.unassignPlansStatus.status,
+	// unapproveSalesResponse: state.plansPageState.unassignPlansStatus.response,
 	selectedFilters: state.plansPageState.selectedFilters,
 	// selectedPlans: state.plansPageState.selectedPlans,
 	selectedSalesPlans: state.plansPageState.selectedPlans,
@@ -49,11 +51,11 @@ const mapStateToProps = (state) => ({
 	selectedMechanics: state.plansPageState.selectedMechanics,
 	sortBy: state.plansPageState.sortBy,
 	token: state.userData.tokenResponse.accessToken,
-	// unassignPlansResponse: state.plansPageState.unassignPlansStatus.response,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	// assignPlans: (payload, token) => dispatch(assignPlansAction(AssignPlansAction, payload, token)),
+	approveSales: (payload) => dispatch(approveSalesAction(payload)),
+	unapproveSales: (payload, token) => dispatch(unapproveSalesAction(payload, token)),
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
 	clearSelectedServicePlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
 	// fetchPlans: (payload, token) => dispatch(fetchPlansAssignment(FetchPlansAction, payload, token)),
@@ -61,6 +63,7 @@ const mapDispatchToProps = (dispatch) => ({
 	// getServiceOrder: () => dispatch(getServiceOrderAction()),
 	// getSalesOrder: () => dispatch(getSalesFilteredAction()),
 	// getSearchValue: (payload) => dispatch(getSearchValueAction(payload)),
+	putDatatoPlanningApprove: (payload) => dispatch(putPlanningApprovedAction(payload)),
 	fetchSalesOrder: (payload) => dispatch(fetchSalesAction(payload)),
 	fetchServiceOrder: (payload) => dispatch(fetchServiceAction(payload)),
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
