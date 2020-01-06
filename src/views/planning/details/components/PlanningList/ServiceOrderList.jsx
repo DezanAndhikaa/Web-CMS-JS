@@ -26,9 +26,9 @@ export default class ServiceOrderList extends React.PureComponent {
     }
     isCheckboxAvailable = (data) => {
         let isAvailable = false;
-        if (this.props.selectedServicePlanList.selectedService.some((plan) => plan.status === 'Assigned')) {
-          isAvailable = this.props.selectedServicePlanList.selectedService.some((plan) => plan.status !== data.status);
-        } else { isAvailable = this.props.selectedServicePlanList.selectedService.some((plan) => plan.status !== 'Assigned') && data.status === 'Assigned'; }
+        if (this.props.selectedServicePlanList.some((plan) => plan.status === 'Assigned')) {
+          isAvailable = this.props.selectedServicePlanList.some((plan) => plan.status !== data.status);
+        } else { isAvailable = this.props.selectedServicePlanList.some((plan) => plan.status !== 'Assigned') && data.status === 'Assigned'; }
         return isAvailable;
       }
 
@@ -120,7 +120,7 @@ render(){
             && this.props.serviceOrderList.Lists.map((row, index) => (
               <TableRow key={index} classes={{ root: 'table-row' }}>
                 <TableCell padding="checkbox">
-                  {this.props.displayCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedServicePlanList.selectedService.some((plans) => plans.Wo === row.Wo)} onClick={() => this.props.onChoosedService(row)} classes={{ checked: 'checkbox-checked' }} />}
+                  {this.props.displayCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedServicePlanList.some((plans) => plans.Wo === row.Wo)} onClick={() => this.props.onChoosedService(row)} classes={{ checked: 'checkbox-checked' }} />}
                 </TableCell>
                 <TableCell align="left" className="table-cell"> {row.Wo} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.Customer} </TableCell>
