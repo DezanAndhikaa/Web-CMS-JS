@@ -31,7 +31,7 @@ class DetailPages extends React.Component{
 componentWillUnmount = () => {
   this.props.onSearch('');
 
-  this.props.updateParameter({
+  this.props.updateSalesParameter({
     ...this.props.salesParameter, Search: '',
   });
 }
@@ -291,7 +291,7 @@ onClickApproveBtn = () => {
   //     //   console.log('data dari api',this.state.salesOrder)
   // }
   
-  _renderPagination() {
+  _renderPagination= (value) =>  {
     // console.log('ini data untuk paging',this.props.salesOrderList)
     const web = this.props.displayMode === 'web';
     const nextSales = this.props.salesOrderList.NextPage;
@@ -318,8 +318,8 @@ onClickApproveBtn = () => {
   
 
     onClickServiceOrder = () => {
-      this.props.fetchServiceOrder(this.props.salesParameter.dataFilter);
-      // console.log('ini data dari api',this.props.serviceOrderList);
+      this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+      console.log('ini data dari api',this.props.serviceParameter.dataFilter);
     }
 
     onClickSalesOrder = () =>{
@@ -365,14 +365,14 @@ onClickApproveBtn = () => {
   }
 
   updateAssignmentServiceStates = (plan) => {
-    if (this.props.selectedServicePlans.selectedService.some(
+    if (this.props.selectedServicePlans.some(
       (plans) => plans.Wo === plan.Wo,
     )) { return this.props.unselectServicePlan(plan); }
     return this.props.selectServicePlan(plan);
   };
 
   updateAssignmentSalesStates = (plan) => {
-    if (this.props.selectedSalesPlans.selectedSales.some(
+    if (this.props.selectedSalesPlans.some(
       (plans) => plans.SO === plan.SO,
     )) { return this.props.unselectSalesPlan(plan); }
     return this.props.selectSalesPlan(plan);
@@ -414,8 +414,9 @@ onClickApproveBtn = () => {
   }
 
     render(){
-      console.log('ini selected parameter sales',this.props.selectedSalesPlanList);
-      console.log('ini seleceted parameter service',this.props.selectedServicePlanList);
+      console.log('ini selected parameter sales',this.props.selectedSalesPlans);
+      console.log('ini seleceted parameter service',this.props.selectedServicePlans);
+      // console.log('ini seleceted parameter sales',this.props.selectedServicePlans);
       // console.log('data props',this.props)
         return(
             <main className="content">

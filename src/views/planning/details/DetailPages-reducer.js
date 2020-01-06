@@ -71,17 +71,17 @@ const initialSelectedFilter = {
 
 const initialSalesParameter = {
 	dataFilter : {
-			PageNumber : 1,
-			PageSize: 10,
-			Sort: '',
-			Filter: [
+		PageNumber : 1,
+		PageSize: 10,
+		Sort: '',
+		Filter: [
 			// {
 			//   Field: '',
 			//   Operator: '',
 			//   Value: '',
 			//   Logic: ''
 			// }
-			]
+		]
 	},
 	paramsData : {
 		PageNumber: 0,
@@ -111,19 +111,19 @@ const initialSalesParameter = {
 };
 const initialServiceParameter = {
 	// dataFilter : {
-		Filter: {
+	dataFilter: {
 			  PageNumber : 1,
 			  PageSize: 2,
 			  Sort: '',
-			//   Filter: [
-			// 	{
-			// 	  Field: '',
-			// 	  Operator: '',
-			// 	  Value: '',
-			// 	  Logic: ''
-			// 	}
-			//   ]
-		},
+		  Filter: [
+			// {
+			//   Field: '',
+			//   Operator: '',
+			//   Value: '',
+			//   Logic: ''
+			// }
+		  ]
+	},
 	// },
 	paramsData : {
 		PageNumber: 0,
@@ -304,17 +304,17 @@ export function selectedFiltersReducer(state = initialSelectedFilter, action) {
 
 export function salesParameterReducer(state = initialSalesParameter, action) {
 	console.log('ini data reducer action/payload', action.payload);
-	console.log('action action action : ',action)
+	console.log('action action action : ',action);
 	if (action.type === UpdateSalesParameterAction)
 		return {...state, dataFilter: {Filter: action.payload}};
 	if (action.type === SelectCustomerFilterAction)
-		return {...state, dataFilter: {Filter : {Filter : [{Field: "Customer", Operator: "eq", Value: action.payload, Logic: "and"}] }}}
+		return {...state, dataFilter: {Filter : {Filter : [{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }}};
 	if(action.type === SelectSiteFilterAction)
-		return {...state, dataFilter:{Filter :{Filter : [{Field: "Site", Operator: "eq", Value: action.payload, Logic: "and"}] }}}
+		return {...state, dataFilter:{Filter :{Filter : [{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] }}};
 	if (action.type === SelectUnitModelFilterAction)
-		return {...state, dataFilter: {Filter : {Filter : [{Field: "UnitModel", Operator: "eq", Value: action.payload, Logic: "and"}] }}}
+		return {...state, dataFilter: {Filter : {Filter : [{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}] }}};
 	if (action.type === SelectComponentFilterAction)
-		return {...state, dataFilter: {Filter :{Filter : [{Field: "ComponentDescription", Operator: "eq", Value: action.payload, Logic: "and"}] }}}
+		return {...state, dataFilter: {Filter :{Filter : [{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }}};
 	return state;
 }
 export function serviceParameterReducer(state = initialServiceParameter, action) {
@@ -323,7 +323,7 @@ export function serviceParameterReducer(state = initialServiceParameter, action)
 }
 
 export function searchPlansReducer(state = '', action) {
-	console.log('ini data untuk search value', action.payload)
+	console.log('ini data untuk search value', action.payload);
 	if (action.type === SearchSalesAction) return action.payload;
 	return state;
 }
@@ -348,14 +348,24 @@ export function searchSoReducer(state = '', action) {
 // 	}
 // }
 
-export function selectPlansReducer(state = initialSelectedAssignment, action) {
+export function selectSalesPlansReducer(state = [], action) {
 	switch (action.type) {
-	case SelectSalesPlanAction:
-		return [...state.selectedSales, action.payload];
-	case SelectServicePlanAction:
-		return [...state.selectedService, action.payload];
+	case SelectSalesPlanAction: {
+		return [...state, action.payload];
+	}
 	case UnselectSalesPlanAction: {
 		return [...state.filter(((item) => item.SO !== action.payload.SO))];
+	}
+	case ClearSelectedPlans:
+		return [];
+	default:
+		return state;
+	}
+}
+export function selectServicePlansReducer(state = [], action) {
+	switch (action.type) {
+	case SelectServicePlanAction:{
+		return [...state, action.payload];
 	}
 	case UnselectServicePlanAction: {
 		return [...state.filter(((item) => item.Wo !== action.payload.Wo))];
@@ -481,7 +491,8 @@ const PlansReducers = combineReducers({
 	// salesOrderList : getSearchValueReducer,
 	// salesOrderList: getSalesOrderReducer,
 	// mechanicList: getMechanicsReducer,
-	selectedPlans: selectPlansReducer,
+	selectedSalesPlans: selectSalesPlansReducer,
+	selectedServicePlans: selectServicePlansReducer,
 	selectedMechanics: selectMechanicsReducer,
 	approveSalesStatus: approveSalesReducer,
 	// unapproveSalesStatus: unapproveSalesReducer,
