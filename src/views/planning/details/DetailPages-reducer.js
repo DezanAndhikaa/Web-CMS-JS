@@ -351,6 +351,7 @@ export function searchSoReducer(state = '', action) {
 export function selectPlansReducer(state = initialSelectedAssignment, action) {
 	switch (action.type) {
 	case SelectSalesPlanAction:
+		console.log('ini si payload paylaod payload : ',action.payload)
 		return [...state.selectedSales, action.payload];
 	case SelectServicePlanAction:
 		return [...state.selectedService, action.payload];

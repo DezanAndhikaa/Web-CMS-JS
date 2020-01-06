@@ -15,7 +15,7 @@ class DetailPages extends React.Component{
         stats: true,
         displayCheckbox: true,
         // lifetime: SalesDummy,
-        lifetime: this.props.salesOrderList.Lists,
+        lifetime: [],
         salesOrder: [],
         isShowAssign: false,
         // nextPage: true,
@@ -34,6 +34,12 @@ componentWillUnmount = () => {
   this.props.updateParameter({
     ...this.props.salesParameter, Search: '',
   });
+}
+
+componentWillReceiveProps(props) {
+  this.state = {
+    lifetime: props.salesOrderList.Lists
+  }
 }
 
 componentDidUpdate = (prevProps) => {
@@ -325,6 +331,7 @@ onClickApproveBtn = () => {
     onClickSalesOrder = () =>{
       console.log('ini filter paging ', this.props.salesParameter.dataFilter )
       this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
+      console.log('nilai nilai props : ',this.state.lifetime)
       // console.log('ini data parameter',JSON.stringify(this.props.salesParameter.soFilter));
       // console.log('ini data dari api',this.props.salesOrderList);
       // console.log('ini data pilihan dari marinka : ', this.props.salesOrderList.GroupSo)
@@ -358,9 +365,8 @@ onClickApproveBtn = () => {
   isChangeStat = (value,key) =>{
     console.log('nilai value kiriman : '+value)
     console.log('nilai key kiriman : '+key)
-    console.log('nilai nilai props : ',this.state.lifetime)
     this.setState({
-      lifetime: { Lists :this.state.lifetime.Lists.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) }
+      lifetime: this.state.lifetime.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) 
     });
   }
 
@@ -395,7 +401,7 @@ onClickApproveBtn = () => {
           displayCheckbox={this.props.salesParameter.paramsData.assigmentFilter || this.props.salesParameter.paramsData.inProgressFilter}
           stats={this.state.stats}
           onStats={this.isChangeStat}
-          // value={this.state.lifetime}      
+          value={this.state.lifetime}      
           totalSalesData={this.props.salesOrderList.TotalData}
           totalServiceData={this.props.serviceOrderList.TotalData}
           onClickTabHead={this.props.onClickSortBy}
@@ -414,6 +420,7 @@ onClickApproveBtn = () => {
   }
 
     render(){
+      console.log('nilai nilai propos : ',this.state.lifetime)
       console.log('ini selected parameter sales',this.props.selectedSalesPlanList);
       console.log('ini seleceted parameter service',this.props.selectedServicePlanList);
       // console.log('data props',this.props)
