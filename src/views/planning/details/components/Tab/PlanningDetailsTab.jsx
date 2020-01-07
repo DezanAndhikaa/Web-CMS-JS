@@ -208,7 +208,7 @@ class PlanningDetailsTab extends React.Component {
             <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<Badge badgeContent={this.props.totalSalesData} color="primary" className="badge" invisible={this.state.invisible1}>
             <>Sales Order</>
             </Badge >} />
-            <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<Badge badgeContent={this.props.totalServiceData} color="secondary" className="badge" invisible={this.state.invisible2}>
+            <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<Badge badgeContent={this.props.totalServiceData} color="primary" className="badge" invisible={this.state.invisible2}>
             <>Service Order</>
             </Badge >} />
             {/* <Tab disabled classes={{ root: classes.tabRoot }} /><Tab disabled classes={{ root: classes.tabRoot }} />
