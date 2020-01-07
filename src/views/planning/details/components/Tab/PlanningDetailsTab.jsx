@@ -150,6 +150,7 @@ class PlanningDetailsTab extends React.Component {
       <div className="dropdowns-container">
         <div className="dropdown-container">
           <DropdownFilter
+          {...this.props}
             data={this.props.salesOrderList.GroupCustomer}
             selected={this.props.selectedFilters.customerType}
             onSelectActionType={SelectCustomerFilterAction}
@@ -158,26 +159,26 @@ class PlanningDetailsTab extends React.Component {
         </div>
         <div className="dropdown-container">
           <DropdownFilter
-          data={this.props.salesOrderList.GroupSite}
-          selected={this.props.selectedFilters.siteType}
-          onSelectActionType={SelectSiteFilterAction}
-          onSelectAction={this.props.selectFilter}
+            data={this.props.salesOrderList.GroupSite}
+            selected={this.props.selectedFilters.siteType}
+            onSelectActionType={SelectSiteFilterAction}
+            onSelectAction={this.props.selectFilter}
           />
         </div>
         <div className="dropdown-container">
           <DropdownFilter
-          data={this.props.salesOrderList.GroupUnitModel}
-          selected={this.props.selectedFilters.unitType}
-          onSelectActionType={SelectUnitModelFilterAction}
-          onSelectAction={this.props.selectFilter}
+            data={this.props.salesOrderList.GroupUnitModel}
+            selected={this.props.selectedFilters.unitType}
+            onSelectActionType={SelectUnitModelFilterAction}
+            onSelectAction={this.props.selectFilter}
           />
         </div>
         <div className="dropdown-container">
           <DropdownFilter
-          data={this.props.salesOrderList.GroupComponentDescription}
-          selected={this.props.selectedFilters.compType}
-          onSelectActionType={SelectComponentFilterAction}
-          onSelectAction={this.props.selectFilter}
+            data={this.props.salesOrderList.GroupComponentDescription}
+            selected={this.props.selectedFilters.compType}
+            onSelectActionType={SelectComponentFilterAction}
+            onSelectAction={this.props.selectFilter}
           />
         </div>
         <div className="search-container">

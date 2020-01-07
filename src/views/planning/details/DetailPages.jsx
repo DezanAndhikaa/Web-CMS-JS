@@ -43,10 +43,13 @@ componentWillReceiveProps(props) {
 }
 
 componentDidUpdate = (prevProps) => {
-  // console.log('fetch berjalan', this.props.salesParameter)
+
+  console.log('nilai nilai nilai sebelum paramter : ',prevProps.salesParameter)
+  console.log('nilai nilai nilai lanjutan parameter : ',this.props.salesParameter)
   if (prevProps.salesParameter !== this.props.salesParameter) {
     console.log('fetch berjalan', this.props.salesParameter)
     // this.props.fetchServiceOrder(this.props.salesParameter.dataFilter);
+    console.log('data filter paling terupdate : ', this.props.salesParameter.dataFilter)
     this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
   }
   if (prevProps.serviceParameter !== this.props.serviceParameter) {
