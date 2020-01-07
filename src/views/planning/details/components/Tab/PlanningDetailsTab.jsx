@@ -42,9 +42,10 @@ const styles = theme => ({
   },
   tabRoot: {
     textTransform: 'initial',
+    marginLeft:0,
     minWidth: 72,
     fontWeight: theme.typography.fontWeightRegular,
-    marginRight: theme.spacing.unit * 4,
+    marginRight: theme.spacing.unit * 0,
     fontFamily: [
       '-apple-system',
       'BlinkMacSystemFont',
@@ -71,7 +72,7 @@ const styles = theme => ({
   },
   tabSelected: {},
   typography: {
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing.unit * 0,
   },
 });
 

@@ -48,7 +48,7 @@ class FilterbyDataAction extends React.Component {
           <Button className="button" variant="outlined">
             Planning Approved
           </Button>
-          <Button className="button" variant="outlined">
+          <Button className="button-plan-del" variant="outlined">
             Planning Deleted
           </Button>
       </div>

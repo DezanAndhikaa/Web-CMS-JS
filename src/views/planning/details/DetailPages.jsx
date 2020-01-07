@@ -347,15 +347,18 @@ onClickApproveBtn = () => {
     );
   }
 
-  _renderBaseButton() {
+  _renderBaseButton = () => {
     if (this.props.salesParameter.paramsData.assigmentFilter) {
       return(
 				<div className="bottom-row">
-          <BaseButton titles="Delete"/>
+          <BaseButton titles="Total" totalSelectedItems ={this.props.selectedSalesPlans.length}/>
+          <BaseButton titles="Delete" />
 					<BaseButton titles="Download"  />
           <BaseButton titles="Approve"
-            // disabled={this.props.selectedSalesPlans.selectedSales.length < 1 || this.props.selectedSalesPlans.selectedSales.some((plans) => plans.status === 'Approved')} 
-            className="btn-assign" onClick={this.onClickApproveBtn}
+            onClick={this.onClickApproveBtn}
+            disabledButton = {this.props.selectedSalesPlans.length < 1 }
+            totalSelectedItems ={this.props.selectedSalesPlans.length}
+            isMoved = { this.props.putDatatoPlanningApprove(this.props.selectedSalesPlans)}
           />
         </div>
       );
@@ -389,6 +392,7 @@ onClickApproveBtn = () => {
       <>
         <PlanningDetailsTab
           {...this.props}
+          // salesDataSelected={this.props.selectedSalesPlans.length}
           renderBaseButton={this._renderBaseButton()}
           renderSearch={this._renderSearchBar()}
           onClickSalesOrder={this.onClickSalesOrder}        

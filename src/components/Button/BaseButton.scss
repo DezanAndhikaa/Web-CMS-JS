@@ -7,6 +7,15 @@
     // flex-direction: row;
     // margin-left: 34%;
     width: auto;
+    .label-selected-data{
+        display: flex;
+        color: map-get($colors, primary-dark);
+        font-size: 14px;
+        width: 16.2vw;
+        align-items: center;
+        justify-content: flex-end;
+        margin-right: 0.8vw;
+    }
     .btn-download{
         display: flex;
         padding-left: 10%;

@@ -18,7 +18,7 @@ export default class ApproveConfirmation extends React.PureComponent {
                 <p className="confirmation-title">From Service Order</p>
                 <img className="confirmation-image" src={Confirm} alt="" />
                 <p className="confirmation-caption">Are you sure want to</p>
-                <p className="confirmation-caption">approve 3 items?</p>
+                <p className="confirmation-caption">approve {this.props.totalData} items?</p>
                 <div className="btn-row">
                   <Button className="button-no" onClick={this.props.onClose}>No</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <Button className="button-yes" onClick={this.props.putOnPlanningApp}>Yes</Button>
