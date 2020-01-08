@@ -72,7 +72,7 @@ const initialSelectedFilter = {
 const initialSalesParameter = {
 	dataFilter : {
 		PageNumber : 1,
-		PageSize: 10,
+		PageSize: 2,
 		Sort: '',
 		Filter: [
 			// {
@@ -306,7 +306,7 @@ export function salesParameterReducer(state = initialSalesParameter, action) {
 	console.log('ini data reducer action/payload', action.payload);
 	console.log('action action action : ',action);
 	if (action.type === UpdateSalesParameterAction)
-		return {...state, dataFilter: {Filter: action.payload}};
+		return {...state, dataFilter: action.payload};
 	if (action.type === SelectCustomerFilterAction)
 		return {...state, dataFilter: {Filter : {Filter : [{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }}};
 	if(action.type === SelectSiteFilterAction)
@@ -318,7 +318,16 @@ export function salesParameterReducer(state = initialSalesParameter, action) {
 	return state;
 }
 export function serviceParameterReducer(state = initialServiceParameter, action) {
-	if (action.type === UpdateServiceParameterAction) return action.payload;
+	if (action.type === UpdateServiceParameterAction)
+		return {...state, dataFilter: action.payload};
+	if (action.type === SelectCustomerFilterAction)
+		return {...state, dataFilter: {Filter : {Filter : [{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }}};
+	if(action.type === SelectSiteFilterAction)
+		return {...state, dataFilter:{Filter :{Filter : [{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] }}};
+	if (action.type === SelectUnitModelFilterAction)
+		return {...state, dataFilter: {Filter : {Filter : [{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}] }}};
+	if (action.type === SelectComponentFilterAction)
+		return {...state, dataFilter: {Filter :{Filter : [{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }}};
 	return state;
 }
 

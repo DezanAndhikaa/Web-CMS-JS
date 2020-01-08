@@ -95,14 +95,17 @@ class PlanningDetailsTab extends React.Component {
 
   handleChange = (event, value) => {
     console.log('ini index pas di change',this.state.value)
+    
     if (this.state.value === 1) {
+      this.props.onPage(this.state.value);
       this.setState({
         invisible1 : !this.state.invisible1,
         invisible2 : !this.state.invisible2,
-        value
+        value,
       })
     }
     if (this.state.value === 0) {
+      this.props.onPage(this.state.value);
       this.setState({
         invisible1 : !this.state.invisible1,
         invisible2 : !this.state.invisible2,

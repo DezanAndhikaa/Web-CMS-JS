@@ -13,11 +13,11 @@ class DetailPages extends React.Component{
       super(props)
       this.state = {
         stats: true,
-        displayCheckbox: true,
         // lifetime: SalesDummy,
         lifetime: this.props.salesOrderList.Lists,
-        salesOrder: [],
-        isShowAssign: false,
+        isPaging: true,
+        isShowPerPage: true,
+        showPerPage : 0,
         // nextPage: true,
         // prevPage: false,
         // numberOfPage: 2,
@@ -291,29 +291,61 @@ onClickApproveBtn = () => {
   //     //   console.log('data dari api',this.state.salesOrder)
   // }
   
-  _renderPagination= (value) =>  {
-    // console.log('ini data untuk paging',this.props.salesOrderList)
-    const web = this.props.displayMode === 'web';
-    const nextSales = this.props.salesOrderList.NextPage;
-    const prevSales = this.props.salesOrderList.PrevPage;
-    const currentPropsSales = this.props.salesOrderList.PageNumber;
-    const { TotalPage } = this.props.salesOrderList;
-    
-    return(
-      <div className="pagination">
-        <div className="paging">
-          {prevSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter.Filter, PageNumber: currentPropsSales - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>}
-          {web && currentPropsSales - 3 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter.Filter, PageNumber: currentPropsSales - 3 })} className="page-inactive">{currentPropsSales - 3}</div>}
-          {web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter.Filter, PageNumber: currentPropsSales - 2 })} className="page-inactive">{currentPropsSales - 2}</div>}
-          {currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter.Filter, PageNumber: currentPropsSales - 1 })} className="page-inactive">{currentPropsSales - 1}</div>}
-          <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter.Filter, PageNumber: currentPropsSales })} className="page-active">{currentPropsSales}</div>
-          {currentPropsSales + 1 <= TotalPage && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter.Filter, PageNumber: currentPropsSales + 1 })} className="page-inactive">{currentPropsSales + 1}</div>}
-          {web && currentPropsSales + 2 < TotalPage && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter.Filter, PageNumber: currentPropsSales + 2 })} className="page-inactive">{currentPropsSales + 2}</div>}
-          {web && currentPropsSales + 3 < TotalPage && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter.Filter, PageNumber: currentPropsSales + 3 })} className="page-inactive">{currentPropsSales + 3}</div>}
-          {nextSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter.Filter, PageNumber: currentPropsSales + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>}
+  _renderPagination= (pageValue) =>  {
+    if (pageValue === 1) {
+      this.setState({isPaging : true})
+    }if (pageValue === 0) {
+      this.setState({isPaging : false})
+    }
+    // console.log('ini data untuk paging',pageValue)
+    // this.setState({NumberOfPages : pageValue})
+    console.log('ini data untuk paging',this.state.isPaging);
+    if (this.state.isPaging === true) {
+      const web = this.props.displayMode === 'web';
+      const nextSales = this.props.salesOrderList.NextPage;
+      const prevSales = this.props.salesOrderList.PrevPage;
+      const currentPropsSales = this.props.salesOrderList.PageNumber;
+      const { TotalPage } = this.props.salesOrderList;
+      
+      return(
+        <div className="pagination">
+          <div className="paging">
+            {prevSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>}
+            {web && currentPropsSales - 3 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 3 })} className="page-inactive">{currentPropsSales - 3}</div>}
+            {web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive">{currentPropsSales - 2}</div>}
+            {currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive">{currentPropsSales - 1}</div>}
+            <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales })} className="page-active">{currentPropsSales}</div>
+            {currentPropsSales + 1 <= TotalPage && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive">{currentPropsSales + 1}</div>}
+            {web && currentPropsSales + 2 < TotalPage && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive">{currentPropsSales + 2}</div>}
+            {web && currentPropsSales + 3 < TotalPage && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive">{currentPropsSales + 3}</div>}
+            {nextSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>}
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
+    if (this.state.isPaging === false) {
+      const web = this.props.displayMode === 'web';
+      const nextSales = this.props.serviceOrderList.NextPage;
+      const prevSales = this.props.serviceOrderList.PrevPage;
+      const currentPropsService = this.props.serviceOrderList.PageNumber;
+      const { TotalPage } = this.props.serviceOrderList;
+      
+      return(
+        <div className="pagination">
+          <div className="paging">
+            {prevSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>}
+            {web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive">{currentPropsService - 3}</div>}
+            {web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive">{currentPropsService - 2}</div>}
+            {currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive">{currentPropsService - 1}</div>}
+            <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService })} className="page-active">{currentPropsService}</div>
+            {currentPropsService + 1 <= TotalPage && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive">{currentPropsService + 1}</div>}
+            {web && currentPropsService + 2 < TotalPage && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive">{currentPropsService + 2}</div>}
+            {web && currentPropsService + 3 < TotalPage && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive">{currentPropsService + 3}</div>}
+            {nextSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>}
+          </div>
+        </div>
+      )
+    }
   }
   
 
@@ -325,11 +357,28 @@ onClickApproveBtn = () => {
     onClickSalesOrder = () =>{
       console.log('ini filter paging ', this.props.salesParameter.dataFilter )
       this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
-      // console.log('ini data parameter',JSON.stringify(this.props.salesParameter.soFilter));
-      // console.log('ini data dari api',this.props.salesOrderList);
-      // console.log('ini data pilihan dari marinka : ', this.props.salesOrderList.GroupSo)
     }
 
+  handlePageSize = (numberOfPage) => {
+    // this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: numberOfPage})
+    // this.setState({
+    //     showPerPage : numberOfPage
+    //   })
+    // const pageNumber = this.props.salesParameter.dataFilter.PageSize
+    // const pageNumber = numberOfPage;
+    // this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter, PageSize : pageNumber }) 
+    // console.log('ini page number', pageNumber)
+    console.log('ini pagenumber yg sudah diklik', numberOfPage)
+  }
+
+  _renderShowPerPage(){
+    return(
+      <DropDownList 
+      {...this.props}
+      onPageSize={()=>this.handlePageSize()}
+      />
+    )
+  }
   _renderSearchBar(){
     return (
       <SearchInput
@@ -401,17 +450,12 @@ onClickApproveBtn = () => {
           onClickTabHead={this.props.onClickSortBy}
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}
+          onPage={this._renderPagination}
           
         />
       </>
     );
   };
-
-  _renderShowPerPage(){
-    return(
-      <DropDownList />
-    )
-  }
 
     render(){
       console.log('ini selected parameter sales',this.props.selectedSalesPlans);
@@ -420,6 +464,7 @@ onClickApproveBtn = () => {
       // console.log('data props',this.props)
         return(
             <main className="content">
+              {this.handlePageSize()}
                 <div className="table-container">
                       {this._renderTabs()}
                   </div>
