@@ -233,6 +233,10 @@ export function selectFilterAction(type, payload) {
 	return { type, payload };
 }
 
+export function selectFilterAction2(type, payload) {
+	return { type, payload };
+}
+
 export function selectSalesPlansAction(type, payload) {
 	return { type, payload };
 }

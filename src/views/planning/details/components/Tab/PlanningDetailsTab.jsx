@@ -80,6 +80,12 @@ class PlanningDetailsTab extends React.Component {
     value: 0,
     invisible1: false,
     invisible2: true,
+    dataFilter: {
+      GroupCustomer: [],
+      GroupSite: [],
+      GroupUnitModel: [],
+      GroupComponentDescription: []
+    },
   };
 
   _renderTotalSalesOrder(){
@@ -144,6 +150,20 @@ class PlanningDetailsTab extends React.Component {
     );
   }
 
+  // _dataFilterCustomer(){
+  //     if(this.state.value === 0){
+  //       this.setState({
+  //         dataFilter: {
+  //           GroupCustomer: this.props.salesOrderList.GroupCustomer
+  //         }
+  //       })
+  //       return this.state.dataFilter.GroupCustomer
+  //     }
+  //     // else{
+  //     //   return this.props.serviceOrderList.GroupCustomer
+  //     // }
+  // }
+
   _renderFilter() {
     console.log('ini props untuk filter', this.props.salesOrderList)
     return (
@@ -151,10 +171,11 @@ class PlanningDetailsTab extends React.Component {
         <div className="dropdown-container">
           <DropdownFilter
           {...this.props}
+            // data={this._dataFilterCustomer()}
             data={this.props.salesOrderList.GroupCustomer}
             selected={this.props.selectedFilters.customerType}
             onSelectActionType={SelectCustomerFilterAction}
-            onSelectAction={this.props.selectFilter}
+            onSelectAction={this.props.selectFilter2}
           />
         </div>
         <div className="dropdown-container">
@@ -162,7 +183,7 @@ class PlanningDetailsTab extends React.Component {
             data={this.props.salesOrderList.GroupSite}
             selected={this.props.selectedFilters.siteType}
             onSelectActionType={SelectSiteFilterAction}
-            onSelectAction={this.props.selectFilter}
+            onSelectAction={this.props.selectFilter2}
           />
         </div>
         <div className="dropdown-container">
@@ -170,7 +191,7 @@ class PlanningDetailsTab extends React.Component {
             data={this.props.salesOrderList.GroupUnitModel}
             selected={this.props.selectedFilters.unitType}
             onSelectActionType={SelectUnitModelFilterAction}
-            onSelectAction={this.props.selectFilter}
+            onSelectAction={this.props.selectFilter2}
           />
         </div>
         <div className="dropdown-container">
@@ -178,7 +199,7 @@ class PlanningDetailsTab extends React.Component {
             data={this.props.salesOrderList.GroupComponentDescription}
             selected={this.props.selectedFilters.compType}
             onSelectActionType={SelectComponentFilterAction}
-            onSelectAction={this.props.selectFilter}
+            onSelectAction={this.props.selectFilter2}
           />
         </div>
         <div className="search-container">
@@ -221,7 +242,7 @@ class PlanningDetailsTab extends React.Component {
         <div className="filters-container">
           {this._renderFilter()}
         </div>
-    {value === 0 && <TabContainer dir={theme.direction}><div>{this._renderSalesOrderList()}</div></TabContainer>}
+        {value === 0 && <TabContainer dir={theme.direction}><div>{this._renderSalesOrderList()}</div></TabContainer>}
         {value === 1 && <TabContainer dir={theme.direction}><div>{this._renderServiceOrderList()}</div></TabContainer>}
       </div>
     );

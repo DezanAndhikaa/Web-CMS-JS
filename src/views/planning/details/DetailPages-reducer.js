@@ -216,7 +216,7 @@ export function fetchSalesReducer(state = initialSalesState, action) {
 	if (action.type === FetchSalesAction) {
 	  switch (action.status) {
 		case ApiRequestActionsStatus.SUCCEEDED:
-			console.log('ini balikan dari mantan',action.payload);
+			// console.log('ini balikan dari mantan',action.payload);
 		  return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
 		case ApiRequestActionsStatus.FAILED:
 		  return {
@@ -301,20 +301,42 @@ export function selectedFiltersReducer(state = initialSelectedFilter, action) {
 // }
 
 export function salesParameterReducer(state = initialSalesParameter, action) {
-	console.log('ini data reducer action/payload', action.payload);
-	console.log('action action action : ',action);
 	if (action.type === UpdateSalesParameterAction)
 		return {...state, dataFilter: {Filter: action.payload}};
-	if (action.type === SelectCustomerFilterAction)
-		return {...state, dataFilter: {Filter : [{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
-	if(action.type === SelectSiteFilterAction)
-		return {...state, dataFilter: {Filter : [{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
-	if (action.type === SelectUnitModelFilterAction)
-		return {...state, dataFilter: {Filter : [{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
-	if (action.type === SelectComponentFilterAction)
-		return {...state, dataFilter: {Filter : [{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 	return state;
 }
+
+export function filterParameterReducer(state = [], action){
+	if (action.type === SelectCustomerFilterAction)
+		if(state.length === 0){ //IF yang pertama ini,jika filternya belum di isi apa2 (filter belum di jalankan)
+			return {...state, dataFilter: {Filter : [{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
+		}else{
+			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }}
+		}
+	if(action.type === SelectSiteFilterAction)
+		if(state.length === 0){
+			return {...state, dataFilter: {Filter : [{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
+		}else{
+			// lifetime: this.state.lifetime.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) 
+			console.log('panjang data : ',state.dataFilter.Filter.length)
+			
+			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
+		}
+	if (action.type === SelectUnitModelFilterAction)
+		if(state.length === 0){
+			return {...state, dataFilter: {Filter : [{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
+		}else{
+			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
+		}
+	if (action.type === SelectComponentFilterAction)
+		if(state.length === 0){
+			return {...state, dataFilter: {Filter : [{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }}
+		}else{
+			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
+		}
+	return state
+}
+
 export function serviceParameterReducer(state = initialServiceParameter, action) {
 	if (action.type === UpdateServiceParameterAction) return action.payload;
 	return state;
@@ -494,6 +516,7 @@ const PlansReducers = combineReducers({
 	approveSalesStatus: approveSalesReducer,
 	// unapproveSalesStatus: unapproveSalesReducer,
 	salesParameter: salesParameterReducer,
+	filterParameter: filterParameterReducer,
 	serviceParameter: serviceParameterReducer,
 	// PlansAssignmentSummary: fetchPlansReducer,
 	sortSalesBy: sortSalesByReducer,
