@@ -43,14 +43,17 @@ componentWillReceiveProps(props) {
 }
 
 componentDidUpdate = (prevProps) => {
-  // console.log('fetch berjalan', this.props.salesParameter)
   if (prevProps.salesParameter !== this.props.salesParameter) {
-    console.log('fetch berjalan', this.props.salesParameter)
-    // this.props.fetchServiceOrder(this.props.salesParameter.dataFilter);
+    // console.log('fetch berjalan', this.props.salesParameter)
+    // console.log('data filter paling terupdate : ', this.props.salesParameter.dataFilter)
     this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
   }
+  // FILTER DROPDOWN
+  if(prevProps.filterParameter !== this.props.filterParameter){
+    this.props.fetchSalesOrder(this.props.filterParameter.dataFilter);
+  }
   if (prevProps.serviceParameter !== this.props.serviceParameter) {
-    console.log('fetch berjalan', this.props.serviceParameter)
+    // console.log('fetch berjalan', this.props.serviceParameter)
     this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
     // this.props.fetchSalesOrder(this.props.serviceParameter.dataFilter);
   }
@@ -260,8 +263,8 @@ componentDidUpdate = (prevProps) => {
     //   currentPage: 1,
     // });
   }
-  console.log('sales parameter setelah di sorting', this.props.salesParameter)
-  console.log('service parameter setelah di sorting', this.props.serviceParameter)
+  // console.log('sales parameter setelah di sorting', this.props.salesParameter)
+  // console.log('service parameter setelah di sorting', this.props.serviceParameter)
   console.log('ini selected service',this.props.selectedServicePlans)
   console.log('ini selected sales',this.props.selectedSalesPlans)
 }
@@ -325,13 +328,13 @@ onClickApproveBtn = () => {
 
     onClickServiceOrder = () => {
       this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
-      console.log('ini data dari api',this.props.serviceParameter.dataFilter);
+      // console.log('ini data dari api',this.props.serviceParameter.dataFilter);
     }
 
     onClickSalesOrder = () =>{
       console.log('ini filter paging ', this.props.salesParameter.dataFilter )
       this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
-      console.log('nilai nilai props : ',this.state.lifetime)
+      // console.log('nilai nilai props : ',this.state.lifetime)
       // console.log('ini data parameter',JSON.stringify(this.props.salesParameter.soFilter));
       // console.log('ini data dari api',this.props.salesOrderList);
       // console.log('ini data pilihan dari marinka : ', this.props.salesOrderList.GroupSo)
@@ -366,8 +369,6 @@ onClickApproveBtn = () => {
   }
     
   isChangeStat = (value,key) =>{
-    console.log('nilai value kiriman : '+value)
-    console.log('nilai key kiriman : '+key)
     this.setState({
       lifetime: this.state.lifetime.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) 
     });
@@ -381,6 +382,7 @@ onClickApproveBtn = () => {
   };
 
   updateAssignmentSalesStates = (plan) => {
+    console.log('iniiiiiiiiiiiiii', this.state.lifetime)
     if (this.props.selectedSalesPlans.some(
       (plans) => plans.SO === plan.SO,
     )) { return this.props.unselectSalesPlan(plan); }
@@ -424,9 +426,6 @@ onClickApproveBtn = () => {
   }
 
     render(){
-      console.log('nilai nilai propos : ',this.state.lifetime)
-      console.log('ini selected parameter sales',this.props.selectedSalesPlans);
-      console.log('ini seleceted parameter service',this.props.selectedServicePlans);
       // console.log('ini seleceted parameter sales',this.props.selectedServicePlans);
       // console.log('data props',this.props)
         return(
