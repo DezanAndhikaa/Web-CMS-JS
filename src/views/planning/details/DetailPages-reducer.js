@@ -113,7 +113,7 @@ const initialServiceParameter = {
 	// dataFilter : {
 	dataFilter: {
 			  PageNumber : 1,
-			  PageSize: 2,
+			  PageSize: 10,
 			  Sort: '',
 		  Filter: [
 			// {

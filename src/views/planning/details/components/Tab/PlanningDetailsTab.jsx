@@ -9,12 +9,10 @@ import SalesOrderList from '../PlanningList/SalesOrderList';
 import ServiceOrderList from '../PlanningList/ServiceOrderList';
 import Badge from '@material-ui/core/Badge';
 import './PlanningDetailsTab.scss'
-import SalesOrderData from '../../../../../planning-data-dummy.json';
-import BaseButton from '../../../../../components/Button/BaseButton';
-import Searchbar from "../../../../../components/Searchbar/SearchInput";
+// import SalesOrderData from '../../../../../planning-data-dummy.json';
+// import Searchbar from "../../../../../components/Searchbar/SearchInput";
 import FilterbyDataAction from '../../../../../components/FilterByDataAction/FilterbyDataAction';
 import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
-import DeleteButton from '../../../../../components/DeleteConfirmation/DeleteSuccess';
 import { SelectCustomerFilterAction,SelectSiteFilterAction, SelectUnitModelFilterAction, SelectComponentFilterAction } from '../../DetailPages-action'
 
 function TabContainer({ children, dir }) {
@@ -24,6 +22,13 @@ function TabContainer({ children, dir }) {
     </Typography>
   );
 }
+const StyledBadge = withStyles(theme => ({
+  badge: {
+    right: -20,
+    top: 10,
+    padding: '0 4px',
+  },
+}))(Badge);
 
 TabContainer.propTypes = {
   children: PropTypes.node.isRequired,
@@ -43,7 +48,7 @@ const styles = theme => ({
   tabRoot: {
     textTransform: 'initial',
     marginLeft:0,
-    minWidth: 72,
+    // minWidth: 72,
     fontWeight: theme.typography.fontWeightRegular,
     marginRight: theme.spacing.unit * 0,
     fontFamily: [
@@ -72,7 +77,7 @@ const styles = theme => ({
   },
   tabSelected: {},
   typography: {
-    padding: theme.spacing.unit * 0,
+    padding: theme.spacing.unit * 4,
   },
 });
 
@@ -202,16 +207,18 @@ class PlanningDetailsTab extends React.Component {
             {this._renderFilterByDataAction()}
         </div>
           <Tabs 
-          classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
+            classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
             value={this.state.value}
             onChange={this.handleChange}
             indicatorColor="primary" >
-            <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<Badge badgeContent={this.props.totalSalesData} color="primary" className="badge" invisible={this.state.invisible1}>
+            {/* <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<div>Sales Order <span className="badge" style={{visibility: this.state.invisible1}} > {this.props.totalSalesData}</span></div>}/>
+            <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<div>Service Order <span className="badge" visibility={this.state.invisible2} >{this.props.totalServiceData}</span></div>}/> */}
+            <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<StyledBadge badgeContent={this.props.totalSalesData} color="primary" invisible={this.state.invisible1}>
             <>Sales Order</>
-            </Badge >} />
-            <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<Badge badgeContent={this.props.totalServiceData} color="primary" className="badge" invisible={this.state.invisible2}>
+            </StyledBadge >} />
+            <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<StyledBadge badgeContent={this.props.totalServiceData} color="primary" invisible={this.state.invisible2}>
             <>Service Order</>
-            </Badge >} />
+            </StyledBadge >} />
             {/* <Tab disabled classes={{ root: classes.tabRoot }} /><Tab disabled classes={{ root: classes.tabRoot }} />
             <Tab disabled classes={{ root: classes.tabRoot }} /><Tab disabled classes={{ root: classes.tabRoot }} /> */}
             {/* {this.props.renderSearch} 
