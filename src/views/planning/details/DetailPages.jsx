@@ -66,88 +66,72 @@ componentDidUpdate = (prevProps) => {
     if (sortSalesBy.Customer.isActive) {
       isDescending = !sortSalesBy.Customer.isAscending;
       this.props.updateSalesParameter({
-        ...this.props.salesParameter,
-        dataFilter : {
+        ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
           PageSize: 2,
-          Sort: 'Customer desc'
-        },        
+          Sort: 'Customer desc',      
       });
     if (sortSalesBy.Customer.isAscending === !sortSalesBy.Customer.isActive) {
       isDescending = !sortSalesBy.Customer.isAscending;
       this.props.updateSalesParameter({
-        ...this.props.salesParameter,
-        dataFilter : {
+        ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
           PageSize: 2,
-          Sort: 'Customer asc'
-        },        
+          Sort: 'Customer asc'      
       });
     }
   }
     if (sortSalesBy.Site.isActive){
       isDescending = !sortSalesBy.Site.isAscending;
       this.props.updateSalesParameter({
-        ...this.props.salesParameter,
-        dataFilter : {
+        ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
           PageSize: 2,
           Sort: 'Site desc'
-        },      
       });
     if (sortSalesBy.Site.isAscending === !sortSalesBy.Site.isActive) {
       isDescending = !sortSalesBy.Site.isAscending;
       this.props.updateSalesParameter({
-        ...this.props.salesParameter,
-        dataFilter : {
+        ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
           PageSize: 2,
           Sort: 'Site asc'
-        },      
       });
     }
     } 
     if (sortSalesBy.UnitModel.isActive) {
       isDescending = !sortSalesBy.UnitModel.isAscending;
       this.props.updateSalesParameter({
-        ...this.props.salesParameter,
-        dataFilter : {
+        ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
           PageSize: 2,
           Sort: 'UnitModel desc'
-        },      
       });
     if (sortSalesBy.UnitModel.isAscending === !sortSalesBy.UnitModel.isActive) {
       isDescending = !sortSalesBy.UnitModel.isAscending;
       this.props.updateSalesParameter({
-        ...this.props.salesParameter,
-        dataFilter : {
+        ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
           PageSize: 2,
           Sort: 'UnitModel asc'
-        },      
       });
     }
     };
     if (sortSalesBy.CompDesc.isActive) {
       isDescending = !sortSalesBy.CompDesc.isAscending;
       this.props.updateSalesParameter({
-        ...this.props.salesParameter,
-        dataFilter : {
+        ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
           PageSize: 2,
           Sort: 'ComponentDescription desc'
-        },      
       });
     if (sortSalesBy.CompDesc.isAscending === !sortSalesBy.CompDesc.isActive) {
       isDescending = !sortSalesBy.CompDesc.isAscending;
       this.props.updateSalesParameter({
-        ...this.props.salesParameter,
-        dataFilter : {
+        ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
           PageSize: 2,
           Sort: 'ComponentDescription asc'
-        },      
       });
     }
     };
@@ -159,88 +143,72 @@ componentDidUpdate = (prevProps) => {
     if (sortServiceBy.Customer.isActive) {
       isDescending = !sortServiceBy.Customer.isAscending;
       this.props.updateServiceParameter({
-        ...this.props.serviceParameter,
-        dataFilter : {
+        ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
           PageSize: 2,
-          Sort: 'Customer desc'
-        },        
+          Sort: 'Customer desc'   
       });
     if (sortServiceBy.Customer.isAscending === !sortServiceBy.Customer.isActive) {
       isDescending = !sortServiceBy.Customer.isAscending;
       this.props.updateServiceParameter({
-        ...this.props.serviceParameter,
-        dataFilter : {
+        ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
           PageSize: 2,
-          Sort: 'Customer asc'
-        },        
+          Sort: 'Customer asc'   
       });
     }
   }
     if (sortServiceBy.Site.isActive){
       isDescending = !sortServiceBy.Site.isAscending;
       this.props.updateServiceParameter({
-        ...this.props.serviceParameter,
-        dataFilter : {
+        ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
           PageSize: 2,
-          Sort: 'Site desc'
-        },      
+          Sort: 'Site desc' 
       });
     if (sortServiceBy.Site.isAscending === !sortServiceBy.Site.isActive) {
       isDescending = !sortServiceBy.Site.isAscending;
       this.props.updateServiceParameter({
-        ...this.props.serviceParameter,
-        dataFilter : {
+        ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
           PageSize: 2,
-          Sort: 'Site asc'
-        },      
+          Sort: 'Site asc' 
       });
     }
     } 
     if (sortServiceBy.UnitModel.isActive) {
       isDescending = !sortServiceBy.UnitModel.isAscending;
       this.props.updateServiceParameter({
-        ...this.props.serviceParameter,
-        dataFilter : {
+        ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
           PageSize: 2,
-          Sort: 'UnitModel desc'
-        },      
+          Sort: 'UnitModel desc' 
       });
     if (sortServiceBy.UnitModel.isAscending === !sortServiceBy.UnitModel.isActive) {
       isDescending = !sortServiceBy.UnitModel.isAscending;
       this.props.updateServiceParameter({
-        ...this.props.serviceParameter,
-        dataFilter : {
+        ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
           PageSize: 2,
-          Sort: 'UnitModel asc'
-        },      
+          Sort: 'UnitModel asc' 
       });
     }
     };
     if (sortServiceBy.CompDesc.isActive) {
       isDescending = !sortServiceBy.CompDesc.isAscending;
       this.props.updateServiceParameter({
-        ...this.props.serviceParameter,
-        dataFilter : {
+        ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
           PageSize: 2,
-          Sort: 'ComponentDescription desc'
-        },      
+          Sort: 'ComponentDescription desc' 
       });
     if (sortServiceBy.CompDesc.isAscending === !sortServiceBy.CompDesc.isActive) {
       isDescending = !sortServiceBy.CompDesc.isAscending;
       this.props.updateServiceParameter({
-        ...this.props.serviceParameter,
-        dataFilter : {
+        ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
           PageSize: 2,
-          Sort: 'ComponentDescription asc'
-        },      
+          Sort: 'ComponentDescription asc' 
       });
     }
     };
@@ -310,7 +278,7 @@ onClickApproveBtn = () => {
       return(
         <div className="pagination">
           <div className="paging">
-            {prevSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>}
+            {/* {prevSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
             {web && currentPropsSales - 3 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 3 })} className="page-inactive">{currentPropsSales - 3}</div>}
             {web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive">{currentPropsSales - 2}</div>}
             {currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive">{currentPropsSales - 1}</div>}
@@ -318,7 +286,7 @@ onClickApproveBtn = () => {
             {currentPropsSales + 1 <= TotalPage && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive">{currentPropsSales + 1}</div>}
             {web && currentPropsSales + 2 < TotalPage && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive">{currentPropsSales + 2}</div>}
             {web && currentPropsSales + 3 < TotalPage && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive">{currentPropsSales + 3}</div>}
-            {nextSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>}
+            {/* {nextSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>} */}
           </div>
         </div>
       )

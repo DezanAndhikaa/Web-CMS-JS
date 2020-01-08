@@ -11,6 +11,7 @@ class DropDownList extends React.Component{
         // this.setState({pagesize : numberOfPages})
         console.log('this is pagenumber size data', value)
         this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value.target.value})
+        this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value.target.value})
 
         // this.props.onPageSize(value)
     }
