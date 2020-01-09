@@ -26,7 +26,7 @@ import {
 	// UnassignPlansAction, 
 	UnselectSalesPlanAction, UnselectServicePlanAction,
 	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, getSearchValueAction, fetchServiceAction, FetchServiceAction, 
-	UpdateFilterUnit
+	UpdateFilterUnit,IndexFilterAction
 } from './DetailPages-action';
 
 const initialSalesAssignment = {
@@ -320,9 +320,6 @@ export function filterParameterReducer(state = [], action){
 		if(state.length === 0){
 			return {...state, dataFilter: {Filter : [{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}else{
-			// lifetime: this.state.lifetime.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) 
-			console.log('panjang data : ',state.dataFilter.Filter.length)
-			
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}
 	if (action.type === SelectUnitModelFilterAction)
@@ -337,6 +334,13 @@ export function filterParameterReducer(state = [], action){
 		}else{
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}
+	return state
+}
+
+export function indexFilterParameterReducer(state = '', action){
+	if (action.type === IndexFilterAction){
+		return {...state, indexTabParameter : action.payload}
+	}
 	return state
 }
 
@@ -356,21 +360,6 @@ export function searchSoReducer(state = '', action) {
 	if (action.type === SearchSoAction) return action.payload;
 	return state;
 }
-
-// export function selectedFiltersReducer(state = initialSelectedFilter, action) {
-// 	switch (action.type) {
-// 	case SelectPlansTypeFilterAction:
-// 		return { ...state, planType: action.payload };
-// 	case SelectUnitModelFilterAction:
-// 		return { ...state, unitModel: action.payload };
-// 	case SelectCustomerFilterAction:
-// 		return { ...state, customer: action.payload };
-// 	case SelectPlansAssignmentFilterAction:
-// 		return { ...state, plansAssignment: action.payload };
-// 	default:
-// 		return state;
-// 	}
-// }
 
 export function selectSalesPlansReducer(state = [], action) {
 	switch (action.type) {
@@ -514,7 +503,6 @@ const PlansReducers = combineReducers({
 	salesOrderList : fetchSalesReducer,
 	// salesOrderList : getSearchValueReducer,
 	// salesOrderList: getSalesOrderReducer,
-	// mechanicList: getMechanicsReducer,
 	selectedSalesPlans: selectSalesPlansReducer,
 	selectedServicePlans: selectServicePlansReducer,
 	selectedMechanics: selectMechanicsReducer,
@@ -522,6 +510,7 @@ const PlansReducers = combineReducers({
 	// unapproveSalesStatus: unapproveSalesReducer,
 	salesParameter: salesParameterReducer,
 	filterParameter: filterParameterReducer,
+	indexFilterParameter: indexFilterParameterReducer,
 	serviceParameter: serviceParameterReducer,
 	// PlansAssignmentSummary: fetchPlansReducer,
 	sortSalesBy: sortSalesByReducer,

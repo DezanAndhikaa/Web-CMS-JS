@@ -17,6 +17,7 @@ class DetailPages extends React.Component{
         isPaging: true,
         isShowPerPage: true,
         showPerPage : 0,
+        indexPage: '',
         // nextPage: true,
         // prevPage: false,
         // numberOfPage: 2,
@@ -37,24 +38,25 @@ componentWillUnmount = () => {
 
 componentWillReceiveProps(props) {
   this.state = {
-    lifetime: props.salesOrderList.Lists
+    lifetime: props.salesOrderList.Lists,
+    indexPage: props.indexFilterParameter.indexTabParameter
   }
 }
 
 componentDidUpdate = (prevProps) => {
   if (prevProps.salesParameter !== this.props.salesParameter) {
-    // console.log('fetch berjalan', this.props.salesParameter)
-    // console.log('data filter paling terupdate : ', this.props.salesParameter.dataFilter)
     this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
   }
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
-    this.props.fetchSalesOrder(this.props.filterParameter.dataFilter);
+      if(this.state.indexPage === 0){
+        this.props.fetchSalesOrder(this.props.filterParameter.dataFilter);
+      }else{
+        this.props.fetchServiceOrder(this.props.filterParameter.dataFilter);
+      }
   }
   if (prevProps.serviceParameter !== this.props.serviceParameter) {
-    // console.log('fetch berjalan', this.props.serviceParameter)
     this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
-    // this.props.fetchSalesOrder(this.props.serviceParameter.dataFilter);
   }
   if (prevProps.Search !== this.props.Search) {
     this.props.updateSalesParameter({
@@ -274,7 +276,8 @@ onClickApproveBtn = () => {
       this.setState({isPaging : false})
     }
     // console.log('ini data untuk paging',pageValue)
-    // this.setState({NumberOfPages : pageValue})
+    // this.setState({NumberOfPages : pageValue}))
+    // console.log('ini data untuk indexpage ',this.state.indexPage)
     console.log('ini data untuk paging',this.state.isPaging);
     if (this.state.isPaging === true) {
       const web = this.props.displayMode === 'web';

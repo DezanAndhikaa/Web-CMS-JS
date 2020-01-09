@@ -160,18 +160,39 @@ class PlanningDetailsTab extends React.Component {
   }
 
   _dataFilterCustomer(){
-      if(this.state.value === 0){
-        // this.setState({
-        //   dataFilter: {
-        //     GroupCustomer: this.props.salesOrderList.GroupCustomer
-        //   }
-        // })
-        // return this.state.dataFilter.GroupCustomer
-        return this.props.salesOrderList.GroupCustomer
-      }
-      else{
-        return this.props.serviceOrderList.GroupCustomer
-      }
+    if(this.state.value === 0){
+      return this.props.salesOrderList.GroupCustomer
+    }
+    else{
+      return this.props.serviceOrderList.GroupCustomer
+    }
+  }
+
+  _dataFilterSite(){
+    if(this.state.value === 0){
+      return this.props.salesOrderList.GroupSite
+    }
+    else{
+      return this.props.serviceOrderList.GroupSite
+    }
+  }
+
+  _dataFilterUnitModel(){
+    if(this.state.value === 0){
+      return this.props.salesOrderList.GroupUnitModel
+    }
+    else{
+      return this.props.serviceOrderList.GroupUnitModel
+    }
+  }
+
+  _dataFilterComponentDescription(){
+    if(this.state.value === 0){
+      return this.props.salesOrderList.GroupComponentDescription
+    }
+    else{
+      return this.props.serviceOrderList.GroupComponentDescription
+    }
   }
 
   _renderFilter() {
@@ -182,34 +203,40 @@ class PlanningDetailsTab extends React.Component {
           <DropdownFilter
           {...this.props}
             data={this._dataFilterCustomer()}
-            // data={this.props.salesOrderList.GroupCustomer}
             selected={this.props.selectedFilters.customerType}
             onSelectActionType={SelectCustomerFilterAction}
             onSelectAction={this.props.selectFilter2}
+            indexTab={this.state.value}
           />
         </div>
         <div className="dropdown-container">
           <DropdownFilter
-            data={this.props.salesOrderList.GroupSite}
+            {...this.props}
+            data={this._dataFilterSite()}
             selected={this.props.selectedFilters.siteType}
             onSelectActionType={SelectSiteFilterAction}
             onSelectAction={this.props.selectFilter2}
+            indexTab={this.state.value}
           />
         </div>
         <div className="dropdown-container">
           <DropdownFilter
-            data={this.props.salesOrderList.GroupUnitModel}
+            {...this.props}
+            data={this._dataFilterUnitModel()}
             selected={this.props.selectedFilters.unitType}
             onSelectActionType={SelectUnitModelFilterAction}
             onSelectAction={this.props.selectFilter2}
+            indexTab={this.state.value}
           />
         </div>
         <div className="dropdown-container">
           <DropdownFilter
-            data={this.props.salesOrderList.GroupComponentDescription}
+            {...this.props}
+            data={this._dataFilterComponentDescription()}
             selected={this.props.selectedFilters.compType}
             onSelectActionType={SelectComponentFilterAction}
             onSelectAction={this.props.selectFilter2}
+            indexTab={this.state.value}
           />
         </div>
         <div className="search-container">
