@@ -9,7 +9,7 @@ class DropDownList extends React.Component{
     handleClick = (value) =>{
         // const { myValue } = event.currentTarget.dataset
         // this.setState({pagesize : numberOfPages})
-        console.log('this is pagenumber size data', value)
+        console.log('this is pagenumber size data', this.props.salesParameter.dataFilter)
         this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value.target.value})
         this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value.target.value})
 
