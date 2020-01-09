@@ -10,7 +10,8 @@ class BaseButton extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            isShowModal: false
+            isShowModal: false,
+            index:0
         }
     }
 
@@ -20,6 +21,22 @@ class BaseButton extends React.Component{
 
     isClosed = () => {
         this.setState({isShowModal: !this.state.isShowModal})
+    }
+
+    isMoved = async() => {
+        if (this.props.whatTabsIsRendered === true) {
+            await this.props.putDatatoPlanningApprove({...this.props.selectedData})
+            await this.isClosed()
+            await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
+            this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
+        }
+        if (this.props.whatTabsIsRendered === false) {
+
+        }
+        
+        console.log('ini stateeeee', this.props.selectedData)
+        console.log('ini stateeeee2', this.props.selectedSalesPlans)
+        // 
     }
 
     render(){
@@ -60,8 +77,8 @@ class BaseButton extends React.Component{
                         {...this.state}
                         onClose={this.isClosed}
                         openModal={this.state.isShowModal}
-                        putOnPlanningApp={this.props.isMoved} 
                         totalData={this.props.totalSelectedItems}
+                        onMoved={this.isMoved}
                     />
                 </div>
             )

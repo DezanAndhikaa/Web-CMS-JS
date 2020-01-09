@@ -375,6 +375,7 @@ export function searchSoReducer(state = '', action) {
 export function selectSalesPlansReducer(state = [], action) {
 	switch (action.type) {
 	case SelectSalesPlanAction: {
+		console.log('skuiiiiiiiiiiiiiiii', action.payload)
 		return [...state, action.payload];
 	}
 	case UnselectSalesPlanAction: {

@@ -21,7 +21,7 @@ export default class ApproveConfirmation extends React.PureComponent {
                 <p className="confirmation-caption">approve {this.props.totalData} items?</p>
                 <div className="btn-row">
                   <Button className="button-no" onClick={this.props.onClose}>No</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <Button className="button-yes" onClick={this.props.putOnPlanningApp}>Yes</Button>
+                  <Button className="button-yes" onClick={this.props.onMoved}>Yes</Button>
                   </div>
               </div>
           </div>

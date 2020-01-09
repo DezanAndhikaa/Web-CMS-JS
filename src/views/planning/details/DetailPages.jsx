@@ -18,6 +18,13 @@ class DetailPages extends React.Component{
         isPaging: true,
         isShowPerPage: true,
         showPerPage : 0,
+        selectedData: {
+          So : [],
+          IsApproved: false,
+          UpdatedBy: "string",
+          UpdatedByName: "string",
+          UpdatedDate: ""
+        },
         // nextPage: true,
         // prevPage: false,
         // numberOfPage: 2,
@@ -285,7 +292,7 @@ onClickApproveBtn = () => {
             {web && currentPropsSales - 3 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 3 })} className="page-inactive">{currentPropsSales - 3}</div>}
             {web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive">{currentPropsSales - 2}</div>}
             {currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive">{currentPropsSales - 1}</div>}
-            <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales })} className="page-active">{currentPropsSales}</div>
+            <div className="page-active">{currentPropsSales}</div>
             {currentPropsSales + 1 <= TotalPage && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive">{currentPropsSales + 1}</div>}
             {web && currentPropsSales + 2 < TotalPage && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive">{currentPropsSales + 2}</div>}
             {web && currentPropsSales + 3 < TotalPage && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive">{currentPropsSales + 3}</div>}
@@ -308,7 +315,8 @@ onClickApproveBtn = () => {
             {web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive">{currentPropsService - 3}</div>}
             {web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive">{currentPropsService - 2}</div>}
             {currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive">{currentPropsService - 1}</div>}
-            <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService })} className="page-active">{currentPropsService}</div>
+            <div className="page-active">{currentPropsService}</div>
+            {/* <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService })} className="page-active">{currentPropsService}</div> */}
             {currentPropsService + 1 <= TotalPage && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive">{currentPropsService + 1}</div>}
             {web && currentPropsService + 2 < TotalPage && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive">{currentPropsService + 2}</div>}
             {web && currentPropsService + 3 < TotalPage && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive">{currentPropsService + 3}</div>}
@@ -368,10 +376,13 @@ onClickApproveBtn = () => {
           <BaseButton titles="Delete" />
 					<BaseButton titles="Download"  />
           <BaseButton titles="Approve"
+            {...this.props}
             onClick={this.onClickApproveBtn}
             disabledButton = {this.props.selectedSalesPlans.length < 1 }
             totalSelectedItems ={this.props.selectedSalesPlans.length}
-            isMoved = { this.props.putDatatoPlanningApprove(this.props.selectedSalesPlans)}
+            whatTabsIsRendered={this.state.isPaging}
+            selectedData={this.state.selectedData}
+            // isMoved = {()=> this.props.putDatatoPlanningApprove(this.props.selectedSalesPlans.So)}
           />
         </div>
       );
@@ -395,6 +406,10 @@ onClickApproveBtn = () => {
     console.log('iniiiiiiiiiiiiii', this.state.lifetime)
     if (this.props.selectedSalesPlans.some(
       (plans) => plans.SO === plan.SO,
+      this.setState({
+        selectedData : {So:[...this.state.selectedData.So, plan.SO], IsApproved: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: ""}
+      }),
+      console.log('sukiiii', this.state.selectedData)
     )) { return this.props.unselectSalesPlan(plan); }
     return this.props.selectSalesPlan(plan);
   };
