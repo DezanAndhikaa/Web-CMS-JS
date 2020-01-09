@@ -13,8 +13,7 @@ class DetailPages extends React.Component{
       super(props)
       this.state = {
         stats: true,
-        // lifetime: SalesDummy,
-        lifetime: this.props.salesOrderList.Lists,
+        lifetime: [],
         isPaging: true,
         isShowPerPage: true,
         showPerPage : 0,
@@ -34,6 +33,12 @@ componentWillUnmount = () => {
   this.props.updateSalesParameter({
     ...this.props.salesParameter, Search: '',
   });
+}
+
+componentWillReceiveProps(props) {
+  this.state = {
+    lifetime: props.salesOrderList.Lists
+  }
 }
 
 componentDidUpdate = (prevProps) => {
@@ -380,7 +385,7 @@ onClickApproveBtn = () => {
     
   isChangeStat = (value,key) =>{
     this.setState({
-      lifetime: { Lists :this.state.lifetime.Lists.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) }
+      lifetime: this.state.lifetime.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el))
     });
   }
 
@@ -417,7 +422,7 @@ onClickApproveBtn = () => {
           displayCheckbox={this.props.salesParameter.paramsData.assigmentFilter || this.props.salesParameter.paramsData.inProgressFilter}
           stats={this.state.stats}
           onStats={this.isChangeStat}
-          // value={this.state.lifetime}      
+          value={this.state.lifetime}      
           totalSalesData={this.props.salesOrderList.TotalData}
           totalServiceData={this.props.serviceOrderList.TotalData}
           onClickTabHead={this.props.onClickSortBy}

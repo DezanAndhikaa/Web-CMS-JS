@@ -159,19 +159,20 @@ class PlanningDetailsTab extends React.Component {
     );
   }
 
-  // _dataFilterCustomer(){
-  //     if(this.state.value === 0){
-  //       this.setState({
-  //         dataFilter: {
-  //           GroupCustomer: this.props.salesOrderList.GroupCustomer
-  //         }
-  //       })
-  //       return this.state.dataFilter.GroupCustomer
-  //     }
-  //     // else{
-  //     //   return this.props.serviceOrderList.GroupCustomer
-  //     // }
-  // }
+  _dataFilterCustomer(){
+      if(this.state.value === 0){
+        // this.setState({
+        //   dataFilter: {
+        //     GroupCustomer: this.props.salesOrderList.GroupCustomer
+        //   }
+        // })
+        // return this.state.dataFilter.GroupCustomer
+        return this.props.salesOrderList.GroupCustomer
+      }
+      else{
+        return this.props.serviceOrderList.GroupCustomer
+      }
+  }
 
   _renderFilter() {
     console.log('ini props untuk filter', this.props.salesOrderList)
@@ -180,8 +181,8 @@ class PlanningDetailsTab extends React.Component {
         <div className="dropdown-container">
           <DropdownFilter
           {...this.props}
-            // data={this._dataFilterCustomer()}
-            data={this.props.salesOrderList.GroupCustomer}
+            data={this._dataFilterCustomer()}
+            // data={this.props.salesOrderList.GroupCustomer}
             selected={this.props.selectedFilters.customerType}
             onSelectActionType={SelectCustomerFilterAction}
             onSelectAction={this.props.selectFilter2}
