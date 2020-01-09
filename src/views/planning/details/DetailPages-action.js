@@ -230,6 +230,8 @@ export function searchSo(type, payload){
 }
 
 export function selectFilterAction(type, payload) {
+	console.log("ini punya si type : ",type)
+	console.log("ini punya si payload : ", payload)
 	return { type, payload };
 }
 
