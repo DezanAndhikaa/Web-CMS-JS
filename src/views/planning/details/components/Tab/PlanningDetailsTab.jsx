@@ -26,7 +26,8 @@ const StyledBadge = withStyles(theme => ({
   badge: {
     right: -20,
     top: 10,
-    padding: '0 4px',
+    padding: '8px',
+    borderRadius: '5px'
   },
 }))(Badge);
 
