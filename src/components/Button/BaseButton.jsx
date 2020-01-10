@@ -36,7 +36,6 @@ class BaseButton extends React.Component{
         
         console.log('ini stateeeee', this.props.selectedData)
         console.log('ini stateeeee2', this.props.selectedSalesPlans)
-        // 
     }
 
     render(){
