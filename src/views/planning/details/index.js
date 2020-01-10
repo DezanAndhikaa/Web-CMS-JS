@@ -6,7 +6,8 @@ import { PLAN_DATA, StorageKey } from '../../../constants';
 import {
 	approveSalesAction,
 	unapproveSalesAction,
-	putPlanningApprovedAction,
+	putSalesApprovedAction, //APPROVE SALES
+	putServiceApprovedAction, //APPROVE SERVICE
 	getServiceOrderAction, fetchSalesAction, salesParameterAction, fetchServiceAction,
 	ClearSelectedPlans, UpdateServiceParameterAction,
 	// fetchJobsAssignment,
@@ -66,7 +67,8 @@ const mapDispatchToProps = (dispatch) => ({
 	// getServiceOrder: () => dispatch(getServiceOrderAction()),
 	// getSalesOrder: () => dispatch(getSalesFilteredAction()),
 	// getSearchValue: (payload) => dispatch(getSearchValueAction(payload)),
-	putDatatoPlanningApprove: (payload) => dispatch(putPlanningApprovedAction(payload)),
+	putSalestoPlanningApprove: (payload) => dispatch(putSalesApprovedAction(payload)),
+	putServicetoPlanningApprove: (payload) => dispatch(putServiceApprovedAction(payload)),
 	fetchSalesOrder: (payload) => dispatch(fetchSalesAction(payload)),
 	fetchServiceOrder: (payload) => dispatch(fetchServiceAction(payload)),
 	onClickSortBy: (type) => dispatch(sortByAction(type)),

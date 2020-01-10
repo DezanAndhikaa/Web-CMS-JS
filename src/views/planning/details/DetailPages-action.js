@@ -5,10 +5,12 @@ import { RequestMethod, ApiUrlBase } from '../../../constants';
 import { callApi } from '../../../core/RestClientHelpers';
 
 export const ApproveSalesAction = 'APPROVE_SALES';
+export const ApproveServiceAction = 'APPROVE_SERVICE';
 export const UnapproveSalesAction = 'UNAPPROVE_SALES';
 export const ClearSelectedPlans = 'CLEAR_SELECTED_PLANS';
 export const FetchSalesAction = 'FETCH_SALES_ORDER';
-export const PutPlanningApprove = 'PUT_PLANNING_APPROVE';
+export const PutSalesApproved = 'PUT_SALES_APPROVED';
+export const PutServiceApproved = 'PUT_SERVICE_APPROVED';
 export const FetchServiceAction = 'FETCH_SERVICE_ORDER';
 export const FetchPlansAction = 'FETCH_PLANS';
 // export const FetchSearchValueAction = 'FETCH_SEARCH_VALUE';
@@ -88,7 +90,7 @@ export function unapproveSalesAction(payload) {
 // 	};
 // 	return async (dispatch) => dispatch(callApi(type, requestConfig));
 // }
-export function putPlanningApprovedAction(payload){
+export function putSalesApprovedAction(payload){
 	console.log('data kampang', payload)
 	const requestConfig = {
 		method: RequestMethod.PUT,
@@ -99,7 +101,20 @@ export function putPlanningApprovedAction(payload){
 		},
 		data: payload,
 	};
-	return async (dispatch) => dispatch(callApi(PutPlanningApprove, requestConfig));
+	return async (dispatch) => dispatch(callApi(PutSalesApproved, requestConfig));
+}
+
+export function putServiceApprovedAction(payload){
+	const requestConfig = {
+		method: RequestMethod.POST,
+		url: `${ApiUrlBase.SERVICEORDER_API_URL}/Approval`,
+		headers: {
+			'Accept': 'application/json; charset=utf-8',
+			'Content-Type': 'application/json; charset=utf-8',
+		},
+		data: payload,
+	};
+	return async (dispatch) => dispatch(callApi(PutServiceApproved, requestConfig));
 }
 
 export function fetchSalesAction(payload) {
@@ -125,7 +140,7 @@ export function fetchServiceAction(payload) {
 	const filter = payload;
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${ApiUrlBase.SERVICEORDER_API_URL}/MasterData`,
+		url: `${ApiUrlBase.SERVICEORDER_API_URL}/FilterUnapproved`,
 		headers: {
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',

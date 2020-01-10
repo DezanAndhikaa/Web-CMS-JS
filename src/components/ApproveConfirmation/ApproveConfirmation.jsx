@@ -26,7 +26,7 @@ export default class ApproveConfirmation extends React.PureComponent {
               </div>
           </div>
         </DialogContent>
-        </Modal>
+      </Modal>
     );
   }
 }

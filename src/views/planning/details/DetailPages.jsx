@@ -19,12 +19,16 @@ class DetailPages extends React.Component{
         isShowPerPage: true,
         showPerPage : 0,
         selectedData: {
-          So : [],
-          IsApproved: false,
+          SO : [],
+          IsApprove: false,
           UpdatedBy: "string",
           UpdatedByName: "string",
           UpdatedDate: ""
         },
+        selectedServiceData: {
+          Wo : [],
+          IsApprove: false,
+        }
         // nextPage: true,
         // prevPage: false,
         // numberOfPage: 2,
@@ -62,12 +66,6 @@ componentDidUpdate = (prevProps) => {
     this.props.updateSalesParameter({
       ...prevProps.salesParameter.dataFilter, Search: this.props.Search, PageNumber: 1,
     });
-  }console.log('data filter terupdate', this.props.salesParameter )
-  if (prevProps.requestApproveSales !== this.props.requestApproveSales
-    // || prevProps.requestUnassignJobs !== this.props.requestUnassignJobs
-    ) {
-    this.props.clearSelectedSalesPlans({});
-    this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
   }
   // SALES ORDER SORTING
   if (prevProps.sortSalesBy !== this.props.sortSalesBy) {
@@ -234,8 +232,10 @@ componentDidUpdate = (prevProps) => {
   }
   // console.log('sales parameter setelah di sorting', this.props.salesParameter)
   // console.log('service parameter setelah di sorting', this.props.serviceParameter)
-  console.log('ini selected service',this.props.selectedServicePlans)
+  console.log('ini selected service',this.props.selectedServicePlans.length)
   console.log('ini selected sales',this.props.selectedSalesPlans)
+  console.log('data filter salesss', this.props.salesParameter )
+  console.log('data filter terupdate serviceee', this.props.serviceParameter )
 }
 
 onClickApproveBtn = () => {
@@ -372,7 +372,7 @@ onClickApproveBtn = () => {
     if (this.props.salesParameter.paramsData.assigmentFilter) {
       return(
 				<div className="bottom-row">
-          <BaseButton titles="Total" totalSelectedItems ={this.props.selectedSalesPlans.length}/>
+          <BaseButton titles="TotalSales" totalSalesSelected ={this.props.selectedSalesPlans.length}/>
           <BaseButton titles="Delete" />
 					<BaseButton titles="Download"  />
           <BaseButton titles="Approve"
@@ -382,7 +382,23 @@ onClickApproveBtn = () => {
             totalSelectedItems ={this.props.selectedSalesPlans.length}
             whatTabsIsRendered={this.state.isPaging}
             selectedData={this.state.selectedData}
-            // isMoved = {()=> this.props.putDatatoPlanningApprove(this.props.selectedSalesPlans.So)}
+          />
+        </div>
+      );
+    }
+    if (this.props.serviceParameter.paramsData.assigmentFilter) {
+      return(
+				<div className="bottom-row">
+          <BaseButton titles="TotalService" totalServiceSelected ={this.props.selectedServicePlans.length}/>
+          <BaseButton titles="Delete" />
+					<BaseButton titles="Download"  />
+          <BaseButton titles="Approve"
+            {...this.props}
+            onClick={this.onClickApproveBtn}
+            disabledButton = {this.props.selectedServicePlans.length < 1 }
+            totalSelectedItems ={this.props.selectedServicePlans.length}
+            whatTabsIsRendered={this.state.isPaging}
+            selectedServiceData={this.state.selectedServiceData}
           />
         </div>
       );
@@ -398,6 +414,9 @@ onClickApproveBtn = () => {
   updateAssignmentServiceStates = (plan) => {
     if (this.props.selectedServicePlans.some(
       (plans) => plans.Wo === plan.Wo,
+      this.setState({
+        selectedServiceData : {Wo:[...this.state.selectedServiceData.Wo, plan.WO], IsApprove: true}
+      }),
     )) { return this.props.unselectServicePlan(plan); }
     return this.props.selectServicePlan(plan);
   };
@@ -407,7 +426,7 @@ onClickApproveBtn = () => {
     if (this.props.selectedSalesPlans.some(
       (plans) => plans.SO === plan.SO,
       this.setState({
-        selectedData : {So:[...this.state.selectedData.So, plan.SO], IsApproved: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: ""}
+        selectedData : {S0:[...this.state.selectedData.SO, plan.SO], IsApprove: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: ""}
       }),
       console.log('sukiiii', this.state.selectedData)
     )) { return this.props.unselectSalesPlan(plan); }
@@ -429,7 +448,8 @@ onClickApproveBtn = () => {
           onChoosedSales={this.updateAssignmentSalesStates}
           selectedSalesPlanList={this.props.selectedSalesPlans}
           selectedServicePlanList={this.props.selectedServicePlans}
-          displayCheckbox={this.props.salesParameter.paramsData.assigmentFilter || this.props.salesParameter.paramsData.inProgressFilter}
+          displaySalesCheckbox={this.props.salesParameter.paramsData.assigmentFilter || this.props.salesParameter.paramsData.inProgressFilter}
+          displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
           stats={this.state.stats}
           onStats={this.isChangeStat}
           // value={this.state.lifetime}      
@@ -448,6 +468,8 @@ onClickApproveBtn = () => {
     render(){
       // console.log('ini seleceted parameter sales',this.props.selectedServicePlans);
       // console.log('data props',this.props)
+      console.log('ahihihihihi :',this.state.isPaging)
+      console.log('ahihihihihi :',this.state.selectedData)
         return(
             <main className="content">
               {this.handlePageSize()}

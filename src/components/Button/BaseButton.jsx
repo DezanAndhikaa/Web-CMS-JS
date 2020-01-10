@@ -25,13 +25,16 @@ class BaseButton extends React.Component{
 
     isMoved = async() => {
         if (this.props.whatTabsIsRendered === true) {
-            await this.props.putDatatoPlanningApprove({...this.props.selectedData})
+            await this.props.putSalestoPlanningApprove({...this.props.selectedData})
             await this.isClosed()
             await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
             this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
         }
         if (this.props.whatTabsIsRendered === false) {
-
+            await this.props.putServicetoPlanningApprove({...this.props.selectedServiceData})
+            await this.isClosed()
+            await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter)
+            this.props.clearSelectedServicePlans(this.props.selectedServicePlans)
         }
         
         console.log('ini stateeeee', this.props.selectedData)
@@ -39,10 +42,16 @@ class BaseButton extends React.Component{
     }
 
     render(){
-        if(this.props.titles === "Total"){
+        if(this.props.titles === "TotalSales"){
             return(
                 <div className="button-inline">
-                    <FormLabel className="label-selected-data"> {this.props.totalSelectedItems} items selected.</FormLabel>
+                    <FormLabel className="label-selected-data"> {this.props.totalSalesSelected} items selected.</FormLabel>
+                </div>
+            )
+        }else if(this.props.titles === "TotalService"){
+            return(
+                <div className="button-inline">
+                    <FormLabel className="label-selected-data"> {this.props.totalServiceSelected} items selected.</FormLabel>
                 </div>
             )
         }else if(this.props.titles === "Delete"){
