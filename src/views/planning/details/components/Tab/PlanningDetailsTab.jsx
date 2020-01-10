@@ -207,6 +207,7 @@ class PlanningDetailsTab extends React.Component {
             onSelectActionType={SelectCustomerFilterAction}
             onSelectAction={this.props.selectFilter2}
             indexTab={this.state.value}
+            head={"Customer"}
           />
         </div>
         <div className="dropdown-container">
@@ -217,6 +218,7 @@ class PlanningDetailsTab extends React.Component {
             onSelectActionType={SelectSiteFilterAction}
             onSelectAction={this.props.selectFilter2}
             indexTab={this.state.value}
+            head={"Site"}
           />
         </div>
         <div className="dropdown-container">
@@ -227,6 +229,7 @@ class PlanningDetailsTab extends React.Component {
             onSelectActionType={SelectUnitModelFilterAction}
             onSelectAction={this.props.selectFilter2}
             indexTab={this.state.value}
+            head={"UnitModel"}
           />
         </div>
         <div className="dropdown-container">
@@ -237,6 +240,7 @@ class PlanningDetailsTab extends React.Component {
             onSelectActionType={SelectComponentFilterAction}
             onSelectAction={this.props.selectFilter2}
             indexTab={this.state.value}
+            head={"ComponentDescription"}
           />
         </div>
         <div className="search-container">

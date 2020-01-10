@@ -310,28 +310,49 @@ export function salesParameterReducer(state = initialSalesParameter, action) {
 }
 
 export function filterParameterReducer(state = [], action){
+	// return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 	if (action.type === SelectCustomerFilterAction)
 		if(state.length === 0){ //IF yang pertama ini,jika filternya belum di isi apa2 (filter belum di jalankan)
 			return {...state, dataFilter: {Filter : [{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}else{
-			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }}
+			for(let i=0; i<state.dataFilter.Filter.length; i++){
+				if(state.dataFilter.Filter[i].Field === action.head){
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }}		
+				}
+			}
+			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}
 	if(action.type === SelectSiteFilterAction)
 		if(state.length === 0){
 			return {...state, dataFilter: {Filter : [{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}else{
+			for(let i=0; i<state.dataFilter.Filter.length; i++){
+				if(state.dataFilter.Filter[i].Field === action.head){
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }}		
+				}
+			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}
 	if (action.type === SelectUnitModelFilterAction)
 		if(state.length === 0){
 			return {...state, dataFilter: {Filter : [{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}else{
+			for(let i=0; i<state.dataFilter.Filter.length; i++){
+				if(state.dataFilter.Filter[i].Field === action.head){
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }}		
+				}
+			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}
 	if (action.type === SelectComponentFilterAction)
 		if(state.length === 0){
 			return {...state, dataFilter: {Filter : [{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }}
 		}else{
+			for(let i=0; i<state.dataFilter.Filter.length; i++){
+				if(state.dataFilter.Filter[i].Field === action.head){
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }}		
+				}
+			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}
 	return state

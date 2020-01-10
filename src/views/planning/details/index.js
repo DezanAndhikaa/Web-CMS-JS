@@ -76,7 +76,7 @@ const mapDispatchToProps = (dispatch) => ({
 	pushTo: (url) => dispatch(push(url)),
 	savePlanData: (data) => dispatch(storeDataAction(PLAN_DATA, StorageKey.PLAN_DATA, data)),
 	selectFilter: (type, payload) => dispatch(selectFilterAction(type, payload)),
-	selectFilter2: (type, payload) => dispatch(selectFilterAction2(type, payload)),
+	selectFilter2: (type, payload, head) => dispatch(selectFilterAction2(type, payload, head)),
 	indexFilter: (type, payload) => dispatch(indexFilterAction(type, payload)),
 	selectLeader: (type, payload) => dispatch(selectLeaderAction(type, payload)),
 	selectMechanic: (type, payload) => dispatch(selectMechanicAction(type, payload)),

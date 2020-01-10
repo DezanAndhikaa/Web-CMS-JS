@@ -126,7 +126,7 @@ export function fetchServiceAction(payload) {
 	const filter = payload;
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${ApiUrlBase.SERVICEORDER_API_URL}/MasterData`,
+		url: `${ApiUrlBase.SERVICEORDER_API_URL}/FilterUnapproved`,
 		headers: {
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
@@ -237,8 +237,8 @@ export function selectFilterAction(type, payload) {
 	return { type, payload };
 }
 
-export function selectFilterAction2(type, payload) {
-	return { type, payload };
+export function selectFilterAction2(type, payload, head) {
+	return { type, payload, head };
 }
 
 export function indexFilterAction(type, payload){
