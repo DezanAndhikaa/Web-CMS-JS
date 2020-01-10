@@ -314,14 +314,14 @@ export function filterParameterReducer(state = [], action){
 		if(state.length === 0){ //IF yang pertama ini,jika filternya belum di isi apa2 (filter belum di jalankan)
 			return {...state, dataFilter: {Filter : [{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}else{
-			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }}
+			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}
 	if(action.type === SelectSiteFilterAction)
 		if(state.length === 0){
 			return {...state, dataFilter: {Filter : [{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}else{
 			// lifetime: this.state.lifetime.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) 
-			console.log('panjang data : ',state.dataFilter.Filter.length)
+			console.log('panjang data : ',state.dataFilter.Filter.length);
 			
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}
@@ -333,11 +333,11 @@ export function filterParameterReducer(state = [], action){
 		}
 	if (action.type === SelectComponentFilterAction)
 		if(state.length === 0){
-			return {...state, dataFilter: {Filter : [{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }}
+			return {...state, dataFilter: {Filter : [{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}else{
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}
-	return state
+	return state;
 }
 
 export function serviceParameterReducer(state = initialServiceParameter, action) {
