@@ -41,8 +41,8 @@ componentDidUpdate = (prevProps) => {
   }
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
+    console.log("klklklklklkl : ", this.props.filterParameter )
       if(this.props.indexFilterParameter.indexTabParameter === 0){
-        console.log("klklklklklkl : ", this.props.filterParameter )
         this.props.fetchSalesOrder(this.props.filterParameter.dataFilter);
       }else{
         this.props.fetchServiceOrder(this.props.filterParameter.dataFilter);
@@ -368,7 +368,6 @@ _renderPagination= (pageValue) =>  {
   };
 
   updateAssignmentSalesStates = (plan) => {
-    console.log('iniiiiiiiiiiiiii', this.state.lifetime)
     if (this.props.selectedSalesPlans.some(
       (plans) => plans.SO === plan.SO,
     )) { return this.props.unselectSalesPlan(plan); }
@@ -405,8 +404,6 @@ _renderPagination= (pageValue) =>  {
   };
 
     render(){
-      // console.log('ini seleceted parameter sales',this.props.selectedServicePlans);
-      // console.log('data props',this.props)
         return(
             <main className="content">
               {this.handlePageSize()}

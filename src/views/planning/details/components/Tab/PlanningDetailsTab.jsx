@@ -106,8 +106,6 @@ class PlanningDetailsTab extends React.Component {
   }
 
   handleChange = (event, value) => {
-    console.log('ini index pas di change',this.state.value)
-    
     if (this.state.value === 1) {
       this.props.onPage(this.state.value);
       this.setState({
@@ -196,7 +194,6 @@ class PlanningDetailsTab extends React.Component {
   }
 
   _renderFilter() {
-    console.log('ini props untuk filter', this.props.salesOrderList)
     return (
       <div className="dropdowns-container">
         <div className="dropdown-container">
@@ -255,7 +252,6 @@ class PlanningDetailsTab extends React.Component {
     const { value } = this.state;
     console.log('state invis 1', this.state.invisible1);
     console.log('state invis 2', this.state.invisible2);
-    console.log('ini index',this.state.value);
     return (
         <div className="root">
         <AppBar position="relative" color="default" style={{boxShadow: "none"}}>
