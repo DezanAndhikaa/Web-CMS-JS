@@ -28,7 +28,8 @@ class DetailPages extends React.Component{
         selectedServiceData: {
           Wo : [],
           IsApprove: false,
-        }
+        },
+        wasApprove: true
         // nextPage: true,
         // prevPage: false,
         // numberOfPage: 2,
@@ -52,15 +53,23 @@ componentDidUpdate = (prevProps) => {
     // console.log('fetch berjalan', this.props.salesParameter)
     // console.log('data filter paling terupdate : ', this.props.salesParameter.dataFilter)
     this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
+    // this.props.clearSelectedSalesPlans();
   }
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
-    this.props.fetchSalesOrder(this.props.filterParameter.dataFilter);
+      if(this.props.indexFilterParameter.indexTabParameter === 0){
+        console.log("klklklklklkl : ", this.props.filterParameter )
+        this.props.fetchSalesOrder(this.props.filterParameter.dataFilter);
+        // this.props.clearSelectedSalesPlans();
+      }else{
+        this.props.fetchServiceOrder(this.props.filterParameter.dataFilter);
+        // this.props.clearSelectedServicePlans();
+      }
   }
   if (prevProps.serviceParameter !== this.props.serviceParameter) {
     // console.log('fetch berjalan', this.props.serviceParameter)
     this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
-    // this.props.fetchSalesOrder(this.props.serviceParameter.dataFilter);
+    // this.props.clearSelectedServicePlans();
   }
   if (prevProps.Search !== this.props.Search) {
     this.props.updateSalesParameter({
@@ -232,7 +241,7 @@ componentDidUpdate = (prevProps) => {
   }
   // console.log('sales parameter setelah di sorting', this.props.salesParameter)
   // console.log('service parameter setelah di sorting', this.props.serviceParameter)
-  console.log('ini selected service',this.props.selectedServicePlans.length)
+  console.log('ini selected service',this.props.selectedServicePlans)
   console.log('ini selected sales',this.props.selectedSalesPlans)
   console.log('data filter salesss', this.props.salesParameter )
   console.log('data filter terupdate serviceee', this.props.serviceParameter )
@@ -368,25 +377,30 @@ onClickApproveBtn = () => {
     );
   }
 
-  _renderBaseButton = () => {
-    // if (this.props.salesParameter.paramsData.assigmentFilter) {
-    //   return(
-		// 		<div className="bottom-row">
-    //       <BaseButton titles="TotalSales" totalSalesSelected ={this.props.selectedSalesPlans.length}/>
-    //       <BaseButton titles="Delete" />
-		// 			<BaseButton titles="Download"  />
-    //       <BaseButton titles="Approve"
-    //         {...this.props}
-    //         onClick={this.onClickApproveBtn}
-    //         disabledButton = {this.props.selectedSalesPlans.length < 1 }
-    //         totalSelectedItems ={this.props.selectedSalesPlans.length}
-    //         whatTabsIsRendered={this.state.isPaging}
-    //         selectedData={this.state.selectedData}
-    //       />
-    //     </div>
-    //   );
-    // }
-    if (this.props.serviceParameter.paramsData.assigmentFilter) {
+  _renderBaseButton = (value) => {
+    if (value === 1) {
+      this.setState({wasApprove : true})
+    }if (value === 0) {
+      this.setState({wasApprove : false})
+    }
+    if (this.state.wasApprove === true) {
+      return(
+				<div className="bottom-row">
+          <BaseButton titles="TotalSales" totalSalesSelected ={this.props.selectedSalesPlans.length}/>
+          <BaseButton titles="Delete" />
+					<BaseButton titles="Download"  />
+          <BaseButton titles="Approve"
+            {...this.props}
+            onClick={this.onClickApproveBtn}
+            disabledButton = {this.props.selectedSalesPlans.length < 1 }
+            totalSelectedItems ={this.props.selectedSalesPlans.length}
+            whatTabsIsRendered={this.state.isPaging}
+            selectedData={this.state.selectedData}
+          />
+        </div>
+      );
+    }
+    if (this.state.wasApprove === false) {
       return(
 				<div className="bottom-row">
           <BaseButton titles="TotalService" totalServiceSelected ={this.props.selectedServicePlans.length}/>
@@ -415,7 +429,7 @@ onClickApproveBtn = () => {
     if (this.props.selectedServicePlans.some(
       (plans) => plans.Wo === plan.Wo,
       this.setState({
-        selectedServiceData : {Wo:[...this.state.selectedServiceData.Wo, plan.WO], IsApprove: true}
+        selectedServiceData : {Wo:[...this.state.selectedServiceData.Wo, plan.Wo], IsApprove: true}
       }),
     )) { return this.props.unselectServicePlan(plan); }
     return this.props.selectServicePlan(plan);
@@ -428,6 +442,7 @@ onClickApproveBtn = () => {
       this.setState({
         selectedData : {SO:[...this.state.selectedData.SO, plan.SO], IsApprove: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: ""}
       }),
+      console.log('ini diti intik di silict', plan),
       console.log('sukiiii', this.state.selectedData)
     )) { return this.props.unselectSalesPlan(plan); }
     return this.props.selectSalesPlan(plan);
@@ -459,7 +474,7 @@ onClickApproveBtn = () => {
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}
           onPage={this._renderPagination}
-          
+          wasApprove={this._renderBaseButton}
         />
       </>
     );
@@ -468,6 +483,7 @@ onClickApproveBtn = () => {
     render(){
       // console.log('ini seleceted parameter sales',this.props.selectedServicePlans);
       // console.log('data props',this.props)
+      console.log('ini data pantekkk', this.state.wasApprove)
       console.log('ahihihihihi :',this.state.isPaging)
       console.log('ahihihihihi :',this.state.selectedData)
         return(

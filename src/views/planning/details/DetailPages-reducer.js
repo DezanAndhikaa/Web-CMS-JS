@@ -26,7 +26,7 @@ import {
 	// UnassignPlansAction, 
 	UnselectSalesPlanAction, UnselectServicePlanAction,
 	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, getSearchValueAction, fetchServiceAction, FetchServiceAction, 
-	UpdateFilterUnit
+	UpdateFilterUnit,IndexFilterAction, SelectAllSalesPlanAction
 } from './DetailPages-action';
 
 const initialSalesAssignment = {
@@ -314,30 +314,54 @@ export function filterParameterReducer(state = [], action){
 		if(state.length === 0){ //IF yang pertama ini,jika filternya belum di isi apa2 (filter belum di jalankan)
 			return {...state, dataFilter: {Filter : [{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}else{
-			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }}
+			for(let i=0; i<state.dataFilter.Filter.length; i++){
+				if(state.dataFilter.Filter[i].Field === action.head){
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
+				}
+			}
+			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}
 	if(action.type === SelectSiteFilterAction)
 		if(state.length === 0){
 			return {...state, dataFilter: {Filter : [{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}else{
-			// lifetime: this.state.lifetime.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) 
-			console.log('panjang data : ',state.dataFilter.Filter.length)
-			
+			for(let i=0; i<state.dataFilter.Filter.length; i++){
+				if(state.dataFilter.Filter[i].Field === action.head){
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
+				}
+			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}
 	if (action.type === SelectUnitModelFilterAction)
 		if(state.length === 0){
 			return {...state, dataFilter: {Filter : [{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}else{
+			for(let i=0; i<state.dataFilter.Filter.length; i++){
+				if(state.dataFilter.Filter[i].Field === action.head){
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
+				}
+			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}
 	if (action.type === SelectComponentFilterAction)
 		if(state.length === 0){
 			return {...state, dataFilter: {Filter : [{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }}
 		}else{
+			for(let i=0; i<state.dataFilter.Filter.length; i++){
+				if(state.dataFilter.Filter[i].Field === action.head){
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
+				}
+			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}
-	return state
+	return state;
+}
+
+export function indexFilterParameterReducer(state = '', action){
+	if (action.type === IndexFilterAction){
+		return {...state, indexTabParameter : action.payload};
+	}
+	return state;
 }
 
 export function serviceParameterReducer(state = initialServiceParameter, action) {
@@ -375,9 +399,13 @@ export function searchSoReducer(state = '', action) {
 export function selectSalesPlansReducer(state = [], action) {
 	switch (action.type) {
 	case SelectSalesPlanAction: {
-		console.log('skuiiiiiiiiiiiiiiii', action.payload)
+		console.log('skuiiiiiiiiiiiiiiii', action.payload);
 		return [...state, action.payload];
+		// return [...state.map(((item) => item.SO !== action.payload))];
 	}
+	// case SelectAllSalesPlanAction:{
+	// 	return [...state.(((item) => item.SO === action.payload))];
+	// }
 	case UnselectSalesPlanAction: {
 		return [...state.filter(((item) => item.SO !== action.payload.SO))];
 	}

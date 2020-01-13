@@ -40,7 +40,7 @@ render(){
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
           <TableRow>
             <TableCell padding="checkbox">
-              {this.props.displayServiceCheckbox  && <Checkbox />}
+              {this.props.displayServiceCheckbox  && <Checkbox className="checkbox-checked-header" />}
             </TableCell>
             <PlanningListHeader
               name="Work Order"
