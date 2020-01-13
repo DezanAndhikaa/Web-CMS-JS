@@ -50,6 +50,7 @@ export const SelectCustomerFilterAction = 'SELECT_CUSTOMER_FILTER';
 export const SelectSiteFilterAction = 'SELECT_SITE_FILTER'
 export const SelectUnitModelFilterAction ='SELECT_UNIT_MODEL_FILTER'
 export const SelectComponentFilterAction ='SELECT_COMPONENT_FILTER'
+export const IndexFilterAction = "INDEX FILTER";
 
 export function approveSalesAction (payload) {
 	const requestConfig = {
@@ -251,8 +252,12 @@ export function selectFilterAction(type, payload) {
 	return { type, payload };
 }
 
-export function selectFilterAction2(type, payload) {
-	return { type, payload };
+export function selectFilterAction2(type, payload, head) {
+	return { type, payload, head };
+}
+
+export function indexFilterAction(type, payload){
+	return { type, payload }
 }
 
 export function selectSalesPlansAction(type, payload) {

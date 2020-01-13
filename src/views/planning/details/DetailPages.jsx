@@ -13,8 +13,7 @@ class DetailPages extends React.Component{
       super(props)
       this.state = {
         stats: true,
-        // lifetime: SalesDummy,
-        lifetime: this.props.salesOrderList.Lists,
+        lifetime: [],
         isPaging: true,
         isShowPerPage: true,
         showPerPage : 0,
@@ -47,20 +46,28 @@ componentWillUnmount = () => {
   });
 }
 
+// componentWillReceiveProps(props) {
+//   this.state = {
+//     lifetime: props.salesOrderList.Lists,
+//     indexPage: props.indexFilterParameter.indexTabParameter
+//   }
+// }
+
 componentDidUpdate = (prevProps) => {
   if (prevProps.salesParameter !== this.props.salesParameter) {
-    // console.log('fetch berjalan', this.props.salesParameter)
-    // console.log('data filter paling terupdate : ', this.props.salesParameter.dataFilter)
     this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
   }
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
-    this.props.fetchSalesOrder(this.props.filterParameter.dataFilter);
+      if(this.props.indexFilterParameter.indexTabParameter === 0){
+        console.log("klklklklklkl : ", this.props.filterParameter )
+        this.props.fetchSalesOrder(this.props.filterParameter.dataFilter);
+      }else{
+        this.props.fetchServiceOrder(this.props.filterParameter.dataFilter);
+      }
   }
   if (prevProps.serviceParameter !== this.props.serviceParameter) {
-    // console.log('fetch berjalan', this.props.serviceParameter)
     this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
-    // this.props.fetchSalesOrder(this.props.serviceParameter.dataFilter);
   }
   if (prevProps.Search !== this.props.Search) {
     this.props.updateSalesParameter({
@@ -243,31 +250,6 @@ onClickApproveBtn = () => {
   this.setState({ isShowAssign: true });
   this.props.approveSales(this.props.salesParameter.dataFilter);
 }
-
-  // componentDidMount = async () => {
-  //   console.log('fetch berjalan didmount')
-    
-  //   // this.onClickSalesOrder();
-  // }
-
-  // componentDidMount = async() =>{
-  //   // console.log("narik data sales order ")
-  //   // console.log(this.state.lifetime)
-  //   // console.log('testing',this.props)
-  //   // this.props.getServiceOrder()
-  //     // console.log("narik data sales order ")
-  //     // fetch('http://10.200.201.164:5000/v1/Planning/ServiceOrder/MasterData')
-  //     // .then((res) => {
-  //     //   console.log('ini data dari res', res)
-  //     //   if(res.status === 200){
-  //     //   return res.json()
-  //     //   }
-  //     //   })
-  //     //   .then( resJson => {
-  //     //     this.setState({ salesOrder: resJson})
-  //     //   })
-  //     //   console.log('data dari api',this.state.salesOrder)
-  // }
   
   _renderPagination= (pageValue) =>  {
     if (pageValue === 1) {
@@ -323,20 +305,21 @@ onClickApproveBtn = () => {
             {nextSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>}
           </div>
         </div>
-      )
-    }
+      // </div>
+    )
   }
+}
   
 
-    onClickServiceOrder = () => {
-      this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
-      // console.log('ini data dari api',this.props.serviceParameter.dataFilter);
-    }
+  onClickServiceOrder = () => {
+    this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+    // console.log('ini data dari api',this.props.serviceParameter.dataFilter);
+  }
 
-    onClickSalesOrder = () =>{
-      console.log('ini filter paging ', this.props.salesParameter.dataFilter )
-      this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
-    }
+  onClickSalesOrder = () =>{
+    console.log('ini filter paging ', this.props.salesParameter.dataFilter )
+    this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
+  }
 
   handlePageSize = (numberOfPage) => {
     // this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: numberOfPage})
@@ -405,11 +388,11 @@ onClickApproveBtn = () => {
     }
   }
     
-  isChangeStat = (value,key) =>{
-    this.setState({
-      lifetime: { Lists :this.state.lifetime.Lists.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) }
-    });
-  }
+  // isChangeStat = (value,key) =>{
+  //   this.setState({
+  //     lifetime: this.state.lifetime.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el))
+  //   });
+  // }
 
   updateAssignmentServiceStates = (plan) => {
     if (this.props.selectedServicePlans.some(

@@ -26,8 +26,10 @@ class DropdownFilter extends React.Component {
     });
   }
 
-  selectItem = (item) => {
-    this.props.onSelectAction(this.props.onSelectActionType, item);
+  selectItem = (item,Tab,head) => {
+    this.props.onSelectAction(this.props.onSelectActionType, item, head);
+    console.log("nilai si Tab ", Tab)
+    this.props.indexFilter("INDEX FILTER",Tab);
   }
 
   handleJobType = (item) => {
@@ -54,7 +56,7 @@ class DropdownFilter extends React.Component {
       <ul className="list-items-filter">
         {this.props.data
           && this.props.data.map((item, index) => (
-            item && <div className="list-item-filter" onClick={() => this.selectItem(item)} key={index}>{this.handleJobType(item)}</div>
+            item && <div className="list-item-filter" onClick={() => this.selectItem(item,this.props.indexTab,this.props.head)} key={index}>{this.handleJobType(item)}</div>
           ))}
       </ul>
     );

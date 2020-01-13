@@ -160,19 +160,41 @@ class PlanningDetailsTab extends React.Component {
     );
   }
 
-  // _dataFilterCustomer(){
-  //     if(this.state.value === 0){
-  //       this.setState({
-  //         dataFilter: {
-  //           GroupCustomer: this.props.salesOrderList.GroupCustomer
-  //         }
-  //       })
-  //       return this.state.dataFilter.GroupCustomer
-  //     }
-  //     // else{
-  //     //   return this.props.serviceOrderList.GroupCustomer
-  //     // }
-  // }
+  _dataFilterCustomer(){
+    if(this.state.value === 0){
+      return this.props.salesOrderList.GroupCustomer
+    }
+    else{
+      return this.props.serviceOrderList.GroupCustomer
+    }
+  }
+
+  _dataFilterSite(){
+    if(this.state.value === 0){
+      return this.props.salesOrderList.GroupSite
+    }
+    else{
+      return this.props.serviceOrderList.GroupSite
+    }
+  }
+
+  _dataFilterUnitModel(){
+    if(this.state.value === 0){
+      return this.props.salesOrderList.GroupUnitModel
+    }
+    else{
+      return this.props.serviceOrderList.GroupUnitModel
+    }
+  }
+
+  _dataFilterComponentDescription(){
+    if(this.state.value === 0){
+      return this.props.salesOrderList.GroupComponentDescription
+    }
+    else{
+      return this.props.serviceOrderList.GroupComponentDescription
+    }
+  }
 
   _renderFilter() {
     console.log('ini props untuk filter', this.props.salesOrderList)
@@ -181,35 +203,45 @@ class PlanningDetailsTab extends React.Component {
         <div className="dropdown-container">
           <DropdownFilter
           {...this.props}
-            // data={this._dataFilterCustomer()}
-            data={this.props.salesOrderList.GroupCustomer}
+            data={this._dataFilterCustomer()}
             selected={this.props.selectedFilters.customerType}
             onSelectActionType={SelectCustomerFilterAction}
             onSelectAction={this.props.selectFilter2}
+            indexTab={this.state.value}
+            head={"Customer"}
           />
         </div>
         <div className="dropdown-container">
           <DropdownFilter
-            data={this.props.salesOrderList.GroupSite}
+            {...this.props}
+            data={this._dataFilterSite()}
             selected={this.props.selectedFilters.siteType}
             onSelectActionType={SelectSiteFilterAction}
             onSelectAction={this.props.selectFilter2}
+            indexTab={this.state.value}
+            head={"Site"}
           />
         </div>
         <div className="dropdown-container">
           <DropdownFilter
-            data={this.props.salesOrderList.GroupUnitModel}
+            {...this.props}
+            data={this._dataFilterUnitModel()}
             selected={this.props.selectedFilters.unitType}
             onSelectActionType={SelectUnitModelFilterAction}
             onSelectAction={this.props.selectFilter2}
+            indexTab={this.state.value}
+            head={"UnitModel"}
           />
         </div>
         <div className="dropdown-container">
           <DropdownFilter
-            data={this.props.salesOrderList.GroupComponentDescription}
+            {...this.props}
+            data={this._dataFilterComponentDescription()}
             selected={this.props.selectedFilters.compType}
             onSelectActionType={SelectComponentFilterAction}
             onSelectAction={this.props.selectFilter2}
+            indexTab={this.state.value}
+            head={"ComponentDescription"}
           />
         </div>
         <div className="search-container">

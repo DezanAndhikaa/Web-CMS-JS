@@ -14,14 +14,35 @@ import SalesOrderData from '../../../../../planning-data-dummy.json';
 import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc } from '../../DetailPages-action';
 
 export default class SalesOrderList extends React.PureComponent {
-
+  constructor(props) {
+    super(props)
+    this.state = {
+      lifetime: [],
+      stats: 0,
+  }
+}
     // openDetail = async (row) => {
     //   await this.props.saveJobData(row);
     //   this.props.storeJobData(row);
     //   return this.props.pushTo(`${Menu.DETAIL_PI}:${row.woNumber || ''}`);
     // }
-    componentDidMount = async() =>{
-      await this.props.onClickSalesOrder();
+    componentDidMount = () =>{
+      this.props.onClickSalesOrder();
+    }
+
+    componentDidUpdate = () =>{
+      if(this.state.stats === 0){
+        this.setState({
+          lifetime: this.props.salesOrderList.Lists,
+        })
+      }
+    }
+
+    isChangeStat = (value,key) =>{
+      this.setState({
+        stats: 1,
+        lifetime: this.state.lifetime.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el))
+      });
     }
 
     isCheckboxAvailable = (data) => {
@@ -114,9 +135,8 @@ render(){
           </TableRow>
         </TableHead>
         <TableBody classes={{ root: 'table-body' }}>
-          {this.props.salesOrderList.Lists
-            && this.props.salesOrderList.Lists.map((row, id) => (
-              // {/* {SalesOrderData.salesData && SalesOrderData.salesData.map((row, id) => ( */}
+          {this.state.lifetime
+            && this.state.lifetime.map((row, id) => (
               <TableRow key={id} classes={{ root: 'table-row' }}>
                 <TableCell padding="checkbox">
                   {this.props.displaySalesCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedSalesPlanList.some((plans) => plans.SO === row.SO)} onClick={() => this.props.onChoosedSales(row)} classes={{ checked: 'checkbox-checked' }} />}
@@ -130,8 +150,8 @@ render(){
                 <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
                 <TableCell align="center" className="table-cell"> 
-                {!this.props.salesOrderList.Lists[id].LifeTimeComp ? <InputButton title="Input Lifetime Component" onStats={this.props.onStats} titles="Input" key={row.SO} id={row.SO}/> : 
-                  <div>{this.props.salesOrderList.Lists[id].LifeTimeComp}</div>
+                {!this.state.lifetime[id].LifeTimeComp ? <InputButton title="Input Lifetime Component" onStats={this.isChangeStat} titles="Input" key={row.SO} id={row.SO}/> : 
+                  <div>{this.state.lifetime[id].LifeTimeComp}</div>
                 }
                 </TableCell>
                 <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
