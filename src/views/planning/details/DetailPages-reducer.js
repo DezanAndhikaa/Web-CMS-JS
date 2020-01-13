@@ -346,7 +346,7 @@ export function filterParameterReducer(state = [], action){
 		}
 	if (action.type === SelectComponentFilterAction)
 		if(state.length === 0){
-			return {...state, dataFilter: {Filter : [{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }}
+			return {...state, dataFilter: {Filter : [{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}else{
 			for(let i=0; i<state.dataFilter.Filter.length; i++){
 				if(state.dataFilter.Filter[i].Field === action.head){
@@ -355,7 +355,7 @@ export function filterParameterReducer(state = [], action){
 			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}
-	return state
+	return state;
 }
 
 export function indexFilterParameterReducer(state = '', action){

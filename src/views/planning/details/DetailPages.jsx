@@ -41,8 +41,9 @@ class DetailPages extends React.Component{
 componentWillUnmount = () => {
   this.props.onSearch('');
 
+  //ini untuk menyimpan parameter ketika berpindah halaman
   this.props.updateSalesParameter({
-    ...this.props.salesParameter, Search: '',
+    ...this.props.salesParameter.dataFilter, Search: '',
   });
 }
 
@@ -82,16 +83,12 @@ componentDidUpdate = (prevProps) => {
       isDescending = !sortSalesBy.Customer.isAscending;
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
-          PageNumber: 1,
-          PageSize: 2,
           Sort: 'Customer desc',      
       });
     if (sortSalesBy.Customer.isAscending === !sortSalesBy.Customer.isActive) {
       isDescending = !sortSalesBy.Customer.isAscending;
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
-          PageNumber: 1,
-          PageSize: 2,
           Sort: 'Customer asc'      
       });
     }
@@ -100,16 +97,12 @@ componentDidUpdate = (prevProps) => {
       isDescending = !sortSalesBy.Site.isAscending;
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
-          PageNumber: 1,
-          PageSize: 2,
           Sort: 'Site desc'
       });
     if (sortSalesBy.Site.isAscending === !sortSalesBy.Site.isActive) {
       isDescending = !sortSalesBy.Site.isAscending;
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
-          PageNumber: 1,
-          PageSize: 2,
           Sort: 'Site asc'
       });
     }
@@ -118,16 +111,12 @@ componentDidUpdate = (prevProps) => {
       isDescending = !sortSalesBy.UnitModel.isAscending;
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
-          PageNumber: 1,
-          PageSize: 2,
           Sort: 'UnitModel desc'
       });
     if (sortSalesBy.UnitModel.isAscending === !sortSalesBy.UnitModel.isActive) {
       isDescending = !sortSalesBy.UnitModel.isAscending;
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
-          PageNumber: 1,
-          PageSize: 2,
           Sort: 'UnitModel asc'
       });
     }
@@ -136,16 +125,12 @@ componentDidUpdate = (prevProps) => {
       isDescending = !sortSalesBy.CompDesc.isAscending;
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
-          PageNumber: 1,
-          PageSize: 2,
           Sort: 'ComponentDescription desc'
       });
     if (sortSalesBy.CompDesc.isAscending === !sortSalesBy.CompDesc.isActive) {
       isDescending = !sortSalesBy.CompDesc.isAscending;
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
-          PageNumber: 1,
-          PageSize: 2,
           Sort: 'ComponentDescription asc'
       });
     }
@@ -159,16 +144,12 @@ componentDidUpdate = (prevProps) => {
       isDescending = !sortServiceBy.Customer.isAscending;
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          PageSize: 2,
           Sort: 'Customer desc'   
       });
     if (sortServiceBy.Customer.isAscending === !sortServiceBy.Customer.isActive) {
       isDescending = !sortServiceBy.Customer.isAscending;
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          PageSize: 2,
           Sort: 'Customer asc'   
       });
     }
@@ -177,16 +158,12 @@ componentDidUpdate = (prevProps) => {
       isDescending = !sortServiceBy.Site.isAscending;
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          PageSize: 2,
           Sort: 'Site desc' 
       });
     if (sortServiceBy.Site.isAscending === !sortServiceBy.Site.isActive) {
       isDescending = !sortServiceBy.Site.isAscending;
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          PageSize: 2,
           Sort: 'Site asc' 
       });
     }
@@ -195,16 +172,12 @@ componentDidUpdate = (prevProps) => {
       isDescending = !sortServiceBy.UnitModel.isAscending;
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          PageSize: 2,
           Sort: 'UnitModel desc' 
       });
     if (sortServiceBy.UnitModel.isAscending === !sortServiceBy.UnitModel.isActive) {
       isDescending = !sortServiceBy.UnitModel.isAscending;
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          PageSize: 2,
           Sort: 'UnitModel asc' 
       });
     }
@@ -213,16 +186,12 @@ componentDidUpdate = (prevProps) => {
       isDescending = !sortServiceBy.CompDesc.isAscending;
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          PageSize: 2,
           Sort: 'ComponentDescription desc' 
       });
     if (sortServiceBy.CompDesc.isAscending === !sortServiceBy.CompDesc.isActive) {
       isDescending = !sortServiceBy.CompDesc.isAscending;
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          PageSize: 2,
           Sort: 'ComponentDescription asc' 
       });
     }
