@@ -92,7 +92,6 @@ export function unapproveSalesAction(payload) {
 // 	return async (dispatch) => dispatch(callApi(type, requestConfig));
 // }
 export function putSalesApprovedAction(payload){
-	console.log('data kampang', payload)
 	const requestConfig = {
 		method: RequestMethod.PUT,
 		url: `${ApiUrlBase.SALESORDER_API_URL}/Approval`,
@@ -107,7 +106,7 @@ export function putSalesApprovedAction(payload){
 
 export function putServiceApprovedAction(payload){
 	const requestConfig = {
-		method: RequestMethod.POST,
+		method: RequestMethod.PUT,
 		url: `${ApiUrlBase.SERVICEORDER_API_URL}/Approval`,
 		headers: {
 			'Accept': 'application/json; charset=utf-8',

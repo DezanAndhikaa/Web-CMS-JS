@@ -13,7 +13,8 @@ class DetailPages extends React.Component{
       super(props)
       this.state = {
         stats: true,
-        lifetime: [],
+        // lifetime: SalesDummy,
+        lifetime: this.props.salesOrderList.Lists,
         isPaging: true,
         isShowPerPage: true,
         showPerPage : 0,
@@ -41,34 +42,25 @@ class DetailPages extends React.Component{
 componentWillUnmount = () => {
   this.props.onSearch('');
 
-  //ini untuk menyimpan parameter ketika berpindah halaman
   this.props.updateSalesParameter({
-    ...this.props.salesParameter.dataFilter, Search: '',
+    ...this.props.salesParameter, Search: '',
   });
 }
 
-// componentWillReceiveProps(props) {
-//   this.state = {
-//     lifetime: props.salesOrderList.Lists,
-//     indexPage: props.indexFilterParameter.indexTabParameter
-//   }
-// }
-
 componentDidUpdate = (prevProps) => {
   if (prevProps.salesParameter !== this.props.salesParameter) {
+    // console.log('fetch berjalan', this.props.salesParameter)
+    // console.log('data filter paling terupdate : ', this.props.salesParameter.dataFilter)
     this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
   }
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
-      if(this.props.indexFilterParameter.indexTabParameter === 0){
-        console.log("klklklklklkl : ", this.props.filterParameter )
-        this.props.fetchSalesOrder(this.props.filterParameter.dataFilter);
-      }else{
-        this.props.fetchServiceOrder(this.props.filterParameter.dataFilter);
-      }
+    this.props.fetchSalesOrder(this.props.filterParameter.dataFilter);
   }
   if (prevProps.serviceParameter !== this.props.serviceParameter) {
+    // console.log('fetch berjalan', this.props.serviceParameter)
     this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+    // this.props.fetchSalesOrder(this.props.serviceParameter.dataFilter);
   }
   if (prevProps.Search !== this.props.Search) {
     this.props.updateSalesParameter({
@@ -83,12 +75,16 @@ componentDidUpdate = (prevProps) => {
       isDescending = !sortSalesBy.Customer.isAscending;
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
+          PageNumber: 1,
+          PageSize: 2,
           Sort: 'Customer desc',      
       });
     if (sortSalesBy.Customer.isAscending === !sortSalesBy.Customer.isActive) {
       isDescending = !sortSalesBy.Customer.isAscending;
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
+          PageNumber: 1,
+          PageSize: 2,
           Sort: 'Customer asc'      
       });
     }
@@ -97,12 +93,16 @@ componentDidUpdate = (prevProps) => {
       isDescending = !sortSalesBy.Site.isAscending;
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
+          PageNumber: 1,
+          PageSize: 2,
           Sort: 'Site desc'
       });
     if (sortSalesBy.Site.isAscending === !sortSalesBy.Site.isActive) {
       isDescending = !sortSalesBy.Site.isAscending;
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
+          PageNumber: 1,
+          PageSize: 2,
           Sort: 'Site asc'
       });
     }
@@ -111,12 +111,16 @@ componentDidUpdate = (prevProps) => {
       isDescending = !sortSalesBy.UnitModel.isAscending;
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
+          PageNumber: 1,
+          PageSize: 2,
           Sort: 'UnitModel desc'
       });
     if (sortSalesBy.UnitModel.isAscending === !sortSalesBy.UnitModel.isActive) {
       isDescending = !sortSalesBy.UnitModel.isAscending;
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
+          PageNumber: 1,
+          PageSize: 2,
           Sort: 'UnitModel asc'
       });
     }
@@ -125,12 +129,16 @@ componentDidUpdate = (prevProps) => {
       isDescending = !sortSalesBy.CompDesc.isAscending;
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
+          PageNumber: 1,
+          PageSize: 2,
           Sort: 'ComponentDescription desc'
       });
     if (sortSalesBy.CompDesc.isAscending === !sortSalesBy.CompDesc.isActive) {
       isDescending = !sortSalesBy.CompDesc.isAscending;
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
+          PageNumber: 1,
+          PageSize: 2,
           Sort: 'ComponentDescription asc'
       });
     }
@@ -144,12 +152,16 @@ componentDidUpdate = (prevProps) => {
       isDescending = !sortServiceBy.Customer.isAscending;
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
+          PageNumber: 1,
+          PageSize: 2,
           Sort: 'Customer desc'   
       });
     if (sortServiceBy.Customer.isAscending === !sortServiceBy.Customer.isActive) {
       isDescending = !sortServiceBy.Customer.isAscending;
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
+          PageNumber: 1,
+          PageSize: 2,
           Sort: 'Customer asc'   
       });
     }
@@ -158,12 +170,16 @@ componentDidUpdate = (prevProps) => {
       isDescending = !sortServiceBy.Site.isAscending;
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
+          PageNumber: 1,
+          PageSize: 2,
           Sort: 'Site desc' 
       });
     if (sortServiceBy.Site.isAscending === !sortServiceBy.Site.isActive) {
       isDescending = !sortServiceBy.Site.isAscending;
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
+          PageNumber: 1,
+          PageSize: 2,
           Sort: 'Site asc' 
       });
     }
@@ -172,12 +188,16 @@ componentDidUpdate = (prevProps) => {
       isDescending = !sortServiceBy.UnitModel.isAscending;
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
+          PageNumber: 1,
+          PageSize: 2,
           Sort: 'UnitModel desc' 
       });
     if (sortServiceBy.UnitModel.isAscending === !sortServiceBy.UnitModel.isActive) {
       isDescending = !sortServiceBy.UnitModel.isAscending;
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
+          PageNumber: 1,
+          PageSize: 2,
           Sort: 'UnitModel asc' 
       });
     }
@@ -186,12 +206,16 @@ componentDidUpdate = (prevProps) => {
       isDescending = !sortServiceBy.CompDesc.isAscending;
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
+          PageNumber: 1,
+          PageSize: 2,
           Sort: 'ComponentDescription desc' 
       });
     if (sortServiceBy.CompDesc.isAscending === !sortServiceBy.CompDesc.isActive) {
       isDescending = !sortServiceBy.CompDesc.isAscending;
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
+          PageNumber: 1,
+          PageSize: 2,
           Sort: 'ComponentDescription asc' 
       });
     }
@@ -219,6 +243,31 @@ onClickApproveBtn = () => {
   this.setState({ isShowAssign: true });
   this.props.approveSales(this.props.salesParameter.dataFilter);
 }
+
+  // componentDidMount = async () => {
+  //   console.log('fetch berjalan didmount')
+    
+  //   // this.onClickSalesOrder();
+  // }
+
+  // componentDidMount = async() =>{
+  //   // console.log("narik data sales order ")
+  //   // console.log(this.state.lifetime)
+  //   // console.log('testing',this.props)
+  //   // this.props.getServiceOrder()
+  //     // console.log("narik data sales order ")
+  //     // fetch('http://10.200.201.164:5000/v1/Planning/ServiceOrder/MasterData')
+  //     // .then((res) => {
+  //     //   console.log('ini data dari res', res)
+  //     //   if(res.status === 200){
+  //     //   return res.json()
+  //     //   }
+  //     //   })
+  //     //   .then( resJson => {
+  //     //     this.setState({ salesOrder: resJson})
+  //     //   })
+  //     //   console.log('data dari api',this.state.salesOrder)
+  // }
   
   _renderPagination= (pageValue) =>  {
     if (pageValue === 1) {
@@ -274,10 +323,9 @@ onClickApproveBtn = () => {
             {nextSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>}
           </div>
         </div>
-      // </div>
-    )
+      )
+    }
   }
-}
   
 
   onClickServiceOrder = () => {
@@ -321,23 +369,23 @@ onClickApproveBtn = () => {
   }
 
   _renderBaseButton = () => {
-    if (this.props.salesParameter.paramsData.assigmentFilter) {
-      return(
-				<div className="bottom-row">
-          <BaseButton titles="TotalSales" totalSalesSelected ={this.props.selectedSalesPlans.length}/>
-          <BaseButton titles="Delete" />
-					<BaseButton titles="Download"  />
-          <BaseButton titles="Approve"
-            {...this.props}
-            onClick={this.onClickApproveBtn}
-            disabledButton = {this.props.selectedSalesPlans.length < 1 }
-            totalSelectedItems ={this.props.selectedSalesPlans.length}
-            whatTabsIsRendered={this.state.isPaging}
-            selectedData={this.state.selectedData}
-          />
-        </div>
-      );
-    }
+    // if (this.props.salesParameter.paramsData.assigmentFilter) {
+    //   return(
+		// 		<div className="bottom-row">
+    //       <BaseButton titles="TotalSales" totalSalesSelected ={this.props.selectedSalesPlans.length}/>
+    //       <BaseButton titles="Delete" />
+		// 			<BaseButton titles="Download"  />
+    //       <BaseButton titles="Approve"
+    //         {...this.props}
+    //         onClick={this.onClickApproveBtn}
+    //         disabledButton = {this.props.selectedSalesPlans.length < 1 }
+    //         totalSelectedItems ={this.props.selectedSalesPlans.length}
+    //         whatTabsIsRendered={this.state.isPaging}
+    //         selectedData={this.state.selectedData}
+    //       />
+    //     </div>
+    //   );
+    // }
     if (this.props.serviceParameter.paramsData.assigmentFilter) {
       return(
 				<div className="bottom-row">
@@ -357,11 +405,11 @@ onClickApproveBtn = () => {
     }
   }
     
-  // isChangeStat = (value,key) =>{
-  //   this.setState({
-  //     lifetime: this.state.lifetime.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el))
-  //   });
-  // }
+  isChangeStat = (value,key) =>{
+    this.setState({
+      lifetime: { Lists :this.state.lifetime.Lists.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) }
+    });
+  }
 
   updateAssignmentServiceStates = (plan) => {
     if (this.props.selectedServicePlans.some(
@@ -378,7 +426,7 @@ onClickApproveBtn = () => {
     if (this.props.selectedSalesPlans.some(
       (plans) => plans.SO === plan.SO,
       this.setState({
-        selectedData : {S0:[...this.state.selectedData.SO, plan.SO], IsApprove: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: ""}
+        selectedData : {SO:[...this.state.selectedData.SO, plan.SO], IsApprove: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: ""}
       }),
       console.log('sukiiii', this.state.selectedData)
     )) { return this.props.unselectSalesPlan(plan); }
