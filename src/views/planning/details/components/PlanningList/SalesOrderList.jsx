@@ -61,7 +61,11 @@ render(){
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
           <TableRow classes={{ root: 'table-row' }}>
             <TableCell padding="checkbox">
-              {this.props.displaySalesCheckbox && <Checkbox className="checkbox-checked-header"/>}
+              {this.props.displaySalesCheckbox && 
+              <Checkbox 
+              onClick={() => {this.state.lifetime.map((row) => 
+              this.props.onChoosedSales(row))}}
+              className="checkbox-checked-header"/>}
             </TableCell>
             <PlanningListHeader
               name="SO"

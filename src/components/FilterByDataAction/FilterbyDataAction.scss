@@ -78,6 +78,7 @@
         text-align: center;
         text-transform: capitalize;
         margin-top: 0.5vw;
+        padding: inherit;
     }
     .button-plan-del{
         width: vw(173.22);
@@ -87,6 +88,7 @@
         text-align: center;
         text-transform: capitalize;
         margin-bottom: 0.5vw;
+        padding: inherit;
     }
     .button:focus{
         color: map-get($colors, primary);

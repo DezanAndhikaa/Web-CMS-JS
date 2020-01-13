@@ -26,7 +26,7 @@ import {
 	// UnassignPlansAction, 
 	UnselectSalesPlanAction, UnselectServicePlanAction,
 	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, getSearchValueAction, fetchServiceAction, FetchServiceAction, 
-	UpdateFilterUnit,IndexFilterAction
+	UpdateFilterUnit,IndexFilterAction, SelectAllSalesPlanAction
 } from './DetailPages-action';
 
 const initialSalesAssignment = {
@@ -317,7 +317,7 @@ export function filterParameterReducer(state = [], action){
 		}else{
 			for(let i=0; i<state.dataFilter.Filter.length; i++){
 				if(state.dataFilter.Filter[i].Field === action.head){
-					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }}		
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
 				}
 			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
@@ -328,7 +328,7 @@ export function filterParameterReducer(state = [], action){
 		}else{
 			for(let i=0; i<state.dataFilter.Filter.length; i++){
 				if(state.dataFilter.Filter[i].Field === action.head){
-					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }}		
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
 				}
 			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
@@ -339,7 +339,7 @@ export function filterParameterReducer(state = [], action){
 		}else{
 			for(let i=0; i<state.dataFilter.Filter.length; i++){
 				if(state.dataFilter.Filter[i].Field === action.head){
-					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }}		
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
 				}
 			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
@@ -350,7 +350,7 @@ export function filterParameterReducer(state = [], action){
 		}else{
 			for(let i=0; i<state.dataFilter.Filter.length; i++){
 				if(state.dataFilter.Filter[i].Field === action.head){
-					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }}		
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
 				}
 			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
@@ -360,9 +360,9 @@ export function filterParameterReducer(state = [], action){
 
 export function indexFilterParameterReducer(state = '', action){
 	if (action.type === IndexFilterAction){
-		return {...state, indexTabParameter : action.payload}
+		return {...state, indexTabParameter : action.payload};
 	}
-	return state
+	return state;
 }
 
 export function serviceParameterReducer(state = initialServiceParameter, action) {
@@ -385,9 +385,13 @@ export function searchSoReducer(state = '', action) {
 export function selectSalesPlansReducer(state = [], action) {
 	switch (action.type) {
 	case SelectSalesPlanAction: {
-		console.log('skuiiiiiiiiiiiiiiii', action.payload)
+		console.log('skuiiiiiiiiiiiiiiii', action.payload);
 		return [...state, action.payload];
+		// return [...state.map(((item) => item.SO !== action.payload))];
 	}
+	// case SelectAllSalesPlanAction:{
+	// 	return [...state.(((item) => item.SO === action.payload))];
+	// }
 	case UnselectSalesPlanAction: {
 		return [...state.filter(((item) => item.SO !== action.payload.SO))];
 	}

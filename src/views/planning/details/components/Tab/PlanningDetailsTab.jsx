@@ -111,6 +111,7 @@ class PlanningDetailsTab extends React.Component {
     
     if (this.state.value === 1) {
       this.props.onPage(this.state.value);
+      this.props.wasApprove(this.state.value);
       this.setState({
         invisible1 : !this.state.invisible1,
         invisible2 : !this.state.invisible2,
@@ -119,6 +120,7 @@ class PlanningDetailsTab extends React.Component {
     }
     if (this.state.value === 0) {
       this.props.onPage(this.state.value);
+      this.props.wasApprove(this.state.value);
       this.setState({
         invisible1 : !this.state.invisible1,
         invisible2 : !this.state.invisible2,
@@ -144,6 +146,7 @@ class PlanningDetailsTab extends React.Component {
   }
 
   _renderServiceOrderList(){
+    
     return(
         <div className="plannings-list-containers">
           <ServiceOrderList 
@@ -277,10 +280,10 @@ class PlanningDetailsTab extends React.Component {
             <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<Badge className="badge" badgeContent={this.props.totalServiceData} color="primary" invisible={this.state.invisible2}>
             <>Service Order</>
             </Badge >} /> */}
-            <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<StyledBadge badgeContent={this.props.totalSalesData} color="primary" invisible={this.state.invisible1}>
+            <Tab onClick={() => this.props.clearSelectedSalesPlans()} classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<StyledBadge badgeContent={this.props.totalSalesData} color="primary" invisible={this.state.invisible1}>
             <>Sales Order</>
             </StyledBadge >} />
-            <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<StyledBadge badgeContent={this.props.totalServiceData} color="primary" invisible={this.state.invisible2}>
+            <Tab onClick={() => this.props.clearSelectedServicePlans()} classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<StyledBadge badgeContent={this.props.totalServiceData} color="primary" invisible={this.state.invisible2}>
             <>Service Order</>
             </StyledBadge >} />
             {/* <Tab disabled classes={{ root: classes.tabRoot }} /><Tab disabled classes={{ root: classes.tabRoot }} />
@@ -292,8 +295,8 @@ class PlanningDetailsTab extends React.Component {
         <div className="filters-container">
           {this._renderFilter()}
         </div>
-        {value === 0 && <TabContainer dir={theme.direction}><div>{this._renderSalesOrderList()}</div></TabContainer>}
-        {value === 1 && <TabContainer dir={theme.direction}><div>{this._renderServiceOrderList()}</div></TabContainer>}
+        {value === 0 && <TabContainer dir={theme.direction} ><div>{this._renderSalesOrderList()}</div></TabContainer>}
+        {value === 1 && <TabContainer dir={theme.direction} ><div>{this._renderServiceOrderList()}</div></TabContainer>}
       </div>
     );
   }

@@ -24,7 +24,9 @@ export const SearchSalesAction = 'SEARCH_PLANS';
 export const SearchSoAction = 'SEARCH_SO';
 
 export const SelectSalesPlanAction = 'SELECT_SALES_PLANS';
+export const SelectAllSalesPlanAction = 'SELECT_ALL_SALES_PLANS';
 export const SelectServicePlanAction = 'SELECT_SERVICE_PLANS';
+export const SelectAllServicePlanAction = 'SELECT_ALL_SERVICE_PLANS';
 export const SelectPlansAssignmentFilterAction = 'SELECT_PLANS_ASSIGNMENT_FILTER';
 export const SelectPlansTypeFilterAction = 'SELECT_PLANS_TYPE_FILTER';
 export const SelectLeaderAction = 'SELECT_LEADER';
@@ -50,7 +52,7 @@ export const SelectCustomerFilterAction = 'SELECT_CUSTOMER_FILTER';
 export const SelectSiteFilterAction = 'SELECT_SITE_FILTER'
 export const SelectUnitModelFilterAction ='SELECT_UNIT_MODEL_FILTER'
 export const SelectComponentFilterAction ='SELECT_COMPONENT_FILTER'
-export const IndexFilterAction = "INDEX FILTER";
+export const IndexFilterAction = 'INDEX FILTER';
 
 export function approveSalesAction (payload) {
 	const requestConfig = {
