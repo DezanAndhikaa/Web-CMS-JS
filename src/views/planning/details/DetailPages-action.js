@@ -45,9 +45,9 @@ export const UpdateServiceParameterAction = 'SERVICE_PARAMETER';
 export const SalesOrderFilterAction = 'SALES_ORDER_FILTER';
 
 export const SelectCustomerFilterAction = 'SELECT_CUSTOMER_FILTER';
-export const SelectSiteFilterAction = 'SELECT_SITE_FILTER'
-export const SelectUnitModelFilterAction ='SELECT_UNIT_MODEL_FILTER'
-export const SelectComponentFilterAction ='SELECT_COMPONENT_FILTER'
+export const SelectSiteFilterAction = 'SELECT_SITE_FILTER';
+export const SelectUnitModelFilterAction ='SELECT_UNIT_MODEL_FILTER';
+export const SelectComponentFilterAction ='SELECT_COMPONENT_FILTER';
 
 export function approveSalesAction (payload) {
 	const requestConfig = {
@@ -89,7 +89,7 @@ export function unapproveSalesAction(payload) {
 // 	return async (dispatch) => dispatch(callApi(type, requestConfig));
 // }
 export function putPlanningApprovedAction(payload){
-	console.log('data kampang', payload)
+	console.log('data kampang', payload);
 	const requestConfig = {
 		method: RequestMethod.PUT,
 		url: `${ApiUrlBase.SALESORDER_API_URL}/Approval`,
