@@ -28,7 +28,6 @@ class DropdownFilter extends React.Component {
 
   selectItem = (item,Tab,head) => {
     this.props.onSelectAction(this.props.onSelectActionType, item, head);
-    console.log("nilai si Tab ", Tab)
     this.props.indexFilter("INDEX FILTER",Tab);
   }
 

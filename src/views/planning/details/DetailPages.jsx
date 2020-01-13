@@ -57,8 +57,8 @@ componentDidUpdate = (prevProps) => {
   }
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
+    console.log("klklklklklkl : ", this.props.filterParameter )
       if(this.props.indexFilterParameter.indexTabParameter === 0){
-        console.log("klklklklklkl : ", this.props.filterParameter )
         this.props.fetchSalesOrder(this.props.filterParameter.dataFilter);
         // this.props.clearSelectedSalesPlans();
       }else{
@@ -436,7 +436,6 @@ onClickApproveBtn = () => {
   };
 
   updateAssignmentSalesStates = (plan) => {
-    console.log('iniiiiiiiiiiiiii', this.state.lifetime)
     if (this.props.selectedSalesPlans.some(
       (plans) => plans.SO === plan.SO,
       this.setState({

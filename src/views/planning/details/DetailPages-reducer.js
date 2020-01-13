@@ -219,7 +219,8 @@ export function fetchSalesReducer(state = initialSalesState, action) {
 	if (action.type === FetchSalesAction) {
 	  switch (action.status) {
 		case ApiRequestActionsStatus.SUCCEEDED:
-			// console.log('ini balikan dari mantan',action.payload);
+			console.log('ini balikan dari mantan 1',state)
+			console.log('ini balikan dari mantan 2',action.payload);
 		  return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
 		case ApiRequestActionsStatus.FAILED:
 		  return {
@@ -314,9 +315,13 @@ export function filterParameterReducer(state = [], action){
 		if(state.length === 0){ //IF yang pertama ini,jika filternya belum di isi apa2 (filter belum di jalankan)
 			return {...state, dataFilter: {Filter : [{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}else{
-			for(let i=0; i<state.dataFilter.Filter.length; i++){
-				if(state.dataFilter.Filter[i].Field === action.head){
-					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
+			for(let i=0; i<state.dataFilter.Filter.length; i++){ //FOR di sini untuk mengecek pada objek sebelumnya
+				if(state.dataFilter.Filter[i].Field === action.head){ //JIKA pada objek sebelumnya pada "field" ada yang sama, maka akan merubah nilai pada "value" tersebut tanpa menambah array
+					if(action.payload === "All"){
+						state.dataFilter.Filter.splice(i,1)
+						return {dataFilter : {Filter : state.dataFilter.Filter }}
+					}
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }}		
 				}
 			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
@@ -327,7 +332,11 @@ export function filterParameterReducer(state = [], action){
 		}else{
 			for(let i=0; i<state.dataFilter.Filter.length; i++){
 				if(state.dataFilter.Filter[i].Field === action.head){
-					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
+					if(action.payload === "All"){
+						state.dataFilter.Filter.splice(i,1)
+						return {dataFilter : {Filter : state.dataFilter.Filter }}
+					}
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }}		
 				}
 			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
@@ -338,7 +347,11 @@ export function filterParameterReducer(state = [], action){
 		}else{
 			for(let i=0; i<state.dataFilter.Filter.length; i++){
 				if(state.dataFilter.Filter[i].Field === action.head){
-					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
+					if(action.payload === "All"){
+						state.dataFilter.Filter.splice(i,1)
+						return {dataFilter : {Filter : state.dataFilter.Filter }}
+					}
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }}		
 				}
 			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
@@ -349,7 +362,11 @@ export function filterParameterReducer(state = [], action){
 		}else{
 			for(let i=0; i<state.dataFilter.Filter.length; i++){
 				if(state.dataFilter.Filter[i].Field === action.head){
-					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
+					if(action.payload === "All"){
+						state.dataFilter.Filter.splice(i,1)
+						return {dataFilter : {Filter : state.dataFilter.Filter }}
+					}
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }}		
 				}
 			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
@@ -358,7 +375,9 @@ export function filterParameterReducer(state = [], action){
 }
 
 export function indexFilterParameterReducer(state = '', action){
+	console.log('aneh aneh')
 	if (action.type === IndexFilterAction){
+		console.log('aneh aneh aneh 3 ',action)
 		return {...state, indexTabParameter : action.payload};
 	}
 	return state;
@@ -551,6 +570,7 @@ const PlansReducers = combineReducers({
 	// unapproveSalesStatus: unapproveSalesReducer,
 	salesParameter: salesParameterReducer,
 	filterParameter: filterParameterReducer,
+	indexFilterParameter: indexFilterParameterReducer,
 	serviceParameter: serviceParameterReducer,
 	// PlansAssignmentSummary: fetchPlansReducer,
 	sortSalesBy: sortSalesByReducer,
