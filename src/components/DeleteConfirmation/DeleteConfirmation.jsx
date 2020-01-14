@@ -17,9 +17,9 @@ export default class DeleteConfirmation extends React.PureComponent {
                 <p className="confirmation-title">Delete Planning</p>
                 <img className="confirmation-image" src={Delete} alt="" />
                 <p className="confirmation-caption">Are you sure want to</p>
-                <p className="confirmation-caption">delete 5 items?</p>
+                <p className="confirmation-caption">delete {this.props.totalData} items?</p>
                 <div className="btn-row">
-                  <Button className="btn-yes" onClick={this.props.onStat}>Yes</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <Button className="btn-yes" onClick={this.props.onDelete}>Yes</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <Button className="btn-no" onClick={this.props.onClose}>No</Button>
                   </div>
               </div>

@@ -9,10 +9,9 @@ export const ApproveServiceAction = 'APPROVE_SERVICE';
 export const UnapproveSalesAction = 'UNAPPROVE_SALES';
 export const ClearSelectedPlans = 'CLEAR_SELECTED_PLANS';
 export const FetchSalesAction = 'FETCH_SALES_ORDER';
-export const PutSalesApproved = 'PUT_SALES_APPROVED';
-export const PutServiceApproved = 'PUT_SERVICE_APPROVED';
 export const FetchServiceAction = 'FETCH_SERVICE_ORDER';
-export const FetchPlansAction = 'FETCH_PLANS';
+export const DeleteSalesAction = 'DELETE_SALES';
+export const DeleteServiceAction = 'DELETE_SERVICE';
 // export const FetchSearchValueAction = 'FETCH_SEARCH_VALUE';
 export const GetMechanicsAction = 'GET_MECHANICS';
 export const GetServiceOrderAction = 'GET_SERVICE_ORDER';
@@ -22,7 +21,6 @@ export const ResetSelectedMechanicsAction = 'RESET_SELECTED_MECHANICS';
 export const ResetSelectedLeaderAction = 'RESET_SELECTED_LEADER';
 export const SearchSalesAction = 'SEARCH_PLANS';
 export const SearchSoAction = 'SEARCH_SO';
-
 export const SelectSalesPlanAction = 'SELECT_SALES_PLANS';
 export const SelectAllSalesPlanAction = 'SELECT_ALL_SALES_PLANS';
 export const SelectServicePlanAction = 'SELECT_SERVICE_PLANS';
@@ -47,22 +45,21 @@ export const UnselectMechanicAction = 'UNSELECT_MECHANIC';
 export const UpdateSalesParameterAction = 'SALES_PARAMETER';
 export const UpdateServiceParameterAction = 'SERVICE_PARAMETER';
 export const SalesOrderFilterAction = 'SALES_ORDER_FILTER';
-
 export const SelectCustomerFilterAction = 'SELECT_CUSTOMER_FILTER';
 export const SelectSiteFilterAction = 'SELECT_SITE_FILTER'
 export const SelectUnitModelFilterAction ='SELECT_UNIT_MODEL_FILTER'
 export const SelectComponentFilterAction ='SELECT_COMPONENT_FILTER'
 export const IndexFilterAction = 'INDEX FILTER';
 
-export function approveSalesAction (payload) {
+export function approveSalesAction(payload){
 	const requestConfig = {
 		method: RequestMethod.PUT,
 		url: `${ApiUrlBase.SALESORDER_API_URL}/Approval`,
-		data: payload,
 		headers: {
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
 		},
+		data: payload,
 	};
 	return async (dispatch) => dispatch(callApi(ApproveSalesAction, requestConfig));
 }
@@ -80,33 +77,7 @@ export function unapproveSalesAction(payload) {
 	return async (dispatch) => dispatch(callApi(UnapproveSalesAction, requestConfig));
 }
 
-// export function fetchPlansAssignment(type, payload, accessToken) {
-// 	const requestConfig = {
-// 		method: RequestMethod.POST,
-// 		url: `${ApiUrlBase.SALESORDER_API_URL}Filters`,
-// 		data: payload,
-// 		headers: {
-// 			Authorization: `Bearer ${accessToken}`,
-// 			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID, // eslint-disable-line no-undef
-// 			'Content-Type': 'application/json',
-// 		},
-// 	};
-// 	return async (dispatch) => dispatch(callApi(type, requestConfig));
-// }
-export function putSalesApprovedAction(payload){
-	const requestConfig = {
-		method: RequestMethod.PUT,
-		url: `${ApiUrlBase.SALESORDER_API_URL}/Approval`,
-		headers: {
-			'Accept': 'application/json; charset=utf-8',
-			'Content-Type': 'application/json; charset=utf-8',
-		},
-		data: payload,
-	};
-	return async (dispatch) => dispatch(callApi(PutSalesApproved, requestConfig));
-}
-
-export function putServiceApprovedAction(payload){
+export function approveServiceAction(payload){
 	const requestConfig = {
 		method: RequestMethod.PUT,
 		url: `${ApiUrlBase.SERVICEORDER_API_URL}/Approval`,
@@ -116,7 +87,33 @@ export function putServiceApprovedAction(payload){
 		},
 		data: payload,
 	};
-	return async (dispatch) => dispatch(callApi(PutServiceApproved, requestConfig));
+	return async (dispatch) => dispatch(callApi(ApproveServiceAction, requestConfig));
+}
+
+export function deleteSalesAction(payload){
+	const requestConfig = {
+		method: RequestMethod.DELETE,
+		url: `${ApiUrlBase.SALESORDER_API_URL}/DataAction/Delete`,
+		headers: {
+			'Accept': 'application/json; charset=utf-8',
+			'Content-Type': 'application/json; charset=utf-8',
+		},
+		data: payload,
+	};
+	return async (dispatch) => dispatch(callApi(ApproveSalesAction, requestConfig));
+}
+
+export function deleteServiceAction(payload){
+	const requestConfig = {
+		method: RequestMethod.DELETE,
+		url: `${ApiUrlBase.SERVICEORDER_API_URL}/DataAction/Delete`,
+		headers: {
+			'Accept': 'application/json; charset=utf-8',
+			'Content-Type': 'application/json; charset=utf-8',
+		},
+		data: payload,
+	};
+	return async (dispatch) => dispatch(callApi(DeleteServiceAction, requestConfig));
 }
 
 export function fetchSalesAction(payload) {

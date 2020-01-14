@@ -41,7 +41,7 @@ export default class SalesOrderList extends React.PureComponent {
     isChangeStat = (value,key) =>{
       this.setState({
         stats: 1,
-        lifetime: this.state.lifetime.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el))
+        lifetime: this.state.lifetime.map(el => (el.So === key ? {...el, LifeTimeComp : value} : el))
       });
     }
 
@@ -63,9 +63,9 @@ render(){
             <TableCell padding="checkbox">
               {this.props.displaySalesCheckbox && 
               <Checkbox 
-              onClick={() => {this.state.lifetime.map((row) => 
-              this.props.onChoosedSales(row))}}
-              className="checkbox-checked-header"/>}
+                onClick={() => {this.state.lifetime.map((row,id) => 
+                this.props.onChoosedSales(row,id))}}
+                className="checkbox-checked-header"/>}
             </TableCell>
             <PlanningListHeader
               name="SO"
@@ -143,9 +143,9 @@ render(){
             && this.state.lifetime.map((row, id) => (
               <TableRow key={id} classes={{ root: 'table-row' }}>
                 <TableCell padding="checkbox">
-                  {this.props.displaySalesCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedSalesPlanList.some((plans) => plans.SO === row.SO)} onClick={() => this.props.onChoosedSales(row)} classes={{ checked: 'checkbox-checked' }} />}
+                  {this.props.displaySalesCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedSalesPlanList.some((plans) => plans.So === row.So)} onClick={() => this.props.onChoosedSales(row)} classes={{ checked: 'checkbox-checked' }} />}
                 </TableCell>
-                <TableCell align="left" className="table-cell"> {row.SO} </TableCell>
+                <TableCell align="left" className="table-cell"> {row.So} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.Customer} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.Site} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>

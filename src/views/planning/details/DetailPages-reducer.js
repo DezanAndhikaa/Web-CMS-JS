@@ -2,7 +2,7 @@
 import { combineReducers } from 'redux';
 import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
 import {
-	ApproveSalesAction, 
+	// ApproveSalesAction, 
 	ClearSelectedPlans,
 	// FetchSearchValueAction, 
 	// FetchPlansAction, 
@@ -176,27 +176,6 @@ const initialAssignmentState = { response: false, status: ApiRequestActionsStatu
 const initialSalesState = { data: initialSalesAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialServiceState = { data: initialServiceAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialMechanicsState = { data: [], status: ApiRequestActionsStatus.IDLE };
-
-export function approveSalesReducer(state = initialAssignmentState, action) {
-	if (action.type === ApproveSalesAction) {
-		switch (action.status) {
-		case ApiRequestActionsStatus.SUCCEEDED:
-			return { response: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
-		case ApiRequestActionsStatus.FAILED:
-			return {
-				response: initialAssignmentState.response,
-				status: ApiRequestActionsStatus.FAILED,
-				error: action.error,
-			};
-		default:
-			return {
-				response: initialAssignmentState.response,
-				status: ApiRequestActionsStatus.LOADING,
-			};
-		}
-	}
-	return state;
-}
 
 // export function fetchPlansReducer(state = initialPlansState, action) {
 // 	if (action.type === FetchPlansAction) {
@@ -566,7 +545,7 @@ const PlansReducers = combineReducers({
 	selectedSalesPlans: selectSalesPlansReducer,
 	selectedServicePlans: selectServicePlansReducer,
 	selectedMechanics: selectMechanicsReducer,
-	approveSalesStatus: approveSalesReducer,
+	// approveSalesStatus: approveSalesReducer,
 	// unapproveSalesStatus: unapproveSalesReducer,
 	salesParameter: salesParameterReducer,
 	filterParameter: filterParameterReducer,

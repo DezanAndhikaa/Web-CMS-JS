@@ -120,7 +120,12 @@ render(){
             && this.props.serviceOrderList.Lists.map((row, index) => (
               <TableRow key={index} classes={{ root: 'table-row' }}>
                 <TableCell padding="checkbox">
-                  {this.props.displayServiceCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedServicePlanList.some((plans) => plans.Wo === row.Wo)} onClick={() => this.props.onChoosedService(row)} classes={{ checked: 'checkbox-checked' }} />}
+                  {this.props.displayServiceCheckbox && 
+                  <Checkbox 
+                    disabled={this.isCheckboxAvailable(row)} 
+                    checked={this.props.selectedServicePlanList.some((plans) => plans.Wo === row.Wo)} 
+                    onClick={() => this.props.onChoosedService(row)} 
+                    classes={{ checked: 'checkbox-checked' }} />}
                 </TableCell>
                 <TableCell align="left" className="table-cell"> {row.Wo} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.Customer} </TableCell>

@@ -4,10 +4,11 @@ import { PlansReducers } from './DetailPages-reducer';
 import { storeDataAction } from '../../../core/StorageHelper';
 import { PLAN_DATA, StorageKey } from '../../../constants';
 import {
-	approveSalesAction,
-	unapproveSalesAction,
-	putSalesApprovedAction, //APPROVE SALES
-	putServiceApprovedAction, //APPROVE SERVICE
+	approveSalesAction, //APPROVE SALES
+	unapproveSalesAction, 
+	approveServiceAction, //APPROVE SERVICE
+	deleteSalesAction,
+	deleteServiceAction,
 	getServiceOrderAction, fetchSalesAction, salesParameterAction, fetchServiceAction,
 	ClearSelectedPlans, UpdateServiceParameterAction,
 	// fetchJobsAssignment,
@@ -59,7 +60,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	approveSales: (payload) => dispatch(approveSalesAction(payload)),
+	// approveSales: (payload) => dispatch(approveSalesAction(payload)),
 	unapproveSales: (payload, token) => dispatch(unapproveSalesAction(payload, token)),
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
 	clearSelectedServicePlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
@@ -68,8 +69,10 @@ const mapDispatchToProps = (dispatch) => ({
 	// getServiceOrder: () => dispatch(getServiceOrderAction()),
 	// getSalesOrder: () => dispatch(getSalesFilteredAction()),
 	// getSearchValue: (payload) => dispatch(getSearchValueAction(payload)),
-	putSalestoPlanningApprove: (payload) => dispatch(putSalesApprovedAction(payload)),
-	putServicetoPlanningApprove: (payload) => dispatch(putServiceApprovedAction(payload)),
+	approveSales: (payload) => dispatch(approveSalesAction(payload)),
+	approveService: (payload) => dispatch(approveServiceAction(payload)),
+	deleteSales: (payload) => dispatch(deleteSalesAction(payload)),
+	deleteService: (payload) => dispatch(deleteServiceAction(payload)),
 	fetchSalesOrder: (payload) => dispatch(fetchSalesAction(payload)),
 	fetchServiceOrder: (payload) => dispatch(fetchServiceAction(payload)),
 	onClickSortBy: (type) => dispatch(sortByAction(type)),

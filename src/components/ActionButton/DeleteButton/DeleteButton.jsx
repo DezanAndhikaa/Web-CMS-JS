@@ -5,7 +5,7 @@ class DeleteButton extends React.PureComponent {
 	render() {
 		return (
 			<div className="del-button-row">
-				<div className="del-button" onClick={this.props.onClick} />
+				<div className="del-button" onClick={this.props.onClick}/>
 			</div>
 		);
 	}
