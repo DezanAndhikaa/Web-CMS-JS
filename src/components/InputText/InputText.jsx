@@ -1,11 +1,9 @@
 import React from 'react'
 import './InputText.scss'
 import CloseButton from '../../components/CloseButton/CloseButton'
-import DropDownList from '../DropdownList/DropDownList'
 import { Button, TextField, FormHelperText } from '@material-ui/core'
 import * as Yup from 'yup';
-import { Formik, Form } from 'formik';
-import { FormikTextField } from 'formik-material-fields'
+import { Formik } from 'formik';
 import NumberFormat from 'react-number-format';
 
 const validationSchema = Yup.object().shape({
@@ -18,7 +16,7 @@ class InputText extends React.Component{
     constructor(props){
         super(props);
         this.state ={ 
-            limitText: ''
+            limitText: (this.props.field === "edit" ? this.props.values : '')
         }
     }
     
@@ -32,7 +30,6 @@ class InputText extends React.Component{
     }
 
     render(){
-        console.log("key key kye "+ JSON.stringify(this.props))
         return(
             <div className="assign-mechanic-modal">
                 <div className="top-row">
@@ -57,7 +54,7 @@ class InputText extends React.Component{
                 </Formik>
                 <div className="bottom-row">
                     <Button className="btn-cancel" onClick={this.props.onClosed}>Cancel</Button>
-                    <Button className="btn-input" onClick={() => this.props.onStats(this.state.limitText, this.props.id)}>Input</Button>
+                    <Button className="btn-input" onClick={ () => {this.props.onStats(this.state.limitText, this.props.id); this.props.onClosed()} } >Input</Button>
                 </div>
             </div>
         )
