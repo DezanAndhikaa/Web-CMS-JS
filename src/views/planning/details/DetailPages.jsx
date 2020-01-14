@@ -283,12 +283,6 @@ componentDidUpdate = (prevProps) => {
   }
 }
 
-// onClickApproveBtn = () => {
-//   // this.props.getMechanics(this.props.token);
-//   this.setState({ isShowAssign: true });
-//   this.props.approveSales(this.props.salesParameter.dataFilter);
-// }
-
   _renderPagination= (pageValue) =>  {
     if (pageValue === 1) {
       this.setState({isPaging : true})
