@@ -154,12 +154,12 @@ render(){
                 <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
                 <TableCell align="center" className="table-cell"> 
-                {!this.state.lifetime[id].LifeTimeComp ? <InputButton title="Input Lifetime Component" onStats={this.isChangeStat} titles="Input" key={row.SO} id={row.SO}/> : 
+                {!this.state.lifetime[id].LifeTimeComp ? <InputButton title="Input Lifetime Component" onStats={this.isChangeStat} titles="Input" key={row.So} id={row.So} field="input"/> : 
                   <div>{this.state.lifetime[id].LifeTimeComp}</div>
                 }
                 </TableCell>
                 <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
-                <TableCell align="center" className="table-cell"> <EditButton /></TableCell>
+                <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isChangeStat} values={this.state.lifetime[id].LifeTimeComp} field="edit" id={row.So} /></TableCell>
               </TableRow>
             ))}
         </TableBody>

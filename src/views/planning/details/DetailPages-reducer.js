@@ -482,7 +482,6 @@ export function sortSalesByReducer(state = salesSortbyInitialState, action) {
 	}
 }
 
-
 export function sortServiceByReducer(state = serviceSortbyInitialState, action) {
 	switch (action.type) {
 	case SortServiceByCustomer:

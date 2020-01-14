@@ -93,7 +93,7 @@
                 background-color: white;
                 .table-row{
                     border-bottom: vw(5) solid #F4F6F8;
-                    cursor: pointer;
+                    // cursor: pointer;
                     .table-cell{
                         padding: 0;
                         height: vw(40);
@@ -106,9 +106,9 @@
                         color: #3C3B3B;
                     }
                 }
-                .table-row:hover{
-                    background-color:map-get($colors, primary);
-                }
+                // .table-row:hover{
+                //     background-color:map-get($colors, primary);
+                // }
             }
         }
     }
@@ -153,9 +153,9 @@
                             color: #3C3B3B;
                         }
                     }
-                    .table-row:hover{
-                        background-color:map-get($colors, primary);
-                    }
+                    // .table-row:hover{
+                    //     background-color:map-get($colors, primary);
+                    // }
                 }
             }
         }
