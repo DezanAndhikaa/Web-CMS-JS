@@ -172,10 +172,78 @@ const serviceSortbyInitialState = {
 	CompDesc: defaultState,
 };
 
+const initialSearchSOParameter ={
+	Field	: 'SO',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'AND'
+};
+const initialSearchCustomerParameter ={
+	Field	: 'Customer',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'AND'
+};
+const initialSearchSiteParameter = {
+	Field	: 'Site',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'AND'
+};
+const initialSearchUnitModelParameter ={
+	Field	: 'UnitModel',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'AND'
+};
+const initialSearchComponentDescriptionParameter ={
+	Field	: 'ComponentDescription',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'AND'
+};
+const initialSearchPartNumberParameter ={
+	Field	: 'PartNumber',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'AND'
+};
+const initialSearchUnitCodeParameter ={
+	Field	: 'UnitCode',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'AND'
+};
+const initialSearchSerialNumberParameter ={
+	Field	: 'SerialNumber',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'AND'
+}
+const initialSearchLifeTimeCompParameter ={
+	Field	: 'LifeTimeComp',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'AND'
+};
+const initialSearchPlanExecutionParameter ={
+	Field	: 'PlanExecution',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'AND'
+};
+		
+
 const initialAssignmentState = { response: false, status: ApiRequestActionsStatus.IDLE };
 const initialSalesState = { data: initialSalesAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialServiceState = { data: initialServiceAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialMechanicsState = { data: [], status: ApiRequestActionsStatus.IDLE };
+const initialSearchParameter = { Filter : [
+	initialSearchSOParameter, initialSearchCustomerParameter, 
+	initialSearchSiteParameter, initialSearchPartNumberParameter, 
+	initialSearchUnitModelParameter, initialSearchComponentDescriptionParameter, 
+	initialSearchUnitCodeParameter, initialSearchSerialNumberParameter, 
+	initialSearchLifeTimeCompParameter,initialSearchPlanExecutionParameter ] };
 
 // export function fetchPlansReducer(state = initialPlansState, action) {
 // 	if (action.type === FetchPlansAction) {
@@ -198,7 +266,7 @@ export function fetchSalesReducer(state = initialSalesState, action) {
 	if (action.type === FetchSalesAction) {
 	  switch (action.status) {
 		case ApiRequestActionsStatus.SUCCEEDED:
-			console.log('ini balikan dari mantan 1',state)
+			console.log('ini balikan dari mantan 1',state);
 			console.log('ini balikan dari mantan 2',action.payload);
 		  return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
 		case ApiRequestActionsStatus.FAILED:
@@ -296,11 +364,11 @@ export function filterParameterReducer(state = [], action){
 		}else{
 			for(let i=0; i<state.dataFilter.Filter.length; i++){ //FOR di sini untuk mengecek pada objek sebelumnya
 				if(state.dataFilter.Filter[i].Field === action.head){ //JIKA pada objek sebelumnya pada "field" ada yang sama, maka akan merubah nilai pada "value" tersebut tanpa menambah array
-					if(action.payload === "All"){
-						state.dataFilter.Filter.splice(i,1)
-						return {dataFilter : {Filter : state.dataFilter.Filter }}
+					if(action.payload === 'All'){
+						state.dataFilter.Filter.splice(i,1);
+						return {dataFilter : {Filter : state.dataFilter.Filter }};
 					}
-					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }}		
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
 				}
 			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
@@ -311,11 +379,11 @@ export function filterParameterReducer(state = [], action){
 		}else{
 			for(let i=0; i<state.dataFilter.Filter.length; i++){
 				if(state.dataFilter.Filter[i].Field === action.head){
-					if(action.payload === "All"){
-						state.dataFilter.Filter.splice(i,1)
-						return {dataFilter : {Filter : state.dataFilter.Filter }}
+					if(action.payload === 'All'){
+						state.dataFilter.Filter.splice(i,1);
+						return {dataFilter : {Filter : state.dataFilter.Filter }};
 					}
-					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }}		
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
 				}
 			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
@@ -326,26 +394,26 @@ export function filterParameterReducer(state = [], action){
 		}else{
 			for(let i=0; i<state.dataFilter.Filter.length; i++){
 				if(state.dataFilter.Filter[i].Field === action.head){
-					if(action.payload === "All"){
-						state.dataFilter.Filter.splice(i,1)
-						return {dataFilter : {Filter : state.dataFilter.Filter }}
+					if(action.payload === 'All'){
+						state.dataFilter.Filter.splice(i,1);
+						return {dataFilter : {Filter : state.dataFilter.Filter }};
 					}
-					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }}		
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
 				}
 			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}
 	if (action.type === SelectComponentFilterAction)
 		if(state.length === 0){
-			return {...state, dataFilter: {Filter : [{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }}
+			return {...state, dataFilter: {Filter : [{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}else{
 			for(let i=0; i<state.dataFilter.Filter.length; i++){
 				if(state.dataFilter.Filter[i].Field === action.head){
-					if(action.payload === "All"){
-						state.dataFilter.Filter.splice(i,1)
-						return {dataFilter : {Filter : state.dataFilter.Filter }}
+					if(action.payload === 'All'){
+						state.dataFilter.Filter.splice(i,1);
+						return {dataFilter : {Filter : state.dataFilter.Filter }};
 					}
-					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }}		
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
 				}
 			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
@@ -354,9 +422,9 @@ export function filterParameterReducer(state = [], action){
 }
 
 export function indexFilterParameterReducer(state = '', action){
-	console.log('aneh aneh')
+	console.log('aneh aneh');
 	if (action.type === IndexFilterAction){
-		console.log('aneh aneh aneh 3 ',action)
+		console.log('aneh aneh aneh 3 ',action);
 		return {...state, indexTabParameter : action.payload};
 	}
 	return state;
@@ -368,9 +436,11 @@ export function serviceParameterReducer(state = initialServiceParameter, action)
 	return state;
 }
 
-export function searchPlansReducer(state = '', action) {
+export function searchPlansReducer(state = initialSearchParameter, action) {
 	console.log('ini data untuk search value', action.payload);
-	if (action.type === SearchSalesAction) return action.payload;
+
+	if (action.type === SearchSalesAction)
+		return {...state, Value : action.payload};
 	return state;
 }
 

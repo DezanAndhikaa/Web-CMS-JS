@@ -52,7 +52,7 @@ componentWillUnmount = () => {
   this.props.onSearch('');
 
   this.props.updateSalesParameter({
-    ...this.props.salesParameter, Search: '',
+    ...this.props.salesParameter.dataFilter, Search: '',
   });
 }
 
@@ -76,7 +76,7 @@ componentDidUpdate = (prevProps) => {
   }
   if (prevProps.Search !== this.props.Search) {
     this.props.updateSalesParameter({
-      ...prevProps.salesParameter.dataFilter, Search: this.props.Search, PageNumber: 1,
+      ...prevProps.salesParameter.dataFilter, Filter: this.props.Search, PageNumber: 1,
     });
   }
   // SALES ORDER SORTING
@@ -88,16 +88,22 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          PageSize: 2,
-          Sort: 'Customer desc',      
+          // PageSize: 2,
+          Sort: [{
+            Field : 'Customer',
+            Direction : 'desc'
+          }],      
       });
     if (sortSalesBy.Customer.isAscending === !sortSalesBy.Customer.isActive) {
       isDescending = !sortSalesBy.Customer.isAscending;
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          PageSize: 2,
-          Sort: 'Customer asc'      
+          // PageSize: 2,
+          Sort: [{
+            Field : 'Customer',
+            Direction : 'asc'
+          }],      
       });
     }
   }
@@ -106,16 +112,22 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          PageSize: 2,
-          Sort: 'Site desc'
+          // PageSize: 2,
+          Sort: [{
+            Field : 'Site',
+            Direction : 'desc'
+          }],
       });
     if (sortSalesBy.Site.isAscending === !sortSalesBy.Site.isActive) {
       isDescending = !sortSalesBy.Site.isAscending;
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          PageSize: 2,
-          Sort: 'Site asc'
+          // PageSize: 2,
+          Sort: [{
+            Field : 'Site',
+            Direction : 'asc'
+          }],
       });
     }
     } 
@@ -124,16 +136,22 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          PageSize: 2,
-          Sort: 'UnitModel desc'
+          // PageSize: 2,
+          Sort: [{
+            Field : 'UnitModel',
+            Direction : 'desc'
+          }],
       });
     if (sortSalesBy.UnitModel.isAscending === !sortSalesBy.UnitModel.isActive) {
       isDescending = !sortSalesBy.UnitModel.isAscending;
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          PageSize: 2,
-          Sort: 'UnitModel asc'
+          // PageSize: 2,
+          Sort: [{
+            Field : 'UnitModel',
+            Direction : 'asc'
+          }],
       });
     }
     };
@@ -142,16 +160,22 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          PageSize: 2,
-          Sort: 'ComponentDescription desc'
+          // PageSize: 2,
+          Sort: [{
+            Field : 'ComponentDescription',
+            Direction : 'desc'
+          }],
       });
     if (sortSalesBy.CompDesc.isAscending === !sortSalesBy.CompDesc.isActive) {
       isDescending = !sortSalesBy.CompDesc.isAscending;
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          PageSize: 2,
-          Sort: 'ComponentDescription asc'
+          // PageSize: 2,
+          Sort: [{
+            Field : 'ComponentDescription',
+            Direction : 'asc'
+          }]
       });
     }
     };
@@ -165,16 +189,22 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          PageSize: 2,
-          Sort: 'Customer desc'   
+          // PageSize: 2,
+          Sort: [{
+            Field : 'Customer',
+            Direction : 'desc'
+          }]   
       });
     if (sortServiceBy.Customer.isAscending === !sortServiceBy.Customer.isActive) {
       isDescending = !sortServiceBy.Customer.isAscending;
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          PageSize: 2,
-          Sort: 'Customer asc'   
+          // PageSize: 2,
+          Sort: [{
+            Field : 'Customer',
+            Direction : 'asc'
+          }]   
       });
     }
   }
@@ -183,16 +213,22 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          PageSize: 2,
-          Sort: 'Site desc' 
+          // PageSize: 2,
+          Sort: [{
+            Field : 'Site',
+            Direction : 'desc'
+          }] 
       });
     if (sortServiceBy.Site.isAscending === !sortServiceBy.Site.isActive) {
       isDescending = !sortServiceBy.Site.isAscending;
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          PageSize: 2,
-          Sort: 'Site asc' 
+          // PageSize: 2,
+          Sort: [{
+            Field : 'Site',
+            Direction : 'asc'
+          }] 
       });
     }
     } 
@@ -201,16 +237,22 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          PageSize: 2,
-          Sort: 'UnitModel desc' 
+          // PageSize: 2,
+          Sort: [{
+            Field : 'UnitModel',
+            Direction : 'desc'
+          }] 
       });
     if (sortServiceBy.UnitModel.isAscending === !sortServiceBy.UnitModel.isActive) {
       isDescending = !sortServiceBy.UnitModel.isAscending;
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          PageSize: 2,
-          Sort: 'UnitModel asc' 
+          // PageSize: 2,
+          Sort: [{
+            Field : 'UnitModel',
+            Direction : 'asc'
+          }] 
       });
     }
     };
@@ -219,16 +261,22 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          PageSize: 2,
-          Sort: 'ComponentDescription desc' 
+          // PageSize: 2,
+          Sort: [{
+            Field : 'ComponentDescription',
+            Direction : 'desc'
+          }] 
       });
     if (sortServiceBy.CompDesc.isAscending === !sortServiceBy.CompDesc.isActive) {
       isDescending = !sortServiceBy.CompDesc.isAscending;
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          PageSize: 2,
-          Sort: 'ComponentDescription asc' 
+          // PageSize: 2,
+          Sort: [{
+            Field : 'ComponentDescription',
+            Direction : 'asc'
+          }] 
       });
     }
     };
