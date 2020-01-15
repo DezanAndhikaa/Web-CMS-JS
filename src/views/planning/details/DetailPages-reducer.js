@@ -1,5 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { combineReducers } from 'redux';
+import update from 'immutability-helper';
 import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
 import {
 	// ApproveSalesAction, 
@@ -172,78 +173,79 @@ const serviceSortbyInitialState = {
 	CompDesc: defaultState,
 };
 
-const initialSearchSOParameter ={
+const initialSearchParameter =
+[{
 	Field	: 'SO',
 	Operator: 'contains',
 	Value 	: '',
-	Logic 	: 'AND'
-};
-const initialSearchCustomerParameter ={
+	Logic 	: 'OR'
+},
+{
 	Field	: 'Customer',
 	Operator: 'contains',
 	Value 	: '',
-	Logic 	: 'AND'
-};
-const initialSearchSiteParameter = {
+	Logic 	: 'OR'
+},
+{
 	Field	: 'Site',
 	Operator: 'contains',
 	Value 	: '',
-	Logic 	: 'AND'
-};
-const initialSearchUnitModelParameter ={
+	Logic 	: 'OR'
+},
+{
 	Field	: 'UnitModel',
 	Operator: 'contains',
 	Value 	: '',
-	Logic 	: 'AND'
-};
-const initialSearchComponentDescriptionParameter ={
+	Logic 	: 'OR'
+},
+{
 	Field	: 'ComponentDescription',
 	Operator: 'contains',
 	Value 	: '',
-	Logic 	: 'AND'
-};
-const initialSearchPartNumberParameter ={
+	Logic 	: 'OR'
+},
+{
 	Field	: 'PartNumber',
 	Operator: 'contains',
 	Value 	: '',
-	Logic 	: 'AND'
-};
-const initialSearchUnitCodeParameter ={
+	Logic 	: 'OR'
+},
+{
 	Field	: 'UnitCode',
 	Operator: 'contains',
 	Value 	: '',
-	Logic 	: 'AND'
-};
-const initialSearchSerialNumberParameter ={
+	Logic 	: 'OR'
+},
+{
 	Field	: 'SerialNumber',
 	Operator: 'contains',
 	Value 	: '',
-	Logic 	: 'AND'
-}
-const initialSearchLifeTimeCompParameter ={
+	Logic 	: 'OR'
+},
+{
 	Field	: 'LifeTimeComp',
 	Operator: 'contains',
 	Value 	: '',
-	Logic 	: 'AND'
-};
-const initialSearchPlanExecutionParameter ={
+	Logic 	: 'OR'
+},
+{
 	Field	: 'PlanExecution',
 	Operator: 'contains',
 	Value 	: '',
-	Logic 	: 'AND'
-};
+	Logic 	: 'OR'
+}];
 		
 
 const initialAssignmentState = { response: false, status: ApiRequestActionsStatus.IDLE };
 const initialSalesState = { data: initialSalesAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialServiceState = { data: initialServiceAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialMechanicsState = { data: [], status: ApiRequestActionsStatus.IDLE };
-const initialSearchParameter = { Filter : [
-	initialSearchSOParameter, initialSearchCustomerParameter, 
-	initialSearchSiteParameter, initialSearchPartNumberParameter, 
-	initialSearchUnitModelParameter, initialSearchComponentDescriptionParameter, 
-	initialSearchUnitCodeParameter, initialSearchSerialNumberParameter, 
-	initialSearchLifeTimeCompParameter,initialSearchPlanExecutionParameter ] };
+// const initialSearchParameter = { Filter : [
+// 	initialSearchSOParameter, initialSearchCustomerParameter, 
+// 	initialSearchSiteParameter, initialSearchPartNumberParameter, 
+// 	initialSearchUnitModelParameter, initialSearchComponentDescriptionParameter, 
+// 	initialSearchUnitCodeParameter, initialSearchSerialNumberParameter, 
+// 	initialSearchLifeTimeCompParameter,initialSearchPlanExecutionParameter ] };
 
 // export function fetchPlansReducer(state = initialPlansState, action) {
 // 	if (action.type === FetchPlansAction) {
@@ -438,9 +440,26 @@ export function serviceParameterReducer(state = initialServiceParameter, action)
 
 export function searchPlansReducer(state = initialSearchParameter, action) {
 	console.log('ini data untuk search value', action.payload);
+	// let index = 0;
+	// let newArray = update(state, {[index]: {Value:{$set: action.payload}}});
 
-	if (action.type === SearchSalesAction)
-		return {...state, Value : action.payload};
+	// console.log('mmmmmm', newArray);
+	if (action.type === SearchSalesAction){
+		let newArray = 
+		update(state, {
+			[0]: {Value:{$set: action.payload}},
+			[1]: {Value:{$set: action.payload}},
+			[2]: {Value:{$set: action.payload}},
+			[3]: {Value:{$set: action.payload}},
+			[4]: {Value:{$set: action.payload}},
+			[5]: {Value:{$set: action.payload}},
+			[6]: {Value:{$set: action.payload}},
+			[7]: {Value:{$set: action.payload}},
+			[8]: {Value:{$set: action.payload}},
+			[9]: {Value:{$set: action.payload}},
+		});
+		return newArray;
+	}
 	return state;
 }
 
