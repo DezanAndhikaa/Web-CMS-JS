@@ -389,6 +389,7 @@ componentDidUpdate = (prevProps) => {
 				<div className="bottom-row">
           <BaseButton titles="Total" totalSelectedItems ={this.props.selectedSalesPlans.length}/>
           <BaseButton titles="Delete" 
+            {...this.props}
             disabledButton = {this.props.selectedSalesPlans.length < 1 }
             totalSelectedItems ={this.props.selectedSalesPlans.length}
             whatTabsIsRendered={this.state.isPaging}
@@ -439,8 +440,8 @@ componentDidUpdate = (prevProps) => {
     if (this.props.selectedSalesPlans
       .some((plans) => plans.So === plan.So,
         this.setState({
-          // selectedData : {SO:[...this.state.selectedData.SO, plan.SO], IsApprove: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: ""}
-          deleteSalesData : {So:[...this.state.deleteSalesData.So, plan.So], IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: ""}
+          selectedData : {So:[...this.state.selectedData.So, plan.So], IsApprove: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: ""},
+          deleteSalesData : {So:[...this.state.deleteSalesData.So, plan.So], IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: "2019-01-15"}
         }),
       )) 
     { return this.props.unselectSalesPlan(plan); }
@@ -451,7 +452,7 @@ componentDidUpdate = (prevProps) => {
     if (this.props.selectedServicePlans
       .some((plans) => plans.Wo === plan.Wo,
         this.setState({
-          // selectedServiceData : {Wo:[...this.state.selectedServiceData.Wo, plan.Wo], IsApprove: true}
+          selectedServiceData : {Wo:[...this.state.selectedServiceData.Wo, plan.Wo], IsApprove: true},
           deleteServiceData : {Wo:[...this.state.deleteServiceData.Wo, plan.Wo], IsDelete: true}
         }),
       ))
