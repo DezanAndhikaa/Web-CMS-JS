@@ -9,6 +9,7 @@ export const ApproveServiceAction = 'APPROVE_SERVICE';
 export const UnapproveSalesAction = 'UNAPPROVE_SALES';
 export const ClearSelectedPlans = 'CLEAR_SELECTED_PLANS';
 export const FetchSalesAction = 'FETCH_SALES_ORDER';
+export const PutLifetimeComp = 'PUT_LIFETIME_COMP';
 export const PutSalesApproved = 'PUT_SALES_APPROVED';
 export const PutServiceApproved = 'PUT_SERVICE_APPROVED';
 export const FetchServiceAction = 'FETCH_SERVICE_ORDER';
@@ -93,6 +94,19 @@ export function unapproveSalesAction(payload) {
 // 	};
 // 	return async (dispatch) => dispatch(callApi(type, requestConfig));
 // }
+export function putLifetimeCompAction(payload){
+	const requestConfig = {
+		method: RequestMethod.PUT,
+		url: `${ApiUrlBase.SALESORDER_API_URL}`,
+		headers: {
+			'Accept': 'application/json; charset=utf-8',
+			'Content-Type': 'application/json; charset=utf-8',
+		},
+		data: payload,
+	};
+	return async (dispatch) => dispatch(callApi(PutLifetimeComp, requestConfig));
+}
+
 export function putSalesApprovedAction(payload){
 	const requestConfig = {
 		method: RequestMethod.PUT,
