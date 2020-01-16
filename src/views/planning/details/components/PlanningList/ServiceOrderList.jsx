@@ -1,38 +1,28 @@
 import React from 'react';
 import moment, { ISO_8601 } from 'moment';
 import {
-  Card, CardContent, Checkbox, Table, TableBody, TableCell, TableHead, TableRow,
+  Checkbox, Table, TableBody, TableCell, TableHead, TableRow,
 } from '@material-ui/core';
 import './PlanningList.scss';
-import { Menu } from '../../../../../constants';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
-import SaveButton from '../../../../../components/ActionButton/SaveButton/SaveButton';
 import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
-import InputButton from '../../../../../components/Button/InputButton';
-import { booleanLiteral } from '@babel/types';
-import SalesOrderData from '../../../../../planning-data-dummy.json';
 import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc } from '../../DetailPages-action';
 
 export default class ServiceOrderList extends React.PureComponent {
 
-    // openDetail = async (row) => {
-    //   await this.props.saveJobData(row);
-    //   this.props.storeJobData(row);
-    //   return this.props.pushTo(`${Menu.DETAIL_PI}:${row.woNumber || ''}`);
-    // }
-
-    componentDidMount = async () => {
-     await this.props.onClickServiceOrder();
+  componentDidMount = async () => {
+    await this.props.onClickServiceOrder();
+  }
+  
+  isCheckboxAvailable = (data) => {
+      let isAvailable = false;
+      if (this.props.selectedServicePlanList.some((plan) => plan.status === 'Assigned')) {
+        isAvailable = this.props.selectedServicePlanList.some((plan) => plan.status !== data.status);
+      } else { isAvailable = this.props.selectedServicePlanList.some((plan) => plan.status !== 'Assigned') && data.status === 'Assigned'; }
+      return isAvailable;
     }
-    isCheckboxAvailable = (data) => {
-        let isAvailable = false;
-        if (this.props.selectedServicePlanList.some((plan) => plan.status === 'Assigned')) {
-          isAvailable = this.props.selectedServicePlanList.some((plan) => plan.status !== data.status);
-        } else { isAvailable = this.props.selectedServicePlanList.some((plan) => plan.status !== 'Assigned') && data.status === 'Assigned'; }
-        return isAvailable;
-      }
 
-      datePlant = (date) => moment.utc(date, ISO_8601).local().format('DD MMMM YYYY')
+    datePlant = (date) => moment.utc(date, ISO_8601).local().format('DD MMMM YYYY')
 
 render(){
     return(

@@ -8,10 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import SalesOrderList from '../PlanningList/SalesOrderList';
 import ServiceOrderList from '../PlanningList/ServiceOrderList';
 import Badge from '@material-ui/core/Badge';
-import './PlanningDetailsTab.scss'
-// import SalesOrderData from '../../../../../planning-data-dummy.json';
-// import Searchbar from "../../../../../components/Searchbar/SearchInput";
-import FilterbyDataAction from '../../../../../components/FilterByDataAction/FilterbyDataAction';
+import './PlanningDetailsTab.scss';
 import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
 import { SelectCustomerFilterAction,SelectSiteFilterAction, SelectUnitModelFilterAction, SelectComponentFilterAction } from '../../DetailPages-action'
 
@@ -129,7 +126,6 @@ class PlanningDetailsTab extends React.Component {
     // this.setState({ value });
 
   handleChangeIndex = index => {
-    console.log('change index berjalan')
     this.setState({ value: index });
   };
 
@@ -144,7 +140,6 @@ class PlanningDetailsTab extends React.Component {
   }
 
   _renderServiceOrderList(){
-    
     return(
         <div className="plannings-list-containers">
           <ServiceOrderList 
@@ -152,12 +147,6 @@ class PlanningDetailsTab extends React.Component {
           isClick={this.props.isClick}
           />
         </div>
-    );
-  }
-      
-  _renderFilterByDataAction(){
-    return(
-        <FilterbyDataAction />
     );
   }
 
@@ -254,14 +243,12 @@ class PlanningDetailsTab extends React.Component {
   render() {
     const { classes, theme } = this.props;
     const { value } = this.state;
-    console.log('state invis 1', this.state.invisible1);
-    console.log('state invis 2', this.state.invisible2);
     return (
         <div className="root">
         <AppBar position="relative" color="default" style={{boxShadow: "none"}}>
         <div className="tab-container"> 
             {this.props.renderSearch} 
-            {this._renderFilterByDataAction()}
+            {this.props.renderFilterByDataAction}
         </div>
           <Tabs 
             classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}

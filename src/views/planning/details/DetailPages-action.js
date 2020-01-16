@@ -1,6 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 
-
 import { RequestMethod, ApiUrlBase } from '../../../constants';
 import { callApi } from '../../../core/RestClientHelpers';
 
@@ -10,6 +9,10 @@ export const UnapproveSalesAction = 'UNAPPROVE_SALES';
 export const ClearSelectedPlans = 'CLEAR_SELECTED_PLANS';
 export const FetchSalesAction = 'FETCH_SALES_ORDER';
 export const FetchServiceAction = 'FETCH_SERVICE_ORDER';
+export const FetchApprovedSalesAction = 'FETCH_APPROVED_SALES';
+export const FetchApprovedServiceAction = 'FETCH_APPROVED_SERVICE';
+export const FetchDeletedSalesAction = 'FETCH_DELETED_SALES';
+export const FetchDeletedServiceAction = 'FETCH_DELETED_SERVICE';
 export const DeleteSalesAction = 'DELETE_SALES';
 export const DeleteServiceAction = 'DELETE_SERVICE';
 // export const FetchSearchValueAction = 'FETCH_SEARCH_VALUE';
@@ -117,10 +120,7 @@ export function deleteServiceAction(payload){
 }
 
 export function fetchSalesAction(payload) {
-	console.log('ini type',FetchSalesAction);
-	
 	const filter = payload;
-	console.log('isian filter : ',filter);
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${ApiUrlBase.SALESORDER_API_URL}/FilterUnapproved`,
@@ -134,8 +134,6 @@ export function fetchSalesAction(payload) {
 }
 
 export function fetchServiceAction(payload) {
-	console.log('ini type',FetchServiceAction);
-	console.log(payload);
 	const filter = payload;
 	const requestConfig = {
 		method: RequestMethod.POST,
@@ -148,37 +146,60 @@ export function fetchServiceAction(payload) {
 	};
 	return async (dispatch) => dispatch(callApi(FetchServiceAction, requestConfig));
 }
-// export function getMechanicsAction(accessToken) {
-// 	const requestConfig = {
-// 		method : RequestMethod.POST,
-// 		url: `${ApiUrlBase.SALESORDER_API_URL}/FilterGlobalUnapproved`,
-// 		headers: {
-// 			'Accept': 'application/json; charset=utf-8',
-// 			'Content-Type': 'application/json; charset=utf-8',
-// 		},
-// 		data: payload,
-// 	};
-// 	return async (dispatch) => dispatch(callApi(FetchSearchValueAction, requestConfig));
-// }
 
-// export function getMechanicsAction(accessToken) {
-// 	const requestConfig = {
-// 		method: RequestMethod.GET,
-// 		url: `${ApiUrlBase.ASSIGNMENT_API_URL}DummyMechanic`,
-// 		headers: {
-// 			Authorization: `Bearer ${accessToken}`,
-// 			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID, // eslint-disable-line no-undef
-// 			'Content-Type': 'application/json',
-// 		},
-// 	};
-// 	return async (dispatch) => dispatch(callApi(GetMechanicsAction, requestConfig));
-// }
+export function fetchApprovedSalesAction(payload){
+	const requestConfig = {
+		method: RequestMethod.POST,
+		url: `${ApiUrlBase.SALESORDER_API_URL}/FilterApproved`,
+		headers: {
+			'Accept': 'application/json; charset=utf-8',
+			'Content-Type': 'application/json; charset=utf-8',
+		},
+		data: payload,
+	};
+	return async (dispatch) => dispatch(callApi(FetchApprovedSalesAction, requestConfig));
+}
+
+export function fetchApprovedServiceAction(payload){
+	const requestConfig = {
+		method: RequestMethod.POST,
+		url: `${ApiUrlBase.SERVICEORDER_API_URL}/FilterApproved`,
+		headers: {
+			'Accept': 'application/json; charset=utf-8',
+			'Content-Type': 'application/json; charset=utf-8',
+		},
+		data: payload,
+	};
+	return async (dispatch) => dispatch(callApi(FetchApprovedServiceAction, requestConfig));
+}
+
+export function fetchDeletedSalesAction(payload){
+	const requestConfig = {
+		method: RequestMethod.POST,
+		url: `${ApiUrlBase.SALESORDER_API_URL}/FilterDeleted`,
+		headers: {
+			'Accept': 'application/json; charset=utf-8',
+			'Content-Type': 'application/json; charset=utf-8',
+		},
+		data: payload,
+	};
+	return async (dispatch) => dispatch(callApi(FetchDeletedSalesAction, requestConfig));
+}
+
+export function fetchDeletedServiceAction(payload){
+	const requestConfig = {
+		method: RequestMethod.POST,
+		url: `${ApiUrlBase.SERVICEORDER_API_URL}/FilterDeleted`,
+		headers: {
+			'Accept': 'application/json; charset=utf-8',
+			'Content-Type': 'application/json; charset=utf-8',
+		},
+		data: payload,
+	};
+	return async (dispatch) => dispatch(callApi(FetchDeletedServiceAction, requestConfig));
+}
 
 export function getServiceOrderAction(payload) {
-	// const data = {
-	// 	isDeleted: false,
-	// 	filter:{}
-	// };
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${ApiUrlBase.SERVICEORDER_API_URL}/FilterUnapproved`,
@@ -191,44 +212,7 @@ export function getServiceOrderAction(payload) {
 	return async (dispatch) => dispatch(callApi(GetServiceOrderAction, requestConfig));
 }
 
-// export function getSalesFilteredAction() {
-// 	// const data = {
-// 	// 	isDeleted: false,
-// 	// 	filter:{}
-// 	// };
-// 	const requestConfig = {
-// 		method: RequestMethod.POST,
-// 		url: `${ApiUrlBase.SALESORDER_API_URL}/Filters`,
-// 		body: { 
-// 			isDeleted : false,
-// 			filter: {}
-// 		},
-// 		headers: {
-// 			'Content-Type':'application/json'
-// 		}
-// 		// body:JSON.stringify(data)
-		
-// 	};
-// 	return async (dispatch) => dispatch(callApi(GetSalesOrderAction, requestConfig));
-// }
-// export function getSelesOrderAction() {
-// 	const requestConfig = {
-// 		method: RequestMethod.GET,
-// 		url: `${ApiUrlBase.SALESORDER_API_URL}`,
-// 		// headers: {
-// 		// 	Authorization: 'anbiya',
-// 		// 	'Content-Type':'application/json'
-// 		// },
-// 		// data: { payload },
-// 		// body:JSON.stringify(data)
-		
-// 	};
-// 	return async (dispatch) => dispatch(callApi(GetSalesOrderAction, requestConfig));
-// }
-
 export function salesParameterAction(type, payload) {
-	// const filter = payload;
-	console.log('ini payload parameter', payload);
 	return { type, payload };
 }
 export function serviceParameterAction(type, payload) {
@@ -236,7 +220,6 @@ export function serviceParameterAction(type, payload) {
 }
 
 export function searchAction(type, payload) {
-	console.log('search parameter', payload);
 	return { type, payload };
 }
 
@@ -245,8 +228,6 @@ export function searchSo(type, payload){
 }
 
 export function selectFilterAction(type, payload) {
-	console.log('ini punya si type : ',type);
-	console.log('ini punya si payload : ', payload);
 	return { type, payload };
 }
 

@@ -5,6 +5,7 @@ import PlanningDetailsTab from './components/Tab/PlanningDetailsTab';
 import DropDownList from '../../../components/DropdownList/DropDownList';
 import SearchInput from "../../../components/Searchbar/SearchInput";
 import BaseButton from '../../../components/Button/BaseButton';
+import FilterbyDataAction from '../../../components/FilterByDataAction/FilterbyDataAction';
 
 class DetailPages extends React.Component{
     constructor(props) {
@@ -340,7 +341,6 @@ componentDidUpdate = (prevProps) => {
 
   onClickServiceOrder = () => {
     this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
-    // console.log('ini data dari api',this.props.serviceParameter.dataFilter);
   }
 
   onClickSalesOrder = () =>{
@@ -376,6 +376,49 @@ componentDidUpdate = (prevProps) => {
         onSearch={this.props.onSearch}
       />
     );
+  }
+
+  onClickApprovedSales = () => {
+    this.props.fetchApprovedSales(this.props.salesParameter.dataFilter);
+    console.log("okokokokok , ",this.props.salesOrderListApproved.Lists.length)
+  }
+
+  onClickApprovedService = () =>{
+    this.props.fetchApprovedService(this.props.serviceParameter.dataFilter);
+  }
+
+  onClickDeletedSales = () => {
+    this.props.fetchDeletedSales(this.props.salesParameter.dataFilter);
+  }
+
+  onClickDeletedService = () =>{
+    this.props.fetchDeletedService(this.props.serviceParameter.dataFilter);
+  }
+
+  _renderFilterByDataAction = (value) => {
+    if (value === 1) {
+      this.setState({wasApprove : true})
+    }if (value === 0) {
+      this.setState({wasApprove : false})
+    }
+    if (this.state.wasApprove === true) {
+      return(
+        <FilterbyDataAction 
+          {...this.props}
+          onClickPlanningApprove={this.onClickApprovedSales}
+          onClickPlanningDelete={this.onClickDeletedSales}
+        />
+      );
+    }
+    if (this.state.wasApprove === false) {
+      return(
+        <FilterbyDataAction 
+          {...this.props}
+          onClickPlanningApprove={this.onClickApprovedService}
+          onClickPlanningDelete={this.onClickDeletedService}
+        />
+      );
+    }
   }
 
   _renderBaseButton = (value) => {
@@ -465,6 +508,7 @@ componentDidUpdate = (prevProps) => {
       <>
         <PlanningDetailsTab
           {...this.props}
+          renderFilterByDataAction={this._renderFilterByDataAction()}
           renderBaseButton={this._renderBaseButton()}
           renderSearch={this._renderSearchBar()}
           onClickSalesOrder={this.onClickSalesOrder}        

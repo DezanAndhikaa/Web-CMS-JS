@@ -4,6 +4,10 @@ import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
 import {
 	// ApproveSalesAction, 
 	ClearSelectedPlans,
+	FetchApprovedSalesAction,
+	FetchApprovedServiceAction,
+	FetchDeletedSalesAction,
+	FetchDeletedServiceAction,
 	// FetchSearchValueAction, 
 	// FetchPlansAction, 
 	// GetMechanicsAction, 
@@ -245,29 +249,10 @@ const initialSearchParameter = { Filter : [
 	initialSearchUnitCodeParameter, initialSearchSerialNumberParameter, 
 	initialSearchLifeTimeCompParameter,initialSearchPlanExecutionParameter ] };
 
-// export function fetchPlansReducer(state = initialPlansState, action) {
-// 	if (action.type === FetchPlansAction) {
-// 		switch (action.status) {
-// 		case ApiRequestActionsStatus.SUCCEEDED:
-// 			return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
-// 		case ApiRequestActionsStatus.FAILED:
-// 			return {
-// 				data: initialPlansState.data,
-// 				status: ApiRequestActionsStatus.FAILED,
-// 				error: action.error,
-// 			};
-// 		default:
-// 			return { data: initialPlansState.data, status: ApiRequestActionsStatus.LOADING };
-// 		}
-// 	}
-// 	return state;
-// }
 export function fetchSalesReducer(state = initialSalesState, action) {
 	if (action.type === FetchSalesAction) {
 	  switch (action.status) {
 		case ApiRequestActionsStatus.SUCCEEDED:
-			console.log('ini balikan dari mantan 1',state);
-			console.log('ini balikan dari mantan 2',action.payload);
 		  return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
 		case ApiRequestActionsStatus.FAILED:
 		  return {
@@ -300,6 +285,78 @@ export function fetchServiceReducer(state = initialServiceState, action) {
 	return state;
 }
 
+export function fetchApprovedSalesReducer(state = initialSalesState, action) {
+	if (action.type === FetchApprovedSalesAction) {
+	  switch (action.status) {
+		case ApiRequestActionsStatus.SUCCEEDED:
+		  return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		case ApiRequestActionsStatus.FAILED:
+		  return {
+				data: initialSalesState.data,
+				status: ApiRequestActionsStatus.FAILED,
+				error: action.error,
+		  };
+		default:
+		  return { data: initialSalesState.data, status: ApiRequestActionsStatus.LOADING };
+	  }
+	}
+	return state;
+}
+
+export function fetchApprovedServiceReducer(state = initialServiceState, action) {
+	if (action.type === FetchApprovedServiceAction) {
+		switch (action.status) {
+		case ApiRequestActionsStatus.SUCCEEDED:
+			return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		case ApiRequestActionsStatus.FAILED:
+			return {
+				data: initialServiceState.data,
+				status: ApiRequestActionsStatus.FAILED,
+				error: action.error,
+			};
+		default:
+			return { data: initialMechanicsState.data, status: ApiRequestActionsStatus.LOADING };
+		}
+	}
+	return state;
+}
+
+export function fetchDeletedSalesReducer(state = initialSalesState, action) {
+	if (action.type === FetchDeletedSalesAction) {
+	  switch (action.status) {
+		case ApiRequestActionsStatus.SUCCEEDED:
+		  return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		case ApiRequestActionsStatus.FAILED:
+		  return {
+				data: initialSalesState.data,
+				status: ApiRequestActionsStatus.FAILED,
+				error: action.error,
+		  };
+		default:
+		  return { data: initialSalesState.data, status: ApiRequestActionsStatus.LOADING };
+	  }
+	}
+	return state;
+}
+
+export function fetchDeletedServiceReducer(state = initialServiceState, action) {
+	if (action.type === FetchDeletedServiceAction) {
+		switch (action.status) {
+		case ApiRequestActionsStatus.SUCCEEDED:
+			return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		case ApiRequestActionsStatus.FAILED:
+			return {
+				data: initialServiceState.data,
+				status: ApiRequestActionsStatus.FAILED,
+				error: action.error,
+			};
+		default:
+			return { data: initialMechanicsState.data, status: ApiRequestActionsStatus.LOADING };
+		}
+	}
+	return state;
+}
+
 export function selectedFiltersReducer(state = initialSelectedFilter, action) {
 	switch (action.type) {
 	  case SelectCustomerFilterAction:
@@ -314,42 +371,6 @@ export function selectedFiltersReducer(state = initialSelectedFilter, action) {
 		return state;
 	}
 }
-
-// export function getSalesOrderReducer(state = initialSalesOrderState, action) {
-// 	if (action.type === GetSalesOrderAction) {
-// 		switch (action.status) {
-// 		case ApiRequestActionsStatus.SUCCEEDED:
-// 			return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
-// 		case ApiRequestActionsStatus.FAILED:
-// 			return {
-// 				data: initialServiceOrderState.data,
-// 				status: ApiRequestActionsStatus.FAILED,
-// 				error: action.error,
-// 			};
-// 		default:
-// 			return { data: initialMechanicsState.data, status: ApiRequestActionsStatus.LOADING };
-// 		}
-// 	}
-// 	return state;
-// }
-
-// export function getMechanicsReducer(state = initialMechanicsState, action) {
-// 	if (action.type === GetMechanicsAction) {
-// 		switch (action.status) {
-// 		case ApiRequestActionsStatus.SUCCEEDED:
-// 			return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
-// 		case ApiRequestActionsStatus.FAILED:
-// 			return {
-// 				data: initialMechanicsState.data,
-// 				status: ApiRequestActionsStatus.FAILED,
-// 				error: action.error,
-// 			};
-// 		default:
-// 			return { data: initialMechanicsState.data, status: ApiRequestActionsStatus.LOADING };
-// 		}
-// 	}
-// 	return state;
-// }
 
 export function salesParameterReducer(state = initialSalesParameter, action) {
 	if (action.type === UpdateSalesParameterAction)
@@ -422,9 +443,7 @@ export function filterParameterReducer(state = [], action){
 }
 
 export function indexFilterParameterReducer(state = '', action){
-	console.log('aneh aneh');
 	if (action.type === IndexFilterAction){
-		console.log('aneh aneh aneh 3 ',action);
 		return {...state, indexTabParameter : action.payload};
 	}
 	return state;
@@ -438,7 +457,6 @@ export function serviceParameterReducer(state = initialServiceParameter, action)
 
 export function searchPlansReducer(state = initialSearchParameter, action) {
 	console.log('ini data untuk search value', action.payload);
-
 	if (action.type === SearchSalesAction)
 		return {...state, Value : action.payload};
 	return state;
@@ -449,25 +467,9 @@ export function searchSoReducer(state = '', action) {
 	return state;
 }
 
-// export function selectedFiltersReducer(state = initialSelectedFilter, action) {
-// 	switch (action.type) {
-// 	case SelectPlansTypeFilterAction:
-// 		return { ...state, planType: action.payload };
-// 	case SelectUnitModelFilterAction:
-// 		return { ...state, unitModel: action.payload };
-// 	case SelectCustomerFilterAction:
-// 		return { ...state, customer: action.payload };
-// 	case SelectPlansAssignmentFilterAction:
-// 		return { ...state, plansAssignment: action.payload };
-// 	default:
-// 		return state;
-// 	}
-// }
-
 export function selectSalesPlansReducer(state = [], action) {
 	switch (action.type) {
 	case SelectSalesPlanAction: {
-		console.log('skuiiiiiiiiiiiiiiii', action.payload);
 		return [...state, action.payload];
 		// return [...state.map(((item) => item.SO !== action.payload))];
 	}
@@ -555,7 +557,6 @@ export function sortSalesByReducer(state = salesSortbyInitialState, action) {
 export function sortServiceByReducer(state = serviceSortbyInitialState, action) {
 	switch (action.type) {
 	case SortServiceByCustomer:
-		console.log('sort berjalan', action);
 		return {
 			...serviceSortbyInitialState,
 			Customer: { isActive: true, isAscending: !state.Customer.isAscending },
@@ -608,6 +609,7 @@ const PlansReducers = combineReducers({
 	selectedFilters: selectedFiltersReducer,
 	serviceOrderList: fetchServiceReducer,
 	salesOrderList : fetchSalesReducer,
+	salesOrderListApproved : fetchApprovedSalesReducer,
 	// salesOrderList : getSearchValueReducer,
 	// salesOrderList: getSalesOrderReducer,
 	// mechanicList: getMechanicsReducer,
