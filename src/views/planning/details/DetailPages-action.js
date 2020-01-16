@@ -95,6 +95,7 @@ export function unapproveSalesAction(payload) {
 // 	return async (dispatch) => dispatch(callApi(type, requestConfig));
 // }
 export function putLifetimeCompAction(payload){
+	console.log('kopi kopi kopi')
 	const requestConfig = {
 		method: RequestMethod.PUT,
 		url: `${ApiUrlBase.SALESORDER_API_URL}`,

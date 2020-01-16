@@ -50,8 +50,6 @@ componentWillUnmount = () => {
 
 componentDidUpdate = (prevProps) => {
   if (prevProps.salesParameter !== this.props.salesParameter) {
-    // console.log('fetch berjalan', this.props.salesParameter)
-    // console.log('data filter paling terupdate : ', this.props.salesParameter.dataFilter)
     this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
     // this.props.clearSelectedSalesPlans();
   }
@@ -67,7 +65,6 @@ componentDidUpdate = (prevProps) => {
       }
   }
   if (prevProps.serviceParameter !== this.props.serviceParameter) {
-    // console.log('fetch berjalan', this.props.serviceParameter)
     this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
     // this.props.clearSelectedServicePlans();
   }

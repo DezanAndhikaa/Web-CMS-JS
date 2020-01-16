@@ -7,12 +7,22 @@
     height: vw(30);
     width: 100%;
     cursor: pointer;
-    .edit-button{
+    .edit-button-visible{
         height: vw(30);
         width: vw(30);
         background-image: url('../../../assets/icons/edit.png');
         background-repeat: no-repeat;
         background-size: contain;
+        visibility: visible;
+        cursor: pointer;
+    }
+    .edit-button-unvisible{
+        height: vw(30);
+        width: vw(30);
+        background-image: url('../../../assets/icons/edit.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        visibility: hidden;
     }
 }
 

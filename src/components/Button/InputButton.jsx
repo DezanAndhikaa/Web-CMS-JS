@@ -27,7 +27,7 @@ export default class InputButton extends React.Component{
             return(
                 <div className="button-rows">
                 <Button onClick={this.isClicked} className="btn-assigns">{this.props.titles}</Button>
-                    <Modal disableEnforceFocus className="modal-pos" open={this.state.isShowModal} onClose={this.isClosed}>
+                    <Modal className="modal-pos" open={this.state.isShowModal} onClose={this.isClosed}>
                         <div>
                             <InputText 
                                 {...this.props}

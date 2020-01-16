@@ -50,14 +50,14 @@ export default class SalesOrderList extends React.PureComponent {
       // }
     }
 
-    // isChangeStat = (value,key) =>{
-    //   this.setState({
-    //     stats: 1,
-    //     lifetime: this.state.lifetime.map(el => (el.So === key ? {...el, LifeTimeComp : value} : el))
-    //   });
-    // }
+    isChangeStat = (value,key) =>{
+      this.setState({
+        stats: 1,
+        lifetime: this.state.lifetime.map(el => (el.So === key ? {...el, LifeTimeComp : value} : el))
+      });
+    }
 
-    isPutLifetime = async (key, value) => {
+    isPutLifetime =  async(key, value) => {
         this.setState({
           putLifetime: {
             So: key,
@@ -65,11 +65,11 @@ export default class SalesOrderList extends React.PureComponent {
           },
           stats: 1
         }, 
-        // () => this.props.putLifetimeComp(this.state.putLifetime)
+        () => this.props.putLifetimeComp(this.state.putLifetime) 
         )
         console.log("fffffff fffffff ffffff ")
-        this.props.putLifetimeComp(this.state.putLifetime)
-        this.props.onClickSalesOrder();
+        await this.props.putLifetimeComp(this.state.putLifetime)
+        await this.props.onClickSalesOrder();
     }
 
     isCheckboxAvailable = (data) => {
@@ -83,7 +83,7 @@ export default class SalesOrderList extends React.PureComponent {
       datePlant = (date) => moment.utc(date, ISO_8601).local().format('DD MMMM YYYY')
 
 render(){
-  console.log('render ulang ulang')
+  console.log('kopi kopi')
     return(
         <Table classes={{ root: 'table' }} className="table">
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
