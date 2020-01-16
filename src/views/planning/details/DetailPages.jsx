@@ -74,10 +74,18 @@ componentDidUpdate = (prevProps) => {
   if (prevProps.serviceParameter !== this.props.serviceParameter) {
     this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
   }
-  if (prevProps.Search !== this.props.Search) {
+  if (prevProps.salesSearch !== this.props.salesSearch) {
+    
     this.props.updateSalesParameter({
-      ...prevProps.salesParameter.dataFilter, Filter : this.props.Search, PageNumber: 1,
+      ...prevProps.salesParameter.dataFilter, Filter : this.props.salesSearch, PageNumber: 1,
     });
+    console.log('blabla sales', this.props.salesSearch);
+  }
+  if(prevProps.serviceSearch !== this.props.serviceSearch){
+    this.props.updateServiceParameter({
+      ...prevProps.serviceParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber: 1,
+    });
+    console.log('blabla service', this.props.serviceSearch);
   }
   // SALES ORDER SORTING
   if (prevProps.sortSalesBy !== this.props.sortSalesBy) {
@@ -340,12 +348,14 @@ componentDidUpdate = (prevProps) => {
 
   onClickServiceOrder = () => {
     this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+    console.log('blablabla', this.props.Search)
     // console.log('ini data dari api',this.props.serviceParameter.dataFilter);
   }
 
   onClickSalesOrder = () =>{
     // console.log('ini filter paging ', this.props.salesParameter.dataFilter )
     this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
+    console.log('blablabla', this.props)
   }
 
   handlePageSize = (numberOfPage) => {
@@ -372,8 +382,10 @@ componentDidUpdate = (prevProps) => {
     return (
       <SearchInput
         {...this.props}
+        wasApprove={this.state.wasApprove}
         webInfo="Search by all component"
-        onSearch={this.props.onSearch}
+        onSalesSearch={this.props.onSearchSales}
+        onServiceSearch={this.props.onSearchService}
       />
     );
   }
@@ -493,6 +505,7 @@ componentDidUpdate = (prevProps) => {
       console.log('bacot', this.props);
       console.log('pantek sales', this.props.selectedSalesPlans)
       console.log('pantek service', this.props.selectedServicePlans)
+      
       return(
           <main className="content">
             {this.handlePageSize()}

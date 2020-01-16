@@ -11,6 +11,7 @@ import {
 	// GetServiceOrderAction, GetSalesOrderAction, 
 	UpdateSalesParameterAction, ResetSelectedMechanicsAction, 
 	SearchSalesAction,
+	SearchServiceAction,
 	SearchSoAction,
 	// SelectCustomerFilterAction, 
 	SelectSalesPlanAction,
@@ -173,7 +174,7 @@ const serviceSortbyInitialState = {
 	CompDesc: defaultState,
 };
 
-const initialSearchParameter =
+const initialSearchSalesParameter =
 [{
 	Field	: 'SO',
 	Operator: 'contains',
@@ -234,7 +235,69 @@ const initialSearchParameter =
 	Value 	: '',
 	Logic 	: 'OR'
 }];
-		
+
+const initialSearchServiceParameter =
+[{
+	Field	: 'Wo',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'Customer',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'Site',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'UnitModel',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'ComponentDescription',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'PartNumber',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'UnitCode',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'SerialNumber',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'LifeTimeComp',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'PlanExecution',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+}];
+
 
 const initialAssignmentState = { response: false, status: ApiRequestActionsStatus.IDLE };
 const initialSalesState = { data: initialSalesAssignment, status: ApiRequestActionsStatus.IDLE };
@@ -438,27 +501,43 @@ export function serviceParameterReducer(state = initialServiceParameter, action)
 	return state;
 }
 
-export function searchPlansReducer(state = initialSearchParameter, action) {
+export function searchSalesPlansReducer(state = initialSearchSalesParameter, action) {
 	console.log('ini data untuk search value', action.payload);
-	// let index = 0;
-	// let newArray = update(state, {[index]: {Value:{$set: action.payload}}});
-
-	// console.log('mmmmmm', newArray);
+	console.log('mmmmmm', state.length);
 	if (action.type === SearchSalesAction){
-		let newArray = 
-		update(state, {
-			[0]: {Value:{$set: action.payload}},
-			[1]: {Value:{$set: action.payload}},
-			[2]: {Value:{$set: action.payload}},
-			[3]: {Value:{$set: action.payload}},
-			[4]: {Value:{$set: action.payload}},
-			[5]: {Value:{$set: action.payload}},
-			[6]: {Value:{$set: action.payload}},
-			[7]: {Value:{$set: action.payload}},
-			[8]: {Value:{$set: action.payload}},
-			[9]: {Value:{$set: action.payload}},
-		});
-		return newArray;
+		var howManyRows = state.length;
+		var j = 0;
+		let array = [];
+		for( j ; j < howManyRows; j++){
+			
+			console.log('aaaaaaaa', j);
+			let updatedArray = update(state[j], {Value:{$set: action.payload}});
+			array = [...array, updatedArray];
+			console.log('aaaaaa', array);
+			
+		}
+		return array;
+	}
+	return state;
+}
+
+
+export function searchServicePlansReducer(state = initialSearchServiceParameter, action) {
+	console.log('ini data untuk search value', action.payload);
+	console.log('mmmmmm', state.length);
+	if (action.type === SearchServiceAction){
+		var howManyRows = state.length;
+		var j = 0;
+		let array = [];
+		for( j ; j < howManyRows; j++){
+			
+			console.log('aaaaaaaa', j);
+			let updatedArray = update(state[j], {Value:{$set: action.payload}});
+			array = [...array, updatedArray];
+			console.log('aaaaaa', array);
+			
+		}
+		return array;
 	}
 	return state;
 }
@@ -642,7 +721,8 @@ const PlansReducers = combineReducers({
 	// PlansAssignmentSummary: fetchPlansReducer,
 	sortSalesBy: sortSalesByReducer,
 	sortServiceBy: sortServiceByReducer,
-	Search: searchPlansReducer,
+	salesSearch: searchSalesPlansReducer,
+	serviceSearch: searchServicePlansReducer,
 	soValue: searchSoReducer,
 	selectedPlanData: storePlanDataReducer,
 });

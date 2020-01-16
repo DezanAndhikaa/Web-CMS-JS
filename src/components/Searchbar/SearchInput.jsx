@@ -14,13 +14,24 @@ export default class SearchInput extends React.PureComponent {
   }
 
   handleKeyUp = (event) => {
-    this.setState({ value: event.target.value });
+    if (this.props.wasApprove === true) {
+      this.setState({ value: event.target.value });
     if (event.keyCode === 13) {
-      this.props.onSearch(this.state.value);
+      this.props.onSalesSearch(this.state.value);
     } else {
       setTimeout(() => {
-        this.props.onSearch(this.state.value);
+        this.props.onSalesSearch(this.state.value);
       }, 1000);
+    }
+    }
+    if (this.props.wasApprove === false) {
+      if (event.keyCode === 13) {
+        this.props.onServiceSearch(this.state.value);
+      } else {
+        setTimeout(() => {
+          this.props.onServiceSearch(this.state.value);
+        }, 1000);
+      }
     }
   }
 
