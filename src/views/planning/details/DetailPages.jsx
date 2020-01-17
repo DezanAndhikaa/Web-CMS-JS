@@ -74,6 +74,8 @@ componentDidUpdate = (prevProps) => {
   if (prevProps.serviceParameter !== this.props.serviceParameter) {
     this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
   }
+
+  //ini untuk trigger sales global search
   if (prevProps.salesSearch !== this.props.salesSearch) {
     
     this.props.updateSalesParameter({
@@ -81,6 +83,8 @@ componentDidUpdate = (prevProps) => {
     });
     console.log('blabla sales', this.props.salesSearch);
   }
+  
+  //ini untuk trigger service global search
   if(prevProps.serviceSearch !== this.props.serviceSearch){
     this.props.updateServiceParameter({
       ...prevProps.serviceParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber: 1,

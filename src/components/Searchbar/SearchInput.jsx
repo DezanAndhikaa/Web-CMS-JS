@@ -25,6 +25,7 @@ export default class SearchInput extends React.PureComponent {
     }
     }
     if (this.props.wasApprove === false) {
+      this.setState({ value: event.target.value });
       if (event.keyCode === 13) {
         this.props.onServiceSearch(this.state.value);
       } else {

@@ -224,7 +224,7 @@ const initialSearchSalesParameter =
 	Logic 	: 'OR'
 },
 {
-	Field	: 'LifeTimeComp',
+	Field	: 'LifeTimeComponent',
 	Operator: 'contains',
 	Value 	: '',
 	Logic 	: 'OR'
@@ -286,7 +286,7 @@ const initialSearchServiceParameter =
 	Logic 	: 'OR'
 },
 {
-	Field	: 'LifeTimeComp',
+	Field	: 'LifeTimeComponent',
 	Operator: 'contains',
 	Value 	: '',
 	Logic 	: 'OR'
@@ -537,6 +537,7 @@ export function searchServicePlansReducer(state = initialSearchServiceParameter,
 			console.log('aaaaaa', array);
 			
 		}
+		console.log('aaaa', JSON.stringify(array));
 		return array;
 	}
 	return state;
