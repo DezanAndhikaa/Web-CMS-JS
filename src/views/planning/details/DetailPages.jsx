@@ -383,7 +383,7 @@ componentDidUpdate = (prevProps) => {
     console.log("okokokokok , ",this.props.salesOrderListApproved.Lists.length)
   }
 
-  onClickApprovedService = () =>{
+  onClickApprovedService = () => {
     this.props.fetchApprovedService(this.props.serviceParameter.dataFilter);
   }
 
@@ -391,7 +391,7 @@ componentDidUpdate = (prevProps) => {
     this.props.fetchDeletedSales(this.props.salesParameter.dataFilter);
   }
 
-  onClickDeletedService = () =>{
+  onClickDeletedService = () => {
     this.props.fetchDeletedService(this.props.serviceParameter.dataFilter);
   }
 
