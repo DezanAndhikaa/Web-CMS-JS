@@ -4,11 +4,16 @@ import { PlansReducers } from './DetailPages-reducer';
 import { storeDataAction } from '../../../core/StorageHelper';
 import { PLAN_DATA, StorageKey } from '../../../constants';
 import {
-	approveSalesAction,
-	unapproveSalesAction,
+	// approveSalesAction,
+	// unapproveSalesAction,
 	putSalesApprovedAction, //APPROVE SALES
-	putServiceApprovedAction, //APPROVE SERVICE
+	// putServiceApprovedAction, //APPROVE SERVICE
 	putLifetimeCompAction,
+	approveSalesAction, //APPROVE SALES
+	unapproveSalesAction, 
+	// approveServiceAction, //APPROVE SERVICE
+	deleteSalesAction,
+	deleteServiceAction,
 	getServiceOrderAction, fetchSalesAction, salesParameterAction, fetchServiceAction,
 	ClearSelectedPlans, UpdateServiceParameterAction,
 	// fetchJobsAssignment,
@@ -18,9 +23,8 @@ import {
 	// plansParameterAction,
 	UpdateSalesParameterAction, 
 	searchAction,
-	SearchSalesAction, 
-	searchSo,
-	SearchSoAction,
+	SearchSalesAction, SearchServiceAction,searchCompAction,
+	SearchCompAction,
 	selectFilterAction,selectFilterAction2,indexFilterAction, UnselectSalesPlanAction, planParameterAction, UpdatePlansParameterAction, serviceParameterAction,
 	UnselectServicePlanAction, selectSalesPlansAction, selectServicePlansAction, selectLeaderAction, SelectSalesPlanAction,
 	SelectServicePlanAction, FetchSalesAction,
@@ -43,7 +47,9 @@ const mapStateToProps = (state) => ({
 	filterParameter: state.plansPageState.filterParameter,
 	indexFilterParameter: state.plansPageState.indexFilterParameter,
 	serviceParameter: state.plansPageState.serviceParameter,
-	Search: state.plansPageState.Search,
+	salesSearch: state.plansPageState.salesSearch,
+	serviceSearch: state.plansPageState.serviceSearch,
+	searchComp: state.plansPageState.searchComp,
 	// requestPlans: state.plansPageState.PlansAssignmentSummary.status,
 	// requestMechanics: state.plansPageState.mechanicList.status,
 	// requestUnapproveSales: state.plansPageState.unassignPlansStatus.status,
@@ -60,7 +66,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	approveSales: (payload) => dispatch(approveSalesAction(payload)),
+	// approveSales: (payload) => dispatch(approveSalesAction(payload)),
 	unapproveSales: (payload, token) => dispatch(unapproveSalesAction(payload, token)),
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
 	clearSelectedServicePlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
@@ -71,12 +77,17 @@ const mapDispatchToProps = (dispatch) => ({
 	// getSearchValue: (payload) => dispatch(getSearchValueAction(payload)),
 	putLifetimeComp : (payload) => dispatch(putLifetimeCompAction(payload)),
 	putSalestoPlanningApprove: (payload) => dispatch(putSalesApprovedAction(payload)),
-	putServicetoPlanningApprove: (payload) => dispatch(putServiceApprovedAction(payload)),
+	// putServicetoPlanningApprove: (payload) => dispatch(putServiceApprovedAction(payload)),
+	approveSales: (payload) => dispatch(approveSalesAction(payload)),
+	// approveService: (payload) => dispatch(approveServiceAction(payload)),
+	deleteSales: (payload) => dispatch(deleteSalesAction(payload)),
+	deleteService: (payload) => dispatch(deleteServiceAction(payload)),
 	fetchSalesOrder: (payload) => dispatch(fetchSalesAction(payload)),
 	fetchServiceOrder: (payload) => dispatch(fetchServiceAction(payload)),
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
-	onSearch: (keyword) => dispatch(searchAction(SearchSalesAction, keyword)),
-	onSearchSo: (keyword) => dispatch(searchSo(SearchSoAction, keyword)),
+	onSearchSales: (keyword) => dispatch(searchAction(SearchSalesAction, keyword)),
+	onSearchService: (keyword) => dispatch(searchAction(SearchServiceAction, keyword)),
+	onSearchComp: (keyword) => dispatch(searchCompAction(SearchCompAction, keyword)),
 	pushTo: (url) => dispatch(push(url)),
 	savePlanData: (data) => dispatch(storeDataAction(PLAN_DATA, StorageKey.PLAN_DATA, data)),
 	selectFilter: (type, payload) => dispatch(selectFilterAction(type, payload)),

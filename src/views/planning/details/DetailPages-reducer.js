@@ -1,8 +1,9 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { combineReducers } from 'redux';
+import update from 'immutability-helper';
 import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
 import {
-	ApproveSalesAction, 
+	// ApproveSalesAction, 
 	ClearSelectedPlans,
 	// FetchSearchValueAction, 
 	// FetchPlansAction, 
@@ -10,7 +11,8 @@ import {
 	// GetServiceOrderAction, GetSalesOrderAction, 
 	UpdateSalesParameterAction, ResetSelectedMechanicsAction, 
 	SearchSalesAction,
-	SearchSoAction,
+	SearchServiceAction,
+	SearchCompAction,
 	// SelectCustomerFilterAction, 
 	SelectSalesPlanAction,
 	SelectServicePlanAction, 
@@ -172,31 +174,148 @@ const serviceSortbyInitialState = {
 	CompDesc: defaultState,
 };
 
+const initialSearchCompParameter = {
+	Field	: 'So',
+	Operator: 'contains',
+	Value   : '',
+	Logic   : 'OR'
+}
+
+const initialSearchSalesParameter =
+[{
+	Field	: 'SO',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'Customer',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'Site',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'UnitModel',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'ComponentDescription',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'PartNumber',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'UnitCode',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'SerialNumber',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'LifeTimeComponent',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'PlanExecution',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+}];
+
+const initialSearchServiceParameter =
+[{
+	Field	: 'Wo',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'Customer',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'Site',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'UnitModel',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'ComponentDescription',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'PartNumber',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'UnitCode',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'SerialNumber',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'LifeTimeComponent',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'PlanExecution',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+}];
+
+
 const initialAssignmentState = { response: false, status: ApiRequestActionsStatus.IDLE };
 const initialSalesState = { data: initialSalesAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialServiceState = { data: initialServiceAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialMechanicsState = { data: [], status: ApiRequestActionsStatus.IDLE };
-
-export function approveSalesReducer(state = initialAssignmentState, action) {
-	if (action.type === ApproveSalesAction) {
-		switch (action.status) {
-		case ApiRequestActionsStatus.SUCCEEDED:
-			return { response: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
-		case ApiRequestActionsStatus.FAILED:
-			return {
-				response: initialAssignmentState.response,
-				status: ApiRequestActionsStatus.FAILED,
-				error: action.error,
-			};
-		default:
-			return {
-				response: initialAssignmentState.response,
-				status: ApiRequestActionsStatus.LOADING,
-			};
-		}
-	}
-	return state;
-}
+// const initialSearchParameter = { Filter : [
+// 	initialSearchSOParameter, initialSearchCustomerParameter, 
+// 	initialSearchSiteParameter, initialSearchPartNumberParameter, 
+// 	initialSearchUnitModelParameter, initialSearchComponentDescriptionParameter, 
+// 	initialSearchUnitCodeParameter, initialSearchSerialNumberParameter, 
+// 	initialSearchLifeTimeCompParameter,initialSearchPlanExecutionParameter ] };
 
 // export function fetchPlansReducer(state = initialPlansState, action) {
 // 	if (action.type === FetchPlansAction) {
@@ -219,7 +338,7 @@ export function fetchSalesReducer(state = initialSalesState, action) {
 	if (action.type === FetchSalesAction) {
 	  switch (action.status) {
 		case ApiRequestActionsStatus.SUCCEEDED:
-			console.log('ini balikan dari mantan 1',state)
+			console.log('ini balikan dari mantan 1',state);
 			console.log('ini balikan dari mantan 2',action.payload);
 		  return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
 		case ApiRequestActionsStatus.FAILED:
@@ -317,11 +436,11 @@ export function filterParameterReducer(state = [], action){
 		}else{
 			for(let i=0; i<state.dataFilter.Filter.length; i++){ //FOR di sini untuk mengecek pada objek sebelumnya
 				if(state.dataFilter.Filter[i].Field === action.head){ //JIKA pada objek sebelumnya pada "field" ada yang sama, maka akan merubah nilai pada "value" tersebut tanpa menambah array
-					if(action.payload === "All"){
-						state.dataFilter.Filter.splice(i,1)
-						return {dataFilter : {Filter : state.dataFilter.Filter }}
+					if(action.payload === 'All'){
+						state.dataFilter.Filter.splice(i,1);
+						return {dataFilter : {Filter : state.dataFilter.Filter }};
 					}
-					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }}		
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
 				}
 			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
@@ -332,11 +451,11 @@ export function filterParameterReducer(state = [], action){
 		}else{
 			for(let i=0; i<state.dataFilter.Filter.length; i++){
 				if(state.dataFilter.Filter[i].Field === action.head){
-					if(action.payload === "All"){
-						state.dataFilter.Filter.splice(i,1)
-						return {dataFilter : {Filter : state.dataFilter.Filter }}
+					if(action.payload === 'All'){
+						state.dataFilter.Filter.splice(i,1);
+						return {dataFilter : {Filter : state.dataFilter.Filter }};
 					}
-					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }}		
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
 				}
 			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
@@ -347,26 +466,26 @@ export function filterParameterReducer(state = [], action){
 		}else{
 			for(let i=0; i<state.dataFilter.Filter.length; i++){
 				if(state.dataFilter.Filter[i].Field === action.head){
-					if(action.payload === "All"){
-						state.dataFilter.Filter.splice(i,1)
-						return {dataFilter : {Filter : state.dataFilter.Filter }}
+					if(action.payload === 'All'){
+						state.dataFilter.Filter.splice(i,1);
+						return {dataFilter : {Filter : state.dataFilter.Filter }};
 					}
-					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }}		
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
 				}
 			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}
 	if (action.type === SelectComponentFilterAction)
 		if(state.length === 0){
-			return {...state, dataFilter: {Filter : [{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }}
+			return {...state, dataFilter: {Filter : [{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}else{
 			for(let i=0; i<state.dataFilter.Filter.length; i++){
 				if(state.dataFilter.Filter[i].Field === action.head){
-					if(action.payload === "All"){
-						state.dataFilter.Filter.splice(i,1)
-						return {dataFilter : {Filter : state.dataFilter.Filter }}
+					if(action.payload === 'All'){
+						state.dataFilter.Filter.splice(i,1);
+						return {dataFilter : {Filter : state.dataFilter.Filter }};
 					}
-					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }}		
+					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
 				}
 			}
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
@@ -375,9 +494,9 @@ export function filterParameterReducer(state = [], action){
 }
 
 export function indexFilterParameterReducer(state = '', action){
-	console.log('aneh aneh')
+	console.log('aneh aneh');
 	if (action.type === IndexFilterAction){
-		console.log('aneh aneh aneh 3 ',action)
+		console.log('aneh aneh aneh 3 ',action);
 		return {...state, indexTabParameter : action.payload};
 	}
 	return state;
@@ -389,14 +508,52 @@ export function serviceParameterReducer(state = initialServiceParameter, action)
 	return state;
 }
 
-export function searchPlansReducer(state = '', action) {
+export function searchSalesPlansReducer(state = initialSearchSalesParameter, action) {
 	console.log('ini data untuk search value', action.payload);
-	if (action.type === SearchSalesAction) return action.payload;
+	console.log('mmmmmm', state.length);
+	if (action.type === SearchSalesAction){
+		var howManyRows = state.length;
+		var j = 0;
+		let array = [];
+		for( j ; j < howManyRows; j++){
+			
+			console.log('aaaaaaaa', j);
+			let updatedArray = update(state[j], {Value:{$set: action.payload}});
+			array = [...array, updatedArray];
+			console.log('aaaaaa', array);
+			
+		}
+		return array;
+	}
 	return state;
 }
 
-export function searchSoReducer(state = '', action) {
-	if (action.type === SearchSoAction) return action.payload;
+
+export function searchServicePlansReducer(state = initialSearchServiceParameter, action) {
+	console.log('ini data untuk search value', action.payload);
+	console.log('mmmmmm', state.length);
+	if (action.type === SearchServiceAction){
+		var howManyRows = state.length;
+		var j = 0;
+		let array = [];
+		for( j ; j < howManyRows; j++){
+			
+			console.log('aaaaaaaa', j);
+			let updatedArray = update(state[j], {Value:{$set: action.payload}});
+			array = [...array, updatedArray];
+			console.log('aaaaaa', array);
+			
+		}
+		console.log('aaaa', JSON.stringify(array));
+		return array;
+	}
+	return state;
+}
+
+export function searchCompReducer(state = initialSearchCompParameter, action) {
+	if (action.type === SearchCompAction) {
+		return {...state, Value: action.payload};
+	}
 	return state;
 }
 
@@ -565,7 +722,7 @@ const PlansReducers = combineReducers({
 	selectedSalesPlans: selectSalesPlansReducer,
 	selectedServicePlans: selectServicePlansReducer,
 	selectedMechanics: selectMechanicsReducer,
-	approveSalesStatus: approveSalesReducer,
+	// approveSalesStatus: approveSalesReducer,
 	// unapproveSalesStatus: unapproveSalesReducer,
 	salesParameter: salesParameterReducer,
 	filterParameter: filterParameterReducer,
@@ -574,8 +731,9 @@ const PlansReducers = combineReducers({
 	// PlansAssignmentSummary: fetchPlansReducer,
 	sortSalesBy: sortSalesByReducer,
 	sortServiceBy: sortServiceByReducer,
-	Search: searchPlansReducer,
-	soValue: searchSoReducer,
+	salesSearch: searchSalesPlansReducer,
+	serviceSearch: searchServicePlansReducer,
+	searchComp: searchCompReducer,
 	selectedPlanData: storePlanDataReducer,
 });
 

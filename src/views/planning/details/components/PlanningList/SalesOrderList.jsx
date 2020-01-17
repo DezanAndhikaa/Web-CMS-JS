@@ -91,14 +91,15 @@ render(){
             <TableCell padding="checkbox">
               {this.props.displaySalesCheckbox && 
               <Checkbox 
-              onClick={() => {this.state.lifetime.map((row) => 
-              this.props.onChoosedSales(row))}}
-              className="checkbox-checked-header"/>}
+                onClick={() => {this.state.lifetime.map((row,id) => 
+                this.props.onChoosedSales(row,id))}}
+                className="checkbox-checked-header"/>}
             </TableCell>
             <PlanningListHeader
               name="SO"
               // isActive={this.props.sortJobsByState.unitModel.isActive}
               delay={300}
+              onSearch={this.props.onSearchComp}
               // isAscending={this.props.sortJobsByState.unitModel.isAscending}
             />
             <PlanningListHeader
@@ -182,13 +183,13 @@ render(){
                 <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
                 <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
                 <TableCell align="center" className="table-cell"> 
-                {!this.props.salesOrderList.Lists[id].LifeTimeComp ? <InputButton title="Input Lifetime Component" onStats={this.isPutLifetime} titles="Input" key={row.So} id={row.So} field="input"/> : 
-                  <div>{this.props.salesOrderList.Lists[id].LifeTimeComp}</div>
+                {!this.props.salesOrderList.Lists[id].LifeTimeComponent ? <InputButton title="Input Lifetime Component" onStats={this.isPutLifetime} titles="Input" key={row.So} id={row.So} field="input"/> : 
+                  <div>{this.props.salesOrderList.Lists[id].LifeTimeComponent}</div>
                 }
                 {/* <InputButton title="Input Lifetime Component" onStats={this.isPutLifetime} titles="Input" key={row.So} id={row.So} field="input"/> */}
                 </TableCell>
                 <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
-                <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComp} field="edit" id={row.So} /></TableCell>
+                <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.So} /></TableCell>
               </TableRow>
             ))}
         </TableBody>

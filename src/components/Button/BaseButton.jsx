@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, FormLabel } from '@material-ui/core';
 import './BaseButton.scss';
-import DeleteSuccess from '../DeleteConfirmation/DeleteSuccess';
 import DeleteButton from '../ActionButton/DeleteButton/DeleteButton';
 import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 import ApproveConfirmation from '../ApproveConfirmation/ApproveConfirmation';
@@ -23,35 +22,50 @@ class BaseButton extends React.Component{
         this.setState({isShowModal: !this.state.isShowModal})
     }
 
-    isMoved = async() => {
+    isApproved = async() => {
+        console.log('masuk isAPprove')
         if (this.props.whatTabsIsRendered === true) {
-            await this.props.putSalestoPlanningApprove({...this.props.selectedData})
-            await this.isClosed()
-            await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
-            this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
+            if (this.props.titles === "Approve") {
+                console.log('masuk whatTabsIsRendered',this.props.selectedData)
+                await this.props.approveSales({...this.props.selectedData})
+                this.isClosed()
+                await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
+                await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
+            }
+            if (this.props.titles === "Delete") {
+                console.log('masuk whatTabsIsRendered',this.props.deleteSalesData)
+                await this.props.deleteSales({...this.props.deleteSalesData})
+                this.isClosed()
+                await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
+                await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
+            }
         }
         if (this.props.whatTabsIsRendered === false) {
-            await this.props.putServicetoPlanningApprove({...this.props.selectedServiceData})
-            await this.isClosed()
+            await this.props.approveService({...this.props.selectedServiceData})
+            this.isClosed()
             await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter)
             this.props.clearSelectedServicePlans(this.props.selectedServicePlans)
         }
-        
-        console.log('ini stateeeee', this.props.selectedData)
-        console.log('ini stateeeee2', this.props.selectedSalesPlans)
     }
 
+    // isDeleted = async() => {
+    //     console.log('masuk isDeleted')
+    //     if (this.props.whatTabsIsRendered === true) {
+
+    //     }
+    //     if (this.props.whatTabsIsRendered === false) {
+    //         await this.props.deleteService({...this.props.deleteServiceData})
+    //         this.isClosed()
+    //         await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter)
+    //         this.props.clearSelectedServicePlans(this.props.selectedServicePlans)
+    //     }
+    // }
+
     render(){
-        if(this.props.titles === "TotalSales"){
+        if(this.props.titles === "Total"){
             return(
                 <div className="button-inline">
-                    <FormLabel className="label-selected-data"> {this.props.totalSalesSelected} items selected.</FormLabel>
-                </div>
-            )
-        }else if(this.props.titles === "TotalService"){
-            return(
-                <div className="button-inline">
-                    <FormLabel className="label-selected-data"> {this.props.totalServiceSelected} items selected.</FormLabel>
+                    <FormLabel className="label-selected-data"> {this.props.totalSelectedItems} items selected.</FormLabel>
                 </div>
             )
         }else if(this.props.titles === "Delete"){
@@ -61,12 +75,15 @@ class BaseButton extends React.Component{
                         {...this.props}
                         {...this.state}
                         onClick={this.isClicked}
+                        disabled={this.props.disabledButton}
                     />
                     <DeleteConfirmation
                         {...this.props}
                         {...this.state}
                         onClose={this.isClosed}
                         openModal={this.state.isShowModal}
+                        totalData={this.props.totalSelectedItems}
+                        onDelete={this.isApproved}
                     />
                 </div>
             )
@@ -86,29 +103,31 @@ class BaseButton extends React.Component{
                         onClose={this.isClosed}
                         openModal={this.state.isShowModal}
                         totalData={this.props.totalSelectedItems}
-                        onMoved={this.isMoved}
+                        onApprove={this.isApproved}
                     />
-                </div>
-            )
-        }else {
-            return(
-                <div className="button-inline">
-                    <DeleteButton 
-                        {...this.props}
-                        {...this.state}
-                        onClick={this.isClicked}
-                    />
-                    <DeleteConfirmation
-                        {...this.props}
-                        {...this.state}
-                        onClose={this.isClosed}
-                        openModal={this.state.isShowModal}
-                    />
-                    <Button className="btn-download" onClick={this.isClicked}>Download</Button>
-                    <Button className="btn-approve" onClick={this.isClicked}>Approve</Button>
                 </div>
             )
         }
+        // else {
+        //     return(
+        //         <div className="button-inline">
+        //             <DeleteButton 
+        //                 {...this.props}
+        //                 {...this.state}
+        //                 onClick={this.isClicked}
+        //             />
+        //             <DeleteConfirmation
+        //                 {...this.props}
+        //                 {...this.state}
+        //                 onClose={this.isClosed}
+        //                 openModal={this.state.isShowModal}
+        //                 onDelete={this.isApproved}
+        //             />
+        //             <Button className="btn-download" onClick={this.isClicked}>Download</Button>
+        //             <Button className="btn-approve" onClick={this.isClicked}>Approve</Button>
+        //         </div>
+        //     )
+        // }
     }
 }
 

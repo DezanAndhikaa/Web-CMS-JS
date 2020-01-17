@@ -19,7 +19,7 @@ export default class PlanningListHeader extends React.PureComponent {
 							this.props.name === 'Plan' ?
 								<InputButton titles="Plan Execution" title="Plan Execution Date"/> : 
 								this.props.name === 'SO' ?
-									<InputButton titles="SO" placeholder="SO" /> :
+									<InputButton titles="SO" placeholder="SO" onSearch={this.props.onSearch}/> :
 									this.props.name === 'Part Number' ?
 										<InputButton titles="Part Number" placeholder="Part Number" /> :
 										this.props.name === 'Unit Code' ?
