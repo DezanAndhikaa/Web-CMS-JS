@@ -75,9 +75,28 @@ componentDidUpdate = (prevProps) => {
   if (prevProps.serviceParameter !== this.props.serviceParameter) {
     this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
   }
-  if (prevProps.Search !== this.props.Search) {
+
+  //ini untuk trigger sales global search
+  if (prevProps.salesSearch !== this.props.salesSearch) {
+    
     this.props.updateSalesParameter({
-      ...prevProps.salesParameter.dataFilter, Filter: this.props.Search, PageNumber: 1,
+      ...prevProps.salesParameter.dataFilter, Filter : this.props.salesSearch, PageNumber: 1,
+    });
+    console.log('blabla sales', this.props.salesSearch);
+  }
+  
+  //ini untuk trigger service global search
+  if(prevProps.serviceSearch !== this.props.serviceSearch){
+    this.props.updateServiceParameter({
+      ...prevProps.serviceParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber: 1,
+    });
+    console.log('blabla service', this.props.serviceSearch);
+  }
+  //searc per component
+  if(prevProps.searchComp !== this.props.searchComp){
+    console.log('jkl jkl apdet ',this.props.searchComp)
+    this.props.updateSalesParameter({
+      ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
     });
   }
   // SALES ORDER SORTING
@@ -295,7 +314,7 @@ componentDidUpdate = (prevProps) => {
       const nextSales = this.props.salesOrderList.NextPage;
       const prevSales = this.props.salesOrderList.PrevPage;
       const currentPropsSales = this.props.salesOrderList.PageNumber;
-      const { TotalPage } = this.props.salesOrderList;
+      const { TotalPages } = this.props.salesOrderList;
       
       return(
         <div className="pagination">
@@ -305,9 +324,9 @@ componentDidUpdate = (prevProps) => {
             {web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive">{currentPropsSales - 2}</div>}
             {currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive">{currentPropsSales - 1}</div>}
             <div className="page-active">{currentPropsSales}</div>
-            {currentPropsSales + 1 <= TotalPage && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive">{currentPropsSales + 1}</div>}
-            {web && currentPropsSales + 2 < TotalPage && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive">{currentPropsSales + 2}</div>}
-            {web && currentPropsSales + 3 < TotalPage && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive">{currentPropsSales + 3}</div>}
+            {currentPropsSales + 1 <= TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive">{currentPropsSales + 1}</div>}
+            {web && currentPropsSales + 2 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive">{currentPropsSales + 2}</div>}
+            {web && currentPropsSales + 3 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive">{currentPropsSales + 3}</div>}
             {/* {nextSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>} */}
           </div>
         </div>
@@ -318,7 +337,7 @@ componentDidUpdate = (prevProps) => {
       const nextSales = this.props.serviceOrderList.NextPage;
       const prevSales = this.props.serviceOrderList.PrevPage;
       const currentPropsService = this.props.serviceOrderList.PageNumber;
-      const { TotalPage } = this.props.serviceOrderList;
+      const { TotalPages } = this.props.serviceOrderList;
       
       return(
         <div className="pagination">
@@ -329,9 +348,9 @@ componentDidUpdate = (prevProps) => {
             {currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive">{currentPropsService - 1}</div>}
             <div className="page-active">{currentPropsService}</div>
             {/* <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService })} className="page-active">{currentPropsService}</div> */}
-            {currentPropsService + 1 <= TotalPage && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive">{currentPropsService + 1}</div>}
-            {web && currentPropsService + 2 < TotalPage && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive">{currentPropsService + 2}</div>}
-            {web && currentPropsService + 3 < TotalPage && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive">{currentPropsService + 3}</div>}
+            {currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive">{currentPropsService + 1}</div>}
+            {web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive">{currentPropsService + 2}</div>}
+            {web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive">{currentPropsService + 3}</div>}
             {nextSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>}
           </div>
         </div>
@@ -341,11 +360,14 @@ componentDidUpdate = (prevProps) => {
 
   onClickServiceOrder = () => {
     this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+    console.log('blablabla', this.props.Search)
+    // console.log('ini data dari api',this.props.serviceParameter.dataFilter);
   }
 
   onClickSalesOrder = () =>{
     // console.log('ini filter paging ', this.props.salesParameter.dataFilter )
     this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
+    console.log('blablabla', this.props)
   }
 
   handlePageSize = (numberOfPage) => {
@@ -372,8 +394,10 @@ componentDidUpdate = (prevProps) => {
     return (
       <SearchInput
         {...this.props}
+        wasApprove={this.state.wasApprove}
         webInfo="Search by all component"
-        onSearch={this.props.onSearch}
+        onSalesSearch={this.props.onSearchSales}
+        onServiceSearch={this.props.onSearchService}
       />
     );
   }
@@ -536,6 +560,9 @@ componentDidUpdate = (prevProps) => {
 
     render(){
       console.log('bacot', this.props);
+      console.log('pantek sales', this.props.selectedSalesPlans)
+      console.log('pantek service', this.props.selectedServicePlans)
+      
       return(
           <main className="content">
             {this.handlePageSize()}

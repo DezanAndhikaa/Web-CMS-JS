@@ -15,6 +15,10 @@ export default class SalesOrderList extends React.PureComponent {
     this.state = {
       lifetime: [],
       stats: 0,
+      putLifetime: {
+        So : '',
+        LifeTimeComponent : '',
+      }
   }
 }
 
@@ -28,6 +32,14 @@ export default class SalesOrderList extends React.PureComponent {
           lifetime: this.props.salesOrderList.Lists,
         })
       }
+      // else if(this.state.stats === 1){
+      //   console.log("ketiga ketiga")
+      //   this.props.putLifetimeComp(this.state.putLifetime)
+      //   this.setState({
+      //     stats: 3
+      //   })
+      //   this.props.onClickSalesOrder();
+      // }
     }
 
     isChangeStat = (value,key) =>{
@@ -35,6 +47,21 @@ export default class SalesOrderList extends React.PureComponent {
         stats: 1,
         lifetime: this.state.lifetime.map(el => (el.So === key ? {...el, LifeTimeComp : value} : el))
       });
+    }
+
+    isPutLifetime =  async(key, value) => {
+        this.setState({
+          putLifetime: {
+            So: key,
+            LifeTimeComponent: value
+          },
+          stats: 1
+        }, 
+        () => this.props.putLifetimeComp(this.state.putLifetime) 
+        )
+        console.log("fffffff fffffff ffffff ")
+        await this.props.putLifetimeComp(this.state.putLifetime)
+        await this.props.onClickSalesOrder();
     }
 
     isCheckboxAvailable = (data) => {
@@ -62,6 +89,7 @@ export default class SalesOrderList extends React.PureComponent {
                 name="SO"
                 // isActive={this.props.sortJobsByState.unitModel.isActive}
                 delay={300}
+                onSearch={this.props.onSearchComp}
                 // isAscending={this.props.sortJobsByState.unitModel.isAscending}
               />
               <PlanningListHeader

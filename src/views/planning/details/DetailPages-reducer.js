@@ -1,5 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { combineReducers } from 'redux';
+import update from 'immutability-helper';
 import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
 import {
 	// ApproveSalesAction, 
@@ -14,7 +15,8 @@ import {
 	// GetServiceOrderAction, GetSalesOrderAction, 
 	UpdateSalesParameterAction, ResetSelectedMechanicsAction, 
 	SearchSalesAction,
-	SearchSoAction,
+	SearchServiceAction,
+	SearchCompAction,
 	// SelectCustomerFilterAction, 
 	SelectSalesPlanAction,
 	SelectServicePlanAction, 
@@ -176,78 +178,148 @@ const serviceSortbyInitialState = {
 	CompDesc: defaultState,
 };
 
-const initialSearchSOParameter ={
+const initialSearchCompParameter = {
+	Field	: 'So',
+	Operator: 'contains',
+	Value   : '',
+	Logic   : 'OR'
+}
+
+const initialSearchSalesParameter =
+[{
 	Field	: 'SO',
 	Operator: 'contains',
 	Value 	: '',
-	Logic 	: 'AND'
-};
-const initialSearchCustomerParameter ={
+	Logic 	: 'OR'
+},
+{
 	Field	: 'Customer',
 	Operator: 'contains',
 	Value 	: '',
-	Logic 	: 'AND'
-};
-const initialSearchSiteParameter = {
+	Logic 	: 'OR'
+},
+{
 	Field	: 'Site',
 	Operator: 'contains',
 	Value 	: '',
-	Logic 	: 'AND'
-};
-const initialSearchUnitModelParameter ={
+	Logic 	: 'OR'
+},
+{
 	Field	: 'UnitModel',
 	Operator: 'contains',
 	Value 	: '',
-	Logic 	: 'AND'
-};
-const initialSearchComponentDescriptionParameter ={
+	Logic 	: 'OR'
+},
+{
 	Field	: 'ComponentDescription',
 	Operator: 'contains',
 	Value 	: '',
-	Logic 	: 'AND'
-};
-const initialSearchPartNumberParameter ={
+	Logic 	: 'OR'
+},
+{
 	Field	: 'PartNumber',
 	Operator: 'contains',
 	Value 	: '',
-	Logic 	: 'AND'
-};
-const initialSearchUnitCodeParameter ={
+	Logic 	: 'OR'
+},
+{
 	Field	: 'UnitCode',
 	Operator: 'contains',
 	Value 	: '',
-	Logic 	: 'AND'
-};
-const initialSearchSerialNumberParameter ={
+	Logic 	: 'OR'
+},
+{
 	Field	: 'SerialNumber',
 	Operator: 'contains',
 	Value 	: '',
-	Logic 	: 'AND'
-}
-const initialSearchLifeTimeCompParameter ={
-	Field	: 'LifeTimeComp',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'LifeTimeComponent',
 	Operator: 'contains',
 	Value 	: '',
-	Logic 	: 'AND'
-};
-const initialSearchPlanExecutionParameter ={
+	Logic 	: 'OR'
+},
+{
 	Field	: 'PlanExecution',
 	Operator: 'contains',
 	Value 	: '',
-	Logic 	: 'AND'
-};
-		
+	Logic 	: 'OR'
+}];
+
+const initialSearchServiceParameter =
+[{
+	Field	: 'Wo',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'Customer',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'Site',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'UnitModel',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'ComponentDescription',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'PartNumber',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'UnitCode',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'SerialNumber',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'LifeTimeComponent',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+},
+{
+	Field	: 'PlanExecution',
+	Operator: 'contains',
+	Value 	: '',
+	Logic 	: 'OR'
+}];
+
 
 const initialAssignmentState = { response: false, status: ApiRequestActionsStatus.IDLE };
 const initialSalesState = { data: initialSalesAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialServiceState = { data: initialServiceAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialMechanicsState = { data: [], status: ApiRequestActionsStatus.IDLE };
-const initialSearchParameter = { Filter : [
-	initialSearchSOParameter, initialSearchCustomerParameter, 
-	initialSearchSiteParameter, initialSearchPartNumberParameter, 
-	initialSearchUnitModelParameter, initialSearchComponentDescriptionParameter, 
-	initialSearchUnitCodeParameter, initialSearchSerialNumberParameter, 
-	initialSearchLifeTimeCompParameter,initialSearchPlanExecutionParameter ] };
+// const initialSearchParameter = { Filter : [
+// 	initialSearchSOParameter, initialSearchCustomerParameter, 
+// 	initialSearchSiteParameter, initialSearchPartNumberParameter, 
+// 	initialSearchUnitModelParameter, initialSearchComponentDescriptionParameter, 
+// 	initialSearchUnitCodeParameter, initialSearchSerialNumberParameter, 
+// 	initialSearchLifeTimeCompParameter,initialSearchPlanExecutionParameter ] };
 
 export function fetchSalesReducer(state = initialSalesState, action) {
 	if (action.type === FetchSalesAction) {
@@ -455,15 +527,53 @@ export function serviceParameterReducer(state = initialServiceParameter, action)
 	return state;
 }
 
-export function searchPlansReducer(state = initialSearchParameter, action) {
+//ini reducer untuk global search dibagian sales order, menggunakan react-addons-update
+export function searchSalesPlansReducer(state = initialSearchSalesParameter, action) {
 	console.log('ini data untuk search value', action.payload);
-	if (action.type === SearchSalesAction)
-		return {...state, Value : action.payload};
+	console.log('mmmmmm', state.length);
+	if (action.type === SearchSalesAction){
+		var howManyRows = state.length;
+		var j = 0;
+		let array = [];
+		for( j ; j < howManyRows; j++){
+			
+			console.log('aaaaaaaa', j);
+			let updatedArray = update(state[j], {Value:{$set: action.payload}});
+			array = [...array, updatedArray];
+			console.log('aaaaaa', array);
+			
+		}
+		return array;
+	}
 	return state;
 }
 
-export function searchSoReducer(state = '', action) {
-	if (action.type === SearchSoAction) return action.payload;
+//ini reducer untuk global search dibagian service order, menggunakan react-addons-update
+export function searchServicePlansReducer(state = initialSearchServiceParameter, action) {
+	console.log('ini data untuk search value', action.payload);
+	console.log('mmmmmm', state.length);
+	if (action.type === SearchServiceAction){
+		var howManyRows = state.length;
+		var j = 0;
+		let array = [];
+		for( j ; j < howManyRows; j++){
+			
+			console.log('aaaaaaaa', j);
+			let updatedArray = update(state[j], {Value:{$set: action.payload}});
+			array = [...array, updatedArray];
+			console.log('aaaaaa', array);
+			
+		}
+		console.log('aaaa', JSON.stringify(array));
+		return array;
+	}
+	return state;
+}
+
+export function searchCompReducer(state = initialSearchCompParameter, action) {
+	if (action.type === SearchCompAction) {
+		return {...state, Value: action.payload};
+	}
 	return state;
 }
 
@@ -628,8 +738,9 @@ const PlansReducers = combineReducers({
 	// PlansAssignmentSummary: fetchPlansReducer,
 	sortSalesBy: sortSalesByReducer,
 	sortServiceBy: sortServiceByReducer,
-	Search: searchPlansReducer,
-	soValue: searchSoReducer,
+	salesSearch: searchSalesPlansReducer,
+	serviceSearch: searchServicePlansReducer,
+	searchComp: searchCompReducer,
 	selectedPlanData: storePlanDataReducer,
 });
 

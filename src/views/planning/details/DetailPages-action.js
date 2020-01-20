@@ -8,6 +8,9 @@ export const ApproveServiceAction = 'APPROVE_SERVICE';
 export const UnapproveSalesAction = 'UNAPPROVE_SALES';
 export const ClearSelectedPlans = 'CLEAR_SELECTED_PLANS';
 export const FetchSalesAction = 'FETCH_SALES_ORDER';
+export const PutLifetimeComp = 'PUT_LIFETIME_COMP';
+export const PutSalesApproved = 'PUT_SALES_APPROVED';
+export const PutServiceApproved = 'PUT_SERVICE_APPROVED';
 export const FetchServiceAction = 'FETCH_SERVICE_ORDER';
 export const FetchApprovedSalesAction = 'FETCH_APPROVED_SALES';
 export const FetchApprovedServiceAction = 'FETCH_APPROVED_SERVICE';
@@ -22,11 +25,12 @@ export const GetSalesOrderAction = 'GET_SALES_ORDER';
 export const ResetAssignment = 'RESET_ASSIGNMENT';
 export const ResetSelectedMechanicsAction = 'RESET_SELECTED_MECHANICS';
 export const ResetSelectedLeaderAction = 'RESET_SELECTED_LEADER';
-export const SearchSalesAction = 'SEARCH_PLANS';
-export const SearchSoAction = 'SEARCH_SO';
-export const SelectSalesPlanAction = 'SELECT_SALES_PLANS';
+export const SearchSalesAction = 'SEARCH_SALES_PLANS';
+export const SearchServiceAction = 'SEARCH_SERVICE_PLANS';
+export const SearchCompAction = 'SEARCH_BY_COMP';
 export const SelectAllSalesPlanAction = 'SELECT_ALL_SALES_PLANS';
 export const SelectServicePlanAction = 'SELECT_SERVICE_PLANS';
+export const SelectSalesPlanAction = 'SELECT_SALES_PLANS';
 export const SelectAllServicePlanAction = 'SELECT_ALL_SERVICE_PLANS';
 export const SelectPlansAssignmentFilterAction = 'SELECT_PLANS_ASSIGNMENT_FILTER';
 export const SelectPlansTypeFilterAction = 'SELECT_PLANS_TYPE_FILTER';
@@ -80,7 +84,34 @@ export function unapproveSalesAction(payload) {
 	return async (dispatch) => dispatch(callApi(UnapproveSalesAction, requestConfig));
 }
 
-export function approveServiceAction(payload){
+// export function fetchPlansAssignment(type, payload, accessToken) {
+// 	const requestConfig = {
+// 		method: RequestMethod.POST,
+// 		url: `${ApiUrlBase.SALESORDER_API_URL}Filters`,
+// 		data: payload,
+// 		headers: {
+// 			Authorization: `Bearer ${accessToken}`,
+// 			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID, // eslint-disable-line no-undef
+// 			'Content-Type': 'application/json',
+// 		},
+// 	};
+// 	return async (dispatch) => dispatch(callApi(type, requestConfig));
+// }
+export function putLifetimeCompAction(payload){
+	console.log('kopi kopi kopi')
+	const requestConfig = {
+		method: RequestMethod.PUT,
+		url: `${ApiUrlBase.SALESORDER_API_URL}`,
+		headers: {
+			'Accept': 'application/json; charset=utf-8',
+			'Content-Type': 'application/json; charset=utf-8',
+		},
+		data: payload,
+	};
+	return async (dispatch) => dispatch(callApi(PutLifetimeComp, requestConfig));
+}
+
+export function putSalesApprovedAction(payload){
 	const requestConfig = {
 		method: RequestMethod.PUT,
 		url: `${ApiUrlBase.SERVICEORDER_API_URL}/Approval`,
@@ -223,7 +254,7 @@ export function searchAction(type, payload) {
 	return { type, payload };
 }
 
-export function searchSo(type, payload){
+export function searchCompAction(type, payload){
 	return { type, payload };
 }
 

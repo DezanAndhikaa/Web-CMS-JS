@@ -10,7 +10,8 @@ export default class InputButton extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            isShowModal: false
+            isShowModal: false,
+            value: '',
         }
     }
 
@@ -22,12 +23,19 @@ export default class InputButton extends React.Component{
         this.setState({isShowModal: !this.state.isShowModal})
     }
 
+    handleKeyUp = (event) => {
+          this.setState({ value: event.target.value });
+          setTimeout(() => {
+            this.props.onSearch(this.state.value)
+          }, 1000);
+    }
+
     render(){
         if(this.props.titles === "Input"){
             return(
                 <div className="button-rows">
                 <Button onClick={this.isClicked} className="btn-assigns">{this.props.titles}</Button>
-                    <Modal disableEnforceFocus className="modal-pos" open={this.state.isShowModal} onClose={this.isClosed}>
+                    <Modal className="modal-pos" open={this.state.isShowModal} onClose={this.isClosed}>
                         <div>
                             <InputText 
                                 {...this.props}
@@ -42,7 +50,7 @@ export default class InputButton extends React.Component{
             return(
                 <div className="button-rows">
                     <Paper className={this.props.className || 'global-search-pk'} elevation={1}>
-                        <InputBase className="txt-search-pk" placeholder={this.props.placeholder}/>
+                        <InputBase className="txt-search-pk" placeholder={this.props.placeholder} onKeyUp={this.handleKeyUp} />
                     </Paper>
                 </div>
             )
