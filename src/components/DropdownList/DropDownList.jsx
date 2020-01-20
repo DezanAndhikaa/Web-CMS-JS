@@ -6,19 +6,24 @@ class DropDownList extends React.Component{
     state = {
         pagesize: 0,
     }
-    handleClick = (value) =>{
+    handleClick = async(prevState, value) =>{
         // const { myValue } = event.currentTarget.dataset
         // this.setState({pagesize : numberOfPages})
-        console.log('this is pagenumber size data', this.props.salesParameter.dataFilter)
-        this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value.target.value})
-        this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value.target.value})
+        // await this.setState({ pagesize : value.target.value});
+            console.log('this is pagenumber size data', prevState.target.value)
+            console.log('this is pagenumber size data', this.state.pagesize)
 
         // this.props.onPageSize(value)
     }
-    handleChange = (event) => {
-        this.setState({ pagesize : event.target.value});
+    handleChange = async(event) => {
+        this.setState(
+            { pagesize : event.target.value},
+            () => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: this.state.pagesize}), this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: this.state.pagesize})
+            );
         // await this.handleClick(event.target.value)
         // this.handleClick(event.target.value)
+        // await this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: this.state.pagesize})
+        // await this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: this.state.pagesize})
       }
 	render(){
 		return(

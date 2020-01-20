@@ -501,6 +501,7 @@ export function serviceParameterReducer(state = initialServiceParameter, action)
 	return state;
 }
 
+//ini reducer untuk global search dibagian sales order, menggunakan react-addons-update
 export function searchSalesPlansReducer(state = initialSearchSalesParameter, action) {
 	console.log('ini data untuk search value', action.payload);
 	console.log('mmmmmm', state.length);
@@ -521,7 +522,7 @@ export function searchSalesPlansReducer(state = initialSearchSalesParameter, act
 	return state;
 }
 
-
+//ini reducer untuk global search dibagian service order, menggunakan react-addons-update
 export function searchServicePlansReducer(state = initialSearchServiceParameter, action) {
 	console.log('ini data untuk search value', action.payload);
 	console.log('mmmmmm', state.length);
@@ -543,6 +544,7 @@ export function searchServicePlansReducer(state = initialSearchServiceParameter,
 	return state;
 }
 
+//ini untuk search per kolom
 export function searchSoReducer(state = '', action) {
 	if (action.type === SearchSoAction) return action.payload;
 	return state;
