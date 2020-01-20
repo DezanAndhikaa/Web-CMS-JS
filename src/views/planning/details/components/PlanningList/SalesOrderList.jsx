@@ -19,173 +19,171 @@ export default class SalesOrderList extends React.PureComponent {
         So : '',
         LifeTimeComponent : '',
       }
+    }
   }
-}
 
-    componentDidMount = () =>{
-      this.props.onClickSalesOrder();
-    }
+  componentDidMount = () =>{
+    this.props.onClickSalesOrder();
+  }
 
-    componentDidUpdate = () =>{
-      if(this.state.stats === 0){
-        this.setState({
-          lifetime: this.props.salesOrderList.Lists,
-        })
-      }
-      // else if(this.state.stats === 1){
-      //   console.log("ketiga ketiga")
-      //   this.props.putLifetimeComp(this.state.putLifetime)
-      //   this.setState({
-      //     stats: 3
-      //   })
-      //   this.props.onClickSalesOrder();
-      // }
-    }
-
-    isChangeStat = (value,key) =>{
+  componentDidUpdate = () =>{
+    if(this.state.stats === 0){
       this.setState({
-        stats: 1,
-        lifetime: this.state.lifetime.map(el => (el.So === key ? {...el, LifeTimeComp : value} : el))
-      });
+        lifetime: this.props.salesOrderList.Lists,
+      })
     }
+    // else if(this.state.stats === 1){
+    //   this.props.putLifetimeComp(this.state.putLifetime)
+    //   this.setState({
+    //     stats: 3
+    //   })
+    //   this.props.onClickSalesOrder();
+    // }
+  }
 
-    isPutLifetime =  async(key, value) => {
-        this.setState({
-          putLifetime: {
-            So: key,
-            LifeTimeComponent: value
-          },
-          stats: 1
-        }, 
-        () => this.props.putLifetimeComp(this.state.putLifetime) 
-        )
-        console.log("fffffff fffffff ffffff ")
-        await this.props.putLifetimeComp(this.state.putLifetime)
-        await this.props.onClickSalesOrder();
-    }
+  isChangeStat = (value,key) =>{
+    this.setState({
+      stats: 1,
+      lifetime: this.state.lifetime.map(el => (el.So === key ? {...el, LifeTimeComp : value} : el))
+    });
+  }
 
-    isCheckboxAvailable = (data) => {
-        let isAvailable = false;
-        if (this.props.selectedSalesPlanList.some((plan) => plan.status === 'Assigned')) {
-          isAvailable = this.props.selectedSalesPlanList.some((plan) => plan.status !== data.status);
-        } else { isAvailable = this.props.selectedSalesPlanList.some((plan) => plan.status !== 'Assigned') && data.status === 'Assigned'; }
-        return isAvailable;
-      }
+  isPutLifetime =  async(key, value) => {
+      this.setState({
+        putLifetime: {
+          So: key,
+          LifeTimeComponent: value
+        },
+        stats: 1
+      }, 
+      () => this.props.putLifetimeComp(this.state.putLifetime) 
+      )
+      await this.props.putLifetimeComp(this.state.putLifetime)
+      await this.props.onClickSalesOrder();
+  }
 
-      datePlant = (date) => moment.utc(date, ISO_8601).local().format('DD MMMM YYYY')
+  isCheckboxAvailable = (data) => {
+    let isAvailable = false;
+    if (this.props.selectedSalesPlanList.some((plan) => plan.status === 'Assigned')) {
+      isAvailable = this.props.selectedSalesPlanList.some((plan) => plan.status !== data.status);
+    } else { isAvailable = this.props.selectedSalesPlanList.some((plan) => plan.status !== 'Assigned') && data.status === 'Assigned'; }
+    return isAvailable;
+  }
 
-      showTableHead() {
-          return (
-            <TableHead className="table-head" classes={{ root: 'table-head' }}>
-            <TableRow classes={{ root: 'table-row' }}>
-              <TableCell padding="checkbox">
-                {this.props.displaySalesCheckbox && 
-                <Checkbox 
-                  onClick={() => {this.state.lifetime.map((row,id) => 
-                  this.props.onChoosedSales(row,id))}}
-                  className="checkbox-checked-header"/>}
-              </TableCell>
-              <PlanningListHeader
-                name="SO"
-                // isActive={this.props.sortJobsByState.unitModel.isActive}
-                delay={300}
-                onSearch={this.props.onSearchComp}
-                // isAscending={this.props.sortJobsByState.unitModel.isAscending}
-              />
-              <PlanningListHeader
-                name="Customer"
-                isActive={this.props.sortSalesByState.Customer.isActive}
-                delay={300}
-                isAscending={this.props.sortSalesByState.Customer.isAscending}
-                onClick={() => this.props.onClickTabHead(SortSalesByCustomer)}
-              />
-              <PlanningListHeader
-                name="Site"
-                isActive={this.props.sortSalesByState.Site.isActive}
-                delay={300}
-                isAscending={this.props.sortSalesByState.Site.isAscending}
-                onClick={() => this.props.onClickTabHead(SortSalesBySite)}
-              />
-              <PlanningListHeader
-                name="Unit Model"
-                isActive={this.props.sortSalesByState.UnitModel.isActive}
-                delay={300}
-                isAscending={this.props.sortSalesByState.UnitModel.isAscending}
-                onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
-              />
-              <PlanningListHeader
-                name="Comp Desc"
-                isActive={this.props.sortSalesByState.CompDesc.isActive}
-                delay={300}
-                isAscending={this.props.sortSalesByState.CompDesc.isAscending}
-                onClick={() => this.props.onClickTabHead(SortSalesByCompDesc)}
-              />
-              <PlanningListHeader
-                name="Part Number"
-              // //   isActive={this.props.sortJobsByState.backlogOpen.isActive}
-                delay={300}
-              // //   isAscending={this.props.sortJobsByState.backlogOpen.isAscending}
-              />
-              <PlanningListHeader
-                name="Unit Code"
-              // //   isActive={this.props.sortJobsByState.plantExecution.isActive}
-                delay={300}
-              // //   isAscending={this.props.sortJobsByState.plantExecution.isAscending}
-              />
-              <PlanningListHeader
-                name="Serial Number"
-              // //   isActive={this.props.sortJobsByState.status.isActive}
-                delay={300}
-              // //   isAscending={this.props.sortJobsByState.status.isAscending}            
-              />
-              <PlanningListHeader
-                name="Lifetime"
-              // //   isActive={this.props.sortJobsByState.staging.isActive}
-                delay={300}
-              // //   isAscending={this.props.sortJobsByState.staging.isAscending}
-              />
-              <PlanningListHeader
-                name="Plan"
-              // //   isActive={this.props.sortJobsByState.staging.isActive}
-                delay={300}
-              // //   isAscending={this.props.sortJobsByState.staging.isAscending}
-              />
-              <Typography
-                name="Action" style={{marginTop: "10px"}}
-              // //   isActive={this.props.sortJobsByState.staging.isActive}
-              // //   isAscending={this.props.sortJobsByState.staging.isAscending}
-              >Action</Typography>
-            </TableRow>
-          </TableHead>
-        )
-      }
+  datePlant = (date) => moment.utc(date, ISO_8601).local().format('DD MMMM YYYY')
 
-      showTableBody(row,id) {
-        return (
-          <TableRow key={id} classes={{ root: 'table-row' }}>
-            <TableCell padding="checkbox">
-              {this.props.displaySalesCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedSalesPlanList.some((plans) => plans.So === row.So)} onClick={() => this.props.onChoosedSales(row)} classes={{ checked: 'checkbox-checked' }} />}
-            </TableCell>
-            <TableCell align="left" className="table-cell"> {row.So} </TableCell>
-            <TableCell align="left" className="table-cell"> {row.Customer} </TableCell>
-            <TableCell align="left" className="table-cell"> {row.Site} </TableCell>
-            <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
-            <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>
-            <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
-            <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
-            <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
-            <TableCell align="center" className="table-cell"> 
-            {!this.props.salesOrderList.Lists[id].LifeTimeComponent ? <InputButton title="Input Lifetime Component" onStats={this.isChangeStat} titles="Input" key={row.So} id={row.So} field="input"/> : 
-              <div>{this.props.salesOrderList.Lists[id].LifeTimeComponent}</div>
-            }
-            </TableCell>
-            <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
-            <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isChangeStat} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.So} /></TableCell>
-          </TableRow>
-        )
-      }
+  showTableHead() {
+      return (
+        <TableHead className="table-head" classes={{ root: 'table-head' }}>
+        <TableRow classes={{ root: 'table-row' }}>
+          <TableCell padding="checkbox">
+            {this.props.displaySalesCheckbox && 
+            <Checkbox 
+              onClick={() => {this.state.lifetime.map((row,id) => 
+              this.props.onChoosedSales(row,id))}}
+              className="checkbox-checked-header"/>}
+          </TableCell>
+          <PlanningListHeader
+            name="SO"
+            // isActive={this.props.sortJobsByState.unitModel.isActive}
+            delay={300}
+            onSearch={this.props.onSearchComp}
+            // isAscending={this.props.sortJobsByState.unitModel.isAscending}
+          />
+          <PlanningListHeader
+            name="Customer"
+            isActive={this.props.sortSalesByState.Customer.isActive}
+            delay={300}
+            isAscending={this.props.sortSalesByState.Customer.isAscending}
+            onClick={() => this.props.onClickTabHead(SortSalesByCustomer)}
+          />
+          <PlanningListHeader
+            name="Site"
+            isActive={this.props.sortSalesByState.Site.isActive}
+            delay={300}
+            isAscending={this.props.sortSalesByState.Site.isAscending}
+            onClick={() => this.props.onClickTabHead(SortSalesBySite)}
+          />
+          <PlanningListHeader
+            name="Unit Model"
+            isActive={this.props.sortSalesByState.UnitModel.isActive}
+            delay={300}
+            isAscending={this.props.sortSalesByState.UnitModel.isAscending}
+            onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
+          />
+          <PlanningListHeader
+            name="Comp Desc"
+            isActive={this.props.sortSalesByState.CompDesc.isActive}
+            delay={300}
+            isAscending={this.props.sortSalesByState.CompDesc.isAscending}
+            onClick={() => this.props.onClickTabHead(SortSalesByCompDesc)}
+          />
+          <PlanningListHeader
+            name="Part Number"
+          // //   isActive={this.props.sortJobsByState.backlogOpen.isActive}
+            delay={300}
+          // //   isAscending={this.props.sortJobsByState.backlogOpen.isAscending}
+          />
+          <PlanningListHeader
+            name="Unit Code"
+          // //   isActive={this.props.sortJobsByState.plantExecution.isActive}
+            delay={300}
+          // //   isAscending={this.props.sortJobsByState.plantExecution.isAscending}
+          />
+          <PlanningListHeader
+            name="Serial Number"
+          // //   isActive={this.props.sortJobsByState.status.isActive}
+            delay={300}
+          // //   isAscending={this.props.sortJobsByState.status.isAscending}            
+          />
+          <PlanningListHeader
+            name="Lifetime"
+          // //   isActive={this.props.sortJobsByState.staging.isActive}
+            delay={300}
+          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
+          />
+          <PlanningListHeader
+            name="Plan"
+          // //   isActive={this.props.sortJobsByState.staging.isActive}
+            delay={300}
+          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
+          />
+          <Typography
+            name="Action" style={{marginTop: "10px"}}
+          // //   isActive={this.props.sortJobsByState.staging.isActive}
+          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
+          >Action</Typography>
+        </TableRow>
+      </TableHead>
+    )
+  }
 
-render(){
+  showTableBody(row,id) {
+    return (
+      <TableRow key={id} classes={{ root: 'table-row' }}>
+        <TableCell padding="checkbox">
+          {this.props.displaySalesCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedSalesPlanList.some((plans) => plans.So === row.So)} onClick={() => this.props.onChoosedSales(row)} classes={{ checked: 'checkbox-checked' }} />}
+        </TableCell>
+        <TableCell align="left" className="table-cell"> {row.So} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.Customer} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.Site} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
+        <TableCell align="center" className="table-cell"> 
+        {!this.props.salesOrderList.Lists[id].LifeTimeComponent ? <InputButton title="Input Lifetime Component" onStats={this.isChangeStat} titles="Input" key={row.So} id={row.So} field="input"/> : 
+          <div>{this.props.salesOrderList.Lists[id].LifeTimeComponent}</div>
+        }
+        </TableCell>
+        <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
+        <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isChangeStat} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.So} /></TableCell>
+      </TableRow>
+    )
+  }
+
+  render(){
     if(this.props.salesOrderListApproved.Lists.length > 0 ){
       return(
         <Table classes={{ root: 'table' }} className="table">
@@ -206,7 +204,7 @@ render(){
           {this.props.salesOrderListDeleted.Lists
             && this.props.salesOrderListDeleted.Lists.map((row, id) => (
               this.showTableBody(row,id)
-            ))}
+              ))}
           </TableBody>
         </Table>
       )

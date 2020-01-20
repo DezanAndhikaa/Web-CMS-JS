@@ -387,7 +387,7 @@ export function fetchApprovedServiceReducer(state = initialServiceState, action)
 				error: action.error,
 			};
 		default:
-			return { data: initialMechanicsState.data, status: ApiRequestActionsStatus.LOADING };
+			return { data: initialServiceState.data, status: ApiRequestActionsStatus.LOADING };
 		}
 	}
 	return state;
@@ -423,7 +423,7 @@ export function fetchDeletedServiceReducer(state = initialServiceState, action) 
 				error: action.error,
 			};
 		default:
-			return { data: initialMechanicsState.data, status: ApiRequestActionsStatus.LOADING };
+			return { data: initialServiceState.data, status: ApiRequestActionsStatus.LOADING };
 		}
 	}
 	return state;
@@ -721,7 +721,7 @@ const PlansReducers = combineReducers({
 	salesOrderList : fetchSalesReducer,
 	salesOrderListApproved : fetchApprovedSalesReducer,
 	serviceOrderListApproved : fetchApprovedServiceReducer,
-	salesOrderListDeleted : fetchApprovedSalesReducer,
+	salesOrderListDeleted : fetchDeletedSalesReducer,
 	serviceOrderListDeleted : fetchDeletedServiceReducer,
 	// salesOrderList : getSearchValueReducer,
 	// salesOrderList: getSalesOrderReducer,

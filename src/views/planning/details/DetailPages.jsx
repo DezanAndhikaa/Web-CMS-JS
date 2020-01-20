@@ -360,14 +360,10 @@ componentDidUpdate = (prevProps) => {
 
   onClickServiceOrder = () => {
     this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
-    console.log('blablabla', this.props.Search)
-    // console.log('ini data dari api',this.props.serviceParameter.dataFilter);
   }
 
   onClickSalesOrder = () =>{
-    // console.log('ini filter paging ', this.props.salesParameter.dataFilter )
     this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
-    console.log('blablabla', this.props)
   }
 
   handlePageSize = (numberOfPage) => {
@@ -395,7 +391,7 @@ componentDidUpdate = (prevProps) => {
       <SearchInput
         {...this.props}
         wasApprove={this.state.wasApprove}
-        webInfo="Search by all component"
+        webInfo="Search"
         onSalesSearch={this.props.onSearchSales}
         onServiceSearch={this.props.onSearchService}
       />
