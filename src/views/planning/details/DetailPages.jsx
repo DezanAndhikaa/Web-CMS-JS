@@ -5,6 +5,7 @@ import PlanningDetailsTab from './components/Tab/PlanningDetailsTab';
 import DropDownList from '../../../components/DropdownList/DropDownList';
 import SearchInput from "../../../components/Searchbar/SearchInput";
 import BaseButton from '../../../components/Button/BaseButton';
+import FilterbyDataAction from '../../../components/FilterByDataAction/FilterbyDataAction';
 
 class DetailPages extends React.Component{
     constructor(props) {
@@ -401,6 +402,49 @@ componentDidUpdate = (prevProps) => {
     );
   }
 
+  onClickApprovedSales = () => {
+    this.props.fetchApprovedSales(this.props.salesParameter.dataFilter);
+    console.log("okokokokok , ",this.props.salesOrderListApproved.Lists.length)
+  }
+
+  onClickApprovedService = () => {
+    this.props.fetchApprovedService(this.props.serviceParameter.dataFilter);
+  }
+
+  onClickDeletedSales = () => {
+    this.props.fetchDeletedSales(this.props.salesParameter.dataFilter);
+  }
+
+  onClickDeletedService = () => {
+    this.props.fetchDeletedService(this.props.serviceParameter.dataFilter);
+  }
+
+  _renderFilterByDataAction = (value) => {
+    if (value === 1) {
+      this.setState({wasApprove : true})
+    }if (value === 0) {
+      this.setState({wasApprove : false})
+    }
+    if (this.state.wasApprove === true) {
+      return(
+        <FilterbyDataAction 
+          {...this.props}
+          onClickPlanningApprove={this.onClickApprovedSales}
+          onClickPlanningDelete={this.onClickDeletedSales}
+        />
+      );
+    }
+    if (this.state.wasApprove === false) {
+      return(
+        <FilterbyDataAction 
+          {...this.props}
+          onClickPlanningApprove={this.onClickApprovedService}
+          onClickPlanningDelete={this.onClickDeletedService}
+        />
+      );
+    }
+  }
+
   _renderBaseButton = (value) => {
     if (value === 1) {
       this.setState({wasApprove : true})
@@ -412,6 +456,7 @@ componentDidUpdate = (prevProps) => {
 				<div className="bottom-row">
           <BaseButton titles="Total" totalSelectedItems ={this.props.selectedSalesPlans.length}/>
           <BaseButton titles="Delete" 
+            {...this.props}
             disabledButton = {this.props.selectedSalesPlans.length < 1 }
             totalSelectedItems ={this.props.selectedSalesPlans.length}
             whatTabsIsRendered={this.state.isPaging}
@@ -462,8 +507,8 @@ componentDidUpdate = (prevProps) => {
     if (this.props.selectedSalesPlans
       .some((plans) => plans.So === plan.So,
         this.setState({
-          // selectedData : {SO:[...this.state.selectedData.SO, plan.SO], IsApprove: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: ""}
-          deleteSalesData : {So:[...this.state.deleteSalesData.So, plan.So], IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: ""}
+          selectedData : {So:[...this.state.selectedData.So, plan.So], IsApprove: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: ""},
+          deleteSalesData : {So:[...this.state.deleteSalesData.So, plan.So], IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: "2019-01-15"}
         }),
       )) 
     { return this.props.unselectSalesPlan(plan); }
@@ -474,7 +519,7 @@ componentDidUpdate = (prevProps) => {
     if (this.props.selectedServicePlans
       .some((plans) => plans.Wo === plan.Wo,
         this.setState({
-          // selectedServiceData : {Wo:[...this.state.selectedServiceData.Wo, plan.Wo], IsApprove: true}
+          selectedServiceData : {Wo:[...this.state.selectedServiceData.Wo, plan.Wo], IsApprove: true},
           deleteServiceData : {Wo:[...this.state.deleteServiceData.Wo, plan.Wo], IsDelete: true}
         }),
       ))
@@ -487,6 +532,7 @@ componentDidUpdate = (prevProps) => {
       <>
         <PlanningDetailsTab
           {...this.props}
+          renderFilterByDataAction={this._renderFilterByDataAction()}
           renderBaseButton={this._renderBaseButton()}
           renderSearch={this._renderSearchBar()}
           onClickSalesOrder={this.onClickSalesOrder}        

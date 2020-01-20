@@ -45,10 +45,10 @@ class FilterbyDataAction extends React.Component {
   renderDropdownList() {
     return (
       <div className="list-items">
-          <Button className="button" variant="outlined">
-            Planning Approved
+          <Button className="button" variant="outlined" onClick={this.props.onClickPlanningApprove}>
+            Planning Approved 
           </Button>
-          <Button className="button-plan-del" variant="outlined">
+          <Button className="button-plan-del" variant="outlined" onClick={this.props.onClickPlanningDelete}>
             Planning Deleted
           </Button>
       </div>
