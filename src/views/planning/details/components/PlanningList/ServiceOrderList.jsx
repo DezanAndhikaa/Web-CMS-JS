@@ -35,6 +35,7 @@ export default class ServiceOrderList extends React.PureComponent {
                 name="Work Order"
               //   isActive={this.props.sortJobsByState.unitModel.isActive}
                 delay={300}
+                onSearch={this.props.onSearchCompService}
               //   isAscending={this.props.sortJobsByState.unitModel.isAscending}
               />
               <PlanningListHeader
@@ -69,18 +70,21 @@ export default class ServiceOrderList extends React.PureComponent {
                 name="Part Number"
               // //   isActive={this.props.sortJobsByState.backlogOpen.isActive}
                 delay={300}
+                onSearch={this.props.onSearchCompService}
               // //   isAscending={this.props.sortJobsByState.backlogOpen.isAscending}
               />
               <PlanningListHeader
                 name="Unit Code"
               // //   isActive={this.props.sortJobsByState.plantExecution.isActive}
                 delay={300}
+                onSearch={this.props.onSearchCompService}
               // //   isAscending={this.props.sortJobsByState.plantExecution.isAscending}
               />
               <PlanningListHeader
                 name="Serial Number"
               // //   isActive={this.props.sortJobsByState.status.isActive}
                 delay={300}
+                onSearch={this.props.onSearchCompService}
               // //   isAscending={this.props.sortJobsByState.status.isAscending}            
               />
             <PlanningListHeader
@@ -95,13 +99,13 @@ export default class ServiceOrderList extends React.PureComponent {
                 delay={300}
               // //   isAscending={this.props.sortJobsByState.staging.isAscending}
               />
-              <PlanningListHeader
+              {/* <PlanningListHeader
                 name="Action"
                 align="center"
               // //   isActive={this.props.sortJobsByState.staging.isActive}
                 delay={300}
               // //   isAscending={this.props.sortJobsByState.staging.isAscending}
-              />
+              /> */}
             </TableRow>
           </TableHead>
       )
@@ -125,10 +129,10 @@ export default class ServiceOrderList extends React.PureComponent {
           <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>
           <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
           <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
-          <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>\
+          <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
           <TableCell align="left" className="table-cell"> {row.LifeTimeComponent}</TableCell>
           <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
-          <TableCell align="center" className="table-cell"> <EditButton /></TableCell>
+          {/* <TableCell align="center" className="table-cell"> <EditButton /></TableCell> */}
         </TableRow>
       )
     }

@@ -16,25 +16,25 @@ export default class PlanningListHeader extends React.PureComponent {
 					{
 						this.props.name === 'Lifetime' ?
 							<InputButton titles="Lifetime Comp" title="Lifetime Component"/> : 
-							this.props.name === 'Plan' ?
-								<InputButton titles="Plan Execution" title="Plan Execution Date"/> : 
-								this.props.name === 'SO' ?
-									<InputButton titles="SO" placeholder="SO" onSearch={this.props.onSearch}/> :
-									this.props.name === 'Part Number' ?
-										<InputButton titles="Part Number" placeholder="Part Number" /> :
-										this.props.name === 'Unit Code' ?
-											<InputButton titles="Unit Code" placeholder="Unit Code" /> :
-											this.props.name === 'Serial Number' ?
-												<InputButton titles="Serial Number" placeholder="Serial Number" /> :
-												this.props.name === 'Work Order' ?
-													<InputButton titles="Work Order" placeholder="WO" /> :
-													<TableSortLabel
-														active={this.props.isActive}
-														IconComponent={this.props.isAscending ? KeyboardArrowUp : KeyboardArrowDown}
-														onClick={this.props.onClick} 
-													>
-														{this.props.name}
-													</TableSortLabel>
+						this.props.name === 'Plan' ?
+							<InputButton titles="Plan Execution" title="Plan Execution Date"/> : 
+						this.props.name === 'SO' ?
+							<InputButton titles="SO" placeholder="SO" onSearch={this.props.onSearch} sort="So"/> :
+						this.props.name === 'Part Number' ?
+							<InputButton titles="Part Number" placeholder="Part Number" onSearch={this.props.onSearch} sort="PartNumber"/> :
+						this.props.name === 'Unit Code' ?
+							<InputButton titles="Unit Code" placeholder="Unit Code" onSearch={this.props.onSearch} sort="UnitCode"/> :
+						this.props.name === 'Serial Number' ?
+							<InputButton titles="Serial Number" placeholder="Serial Number" onSearch={this.props.onSearch} sort="SerialNumber"/> :
+						this.props.name === 'Work Order' ?
+							<InputButton titles="Work Order" placeholder="WO" onSearch={this.props.onSearch} sort="Wo"/> :
+							<TableSortLabel
+								active={this.props.isActive}
+								IconComponent={this.props.isAscending ? KeyboardArrowUp : KeyboardArrowDown}
+								onClick={this.props.onClick} 
+							>
+								{this.props.name}
+							</TableSortLabel>
 					}
 				</Tooltip>
 			</TableCell>

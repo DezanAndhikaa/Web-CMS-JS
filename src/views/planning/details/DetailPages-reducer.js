@@ -16,7 +16,7 @@ import {
 	UpdateSalesParameterAction, ResetSelectedMechanicsAction, 
 	SearchSalesAction,
 	SearchServiceAction,
-	SearchCompAction,
+	SearchCompAction,SearchCompActionService,
 	// SelectCustomerFilterAction, 
 	SelectSalesPlanAction,
 	SelectServicePlanAction, 
@@ -178,12 +178,13 @@ const serviceSortbyInitialState = {
 	CompDesc: defaultState,
 };
 
-const initialSearchCompParameter = {
-	Field	: 'So',
+const initialSearchCompParameter = 
+[{
+	Field	: '',
 	Operator: 'contains',
 	Value   : '',
 	Logic   : 'OR'
-}
+}]
 
 const initialSearchSalesParameter =
 [{
@@ -572,7 +573,34 @@ export function searchServicePlansReducer(state = initialSearchServiceParameter,
 
 export function searchCompReducer(state = initialSearchCompParameter, action) {
 	if (action.type === SearchCompAction) {
-		return {...state, Value: action.payload};
+		if(action.sort === "So"){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else if(action.sort === "PartNumber"){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else if(action.sort === "UnitCode"){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else{
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}
+	}else if(action.type === SearchCompActionService){
+		console.log("gatot awal ")
+		if(action.sort === "Wo"){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else if(action.sort === "PartNumber"){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else if(action.sort === "UnitCode"){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else{
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}
 	}
 	return state;
 }

@@ -23,10 +23,11 @@ export default class InputButton extends React.Component{
         this.setState({isShowModal: !this.state.isShowModal})
     }
 
-    handleKeyUp = (event) => {
+    handleKeyUp = (event, sort) => {
+        console.log("kaca ",sort)
           this.setState({ value: event.target.value });
           setTimeout(() => {
-            this.props.onSearch(this.state.value)
+            this.props.onSearch(this.state.value, sort)
           }, 1000);
     }
 
@@ -50,7 +51,7 @@ export default class InputButton extends React.Component{
             return(
                 <div className="button-rows">
                     <Paper className={this.props.className || 'global-search-pk'} elevation={1}>
-                        <InputBase className="txt-search-pk" placeholder={this.props.placeholder} onKeyUp={this.handleKeyUp} />
+                        <InputBase className="txt-search-pk" placeholder={this.props.placeholder} onKeyUp={(e) => {this.handleKeyUp(e, this.props.sort)}} />
                     </Paper>
                 </div>
             )
@@ -58,7 +59,7 @@ export default class InputButton extends React.Component{
             return(
                 <div className="button-rows">
                     <Paper className={this.props.className || 'global-search'} elevation={1}>
-                        <InputBase className="txt-search" placeholder={this.props.placeholder}/>
+                        <InputBase className="txt-search" placeholder={this.props.placeholder} onKeyUp={(e) => {this.handleKeyUp(e, this.props.sort)}}/>
                     </Paper>
                 </div>
             )
