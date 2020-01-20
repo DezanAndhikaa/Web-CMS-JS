@@ -551,16 +551,10 @@ export function searchServicePlansReducer(state = initialSearchServiceParameter,
 	return state;
 }
 
-<<<<<<< HEAD
 export function searchCompReducer(state = initialSearchCompParameter, action) {
 	if (action.type === SearchCompAction) {
 		return {...state, Value: action.payload};
 	}
-=======
-//ini untuk search per kolom
-export function searchSoReducer(state = '', action) {
-	if (action.type === SearchSoAction) return action.payload;
->>>>>>> 0de8c5a56fc8b44ed1d88beb36fc569770c789d8
 	return state;
 }
 
