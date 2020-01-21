@@ -21,7 +21,7 @@ class EditButton extends React.PureComponent {
     }
 
 	render() {
-        console.log("visi visi visi ",this.props.values)
+        // console.log("visi visi visi ",this.props.values)
 		return (
 			<div className="edit-button-row">
 				<div className={this.props.values  > 0 ? "edit-button-visible" : "edit-button-unvisible"} onClick={this.isClicked} />

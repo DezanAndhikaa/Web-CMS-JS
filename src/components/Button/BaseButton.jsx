@@ -27,33 +27,52 @@ class BaseButton extends React.Component{
         if (this.props.whatTabsIsRendered === true) {
             if (this.props.titles === "Approve") {
                 console.log('masuk whatTabsIsRendered',this.props.selectedData)
-                await this.props.approveSales({...this.props.selectedData})
+                await this.props.handleSalesApprove()
                 this.isClosed()
                 await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
                 await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
             }
             if (this.props.titles === "Delete") {
                 console.log('masuk whatTabsIsRendered',this.props.deleteSalesData)
-                await this.props.deleteSales({...this.props.deleteSalesData})
+                await this.props.handleDeleteSales()
                 this.isClosed()
                 await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
                 await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
             }
+            // else{
+            //     console.log('kkkkkk sales')
+            //     await this.props.handleSalesApprovedDownload()
+            // }
+            // else{
+            //     console.log('masuk ke is download kondisi')
+            //     await this.props.downloadSalesApproved(...this.props.selectedData)
+            // }
         }
         if (this.props.whatTabsIsRendered === false) {
             if (this.props.titles === "Approve") {
-                await this.props.approveService({...this.props.selectedServiceData})
+                await this.props.handleServiceApprove();
                 this.isClosed()
                 await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter)
                 this.props.clearSelectedServicePlans(this.props.selectedServicePlans)
             }
             if (this.props.titles === "Delete") {
-                await this.props.deleteService({...this.props.deleteServiceData})
+                await this.props.handleDeleteService();
                 this.isClosed()
                 await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter)
                 this.props.clearSelectedServicePlans(this.props.selectedServicePlans)
             }
         }
+    }
+
+    isDownloaded = async() => {
+        if (this.props.whatTabsIsRendered === true) {
+            console.log('kkkkkk sales')
+            await this.props.handleSalesApprovedDownload()
+        }if (this.props.whatTabsIsRendered === false) {
+            console.log('kkkkkk')
+            await this.props.handleServiceApprovedDownload()
+        }
+       
     }
 
     render(){
@@ -85,7 +104,7 @@ class BaseButton extends React.Component{
         } else if(this.props.titles === "Download"){
             return(
                 <div className="button-inline">
-                    <Button className="btn-download" onClick={this.isClicked}>Download</Button>
+                    <Button className="btn-download" onClick={this.isDownloaded}>Download</Button>
                 </div>
             )
         } else if(this.props.titles === "Approve"){

@@ -1,7 +1,9 @@
 import React from 'react';
+import moment, { ISO_8601 } from "moment";
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import './DetailPages.scss';
 import PlanningDetailsTab from './components/Tab/PlanningDetailsTab';
+import { ApiRequestActionsStatus } from "../../../core/RestClientHelpers";
 import DropDownList from '../../../components/DropdownList/DropDownList';
 import SearchInput from "../../../components/Searchbar/SearchInput";
 import BaseButton from '../../../components/Button/BaseButton';
@@ -12,32 +14,9 @@ class DetailPages extends React.Component{
       super(props)
       this.state = {
         stats: true,
-        lifetime: this.props.salesOrderList.Lists,
         isPaging: true,
         isShowPerPage: true,
         showPerPage : 0,
-        selectedData: {
-          So : [],
-          IsApprove: false,
-          UpdatedBy: "string",
-          UpdatedByName: "string",
-          UpdatedDate: ""
-        },
-        selectedServiceData: {
-          Wo : [],
-          IsApprove: false,
-        },
-        deleteSalesData: {
-          So : [],
-          IsDelete: false,
-          UpdatedBy: "string",
-          UpdatedByName: "string",
-          UpdatedDate: ""
-        },
-        deleteServiceData: {
-          Wo : [],
-          IsDelete: false
-        },
         wasApprove: true
         // nextPage: true,
         // prevPage: false,
@@ -53,13 +32,24 @@ componentWillUnmount = () => {
   this.props.onSearch('');
 
   this.props.updateSalesParameter({
-    ...this.props.salesParameter.dataFilter, Search: '',
+    ...this.props.salesParameter.dataFilter, Filter: '',
   });
 }
 
 componentDidUpdate = (prevProps) => {
   if (prevProps.salesParameter !== this.props.salesParameter) {
     this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
+  }
+  if (prevProps.serviceParameter !== this.props.serviceParameter) {
+    this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+  }
+  if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
+    prevProps.approveSalesDownloaded.status === ApiRequestActionsStatus.LOADING) {
+    this.onClickDownloadSalesApproved()
+  }
+  if (this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
+    prevProps.approveServiceDownloaded.status === ApiRequestActionsStatus.LOADING) {
+    this.onClickDownloadServiceApproved()
   }
 
   // FILTER DROPDOWN
@@ -72,9 +62,6 @@ componentDidUpdate = (prevProps) => {
         // this.props.clearSelectedServicePlans();
       }
   }
-  if (prevProps.serviceParameter !== this.props.serviceParameter) {
-    this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
-  }
 
   //ini untuk trigger sales global search
   if (prevProps.salesSearch !== this.props.salesSearch) {
@@ -82,7 +69,7 @@ componentDidUpdate = (prevProps) => {
     this.props.updateSalesParameter({
       ...prevProps.salesParameter.dataFilter, Filter : this.props.salesSearch, PageNumber: 1,
     });
-    console.log('blabla sales', this.props.salesSearch);
+    // console.log('blabla sales', this.props.salesSearch);
   }
   
   //ini untuk trigger service global search
@@ -90,11 +77,11 @@ componentDidUpdate = (prevProps) => {
     this.props.updateServiceParameter({
       ...prevProps.serviceParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber: 1,
     });
-    console.log('blabla service', this.props.serviceSearch);
+    // console.log('blabla service', this.props.serviceSearch);
   }
   //searc per component
   if(prevProps.searchComp !== this.props.searchComp){
-    console.log('jkl jkl apdet ',this.props.searchComp)
+    // console.log('jkl jkl apdet ',this.props.searchComp)
     this.props.updateSalesParameter({
       ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
     });
@@ -303,6 +290,7 @@ componentDidUpdate = (prevProps) => {
   }
 }
 
+  // PAGINATION DENGAN KONDISI UNTUK TAB SALES ORDER ATAU SERVICE ORDER
   _renderPagination= (pageValue) =>  {
     if (pageValue === 1) {
       this.setState({isPaging : true})
@@ -358,16 +346,18 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
+  //SAAT MENGKLIK SALES ORDER TAB
   onClickServiceOrder = () => {
     this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
-    console.log('blablabla', this.props.Search)
+    // console.log('blablabla', this.props.Search)
     // console.log('ini data dari api',this.props.serviceParameter.dataFilter);
   }
 
+  //SAAT MENGKLIK SERVICE ORDER TAB
   onClickSalesOrder = () =>{
     // console.log('ini filter paging ', this.props.salesParameter.dataFilter )
     this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
-    console.log('blablabla', this.props)
+    // console.log('blablabla', this.props)
   }
 
   handlePageSize = (numberOfPage) => {
@@ -382,6 +372,7 @@ componentDidUpdate = (prevProps) => {
     // console.log('ini pagenumber yg sudah diklik', numberOfPage)
   }
 
+  //KOMPONEN UNTUK SHOW PER/PAGE
   _renderShowPerPage(){
     return(
       <DropDownList 
@@ -390,6 +381,8 @@ componentDidUpdate = (prevProps) => {
       />
     )
   }
+
+  //KOMPONEN UNTUK GLOBAL SEARCH
   _renderSearchBar(){
     return (
       <SearchInput
@@ -402,23 +395,148 @@ componentDidUpdate = (prevProps) => {
     );
   }
 
+  //FUNGSI UNTUK MENGAPROVE SALES ORDER
   onClickApprovedSales = () => {
     this.props.fetchApprovedSales(this.props.salesParameter.dataFilter);
-    console.log("okokokokok , ",this.props.salesOrderListApproved.Lists.length)
+    // console.log("okokokokok , ",this.props.salesOrderListApproved.Lists.length)
   }
 
+  //FUNGSI UNTUK MENGAPROVE SERVICE ORDER
   onClickApprovedService = () => {
     this.props.fetchApprovedService(this.props.serviceParameter.dataFilter);
   }
 
+  //FUNGSI UNTUK memanggil Data SALES ORDER yang telah terhapus
   onClickDeletedSales = () => {
     this.props.fetchDeletedSales(this.props.salesParameter.dataFilter);
   }
 
+  //FUNGSI UNTUK memanggil Data SERVICE ORDER yang telah terhapus
   onClickDeletedService = () => {
     this.props.fetchDeletedService(this.props.serviceParameter.dataFilter);
   }
 
+  onClickDownloadSalesApproved = () => {
+    let link = document.createElement("a");
+    document.body.appendChild(link);
+    link.style = "display: none";
+    const todayDate = moment(new Date()).format('DD-MM-YYYY');
+    // const salesOrder  = this.state.selectedData.So;
+    let fileName = "Sales-Order-Planning-"+todayDate+".csv";
+    let blob = new Blob([this.props.approveSalesDownloaded.data]),
+      url = window.URL.createObjectURL(blob);
+    link.href = url;
+    link.download = fileName;
+    link.click();
+    window.URL.revokeObjectURL(url);
+  }
+
+  onClickDownloadServiceApproved = () => {
+    let link = document.createElement("a");
+    document.body.appendChild(link);
+    link.style = "display: none";
+    const todayDate = moment(new Date()).format('DD-MM-YYYY');
+    // const serviceOrder  = this.state.selectedServiceData.Wo;
+    let fileName = "Service-Order-Planning-"+todayDate+".csv";
+    let blob = new Blob([this.props.approveServiceDownloaded.data]),
+      url = window.URL.createObjectURL(blob);
+    link.href = url;
+    link.download = fileName;
+    link.click();
+    window.URL.revokeObjectURL(url);
+  }
+
+  handleSalesApprovedDownload = async() => {
+    let arr = []
+    const index = this.props.selectedSalesPlans.length
+    if (this.props.selectedSalesPlans.length > 0) {
+      for (let i = 0; i < index; i++) {
+        // console.log('pantek ini ',this.props.selectedSalesPlans[i].So)
+        arr = [...arr, this.props.selectedSalesPlans[i].So]
+        // console.log('pantek ini sales ',arr)
+      }
+    }await this.props.downloadSalesApproved(arr);
+    if (
+      this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.FAILED
+    ) {
+      this.setState({ showError: true });
+    }
+  };
+
+  handleServiceApprovedDownload = async() => {
+    let arr = []
+    const index = this.props.selectedServicePlans.length
+    if (this.props.selectedServicePlans.length > 0) {
+      for (let i = 0; i < index; i++) {
+        // console.log('pantek ini ',this.props.selectedServicePlans[i].Wo)
+        arr = [...arr, this.props.selectedServicePlans[i].Wo]
+        // console.log('pantek ini sales ',arr)
+      }
+    }
+    await this.props.downloadServiceApproved(arr);
+    if (
+      this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.FAILED
+    ) {
+      this.setState({ showError: true });
+    }
+  };
+
+  handleSalesApprove = async() => {
+    let arr = []
+    const index = this.props.selectedSalesPlans.length
+    if (this.props.selectedSalesPlans.length > 0) {
+      for (let i = 0; i < index; i++) {
+        // console.log('pantek ini ',this.props.selectedSalesPlans[i].So)
+        arr = [...arr, this.props.selectedSalesPlans[i].So]
+        // console.log('pantek ini sales ',{arr, IsApprove: true})
+      }
+      await this.props.approveSales({arr, IsApprove: true})
+  }
+};
+
+  handleServiceApprove = async() => {
+  let arr = []
+  const index = this.props.selectedServicePlans.length
+    if (this.props.selectedServicePlans.length > 0) {
+      for (let i = 0; i < index; i++) {
+        // console.log('pantek ini ',this.props.selectedServicePlans[i].Wo)
+        arr = [...arr, this.props.selectedServicePlans[i].Wo]
+        // console.log('pantek ini service ',{arr, IsApprove: true})
+      }
+    await this.props.approveService({arr, IsApprove: true})
+    }
+  }
+
+  handleDeleteSales = async() => {
+    let arr = []
+    const index = this.props.selectedSalesPlans.length
+    const todayDate = moment(new Date()).format('YYYY-MM-DD');
+    if (this.props.selectedSalesPlans.length > 0) {
+      for (let i = 0; i < index; i++) {
+        // console.log('pantek ini ',this.props.selectedSalesPlans[i].So)
+        arr = [...arr, this.props.selectedSalesPlans[i].So]
+        // console.log('pantek ini sales ',{arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
+      }
+      await this.props.deleteSales({arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
+    }
+  }
+
+  handleDeleteService = async() => {
+    let arr = []
+    const index = this.props.selectedServicePlans.length
+    const todayDate = moment(new Date()).format('YYYY-MM-DD');
+    if (this.props.selectedServicePlans.length > 0) {
+      for (let i = 0; i < index; i++) {
+        // console.log('pantek ini ',this.props.selectedServicePlans[i].Wo)
+        arr = [...arr, this.props.selectedServicePlans[i].Wo]
+        // console.log('pantek ini service ',{arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
+      }
+      await this.props.deleteService({arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
+    }
+  }
+
+
+  //KOMPONEN UNTUK FILTER DATA ACTION
   _renderFilterByDataAction = (value) => {
     if (value === 1) {
       this.setState({wasApprove : true})
@@ -443,8 +561,9 @@ componentDidUpdate = (prevProps) => {
         />
       );
     }
-  }
+  };
 
+  //KOMPONEN UNTUK BUTTON DOWNLOAD, APPROVE, DAN DELETE
   _renderBaseButton = (value) => {
     if (value === 1) {
       this.setState({wasApprove : true})
@@ -460,14 +579,20 @@ componentDidUpdate = (prevProps) => {
             disabledButton = {this.props.selectedSalesPlans.length < 1 }
             totalSelectedItems ={this.props.selectedSalesPlans.length}
             whatTabsIsRendered={this.state.isPaging}
-            deleteSalesData={this.state.deleteSalesData}
+            handleDeleteSales={this.handleDeleteSales}
           />
-					<BaseButton titles="Download" />
+          <BaseButton titles="Download"
+            {...this.props}
+            whatTabsIsRendered={this.state.isPaging}
+            handleSalesApprovedDownload={this.handleSalesApprovedDownload}
+            // selectedDownloadData={this.state.selectedData.So} 
+          />
           <BaseButton titles="Approve"
             {...this.props}
+            whatTabsIsRendered={this.state.isPaging}
             disabledButton = {this.props.selectedSalesPlans.length < 1 }
             totalSelectedItems ={this.props.selectedSalesPlans.length}
-            whatTabsIsRendered={this.state.isPaging}
+            handleSalesApprove={this.handleSalesApprove}
             selectedData={this.state.selectedData}
           />
         </div>
@@ -482,51 +607,53 @@ componentDidUpdate = (prevProps) => {
             disabledButton = {this.props.selectedServicePlans.length < 1 }
             totalSelectedItems ={this.props.selectedServicePlans.length}
             whatTabsIsRendered={this.state.isPaging}
-            deleteServiceData={this.state.deleteServiceData}
+            handleDeleteService={this.handleDeleteService}
           />
-					<BaseButton titles="Download"  />
+					<BaseButton titles="Download"  
+            {...this.props}
+            whatTabsIsRendered={this.state.isPaging}
+            handleServiceApprovedDownload={this.handleServiceApprovedDownload}
+          />
           <BaseButton titles="Approve"
             {...this.props}
             disabledButton = {this.props.selectedServicePlans.length < 1 }
             totalSelectedItems ={this.props.selectedServicePlans.length}
             whatTabsIsRendered={this.state.isPaging}
             selectedServiceData={this.state.selectedServiceData}
+            handleServiceApprove={this.handleServiceApprove}
           />
         </div>
       );
     }
-  }
+  };
     
   isChangeStat = (value,key) =>{
     this.setState({
       lifetime: { Lists :this.state.lifetime.Lists.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) }
     });
-  }
+  };
 
+  //FUNGSI UNTUK MULTI SELECT SALES ORDER
   updateAssignmentSalesStates = (plan) => {
     if (this.props.selectedSalesPlans
       .some((plans) => plans.So === plan.So,
-        this.setState({
-          selectedData : {So:[...this.state.selectedData.So, plan.So], IsApprove: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: ""},
-          deleteSalesData : {So:[...this.state.deleteSalesData.So, plan.So], IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: "2019-01-15"}
-        }),
+        // console.log('sssss sales', this.state.selectedData.So)
       )) 
     { return this.props.unselectSalesPlan(plan); }
     return this.props.selectSalesPlan(plan);
   };
 
+  //FUNGSI UNTUK MULTI SELECT SERVICE ORDER
   updateAssignmentServiceStates = (plan) => {
     if (this.props.selectedServicePlans
       .some((plans) => plans.Wo === plan.Wo,
-        this.setState({
-          selectedServiceData : {Wo:[...this.state.selectedServiceData.Wo, plan.Wo], IsApprove: true},
-          deleteServiceData : {Wo:[...this.state.deleteServiceData.Wo, plan.Wo], IsDelete: true}
-        }),
+        // console.log('sssss sales', this.state.selectedServiceData.Wo)
       ))
     { return this.props.unselectServicePlan(plan); }
     return this.props.selectServicePlan(plan);
   };
 
+  //KOMPONEN UNTUK RENDER PAGE SALES ORDER DAN SERVICE ORDER
   _renderTabs(){
     return (
       <>
@@ -558,11 +685,11 @@ componentDidUpdate = (prevProps) => {
     );
   };
 
+
     render(){
-      console.log('bacot', this.props);
-      console.log('pantek sales', this.props.selectedSalesPlans)
-      console.log('pantek service', this.props.selectedServicePlans)
-      
+      // console.log('bacot', this.props.approveSalesDownloaded.status );
+      // console.log('pantek sales', this.props.selectedSalesPlans)
+      // console.log('pantek service', this.props.selectedServicePlans)
       return(
           <main className="content">
             {this.handlePageSize()}

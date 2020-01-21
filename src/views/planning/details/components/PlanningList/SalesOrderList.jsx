@@ -13,7 +13,7 @@ export default class SalesOrderList extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      lifetime: [],
+      checkedValue: false,
       stats: 0,
       putLifetime: {
         So : '',
@@ -26,11 +26,17 @@ export default class SalesOrderList extends React.PureComponent {
       this.props.onClickSalesOrder();
     }
 
-    componentDidUpdate = () =>{
+    componentDidUpdate = (prevState) =>{
+      console.log('pantek', prevState)
       if(this.state.stats === 0){
         this.setState({
           lifetime: this.props.salesOrderList.Lists,
         })
+      }
+      //untuk menghilangkan checkbox
+      if (prevState.salesParameter !== this.props.salesParameter || prevState.salesSearch !== this.props.salesSearch || 
+        prevState.searchComp !==this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
+        this.setState({checkedValue : false})
       }
       // else if(this.state.stats === 1){
       //   console.log("ketiga ketiga")
@@ -59,7 +65,6 @@ export default class SalesOrderList extends React.PureComponent {
         }, 
         () => this.props.putLifetimeComp(this.state.putLifetime) 
         )
-        console.log("fffffff fffffff ffffff ")
         await this.props.putLifetimeComp(this.state.putLifetime)
         await this.props.onClickSalesOrder();
     }
@@ -74,6 +79,11 @@ export default class SalesOrderList extends React.PureComponent {
 
       datePlant = (date) => moment.utc(date, ISO_8601).local().format('DD MMMM YYYY')
 
+      handleClick = () =>{
+        this.setState({
+          checkedValue : !this.state.checkedValue
+        })
+      }
       showTableHead() {
           return (
             <TableHead className="table-head" classes={{ root: 'table-head' }}>
@@ -81,8 +91,10 @@ export default class SalesOrderList extends React.PureComponent {
               <TableCell padding="checkbox">
                 {this.props.displaySalesCheckbox && 
                 <Checkbox 
-                  onClick={() => {this.state.lifetime.map((row,id) => 
+                  checked={this.state.checkedValue}
+                  onClick={() => {this.props.salesOrderList.Lists.map((row,id) => 
                   this.props.onChoosedSales(row,id))}}
+                  onChange={this.handleClick}
                   className="checkbox-checked-header"/>}
               </TableCell>
               <PlanningListHeader

@@ -9,9 +9,24 @@ import EditButton from '../../../../../components/ActionButton/EditButton/EditBu
 import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc } from '../../DetailPages-action';
 
 export default class ServiceOrderList extends React.PureComponent {
+  state = {
+    checkedValue : false
+  }
 
   componentDidMount = async () => {
     await this.props.onClickServiceOrder();
+  }
+  componentDidUpdate = (prevState) =>{
+    if (prevState.serviceParameter !== this.props.serviceParameter || prevState.serviceSearch !== this.props.serviceSearch || 
+      prevState.searchComp !==this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
+      this.setState({checkedValue : false})
+    }
+  }
+
+  handleClick = () =>{
+    this.setState({
+      checkedValue : !this.state.checkedValue
+    })
   }
   
   isCheckboxAvailable = (data) => {
@@ -29,7 +44,13 @@ export default class ServiceOrderList extends React.PureComponent {
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
             <TableRow>
               <TableCell padding="checkbox">
-                {this.props.displayServiceCheckbox  && <Checkbox className="checkbox-checked-header" />}
+                {this.props.displayServiceCheckbox  && 
+                <Checkbox 
+                checked={this.state.checkedValue}
+                onChange={this.handleClick}
+                onClick={() => {this.props.serviceOrderList.Lists.map((row,id) => 
+                this.props.onChoosedService(row,id))}}
+                className="checkbox-checked-header" />}
               </TableCell>
               <PlanningListHeader
                 name="Work Order"
