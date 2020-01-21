@@ -100,6 +100,8 @@ import FolderIcon from './folder.png';
 import ApproveIcon from './send.png';
 import Filters from './filters.png';
 import Email from './email.png';
+import IconNotif from './notif.png';
+import IconHistory from './history.png';
 
 export {
 	AssignmentIcon,
@@ -203,5 +205,7 @@ export {
 	FolderIcon,
 	ApproveIcon,
 	Filters,
-	Email
+	Email,
+	IconNotif,
+	IconHistory
 };

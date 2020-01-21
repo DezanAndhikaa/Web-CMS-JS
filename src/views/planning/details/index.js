@@ -4,27 +4,18 @@ import { PlansReducers } from './DetailPages-reducer';
 import { storeDataAction } from '../../../core/StorageHelper';
 import { PLAN_DATA, StorageKey } from '../../../constants';
 import {
-	// approveSalesAction,
-	// unapproveSalesAction,
-	putSalesApprovedAction, //APPROVE SALES
-	// putServiceApprovedAction, //APPROVE SERVICE
 	putLifetimeCompAction,
 	approveSalesAction, //APPROVE SALES
 	unapproveSalesAction, 
-	// approveServiceAction, //APPROVE SERVICE
+	approveServiceAction, //APPROVE SERVICE
 	deleteSalesAction,
 	deleteServiceAction,
 	fetchApprovedSalesAction,
 	fetchApprovedServiceAction,
 	fetchDeletedSalesAction,
 	fetchDeletedServiceAction,
-	getServiceOrderAction, fetchSalesAction, salesParameterAction, fetchServiceAction,
+	fetchSalesAction, salesParameterAction, fetchServiceAction,
 	ClearSelectedPlans, UpdateServiceParameterAction,
-	// fetchJobsAssignment,
-	// FetchPlansAction,
-	// fetchPlansAssignment,
-	// getMechanicsAction,
-	// plansParameterAction,
 	UpdateSalesParameterAction, 
 	searchAction,
 	SearchSalesAction, SearchServiceAction,searchCompAction,
@@ -74,20 +65,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	// approveSales: (payload) => dispatch(approveSalesAction(payload)),
 	unapproveSales: (payload, token) => dispatch(unapproveSalesAction(payload, token)),
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
 	clearSelectedServicePlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
-	// fetchPlans: (payload, token) => dispatch(fetchPlansAssignment(FetchPlansAction, payload, token)),
-	// getMechanics: (token) => dispatch(getMechanicsAction(token)),
-	// getServiceOrder: () => dispatch(getServiceOrderAction()),
-	// getSalesOrder: () => dispatch(getSalesFilteredAction()),
-	// getSearchValue: (payload) => dispatch(getSearchValueAction(payload)),
 	putLifetimeComp : (payload) => dispatch(putLifetimeCompAction(payload)),
-	putSalestoPlanningApprove: (payload) => dispatch(putSalesApprovedAction(payload)),
-	// putServicetoPlanningApprove: (payload) => dispatch(putServiceApprovedAction(payload)),
 	approveSales: (payload) => dispatch(approveSalesAction(payload)),
-	// approveService: (payload) => dispatch(approveServiceAction(payload)),
+	approveService: (payload) => dispatch(approveServiceAction(payload)),
 	deleteSales: (payload) => dispatch(deleteSalesAction(payload)),
 	deleteService: (payload) => dispatch(deleteServiceAction(payload)),
 	fetchApprovedSales: (payload) => dispatch(fetchApprovedSalesAction(payload)),

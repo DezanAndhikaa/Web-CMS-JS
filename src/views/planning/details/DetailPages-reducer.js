@@ -529,19 +529,13 @@ export function serviceParameterReducer(state = initialServiceParameter, action)
 
 //ini reducer untuk global search dibagian sales order, menggunakan react-addons-update
 export function searchSalesPlansReducer(state = initialSearchSalesParameter, action) {
-	console.log('ini data untuk search value', action.payload);
-	console.log('mmmmmm', state.length);
 	if (action.type === SearchSalesAction){
 		var howManyRows = state.length;
 		var j = 0;
 		let array = [];
 		for( j ; j < howManyRows; j++){
-			
-			console.log('aaaaaaaa', j);
 			let updatedArray = update(state[j], {Value:{$set: action.payload}});
 			array = [...array, updatedArray];
-			console.log('aaaaaa', array);
-			
 		}
 		return array;
 	}
@@ -550,21 +544,14 @@ export function searchSalesPlansReducer(state = initialSearchSalesParameter, act
 
 //ini reducer untuk global search dibagian service order, menggunakan react-addons-update
 export function searchServicePlansReducer(state = initialSearchServiceParameter, action) {
-	console.log('ini data untuk search value', action.payload);
-	console.log('mmmmmm', state.length);
 	if (action.type === SearchServiceAction){
 		var howManyRows = state.length;
 		var j = 0;
 		let array = [];
 		for( j ; j < howManyRows; j++){
-			
-			console.log('aaaaaaaa', j);
 			let updatedArray = update(state[j], {Value:{$set: action.payload}});
 			array = [...array, updatedArray];
-			console.log('aaaaaa', array);
-			
 		}
-		console.log('aaaa', JSON.stringify(array));
 		return array;
 	}
 	return state;
@@ -639,7 +626,6 @@ export function selectMechanicsReducer(state = [], action) {
 export function sortSalesByReducer(state = salesSortbyInitialState, action) {
 	switch (action.type) {
 	case SortSalesByCustomer:
-		console.log('sort berjalan', action);
 		return {
 			...salesSortbyInitialState,
 			Customer: { isActive: true, isAscending: !state.Customer.isAscending },

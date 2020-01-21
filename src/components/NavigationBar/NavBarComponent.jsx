@@ -1,9 +1,9 @@
 
 
 import React from 'react';
-import { AppBar, Toolbar } from '@material-ui/core';
-import { AccountPic, DcaLogo } from '../../assets/imgs';
-import { MenuToggle, Email } from '../../assets/icons';
+import { AppBar, Toolbar, Badge } from '@material-ui/core';
+import { UTLogoNew, AccountPic, DcaLogo } from '../../assets/imgs';
+import { MenuToggle, IconNotif, IconHistory } from '../../assets/icons';
 import isAccessTokenValid from '../../core/HelpersFunction';
 import './NavBarComponent.scss';
 
@@ -15,11 +15,19 @@ class NavBarComponent extends React.Component {
 				navBar = (
 					<AppBar position="fixed" className="app-bar">
 						<Toolbar variant="dense" className="toolbar">
-							<p>
-								{`Hi, ${this.props.userData.firstName} ${this.props.userData.lastName}`}
-							</p>
-							<img src={AccountPic} className="account-pic" alt="" />
-							<img src={Email} className="icon-email" alt="" />
+							<img src={UTLogoNew} alt="" className="logo-ut"/>
+							<div className="notification">
+								<Badge badgeContent={27} color="secondary" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
+									<img src={IconNotif} className="icon-notif" alt="" /> <span className="label-notif">Notification</span>
+								</Badge>
+								<img src={IconHistory} className="icon-notif" alt="" /><span className="label-notif">History</span>
+							</div>
+							<div className="info-login">
+								<p>
+									{`Hi, ${this.props.userData.firstName} ${this.props.userData.lastName}`}
+								</p>
+								<img src={AccountPic} className="account-pic" alt="" />
+							</div>
 						</Toolbar>
 					</AppBar>
 				);

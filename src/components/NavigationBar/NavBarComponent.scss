@@ -2,36 +2,53 @@
 @import '../../themes/functions';
 
 .app-bar{
+    display: flex;
     color: #000000 !important;
     background-color: #FFFFFF !important;
     box-shadow: none !important;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-right: vw(40); //70.2
     height: vw(88) !important;
     .toolbar{
         padding: 0 !important;
-    }
-    .sub-app-bar{
-        flex: 1;
-        height: 2vw;
-        background: #ffffff;
-    }
-    p{
-        font-family: 'Lato-Bold';
-        font-size: vw(20);
-        line-height: vw(24);
-        color: #3C3B3B;
-        // margin-right: vw(18);
-    }
-    .account-pic{
-        height: vw(48) !important;
-        margin-left: vw(28);
-    }
-    .icon-email{
-        height: vw(25) !important;
-        margin-left: vw(28);
+        .info-login{
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            margin-left: vw(795);
+            padding-right: vw(19);
+            p{
+                font-family: 'Lato-Bold';
+                font-size: vw(20);
+                line-height: vw(24);
+                color: #3C3B3B;
+                margin-right: vw(20);
+            }
+            .account-pic{
+                height: vw(48) !important;
+            }
+        }
+        .notification{
+            display: flex;
+            flex-wrap: nowrap;
+            .icon-notif{
+                height: vw(25) !important;
+                margin-right: vw(10);
+            }
+            .label-notif{
+                font-family: 'Lato-Bold';
+                font-size: vw(20);
+                line-height: vw(24);
+                color: #3C3B3B;
+                margin-right: vw(50);
+            }
+        }
+        .logo-ut{
+            display: flex;
+            align-items: flex-start;
+            height: vw(88) !important;
+            margin-left: 0px;
+            margin-right: vw(50);
+        }
     }
 }
 

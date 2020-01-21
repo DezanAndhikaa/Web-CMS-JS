@@ -5,6 +5,7 @@ import MovingAsOneInverse from './movingasone-inverse.png';
 import AccountPic from './account-pic.png';
 import UTLogo from './logo-ut.png';
 import UTLogoBlack from './logo-ut-black.png';
+import UTLogoNew from './logo-ut-yellow-background.png';
 import MechanicUt from './mechanic-ut.png';
 import MechanicPartner from './mechanic-partner.png';
 import AssignLeader from './assign-leader.png';
@@ -35,6 +36,7 @@ export {
   AccountPic,
   UTLogo,
   UTLogoBlack,
+  UTLogoNew,
   MechanicUt,
   MechanicPartner,
   AssignLeader,

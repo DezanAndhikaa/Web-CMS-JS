@@ -84,21 +84,7 @@ export function unapproveSalesAction(payload) {
 	return async (dispatch) => dispatch(callApi(UnapproveSalesAction, requestConfig));
 }
 
-// export function fetchPlansAssignment(type, payload, accessToken) {
-// 	const requestConfig = {
-// 		method: RequestMethod.POST,
-// 		url: `${ApiUrlBase.SALESORDER_API_URL}Filters`,
-// 		data: payload,
-// 		headers: {
-// 			Authorization: `Bearer ${accessToken}`,
-// 			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID, // eslint-disable-line no-undef
-// 			'Content-Type': 'application/json',
-// 		},
-// 	};
-// 	return async (dispatch) => dispatch(callApi(type, requestConfig));
-// }
 export function putLifetimeCompAction(payload){
-	console.log('kopi kopi kopi')
 	const requestConfig = {
 		method: RequestMethod.PUT,
 		url: `${ApiUrlBase.SALESORDER_API_URL}`,
@@ -111,7 +97,7 @@ export function putLifetimeCompAction(payload){
 	return async (dispatch) => dispatch(callApi(PutLifetimeComp, requestConfig));
 }
 
-export function putSalesApprovedAction(payload){
+export function approveServiceAction(payload){
 	const requestConfig = {
 		method: RequestMethod.PUT,
 		url: `${ApiUrlBase.SERVICEORDER_API_URL}/Approval`,

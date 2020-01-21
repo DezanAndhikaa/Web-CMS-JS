@@ -82,7 +82,6 @@ componentDidUpdate = (prevProps) => {
     this.props.updateSalesParameter({
       ...prevProps.salesParameter.dataFilter, Filter : this.props.salesSearch, PageNumber: 1,
     });
-    console.log('blabla sales', this.props.salesSearch);
   }
   
   //ini untuk trigger service global search
@@ -90,11 +89,9 @@ componentDidUpdate = (prevProps) => {
     this.props.updateServiceParameter({
       ...prevProps.serviceParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber: 1,
     });
-    console.log('blabla service', this.props.serviceSearch);
   }
   //searc per component
   if(prevProps.searchComp !== this.props.searchComp){
-    console.log('jkl jkl apdet ',this.props.searchComp)
     this.props.updateSalesParameter({
       ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
     });
@@ -366,18 +363,6 @@ componentDidUpdate = (prevProps) => {
     this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
   }
 
-  handlePageSize = (numberOfPage) => {
-    // this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: numberOfPage})
-    // this.setState({
-    //     showPerPage : numberOfPage
-    //   })
-    // const pageNumber = this.props.salesParameter.dataFilter.PageSize
-    // const pageNumber = numberOfPage;
-    // this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter, PageSize : pageNumber }) 
-    // console.log('ini page number', pageNumber)
-    // console.log('ini pagenumber yg sudah diklik', numberOfPage)
-  }
-
   _renderShowPerPage(){
     return(
       <DropDownList 
@@ -400,7 +385,6 @@ componentDidUpdate = (prevProps) => {
 
   onClickApprovedSales = () => {
     this.props.fetchApprovedSales(this.props.salesParameter.dataFilter);
-    console.log("okokokokok , ",this.props.salesOrderListApproved.Lists.length)
   }
 
   onClickApprovedService = () => {
@@ -554,14 +538,9 @@ componentDidUpdate = (prevProps) => {
     );
   };
 
-    render(){
-      console.log('bacot', this.props);
-      console.log('pantek sales', this.props.selectedSalesPlans)
-      console.log('pantek service', this.props.selectedServicePlans)
-      
+    render(){      
       return(
           <main className="content">
-            {this.handlePageSize()}
               <div className="table-container">
                     {this._renderTabs()}
                 </div>

@@ -9,7 +9,7 @@ import {
   DialogContent,
   Collapse
 } from "@material-ui/core";
-import { UTLogoBlack } from "../../assets/imgs/";
+import { UTLogoNew} from "../../assets/imgs/";
 import { AssignmentIcon, LogoutIcon, AllocationIcon, DeliveryIcon, TrackingIcon,
 SettingIcon, ProductionIcon, ExecutionIcon, DashboardIcon, PlanningIcon } from "../../assets/icons";
 import { Menu, StorageKey } from "../../constants";
@@ -58,7 +58,7 @@ class SideMenuComponent extends React.Component {
           open={this.props.menuDrawerState}
           onClose={() => this.props.closeDrawer()}
         >
-          <img src={UTLogoBlack} alt="logo" className="dca-logo" />
+          {/* <img src={UTLogoNew} alt="logo" className="dca-logo" /> */}
           <List>
             {/* Dashboard */}
             <ListItem
