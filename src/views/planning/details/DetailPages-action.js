@@ -260,9 +260,6 @@ export function searchCompAction(type, payload, sort){
 }
 
 export function searchCompActionService(type, payload, sort){
-	console.log("gatot type ,",type)
-	console.log("gatot payload ,",payload)
-	console.log("gatot sort ,",sort)
 	return { type, payload, sort };
 }
 

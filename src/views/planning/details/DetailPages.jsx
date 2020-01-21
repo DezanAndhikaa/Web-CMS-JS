@@ -369,11 +369,9 @@ componentDidUpdate = (prevProps) => {
   onClickServiceOrder = () => {
     this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
     console.log('blablabla', this.props.Search)
-    // console.log('ini data dari api',this.props.serviceParameter.dataFilter);
   }
 
   onClickSalesOrder = () =>{
-    // console.log('ini filter paging ', this.props.salesParameter.dataFilter )
     this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
     console.log('blablabla', this.props)
   }
@@ -567,10 +565,6 @@ componentDidUpdate = (prevProps) => {
   };
 
     render(){
-      console.log('bacot', this.props);
-      console.log('pantek sales', this.props.selectedSalesPlans)
-      console.log('pantek service', this.props.selectedServicePlans)
-      
       return(
           <main className="content">
             {this.handlePageSize()}

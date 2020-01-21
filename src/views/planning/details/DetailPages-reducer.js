@@ -438,7 +438,7 @@ export function selectedFiltersReducer(state = initialSelectedFilter, action) {
 		return { ...state, siteType: action.payload };
 	  case SelectUnitModelFilterAction:
 		return { ...state, unitType: action.payload };
-	case SelectComponentFilterAction:
+	  case SelectComponentFilterAction:
 	    return { ...state, compType: action.payload };
 	  default:
 		return state;
@@ -587,7 +587,6 @@ export function searchCompReducer(state = initialSearchCompParameter, action) {
 			return updatedArray;
 		}
 	}else if(action.type === SearchCompActionService){
-		console.log("gatot awal ")
 		if(action.sort === "Wo"){
 			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
 			return updatedArray;

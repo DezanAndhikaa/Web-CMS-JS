@@ -71,6 +71,8 @@ const mapStateToProps = (state) => ({
 	sortSalesBy: state.plansPageState.sortSalesBy,
 	sortServiceBy: state.plansPageState.sortServiceBy,
 	token: state.userData.tokenResponse.accessToken,
+	fetchStatusSales: state.plansPageState.salesOrderList.status,
+	fetchStatusService: state.plansPageState.serviceOrderList.status
 });
 
 const mapDispatchToProps = (dispatch) => ({

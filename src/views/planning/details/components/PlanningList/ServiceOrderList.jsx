@@ -6,7 +6,9 @@ import {
 import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
+import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc } from '../../DetailPages-action';
+import { Spinner } from '../../../../../assets/icons'
 
 export default class ServiceOrderList extends React.PureComponent {
 
@@ -137,9 +139,24 @@ export default class ServiceOrderList extends React.PureComponent {
       )
     }
 
+    showTableEmpty(){
+      if(this.props.fetchStatusService === ApiRequestActionsStatus.LOADING){
+        return(
+          <div className="loading-container">
+            <img 
+              src={Spinner}
+              alt="loading-spinner"
+              className="loading-icon"
+              />
+          </div>
+        )
+      }
+    }
+
   render(){
     if (this.props.serviceOrderListApproved.Lists.length > 0 ){
       return(
+        <>
         <Table classes={{ root: 'table' }}>
           {this.showTableHead()}
           <TableBody classes={{ root: 'table-body' }}>
@@ -149,9 +166,12 @@ export default class ServiceOrderList extends React.PureComponent {
             ))}
           </TableBody>
         </Table>
+        {this.showTableEmpty()}
+        </>
       )
     }else if(this.props.serviceOrderListDeleted.Lists.length > 0 ){
       return(
+        <>
         <Table classes={{ root: 'table' }} className="table">
         {this.showTableHead()}
         <TableBody classes={{ root: 'table-body' }}>
@@ -161,9 +181,12 @@ export default class ServiceOrderList extends React.PureComponent {
             ))}
           </TableBody>
         </Table>
+        {this.showTableEmpty()}
+        </>
       )
     }else{
       return(
+        <>
         <Table classes={{ root: 'table' }} className="table">
         {this.showTableHead()}
         <TableBody classes={{ root: 'table-body' }}>
@@ -173,6 +196,8 @@ export default class ServiceOrderList extends React.PureComponent {
             ))}
           </TableBody>
         </Table>
+        {this.showTableEmpty()}
+        </>
        )
     }
   }
