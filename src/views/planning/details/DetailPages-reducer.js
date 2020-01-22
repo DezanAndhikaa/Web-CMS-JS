@@ -4,6 +4,8 @@ import update from 'immutability-helper';
 import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
 import {
 	// ApproveSalesAction, 
+	PlanningApprovedSalesDownloadAction,
+	PlanningApprovedServiceDownloadAction,
 	ClearSelectedPlans,
 	FetchApprovedSalesAction,
 	FetchApprovedServiceAction,
@@ -177,7 +179,7 @@ const initialSearchCompParameter =
 	Operator: 'contains',
 	Value   : '',
 	Logic   : 'OR'
-}]
+}];
 
 const initialSearchSalesParameter =
 [{
@@ -303,7 +305,7 @@ const initialSearchServiceParameter =
 	Logic 	: 'OR'
 }];
 
-
+const initialDownloadState = { data: new Blob(), status: ApiRequestActionsStatus.IDLE };
 const initialAssignmentState = { response: false, status: ApiRequestActionsStatus.IDLE };
 const initialSalesState = { data: initialSalesAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialServiceState = { data: initialServiceAssignment, status: ApiRequestActionsStatus.IDLE };
@@ -417,6 +419,43 @@ export function fetchDeletedServiceReducer(state = initialServiceState, action) 
 	return state;
 }
 
+export function downloadApprovedSalesReducer(state = initialDownloadState, action) {
+	if (action.type === PlanningApprovedSalesDownloadAction) {
+	  switch (action.status) {
+		case ApiRequestActionsStatus.SUCCEEDED:
+		  return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		case ApiRequestActionsStatus.FAILED:
+		  return {
+				data: initialDownloadState.data,
+				status: ApiRequestActionsStatus.FAILED,
+				error: action.error,
+		  };
+		default:
+		  return { data: initialDownloadState.data, status: ApiRequestActionsStatus.LOADING };
+	  }
+	}
+	return state;
+}
+export function downloadApprovedServiceReducer(state = initialDownloadState, action) {
+	if (action.type === PlanningApprovedServiceDownloadAction) {
+	  switch (action.status) {
+		case ApiRequestActionsStatus.SUCCEEDED:
+		  return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		case ApiRequestActionsStatus.FAILED:
+		  return {
+				data: initialDownloadState.data,
+				status: ApiRequestActionsStatus.FAILED,
+				error: action.error,
+		  };
+		default:
+		  return { data: initialDownloadState.data, status: ApiRequestActionsStatus.LOADING };
+	  }
+	}
+	return state;
+}
+
+
+
 export function selectedFiltersReducer(state = initialSelectedFilter, action) {
 	switch (action.type) {
 	  case SelectCustomerFilterAction:
@@ -455,6 +494,7 @@ export function filterParameterReducer(state = initialSalesParameter, action){
 					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
 				}
 			}
+			console.log('pantek', {...state.dataFilter, Filter : [...state.dataFilter.Filter,{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}]});
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}
 	if(action.type === SelectSiteFilterAction)
@@ -550,13 +590,13 @@ export function searchServicePlansReducer(state = initialSearchServiceParameter,
 
 export function searchCompReducer(state = initialSearchCompParameter, action) {
 	if (action.type === SearchCompAction) {
-		if(action.sort === "So"){
+		if(action.sort === 'So'){
 			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
 			return updatedArray;
-		}else if(action.sort === "PartNumber"){
+		}else if(action.sort === 'PartNumber'){
 			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
 			return updatedArray;
-		}else if(action.sort === "UnitCode"){
+		}else if(action.sort === 'UnitCode'){
 			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
 			return updatedArray;
 		}else{
@@ -564,13 +604,13 @@ export function searchCompReducer(state = initialSearchCompParameter, action) {
 			return updatedArray;
 		}
 	}else if(action.type === SearchCompActionService){
-		if(action.sort === "Wo"){
+		if(action.sort === 'Wo'){
 			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
 			return updatedArray;
-		}else if(action.sort === "PartNumber"){
+		}else if(action.sort === 'PartNumber'){
 			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
 			return updatedArray;
-		}else if(action.sort === "UnitCode"){
+		}else if(action.sort === 'UnitCode'){
 			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
 			return updatedArray;
 		}else{
@@ -591,7 +631,7 @@ export function selectSalesPlansReducer(state = [], action) {
 	// 	return [...state.(((item) => item.SO === action.payload))];
 	// }
 	case UnselectSalesPlanAction: {
-		return [...state.filter(((item) => item.SO !== action.payload.SO))];
+		return [...state.filter(((item) => item.So !== action.payload.So))];
 	}
 	case ClearSelectedPlans:
 		return [];
@@ -745,6 +785,8 @@ const PlansReducers = combineReducers({
 	serviceSearch: searchServicePlansReducer,
 	searchComp: searchCompReducer,
 	selectedPlanData: storePlanDataReducer,
+	approveSalesDownloaded : downloadApprovedSalesReducer,
+	approveServiceDownloaded : downloadApprovedServiceReducer
 });
 
 export { PlansReducers };

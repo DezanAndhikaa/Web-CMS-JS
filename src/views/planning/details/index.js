@@ -4,6 +4,9 @@ import { PlansReducers } from './DetailPages-reducer';
 import { storeDataAction } from '../../../core/StorageHelper';
 import { PLAN_DATA, StorageKey } from '../../../constants';
 import {
+	// approveSalesAction,
+	// unapproveSalesAction,
+	approveServiceDownloadAction, approveSalesDownloadAction,
 	putLifetimeCompAction,
 	approveSalesAction, //APPROVE SALES
 	unapproveSalesAction, 
@@ -62,11 +65,16 @@ const mapStateToProps = (state) => ({
 	sortSalesBy: state.plansPageState.sortSalesBy,
 	sortServiceBy: state.plansPageState.sortServiceBy,
 	token: state.userData.tokenResponse.accessToken,
+	approveSalesDownloaded : state.plansPageState.approveSalesDownloaded,
+	approveServiceDownloaded : state.plansPageState.approveServiceDownloaded,
 	fetchStatusSales: state.plansPageState.salesOrderList.status,
 	fetchStatusService: state.plansPageState.serviceOrderList.status
 });
 
 const mapDispatchToProps = (dispatch) => ({
+	// approveSales: (payload) => dispatch(approveSalesAction(payload)),
+	downloadSalesApproved : (soId) => dispatch(approveSalesDownloadAction(soId)),
+	downloadServiceApproved : (soId) => dispatch(approveServiceDownloadAction(soId)),
 	unapproveSales: (payload, token) => dispatch(unapproveSalesAction(payload, token)),
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
 	clearSelectedServicePlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),

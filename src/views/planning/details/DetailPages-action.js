@@ -25,6 +25,8 @@ export const GetSalesOrderAction = 'GET_SALES_ORDER';
 export const ResetAssignment = 'RESET_ASSIGNMENT';
 export const ResetSelectedMechanicsAction = 'RESET_SELECTED_MECHANICS';
 export const ResetSelectedLeaderAction = 'RESET_SELECTED_LEADER';
+export const PlanningApprovedSalesDownloadAction = 'DOWNLOAD_APPROVED_SALES';
+export const PlanningApprovedServiceDownloadAction = 'DOWNLOAD_APPROVED_SERVICE';
 export const SearchSalesAction = 'SEARCH_SALES_PLANS';
 export const SearchServiceAction = 'SEARCH_SERVICE_PLANS';
 export const SearchCompAction = 'SEARCH_BY_COMP';
@@ -72,6 +74,19 @@ export function approveSalesAction(payload){
 	return async (dispatch) => dispatch(callApi(ApproveSalesAction, requestConfig));
 }
 
+export function approveServiceAction(payload){
+	const requestConfig = {
+		method: RequestMethod.PUT,
+		url: `${ApiUrlBase.SERVICEORDER_API_URL}/Approval`,
+		headers: {
+			'Accept': 'application/json; charset=utf-8',
+			'Content-Type': 'application/json; charset=utf-8',
+		},
+		data: payload,
+	};
+	return async (dispatch) => dispatch(callApi(ApproveServiceAction, requestConfig));
+}
+
 export function unapproveSalesAction(payload) {
 	const requestConfig = {
 		method: RequestMethod.POST,
@@ -85,7 +100,50 @@ export function unapproveSalesAction(payload) {
 	return async (dispatch) => dispatch(callApi(UnapproveSalesAction, requestConfig));
 }
 
+export function approveSalesDownloadAction(soId){
+	const requestConfig = {
+		responseType: 'blob',
+		method: RequestMethod.POST,
+		url: `${ApiUrlBase.SALESORDER_API_URL}/DownloadSalesOrder`,
+		data: { So: soId },
+		headers: {
+		//   Authorization: `Bearer ${accessToken}`,
+		//   'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID, // eslint-disable-line no-undef
+		  'Content-Type': 'application/json',
+		},
+	  };
+	  return async (dispatch) => dispatch(callApi(PlanningApprovedSalesDownloadAction, requestConfig));
+}
+export function approveServiceDownloadAction(woId){
+	const requestConfig = {
+		responseType: 'blob',
+		method: RequestMethod.POST,
+		url: `${ApiUrlBase.SERVICEORDER_API_URL}/DownloadServiceOrder`,
+		data: { Wo: woId },
+		headers: {
+		//   Authorization: `Bearer ${accessToken}`,
+		//   'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID, // eslint-disable-line no-undef
+		  'Content-Type': 'application/json',
+		},
+	  };
+	  return async (dispatch) => dispatch(callApi(PlanningApprovedServiceDownloadAction, requestConfig));
+}
+
+// export function fetchPlansAssignment(type, payload, accessToken) {
+// 	const requestConfig = {
+// 		method: RequestMethod.POST,
+// 		url: `${ApiUrlBase.SALESORDER_API_URL}Filters`,
+// 		data: payload,
+// 		headers: {
+// 			Authorization: `Bearer ${accessToken}`,
+// 			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID, // eslint-disable-line no-undef
+// 			'Content-Type': 'application/json',
+// 		},
+// 	};
+// 	return async (dispatch) => dispatch(callApi(type, requestConfig));
+// }
 export function putLifetimeCompAction(payload){
+	console.log('kopi kopi kopi');
 	const requestConfig = {
 		method: RequestMethod.PUT,
 		url: `${ApiUrlBase.SALESORDER_API_URL}`,
@@ -96,19 +154,6 @@ export function putLifetimeCompAction(payload){
 		data: payload,
 	};
 	return async (dispatch) => dispatch(callApi(PutLifetimeComp, requestConfig));
-}
-
-export function approveServiceAction(payload){
-	const requestConfig = {
-		method: RequestMethod.PUT,
-		url: `${ApiUrlBase.SERVICEORDER_API_URL}/Approval`,
-		headers: {
-			'Accept': 'application/json; charset=utf-8',
-			'Content-Type': 'application/json; charset=utf-8',
-		},
-		data: payload,
-	};
-	return async (dispatch) => dispatch(callApi(ApproveServiceAction, requestConfig));
 }
 
 export function deleteSalesAction(payload){

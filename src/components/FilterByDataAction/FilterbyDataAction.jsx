@@ -21,10 +21,11 @@ class FilterbyDataAction extends React.Component {
     });
   }
 
-  hideDropdownMenu = () => {
+  hideDropdownMenu = async() => {
     this.setState({ displayMenu: false }, () => {
       document.removeEventListener('click', this.hideDropdownMenu);
     });
+    await this.props.onClickButton();
   }
 
   selectItem = (item) => {

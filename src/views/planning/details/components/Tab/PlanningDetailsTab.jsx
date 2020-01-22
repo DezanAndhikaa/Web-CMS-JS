@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import SalesOrderList from '../PlanningList/SalesOrderList';
 import ServiceOrderList from '../PlanningList/ServiceOrderList';
+import ApprovedSalesOrderList from '../PlanningList/ApprovedSalesOrderList';
 import Badge from '@material-ui/core/Badge';
 import './PlanningDetailsTab.scss';
 import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
@@ -90,16 +91,23 @@ class PlanningDetailsTab extends React.Component {
     GroupComponentDescription: []
   };
 
-  _renderTotalSalesOrder(){
-    return(
-    <>{this.props.totalSalesData}</>
-    );
-}
-  _renderTotalServiceOrder(){
-    return(
-    <>{this.props.totalServiceData}</>
-    );
-  }
+//   _renderTotalSalesOrder(){
+//     return(
+//     <>{this.props.totalSalesData}</>
+//     );
+// }
+
+// _renderTotalApprovedSalesOrder(){
+//   return(
+//   <>{this.props.totalApprovedSalesData}</>
+//   );
+// }
+
+//   _renderTotalServiceOrder(){
+//     return(
+//     <>{this.props.totalServiceData}</>
+//     );
+//   }
 
   handleChange = (event, value) => {
     if (this.state.value === 1) {
@@ -134,6 +142,16 @@ class PlanningDetailsTab extends React.Component {
         />
       </div>
     );
+  }
+
+  _renderApprovedSalesOrderList(){
+    return(
+      <div className="planning-list-containers">
+        <ApprovedSalesOrderList 
+        {...this.props}
+        />
+      </div>
+    )
   }
 
   _renderServiceOrderList(){
@@ -256,6 +274,8 @@ class PlanningDetailsTab extends React.Component {
   render() {
     const { classes, theme } = this.props;
     const { value } = this.state;
+    console.log('skuit', this.props.isApproved)
+    {!this.props.isApproved ? console.log('skuit kondisi false', this.props.totalSalesData) : console.log('skuit kondisi true', this.props.totalApprovedSalesData)}
     return (
         <div className="root">
         <AppBar position="relative" color="default" style={{boxShadow: "none"}}>
@@ -270,7 +290,7 @@ class PlanningDetailsTab extends React.Component {
             indicatorColor="primary" >
             <Tab onClick={() => this.props.clearSelectedSalesPlans()} classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<StyledBadge badgeContent={this.props.totalSalesData} color="primary" invisible={this.state.invisible1}>
             <>Sales Order</>
-            </StyledBadge >} />
+            </StyledBadge >} />}
             <Tab onClick={() => this.props.clearSelectedServicePlans()} classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<StyledBadge badgeContent={this.props.totalServiceData} color="primary" invisible={this.state.invisible2}>
             <>Service Order</>
             </StyledBadge >} />
@@ -279,7 +299,7 @@ class PlanningDetailsTab extends React.Component {
         <div className="filters-container">
           {this._renderFilter()}
         </div>
-        {value === 0 && <TabContainer dir={theme.direction} ><div>{this._renderSalesOrderList()}</div></TabContainer>}
+          {value === 0 && <TabContainer dir={theme.direction} ><div>{this._renderSalesOrderList()}</div> </TabContainer>}
         {value === 1 && <TabContainer dir={theme.direction} ><div>{this._renderServiceOrderList()}</div></TabContainer>}
       </div>
     );
