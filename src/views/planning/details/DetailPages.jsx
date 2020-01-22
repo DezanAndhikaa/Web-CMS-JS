@@ -17,7 +17,8 @@ class DetailPages extends React.Component{
         isPaging: true,
         isShowPerPage: true,
         showPerPage : 0,
-        wasApprove: true
+        wasApprove: true,
+        isApproved: false,
         // nextPage: true,
         // prevPage: false,
         // numberOfPage: 2,
@@ -29,10 +30,9 @@ class DetailPages extends React.Component{
 }
 
 componentWillUnmount = () => {
-  this.props.onSearch('');
 
   this.props.updateSalesParameter({
-    ...this.props.salesParameter.dataFilter, Filter: '',
+    ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
   });
 }
 
@@ -304,7 +304,8 @@ componentDidUpdate = (prevProps) => {
       this.setState({isPaging : false})
     }
     if (this.state.isPaging === true) {
-      const web = this.props.displayMode === 'web';
+      if (this.state.isApproved === false) {
+        const web = this.props.displayMode === 'web';
       const nextSales = this.props.salesOrderList.NextPage;
       const prevSales = this.props.salesOrderList.PrevPage;
       const currentPropsSales = this.props.salesOrderList.PageNumber;
@@ -325,6 +326,7 @@ componentDidUpdate = (prevProps) => {
           </div>
         </div>
       )
+      }
     }
     if (this.state.isPaging === false) {
       const web = this.props.displayMode === 'web';
@@ -524,6 +526,12 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
+  handleClickFilterByDataAction = () =>{
+    this.setState({
+      isApproved : !this.state.isApproved
+    })
+  }
+
 
   //KOMPONEN UNTUK FILTER DATA ACTION
   _renderFilterByDataAction = (value) => {
@@ -538,6 +546,7 @@ componentDidUpdate = (prevProps) => {
           {...this.props}
           onClickPlanningApprove={this.onClickApprovedSales}
           onClickPlanningDelete={this.onClickDeletedSales}
+          onClickButton={this.handleClickFilterByDataAction}
         />
       );
     }
@@ -547,6 +556,7 @@ componentDidUpdate = (prevProps) => {
           {...this.props}
           onClickPlanningApprove={this.onClickApprovedService}
           onClickPlanningDelete={this.onClickDeletedService}
+          onClickButton={this.handleClickFilterByDataAction}
         />
       );
     }
@@ -664,11 +674,13 @@ componentDidUpdate = (prevProps) => {
           onStats={this.isChangeStat}     
           totalSalesData={this.props.salesOrderList.TotalData}
           totalServiceData={this.props.serviceOrderList.TotalData}
+          ApprovedSalesData={this.props.salesOrderListApproved}
           onClickTabHead={this.props.onClickSortBy}
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}
           onPage={this._renderPagination}
           wasApprove={this._renderBaseButton}
+          isApproved={this.state.isApproved}
         />
       </>
     );

@@ -177,7 +177,12 @@ export default class SalesOrderList extends React.PureComponent {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
         <TableCell padding="checkbox">
-          {this.props.displaySalesCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedSalesPlanList.some((plans) => plans.So === row.So)} onClick={() => this.props.onChoosedSales(row)} classes={{ checked: 'checkbox-checked' }} />}
+          {this.props.displaySalesCheckbox && 
+          <Checkbox 
+          disabled={this.isCheckboxAvailable(row)} 
+          checked={this.props.selectedSalesPlanList.some((plans) => plans.So === row.So)} 
+          onClick={() => this.props.onChoosedSales(row)} 
+          classes={{ checked: 'checkbox-checked' }} />}
         </TableCell>
         <TableCell align="left" className="table-cell"> {row.So} </TableCell>
         <TableCell align="left" className="table-cell"> {row.Customer} </TableCell>
