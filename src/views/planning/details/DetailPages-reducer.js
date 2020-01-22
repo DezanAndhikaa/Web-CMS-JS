@@ -59,10 +59,10 @@ const initialServiceAssignment = {
 	Lists: [],
 	NextPage: false,
 	PrevPage: false,
-	GroupSo: ['All WO'],
-	GroupCustomer: ['ALL CUSTOMER'],
-	GroupSite: ['ALL SITE'],
-	GroupUnitModel: ['ALL UNIT MODEL'],
+	GroupCustomer: ['ALL Customer'],
+	GroupSite: ['ALL Site'],
+	GroupUnitModel: ['ALL Unit Model'],
+	GroupComponentDescription: ['All Component Description'],
 	GroupSerialNumber: [],
 	GroupLifeTimeComponent: [],
 	GroupPlanExecution: [],
@@ -80,14 +80,7 @@ const initialSalesParameter = {
 		PageNumber : 1,
 		PageSize: 2,
 		Sort: '',
-		Filter: [
-			// {
-			//   Field: '',
-			//   Operator: '',
-			//   Value: '',
-			//   Logic: ''
-			// }
-		]
+		Filter: []
 	},
 	paramsData : {
 		PageNumber: 0,
@@ -442,17 +435,20 @@ export function selectedFiltersReducer(state = initialSelectedFilter, action) {
 export function salesParameterReducer(state = initialSalesParameter, action) {
 	if (action.type === UpdateSalesParameterAction)
 		return {...state, dataFilter: action.payload};
+		// console.log('dums',state)
 	return state;
 }
 
-export function filterParameterReducer(state = [], action){
+export function filterParameterReducer(state = initialSalesParameter, action){
+	console.log('dumgg',state)
 	if (action.type === SelectCustomerFilterAction)
-		if(state.length === 0){ //IF yang pertama ini,jika filternya belum di isi apa2 (filter belum di jalankan)
-			return {...state, dataFilter: {Filter : [{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
+		if(state.dataFilter.Filter.length === 0){ //IF yang pertama ini,jika filternya belum di isi apa2 (filter belum di jalankan)
+			// console.log('dumgg1', state)
+			return {...state.dataFilter, PageSize: action.page, Filter : [{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
 		}else{
 			for(let i=0; i<state.dataFilter.Filter.length; i++){ //FOR di sini untuk mengecek pada objek sebelumnya
 				if(state.dataFilter.Filter[i].Field === action.head){ //JIKA pada objek sebelumnya pada "field" ada yang sama, maka akan merubah nilai pada "value" tersebut tanpa menambah array
-					if(action.payload === 'All'){
+					if(action.payload.includes('All') ){
 						state.dataFilter.Filter.splice(i,1);
 						return {dataFilter : {Filter : state.dataFilter.Filter }};
 					}
@@ -462,12 +458,12 @@ export function filterParameterReducer(state = [], action){
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}
 	if(action.type === SelectSiteFilterAction)
-		if(state.length === 0){
-			return {...state, dataFilter: {Filter : [{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
+		if(state.dataFilter.Filter.length === 0){
+			return {...state.dataFilter, Filter : [{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}], PageSize: action.page};
 		}else{
 			for(let i=0; i<state.dataFilter.Filter.length; i++){
 				if(state.dataFilter.Filter[i].Field === action.head){
-					if(action.payload === 'All'){
+					if(action.payload.includes('All') ){
 						state.dataFilter.Filter.splice(i,1);
 						return {dataFilter : {Filter : state.dataFilter.Filter }};
 					}
@@ -477,12 +473,12 @@ export function filterParameterReducer(state = [], action){
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}
 	if (action.type === SelectUnitModelFilterAction)
-		if(state.length === 0){
-			return {...state, dataFilter: {Filter : [{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
+		if(state.dataFilter.Filter.length === 0){
+			return {...state.dataFilter, Filter : [{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}], PageSize: action.page};
 		}else{
 			for(let i=0; i<state.dataFilter.Filter.length; i++){
 				if(state.dataFilter.Filter[i].Field === action.head){
-					if(action.payload === 'All'){
+					if(action.payload.includes('All') ){
 						state.dataFilter.Filter.splice(i,1);
 						return {dataFilter : {Filter : state.dataFilter.Filter }};
 					}
@@ -492,12 +488,12 @@ export function filterParameterReducer(state = [], action){
 			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
 		}
 	if (action.type === SelectComponentFilterAction)
-		if(state.length === 0){
-			return {...state, dataFilter: {Filter : [{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
+		if(state.dataFilter.Filter.length === 0){
+			return {...state.dataFilter, Filter : [{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}], PageSize: action.page};
 		}else{
 			for(let i=0; i<state.dataFilter.Filter.length; i++){
 				if(state.dataFilter.Filter[i].Field === action.head){
-					if(action.payload === 'All'){
+					if(action.payload.includes('All') ){
 						state.dataFilter.Filter.splice(i,1);
 						return {dataFilter : {Filter : state.dataFilter.Filter }};
 					}

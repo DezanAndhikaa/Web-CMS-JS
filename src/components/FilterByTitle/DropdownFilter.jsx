@@ -27,7 +27,7 @@ class DropdownFilter extends React.Component {
   }
 
   selectItem = (item,Tab,head) => {
-    this.props.onSelectAction(this.props.onSelectActionType, item, head);
+    this.props.onSelectAction(this.props.onSelectActionType, item, head, this.props.salesParameter.dataFilter.PageSize);
     this.props.indexFilter("INDEX FILTER",Tab);
   }
 
