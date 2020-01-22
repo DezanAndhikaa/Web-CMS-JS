@@ -84,12 +84,10 @@ class PlanningDetailsTab extends React.Component {
     value: 0,
     invisible1: false,
     invisible2: true,
-    dataFilter: {
-      GroupCustomer: [],
-      GroupSite: [],
-      GroupUnitModel: [],
-      GroupComponentDescription: []
-    },
+    GroupCustomer: [],
+    GroupSite: [],
+    GroupUnitModel: [],
+    GroupComponentDescription: []
   };
 
   _renderTotalSalesOrder(){
@@ -152,10 +150,17 @@ class PlanningDetailsTab extends React.Component {
 
   _dataFilterCustomer(){
     if(this.state.value === 0){
-      return this.props.salesOrderList.GroupCustomer
+      console.log('dums ',this.props.salesOrderList.GroupCustomer)
+      let arr = this.props.salesOrderList.GroupCustomer;
+      arr.splice(0, 0, "All Customer")
+      return arr
     }
     else{
-      return this.props.serviceOrderList.GroupCustomer
+      // console.log('dumsx ',this.props.serviceOrderList.GroupCustomer)
+      // let arr = this.props.salesOrderList.GroupCustomer;
+      // arr.splice(0, 0, "All Customer")
+      // return arr
+      return this.props.serviceOrderList.GroupCustomer;
     }
   }
 

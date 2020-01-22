@@ -1,13 +1,15 @@
 import React from 'react';
 import moment, { ISO_8601 } from 'moment';
 import {
-  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Typography
+  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Typography, CircularProgress
 } from '@material-ui/core';
 import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
 import InputButton from '../../../../../components/Button/InputButton';
 import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc } from '../../DetailPages-action';
+import { Spinner } from '../../../../../assets/icons'
+import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 
 export default class SalesOrderList extends React.PureComponent {
   constructor(props) {
@@ -19,20 +21,11 @@ export default class SalesOrderList extends React.PureComponent {
         So : '',
         LifeTimeComponent : '',
       }
-  }
-}
-
-    componentDidMount = () =>{
-      this.props.onClickSalesOrder();
     }
+  }
 
     componentDidUpdate = (prevState) =>{
       console.log('pantek', prevState)
-      if(this.state.stats === 0){
-        this.setState({
-          lifetime: this.props.salesOrderList.Lists,
-        })
-      }
       //untuk menghilangkan checkbox
       if (prevState.salesParameter !== this.props.salesParameter || prevState.salesSearch !== this.props.salesSearch || 
         prevState.searchComp !==this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
@@ -47,12 +40,8 @@ export default class SalesOrderList extends React.PureComponent {
       //   this.props.onClickSalesOrder();
       // }
     }
-
-    isChangeStat = (value,key) =>{
-      this.setState({
-        stats: 1,
-        lifetime: this.state.lifetime.map(el => (el.So === key ? {...el, LifeTimeComp : value} : el))
-      });
+    componentDidMount = () =>{
+      this.props.onClickSalesOrder();
     }
 
     isPutLifetime =  async(key, value) => {
@@ -68,17 +57,28 @@ export default class SalesOrderList extends React.PureComponent {
         await this.props.putLifetimeComp(this.state.putLifetime)
         await this.props.onClickSalesOrder();
     }
+    // else if(this.state.stats === 1){
+    //   this.props.putLifetimeComp(this.state.putLifetime)
+    //   this.setState({
+    //     stats: 3
+    //   })
+    //   this.props.onClickSalesOrder();
+    // }
 
     isCheckboxAvailable = (data) => {
-        let isAvailable = false;
-        if (this.props.selectedSalesPlanList.some((plan) => plan.status === 'Assigned')) {
-          isAvailable = this.props.selectedSalesPlanList.some((plan) => plan.status !== data.status);
-        } else { isAvailable = this.props.selectedSalesPlanList.some((plan) => plan.status !== 'Assigned') && data.status === 'Assigned'; }
-        return isAvailable;
-      }
+      let isAvailable = false;
+      if (this.props.selectedSalesPlanList.some((plan) => plan.status === 'Assigned')) {
+        isAvailable = this.props.selectedSalesPlanList.some((plan) => plan.status !== data.status);
+      } else { isAvailable = this.props.selectedSalesPlanList.some((plan) => plan.status !== 'Assigned') && data.status === 'Assigned'; }
+      return isAvailable;
+    }
 
-      datePlant = (date) => moment.utc(date, ISO_8601).local().format('DD MMMM YYYY')
-
+  isChangeStat = (value,key) =>{
+    this.setState({
+      stats: 1,
+      lifetime: this.state.lifetime.map(el => (el.So === key ? {...el, LifeTimeComp : value} : el))
+    });
+  }
       handleClick = () =>{
         this.setState({
           checkedValue : !this.state.checkedValue
@@ -172,68 +172,92 @@ export default class SalesOrderList extends React.PureComponent {
         )
       }
 
-      showTableBody(row,id) {
-        return (
-          <TableRow key={id} classes={{ root: 'table-row' }}>
-            <TableCell padding="checkbox">
-              {this.props.displaySalesCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedSalesPlanList.some((plans) => plans.So === row.So)} onClick={() => this.props.onChoosedSales(row)} classes={{ checked: 'checkbox-checked' }} />}
-            </TableCell>
-            <TableCell align="left" className="table-cell"> {row.So} </TableCell>
-            <TableCell align="left" className="table-cell"> {row.Customer} </TableCell>
-            <TableCell align="left" className="table-cell"> {row.Site} </TableCell>
-            <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
-            <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>
-            <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
-            <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
-            <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
-            <TableCell align="center" className="table-cell"> 
-            {!this.props.salesOrderList.Lists[id].LifeTimeComponent ? <InputButton title="Input Lifetime Component" onStats={this.isChangeStat} titles="Input" key={row.So} id={row.So} field="input"/> : 
-              <div>{this.props.salesOrderList.Lists[id].LifeTimeComponent}</div>
-            }
-            </TableCell>
-            <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
-            <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isChangeStat} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.So} /></TableCell>
-          </TableRow>
-        )
-      }
+
+  showTableBody(row,id) {
+    return (
+      <TableRow key={id} classes={{ root: 'table-row' }}>
+        <TableCell padding="checkbox">
+          {this.props.displaySalesCheckbox && <Checkbox disabled={this.isCheckboxAvailable(row)} checked={this.props.selectedSalesPlanList.some((plans) => plans.So === row.So)} onClick={() => this.props.onChoosedSales(row)} classes={{ checked: 'checkbox-checked' }} />}
+        </TableCell>
+        <TableCell align="left" className="table-cell"> {row.So} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.Customer} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.Site} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
+        <TableCell align="center" className="table-cell"> 
+        {!this.props.salesOrderList.Lists[id].LifeTimeComponent ? <InputButton title="Input Lifetime Component" onStats={this.isPutLifetime} titles="Input" key={row.So} id={row.So} field="input"/> : 
+          <div>{this.props.salesOrderList.Lists[id].LifeTimeComponent}</div>
+        }
+        </TableCell>
+        <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
+        <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.So} /></TableCell>
+      </TableRow>
+    )
+  }
+
+  showTableEmpty(){
+    if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
+      return(
+        <div className="loading-container">
+          <img 
+            src={Spinner}
+            alt="loading-spinner"
+            className="loading-icon"
+            />
+        </div>
+      )
+    }
+  }
 
 render(){
-    if(this.props.salesOrderListApproved.Lists.length > 0 ){
-      return(
-        <Table classes={{ root: 'table' }} className="table">
-        {this.showTableHead()}
-        <TableBody classes={{ root: 'table-body' }}>
-          {this.props.salesOrderListApproved.Lists
-            && this.props.salesOrderListApproved.Lists.map((row, id) => (
-              this.showTableBody(row,id)
+      if(this.props.salesOrderListApproved.Lists.length > 0 ){
+        return(
+          <>
+          <Table classes={{ root: 'table' }} className="table">
+          {this.showTableHead()}
+          <TableBody classes={{ root: 'table-body' }}>
+            {this.props.salesOrderListApproved.Lists
+              && this.props.salesOrderListApproved.Lists.map((row, id) => (
+                this.showTableBody(row,id)
+                ))}
+            </TableBody>
+          </Table>
+          {this.showTableEmpty()}
+          </>
+        )
+      }else if(this.props.salesOrderListDeleted.Lists.length > 0 ){
+        return(
+          <>
+          <Table classes={{ root: 'table' }} className="table">
+          {this.showTableHead()}
+          <TableBody classes={{ root: 'table-body' }}>
+            {this.props.salesOrderListDeleted.Lists
+              && this.props.salesOrderListDeleted.Lists.map((row, id) => (
+                this.showTableBody(row,id)
               ))}
-          </TableBody>
-        </Table>
-      )
-    }else if(this.props.salesOrderListDeleted.Lists.length > 0 ){
-      return(
-        <Table classes={{ root: 'table' }} className="table">
-        {this.showTableHead()}
-        <TableBody classes={{ root: 'table-body' }}>
-          {this.props.salesOrderListDeleted.Lists
-            && this.props.salesOrderListDeleted.Lists.map((row, id) => (
-              this.showTableBody(row,id)
-            ))}
-          </TableBody>
-        </Table>
-      )
-    }else{
-      return(
-        <Table classes={{ root: 'table' }} className="table">
-        {this.showTableHead()}
-        <TableBody classes={{ root: 'table-body' }}>
-          {this.props.salesOrderList.Lists
-            && this.props.salesOrderList.Lists.map((row, id) => (
-              this.showTableBody(row,id)
-            ))}
-          </TableBody>
-        </Table>
-       )
-    }
+            </TableBody>
+          </Table>
+          {this.showTableEmpty()}
+          </>
+        )
+      }else{
+        return(
+          <>
+            <Table classes={{ root: 'table' }} className="table">
+            {this.showTableHead()}
+            <TableBody classes={{ root: 'table-body' }}>
+              {this.props.salesOrderList.Lists
+                && this.props.salesOrderList.Lists.map((row, id) => (
+                  this.showTableBody(row,id)
+                ))}
+              </TableBody>
+            </Table>
+            {this.showTableEmpty()}
+          </>
+        )
+      }
   }
 }

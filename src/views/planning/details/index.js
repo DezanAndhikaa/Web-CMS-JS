@@ -7,29 +7,22 @@ import {
 	// approveSalesAction,
 	// unapproveSalesAction,
 	approveServiceDownloadAction, approveSalesDownloadAction,
-	approveServiceAction, //APPROVE SALES
-	// putServiceApprovedAction, //APPROVE SERVICE
 	putLifetimeCompAction,
 	approveSalesAction, //APPROVE SALES
 	unapproveSalesAction, 
-	// approveServiceAction, //APPROVE SERVICE
+	approveServiceAction, //APPROVE SERVICE
 	deleteSalesAction,
 	deleteServiceAction,
 	fetchApprovedSalesAction,
 	fetchApprovedServiceAction,
 	fetchDeletedSalesAction,
 	fetchDeletedServiceAction,
-	getServiceOrderAction, fetchSalesAction, salesParameterAction, fetchServiceAction,
+	fetchSalesAction, salesParameterAction, fetchServiceAction,
 	ClearSelectedPlans, UpdateServiceParameterAction,
-	// fetchJobsAssignment,
-	// FetchPlansAction,
-	// fetchPlansAssignment,
-	// getMechanicsAction,
-	// plansParameterAction,
 	UpdateSalesParameterAction, 
 	searchAction,
 	SearchSalesAction, SearchServiceAction,searchCompAction,
-	SearchCompAction,
+	SearchCompAction,SearchCompActionService,searchCompActionService,
 	selectFilterAction,selectFilterAction2,indexFilterAction, UnselectSalesPlanAction, planParameterAction, UpdatePlansParameterAction, serviceParameterAction,
 	UnselectServicePlanAction, selectSalesPlansAction, selectServicePlansAction, selectLeaderAction, SelectSalesPlanAction,
 	SelectServicePlanAction, FetchSalesAction,
@@ -73,7 +66,9 @@ const mapStateToProps = (state) => ({
 	sortServiceBy: state.plansPageState.sortServiceBy,
 	token: state.userData.tokenResponse.accessToken,
 	approveSalesDownloaded : state.plansPageState.approveSalesDownloaded,
-	approveServiceDownloaded : state.plansPageState.approveServiceDownloaded
+	approveServiceDownloaded : state.plansPageState.approveServiceDownloaded,
+	fetchStatusSales: state.plansPageState.salesOrderList.status,
+	fetchStatusService: state.plansPageState.serviceOrderList.status
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -83,13 +78,7 @@ const mapDispatchToProps = (dispatch) => ({
 	unapproveSales: (payload, token) => dispatch(unapproveSalesAction(payload, token)),
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
 	clearSelectedServicePlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
-	// fetchPlans: (payload, token) => dispatch(fetchPlansAssignment(FetchPlansAction, payload, token)),
-	// getMechanics: (token) => dispatch(getMechanicsAction(token)),
-	// getServiceOrder: () => dispatch(getServiceOrderAction()),
-	// getSalesOrder: () => dispatch(getSalesFilteredAction()),
-	// getSearchValue: (payload) => dispatch(getSearchValueAction(payload)),
 	putLifetimeComp : (payload) => dispatch(putLifetimeCompAction(payload)),
-	// putServicetoPlanningApprove: (payload) => dispatch(putServiceApprovedAction(payload)),
 	approveSales: (payload) => dispatch(approveSalesAction(payload)),
 	approveService: (payload) => dispatch(approveServiceAction(payload)),
 	deleteSales: (payload) => dispatch(deleteSalesAction(payload)),
@@ -103,7 +92,8 @@ const mapDispatchToProps = (dispatch) => ({
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	onSearchSales: (keyword) => dispatch(searchAction(SearchSalesAction, keyword)),
 	onSearchService: (keyword) => dispatch(searchAction(SearchServiceAction, keyword)),
-	onSearchComp: (keyword) => dispatch(searchCompAction(SearchCompAction, keyword)),
+	onSearchComp: (keyword,sort) => dispatch(searchCompAction(SearchCompAction, keyword, sort)),
+	onSearchCompService: (keyword, sort) => dispatch(searchCompActionService(SearchCompActionService, keyword, sort)),
 	pushTo: (url) => dispatch(push(url)),
 	savePlanData: (data) => dispatch(storeDataAction(PLAN_DATA, StorageKey.PLAN_DATA, data)),
 	selectFilter: (type, payload) => dispatch(selectFilterAction(type, payload)),

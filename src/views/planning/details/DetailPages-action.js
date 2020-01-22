@@ -30,6 +30,7 @@ export const PlanningApprovedServiceDownloadAction = 'DOWNLOAD_APPROVED_SERVICE'
 export const SearchSalesAction = 'SEARCH_SALES_PLANS';
 export const SearchServiceAction = 'SEARCH_SERVICE_PLANS';
 export const SearchCompAction = 'SEARCH_BY_COMP';
+export const SearchCompActionService = 'SEARCH_BY_COMP_SERVICE';
 export const SelectAllSalesPlanAction = 'SELECT_ALL_SALES_PLANS';
 export const SelectServicePlanAction = 'SELECT_SERVICE_PLANS';
 export const SelectSalesPlanAction = 'SELECT_SALES_PLANS';
@@ -154,7 +155,6 @@ export function putLifetimeCompAction(payload){
 	};
 	return async (dispatch) => dispatch(callApi(PutLifetimeComp, requestConfig));
 }
-
 
 export function deleteSalesAction(payload){
 	const requestConfig = {
@@ -286,8 +286,12 @@ export function searchAction(type, payload) {
 	return { type, payload };
 }
 
-export function searchCompAction(type, payload){
-	return { type, payload };
+export function searchCompAction(type, payload, sort){
+	return { type, payload, sort };
+}
+
+export function searchCompActionService(type, payload, sort){
+	return { type, payload, sort };
 }
 
 export function selectFilterAction(type, payload) {

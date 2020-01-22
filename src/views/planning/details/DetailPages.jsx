@@ -69,7 +69,6 @@ componentDidUpdate = (prevProps) => {
     this.props.updateSalesParameter({
       ...prevProps.salesParameter.dataFilter, Filter : this.props.salesSearch, PageNumber: 1,
     });
-    // console.log('blabla sales', this.props.salesSearch);
   }
   
   //ini untuk trigger service global search
@@ -77,15 +76,22 @@ componentDidUpdate = (prevProps) => {
     this.props.updateServiceParameter({
       ...prevProps.serviceParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber: 1,
     });
-    // console.log('blabla service', this.props.serviceSearch);
   }
-  //searc per component
-  if(prevProps.searchComp !== this.props.searchComp){
-    // console.log('jkl jkl apdet ',this.props.searchComp)
-    this.props.updateSalesParameter({
-      ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
-    });
+  //search per component
+  if(this.state.isPaging){
+    if(prevProps.searchComp !== this.props.searchComp){
+      this.props.updateSalesParameter({
+        ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+      });
+    }
+  }else{
+    if(prevProps.searchComp !== this.props.searchComp){
+      this.props.updateServiceParameter({
+        ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+      });
+    }
   }
+  
   // SALES ORDER SORTING
   if (prevProps.sortSalesBy !== this.props.sortSalesBy) {
     const { sortSalesBy } = this.props;
@@ -349,27 +355,11 @@ componentDidUpdate = (prevProps) => {
   //SAAT MENGKLIK SALES ORDER TAB
   onClickServiceOrder = () => {
     this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
-    // console.log('blablabla', this.props.Search)
-    // console.log('ini data dari api',this.props.serviceParameter.dataFilter);
   }
 
   //SAAT MENGKLIK SERVICE ORDER TAB
   onClickSalesOrder = () =>{
-    // console.log('ini filter paging ', this.props.salesParameter.dataFilter )
     this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
-    // console.log('blablabla', this.props)
-  }
-
-  handlePageSize = (numberOfPage) => {
-    // this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: numberOfPage})
-    // this.setState({
-    //     showPerPage : numberOfPage
-    //   })
-    // const pageNumber = this.props.salesParameter.dataFilter.PageSize
-    // const pageNumber = numberOfPage;
-    // this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter, PageSize : pageNumber }) 
-    // console.log('ini page number', pageNumber)
-    // console.log('ini pagenumber yg sudah diklik', numberOfPage)
   }
 
   //KOMPONEN UNTUK SHOW PER/PAGE
@@ -388,7 +378,7 @@ componentDidUpdate = (prevProps) => {
       <SearchInput
         {...this.props}
         wasApprove={this.state.wasApprove}
-        webInfo="Search by all component"
+        webInfo="Search"
         onSalesSearch={this.props.onSearchSales}
         onServiceSearch={this.props.onSearchService}
       />
@@ -398,7 +388,6 @@ componentDidUpdate = (prevProps) => {
   //FUNGSI UNTUK MENGAPROVE SALES ORDER
   onClickApprovedSales = () => {
     this.props.fetchApprovedSales(this.props.salesParameter.dataFilter);
-    // console.log("okokokokok , ",this.props.salesOrderListApproved.Lists.length)
   }
 
   //FUNGSI UNTUK MENGAPROVE SERVICE ORDER
@@ -685,24 +674,19 @@ componentDidUpdate = (prevProps) => {
     );
   };
 
-
-    render(){
-      // console.log('bacot', this.props.approveSalesDownloaded.status );
-      // console.log('pantek sales', this.props.selectedSalesPlans)
-      // console.log('pantek service', this.props.selectedServicePlans)
-      return(
-          <main className="content">
-            {this.handlePageSize()}
-              <div className="table-container">
-                    {this._renderTabs()}
-                </div>
-                <div></div>
-                <div className="bottom-row">
-                    {this._renderShowPerPage()} {this._renderPagination()}
-                </div>
-          </main>
-      )
-    }
+  render(){      
+    return(
+        <main className="content">
+            <div className="table-container">
+                  {this._renderTabs()}
+              </div>
+              <div></div>
+              <div className="bottom-row">
+                  {this._renderShowPerPage()} {this._renderPagination()}
+              </div>
+        </main>
+    )
   }
+}
 
 export default DetailPages;
