@@ -50,7 +50,7 @@ class DetailPages extends React.Component{
 }
 
 componentWillUnmount = () => {
-  this.props.onSearch('');
+  // this.props.onSearch('');
 
   this.props.updateSalesParameter({
     ...this.props.salesParameter.dataFilter, Search: '',

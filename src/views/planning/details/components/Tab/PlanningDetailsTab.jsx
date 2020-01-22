@@ -120,8 +120,7 @@ class PlanningDetailsTab extends React.Component {
         value
       })
     }
-    }
-    // this.setState({ value });
+  }
 
   handleChangeIndex = index => {
     this.setState({ value: index });
@@ -156,10 +155,6 @@ class PlanningDetailsTab extends React.Component {
       return arr
     }
     else{
-      // console.log('dumsx ',this.props.serviceOrderList.GroupCustomer)
-      // let arr = this.props.salesOrderList.GroupCustomer;
-      // arr.splice(0, 0, "All Customer")
-      // return arr
       return this.props.serviceOrderList.GroupCustomer;
     }
   }
@@ -260,24 +255,12 @@ class PlanningDetailsTab extends React.Component {
             value={this.state.value}
             onChange={this.handleChange}
             indicatorColor="primary" >
-            {/* <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<div>Sales Order <span className="badge" style={{visibility: this.state.invisible1}} > {this.props.totalSalesData}</span></div>}/>
-            <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<div>Service Order <span className="badge" visibility={this.state.invisible2} >{this.props.totalServiceData}</span></div>}/> */}
-            {/* <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<Badge className="badge" badgeContent={this.props.totalSalesData} color="primary" invisible={this.state.invisible1}>
-            <>Sales Order</>
-            </Badge >} />
-            <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<Badge className="badge" badgeContent={this.props.totalServiceData} color="primary" invisible={this.state.invisible2}>
-            <>Service Order</>
-            </Badge >} /> */}
             <Tab onClick={() => this.props.clearSelectedSalesPlans()} classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<StyledBadge badgeContent={this.props.totalSalesData} color="primary" invisible={this.state.invisible1}>
             <>Sales Order</>
             </StyledBadge >} />
             <Tab onClick={() => this.props.clearSelectedServicePlans()} classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<StyledBadge badgeContent={this.props.totalServiceData} color="primary" invisible={this.state.invisible2}>
             <>Service Order</>
             </StyledBadge >} />
-            {/* <Tab disabled classes={{ root: classes.tabRoot }} /><Tab disabled classes={{ root: classes.tabRoot }} />
-            <Tab disabled classes={{ root: classes.tabRoot }} /><Tab disabled classes={{ root: classes.tabRoot }} /> */}
-            {/* {this.props.renderSearch} 
-            {this._renderFilterByDataAction()} */}
           </Tabs>
         </AppBar>
         <div className="filters-container">

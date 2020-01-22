@@ -6,6 +6,15 @@ import { UTLogoNew, AccountPic, DcaLogo } from '../../assets/imgs';
 import { MenuToggle, IconNotif, IconHistory } from '../../assets/icons';
 import isAccessTokenValid from '../../core/HelpersFunction';
 import './NavBarComponent.scss';
+import { withStyles } from '@material-ui/core/styles';
+
+const Badges = withStyles(theme => ({
+	badge: {
+		left: -5,
+		fontSize: '10px',
+		border: '2px solid white'
+	},
+  }))(Badge);
 
 class NavBarComponent extends React.Component {
 	render() {
@@ -16,12 +25,6 @@ class NavBarComponent extends React.Component {
 					<AppBar position="fixed" className="app-bar">
 						<Toolbar variant="dense" className="toolbar">
 							<img src={UTLogoNew} alt="" className="logo-ut"/>
-							<div className="notification">
-								<Badge badgeContent={27} color="secondary" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
-									<img src={IconNotif} className="icon-notif" alt="" /> <span className="label-notif">Notification</span>
-								</Badge>
-								<img src={IconHistory} className="icon-notif" alt="" /><span className="label-notif">History</span>
-							</div>
 							<div className="info-login">
 								<p>
 									{`Hi, ${this.props.userData.firstName} ${this.props.userData.lastName}`}

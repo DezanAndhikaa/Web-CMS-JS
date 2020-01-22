@@ -315,12 +315,6 @@ const initialAssignmentState = { response: false, status: ApiRequestActionsStatu
 const initialSalesState = { data: initialSalesAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialServiceState = { data: initialServiceAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialMechanicsState = { data: [], status: ApiRequestActionsStatus.IDLE };
-// const initialSearchParameter = { Filter : [
-// 	initialSearchSOParameter, initialSearchCustomerParameter, 
-// 	initialSearchSiteParameter, initialSearchPartNumberParameter, 
-// 	initialSearchUnitModelParameter, initialSearchComponentDescriptionParameter, 
-// 	initialSearchUnitCodeParameter, initialSearchSerialNumberParameter, 
-// 	initialSearchLifeTimeCompParameter,initialSearchPlanExecutionParameter ] };
 
 export function fetchSalesReducer(state = initialSalesState, action) {
 	if (action.type === FetchSalesAction) {
@@ -352,7 +346,7 @@ export function fetchServiceReducer(state = initialServiceState, action) {
 				error: action.error,
 			};
 		default:
-			return { data: initialMechanicsState.data, status: ApiRequestActionsStatus.LOADING };
+			return { data: initialServiceState.data, status: ApiRequestActionsStatus.LOADING };
 		}
 	}
 	return state;
