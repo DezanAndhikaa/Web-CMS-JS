@@ -19,7 +19,7 @@ import {
 	UpdateSalesParameterAction, 
 	searchAction,
 	SearchSalesAction, SearchServiceAction,searchCompAction,
-	SearchCompAction,
+	SearchCompAction,SearchCompActionService,searchCompActionService,
 	selectFilterAction,selectFilterAction2,indexFilterAction, UnselectSalesPlanAction, planParameterAction, UpdatePlansParameterAction, serviceParameterAction,
 	UnselectServicePlanAction, selectSalesPlansAction, selectServicePlansAction, selectLeaderAction, SelectSalesPlanAction,
 	SelectServicePlanAction, FetchSalesAction,
@@ -62,6 +62,8 @@ const mapStateToProps = (state) => ({
 	sortSalesBy: state.plansPageState.sortSalesBy,
 	sortServiceBy: state.plansPageState.sortServiceBy,
 	token: state.userData.tokenResponse.accessToken,
+	fetchStatusSales: state.plansPageState.salesOrderList.status,
+	fetchStatusService: state.plansPageState.serviceOrderList.status
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -82,7 +84,8 @@ const mapDispatchToProps = (dispatch) => ({
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	onSearchSales: (keyword) => dispatch(searchAction(SearchSalesAction, keyword)),
 	onSearchService: (keyword) => dispatch(searchAction(SearchServiceAction, keyword)),
-	onSearchComp: (keyword) => dispatch(searchCompAction(SearchCompAction, keyword)),
+	onSearchComp: (keyword,sort) => dispatch(searchCompAction(SearchCompAction, keyword, sort)),
+	onSearchCompService: (keyword, sort) => dispatch(searchCompActionService(SearchCompActionService, keyword, sort)),
 	pushTo: (url) => dispatch(push(url)),
 	savePlanData: (data) => dispatch(storeDataAction(PLAN_DATA, StorageKey.PLAN_DATA, data)),
 	selectFilter: (type, payload) => dispatch(selectFilterAction(type, payload)),

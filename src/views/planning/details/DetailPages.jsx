@@ -90,12 +90,21 @@ componentDidUpdate = (prevProps) => {
       ...prevProps.serviceParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber: 1,
     });
   }
-  //searc per component
-  if(prevProps.searchComp !== this.props.searchComp){
-    this.props.updateSalesParameter({
-      ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
-    });
+  //search per component
+  if(this.state.isPaging){
+    if(prevProps.searchComp !== this.props.searchComp){
+      this.props.updateSalesParameter({
+        ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+      });
+    }
+  }else{
+    if(prevProps.searchComp !== this.props.searchComp){
+      this.props.updateServiceParameter({
+        ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+      });
+    }
   }
+  
   // SALES ORDER SORTING
   if (prevProps.sortSalesBy !== this.props.sortSalesBy) {
     const { sortSalesBy } = this.props;
@@ -538,19 +547,19 @@ componentDidUpdate = (prevProps) => {
     );
   };
 
-    render(){      
-      return(
-          <main className="content">
-              <div className="table-container">
-                    {this._renderTabs()}
-                </div>
-                <div></div>
-                <div className="bottom-row">
-                    {this._renderShowPerPage()} {this._renderPagination()}
-                </div>
-          </main>
-      )
-    }
+  render(){      
+    return(
+        <main className="content">
+            <div className="table-container">
+                  {this._renderTabs()}
+              </div>
+              <div></div>
+              <div className="bottom-row">
+                  {this._renderShowPerPage()} {this._renderPagination()}
+              </div>
+        </main>
+    )
   }
+}
 
 export default DetailPages;
