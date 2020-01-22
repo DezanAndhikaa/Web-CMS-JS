@@ -28,12 +28,12 @@ export default class SalesOrderList extends React.PureComponent {
     this.props.onClickSalesOrder();
   }
 
-  componentDidUpdate = () =>{
-    if(this.state.stats === 0){
-      this.setState({
-        lifetime: this.props.salesOrderList.Lists,
-      })
-    }
+  // componentDidUpdate = () =>{
+    // if(this.state.stats === 0){
+    //   this.setState({
+    //     lifetime: this.props.salesOrderList.Lists,
+    //   })
+    // }
     // else if(this.state.stats === 1){
     //   this.props.putLifetimeComp(this.state.putLifetime)
     //   this.setState({
@@ -41,14 +41,14 @@ export default class SalesOrderList extends React.PureComponent {
     //   })
     //   this.props.onClickSalesOrder();
     // }
-  }
+  // }
 
-  isChangeStat = (value,key) =>{
-    this.setState({
-      stats: 1,
-      lifetime: this.state.lifetime.map(el => (el.So === key ? {...el, LifeTimeComp : value} : el))
-    });
-  }
+  // isChangeStat = (value,key) =>{
+  //   this.setState({
+  //     stats: 1,
+  //     lifetime: this.state.lifetime.map(el => (el.So === key ? {...el, LifeTimeComp : value} : el))
+  //   });
+  // }
 
   isPutLifetime =  async(key, value) => {
       this.setState({
@@ -57,9 +57,7 @@ export default class SalesOrderList extends React.PureComponent {
           LifeTimeComponent: value
         },
         stats: 1
-      }, 
-      () => this.props.putLifetimeComp(this.state.putLifetime) 
-      )
+      }, () => this.props.putLifetimeComp(this.state.putLifetime) )
       await this.props.putLifetimeComp(this.state.putLifetime)
       await this.props.onClickSalesOrder();
   }

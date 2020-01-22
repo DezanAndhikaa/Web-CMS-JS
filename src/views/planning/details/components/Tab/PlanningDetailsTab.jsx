@@ -150,44 +150,53 @@ class PlanningDetailsTab extends React.Component {
 
   _dataFilterCustomer(){
     if(this.state.value === 0){
-      console.log('dums ',this.props.salesOrderList.GroupCustomer)
       let arr = this.props.salesOrderList.GroupCustomer;
       arr.splice(0, 0, "All Customer")
       return arr
     }
     else{
-      // console.log('dumsx ',this.props.serviceOrderList.GroupCustomer)
-      // let arr = this.props.salesOrderList.GroupCustomer;
-      // arr.splice(0, 0, "All Customer")
-      // return arr
-      return this.props.serviceOrderList.GroupCustomer;
+      let arr = this.props.serviceOrderList.GroupCustomer;
+      arr.splice(0, 0, "All Customer")
+      return arr
     }
   }
 
   _dataFilterSite(){
     if(this.state.value === 0){
-      return this.props.salesOrderList.GroupSite
+      let arr = this.props.salesOrderList.GroupSite;
+      arr.splice(0, 0, "All Site")
+      return arr
     }
     else{
-      return this.props.serviceOrderList.GroupSite
+      let arr = this.props.serviceOrderList.GroupSite;
+      arr.splice(0, 0, "All Site")
+      return arr
     }
   }
 
   _dataFilterUnitModel(){
     if(this.state.value === 0){
-      return this.props.salesOrderList.GroupUnitModel
+      let arr = this.props.salesOrderList.GroupUnitModel;
+      arr.splice(0, 0, "All Unit Model")
+      return arr
     }
     else{
-      return this.props.serviceOrderList.GroupUnitModel
+      let arr = this.props.serviceOrderList.GroupUnitModel;
+      arr.splice(0, 0, "All Unit Model")
+      return arr
     }
   }
 
   _dataFilterComponentDescription(){
     if(this.state.value === 0){
-      return this.props.salesOrderList.GroupComponentDescription
+      let arr = this.props.salesOrderList.GroupComponentDescription;
+      arr.splice(0, 0, "All Component Description")
+      return arr
     }
     else{
-      return this.props.serviceOrderList.GroupComponentDescription
+      let arr = this.props.serviceOrderList.GroupComponentDescription;
+      arr.splice(0, 0, "All Component Description")
+      return arr
     }
   }
 

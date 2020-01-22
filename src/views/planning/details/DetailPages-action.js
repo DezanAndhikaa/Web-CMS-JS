@@ -253,8 +253,8 @@ export function selectFilterAction(type, payload) {
 	return { type, payload };
 }
 
-export function selectFilterAction2(type, payload, head) {
-	return { type, payload, head };
+export function selectFilterAction2(type, payload, head, page) {
+	return { type, payload, head, page };
 }
 
 export function indexFilterAction(type, payload){
