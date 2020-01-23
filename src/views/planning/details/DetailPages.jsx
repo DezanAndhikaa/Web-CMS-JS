@@ -8,6 +8,7 @@ import DropDownList from '../../../components/DropdownList/DropDownList';
 import SearchInput from "../../../components/Searchbar/SearchInput";
 import BaseButton from '../../../components/Button/BaseButton';
 import FilterbyDataAction from '../../../components/FilterByDataAction/FilterbyDataAction';
+import NotifButton from '../../../components/ActionButton/NotifButton/NotifButton';
 
 class DetailPages extends React.Component{
     constructor(props) {
@@ -65,7 +66,6 @@ componentDidUpdate = (prevProps) => {
 
   //ini untuk trigger sales global search
   if (prevProps.salesSearch !== this.props.salesSearch) {
-    
     this.props.updateSalesParameter({
       ...prevProps.salesParameter.dataFilter, Filter : this.props.salesSearch, PageNumber: 1,
     });
@@ -387,6 +387,19 @@ componentDidUpdate = (prevProps) => {
     );
   }
 
+  _renderNotif(){
+    return (
+      <div className="bottom-row">
+        <NotifButton 
+        titles = "Notif"
+      />
+        <NotifButton 
+          titles = "History"
+        />
+      </div>
+    )
+  }
+
   //FUNGSI UNTUK MENGAPROVE SALES ORDER
   onClickApprovedSales = () => {
     this.props.fetchApprovedSales(this.props.salesParameter.dataFilter);
@@ -661,6 +674,7 @@ componentDidUpdate = (prevProps) => {
           renderFilterByDataAction={this._renderFilterByDataAction()}
           renderBaseButton={this._renderBaseButton()}
           renderSearch={this._renderSearchBar()}
+          renderNotif={this._renderNotif()}
           onClickSalesOrder={this.onClickSalesOrder}        
           onClickServiceOrder={this.onClickServiceOrder}
           // onSearchValue={this.onSearchValue}

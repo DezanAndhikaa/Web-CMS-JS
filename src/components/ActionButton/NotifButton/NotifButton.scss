@@ -1,0 +1,21 @@
+.notif-history{
+    display: flex;
+    flex-direction: row;
+    .icon-notif{
+        height: vw(25) !important;
+        margin-right: vw(10);
+    }
+    .label-notif{
+        font-family: 'Lato-Bold';
+        font-size: vw(20);
+        line-height: vw(24);
+        color: #3C3B3B;
+        margin-right: vw(50);
+    }
+    .label-history{
+        font-family: 'Lato-Bold';
+        font-size: vw(20);
+        line-height: vw(24);
+        color: #3C3B3B;
+    }
+}

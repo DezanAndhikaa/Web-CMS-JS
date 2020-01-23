@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import SalesOrderList from '../PlanningList/SalesOrderList';
 import ServiceOrderList from '../PlanningList/ServiceOrderList';
 import ApprovedSalesOrderList from '../PlanningList/ApprovedSalesOrderList';
+import { IconNotif, IconHistory } from '../../../../../assets/icons';
 import Badge from '@material-ui/core/Badge';
 import './PlanningDetailsTab.scss';
 import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
@@ -28,6 +29,14 @@ const StyledBadge = withStyles(theme => ({
     borderRadius: '5px'
   },
 }))(Badge);
+
+const Badges = withStyles(theme => ({
+	badge: {
+		left: -5,
+		fontSize: '10px',
+		border: '2px solid white'
+	},
+  }))(Badge);
 
 TabContainer.propTypes = {
   children: PropTypes.node.isRequired,
@@ -279,10 +288,17 @@ class PlanningDetailsTab extends React.Component {
     return (
         <div className="root">
         <AppBar position="relative" color="default" style={{boxShadow: "none"}}>
+
+        {/* Tampilan HO */}
         <div className="tab-container"> 
-            {this.props.renderSearch} 
-            {this.props.renderFilterByDataAction}
+          {this.props.renderSearch} 
+          {this.props.renderFilterByDataAction}
         </div>
+        
+        {/* Tampilan Site */}
+        {/* <div className="right-side">
+            {this.props.renderNotif}
+        </div> */}
           <Tabs 
             classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
             value={this.state.value}

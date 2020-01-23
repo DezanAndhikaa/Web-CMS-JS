@@ -9,16 +9,12 @@
             box-shadow: 0 vw(15) vw(30) rgba(0, 0, 0, 0.161);
             width: vw(281) !important;
             margin-top: vw(88);
-            // .dca-logo{
-            //     width: vw(184);
-            //     left: -vw(30);
-            //     margin: vw(24) auto vw(35) auto;
-            // }
             .menu-item{
                 height: vw(37);
                 margin-bottom: vw(10);
                 margin-left: vw(12);
                 border-radius: vw(15);
+                padding-left: vw(32);
                 .item-text{
                     font-family: 'Lato-Bold' !important;
                     font-style: normal;
@@ -45,6 +41,7 @@
                 margin-left: vw(50);
                 background-color: map-get($colors , primary);
                 border-radius: vw(15);
+                padding-left: vw(32);
                 .item-text{
                     font-family: 'Lato-Bold' !important;
                     font-style: normal;

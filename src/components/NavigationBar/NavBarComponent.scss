@@ -26,29 +26,23 @@
             margin-left: 0px;
             margin-right: vw(50);
         }
-        // .right-side{
-        //     display: flex;
-        //     flex: 1;
-        //     justify-content: flex-end;
-        //     align-items: center;
-            .info-login{
-                display: flex;
-                flex: 1;
-                justify-content: flex-end;
-                align-items: center;
-                padding-right: vw(30);
-                p{
-                    font-family: 'Lato-Bold';
-                    font-size: vw(20);
-                    line-height: vw(24);
-                    color: #3C3B3B;
-                    margin-right: vw(20);
-                }
-                .account-pic{
-                    height: vw(48) !important;
-                }
+        .info-login{
+            display: flex;
+            flex: 1;
+            justify-content: flex-end;
+            align-items: center;
+            padding-right: vw(30);
+            p{
+                font-family: 'Lato-Bold';
+                font-size: vw(20);
+                line-height: vw(24);
+                color: #3C3B3B;
+                margin-right: vw(20);
             }
-        // }
+            .account-pic{
+                height: vw(48) !important;
+            }
+        }
     }
 }
 

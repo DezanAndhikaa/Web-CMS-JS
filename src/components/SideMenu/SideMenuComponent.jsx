@@ -58,7 +58,6 @@ class SideMenuComponent extends React.Component {
           open={this.props.menuDrawerState}
           onClose={() => this.props.closeDrawer()}
         >
-          {/* <img src={UTLogoNew} alt="logo" className="dca-logo" /> */}
           <List>
             {/* Dashboard */}
             <ListItem
