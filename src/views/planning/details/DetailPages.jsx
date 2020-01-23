@@ -67,10 +67,8 @@ componentDidUpdate = (prevProps) => {
     console.log('dumtt,',this.props.filterParameter)
       if(this.props.indexFilterParameter.indexTabParameter === 0){
         this.props.fetchSalesOrder(this.props.filterParameter);
-        // this.props.clearSelectedSalesPlans();
       }else{
-        this.props.fetchServiceOrder(this.props.filterParameter.dataFilter);
-        // this.props.clearSelectedServicePlans();
+        this.props.fetchServiceOrder(this.props.filterParameter);
       }
   }
   if (prevProps.serviceParameter !== this.props.serviceParameter) {
