@@ -4,6 +4,7 @@ import React from 'react';
 // import { ExpandMore } from '@material-ui/icons';
 import './FilterbyDataAction.scss';
 import { Button } from '@material-ui/core';
+import { Menu } from '../../constants';
 
 class FilterbyDataAction extends React.Component {
   constructor(props) {
@@ -32,6 +33,10 @@ class FilterbyDataAction extends React.Component {
     this.props.onSelectAction(this.props.onSelectActionType, item);
   }
 
+  handleClick = (menu, subMenu) => {
+      this.props.push(menu);
+    }
+
   renderDropdown() {
     return (
       <div className="dropdown-button" onClick={this.showDropdownMenu}>
@@ -46,7 +51,8 @@ class FilterbyDataAction extends React.Component {
   renderDropdownList() {
     return (
       <div className="list-items">
-          <Button className="button" variant="outlined" onClick={this.props.onClickPlanningApprove}>
+          {/* <Button className="button" variant="outlined" onClick={this.props.onClickPlanningApprove}> */}
+          <Button className="button" variant="outlined" onClick={this.handleClick(Menu.PLANNING_DETAILS_TRACKING)}>
             Planning Approved 
           </Button>
           <Button className="button-plan-del" variant="outlined" onClick={this.props.onClickPlanningDelete}>

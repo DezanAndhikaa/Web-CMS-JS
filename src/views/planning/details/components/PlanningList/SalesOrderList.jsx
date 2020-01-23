@@ -218,37 +218,37 @@ export default class SalesOrderList extends React.PureComponent {
   }
 
 render(){
-      if(this.props.salesOrderListApproved.Lists.length > 0 ){
-        return(
-          <>
-          <Table classes={{ root: 'table' }} className="table">
-          {this.showTableHead()}
-          <TableBody classes={{ root: 'table-body' }}>
-            {this.props.salesOrderListApproved.Lists
-              && this.props.salesOrderListApproved.Lists.map((row, id) => (
-                this.showTableBody(row,id)
-                ))}
-            </TableBody>
-          </Table>
-          {this.showTableEmpty()}
-          </>
-        )
-      }else if(this.props.salesOrderListDeleted.Lists.length > 0 ){
-        return(
-          <>
-          <Table classes={{ root: 'table' }} className="table">
-          {this.showTableHead()}
-          <TableBody classes={{ root: 'table-body' }}>
-            {this.props.salesOrderListDeleted.Lists
-              && this.props.salesOrderListDeleted.Lists.map((row, id) => (
-                this.showTableBody(row,id)
-              ))}
-            </TableBody>
-          </Table>
-          {this.showTableEmpty()}
-          </>
-        )
-      }else{
+      // if(this.props.salesOrderListApproved.Lists.length > 0 ){
+      //   return(
+      //     <>
+      //     <Table classes={{ root: 'table' }} className="table">
+      //     {this.showTableHead()}
+      //     <TableBody classes={{ root: 'table-body' }}>
+      //       {this.props.salesOrderListApproved.Lists
+      //         && this.props.salesOrderListApproved.Lists.map((row, id) => (
+      //           this.showTableBody(row,id)
+      //           ))}
+      //       </TableBody>
+      //     </Table>
+      //     {this.showTableEmpty()}
+      //     </>
+      //   )
+      // }else if(this.props.salesOrderListDeleted.Lists.length > 0 ){
+      //   return(
+      //     <>
+      //     <Table classes={{ root: 'table' }} className="table">
+      //     {this.showTableHead()}
+      //     <TableBody classes={{ root: 'table-body' }}>
+      //       {this.props.salesOrderListDeleted.Lists
+      //         && this.props.salesOrderListDeleted.Lists.map((row, id) => (
+      //           this.showTableBody(row,id)
+      //         ))}
+      //       </TableBody>
+      //     </Table>
+      //     {this.showTableEmpty()}
+      //     </>
+      //   )
+      // }else{
         return(
           <>
             <Table classes={{ root: 'table' }} className="table">
@@ -265,4 +265,4 @@ render(){
         )
       }
   }
-}
+// }

@@ -91,23 +91,6 @@ class PlanningDetailsTab extends React.Component {
     GroupComponentDescription: []
   };
 
-//   _renderTotalSalesOrder(){
-//     return(
-//     <>{this.props.totalSalesData}</>
-//     );
-// }
-
-// _renderTotalApprovedSalesOrder(){
-//   return(
-//   <>{this.props.totalApprovedSalesData}</>
-//   );
-// }
-
-//   _renderTotalServiceOrder(){
-//     return(
-//     <>{this.props.totalServiceData}</>
-//     );
-//   }
 
   handleChange = (event, value) => {
     if (this.state.value === 1) {
@@ -275,7 +258,7 @@ class PlanningDetailsTab extends React.Component {
     const { classes, theme } = this.props;
     const { value } = this.state;
     console.log('skuit', this.props.isApproved)
-    {!this.props.isApproved ? console.log('skuit kondisi false', this.props.totalSalesData) : console.log('skuit kondisi true', this.props.totalApprovedSalesData)}
+    {!this.props.isApproved ? console.log('skuit kondisi false', this.props.totalSalesData) : console.log('skuit kondisi true', this.props.salesOrderListApproved)}
     return (
         <div className="root">
         <AppBar position="relative" color="default" style={{boxShadow: "none"}}>
@@ -288,9 +271,16 @@ class PlanningDetailsTab extends React.Component {
             value={this.state.value}
             onChange={this.handleChange}
             indicatorColor="primary" >
+            {/* {!this.props.isApproved ? */}
             <Tab onClick={() => this.props.clearSelectedSalesPlans()} classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<StyledBadge badgeContent={this.props.totalSalesData} color="primary" invisible={this.state.invisible1}>
             <>Sales Order</>
-            </StyledBadge >} />}
+            </StyledBadge >} />
+            {/* :  */}
+            {/* <Tab onClick={() => this.props.clearSelectedSalesPlans()} classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<StyledBadge badgeContent={this.props.ApprovedSalesData} color="primary" invisible={this.state.invisible1}>
+            <>Sales Order</>
+            </StyledBadge >} /> } */}
+
+
             <Tab onClick={() => this.props.clearSelectedServicePlans()} classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<StyledBadge badgeContent={this.props.totalServiceData} color="primary" invisible={this.state.invisible2}>
             <>Service Order</>
             </StyledBadge >} />
@@ -299,7 +289,11 @@ class PlanningDetailsTab extends React.Component {
         <div className="filters-container">
           {this._renderFilter()}
         </div>
-          {value === 0 && <TabContainer dir={theme.direction} ><div>{this._renderSalesOrderList()}</div> </TabContainer>}
+    {value === 0 && <TabContainer dir={theme.direction} >
+      {/* {!this.props.isApproved ?  */}
+    <div>{this._renderSalesOrderList()}</div> 
+    {/* <div>{this._renderApprovedSalesOrderList()}</div>}   */}
+    </TabContainer>}
         {value === 1 && <TabContainer dir={theme.direction} ><div>{this._renderServiceOrderList()}</div></TabContainer>}
       </div>
     );

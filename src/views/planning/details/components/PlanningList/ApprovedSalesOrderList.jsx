@@ -204,10 +204,13 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
     }else{
       return(
           <>
-        <div>
+        <Table classes={{ root: 'table' }} className="table">
+          {this.showTableHead()}
+        <TableBody classes={{ root: 'table-body' }}>
           <h1>DATA TIDAK ADA</h1>
           {this.showTableEmpty()}
-        </div>
+        </TableBody>
+        </Table>
         </>
        )
     }
