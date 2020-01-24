@@ -28,6 +28,10 @@ export default class PlanningListHeader extends React.PureComponent {
 							<InputButton titles="Serial Number" placeholder="Serial Number" onSearch={this.props.onSearch} sort="SerialNumber"/> :
 						this.props.name === 'Work Order' ?
 							<InputButton titles="Work Order" placeholder="WO" onSearch={this.props.onSearch} sort="Wo"/> :
+						this.props.name === 'SMR' ?
+							<InputButton titles='SMR' placeholder="SMR" onSearch={this.props.onSearch} sort="SMR"/> :
+						this.props.name === 'SMR Date' ?
+							<InputButton titles='SMR Date' title="SMR Date"/> :
 							<TableSortLabel
 								active={this.props.isActive}
 								IconComponent={this.props.isAscending ? KeyboardArrowUp : KeyboardArrowDown}

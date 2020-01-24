@@ -136,18 +136,21 @@ export default class SalesOrderList extends React.PureComponent {
                 name="Part Number"
               // //   isActive={this.props.sortJobsByState.backlogOpen.isActive}
                 delay={300}
+                onSearch={this.props.onSearchComp}
               // //   isAscending={this.props.sortJobsByState.backlogOpen.isAscending}
               />
               <PlanningListHeader
                 name="Unit Code"
               // //   isActive={this.props.sortJobsByState.plantExecution.isActive}
                 delay={300}
+                onSearch={this.props.onSearchComp}
               // //   isAscending={this.props.sortJobsByState.plantExecution.isAscending}
               />
               <PlanningListHeader
                 name="Serial Number"
               // //   isActive={this.props.sortJobsByState.status.isActive}
                 delay={300}
+                onSearch={this.props.onSearchComp}
               // //   isAscending={this.props.sortJobsByState.status.isAscending}            
               />
               <PlanningListHeader
@@ -161,6 +164,16 @@ export default class SalesOrderList extends React.PureComponent {
               // //   isActive={this.props.sortJobsByState.staging.isActive}
                 delay={300}
               // //   isAscending={this.props.sortJobsByState.staging.isAscending}
+              />
+              <PlanningListHeader
+                name="SMR"
+                delay={300}
+                onSearch={this.props.onSearchComp}
+              />
+              <PlanningListHeader
+                name="SMR Date"
+                delay={300}
+                onSearch={this.props.onSearchComp}
               />
               <Typography
                 name="Action" style={{marginTop: "10px"}}
@@ -198,6 +211,8 @@ export default class SalesOrderList extends React.PureComponent {
         }
         </TableCell>
         <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
+        <TableCell align="left" className="table-cell"> Unknown </TableCell>
+        <TableCell align="left" className="table-cell"> Unknowns </TableCell>
         <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.So} /></TableCell>
       </TableRow>
     )

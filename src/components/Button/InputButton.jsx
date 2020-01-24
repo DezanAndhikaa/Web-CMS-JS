@@ -47,7 +47,7 @@ export default class InputButton extends React.Component{
                     </Modal>
                 </div>
             )
-        }else if(this.props.titles === "SO" || this.props.titles ==="Work Order"){
+        }else if(this.props.titles === "SO" || this.props.titles ==="Work Order" || this.props.titles ==="SMR"){
             return(
                 <div className="button-rows">
                     <Paper className={this.props.className || 'global-search-pk'} elevation={1}>
