@@ -136,18 +136,21 @@ export default class SalesOrderList extends React.PureComponent {
                 name="Part Number"
               // //   isActive={this.props.sortJobsByState.backlogOpen.isActive}
                 delay={300}
+                onSearch={this.props.onSearchComp}
               // //   isAscending={this.props.sortJobsByState.backlogOpen.isAscending}
               />
               <PlanningListHeader
                 name="Unit Code"
               // //   isActive={this.props.sortJobsByState.plantExecution.isActive}
                 delay={300}
+                onSearch={this.props.onSearchComp}
               // //   isAscending={this.props.sortJobsByState.plantExecution.isAscending}
               />
               <PlanningListHeader
                 name="Serial Number"
               // //   isActive={this.props.sortJobsByState.status.isActive}
                 delay={300}
+                onSearch={this.props.onSearchComp}
               // //   isAscending={this.props.sortJobsByState.status.isAscending}            
               />
               <PlanningListHeader

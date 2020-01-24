@@ -13,6 +13,18 @@ const Badges = withStyles(theme => ({
 	},
 }))(Badge);
 
+const DotBadges = withStyles(theme => ({
+	badge: {
+        top: -1,
+		left: 4,
+        border: '2px solid white',
+        width: 'auto',
+        minWidth: '15px',
+        height: '15px',
+        borderRadius: '50%'
+	},
+}))(Badge);
+
 class NotifButton extends React.PureComponent {
 	render() {
 		if(this.props.titles === "Notif"){
@@ -26,9 +38,9 @@ class NotifButton extends React.PureComponent {
         } else if (this.props.titles === "History"){
             return(
                 <div className="notif-history">
-                    <Badges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
+                    <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
                         <img src={IconHistory} className="icon-notif" alt="" /><span className="label-history">Tracking History</span>
-                    </Badges>
+                    </DotBadges>
                 </div>
             )
         }

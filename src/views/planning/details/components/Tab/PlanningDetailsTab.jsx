@@ -288,11 +288,11 @@ class PlanningDetailsTab extends React.Component {
             indicatorColor="primary" >
             <Tab onClick={() => this.props.clearSelectedSalesPlans()} classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
               label={<StyledBadge badgeContent={this.props.totalSalesData} color="primary" invisible={this.state.invisible1}>
-              <div className="label">Sales Order</div>
+              <div className="tab-label">Sales Order</div>
             </StyledBadge >} />}
             <Tab onClick={() => this.props.clearSelectedServicePlans()} classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
               label={<StyledBadge badgeContent={this.props.totalServiceData} MatBadgeSize="medium" color="primary" invisible={this.state.invisible2}>
-              <div className="label">Service Order</div>
+              <div className="tab-label">Service Order</div>
             </StyledBadge >} />
           </Tabs>
         </AppBar>
