@@ -203,7 +203,7 @@ export default class SalesOrderList extends React.PureComponent {
     )
   }
 
-  showTableEmpty(){
+  showLoading(){
     if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
       return(
         <div className="loading-container">
@@ -214,10 +214,23 @@ export default class SalesOrderList extends React.PureComponent {
             />
         </div>
       )
+    }else if(this.props.fetchStatusSales === ApiRequestActionsStatus.FAILED){
+      return(
+        <div className="loading-container">
+          OOPS THERE WAS AN ERROR :'(
+        </div>
+      )
+    }else if(this.props.salesOrderList.Lists.length === 0){
+      return(
+        <div className="loading-container">
+          DATA NOT FOUND
+        </div>
+      )
     }
   }
 
 render(){
+  
       if(this.props.salesOrderListApproved.Lists.length > 0 ){
         return(
           <>
@@ -230,7 +243,7 @@ render(){
                 ))}
             </TableBody>
           </Table>
-          {this.showTableEmpty()}
+          {this.showLoading()}
           </>
         )
       }else if(this.props.salesOrderListDeleted.Lists.length > 0 ){
@@ -245,7 +258,7 @@ render(){
               ))}
             </TableBody>
           </Table>
-          {this.showTableEmpty()}
+          {this.showLoading()}
           </>
         )
       }else{
@@ -260,7 +273,7 @@ render(){
                 ))}
               </TableBody>
             </Table>
-            {this.showTableEmpty()}
+            {this.showLoading()}
           </>
         )
       }

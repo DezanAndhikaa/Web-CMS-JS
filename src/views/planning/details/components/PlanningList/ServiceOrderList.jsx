@@ -156,7 +156,7 @@ export default class ServiceOrderList extends React.PureComponent {
     )
   }
 
-  showTableEmpty(){
+  showLoading(){
     if(this.props.fetchStatusService === ApiRequestActionsStatus.LOADING){
       return(
         <div className="loading-container">
@@ -165,6 +165,18 @@ export default class ServiceOrderList extends React.PureComponent {
             alt="loading-spinner"
             className="loading-icon"
             />
+        </div>
+      )
+    }else if(this.props.fetchStatusService === ApiRequestActionsStatus.FAILED){
+      return(
+        <div className="loading-container">
+          OOPS THERE WAS AN ERROR :'(
+        </div>
+      )
+    }else if(this.props.serviceOrderList.Lists.length === 0){
+      return(
+        <div className="loading-container">
+          DATA NOT FOUND
         </div>
       )
     }
@@ -183,7 +195,7 @@ export default class ServiceOrderList extends React.PureComponent {
             ))}
           </TableBody>
         </Table>
-        {this.showTableEmpty()}
+        {this.showLoading()}
         </>
       )
     }else if(this.props.serviceOrderListDeleted.Lists.length > 0 ){
@@ -198,7 +210,7 @@ export default class ServiceOrderList extends React.PureComponent {
             ))}
           </TableBody>
         </Table>
-        {this.showTableEmpty()}
+        {this.showLoading()}
         </>
       )
     }else{
@@ -213,7 +225,7 @@ export default class ServiceOrderList extends React.PureComponent {
             ))}
           </TableBody>
         </Table>
-        {this.showTableEmpty()}
+        {this.showLoading()}
         </>
        )
     }

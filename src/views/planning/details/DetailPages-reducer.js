@@ -154,6 +154,13 @@ const initialServiceParameter = {
 	// pageSize: 10,
 };
 
+const initialFilterParameter = {
+	PageNumber : 1,
+	PageSize: 2,
+	Sort: '',
+	Filter: []
+};
+
 const initialSelectedAssignment = {
 	selectedService: [],
 	selectedSales: [],
@@ -478,69 +485,66 @@ export function salesParameterReducer(state = initialSalesParameter, action) {
 	return state;
 }
 
-export function filterParameterReducer(state = initialSalesParameter, action){
-	console.log('dumgg',state)
+export function filterParameterReducer(state = initialFilterParameter, action){
 	if (action.type === SelectCustomerFilterAction)
-		if(state.dataFilter.Filter.length === 0){ //IF yang pertama ini,jika filternya belum di isi apa2 (filter belum di jalankan)
-			// console.log('dumgg1', state)
-			return {...state.dataFilter, PageSize: action.page, Filter : [{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
+		if(state.Filter.length === 0){ //IF yang pertama ini,jika filternya belum di isi apa2 (filter belum di jalankan)
+			return {...state, PageSize: action.page, Filter : [{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
 		}else{
-			for(let i=0; i<state.dataFilter.Filter.length; i++){ //FOR di sini untuk mengecek pada objek sebelumnya
-				if(state.dataFilter.Filter[i].Field === action.head){ //JIKA pada objek sebelumnya pada "field" ada yang sama, maka akan merubah nilai pada "value" tersebut tanpa menambah array
+			for(let i=0; i<state.Filter.length; i++){ //FOR di sini untuk mengecek pada objek sebelumnya
+				if(state.Filter[i].Field === action.head){ //JIKA pada objek sebelumnya pada "field" ada yang sama, maka akan merubah nilai pada "value" tersebut tanpa menambah array
 					if(action.payload.includes('All') ){
-						state.dataFilter.Filter.splice(i,1);
-						return {dataFilter : {Filter : state.dataFilter.Filter }};
+						state.Filter.splice(i,1);
+						return { ...state, Filter : state.Filter };
 					}
-					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
+					return { ...state, Filter : state.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) };
 				}
 			}
-			console.log('pantek', {...state.dataFilter, Filter : [...state.dataFilter.Filter,{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}]});
-			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
+			return { ...state, Filter : [...state.Filter,{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
 		}
 	if(action.type === SelectSiteFilterAction)
-		if(state.dataFilter.Filter.length === 0){
-			return {...state.dataFilter, Filter : [{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}], PageSize: action.page};
+		if(state.Filter.length === 0){
+			return {...state, PageSize: action.page, Filter : [{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
 		}else{
-			for(let i=0; i<state.dataFilter.Filter.length; i++){
-				if(state.dataFilter.Filter[i].Field === action.head){
+			for(let i=0; i<state.Filter.length; i++){
+				if(state.Filter[i].Field === action.head){
 					if(action.payload.includes('All') ){
-						state.dataFilter.Filter.splice(i,1);
-						return {dataFilter : {Filter : state.dataFilter.Filter }};
+						state.Filter.splice(i,1);
+						return { ...state, Filter : state.Filter };
 					}
-					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
+					return { ...state, Filter : state.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) };
 				}
 			}
-			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
+			return { ...state, Filter : [...state.Filter,{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
 		}
 	if (action.type === SelectUnitModelFilterAction)
-		if(state.dataFilter.Filter.length === 0){
-			return {...state.dataFilter, Filter : [{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}], PageSize: action.page};
+		if(state.Filter.length === 0){
+			return {...state, PageSize: action.page, Filter : [{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
 		}else{
-			for(let i=0; i<state.dataFilter.Filter.length; i++){
-				if(state.dataFilter.Filter[i].Field === action.head){
+			for(let i=0; i<state.Filter.length; i++){
+				if(state.Filter[i].Field === action.head){
 					if(action.payload.includes('All') ){
-						state.dataFilter.Filter.splice(i,1);
-						return {dataFilter : {Filter : state.dataFilter.Filter }};
+						state.Filter.splice(i,1);
+						return { ...state, Filter : state.Filter };
 					}
-					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
+					return { ...state, Filter : state.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) };
 				}
 			}
-			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
+			return { ...state, Filter : [...state.Filter,{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
 		}
 	if (action.type === SelectComponentFilterAction)
-		if(state.dataFilter.Filter.length === 0){
-			return {...state.dataFilter, Filter : [{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}], PageSize: action.page};
+		if(state.Filter.length === 0){
+			return {...state, PageSize: action.page, Filter : [{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
 		}else{
-			for(let i=0; i<state.dataFilter.Filter.length; i++){
-				if(state.dataFilter.Filter[i].Field === action.head){
+			for(let i=0; i<state.Filter.length; i++){
+				if(state.Filter[i].Field === action.head){
 					if(action.payload.includes('All') ){
-						state.dataFilter.Filter.splice(i,1);
-						return {dataFilter : {Filter : state.dataFilter.Filter }};
+						state.Filter.splice(i,1);
+						return { ...state, Filter : state.Filter };
 					}
-					return { dataFilter : {Filter : state.dataFilter.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) }};		
+					return { ...state, Filter : state.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) };
 				}
 			}
-			return {dataFilter: {Filter : [...state.dataFilter.Filter,{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] }};
+			return { ...state, Filter : [...state.Filter,{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
 		}
 	return state;
 }
