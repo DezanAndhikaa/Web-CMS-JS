@@ -4,7 +4,7 @@ import React from 'react';
 // import { ExpandMore } from '@material-ui/icons';
 import './FilterbyDataAction.scss';
 import { Button } from '@material-ui/core';
-import { Menu } from '../../constants';
+
 
 class FilterbyDataAction extends React.Component {
   constructor(props) {
@@ -52,7 +52,7 @@ class FilterbyDataAction extends React.Component {
     return (
       <div className="list-items">
           {/* <Button className="button" variant="outlined" onClick={this.props.onClickPlanningApprove}> */}
-          <Button className="button" variant="outlined" onClick={this.handleClick(Menu.PLANNING_DETAILS_TRACKING)}>
+          <Button className="button" variant="outlined" onClick={this.props.onCliclPlanningApprove}>
             Planning Approved 
           </Button>
           <Button className="button-plan-del" variant="outlined" onClick={this.props.onClickPlanningDelete}>
