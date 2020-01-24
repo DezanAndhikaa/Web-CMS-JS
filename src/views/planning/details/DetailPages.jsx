@@ -325,6 +325,29 @@ componentDidUpdate = (prevProps) => {
         </div>
       )
       }
+      if (this.state.isApproved === true) {
+        const web = this.props.displayMode === 'web';
+      const nextSales = this.props.salesOrderListApproved.NextPage;
+      const prevSales = this.props.salesOrderListApproved.PrevPage;
+      const currentPropsSales = this.props.salesOrderListApproved.PageNumber;
+      const { TotalPages } = this.props.salesOrderListApproved;
+      
+      return(
+        <div className="pagination">
+          <div className="paging">
+            {/* {prevSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
+            {web && currentPropsSales - 3 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 3 })} className="page-inactive">{currentPropsSales - 3}</div>}
+            {web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive">{currentPropsSales - 2}</div>}
+            {currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive">{currentPropsSales - 1}</div>}
+            <div className="page-active">{currentPropsSales}</div>
+            {currentPropsSales + 1 <= TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive">{currentPropsSales + 1}</div>}
+            {web && currentPropsSales + 2 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive">{currentPropsSales + 2}</div>}
+            {web && currentPropsSales + 3 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive">{currentPropsSales + 3}</div>}
+            {/* {nextSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>} */}
+          </div>
+        </div>
+      )
+      }
     }
     if (this.state.isPaging === false) {
       const web = this.props.displayMode === 'web';
@@ -494,7 +517,7 @@ componentDidUpdate = (prevProps) => {
         arr = [...arr, this.props.selectedSalesPlans[i].So]
         // console.log('pantek ini sales ',{arr, IsApprove: true})
       }
-      await this.props.approveSales({arr, IsApprove: true})
+      await this.props.approveSales({So : arr, IsApprove: true})
   }
 };
 
@@ -507,7 +530,7 @@ componentDidUpdate = (prevProps) => {
         arr = [...arr, this.props.selectedServicePlans[i].Wo]
         // console.log('pantek ini service ',{arr, IsApprove: true})
       }
-    await this.props.approveService({arr, IsApprove: true})
+    await this.props.approveService({Wo : arr, IsApprove: true})
     }
   }
 
@@ -521,7 +544,7 @@ componentDidUpdate = (prevProps) => {
         arr = [...arr, this.props.selectedSalesPlans[i].So]
         // console.log('pantek ini sales ',{arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
       }
-      await this.props.deleteSales({arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
+      await this.props.deleteSales({So : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
     }
   }
 
@@ -535,7 +558,7 @@ componentDidUpdate = (prevProps) => {
         arr = [...arr, this.props.selectedServicePlans[i].Wo]
         // console.log('pantek ini service ',{arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
       }
-      await this.props.deleteService({arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
+      await this.props.deleteService({Wo : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
     }
   }
 
@@ -554,6 +577,7 @@ componentDidUpdate = (prevProps) => {
       this.setState({wasApprove : false})
     }
     if (this.state.wasApprove === true) {
+      console.log('skuit pantek', this.props.salesOrderListApproved)
       return(
         <FilterbyDataAction 
           {...this.props}
@@ -688,7 +712,7 @@ componentDidUpdate = (prevProps) => {
           onStats={this.isChangeStat}     
           totalSalesData={this.props.salesOrderList.TotalData}
           totalServiceData={this.props.serviceOrderList.TotalData}
-          ApprovedSalesData={this.props.salesOrderListApproved}
+          ApprovedSalesData={this.props.salesOrderListApproved.TotalData}
           onClickTabHead={this.props.onClickSortBy}
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}

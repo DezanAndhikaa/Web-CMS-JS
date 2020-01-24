@@ -8,6 +8,7 @@ export const RequestMethod = {
 export const Menu = {
 	PLANNING : '/webcms/planning',
 	PLANNING_DETAILS : '/webcms/planning/details',
+	PLANNING_DETAILS_TRACKING: '/webcms/planning/details/tracking-history',
 	PLANNING_DASHBOARD : '/webcms/planning/dashboard',
 	LOGIN: '/webdcajs/',
 	DASHBOARD: '/webdcajs/dashboard',
