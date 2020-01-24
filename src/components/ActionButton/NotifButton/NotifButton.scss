@@ -1,21 +1,22 @@
 .notif-history{
     display: flex;
     flex-direction: row;
+    align-self: flex-end;
     .icon-notif{
-        height: vw(25) !important;
-        margin-right: vw(10);
+        height: 17px; //vw(25) !important
+        margin-right: 10px; //vw(10)
     }
     .label-notif{
         font-family: 'Lato-Bold';
-        font-size: vw(20);
-        line-height: vw(24);
+        font-size: 14px; //vw(20)
+        line-height: 18px; // vw(24)
         color: #3C3B3B;
-        margin-right: vw(50);
+        margin-right: 44px; // vw(50)
     }
     .label-history{
         font-family: 'Lato-Bold';
-        font-size: vw(20);
-        line-height: vw(24);
+        font-size: 14px; //vw(20)
+        line-height: 18px; // vw(24)
         color: #3C3B3B;
     }
 }

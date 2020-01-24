@@ -2,13 +2,14 @@
 @import '../../themes/functions';
 
 .search-input{
-    width: vw(330);
+    width: 263px; //vw(330)
     position: relative;
     background-color: #ffffff !important;
-    border-radius: vw(15) !important;
+    border-radius: vw(10) !important;
     display: flex;
     align-items: center;
-    height: vw((45.07));
+    // height: vw(45.07);
+    height: vw(38.07);
     box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161) !important;
     margin: 0 0 0 vw(22);
     .search-icon{

@@ -61,9 +61,14 @@
 
 .bottom-row{
     // flex: 1;
-    display: flex;
+    // display: flex;
+    // align-self: flex-end;
     // flex-direction: row;
     // margin-top: 1vw;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    margin-top: vw(20);
     .btn-assign{
         display: flex;
         align-items: center;

@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const Badges = withStyles(theme => ({
 	badge: {
+        top: -3,
 		left: -5,
 		fontSize: '10px',
 		border: '2px solid white'
@@ -25,9 +26,9 @@ class NotifButton extends React.PureComponent {
         } else if (this.props.titles === "History"){
             return(
                 <div className="notif-history">
-                    <Badge color="secondary" variant="dot" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
+                    <Badges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
                         <img src={IconHistory} className="icon-notif" alt="" /><span className="label-history">Tracking History</span>
-                    </Badge>
+                    </Badges>
                 </div>
             )
         }

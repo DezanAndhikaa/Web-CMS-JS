@@ -377,13 +377,15 @@ componentDidUpdate = (prevProps) => {
   //KOMPONEN UNTUK GLOBAL SEARCH
   _renderSearchBar(){
     return (
-      <SearchInput
+      <div className="bottom-row">
+        <SearchInput
         {...this.props}
         wasApprove={this.state.wasApprove}
         webInfo="Search"
         onSalesSearch={this.props.onSearchSales}
         onServiceSearch={this.props.onSearchService}
       />
+      </div>
     );
   }
 
@@ -391,8 +393,8 @@ componentDidUpdate = (prevProps) => {
     return (
       <div className="bottom-row">
         <NotifButton 
-        titles = "Notif"
-      />
+          titles = "Notif"
+        />
         <NotifButton 
           titles = "History"
         />

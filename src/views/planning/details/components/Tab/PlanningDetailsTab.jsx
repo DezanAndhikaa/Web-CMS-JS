@@ -25,18 +25,11 @@ const StyledBadge = withStyles(theme => ({
   badge: {
     right: -20,
     top: 10,
-    padding: '8px',
-    borderRadius: '5px'
+    padding: '10px',
+    borderRadius: '5px',
+    fontSize: '15px'
   },
 }))(Badge);
-
-const Badges = withStyles(theme => ({
-	badge: {
-		left: -5,
-		fontSize: '10px',
-		border: '2px solid white'
-	},
-  }))(Badge);
 
 TabContainer.propTypes = {
   children: PropTypes.node.isRequired,
@@ -46,6 +39,7 @@ TabContainer.propTypes = {
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    alignItems: 'center'
   },
   tabsRoot: {
     borderBottom: '1px solid #e8e8e8',
@@ -273,8 +267,13 @@ class PlanningDetailsTab extends React.Component {
             head={"ComponentDescription"}
           />
         </div>
+        {/* <div className="base-button-container"> */}
+          {/* Tampilan HO */}
+          {/* {this.props.renderBaseButton} */}
+        {/* </div> */}
         <div className="search-container">
-          {this.props.renderBaseButton}
+          {/* Tampilan Site */}
+          {this.props.renderSearch}
         </div>
       </div>
     );
@@ -290,25 +289,27 @@ class PlanningDetailsTab extends React.Component {
         <AppBar position="relative" color="default" style={{boxShadow: "none"}}>
 
         {/* Tampilan HO */}
-        <div className="tab-container"> 
+        {/* <div className="tab-container"> 
           {this.props.renderSearch} 
           {this.props.renderFilterByDataAction}
-        </div>
+        </div> */}
         
         {/* Tampilan Site */}
-        {/* <div className="right-side">
+        <div className="tab-container">
             {this.props.renderNotif}
-        </div> */}
+        </div>
           <Tabs 
             classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
             value={this.state.value}
             onChange={this.handleChange}
             indicatorColor="primary" >
-            <Tab onClick={() => this.props.clearSelectedSalesPlans()} classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<StyledBadge badgeContent={this.props.totalSalesData} color="primary" invisible={this.state.invisible1}>
-            <>Sales Order</>
+            <Tab onClick={() => this.props.clearSelectedSalesPlans()} classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+              label={<StyledBadge badgeContent={this.props.totalSalesData} color="primary" invisible={this.state.invisible1}>
+              <div className="label">Sales Order</div>
             </StyledBadge >} />}
-            <Tab onClick={() => this.props.clearSelectedServicePlans()} classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={<StyledBadge badgeContent={this.props.totalServiceData} color="primary" invisible={this.state.invisible2}>
-            <>Service Order</>
+            <Tab onClick={() => this.props.clearSelectedServicePlans()} classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+              label={<StyledBadge badgeContent={this.props.totalServiceData} MatBadgeSize="medium" color="primary" invisible={this.state.invisible2}>
+              <div className="label">Service Order</div>
             </StyledBadge >} />
           </Tabs>
         </AppBar>
