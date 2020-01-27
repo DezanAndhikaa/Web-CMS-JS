@@ -23,8 +23,8 @@ function TabContainer({ children, dir }) {
 }
 const StyledBadge = withStyles(theme => ({
   badge: {
-    right: -20,
-    top: 10,
+    right: -32,
+    // top: 10,
     padding: '10px',
     borderRadius: '5px',
     fontSize: '15px'
@@ -39,7 +39,7 @@ TabContainer.propTypes = {
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    alignItems: 'center'
+    minWidth: 10
   },
   tabsRoot: {
     borderBottom: '1px solid #e8e8e8',
@@ -262,13 +262,45 @@ class PlanningDetailsTab extends React.Component {
     );
   }
 
+  renderTotalSales(){
+    return(
+      <div className="tab-coba">
+        <div className="tab-label">Sales Order 
+          <span>
+            <StyledBadge 
+              badgeContent={this.props.totalSalesData} 
+              color="primary" 
+              invisible={this.state.invisible1}>
+            </StyledBadge >
+          </span> 
+        </div>
+      </div>      
+    )
+  }
+
+  renderTotalService(){
+    return(
+      <div className="tab-coba">
+        <div className="tab-label">Service Order 
+        <span>
+          <StyledBadge 
+            badgeContent={this.props.totalServiceData} 
+            color="primary" 
+            invisible={this.state.invisible2}>
+          </StyledBadge >
+        </span> 
+      </div>
+      </div>      
+    )
+  }
+
   render() {
     const { classes, theme } = this.props;
     const { value } = this.state;
     {!this.props.isApproved ? console.log('skuit kondisi false', this.props.totalSalesData) : console.log('skuit kondisi true', this.props.salesOrderListApproved)}
     return (
         <div className="root">
-        <AppBar position="relative" color="default" style={{boxShadow: "none"}}>
+        <AppBar position="static" color="default" style={{boxShadow: "none"}}>
 
         {/* Tampilan HO */}
         {/* <div className="tab-container"> 
@@ -280,19 +312,23 @@ class PlanningDetailsTab extends React.Component {
         <div className="tab-container">
             {this.props.renderNotif}
         </div>
-          <Tabs 
+          <Tabs
             classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
             value={this.state.value}
             onChange={this.handleChange}
             indicatorColor="primary" >
-            <Tab onClick={() => this.props.clearSelectedSalesPlans()} classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-              label={<StyledBadge badgeContent={this.props.totalSalesData} color="primary" invisible={this.state.invisible1}>
-              <div className="tab-label">Sales Order</div>
-            </StyledBadge >} />}
-            <Tab onClick={() => this.props.clearSelectedServicePlans()} classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-              label={<StyledBadge badgeContent={this.props.totalServiceData} MatBadgeSize="medium" color="primary" invisible={this.state.invisible2}>
-              <div className="tab-label">Service Order</div>
-            </StyledBadge >} />
+            <Tab 
+              centered={true}
+              onClick={() => this.props.clearSelectedSalesPlans()} 
+              classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+              label= {this.renderTotalSales()} 
+            />
+            <Tab 
+              centered={true}
+              onClick={() => this.props.clearSelectedServicePlans()} 
+              classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+              label= {this.renderTotalService()}
+            />
           </Tabs>
         </AppBar>
         <div className="filters-container">

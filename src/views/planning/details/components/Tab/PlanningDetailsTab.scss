@@ -36,13 +36,20 @@
       }
     }
 }
-
-.tab-label{
-    font-family: 'Lato-Bold';
-    font-size: 22 vw; //vw(20)
-    line-height: vw(24); // vw(24)
-    // color: #3C3B3B;
-    // margin-right: 44px; // vw(50)
+.tab-coba{
+    width: 100%;
+    display: inline-flex;
+    // align-items: center;
+    // flex-direction: row; 
+    // justify-content: center;
+    .tab-label{
+        font-family: 'Lato-Bold';
+        font-size: vw(22); //vw(20)
+        line-height: vw(24); // vw(24)
+        width: 170px;
+        // color: #3C3B3B;
+        // margin-right: 44px; // vw(50)
+    }
 }
 
 .tab-container{

@@ -81,7 +81,9 @@ export default class SalesOrderList extends React.PureComponent {
           return (
             <TableHead className="table-head" classes={{ root: 'table-head' }}>
             <TableRow classes={{ root: 'table-row' }}>
-              <TableCell padding="checkbox">
+              {/* Nanti ada if user ho atau site
+              Ini tampilan HO */}
+              {/* <TableCell padding="checkbox">
                 {this.props.displaySalesCheckbox && 
                 <Checkbox 
                   checked={this.state.checkedValue}
@@ -89,7 +91,9 @@ export default class SalesOrderList extends React.PureComponent {
                   this.props.onChoosedSales(row,id))}}
                   onChange={this.handleClick}
                   className="checkbox-checked-header"/>}
-              </TableCell>
+              </TableCell> */}
+
+              {/* Ini tampilan Site */}
               <PlanningListHeader
                 name="SO"
                 // isActive={this.props.sortJobsByState.unitModel.isActive}
@@ -168,11 +172,12 @@ export default class SalesOrderList extends React.PureComponent {
                 delay={300}
                 onSearch={this.props.onSearchComp}
               />
-              <Typography
+              {/* Ini tampilan HO, site gaada action */}
+              {/* <Typography
                 name="Action" style={{marginTop: "10px"}}
               // //   isActive={this.props.sortJobsByState.staging.isActive}
               // //   isAscending={this.props.sortJobsByState.staging.isAscending}
-              >Action</Typography>
+              >Action</Typography> */}
             </TableRow>
           </TableHead>
         )
@@ -182,14 +187,16 @@ export default class SalesOrderList extends React.PureComponent {
   showTableBody(row,id) {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
-        <TableCell padding="checkbox">
+        {/* Nanti ada if user ho atau site
+              Ini tampilan HO */}
+        {/* <TableCell padding="checkbox">
           {this.props.displaySalesCheckbox && 
           <Checkbox 
           disabled={this.isCheckboxAvailable(row)} 
           checked={this.props.selectedSalesPlanList.some((plans) => plans.So === row.So)} 
           onClick={() => this.props.onChoosedSales(row)} 
           classes={{ checked: 'checkbox-checked' }} />}
-        </TableCell>
+        </TableCell> */}
         <TableCell align="left" className="table-cell"> {row.So} </TableCell>
         <TableCell align="left" className="table-cell"> {row.Customer} </TableCell>
         <TableCell align="left" className="table-cell"> {row.Site} </TableCell>
@@ -206,7 +213,8 @@ export default class SalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
         <TableCell align="left" className="table-cell"> Unknown </TableCell>
         <TableCell align="left" className="table-cell"> Unknowns </TableCell>
-        <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.So} /></TableCell>
+        {/* Ini tampilan HO, site gaada action */}
+        {/* <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.So} /></TableCell> */}
       </TableRow>
     )
   }
