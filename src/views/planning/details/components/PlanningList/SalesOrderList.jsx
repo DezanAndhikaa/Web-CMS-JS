@@ -54,16 +54,9 @@ export default class SalesOrderList extends React.PureComponent {
         }, 
         () => this.props.putLifetimeComp(this.state.putLifetime) 
         )
-        await this.props.putLifetimeComp(this.state.putLifetime)
+        // await this.props.putLifetimeComp(this.state.putLifetime)
         await this.props.onClickSalesOrder();
     }
-    // else if(this.state.stats === 1){
-    //   this.props.putLifetimeComp(this.state.putLifetime)
-    //   this.setState({
-    //     stats: 3
-    //   })
-    //   this.props.onClickSalesOrder();
-    // }
 
     isCheckboxAvailable = (data) => {
       let isAvailable = false;

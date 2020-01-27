@@ -146,7 +146,7 @@ export function putLifetimeCompAction(payload){
 	console.log('kopi kopi kopi');
 	const requestConfig = {
 		method: RequestMethod.PUT,
-		url: `${ApiUrlBase.SALESORDER_API_URL}`,
+		url: `${ApiUrlBase.SALESORDER_API_URL}/LifeTimeComponent`,
 		headers: {
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
