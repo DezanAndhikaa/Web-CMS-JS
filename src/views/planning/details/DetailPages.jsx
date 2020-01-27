@@ -9,6 +9,7 @@ import SearchInput from "../../../components/Searchbar/SearchInput";
 import BaseButton from '../../../components/Button/BaseButton';
 import FilterbyDataAction from '../../../components/FilterByDataAction/FilterbyDataAction';
 import NotifButton from '../../../components/ActionButton/NotifButton/NotifButton';
+import {Snackbar, Button} from '@material-ui/core';
 
 class DetailPages extends React.Component{
     constructor(props) {
@@ -20,6 +21,7 @@ class DetailPages extends React.Component{
         showPerPage : 0,
         wasApprove: true,
         isApproved: false,
+        snak: true,
         // nextPage: true,
         // prevPage: false,
         // numberOfPage: 2,
@@ -724,6 +726,36 @@ componentDidUpdate = (prevProps) => {
       </>
     );
   };
+
+  // handleClick = () =>{
+  //   this.setState({
+  //     snak: true
+  //   })
+  // }
+
+  // handleClose = () => {
+  //   this.setState({
+  //     snak: false
+  //   })
+  // }
+
+  // butt(){
+  //   return(
+  //     <div>
+  //     {/* <Button onClick={this.handleClick}>Open simple snackbar</Button> */}
+  //     <Snackbar
+  //       anchorOrigin={{
+  //         vertical: 'bottom',
+  //         horizontal: 'left',
+  //       }}
+  //       open={this.state.snak}
+  //       onClose={this.handleClose}
+  //       autoHideDuration={2000}
+  //       message="Note archived"
+  //     />
+  //   </div>
+  //   )
+  // }
 
   render(){      
     return(
