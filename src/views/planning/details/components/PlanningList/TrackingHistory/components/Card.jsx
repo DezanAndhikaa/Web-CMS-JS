@@ -1,75 +1,54 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import SkipNextIcon from '@material-ui/icons/SkipNext';
-import '../../../../../../../components/FilterByTitle/DropdownFilter.scss';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
 	card: {
 		display: 'inline-block',
+		maxWidth: 345,
 		marginTop: 130,
 		marginLeft: 100
 	},
-	details: {
-		display: 'flex',
-		flexDirection: 'column',
+	media: {
+		height: 140,
 	},
-	content: {
-		flex: '1 0 auto',
-	},
-	cover: {
-		width: 151,
-	},
-	controls: {
-		display: 'flex',
-		alignItems: 'center',
-		paddingLeft: theme.spacing(1),
-		paddingBottom: theme.spacing(1),
-	},
-	playIcon: {
-		height: 38,
-		width: 38,
-	},
-}));
+});
 
-export default function MediaControlCard() {
+export default function MediaCard() {
 	const classes = useStyles();
-	const theme = useTheme();
 
 	return (
 		<Card className={classes.card}>
-			<div className={classes.details}>
-				<CardContent className={classes.content}>
-					<Typography component="h5" variant="h5">
-            Live From Space
+			<CardActionArea>
+				<CardMedia
+					className={classes.media}
+					image="/static/images/cards/contemplative-reptile.jpg"
+					title="Contemplative Reptile"
+				/>
+				<CardContent>
+					<Typography gutterBottom variant="h5" component="h2">
+            Lizard
 					</Typography>
-					<Typography variant="subtitle1" color="textSecondary">
-            Mac Miller
+					<Typography variant="body2" color="textSecondary" component="p">
+            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+            across all continents except Antarctica
 					</Typography>
 				</CardContent>
-				<div className={classes.controls}>
-					<IconButton aria-label="previous">
-						{theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
-					</IconButton>
-					<IconButton aria-label="play/pause">
-						<PlayArrowIcon className={classes.playIcon} />
-					</IconButton>
-					<IconButton aria-label="next">
-						{theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
-					</IconButton>
-				</div>
-			</div>
-			<CardMedia
-				className={classes.cover}
-				image="/static/images/cards/live-from-space.jpg"
-				title="Live from space album cover"
-			/>
+			</CardActionArea>
+			<CardActions>
+				<Button size="small" color="primary">
+          Share
+				</Button>
+				<Button size="small" color="primary">
+          Learn More
+				</Button>
+			</CardActions>
 		</Card>
 	);
-}
+}	
