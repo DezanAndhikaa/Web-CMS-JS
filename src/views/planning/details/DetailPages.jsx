@@ -418,6 +418,7 @@ componentDidUpdate = (prevProps) => {
         />
         <NotifButton 
           titles = "History"
+          history={this.props.history}
         />
       </div>
     )
