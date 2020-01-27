@@ -4,7 +4,7 @@
     align-self: flex-end;
     cursor: pointer;
     .icon-notif{
-        height: 17px; //vw(25) !important
+        height: 18px; //vw(25) !important
         margin-right: 10px; //vw(10)
     }
     .label-notif{
@@ -20,4 +20,8 @@
         line-height: 18px; // vw(24)
         color: #3C3B3B;
     }
+}
+.notif-history:hover{
+    color: yellow;
+    cursor: pointer;
 }
