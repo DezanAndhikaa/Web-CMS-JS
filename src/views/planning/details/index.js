@@ -1,8 +1,8 @@
-import { push } from 'connected-react-router';
+// import { push } from 'connected-react-router';
 import { connect } from 'react-redux';
 import { PlansReducers } from './DetailPages-reducer';
-import { storeDataAction } from '../../../core/StorageHelper';
-import { PLAN_DATA, StorageKey } from '../../../constants';
+// import { storeDataAction } from '../../../core/StorageHelper';
+// import { PLAN_DATA, StorageKey } from '../../../constants';
 import {
 	// approveSalesAction,
 	// unapproveSalesAction,
@@ -95,8 +95,8 @@ const mapDispatchToProps = (dispatch) => ({
 	onSearchService: (keyword) => dispatch(searchAction(SearchServiceAction, keyword)),
 	onSearchComp: (keyword,sort) => dispatch(searchCompAction(SearchCompAction, keyword, sort)),
 	onSearchCompService: (keyword, sort) => dispatch(searchCompActionService(SearchCompActionService, keyword, sort)),
-	pushTo: (url) => dispatch(push(url)),
-	savePlanData: (data) => dispatch(storeDataAction(PLAN_DATA, StorageKey.PLAN_DATA, data)),
+	// pushTo: (url) => dispatch(push(url)),
+	// savePlanData: (data) => dispatch(storeDataAction(PLAN_DATA, StorageKey.PLAN_DATA, data)),
 	selectFilter: (type, payload) => dispatch(selectFilterAction(type, payload)),
 	selectFilter2: (type, payload, head, page) => dispatch(selectFilterAction2(type, payload, head, page)),
 	indexFilter: (type, payload) => dispatch(indexFilterAction(type, payload)),

@@ -96,21 +96,30 @@ class PlanningDetailsTab extends React.Component {
 
 
   handleChange = (event, value) => {
-    if (this.state.value === 1) {
+console.log('kondisi value terasek', value)
+    if (value === 0) {
       this.props.onPage(this.state.value);
       this.props.wasApprove(this.state.value);
+      if (this.state.invisible1) {
+        this.setState({
+          invisible2 : true
+        })
+      }
       this.setState({
-        invisible1 : !this.state.invisible1,
-        invisible2 : !this.state.invisible2,
+        invisible1 : false,
         value,
       })
     }
-    if (this.state.value === 0) {
+    if (value === 1) {    
       this.props.onPage(this.state.value);
       this.props.wasApprove(this.state.value);
+      if (this.state.invisible2) {
+        this.setState({
+          invisible1 : true
+        })
+      }
       this.setState({
-        invisible1 : !this.state.invisible1,
-        invisible2 : !this.state.invisible2,
+        invisible2 : false,
         value
       })
     }
@@ -128,16 +137,6 @@ class PlanningDetailsTab extends React.Component {
         />
       </div>
     );
-  }
-
-  _renderApprovedSalesOrderList(){
-    return(
-      <div className="planning-list-containers">
-        <ApprovedSalesOrderList 
-        {...this.props}
-        />
-      </div>
-    )
   }
 
   _renderServiceOrderList(){
@@ -266,6 +265,18 @@ class PlanningDetailsTab extends React.Component {
     const { classes, theme } = this.props;
     const { value } = this.state;
     {!this.props.isApproved ? console.log('skuit kondisi false', this.props.totalSalesData) : console.log('skuit kondisi true', this.props.salesOrderListApproved)}
+    console.log('skuit kondisi true', this.props.salesOrderListApproved)
+    // if (value === 0) {
+    //   this.setState({
+    //     invisible1 : false
+    //   })
+    // }
+    // if (value === 1) {
+    //   this.setState({
+    //     invisible1 : true,
+    //     invisible2 : false
+    //   })
+    // }
     return (
         <div className="root">
         <AppBar position="relative" color="default" style={{boxShadow: "none"}}>
