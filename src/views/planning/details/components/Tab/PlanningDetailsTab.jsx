@@ -23,6 +23,15 @@ function TabContainer({ children, dir }) {
 }
 const StyledBadge = withStyles(theme => ({
   badge: {
+    right: -42,
+    padding: '10px',
+    borderRadius: '5px',
+    fontSize: '15px'
+  },
+}))(Badge);
+
+const Badges = withStyles(theme => ({
+  badge: {
     right: -32,
     // top: 10,
     padding: '10px',
@@ -39,16 +48,19 @@ TabContainer.propTypes = {
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    minWidth: 10
+    minWidth: 10,
+    alignItem: 'center'
   },
   tabsRoot: {
     borderBottom: '1px solid #e8e8e8',
+    alignItem: 'center'
   },
   tabsIndicator: {
     backgroundColor: '#1890ff',
   },
   tabRoot: {
     textTransform: 'initial',
+    alignItem: 'center',
     marginLeft:0,
     // minWidth: 72,
     fontWeight: theme.typography.fontWeightRegular,
@@ -283,11 +295,11 @@ class PlanningDetailsTab extends React.Component {
       <div className="tab-coba">
         <div className="tab-label">Service Order 
         <span>
-          <StyledBadge 
+          <Badges 
             badgeContent={this.props.totalServiceData} 
             color="primary" 
             invisible={this.state.invisible2}>
-          </StyledBadge >
+          </Badges >
         </span> 
       </div>
       </div>      

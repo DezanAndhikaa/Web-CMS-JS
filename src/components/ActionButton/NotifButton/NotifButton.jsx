@@ -1,6 +1,6 @@
 import React from 'react';
 import './NotifButton.scss';
-import Badge from '@material-ui/core/Badge';
+import {Badge, Button} from '@material-ui/core/';
 import { IconNotif, IconHistory } from '../../../assets/icons';
 import { withStyles } from '@material-ui/core/styles';
 import { Menu } from '../../../constants';
@@ -51,7 +51,7 @@ class NotifButton extends React.PureComponent {
                     </DotBadges>
                 </div>
             )
-        }
+        } 
 	}
 }
 
