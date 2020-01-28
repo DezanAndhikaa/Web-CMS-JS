@@ -29,7 +29,7 @@ import {
 	SelectSiteFilterAction,SelectUnitModelFilterAction,
 	// SelectUnitModelFilterAction,
 	SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, UpdateServiceParameterAction,
-	FetchSalesAction,
+	FetchSalesAction, PutLifetimeComp,
 	SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc,
 	// UnassignPlansAction, 
 	UnselectSalesPlanAction, UnselectServicePlanAction,
@@ -320,6 +320,24 @@ const initialMechanicsState = { data: [], status: ApiRequestActionsStatus.IDLE }
 
 export function fetchSalesReducer(state = initialSalesState, action) {
 	if (action.type === FetchSalesAction) {
+	  switch (action.status) {
+		case ApiRequestActionsStatus.SUCCEEDED:
+		  return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		case ApiRequestActionsStatus.FAILED:
+		  return {
+				data: initialSalesState.data,
+				status: ApiRequestActionsStatus.FAILED,
+				error: action.error,
+		  };
+		default:
+		  return { data: initialSalesState.data, status: ApiRequestActionsStatus.LOADING };
+	  }
+	}
+	return state;
+}
+
+export function fetchPutLifetimeReducer(state = initialSalesState, action) {
+	if (action.type === PutLifetimeComp) {
 	  switch (action.status) {
 		case ApiRequestActionsStatus.SUCCEEDED:
 		  return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
@@ -790,7 +808,8 @@ const PlansReducers = combineReducers({
 	searchComp: searchCompReducer,
 	selectedPlanData: storePlanDataReducer,
 	approveSalesDownloaded : downloadApprovedSalesReducer,
-	approveServiceDownloaded : downloadApprovedServiceReducer
+	approveServiceDownloaded : downloadApprovedServiceReducer,
+	putLifetimeList: fetchPutLifetimeReducer
 });
 
 export { PlansReducers };

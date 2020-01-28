@@ -727,36 +727,6 @@ componentDidUpdate = (prevProps) => {
     );
   };
 
-  // handleClick = () =>{
-  //   this.setState({
-  //     snak: true
-  //   })
-  // }
-
-  // handleClose = () => {
-  //   this.setState({
-  //     snak: false
-  //   })
-  // }
-
-  // butt(){
-  //   return(
-  //     <div>
-  //     {/* <Button onClick={this.handleClick}>Open simple snackbar</Button> */}
-  //     <Snackbar
-  //       anchorOrigin={{
-  //         vertical: 'bottom',
-  //         horizontal: 'left',
-  //       }}
-  //       open={this.state.snak}
-  //       onClose={this.handleClose}
-  //       autoHideDuration={2000}
-  //       message="Note archived"
-  //     />
-  //   </div>
-  //   )
-  // }
-
   render(){      
     return(
         <main className="content">

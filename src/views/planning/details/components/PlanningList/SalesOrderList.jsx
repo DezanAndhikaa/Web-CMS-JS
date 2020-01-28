@@ -10,6 +10,7 @@ import InputButton from '../../../../../components/Button/InputButton';
 import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+import { NotificationManager } from 'react-notifications';
 import {Snackbar, Button} from '@material-ui/core';
 
 export default class SalesOrderList extends React.PureComponent {
@@ -210,6 +211,18 @@ export default class SalesOrderList extends React.PureComponent {
     )
   }
 
+  handleClick = () =>{
+    this.setState({
+      snak: true
+    })
+  }
+
+  handleClose = () => {
+    this.setState({
+      stats: false
+    })
+  }
+
   showLoading(){
     if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
       return(
@@ -221,7 +234,21 @@ export default class SalesOrderList extends React.PureComponent {
             />
         </div>
       )
-    }else if(this.props.fetchStatusSales === ApiRequestActionsStatus.FAILED){
+    }else if(this.props.fetchStatusPutLifetime === ApiRequestActionsStatus.LOADING){
+      return(
+            <div>
+            <Snackbar
+              anchorOrigin={{ vertical: 'center',horizontal: 'right'}}
+              bodyStyle={{ backgroundColor: 'teal', color: 'coral' }}
+              open={this.state.stats}
+              onClose={this.handleClose}
+              autoHideDuration={3000}
+              message="Please Wait. Page will reload automatically"
+            />
+          </div>
+          )
+    }
+    else if(this.props.fetchStatusSales === ApiRequestActionsStatus.FAILED){
       return(
         <div className="loading-container">
           OOPS THERE WAS AN ERROR :'(
@@ -237,37 +264,7 @@ export default class SalesOrderList extends React.PureComponent {
   }
 
 render(){
-      // if(this.props.salesOrderListApproved.Lists.length > 0 ){
-      //   return(
-      //     <>
-      //     <Table classes={{ root: 'table' }} className="table">
-      //     {this.showTableHead()}
-      //     <TableBody classes={{ root: 'table-body' }}>
-      //       {this.props.salesOrderListApproved.Lists
-      //         && this.props.salesOrderListApproved.Lists.map((row, id) => (
-      //           this.showTableBody(row,id)
-      //           ))}
-      //       </TableBody>
-      //     </Table>
-      //     {this.showTableEmpty()}
-      //     </>
-      //   )
-      // }else if(this.props.salesOrderListDeleted.Lists.length > 0 ){
-      //   return(
-      //     <>
-      //     <Table classes={{ root: 'table' }} className="table">
-      //     {this.showTableHead()}
-      //     <TableBody classes={{ root: 'table-body' }}>
-      //       {this.props.salesOrderListDeleted.Lists
-      //         && this.props.salesOrderListDeleted.Lists.map((row, id) => (
-      //           this.showTableBody(row,id)
-      //         ))}
-      //       </TableBody>
-      //     </Table>
-      //     {this.showTableEmpty()}
-      //     </>
-      //   )
-      // }else{
+  console.log('render ulang')
         return(
           <>
             <Table classes={{ root: 'table' }} className="table">

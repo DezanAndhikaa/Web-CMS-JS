@@ -4,17 +4,25 @@ import '../../../../../../components/FilterByTitle/DropdownFilter.scss';
 import '../../../../details/components/Tab/PlanningDetailsTab.scss';
 
 export default class ServiceOrderList extends React.PureComponent {
+
+	hendleClick () {
+		alert('yeah')
+	}
+
 	render(){
 		return(
-			<div className="filters-container">
-				<div className="dropdowns-container">
-					<div className="dropdown-container">
-						<Cards /> &nbsp; <Cards /> &nbsp; <Cards /> &nbsp; <Cards />
-					</div>					
+			<main className="content">
+				<div className="table-container">
+					<div className="filters-container">
+						<div className="dropdowns-container">
+							<div className="dropdown-container">
+								<Cards onClick={this.handleClick}/> 
+								<Cards /> 
+							</div>					
+						</div>
+					</div>
 				</div>
-			</div>
-			
-			
-		);
+			</main>
+		)
 	}
 }

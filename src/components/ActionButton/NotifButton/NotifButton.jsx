@@ -45,7 +45,7 @@ class NotifButton extends React.PureComponent {
             )
         } else if (this.props.titles === "History"){
             return(
-                <div className="notif-history">
+                <div className="notif-history" onClick={()=>this.handleClick(Menu.PLANNING_DETAILS_TRACKING)}>
                     <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
                         <img src={IconHistory} className="icon-notif" alt="" /><span className="label-history">Tracking History</span>
                     </DotBadges>

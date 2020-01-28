@@ -9,67 +9,50 @@ import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import '../../../../../../../components/FilterByTitle/DropdownFilter.scss';
+import './Card.scss'
 
-const useStyles = makeStyles(theme => ({
-	card: {
-		display: 'inline-block',
-		marginTop: 130,
-		marginLeft: 100
-	},
-	details: {
-		display: 'flex',
-		flexDirection: 'column',
-	},
-	content: {
-		flex: '1 0 auto',
-	},
-	cover: {
-		width: 151,
-	},
-	controls: {
-		display: 'flex',
-		alignItems: 'center',
-		paddingLeft: theme.spacing(1),
-		paddingBottom: theme.spacing(1),
-	},
-	playIcon: {
-		height: 38,
-		width: 38,
-	},
-}));
+// const useStyles = makeStyles(theme => ({
+// 	card: {
+// 		display: 'inline-block',
+// 		marginTop: 130,
+// 		marginLeft: 20
+// 	},
+// 	details: {
+// 		display: 'flex',
+// 		flexDirection: 'column',
+// 	},
+// 	content: {
+// 		flex: '1 0 auto',
+// 	},
+// 	cover: {
+// 		width: 551,
+// 	},
+// 	controls: {
+// 		display: 'flex',
+// 		alignItems: 'center',
+// 		paddingLeft: theme.spacing(1),
+// 		paddingBottom: theme.spacing(1),
+// 	},
+// 	playIcon: {
+// 		height: 38,
+// 		width: 38,
+// 	},
+// }));
 
 export default function MediaControlCard() {
-	const classes = useStyles();
-	const theme = useTheme();
-
 	return (
-		<Card className={classes.card}>
-			<div className={classes.details}>
-				<CardContent className={classes.content}>
+		<Card className="card-body">
+			<div className="card-details">
+				<CardContent className="card-contents">
 					<Typography component="h5" variant="h5">
-            Live From Space
+			Live From Space
 					</Typography>
 					<Typography variant="subtitle1" color="textSecondary">
-            Mac Miller
+			Mac Miller
 					</Typography>
 				</CardContent>
-				<div className={classes.controls}>
-					<IconButton aria-label="previous">
-						{theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
-					</IconButton>
-					<IconButton aria-label="play/pause">
-						<PlayArrowIcon className={classes.playIcon} />
-					</IconButton>
-					<IconButton aria-label="next">
-						{theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
-					</IconButton>
-				</div>
+				<div className="card-controls"></div>
 			</div>
-			<CardMedia
-				className={classes.cover}
-				image="/static/images/cards/live-from-space.jpg"
-				title="Live from space album cover"
-			/>
 		</Card>
 	);
 }
