@@ -6,7 +6,7 @@ import '../../../../../../components/FilterByTitle/DropdownFilter.scss';
 import '../../../../details/components/Tab/PlanningDetailsTab.scss';
 import '../../../DetailPages.scss';
 
-export default class ServiceOrderList extends React.PureComponent {
+export default class TrackingHistory extends React.PureComponent {
 	
 	_renderTabs(){
 		return(
@@ -18,9 +18,22 @@ export default class ServiceOrderList extends React.PureComponent {
 		);
 	}
 
-	componentDidMount(){
+	// _renderCards(){
+	// 	return(
+	// 		<>
+	// 			<Cards />
+	// 		</>
+	// 	);
+	// }
+
+
+	componentDidMount = () =>{
 		this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
 		this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+		this.props.fetchApprovedSales(this.props.salesParameter.dataFilter);
+		this.props.fetchApprovedService(this.props.serviceParameter.dataFilter);
+		this.props.fetchDeletedSales(this.props.salesParameter.dataFilter);
+		this.props.fetchDeletedService(this.props.serviceParameter.dataFilter);
 
 	}
 
@@ -29,7 +42,13 @@ export default class ServiceOrderList extends React.PureComponent {
 		return(
 			<main className="content" >
 				<div className="table-container">
-					{this._renderTabs()}
+					{/* {this._renderTabs()} */}
+					{/* {this._renderCards()} &nbsp; {this._renderCards()} &nbsp; {this._renderCards()} &nbsp; {this._renderCards()}
+					 */}
+					<Cards title="Approve" totalData={this.props.salesOrderListApproved.TotalData} /> &nbsp; 
+					<Cards title="Not Approve" totalData={this.props.salesOrderList.TotalData}/> &nbsp; 
+					<Cards title="Delete" totalData={this.props.salesOrderListDeleted.TotalData} /> &nbsp; 
+					<Cards title="SAP ISSUE" totalData="0" />
 				</div>
 			</main>
 			// <div className="filters-container">
