@@ -19,7 +19,7 @@ class DetailPages extends React.Component{
         isPaging: true,
         isShowPerPage: true,
         showPerPage : 0,
-        wasApprove: true,
+        // wasApprove: true,
         isApproved: false,
         snak: true,
         // nextPage: true,
@@ -403,7 +403,7 @@ componentDidUpdate = (prevProps) => {
       <div className="bottom-row">
         <SearchInput
         {...this.props}
-        wasApprove={this.state.wasApprove}
+        // wasApprove={this.state.wasApprove}
         webInfo="Search"
         onSalesSearch={this.props.onSearchSales}
         onServiceSearch={this.props.onSearchService}
