@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './NotifButton.scss';
-import {Badge, Button} from '@material-ui/core/';
+import {Badge, Button, Menu, MenuItem, Popover} from '@material-ui/core/';
+// import Popover, {PopoverAnimationVertical} from 'material-ui/core/Popover';
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { IconNotif, IconHistory } from '../../../assets/icons';
 import { withStyles } from '@material-ui/core/styles';
-import { Menu } from '../../../constants';
+// import { Menu } from '../../../constants';
 import { withRouter } from "react-router-dom";
 
 const Badges = withStyles(theme => ({
@@ -29,27 +31,81 @@ const DotBadges = withStyles(theme => ({
 
 class NotifButton extends React.PureComponent {
 
-    handleClick = (menu) => {
-        console.log('skui menu', menu)
-        this.props.history.push(menu);
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+          displayMenu: false,
+        };
       }
     
+      showDropdownMenu = (event) => {
+        event.preventDefault();
+        this.setState({ displayMenu: true }, () => {
+          document.addEventListener('click', this.hideDropdownMenu);
+        });
+      }
+    
+      hideDropdownMenu = async() => {
+        this.setState({ displayMenu: false }, () => {
+          document.removeEventListener('click', this.hideDropdownMenu);
+        });
+        // await this.props.onClickButton();
+      }
+    
+      selectItem = (item) => {
+        this.props.onSelectAction(this.props.onSelectActionType, item);
+      }
+    
+      handleClick = (menu, subMenu) => {
+          this.props.push(menu);
+        }
+    
+      renderDropdown() {
+        return (
+            <Button className="notif-history" onClick={this.showDropdownMenu}>
+                <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
+                    <img src={IconHistory} className="icon-notif" alt="" /><span className="label-history">Tracking History</span>
+                </DotBadges>
+            </Button>
+        );
+      }
+    
+      renderDropdownList() {
+        return (
+          <div className="list-tracking">
+              <Button className="list-item-tracking" variant="outlined">
+                Sales Order
+              </Button>
+              <Button className="list-item-tracking" variant="outlined">
+               Service Order
+              </Button>
+          </div>
+        );
+      }
+
 	render() {
 		if(this.props.titles === "Notif"){
             return(
-                <div className="notif-history">
+                <Button className="notif-history">
                     <Badges badgeContent={57} color="secondary" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
                         <img src={IconNotif} className="icon-notif" alt="" /> <span className="label-notif">Notification</span>
                     </Badges>
-                </div>
+                </Button>
             )
         } else if (this.props.titles === "History"){
             return(
-                <div className="notif-history" onClick={()=>this.handleClick(Menu.PLANNING_DETAILS_TRACKING)}>
+                // <div className="badan">
+                //     {this.renderDropdown()}
+                //     {
+                //     this.state.displayMenu && this.renderDropdownList()  
+                //     }
+                // </div>
+                <Button className="notif-history" onClick={this.showDropdownMenu}>
                     <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
                         <img src={IconHistory} className="icon-notif" alt="" /><span className="label-history">Tracking History</span>
                     </DotBadges>
-                </div>
+                </Button>
             )
         } 
 	}

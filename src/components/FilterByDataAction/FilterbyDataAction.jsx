@@ -52,10 +52,10 @@ class FilterbyDataAction extends React.Component {
     return (
       <div className="list-items">
           {/* <Button className="button" variant="outlined" onClick={this.props.onClickPlanningApprove}> */}
-          <Button className="button" variant="outlined" onClick={this.props.onCliclPlanningApprove}>
+          <Button className="button" variant="outlined">
             Planning Approved 
           </Button>
-          <Button className="button-plan-del" variant="outlined" onClick={this.props.onClickPlanningDelete}>
+          <Button className="button-plan-del" variant="outlined">
             Planning Deleted
           </Button>
       </div>
