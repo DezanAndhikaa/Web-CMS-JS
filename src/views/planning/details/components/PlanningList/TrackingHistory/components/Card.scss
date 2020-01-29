@@ -24,6 +24,15 @@
 //     width: 38,
 // },
 
+.card{
+    max-width: 275px;
+    min-width: 275px;
+    max-height: 100px;
+    min-height: 100px;
+    margin-top: 10px;
+    margin-right: 25px;
+}
+
 .card-body{
     display: 'inline-block';
     margin-top: 10px;
