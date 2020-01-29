@@ -37,7 +37,7 @@ export default class TrackingHistory extends React.PureComponent {
 						<Cards title="Approve" totalData={this.props.salesOrderListApproved.TotalData} /> &nbsp; 
 						<Cards title="Not Approve" totalData={this.props.salesOrderList.TotalData}/> &nbsp; 
 						<Cards title="Delete" totalData={this.props.salesOrderListDeleted.TotalData} /> &nbsp; 
-						<Cards title="SAP ISSUE" totalData="0" />
+						<Cards title="SAP Issue" totalData="0" />
 						</div>
 					</div>
 					{/* {this._renderTabs()} */}

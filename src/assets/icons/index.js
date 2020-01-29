@@ -102,6 +102,10 @@ import Filters from './filters.png';
 import Email from './email.png';
 import IconNotif from './notif.png';
 import IconHistory from './history.png';
+import CardApprove from './card_approve.png';
+import CardDelete from './card_delete.png';
+import CardNotApproved from './card_notapprove.png';
+import CardSap from './card_sap.png';
 
 export {
 	AssignmentIcon,
@@ -207,5 +211,9 @@ export {
 	Filters,
 	Email,
 	IconNotif,
-	IconHistory
+	IconHistory,
+	CardApprove,
+	CardDelete,
+	CardNotApproved,
+	CardSap
 };

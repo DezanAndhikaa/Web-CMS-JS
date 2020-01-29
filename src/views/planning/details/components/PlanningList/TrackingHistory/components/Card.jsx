@@ -7,6 +7,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import './Card.scss'
 
 const styles  = theme => ({
 	card: {
@@ -34,32 +35,37 @@ class Cards extends React.Component {
 	// const totalData = props.title;
 	// console.log('kon....t',totalData);
 	handleClick (){
-		alert('yeah')
+		// alert('yeah')
 	}
 
 	render(){
-		const { classes } = this.props;
 		return (
-			<Card classes={{ root : classes.card}}>
-				<CardActionArea onClick={this.handleClick}>
-					<CardContent>
-						<Typography variant="h5" component="h2">
-							{this.props.title}
-						</Typography>
-						<Typography variant="h5" component="h1">
-							{this.props.totalData}
-						</Typography>
-					</CardContent>
-					<CardActions>
-						<Button size="small">Learn More</Button>
-					</CardActions>
-				</CardActionArea>
-			</Card>
+		<div className="card-container">
+			<Button className={this.props.title === "Approve" ? "card-approve" : 
+			this.props.title === "Not Approve" ? "card-not-approve" :
+			this.props.title === "Delete" ? "card-delete" : "card-SAP" } onClick={this.handleClick} >
+				<div className="card-title">
+					{this.props.title}
+				</div>
+				<div className="card-data">
+					{this.props.totalData}
+				</div>
+			</Button>
+		</div> 
+			// <Card className="card-body" >
+			// 	<CardActionArea onClick={this.handleClick}>
+			// 		<CardContent>
+			// 			<Typography variant="h5" component="h2">
+			// 				{this.props.title}
+			// 			</Typography>
+			// 			<Typography variant="h5" component="h1">
+			// 				{this.props.totalData}
+			// 			</Typography>
+			// 		</CardContent>
+			// 	</CardActionArea>
+			// </Card>
 		);
 	}
 }
-Cards.propTypes = {
-	classes: PropTypes.object.isRequired,
-};
 
-export default withStyles(styles, { withTheme: true })(Cards);
+export default Cards;
