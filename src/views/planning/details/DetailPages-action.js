@@ -60,6 +60,7 @@ export const SelectSiteFilterAction = 'SELECT_SITE_FILTER'
 export const SelectUnitModelFilterAction ='SELECT_UNIT_MODEL_FILTER'
 export const SelectComponentFilterAction ='SELECT_COMPONENT_FILTER'
 export const IndexFilterAction = 'INDEX FILTER';
+export const LifetimeFilterAction = 'SELECT_LIFETIME_FILTER'
 
 export function approveSalesAction(payload){
 	const requestConfig = {
@@ -143,7 +144,6 @@ export function approveServiceDownloadAction(woId){
 // 	return async (dispatch) => dispatch(callApi(type, requestConfig));
 // }
 export function putLifetimeCompAction(payload){
-	console.log('kopi kopi kopi');
 	const requestConfig = {
 		method: RequestMethod.PUT,
 		url: `${ApiUrlBase.SALESORDER_API_URL}/LifeTimeComponent`,
@@ -294,8 +294,8 @@ export function searchCompActionService(type, payload, sort){
 	return { type, payload, sort };
 }
 
-export function selectFilterAction(type, payload) {
-	return { type, payload };
+export function selectFilterAction(type, payload, payload2) {
+	return { type, payload, payload2 };
 }
 
 export function selectFilterAction2(type, payload, head, page) {

@@ -7,7 +7,7 @@ import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
 import InputButton from '../../../../../components/Button/InputButton';
-import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc } from '../../DetailPages-action';
+import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import { NotificationManager } from 'react-notifications';
@@ -27,7 +27,6 @@ export default class SalesOrderList extends React.PureComponent {
   }
 
   componentDidUpdate = (prevState) =>{
-    console.log('pantek', prevState)
     //untuk menghilangkan checkbox
     if (prevState.salesParameter !== this.props.salesParameter || prevState.salesSearch !== this.props.salesSearch || 
       prevState.searchComp !==this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
@@ -41,7 +40,6 @@ export default class SalesOrderList extends React.PureComponent {
   putLifetimke = async(data) => {
     await this.props.putLifetimeComp(data);
     await this.props.onClickSalesOrder();
-    
   }
   
   isPutLifetime =  async(key, value) => {
@@ -54,6 +52,10 @@ export default class SalesOrderList extends React.PureComponent {
       }, 
       () => this.putLifetimke(this.state.putLifetime) 
       )
+  }
+
+  isFilterLifetime = async( value1, value2 ) => {
+    this.props.lifetimeFilter( LifetimeFilterAction, value1, value2 );
   }
 
   isCheckboxAvailable = (data) => {
@@ -150,6 +152,7 @@ export default class SalesOrderList extends React.PureComponent {
             name="Lifetime"
           // //   isActive={this.props.sortJobsByState.staging.isActive}
             delay={300}
+            onFilter={this.isFilterLifetime}
           // //   isAscending={this.props.sortJobsByState.staging.isAscending}
           />
           <PlanningListHeader
@@ -264,7 +267,6 @@ export default class SalesOrderList extends React.PureComponent {
   }
 
 render(){
-  console.log('render ulang')
         return(
           <>
             <Table classes={{ root: 'table' }} className="table">

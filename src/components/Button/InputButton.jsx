@@ -74,7 +74,6 @@ export default class InputButton extends React.Component{
                                 {...this.state}
                                 title={this.props.title} 
                                 onClosed={this.isClosed}
-                                onStats={this.props.onStats}
                             />
                         </div>
                     </Modal>

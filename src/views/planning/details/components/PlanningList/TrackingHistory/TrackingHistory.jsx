@@ -5,9 +5,8 @@ import SearchInput from '../../../../../../components/Searchbar/SearchInput';
 import BaseButton from '../../../../../../components/Button/BaseButton';
 import SalesOrderList from '../SalesOrderList';
 import ApprovedSalesOrderList from '../ApprovedSalesOrderList';
-import '../../../../../../components/FilterByTitle/DropdownFilter.scss';
-import '../../../../details/components/Tab/PlanningDetailsTab.scss';
-import '../../../DetailPages.scss';
+// import '../../../../../../components/FilterByTitle/DropdownFilter.scss';
+import './TrackingHistory.scss'
 
 export default class TrackingHistory extends React.PureComponent {
 	state ={
@@ -16,7 +15,7 @@ export default class TrackingHistory extends React.PureComponent {
 
 	_renderSearchBar(){
 		return (
-		  <div className="bottom-row">
+		  <div className="bottom-rows">
 			<SearchInput
 			{...this.props}
 			webInfo="Search"
@@ -120,32 +119,34 @@ export default class TrackingHistory extends React.PureComponent {
 		console.log('skui living', this.props);
 		return(
 			<main className="content" >
-				<div className="table-container">
-					<div className="filters-container">
-						<div className="dropdowns-container">
+				<div className="table-containers">
+					<div className="title-containers">
+						<div className="title">
+							Tracking history - Sales Order
+						</div>
+						<div className="search-containers">							
+							{this._renderSearchBar()}
+							{this._renderDownloadBtn()}
+						</div>
+					</div>
+					{/* <div className="base-button-containers">
+						
+					</div> */}
+					<div className="filters-containers">
+						<div className="dropdowns-containers">
 							<Cards title="Approve" totalData={this.props.salesOrderListApproved.TotalData} renderList={this._renderList} /> &nbsp; 
 							<Cards title="Not Approve" totalData={this.props.salesOrderList.TotalData} renderList={this._renderList} /> &nbsp; 
 							<Cards title="Delete" totalData={this.props.salesOrderListDeleted.TotalData} renderList={this._renderList} /> &nbsp; 
 							<Cards title="SAP ISSUE" totalData="0" renderList={this._renderList} />
 						</div>
-						 <p1> TRACKING HISTORY - Sales Order </p1> 
-						 <br />
-						<div className="search-container">							
-        					{this._renderSearchBar()}
-        				</div>
-						<br />
-						<div className="base-button-container">
-							{this._renderDownloadBtn()}
-						</div>
+						 {/* <p1> TRACKING HISTORY - Sales Order </p1> 
+						 <br /> */}
+					</div>
+					<div>
+						{this._renderList(this.state.whatPageIsChoosed)}
 					</div>
 				</div>
-				<div>
-				{this._renderList(this.state.whatPageIsChoosed)}
-				</div>
 			</main>
-			
-			
-			
 		);
 	}
 }
