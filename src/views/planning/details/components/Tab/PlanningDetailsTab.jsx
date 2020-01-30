@@ -323,6 +323,7 @@ class PlanningDetailsTab extends React.Component {
         {/* Tampilan Site */}
         <div className="tab-container">
             {this.props.renderNotif}
+            {this.props.renderFilterByDataAction}
         </div>
           <Tabs
             classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}

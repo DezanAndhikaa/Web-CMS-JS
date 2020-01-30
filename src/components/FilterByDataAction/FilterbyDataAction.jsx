@@ -3,8 +3,21 @@
 import React from 'react';
 // import { ExpandMore } from '@material-ui/icons';
 import './FilterbyDataAction.scss';
-import { Button } from '@material-ui/core';
+import { Button, Badge } from '@material-ui/core';
+import { IconNotif, IconHistory } from '../../assets/icons';
+import { withStyles } from '@material-ui/core/styles';
 
+const DotBadges = withStyles(theme => ({
+	badge: {
+        top: -1,
+		left: 4,
+        border: '2px solid white',
+        width: 'auto',
+        minWidth: '15px',
+        height: '15px',
+        borderRadius: '50%'
+	},
+}))(Badge);
 
 class FilterbyDataAction extends React.Component {
   constructor(props) {
@@ -41,8 +54,13 @@ class FilterbyDataAction extends React.Component {
     return (
       <div className="dropdown-button" onClick={this.showDropdownMenu}>
         <div className="dropdown-selected-item">
-          Data Action
-          <div className="expand-icon-container"></div>
+          {/* Data Action */}
+              <Button className="tracking-history">
+                <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
+                    <img src={IconHistory} className="icon-history" alt="" /><span className="label-history">Tracking History</span>
+                </DotBadges>
+            </Button>
+          {/* <div className="expand-icon-container"></div> */}
         </div>
       </div>
     );
@@ -53,10 +71,10 @@ class FilterbyDataAction extends React.Component {
       <div className="list-items">
           {/* <Button className="button" variant="outlined" onClick={this.props.onClickPlanningApprove}> */}
           <Button className="button" variant="outlined">
-            Planning Approved 
+            Sales Order{/* Planning Approved  */}
           </Button>
           <Button className="button-plan-del" variant="outlined">
-            Planning Deleted
+            Service Order{/* Planning Deleted */}
           </Button>
       </div>
     );

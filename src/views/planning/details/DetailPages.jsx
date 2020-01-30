@@ -412,15 +412,16 @@ componentDidUpdate = (prevProps) => {
 
   _renderNotif(){
     return (
-      <div className="bottom-row">
-        <NotifButton 
-          titles = "Notif"
-        />
-        <NotifButton 
-          titles = "History"
-          history={this.props.history}
-        />
-      </div>
+      <NotifButton />
+      // <div className="bottom-row">
+      //   <NotifButton 
+      //     // titles = "Notif"
+      //   />
+      //   <NotifButton 
+      //     titles = "History"
+      //     history={this.props.history}
+      //   />
+      // </div>
     )
   }
 

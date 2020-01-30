@@ -85,7 +85,7 @@ class NotifButton extends React.PureComponent {
       }
 
 	render() {
-		if(this.props.titles === "Notif"){
+		// if(this.props.titles === "Notif"){
             return(
                 <Button className="notif-history">
                     <Badges badgeContent={57} color="secondary" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
@@ -93,21 +93,21 @@ class NotifButton extends React.PureComponent {
                     </Badges>
                 </Button>
             )
-        } else if (this.props.titles === "History"){
-            return(
-                // <div className="badan">
-                //     {this.renderDropdown()}
-                //     {
-                //     this.state.displayMenu && this.renderDropdownList()  
-                //     }
-                // </div>
-                <Button className="notif-history" onClick={this.showDropdownMenu}>
-                    <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
-                        <img src={IconHistory} className="icon-notif" alt="" /><span className="label-history">Tracking History</span>
-                    </DotBadges>
-                </Button>
-            )
-        } 
+        // } else if (this.props.titles === "History"){
+        //     return(
+        //         <div className="badan">
+        //             {this.renderDropdown()}
+        //             {
+        //             this.state.displayMenu && this.renderDropdownList()  
+        //             }
+        //         </div>
+        //         <Button className="notif-history" onClick={this.showDropdownMenu}>
+        //             <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
+        //                 <img src={IconHistory} className="icon-notif" alt="" /><span className="label-history">Tracking History</span>
+        //             </DotBadges>
+        //         </Button>
+        //     )
+        // } 
 	}
 }
 
