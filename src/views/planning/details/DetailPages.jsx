@@ -63,6 +63,10 @@ componentDidUpdate = (prevProps) => {
       }
   }
 
+  if(prevProps.filterLifetime !== this.props.filterLifetime){
+    this.props.fetchSalesOrder(this.props.filterLifetime);
+  }
+
   //ini untuk trigger sales global search
   if (prevProps.salesSearch !== this.props.salesSearch) {
     this.props.updateSalesParameter({
@@ -456,9 +460,7 @@ componentDidUpdate = (prevProps) => {
     const index = this.props.selectedSalesPlans.length
     if (this.props.selectedSalesPlans.length > 0) {
       for (let i = 0; i < index; i++) {
-        // console.log('pantek ini ',this.props.selectedSalesPlans[i].So)
         arr = [...arr, this.props.selectedSalesPlans[i].So]
-        // console.log('pantek ini sales ',arr)
       }
     }await this.props.downloadSalesApproved(arr);
     if (
@@ -473,9 +475,7 @@ componentDidUpdate = (prevProps) => {
     const index = this.props.selectedServicePlans.length
     if (this.props.selectedServicePlans.length > 0) {
       for (let i = 0; i < index; i++) {
-        // console.log('pantek ini ',this.props.selectedServicePlans[i].Wo)
         arr = [...arr, this.props.selectedServicePlans[i].Wo]
-        // console.log('pantek ini sales ',arr)
       }
     }
     await this.props.downloadServiceApproved(arr);
@@ -491,9 +491,7 @@ componentDidUpdate = (prevProps) => {
     const index = this.props.selectedSalesPlans.length
     if (this.props.selectedSalesPlans.length > 0) {
       for (let i = 0; i < index; i++) {
-        // console.log('pantek ini ',this.props.selectedSalesPlans[i].So)
         arr = [...arr, this.props.selectedSalesPlans[i].So]
-        // console.log('pantek ini sales ',{arr, IsApprove: true})
       }
       await this.props.approveSales({So : arr, IsApprove: true})
   }
@@ -504,9 +502,7 @@ componentDidUpdate = (prevProps) => {
   const index = this.props.selectedServicePlans.length
     if (this.props.selectedServicePlans.length > 0) {
       for (let i = 0; i < index; i++) {
-        // console.log('pantek ini ',this.props.selectedServicePlans[i].Wo)
         arr = [...arr, this.props.selectedServicePlans[i].Wo]
-        // console.log('pantek ini service ',{arr, IsApprove: true})
       }
     await this.props.approveService({Wo : arr, IsApprove: true})
     }
@@ -518,9 +514,7 @@ componentDidUpdate = (prevProps) => {
     const todayDate = moment(new Date()).format('YYYY-MM-DD');
     if (this.props.selectedSalesPlans.length > 0) {
       for (let i = 0; i < index; i++) {
-        // console.log('pantek ini ',this.props.selectedSalesPlans[i].So)
         arr = [...arr, this.props.selectedSalesPlans[i].So]
-        // console.log('pantek ini sales ',{arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
       }
       await this.props.deleteSales({So : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
     }
@@ -532,9 +526,7 @@ componentDidUpdate = (prevProps) => {
     const todayDate = moment(new Date()).format('YYYY-MM-DD');
     if (this.props.selectedServicePlans.length > 0) {
       for (let i = 0; i < index; i++) {
-        // console.log('pantek ini ',this.props.selectedServicePlans[i].Wo)
         arr = [...arr, this.props.selectedServicePlans[i].Wo]
-        // console.log('pantek ini service ',{arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
       }
       await this.props.deleteService({Wo : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
     }

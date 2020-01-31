@@ -5,9 +5,8 @@ import SearchInput from '../../../../../../components/Searchbar/SearchInput';
 import BaseButton from '../../../../../../components/Button/BaseButton';
 import SalesOrderList from '../SalesOrderList';
 import ApprovedSalesOrderList from '../ApprovedSalesOrderList';
-import '../../../../../../components/FilterByTitle/DropdownFilter.scss';
-import '../../../../details/components/Tab/PlanningDetailsTab.scss';
-import '../../../DetailPages.scss';
+// import '../../../../../../components/FilterByTitle/DropdownFilter.scss';
+import './TrackingHistory.scss'
 
 export default class TrackingHistory extends React.PureComponent {
 	state ={
@@ -20,7 +19,7 @@ export default class TrackingHistory extends React.PureComponent {
 
 	_renderSearchBar(){
 		return (
-		  <div className="bottom-row">
+		  <div className="bottom-rows">
 			<SearchInput
 			{...this.props}
 			webInfo="Search"
@@ -143,32 +142,34 @@ export default class TrackingHistory extends React.PureComponent {
 
 		return(
 			<main className="content" >
-				<div className="table-container">
-					<div className="filters-container">
-						<div className="dropdowns-container">
-							<Cards title="Approve" totalData={this.state.approveTotalData} renderList={this._renderList} /> &nbsp; 
-							<Cards title="Not Approve" totalData={this.state.notApproveTotalData} renderList={this._renderList} /> &nbsp; 
-							<Cards title="Delete" totalData={this.state.deleteTotalData} renderList={this._renderList} /> &nbsp; 
-							<Cards title="SAP ISSUE" totalData={this.state.sapIssueTotalData} renderList={this._renderList} />
+				<div className="table-containers">
+					<div className="title-containers">
+						<div className="title">
+							Tracking history - Sales Order
 						</div>
-						 <p1> TRACKING HISTORY - Sales Order </p1> 
-						 <br />
-						<div className="search-container">							
-        					{this._renderSearchBar()}
-        				</div>
-						<br />
-						<div className="base-button-container">
+						<div className="search-containers">							
+							{this._renderSearchBar()}
 							{this._renderDownloadBtn()}
 						</div>
 					</div>
-				</div>
-				<div>
-				{this._renderList(this.state.whatPageIsChoosed)}
+					{/* <div className="base-button-containers">
+						
+					</div> */}
+					<div className="filters-containers">
+						<div className="dropdowns-containers">
+							<Cards title="Approve" totalData={this.props.salesOrderListApproved.TotalData} renderList={this._renderList} /> &nbsp; 
+							<Cards title="Not Approve" totalData={this.props.salesOrderList.TotalData} renderList={this._renderList} /> &nbsp; 
+							<Cards title="Delete" totalData={this.props.salesOrderListDeleted.TotalData} renderList={this._renderList} /> &nbsp; 
+							<Cards title="SAP ISSUE" totalData="0" renderList={this._renderList} />
+						</div>
+						 {/* <p1> TRACKING HISTORY - Sales Order </p1> 
+						 <br /> */}
+					</div>
+					<div>
+						{this._renderList(this.state.whatPageIsChoosed)}
+					</div>
 				</div>
 			</main>
-			
-			
-			
 		);
 	}
 }
