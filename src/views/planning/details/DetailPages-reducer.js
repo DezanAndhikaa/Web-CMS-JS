@@ -507,7 +507,7 @@ export function filterLifetimeReducer(state = initialFilterParameter, action){
 	if(action.type === LifetimeFilterAction)
 		for(let i=0; i<2; i++){
 			if( i === 0){
-				state ={ ...state, Filter : [...state.Filter,{Field: 'LifeTimeComponent', Operator: 'gte', Value: action.payload, Logic: 'and'}] }; 
+				state ={ ...state, PageSize: action.page, Filter : [...state.Filter,{Field: 'LifeTimeComponent', Operator: 'gte', Value: action.payload, Logic: 'and'}] }; 
 			}else if(i === 1 ){
 				state ={ ...state, Filter : [...state.Filter,{Field: 'LifeTimeComponent', Operator: 'lte', Value: action.payload2, Logic: 'and'}] }; 
 			}

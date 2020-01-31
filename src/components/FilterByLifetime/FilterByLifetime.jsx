@@ -39,7 +39,6 @@ class FilterByLifetime extends React.Component{
                 </div>
                 
                 <div className="bottom-rows">
-                    {/* <Button className="btn-search" >Search Lifetime</Button> */}
                     <Button className="btn-search" onClick={ () => {this.props.onFilter(this.state.value1, this.state.value2); this.props.onClosed()}} >Search Lifetime</Button>
                 </div>
             </div>

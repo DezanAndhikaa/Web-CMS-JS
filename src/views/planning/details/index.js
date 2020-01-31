@@ -98,7 +98,7 @@ const mapDispatchToProps = (dispatch) => ({
 	onSearchCompService: (keyword, sort) => dispatch(searchCompActionService(SearchCompActionService, keyword, sort)),
 	// pushTo: (url) => dispatch(push(url)),
 	// savePlanData: (data) => dispatch(storeDataAction(PLAN_DATA, StorageKey.PLAN_DATA, data)),
-	lifetimeFilter: (type, payload, payload2) => dispatch(selectFilterAction(type, payload, payload2)),
+	lifetimeFilter: (type, payload, payload2, page) => dispatch(selectFilterAction(type, payload, payload2, page)),
 	selectFilter2: (type, payload, head, page) => dispatch(selectFilterAction2(type, payload, head, page)),
 	indexFilter: (type, payload) => dispatch(indexFilterAction(type, payload)),
 	selectLeader: (type, payload) => dispatch(selectLeaderAction(type, payload)),

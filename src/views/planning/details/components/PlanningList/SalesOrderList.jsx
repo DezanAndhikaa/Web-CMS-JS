@@ -55,7 +55,7 @@ export default class SalesOrderList extends React.PureComponent {
   }
 
   isFilterLifetime = async( value1, value2 ) => {
-    this.props.lifetimeFilter( LifetimeFilterAction, value1, value2 );
+    this.props.lifetimeFilter( LifetimeFilterAction, value1, value2, this.props.salesParameter.dataFilter.PageSize );
   }
 
   isCheckboxAvailable = (data) => {
@@ -66,12 +66,12 @@ export default class SalesOrderList extends React.PureComponent {
     return isAvailable;
   }
 
-  isChangeStat = (value,key) =>{
-    this.setState({
-      stats: 1,
-      lifetime: this.state.lifetime.map(el => (el.So === key ? {...el, LifeTimeComp : value} : el))
-    });
-  }
+  // isChangeStat = (value,key) =>{
+  //   this.setState({
+  //     stats: 1,
+  //     lifetime: this.state.lifetime.map(el => (el.So === key ? {...el, LifeTimeComp : value} : el))
+  //   });
+  // }
 
   handleClick = () =>{
     this.setState({

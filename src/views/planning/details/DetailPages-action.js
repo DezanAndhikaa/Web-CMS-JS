@@ -294,8 +294,8 @@ export function searchCompActionService(type, payload, sort){
 	return { type, payload, sort };
 }
 
-export function selectFilterAction(type, payload, payload2) {
-	return { type, payload, payload2 };
+export function selectFilterAction(type, payload, payload2, page) {
+	return { type, payload, payload2, page };
 }
 
 export function selectFilterAction2(type, payload, head, page) {

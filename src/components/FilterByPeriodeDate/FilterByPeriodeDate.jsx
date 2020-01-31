@@ -5,18 +5,27 @@ import { Button, TextField, FormHelperText } from '@material-ui/core'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+// import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 
 class FilterByPeriodeDate extends React.Component{
 
     state = {
-        startDate: new Date()
+        startDate: new Date(),
+        startDate2: new Date()
     };
 
-    handleChange = date => {
+    handleChangeStart = date => {
         this.setState({
-            startDate: date
+            startDate: date,
         })
-        alert(this.state.startDate)
+        console.log('kurseh 1 : ',this.state.startDate)
+    }
+
+    handleChangeEnd = date => {
+        this.setState({
+            startDate2: date,
+        })
+        console.log('kurseh 2 : ',this.state.startDate2)
     }
 
     render(){
@@ -33,17 +42,29 @@ class FilterByPeriodeDate extends React.Component{
                 </div>
                 <div className="top-midel">
                     <div className="box"/>
+                    {/* <KeyboardDatePicker
+                        disableToolbar
+                        variant="inline"
+                        format="MM/dd/yyyy"
+                        margin="normal"
+                        id="date-picker-inline"
+                        label="Date picker inline"
+                        value={this.state.startDate}
+                        onChange={this.handleDateChange}
+                        KeyboardButtonProps={{
+                            'aria-label': 'change date',}}
+                    /> */}
                     <DatePicker
                         className="dates"
                         dateFormat="dd-MM-yyyy"
                         selected={this.state.startDate}
-                        onChange={this.handleChange}
+                        onChange={this.handleChangeStart}
                     />
                     <DatePicker
                         className="dates2"
                         dateFormat="dd-MM-yyyy"
-                        selected={this.state.startDate}
-                        onChange={this.handleChange}
+                        selected={this.state.startDate2}
+                        onChange={this.handleChangeEnd}
                     />
                 </div>
                 
