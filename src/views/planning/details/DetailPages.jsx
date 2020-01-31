@@ -569,22 +569,36 @@ componentDidUpdate = (prevProps) => {
     if (this.state.wasApprove === true) {
       console.log('skuit pantek', this.props.salesOrderListApproved)
       return(
-        <FilterbyDataAction 
-          {...this.props}
-          onClickPlanningApprove={this.onClickApprovedSales}
-          onClickPlanningDelete={this.onClickDeletedSales}
-          onClickButton={this.handleClickFilterByDataAction}
-        />
+        <>
+          <FilterbyDataAction 
+            {...this.props}
+            titles="Tracking History"
+            onClickPlanningApprove={this.onClickApprovedSales}
+            onClickPlanningDelete={this.onClickDeletedSales}
+            onClickButton={this.handleClickFilterByDataAction}
+          />
+          <FilterbyDataAction 
+            {... this.props}
+            titles="Approve"
+          />
+        </>
       );
     }
     if (this.state.wasApprove === false) {
       return(
-        <FilterbyDataAction 
-          {...this.props}
-          onClickPlanningApprove={this.onClickApprovedService}
-          onClickPlanningDelete={this.onClickDeletedService}
-          onClickButton={this.handleClickFilterByDataAction}
-        />
+        <>
+          <FilterbyDataAction 
+            {...this.props}
+            titles="Tracking History"
+            onClickPlanningApprove={this.onClickApprovedService}
+            onClickPlanningDelete={this.onClickDeletedService}
+            onClickButton={this.handleClickFilterByDataAction}
+          />
+          <FilterbyDataAction 
+            {... this.props}
+            titles="Approve"
+          />
+        </>
       );
     }
   };

@@ -47,7 +47,7 @@ export default class ServiceOrderList extends React.PureComponent {
             <TableRow>
               {/* Nanti ada if user ho atau site
               Ini tampilan HO */}
-              {/* <TableCell padding="checkbox">
+              <TableCell padding="checkbox">
                 {this.props.displayServiceCheckbox  && 
                 <Checkbox 
                 checked={this.state.checkedValue}
@@ -55,7 +55,7 @@ export default class ServiceOrderList extends React.PureComponent {
                 onClick={() => {this.props.serviceOrderList.Lists.map((row,id) => 
                 this.props.onChoosedService(row,id))}}
                 className="checkbox-checked-header" />}
-              </TableCell> */}
+              </TableCell>
 
               {/* Ini tampilan Site */}
               <PlanningListHeader
@@ -143,14 +143,14 @@ export default class ServiceOrderList extends React.PureComponent {
       <TableRow key={index} classes={{ root: 'table-row' }}>
         {/* Nanti ada if user ho atau site
               Ini tampilan HO */}
-        {/* <TableCell padding="checkbox">
+        <TableCell padding="checkbox">
           {this.props.displayServiceCheckbox && 
           <Checkbox 
             disabled={this.isCheckboxAvailable(row)} 
             checked={this.props.selectedServicePlanList.some((plans) => plans.Wo === row.Wo)} 
             onClick={() => this.props.onChoosedService(row)} 
             classes={{ checked: 'checkbox-checked' }} />}
-        </TableCell> */}
+        </TableCell>
         <TableCell align="left" className="table-cell"> {row.Wo} </TableCell>
         <TableCell align="left" className="table-cell"> {row.Customer} </TableCell>
         <TableCell align="left" className="table-cell"> {row.Site} </TableCell>

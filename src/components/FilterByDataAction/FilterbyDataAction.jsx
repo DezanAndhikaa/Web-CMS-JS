@@ -4,7 +4,7 @@ import React from 'react';
 // import { ExpandMore } from '@material-ui/icons';
 import './FilterbyDataAction.scss';
 import { Button, Badge } from '@material-ui/core';
-import { IconNotif, IconHistory } from '../../assets/icons';
+import { IconApprove, IconHistory } from '../../assets/icons';
 import { withStyles } from '@material-ui/core/styles';
 
 const DotBadges = withStyles(theme => ({
@@ -50,21 +50,37 @@ class FilterbyDataAction extends React.Component {
       this.props.push(menu);
     }
 
-  renderDropdown() {
-    return (
-      <div className="dropdown-button" onClick={this.showDropdownMenu}>
-        <div className="dropdown-selected-item">
-          {/* Data Action */}
-              <Button className="tracking-history">
-                <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
-                    <img src={IconHistory} className="icon-history" alt="" /><span className="label-history">Tracking History</span>
-                </DotBadges>
-            </Button>
-          {/* <div className="expand-icon-container"></div> */}
-        </div>
-      </div>
-    );
-  }
+  // renderDropdown() {
+  //   if(this.props.titles === "Tracking History"){
+  //     return (
+  //       <div className="dropdown-button" onClick={this.showDropdownMenu}>
+  //         <div className="dropdown-selected-item">
+  //           {/* Data Action */}
+  //               <div className="tracking-history">
+  //                 <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
+  //                     <img src={IconHistory} className="icon-history" alt="" /><span className="label-history">Tracking History</span>
+  //                 </DotBadges>
+  //             </div>
+  //           {/* <div className="expand-icon-container"></div> */}
+  //         </div>
+  //       </div>
+  //     );
+  //   } else if(this.props.titles === "Approve Data"){
+  //     return (
+  //       <div className="dropdown-button" onClick={this.showDropdownMenu}>
+  //         <div className="dropdown-selected-item">
+  //           {/* Data Action */}
+  //               <div className="tracking-history">
+  //                 <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
+  //                     <img src={IconApprove} className="icon-history" alt="" /><span className="label-history">Approve</span>
+  //                 </DotBadges>
+  //             </div>
+  //           {/* <div className="expand-icon-container"></div> */}
+  //         </div>
+  //       </div>
+  //     );
+  //   }
+  // }
 
   renderDropdownList() {
     return (
@@ -94,14 +110,41 @@ class FilterbyDataAction extends React.Component {
       );
     }
 
-    return (
-      <div className="dropdown">
-        {this.renderDropdown()}
-        {
-          this.state.displayMenu && this.renderDropdownList()  
-        }
-      </div>
-    );
+    if(this.props.titles === "Tracking History"){
+      return (
+        <div className="dropdown">
+          <div className="dropdown-button" onClick={this.showDropdownMenu}>
+          <div className="dropdown-selected-item">
+            <div className="tracking-history">
+              <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
+                  <img src={IconHistory} className="icon-history" alt="" /><span className="label-history">Tracking History</span>
+              </DotBadges>
+            </div>
+          </div>
+        </div>
+          {
+            this.state.displayMenu && this.renderDropdownList()  
+          }
+        </div>
+      );
+    } else if(this.props.titles === "Approve"){
+      return (
+        <div className="dropdown">
+          <div className="dropdown-button" onClick={this.showDropdownMenu}>
+            <div className="dropdown-selected-item">
+              <div className="tracking-history">
+                <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
+                    <img src={IconApprove} className="icon-history" alt="" /><span className="label-history">Approve</span>
+                </DotBadges>
+              </div>
+          </div>
+        </div>
+          {
+            this.state.displayMenu && this.renderDropdownList()  
+          }
+        </div>
+      );
+    }
   }
 }
 

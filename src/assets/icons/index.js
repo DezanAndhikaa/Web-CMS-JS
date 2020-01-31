@@ -102,8 +102,13 @@ import Filters from './filters.png';
 import Email from './email.png';
 import IconNotif from './notif.png';
 import IconHistory from './history.png';
+import IconApprove from './ic_approve.png';
+import NotifHover from './alarm.png';
+import HistoryHover from './clock.png';
 
 export {
+	NotifHover,
+	HistoryHover,
 	AssignmentIcon,
 	SettingsIcon,
 	StagingGreen,
@@ -207,5 +212,7 @@ export {
 	Filters,
 	Email,
 	IconNotif,
-	IconHistory
+	IconHistory,
+	IconApprove,
+
 };

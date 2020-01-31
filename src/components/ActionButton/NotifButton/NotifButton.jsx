@@ -87,11 +87,11 @@ class NotifButton extends React.PureComponent {
 	render() {
 		// if(this.props.titles === "Notif"){
             return(
-                <Button className="notif-history">
+                <div className="notif-history">
                     <Badges badgeContent={57} color="secondary" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
                         <img src={IconNotif} className="icon-notif" alt="" /> <span className="label-notif">Notification</span>
                     </Badges>
-                </Button>
+                </div>
             )
         // } else if (this.props.titles === "History"){
         //     return(
