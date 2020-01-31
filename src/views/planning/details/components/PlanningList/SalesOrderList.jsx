@@ -71,7 +71,7 @@ export default class SalesOrderList extends React.PureComponent {
     });
   }
 
-  handleClick = () =>{
+  handleClicks = () =>{
     this.setState({
       checkedValue : !this.state.checkedValue
     })
@@ -85,9 +85,9 @@ export default class SalesOrderList extends React.PureComponent {
             {this.props.displaySalesCheckbox && 
             <Checkbox 
               checked={this.state.checkedValue}
+              onChange={this.handleClicks}
               onClick={() => {this.props.salesOrderList.Lists.map((row,id) => 
               this.props.onChoosedSales(row,id))}}
-              onChange={this.handleClick}
               className="checkbox-checked-header"/>}
           </TableCell>
           <PlanningListHeader
