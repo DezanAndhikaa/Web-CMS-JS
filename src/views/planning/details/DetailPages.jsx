@@ -9,6 +9,7 @@ import SearchInput from "../../../components/Searchbar/SearchInput";
 import BaseButton from '../../../components/Button/BaseButton';
 import FilterbyDataAction from '../../../components/FilterByDataAction/FilterbyDataAction';
 import NotifButton from '../../../components/ActionButton/NotifButton/NotifButton';
+import {Snackbar, Button} from '@material-ui/core';
 
 class DetailPages extends React.Component{
     constructor(props) {
@@ -20,6 +21,7 @@ class DetailPages extends React.Component{
         showPerPage : 0,
         wasApprove: true,
         isApproved: false,
+        snak: true,
         // nextPage: true,
         // prevPage: false,
         // numberOfPage: 2,
@@ -401,7 +403,7 @@ componentDidUpdate = (prevProps) => {
       <div className="bottom-row">
         <SearchInput
         {...this.props}
-        wasApprove={this.state.wasApprove}
+        // wasApprove={this.state.wasApprove}
         webInfo="Search"
         onSalesSearch={this.props.onSearchSales}
         onServiceSearch={this.props.onSearchService}
@@ -413,15 +415,6 @@ componentDidUpdate = (prevProps) => {
   _renderNotif(){
     return (
       <NotifButton />
-      // <div className="bottom-row">
-      //   <NotifButton 
-      //     // titles = "Notif"
-      //   />
-      //   <NotifButton 
-      //     titles = "History"
-      //     history={this.props.history}
-      //   />
-      // </div>
     )
   }
 
@@ -721,7 +714,7 @@ componentDidUpdate = (prevProps) => {
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}
           onPage={this._renderPagination}
-          wasApprove={this._renderBaseButton}
+          // wasApprove={this._renderBaseButton}
           isApproved={this.state.isApproved}
         />
       </>

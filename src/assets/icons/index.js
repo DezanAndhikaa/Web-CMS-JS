@@ -105,6 +105,10 @@ import IconHistory from './history.png';
 import IconApprove from './ic_approve.png';
 import NotifHover from './alarm.png';
 import HistoryHover from './clock.png';
+import CardApprove from './card_approve.png';
+import CardDelete from './card_delete.png';
+import CardNotApproved from './card_notapprove.png';
+import CardSap from './card_sap.png';
 
 export {
 	NotifHover,
@@ -215,4 +219,8 @@ export {
 	IconHistory,
 	IconApprove,
 
+	CardApprove,
+	CardDelete,
+	CardNotApproved,
+	CardSap
 };

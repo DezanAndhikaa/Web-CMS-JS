@@ -1,7 +1,7 @@
 import React from 'react';
-import moment, { ISO_8601 } from 'moment';
+// import moment, { ISO_8601 } from 'moment';
 import {
-  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Typography, CircularProgress
+  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Typography,
 } from '@material-ui/core';
 import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
@@ -10,13 +10,15 @@ import InputButton from '../../../../../components/Button/InputButton';
 import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+// import { NotificationManager } from 'react-notifications';
+import {Snackbar, Button} from '@material-ui/core';
 
 export default class SalesOrderList extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
       checkedValue: false,
-      stats: 0,
+      stats: false,
       putLifetime: {
         So : '',
         LifeTimeComponent : '',
@@ -24,47 +26,43 @@ export default class SalesOrderList extends React.PureComponent {
     }
   }
 
-    componentDidUpdate = (prevState) =>{
-      console.log('pantek', prevState)
-      //untuk menghilangkan checkbox
-      if (prevState.salesParameter !== this.props.salesParameter || prevState.salesSearch !== this.props.salesSearch || 
-        prevState.searchComp !==this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
-        this.setState({checkedValue : false})
-      }
-      // else if(this.state.stats === 1){
-      //   console.log("ketiga ketiga")
-      //   this.props.putLifetimeComp(this.state.putLifetime)
-      //   this.setState({
-      //     stats: 3
-      //   })
-      //   this.props.onClickSalesOrder();
-      // }
+  componentDidUpdate = (prevState) =>{
+    console.log('pantek', prevState)
+    //untuk menghilangkan checkbox
+    if (prevState.salesParameter !== this.props.salesParameter || prevState.salesSearch !== this.props.salesSearch || 
+      prevState.searchComp !==this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
+      this.setState({checkedValue : false})
     }
-    componentDidMount = () =>{
-      this.props.onClickSalesOrder();
-    }
+  }
+  componentDidMount = () =>{
+    this.props.onClickSalesOrder();
+  }
 
-    isPutLifetime =  async(key, value) => {
-        this.setState({
-          putLifetime: {
-            So: key,
-            LifeTimeComponent: value
-          },
-          stats: 1
-        }, 
-        () => this.props.putLifetimeComp(this.state.putLifetime) 
-        )
-        // await this.props.putLifetimeComp(this.state.putLifetime)
-        await this.props.onClickSalesOrder();
-    }
+  putLifetimke = async(data) => {
+    await this.props.putLifetimeComp(data);
+    await this.props.onClickSalesOrder();
+    
+  }
+  
+  isPutLifetime =  async(key, value) => {
+      this.setState({
+        putLifetime: {
+          So: key,
+          LifeTimeComponent: value
+        },
+        stats: true
+      }, 
+      () => this.putLifetimke(this.state.putLifetime) 
+      )
+  }
 
-    isCheckboxAvailable = (data) => {
-      let isAvailable = false;
-      if (this.props.selectedSalesPlanList.some((plan) => plan.status === 'Assigned')) {
-        isAvailable = this.props.selectedSalesPlanList.some((plan) => plan.status !== data.status);
-      } else { isAvailable = this.props.selectedSalesPlanList.some((plan) => plan.status !== 'Assigned') && data.status === 'Assigned'; }
-      return isAvailable;
-    }
+  isCheckboxAvailable = (data) => {
+    let isAvailable = false;
+    if (this.props.selectedSalesPlanList.some((plan) => plan.status === 'Assigned')) {
+      isAvailable = this.props.selectedSalesPlanList.some((plan) => plan.status !== data.status);
+    } else { isAvailable = this.props.selectedSalesPlanList.some((plan) => plan.status !== 'Assigned') && data.status === 'Assigned'; }
+    return isAvailable;
+  }
 
   isChangeStat = (value,key) =>{
     this.setState({
@@ -219,6 +217,18 @@ export default class SalesOrderList extends React.PureComponent {
     )
   }
 
+  handleClick = () =>{
+    this.setState({
+      snak: true
+    })
+  }
+
+  handleClose = () => {
+    this.setState({
+      stats: false
+    })
+  }
+
   showLoading(){
     if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
       return(
@@ -230,7 +240,21 @@ export default class SalesOrderList extends React.PureComponent {
             />
         </div>
       )
-    }else if(this.props.fetchStatusSales === ApiRequestActionsStatus.FAILED){
+    }else if(this.props.fetchStatusPutLifetime === ApiRequestActionsStatus.LOADING){
+      return(
+            <div>
+            <Snackbar
+              anchorOrigin={{ vertical: 'center',horizontal: 'right'}}
+              bodyStyle={{ backgroundColor: 'teal', color: 'coral' }}
+              open={this.state.stats}
+              onClose={this.handleClose}
+              autoHideDuration={3000}
+              message="Please Wait. Page will reload automatically"
+            />
+          </div>
+          )
+    }
+    else if(this.props.fetchStatusSales === ApiRequestActionsStatus.FAILED){
       return(
         <div className="loading-container">
           OOPS THERE WAS AN ERROR :'(
@@ -246,37 +270,7 @@ export default class SalesOrderList extends React.PureComponent {
   }
 
 render(){
-      // if(this.props.salesOrderListApproved.Lists.length > 0 ){
-      //   return(
-      //     <>
-      //     <Table classes={{ root: 'table' }} className="table">
-      //     {this.showTableHead()}
-      //     <TableBody classes={{ root: 'table-body' }}>
-      //       {this.props.salesOrderListApproved.Lists
-      //         && this.props.salesOrderListApproved.Lists.map((row, id) => (
-      //           this.showTableBody(row,id)
-      //           ))}
-      //       </TableBody>
-      //     </Table>
-      //     {this.showTableEmpty()}
-      //     </>
-      //   )
-      // }else if(this.props.salesOrderListDeleted.Lists.length > 0 ){
-      //   return(
-      //     <>
-      //     <Table classes={{ root: 'table' }} className="table">
-      //     {this.showTableHead()}
-      //     <TableBody classes={{ root: 'table-body' }}>
-      //       {this.props.salesOrderListDeleted.Lists
-      //         && this.props.salesOrderListDeleted.Lists.map((row, id) => (
-      //           this.showTableBody(row,id)
-      //         ))}
-      //       </TableBody>
-      //     </Table>
-      //     {this.showTableEmpty()}
-      //     </>
-      //   )
-      // }else{
+  console.log('render ulang')
         return(
           <>
             <Table classes={{ root: 'table' }} className="table">
