@@ -1,27 +1,72 @@
-.notif-history{
-    display: flex;
-    flex-direction: row;
-    align-self: flex-end;
-    cursor: pointer;
-    .icon-notif{
-        height: 18px; //vw(25) !important
-        margin-right: 10px; //vw(10)
-    }
-    .label-notif{
-        font-family: 'Lato-Bold';
-        font-size: 14px; //vw(20)
-        line-height: 18px; // vw(24)
-        color: #3C3B3B;
-        margin-right: 44px; // vw(50)
-    }
-    .label-history{
-        font-family: 'Lato-Bold';
-        font-size: 14px; //vw(20)
-        line-height: 18px; // vw(24)
-        color: #3C3B3B;
-    }
+.badan{
+  position: absolute;
+  display: inline-block;
+  background-color: transparent;
+  // width: 170px; //vw(233.22);
+  // height: 110px; // vw(45.07);
+  border-radius:vw(15) !important;
+  box-shadow: 0px 0.2vw 0.6vw rgba(0, 0, 0, 0.161);
 }
-.notif-history:hover{
-    color: yellow;
-    cursor: pointer;
+
+.notif-history{
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+  cursor: pointer;
+  background-color: transparent;
+  align-items: center;
+  .icon-notif{
+      // height: 18px; //vw(25) !important
+      margin-right: 10px; //vw(10)
+  }
+  .label-notif{
+      font-family: 'Lato-Bold';
+      font-size: 14px; //vw(20)
+      line-height: 18px; // vw(24)
+      color: #3C3B3B;
+      // margin-right: 44px; // vw(50)
+      text-transform: capitalize;
+  }
+  // .label-history{
+  //     font-family: 'Lato-Bold';
+  //     font-size: 14px; //vw(20)
+  //     line-height: 18px; // vw(24)
+  //     color: #3C3B3B;
+  //     text-transform: capitalize;
+  // }
+  // .label-history:hover{
+  //   color: #FC9517;
+  // }
+  .label-notif:hover{
+    color: #FC9517;
+  }
+}
+  
+.list-tracking {
+  margin: 0;
+  right: 0px;
+  width: 170px; //vw(233.22);
+  height: 110px; // vw(45.07);
+  border-radius:vw(10) !important;
+  background-color: white;
+  position: absolute;
+  z-index: 100;
+  box-shadow: 0px 0.3vw 0.6vw 0px rgba(0,0,0,0.2);
+  color: rgb(0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  .list-item-tracking {
+    padding: vw(6) vw(19);
+    color: #3C3B3B;
+    font-family: 'Lato-Bold';
+    font-size: vw(14);
+    line-height: vw(17);
+    text-transform: capitalize;
+  }
+  .list-item-tracking:hover {
+      background-color: #e5e5e5;
+      color: #3C3B3B;
+  }
 }

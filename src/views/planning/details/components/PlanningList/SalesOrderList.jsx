@@ -10,7 +10,7 @@ import InputButton from '../../../../../components/Button/InputButton';
 import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
-import { NotificationManager } from 'react-notifications';
+// import { NotificationManager } from 'react-notifications';
 import {Snackbar, Button} from '@material-ui/core';
 
 export default class SalesOrderList extends React.PureComponent {
@@ -185,6 +185,8 @@ export default class SalesOrderList extends React.PureComponent {
   showTableBody(row,id) {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
+        {/* Nanti ada if user ho atau site
+              Ini tampilan HO */}
         <TableCell padding="checkbox">
           {this.props.displaySalesCheckbox && 
           <Checkbox 
@@ -209,7 +211,8 @@ export default class SalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
         <TableCell align="left" className="table-cell"> Unknown </TableCell>
         <TableCell align="left" className="table-cell"> Unknowns </TableCell>
-        <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.So} /></TableCell>
+        {/* Ini tampilan HO, site gaada action */}
+        {/* <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.So} /></TableCell> */}
       </TableRow>
     )
   }

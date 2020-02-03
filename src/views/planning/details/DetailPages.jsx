@@ -20,7 +20,8 @@ class DetailPages extends React.Component{
         isShowPerPage: true,
         showPerPage : 0,
         whichTabs: true,
-        // isApproved: false,
+        isApproved: false,
+        snak: true,
         // nextPage: true,
         // prevPage: false,
         // numberOfPage: 2,
@@ -392,16 +393,7 @@ componentDidUpdate = (prevProps) => {
 
   _renderNotif(){
     return (
-      <div className="bottom-row">
-        <NotifButton 
-          titles = "Notif"
-        />
-        <NotifButton 
-          {...this.props}
-          titles = "History"
-          history={this.props.history}
-        />
-      </div>
+      <NotifButton />
     )
   }
 
@@ -540,34 +532,48 @@ componentDidUpdate = (prevProps) => {
 
 
   //KOMPONEN UNTUK FILTER DATA ACTION
-  // _renderFilterByDataAction = (value) => {
-  //   if (value === 1) {
-  //     this.setState({wasApprove : true})
-  //   }if (value === 0) {
-  //     this.setState({wasApprove : false})
-  //   }
-  //   if (this.state.wasApprove === true) {
-  //     console.log('skuit pantek', this.props.salesOrderListApproved)
-  //     return(
-  //       <FilterbyDataAction 
-  //         {...this.props}
-  //         onClickPlanningApprove={this.onClickApprovedSales}
-  //         onClickPlanningDelete={this.onClickDeletedSales}
-  //         onClickButton={this.handleClickFilterByDataAction}
-  //       />
-  //     );
-  //   }
-  //   if (this.state.wasApprove === false) {
-  //     return(
-  //       <FilterbyDataAction 
-  //         {...this.props}
-  //         onClickPlanningApprove={this.onClickApprovedService}
-  //         onClickPlanningDelete={this.onClickDeletedService}
-  //         onClickButton={this.handleClickFilterByDataAction}
-  //       />
-  //     );
-  //   }
-  // };
+  _renderFilterByDataAction = (value) => {
+    if (value === 1) {
+      this.setState({whichTabs : true})
+    }if (value === 0) {
+      this.setState({whichTabs : false})
+    }
+    if (this.state.whichTabs === true) {
+      console.log('skuit pantek', this.props.salesOrderListApproved)
+      return(
+        <>
+          <FilterbyDataAction 
+            {...this.props}
+            titles="Tracking History"
+            onClickPlanningApprove={this.onClickApprovedSales}
+            onClickPlanningDelete={this.onClickDeletedSales}
+            onClickButton={this.handleClickFilterByDataAction}
+          />
+          <FilterbyDataAction 
+            {... this.props}
+            titles="Approve"
+          />
+        </>
+      );
+    }
+    if (this.state.whichTabs === false) {
+      return(
+        <>
+          <FilterbyDataAction 
+            {...this.props}
+            titles="Tracking History"
+            onClickPlanningApprove={this.onClickApprovedService}
+            onClickPlanningDelete={this.onClickDeletedService}
+            onClickButton={this.handleClickFilterByDataAction}
+          />
+          <FilterbyDataAction 
+            {... this.props}
+            titles="Approve"
+          />
+        </>
+      );
+    }
+  };
 
   //KOMPONEN UNTUK BUTTON DOWNLOAD, APPROVE, DAN DELETE
   _renderBaseButton = (value) => {
@@ -665,7 +671,7 @@ componentDidUpdate = (prevProps) => {
       <>
         <PlanningDetailsTab
           {...this.props}
-          // renderFilterByDataAction={this._renderFilterByDataAction()}  
+          renderFilterByDataAction={this._renderFilterByDataAction()}  
           renderBaseButton={this._renderBaseButton()}
           renderSearch={this._renderSearchBar()}
           renderNotif={this._renderNotif()}

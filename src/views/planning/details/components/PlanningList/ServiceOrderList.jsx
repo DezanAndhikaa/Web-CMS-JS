@@ -45,6 +45,8 @@ export default class ServiceOrderList extends React.PureComponent {
       return(
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
             <TableRow>
+              {/* Nanti ada if user ho atau site
+              Ini tampilan HO */}
               <TableCell padding="checkbox">
                 {this.props.displayServiceCheckbox  && 
                 <Checkbox 
@@ -54,6 +56,8 @@ export default class ServiceOrderList extends React.PureComponent {
                 this.props.onChoosedService(row,id))}}
                 className="checkbox-checked-header" />}
               </TableCell>
+
+              {/* Ini tampilan Site */}
               <PlanningListHeader
                 name="Work Order"
               //   isActive={this.props.sortJobsByState.unitModel.isActive}
@@ -137,6 +141,8 @@ export default class ServiceOrderList extends React.PureComponent {
   showTableBody(row,index) {
     return(
       <TableRow key={index} classes={{ root: 'table-row' }}>
+        {/* Nanti ada if user ho atau site
+              Ini tampilan HO */}
         <TableCell padding="checkbox">
           {this.props.displayServiceCheckbox && 
           <Checkbox 
