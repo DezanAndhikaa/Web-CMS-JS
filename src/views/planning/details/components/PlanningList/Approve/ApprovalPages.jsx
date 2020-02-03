@@ -1,33 +1,65 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
-import Cards from './components/Card';
-import SearchInput from '../../../../../../components/Searchbar/SearchInput';
-import BaseButton from '../../../../../../components/Button/BaseButton';
-import SalesOrderList from '../SalesOrderList';
-import ApprovedSalesOrderList from '../ApprovedSalesOrderList';
-import './TrackingHistory.scss'
 
-export default class TrackingHistory extends React.PureComponent {
-	state ={
+export default class ApprovalPages extends React.PureComponent {
+    state ={
 		whatPageIsChoosed : '',
-		approveTotalData : 0,
-		notApproveTotalData : 0,
-		deleteTotalData : 0,
-		sapIssueTotalData : 0
+		// approveTotalData : 0,
+		// notApproveTotalData : 0,
+		// deleteTotalData : 0,
+		// sapIssueTotalData : 0
 	}
 
 	_renderSearchBar(){
 		return (
-		  <div className="bottom-rows">
-			<SearchInput
-			{...this.props}
-			webInfo="Search"
-			onSalesSearch={this.props.onSearchSales}
-			onServiceSearch={this.props.onSearchService}
-		  />
-		  </div>
+			<div className="bottom-rows">
+				<SearchInput
+				{...this.props}
+				webInfo="Search"
+				onSalesSearch={this.props.onSearchSales}
+				onServiceSearch={this.props.onSearchService}
+				/>
+		  	</div>
 		);
 	  }
+
+	_renderBaseButton (){
+		return(
+			<div className="bottom-row">
+			  {/* <BaseButton titles="Total" totalSelectedItems ={this.props.selectedSalesPlans.length}/> */}
+			  <BaseButton titles="Approve"
+				{...this.props}
+				whatTabsIsRendered={this.state.isPaging}
+				disabledButton = {this.props.selectedSalesPlans.length < 1 }
+				totalSelectedItems ={this.props.selectedSalesPlans.length}
+				handleSalesApprove={this.handleSalesApprove}
+				selectedData={this.state.selectedData}
+			  />
+			  <BaseButton titles="Cancel Approve"
+				// {...this.props}
+				// whatTabsIsRendered={this.state.isPaging}
+				// disabledButton = {this.props.selectedSalesPlans.length < 1 }
+				// totalSelectedItems ={this.props.selectedSalesPlans.length}
+				// handleSalesApprove={this.handleSalesApprove}
+				// selectedData={this.state.selectedData}
+			  />
+			  <BaseButton titles="Download"
+				{...this.props}
+				whatTabsIsRendered={this.state.isPaging}
+				handleSalesApprovedDownload={this.handleSalesApprovedDownload}
+				// selectedDownloadData={this.state.selectedData.So} 
+			  />
+			  <BaseButton titles="Edit" />
+			  <BaseButton titles="Delete" 
+				{...this.props}
+				disabledButton = {this.props.selectedSalesPlans.length < 1 }
+				totalSelectedItems ={this.props.selectedSalesPlans.length}
+				// whatTabsIsRendered={this.state.isPaging}
+				handleDeleteSales={this.handleDeleteSales}
+			  />
+			</div>
+		);
+	}
+
 	_renderDownloadBtn(){
 		return(
 			<BaseButton titles="Download"
@@ -39,7 +71,8 @@ export default class TrackingHistory extends React.PureComponent {
 	}
 	onClickSalesOrder = () =>{
 		this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
-	  }
+	}
+
 	salesOrderList(){
 		return(
 		  <div className="plannings-list-containers">
@@ -54,7 +87,6 @@ export default class TrackingHistory extends React.PureComponent {
 		  </div>
 		);
 	  }
-
 
 	  approvedSalesOrderList(){
 		return(
@@ -136,36 +168,31 @@ export default class TrackingHistory extends React.PureComponent {
 	}
 
 	render(){
-		// console.log('skui living', this.props);
-		// console.log('skui living', this.state.approveTotalData)
-
 		return(
 			<main className="content" >
-				<div className="table-containers">
+				<div className="table-bar">
 					<div className="title-containers">
 						<div className="title">
 							Tracking history - Sales Order
 						</div>
-						<div className="search-containers">							
+						<div className="approval-search-bar">							
 							{this._renderSearchBar()}
-							{this._renderDownloadBtn()}
+							{this._renderBaseButton()}
 						</div>
 					</div>
 					{/* <div className="base-button-containers">
 						
 					</div> */}
-					<div className="filters-containers">
+					{/* <div className="filters-containers">
 						<div className="dropdowns-containers">
 							<Cards title="Approve" totalData={this.props.salesOrderListApproved.TotalData} renderList={this._renderList} /> &nbsp; 
 							<Cards title="Not Approve" totalData={this.props.salesOrderList.TotalData} renderList={this._renderList} /> &nbsp; 
 							<Cards title="Delete" totalData={this.props.salesOrderListDeleted.TotalData} renderList={this._renderList} /> &nbsp; 
 							<Cards title="SAP ISSUE" totalData="0" renderList={this._renderList} />
 						</div>
-						 {/* <p1> TRACKING HISTORY - Sales Order </p1> 
-						 <br /> */}
-					</div>
+					</div> */}
 					<div>
-						{this._renderList(this.state.whatPageIsChoosed)}
+						{/* {this._renderList(this.state.whatPageIsChoosed)} */}
 					</div>
 				</div>
 			</main>

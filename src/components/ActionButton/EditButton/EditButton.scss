@@ -8,22 +8,28 @@
     width: 100%;
     cursor: pointer;
     .edit-button-visible{
-        height: vw(30);
-        width: vw(30);
-        background-image: url('../../../assets/icons/edit.png');
+        // height: vw(30);
+        // width: vw(30);
+        height: vw(38.07);
+        width: vw(40.07);
+        border-radius: vw(10) !important;
+        background-image: url('../../../assets/icons/ic_edit.png');
         background-repeat: no-repeat;
-        background-size: contain;
-        visibility: visible;
-        cursor: pointer;
+        background-size: 45%;
+        background-position: center;
+        // background-repeat: no-repeat;
+        // background-size: contain;
+        // visibility: visible;
+        // cursor: pointer;
     }
-    .edit-button-unvisible{
-        height: vw(30);
-        width: vw(30);
-        background-image: url('../../../assets/icons/edit.png');
-        background-repeat: no-repeat;
-        background-size: contain;
-        visibility: hidden;
-    }
+    // .edit-button-unvisible{
+    //     height: vw(30);
+    //     width: vw(30);
+    //     background-image: url('../../../assets/icons/edit.png');
+    //     background-repeat: no-repeat;
+    //     background-size: contain;
+    //     visibility: hidden;
+    // }
 }
 
 @media (min-width: 600px) and (max-width: 1025px) {

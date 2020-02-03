@@ -171,11 +171,6 @@ export default class SalesOrderList extends React.PureComponent {
             delay={300}
             onSearch={this.props.onSearchComp}
           />
-          <Typography
-            name="Action" style={{marginTop: "10px"}}
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
-          >Action</Typography>
         </TableRow>
       </TableHead>
     )

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, FormLabel } from '@material-ui/core';
 import './BaseButton.scss';
+import EditButton from '../ActionButton/EditButton/EditButton';
 import DeleteButton from '../ActionButton/DeleteButton/DeleteButton';
 import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 import ApproveConfirmation from '../ApproveConfirmation/ApproveConfirmation';
@@ -39,14 +40,6 @@ class BaseButton extends React.Component{
                 await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
                 await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
             }
-            // else{
-            //     console.log('kkkkkk sales')
-            //     await this.props.handleSalesApprovedDownload()
-            // }
-            // else{
-            //     console.log('masuk ke is download kondisi')
-            //     await this.props.downloadSalesApproved(...this.props.selectedData)
-            // }
         }
         if (this.props.whatTabsIsRendered === false) {
             if (this.props.titles === "Approve") {
@@ -82,6 +75,38 @@ class BaseButton extends React.Component{
                     <FormLabel className="label-selected-data"> {this.props.totalSelectedItems} items selected.</FormLabel>
                 </div>
             )
+        }else if(this.props.titles === "Approve"){
+            return(
+                <div className="button-inline">
+                    <Button className="btn-approve" onClick={this.isClicked} disabled={this.props.disabledButton}>Approve</Button>
+                    <ApproveConfirmation
+                        {...this.props}
+                        {...this.state}
+                        onClose={this.isClosed}
+                        openModal={this.state.isShowModal}
+                        totalData={this.props.totalSelectedItems}
+                        onApprove={this.isApproved}
+                    />
+                </div>
+            )
+        }else if(this.props.titles === "Cancel Approve"){
+            return(
+                <div className="button-inline">
+                    <Button className="btn-cancel-approve" onClick={this.isClicked}> Cancel Approve</Button>
+                </div>
+            )
+        }else if(this.props.titles === "Download"){
+            return(
+                <div className="button-inline">
+                    <Button className="btn-download" onClick={this.isDownloaded} />
+                </div>
+            )
+        }else if(this.props.titles === "Edit"){
+            return(
+                <div className="button-inline">
+                    <EditButton />
+                </div>
+            )
         }else if(this.props.titles === "Delete"){
             return(
                 <div className="button-inline">
@@ -98,26 +123,6 @@ class BaseButton extends React.Component{
                         openModal={this.state.isShowModal}
                         totalData={this.props.totalSelectedItems}
                         onDelete={this.isApproved}
-                    />
-                </div>
-            )
-        } else if(this.props.titles === "Download"){
-            return(
-                <div className="button-inline">
-                    <Button className="btn-download" onClick={this.isDownloaded}>Download</Button>
-                </div>
-            )
-        } else if(this.props.titles === "Approve"){
-            return(
-                <div className="button-inline">
-                    <Button className="btn-approve" onClick={this.isClicked} disabled={this.props.disabledButton}>Approve</Button>
-                    <ApproveConfirmation
-                        {...this.props}
-                        {...this.state}
-                        onClose={this.isClosed}
-                        openModal={this.state.isShowModal}
-                        totalData={this.props.totalSelectedItems}
-                        onApprove={this.isApproved}
                     />
                 </div>
             )
