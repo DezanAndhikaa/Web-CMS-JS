@@ -19,7 +19,7 @@ class DetailPages extends React.Component{
         isPaging: true,
         isShowPerPage: true,
         showPerPage : 0,
-        // wasApprove: true,
+        wasApprove: true,
         isApproved: false,
         snak: true,
         // nextPage: true,
@@ -418,16 +418,7 @@ componentDidUpdate = (prevProps) => {
 
   _renderNotif(){
     return (
-      <div className="bottom-row">
-        <NotifButton 
-          titles = "Notif"
-        />
-        <NotifButton 
-          {...this.props}
-          titles = "History"
-          history={this.props.history}
-        />
-      </div>
+      <NotifButton />
     )
   }
 
@@ -574,22 +565,36 @@ componentDidUpdate = (prevProps) => {
     }
     if (this.state.wasApprove === true) {
       return(
-        <FilterbyDataAction 
-          {...this.props}
-          onClickPlanningApprove={this.onClickApprovedSales}
-          onClickPlanningDelete={this.onClickDeletedSales}
-          onClickButton={this.handleClickFilterByDataAction}
-        />
+        <>
+          <FilterbyDataAction 
+            {...this.props}
+            titles="Tracking History"
+            onClickPlanningApprove={this.onClickApprovedSales}
+            onClickPlanningDelete={this.onClickDeletedSales}
+            onClickButton={this.handleClickFilterByDataAction}
+          />
+          <FilterbyDataAction 
+            {... this.props}
+            titles="Approve"
+          />
+        </>
       );
     }
     if (this.state.wasApprove === false) {
       return(
-        <FilterbyDataAction 
-          {...this.props}
-          onClickPlanningApprove={this.onClickApprovedService}
-          onClickPlanningDelete={this.onClickDeletedService}
-          onClickButton={this.handleClickFilterByDataAction}
-        />
+        <>
+          <FilterbyDataAction 
+            {...this.props}
+            titles="Tracking History"
+            onClickPlanningApprove={this.onClickApprovedService}
+            onClickPlanningDelete={this.onClickDeletedService}
+            onClickButton={this.handleClickFilterByDataAction}
+          />
+          <FilterbyDataAction 
+            {... this.props}
+            titles="Approve"
+          />
+        </>
       );
     }
   };
@@ -712,7 +717,7 @@ componentDidUpdate = (prevProps) => {
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}
           onPage={this._renderPagination}
-          wasApprove={this._renderBaseButton}
+          // wasApprove={this._renderBaseButton}
           isApproved={this.state.isApproved}
         />
       </>

@@ -102,12 +102,17 @@ import Filters from './filters.png';
 import Email from './email.png';
 import IconNotif from './notif.png';
 import IconHistory from './history.png';
+import IconApprove from './ic_approve.png';
+import NotifHover from './alarm.png';
+import HistoryHover from './clock.png';
 import CardApprove from './card_approve.png';
 import CardDelete from './card_delete.png';
 import CardNotApproved from './card_notapprove.png';
 import CardSap from './card_sap.png';
 
 export {
+	NotifHover,
+	HistoryHover,
 	AssignmentIcon,
 	SettingsIcon,
 	StagingGreen,
@@ -212,6 +217,8 @@ export {
 	Email,
 	IconNotif,
 	IconHistory,
+	IconApprove,
+
 	CardApprove,
 	CardDelete,
 	CardNotApproved,
