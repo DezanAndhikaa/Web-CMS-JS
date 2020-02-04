@@ -109,8 +109,10 @@ import CardApprove from './card_approve.png';
 import CardDelete from './card_delete.png';
 import CardNotApproved from './card_notapprove.png';
 import CardSap from './card_sap.png';
+import IconEdit from './ic_edit.png'; 
 
 export {
+	IconEdit,
 	NotifHover,
 	HistoryHover,
 	AssignmentIcon,
@@ -218,7 +220,6 @@ export {
 	IconNotif,
 	IconHistory,
 	IconApprove,
-
 	CardApprove,
 	CardDelete,
 	CardNotApproved,

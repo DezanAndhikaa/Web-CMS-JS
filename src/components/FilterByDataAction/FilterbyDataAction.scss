@@ -2,9 +2,8 @@
 @import '../../themes/functions';
 
 .dropdown {
-    // position: relative;
+    // position: absolute;
     display: flex;
-    // z-index: 1000;
     // background-color: #ffffff;
     // width: vw(233.22);
     // height: vw(45.07);
@@ -84,7 +83,6 @@
 
 .list-items {
     margin: 0;
-    margin-top: 50px;
     right: 0px;
     width: vw(233.22);
     height: vw(150);
@@ -98,8 +96,9 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    margin-top: 150px;
     .button{
-        // width: vw(173.22);
+        width: vw(173.22);
         height: vw(45.07);
         border-radius: vw(10) !important;
         font-size: 10px;

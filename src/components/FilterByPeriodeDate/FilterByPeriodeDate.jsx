@@ -23,8 +23,6 @@ class FilterByPeriodeDate extends React.Component{
             startDate: date,
             startFilter: moment(date).format('YYYY-MM-DD')
         })
-        console.log('kurseh 1 : ',this.state.startDate)
-        console.log('kurseh 1,2 : ', this.state.startFilter)
     }
 
     handleChangeEnd = date => {
@@ -32,8 +30,6 @@ class FilterByPeriodeDate extends React.Component{
             startDate2: date,
             endFilter: moment(date).format('YYYY-MM-DD')
         })
-        console.log('kurseh 2 : ',this.state.startDate2)
-        console.log('kurseh 2,2 : ',this.state.endFilter)
     }
 
     render(){

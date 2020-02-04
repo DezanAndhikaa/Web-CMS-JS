@@ -199,6 +199,7 @@ export function fetchSalesAction(payload) {
 
 export function fetchServiceAction(payload) {
 	const filter = payload;
+	console.log('kupi kupi ', filter)
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${ApiUrlBase.SERVICEORDER_API_URL}/FilterUnapproved`,

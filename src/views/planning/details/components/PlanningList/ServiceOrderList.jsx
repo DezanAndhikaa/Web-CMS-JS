@@ -67,30 +67,30 @@ export default class ServiceOrderList extends React.PureComponent {
               />
               <PlanningListHeader
                 name="Customer"
-                isActive={this.props.sortServiceByState.Customer.isActive}
+                // isActive={this.props.sortServiceByState.Customer.isActive}
                 delay={300}
-                isAscending={this.props.sortServiceByState.Customer.isAscending}
+                // isAscending={this.props.sortServiceByState.Customer.isAscending}
                 onClick={() => this.props.onClickTabHead(SortServiceByCustomer)}
               />
               <PlanningListHeader
                 name="Site"
-                isActive={this.props.sortServiceByState.Site.isActive}
+                // isActive={this.props.sortServiceByState.Site.isActive}
                 delay={300}
-                isAscending={this.props.sortServiceByState.Site.isAscending}
+                // isAscending={this.props.sortServiceByState.Site.isAscending}
                 onClick={() => this.props.onClickTabHead(SortServiceBySite)}
               />
               <PlanningListHeader
                 name="Unit Model"
-                isActive={this.props.sortServiceByState.UnitModel.isActive}
+                // isActive={this.props.sortServiceByState.UnitModel.isActive}
                 delay={300}
-                isAscending={this.props.sortServiceByState.UnitModel.isAscending}
+                // isAscending={this.props.sortServiceByState.UnitModel.isAscending}
                 onClick={() => this.props.onClickTabHead(SortServiceByUnitModel)}
               />
               <PlanningListHeader
                 name="Comp Desc"
-                isActive={this.props.sortServiceByState.CompDesc.isActive}
+                // isActive={this.props.sortServiceByState.CompDesc.isActive}
                 delay={300}
-                isAscending={this.props.sortServiceByState.CompDesc.isAscending}
+                // isAscending={this.props.sortServiceByState.CompDesc.isAscending}
                 onClick={() => this.props.onClickTabHead(SortServiceByCompDesc)}
               />
               <PlanningListHeader
