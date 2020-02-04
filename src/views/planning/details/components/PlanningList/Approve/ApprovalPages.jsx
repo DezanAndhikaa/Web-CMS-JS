@@ -1,4 +1,12 @@
 import React from 'react';
+import SearchInput from '../../../../../../components/Searchbar/SearchInput';
+import BaseButton from '../../../../../../components/Button/BaseButton';
+import SalesOrderList from '../SalesOrderList';
+import ApprovedSalesOrderList from '../ApprovedSalesOrderList';
+import './ApprovalPages.scss';
+import FilterbyDataAction from '../../../../../../components/FilterByDataAction/FilterbyDataAction';
+import NotifButton from '../../../../../../components/ActionButton/NotifButton/NotifButton';
+import { AppBar } from '@material-ui/core';
 
 export default class ApprovalPages extends React.PureComponent {
     state ={
@@ -11,7 +19,7 @@ export default class ApprovalPages extends React.PureComponent {
 
 	_renderSearchBar(){
 		return (
-			<div className="bottom-rows">
+			<div className="footer-container">
 				<SearchInput
 				{...this.props}
 				webInfo="Search"
@@ -24,12 +32,12 @@ export default class ApprovalPages extends React.PureComponent {
 
 	_renderBaseButton (){
 		return(
-			<div className="bottom-row">
+			<div className="footer-container">
 			  {/* <BaseButton titles="Total" totalSelectedItems ={this.props.selectedSalesPlans.length}/> */}
 			  <BaseButton titles="Approve"
 				{...this.props}
 				whatTabsIsRendered={this.state.isPaging}
-				disabledButton = {this.props.selectedSalesPlans.length < 1 }
+				// disabledButton = {this.props.selectedSalesPlans.length < 1 }
 				totalSelectedItems ={this.props.selectedSalesPlans.length}
 				handleSalesApprove={this.handleSalesApprove}
 				selectedData={this.state.selectedData}
@@ -167,35 +175,69 @@ export default class ApprovalPages extends React.PureComponent {
 		})
 	}
 
-	render(){
+	_renderNotif(){
+		return (
+		  <NotifButton />
+		)
+	}
+
+	_renderTrackingHistory(){
 		return(
-			<main className="content" >
-				<div className="table-bar">
-					<div className="title-containers">
-						<div className="title">
-							Tracking history - Sales Order
-						</div>
-						<div className="approval-search-bar">							
-							{this._renderSearchBar()}
-							{this._renderBaseButton()}
-						</div>
-					</div>
-					{/* <div className="base-button-containers">
+			<>
+				<FilterbyDataAction 
+					{...this.props}
+					titles="Tracking History"
+					onClickPlanningApprove={this.onClickApprovedSales}
+					onClickPlanningDelete={this.onClickDeletedSales}
+					onClickButton={this.handleClickFilterByDataAction}
+				/>
+				<FilterbyDataAction 
+					{... this.props}
+					titles="Approve"
+				/>
+			</>
+		)
+	}
+
+	render(){
+		// return(
+		// 	<main className="content" >
+		// 		<div className="table-bar">
+		// 			<div className="title-content">
+		// 				<div className="titles">
+		// 					Approval - Sales Order
+		// 				</div>
+		// 				<div className="search-content">							
+		// 					{/* {this._renderSearchBar()} */}
+		// 					{this._renderBaseButton()}
+		// 				</div>
+		// 			</div>
+		// 			<div className="filters-content">
 						
-					</div> */}
-					{/* <div className="filters-containers">
-						<div className="dropdowns-containers">
-							<Cards title="Approve" totalData={this.props.salesOrderListApproved.TotalData} renderList={this._renderList} /> &nbsp; 
-							<Cards title="Not Approve" totalData={this.props.salesOrderList.TotalData} renderList={this._renderList} /> &nbsp; 
-							<Cards title="Delete" totalData={this.props.salesOrderListDeleted.TotalData} renderList={this._renderList} /> &nbsp; 
-							<Cards title="SAP ISSUE" totalData="0" renderList={this._renderList} />
-						</div>
-					</div> */}
-					<div>
-						{/* {this._renderList(this.state.whatPageIsChoosed)} */}
-					</div>
+		// 			</div>
+		// 		</div>
+		// 	</main>
+		// );
+		return(
+			<main className="content">
+				<AppBar>
+				<div className="tab-bar">
+					{/* {this._renderNotif()}
+					{this._renderTrackingHistory()} */}
 				</div>
+				</AppBar>
+				<div className="table-bar">
+					  {/* {this._renderTabs()} */}
+		 				<div className="approval-search-bar">							
+		 					{/* {this._renderSearchBar()} */}
+		 					{this._renderBaseButton()}
+		 				</div>
+				  </div>
+				  <div></div>
+				  <div className="footer-container">
+					  {/* {this._renderShowPerPage()} {this._renderPagination()} */}
+				  </div>
 			</main>
-		);
+		  )
 	}
 }

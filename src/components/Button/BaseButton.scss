@@ -2,11 +2,8 @@
 @import '../../themes/variables';
 
 .button-inline{
-    // flex: 1;
     display: flex;
-    // flex-direction: row;
-    // margin-left: 34%;
-    width: auto;
+    // width: auto;
     .label-selected-data{
         display: flex;
         color: map-get($colors, primary-dark);
@@ -19,39 +16,42 @@
     .btn-download{
         height: vw(38.07);
         width: vw(40.07);
+        margin-left: vw(15);
         border-radius: vw(10) !important;
-        background-image: url('../../assets/icons/download.png');
-        background-color: map-get($colors, white);
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        background-image: url('../../assets/icons/ic_download.png');
+        background-color: white;
         background-repeat: no-repeat;
         background-size: 45%;
         background-position: center;
-        // display: flex;
-        // padding-left: 10%;
-        // padding-right: 0%;
-        // width: vw(153.22);
-        // height: vw(38.07);
-        // margin-left: 0.8vw;
-        // font-size: vw(16);
-        // font-weight: bold;
-        // line-height: vw(16) !important;
-        // font-family: 'Lato-Regular';
-        // text-transform: capitalize;
-        // background-color: white;
-        // box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-        // background-image: url('../../assets/icons/download.png');
-        // background-size: 10%;
-        // background-position-x: 18%;
-        // background-position-y: center;
-        // background-repeat: no-repeat;
-        // cursor: pointer;
+    }
+    .btn-download-full{
+        display: flex;
+        padding-left: 10%;
+        padding-right: 0%;
+        width: vw(153.22);
+        height: vw(38.07);
+        margin-left: vw(15);
+        font-size: vw(16);
+        font-weight: bold;
+        line-height: vw(16) !important;
+        font-family: 'Lato-Regular';
+        text-transform: capitalize;
+        background-color: white;
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        background-image: url('../../assets/icons/ic_download.png');
+        background-size: 10%;
+        background-position-x: 18%;
+        background-position-y: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
     }
     .btn-approve{
         display: flex;
         padding-right: 20%;
         width: vw(153.22);
         height: vw(38.07);
-        margin-left: 0.8vw;
-        font-size: vw(16);
+        font-size: vw(18); //16
         font-weight: bold;
         line-height: vw(16) !important;
         font-family: 'Lato-Regular';
@@ -71,27 +71,29 @@
     }
     .btn-cancel-approve{
         display: flex;
-        padding-left: 6%;
-        width: vw(153.22);
+        padding-left: 22%;
+        width: vw(203.22);
         height: vw(38.07);
         margin-left: vw(15);
-        font-size: vw(16);
+        font-size: vw(18);
         font-weight: bold;
         line-height: vw(16) !important;
         font-family: 'Lato-Regular';
         text-transform: capitalize;
-        color: white;
-        background-color: map-get($colors, del-permanent);
+        color: #707070;
+        background-color: transparent;
+        border: 1px solid #FF736A;
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-        background-image: url('../../assets/icons/back.png');
-        background-size: 10%;
-        background-position-x: 18%;
+        background-image: url('../../assets/icons/cancel_approve.png');
+        background-size: 15%;
+        background-position-x: 8%;
         background-position-y: center;
         background-repeat: no-repeat;
         cursor: pointer;
     }
     .btn-cancel-approve:hover{
         background-color: map-get($colors, delete);
+        color: white;
     }
     .btn-permanently{
         display: flex;

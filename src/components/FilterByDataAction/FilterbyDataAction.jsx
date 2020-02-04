@@ -54,12 +54,11 @@ class FilterbyDataAction extends React.Component {
   renderDropdownList() {
     return (
       <div className="list-items">
-          {/* <Button className="button" variant="outlined" onClick={this.props.onClickPlanningApprove}> */}
-          <Button className="button" variant="outlined" onClick={()=>this.handleClick(Menu.PLANNING_DETAILS_APPROVAL)}>
-            Sales Order{/* Planning Approved  */}
+          <Button className="button" variant="outlined" onClick={()=>this.handleClick(Menu.PLANNING_DETAILS_TRACKING)}>
+            Sales Order
           </Button>
           <Button className="button-plan-del" variant="outlined">
-            Service Order{/* Planning Deleted */}
+            Service Order
           </Button>
       </div>
     );
@@ -68,12 +67,11 @@ class FilterbyDataAction extends React.Component {
   renderDropdownApproval() {
     return (
       <div className="list-items">
-          {/* <Button className="button" variant="outlined" onClick={this.props.onClickPlanningApprove}> */}
-          <Button className="button" variant="outlined" onClick={()=>this.handleClick(Menu.PLANNING_DETAILS_TRACKING)}>
-            Sales Order{/* Planning Approved  */}
+          <Button className="button" variant="outlined" onClick={()=>this.handleClick(Menu.PLANNING_DETAILS_APPROVAL)}>
+            Sales Order
           </Button>
           <Button className="button-plan-del" variant="outlined">
-            Service Order{/* Planning Deleted */}
+            Service Order
           </Button>
       </div>
     );
@@ -123,7 +121,7 @@ class FilterbyDataAction extends React.Component {
           </div>
         </div>
           {
-            this.state.displayMenu && this.renderDropdownList()  
+            this.state.displayMenu && this.renderDropdownApproval()  
           }
         </div>
       );

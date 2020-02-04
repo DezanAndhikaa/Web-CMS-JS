@@ -530,7 +530,6 @@ componentDidUpdate = (prevProps) => {
     })
   }
 
-
   //KOMPONEN UNTUK FILTER DATA ACTION
   _renderFilterByDataAction = (value) => {
     if (value === 1) {
@@ -703,15 +702,15 @@ componentDidUpdate = (prevProps) => {
   render(){ 
     // console.log('data selected filter', this.props.selectedFilters)     
     return(
-        <main className="content">
-            <div className="table-container">
-                  {this._renderTabs()}
-              </div>
-              <div></div>
-              <div className="bottom-row">
-                  {this._renderShowPerPage()} {this._renderPagination()}
-              </div>
-        </main>
+      <main className="content">
+          <div className="table-container">
+                {this._renderTabs()}
+            </div>
+            <div></div>
+            <div className="bottom-row">
+                {this._renderShowPerPage()} {this._renderPagination()}
+            </div>
+      </main>
     )
   }
 }

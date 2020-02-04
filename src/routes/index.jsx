@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router';
 import { Menu } from '../constants';
 import { DetailPages } from '../views/planning/details';
 import { TrackingHistory } from '../views/planning/details/components/PlanningList/TrackingHistory';
+import { ApprovalPages } from '../views/planning/details/components/PlanningList/Approve';
 // import { JobsPage } from '../pages/jobs-execution/jobs';
 // import { LoginPage } from '../pages/login';
 // import MasterDataUploader from '../pages/master-data-uploader';
@@ -31,7 +32,7 @@ const routes = (
 		<Switch>
 			<Route exact path={Menu.PLANNING_DETAILS} component={DetailPages} />
 			<Route exact path={Menu.PLANNING_DETAILS_TRACKING} component={TrackingHistory} />
-			{/* <Route exact path={Menu.PLANNING_DASHBOARD} component={DetailPages} /> */}
+			<Route exact path={Menu.PLANNING_DETAILS_APPROVAL} component={ApprovalPages} />
 			{/* <Route exact path={Menu.LOGIN} component={LoginPage} />
 			<Route exact path={Menu.DASHBOARD} component={requireAuth(Dashboard)} />
 			<Route exact path={Menu.JOBS_SUMMARY} component={requireAuth(JobsPage)} />
