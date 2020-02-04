@@ -2,8 +2,9 @@
 @import '../../themes/functions';
 
 .dropdown {
-    // position: absolute;
+    // position: relative;
     display: flex;
+    // z-index: 1000;
     // background-color: #ffffff;
     // width: vw(233.22);
     // height: vw(45.07);
@@ -83,6 +84,7 @@
 
 .list-items {
     margin: 0;
+    margin-top: 50px;
     right: 0px;
     width: vw(233.22);
     height: vw(150);

@@ -27,7 +27,7 @@ import {
 	UnselectServicePlanAction, selectSalesPlansAction, selectServicePlansAction, selectLeaderAction, SelectSalesPlanAction,
 	SelectServicePlanAction, FetchSalesAction,
 	selectMechanicAction, sortByAction, 
-	storePlanDataAction,
+	storePlanDataAction,dateFilterAction
 	// getSearchValueAction, 
 	// getSelesOrderAction, 
 } from './DetailPages-action';
@@ -48,6 +48,7 @@ const mapStateToProps = (state) => ({
 	salesParameter: state.plansPageState.salesParameter,
 	filterParameter: state.plansPageState.filterParameter,
 	filterLifetime: state.plansPageState.filterLifetime,
+	filterDate: state.plansPageState.filterDate,
 	indexFilterParameter: state.plansPageState.indexFilterParameter,
 	serviceParameter: state.plansPageState.serviceParameter,
 	salesSearch: state.plansPageState.salesSearch,
@@ -99,6 +100,7 @@ const mapDispatchToProps = (dispatch) => ({
 	// pushTo: (url) => dispatch(push(url)),
 	// savePlanData: (data) => dispatch(storeDataAction(PLAN_DATA, StorageKey.PLAN_DATA, data)),
 	lifetimeFilter: (type, payload, payload2, page) => dispatch(selectFilterAction(type, payload, payload2, page)),
+	dateFilter: (type, payload, payload2, page) => dispatch(dateFilterAction(type, payload, payload2, page)),
 	selectFilter2: (type, payload, head, page) => dispatch(selectFilterAction2(type, payload, head, page)),
 	indexFilter: (type, payload) => dispatch(indexFilterAction(type, payload)),
 	selectLeader: (type, payload) => dispatch(selectLeaderAction(type, payload)),

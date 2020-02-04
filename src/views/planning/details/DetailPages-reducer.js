@@ -34,7 +34,7 @@ import {
 	// UnassignPlansAction, 
 	UnselectSalesPlanAction, UnselectServicePlanAction,
 	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, getSearchValueAction, fetchServiceAction, FetchServiceAction, 
-	UpdateFilterUnit,IndexFilterAction, SelectAllSalesPlanAction, LifetimeFilterAction
+	UpdateFilterUnit,IndexFilterAction, SelectAllSalesPlanAction, LifetimeFilterAction, DateFilterAction
 } from './DetailPages-action';
 
 const initialSalesAssignment = {
@@ -515,6 +515,18 @@ export function filterLifetimeReducer(state = initialFilterParameter, action){
 	return state;
 }
 
+export function filterDateReducer(state = initialFilterParameter, action){
+	if(action.type === DateFilterAction)
+	for(let i=0; i<2; i++){
+		if( i === 0){
+			state = {...state, PageSize: action.page, Filter : [...state.Filter,{Field: 'PlanExecution', Operator: 'gte', Value: action.payload, Logic: 'and'}] };
+		}else if( i === 1){
+			state = {...state, Filter : [...state.Filter,{Field: 'PlanExecution', Operator: 'lte', Value: action.payload2, Logic: 'and'}] };
+		}
+	}
+	return state;
+}
+
 export function filterParameterReducer(state = initialFilterParameter, action){
 	if (action.type === SelectCustomerFilterAction)
 		if(state.Filter.length === 0){ //IF yang pertama ini,jika filternya belum di isi apa2 (filter belum di jalankan)
@@ -823,6 +835,7 @@ const PlansReducers = combineReducers({
 	approveServiceDownloaded : downloadApprovedServiceReducer,
 	putLifetimeList: fetchPutLifetimeReducer,
 	filterLifetime : filterLifetimeReducer,
+	filterDate : filterDateReducer
 });
 
 export { PlansReducers };

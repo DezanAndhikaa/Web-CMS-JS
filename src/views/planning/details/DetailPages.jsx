@@ -19,7 +19,7 @@ class DetailPages extends React.Component{
         isPaging: true,
         isShowPerPage: true,
         showPerPage : 0,
-        wasApprove: true,
+        whichTabs: true,
         isApproved: false,
         snak: true,
         // nextPage: true,
@@ -63,9 +63,13 @@ componentDidUpdate = (prevProps) => {
         this.props.fetchServiceOrder(this.props.filterParameter);
       }
   }
-
+  //FILTER RANGE LIFETIME
   if(prevProps.filterLifetime !== this.props.filterLifetime){
     this.props.fetchSalesOrder(this.props.filterLifetime);
+  }
+  //FILTER RANGE DATE
+  if(prevProps.filterDate !== this.props.filterDate){
+    this.props.fetchSalesOrder(this.props.filterDate);
   }
 
   //ini untuk trigger sales global search
@@ -308,8 +312,7 @@ componentDidUpdate = (prevProps) => {
       this.setState({isPaging : false})
     }
     if (this.state.isPaging === true) {
-      if (this.state.isApproved === false) {
-        const web = this.props.displayMode === 'web';
+      const web = this.props.displayMode === 'web';
       const nextSales = this.props.salesOrderList.NextPage;
       const prevSales = this.props.salesOrderList.PrevPage;
       const currentPropsSales = this.props.salesOrderList.PageNumber;
@@ -331,30 +334,6 @@ componentDidUpdate = (prevProps) => {
         </div>
       )
       }
-      if (this.state.isApproved === true) {
-        const web = this.props.displayMode === 'web';
-      const nextSales = this.props.salesOrderListApproved.NextPage;
-      const prevSales = this.props.salesOrderListApproved.PrevPage;
-      const currentPropsSales = this.props.salesOrderListApproved.PageNumber;
-      const { TotalPages } = this.props.salesOrderListApproved;
-      
-      return(
-        <div className="pagination">
-          <div className="paging">
-            {/* {prevSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
-            {web && currentPropsSales - 3 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 3 })} className="page-inactive">{currentPropsSales - 3}</div>}
-            {web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive">{currentPropsSales - 2}</div>}
-            {currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive">{currentPropsSales - 1}</div>}
-            <div className="page-active">{currentPropsSales}</div>
-            {currentPropsSales + 1 <= TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive">{currentPropsSales + 1}</div>}
-            {web && currentPropsSales + 2 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive">{currentPropsSales + 2}</div>}
-            {web && currentPropsSales + 3 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive">{currentPropsSales + 3}</div>}
-            {/* {nextSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>} */}
-          </div>
-        </div>
-      )
-      }
-    }
     if (this.state.isPaging === false) {
       const web = this.props.displayMode === 'web';
       const nextSales = this.props.serviceOrderList.NextPage;
@@ -396,7 +375,7 @@ componentDidUpdate = (prevProps) => {
     return(
       <DropDownList 
       {...this.props}
-      onPageSize={()=>this.handlePageSize()}
+      // onPageSize={()=>this.handlePageSize()}
       />
     )
   }
@@ -407,7 +386,7 @@ componentDidUpdate = (prevProps) => {
       <div className="bottom-row">
         <SearchInput
         {...this.props}
-        // wasApprove={this.state.wasApprove}
+        whichTabs={this.state.whichTabs}
         webInfo="Search"
         onSalesSearch={this.props.onSearchSales}
         onServiceSearch={this.props.onSearchService}
@@ -559,11 +538,12 @@ componentDidUpdate = (prevProps) => {
   //KOMPONEN UNTUK FILTER DATA ACTION
   _renderFilterByDataAction = (value) => {
     if (value === 1) {
-      this.setState({wasApprove : true})
+      this.setState({whichTabs : true})
     }if (value === 0) {
-      this.setState({wasApprove : false})
+      this.setState({whichTabs : false})
     }
-    if (this.state.wasApprove === true) {
+    if (this.state.whichTabs === true) {
+      console.log('skuit pantek', this.props.salesOrderListApproved)
       return(
         <>
           <FilterbyDataAction 
@@ -580,7 +560,7 @@ componentDidUpdate = (prevProps) => {
         </>
       );
     }
-    if (this.state.wasApprove === false) {
+    if (this.state.whichTabs === false) {
       return(
         <>
           <FilterbyDataAction 
@@ -602,11 +582,11 @@ componentDidUpdate = (prevProps) => {
   //KOMPONEN UNTUK BUTTON DOWNLOAD, APPROVE, DAN DELETE
   _renderBaseButton = (value) => {
     if (value === 1) {
-      this.setState({wasApprove : true})
+      this.setState({whichTabs : true})
     }if (value === 0) {
-      this.setState({wasApprove : false})
+      this.setState({whichTabs : false})
     }
-    if (this.state.wasApprove === true) {
+    if (this.state.whichTabs === true) {
       return(
 				<div className="bottom-row">
           <BaseButton titles="Total" totalSelectedItems ={this.props.selectedSalesPlans.length}/>
@@ -634,7 +614,7 @@ componentDidUpdate = (prevProps) => {
         </div>
       );
     }
-    if (this.state.wasApprove === false) {
+    if (this.state.whichTabs === false) {
       return(
 				<div className="bottom-row">
           <BaseButton titles="Total" totalSelectedItems ={this.props.selectedServicePlans.length}/>
@@ -695,7 +675,7 @@ componentDidUpdate = (prevProps) => {
       <>
         <PlanningDetailsTab
           {...this.props}
-          renderFilterByDataAction={this._renderFilterByDataAction()}
+          renderFilterByDataAction={this._renderFilterByDataAction()}  
           renderBaseButton={this._renderBaseButton()}
           renderSearch={this._renderSearchBar()}
           renderNotif={this._renderNotif()}
@@ -717,14 +697,15 @@ componentDidUpdate = (prevProps) => {
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}
           onPage={this._renderPagination}
-          // wasApprove={this._renderBaseButton}
+          baseButton={this._renderBaseButton}
           isApproved={this.state.isApproved}
         />
       </>
     );
   };
 
-  render(){      
+  render(){ 
+    console.log('data selected filter', this.props.selectedFilters)     
     return(
         <main className="content">
             <div className="table-container">

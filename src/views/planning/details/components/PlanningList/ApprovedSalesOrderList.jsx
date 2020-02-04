@@ -186,31 +186,16 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
         {this.showTableEmpty()}
         </>
       )
-    }else if(this.props.salesOrderListDeleted.Lists.length > 0 ){
-      return(
-        <>
-        <Table classes={{ root: 'table' }} className="table">
-        {this.showTableHead()}
-        <TableBody classes={{ root: 'table-body' }}>
-          {this.props.salesOrderListDeleted.Lists
-            && this.props.salesOrderListDeleted.Lists.map((row, id) => (
-              this.showTableBody(row,id)
-            ))}
-          </TableBody>
-        </Table>
-        {this.showTableEmpty()}
-        </>
-      )
     }else{
       return(
           <>
         <Table classes={{ root: 'table' }} className="table">
           {this.showTableHead()}
         <TableBody classes={{ root: 'table-body' }}>
-          <h1>DATA TIDAK ADA</h1>
-          {this.showTableEmpty()}
+          {/* <h1>DATA TIDAK ADA</h1> */}
         </TableBody>
         </Table>
+        {this.showTableEmpty()}
         </>
        )
     }

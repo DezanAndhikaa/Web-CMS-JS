@@ -61,6 +61,7 @@ export const SelectUnitModelFilterAction ='SELECT_UNIT_MODEL_FILTER'
 export const SelectComponentFilterAction ='SELECT_COMPONENT_FILTER'
 export const IndexFilterAction = 'INDEX FILTER';
 export const LifetimeFilterAction = 'SELECT_LIFETIME_FILTER'
+export const DateFilterAction = 'SELECT_DATE_FILTER'
 
 export function approveSalesAction(payload){
 	const requestConfig = {
@@ -292,6 +293,10 @@ export function searchCompAction(type, payload, sort){
 
 export function searchCompActionService(type, payload, sort){
 	return { type, payload, sort };
+}
+
+export function dateFilterAction(type, payload, payload2, page){
+	return { type, payload, payload2, page };
 }
 
 export function selectFilterAction(type, payload, payload2, page) {

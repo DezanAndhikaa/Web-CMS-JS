@@ -5,27 +5,35 @@ import { Button, TextField, FormHelperText } from '@material-ui/core'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import moment from 'moment';
 // import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 
 class FilterByPeriodeDate extends React.Component{
 
     state = {
         startDate: new Date(),
-        startDate2: new Date()
+        startDate2: new Date(),
+        startFilter: Date(),
+        endFilter: Date()
     };
 
     handleChangeStart = date => {
+        // const valueOfInput = moment(date).format('YYYY.MM.DD');
         this.setState({
             startDate: date,
+            startFilter: moment(date).format('YYYY-MM-DD')
         })
         console.log('kurseh 1 : ',this.state.startDate)
+        console.log('kurseh 1,2 : ', this.state.startFilter)
     }
 
     handleChangeEnd = date => {
         this.setState({
             startDate2: date,
+            endFilter: moment(date).format('YYYY-MM-DD')
         })
         console.log('kurseh 2 : ',this.state.startDate2)
+        console.log('kurseh 2,2 : ',this.state.endFilter)
     }
 
     render(){
@@ -37,23 +45,11 @@ class FilterByPeriodeDate extends React.Component{
                     <CloseButton onClose={this.props.onClosed}/>
                 </div>
                 <div className="teks-middle">
-                    <label className="teks-left">From</label>    
+                    <label className="teks-left">From </label>
                     <label className="teks-right">To</label>
                 </div>
                 <div className="top-midel">
                     <div className="box"/>
-                    {/* <KeyboardDatePicker
-                        disableToolbar
-                        variant="inline"
-                        format="MM/dd/yyyy"
-                        margin="normal"
-                        id="date-picker-inline"
-                        label="Date picker inline"
-                        value={this.state.startDate}
-                        onChange={this.handleDateChange}
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',}}
-                    /> */}
                     <DatePicker
                         className="dates"
                         dateFormat="dd-MM-yyyy"
@@ -69,7 +65,7 @@ class FilterByPeriodeDate extends React.Component{
                 </div>
                 
                 <div className="bottom-rows">
-                    <Button className="btn-search" onClick={this.props.onStats}>Search Plan</Button>
+                    <Button className="btn-search" onClick={ () => {this.props.onFilter(this.state.startFilter, this.state.endFilter); this.props.onClosed() }} >Search Plan</Button>
                 </div>
             </div>
         )

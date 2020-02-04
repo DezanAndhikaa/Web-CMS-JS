@@ -10,7 +10,11 @@ import './TrackingHistory.scss'
 
 export default class TrackingHistory extends React.PureComponent {
 	state ={
-		whatPageIsChoosed : ''
+		whatPageIsChoosed : '',
+		approveTotalData : 0,
+		notApproveTotalData : 0,
+		deleteTotalData : 0,
+		sapIssueTotalData : 0
 	}
 
 	_renderSearchBar(){
@@ -37,7 +41,7 @@ export default class TrackingHistory extends React.PureComponent {
 	onClickSalesOrder = () =>{
 		this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
 	  }
-	_renderSalesOrderList(){
+	salesOrderList(){
 		return(
 		  <div className="plannings-list-containers">
 			<SalesOrderList 
@@ -53,7 +57,7 @@ export default class TrackingHistory extends React.PureComponent {
 	  }
 
 
-	  _renderApprovedSalesOrderList(){
+	  approvedSalesOrderList(){
 		return(
 		  <div className="plannings-list-containers">
 			<ApprovedSalesOrderList 
@@ -68,11 +72,8 @@ export default class TrackingHistory extends React.PureComponent {
 		);
 	  }
 	//   componentDidUpdate = () => {
-	// 	this.refresh()
+
 	//   }
-	  refresh(){
-		window.location.reload(false);
-	  }
 
 	  _renderList = (whatPageIsChoosed) =>{
 		// const whatPageIsChoosed = '';
@@ -81,20 +82,30 @@ export default class TrackingHistory extends React.PureComponent {
 		})
 		switch (this.state.whatPageIsChoosed) {
 			case 'Approve':
-				console.log('this is approved', whatPageIsChoosed)
+				console.log('this is ', whatPageIsChoosed)
 				return(
-					this._renderApprovedSalesOrderList()
+					this.approvedSalesOrderList()
 				)
 			case 'Not Approve': 
-			console.log('this is not approved', whatPageIsChoosed)
+			console.log('this is ', whatPageIsChoosed)
 				return (
-					this._renderSalesOrderList()
+					this.salesOrderList()
 				)
+			case 'Delete': 
+			console.log('this is ', whatPageIsChoosed)
+				// return (
+				// 	this.salesOrderList()
+				// )
+			case 'SAP ISSUE': 
+			console.log('this is ', whatPageIsChoosed)
+				// return (
+				// 	this.salesOrderList()
+				// )
 			default:
 				console.log('this is default', whatPageIsChoosed)
-				return(
-					this._renderApprovedSalesOrderList()
-				)
+				// return(
+				// 	this.approvedSalesOrderList()
+				// )
 		}
 	  }
 
@@ -106,17 +117,29 @@ export default class TrackingHistory extends React.PureComponent {
 		{ return this.props.unselectSalesPlan(plan); }
 		return this.props.selectSalesPlan(plan);
 	  };
-	componentDidMount = () =>{
-		this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
-		this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
-		this.props.fetchApprovedSales(this.props.salesParameter.dataFilter);
-		this.props.fetchApprovedService(this.props.serviceParameter.dataFilter);
-		this.props.fetchDeletedSales(this.props.salesParameter.dataFilter);
-		this.props.fetchDeletedService(this.props.serviceParameter.dataFilter);
+	componentDidMount = async() =>{
+		await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
+		await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+		await this.props.fetchApprovedSales(this.props.salesParameter.dataFilter);
+		await this.props.fetchApprovedService(this.props.serviceParameter.dataFilter);
+		await this.props.fetchDeletedSales(this.props.salesParameter.dataFilter);
+		await this.props.fetchDeletedService(this.props.serviceParameter.dataFilter);
+		this.setPropsToState();
+	}
+	setPropsToState(){
+		console.log('pantek ke trigger')
+		this.setState({
+			approveTotalData : this.props.salesOrderListApproved.TotalData,
+			notApproveTotalData : this.props.salesOrderList.TotalData,
+			deleteTotalData : this.props.salesOrderListDeleted.TotalData,
+			sapIssueTotalData : 0
+		})
 	}
 
 	render(){
 		console.log('skui living', this.props);
+		console.log('skui living', this.state.approveTotalData)
+
 		return(
 			<main className="content" >
 				<div className="table-containers">

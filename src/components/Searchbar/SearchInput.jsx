@@ -14,7 +14,7 @@ export default class SearchInput extends React.PureComponent {
   }
 
   handleKeyUp = (event) => {
-    if (this.props.wasApprove === true) {
+    if (this.props.whatTabIsRendered === true) {
       this.setState({ value: event.target.value });
       if (event.keyCode === 13) {
         this.props.onSalesSearch(this.state.value);
