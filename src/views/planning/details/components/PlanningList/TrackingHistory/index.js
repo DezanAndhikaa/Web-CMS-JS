@@ -30,6 +30,7 @@ import TrackingHistory from './TrackingHistory';
 
 const mapStateToProps = (state) => ({
 	displayMode: state.displayMode,
+	approveSalesDownloaded : state.plansPageState.approveSalesDownloaded,
 	salesOrderList: state.plansPageState.salesOrderList.data,
 	salesOrderListApproved: state.plansPageState.salesOrderListApproved.data,
 	salesOrderListDeleted: state.plansPageState.salesOrderListDeleted.data,
