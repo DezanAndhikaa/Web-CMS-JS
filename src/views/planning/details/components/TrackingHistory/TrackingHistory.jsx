@@ -1,14 +1,14 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import Cards from './components/Card';
-import SearchInput from '../../../../../../components/Searchbar/SearchInput';
-import BaseButton from '../../../../../../components/Button/BaseButton';
-import SalesOrderList from '../SalesOrderList';
-import ServiceOrderList from '../ServiceOrderList';
-import ApprovedSalesOrderList from '../ApprovedSalesOrderList';
+import SearchInput from '../../../../../components/Searchbar/SearchInput';
+import BaseButton from '../../../../../components/Button/BaseButton';
+import SalesOrderList from '../PlanningList/SalesOrderList';
+import ServiceOrderList from '../PlanningList/ServiceOrderList';
+import ApprovedSalesOrderList from '../PlanningList/ApprovedSalesOrderList';
 import Button from '@material-ui/core/Button';
 import './TrackingHistory.scss'
-import { Menu } from '../../../../../../constants'
+import { Menu } from '../../../../../constants'
 
 export default class TrackingHistory extends React.PureComponent {
 	state ={
@@ -50,7 +50,7 @@ export default class TrackingHistory extends React.PureComponent {
 	}
 
 	onClickServiceOrder = () => {
-		this.props.fetchServiceOrder(this.props.salesParameter.dataFIlter);
+		this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
 	}
 
 	salesOrderList(){
@@ -153,7 +153,7 @@ export default class TrackingHistory extends React.PureComponent {
 
 	updateAssignmentServiceStates = (plan) => {
 		if (this.props.selectedServicePlans
-			.some((plans) => plans.So === plan.So,
+			.some((plans) => plans.Wo === plan.Wo,
 			// console.log('sssss sales', this.state.selectedData.So)
 			)) 
 		{ return this.props.unselectServicePlan(plan); }
@@ -161,12 +161,15 @@ export default class TrackingHistory extends React.PureComponent {
 	};
 
 	componentDidMount = async() =>{
-		await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
-		await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
-		await this.props.fetchApprovedSales(this.props.salesParameter.dataFilter);
-		await this.props.fetchApprovedService(this.props.serviceParameter.dataFilter);
-		await this.props.fetchDeletedSales(this.props.salesParameter.dataFilter);
-		await this.props.fetchDeletedService(this.props.serviceParameter.dataFilter);
+		if(this.props.location.whichTab === "sales"){
+			await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
+			await this.props.fetchApprovedSales(this.props.salesParameter.dataFilter);
+			await this.props.fetchDeletedSales(this.props.salesParameter.dataFilter);
+		}else{
+			await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+			await this.props.fetchApprovedService(this.props.serviceParameter.dataFilter);
+			await this.props.fetchDeletedService(this.props.serviceParameter.dataFilter);
+		}
 		this.setPropsToState();
 	}
 
