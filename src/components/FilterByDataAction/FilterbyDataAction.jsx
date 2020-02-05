@@ -47,7 +47,7 @@ class FilterbyDataAction extends React.Component {
     this.props.onSelectAction(this.props.onSelectActionType, item);
   }
 
-  handleClick = (menu, tab,  subMenu) => {
+  handleClick = (menu, tab) => {
     this.props.history.push({
       pathname: menu,
       whichTab: tab
