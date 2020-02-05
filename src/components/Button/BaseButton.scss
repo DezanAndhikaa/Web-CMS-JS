@@ -13,7 +13,7 @@
         justify-content: flex-end;
         margin-right: 0.8vw;
     }
-    .btn-download{
+    .btn-download-icon{
         height: vw(38.07);
         width: vw(40.07);
         margin-left: vw(15);
@@ -25,7 +25,7 @@
         background-size: 45%;
         background-position: center;
     }
-    .btn-download-full{
+    .btn-download{
         display: flex;
         padding-left: 10%;
         padding-right: 0%;
@@ -92,6 +92,9 @@
         cursor: pointer;
     }
     .btn-cancel-approve:hover{
+        background-image: url('../../assets/icons/cancel_approve_hover.png');
+        background-size: 15%;
+        background-position-x: 8%;
         background-color: map-get($colors, delete);
         color: white;
     }

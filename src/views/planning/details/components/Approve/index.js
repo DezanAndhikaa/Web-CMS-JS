@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { PlansReducers } from '../../../DetailPages-reducer';
+import { PlansReducers } from '../../DetailPages-reducer';
 import {
     approveServiceDownloadAction, 
     approveSalesDownloadAction,
@@ -40,7 +40,7 @@ import {
     selectMechanicAction, 
     sortByAction, 
 	storePlanDataAction,
-} from '../../../DetailPages-action';
+} from '../../DetailPages-action';
 import ApprovalPages from './ApprovalPages';
 
 const mapStateToProps = (state) => ({
