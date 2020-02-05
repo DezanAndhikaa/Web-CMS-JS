@@ -12,6 +12,7 @@ import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 // import { NotificationManager } from 'react-notifications';
 import {Snackbar, Button} from '@material-ui/core';
+import Loading from '../../../../../components/Loading/Loading'
 
 export default class SalesOrderList extends React.PureComponent {
   constructor(props) {
@@ -287,6 +288,7 @@ render(){
               </TableBody>
             </Table>
             {this.showLoading()}
+            {/* <Loading/> */}
           </>
         )
       }

@@ -699,6 +699,7 @@ componentDidUpdate = (prevProps) => {
           onPage={this._renderPagination}
           baseButton={this._renderBaseButton}
           isApproved={this.state.isApproved}
+          // whichTabs={this.state.whichTabs}
         />
       </>
     );

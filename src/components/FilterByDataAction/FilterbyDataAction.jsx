@@ -130,6 +130,23 @@ class FilterbyDataAction extends React.Component {
           }
         </div>
       );
+    }else{
+      return (
+        <div className="dropdown">
+          <div className="dropdown-button" onClick={this.showDropdownMenu}>
+          <div className="dropdown-selected-item">
+            <div className="tracking-history">
+              <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
+                  <img src={IconHistory} className="icon-history" alt="" /><span className="label-history">Tracking History</span>
+              </DotBadges>
+            </div>
+          </div>
+        </div>
+          {
+            this.state.displayMenu && this.renderDropdownList()  
+          }
+        </div>
+      );
     }
   }
 }

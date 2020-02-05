@@ -9,6 +9,10 @@ import ApprovedSalesOrderList from '../PlanningList/ApprovedSalesOrderList';
 import Button from '@material-ui/core/Button';
 import './TrackingHistory.scss'
 import { Menu } from '../../../../../constants'
+import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton'
+import FilterbyDataAction  from '../../../../../components/FilterByDataAction/FilterbyDataAction'
+import { Spinner } from '../../../../../assets/icons'
+import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 
 export default class TrackingHistory extends React.PureComponent {
 	state ={
@@ -183,13 +187,57 @@ export default class TrackingHistory extends React.PureComponent {
 		})
 	}
 
+	showLoading(){
+
+		// return(
+		// 	<div className="loading-tracking-container">
+		// 	  <img 
+		// 		src={Spinner}
+		// 		alt="loading-spinner"
+		// 		className="loading-icon"
+		// 		/>
+		// 	</div>
+		//   )
+
+		if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
+		  return(
+			<div className="loading-tracking-container">
+			  <img 
+				src={Spinner}
+				alt="loading-spinner"
+				className="loading-icon"
+				/>
+			</div>
+		  )
+		}else if(this.props.fetchStatusSales === ApiRequestActionsStatus.FAILED){
+		  return(
+			<div className="loading-tracking-container">
+			  {/* OOPS THERE WAS AN ERROR :'( */}
+			</div>
+		  )
+		}else if(this.props.salesOrderList.Lists.length === 0){
+		  return(
+			<div className="loading-tracking-container">
+			  {/* DATA NOT FOUND */}
+			</div>
+		  )
+		}
+	  }
+
 	render(){
 		return(
 			<main className="content" >
+				{this.showLoading()}
 				<div className="head-containers">
-					<Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS) }>
-						Detail
-					</Button>
+					<div className="back_button">
+						<Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS) }>
+							Detail
+						</Button>
+					</div>
+					<div className="notif_button">
+						<NotifButton/>
+						<FilterbyDataAction/>
+					</div>
 				</div>
 				<div className="table-containers">
 					<div className="title-containers">
