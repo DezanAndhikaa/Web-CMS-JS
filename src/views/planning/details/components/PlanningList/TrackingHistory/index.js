@@ -24,6 +24,7 @@ import {
 	UnselectSalesPlanAction,
 	UpdateSalesParameterAction,
 	UpdateServiceParameterAction,
+	sortByAction
 } from '../../../DetailPages-action';
 import TrackingHistory from './TrackingHistory';
 
@@ -59,6 +60,7 @@ const mapDispatchToProps = (dispatch) => ({
 	fetchServiceOrder: (payload) => dispatch(fetchServiceAction(payload)),
 	onSearchSales: (keyword) => dispatch(searchAction(SearchSalesAction, keyword)),
 	onSearchService: (keyword) => dispatch(searchAction(SearchServiceAction, keyword)),
+	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	selectSalesPlan: (payload) => dispatch(selectSalesPlansAction(SelectSalesPlanAction, payload)),
 	selectServicePlan: (payload) => dispatch(selectServicePlansAction(SelectServicePlanAction, payload)),
 	unselectServicePlan: (payload) => dispatch(selectServicePlansAction(UnselectServicePlanAction, payload)),

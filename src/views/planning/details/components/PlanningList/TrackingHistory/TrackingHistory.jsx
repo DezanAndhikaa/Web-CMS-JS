@@ -14,7 +14,8 @@ export default class TrackingHistory extends React.PureComponent {
 		approveTotalData : 0,
 		notApproveTotalData : 0,
 		deleteTotalData : 0,
-		sapIssueTotalData : 0
+		sapIssueTotalData : 0,
+		isTrackingHistory : true
 	}
 
 	_renderSearchBar(){
@@ -38,9 +39,16 @@ export default class TrackingHistory extends React.PureComponent {
           />
 		)
 	}
-	onClickSalesOrder = () =>{
-		this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
+	onClickSalesOrder = async () =>{
+		console.log('pantek fetch sales')
+		await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
+		this.setPropsToState();
 	  }
+	onClickSalesOrderApproved = async () =>{
+		console.log('pantek fetch sales approved')
+		await this.props.fetchApprovedSales(this.props.salesParameter.dataFilter);
+		this.setPropsToState();
+	}
 	salesOrderList(){
 		return(
 		  <div className="plannings-list-containers">
@@ -51,6 +59,8 @@ export default class TrackingHistory extends React.PureComponent {
 			onClickSalesOrder={this.onClickSalesOrder}
 			onChoosedSales={this.updateAssignmentSalesStates}
 			selectedSalesPlanList={this.props.selectedSalesPlans}
+			onClickTabHead={this.props.onClickSortBy}
+			isTrackingHistory={this.state.isTrackingHistory}
 			/>
 		  </div>
 		);
@@ -63,17 +73,15 @@ export default class TrackingHistory extends React.PureComponent {
 			<ApprovedSalesOrderList 
 			{...this.props}
 			displaySalesCheckbox={this.props.salesParameter.paramsData.assigmentFilter || this.props.salesParameter.paramsData.inProgressFilter}
-			sortSalesByState={this.props.sortSalesBy}
-			onClickSalesOrder={this.onClickSalesOrder}
+			// sortSalesByState={this.props.sortSalesBy}
+			onClickSalesOrderApproved={this.onClickSalesOrderApproved}
 			onChoosedSales={this.updateAssignmentSalesStates}
 			selectedSalesPlanList={this.props.selectedSalesPlans}
+			// onClickTabHead={this.props.onClickSortBy}
 			/>
 		  </div>
 		);
 	  }
-	//   componentDidUpdate = () => {
-
-	//   }
 
 	  _renderList = (whatPageIsChoosed) =>{
 		// const whatPageIsChoosed = '';
@@ -118,16 +126,18 @@ export default class TrackingHistory extends React.PureComponent {
 		return this.props.selectSalesPlan(plan);
 	  };
 	componentDidMount = async() =>{
-		await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
-		await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
 		await this.props.fetchApprovedSales(this.props.salesParameter.dataFilter);
-		await this.props.fetchApprovedService(this.props.serviceParameter.dataFilter);
+		await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
+		// await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+		// await this.props.fetchApprovedService(this.props.serviceParameter.dataFilter);
 		await this.props.fetchDeletedSales(this.props.salesParameter.dataFilter);
-		await this.props.fetchDeletedService(this.props.serviceParameter.dataFilter);
+		// await this.props.fetchDeletedService(this.props.serviceParameter.dataFilter);
 		this.setPropsToState();
 	}
+
+
 	setPropsToState(){
-		console.log('pantek ke trigger')
+		console.log('pantek ke trigger', this.props.salesParameter.dataFilter)
 		this.setState({
 			approveTotalData : this.props.salesOrderListApproved.TotalData,
 			notApproveTotalData : this.props.salesOrderList.TotalData,
@@ -157,10 +167,10 @@ export default class TrackingHistory extends React.PureComponent {
 					</div> */}
 					<div className="filters-containers">
 						<div className="dropdowns-containers">
-							<Cards title="Approve" totalData={this.props.salesOrderListApproved.TotalData} renderList={this._renderList} /> &nbsp; 
-							<Cards title="Not Approve" totalData={this.props.salesOrderList.TotalData} renderList={this._renderList} /> &nbsp; 
-							<Cards title="Delete" totalData={this.props.salesOrderListDeleted.TotalData} renderList={this._renderList} /> &nbsp; 
-							<Cards title="SAP ISSUE" totalData="0" renderList={this._renderList} />
+							<Cards title="Approve" totalData={this.state.approveTotalData} renderList={this._renderList} /> &nbsp; 
+							<Cards title="Not Approve" totalData={this.state.notApproveTotalData} renderList={this._renderList} /> &nbsp; 
+							<Cards title="Delete" totalData={this.state.deleteTotalData} renderList={this._renderList} /> &nbsp; 
+							<Cards title="SAP ISSUE" totalData={this.state.sapIssueTotalData} renderList={this._renderList} />
 						</div>
 						 {/* <p1> TRACKING HISTORY - Sales Order </p1> 
 						 <br /> */}

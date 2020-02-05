@@ -9,6 +9,7 @@ import EditButton from '../../../../../components/ActionButton/EditButton/EditBu
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'
+import {Snackbar, Button} from '@material-ui/core';
 
 export default class ApprovedSalesOrderList extends React.PureComponent {
   state = {
@@ -16,7 +17,7 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
   }
 
   componentDidMount = async () => {
-    this.props.fetchApprovedSales(this.props.salesParameter.dataFilter);
+    this.props.onClickSalesOrderApproved();
   }
   componentDidUpdate = (prevState) =>{
     if (prevState.salesParameter !== this.props.salesParameter || prevState.salesSearch !== this.props.salesSearch || 
@@ -57,73 +58,68 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
               <PlanningListHeader
                 name="SO"
               //   isActive={this.props.sortJobsByState.unitModel.isActive}
-                delay={300}
-                onSearch={this.props.onSearchComp}
+                // delay={300}
+                // // onSearch={this.props.onSearchComp}
               //   isAscending={this.props.sortJobsByState.unitModel.isAscending}
               />
               <PlanningListHeader
                 name="Customer"
-                isActive={this.props.sortSalesByState.Customer.isActive}
-                delay={300}
-                isAscending={this.props.sortSalesByState.Customer.isAscending}
-                onClick={() => this.props.onClickTabHead(SortSalesByCustomer)}
+                // isActive={this.props.sortSalesByState.Customer.isActive}
+                // delay={300}
+                // // isAscending={this.props.sortSalesByState.Customer.isAscending}
+                // // onClick={() => this.props.onClickTabHead(SortSalesByCustomer)}
               />
               <PlanningListHeader
                 name="Site"
-                isActive={this.props.sortSalesByState.Site.isActive}
-                delay={300}
-                isAscending={this.props.sortSalesByState.Site.isAscending}
-                onClick={() => this.props.onClickTabHead(SortSalesBySite)}
+                // isActive={this.props.sortSalesByState.Site.isActive}
+                // delay={300}
+                // // isAscending={this.props.sortSalesByState.Site.isAscending}
+                // // onClick={() => this.props.onClickTabHead(SortSalesBySite)}
               />
               <PlanningListHeader
                 name="Unit Model"
-                isActive={this.props.sortSalesByState.UnitModel.isActive}
-                delay={300}
-                isAscending={this.props.sortSalesByState.UnitModel.isAscending}
-                onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
+                // // isActive={this.props.sortSalesByState.UnitModel.isActive}
+                // delay={300}
+                // // isAscending={this.props.sortSalesByState.UnitModel.isAscending}
+                // // onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
               />
               <PlanningListHeader
                 name="Comp Desc"
-                isActive={this.props.sortSalesByState.CompDesc.isActive}
-                delay={300}
-                isAscending={this.props.sortSalesByState.CompDesc.isAscending}
-                onClick={() => this.props.onClickTabHead(SortSalesByCompDesc)}
+                // // isActive={this.props.sortSalesByState.CompDesc.isActive}
+                // delay={300}
+                // // isAscending={this.props.sortSalesByState.CompDesc.isAscending}
+                // // onClick={() => this.props.onClickTabHead(SortSalesByCompDesc)}
               />
               <PlanningListHeader
                 name="Part Number"
               // //   isActive={this.props.sortJobsByState.backlogOpen.isActive}
-                delay={300}
+                // delay={300}
               // //   isAscending={this.props.sortJobsByState.backlogOpen.isAscending}
               />
               <PlanningListHeader
                 name="Unit Code"
               // //   isActive={this.props.sortJobsByState.plantExecution.isActive}
-                delay={300}
+                // delay={300}
               // //   isAscending={this.props.sortJobsByState.plantExecution.isAscending}
               />
               <PlanningListHeader
                 name="Serial Number"
               // //   isActive={this.props.sortJobsByState.status.isActive}
-                delay={300}
+                // delay={300}
               // //   isAscending={this.props.sortJobsByState.status.isAscending}            
               />
           <PlanningListHeader
               name="Lifetime"
             // //   isActive={this.props.sortJobsByState.staging.isActive}
-              delay={300}
+              // delay={300}
             // //   isAscending={this.props.sortJobsByState.staging.isAscending}
             />
             <PlanningListHeader
               name="Plan"
             // //   isActive={this.props.sortJobsByState.staging.isActive}
-              delay={300}
+              // delay={300}
             // //   isAscending={this.props.sortJobsByState.staging.isAscending}
             />
-            <Typography
-                name="Action" style={{marginTop: "10px"}}
-              // //   isActive={this.props.sortJobsByState.staging.isActive}
-              // //   isAscending={this.props.sortJobsByState.staging.isAscending}
-              >Action</Typography>
           </TableRow>
         </TableHead>
     )
@@ -156,7 +152,7 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
     )
   }
 
-  showTableEmpty(){
+  showLoading(){
     if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
       return(
         <div className="loading-container">
@@ -165,6 +161,32 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
             alt="loading-spinner"
             className="loading-icon"
             />
+        </div>
+      )
+    }else if(this.props.fetchStatusPutLifetime === ApiRequestActionsStatus.LOADING){
+      return(
+            <div>
+            <Snackbar
+              anchorOrigin={{ vertical: 'center',horizontal: 'right'}}
+              bodyStyle={{ backgroundColor: 'teal', color: 'coral' }}
+              open={this.state.stats}
+              onClose={this.handleClose}
+              autoHideDuration={3000}
+              message="Please Wait. Page will reload automatically"
+            />
+          </div>
+          )
+    }
+    else if(this.props.fetchStatusSales === ApiRequestActionsStatus.FAILED){
+      return(
+        <div className="loading-container">
+          OOPS THERE WAS AN ERROR :'(
+        </div>
+      )
+    }else if(this.props.salesOrderList.Lists.length === 0){
+      return(
+        <div className="loading-container">
+          DATA NOT FOUND
         </div>
       )
     }
@@ -183,7 +205,7 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
             ))}
           </TableBody>
         </Table>
-        {this.showTableEmpty()}
+        {this.showLoading()}
         </>
       )
     }else{
@@ -195,7 +217,7 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
           {/* <h1>DATA TIDAK ADA</h1> */}
         </TableBody>
         </Table>
-        {this.showTableEmpty()}
+        {this.showLoading()}
         </>
        )
     }

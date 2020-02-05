@@ -6,6 +6,7 @@ import './FilterbyDataAction.scss';
 import { Button, Badge } from '@material-ui/core';
 import { IconApprove, IconHistory } from '../../assets/icons';
 import { withStyles } from '@material-ui/core/styles';
+import { Menu } from '../../constants'
 
 const DotBadges = withStyles(theme => ({
 	badge: {
@@ -47,7 +48,7 @@ class FilterbyDataAction extends React.Component {
   }
 
   handleClick = (menu, subMenu) => {
-      this.props.push(menu);
+      this.props.history.push(menu);
     }
 
   // renderDropdown() {
@@ -86,7 +87,7 @@ class FilterbyDataAction extends React.Component {
     return (
       <div className="list-items">
           {/* <Button className="button" variant="outlined" onClick={this.props.onClickPlanningApprove}> */}
-          <Button className="button" variant="outlined">
+          <Button className="button" variant="outlined" onClick={()=>this.handleClick(Menu.PLANNING_DETAILS_TRACKING)}>
             Sales Order{/* Planning Approved  */}
           </Button>
           <Button className="button-plan-del" variant="outlined">
