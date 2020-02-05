@@ -66,9 +66,13 @@ componentDidUpdate = (prevProps) => {
         this.props.fetchServiceOrder(this.props.filterParameter);
       }
   }
-
+  //FILTER RANGE LIFETIME
   if(prevProps.filterLifetime !== this.props.filterLifetime){
     this.props.fetchSalesOrder(this.props.filterLifetime);
+  }
+  //FILTER RANGE DATE
+  if(prevProps.filterDate !== this.props.filterDate){
+    this.props.fetchSalesOrder(this.props.filterDate);
   }
 
   //ini untuk trigger sales global search
@@ -579,68 +583,68 @@ componentDidUpdate = (prevProps) => {
   };
 
   //KOMPONEN UNTUK BUTTON DOWNLOAD, APPROVE, DAN DELETE
-  _renderBaseButton = (value) => {
-    if (value === 1) {
-      this.setState({whichTabs : true})
-    }if (value === 0) {
-      this.setState({whichTabs : false})
-    }
-    if (this.state.whichTabs === true) {
-      return(
-				<div className="bottom-row">
-          <BaseButton titles="Total" totalSelectedItems ={this.props.selectedSalesPlans.length}/>
-          <BaseButton titles="Delete" 
-            {...this.props}
-            disabledButton = {this.props.selectedSalesPlans.length < 1 }
-            totalSelectedItems ={this.props.selectedSalesPlans.length}
-            whatTabsIsRendered={this.state.isPaging}
-            handleDeleteSales={this.handleDeleteSales}
-          />
-          <BaseButton titles="Download"
-            {...this.props}
-            whatTabsIsRendered={this.state.isPaging}
-            handleSalesApprovedDownload={this.handleSalesApprovedDownload}
-            // selectedDownloadData={this.state.selectedData.So} 
-          />
-          <BaseButton titles="Approve"
-            {...this.props}
-            whatTabsIsRendered={this.state.isPaging}
-            disabledButton = {this.props.selectedSalesPlans.length < 1 }
-            totalSelectedItems ={this.props.selectedSalesPlans.length}
-            handleSalesApprove={this.handleSalesApprove}
-            selectedData={this.state.selectedData}
-          />
-        </div>
-      );
-    }
-    if (this.state.whichTabs === false) {
-      return(
-				<div className="bottom-row">
-          <BaseButton titles="Total" totalSelectedItems ={this.props.selectedServicePlans.length}/>
-          <BaseButton titles="Delete" 
-            {...this.props}
-            disabledButton = {this.props.selectedServicePlans.length < 1 }
-            totalSelectedItems ={this.props.selectedServicePlans.length}
-            whatTabsIsRendered={this.state.isPaging}
-            handleDeleteService={this.handleDeleteService}
-          />
-					<BaseButton titles="Download"  
-            {...this.props}
-            whatTabsIsRendered={this.state.isPaging}
-            handleServiceApprovedDownload={this.handleServiceApprovedDownload}
-          />
-          <BaseButton titles="Approve"
-            {...this.props}
-            disabledButton = {this.props.selectedServicePlans.length < 1 }
-            totalSelectedItems ={this.props.selectedServicePlans.length}
-            whatTabsIsRendered={this.state.isPaging}
-            selectedServiceData={this.state.selectedServiceData}
-            handleServiceApprove={this.handleServiceApprove}
-          />
-        </div>
-      );
-    }
-  };
+  // _renderBaseButton = (value) => {
+  //   if (value === 1) {
+  //     this.setState({whichTabs : true})
+  //   }if (value === 0) {
+  //     this.setState({whichTabs : false})
+  //   }
+  //   if (this.state.whichTabs === true) {
+  //     return(
+	// 			<div className="bottom-row">
+  //         <BaseButton titles="Total" totalSelectedItems ={this.props.selectedSalesPlans.length}/>
+  //         <BaseButton titles="Delete" 
+  //           {...this.props}
+  //           disabledButton = {this.props.selectedSalesPlans.length < 1 }
+  //           totalSelectedItems ={this.props.selectedSalesPlans.length}
+  //           whatTabsIsRendered={this.state.isPaging}
+  //           handleDeleteSales={this.handleDeleteSales}
+  //         />
+  //         <BaseButton titles="Download"
+  //           {...this.props}
+  //           whatTabsIsRendered={this.state.isPaging}
+  //           handleSalesApprovedDownload={this.handleSalesApprovedDownload}
+  //           // selectedDownloadData={this.state.selectedData.So} 
+  //         />
+  //         <BaseButton titles="Approve"
+  //           {...this.props}
+  //           whatTabsIsRendered={this.state.isPaging}
+  //           disabledButton = {this.props.selectedSalesPlans.length < 1 }
+  //           totalSelectedItems ={this.props.selectedSalesPlans.length}
+  //           handleSalesApprove={this.handleSalesApprove}
+  //           selectedData={this.state.selectedData}
+  //         />
+  //       </div>
+  //     );
+  //   }
+  //   if (this.state.whichTabs === false) {
+  //     return(
+	// 			<div className="bottom-row">
+  //         <BaseButton titles="Total" totalSelectedItems ={this.props.selectedServicePlans.length}/>
+  //         <BaseButton titles="Delete" 
+  //           {...this.props}
+  //           disabledButton = {this.props.selectedServicePlans.length < 1 }
+  //           totalSelectedItems ={this.props.selectedServicePlans.length}
+  //           whatTabsIsRendered={this.state.isPaging}
+  //           handleDeleteService={this.handleDeleteService}
+  //         />
+	// 				<BaseButton titles="Download"  
+  //           {...this.props}
+  //           whatTabsIsRendered={this.state.isPaging}
+  //           handleServiceApprovedDownload={this.handleServiceApprovedDownload}
+  //         />
+  //         <BaseButton titles="Approve"
+  //           {...this.props}
+  //           disabledButton = {this.props.selectedServicePlans.length < 1 }
+  //           totalSelectedItems ={this.props.selectedServicePlans.length}
+  //           whatTabsIsRendered={this.state.isPaging}
+  //           selectedServiceData={this.state.selectedServiceData}
+  //           handleServiceApprove={this.handleServiceApprove}
+  //         />
+  //       </div>
+  //     );
+  //   }
+  // };
     
   isChangeStat = (value,key) =>{
     this.setState({
@@ -675,7 +679,7 @@ componentDidUpdate = (prevProps) => {
         <PlanningDetailsTab
           {...this.props}
           renderFilterByDataAction={this._renderFilterByDataAction()}  
-          renderBaseButton={this._renderBaseButton()}
+          // renderBaseButton={this._renderBaseButton()}
           renderSearch={this._renderSearchBar()}
           renderNotif={this._renderNotif()}
           onClickSalesOrder={this.onClickSalesOrder}        
@@ -696,7 +700,7 @@ componentDidUpdate = (prevProps) => {
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}
           onPage={this._renderPagination}
-          baseButton={this._renderBaseButton}
+          // baseButton={this._renderBaseButton}
           isApproved={this.state.isApproved}
         />
       </>
@@ -704,7 +708,7 @@ componentDidUpdate = (prevProps) => {
   };
 
   render(){ 
-    console.log('data selected filter', this.props.selectedFilters)     
+    // console.log('data selected filter', this.props.selectedFilters)     
     return(
         <main className="content">
             <div className="table-container">

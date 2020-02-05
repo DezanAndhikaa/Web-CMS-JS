@@ -6,7 +6,7 @@ import './FilterbyDataAction.scss';
 import { Button, Badge } from '@material-ui/core';
 import { IconApprove, IconHistory } from '../../assets/icons';
 import { withStyles } from '@material-ui/core/styles';
-import { Menu } from '../../constants'
+import { Menu } from '../../constants';
 
 const DotBadges = withStyles(theme => ({
 	badge: {
@@ -40,57 +40,42 @@ class FilterbyDataAction extends React.Component {
     this.setState({ displayMenu: false }, () => {
       document.removeEventListener('click', this.hideDropdownMenu);
     });
-    await this.props.onClickButton();
+    // await this.props.onClickButton();
   }
 
   selectItem = (item) => {
     this.props.onSelectAction(this.props.onSelectActionType, item);
   }
 
-  handleClick = (menu, subMenu) => {
-      this.props.history.push(menu);
-    }
-
-  // renderDropdown() {
-  //   if(this.props.titles === "Tracking History"){
-  //     return (
-  //       <div className="dropdown-button" onClick={this.showDropdownMenu}>
-  //         <div className="dropdown-selected-item">
-  //           {/* Data Action */}
-  //               <div className="tracking-history">
-  //                 <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
-  //                     <img src={IconHistory} className="icon-history" alt="" /><span className="label-history">Tracking History</span>
-  //                 </DotBadges>
-  //             </div>
-  //           {/* <div className="expand-icon-container"></div> */}
-  //         </div>
-  //       </div>
-  //     );
-  //   } else if(this.props.titles === "Approve Data"){
-  //     return (
-  //       <div className="dropdown-button" onClick={this.showDropdownMenu}>
-  //         <div className="dropdown-selected-item">
-  //           {/* Data Action */}
-  //               <div className="tracking-history">
-  //                 <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
-  //                     <img src={IconApprove} className="icon-history" alt="" /><span className="label-history">Approve</span>
-  //                 </DotBadges>
-  //             </div>
-  //           {/* <div className="expand-icon-container"></div> */}
-  //         </div>
-  //       </div>
-  //     );
-  //   }
-  // }
+  handleClick = (menu, tab,  subMenu) => {
+    this.props.history.push({
+      pathname: menu,
+      whichTab: tab
+    });
+  }
 
   renderDropdownList() {
     return (
       <div className="list-items">
           {/* <Button className="button" variant="outlined" onClick={this.props.onClickPlanningApprove}> */}
-          <Button className="button" variant="outlined" onClick={()=>this.handleClick(Menu.PLANNING_DETAILS_TRACKING)}>
+          <Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_TRACKING, 'sales') }>
             Sales Order{/* Planning Approved  */}
           </Button>
-          <Button className="button-plan-del" variant="outlined">
+          <Button className="button-plan-del" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_TRACKING, 'service') }>
+            Service Order{/* Planning Deleted */}
+          </Button>
+      </div>
+    );
+  }
+
+  renderDropdownApproval() {
+    return (
+      <div className="list-items">
+          {/* <Button className="button" variant="outlined" onClick={this.props.onClickPlanningApprove}> */}
+          <Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_APPROVAL, 'sales') }>
+            Sales Orders{/* Planning Approved  */}
+          </Button>
+          <Button className="button-plan-del" variant="outlined" onClick={() => this.handleClick(Menu.PLANNING_DETAILS_APPROVAL, 'service') }>
             Service Order{/* Planning Deleted */}
           </Button>
       </div>
@@ -141,7 +126,7 @@ class FilterbyDataAction extends React.Component {
           </div>
         </div>
           {
-            this.state.displayMenu && this.renderDropdownList()  
+            this.state.displayMenu && this.renderDropdownApproval()  
           }
         </div>
       );

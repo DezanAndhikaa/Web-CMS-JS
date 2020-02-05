@@ -1,6 +1,17 @@
+.head-containers{
+    display: flex;
+    position: relative;
+    z-index:3;
+    background-image: url('../../../../../assets/icons/Arrow_Left.png');
+    background-size: 0.5%;
+    background-position-x: 0.3%;
+    background-position-y: center;
+    background-repeat: no-repeat;
+}
+
 .table-containers{
     display: flex;
-    top: 80px;
+    top: 8%;
     flex-direction: column;
     position: relative;
     z-index: 3;
@@ -11,6 +22,7 @@
         .title{
             display: flex;
             width: 50%;
+            margin-bottom: 2%;
         }
         .search-containers{
             flex: 1;

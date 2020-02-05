@@ -111,7 +111,7 @@ class PlanningDetailsTab extends React.Component {
 console.log('kondisi value terasek', value)
     if (value === 0) {
       this.props.onPage(this.state.value);
-      this.props.baseButton(this.state.value);
+      // this.props.baseButton(this.state.value);
       if (this.state.invisible1) {
         this.setState({
           invisible2 : true
@@ -124,7 +124,7 @@ console.log('kondisi value terasek', value)
     }
     if (value === 1) {    
       this.props.onPage(this.state.value);
-      this.props.baseButton(this.state.value);
+      // this.props.baseButton(this.state.value);
       if (this.state.invisible2) {
         this.setState({
           invisible1 : true

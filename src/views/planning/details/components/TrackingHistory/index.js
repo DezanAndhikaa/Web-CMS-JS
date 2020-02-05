@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { PlansReducers } from '../../../DetailPages-reducer';
+import { PlansReducers } from '../../DetailPages-reducer';
 
 import {
 	approveSalesDownloadAction,
@@ -25,12 +25,13 @@ import {
 	UpdateSalesParameterAction,
 	UpdateServiceParameterAction,
 	sortByAction
-} from '../../../DetailPages-action';
+} from '../../DetailPages-action';
 import TrackingHistory from './TrackingHistory';
 
 const mapStateToProps = (state) => ({
 	displayMode: state.displayMode,
 	approveSalesDownloaded : state.plansPageState.approveSalesDownloaded,
+	approveServiceDownloaded : state.plansPageState.approveServiceDownloaded,
 	salesOrderList: state.plansPageState.salesOrderList.data,
 	salesOrderListApproved: state.plansPageState.salesOrderListApproved.data,
 	salesOrderListDeleted: state.plansPageState.salesOrderListDeleted.data,

@@ -1,12 +1,8 @@
-// import { push } from 'connected-react-router';
 import { connect } from 'react-redux';
 import { PlansReducers } from './DetailPages-reducer';
-// import { storeDataAction } from '../../../core/StorageHelper';
-// import { PLAN_DATA, StorageKey } from '../../../constants';
 import {
-	// approveSalesAction,
-	// unapproveSalesAction,
-	approveServiceDownloadAction, approveSalesDownloadAction,
+    approveServiceDownloadAction, 
+    approveSalesDownloadAction,
 	putLifetimeCompAction,
 	approveSalesAction, //APPROVE SALES
 	unapproveSalesAction, 
@@ -17,28 +13,38 @@ import {
 	fetchApprovedServiceAction,
 	fetchDeletedSalesAction,
 	fetchDeletedServiceAction,
-	fetchSalesAction, salesParameterAction, fetchServiceAction,
-	ClearSelectedPlans, UpdateServiceParameterAction,
+    fetchSalesAction, 
+    salesParameterAction, 
+    fetchServiceAction,
+    ClearSelectedPlans, 
+    UpdateServiceParameterAction,
 	UpdateSalesParameterAction, 
 	searchAction,
-	SearchSalesAction, SearchServiceAction,searchCompAction,
-	SearchCompAction,SearchCompActionService,searchCompActionService,
-	selectFilterAction,selectFilterAction2,indexFilterAction, UnselectSalesPlanAction, planParameterAction, UpdatePlansParameterAction, serviceParameterAction,
-	UnselectServicePlanAction, selectSalesPlansAction, selectServicePlansAction, selectLeaderAction, SelectSalesPlanAction,
-	SelectServicePlanAction, FetchSalesAction,
-	selectMechanicAction, sortByAction, 
-	storePlanDataAction,dateFilterAction
-	// getSearchValueAction, 
-	// getSelesOrderAction, 
+    SearchSalesAction, 
+    SearchServiceAction,
+    searchCompAction,
+    SearchCompAction,
+    SearchCompActionService,
+    searchCompActionService,
+    selectFilterAction,
+    selectFilterAction2,
+    indexFilterAction, 
+    UnselectSalesPlanAction, 
+    serviceParameterAction,
+    UnselectServicePlanAction, 
+    selectSalesPlansAction, 
+    selectServicePlansAction, 
+    selectLeaderAction, 
+    SelectSalesPlanAction,
+	SelectServicePlanAction,
+    selectMechanicAction, 
+    sortByAction, 
+	storePlanDataAction,
 } from './DetailPages-action';
 import DetailPages from './DetailPages';
 
 const mapStateToProps = (state) => ({
-	// assignPlansResponse: state.plansPageState.assignPlansStatus.response,
-	// requestApproveSales: state.plansPageState.assignPlansStatus.status,
 	displayMode: state.displayMode,
-	// plansData: state.plansPageState.PlansAssignmentSummary.data,
-	// mechanicList: state.plansPageState.mechanicList.data,
 	salesOrderList: state.plansPageState.salesOrderList.data,
 	salesOrderListApproved: state.plansPageState.salesOrderListApproved.data,
 	salesOrderListDeleted: state.plansPageState.salesOrderListDeleted.data,
@@ -48,18 +54,12 @@ const mapStateToProps = (state) => ({
 	salesParameter: state.plansPageState.salesParameter,
 	filterParameter: state.plansPageState.filterParameter,
 	filterLifetime: state.plansPageState.filterLifetime,
-	filterDate: state.plansPageState.filterDate,
 	indexFilterParameter: state.plansPageState.indexFilterParameter,
 	serviceParameter: state.plansPageState.serviceParameter,
 	salesSearch: state.plansPageState.salesSearch,
 	serviceSearch: state.plansPageState.serviceSearch,
 	searchComp: state.plansPageState.searchComp,
-	// requestPlans: state.plansPageState.PlansAssignmentSummary.status,
-	// requestMechanics: state.plansPageState.mechanicList.status,
-	// requestUnapproveSales: state.plansPageState.unassignPlansStatus.status,
-	// unapproveSalesResponse: state.plansPageState.unassignPlansStatus.response,
 	selectedFilters: state.plansPageState.selectedFilters,
-	// selectedPlans: state.plansPageState.selectedPlans,
 	selectedSalesPlans: state.plansPageState.selectedSalesPlans,
 	selectedServicePlans: state.plansPageState.selectedServicePlans,
 	selectedLeader: state.plansPageState.selectedLeader,
@@ -75,7 +75,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	// approveSales: (payload) => dispatch(approveSalesAction(payload)),
 	downloadSalesApproved : (soId) => dispatch(approveSalesDownloadAction(soId)),
 	downloadServiceApproved : (soId) => dispatch(approveServiceDownloadAction(soId)),
 	unapproveSales: (payload, token) => dispatch(unapproveSalesAction(payload, token)),
@@ -97,10 +96,7 @@ const mapDispatchToProps = (dispatch) => ({
 	onSearchService: (keyword) => dispatch(searchAction(SearchServiceAction, keyword)),
 	onSearchComp: (keyword,sort) => dispatch(searchCompAction(SearchCompAction, keyword, sort)),
 	onSearchCompService: (keyword, sort) => dispatch(searchCompActionService(SearchCompActionService, keyword, sort)),
-	// pushTo: (url) => dispatch(push(url)),
-	// savePlanData: (data) => dispatch(storeDataAction(PLAN_DATA, StorageKey.PLAN_DATA, data)),
 	lifetimeFilter: (type, payload, payload2, page) => dispatch(selectFilterAction(type, payload, payload2, page)),
-	dateFilter: (type, payload, payload2, page) => dispatch(dateFilterAction(type, payload, payload2, page)),
 	selectFilter2: (type, payload, head, page) => dispatch(selectFilterAction2(type, payload, head, page)),
 	indexFilter: (type, payload) => dispatch(indexFilterAction(type, payload)),
 	selectLeader: (type, payload) => dispatch(selectLeaderAction(type, payload)),
@@ -114,6 +110,6 @@ const mapDispatchToProps = (dispatch) => ({
 	updateServiceParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
 });
 
-const detailPages = connect(mapStateToProps, mapDispatchToProps)(DetailPages);
+const approvalPages = connect(mapStateToProps, mapDispatchToProps)(DetailPages);
 
-export { detailPages as DetailPages, PlansReducers };
+export { approvalPages as ApprovalPages, PlansReducers };
