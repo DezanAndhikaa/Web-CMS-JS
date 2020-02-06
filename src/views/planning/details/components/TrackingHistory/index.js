@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { PlansReducers } from '../../../DetailPages-reducer';
+import { PlansReducers } from '../../DetailPages-reducer';
 
 import {
 	approveSalesDownloadAction,
@@ -24,11 +24,14 @@ import {
 	UnselectSalesPlanAction,
 	UpdateSalesParameterAction,
 	UpdateServiceParameterAction,
-} from '../../../DetailPages-action';
+	sortByAction
+} from '../../DetailPages-action';
 import TrackingHistory from './TrackingHistory';
 
 const mapStateToProps = (state) => ({
 	displayMode: state.displayMode,
+	approveSalesDownloaded : state.plansPageState.approveSalesDownloaded,
+	approveServiceDownloaded : state.plansPageState.approveServiceDownloaded,
 	salesOrderList: state.plansPageState.salesOrderList.data,
 	salesOrderListApproved: state.plansPageState.salesOrderListApproved.data,
 	salesOrderListDeleted: state.plansPageState.salesOrderListDeleted.data,
@@ -59,6 +62,7 @@ const mapDispatchToProps = (dispatch) => ({
 	fetchServiceOrder: (payload) => dispatch(fetchServiceAction(payload)),
 	onSearchSales: (keyword) => dispatch(searchAction(SearchSalesAction, keyword)),
 	onSearchService: (keyword) => dispatch(searchAction(SearchServiceAction, keyword)),
+	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	selectSalesPlan: (payload) => dispatch(selectSalesPlansAction(SelectSalesPlanAction, payload)),
 	selectServicePlan: (payload) => dispatch(selectServicePlansAction(SelectServicePlanAction, payload)),
 	unselectServicePlan: (payload) => dispatch(selectServicePlansAction(UnselectServicePlanAction, payload)),

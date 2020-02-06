@@ -4,7 +4,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router';
 import { Menu } from '../constants';
 import { DetailPages } from '../views/planning/details';
-import { TrackingHistory } from '../views/planning/details/components/PlanningList/TrackingHistory';
+import { TrackingHistory } from '../views/planning/details/components/TrackingHistory';
 import { ApprovalPages } from '../views/planning/details/components/Approve';
 // import { JobsPage } from '../pages/jobs-execution/jobs';
 // import { LoginPage } from '../pages/login';

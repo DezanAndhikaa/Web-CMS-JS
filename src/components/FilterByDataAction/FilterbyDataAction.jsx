@@ -47,17 +47,20 @@ class FilterbyDataAction extends React.Component {
     this.props.onSelectAction(this.props.onSelectActionType, item);
   }
 
-  handleClick = (menu, subMenu) => {
-    this.props.history.push(menu);
+  handleClick = (menu, tab) => {
+    this.props.history.push({
+      pathname: menu,
+      whichTab: tab
+    });
   }
 
   renderDropdownList() {
     return (
       <div className="list-items">
-          <Button className="button" variant="outlined" onClick={()=>this.handleClick(Menu.PLANNING_DETAILS_TRACKING)}>
+          <Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_TRACKING, 'sales') }>
             Sales Order
           </Button>
-          <Button className="button-plan-del" variant="outlined">
+          <Button className="button-plan-del" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_TRACKING, 'service') }>
             Service Order
           </Button>
       </div>
@@ -67,10 +70,10 @@ class FilterbyDataAction extends React.Component {
   renderDropdownApproval() {
     return (
       <div className="list-items">
-          <Button className="button" variant="outlined" onClick={()=>this.handleClick(Menu.PLANNING_DETAILS_APPROVAL)}>
-            Sales Order
+          <Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_APPROVAL, 'sales') }>
+            Sales Orders
           </Button>
-          <Button className="button-plan-del" variant="outlined">
+          <Button className="button-plan-del" variant="outlined" onClick={() => this.handleClick(Menu.PLANNING_DETAILS_APPROVAL, 'service') }>
             Service Order
           </Button>
       </div>

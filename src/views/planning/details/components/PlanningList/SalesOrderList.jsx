@@ -7,7 +7,7 @@ import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
 import InputButton from '../../../../../components/Button/InputButton';
-import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction } from '../../DetailPages-action';
+import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 // import { NotificationManager } from 'react-notifications';
@@ -56,6 +56,10 @@ export default class SalesOrderList extends React.PureComponent {
 
   isFilterLifetime = async( value1, value2 ) => {
     this.props.lifetimeFilter( LifetimeFilterAction, value1, value2, this.props.salesParameter.dataFilter.PageSize );
+  }
+
+  isFilterDate = async ( value1, value2) => {
+    this.props.dateFilter( DateFilterAction, value1, value2, this.props.salesParameter.dataFilter.PageSize );
   }
 
   isCheckboxAvailable = (data) => {
@@ -159,6 +163,7 @@ export default class SalesOrderList extends React.PureComponent {
             name="Plan"
           // //   isActive={this.props.sortJobsByState.staging.isActive}
             delay={300}
+            onFilter={this.isFilterDate}
           // //   isAscending={this.props.sortJobsByState.staging.isAscending}
           />
           <PlanningListHeader
@@ -171,6 +176,11 @@ export default class SalesOrderList extends React.PureComponent {
             delay={300}
             onSearch={this.props.onSearchComp}
           />
+          {/* <Typography
+            name="Action" style={{marginTop: "10px"}}
+          // //   isActive={this.props.sortJobsByState.staging.isActive}
+          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
+          >Action</Typography> */}
         </TableRow>
       </TableHead>
     )
