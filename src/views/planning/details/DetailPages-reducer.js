@@ -155,9 +155,7 @@ const initialServiceParameter = {
 };
 
 const initialFilterParameter = {
-	PageNumber : 1,
-	PageSize: 2,
-	Sort: '',
+
 	Filter: []
 };
 
@@ -507,7 +505,7 @@ export function filterLifetimeReducer(state = initialFilterParameter, action){
 	if(action.type === LifetimeFilterAction)
 		for(let i=0; i<2; i++){
 			if( i === 0){
-				state ={ ...state, PageSize: action.page, Filter : [...state.Filter,{Field: 'LifeTimeComponent', Operator: 'gte', Value: action.payload, Logic: 'and'}] }; 
+				state ={ ...state, Filter : [...state.Filter,{Field: 'LifeTimeComponent', Operator: 'gte', Value: action.payload, Logic: 'and'}] }; 
 			}else if(i === 1 ){
 				state ={ ...state, Filter : [...state.Filter,{Field: 'LifeTimeComponent', Operator: 'lte', Value: action.payload2, Logic: 'and'}] }; 
 			}
@@ -530,7 +528,8 @@ export function filterDateReducer(state = initialFilterParameter, action){
 export function filterParameterReducer(state = initialFilterParameter, action){
 	if (action.type === SelectCustomerFilterAction)
 		if(state.Filter.length === 0){ //IF yang pertama ini,jika filternya belum di isi apa2 (filter belum di jalankan)
-			return {...state, PageSize: action.page, Filter : [{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
+			// return {...state, PageSize: action.page, Filter : [{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
+			return {...state,Filter : [{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
 		}else{
 			for(let i=0; i<state.Filter.length; i++){ //FOR di sini untuk mengecek pada objek sebelumnya
 				if(state.Filter[i].Field === action.head){ //JIKA pada objek sebelumnya pada "field" ada yang sama, maka akan merubah nilai pada "value" tersebut tanpa menambah array
@@ -545,7 +544,7 @@ export function filterParameterReducer(state = initialFilterParameter, action){
 		}
 	if(action.type === SelectSiteFilterAction)
 		if(state.Filter.length === 0){
-			return {...state, PageSize: action.page, Filter : [{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
+			return {...state, Filter : [{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
 		}else{
 			for(let i=0; i<state.Filter.length; i++){
 				if(state.Filter[i].Field === action.head){
@@ -560,7 +559,7 @@ export function filterParameterReducer(state = initialFilterParameter, action){
 		}
 	if (action.type === SelectUnitModelFilterAction)
 		if(state.Filter.length === 0){
-			return {...state, PageSize: action.page, Filter : [{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
+			return {...state, Filter : [{Field: 'UnitModel', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
 		}else{
 			for(let i=0; i<state.Filter.length; i++){
 				if(state.Filter[i].Field === action.head){
@@ -575,7 +574,7 @@ export function filterParameterReducer(state = initialFilterParameter, action){
 		}
 	if (action.type === SelectComponentFilterAction)
 		if(state.Filter.length === 0){
-			return {...state, PageSize: action.page, Filter : [{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
+			return {...state, Filter : [{Field: 'ComponentDescription', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
 		}else{
 			for(let i=0; i<state.Filter.length; i++){
 				if(state.Filter[i].Field === action.head){
