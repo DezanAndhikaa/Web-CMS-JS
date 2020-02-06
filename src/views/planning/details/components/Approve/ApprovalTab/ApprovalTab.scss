@@ -39,12 +39,13 @@
     }
 }
 .tab-approval{
-    width: 100%;
-    display: inline-flex;
-    width: 165px;
+    // width: 100%;
+    // display: inline-flex;
+    // width: 165px;
+    display: flex;
     .tab-label-approval{
         font-family: 'Lato-Bold';
-        font-size: vw(22); //vw(20)
+        font-size: vw(24); //vw(22)
         line-height: vw(24); // vw(24)
     }
 }
@@ -66,11 +67,67 @@
     .base-button-container{
         display: flex;
         flex-direction: row;
-        .base-button{
-            flex: 1;
-            align-self: flex-end;
+        .approval-container{
+            width: 100%;
             display: flex;
-            justify-content: flex-end;
+            flex-direction: row;
+            margin-top: vw(41.93);
+            .total-data{
+                display: flex;
+                // position: absolute;
+                width: 306px;
+                height: 89px;
+                background-color: white;
+                border-radius: vw(8) !important;
+                box-shadow: 0px vw-tab(3) vw-tab(6) rgba(0, 0, 0, 0.161);
+                .header-approval{
+                    position: absolute;
+                    // font-size: vw(24); //vw(22)
+                    .header1{
+                        margin-left: 17.94%;
+                        margin-right: 75.26%;
+                        margin-top: 16.72%;
+                        margin-bottom: 80.55%;
+                        font-size: vw(20); //20px;
+                        font-family: 'Lato-Bold';
+                        line-height: vw(24); //24px; 
+                    }
+                    .header2{
+                        margin-left: 17.86%;
+                        margin-right: 76.5%;
+                        margin-top: 19.91%;
+                        margin-bottom: 78.04%;
+
+                        font-family: 'Lato-Regular';
+                        // font-style: normal;
+                        // font-weight: normal;
+                        font-size: vw(15); //15px;
+                        line-height: vw(18);//18px;
+                    }
+                }
+                .total-container{
+                    margin-left: 45.72%;//32.72%;
+                    // margin-right: 62.66%;
+                    margin-top: 12.8%;//19.8%;
+                    // margin-bottom: 75.31%;
+
+                    font-family: 'Lato-Bold';
+                    // font-style: normal;
+                    // font-weight: bold;
+                    // font-size: 36px;
+                    // line-height: 43px;
+                    font-size: vw(36);
+                    line-height: vw(43);
+
+                    color: #3C3B3B;
+                }
+            }
+            .base-button{
+                flex: 1;
+                align-self: flex-end;
+                display: flex;
+                justify-content: flex-end;
+            }
         }
     }
     .filters-container-approval{

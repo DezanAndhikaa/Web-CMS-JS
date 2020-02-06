@@ -98,7 +98,7 @@ class BaseButton extends React.Component{
         }else if(this.props.titles === "Download"){
             return(
                 <div className="button-inline">
-                    <div className="btn-download-icon" onClick={this.isDownloaded} />
+                    <Button className="btn-download" onClick={this.isDownloaded}>Download </Button>
                 </div>
             )
         }else if(this.props.titles === "Edit"){

@@ -214,11 +214,24 @@ class ApprovalTab extends React.Component {
 
   _renderBaseBtn(){
     return (
-      // <div className="base-button-container">
+      <div className="approval-container">
+        <div className="total-data">
+          <div className="header-approval">
+            <div className="header1">
+              Approval -
+            </div>
+            <div className="header2">
+              Sales Order
+            </div>
+          </div>
+          <div className="total-container">
+            {this.props.totalSalesData}
+          </div>
+        </div>
         <div className="base-button">
           {this.props.renderBaseButton}
         </div>
-      // </div>
+      </div>
     )
   }
 
@@ -280,13 +293,13 @@ class ApprovalTab extends React.Component {
     return(
       <div className="tab-approval">
         <div className="tab-label-approval">Sales Order 
-          <span>
+          {/* <span>
             <StyledBadge 
               badgeContent={this.props.totalSalesData} 
               color="primary" 
               invisible={this.state.invisible1}>
             </StyledBadge >
-          </span> 
+          </span>  */}
         </div>
       </div>      
     )
@@ -296,13 +309,13 @@ class ApprovalTab extends React.Component {
     return(
       <div className="tab-approval">
         <div className="tab-label-approval">Service Order 
-        <span>
+        {/* <span>
           <Badges 
             badgeContent={this.props.totalServiceData} 
             color="primary" 
             invisible={this.state.invisible2}>
           </Badges >
-        </span> 
+        </span>  */}
       </div>
       </div>      
     )
@@ -327,14 +340,6 @@ class ApprovalTab extends React.Component {
     return (
         <div className="root">
         <AppBar position="static" color="default" style={{boxShadow: "none"}}>
-
-        {/* Tampilan HO */}
-        {/* <div className="tab-container"> 
-          {this.props.renderSearch} 
-          {this.props.renderFilterByDataAction}
-        </div> */}
-        
-        {/* Tampilan Site */}
         <div className="tab-container-approval">
             {this.props.renderNotif}
             {this.props.renderFilterByDataAction}
@@ -349,12 +354,14 @@ class ApprovalTab extends React.Component {
               onClick={() => this.props.clearSelectedSalesPlans()} 
               classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
               label= {this.renderTotalSales()} 
+              //{<div className="tab-label-approval">Sales Order</div>}
             />
             <Tab 
               centered={true}
               onClick={() => this.props.clearSelectedServicePlans()} 
-              classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+              classes={{ root: classes.tabRoot, selected: classes.tabSelected }}  
               label= {this.renderTotalService()}
+              //
             />
           </Tabs>
         </AppBar>

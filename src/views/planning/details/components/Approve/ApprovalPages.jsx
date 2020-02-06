@@ -538,19 +538,22 @@ componentDidUpdate = (prevProps) => {
       this.setState({whichTabs : false})
     }
     if (this.state.whichTabs === true) {
-    //   console.log('skuit pantek', this.props.salesOrderListApproved)
       return(
         <>
           <FilterbyDataAction 
             {...this.props}
             titles="Tracking History"
-            onClickPlanningApprove={this.onClickApprovedSales}
-            onClickPlanningDelete={this.onClickDeletedSales}
-            onClickButton={this.handleClickFilterByDataAction}
+          />
+          <FilterbyDataAction 
+            {... this.props}
+            titles="Status"
           />
           <FilterbyDataAction 
             {... this.props}
             titles="Approve"
+            onClickPlanningApprove={this.onClickApprovedSales}
+            onClickPlanningDelete={this.onClickDeletedSales}
+            onClickButton={this.handleClickFilterByDataAction}
           />
         </>
       );
@@ -561,13 +564,17 @@ componentDidUpdate = (prevProps) => {
           <FilterbyDataAction 
             {...this.props}
             titles="Tracking History"
-            onClickPlanningApprove={this.onClickApprovedService}
-            onClickPlanningDelete={this.onClickDeletedService}
-            onClickButton={this.handleClickFilterByDataAction}
+          />
+          <FilterbyDataAction 
+            {... this.props}
+            titles="Status"
           />
           <FilterbyDataAction 
             {... this.props}
             titles="Approve"
+            onClickPlanningApprove={this.onClickApprovedService}
+            onClickPlanningDelete={this.onClickDeletedService}
+            onClickButton={this.handleClickFilterByDataAction}
           />
         </>
       );
