@@ -374,13 +374,25 @@ componentDidUpdate = (prevProps) => {
   }
 
   //KOMPONEN UNTUK SHOW PER/PAGE
-  _renderShowPerPage(){
+  _renderShowPerPage = () =>{
     return(
       <DropDownList 
       {...this.props}
       // onPageSize={()=>this.handlePageSize()}
+      handleClickShowPerPage={this.handleClickShowPerPage}
       />
     )
+  }
+  handleClickShowPerPage = async(value) =>{
+    if (this.state.whichTabs === true) {
+      console.log('pantej sales', value)
+      await this.props.clearSelectedSalesPlans();
+      await this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value})
+    }else if (this.state.whichTabs === false) {
+      console.log('pantej service', value)
+      await this.props.clearSelectedServicePlans();
+      await this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value})
+    }
   }
 
   //KOMPONEN UNTUK GLOBAL SEARCH

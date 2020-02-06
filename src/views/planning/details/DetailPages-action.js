@@ -53,6 +53,7 @@ export const UnselectSalesPlanAction = 'UNSELECT_SALES_PLANS';
 export const UnselectServicePlanAction = 'UNSELECT_SERVICE_PLANS';
 export const UnselectMechanicAction = 'UNSELECT_MECHANIC';
 export const UpdateSalesParameterAction = 'SALES_PARAMETER';
+export const UpdateSalesApprovedParameterAction = 'SALES_APPROVED_PARAMETER';
 export const UpdateServiceParameterAction = 'SERVICE_PARAMETER';
 export const SalesOrderFilterAction = 'SALES_ORDER_FILTER';
 export const SelectCustomerFilterAction = 'SELECT_CUSTOMER_FILTER';
@@ -278,6 +279,9 @@ export function getServiceOrderAction(payload) {
 }
 
 export function salesParameterAction(type, payload) {
+	return { type, payload };
+}
+export function salesParameterApprovedAction(type, payload) {
 	return { type, payload };
 }
 export function serviceParameterAction(type, payload) {

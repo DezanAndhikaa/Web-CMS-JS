@@ -28,8 +28,8 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
 
   componentDidUpdate = (prevState) =>{
     //untuk menghilangkan checkbox
-    if (prevState.salesParameter !== this.props.salesParameter || prevState.salesSearch !== this.props.salesSearch || 
-      prevState.searchComp !==this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
+    if (prevState.salesApprovedParameter !== this.props.salesApprovedParameter || prevState.salesSearch !== this.props.salesSearch || 
+      prevState.searchComp !==this.props.searchComp) {
       this.setState({checkedValue : false})
     }
   }
@@ -39,11 +39,11 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
   
 
   isFilterLifetime = async( value1, value2 ) => {
-    this.props.lifetimeFilter( LifetimeFilterAction, value1, value2, this.props.salesParameter.dataFilter.PageSize );
+    this.props.lifetimeFilter( LifetimeFilterAction, value1, value2, this.props.salesApprovedParameter.dataFilter.PageSize );
   }
 
   isFilterDate = async ( value1, value2) => {
-    this.props.dateFilter( DateFilterAction, value1, value2, this.props.salesParameter.dataFilter.PageSize );
+    this.props.dateFilter( DateFilterAction, value1, value2, this.props.salesApprovedParameter.dataFilter.PageSize );
   }
 
   isCheckboxAvailable = (data) => {
@@ -76,7 +76,7 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
             <Checkbox 
               checked={this.state.checkedValue}
               onChange={this.handleClicks}
-              onClick={() => {this.props.salesOrderList.Lists.map((row,id) => 
+              onClick={() => {this.props.salesOrderListApproved.Lists.map((row,id) => 
               this.props.onChoosedSales(row,id))}}
               className="checkbox-checked-header"/>}
           </TableCell>
@@ -214,44 +214,65 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
     })
   }
 
+  //perbaiki lagi nanti
   showLoading(){
-    if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
-      return(
-        <div className="loading-container">
-          <img 
-            src={Spinner}
-            alt="loading-spinner"
-            className="loading-icon"
-            />
-        </div>
-      )
-    }else if(this.props.fetchStatusPutLifetime === ApiRequestActionsStatus.LOADING){
-      return(
-            <div>
-            <Snackbar
-              anchorOrigin={{ vertical: 'center',horizontal: 'right'}}
-              bodyStyle={{ backgroundColor: 'teal', color: 'coral' }}
-              open={this.state.stats}
-              onClose={this.handleClose}
-              autoHideDuration={3000}
-              message="Please Wait. Page will reload automatically"
-            />
+    switch (ApiRequestActionsStatus) {
+      case ApiRequestActionsStatus.LOADING:
+        return(
+          <div className="loading-container">
+            <img 
+              src={Spinner}
+              alt="loading-spinner"
+              className="loading-icon"
+              />
           </div>
-          )
-    }
-    else if(this.props.fetchStatusSales === ApiRequestActionsStatus.FAILED){
-      return(
-        <div className="loading-container">
-          OOPS THERE WAS AN ERROR :'(
-        </div>
+        )
+        case ApiRequestActionsStatus.FAILED:
+          return(
+            <div className="loading-container">
+              OOPS THERE WAS AN ERROR :'(
+            </div>
       )
-    }else if(this.props.salesOrderList.Lists.length === 0){
-      return(
-        <div className="loading-container">
-          DATA NOT FOUND
-        </div>
-      )
+      default:
+        console.log('STATUS', this.props)
     }
+    // if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
+    //   return(
+    //     <div className="loading-container">
+    //       <img 
+    //         src={Spinner}
+    //         alt="loading-spinner"
+    //         className="loading-icon"
+    //         />
+    //     </div>
+    //   )
+    // }else if(this.props.fetchStatusPutLifetime === ApiRequestActionsStatus.LOADING){
+    //   return(
+    //         <div>
+    //         <Snackbar
+    //           anchorOrigin={{ vertical: 'center',horizontal: 'right'}}
+    //           bodyStyle={{ backgroundColor: 'teal', color: 'coral' }}
+    //           open={this.state.stats}
+    //           onClose={this.handleClose}
+    //           autoHideDuration={3000}
+    //           message="Please Wait. Page will reload automatically"
+    //         />
+    //       </div>
+    //       )
+    // }
+    // else if(this.props.fetchStatusSales === ApiRequestActionsStatus.FAILED){
+    //   return(
+    //     <div className="loading-container">
+    //       OOPS THERE WAS AN ERROR :'(
+    //     </div>
+    //   )
+    // }else if(this.props.salesOrderListApproved.Lists.length === 0){
+    //   return(
+    //     <div className="loading-container">
+    //       DATA NOT FOUND
+    //     </div>
+    //   )
+    // }
   }
 
 render(){
@@ -260,8 +281,8 @@ render(){
             <Table classes={{ root: 'table' }} className="table">
             {this.showTableHead()}
             <TableBody classes={{ root: 'table-body' }}>
-              {this.props.salesOrderList.Lists
-                && this.props.salesOrderList.Lists.map((row, id) => (
+              {this.props.salesOrderListApproved.Lists
+                && this.props.salesOrderListApproved.Lists.map((row, id) => (
                   this.showTableBody(row,id)
                 ))}
               </TableBody>
@@ -271,4 +292,3 @@ render(){
         )
       }
   }
-// }

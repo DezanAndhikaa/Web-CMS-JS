@@ -12,6 +12,7 @@ import { Menu } from '../../../../../constants';
 import { ApiRequestActionsStatus } from "../../../../../core/RestClientHelpers";
 import moment, { ISO_8601 } from "moment";
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
+import DropDownList from '../../../../../components/DropdownList/DropDownList';
 
 export default class TrackingHistory extends React.PureComponent {
 	state ={
@@ -99,7 +100,8 @@ export default class TrackingHistory extends React.PureComponent {
 		  />
 		  </div>
 		);
-	  }
+	}
+
 	_renderDownloadBtn(){
 		if (this.props.location.whichTab === "sales") {
 			return(
@@ -120,30 +122,62 @@ export default class TrackingHistory extends React.PureComponent {
 		}
 		
 	}
+
 	_renderPagination= (data) =>  {
 		console.log('pantej', data)
 		if (this.props.location.whichTab === "sales") {
 		  const web = this.props.displayMode === 'web';
 		  const currentPropsSales = data.PageNumber;
 		  const { TotalPages } = data;
-		  return(
-			<div className="bottom-row">
-			<div className="pagination">
-			  <div className="paging">
-				{/* {prevSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
-				{web && currentPropsSales - 3 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 3 })} className="page-inactive">{currentPropsSales - 3}</div>}
-				{web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive">{currentPropsSales - 2}</div>}
-				{currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive">{currentPropsSales - 1}</div>}
-				<div className="page-active">{currentPropsSales}</div>
-				{currentPropsSales + 1 <= TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive">{currentPropsSales + 1}</div>}
-				{web && currentPropsSales + 2 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive">{currentPropsSales + 2}</div>}
-				{web && currentPropsSales + 3 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive">{currentPropsSales + 3}</div>}
-				{/* {nextSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>} */}
-			  </div>
-			</div>
-			</div>
-		  )
-		  }else if(this.props.location.whichTab === "service"){
+		  switch (this.state.whatPageIsChoosed) {
+			case 'Approve':
+				console.log('MASOK APPROVE BAPAKK')
+				return(
+					<div className="pagination">
+					<div className="paging">
+						{/* {prevSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
+						{web && currentPropsSales - 3 > 0 && <div onClick={() => this.props.updateSalesApprovedParameter({ ...this.props.salesApprovedParameter.dataFilter, PageNumber: currentPropsSales - 3 })} className="page-inactive">{currentPropsSales - 3}</div>}
+						{web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesApprovedParameter({ ...this.props.salesApprovedParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive">{currentPropsSales - 2}</div>}
+						{currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesApprovedParameter({ ...this.props.salesApprovedParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive">{currentPropsSales - 1}</div>}
+						<div className="page-active">{currentPropsSales}</div>
+						{currentPropsSales + 1 <= TotalPages && <div onClick={() => this.props.updateSalesApprovedParameter({ ...this.props.salesApprovedParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive">{currentPropsSales + 1}</div>}
+						{web && currentPropsSales + 2 < TotalPages && <div onClick={() => this.props.updateSalesApprovedParameter({ ...this.props.salesApprovedParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive">{currentPropsSales + 2}</div>}
+						{web && currentPropsSales + 3 < TotalPages && <div onClick={() => this.props.updateSalesApprovedParameter({ ...this.props.salesApprovedParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive">{currentPropsSales + 3}</div>}
+						{/* {nextSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>} */}
+					</div>
+					</div>
+				)
+			case 'Not Approve': 
+			console.log('MASOK NOT APPROVE')
+				return(
+					<div className="pagination">
+					<div className="paging">
+						{/* {prevSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
+						{web && currentPropsSales - 3 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 3 })} className="page-inactive">{currentPropsSales - 3}</div>}
+						{web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive">{currentPropsSales - 2}</div>}
+						{currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive">{currentPropsSales - 1}</div>}
+						<div className="page-active">{currentPropsSales}</div>
+						{currentPropsSales + 1 <= TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive">{currentPropsSales + 1}</div>}
+						{web && currentPropsSales + 2 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive">{currentPropsSales + 2}</div>}
+						{web && currentPropsSales + 3 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive">{currentPropsSales + 3}</div>}
+						{/* {nextSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>} */}
+					</div>
+					</div>
+				)
+			case 'Delete':
+				return(
+					console.log('MASOK DELETE')
+				)
+			case 'SAP ISSUE' :
+				return(
+					console.log('MASOK SAP ISSUE')
+				)
+		  default:
+				return(
+					console.log('lol')
+				) 
+		  }
+		}else if(this.props.location.whichTab === "service"){
 		  const web = this.props.displayMode === 'web';
 		  const nextSales = this.props.serviceOrderList.NextPage;
 		  const prevSales = this.props.serviceOrderList.PrevPage;
@@ -151,7 +185,6 @@ export default class TrackingHistory extends React.PureComponent {
 		  const { TotalPages } = this.props.serviceOrderList;
 		  
 		  return(
-			<div className="bottom-row">
 			<div className="pagination">
 			  <div className="paging">
 				{prevSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>}
@@ -166,10 +199,53 @@ export default class TrackingHistory extends React.PureComponent {
 				{nextSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>}
 			  </div>
 			</div>
-			</div>
 		  )
 		}
 	  }
+
+
+	_renderShowPerPage(){
+		return(
+			<DropDownList 
+			{...this.props}
+			handleClickShowPerPage={this.handleClickShowPerPage}
+			/>
+		)
+	}
+
+	handleClickShowPerPage = (value) =>{
+		if (this.props.location.whichTab === 'sales') {
+			console.log('pantej masuk sales')
+			 switch (this.state.whatPageIsChoosed) {
+				 case 'Approve':
+					 return(
+						console.log('pantej case sales', this.state.whatPageIsChoosed)
+					 )
+				 case 'Not Approve':
+					console.log('pantej case sales not', value)
+					 return(
+						 <>
+					{this.props.clearSelectedSalesPlans()};
+					{this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value})}
+					 </>
+					 )
+				 case 'Delete': 
+					return(
+						console.log('pantej case sales del',  this.state.whatPageIsChoosed)
+					)
+				 case 'SAP ISSUE':
+					 return(
+						console.log('pantej case sales issue',  this.state.whatPageIsChoosed)
+					 )
+				 default:
+					 console.log('lol')
+			 }
+		}else if (this.props.location.whichTab === 'service') {
+		  console.log('pantej masuk service', value)
+		  this.props.clearSelectedServicePlans();
+		  this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value})
+		}
+	}
 
 	onClickSalesOrder = async() =>{
 		await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
@@ -224,7 +300,7 @@ export default class TrackingHistory extends React.PureComponent {
 			<div className="plannings-list-containers">
 				<ApprovedSalesOrderList 
 				{...this.props}
-				displaySalesCheckbox={this.props.salesParameter.paramsData.assigmentFilter || this.props.salesParameter.paramsData.inProgressFilter}
+				displaySalesCheckbox={this.props.salesApprovedParameter.paramsData.assigmentFilter || this.props.salesApprovedParameter.paramsData.inProgressFilter}
 				sortSalesByState={this.props.sortSalesBy}
 				onClickSalesOrderApproved={this.onClickSalesOrderApproved}
 				onChoosedSales={this.updateAssignmentSalesStates}
@@ -246,6 +322,9 @@ export default class TrackingHistory extends React.PureComponent {
 	componentDidUpdate = (prevProps) => {
 		if (prevProps.salesParameter !== this.props.salesParameter) {
 			this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
+		}
+		if (prevProps.salesApprovedParameter !== this.props.salesApprovedParameter) {
+			this.props.fetchApprovedSales(this.props.salesApprovedParameter.dataFilter);
 		}
 		if (prevProps.serviceParameter !== this.props.serviceParameter) {
 			this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
@@ -272,9 +351,9 @@ export default class TrackingHistory extends React.PureComponent {
 				return(
 					<>
 						{this.approvedSalesOrderList()}
-					<>
-						{this._renderPagination(this.props.salesOrderListApproved)}
-					</>
+					<div className="bottom-row">
+					{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderListApproved)}
+					</div>
 					</>
 				)
 			case 'Not Approve': 
@@ -283,9 +362,9 @@ export default class TrackingHistory extends React.PureComponent {
 					return (
 						<>
 							{this.salesOrderList()}
-						<>
-							{this._renderPagination(this.props.salesOrderList)}
-						</>
+						<div className="bottom-row">
+						{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderList)}
+						</div>
 						</>
 					)
 				}else
@@ -294,9 +373,9 @@ export default class TrackingHistory extends React.PureComponent {
 					return (
 						<>
 							{this.serviceOrderList()}
-						<>
-							{this._renderPagination()}
-						</>
+						<div className="bottom-row">
+						{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderList)}
+						</div>
 						</>
 					)
 				}

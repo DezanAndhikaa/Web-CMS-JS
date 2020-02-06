@@ -14,6 +14,7 @@ import {
 	fetchServiceAction,
 	searchAction,
 	salesParameterAction,
+	salesParameterApprovedAction,
 	serviceParameterAction,
 	ClearSelectedPlans,
 	SearchSalesAction,
@@ -23,6 +24,7 @@ import {
 	UnselectServicePlanAction,
 	UnselectSalesPlanAction,
 	UpdateSalesParameterAction,
+	UpdateSalesApprovedParameterAction,
 	UpdateServiceParameterAction,
 	sortByAction
 } from '../../DetailPages-action';
@@ -39,6 +41,7 @@ const mapStateToProps = (state) => ({
 	serviceOrderListApproved: state.plansPageState.serviceOrderListApproved.data,
 	serviceOrderListDeleted: state.plansPageState.serviceOrderListDeleted.data,
 	salesParameter: state.plansPageState.salesParameter,
+	salesApprovedParameter: state.plansPageState.salesApprovedParameter,
 	serviceParameter: state.plansPageState.serviceParameter,
 	salesSearch: state.plansPageState.salesSearch,
 	serviceSearch: state.plansPageState.serviceSearch,
@@ -68,6 +71,7 @@ const mapDispatchToProps = (dispatch) => ({
 	unselectServicePlan: (payload) => dispatch(selectServicePlansAction(UnselectServicePlanAction, payload)),
 	unselectSalesPlan: (payload) => dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
 	updateSalesParameter: (payload) => dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
+	updateSalesApprovedParameter: (payload) => dispatch(salesParameterApprovedAction(UpdateSalesApprovedParameterAction, payload)),
 	updateServiceParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload))
 });
 
