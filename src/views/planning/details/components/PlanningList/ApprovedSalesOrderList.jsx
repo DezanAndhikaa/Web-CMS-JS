@@ -216,7 +216,7 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
 
   //perbaiki lagi nanti
   showLoading(){
-    switch (ApiRequestActionsStatus) {
+    switch (this.props.fetchStatusSalesApproved) {
       case ApiRequestActionsStatus.LOADING:
         return(
           <div className="loading-container">
@@ -234,7 +234,7 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
             </div>
       )
       default:
-        console.log('STATUS', this.props)
+        console.log('STATUS oioi', this.props.fetchStatusSalesApproved)
     }
     // if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
     //   return(

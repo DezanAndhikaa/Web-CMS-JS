@@ -48,6 +48,7 @@ const mapStateToProps = (state) => ({
 	selectedSalesPlans: state.plansPageState.selectedSalesPlans,
 	selectedServicePlans: state.plansPageState.selectedServicePlans,
 	fetchStatusSales: state.plansPageState.salesOrderList.status,
+	fetchStatusSalesApproved: state.plansPageState.salesOrderListApproved.status,
 	fetchStatusService: state.plansPageState.serviceOrderList.status,
 	sortSalesBy: state.plansPageState.sortSalesBy,
 });
