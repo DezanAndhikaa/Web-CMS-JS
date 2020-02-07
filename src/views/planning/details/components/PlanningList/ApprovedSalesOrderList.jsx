@@ -214,7 +214,7 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
     })
   }
 
-  //perbaiki lagi nanti
+  //LOADING SCENE
   showLoading(){
     switch (this.props.fetchStatusSalesApproved) {
       case ApiRequestActionsStatus.LOADING:
