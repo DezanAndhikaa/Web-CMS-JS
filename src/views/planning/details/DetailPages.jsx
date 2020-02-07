@@ -16,7 +16,7 @@ class DetailPages extends React.Component{
       super(props)
       this.state = {
         stats: true,
-        isPaging: true,
+        // isPaging: true,
         isShowPerPage: true,
         showPerPage : 0,
         whichTabs: true,
@@ -35,6 +35,9 @@ class DetailPages extends React.Component{
 componentWillUnmount = () => {
   this.props.updateSalesParameter({
     ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
+  });
+  this.props.updateServiceParameter({
+    ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
   });
 }
 
@@ -96,7 +99,7 @@ componentDidUpdate = (prevProps) => {
     });
   }
   //search per component
-  if(this.state.isPaging){
+  if(this.state.whichTabs){
     if(prevProps.searchComp !== this.props.searchComp){
       this.props.updateSalesParameter({
         ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
@@ -317,11 +320,11 @@ componentDidUpdate = (prevProps) => {
   // PAGINATION DENGAN KONDISI UNTUK TAB SALES ORDER ATAU SERVICE ORDER
   _renderPagination= (pageValue) =>  {
     if (pageValue === 1) {
-      this.setState({isPaging : true})
+      this.setState({whichTabs : true})
     }if (pageValue === 0) {
-      this.setState({isPaging : false})
+      this.setState({whichTabs : false})
     }
-    if (this.state.isPaging === true) {
+    if (this.state.whichTabs === true) {
       const web = this.props.displayMode === 'web';
       const nextSales = this.props.salesOrderList.NextPage;
       const prevSales = this.props.salesOrderList.PrevPage;
@@ -344,7 +347,7 @@ componentDidUpdate = (prevProps) => {
         </div>
       )
       }
-    if (this.state.isPaging === false) {
+    if (this.state.whichTabs === false) {
       const web = this.props.displayMode === 'web';
       const nextSales = this.props.serviceOrderList.NextPage;
       const prevSales = this.props.serviceOrderList.PrevPage;
@@ -381,13 +384,25 @@ componentDidUpdate = (prevProps) => {
   }
 
   //KOMPONEN UNTUK SHOW PER/PAGE
-  _renderShowPerPage(){
+  _renderShowPerPage = () =>{
     return(
       <DropDownList 
       {...this.props}
       // onPageSize={()=>this.handlePageSize()}
+      handleClickShowPerPage={this.handleClickShowPerPage}
       />
     )
+  }
+  handleClickShowPerPage = async(value) =>{
+    if (this.state.whichTabs === true) {
+      console.log('pantej sales', value)
+      await this.props.clearSelectedSalesPlans();
+      await this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value})
+    }else if (this.state.whichTabs === false) {
+      console.log('pantej service', value)
+      await this.props.clearSelectedServicePlans();
+      await this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value})
+    }
   }
 
   //KOMPONEN UNTUK GLOBAL SEARCH
@@ -707,7 +722,7 @@ componentDidUpdate = (prevProps) => {
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}
           onPage={this._renderPagination}
-          baseButton={this._renderBaseButton}
+          // baseButton={this._renderBaseButton}
           isApproved={this.state.isApproved}
           // whichTabs={this.state.whichTabs}
         />

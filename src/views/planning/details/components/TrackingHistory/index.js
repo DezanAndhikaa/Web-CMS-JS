@@ -14,6 +14,7 @@ import {
 	fetchServiceAction,
 	searchAction,
 	salesParameterAction,
+	salesParameterApprovedAction,
 	serviceParameterAction,
 	ClearSelectedPlans,
 	SearchSalesAction,
@@ -23,12 +24,16 @@ import {
 	UnselectServicePlanAction,
 	UnselectSalesPlanAction,
 	UpdateSalesParameterAction,
+	UpdateSalesApprovedParameterAction,
 	UpdateServiceParameterAction,
+	sortByAction
 } from '../../DetailPages-action';
 import TrackingHistory from './TrackingHistory';
 
 const mapStateToProps = (state) => ({
 	displayMode: state.displayMode,
+	approveSalesDownloaded : state.plansPageState.approveSalesDownloaded,
+	approveServiceDownloaded : state.plansPageState.approveServiceDownloaded,
 	salesOrderList: state.plansPageState.salesOrderList.data,
 	salesOrderListApproved: state.plansPageState.salesOrderListApproved.data,
 	salesOrderListDeleted: state.plansPageState.salesOrderListDeleted.data,
@@ -36,12 +41,14 @@ const mapStateToProps = (state) => ({
 	serviceOrderListApproved: state.plansPageState.serviceOrderListApproved.data,
 	serviceOrderListDeleted: state.plansPageState.serviceOrderListDeleted.data,
 	salesParameter: state.plansPageState.salesParameter,
+	salesApprovedParameter: state.plansPageState.salesApprovedParameter,
 	serviceParameter: state.plansPageState.serviceParameter,
 	salesSearch: state.plansPageState.salesSearch,
 	serviceSearch: state.plansPageState.serviceSearch,
 	selectedSalesPlans: state.plansPageState.selectedSalesPlans,
 	selectedServicePlans: state.plansPageState.selectedServicePlans,
 	fetchStatusSales: state.plansPageState.salesOrderList.status,
+	fetchStatusSalesApproved: state.plansPageState.salesOrderListApproved.status,
 	fetchStatusService: state.plansPageState.serviceOrderList.status,
 	sortSalesBy: state.plansPageState.sortSalesBy,
 });
@@ -59,11 +66,13 @@ const mapDispatchToProps = (dispatch) => ({
 	fetchServiceOrder: (payload) => dispatch(fetchServiceAction(payload)),
 	onSearchSales: (keyword) => dispatch(searchAction(SearchSalesAction, keyword)),
 	onSearchService: (keyword) => dispatch(searchAction(SearchServiceAction, keyword)),
+	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	selectSalesPlan: (payload) => dispatch(selectSalesPlansAction(SelectSalesPlanAction, payload)),
 	selectServicePlan: (payload) => dispatch(selectServicePlansAction(SelectServicePlanAction, payload)),
 	unselectServicePlan: (payload) => dispatch(selectServicePlansAction(UnselectServicePlanAction, payload)),
 	unselectSalesPlan: (payload) => dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
 	updateSalesParameter: (payload) => dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
+	updateSalesApprovedParameter: (payload) => dispatch(salesParameterApprovedAction(UpdateSalesApprovedParameterAction, payload)),
 	updateServiceParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload))
 });
 

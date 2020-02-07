@@ -15,6 +15,7 @@ import {
 	// FetchPlansAction, 
 	// GetMechanicsAction, 
 	// GetServiceOrderAction, GetSalesOrderAction, 
+	UpdateSalesApprovedParameterAction,
 	UpdateSalesParameterAction, ResetSelectedMechanicsAction, 
 	SearchSalesAction,
 	SearchServiceAction,
@@ -501,6 +502,13 @@ export function salesParameterReducer(state = initialSalesParameter, action) {
 	return state;
 }
 
+export function salesApprovedParameterReducer(state = initialSalesParameter, action) {
+	if (action.type === UpdateSalesApprovedParameterAction)
+		return {...state, dataFilter: action.payload};
+		// console.log('dums',state)
+	return state;
+}
+
 export function filterLifetimeReducer(state = initialFilterParameter, action){
 	if(action.type === LifetimeFilterAction)
 		for(let i=0; i<2; i++){
@@ -515,13 +523,13 @@ export function filterLifetimeReducer(state = initialFilterParameter, action){
 
 export function filterDateReducer(state = initialFilterParameter, action){
 	if(action.type === DateFilterAction)
-	for(let i=0; i<2; i++){
-		if( i === 0){
-			state = {...state, PageSize: action.page, Filter : [...state.Filter,{Field: 'PlanExecution', Operator: 'gte', Value: action.payload, Logic: 'and'}] };
-		}else if( i === 1){
-			state = {...state, Filter : [...state.Filter,{Field: 'PlanExecution', Operator: 'lte', Value: action.payload2, Logic: 'and'}] };
+		for(let i=0; i<2; i++){
+			if( i === 0){
+				state = {...state, PageSize: action.page, Filter : [...state.Filter,{Field: 'PlanExecution', Operator: 'gte', Value: action.payload, Logic: 'and'}] };
+			}else if( i === 1){
+				state = {...state, Filter : [...state.Filter,{Field: 'PlanExecution', Operator: 'lte', Value: action.payload2, Logic: 'and'}] };
+			}
 		}
-	}
 	return state;
 }
 
@@ -820,6 +828,7 @@ const PlansReducers = combineReducers({
 	// approveSalesStatus: approveSalesReducer,
 	// unapproveSalesStatus: unapproveSalesReducer,
 	salesParameter: salesParameterReducer,
+	salesApprovedParameter : salesApprovedParameterReducer,
 	filterParameter: filterParameterReducer,
 	indexFilterParameter: indexFilterParameterReducer,
 	serviceParameter: serviceParameterReducer,
