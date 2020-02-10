@@ -6,6 +6,7 @@ import BaseButton from '../../../../../components/Button/BaseButton';
 import SalesOrderList from '../PlanningList/SalesOrderList';
 import ServiceOrderList from '../PlanningList/ServiceOrderList';
 import ApprovedSalesOrderList from '../PlanningList/ApprovedSalesOrderList';
+import DeletedSalesOrderList from '../PlanningList/DeletedSalesOrderList';
 import Button from '@material-ui/core/Button';
 import './TrackingHistory.scss';
 import { Menu } from '../../../../../constants';
@@ -258,6 +259,12 @@ export default class TrackingHistory extends React.PureComponent {
 		this.setPropsToState();
 	}
 
+	onClickSalesOrderDeleted = async() =>{
+		await this.props.fetchDeletedSales(this.props.salesParameter.dataFilter);
+		await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
+		this.setPropsToState();
+	}
+
 	onClickServiceOrder = async() => {
 		await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
 		this.props.clearSelectedServicePlans(this.props.selectedServicePlans)
@@ -310,6 +317,21 @@ export default class TrackingHistory extends React.PureComponent {
 		);
 	}
 
+	deletedSalesOrderList(){
+		return(
+			<div className="plannings-list-containers">
+				<DeletedSalesOrderList 
+				{...this.props}
+				displaySalesCheckbox={this.props.salesApprovedParameter.paramsData.assigmentFilter || this.props.salesApprovedParameter.paramsData.inProgressFilter}
+				sortSalesByState={this.props.sortSalesBy}
+				onClickSalesOrderDeleted={this.onClickSalesOrderDeleted}
+				onChoosedSales={this.updateAssignmentSalesStates}
+				selectedSalesPlanList={this.props.selectedSalesPlans}
+				/>
+			</div>
+		);
+	}
+
 	componentWillUnmount = () => {
 		this.props.updateSalesParameter({
 		  ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
@@ -348,6 +370,7 @@ export default class TrackingHistory extends React.PureComponent {
 		switch (this.state.whatPageIsChoosed) {
 			case 'Approve':
 				console.log('this is ', whatPageIsChoosed)
+				if(this.props.location.whichTab === 'sales'){
 				return(
 					<>
 						{this.approvedSalesOrderList()}
@@ -356,6 +379,9 @@ export default class TrackingHistory extends React.PureComponent {
 					</div>
 					</>
 				)
+				}else{
+					console.log('ini serpis order approved')
+				}
 			case 'Not Approve': 
 			console.log('this is ', whatPageIsChoosed)
 				if(this.props.location.whichTab === 'sales'){

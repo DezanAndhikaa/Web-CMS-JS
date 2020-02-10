@@ -54,6 +54,7 @@ export const UnselectServicePlanAction = 'UNSELECT_SERVICE_PLANS';
 export const UnselectMechanicAction = 'UNSELECT_MECHANIC';
 export const UpdateSalesParameterAction = 'SALES_PARAMETER';
 export const UpdateSalesApprovedParameterAction = 'SALES_APPROVED_PARAMETER';
+export const UpdateSalesDeletedParameterAction = 'SALES_DELETED_PARAMETER';
 export const UpdateServiceParameterAction = 'SERVICE_PARAMETER';
 export const SalesOrderFilterAction = 'SALES_ORDER_FILTER';
 export const SelectCustomerFilterAction = 'SELECT_CUSTOMER_FILTER';
