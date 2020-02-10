@@ -19,24 +19,6 @@ function TabContainer({ children, dir }) {
     </Typography>
   );
 }
-const StyledBadge = withStyles(theme => ({
-  badge: {
-    right: -42,
-    padding: '10px',
-    borderRadius: '5px',
-    fontSize: '15px'
-  },
-}))(Badge);
-
-const Badges = withStyles(theme => ({
-  badge: {
-    right: -32,
-    // top: 10,
-    padding: '10px',
-    borderRadius: '5px',
-    fontSize: '15px'
-  },
-}))(Badge);
 
 TabContainer.propTypes = {
   children: PropTypes.node.isRequired,
@@ -101,7 +83,8 @@ class ApprovalTab extends React.Component {
     GroupCustomer: [],
     GroupSite: [],
     GroupUnitModel: [],
-    GroupComponentDescription: []
+    GroupComponentDescription: [],
+    whichTabs: true
   };
 
 
@@ -213,26 +196,50 @@ class ApprovalTab extends React.Component {
   }
 
   _renderBaseBtn(){
-    return (
-      <div className="approval-container">
-        <div className="total-data">
-          <div className="header-approval">
-            <div className="header1">
-              Approval -
+    if (this.state.value === 0) {
+      return(
+        <div className="approval-container">
+          <div className="total-data">
+            <div className="header-approval">
+              <div className="header1">
+                Approval -
+              </div>
+              <div className="header2">
+                Sales Order
+              </div>
             </div>
-            <div className="header2">
-              Sales Order
+            <div className="total-container">
+              {this.props.totalSalesData}
             </div>
           </div>
-          <div className="total-container">
-            {this.props.totalSalesData}
+          <div className="base-button">
+            {this.props.renderBaseButton}
           </div>
         </div>
-        <div className="base-button">
-          {this.props.renderBaseButton}
+      )
+    }
+    else{
+      return(
+        <div className="approval-container">
+          <div className="total-data">
+            <div className="header-approval">
+              <div className="header1">
+                Approval -
+              </div>
+              <div className="header2">
+                Service Order
+              </div>
+            </div>
+            <div className="total-container">
+              {this.props.totalServiceData}
+            </div>
+          </div>
+          <div className="base-button">
+            {this.props.renderBaseButton}
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
   }
 
   _renderFilter() {

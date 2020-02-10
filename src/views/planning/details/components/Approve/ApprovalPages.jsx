@@ -590,64 +590,55 @@ componentDidUpdate = (prevProps) => {
     }
     if (this.state.whichTabs === true) {
       return(
-		<div className="header-rows">
-			{/* <BaseButton titles="Total" totalSelectedItems ={this.props.selectedSalesPlans.length}/> */}
-			<BaseButton titles="Approve"
-				{...this.props}
-				whatTabsIsRendered={this.state.isPaging}
-				// disabledButton = {this.props.selectedSalesPlans.length < 1 }
-				totalSelectedItems ={this.props.selectedSalesPlans.length}
-				handleSalesApprove={this.handleSalesApprove}
-				selectedData={this.state.selectedData}
-			/>
-			<BaseButton titles="Cancel Approve"
-				// {...this.props}
-				// whatTabsIsRendered={this.state.isPaging}
-				// disabledButton = {this.props.selectedSalesPlans.length < 1 }
-				// totalSelectedItems ={this.props.selectedSalesPlans.length}
-				// handleSalesApprove={this.handleSalesApprove}
-				// selectedData={this.state.selectedData}
-			/>
-			<BaseButton titles="Edit" />
-			<BaseButton titles="Delete" 
-				{...this.props}
-				disabledButton = {this.props.selectedSalesPlans.length < 1 }
-				totalSelectedItems ={this.props.selectedSalesPlans.length}
-				whatTabsIsRendered={this.state.isPaging}
-				handleDeleteSales={this.handleDeleteSales}
-			/>
-			{/* <BaseButton titles="Download"
-				{...this.props}
-				whatTabsIsRendered={this.state.isPaging}
-				handleSalesApprovedDownload={this.handleSalesApprovedDownload}
-				selectedDownloadData={this.state.selectedData.So} 
-			/> */}
+        <div className="header-rows">
+          {/* <BaseButton titles="Total" totalSelectedItems ={this.props.selectedSalesPlans.length}/> */}
+          <BaseButton titles="Approve"
+            {...this.props}
+            whatTabsIsRendered={this.state.isPaging}
+            // disabledButton = {this.props.selectedSalesPlans.length < 1 }
+            totalSelectedItems ={this.props.selectedSalesPlans.length}
+            handleSalesApprove={this.handleSalesApprove}
+            selectedData={this.state.selectedData}
+          />
+          <BaseButton titles="Cancel Approve"
+            // {...this.props}
+            // whatTabsIsRendered={this.state.isPaging}
+            // disabledButton = {this.props.selectedSalesPlans.length < 1 }
+            // totalSelectedItems ={this.props.selectedSalesPlans.length}
+            // handleSalesApprove={this.handleSalesApprove}
+            // selectedData={this.state.selectedData}
+          />
+          <BaseButton titles="Edit" />
+          <BaseButton titles="Delete" 
+            {...this.props}
+            disabledButton = {this.props.selectedSalesPlans.length < 1 }
+            totalSelectedItems ={this.props.selectedSalesPlans.length}
+            whatTabsIsRendered={this.state.isPaging}
+            handleDeleteSales={this.handleDeleteSales}
+          />
         </div>
       );
     }
     if (this.state.whichTabs === false) {
       return(
-				<div className="bottom-row">
-          <BaseButton titles="Total" totalSelectedItems ={this.props.selectedServicePlans.length}/>
-          <BaseButton titles="Delete" 
-            {...this.props}
-            disabledButton = {this.props.selectedServicePlans.length < 1 }
-            totalSelectedItems ={this.props.selectedServicePlans.length}
-            whatTabsIsRendered={this.state.isPaging}
-            handleDeleteService={this.handleDeleteService}
-          />
-					<BaseButton titles="Download"  
-            {...this.props}
-            whatTabsIsRendered={this.state.isPaging}
-            handleServiceApprovedDownload={this.handleServiceApprovedDownload}
-          />
+				<div className="header-rows">
+          {/* <BaseButton titles="Total" totalSelectedItems ={this.props.selectedServicePlans.length}/> */}
           <BaseButton titles="Approve"
             {...this.props}
-            disabledButton = {this.props.selectedServicePlans.length < 1 }
+            // disabledButton = {this.props.selectedServicePlans.length < 1 }
             totalSelectedItems ={this.props.selectedServicePlans.length}
             whatTabsIsRendered={this.state.isPaging}
             selectedServiceData={this.state.selectedServiceData}
             handleServiceApprove={this.handleServiceApprove}
+          />
+          <BaseButton titles="Cancel Approve" />
+          <BaseButton titles="Edit" />
+          <BaseButton titles="Delete" 
+            {...this.props}
+            // disabledButton = {this.props.selectedServicePlans.length < 1 }
+            totalSelectedItems ={this.props.selectedServicePlans.length}
+            whatTabsIsRendered={this.state.isPaging}
+            handleDeleteService={this.handleDeleteService}
           />
         </div>
       );

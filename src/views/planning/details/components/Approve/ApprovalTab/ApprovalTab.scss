@@ -66,14 +66,12 @@
                     // position: absolute;
                     width: 93px;
                     flex-wrap: nowrap;
-                    // font-size: vw(24); //vw(22)
                     .header1{
                         width: 93px;
                         display: inline-flex;
                         margin-left: 17.94%;
-                        margin-right: 75.26%;
+                        // margin-right: 75.26%;
                         margin-top: 16.72%;
-                        // margin-bottom: 80.55%;
                         font-size: vw(25); //20px;
                         font-family: 'Lato-Bold';
                         line-height: vw(34); //24px; 
@@ -81,13 +79,7 @@
                     .header2{
                         width: 93px;
                         margin-left: 17.86%;
-                        // margin-right: 76.5%;
-                        // margin-top: 19.91%;
-                        // margin-bottom: 78.04%;
-
                         font-family: 'Lato-Regular';
-                        // font-style: normal;
-                        // font-weight: normal;
                         font-size: vw(20); //15px;
                         line-height: vw(28);//18px;
                     }
@@ -95,15 +87,8 @@
                 .total-container{                    
                     width: 153px;
                     margin-left: 45.72%;//32.72%;
-                    // margin-right: 62.66%;
                     margin-top: 12.8%;//19.8%;
-                    // margin-bottom: 75.31%;
-
                     font-family: 'Lato-Bold';
-                    // font-style: normal;
-                    // font-weight: bold;
-                    // font-size: 36px;
-                    // line-height: 43px;
                     font-size: vw(36);
                     line-height: vw(43);
                     color: #3C3B3B;
@@ -131,7 +116,7 @@
             .search-container-approval{
                 flex: 1;
                 align-self: flex-end;
-                margin-left: 16vw;
+                margin-left: 10.3vw;
                 display: flex;
                 justify-content: flex-end;
             }
