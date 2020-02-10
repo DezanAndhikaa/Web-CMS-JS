@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { PlansReducers } from './DetailPages-reducer';
+import { PlansReducers } from '../../DetailPages-reducer';
 import {
     approveServiceDownloadAction, 
     approveSalesDownloadAction,
@@ -40,8 +40,8 @@ import {
     selectMechanicAction, 
     sortByAction, 
 	storePlanDataAction,
-} from './DetailPages-action';
-import DetailPages from './DetailPages';
+} from '../../DetailPages-action';
+import ApprovalPages from './ApprovalPages';
 
 const mapStateToProps = (state) => ({
 	displayMode: state.displayMode,
@@ -110,6 +110,6 @@ const mapDispatchToProps = (dispatch) => ({
 	updateServiceParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
 });
 
-const approvalPages = connect(mapStateToProps, mapDispatchToProps)(DetailPages);
+const approvalPages = connect(mapStateToProps, mapDispatchToProps)(ApprovalPages);
 
 export { approvalPages as ApprovalPages, PlansReducers };

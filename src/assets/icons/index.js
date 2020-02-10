@@ -80,7 +80,7 @@ import ThickHigh from './thick-high.png';
 import ThickMedium from './thick-medium.png';
 import ViolanceHard from './violance-hard.png';
 import ViolanceSoft from './violance-soft.png';
-import Delete from './delete.png';
+import Delete from './ic_delete.png';
 import DeleteWhite from './delete-white.png';
 import Bin from './bin.png';
 import Pencil from './pencil.png';
@@ -110,8 +110,10 @@ import CardDelete from './card_delete.png';
 import CardNotApproved from './card_notapprove.png';
 import CardSap from './card_sap.png';
 import IconEdit from './ic_edit.png'; 
+import CancelApprove from './cancel_approve.png';
 
 export {
+	CancelApprove,
 	IconEdit,
 	NotifHover,
 	HistoryHover,
