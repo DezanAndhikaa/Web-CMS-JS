@@ -11,7 +11,9 @@ import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesBy
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 // import { NotificationManager } from 'react-notifications';
-import {Snackbar, Button} from '@material-ui/core';
+import {Snackbar} from '@material-ui/core';
+// import Loading from '../../../../../components/Loading/Loading'
+import moment from 'moment'
 
 export default class SalesOrderList extends React.PureComponent {
   constructor(props) {
@@ -174,7 +176,7 @@ export default class SalesOrderList extends React.PureComponent {
           <PlanningListHeader
             name="SMR Date"
             delay={300}
-            onSearch={this.props.onSearchComp}
+            onFilter={this.isFilterDate}
           />
           {/* <Typography
             name="Action" style={{marginTop: "10px"}}
@@ -213,9 +215,9 @@ export default class SalesOrderList extends React.PureComponent {
           <div>{this.props.salesOrderList.Lists[id].LifeTimeComponent}</div>
         }
         </TableCell>
-        <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
-        <TableCell align="left" className="table-cell"> Unknown </TableCell>
-        <TableCell align="left" className="table-cell"> Unknowns </TableCell>
+        <TableCell align="left" className="table-cell"> {moment(row.PlanExecution).format('DD-MM-YYYY')} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
+        <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
         {/* Ini tampilan HO, site gaada action */}
         {/* <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.So} /></TableCell> */}
       </TableRow>
@@ -249,7 +251,7 @@ export default class SalesOrderList extends React.PureComponent {
       return(
             <div>
             <Snackbar
-              anchorOrigin={{ vertical: 'center',horizontal: 'right'}}
+              anchorOrigin={{ vertical: 'center',horizontal: 'center'}}
               bodyStyle={{ backgroundColor: 'teal', color: 'coral' }}
               open={this.state.stats}
               onClose={this.handleClose}
@@ -287,6 +289,7 @@ render(){
               </TableBody>
             </Table>
             {this.showLoading()}
+            {/* <Loading/> */}
           </>
         )
       }

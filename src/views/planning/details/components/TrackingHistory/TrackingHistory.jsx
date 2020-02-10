@@ -8,9 +8,12 @@ import ServiceOrderList from '../PlanningList/ServiceOrderList';
 import ApprovedSalesOrderList from '../PlanningList/ApprovedSalesOrderList';
 import DeletedSalesOrderList from '../PlanningList/DeletedSalesOrderList';
 import Button from '@material-ui/core/Button';
-import './TrackingHistory.scss';
-import { Menu } from '../../../../../constants';
-import { ApiRequestActionsStatus } from "../../../../../core/RestClientHelpers";
+import './TrackingHistory.scss'
+import { Menu } from '../../../../../constants'
+import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton'
+import FilterbyDataAction  from '../../../../../components/FilterByDataAction/FilterbyDataAction'
+import { Spinner } from '../../../../../assets/icons'
+import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment, { ISO_8601 } from "moment";
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import DropDownList from '../../../../../components/DropdownList/DropDownList';
@@ -317,12 +320,16 @@ export default class TrackingHistory extends React.PureComponent {
 		);
 	}
 
+	approvedServiceOrderList(){
+
+	}
+
 	deletedSalesOrderList(){
 		return(
 			<div className="plannings-list-containers">
 				<DeletedSalesOrderList 
 				{...this.props}
-				displaySalesCheckbox={this.props.salesApprovedParameter.paramsData.assigmentFilter || this.props.salesApprovedParameter.paramsData.inProgressFilter}
+				displaySalesCheckbox={this.props.salesDeletedParameter.paramsData.assigmentFilter || this.props.salesDeletedParameter.paramsData.inProgressFilter}
 				sortSalesByState={this.props.sortSalesBy}
 				onClickSalesOrderDeleted={this.onClickSalesOrderDeleted}
 				onChoosedSales={this.updateAssignmentSalesStates}
@@ -330,6 +337,10 @@ export default class TrackingHistory extends React.PureComponent {
 				/>
 			</div>
 		);
+	}
+
+	deletedServiceOrderList(){
+
 	}
 
 	componentWillUnmount = () => {
@@ -381,6 +392,14 @@ export default class TrackingHistory extends React.PureComponent {
 				)
 				}else{
 					console.log('ini serpis order approved')
+					return(
+						<>
+							{this.deletedSalesOrderList()}
+						<div className="bottom-row">
+						{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderListDeleted)}
+						</div>
+						</>
+					)
 				}
 			case 'Not Approve': 
 			console.log('this is ', whatPageIsChoosed)
@@ -467,14 +486,58 @@ export default class TrackingHistory extends React.PureComponent {
 		})
 	}
 
+	showLoading(){
+
+		// return(
+		// 	<div className="loading-tracking-container">
+		// 	  <img 
+		// 		src={Spinner}
+		// 		alt="loading-spinner"
+		// 		className="loading-icon"
+		// 		/>
+		// 	</div>
+		//   )
+
+		if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
+		  return(
+			<div className="loading-tracking-container">
+			  <img 
+				src={Spinner}
+				alt="loading-spinner"
+				className="loading-icon"
+				/>
+			</div>
+		  )
+		}else if(this.props.fetchStatusSales === ApiRequestActionsStatus.FAILED){
+		  return(
+			<div className="loading-tracking-container">
+			  {/* OOPS THERE WAS AN ERROR :'( */}
+			</div>
+		  )
+		}else if(this.props.salesOrderList.Lists.length === 0){
+		  return(
+			<div className="loading-tracking-container">
+			  {/* DATA NOT FOUND */}
+			</div>
+		  )
+		}
+	  }
+
 	render(){
 		console.log('pantej', this.props.location.whichTab)
 		return(
 			<main className="content" >
+				{this.showLoading()}
 				<div className="head-containers">
-					<Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS) }>
-						Detail
-					</Button>
+					<div className="back_button">
+						<Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS) }>
+							Detail
+						</Button>
+					</div>
+					<div className="notif_button">
+						<NotifButton/>
+						<FilterbyDataAction/>
+					</div>
 				</div>
 				<div className="table-containers">
 					<div className="title-containers">

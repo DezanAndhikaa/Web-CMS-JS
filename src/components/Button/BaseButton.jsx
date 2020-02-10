@@ -92,13 +92,13 @@ class BaseButton extends React.Component{
         }else if(this.props.titles === "Cancel Approve"){
             return(
                 <div className="button-inline">
-                    <Button className="btn-cancel-approve" onClick={this.isClicked}> Cancel Approve</Button>
+                    <Button  className="btn-cancel-approve" onClick={this.isClicked}> Cancel Approve</Button>
                 </div>
             )
         }else if(this.props.titles === "Download"){
             return(
                 <div className="button-inline">
-                    <Button className="btn-download" onClick={this.isDownloaded} />
+                    <Button className="btn-download" onClick={this.isDownloaded}>Download </Button>
                 </div>
             )
         }else if(this.props.titles === "Edit"){

@@ -57,12 +57,11 @@ class FilterbyDataAction extends React.Component {
   renderDropdownList() {
     return (
       <div className="list-items">
-          {/* <Button className="button" variant="outlined" onClick={this.props.onClickPlanningApprove}> */}
-          <Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_TRACKING, 'sales') }>
-            Sales Order{/* Planning Approved  */}
+          <Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales') }>
+            Sales Order
           </Button>
-          <Button className="button-plan-del" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_TRACKING, 'service') }>
-            Service Order{/* Planning Deleted */}
+          <Button className="button-plan-del" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service') }>
+            Service Order
           </Button>
       </div>
     );
@@ -71,12 +70,11 @@ class FilterbyDataAction extends React.Component {
   renderDropdownApproval() {
     return (
       <div className="list-items">
-          {/* <Button className="button" variant="outlined" onClick={this.props.onClickPlanningApprove}> */}
-          <Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_APPROVAL, 'sales') }>
-            Sales Orders{/* Planning Approved  */}
+          <Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL, 'sales') }>
+            Sales Orders
           </Button>
-          <Button className="button-plan-del" variant="outlined" onClick={() => this.handleClick(Menu.PLANNING_DETAILS_APPROVAL, 'service') }>
-            Service Order{/* Planning Deleted */}
+          <Button className="button-plan-del" variant="outlined" onClick={() => this.handleClick(Menu.PLANNING_APPROVAL, 'service') }>
+            Service Order
           </Button>
       </div>
     );
@@ -96,14 +94,14 @@ class FilterbyDataAction extends React.Component {
       );
     }
 
-    if(this.props.titles === "Tracking History"){
+    if(this.props.titles === "Status"){
       return (
         <div className="dropdown">
           <div className="dropdown-button" onClick={this.showDropdownMenu}>
           <div className="dropdown-selected-item">
             <div className="tracking-history">
               <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
-                  <img src={IconHistory} className="icon-history" alt="" /><span className="label-history">Tracking History</span>
+                  <img src={IconHistory} className="icon-history" alt="" /><span className="label-history">Status</span>
               </DotBadges>
             </div>
           </div>
@@ -113,7 +111,7 @@ class FilterbyDataAction extends React.Component {
           }
         </div>
       );
-    } else if(this.props.titles === "Approve"){
+    }else if(this.props.titles === "Approve"){
       return (
         <div className="dropdown">
           <div className="dropdown-button" onClick={this.showDropdownMenu}>
@@ -127,6 +125,23 @@ class FilterbyDataAction extends React.Component {
         </div>
           {
             this.state.displayMenu && this.renderDropdownApproval()  
+          }
+        </div>
+      );
+    }else{
+      return (
+        <div className="dropdown">
+          <div className="dropdown-button" onClick={this.showDropdownMenu}>
+          <div className="dropdown-selected-item">
+            <div className="tracking-history">
+              <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
+                  <img src={IconHistory} className="icon-history" alt="" /><span className="label-history">Tracking History</span>
+              </DotBadges>
+            </div>
+          </div>
+        </div>
+          {
+            this.state.displayMenu && this.renderDropdownList()  
           }
         </div>
       );

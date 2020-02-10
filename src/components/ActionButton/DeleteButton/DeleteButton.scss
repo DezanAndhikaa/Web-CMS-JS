@@ -7,11 +7,13 @@
     .del-button{
         height: vw(38.07);
         width: vw(40.07);
-        border-radius: vw(10) !important;
-        background-image: url('../../../assets/icons/trash.png');
-        background-color: map-get($colors, white);
+        margin-left: vw(15);
+        border-radius: vw(8) !important;
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        background-image: url('../../../assets/icons/ic_delete.png');
+        background-color: white;
         background-repeat: no-repeat;
-        background-size: 45%;
+        background-size: 50%;
         background-position: center;
     }
 }
@@ -25,7 +27,8 @@
         .del-button{
             height: vw-tab(30);
             width: vw-tab(30);
-            background-image: url('../../../assets/icons/trash.png');
+            box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+            background-image: url('../../../assets/icons/ic_delete.png');
             background-repeat: no-repeat;
             background-size: contain;
         }
@@ -41,7 +44,8 @@
         .del-button{
             height: vw-mobile(20);
             width: vw-mobile(20);
-            background-image: url('../../../assets/icons/trash.png');
+            box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+            background-image: url('../../../assets/icons/ic_delete.png');
             background-repeat: no-repeat;
             background-size: contain;
         }
