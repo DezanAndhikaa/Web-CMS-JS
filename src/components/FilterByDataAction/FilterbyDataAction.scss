@@ -56,12 +56,8 @@
                 background-color: transparent;
                 align-items: center;
                 .icon-history{
-                    // height: 18px; //vw(25) !important
                     margin-right: 10px; //vw(10)
                 }
-                // .icon-history:hover{
-                //     background-image: url('../../assets/icons/clock.png');
-                // }
                 .label-history{
                     font-family: 'Lato-Bold';
                     font-size: 14px; //vw(20)
@@ -70,6 +66,31 @@
                     text-transform: capitalize;
                 }
                 .label-history:hover{
+                color: #FC9517;
+                }
+            }
+            .input-lt{
+                display: flex;
+                flex-direction: row;
+                align-self: flex-end;
+                // cursor: pointer;
+                background-color: transparent;
+                align-items: center;
+                .icon-lt{
+                    // height: 18px; //vw(25) !important
+                    margin-right: 10px; //vw(10)
+                }
+                // .icon-history:hover{
+                //     background-image: url('../../assets/icons/clock.png');
+                // }
+                .label-lt{
+                    font-family: 'Lato-Bold';
+                    font-size: 14px; //vw(20)
+                    line-height: 18px; // vw(24)
+                    color: #3C3B3B;
+                    text-transform: capitalize;
+                }
+                .label-lt:hover{
                 color: #FC9517;
                 }
             }

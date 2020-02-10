@@ -111,8 +111,10 @@ import CardNotApproved from './card_notapprove.png';
 import CardSap from './card_sap.png';
 import IconEdit from './ic_edit.png'; 
 import CancelApprove from './cancel_approve.png';
+import IconInputLT from './ic_input.png';
 
 export {
+	IconInputLT,
 	CancelApprove,
 	IconEdit,
 	NotifHover,

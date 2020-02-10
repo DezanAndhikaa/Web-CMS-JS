@@ -5,7 +5,6 @@ import {
 } from '@material-ui/core';
 import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
-import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'

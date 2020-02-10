@@ -393,7 +393,13 @@ componentDidUpdate = (prevProps) => {
 
   _renderNotif(){
     return (
-      <NotifButton />
+      <>
+        <FilterbyDataAction 
+          {...this.props}
+          titles="Input Lifetime"
+        />
+        <NotifButton />
+      </>
     )
   }
 
@@ -541,19 +547,12 @@ componentDidUpdate = (prevProps) => {
       return(
         <>
           <FilterbyDataAction 
-            {...this.props}
-            titles="Tracking History"
-          />
-          <FilterbyDataAction 
             {... this.props}
             titles="Status"
           />
           <FilterbyDataAction 
-            {... this.props}
-            titles="Approve"
-            onClickPlanningApprove={this.onClickApprovedSales}
-            onClickPlanningDelete={this.onClickDeletedSales}
-            onClickButton={this.handleClickFilterByDataAction}
+            {...this.props}
+            titles="Tracking History"
           />
         </>
       );
@@ -562,19 +561,19 @@ componentDidUpdate = (prevProps) => {
       return(
         <>
           <FilterbyDataAction 
-            {...this.props}
-            titles="Tracking History"
-          />
-          <FilterbyDataAction 
             {... this.props}
             titles="Status"
           />
-          <FilterbyDataAction 
+          {/* <FilterbyDataAction 
             {... this.props}
             titles="Approve"
             onClickPlanningApprove={this.onClickApprovedService}
             onClickPlanningDelete={this.onClickDeletedService}
             onClickButton={this.handleClickFilterByDataAction}
+          /> */}
+          <FilterbyDataAction 
+            {...this.props}
+            titles="Tracking History"
           />
         </>
       );
