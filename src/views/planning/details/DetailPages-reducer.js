@@ -16,6 +16,7 @@ import {
 	// GetMechanicsAction, 
 	// GetServiceOrderAction, GetSalesOrderAction, 
 	UpdateSalesApprovedParameterAction,
+	UpdateSalesDeletedParameterAction,
 	UpdateSalesParameterAction, ResetSelectedMechanicsAction, 
 	SearchSalesAction,
 	SearchServiceAction,
@@ -509,6 +510,13 @@ export function salesApprovedParameterReducer(state = initialSalesParameter, act
 	return state;
 }
 
+export function salesDeletedParameterReducer(state = initialSalesParameter, action) {
+	if (action.type === UpdateSalesDeletedParameterAction)
+		return {...state, dataFilter: action.payload};
+		// console.log('dums',state)
+	return state;
+}
+
 export function filterLifetimeReducer(state = initialFilterParameter, action){
 	if(action.type === LifetimeFilterAction)
 		for(let i=0; i<2; i++){
@@ -829,6 +837,7 @@ const PlansReducers = combineReducers({
 	// unapproveSalesStatus: unapproveSalesReducer,
 	salesParameter: salesParameterReducer,
 	salesApprovedParameter : salesApprovedParameterReducer,
+	salesDeletedParameter : salesDeletedParameterReducer,
 	filterParameter: filterParameterReducer,
 	indexFilterParameter: indexFilterParameterReducer,
 	serviceParameter: serviceParameterReducer,

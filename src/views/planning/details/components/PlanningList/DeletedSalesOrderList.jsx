@@ -11,9 +11,8 @@ import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesBy
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 // import { NotificationManager } from 'react-notifications';
-import {Snackbar, Button} from '@material-ui/core';
 
-export default class ApprovedSalesOrderList extends React.PureComponent {
+export default class DeletedSalesOrderList extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
@@ -28,22 +27,22 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
 
   componentDidUpdate = (prevState) =>{
     //untuk menghilangkan checkbox
-    if (prevState.salesApprovedParameter !== this.props.salesApprovedParameter || prevState.salesSearch !== this.props.salesSearch || 
+    if (prevState.salesDeletedParameter !== this.props.salesDeletedParameter || prevState.salesSearch !== this.props.salesSearch || 
       prevState.searchComp !==this.props.searchComp) {
       this.setState({checkedValue : false})
     }
   }
   componentDidMount = () =>{
-    this.props.onClickSalesOrderApproved();
+    this.props.onClickSalesOrderDeleted();
   }
   
 
   isFilterLifetime = async( value1, value2 ) => {
-    this.props.lifetimeFilter( LifetimeFilterAction, value1, value2, this.props.salesApprovedParameter.dataFilter.PageSize );
+    this.props.lifetimeFilter( LifetimeFilterAction, value1, value2, this.props.salesDeletedParameter.dataFilter.PageSize );
   }
 
   isFilterDate = async ( value1, value2) => {
-    this.props.dateFilter( DateFilterAction, value1, value2, this.props.salesApprovedParameter.dataFilter.PageSize );
+    this.props.dateFilter( DateFilterAction, value1, value2, this.props.salesDeletedParameter.dataFilter.PageSize );
   }
 
   isCheckboxAvailable = (data) => {
@@ -76,7 +75,7 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
             <Checkbox 
               checked={this.state.checkedValue}
               onChange={this.handleClicks}
-              onClick={() => {this.props.salesOrderListApproved.Lists.map((row,id) => 
+              onClick={() => {this.props.salesOrderListDeleted.Lists.map((row,id) => 
               this.props.onChoosedSales(row,id))}}
               className="checkbox-checked-header"/>}
           </TableCell>
@@ -216,7 +215,7 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
 
   //LOADING SCENE
   showLoading(){
-    switch (this.props.fetchStatusSalesApproved) {
+    switch (this.props.fetchStatusSalesDeleted) {
       case ApiRequestActionsStatus.LOADING:
         return(
           <div className="loading-container">
@@ -234,7 +233,7 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
             </div>
       )
       default:
-        console.log('STATUS oioi', this.props.fetchStatusSalesApproved)
+        console.log('STATUS oioi', this.props.fetchStatusSalesDeleted)
     }
     // if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
     //   return(
@@ -266,7 +265,7 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
     //       OOPS THERE WAS AN ERROR :'(
     //     </div>
     //   )
-    // }else if(this.props.salesOrderListApproved.Lists.length === 0){
+    // }else if(this.props.salesOrderListDeletedfetchStatusSalesDeleted.Lists.length === 0){
     //   return(
     //     <div className="loading-container">
     //       DATA NOT FOUND
@@ -281,8 +280,8 @@ render(){
             <Table classes={{ root: 'table' }} className="table">
             {this.showTableHead()}
             <TableBody classes={{ root: 'table-body' }}>
-              {this.props.salesOrderListApproved.Lists
-                && this.props.salesOrderListApproved.Lists.map((row, id) => (
+              {this.props.salesOrderListDeletedfetchStatusSalesDeleted.Lists
+                && this.props.salesOrderListDeletedfetchStatusSalesDeleted.Lists.map((row, id) => (
                   this.showTableBody(row,id)
                 ))}
               </TableBody>

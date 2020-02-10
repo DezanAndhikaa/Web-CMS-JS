@@ -42,6 +42,7 @@ const mapStateToProps = (state) => ({
 	serviceOrderListDeleted: state.plansPageState.serviceOrderListDeleted.data,
 	salesParameter: state.plansPageState.salesParameter,
 	salesApprovedParameter: state.plansPageState.salesApprovedParameter,
+	salesDeletedParameter: state.plansPageState.salesDeletedParameter,
 	serviceParameter: state.plansPageState.serviceParameter,
 	salesSearch: state.plansPageState.salesSearch,
 	serviceSearch: state.plansPageState.serviceSearch,
@@ -49,6 +50,7 @@ const mapStateToProps = (state) => ({
 	selectedServicePlans: state.plansPageState.selectedServicePlans,
 	fetchStatusSales: state.plansPageState.salesOrderList.status,
 	fetchStatusSalesApproved: state.plansPageState.salesOrderListApproved.status,
+	fetchStatusSalesDeleted: state.plansPageState.salesOrderListDeleted.status,
 	fetchStatusService: state.plansPageState.serviceOrderList.status,
 	sortSalesBy: state.plansPageState.sortSalesBy,
 });
