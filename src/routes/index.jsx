@@ -6,7 +6,7 @@ import { Menu } from '../constants';
 import { DetailPages } from '../views/planning/details';
 import { TrackingHistory } from '../views/planning/details/components/TrackingHistory';
 // import { JobsPage } from '../pages/jobs-execution/jobs';
-// import { LoginPage } from '../pages/login';
+import  LoginPage  from '../views/Login/LoginPage';
 // import MasterDataUploader from '../pages/master-data-uploader';
 // import JobsReport from '../views/planning/details/DetailPages';
 // import Settings from '../pages/settings';
@@ -29,11 +29,11 @@ import { TrackingHistory } from '../views/planning/details/components/TrackingHi
 const routes = (
 	<div>
 		<Switch>
+			<Route exact path={Menu.LOGIN} component={LoginPage} />
 			<Route exact path={Menu.PLANNING_DETAILS} component={DetailPages} />
 			<Route exact path={Menu.PLANNING_DETAILS_TRACKING} component={TrackingHistory} />
 			{/* <Route exact path={Menu.PLANNING_DASHBOARD} component={DetailPages} /> */}
-			{/* <Route exact path={Menu.LOGIN} component={LoginPage} />
-			<Route exact path={Menu.DASHBOARD} component={requireAuth(Dashboard)} />
+			{/* <Route exact path={Menu.DASHBOARD} component={requireAuth(Dashboard)} />
 			<Route exact path={Menu.JOBS_SUMMARY} component={requireAuth(JobsPage)} />
 			<Route exact path={Menu.JOBS_REPORT} component={requireAuth(JobsReport)} /> */}
 			{/* Start Add Route For BMS */}

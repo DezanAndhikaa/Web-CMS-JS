@@ -6,12 +6,12 @@ export const RequestMethod = {
 };
   
 export const Menu = {
+	LOGIN: '/webcms/',
 	PLANNING : '/webcms/planning',
 	PLANNING_DETAILS : '/webcms/planning/details',
 	PLANNING_DETAILS_TRACKING: '/webcms/planning/details/tracking-history',
 	PLANNING_DETAILS_APPROVAL:'/webcms/planning/details/approval',
 	PLANNING_DASHBOARD : '/webcms/planning/dashboard',
-	LOGIN: '/webdcajs/',
 	DASHBOARD: '/webdcajs/dashboard',
 	ALLOCATION: '/webdcajs/allocation',
 	JOBS: '/webdcajs/jobs',
