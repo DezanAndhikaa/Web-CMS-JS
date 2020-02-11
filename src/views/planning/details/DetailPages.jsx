@@ -578,7 +578,7 @@ componentDidUpdate = (prevProps) => {
           />
           <FilterbyDataAction 
             {... this.props}
-            titles="Approve"
+            titles="Tracking History"
           />
         </>
       );
@@ -595,7 +595,7 @@ componentDidUpdate = (prevProps) => {
           />
           <FilterbyDataAction 
             {... this.props}
-            titles="Approve"
+            titles="Tracking History"
           />
         </>
       );

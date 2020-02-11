@@ -27,8 +27,14 @@ import Low from './Low.png';
 import Confirm from './confirm.png';
 import Delete from './delete.png';
 import DelSuccess from './del-success.png';
+import ImgSendtoEdit from './send-to-edit.png';
+import ImgCancelEditSucc from './cancel-edit-success.png';
+import ImgCancelApprove from './cancel-approve.png';
 
 export {
+  ImgSendtoEdit,
+  ImgCancelApprove,
+  ImgCancelEditSucc,
   DcaLogo,
   LoginBg,
   MovingAsOneLogo,

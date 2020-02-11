@@ -5,6 +5,7 @@ import EditButton from '../ActionButton/EditButton/EditButton';
 import DeleteButton from '../ActionButton/DeleteButton/DeleteButton';
 import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 import ApproveConfirmation from '../ApproveConfirmation/ApproveConfirmation';
+import UnapproveConfirmation from '../UnapproveConfirmation/UnapproveConfirmation';
 
 class BaseButton extends React.Component{
     constructor(props){
@@ -68,6 +69,14 @@ class BaseButton extends React.Component{
        
     }
 
+    isSendtoEdit(){
+        return(
+            <ApproveConfirmation 
+                titles = "Send to Edit"
+            />
+        )
+    }
+
     render(){
         if(this.props.titles === "Total"){
             return(
@@ -92,7 +101,14 @@ class BaseButton extends React.Component{
         }else if(this.props.titles === "Cancel Approve"){
             return(
                 <div className="button-inline">
-                    <Button  className="btn-cancel-approve" onClick={this.isClicked}> Cancel Approve</Button>
+                    <Button className="btn-cancel-approve" onClick={this.isClicked}> Cancel Approve</Button>
+                    <UnapproveConfirmation 
+                        {...this.props}
+                        idConfirm = "Cancel"
+                        onClose={this.isClosed}
+                        openModal={this.state.isShowModal}
+                        onSendtoEdit = {this.isSendtoEdit()}
+                    />
                 </div>
             )
         }else if(this.props.titles === "Download"){
