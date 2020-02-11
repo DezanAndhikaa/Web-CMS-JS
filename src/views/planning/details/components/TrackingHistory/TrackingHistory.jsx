@@ -637,12 +637,22 @@ export default class TrackingHistory extends React.PureComponent {
 
 	setPropsToState(){
 		console.log('pantek ke trigger')
-		this.setState({
-			approveTotalData : this.props.salesOrderListApproved.TotalData,
-			notApproveTotalData : this.props.salesOrderList.TotalData,
-			deleteTotalData : this.props.salesOrderListDeleted.TotalData,
-			sapIssueTotalData : 0
-		})
+		if (this.props.location.whichTab === "sales") {
+			this.setState({
+				approveTotalData : this.props.salesOrderListApproved.TotalData,
+				notApproveTotalData : this.props.salesOrderList.TotalData,
+				deleteTotalData : this.props.salesOrderListDeleted.TotalData,
+				sapIssueTotalData : 0
+			})
+		}else if (this.props.location.whichTab === "service") {
+			this.setState({
+				approveTotalData : this.props.serviceOrderListApproved.TotalData,
+				notApproveTotalData : this.props.serviceOrderList.TotalData,
+				deleteTotalData : this.props.serviceOrderListDeleted.TotalData,
+				sapIssueTotalData : 0
+			})
+		}
+		
 	}
 
 	showLoading(){
