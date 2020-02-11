@@ -193,37 +193,6 @@ export default class ServiceOrderList extends React.PureComponent {
   }
 
   render(){
-    if (this.props.serviceOrderListApproved.Lists.length > 0 ){
-      return(
-        <>
-        <Table classes={{ root: 'table' }}>
-          {this.showTableHead()}
-          <TableBody classes={{ root: 'table-body' }}>
-            {this.props.serviceOrderListApproved.Lists
-              && this.props.serviceOrderListApproved.Lists.map((row, id) => (
-                this.showTableBody(row,id)
-            ))}
-          </TableBody>
-        </Table>
-        {this.showLoading()}
-        </>
-      )
-    }else if(this.props.serviceOrderListDeleted.Lists.length > 0 ){
-      return(
-        <>
-        <Table classes={{ root: 'table' }} className="table">
-        {this.showTableHead()}
-        <TableBody classes={{ root: 'table-body' }}>
-          {this.props.serviceOrderListDeleted.Lists
-            && this.props.serviceOrderListDeleted.Lists.map((row, id) => (
-              this.showTableBody(row,id)
-            ))}
-          </TableBody>
-        </Table>
-        {this.showLoading()}
-        </>
-      )
-    }else{
       return(
         <>
         <Table classes={{ root: 'table' }} className="table">
@@ -240,4 +209,3 @@ export default class ServiceOrderList extends React.PureComponent {
        )
     }
   }
-}

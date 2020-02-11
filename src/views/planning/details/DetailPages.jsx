@@ -102,7 +102,7 @@ componentDidUpdate = (prevProps) => {
   if(this.state.whichTabs){
     if(prevProps.searchComp !== this.props.searchComp){
       this.props.updateSalesParameter({
-        ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+        ...prevProps.salesParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
       });
     }
   }else{
@@ -411,14 +411,40 @@ componentDidUpdate = (prevProps) => {
       <div className="bottom-row">
         <SearchInput
         {...this.props}
-        whichTabs={this.state.whichTabs}
         webInfo="Search"
-        onSalesSearch={this.props.onSearchSales}
-        onServiceSearch={this.props.onSearchService}
+        handleSearch={this.handleSearch}
+        onSearchSales={this.props.onSearchSales}
       />
       </div>
     );
   }
+
+
+  handleSearch = (value) => {
+    if (this.state.whichTabs === true) {
+      console.log('pantej sales search', value)
+        this.props.onSearchSales(value)
+      // if (value.keyCode === '13') {
+      //   this.props.onSearchSales(value)
+      // }else{
+      //   setTimeout(() => {
+      //     this.props.onSearchSales(value)
+      //   }, 1100)
+      // }
+    }else if (this.state.whichTabs === false) {
+      console.log('pantej service search', value)
+      setTimeout(() => {
+        this.props.onSearchService(value)
+      }, 1000)
+      // if (value.keyCode === '13') {
+      //   this.props.onSearchService(value)
+      // }else{
+      //   setTimeout(() => {
+      //     this.props.onSearchService(value)
+      //   }, 1100)
+      // }
+  }
+};
 
   _renderNotif(){
     return (

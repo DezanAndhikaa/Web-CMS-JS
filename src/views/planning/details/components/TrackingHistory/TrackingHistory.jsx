@@ -7,6 +7,8 @@ import SalesOrderList from '../PlanningList/SalesOrderList';
 import ServiceOrderList from '../PlanningList/ServiceOrderList';
 import ApprovedSalesOrderList from '../PlanningList/ApprovedSalesOrderList';
 import DeletedSalesOrderList from '../PlanningList/DeletedSalesOrderList';
+import ApprovedServiceOrderList from '../PlanningList/ApprovedServiceOrderList';
+import DeletedServiceOrderList from '../PlanningList/DeletedServiceOrderList';
 import Button from '@material-ui/core/Button';
 import './TrackingHistory.scss'
 import { Menu } from '../../../../../constants'
@@ -24,7 +26,8 @@ export default class TrackingHistory extends React.PureComponent {
 		approveTotalData : 0,
 		notApproveTotalData : 0,
 		deleteTotalData : 0,
-		sapIssueTotalData : 0
+		sapIssueTotalData : 0,
+		searchVal : ''
 	}
 
 	handleClick = (menu) => {
@@ -99,11 +102,23 @@ export default class TrackingHistory extends React.PureComponent {
 			<SearchInput
 			{...this.props}
 			webInfo="Search"
-			onSalesSearch={this.props.onSearchSales}
-			onServiceSearch={this.props.onSearchService}
+			handleSearch={this.handleSearch}
+			// onServiceSearch={this.props.onSearchService}
 		  />
 		  </div>
 		);
+	}
+	handleSearch=(value)=>{
+		this.setState({ searchVal : value})
+		if (this.props.location.whichTab === "sales") {
+			setTimeout(() => {
+				this.props.onSearchSales(this.state.searchVal)
+			}, 1000);
+		}else if (this.props.location.whichTab === "service") {
+			setTimeout(() => {
+				this.props.onSearchService(this.state.searchVal)
+			}, 1000);
+		}
 	}
 
 	_renderDownloadBtn(){
@@ -115,7 +130,7 @@ export default class TrackingHistory extends React.PureComponent {
 				handleSalesApprovedDownload={this.handleSalesApprovedDownload}
 			  />
 			)
-		}else{
+		}else if (this.props.location.whichTab === "service"){
 			return(
 				<BaseButton titles="Download"
 				{...this.props}
@@ -169,9 +184,22 @@ export default class TrackingHistory extends React.PureComponent {
 					</div>
 				)
 			case 'Delete':
-				return(
 					console.log('MASOK DELETE')
-				)
+					return(
+						<div className="pagination">
+						<div className="paging">
+							{/* {prevSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
+							{web && currentPropsSales - 3 > 0 && <div onClick={() => this.props.updateSalesDeletedParameter({ ...this.props.salesDeletedParameter.dataFilter, PageNumber: currentPropsSales - 3 })} className="page-inactive">{currentPropsSales - 3}</div>}
+							{web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesDeletedParameter({ ...this.props.salesDeletedParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive">{currentPropsSales - 2}</div>}
+							{currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesDeletedParameter({ ...this.props.salesDeletedParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive">{currentPropsSales - 1}</div>}
+							<div className="page-active">{currentPropsSales}</div>
+							{currentPropsSales + 1 <= TotalPages && <div onClick={() => this.props.updateSalesDeletedParameter({ ...this.props.salesDeletedParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive">{currentPropsSales + 1}</div>}
+							{web && currentPropsSales + 2 < TotalPages && <div onClick={() => this.props.updateSalesDeletedParameter({ ...this.props.salesDeletedParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive">{currentPropsSales + 2}</div>}
+							{web && currentPropsSales + 3 < TotalPages && <div onClick={() => this.props.updateSalesDeletedParameter({ ...this.props.salesDeletedParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive">{currentPropsSales + 3}</div>}
+							{/* {nextSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>} */}
+						</div>
+						</div>
+					)
 			case 'SAP ISSUE' :
 				return(
 					console.log('MASOK SAP ISSUE')
@@ -183,29 +211,71 @@ export default class TrackingHistory extends React.PureComponent {
 		  }
 		}else if(this.props.location.whichTab === "service"){
 		  const web = this.props.displayMode === 'web';
-		  const nextSales = this.props.serviceOrderList.NextPage;
-		  const prevSales = this.props.serviceOrderList.PrevPage;
+		  const nextService = this.props.serviceOrderList.NextPage;
+		  const prevService = this.props.serviceOrderList.PrevPage;
 		  const currentPropsService = this.props.serviceOrderList.PageNumber;
 		  const { TotalPages } = this.props.serviceOrderList;
-		  
-		  return(
-			<div className="pagination">
-			  <div className="paging">
-				{prevSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>}
-				{web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive">{currentPropsService - 3}</div>}
-				{web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive">{currentPropsService - 2}</div>}
-				{currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive">{currentPropsService - 1}</div>}
-				<div className="page-active">{currentPropsService}</div>
-				{/* <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService })} className="page-active">{currentPropsService}</div> */}
-				{currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive">{currentPropsService + 1}</div>}
-				{web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive">{currentPropsService + 2}</div>}
-				{web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive">{currentPropsService + 3}</div>}
-				{nextSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>}
-			  </div>
-			</div>
-		  )
+		  switch (this.state.whatPageIsChoosed) {
+		  case 'Approve':
+				console.log('MASOK APPROVE BAPAKK')
+					return(
+						<div className="pagination">
+						  <div className="paging">
+							{prevService && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceApprovedParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>}
+							{web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceApprovedParameter({ ...this.props.serviceApprovedParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive">{currentPropsService - 3}</div>}
+							{web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceApprovedParameter({ ...this.props.serviceApprovedParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive">{currentPropsService - 2}</div>}
+							{currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceApprovedParameter({ ...this.props.serviceApprovedParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive">{currentPropsService - 1}</div>}
+							<div className="page-active">{currentPropsService}</div>
+							{/* <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService })} className="page-active">{currentPropsService}</div> */}
+							{currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateServiceApprovedParameter({ ...this.props.serviceApprovedParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive">{currentPropsService + 1}</div>}
+							{web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceApprovedParameter({ ...this.props.serviceApprovedParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive">{currentPropsService + 2}</div>}
+							{web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceApprovedParameter({ ...this.props.serviceApprovedParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive">{currentPropsService + 3}</div>}
+							{nextService && <div onClick={() => this.props.updateServiceApprovedParameter({ ...this.props.serviceApprovedParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>}
+						  </div>
+						</div>
+				)
+			case 'Not Approve': 
+			console.log('MASOK NOT APPROVE')
+			return(
+				<div className="pagination">
+				  <div className="paging">
+					{prevService && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>}
+					{web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive">{currentPropsService - 3}</div>}
+					{web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive">{currentPropsService - 2}</div>}
+					{currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive">{currentPropsService - 1}</div>}
+					<div className="page-active">{currentPropsService}</div>
+					{currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive">{currentPropsService + 1}</div>}
+					{web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive">{currentPropsService + 2}</div>}
+					{web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive">{currentPropsService + 3}</div>}
+					{nextService && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>}
+				  </div>
+				</div>
+		)
+			case 'Delete':
+					console.log('MASOK DELETE')
+					return(
+						<div className="pagination">
+						<div className="paging">
+							{web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive">{currentPropsService - 3}</div>}
+							{web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive">{currentPropsService - 2}</div>}
+							{currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive">{currentPropsService - 1}</div>}
+							<div className="page-active">{currentPropsService}</div>
+							{currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateSserviceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive">{currentPropsService + 1}</div>}
+							{web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateSserviceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive">{currentPropsService + 2}</div>}
+							{web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateSserviceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive">{currentPropsService + 3}</div>}
+							
+						</div>
+						</div>
+					)
+			case 'SAP ISSUE' :
+				return(
+					console.log('MASOK SAP ISSUE')
+				)
+		  default:
+
 		}
 	  }
+	}
 
 
 	_renderShowPerPage(){
@@ -274,6 +344,19 @@ export default class TrackingHistory extends React.PureComponent {
 		this.setPropsToState();
 	}
 
+	onClickServiceOrderApproved = async() => {
+		await this.props.fetchApprovedService(this.props.serviceParameter.dataFilter);
+		this.props.clearSelectedServicePlans(this.props.selectedServicePlans)
+		this.setPropsToState();
+
+	}
+
+	onClickServiceOrderDeleted = async() => {
+		await this.props.fetchDeletedService(this.props.serviceParameter.dataFilter);
+		this.props.clearSelectedServicePlans(this.props.selectedServicePlans)
+		this.setPropsToState();
+	}
+
 	salesOrderList(){
 		return(
 			<div className="plannings-list-containers">
@@ -321,7 +404,18 @@ export default class TrackingHistory extends React.PureComponent {
 	}
 
 	approvedServiceOrderList(){
-
+		return(
+			<div className="plannings-list-containers">
+				<ApprovedServiceOrderList 
+				{...this.props}
+				displayServicesCheckbox={this.props.serviceApprovedParameter.paramsData.assigmentFilter || this.props.serviceApprovedParameter.paramsData.inProgressFilter}
+				sortServicesByState={this.props.sortServicesBy}
+				onClickServiceOrderApproved={this.onClickServiceOrderApproved}
+				onChoosedServices={this.updateAssignmentServicesStates}
+				selectedServicesPlanList={this.props.selectedServicesPlans}
+				/>
+			</div>
+		)
 	}
 
 	deletedSalesOrderList(){
@@ -340,7 +434,18 @@ export default class TrackingHistory extends React.PureComponent {
 	}
 
 	deletedServiceOrderList(){
-
+		return(
+			<div className="plannings-list-containers">
+				<DeletedServiceOrderList 
+				{...this.props}
+				displayServiceCheckbox={this.props.serviceDeletedParameter.paramsData.assigmentFilter || this.props.serviceDeletedParameter.paramsData.inProgressFilter}
+				sortServiceByState={this.props.sortServiceBy}
+				onClickServiceOrderDeleted={this.onClickServiceOrderDeleted}
+				onChoosedService={this.updateAssignmentServiceStates}
+				selectedServicePlanList={this.props.selectedServicePlans}
+				/>
+			</div>
+		);
 	}
 
 	componentWillUnmount = () => {
@@ -359,18 +464,58 @@ export default class TrackingHistory extends React.PureComponent {
 		if (prevProps.salesApprovedParameter !== this.props.salesApprovedParameter) {
 			this.props.fetchApprovedSales(this.props.salesApprovedParameter.dataFilter);
 		}
+		if (prevProps.salesDeletedParameter !== this.props.salesDeletedParameter) {
+			this.props.fetchDeletedSales(this.props.salesDeletedParameter.dataFilter);
+		}
 		if (prevProps.serviceParameter !== this.props.serviceParameter) {
 			this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+		}
+		if (prevProps.serviceApprovedParameter !== this.props.serviceApprovedParameter) {
+			this.props.fetchApprovedService(this.props.serviceApprovedParameter.dataFilter);
+		}
+		if (prevProps.serviceDeletedParameter !== this.props.serviceDeletedParameter) {
+			this.props.fetchDeletedService(this.props.serviceDeletedParameter.dataFilter);
 		}
 		if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
 			prevProps.approveSalesDownloaded.status === ApiRequestActionsStatus.LOADING) {
 			this.onClickDownloadSalesApproved()
-		  }
-		  if (this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
-			prevProps.approveServiceDownloaded.status === ApiRequestActionsStatus.LOADING) {
-			this.onClickDownloadServiceApproved()
-		  }
-		
+		}
+		if (this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
+		prevProps.approveServiceDownloaded.status === ApiRequestActionsStatus.LOADING) {
+		this.onClickDownloadServiceApproved()
+		}
+		  //ini untuk trigger sales global search
+		if (prevProps.salesSearch !== this.props.salesSearch) {
+			switch (this.state.whatPageIsChoosed) {
+				case 'Approve':
+					this.props.updateSalesApprovedParameter({...prevProps.salesApprovedParameter.dataFilter, Filter : this.props.salesSearch, PageNumber :1});
+				case 'Not Approve':
+					this.props.updateSalesParameter({...prevProps.salesParameter.dataFilter, Filter : this.props.salesSearch, PageNumber: 1});
+				case 'Delete' :
+					this.props.updateSalesDeletedParameter({...prevProps.salesDeletedParameter.dataFilter, Filter : this.props.salesSearch, PageNumber :1});
+				case 'SAP ISSUE':
+					this.props.updateSalesSapIssueParameter({...prevProps.salesSapIssueParameter.dataFilter, Filter : this.props.salesSearch, PageNumber :1});
+				default:
+					break;
+			}
+			console.log('masuk search ', this.props.salesSearch)
+		}
+		if (prevProps.serviceSearch !== this.props.serviceSearch) {
+			switch (this.state.whatPageIsChoosed) {
+				case 'Approve':
+					this.props.updateServiceApprovedParameter({...prevProps.serviceApprovedParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber :1});
+				case 'Not Approve':
+					this.props.updateServiceParameter({...prevProps.serviceParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber: 1});
+				case 'Delete' :
+					this.props.updateServiceDeletedParameter({...prevProps.serviceDeletedParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber :1});
+				case 'SAP ISSUE':
+					this.props.updateServiceSapIssueParameter({...prevProps.serviceSapIssueParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber :1});
+				default:
+					break;
+			}
+			console.log('masuk search ', this.props.serviceSearch)
+		}
+	
 	}
 
 	_renderList = (whatPageIsChoosed) =>{
@@ -394,9 +539,9 @@ export default class TrackingHistory extends React.PureComponent {
 					console.log('ini serpis order approved')
 					return(
 						<>
-							{this.deletedSalesOrderList()}
+							{this.approvedServiceOrderList()}
 						<div className="bottom-row">
-						{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderListDeleted)}
+						{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderListApproved)}
 						</div>
 						</>
 					)
@@ -412,9 +557,8 @@ export default class TrackingHistory extends React.PureComponent {
 						</div>
 						</>
 					)
-				}else
-				// else if(this.props.location.whichTab === 'service')
-				{
+				// }else
+				}else if(this.props.location.whichTab === 'service'){
 					return (
 						<>
 							{this.serviceOrderList()}
@@ -426,9 +570,26 @@ export default class TrackingHistory extends React.PureComponent {
 				}
 			case 'Delete': 
 			console.log('this is ', whatPageIsChoosed)
-				// return (
-				// 	this.salesOrderList()
-				// )
+			if(this.props.location.whichTab === 'sales'){
+				return(
+					<>
+						{this.deletedSalesOrderList()}
+					<div className="bottom-row">
+					{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderListDeleted)}
+					</div>
+					</>
+				)
+			}else if(this.props.location.whichTab === 'service'){
+				console.log('delete serpis')
+				return(
+					<>
+						{this.deletedServiceOrderList()}
+					<div className="bottom-row">
+					{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderListDeleted)}
+					</div>
+					</>
+				)
+			}
 			case 'SAP ISSUE': 
 			console.log('this is ', whatPageIsChoosed)
 				// return (
@@ -472,7 +633,7 @@ export default class TrackingHistory extends React.PureComponent {
 			await this.props.fetchDeletedService(this.props.serviceParameter.dataFilter);
 			this.setPropsToState();
 		}else if(this.props.location.whichTab === undefined){
-			this.handleClick(Menu.PLANNING_DETAILS);
+			this.handleClick(Menu.PLANNING_APPROVAL);
 		}
 	}
 
@@ -487,17 +648,6 @@ export default class TrackingHistory extends React.PureComponent {
 	}
 
 	showLoading(){
-
-		// return(
-		// 	<div className="loading-tracking-container">
-		// 	  <img 
-		// 		src={Spinner}
-		// 		alt="loading-spinner"
-		// 		className="loading-icon"
-		// 		/>
-		// 	</div>
-		//   )
-
 		if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
 		  return(
 			<div className="loading-tracking-container">
@@ -527,10 +677,10 @@ export default class TrackingHistory extends React.PureComponent {
 		console.log('pantej', this.props.location.whichTab)
 		return(
 			<main className="content" >
-				{this.showLoading()}
+				{/* {this.showLoading()} */}
 				<div className="head-containers">
 					<div className="back_button">
-						<Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS) }>
+						<Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
 							Detail
 						</Button>
 					</div>

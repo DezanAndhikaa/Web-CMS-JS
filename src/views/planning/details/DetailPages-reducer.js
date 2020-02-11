@@ -20,6 +20,7 @@ import {
 	UpdateSalesParameterAction, ResetSelectedMechanicsAction, 
 	SearchSalesAction,
 	SearchServiceAction,
+	UpdateServiceApprovedParameterAction,UpdateServiceDeletedParameterAction,
 	SearchCompAction,SearchCompActionService,
 	// SelectCustomerFilterAction, 
 	SelectSalesPlanAction,
@@ -619,6 +620,18 @@ export function serviceParameterReducer(state = initialServiceParameter, action)
 	return state;
 }
 
+export function serviceParameterApprovedReducer(state = initialServiceParameter, action) {
+	if (action.type === UpdateServiceApprovedParameterAction)
+		return {...state, dataFilter: action.payload};
+	return state;
+}
+
+export function serviceParameterDeletedReducer(state = initialServiceParameter, action) {
+	if (action.type === UpdateServiceDeletedParameterAction)
+		return {...state, dataFilter: action.payload};
+	return state;
+}
+
 //ini reducer untuk global search dibagian sales order, menggunakan react-addons-update
 export function searchSalesPlansReducer(state = initialSearchSalesParameter, action) {
 	if (action.type === SearchSalesAction){
@@ -838,9 +851,11 @@ const PlansReducers = combineReducers({
 	salesParameter: salesParameterReducer,
 	salesApprovedParameter : salesApprovedParameterReducer,
 	salesDeletedParameter : salesDeletedParameterReducer,
+	serviceParameter: serviceParameterReducer,
+	serviceApprovedParameter: serviceParameterApprovedReducer,
+	serviceDeletedParameter: serviceParameterDeletedReducer,
 	filterParameter: filterParameterReducer,
 	indexFilterParameter: indexFilterParameterReducer,
-	serviceParameter: serviceParameterReducer,
 	// PlansAssignmentSummary: fetchPlansReducer,
 	sortSalesBy: sortSalesByReducer,
 	sortServiceBy: sortServiceByReducer,

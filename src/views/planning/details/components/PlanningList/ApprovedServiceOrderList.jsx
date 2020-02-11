@@ -7,12 +7,13 @@ import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
 import InputButton from '../../../../../components/Button/InputButton';
-import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
+import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 // import { NotificationManager } from 'react-notifications';
+import {Snackbar, Button} from '@material-ui/core';
 
-export default class DeletedSalesOrderList extends React.PureComponent {
+export default class ApprovedServiceOrderList extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
@@ -27,29 +28,29 @@ export default class DeletedSalesOrderList extends React.PureComponent {
 
   componentDidUpdate = (prevState) =>{
     //untuk menghilangkan checkbox
-    if (prevState.salesDeletedParameter !== this.props.salesDeletedParameter || prevState.salesSearch !== this.props.salesSearch || 
+    if (prevState.serviceApprovedParameter !== this.props.serviceApprovedParameter || prevState.serviceSearch !== this.props.serviceSearch || 
       prevState.searchComp !==this.props.searchComp) {
       this.setState({checkedValue : false})
     }
   }
   componentDidMount = () =>{
-    this.props.onClickSalesOrderDeleted();
+    this.props.onClickServiceOrderApproved();
   }
   
 
   isFilterLifetime = async( value1, value2 ) => {
-    this.props.lifetimeFilter( LifetimeFilterAction, value1, value2, this.props.salesDeletedParameter.dataFilter.PageSize );
+    this.props.lifetimeFilter( LifetimeFilterAction, value1, value2, this.props.serviceApprovedParameter.dataFilter.PageSize );
   }
 
   isFilterDate = async ( value1, value2) => {
-    this.props.dateFilter( DateFilterAction, value1, value2, this.props.salesDeletedParameter.dataFilter.PageSize );
+    this.props.dateFilter( DateFilterAction, value1, value2, this.props.serviceApprovedParameter.dataFilter.PageSize );
   }
 
   isCheckboxAvailable = (data) => {
     let isAvailable = false;
-    if (this.props.selectedSalesPlanList.some((plan) => plan.status === 'Assigned')) {
-      isAvailable = this.props.selectedSalesPlanList.some((plan) => plan.status !== data.status);
-    } else { isAvailable = this.props.selectedSalesPlanList.some((plan) => plan.status !== 'Assigned') && data.status === 'Assigned'; }
+    if (this.props.selectedServicePlanList.some((plan) => plan.status === 'Assigned')) {
+      isAvailable = this.props.selectedServicePlanList.some((plan) => plan.status !== data.status);
+    } else { isAvailable = this.props.selectedServicePlanList.some((plan) => plan.status !== 'Assigned') && data.status === 'Assigned'; }
     return isAvailable;
   }
 
@@ -71,16 +72,16 @@ export default class DeletedSalesOrderList extends React.PureComponent {
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow classes={{ root: 'table-row' }}>
           <TableCell padding="checkbox">
-            {this.props.displaySalesCheckbox && 
+            {this.props.displayServiceCheckbox && 
             <Checkbox 
               checked={this.state.checkedValue}
               onChange={this.handleClicks}
-              onClick={() => {this.props.salesOrderListDeleted.Lists.map((row,id) => 
-              this.props.onChoosedSales(row,id))}}
+              onClick={() => {this.props.serviceOrderListApproved.Lists.map((row,id) => 
+              this.props.onChoosedService(row,id))}}
               className="checkbox-checked-header"/>}
           </TableCell>
           <PlanningListHeader
-            name="SO"
+            name="Work Order"
             // isActive={this.props.sortJobsByState.unitModel.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
@@ -88,31 +89,31 @@ export default class DeletedSalesOrderList extends React.PureComponent {
           />
           <PlanningListHeader
             name="Customer"
-            isActive={this.props.sortSalesByState.Customer.isActive}
+            // isActive={this.props.sortServiceByState.Customer.isActive}
             delay={300}
-            isAscending={this.props.sortSalesByState.Customer.isAscending}
-            onClick={() => this.props.onClickTabHead(SortSalesByCustomer)}
+            // isAscending={this.props.sortServiceByState.Customer.isAscending}
+            onClick={() => this.props.onClickTabHead(SortServiceByCustomer)}
           />
           <PlanningListHeader
             name="Site"
-            isActive={this.props.sortSalesByState.Site.isActive}
+            // isActive={this.props.sortServiceByState.Site.isActive}
             delay={300}
-            isAscending={this.props.sortSalesByState.Site.isAscending}
-            onClick={() => this.props.onClickTabHead(SortSalesBySite)}
+            // isAscending={this.props.sortServiceByState.Site.isAscending}
+            onClick={() => this.props.onClickTabHead(SortServiceBySite)}
           />
           <PlanningListHeader
             name="Unit Model"
-            isActive={this.props.sortSalesByState.UnitModel.isActive}
+            // isActive={this.props.sortServiceByState.UnitModel.isActive}
             delay={300}
-            isAscending={this.props.sortSalesByState.UnitModel.isAscending}
-            onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
+            // isAscending={this.props.sortServiceByState.UnitModel.isAscending}
+            onClick={() => this.props.onClickTabHead(SortServiceByUnitModel)}
           />
           <PlanningListHeader
             name="Comp Desc"
-            isActive={this.props.sortSalesByState.CompDesc.isActive}
+            // isActive={this.props.sortServiceByState.CompDesc.isActive}
             delay={300}
-            isAscending={this.props.sortSalesByState.CompDesc.isAscending}
-            onClick={() => this.props.onClickTabHead(SortSalesByCompDesc)}
+            // isAscending={this.props.sortServiceByState.CompDesc.isAscending}
+            onClick={() => this.props.onClickTabHead(SortServiceByCompDesc)}
           />
           <PlanningListHeader
             name="Part Number"
@@ -149,16 +150,6 @@ export default class DeletedSalesOrderList extends React.PureComponent {
             onFilter={this.isFilterDate}
           // //   isAscending={this.props.sortJobsByState.staging.isAscending}
           />
-          <PlanningListHeader
-            name="SMR"
-            delay={300}
-            onSearch={this.props.onSearchComp}
-          />
-          <PlanningListHeader
-            name="SMR Date"
-            delay={300}
-            onSearch={this.props.onSearchComp}
-          />
           {/* <Typography
             name="Action" style={{marginTop: "10px"}}
           // //   isActive={this.props.sortJobsByState.staging.isActive}
@@ -176,14 +167,14 @@ export default class DeletedSalesOrderList extends React.PureComponent {
         {/* Nanti ada if user ho atau site
               Ini tampilan HO */}
         <TableCell padding="checkbox">
-          {this.props.displaySalesCheckbox && 
+          {this.props.displayServiceCheckbox && 
           <Checkbox 
           disabled={this.isCheckboxAvailable(row)} 
-          checked={this.props.selectedSalesPlanList.some((plans) => plans.So === row.So)} 
-          onClick={() => this.props.onChoosedSales(row)} 
+          checked={this.props.selectedServicePlanList.some((plans) => plans.Wo === row.Wo)} 
+          onClick={() => this.props.onChoosedService(row)} 
           classes={{ checked: 'checkbox-checked' }} />}
         </TableCell>
-        <TableCell align="left" className="table-cell"> {row.So} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.Wo} </TableCell>
         <TableCell align="left" className="table-cell"> {row.Customer} </TableCell>
         <TableCell align="left" className="table-cell"> {row.Site} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
@@ -193,10 +184,8 @@ export default class DeletedSalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="center" className="table-cell"> {row.LifeTimeComponent} </TableCell>
         <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
-        <TableCell align="left" className="table-cell"> Unknown </TableCell>
-        <TableCell align="left" className="table-cell"> Unknowns </TableCell>
         {/* Ini tampilan HO, site gaada action */}
-        {/* <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.So} /></TableCell> */}
+        {/* <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.serviceOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.So} /></TableCell> */}
       </TableRow>
     )
   }
@@ -207,15 +196,10 @@ export default class DeletedSalesOrderList extends React.PureComponent {
     })
   }
 
-  handleClose = () => {
-    this.setState({
-      stats: false
-    })
-  }
 
   //LOADING SCENE
   showLoading(){
-    switch (this.props.fetchStatusSalesDeleted) {
+    switch (this.props.fetchStatusServiceApproved) {
       case ApiRequestActionsStatus.LOADING:
         return(
           <div className="loading-container">
@@ -233,9 +217,9 @@ export default class DeletedSalesOrderList extends React.PureComponent {
             </div>
       )
       default:
-        console.log('STATUS oioi', this.props.fetchStatusSalesDeleted)
+        console.log('STATUS oioi', this.props.fetchStatusServiceApproved)
     }
-    // if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
+    // if(this.props.fetchStatusService === ApiRequestActionsStatus.LOADING){
     //   return(
     //     <div className="loading-container">
     //       <img 
@@ -259,13 +243,13 @@ export default class DeletedSalesOrderList extends React.PureComponent {
     //       </div>
     //       )
     // }
-    // else if(this.props.fetchStatusSales === ApiRequestActionsStatus.FAILED){
+    // else if(this.props.fetchStatusService === ApiRequestActionsStatus.FAILED){
     //   return(
     //     <div className="loading-container">
     //       OOPS THERE WAS AN ERROR :'(
     //     </div>
     //   )
-    // }else if(this.props.salesOrderListDeletedfetchStatusSalesDeleted.Lists.length === 0){
+    // }else if(this.props.serviceOrderListApproved.Lists.length === 0){
     //   return(
     //     <div className="loading-container">
     //       DATA NOT FOUND
@@ -280,8 +264,8 @@ render(){
             <Table classes={{ root: 'table' }} className="table">
             {this.showTableHead()}
             <TableBody classes={{ root: 'table-body' }}>
-              {this.props.salesOrderListDeleted.Lists
-                && this.props.salesOrderListDeleted.Lists.map((row, id) => (
+              {this.props.serviceOrderListApproved.Lists
+                && this.props.serviceOrderListApproved.Lists.map((row, id) => (
                   this.showTableBody(row,id)
                 ))}
               </TableBody>
