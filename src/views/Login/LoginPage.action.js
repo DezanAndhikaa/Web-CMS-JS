@@ -5,6 +5,8 @@ import { callApi } from '../../core/RestClientHelpers';
 export const RequestLoginAction = 'REQUEST_LOGIN';
 
 export function requestLoginAction(username, password) {
+  console.log('aaku adalah username : ', username)
+  console.log('aaku adalah password : ', password)
   const body = JSON.stringify({
     username,
     password,
@@ -19,6 +21,7 @@ export function requestLoginAction(username, password) {
       'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
     },
   };
+
 
   return async (dispatch) => dispatch(callApi(RequestLoginAction, requestConfig));
 }

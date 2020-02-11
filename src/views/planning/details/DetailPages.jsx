@@ -11,6 +11,8 @@ import FilterbyDataAction from '../../../components/FilterByDataAction/FilterbyD
 import NotifButton from '../../../components/ActionButton/NotifButton/NotifButton';
 import {Snackbar, Button} from '@material-ui/core';
 
+import SapIssue from './components/SapIssue/SapIssue'
+
 class DetailPages extends React.Component{
     constructor(props) {
       super(props)
@@ -39,6 +41,10 @@ componentWillUnmount = () => {
   this.props.updateServiceParameter({
     ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
   });
+}
+
+componentDidMount = () => {
+  console.log('tok token : ', this.props.token)
 }
 
 componentDidUpdate = (prevProps) => {
@@ -380,7 +386,7 @@ componentDidUpdate = (prevProps) => {
 
   //SAAT MENGKLIK SERVICE ORDER TAB
   onClickSalesOrder = () =>{
-    this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
+    this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
   }
 
   //KOMPONEN UNTUK SHOW PER/PAGE
@@ -408,14 +414,20 @@ componentDidUpdate = (prevProps) => {
   //KOMPONEN UNTUK GLOBAL SEARCH
   _renderSearchBar(){
     return (
-      <div className="bottom-row">
-        <SearchInput
-        {...this.props}
-        webInfo="Search"
-        handleSearch={this.handleSearch}
-        onSearchSales={this.props.onSearchSales}
-      />
-      </div>
+      <>
+        <div>
+          <SapIssue data={this.props.salesOrderList.Lists}/>
+        </div>
+        <div className="bottom-row">
+          <SearchInput
+          {...this.props}
+          whichTabs={this.state.whichTabs}
+          webInfo="Search"
+          onSalesSearch={this.props.onSearchSales}
+          onServiceSearch={this.props.onSearchService}
+        />
+        </div>
+      </>
     );
   }
 

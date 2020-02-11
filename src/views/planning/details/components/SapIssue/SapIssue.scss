@@ -1,0 +1,150 @@
+.modal-pos-issue{
+    outline: '0';
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+// @import '../../themes/functions';
+// @import '../../themes/variables';
+
+.assign-mechanic-modal-issue{
+    position: 'absolute';
+    width: 1800px;
+    height: 750px;
+    background-color: white;
+    margin: auto;
+    border-radius: vw(20);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: vw(30);
+    .container-issue{
+        width:97.8%;
+        height: 100%;
+        margin: 1%;
+
+        .ut-underline-issue{
+            margin-top: 2px;
+            margin-bottom: 10px;
+            width: 8px;
+            height: 50%;
+            background-color: orange;
+        }
+        .top-button-issue{
+            margin-top: 2px;
+            margin-bottom: 10px;
+            width: 8%;
+            height: 50%;
+            // background-color: orange;
+        }
+        .top-row-issue{
+            display: flex;
+            justify-content: space-between;
+            // flex-direction: column;
+            height: 50px;
+        }
+        .top-middle-issue{
+            margin-top: vw(10);
+            height: vw(100);
+            .teks-issue{
+                width: 100%;
+            }
+            .label-issue{
+                font-size: 9px;
+                width: 100%
+            }
+        }
+        .select-input-title-issue{
+            margin: 0;
+            margin-right: vw(17);
+            font-weight: bold;
+            font-size: 28px; 
+            width: 60%;
+        }
+
+        .bottom-row-issue{
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+            // margin-top: 45%;
+            .btn-input-issue{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-left: vw(15);
+                // width: vw(170.22) !important;
+                width: 50%;
+                height: vw(33.07) !important;
+                font-size: vw(13) !important;
+                font-weight: bold;
+                line-height: vw(16) !important;
+                font-family: 'Lato-Regular';
+                // background-color: map-get($colors , primary);
+                text-transform: none;
+                box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+                border-radius: 0.4vw;
+                cursor: pointer;
+            }
+            .btn-input-issue:hover {
+                // background-color: map-get($colors, primary-dark);
+            }
+            .btn-cancel-issue{
+                margin-left: 45%;
+                background-color: #F2F2F4;
+                text-transform: none;
+                font-family: 'Lato-Regular';
+                font-weight: bold;
+                width: vw(84.22) !important;
+                height: vw(33.07) !important;
+                font-size: vw(12);
+                border-radius: vw(5);
+                box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.161);
+                color: #1D1D1D;
+                cursor: pointer;
+            }
+            .btn-cancel-issue:hover{
+                background-color: rgb(227, 227, 230);
+            }
+        }
+
+    }
+    
+    
+}
+.table-head-issue{
+    border-bottom: 20px solid #F4F6F8;
+    padding-left: 5px;
+    // .table-cell-issue{
+    //     padding: 0;
+    //         height: 40px;
+    //         font-size: 14px !important;
+    //         line-height: 1%px !important;
+    //         font-family: 'Lato-Bold';
+    //         color: #3C3B3B;
+    //         background-color: white;
+    //         border-bottom: 10px !important;
+    // }
+    .table-body-issue{
+        background-color: white;
+        .table-row-issue{
+            border-bottom: 5px solid #F4F6F8;
+            // cursor: pointer;
+            .table-cell-issue{
+                padding: 0;
+                height: 40px;
+                font-size: 14px !important;
+                line-height: 1%px !important;
+                font-family: 'Lato-Bold';
+                color: #3C3B3B;
+                background-color: white;
+                border-bottom: 10px !important;
+            }
+        }
+    }
+}
+
+.teks{
+    width: 500px;
+}
+

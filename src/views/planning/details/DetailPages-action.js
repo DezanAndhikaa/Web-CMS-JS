@@ -142,18 +142,21 @@ export function approveServiceDownloadAction(woId){
 // 		data: payload,
 // 		headers: {
 // 			Authorization: `Bearer ${accessToken}`,
-// 			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID, // eslint-disable-line no-undef
+			// 'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID, // eslint-disable-line no-undef
 // 			'Content-Type': 'application/json',
 // 		},
 // 	};
 // 	return async (dispatch) => dispatch(callApi(type, requestConfig));
 // }
-export function putLifetimeCompAction(payload){
+export function putLifetimeCompAction(payload, accessToken){
+	console.log("tok token aksi : ",accessToken)
 	const requestConfig = {
 		method: RequestMethod.PUT,
 		url: `${ApiUrlBase.SALESORDER_API_URL}/LifeTimeComponent`,
 		headers: {
+			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8',
+			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Content-Type': 'application/json; charset=utf-8',
 		},
 		data: payload,
@@ -187,13 +190,15 @@ export function deleteServiceAction(payload){
 	return async (dispatch) => dispatch(callApi(DeleteServiceAction, requestConfig));
 }
 
-export function fetchSalesAction(payload) {
+export function fetchSalesAction(payload, accessToken) {
 	const filter = payload;
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${ApiUrlBase.SALESORDER_API_URL}/FilterUnapproved`,
 		headers: {
+			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8',
+			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Content-Type': 'application/json; charset=utf-8',
 		},
 		data: filter,

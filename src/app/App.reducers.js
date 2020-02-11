@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 import { history } from '../configure-store';
-// import { LoginPageReducers } from '../pages/login';
+import { LoginPageReducers } from '../views/Login';
 import { PlansReducers } from '../views/planning/details/DetailPages-reducer';
 import { STORAGE_ACTIONS } from '../core/StorageHelper';
 import { USER_DATA, PLAN_DATA } from '../constants';
@@ -59,7 +59,7 @@ const AppReducer = combineReducers({
 	lastAction: lastActionReducer,
 	userData: userDataReducer,
 	sideMenuComponentState: clickMenuReducer,
-	// loginPageState: LoginPageReducers,
+	loginPageState: LoginPageReducers,
 	plansPageState: PlansReducers,
 	displayMode: setPageDisplayModeReducer,
 	timezone: setTimezoneReducer,
