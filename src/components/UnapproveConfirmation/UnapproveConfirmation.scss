@@ -28,6 +28,7 @@
                 justify-content: center;
                 flex: 1;
                 .confirmation-title{
+                    line-height: vw(20);
                     margin: 0;
                     padding-top: vw(20);
                     font-size: vw(28);
@@ -38,6 +39,17 @@
                     width: vw(175);
                     margin-top: vw(16);
                     margin-bottom: vw(25);
+                }
+                .title-success{
+                    line-height: vw(20);
+                    margin-top: vw(38);
+                    font-size: vw(28);
+                    font-family: 'SFUIDisplay-Bold';
+                    color: #3C3B3B;
+                }
+                .confirmation-success{
+                    margin-top: vw(30);
+                    margin-bottom: vw(35);
                 }
                 .confirmation-caption{
                     margin: 0;
@@ -61,7 +73,7 @@
             align-items: center;
             justify-content: center;
             text-transform: capitalize;
-            width: vw(100.22);
+            width: 50%; //vw(100.22);
             height: vw(45.07);
             font-size: vw(13) !important;
             font-weight: bold;
@@ -82,7 +94,7 @@
             align-items: center;
             justify-content: center;
             text-transform: capitalize;
-            width: vw(170.22);
+            width: 50%; //vw(170.22);
             height: vw(45.07);
             font-size: vw(13) !important;
             font-weight: bold;
@@ -103,7 +115,7 @@
             align-items: center;
             justify-content: center;
             text-transform: capitalize;
-            width: vw(100.22);
+            width: 50%; //vw(100.22);
             height: vw(45.07);
             font-size: vw(13) !important;
             font-weight: bold;
@@ -122,7 +134,7 @@
             align-items: center;
             justify-content: center;
             text-transform: capitalize;
-            width: vw(170.22);
+            width: 50%; //vw(170.22);
             height: vw(45.07);
             font-size: vw(13) !important;
             font-weight: bold;

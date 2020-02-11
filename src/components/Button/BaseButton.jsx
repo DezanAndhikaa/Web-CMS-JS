@@ -16,8 +16,8 @@ class BaseButton extends React.Component{
         }
     }
 
-    isClicked = () => {
-        this.setState({isShowModal: !this.state.isShowModal})
+     isClicked = () => {
+       this.setState({isShowModal: !this.state.isShowModal})
     }
 
     isClosed = () => {
@@ -71,9 +71,16 @@ class BaseButton extends React.Component{
 
     isSendtoEdit(){
         return(
-            <ApproveConfirmation 
-                titles = "Send to Edit"
-            />
+            <>
+                {/* {this.isClicked} */}
+                <UnapproveConfirmation 
+                    // {...this.props}
+                    idConfirm = "Send to Edit"
+                    // onClose={this.isClosed}
+                    // openModal={this.state.isShowModal}
+                    // onSendtoEdit = {this.isSendtoEdit()}
+                />
+            </>
         )
     }
 
@@ -104,10 +111,10 @@ class BaseButton extends React.Component{
                     <Button className="btn-cancel-approve" onClick={this.isClicked}> Cancel Approve</Button>
                     <UnapproveConfirmation 
                         {...this.props}
-                        idConfirm = "Cancel"
+                        idConfirm = "Cancel Edit Success"
                         onClose={this.isClosed}
                         openModal={this.state.isShowModal}
-                        onSendtoEdit = {this.isSendtoEdit()}
+                        // onSendtoEdit = {this.isSendtoEdit}
                     />
                 </div>
             )

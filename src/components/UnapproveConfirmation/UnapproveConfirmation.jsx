@@ -54,10 +54,10 @@ export default class UnapproveConfirmation extends React.PureComponent {
         <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
           <DialogContent className="confirmation-modal-content">
             <div className="confirmation-modal">
-              <CloseNotif onClose={this.props.onClose}/>
+              {/* <CloseNotif onClose={this.props.onClose}/> */}
               <div className="confirmation-container">
-                <p className="confirmation-title">Successful</p>
-                <img className="confirmation-image" src={ImgCancelEditSucc} alt="" />
+                <p className="title-success">Successful</p>
+                <img className="confirmation-success" src={ImgCancelEditSucc} alt="" />
                 <p className="confirmation-caption">You have sent data to be repaired again</p>
                 <div className="btn-row">
                   <Button className="button-continue" onClick={this.props.onClose}>Continue</Button>
