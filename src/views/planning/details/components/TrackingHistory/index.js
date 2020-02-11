@@ -25,6 +25,7 @@ import {
 	UnselectSalesPlanAction,
 	UpdateSalesParameterAction,
 	UpdateSalesApprovedParameterAction,
+	UpdateSalesDeletedParameterAction,
 	UpdateServiceParameterAction,
 	sortByAction
 } from '../../DetailPages-action';
@@ -44,6 +45,10 @@ const mapStateToProps = (state) => ({
 	salesApprovedParameter: state.plansPageState.salesApprovedParameter,
 	salesDeletedParameter: state.plansPageState.salesDeletedParameter,
 	serviceParameter: state.plansPageState.serviceParameter,
+	//
+	serviceApprovedParameter : state.plansPageState.serviceApprovedParameter,
+	serviceDeletedParameter : state.plansPageState.serviceDeletedParameter,
+	//
 	salesSearch: state.plansPageState.salesSearch,
 	serviceSearch: state.plansPageState.serviceSearch,
 	selectedSalesPlans: state.plansPageState.selectedSalesPlans,
@@ -52,7 +57,10 @@ const mapStateToProps = (state) => ({
 	fetchStatusSalesApproved: state.plansPageState.salesOrderListApproved.status,
 	fetchStatusSalesDeleted: state.plansPageState.salesOrderListDeleted.status,
 	fetchStatusService: state.plansPageState.serviceOrderList.status,
+	fetchStatusServiceApproved: state.plansPageState.serviceOrderListApproved.status,
+	fetchStatusServiceDeleted: state.plansPageState.serviceOrderListDeleted.status,
 	sortSalesBy: state.plansPageState.sortSalesBy,
+	sortServiceBy: state.plansPageState.sortServiceBy,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -75,7 +83,11 @@ const mapDispatchToProps = (dispatch) => ({
 	unselectSalesPlan: (payload) => dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
 	updateSalesParameter: (payload) => dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
 	updateSalesApprovedParameter: (payload) => dispatch(salesParameterApprovedAction(UpdateSalesApprovedParameterAction, payload)),
-	updateServiceParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload))
+	updateSalesDeletedParameter: (payload) => dispatch(salesParameterApprovedAction(UpdateSalesDeletedParameterAction, payload)),
+	updateServiceParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
+	updateServiceApprovedParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
+	updateServiceDeletedParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
+	
 });
 
 const trackingHistory = connect(mapStateToProps, mapDispatchToProps)(TrackingHistory);

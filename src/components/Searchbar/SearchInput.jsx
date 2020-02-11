@@ -14,25 +14,11 @@ export default class SearchInput extends React.PureComponent {
   }
 
   handleKeyUp = (event) => {
-    if (this.props.whichTabs === true) {
       this.setState({ value: event.target.value });
-      if (event.keyCode === 13) {
-        this.props.onSalesSearch(this.state.value);
-      } else {
-        setTimeout(() => {
-          this.props.onSalesSearch(this.state.value);
-        }, 1000);
-      }
-    }else{
-      this.setState({ value: event.target.value });
-      if (event.keyCode === 13) {
-        this.props.onServiceSearch(this.state.value);
-      } else {
-        setTimeout(() => {
-          this.props.onServiceSearch(this.state.value);
-        }, 1000);
-      }
-    }
+      setTimeout(() => {
+        this.props.handleSearch(this.state.value)
+        console.log('pantej ke trig')
+      }, 1000)
   }
 
   render() {

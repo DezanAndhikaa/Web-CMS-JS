@@ -32,8 +32,8 @@ const routes = (
 		<Switch>
 			<Route exact path={Menu.LOGIN} component={LoginPage} />
 			<Route exact path={Menu.PLANNING_DETAILS} component={DetailPages} />
-			<Route exact path={Menu.PLANNING_DETAILS_TRACKING} component={TrackingHistory} />
-			<Route exact path={Menu.PLANNING_DETAILS_APPROVAL} component={ApprovalPages} />
+			<Route exact path={Menu.PLANNING_DETAILS_STATUS} component={TrackingHistory} />
+			<Route exact path={Menu.PLANNING_APPROVAL} component={ApprovalPages} />
 			{/* <Route exact path={Menu.LOGIN} component={LoginPage} />
 			<Route exact path={Menu.DASHBOARD} component={requireAuth(Dashboard)} />
 			<Route exact path={Menu.JOBS_SUMMARY} component={requireAuth(JobsPage)} />

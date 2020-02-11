@@ -162,11 +162,11 @@ class SideMenuComponent extends React.Component {
                   button
                   key="jobs-report"
                   className={
-                    this.props.path === Menu.PLANNING_DETAILS
+                    this.props.path === Menu.PLANNING_APPROVAL
                       ? "sub-menu-selected"
                       : "sub-menu"
                   }
-                  onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_DETAILS)}
+                  onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_APPROVAL)}
                 >
                   <ListItemIcon classes={{ root: "icon-root" }}>
                     <img
@@ -176,7 +176,7 @@ class SideMenuComponent extends React.Component {
                     />
                   </ListItemIcon>
                   <ListItemText
-                    primary="Detail"
+                    primary="Approval"
                     classes={{ primary: "item-text", root: "item-text" }}
                   />
                 </ListItem>
