@@ -47,7 +47,7 @@ class DropDownList extends React.Component{
 					>
 						<MenuItem className="dropdown-list" value="2">2</MenuItem>
 						<MenuItem className="dropdown-list" value="4">4</MenuItem>
-						<MenuItem className="dropdown-list" value="6">6</MenuItem>
+						<MenuItem className="dropdown-list" value="5">5</MenuItem>
 						<MenuItem className="dropdown-list" value="100">100</MenuItem>
 						<MenuItem className="dropdown-list" value="100000">All</MenuItem>
 					</Select>

@@ -7,7 +7,7 @@ import { DetailPages } from '../views/planning/details';
 import { TrackingHistory } from '../views/planning/details/components/TrackingHistory';
 import { ApprovalPages } from '../views/planning/details/components/Approve';
 // import { JobsPage } from '../pages/jobs-execution/jobs';
-import  LoginPage  from '../views/Login/LoginPage';
+import  { LoginPage }  from '../views/Login';
 // import MasterDataUploader from '../pages/master-data-uploader';
 // import JobsReport from '../views/planning/details/DetailPages';
 // import Settings from '../pages/settings';

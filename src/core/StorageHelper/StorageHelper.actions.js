@@ -17,7 +17,7 @@ export function removeDataAction(type) {
 
 export function getDataAction(type, storageKey) {
   const dataString = localStorage.getItem(storageKey);
-  console.log("laaaaahh : ",dataString)
+  console.log("laaaaahh : ",JSON.parse(dataString))
   const dataObject = dataString ? JSON.parse(dataString) : null;
   return { type: STORAGE_ACTIONS.GET_DATA + type, data: dataObject };
 }

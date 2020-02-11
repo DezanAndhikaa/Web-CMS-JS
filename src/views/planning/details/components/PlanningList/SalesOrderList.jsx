@@ -40,7 +40,7 @@ export default class SalesOrderList extends React.PureComponent {
   }
 
   putLifetimke = async(data) => {
-    await this.props.putLifetimeComp(data);
+    await this.props.putLifetimeComp(data, this.props.token);
     await this.props.onClickSalesOrder();
   }
   

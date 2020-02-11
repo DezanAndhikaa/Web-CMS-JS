@@ -176,7 +176,7 @@ class SideMenuComponent extends React.Component {
                     />
                   </ListItemIcon>
                   <ListItemText
-                    primary="Detail"
+                    primary="Approval"
                     classes={{ primary: "item-text", root: "item-text" }}
                   />
                 </ListItem>

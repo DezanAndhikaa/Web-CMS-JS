@@ -14,7 +14,6 @@ class LoginPage extends React.Component{
     }
 
     componentDidUpdate(prevProps) {
-        console.log('')
         if (prevProps.loginRequest !== this.props.loginRequest
           && this.props.loginRequest.status === ApiRequestActionsStatus.SUCCEEDED) {
           this.props.saveUserData(this.props.loginRequest.payload);
@@ -26,7 +25,10 @@ class LoginPage extends React.Component{
     
     handlePasswordChange = (event) => { this.setState({ password: event.target.value }); }
     
-    handleLogin = () => { this.props.login(this.state.username, this.state.password); }
+    handleLogin = () => { 
+        console.log('mimpi props : ',this.props.displayMode)
+        this.props.login(this.state.username, this.state.password); 
+    }
 
     // handleKeyPress = (event) => {
     //     if (event.key === 'Enter') return this.handleLogin();
