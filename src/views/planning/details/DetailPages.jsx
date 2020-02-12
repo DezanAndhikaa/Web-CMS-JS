@@ -768,6 +768,7 @@ componentDidUpdate = (prevProps) => {
 
   render(){ 
     // console.log('data selected filter', this.props.selectedFilters)     
+    console.log('selected sales plan : ',this.props.selectedSalesPlans)
     return(
       <main className="content">
           <div className="table-container">
