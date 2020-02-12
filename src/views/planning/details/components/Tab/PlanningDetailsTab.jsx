@@ -9,7 +9,8 @@ import SalesOrderList from '../PlanningList/SalesOrderList';
 import ServiceOrderList from '../PlanningList/ServiceOrderList';
 import ApprovedSalesOrderList from '../PlanningList/ApprovedSalesOrderList';
 import { IconNotif, IconHistory } from '../../../../../assets/icons';
-import Badge from '@material-ui/core/Badge';
+import {Badge, Button} from '@material-ui/core';
+import { Menu } from '../../../../../constants';
 import './PlanningDetailsTab.scss';
 import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
 import { SelectCustomerFilterAction,SelectSiteFilterAction, SelectUnitModelFilterAction, SelectComponentFilterAction } from '../../DetailPages-action'
@@ -105,7 +106,6 @@ class PlanningDetailsTab extends React.Component {
     GroupUnitModel: [],
     GroupComponentDescription: []
   };
-
 
   handleChange = (event, value) => {
 console.log('kondisi value terasek', value)
@@ -214,6 +214,26 @@ console.log('kondisi value terasek', value)
     }
   }
 
+  _renderTotalDataInput() {
+    return(
+      <div className="total-input-container">
+        <div className="label-header-input">
+          <div className="header-input">
+            <div className="input1">
+              Data Input
+            </div>
+            <div className="input2">
+              Sales Order
+            </div>
+          </div>
+          <div className="total-data-input">
+            {this.props.totalSalesData}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   _renderFilter() {
     return (
       <div className="dropdowns-container">
@@ -305,56 +325,32 @@ console.log('kondisi value terasek', value)
     )
   }
 
+  handleClick = (menu) => {
+    this.props.history.push({
+      pathname: menu
+    });
+  }
+
   render() {
     const { classes, theme } = this.props;
     const { value } = this.state;
     {!this.props.isApproved ? console.log('skuit kondisi false', this.props.totalSalesData) : console.log('skuit kondisi true', this.props.salesOrderListApproved)}
-    console.log('skuit kondisi true', this.props.salesOrderListApproved)
-    // if (value === 0) {
-    //   this.setState({
-    //     invisible1 : false
-    //   })
-    // }
-    // if (value === 1) {
-    //   this.setState({
-    //     invisible1 : true,
-    //     invisible2 : false
-    //   })
-    // }
     return (
         <div className="root">
-        <AppBar position="static" color="default" style={{boxShadow: "none"}}>
-
-        {/* Tampilan HO */}
-        {/* <div className="tab-container"> 
-          {this.props.renderSearch} 
-          {this.props.renderFilterByDataAction}
-        </div> */}
-        
-        {/* Tampilan Site */}
-        <div className="tab-container">
-            {this.props.renderNotif}
-            {this.props.renderFilterByDataAction}
+          <div className="tab-container">
+            <Button className="btn-approval" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
+              Approval
+            </Button>
+            <div className="btn-header">
+              {this.props.renderNotif}
+              {this.props.renderFilterByDataAction}
+            </div>
+          </div>
+      {/* TampilanHO renderTotalDataInput + renderFilter*/}
+        <div className="data-input-container">
+          {this._renderTotalDataInput()}
         </div>
-          <Tabs
-            classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
-            value={this.state.value}
-            onChange={this.handleChange}
-            indicatorColor="primary" >
-            <Tab 
-              centered={true}
-              onClick={() => this.props.clearSelectedSalesPlans()} 
-              classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-              label= {this.renderTotalSales()} 
-            />
-            <Tab 
-              centered={true}
-              onClick={() => this.props.clearSelectedServicePlans()} 
-              classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-              label= {this.renderTotalService()}
-            />
-          </Tabs>
-        </AppBar>
+        {/* Tampilan Site hanya renderFilter */}
         <div className="filters-container">
           {this._renderFilter()}
         </div>
