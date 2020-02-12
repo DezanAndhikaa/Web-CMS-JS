@@ -615,7 +615,7 @@ componentDidUpdate = (prevProps) => {
             onClickButton={this.handleClickFilterByDataAction}
           />
           <FilterbyDataAction 
-            {... this.props}
+            {...this.props}
             titles="Tracking History"
           />
         </>
@@ -632,7 +632,7 @@ componentDidUpdate = (prevProps) => {
             onClickButton={this.handleClickFilterByDataAction}
           />
           <FilterbyDataAction 
-            {... this.props}
+            {...this.props}
             titles="Tracking History"
           />
         </>

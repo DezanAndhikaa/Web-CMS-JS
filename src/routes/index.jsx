@@ -11,7 +11,7 @@ import  { LoginPage }  from '../views/Login';
 // import MasterDataUploader from '../pages/master-data-uploader';
 // import JobsReport from '../views/planning/details/DetailPages';
 // import Settings from '../pages/settings';
-// import requireAuth from '../components/AuthGuardHoc';
+import requireAuth from '../components/AuthGuardHoc';
 // import Dashboard from '../pages/dashboard/Dashboard';
 // import FcMonitoring from '../pages/fc-monitoring';
 // import PIDetailPage from '../pages/pi-detail';
@@ -31,9 +31,9 @@ const routes = (
 	<div>
 		<Switch>
 			<Route exact path={Menu.LOGIN} component={LoginPage} />
-			<Route exact path={Menu.PLANNING_DETAILS} component={DetailPages} />
-			<Route exact path={Menu.PLANNING_DETAILS_STATUS} component={TrackingHistory} />
-			<Route exact path={Menu.PLANNING_APPROVAL} component={ApprovalPages} />
+			<Route exact path={Menu.PLANNING_DETAILS} component={requireAuth(DetailPages)} />
+			<Route exact path={Menu.PLANNING_DETAILS_STATUS} component={requireAuth(TrackingHistory)} />
+			<Route exact path={Menu.PLANNING_APPROVAL} component={requireAuth(ApprovalPages)} />
 			{/* <Route exact path={Menu.LOGIN} component={LoginPage} />
 			<Route exact path={Menu.DASHBOARD} component={requireAuth(Dashboard)} />
 			<Route exact path={Menu.JOBS_SUMMARY} component={requireAuth(JobsPage)} />

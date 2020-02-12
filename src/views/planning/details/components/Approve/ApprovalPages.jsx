@@ -36,6 +36,9 @@ componentWillUnmount = () => {
   this.props.updateSalesParameter({
     ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
   });
+  this.props.updateServiceParameter({
+    ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
+  });
 }
 
 componentDidUpdate = (prevProps) => {
@@ -58,15 +61,31 @@ componentDidUpdate = (prevProps) => {
   if(prevProps.filterParameter !== this.props.filterParameter){
     console.log('dumtt,',this.props.filterParameter)
       if(this.props.indexFilterParameter.indexTabParameter === 0){
-        this.props.fetchSalesOrder(this.props.filterParameter);
+        // this.props.fetchSalesOrder(this.props.filterParameter);
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
+        })
       }else{
-        this.props.fetchServiceOrder(this.props.filterParameter);
+        // this.props.fetchServiceOrder(this.props.filterParameter);
+        this.props.updateServiceParameter({
+          ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
+        })
       }
   }
 
+  //FILTER RANGE LIFETIME
   if(prevProps.filterLifetime !== this.props.filterLifetime){
-    this.props.fetchSalesOrder(this.props.filterLifetime);
+    console.log('dumtt,',this.props.filterLifetime)
+    this.props.updateSalesParameter({
+      ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterLifetime.Filter, PageNumber: 1
+    })
+    // this.props.fetchSalesOrder(this.props.filterLifetime);
   }
+
+    //FILTER RANGE DATE
+    if(prevProps.filterDate !== this.props.filterDate){
+      this.props.fetchSalesOrder(this.props.filterDate);
+    }
 
   //ini untuk trigger sales global search
   if (prevProps.salesSearch !== this.props.salesSearch) {
@@ -371,9 +390,19 @@ componentDidUpdate = (prevProps) => {
     return(
       <DropDownList 
       {...this.props}
-      // onPageSize={()=>this.handlePageSize()}
+      handleClickShowPerPage={this.handleClickShowPerPage}
       />
     )
+  }
+
+  handleClickShowPerPage = (value) =>{
+    if (this.state.isPaging === true) {
+          this.props.clearSelectedSalesPlans();
+					this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value})
+    }else{
+      this.props.clearSelectedServicePlans();
+					this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value})
+    }
   }
 
   //KOMPONEN UNTUK GLOBAL SEARCH
@@ -547,7 +576,7 @@ componentDidUpdate = (prevProps) => {
       return(
         <>
           <FilterbyDataAction 
-            {... this.props}
+            {...this.props}
             titles="Status"
           />
           <FilterbyDataAction 
@@ -561,11 +590,11 @@ componentDidUpdate = (prevProps) => {
       return(
         <>
           <FilterbyDataAction 
-            {... this.props}
+            {...this.props}
             titles="Status"
           />
           {/* <FilterbyDataAction 
-            {... this.props}
+            {...this.props}
             titles="Approve"
             onClickPlanningApprove={this.onClickApprovedService}
             onClickPlanningDelete={this.onClickDeletedService}
