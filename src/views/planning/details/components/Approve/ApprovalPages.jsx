@@ -547,7 +547,7 @@ componentDidUpdate = (prevProps) => {
       return(
         <>
           <FilterbyDataAction 
-            {... this.props}
+            {...this.props}
             titles="Status"
           />
           <FilterbyDataAction 
@@ -561,11 +561,11 @@ componentDidUpdate = (prevProps) => {
       return(
         <>
           <FilterbyDataAction 
-            {... this.props}
+            {...this.props}
             titles="Status"
           />
           {/* <FilterbyDataAction 
-            {... this.props}
+            {...this.props}
             titles="Approve"
             onClickPlanningApprove={this.onClickApprovedService}
             onClickPlanningDelete={this.onClickDeletedService}
