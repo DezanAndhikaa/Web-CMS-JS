@@ -48,7 +48,7 @@ class FilterbyDataAction extends React.Component {
   }
 
   handleClick = (menu, tab) => {
-    this.props.history.push({
+    this.props.push({
       pathname: menu,
       whichTab: tab
     });

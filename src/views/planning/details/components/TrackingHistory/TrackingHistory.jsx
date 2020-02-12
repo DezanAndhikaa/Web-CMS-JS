@@ -31,7 +31,7 @@ export default class TrackingHistory extends React.PureComponent {
 	}
 
 	handleClick = (menu) => {
-		this.props.history.push(menu);
+		this.props.push(menu);
 	  }
 
 	onClickDownloadSalesApproved = () => {
@@ -720,7 +720,7 @@ export default class TrackingHistory extends React.PureComponent {
 	  }
 
 	render(){
-		console.log('pantej', this.props.location.whichTab)
+		console.log('pantej location ', this.props.location)
 		return(
 			<main className="content" >
 				{/* {this.showLoading()} */}

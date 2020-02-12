@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { PlansReducers } from '../../DetailPages-reducer';
-
+import { push } from 'connected-react-router';
 import {
 	approveSalesDownloadAction,
 	approveServiceDownloadAction,
@@ -32,6 +32,7 @@ import {
 import TrackingHistory from './TrackingHistory';
 
 const mapStateToProps = (state) => ({
+	location : state.router.location,
 	displayMode: state.displayMode,
 	approveSalesDownloaded : state.plansPageState.approveSalesDownloaded,
 	approveServiceDownloaded : state.plansPageState.approveServiceDownloaded,
@@ -64,6 +65,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+	push: (path, whichTab) => dispatch(push(path, whichTab)),
 	downloadSalesApproved : (soId) => dispatch(approveSalesDownloadAction(soId)),
 	downloadServiceApproved : (soId) => dispatch(approveServiceDownloadAction(soId)),
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),

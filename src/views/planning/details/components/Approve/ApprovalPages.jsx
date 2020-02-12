@@ -411,14 +411,25 @@ componentDidUpdate = (prevProps) => {
       <div className="bottom-row-approval">
         <SearchInput
         {...this.props}
-        whichTabs={this.state.whichTabs}
         webInfo="Search"
-        onSalesSearch={this.props.onSearchSales}
-        onServiceSearch={this.props.onSearchService}
+        handleSearch={this.handleSearch}
       />
       </div>
     );
   }
+
+  handleSearch=(value)=>{
+		this.setState({ searchVal : value})
+		if (this.state.isPaging === true) {
+			setTimeout(() => {
+				this.props.onSearchSales(this.state.searchVal)
+			}, 1000);
+		}if (this.state.isPaging === false) {
+			setTimeout(() => {
+				this.props.onSearchService(this.state.searchVal)
+			}, 1000);
+		}
+	}
 
   _renderNotif(){
     return (
@@ -733,6 +744,7 @@ componentDidUpdate = (prevProps) => {
   };
 
   render(){     
+    console.log('history', this.props.token)
     return(
       <main className="content">
           <div className="table-container-approval">

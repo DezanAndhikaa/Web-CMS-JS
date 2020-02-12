@@ -60,12 +60,12 @@ export const UpdateServiceApprovedParameterAction = 'SERVICE_APPROVED_PARAMETER'
 export const UpdateServiceDeletedParameterAction = 'SERVICE_DELETED_PARAMETER';
 export const SalesOrderFilterAction = 'SALES_ORDER_FILTER';
 export const SelectCustomerFilterAction = 'SELECT_CUSTOMER_FILTER';
-export const SelectSiteFilterAction = 'SELECT_SITE_FILTER'
-export const SelectUnitModelFilterAction ='SELECT_UNIT_MODEL_FILTER'
-export const SelectComponentFilterAction ='SELECT_COMPONENT_FILTER'
+export const SelectSiteFilterAction = 'SELECT_SITE_FILTER';
+export const SelectUnitModelFilterAction ='SELECT_UNIT_MODEL_FILTER';
+export const SelectComponentFilterAction ='SELECT_COMPONENT_FILTER';
 export const IndexFilterAction = 'INDEX FILTER';
-export const LifetimeFilterAction = 'SELECT_LIFETIME_FILTER'
-export const DateFilterAction = 'SELECT_DATE_FILTER'
+export const LifetimeFilterAction = 'SELECT_LIFETIME_FILTER';
+export const DateFilterAction = 'SELECT_DATE_FILTER';
 
 export function approveSalesAction(payload){
 	const requestConfig = {
@@ -142,14 +142,14 @@ export function approveServiceDownloadAction(woId){
 // 		data: payload,
 // 		headers: {
 // 			Authorization: `Bearer ${accessToken}`,
-			// 'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID, // eslint-disable-line no-undef
+// 'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID, // eslint-disable-line no-undef
 // 			'Content-Type': 'application/json',
 // 		},
 // 	};
 // 	return async (dispatch) => dispatch(callApi(type, requestConfig));
 // }
 export function putLifetimeCompAction(payload, accessToken){
-	console.log("tok token aksi : ",accessToken)
+	console.log('tok token aksi : ',accessToken);
 	const requestConfig = {
 		method: RequestMethod.PUT,
 		url: `${ApiUrlBase.SALESORDER_API_URL}/LifeTimeComponent`,
@@ -167,7 +167,7 @@ export function putLifetimeCompAction(payload, accessToken){
 export function deleteSalesAction(payload){
 	const requestConfig = {
 		method: RequestMethod.DELETE,
-		url: `${ApiUrlBase.SALESORDER_API_URL}/DataAction/Delete`,
+		url: `${ApiUrlBase.SALESORDER_API_URL}/Delete`,
 		headers: {
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
@@ -180,7 +180,7 @@ export function deleteSalesAction(payload){
 export function deleteServiceAction(payload){
 	const requestConfig = {
 		method: RequestMethod.DELETE,
-		url: `${ApiUrlBase.SERVICEORDER_API_URL}/DataAction/Delete`,
+		url: `${ApiUrlBase.SERVICEORDER_API_URL}/Delete`,
 		headers: {
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
@@ -208,7 +208,7 @@ export function fetchSalesAction(payload, accessToken) {
 
 export function fetchServiceAction(payload) {
 	const filter = payload;
-	console.log('kupi kupi ', filter)
+	console.log('kupi kupi ', filter);
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${ApiUrlBase.SERVICEORDER_API_URL}/FilterUnapproved`,
@@ -321,7 +321,7 @@ export function selectFilterAction2(type, payload, head, page) {
 }
 
 export function indexFilterAction(type, payload){
-	return { type, payload }
+	return { type, payload };
 }
 
 export function selectSalesPlansAction(type, payload) {
