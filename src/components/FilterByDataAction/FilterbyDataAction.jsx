@@ -136,7 +136,7 @@ class FilterbyDataAction extends React.Component {
           <div className="dropdown-button">
             <div className="dropdown-selected-item">
               <div className="input-lt">
-                <img src={IconInputLT} className="icon-lt" alt="" /><span className="label-lt">Input Lifetime</span>
+                <img src={IconInputLT} className="icon-lt" alt="" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS) }/><span className="label-lt" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS) }>Input Lifetime</span>
               </div>
           </div>
         </div>

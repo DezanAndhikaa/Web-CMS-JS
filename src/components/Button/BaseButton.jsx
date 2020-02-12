@@ -111,7 +111,7 @@ class BaseButton extends React.Component{
                     <Button className="btn-cancel-approve" onClick={this.isClicked}> Cancel Approve</Button>
                     <UnapproveConfirmation 
                         {...this.props}
-                        idConfirm = "Cancel Edit Success"
+                        idConfirm = "Cancel"
                         onClose={this.isClosed}
                         openModal={this.state.isShowModal}
                         // onSendtoEdit = {this.isSendtoEdit}

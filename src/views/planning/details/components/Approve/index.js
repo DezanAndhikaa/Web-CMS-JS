@@ -89,7 +89,7 @@ const mapDispatchToProps = (dispatch) => ({
 	fetchApprovedService: (payload) => dispatch(fetchApprovedServiceAction(payload)),
 	fetchDeletedSales: (payload) => dispatch(fetchDeletedSalesAction(payload)),
 	fetchDeletedService: (payload) => dispatch(fetchDeletedServiceAction(payload)),
-	fetchSalesOrder: (payload) => dispatch(fetchSalesAction(payload)),
+	fetchSalesOrder: (payload, token) => dispatch(fetchSalesAction(payload, token)),
 	fetchServiceOrder: (payload) => dispatch(fetchServiceAction(payload)),
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	onSearchSales: (keyword) => dispatch(searchAction(SearchSalesAction, keyword)),
