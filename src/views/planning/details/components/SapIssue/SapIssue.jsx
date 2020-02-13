@@ -17,8 +17,12 @@ const validationSchema = Yup.object().shape({
 
 export default class SapIssue extends React.Component{
 
+  componentDidMount(){
+    console.log("aaaaannnnnjjjjaa")
+  }
+
     state={
-        isShowModal: false,
+        isShowModal: true,
     }
 
     isClicked = () => {
@@ -35,73 +39,49 @@ export default class SapIssue extends React.Component{
           <TableRow className="table-row-issue">
             <PlanningListHeader
               name="SO"
-              // isActive={this.props.sortJobsByState.unitModel.isActive}
               delay={300}
               onSearch={this.props.onSearchComp}
-              // isAscending={this.props.sortJobsByState.unitModel.isAscending}
             />
             <PlanningListHeader
               name="Customer"
-            //   isActive={this.props.sortSalesByState.Customer.isActive}
               delay={300}
-            //   isAscending={this.props.sortSalesByState.Customer.isAscending}
-            //   onClick={() => this.props.onClickTabHead(SortSalesByCustomer)}
             />
             <PlanningListHeader
               name="Site"
-            //   isActive={this.props.sortSalesByState.Site.isActive}
               delay={300}
-            //   isAscending={this.props.sortSalesByState.Site.isAscending}
-            //   onClick={() => this.props.onClickTabHead(SortSalesBySite)}
             />
             <PlanningListHeader
               name="Unit Model"
-            //   isActive={this.props.sortSalesByState.UnitModel.isActive}
               delay={300}
-            //   isAscending={this.props.sortSalesByState.UnitModel.isAscending}
-            //   onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
             />
             <PlanningListHeader
               name="Comp Desc"
-            //   isActive={this.props.sortSalesByState.CompDesc.isActive}
               delay={300}
-            //   isAscending={this.props.sortSalesByState.CompDesc.isAscending}
-            //   onClick={() => this.props.onClickTabHead(SortSalesByCompDesc)}
             />
             <PlanningListHeader
               name="Part Number"
-            // //   isActive={this.props.sortJobsByState.backlogOpen.isActive}
               delay={300}
               onSearch={this.props.onSearchComp}
-            // //   isAscending={this.props.sortJobsByState.backlogOpen.isAscending}
             />
             <PlanningListHeader
               name="Unit Code"
-            // //   isActive={this.props.sortJobsByState.plantExecution.isActive}
               delay={300}
               onSearch={this.props.onSearchComp}
-            // //   isAscending={this.props.sortJobsByState.plantExecution.isAscending}
             />
             <PlanningListHeader
               name="Serial Number"
-            // //   isActive={this.props.sortJobsByState.status.isActive}
               delay={300}
               onSearch={this.props.onSearchComp}
-            // //   isAscending={this.props.sortJobsByState.status.isAscending}            
             />
             <PlanningListHeader
               name="Lifetime"
-            // //   isActive={this.props.sortJobsByState.staging.isActive}
               delay={300}
               onFilter={this.isFilterLifetime}
-            // //   isAscending={this.props.sortJobsByState.staging.isAscending}
             />
             <PlanningListHeader
               name="Plan"
-            // //   isActive={this.props.sortJobsByState.staging.isActive}
               delay={300}
               onFilter={this.isFilterDate}
-            // //   isAscending={this.props.sortJobsByState.staging.isAscending}
             />
             <PlanningListHeader
               name="SMR"
@@ -120,6 +100,7 @@ export default class SapIssue extends React.Component{
 
     _showTableBody(row, id) {
         return (
+          <>
           <TableRow className="table-row-issue">
             <TableCell align="left" className="table-cell-issue"> {row.SoNumber} </TableCell>
             <TableCell align="left" className="table-cell-issue"> {row.Customer} </TableCell>
@@ -134,6 +115,11 @@ export default class SapIssue extends React.Component{
             <TableCell align="left" className="table-cell-issue"> {row.SMR} </TableCell>
             <TableCell align="left" className="table-cell-issue"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
           </TableRow>
+          <div>
+              <input type="text" name="name" />
+          </div>
+          </>
+         
         )
     }
 
@@ -160,7 +146,7 @@ export default class SapIssue extends React.Component{
                             {this._showTableHead()}
                             <TableBody className="table-body-issue">
                             {this.props.data
-                                && this.props.data.map((row, id) => (this._showTableBody(row,id)))
+                                && this.props.data.map((row, id) => (this._showTableBody(row,id)) )
                             }
                                 {/* {this._showTableBody()} */}
                             </TableBody>
@@ -178,10 +164,10 @@ export default class SapIssue extends React.Component{
 
     render(){
         return(
-            <div >
-                <Button onClick={this.isClicked} >Klik ME!</Button>
+            <div>
+                {/* <Button onClick={this.isClicked} >Klik ME!</Button> */}
                     <Modal className="modal-pos-issue" open={this.state.isShowModal} onClose={this.isClosed} >
-                        <div>
+                        <div className="body-container">
                             {this._renderIssue()}
                         </div>
                     </Modal>

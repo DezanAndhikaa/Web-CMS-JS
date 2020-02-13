@@ -69,21 +69,6 @@ class BaseButton extends React.Component{
        
     }
 
-    isSendtoEdit(){
-        return(
-            <>
-                {/* {this.isClicked} */}
-                <UnapproveConfirmation 
-                    // {...this.props}
-                    idConfirm = "Send to Edit"
-                    // onClose={this.isClosed}
-                    // openModal={this.state.isShowModal}
-                    // onSendtoEdit = {this.isSendtoEdit()}
-                />
-            </>
-        )
-    }
-
     render(){
         if(this.props.titles === "Total"){
             return(
@@ -111,10 +96,10 @@ class BaseButton extends React.Component{
                     <Button className="btn-cancel-approve" onClick={this.isClicked}> Cancel Approve</Button>
                     <UnapproveConfirmation 
                         {...this.props}
-                        idConfirm = "Cancel Edit Success"
+                        idConfirm = "Cancel"
                         onClose={this.isClosed}
                         openModal={this.state.isShowModal}
-                        // onSendtoEdit = {this.isSendtoEdit}
+                        // onSendtoEdit = {this.isClicked}
                     />
                 </div>
             )
@@ -149,7 +134,15 @@ class BaseButton extends React.Component{
                     />
                 </div>
             )
-        }
+        }else if(this.props.titles === "Permanently"){
+            return(
+                <div className="button-inline">
+                    <div className="button-inline">
+                        <Button className="btn-permanently"> Delete Permanently </Button>
+                    </div>
+                </div>
+            )
+        } 
     }
 }
 

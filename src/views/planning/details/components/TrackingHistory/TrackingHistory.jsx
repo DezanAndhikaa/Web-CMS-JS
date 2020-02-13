@@ -124,19 +124,26 @@ export default class TrackingHistory extends React.PureComponent {
 	_renderDownloadBtn(){
 		if (this.props.location.whichTab === "sales") {
 			return(
-				<BaseButton titles="Download"
-				{...this.props}
-				whatTabsIsRendered={true}
-				handleSalesApprovedDownload={this.handleSalesApprovedDownload}
-			  />
+				<>
+					<BaseButton titles="Permanently" />
+
+					<BaseButton titles="Download"
+						{...this.props}
+						whatTabsIsRendered={true}
+						handleSalesApprovedDownload={this.handleSalesApprovedDownload}
+					/>
+				</>
 			)
 		}else if (this.props.location.whichTab === "service"){
 			return(
-				<BaseButton titles="Download"
-				{...this.props}
-				whatTabsIsRendered={false}
-				handleServiceApprovedDownload={this.handleServiceApprovedDownload}
-			  />
+				<>
+					<BaseButton titles="Permanently" />
+					<BaseButton titles="Download"
+						{...this.props}
+						whatTabsIsRendered={false}
+						handleServiceApprovedDownload={this.handleServiceApprovedDownload}
+					/>
+				</>
 			)
 		}
 		

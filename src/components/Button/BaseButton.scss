@@ -100,8 +100,8 @@
     }
     .btn-permanently{
         display: flex;
-        padding-left: 6%;
-        width: vw(153.22);
+        padding-left: 15%;
+        width: vw(223.22);
         height: vw(38.07);
         margin-left: vw(15);
         font-size: vw(16);
@@ -110,16 +110,16 @@
         font-family: 'Lato-Regular';
         text-transform: capitalize;
         color: white;
-        background-color: map-get($colors, del-permanent);
+        background-color: map-get($colors, delete);
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
         background-image: url('../../assets/icons/bin.png');
-        background-size: 10%;
-        background-position-x: 18%;
+        background-size: 8%;
+        background-position-x: 10%;
         background-position-y: center;
         background-repeat: no-repeat;
         cursor: pointer;
     }
     .btn-permanently:hover{
-        background-color: map-get($colors, delete);
+        background-color: map-get($colors, del-permanently);
     }
 }

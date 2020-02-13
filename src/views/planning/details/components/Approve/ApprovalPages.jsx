@@ -32,6 +32,10 @@ class ApprovalPages extends React.Component{
     };
 }
 
+componentDidMount = () => {
+  console.log("ini adalah token : ", this.props.token)
+}
+
 componentWillUnmount = () => {
   this.props.updateSalesParameter({
     ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
@@ -382,7 +386,7 @@ componentDidUpdate = (prevProps) => {
 
   //SAAT MENGKLIK SERVICE ORDER TAB
   onClickSalesOrder = () =>{
-    this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
+    this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
   }
 
   //KOMPONEN UNTUK SHOW PER/PAGE
@@ -738,6 +742,7 @@ componentDidUpdate = (prevProps) => {
           onPage={this._renderPagination}
           baseButton={this._renderBaseButton}
           isApproved={this.state.isApproved}
+          token={this.props.token}
         />
       </>
     );

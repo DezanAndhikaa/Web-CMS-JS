@@ -3,6 +3,7 @@ import './LoginPage.scss'
 import { Button, Input } from '@material-ui/core';
 import { Menu, BasePath } from '../../constants';
 import { ApiRequestActionsStatus } from '../../core/RestClientHelpers';
+import isAccessTokenValid from '../../core/HelpersFunction'
 
 class LoginPage extends React.Component{
     constructor(props){
@@ -13,11 +14,16 @@ class LoginPage extends React.Component{
         }
     }
 
+    componentWillMount() {
+        if (isAccessTokenValid()) { this.props.push(Menu.PLANNING_APPROVAL); }
+    }
+
     componentDidUpdate(prevProps) {
         if (prevProps.loginRequest !== this.props.loginRequest
           && this.props.loginRequest.status === ApiRequestActionsStatus.SUCCEEDED) {
           this.props.saveUserData(this.props.loginRequest.payload);
-          this.props.push(Menu.DASHBOARD);
+        //   this.props.push(Menu.DASHBOARD);
+        this.props.push(Menu.PLANNING_APPROVAL);
         }
     }
 
@@ -25,10 +31,7 @@ class LoginPage extends React.Component{
     
     handlePasswordChange = (event) => { this.setState({ password: event.target.value }); }
     
-    handleLogin = () => { 
-        console.log('mimpi props : ',this.props.displayMode)
-        this.props.login(this.state.username, this.state.password); 
-    }
+    handleLogin = () => { this.props.login(this.state.username, this.state.password); }
 
     // handleKeyPress = (event) => {
     //     if (event.key === 'Enter') return this.handleLogin();
