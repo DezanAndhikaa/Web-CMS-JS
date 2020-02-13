@@ -31,7 +31,7 @@ export default class TrackingHistory extends React.PureComponent {
 	}
 
 	handleClick = (menu) => {
-		this.props.history.push(menu);
+		this.props.push(menu);
 	  }
 
 	onClickDownloadSalesApproved = () => {
@@ -290,8 +290,12 @@ export default class TrackingHistory extends React.PureComponent {
 			console.log('pantej masuk sales')
 			 switch (this.state.whatPageIsChoosed) {
 				 case 'Approve':
+					console.log('pantej case sales', this.state.whatPageIsChoosed)
 					 return(
-						console.log('pantej case sales', this.state.whatPageIsChoosed)
+						<>
+						{this.props.clearSelectedSalesPlans()};
+					{this.props.updateSalesApprovedParameter({ ...this.props.salesApprovedParameter.dataFilter, PageSize: value})}
+					</>
 					 )
 				 case 'Not Approve':
 					console.log('pantej case sales not', value)
@@ -301,9 +305,13 @@ export default class TrackingHistory extends React.PureComponent {
 					{this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value})}
 					 </>
 					 )
-				 case 'Delete': 
+				 case 'Delete':
+					console.log('pantej case sales del',  this.state.whatPageIsChoosed) 
 					return(
-						console.log('pantej case sales del',  this.state.whatPageIsChoosed)
+						<>
+						{this.props.clearSelectedSalesPlans()};
+					{this.props.updateSalesDeletedParameter({ ...this.props.salesDeletedParameter.dataFilter, PageSize: value})}
+						</>
 					)
 				 case 'SAP ISSUE':
 					 return(
@@ -314,8 +322,38 @@ export default class TrackingHistory extends React.PureComponent {
 			 }
 		}else if (this.props.location.whichTab === 'service') {
 		  console.log('pantej masuk service', value)
-		  this.props.clearSelectedServicePlans();
-		  this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value})
+		  switch (this.state.whatPageIsChoosed) {
+			case 'Approve':
+			   console.log('pantej case service', this.state.whatPageIsChoosed)
+				return(
+				   <>
+				   	   {this.props.clearSelectedServicePlans()};
+		  {this.props.updateServiceApprovedParameter({ ...this.props.serviceApprovedParameter.dataFilter, PageSize: value})}
+			   </>
+				)
+			case 'Not Approve':
+			   console.log('pantej case service not', value)
+				return(
+					<>
+			   {this.props.clearSelectedServicePlans()};
+		  {this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value})}
+				</>
+				)
+			case 'Delete':
+			   console.log('pantej case service del',  this.state.whatPageIsChoosed) 
+			   return(
+				   <>
+				   	{this.props.clearSelectedServicePlans()};
+		  			{this.props.updateServiceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageSize: value})}
+				   </>
+			   )
+			case 'SAP ISSUE':
+				return(
+				   console.log('pantej case service issue',  this.state.whatPageIsChoosed)
+				)
+			default:
+				console.log('lol')
+		}
 		}
 	}
 
@@ -682,7 +720,7 @@ export default class TrackingHistory extends React.PureComponent {
 	  }
 
 	render(){
-		console.log('pantej', this.props.location.whichTab)
+		console.log('pantej location ', this.props.location)
 		return(
 			<main className="content" >
 				{/* {this.showLoading()} */}
