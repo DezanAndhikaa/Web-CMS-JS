@@ -326,7 +326,7 @@ console.log('kondisi value terasek', value)
   }
 
   handleClick = (menu) => {
-    this.props.history.push({
+    this.props.push({
       pathname: menu
     });
   }

@@ -27,7 +27,8 @@ export default class TrackingHistory extends React.PureComponent {
 		notApproveTotalData : 0,
 		deleteTotalData : 0,
 		sapIssueTotalData : 0,
-		searchVal : ''
+		searchVal : '',
+		isDisabled: true,
 	}
 
 	handleClick = (menu) => {
@@ -121,11 +122,41 @@ export default class TrackingHistory extends React.PureComponent {
 		}
 	}
 
+	handleDeletePermanent = async() =>{
+		if (this.props.location.whichTab === "sales") {
+			console.log('pantej terklik sales')
+			let arr = []
+			const index = this.props.selectedSalesPlans.length
+			if (this.props.selectedSalesPlans.length > 0) {
+		  		for (let i = 0; i < index; i++) {
+					arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
+		  		}
+			}
+			await this.props.deletePermanentSales(arr);
+		}
+		if (this.props.location.whichTab === "service") {
+			console.log('pantej terklik service')
+			let arr = []
+			const index = this.props.selectedServicePlans.length
+			if (this.props.selectedServicePlans.length > 0) {
+		  		for (let i = 0; i < index; i++) {
+					arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
+		  		}
+			}
+			await this.props.deletePermanentService(arr);
+		}
+	}
+
 	_renderDownloadBtn(){
 		if (this.props.location.whichTab === "sales") {
 			return(
 				<>
-					<BaseButton titles="Permanently" />
+					<BaseButton titles="Permanently" 
+					{...this.props}
+					whatTabsIsRendered={true}
+					handleDeletePermanent={this.handleDeletePermanent}
+					isDisabled={this.state.isDisabled}
+					/>
 
 					<BaseButton titles="Download"
 						{...this.props}
@@ -137,7 +168,12 @@ export default class TrackingHistory extends React.PureComponent {
 		}else if (this.props.location.whichTab === "service"){
 			return(
 				<>
-					<BaseButton titles="Permanently" />
+					<BaseButton titles="Permanently" 
+					{...this.props}
+					whatTabsIsRendered={false}
+					handleDeletePermanent={this.handleDeletePermanent}
+					isDisabled={this.state.isDisabled}
+					/>
 					<BaseButton titles="Download"
 						{...this.props}
 						whatTabsIsRendered={false}
@@ -569,6 +605,7 @@ export default class TrackingHistory extends React.PureComponent {
 		switch (this.state.whatPageIsChoosed) {
 			case 'Approve':
 				console.log('this is ', whatPageIsChoosed)
+				this.setState({ isDisabled : true})
 				if(this.props.location.whichTab === 'sales'){
 				return(
 					<>
@@ -591,6 +628,7 @@ export default class TrackingHistory extends React.PureComponent {
 				}
 			case 'Not Approve': 
 			console.log('this is ', whatPageIsChoosed)
+			this.setState({ isDisabled : true})
 				if(this.props.location.whichTab === 'sales'){
 					return (
 						<>
@@ -613,6 +651,7 @@ export default class TrackingHistory extends React.PureComponent {
 				}
 			case 'Delete': 
 			console.log('this is ', whatPageIsChoosed)
+			this.setState({ isDisabled : false})
 			if(this.props.location.whichTab === 'sales'){
 				return(
 					<>
@@ -634,6 +673,7 @@ export default class TrackingHistory extends React.PureComponent {
 				)
 			}
 			case 'SAP ISSUE': 
+			this.setState({ isDisabled : true})
 			console.log('this is ', whatPageIsChoosed)
 				// return (
 				// 	this.salesOrderList()

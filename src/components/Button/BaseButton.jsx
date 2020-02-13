@@ -138,7 +138,7 @@ class BaseButton extends React.Component{
             return(
                 <div className="button-inline">
                     <div className="button-inline">
-                        <Button className="btn-permanently"> Delete Permanently </Button>
+                        <Button className="btn-permanently" onClick={this.props.handleDeletePermanent} disabled={this.props.isDisabled} > Delete Permanently </Button>
                     </div>
                 </div>
             )

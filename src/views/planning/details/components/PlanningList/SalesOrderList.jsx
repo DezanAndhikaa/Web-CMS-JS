@@ -39,7 +39,8 @@ export default class SalesOrderList extends React.PureComponent {
       this.setState({checkedValue : false})
     }
   }
-  componentDidMount = () =>{    
+  componentDidMount = async() =>{    
+    await this.props.clearSelectedSalesPlans();
     this.props.onClickSalesOrder();
   }
 
