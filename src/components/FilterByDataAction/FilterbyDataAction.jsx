@@ -68,10 +68,10 @@ class FilterbyDataAction extends React.Component {
       <Paper className="list-items-fbdt">
       <MenuList>
         <MenuItem>
-          <Typography className="list-item-fbdt" variant="inherit">Sales Order</Typography>
+          <Typography className="list-item-fbdt" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales')}>Sales Order</Typography>
         </MenuItem>
         <MenuItem>
-          <Typography className="list-item-fbdt" variant="inherit">Service Order</Typography>
+          <Typography className="list-item-fbdt" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
         </MenuItem>
       </MenuList>
     </Paper>

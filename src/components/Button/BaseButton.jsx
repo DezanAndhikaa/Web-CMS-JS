@@ -134,7 +134,15 @@ class BaseButton extends React.Component{
                     />
                 </div>
             )
-        }
+        }else if(this.props.titles === "Permanently"){
+            return(
+                <div className="button-inline">
+                    <div className="button-inline">
+                        <Button className="btn-permanently"> Delete Permanently </Button>
+                    </div>
+                </div>
+            )
+        } 
     }
 }
 
