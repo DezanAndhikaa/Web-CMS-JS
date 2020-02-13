@@ -82,7 +82,7 @@ const mapDispatchToProps = (dispatch) => ({
 	push: (path, state) => dispatch(push(path, state)),
 	downloadSalesApproved : (soId) => dispatch(approveSalesDownloadAction(soId)),
 	downloadServiceApproved : (soId) => dispatch(approveServiceDownloadAction(soId)),
-	unapproveSales: (payload, token) => dispatch(unapproveSalesAction(payload, token)),
+	unapproveSales: (payload) => dispatch(unapproveSalesAction(payload)),
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
 	clearSelectedServicePlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
 	putLifetimeComp : (payload) => dispatch(putLifetimeCompAction(payload)),

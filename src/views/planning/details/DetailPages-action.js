@@ -95,13 +95,13 @@ export function approveServiceAction(payload){
 
 export function unapproveSalesAction(payload) {
 	const requestConfig = {
-		method: RequestMethod.POST,
-		url: `${ApiUrlBase.SALESORDER_API_URL}/Approval`,
-		data: { workOrderId: payload },
+		method: RequestMethod.PUT,
+		url: `${ApiUrlBase.SALESORDER_API_URL}/Revision`,
 		headers: {
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
 		},
+		data: payload,
 	};
 	return async (dispatch) => dispatch(callApi(UnapproveSalesAction, requestConfig));
 }

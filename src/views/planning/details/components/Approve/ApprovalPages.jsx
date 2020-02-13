@@ -550,6 +550,17 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
+  handleSendtoEdit = async() => {
+    let arr = []
+    const index = this.props.selectedSalesPlans.length
+    if (this.props.selectedSalesPlans.length > 0) {
+      for (let i = 0; i < index; i++) {
+        arr = [...arr, this.props.selectedSalesPlans[i].So]
+      }
+      await this.props.unapproveSales({So : arr, IsRevised: true})
+    }
+  }
+
   handleDeleteSales = async() => {
     let arr = []
     const index = this.props.selectedSalesPlans.length
@@ -608,13 +619,6 @@ componentDidUpdate = (prevProps) => {
             {...this.props}
             titles="Status"
           />
-          {/* <FilterbyDataAction 
-            {...this.props}
-            titles="Approve"
-            onClickPlanningApprove={this.onClickApprovedService}
-            onClickPlanningDelete={this.onClickDeletedService}
-            onClickButton={this.handleClickFilterByDataAction}
-          /> */}
           <FilterbyDataAction 
             {...this.props}
             titles="Tracking History"
@@ -638,18 +642,18 @@ componentDidUpdate = (prevProps) => {
           <BaseButton titles="Approve"
             {...this.props}
             whatTabsIsRendered={this.state.isPaging}
-            // disabledButton = {this.props.selectedSalesPlans.length < 1 }
+            disabledButton = {this.props.selectedSalesPlans.length < 1 }
             totalSelectedItems ={this.props.selectedSalesPlans.length}
             handleSalesApprove={this.handleSalesApprove}
             selectedData={this.state.selectedData}
           />
           <BaseButton titles="Cancel Approve"
-            // {...this.props}
-            // whatTabsIsRendered={this.state.isPaging}
-            // disabledButton = {this.props.selectedSalesPlans.length < 1 }
-            // totalSelectedItems ={this.props.selectedSalesPlans.length}
-            // handleSalesApprove={this.handleSalesApprove}
-            // selectedData={this.state.selectedData}
+            {...this.props}
+            whatTabsIsRendered={this.state.isPaging}
+            disabledButton = {this.props.selectedSalesPlans.length < 1 }
+            totalSelectedItems ={this.props.selectedSalesPlans.length}
+            handleSendtoEdit={this.handleSendtoEdit}
+            selectedData={this.state.selectedData}
           />
           <BaseButton titles="Edit" />
           <BaseButton titles="Delete" 
@@ -724,7 +728,6 @@ componentDidUpdate = (prevProps) => {
           renderNotif={this._renderNotif()}
           onClickSalesOrder={this.onClickSalesOrder}        
           onClickServiceOrder={this.onClickServiceOrder}
-          // onSearchValue={this.onSearchValue}
           onChoosedService={this.updateAssignmentServiceStates}
           onChoosedSales={this.updateAssignmentSalesStates}
           selectedSalesPlanList={this.props.selectedSalesPlans}

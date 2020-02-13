@@ -52,7 +52,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
               <img className="confirmation-image" src={ImgSendtoEdit} alt="" />
               <p className="confirmation-caption">Are you sure want to Not Approve <b>{this.props.totalData} items?</b></p>
               <div className="btn-row">
-                <Button className="button-yes" onClick={this.props.onClose}>Yes</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <Button className="button-yes" onClick={this.props.onSendtoEdit}>Yes</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <Button className="button-no" onClick={this.props.onClose}>No</Button>
               </div>
             </div>
