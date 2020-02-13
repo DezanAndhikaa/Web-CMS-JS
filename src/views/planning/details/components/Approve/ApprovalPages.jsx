@@ -468,7 +468,7 @@ componentDidUpdate = (prevProps) => {
     document.body.appendChild(link);
     link.style = "display: none";
     const todayDate = moment(new Date()).format('DD-MM-YYYY');
-    // const salesOrder  = this.state.selectedData.So;
+    // const salesOrder  = this.state.selectedData.SoNumber;
     let fileName = "Sales-Order-Planning-"+todayDate+".csv";
     let blob = new Blob([this.props.approveSalesDownloaded.data]),
       url = window.URL.createObjectURL(blob);
@@ -483,7 +483,7 @@ componentDidUpdate = (prevProps) => {
     document.body.appendChild(link);
     link.style = "display: none";
     const todayDate = moment(new Date()).format('DD-MM-YYYY');
-    // const serviceOrder  = this.state.selectedServiceData.Wo;
+    // const serviceOrder  = this.state.selectedServiceData.WoNumber;
     let fileName = "Service-Order-Planning-"+todayDate+".csv";
     let blob = new Blob([this.props.approveServiceDownloaded.data]),
       url = window.URL.createObjectURL(blob);
@@ -498,7 +498,7 @@ componentDidUpdate = (prevProps) => {
     const index = this.props.selectedSalesPlans.length
     if (this.props.selectedSalesPlans.length > 0) {
       for (let i = 0; i < index; i++) {
-        arr = [...arr, this.props.selectedSalesPlans[i].So]
+        arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
     }await this.props.downloadSalesApproved(arr);
     if (
@@ -513,7 +513,7 @@ componentDidUpdate = (prevProps) => {
     const index = this.props.selectedServicePlans.length
     if (this.props.selectedServicePlans.length > 0) {
       for (let i = 0; i < index; i++) {
-        arr = [...arr, this.props.selectedServicePlans[i].Wo]
+        arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
       }
     }
     await this.props.downloadServiceApproved(arr);
@@ -529,7 +529,7 @@ componentDidUpdate = (prevProps) => {
     const index = this.props.selectedSalesPlans.length
     if (this.props.selectedSalesPlans.length > 0) {
       for (let i = 0; i < index; i++) {
-        arr = [...arr, this.props.selectedSalesPlans[i].So]
+        arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
       await this.props.approveSales({So : arr, IsApprove: true})
   }
@@ -540,7 +540,7 @@ componentDidUpdate = (prevProps) => {
   const index = this.props.selectedServicePlans.length
     if (this.props.selectedServicePlans.length > 0) {
       for (let i = 0; i < index; i++) {
-        arr = [...arr, this.props.selectedServicePlans[i].Wo]
+        arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
       }
     await this.props.approveService({Wo : arr, IsApprove: true})
     }
@@ -552,7 +552,7 @@ componentDidUpdate = (prevProps) => {
     const todayDate = moment(new Date()).format('YYYY-MM-DD');
     if (this.props.selectedSalesPlans.length > 0) {
       for (let i = 0; i < index; i++) {
-        arr = [...arr, this.props.selectedSalesPlans[i].So]
+        arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
       await this.props.deleteSales({So : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
     }
@@ -564,7 +564,7 @@ componentDidUpdate = (prevProps) => {
     const todayDate = moment(new Date()).format('YYYY-MM-DD');
     if (this.props.selectedServicePlans.length > 0) {
       for (let i = 0; i < index; i++) {
-        arr = [...arr, this.props.selectedServicePlans[i].Wo]
+        arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
       }
       await this.props.deleteService({Wo : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
     }
@@ -686,14 +686,14 @@ componentDidUpdate = (prevProps) => {
     
   isChangeStat = (value,key) =>{
     this.setState({
-      lifetime: { Lists :this.state.lifetime.Lists.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) }
+      lifetime: { Lists :this.state.lifetime.Lists.map(el => (el.SoNumber === key ? {...el, LifeTimeComp : value} : el)) }
     });
   };
 
   //FUNGSI UNTUK MULTI SELECT SALES ORDER
   updateAssignmentSalesStates = (plan) => {
     if (this.props.selectedSalesPlans
-      .some((plans) => plans.So === plan.So,
+      .some((plans) => plans.SoNumber === plan.SoNumber,
       )) 
     { return this.props.unselectSalesPlan(plan); }
     return this.props.selectSalesPlan(plan);
@@ -702,7 +702,7 @@ componentDidUpdate = (prevProps) => {
   //FUNGSI UNTUK MULTI SELECT SERVICE ORDER
   updateAssignmentServiceStates = (plan) => {
     if (this.props.selectedServicePlans
-      .some((plans) => plans.Wo === plan.Wo,
+      .some((plans) => plans.WoNumber === plan.WoNumber,
       ))
     { return this.props.unselectServicePlan(plan); }
     return this.props.selectServicePlan(plan);

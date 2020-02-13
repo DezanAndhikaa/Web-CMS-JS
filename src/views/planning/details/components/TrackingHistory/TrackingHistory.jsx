@@ -54,7 +54,7 @@ export default class TrackingHistory extends React.PureComponent {
 		document.body.appendChild(link);
 		link.style = "display: none";
 		const todayDate = moment(new Date()).format('DD-MM-YYYY');
-		// const serviceOrder  = this.state.selectedServiceData.Wo;
+		// const serviceOrder  = this.state.selectedServiceData.WoNumber;
 		let fileName = "Service-Order-Planning-"+todayDate+".csv";
 		let blob = new Blob([this.props.approveServiceDownloaded.data]),
 		  url = window.URL.createObjectURL(blob);
@@ -69,7 +69,7 @@ export default class TrackingHistory extends React.PureComponent {
 		const index = this.props.selectedSalesPlans.length
 		if (this.props.selectedSalesPlans.length > 0) {
 		  for (let i = 0; i < index; i++) {
-			arr = [...arr, this.props.selectedSalesPlans[i].So]
+			arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
 			console.log('pantek');
 		  }
 		}await this.props.downloadSalesApproved(arr);
@@ -85,7 +85,7 @@ export default class TrackingHistory extends React.PureComponent {
 		const index = this.props.selectedServicePlans.length
 		if (this.props.selectedServicePlans.length > 0) {
 		  for (let i = 0; i < index; i++) {
-			arr = [...arr, this.props.selectedServicePlans[i].Wo]
+			arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
 		  }
 		}
 		await this.props.downloadServiceApproved(arr);
@@ -641,8 +641,8 @@ export default class TrackingHistory extends React.PureComponent {
 
 	updateAssignmentSalesStates = (plan) => {
 	if (this.props.selectedSalesPlans
-		.some((plans) => plans.So === plan.So,
-		// console.log('sssss sales', this.state.selectedData.So)
+		.some((plans) => plans.SoNumber === plan.SoNumber,
+		// console.log('sssss sales', this.state.selectedData.SoNumber)
 		)) 
 	{ return this.props.unselectSalesPlan(plan); }
 	return this.props.selectSalesPlan(plan);
@@ -650,8 +650,8 @@ export default class TrackingHistory extends React.PureComponent {
 
 	updateAssignmentServiceStates = (plan) => {
 		if (this.props.selectedServicePlans
-			.some((plans) => plans.Wo === plan.Wo,
-			// console.log('sssss sales', this.state.selectedData.So)
+			.some((plans) => plans.WoNumber === plan.WoNumber,
+			// console.log('sssss sales', this.state.selectedData.SoNumber)
 			)) 
 		{ return this.props.unselectServicePlan(plan); }
 		return this.props.selectServicePlan(plan);

@@ -699,13 +699,13 @@ export function selectSalesPlansReducer(state = [], action) {
 	switch (action.type) {
 	case SelectSalesPlanAction: {
 		return [...state, action.payload];
-		// return [...state.map(((item) => item.SO !== action.payload))];
+		// return [...state.map(((item) => item.SONumber !== action.payload))];
 	}
 	// case SelectAllSalesPlanAction:{
-	// 	return [...state.(((item) => item.SO === action.payload))];
+	// 	return [...state.(((item) => item.SONumber === action.payload))];
 	// }
 	case UnselectSalesPlanAction: {
-		return [...state.filter(((item) => item.So !== action.payload.So))];
+		return [...state.filter(((item) => item.SoNumber !== action.payload.SoNumber))];
 	}
 	case ClearSelectedPlans:
 		return [];
@@ -719,7 +719,7 @@ export function selectServicePlansReducer(state = [], action) {
 		return [...state, action.payload];
 	}
 	case UnselectServicePlanAction: {
-		return [...state.filter(((item) => item.Wo !== action.payload.Wo))];
+		return [...state.filter(((item) => item.WoNumber !== action.payload.WoNumber))];
 	}
 	case ClearSelectedPlans:
 		return [];
