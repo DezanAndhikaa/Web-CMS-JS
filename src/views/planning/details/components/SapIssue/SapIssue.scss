@@ -40,13 +40,13 @@
             .top-middle-issue{
                 margin-top: 10px;
                 height: 80%;
-                .teks-issue{
-                    width: 100%;
-                }
-                .label-issue{
-                    font-size: 9px;
-                    width: 100%
-                }
+                // .teks-issue{
+                //     width: 100%;
+                // }
+                // .label-issue{
+                //     font-size: 9px;
+                //     width: 100%
+                // }
             }
             .select-input-title-issue{
                 margin: 0;
@@ -120,26 +120,26 @@
 .table-head-issue{
     border-bottom: 20px solid #F4F6F8;
     padding-left: 5px;
-    // .table-cell-issue{
-    //     padding: 0;
-    //         height: 40px;
-    //         font-size: 14px !important;
-    //         line-height: 1%px !important;
-    //         font-family: 'Lato-Bold';
-    //         color: #3C3B3B;
-    //         background-color: white;
-    //         border-bottom: 10px !important;
-    // }
+    .table-cell-issue{
+        padding: 0;
+            height: 40px;
+            font-size: 14px !important;
+            line-height: 1%px !important;
+            font-family: 'Lato-Bold';
+            color: #3C3B3B;
+            background-color: white;
+            border-bottom: 10px !important;
+    }
     .table-body-issue{
         background-color: white;
-        .table-row-issue{
+        .table-row-top-issue{
             border-bottom: 5px solid #F4F6F8;
-            // cursor: pointer;
+            // height: 400px;
             .table-cell-issue{
                 padding: 0;
                 height: 40px;
                 font-size: 14px !important;
-                line-height: 1%px !important;
+                line-height: 1% !important;
                 font-family: 'Lato-Bold';
                 color: #3C3B3B;
                 background-color: white;
@@ -150,6 +150,7 @@
 }
 
 .teks{
-    width: 500px;
+    width: 100%;
 }
+
 

@@ -415,9 +415,9 @@ componentDidUpdate = (prevProps) => {
   _renderSearchBar(){
     return (
       <>
-        <div>
+        {/* <div>
           <SapIssue data={this.props.salesOrderList.Lists}/>
-        </div>
+        </div> */}
         <div className="bottom-row">
           <SearchInput
           {...this.props}

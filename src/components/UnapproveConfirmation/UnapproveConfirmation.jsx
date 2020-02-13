@@ -28,13 +28,11 @@ export default class UnapproveConfirmation extends React.PureComponent {
 
   _renderSap(){
     return(
-      <SapIssue/>
+      <SapIssue {...this.props}/>
     )
   }
 
 	render() {
-    console.log('njays : ',this.props.openModal)
-    console.log('njays 2 : ',this.state.isShowModal1)
     if(this.props.idConfirm === "Cancel"){
         return (
           <>

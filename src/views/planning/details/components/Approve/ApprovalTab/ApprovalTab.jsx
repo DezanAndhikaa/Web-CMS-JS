@@ -333,6 +333,7 @@ class ApprovalTab extends React.Component {
     const { value } = this.state;
     {!this.props.isApproved ? console.log('skuit kondisi false', this.props.totalSalesData) : console.log('skuit kondisi true', this.props.salesOrderListApproved)}
     console.log('skuit kondisi true', this.props.salesOrderListApproved)
+    console.log('skuit skuit : ', this.props.totalSalesData)
     // if (value === 0) {
     //   this.setState({
     //     invisible1 : false

@@ -18,7 +18,7 @@ const validationSchema = Yup.object().shape({
 export default class SapIssue extends React.Component{
 
   componentDidMount(){
-    console.log("aaaaannnnnjjjjaa")
+    console.log("sek sek sek : ",this.props.selectedDataSAP)
   }
 
     state={
@@ -40,7 +40,6 @@ export default class SapIssue extends React.Component{
             <PlanningListHeader
               name="SO"
               delay={300}
-              onSearch={this.props.onSearchComp}
             />
             <PlanningListHeader
               name="Customer"
@@ -101,7 +100,7 @@ export default class SapIssue extends React.Component{
     _showTableBody(row, id) {
         return (
           <>
-          <TableRow className="table-row-issue">
+          <TableRow className="table-row-top-issue">
             <TableCell align="left" className="table-cell-issue"> {row.So} </TableCell>
             <TableCell align="left" className="table-cell-issue"> {row.Customer} </TableCell>
             <TableCell align="left" className="table-cell-issue"> {row.Site} </TableCell>
@@ -114,10 +113,26 @@ export default class SapIssue extends React.Component{
             <TableCell align="left" className="table-cell-issue"> {moment(row.PlanExecution).format('DD-MM-YYYY')} </TableCell>
             <TableCell align="left" className="table-cell-issue"> {row.SMR} </TableCell>
             <TableCell align="left" className="table-cell-issue"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
+            {/* <TableCell align="left" className="table-cell-issue"> 1234 </TableCell>
+            <TableCell align="left" className="table-cell-issue"> ULOKLKO </TableCell>
+            <TableCell align="left" className="table-cell-issue"> JKT </TableCell>
+            <TableCell align="left" className="table-cell-issue"> PCX-01 </TableCell>
+            <TableCell align="left" className="table-cell-issue"> BARANG BAGUS </TableCell>
+            <TableCell align="left" className="table-cell-issue"> 11111 </TableCell>
+            <TableCell align="left" className="table-cell-issue"> 123sad </TableCell>
+            <TableCell align="left" className="table-cell-issue"> 1003213 </TableCell>
+            <TableCell align="center" className="table-cell-issue"> 1000</TableCell>
+            <TableCell align="left" className="table-cell-issue"> 2020-02-12 </TableCell>
+            <TableCell align="left" className="table-cell-issue"> 330 </TableCell>
+            <TableCell align="left" className="table-cell-issue"> 2019-12-12 </TableCell> */}
           </TableRow>
-          <div>
+          <TableRow >
+            <TableCell><label>Description &nbsp; :</label></TableCell>
+            <TableCell colSpan="11">{this._showDescription()}</TableCell>
+          </TableRow>
+          {/* <div className="teks">
               <input type="text" name="name" />
-          </div>
+          </div> */}
           </>
          
         )
@@ -126,7 +141,7 @@ export default class SapIssue extends React.Component{
     _showDescription(){
         return(
             <div className="teks">
-                <input type="text" name="name" />
+                 <TextField className=" teks"id="outlined-basic" placeholder="Tuliskan Masalahnya yaa.." variant="outlined" size="small"/>
             </div>
         )
     }
@@ -144,13 +159,16 @@ export default class SapIssue extends React.Component{
                         <div className="top-middle-issue"> 
                         <Table>
                             {this._showTableHead()}
-                            <TableBody className="table-body-issue">
-                            {this.props.data
-                                && this.props.data.map((row, id) => (this._showTableBody(row,id)) )
+                            <TableBody>
+                            {this.props.selectedDataSAP
+                                && this.props.selectedDataSAP.map((row, id) => (this._showTableBody(row,id)) )
                             }
-                                {/* {this._showTableBody()} */}
+                            {/* {this._showTableBody()}
+                            {this._showTableBody()}
+                            {this._showTableBody()} */}
                             </TableBody>
                         </Table>
+                        {/* {this._showDescription()} */}
                         </div>
                     <div className="bottom-row-issue">
                         <Button className="btn-cancel-issue" onClick={this.props.onClosed}>Cancel</Button>
@@ -163,6 +181,7 @@ export default class SapIssue extends React.Component{
     }
 
     render(){
+      
         return(
             <div>
                 {/* <Button onClick={this.isClicked} >Klik ME!</Button> */}
