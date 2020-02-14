@@ -109,7 +109,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
                 </div>
               </div>
             </div>
-          </DialogContent>
+          </DialogContent> 
         </Modal>
       );
     }
