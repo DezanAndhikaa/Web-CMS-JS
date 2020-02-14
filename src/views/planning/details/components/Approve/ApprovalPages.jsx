@@ -673,7 +673,7 @@ componentDidUpdate = (prevProps) => {
           {/* <BaseButton titles="Total" totalSelectedItems ={this.props.selectedServicePlans.length}/> */}
           <BaseButton titles="Approve"
             {...this.props}
-            // disabledButton = {this.props.selectedServicePlans.length < 1 }
+            disabledButton = {this.props.selectedServicePlans.length < 1 }
             totalSelectedItems ={this.props.selectedServicePlans.length}
             whatTabsIsRendered={this.state.isPaging}
             selectedServiceData={this.state.selectedServiceData}
@@ -683,7 +683,7 @@ componentDidUpdate = (prevProps) => {
           <BaseButton titles="Edit" />
           <BaseButton titles="Delete" 
             {...this.props}
-            // disabledButton = {this.props.selectedServicePlans.length < 1 }
+            disabledButton = {this.props.selectedServicePlans.length < 1 }
             totalSelectedItems ={this.props.selectedServicePlans.length}
             whatTabsIsRendered={this.state.isPaging}
             handleDeleteService={this.handleDeleteService}
