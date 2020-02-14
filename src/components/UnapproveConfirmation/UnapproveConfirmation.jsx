@@ -92,12 +92,11 @@ export default class UnapproveConfirmation extends React.PureComponent {
           {this.state.isShowModal3 && (this._renderSendtoEdit())}   
         </>
         );
-    } else if(this.props.idConfirm === "Cancel Edit Success"){
+    } else if(this.props.idConfirm === "Successfull"){
       return (
         <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
           <DialogContent className="confirmation-modal-content">
             <div className="confirmation-modal">
-              {/* <CloseNotif onClose={this.props.onClose}/> */}
               <div className="confirmation-container">
                 <p className="title-success">Successful</p>
                 <img className="confirmation-success" src={ImgCancelEditSucc} alt="" />

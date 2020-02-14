@@ -5,13 +5,16 @@ import EditButton from '../ActionButton/EditButton/EditButton';
 import DeleteButton from '../ActionButton/DeleteButton/DeleteButton';
 import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 import ApproveConfirmation from '../ApproveConfirmation/ApproveConfirmation';
-import UnapproveConfirmation from '../UnapproveConfirmation/UnapproveConfirmation';
+import UnapproveConfirmation from '../UnapproveConfirmation/UnapproveConfirmation'
+import { ApiRequestActionsStatus } from '../../core/RestClientHelpers';
+import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 
 class BaseButton extends React.Component{
     constructor(props){
         super(props);
         this.state={
             isShowModal: false,
+            isSuccess: false,
             index:0
         }
     }
@@ -22,6 +25,27 @@ class BaseButton extends React.Component{
 
     isClosed = () => {
         this.setState({isShowModal: !this.state.isShowModal})
+    }
+
+    isShowModalInfo = () => {
+        this.setState({
+            isShowModal: !this.state.isShowModal,
+            isSuccess: !this.state.isSuccess
+        })
+    }
+
+    showModalInfo(){
+        console.log('cek masuk gak: ', this.props.fetchStatusSales)
+        if(this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED){
+          return(
+            <UnapproveConfirmation
+                {...this.props}
+                idConfirm= "Successfull"
+                onClose={this.isClosed}
+                openModal={this.state.isShowModal}
+            />
+          )
+        }
     }
 
     isApproved = async() => {
@@ -43,6 +67,7 @@ class BaseButton extends React.Component{
             }
             if (this.props.titles === "Cancel Approve"){
                 await this.props.handleSendtoEdit()
+                this.showModalInfo()
                 this.isClosed()
                 await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
                 await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
@@ -87,20 +112,26 @@ class BaseButton extends React.Component{
             return(
                 <div className="button-inline">
                     <Button className="btn-approve" onClick={this.isClicked} disabled={this.props.disabledButton}>Approve</Button>
-                    <ApproveConfirmation
+                    {/* <ApproveConfirmation
                         {...this.props}
                         {...this.state}
                         onClose={this.isClosed}
                         openModal={this.state.isShowModal}
                         totalData={this.props.totalSelectedItems}
                         onApprove={this.isApproved}
+                    /> */}
+                    <ConfirmationModal 
+                        {...this.props}
+                        idModal = "SAP"
+                        onClose={this.isClosed}
+                        openModal={this.state.isShowModal}
                     />
                 </div>
             )
         }else if(this.props.titles === "Cancel Approve"){
             return(
                 <div className="button-inline">
-                    <Button className="btn-cancel-approve" onClick={this.isClicked}> Cancel Approve</Button>
+                    <Button className="btn-cancel-approve" onClick={this.isClicked} disabled={this.props.disabledButton}> Cancel Approve</Button>
                     <UnapproveConfirmation 
                         {...this.props}
                         idConfirm = "Cancel"
