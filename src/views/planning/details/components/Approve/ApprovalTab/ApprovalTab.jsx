@@ -299,15 +299,7 @@ class ApprovalTab extends React.Component {
   renderTotalSales(){
     return(
       <div className="tab-approval">
-        <div className="tab-label-approval">Sales Order 
-          {/* <span>
-            <StyledBadge 
-              badgeContent={this.props.totalSalesData} 
-              color="primary" 
-              invisible={this.state.invisible1}>
-            </StyledBadge >
-          </span>  */}
-        </div>
+        <div className="tab-label-approval">Sales Order</div>
       </div>      
     )
   }
@@ -315,15 +307,7 @@ class ApprovalTab extends React.Component {
   renderTotalService(){
     return(
       <div className="tab-approval">
-        <div className="tab-label-approval">Service Order 
-        {/* <span>
-          <Badges 
-            badgeContent={this.props.totalServiceData} 
-            color="primary" 
-            invisible={this.state.invisible2}>
-          </Badges >
-        </span>  */}
-      </div>
+        <div className="tab-label-approval">Service Order</div>
       </div>      
     )
   }
@@ -332,19 +316,6 @@ class ApprovalTab extends React.Component {
     const { classes, theme } = this.props;
     const { value } = this.state;
     {!this.props.isApproved ? console.log('skuit kondisi false', this.props.totalSalesData) : console.log('skuit kondisi true', this.props.salesOrderListApproved)}
-    console.log('skuit kondisi true', this.props.salesOrderListApproved)
-    console.log('skuit skuit : ', this.props.totalSalesData)
-    // if (value === 0) {
-    //   this.setState({
-    //     invisible1 : false
-    //   })
-    // }
-    // if (value === 1) {
-    //   this.setState({
-    //     invisible1 : true,
-    //     invisible2 : false
-    //   })
-    // }
     return (
         <div className="root">
         <AppBar position="static" color="default" style={{boxShadow: "none"}}>

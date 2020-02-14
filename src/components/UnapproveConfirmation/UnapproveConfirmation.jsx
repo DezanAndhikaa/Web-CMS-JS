@@ -10,6 +10,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
   state={
     isShowModal1: false,
     isShowModal2: false,
+    isShowModal3: false,
   }
 
   componentDidUpdate = (prevProps) =>{
@@ -19,18 +20,47 @@ export default class UnapproveConfirmation extends React.PureComponent {
     })
   }
 
-  isClickedxxx = () => {
+  isClickedSap = () => {
     this.setState({
       isShowModal1: !this.state.isShowModal1,
       isShowModal2: !this.state.isShowModal2
     })
   }
 
-  _renderSap(){
+  isClickedSend = () => {
+    this.setState({
+      isShowModal1: !this.state.isShowModal1,
+      isShowModal3: !this.state.isShowModal3
+    })
+  }
+
+  _renderSap(open){
     return(
-      <SapIssue {...this.props}/>
+      <SapIssue {...this.props} isShowModal={open}/>
     )
   }
+
+  _renderSendtoEdit(){
+    return(
+      <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
+        <DialogContent className="confirmation-modal-content">
+          <div className="confirmation-modal">
+            <CloseNotif onClose={this.props.onClose}/>
+            <div className="confirmation-container">
+              <p className="confirmation-title">Send to Edit</p>
+              <p className="confirmation-title">Lifetime Component</p>
+              <img className="confirmation-image" src={ImgSendtoEdit} alt="" />
+              <p className="confirmation-caption">Are you sure want to Not Approve <b>{this.props.totalData} items?</b></p>
+              <div className="btn-row">
+                <Button className="button-yes" onClick={this.props.onSendtoEdit}>Yes</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <Button className="button-no" onClick={this.props.onClose}>No</Button>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Modal>
+    )
+}
 
 	render() {
     if(this.props.idConfirm === "Cancel"){
@@ -47,8 +77,11 @@ export default class UnapproveConfirmation extends React.PureComponent {
                   <img className="confirmation-image" src={ImgCancelApprove} alt="" />
                   <p className="confirmation-caption"><b>Select one</b> to continue cancel approve</p>
                   <div className="btn-row">
-                    <Button className="button-edit-lt" onClick={this.props.onSendtoEdit}>Edit Lifetime</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button className="button-sap-issue" onClick={() => this.isClickedxxx()}>SAP Issue</Button>
+                    <Button className="button-edit-lt" onClick={() => this.isClickedSend()}>Edit Lifetime</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button className="button-sap-issue" onClick={() => this.isClickedSap()}>SAP Issue</Button>
+                  </div>
+                  <div className="labelMax">
+                    <label>* Max 5 Items</label>
                   </div>
                 </div>
               </div>
@@ -57,31 +90,11 @@ export default class UnapproveConfirmation extends React.PureComponent {
           )     
           }
           {this.state.isShowModal2 && (
-            this._renderSap()
-          )
-          }    
+            this._renderSap(this.state.isShowModal2)
+          )} 
+          {this.state.isShowModal3 && (this._renderSendtoEdit())}   
         </>
         );
-    } else if(this.props.idConfirm === "Send to Edit"){
-      return (
-        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
-          <DialogContent className="confirmation-modal-content">
-            <div className="confirmation-modal">
-              <CloseNotif onClose={this.props.onClose}/>
-              <div className="confirmation-container">
-                <p className="confirmation-title">Send to Edit</p>
-                <p className="confirmation-title">Lifetime Component</p>
-                <img className="confirmation-image" src={ImgSendtoEdit} alt="" />
-                <p className="confirmation-caption">Are you sure want to Not Approve <b>{this.props.totalData} items?</b></p>
-                <div className="btn-row">
-                  <Button className="button-yes" onClick={this.props.onClose}>Yes</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <Button className="button-no" onClick={this.props.onApprove}>No</Button>
-                </div>
-              </div>
-            </div>
-          </DialogContent>
-        </Modal>
-      );
     } else if(this.props.idConfirm === "Cancel Edit Success"){
       return (
         <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">

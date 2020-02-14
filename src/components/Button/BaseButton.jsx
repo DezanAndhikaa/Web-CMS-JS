@@ -45,6 +45,12 @@ class BaseButton extends React.Component{
                 await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
                 await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
             }
+            if (this.props.titles === "Cancel Approve"){
+                await this.props.handleSendtoEdit()
+                this.isClosed()
+                await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
+                await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
+            }
         }
         if (this.props.whatTabsIsRendered === false) {
             if (this.props.titles === "Approve") {
@@ -55,6 +61,7 @@ class BaseButton extends React.Component{
             }
             if (this.props.titles === "Delete") {
                 await this.props.handleDeleteService();
+                
                 this.isClosed()
                 await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter)
                 this.props.clearSelectedServicePlans(this.props.selectedServicePlans)
@@ -71,21 +78,6 @@ class BaseButton extends React.Component{
             await this.props.handleServiceApprovedDownload()
         }
        
-    }
-
-    isSendtoEdit(){
-        return(
-            <>
-                {/* {this.isClicked} */}
-                <UnapproveConfirmation 
-                    // {...this.props}
-                    idConfirm = "Send to Edit"
-                    // onClose={this.isClosed}
-                    // openModal={this.state.isShowModal}
-                    // onSendtoEdit = {this.isSendtoEdit()}
-                />
-            </>
-        )
     }
 
     render(){
@@ -118,8 +110,8 @@ class BaseButton extends React.Component{
                         idConfirm = "Cancel"
                         onClose={this.isClosed}
                         openModal={this.state.isShowModal}
-                        // data={this.props.data}
-                        // onSendtoEdit = {this.isSendtoEdit}
+                        totalData={this.props.totalSelectedItems}
+                        onSendtoEdit = {this.isApproved}
                     />
                 </div>
             )
@@ -154,7 +146,15 @@ class BaseButton extends React.Component{
                     />
                 </div>
             )
-        }
+        }else if(this.props.titles === "Permanently"){
+            return(
+                <div className="button-inline">
+                    <div className="button-inline">
+                        <Button className="btn-permanently"> Delete Permanently </Button>
+                    </div>
+                </div>
+            )
+        } 
     }
 }
 

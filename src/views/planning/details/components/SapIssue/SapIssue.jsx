@@ -17,12 +17,35 @@ const validationSchema = Yup.object().shape({
 
 export default class SapIssue extends React.Component{
 
-  componentDidMount(){
-    console.log("sek sek sek : ",this.props.selectedDataSAP)
-  }
-
     state={
         isShowModal: true,
+        description: [],
+        SAPIssue: []
+    }
+
+    handleChange(id, e) {
+      this.setState({
+        description: { ...this.state.description, [id]: e.target.value },
+      });
+    }
+
+    // ({ ...this.props.salesParameter.dataFilter, PageSize: value})
+    isSAPIssue = async(data) => {
+      console.log('ini huhu ',data)
+      await this.props.putSAPIssue({SAPIssue: data });
+    }
+
+    onKelik =  async(length, description) => {
+      const index = this.props.selectedDataSAP.length
+      let arr = []
+      for(let i=0; i<index; i++){
+        arr = [...arr,{So: this.props.selectedDataSAP[i].So, Message: description[i]}]
+      }
+      this.setState({
+        SAPIssue: arr
+      },
+      () => this.isSAPIssue(arr) 
+      )
     }
 
     isClicked = () => {
@@ -37,61 +60,18 @@ export default class SapIssue extends React.Component{
         return (
           <TableHead className="table-head-issue" >
           <TableRow className="table-row-issue">
-            <PlanningListHeader
-              name="SO"
-              delay={300}
-            />
-            <PlanningListHeader
-              name="Customer"
-              delay={300}
-            />
-            <PlanningListHeader
-              name="Site"
-              delay={300}
-            />
-            <PlanningListHeader
-              name="Unit Model"
-              delay={300}
-            />
-            <PlanningListHeader
-              name="Comp Desc"
-              delay={300}
-            />
-            <PlanningListHeader
-              name="Part Number"
-              delay={300}
-              onSearch={this.props.onSearchComp}
-            />
-            <PlanningListHeader
-              name="Unit Code"
-              delay={300}
-              onSearch={this.props.onSearchComp}
-            />
-            <PlanningListHeader
-              name="Serial Number"
-              delay={300}
-              onSearch={this.props.onSearchComp}
-            />
-            <PlanningListHeader
-              name="Lifetime"
-              delay={300}
-              onFilter={this.isFilterLifetime}
-            />
-            <PlanningListHeader
-              name="Plan"
-              delay={300}
-              onFilter={this.isFilterDate}
-            />
-            <PlanningListHeader
-              name="SMR"
-              delay={300}
-              onSearch={this.props.onSearchComp}
-            />
-            <PlanningListHeader
-              name="SMR Date"
-              delay={300}
-              onFilter={this.isFilterDate}
-            />
+            <TableCell>SO</TableCell>
+            <TableCell>Customer</TableCell>
+            <TableCell>Site</TableCell>
+            <TableCell>Unit Model</TableCell>
+            <TableCell>Component &nbsp; Description</TableCell>
+            <TableCell>Part &nbsp; Number</TableCell>
+            <TableCell>Unit &nbsp; Code</TableCell>
+            <TableCell>Serial &nbsp; Number</TableCell>
+            <TableCell>Lifetime</TableCell>
+            <TableCell>Plan</TableCell>
+            <TableCell>SMR</TableCell>
+            <TableCell>SMR &nbsp;Date</TableCell>
           </TableRow>
         </TableHead>
       )
@@ -126,24 +106,30 @@ export default class SapIssue extends React.Component{
             <TableCell align="left" className="table-cell-issue"> 330 </TableCell>
             <TableCell align="left" className="table-cell-issue"> 2019-12-12 </TableCell> */}
           </TableRow>
-          <TableRow >
+          <TableRow style={{height: 10}}>
             <TableCell><label>Description &nbsp; :</label></TableCell>
-            <TableCell colSpan="11">{this._showDescription()}</TableCell>
+            <TableCell colSpan="11">{this._showDescription(id)}</TableCell>
           </TableRow>
-          {/* <div className="teks">
-              <input type="text" name="name" />
-          </div> */}
           </>
          
         )
     }
 
-    _showDescription(){
-        return(
-            <div className="teks">
-                 <TextField className=" teks"id="outlined-basic" placeholder="Tuliskan Masalahnya yaa.." variant="outlined" size="small"/>
-            </div>
-        )
+    _showDescription(id){
+      return(
+        <div className="teks">
+              <TextField 
+                  className="teks"
+                  type='text' 
+                  placeholder="Tuliskan Masalahnya yaa.."
+                  variant="outlined" 
+                  size="small"
+                  value={this.state.description[id]} 
+                  name={this.state.description[id]} 
+                  onChange={this.handleChange.bind(this, id)} 
+              />
+        </div>
+      )
     }
 
     _renderIssue(){
@@ -172,7 +158,8 @@ export default class SapIssue extends React.Component{
                         </div>
                     <div className="bottom-row-issue">
                         <Button className="btn-cancel-issue" onClick={this.props.onClosed}>Cancel</Button>
-                        <Button className="btn-input-issue" onClick={ () => {this.props.onStats(this.props.id, this.state.limitText); this.props.onClosed()} } >Input</Button>
+                        {/* <Button className="btn-input-issue" onClick={ () => {this.props.onStats(this.props.id, this.state.limitText); this.props.onClosed()} } >Input</Button> */}
+                        <Button className="btn-input-issue" onClick={ ()=> this.onKelik(this.props.selectedDataSAP.length, this.state.description) } >Input</Button>
                     </div>
                 </div>
                
@@ -181,17 +168,14 @@ export default class SapIssue extends React.Component{
     }
 
     render(){
-      
         return(
             <div>
-                {/* <Button onClick={this.isClicked} >Klik ME!</Button> */}
-                    <Modal className="modal-pos-issue" open={this.state.isShowModal} onClose={this.isClosed} >
-                        <div className="body-container">
-                            {this._renderIssue()}
-                        </div>
-                    </Modal>
+              <Modal className="modal-pos-issue" open={this.props.isShowModal} onClose={this.isClosed} >
+                  <div className="body-container">
+                      {this._renderIssue()}
+                  </div>
+              </Modal>
             </div>
         )
     }
-
 }

@@ -50,12 +50,39 @@
 }
 
 .tab-container{
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
-    // margin-left: 50vw;
     position: absolute;
+    width: 100%;
     z-index: 999;
-    align-self: flex-end;
+    flex: 1;
+    padding-bottom: vw(20);
+    border-bottom: 1.5px solid #E0E0E0;
+    .btn-approval{
+        display: flex;
+        width: vw(153.22);
+        height: vw(38.07);
+        font-size: vw(18);
+        font-weight: bold;
+        line-height: vw(16) !important;
+        font-family: 'Lato-Regular';
+        text-transform: capitalize;
+        margin-top: vw(10);
+        background-color: transparent;
+        color: #707070;
+        background-image: url('../../../../../assets/icons/back.png');
+        background-size: auto;
+        background-position-x: 8%;
+        background-position-y: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+    .btn-header{
+        flex: 1;
+        align-self: flex-end;
+        display: flex;
+        justify-content: flex-end;
+    }
 }
 
 .table-container{
@@ -63,6 +90,56 @@
     flex-direction: column;
     position: relative;
     z-index: 3;
+    .data-input-container{
+        display: flex;
+        flex-direction: row;
+        .total-input-container{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            margin-top: vw(111.93);
+            .label-header-input{
+                display: flex;
+                // position: absolute;
+                width: 306px;
+                height: 89px;
+                background-color: white;
+                border-radius: vw(8) !important;
+                box-shadow: 0px vw-tab(3) vw-tab(6) rgba(0, 0, 0, 0.161);
+                .header-input{
+                    // position: absolute;
+                    width: 93px;
+                    flex-wrap: nowrap;
+                    .input1{
+                        width: 93px;
+                        display: inline-flex;
+                        margin-left: 17.94%;
+                        // margin-right: 75.26%;
+                        margin-top: 16.72%;
+                        font-size: vw(25); //20px;
+                        font-family: 'Lato-Bold';
+                        line-height: vw(34); //24px; 
+                    }
+                    .input2{
+                        width: 93px;
+                        margin-left: 17.86%;
+                        font-family: 'Lato-Regular';
+                        font-size: vw(20); //15px;
+                        line-height: vw(28);//18px;
+                    }
+                }
+                .total-data-input{                    
+                    width: 153px;
+                    margin-left: 45.72%;//32.72%;
+                    margin-top: 12.8%;//19.8%;
+                    font-family: 'Lato-Bold';
+                    font-size: vw(36);
+                    line-height: vw(43);
+                    color: #3C3B3B;
+                }
+            }
+        }
+    }
     .filters-container{
         display: flex;
         flex-direction: row;

@@ -7,6 +7,15 @@ import { Button, Badge } from '@material-ui/core';
 import { IconApprove, IconHistory, IconInputLT } from '../../assets/icons';
 import { withStyles } from '@material-ui/core/styles';
 import { Menu } from '../../constants';
+import MenuList from '@material-ui/core/MenuList';
+import MenuItem from '@material-ui/core/MenuItem';
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Typography from '@material-ui/core/Typography';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import SendIcon from '@material-ui/icons/Send';
+import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
 
 const DotBadges = withStyles(theme => ({
 	badge: {
@@ -48,15 +57,30 @@ class FilterbyDataAction extends React.Component {
   }
 
   handleClick = (menu, tab) => {
-    this.props.history.push({
+    this.props.push({
       pathname: menu,
       whichTab: tab
     });
   }
 
+  renderList(){
+    return(
+      <Paper className="list-items-fbdt">
+      <MenuList>
+        <MenuItem>
+          <Typography className="list-item-fbdt" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales')}>Sales Order</Typography>
+        </MenuItem>
+        <MenuItem>
+          <Typography className="list-item-fbdt" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
+        </MenuItem>
+      </MenuList>
+    </Paper>
+    )
+  }
+
   renderDropdownList() {
     return (
-      <div className="list-items">
+      <div className="list-items-fbdt">
           <Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales') }>
             Sales Order
           </Button>
@@ -107,7 +131,8 @@ class FilterbyDataAction extends React.Component {
           </div>
         </div>
           {
-            this.state.displayMenu && this.renderDropdownList()  
+            // this.state.displayMenu && this.renderDropdownList()  
+            this.state.displayMenu && this.renderList()  
           }
         </div>
       );
@@ -135,14 +160,11 @@ class FilterbyDataAction extends React.Component {
         <div className="dropdown">
           <div className="dropdown-button">
             <div className="dropdown-selected-item">
-              <div className="input-lt">
-                <img src={IconInputLT} className="icon-lt" alt="" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS) }/><span className="label-lt" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS) }>Input Lifetime</span>
+              <div className="input-lt" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS) }>
+                <img src={IconInputLT} className="icon-lt" alt="" /><span className="label-lt">Input Lifetime</span>
               </div>
+            </div>
           </div>
-        </div>
-          {
-            // this.state.displayMenu && this.renderDropdownApproval()  
-          }
         </div>
       );
     }

@@ -112,8 +112,10 @@ import CardSap from './card_sap.png';
 import IconEdit from './ic_edit.png'; 
 import CancelApprove from './cancel_approve.png';
 import IconInputLT from './ic_input.png';
+import IconBack from './back.png';
 
 export {
+	IconBack,
 	IconInputLT,
 	CancelApprove,
 	IconEdit,

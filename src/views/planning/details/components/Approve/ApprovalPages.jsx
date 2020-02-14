@@ -40,6 +40,9 @@ componentWillUnmount = () => {
   this.props.updateSalesParameter({
     ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
   });
+  this.props.updateServiceParameter({
+    ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
+  });
 }
 
 componentDidUpdate = (prevProps) => {
@@ -62,15 +65,31 @@ componentDidUpdate = (prevProps) => {
   if(prevProps.filterParameter !== this.props.filterParameter){
     console.log('dumtt,',this.props.filterParameter)
       if(this.props.indexFilterParameter.indexTabParameter === 0){
-        this.props.fetchSalesOrder(this.props.filterParameter);
+        // this.props.fetchSalesOrder(this.props.filterParameter);
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
+        })
       }else{
-        this.props.fetchServiceOrder(this.props.filterParameter);
+        // this.props.fetchServiceOrder(this.props.filterParameter);
+        this.props.updateServiceParameter({
+          ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
+        })
       }
   }
 
+  //FILTER RANGE LIFETIME
   if(prevProps.filterLifetime !== this.props.filterLifetime){
-    this.props.fetchSalesOrder(this.props.filterLifetime);
+    console.log('dumtt,',this.props.filterLifetime)
+    this.props.updateSalesParameter({
+      ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterLifetime.Filter, PageNumber: 1
+    })
+    // this.props.fetchSalesOrder(this.props.filterLifetime);
   }
+
+    //FILTER RANGE DATE
+    if(prevProps.filterDate !== this.props.filterDate){
+      this.props.fetchSalesOrder(this.props.filterDate);
+    }
 
   //ini untuk trigger sales global search
   if (prevProps.salesSearch !== this.props.salesSearch) {
@@ -375,9 +394,19 @@ componentDidUpdate = (prevProps) => {
     return(
       <DropDownList 
       {...this.props}
-      // onPageSize={()=>this.handlePageSize()}
+      handleClickShowPerPage={this.handleClickShowPerPage}
       />
     )
+  }
+
+  handleClickShowPerPage = (value) =>{
+    if (this.state.isPaging === true) {
+          this.props.clearSelectedSalesPlans();
+					this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value})
+    }else{
+      this.props.clearSelectedServicePlans();
+					this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value})
+    }
   }
 
   //KOMPONEN UNTUK GLOBAL SEARCH
@@ -386,14 +415,25 @@ componentDidUpdate = (prevProps) => {
       <div className="bottom-row-approval">
         <SearchInput
         {...this.props}
-        whichTabs={this.state.whichTabs}
         webInfo="Search"
-        onSalesSearch={this.props.onSearchSales}
-        onServiceSearch={this.props.onSearchService}
+        handleSearch={this.handleSearch}
       />
       </div>
     );
   }
+
+  handleSearch=(value)=>{
+		this.setState({ searchVal : value})
+		if (this.state.isPaging === true) {
+			setTimeout(() => {
+				this.props.onSearchSales(this.state.searchVal)
+			}, 1000);
+		}if (this.state.isPaging === false) {
+			setTimeout(() => {
+				this.props.onSearchService(this.state.searchVal)
+			}, 1000);
+		}
+	}
 
   _renderNotif(){
     return (
@@ -510,6 +550,17 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
+  handleSendtoEdit = async() => {
+    let arr = []
+    const index = this.props.selectedSalesPlans.length
+    if (this.props.selectedSalesPlans.length > 0) {
+      for (let i = 0; i < index; i++) {
+        arr = [...arr, this.props.selectedSalesPlans[i].So]
+      }
+      await this.props.unapproveSales({So : arr, IsRevised: true})
+    }
+  }
+
   handleDeleteSales = async() => {
     let arr = []
     const index = this.props.selectedSalesPlans.length
@@ -551,7 +602,7 @@ componentDidUpdate = (prevProps) => {
       return(
         <>
           <FilterbyDataAction 
-            {... this.props}
+            {...this.props}
             titles="Status"
           />
           <FilterbyDataAction 
@@ -565,16 +616,9 @@ componentDidUpdate = (prevProps) => {
       return(
         <>
           <FilterbyDataAction 
-            {... this.props}
+            {...this.props}
             titles="Status"
           />
-          {/* <FilterbyDataAction 
-            {... this.props}
-            titles="Approve"
-            onClickPlanningApprove={this.onClickApprovedService}
-            onClickPlanningDelete={this.onClickDeletedService}
-            onClickButton={this.handleClickFilterByDataAction}
-          /> */}
           <FilterbyDataAction 
             {...this.props}
             titles="Tracking History"
@@ -598,18 +642,19 @@ componentDidUpdate = (prevProps) => {
           <BaseButton titles="Approve"
             {...this.props}
             whatTabsIsRendered={this.state.isPaging}
-            // disabledButton = {this.props.selectedSalesPlans.length < 1 }
+            disabledButton = {this.props.selectedSalesPlans.length < 1 }
             totalSelectedItems ={this.props.selectedSalesPlans.length}
             handleSalesApprove={this.handleSalesApprove}
             selectedData={this.state.selectedData}
           />
-          <BaseButton titles="Cancel Approve" selectedDataSAP={this.props.selectedSalesPlans}
-            // {...this.props}
-            // whatTabsIsRendered={this.state.isPaging}
-            // disabledButton = {this.props.selectedSalesPlans.length < 1 }
-            // totalSelectedItems ={this.props.selectedSalesPlans.length}
-            // handleSalesApprove={this.handleSalesApprove}
-            // selectedData={this.state.selectedData}
+          <BaseButton titles="Cancel Approve"
+            {...this.props}
+            selectedDataSAP={this.props.selectedSalesPlans}
+            whatTabsIsRendered={this.state.isPaging}
+            disabledButton = {this.props.selectedSalesPlans.length < 1 }
+            totalSelectedItems ={this.props.selectedSalesPlans.length}
+            handleSendtoEdit={this.handleSendtoEdit}
+            selectedData={this.state.selectedData}
           />
           <BaseButton titles="Edit" />
           <BaseButton titles="Delete" 
@@ -684,7 +729,6 @@ componentDidUpdate = (prevProps) => {
           renderNotif={this._renderNotif()}
           onClickSalesOrder={this.onClickSalesOrder}        
           onClickServiceOrder={this.onClickServiceOrder}
-          // onSearchValue={this.onSearchValue}
           onChoosedService={this.updateAssignmentServiceStates}
           onChoosedSales={this.updateAssignmentSalesStates}
           selectedSalesPlanList={this.props.selectedSalesPlans}
@@ -708,9 +752,8 @@ componentDidUpdate = (prevProps) => {
     );
   };
 
-  render(){   
-
-    console.log('sel sel sel : ',this.props.selectedSalesPlans)
+  render(){     
+    console.log('history', this.props.token)
     return(
       <main className="content">
           <div className="table-container-approval">

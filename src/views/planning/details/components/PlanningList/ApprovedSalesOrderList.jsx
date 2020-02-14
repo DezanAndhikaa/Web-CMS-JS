@@ -32,6 +32,10 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
       prevState.searchComp !==this.props.searchComp) {
       this.setState({checkedValue : false})
     }
+    if (this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.LOADING) {
+      // console.log('ke trigger')
+      this.setState({checkedValue : false})
+    }
   }
   componentDidMount = () =>{
     this.props.onClickSalesOrderApproved();
