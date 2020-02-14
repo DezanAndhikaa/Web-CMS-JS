@@ -16,6 +16,9 @@ import {
 	salesParameterAction,
 	salesParameterApprovedAction,
 	serviceParameterAction,
+	sortByAction,
+	deletePermanentSalesAction,
+	deletePermanentServiceAction,
 	ClearSelectedPlans,
 	SearchSalesAction,
 	SearchServiceAction,
@@ -27,7 +30,6 @@ import {
 	UpdateSalesApprovedParameterAction,
 	UpdateSalesDeletedParameterAction,
 	UpdateServiceParameterAction,
-	sortByAction
 } from '../../DetailPages-action';
 import TrackingHistory from './TrackingHistory';
 
@@ -89,6 +91,8 @@ const mapDispatchToProps = (dispatch) => ({
 	updateServiceParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
 	updateServiceApprovedParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
 	updateServiceDeletedParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
+	deletePermanentSales: (payload, token) => dispatch(deletePermanentSalesAction(payload, token)),
+	deletePermanentService: (payload, token) => dispatch(deletePermanentServiceAction(payload, token)),
 	
 });
 

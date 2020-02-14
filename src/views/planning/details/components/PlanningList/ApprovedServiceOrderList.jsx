@@ -61,7 +61,7 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
   // isChangeStat = (value,key) =>{
   //   this.setState({
   //     stats: 1,
-  //     lifetime: this.state.lifetime.map(el => (el.So === key ? {...el, LifeTimeComp : value} : el))
+  //     lifetime: this.state.lifetime.map(el => (el.SoNumber === key ? {...el, LifeTimeComp : value} : el))
   //   });
   // }
 
@@ -174,13 +174,13 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
           {this.props.displayServiceCheckbox && 
           <Checkbox 
           disabled={this.isCheckboxAvailable(row)} 
-          checked={this.props.selectedServicePlanList.some((plans) => plans.Wo === row.Wo)} 
+          checked={this.props.selectedServicePlanList.some((plans) => plans.WoNumber === row.WoNumber)} 
           onClick={() => this.props.onChoosedService(row)} 
           classes={{ checked: 'checkbox-checked' }} />}
         </TableCell>
-        <TableCell align="left" className="table-cell"> {row.Wo} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.Customer} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.Site} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
         <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>
         <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
@@ -189,7 +189,7 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
         <TableCell align="center" className="table-cell"> {row.LifeTimeComponent} </TableCell>
         <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
         {/* Ini tampilan HO, site gaada action */}
-        {/* <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.serviceOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.So} /></TableCell> */}
+        {/* <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.serviceOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} /></TableCell> */}
       </TableRow>
     )
   }

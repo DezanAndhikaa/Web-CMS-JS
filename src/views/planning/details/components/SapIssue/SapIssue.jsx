@@ -80,8 +80,8 @@ export default class SapIssue extends React.Component{
     _showTableBody(row, id) {
         return (
           <>
-          <TableRow className="table-row-top-issue">
-            <TableCell align="left" className="table-cell-issue"> {row.So} </TableCell>
+          <TableRow className="table-row-issue">
+            <TableCell align="left" className="table-cell-issue"> {row.SoNumber} </TableCell>
             <TableCell align="left" className="table-cell-issue"> {row.Customer} </TableCell>
             <TableCell align="left" className="table-cell-issue"> {row.Site} </TableCell>
             <TableCell align="left" className="table-cell-issue"> {row.UnitModel} </TableCell>

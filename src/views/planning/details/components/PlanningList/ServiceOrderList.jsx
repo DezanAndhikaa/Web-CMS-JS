@@ -146,13 +146,13 @@ export default class ServiceOrderList extends React.PureComponent {
           {this.props.displayServiceCheckbox && 
           <Checkbox 
             disabled={this.isCheckboxAvailable(row)} 
-            checked={this.props.selectedServicePlanList.some((plans) => plans.Wo === row.Wo)} 
+            checked={this.props.selectedServicePlanList.some((plans) => plans.WoNumber === row.WoNumber)} 
             onClick={() => this.props.onChoosedService(row)} 
             classes={{ checked: 'checkbox-checked' }} />}
         </TableCell>
-        <TableCell align="left" className="table-cell"> {row.Wo} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.Customer} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.Site} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
         <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>
         <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>

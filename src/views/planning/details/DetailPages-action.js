@@ -18,7 +18,9 @@ export const FetchApprovedServiceAction = 'FETCH_APPROVED_SERVICE';
 export const FetchDeletedSalesAction = 'FETCH_DELETED_SALES';
 export const FetchDeletedServiceAction = 'FETCH_DELETED_SERVICE';
 export const DeleteSalesAction = 'DELETE_SALES';
+export const DeletePermanentSalesAction = 'DELETE_PERMANENT_SALES';
 export const DeleteServiceAction = 'DELETE_SERVICE';
+export const DeletePermanentServiceAction = 'DELETE_PERMANENT_SERVICE';
 // export const FetchSearchValueAction = 'FETCH_SEARCH_VALUE';
 export const GetMechanicsAction = 'GET_MECHANICS';
 export const GetServiceOrderAction = 'GET_SERVICE_ORDER';
@@ -197,6 +199,23 @@ export function deleteSalesAction(payload){
 	return async (dispatch) => dispatch(callApi(ApproveSalesAction, requestConfig));
 }
 
+export function deletePermanentSalesAction(payload, accessToken){
+	const requestConfig = {
+		method: RequestMethod.DELETE,
+		url: `${ApiUrlBase.SALESORDER_API_URL}/DeletePermanent`,
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+			'Accept': 'application/json; charset=utf-8',
+			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'Content-Type': 'application/json; charset=utf-8',
+		},
+		data: payload,
+	};
+	return async (dispatch) => dispatch(callApi(DeletePermanentSalesAction, requestConfig));
+}
+
+
+
 export function deleteServiceAction(payload){
 	const requestConfig = {
 		method: RequestMethod.DELETE,
@@ -208,6 +227,21 @@ export function deleteServiceAction(payload){
 		data: payload,
 	};
 	return async (dispatch) => dispatch(callApi(DeleteServiceAction, requestConfig));
+}
+
+export function deletePermanentServiceAction(payload, accessToken){
+	const requestConfig = {
+		method: RequestMethod.DELETE,
+		url: `${ApiUrlBase.SALESORDER_API_URL}/DeletePermanent`,
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+			'Accept': 'application/json; charset=utf-8',
+			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'Content-Type': 'application/json; charset=utf-8',
+		},
+		data: payload,
+	};
+	return async (dispatch) => dispatch(callApi(DeletePermanentServiceAction, requestConfig));
 }
 
 export function fetchSalesAction(payload, accessToken) {

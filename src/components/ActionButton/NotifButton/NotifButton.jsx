@@ -58,7 +58,7 @@ class NotifButton extends React.PureComponent {
   }
 
   handleClick = (menu, subMenu) => {
-      this.props.history.push(menu);
+      this.props.push(menu);
     }
 
   renderDropdown() {

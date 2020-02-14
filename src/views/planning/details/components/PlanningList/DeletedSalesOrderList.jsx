@@ -56,7 +56,7 @@ export default class DeletedSalesOrderList extends React.PureComponent {
   // isChangeStat = (value,key) =>{
   //   this.setState({
   //     stats: 1,
-  //     lifetime: this.state.lifetime.map(el => (el.So === key ? {...el, LifeTimeComp : value} : el))
+  //     lifetime: this.state.lifetime.map(el => (el.SoNumber === key ? {...el, LifeTimeComp : value} : el))
   //   });
   // }
 
@@ -179,13 +179,13 @@ export default class DeletedSalesOrderList extends React.PureComponent {
           {this.props.displaySalesCheckbox && 
           <Checkbox 
           disabled={this.isCheckboxAvailable(row)} 
-          checked={this.props.selectedSalesPlanList.some((plans) => plans.So === row.So)} 
+          checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
           onClick={() => this.props.onChoosedSales(row)} 
           classes={{ checked: 'checkbox-checked' }} />}
         </TableCell>
-        <TableCell align="left" className="table-cell"> {row.So} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.Customer} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.Site} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
         <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>
         <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
@@ -196,7 +196,7 @@ export default class DeletedSalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> Unknown </TableCell>
         <TableCell align="left" className="table-cell"> Unknowns </TableCell>
         {/* Ini tampilan HO, site gaada action */}
-        {/* <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.So} /></TableCell> */}
+        {/* <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} /></TableCell> */}
       </TableRow>
     )
   }
