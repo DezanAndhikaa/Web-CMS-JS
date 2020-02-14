@@ -20,7 +20,7 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
       checkedValue: false,
       stats: false,
       putLifetime: {
-        So : '',
+        SoNumber : '',
         LifeTimeComponent : '',
       }
     }

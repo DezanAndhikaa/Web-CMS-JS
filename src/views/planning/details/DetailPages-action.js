@@ -113,7 +113,7 @@ export function approveSalesDownloadAction(soId){
 		responseType: 'blob',
 		method: RequestMethod.POST,
 		url: `${ApiUrlBase.SALESORDER_API_URL}/DownloadSalesOrder`,
-		data: { So: soId },
+		data: { SoNumber: soId },
 		headers: {
 		//   Authorization: `Bearer ${accessToken}`,
 		//   'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID, // eslint-disable-line no-undef
@@ -127,7 +127,7 @@ export function approveServiceDownloadAction(woId){
 		responseType: 'blob',
 		method: RequestMethod.POST,
 		url: `${ApiUrlBase.SERVICEORDER_API_URL}/DownloadServiceOrder`,
-		data: { Wo: woId },
+		data: { WoNumber: woId },
 		headers: {
 		//   Authorization: `Bearer ${accessToken}`,
 		//   'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID, // eslint-disable-line no-undef

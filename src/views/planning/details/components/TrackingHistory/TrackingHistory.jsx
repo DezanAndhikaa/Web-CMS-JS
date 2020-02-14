@@ -132,7 +132,7 @@ export default class TrackingHistory extends React.PureComponent {
 					arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
 		  		}
 			}
-			await this.props.deletePermanentSales(arr);
+			await this.props.deletePermanentSales({SoNumber : arr});
 		}
 		if (this.props.location.whichTab === "service") {
 			console.log('pantej terklik service')
@@ -143,7 +143,7 @@ export default class TrackingHistory extends React.PureComponent {
 					arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
 		  		}
 			}
-			await this.props.deletePermanentService(arr);
+			await this.props.deletePermanentService({WoNumber : arr});
 		}
 	}
 

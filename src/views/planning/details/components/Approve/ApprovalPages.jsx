@@ -535,7 +535,7 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
-      await this.props.approveSales({So : arr, IsApprove: true})
+      await this.props.approveSales({SoNumber : arr, IsApprove: true})
   }
 };
 
@@ -546,7 +546,7 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
       }
-    await this.props.approveService({Wo : arr, IsApprove: true})
+    await this.props.approveService({WoNumber: arr, IsApprove: true})
     }
   }
 
@@ -558,7 +558,7 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
-      await this.props.deleteSales({So : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
+      await this.props.deleteSales({SoNumber : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
     }
   }
 
@@ -570,7 +570,7 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
       }
-      await this.props.deleteService({Wo : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
+      await this.props.deleteService({WoNumber : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
     }
   }
 

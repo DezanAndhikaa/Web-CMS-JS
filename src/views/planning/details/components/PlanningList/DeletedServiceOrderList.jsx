@@ -19,7 +19,7 @@ export default class DeletedServiceOrderList extends React.PureComponent {
       checkedValue: false,
       stats: false,
       putLifetime: {
-        So : '',
+        SoNumber : '',
         LifeTimeComponent : '',
       }
     }
