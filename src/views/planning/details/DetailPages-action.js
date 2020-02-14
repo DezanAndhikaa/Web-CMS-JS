@@ -9,6 +9,7 @@ export const UnapproveSalesAction = 'UNAPPROVE_SALES';
 export const ClearSelectedPlans = 'CLEAR_SELECTED_PLANS';
 export const FetchSalesAction = 'FETCH_SALES_ORDER';
 export const PutLifetimeComp = 'PUT_LIFETIME_COMP';
+export const PutSAPIssue = 'PUT_SAP_ISSUE';
 export const PutSalesApproved = 'PUT_SALES_APPROVED';
 export const PutServiceApproved = 'PUT_SERVICE_APPROVED';
 export const FetchServiceAction = 'FETCH_SERVICE_ORDER';
@@ -162,6 +163,25 @@ export function putLifetimeCompAction(payload, accessToken){
 		data: payload,
 	};
 	return async (dispatch) => dispatch(callApi(PutLifetimeComp, requestConfig));
+}
+
+export function putSAPIssueAction(payload){
+	const requestConfig = {
+		method: RequestMethod.PUT,
+		url: `${ApiUrlBase.SALESORDER_API_URL}/SapIssue`,
+		// headers: {
+		// 	Authorization: `Bearer ${accessToken}`,
+		// 	'Accept': 'application/json; charset=utf-8',
+		// 	'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+		// 	'Content-Type': 'application/json; charset=utf-8',
+		// },
+		headers: {
+			'Accept': 'application/json; charset=utf-8',
+			'Content-Type': 'application/json; charset=utf-8',
+		},
+		data: payload
+	};
+	return async (dispatch) => dispatch(callApi(PutSAPIssue, requestConfig));
 }
 
 export function deleteSalesAction(payload){

@@ -19,6 +19,10 @@ class BaseButton extends React.Component{
         }
     }
 
+    componentDidMount(){
+        // console.log('sel sel sel masok 2',  this.props.selectedDataSAP)
+    }
+
      isClicked = () => {
        this.setState({isShowModal: !this.state.isShowModal})
     }

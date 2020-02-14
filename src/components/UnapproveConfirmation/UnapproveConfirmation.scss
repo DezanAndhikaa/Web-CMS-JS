@@ -163,6 +163,15 @@
             cursor: pointer;
         }
     }
+    .labelMax{
+        margin-top: 1%;
+        margin-left:50%;
+        font-size: vw(13) !important;
+        font-weight: bold;
+        line-height: vw(16) !important;
+        font-family: 'Lato-Regular';
+        color: red;
+    }
 }
 
 @media (min-width: 600px) and (max-width: 1025px) {    

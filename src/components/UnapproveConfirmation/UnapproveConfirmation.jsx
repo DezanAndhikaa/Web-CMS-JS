@@ -34,9 +34,9 @@ export default class UnapproveConfirmation extends React.PureComponent {
     })
   }
 
-  _renderSap(){
+  _renderSap(open){
     return(
-      <SapIssue/>
+      <SapIssue {...this.props} isShowModal={open}/>
     )
   }
 
@@ -80,6 +80,9 @@ export default class UnapproveConfirmation extends React.PureComponent {
                     <Button className="button-edit-lt" onClick={() => this.isClickedSend()}>Edit Lifetime</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Button className="button-sap-issue" onClick={() => this.isClickedSap()}>SAP Issue</Button>
                   </div>
+                  <div className="labelMax">
+                    <label>* Max 5 Items</label>
+                  </div>
                 </div>
               </div>
             </DialogContent>
@@ -87,7 +90,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
           )     
           }
           {this.state.isShowModal2 && (
-            this._renderSap()
+            this._renderSap(this.state.isShowModal2)
           )} 
           {this.state.isShowModal3 && (this._renderSendtoEdit())}   
         </>

@@ -33,7 +33,7 @@ class ApprovalPages extends React.Component{
 }
 
 componentDidMount = () => {
-  console.log("ini adalah token : ", this.props.token)
+  console.log('tok tok tok : ',this.props.salesOrderList)
 }
 
 componentWillUnmount = () => {
@@ -649,6 +649,7 @@ componentDidUpdate = (prevProps) => {
           />
           <BaseButton titles="Cancel Approve"
             {...this.props}
+            selectedDataSAP={this.props.selectedSalesPlans}
             whatTabsIsRendered={this.state.isPaging}
             disabledButton = {this.props.selectedSalesPlans.length < 1 }
             totalSelectedItems ={this.props.selectedSalesPlans.length}
@@ -678,7 +679,7 @@ componentDidUpdate = (prevProps) => {
             selectedServiceData={this.state.selectedServiceData}
             handleServiceApprove={this.handleServiceApprove}
           />
-          <BaseButton titles="Cancel Approve" />
+          <BaseButton titles="Cancel Approve"/>
           <BaseButton titles="Edit" />
           <BaseButton titles="Delete" 
             {...this.props}

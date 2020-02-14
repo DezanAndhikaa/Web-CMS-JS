@@ -3,6 +3,7 @@ import { PlansReducers } from './DetailPages-reducer';
 import {
 	approveServiceDownloadAction, approveSalesDownloadAction,
 	putLifetimeCompAction,
+	// putSAPIssueAction,
 	approveSalesAction, //APPROVE SALES
 	unapproveSalesAction, 
 	approveServiceAction, //APPROVE SERVICE
@@ -60,7 +61,7 @@ const mapStateToProps = (state) => ({
 	approveServiceDownloaded : state.plansPageState.approveServiceDownloaded,
 	fetchStatusSales: state.plansPageState.salesOrderList.status,
 	fetchStatusPutLifetime: state.plansPageState.putLifetimeList.status,
-	fetchStatusService: state.plansPageState.serviceOrderList.status
+	fetchStatusService: state.plansPageState.serviceOrderList.status,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -69,6 +70,7 @@ const mapDispatchToProps = (dispatch) => ({
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
 	clearSelectedServicePlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
 	putLifetimeComp : (payload, token) => dispatch(putLifetimeCompAction(payload, token)),
+	// putSAPIssue : (payload, so) => dispatch(putSAPIssueAction(payload, so)),
 	approveSales: (payload) => dispatch(approveSalesAction(payload)),
 	unapproveSales: (payload) => dispatch(unapproveSalesAction(payload)),
 	approveService: (payload) => dispatch(approveServiceAction(payload)),
