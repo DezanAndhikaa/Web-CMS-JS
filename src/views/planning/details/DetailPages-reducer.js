@@ -32,7 +32,7 @@ import {
 	SelectSiteFilterAction,SelectUnitModelFilterAction,
 	// SelectUnitModelFilterAction,
 	SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, UpdateServiceParameterAction,
-	FetchSalesAction, PutLifetimeComp,
+	FetchSalesAction, PutLifetimeComp,PutSAPIssue,
 	SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc,
 	// UnassignPlansAction, 
 	UnselectSalesPlanAction, UnselectServicePlanAction,
@@ -339,6 +339,24 @@ export function fetchSalesReducer(state = initialSalesState, action) {
 
 export function fetchPutLifetimeReducer(state = initialSalesState, action) {
 	if (action.type === PutLifetimeComp) {
+	  switch (action.status) {
+		case ApiRequestActionsStatus.SUCCEEDED:
+		  return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		case ApiRequestActionsStatus.FAILED:
+		  return {
+				data: initialSalesState.data,
+				status: ApiRequestActionsStatus.FAILED,
+				error: action.error,
+		  };
+		default:
+		  return { data: initialSalesState.data, status: ApiRequestActionsStatus.LOADING };
+	  }
+	}
+	return state;
+}
+
+export function PutSAPIssueReducer(state = initialSalesState, action) {
+	if (action.type === PutSAPIssue) {
 	  switch (action.status) {
 		case ApiRequestActionsStatus.SUCCEEDED:
 		  return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
@@ -866,6 +884,7 @@ const PlansReducers = combineReducers({
 	approveSalesDownloaded : downloadApprovedSalesReducer,
 	approveServiceDownloaded : downloadApprovedServiceReducer,
 	putLifetimeList: fetchPutLifetimeReducer,
+	putSAPIssue: PutSAPIssueReducer,
 	filterLifetime : filterLifetimeReducer,
 	filterDate : filterDateReducer
 });

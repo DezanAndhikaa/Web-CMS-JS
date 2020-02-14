@@ -5,6 +5,7 @@ import {
 	approveServiceDownloadAction, 
 	approveSalesDownloadAction,
 	putLifetimeCompAction,
+	putSAPIssueAction,
 	approveSalesAction, //APPROVE SALES
 	unapproveSalesAction, 
 	approveServiceAction, //APPROVE SERVICE
@@ -76,16 +77,18 @@ const mapStateToProps = (state) => ({
 	fetchStatusService: state.plansPageState.serviceOrderList.status,
 	fetchStatusSalesApproved: state.plansPageState.salesOrderListApproved.status,
 	fetchStatusServiceApproved: state.plansPageState.serviceOrderListApproved.status,
+	fetchStatusPutSAPIssue: state.plansPageState.putSAPIssue.status
 });
 
 const mapDispatchToProps = (dispatch) => ({
 	push: (path, state) => dispatch(push(path, state)),
 	downloadSalesApproved : (soId) => dispatch(approveSalesDownloadAction(soId)),
 	downloadServiceApproved : (soId) => dispatch(approveServiceDownloadAction(soId)),
-	unapproveSales: (payload, token) => dispatch(unapproveSalesAction(payload, token)),
+	unapproveSales: (payload) => dispatch(unapproveSalesAction(payload)),
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
 	clearSelectedServicePlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
 	putLifetimeComp : (payload) => dispatch(putLifetimeCompAction(payload)),
+	putSAPIssue : (payload, so) => dispatch(putSAPIssueAction(payload, so)),
 	approveSales: (payload) => dispatch(approveSalesAction(payload)),
 	approveService: (payload) => dispatch(approveServiceAction(payload)),
 	deleteSales: (payload) => dispatch(deleteSalesAction(payload)),

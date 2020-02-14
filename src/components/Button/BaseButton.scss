@@ -120,6 +120,6 @@
         cursor: pointer;
     }
     .btn-permanently:hover{
-        background-color: map-get($colors, del-permanently);
+        background-color: map-get($colors, danger);
     }
 }

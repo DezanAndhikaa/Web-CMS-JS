@@ -12,7 +12,7 @@
         padding: 0;
         .confirmation-modal{
             width: vw(519);
-            height: vh(481);
+            // height: vh(481);
             background-color: white;
             margin: auto;
             border-radius: vw(15);
@@ -110,12 +110,12 @@
             background-color: #FC9517;
             color: white;
         }
-        .button-no{
+        .button-yes{
             display: flex;
             align-items: center;
             justify-content: center;
             text-transform: capitalize;
-            width: 50%; //vw(100.22);
+            width: 40%; //vw(100.22);
             height: vw(45.07);
             font-size: vw(13) !important;
             font-weight: bold;
@@ -126,15 +126,15 @@
             box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
             cursor: pointer;
         }
-        .button-no:hover {
+        .button-yes:hover {
             background-color: rgb(227, 227, 230);
         }
-        .button-yes{
+        .button-no{
             display: flex;
             align-items: center;
             justify-content: center;
             text-transform: capitalize;
-            width: 50%; //vw(170.22);
+            width: 60%; //vw(170.22);
             height: vw(45.07);
             font-size: vw(13) !important;
             font-weight: bold;
@@ -144,7 +144,7 @@
             box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
             cursor: pointer;
         }
-        .button-yes:hover {
+        .button-no:hover {
             background-color: map-get($colors, primary-dark);
         }
         .button-continue{
@@ -162,6 +162,15 @@
             box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
             cursor: pointer;
         }
+    }
+    .labelMax{
+        margin-top: 1%;
+        margin-left:50%;
+        font-size: vw(13) !important;
+        font-weight: bold;
+        line-height: vw(16) !important;
+        font-family: 'Lato-Regular';
+        color: red;
     }
 }
 

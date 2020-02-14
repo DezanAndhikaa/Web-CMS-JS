@@ -12,7 +12,7 @@
         padding: 0;
         .confirmation-modal{
             width: vw(519);
-            height: vh(421);
+            // height: vh(421);
             background-color: white;
             margin: auto;
             border-radius: vw(15);
@@ -60,6 +60,7 @@
         font-weight: bold;
         line-height: vw(16) !important;
         font-family: 'Lato-Regular';
+        text-transform: capitalize;
         background-color: map-get($colors , primary);
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
         cursor: pointer;

@@ -34,9 +34,9 @@ export default class UnapproveConfirmation extends React.PureComponent {
     })
   }
 
-  _renderSap(){
+  _renderSap(open){
     return(
-      <SapIssue/>
+      <SapIssue {...this.props} isShowModal={open}/>
     )
   }
 
@@ -52,7 +52,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
               <img className="confirmation-image" src={ImgSendtoEdit} alt="" />
               <p className="confirmation-caption">Are you sure want to Not Approve <b>{this.props.totalData} items?</b></p>
               <div className="btn-row">
-                <Button className="button-yes" onClick={this.props.onClose}>Yes</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <Button className="button-yes" onClick={this.props.onSendtoEdit}>Yes</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <Button className="button-no" onClick={this.props.onClose}>No</Button>
               </div>
             </div>
@@ -80,6 +80,9 @@ export default class UnapproveConfirmation extends React.PureComponent {
                     <Button className="button-edit-lt" onClick={() => this.isClickedSend()}>Edit Lifetime</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Button className="button-sap-issue" onClick={() => this.isClickedSap()}>SAP Issue</Button>
                   </div>
+                  <div className="labelMax">
+                    <label>* Max 5 Items</label>
+                  </div>
                 </div>
               </div>
             </DialogContent>
@@ -87,17 +90,16 @@ export default class UnapproveConfirmation extends React.PureComponent {
           )     
           }
           {this.state.isShowModal2 && (
-            this._renderSap()
+            this._renderSap(this.state.isShowModal2)
           )} 
           {this.state.isShowModal3 && (this._renderSendtoEdit())}   
         </>
         );
-    } else if(this.props.idConfirm === "Cancel Edit Success"){
+    } else if(this.props.idConfirm === "Successfull"){
       return (
         <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
           <DialogContent className="confirmation-modal-content">
             <div className="confirmation-modal">
-              {/* <CloseNotif onClose={this.props.onClose}/> */}
               <div className="confirmation-container">
                 <p className="title-success">Successful</p>
                 <img className="confirmation-success" src={ImgCancelEditSucc} alt="" />
