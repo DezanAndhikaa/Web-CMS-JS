@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { PlansReducers } from './DetailPages-reducer';
+import { push } from 'connected-react-router';
 import {
 	approveServiceDownloadAction, approveSalesDownloadAction,
 	putLifetimeCompAction,
@@ -65,6 +66,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+	push : (path) => dispatch(push(path)),
 	downloadSalesApproved : (soId) => dispatch(approveSalesDownloadAction(soId)),
 	downloadServiceApproved : (soId) => dispatch(approveServiceDownloadAction(soId)),
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),

@@ -325,9 +325,10 @@ console.log('kondisi value terasek', value)
     )
   }
 
-  handleClick = (menu) => {
+  handleClick = (menu, tab) => {
     this.props.push({
-      pathname: menu
+      pathname: menu,
+      whichTab: tab
     });
   }
 
@@ -338,7 +339,7 @@ console.log('kondisi value terasek', value)
     return (
         <div className="root">
           <div className="tab-container">
-            <Button className="btn-approval" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
+            <Button className="btn-approval" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL, 'sales') }>
               Approval
             </Button>
             <div className="btn-header">
