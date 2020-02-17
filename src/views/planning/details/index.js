@@ -1,4 +1,4 @@
-// import { push } from 'connected-react-router';
+import { push } from 'connected-react-router';
 import { connect } from 'react-redux';
 import { PlansReducers } from './DetailPages-reducer';
 // import { storeDataAction } from '../../../core/StorageHelper';
@@ -98,6 +98,7 @@ const mapDispatchToProps = (dispatch) => ({
 	onSearchComp: (keyword,sort) => dispatch(searchCompAction(SearchCompAction, keyword, sort)),
 	onSearchCompService: (keyword, sort) => dispatch(searchCompActionService(SearchCompActionService, keyword, sort)),
 	// pushTo: (url) => dispatch(push(url)),
+	push: (path) => dispatch(push(path)),
 	// savePlanData: (data) => dispatch(storeDataAction(PLAN_DATA, StorageKey.PLAN_DATA, data)),
 	lifetimeFilter: (type, payload, payload2, page) => dispatch(selectFilterAction(type, payload, payload2, page)),
 	dateFilter: (type, payload, payload2, page) => dispatch(dateFilterAction(type, payload, payload2, page)),
