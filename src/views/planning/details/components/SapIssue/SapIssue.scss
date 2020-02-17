@@ -1,3 +1,6 @@
+@import '../../../../../themes/variables';
+@import '../../../../../themes/functions';
+
 .body-container{
     width: 90%;
     height: 80%;
@@ -29,6 +32,15 @@
                 margin-bottom: 10px;
                 width: 8%;
                 height: 50%;
+                .back_button{
+                    display: flex;
+                    // width: 50%;
+                    background-image: url('../../../../../assets/icons/Arrow_Left.png');
+                    // background-size: 1.0%;
+                    background-position-x: 5.3%;
+                    background-position-y: center;
+                    background-repeat: no-repeat;
+                }
                 // background-color: orange;
             }
             .top-row-issue{
@@ -39,7 +51,7 @@
             }
             .top-middle-issue{
                 margin-top: 10px;
-                height: 80%;
+                height: 85%;
                 // .teks-issue{
                 //     width: 100%;
                 // }
@@ -65,40 +77,42 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    margin-left: vw(15);
+                    margin-left: 35%;
                     // width: vw(170.22) !important;
-                    width: 50%;
+                    width: 13%;
                     height: vw(33.07) !important;
                     font-size: vw(13) !important;
                     font-weight: bold;
                     line-height: vw(16) !important;
                     font-family: 'Lato-Regular';
-                    // background-color: map-get($colors , primary);
+                    background-color: map-get($colors , primary);
                     text-transform: none;
                     box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
                     border-radius: 0.4vw;
                     cursor: pointer;
                 }
                 .btn-input-issue:hover {
-                    // background-color: map-get($colors, primary-dark);
+                    background-color: map-get($colors, primary-dark);
                 }
                 .btn-cancel-issue{
-                    margin-left: 45%;
-                    background-color: #F2F2F4;
+                    display: flex;
+                    align-items: center;
+                    // justify-content: center;
                     text-transform: none;
                     font-family: 'Lato-Regular';
                     font-weight: bold;
-                    width: vw(84.22) !important;
-                    height: vw(33.07) !important;
-                    font-size: vw(12);
+                    width: 50%;
+                    margin-top: 0px;
+                    margin-bottom: 0px;
+                    // height: 50px !important;
+                    font-size: 15px;
                     border-radius: vw(5);
-                    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.161);
+                    // box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.161);
                     color: #1D1D1D;
-                    cursor: pointer;
                 }
-                .btn-cancel-issue:hover{
-                    background-color: rgb(227, 227, 230);
-                }
+                // .btn-cancel-issue:hover{
+                //     // background-color: rgb(227, 227, 230);
+                // }
             }
     
         }
@@ -145,6 +159,9 @@
                 background-color: white;
                 border-bottom: 10px !important;
             }
+        }
+        .table-row-bottom-issue{
+            margin-bottom: 100px;
         }
     }
 }

@@ -379,12 +379,12 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  //SAAT MENGKLIK SALES ORDER TAB
+  //SAAT MENGKLIK SERVICE ORDER TAB
   onClickServiceOrder = () => {
-    this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+    this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
   }
 
-  //SAAT MENGKLIK SERVICE ORDER TAB
+  //SAAT MENGKLIK SALES ORDER TAB
   onClickSalesOrder = () =>{
     this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
   }

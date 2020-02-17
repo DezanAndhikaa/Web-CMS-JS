@@ -49,11 +49,11 @@ componentDidMount = () => {
 
 componentDidUpdate = (prevProps) => {
   if (prevProps.salesParameter !== this.props.salesParameter) {
-    this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
+    this.props.fetchSalesOrder(this.props.salesParameter.dataFilter,this.props.token);
   }
-  if (prevProps.serviceParameter !== this.props.serviceParameter) {
-    this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
-  }
+  // if (prevProps.serviceParameter !== this.props.serviceParameter) {
+  //   this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+  // }
   if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
     prevProps.approveSalesDownloaded.status === ApiRequestActionsStatus.LOADING) {
     this.onClickDownloadSalesApproved()
