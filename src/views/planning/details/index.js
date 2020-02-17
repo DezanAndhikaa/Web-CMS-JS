@@ -1,13 +1,10 @@
 import { push } from 'connected-react-router';
 import { connect } from 'react-redux';
 import { PlansReducers } from './DetailPages-reducer';
-// import { storeDataAction } from '../../../core/StorageHelper';
-// import { PLAN_DATA, StorageKey } from '../../../constants';
 import {
-	// approveSalesAction,
-	// unapproveSalesAction,
 	approveServiceDownloadAction, approveSalesDownloadAction,
 	putLifetimeCompAction,
+	// putSAPIssueAction,
 	approveSalesAction, //APPROVE SALES
 	unapproveSalesAction, 
 	approveServiceAction, //APPROVE SERVICE
@@ -28,17 +25,11 @@ import {
 	SelectServicePlanAction, FetchSalesAction,
 	selectMechanicAction, sortByAction, 
 	storePlanDataAction,dateFilterAction
-	// getSearchValueAction, 
-	// getSelesOrderAction, 
 } from './DetailPages-action';
 import DetailPages from './DetailPages';
 
 const mapStateToProps = (state) => ({
-	// assignPlansResponse: state.plansPageState.assignPlansStatus.response,
-	// requestApproveSales: state.plansPageState.assignPlansStatus.status,
 	displayMode: state.displayMode,
-	// plansData: state.plansPageState.PlansAssignmentSummary.data,
-	// mechanicList: state.plansPageState.mechanicList.data,
 	salesOrderList: state.plansPageState.salesOrderList.data,
 	salesOrderListApproved: state.plansPageState.salesOrderListApproved.data,
 	salesOrderListDeleted: state.plansPageState.salesOrderListDeleted.data,
@@ -71,18 +62,18 @@ const mapStateToProps = (state) => ({
 	approveServiceDownloaded : state.plansPageState.approveServiceDownloaded,
 	fetchStatusSales: state.plansPageState.salesOrderList.status,
 	fetchStatusPutLifetime: state.plansPageState.putLifetimeList.status,
-	fetchStatusService: state.plansPageState.serviceOrderList.status
+	fetchStatusService: state.plansPageState.serviceOrderList.status,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	// approveSales: (payload) => dispatch(approveSalesAction(payload)),
 	downloadSalesApproved : (soId) => dispatch(approveSalesDownloadAction(soId)),
 	downloadServiceApproved : (soId) => dispatch(approveServiceDownloadAction(soId)),
-	unapproveSales: (payload, token) => dispatch(unapproveSalesAction(payload, token)),
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
 	clearSelectedServicePlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
 	putLifetimeComp : (payload, token) => dispatch(putLifetimeCompAction(payload, token)),
+	// putSAPIssue : (payload, so) => dispatch(putSAPIssueAction(payload, so)),
 	approveSales: (payload) => dispatch(approveSalesAction(payload)),
+	unapproveSales: (payload) => dispatch(unapproveSalesAction(payload)),
 	approveService: (payload) => dispatch(approveServiceAction(payload)),
 	deleteSales: (payload) => dispatch(deleteSalesAction(payload)),
 	deleteService: (payload) => dispatch(deleteServiceAction(payload)),

@@ -33,7 +33,7 @@ class ApprovalPages extends React.Component{
 }
 
 componentDidMount = () => {
-  console.log("ini adalah token : ", this.props.token)
+  console.log('tok tok tok : ',this.props.salesOrderList)
 }
 
 componentWillUnmount = () => {
@@ -535,7 +535,7 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
-      await this.props.approveSales({So : arr, IsApprove: true})
+      await this.props.approveSales({SoNumber : arr, IsApprove: true})
   }
 };
 
@@ -546,7 +546,18 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
       }
-    await this.props.approveService({Wo : arr, IsApprove: true})
+    await this.props.approveService({WoNumber: arr, IsApprove: true})
+    }
+  }
+
+  handleSendtoEdit = async() => {
+    let arr = []
+    const index = this.props.selectedSalesPlans.length
+    if (this.props.selectedSalesPlans.length > 0) {
+      for (let i = 0; i < index; i++) {
+        arr = [...arr, this.props.selectedSalesPlans[i].So]
+      }
+      await this.props.unapproveSales({So : arr, IsRevised: true})
     }
   }
 
@@ -558,7 +569,7 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
-      await this.props.deleteSales({So : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
+      await this.props.deleteSales({SoNumber : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
     }
   }
 
@@ -570,7 +581,7 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
       }
-      await this.props.deleteService({Wo : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
+      await this.props.deleteService({WoNumber : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
     }
   }
 
@@ -608,13 +619,6 @@ componentDidUpdate = (prevProps) => {
             {...this.props}
             titles="Status"
           />
-          {/* <FilterbyDataAction 
-            {...this.props}
-            titles="Approve"
-            onClickPlanningApprove={this.onClickApprovedService}
-            onClickPlanningDelete={this.onClickDeletedService}
-            onClickButton={this.handleClickFilterByDataAction}
-          /> */}
           <FilterbyDataAction 
             {...this.props}
             titles="Tracking History"
@@ -638,18 +642,19 @@ componentDidUpdate = (prevProps) => {
           <BaseButton titles="Approve"
             {...this.props}
             whatTabsIsRendered={this.state.isPaging}
-            // disabledButton = {this.props.selectedSalesPlans.length < 1 }
+            disabledButton = {this.props.selectedSalesPlans.length < 1 }
             totalSelectedItems ={this.props.selectedSalesPlans.length}
             handleSalesApprove={this.handleSalesApprove}
             selectedData={this.state.selectedData}
           />
           <BaseButton titles="Cancel Approve"
-            // {...this.props}
-            // whatTabsIsRendered={this.state.isPaging}
-            // disabledButton = {this.props.selectedSalesPlans.length < 1 }
-            // totalSelectedItems ={this.props.selectedSalesPlans.length}
-            // handleSalesApprove={this.handleSalesApprove}
-            // selectedData={this.state.selectedData}
+            {...this.props}
+            selectedDataSAP={this.props.selectedSalesPlans}
+            whatTabsIsRendered={this.state.isPaging}
+            disabledButton = {this.props.selectedSalesPlans.length < 1 }
+            totalSelectedItems ={this.props.selectedSalesPlans.length}
+            handleSendtoEdit={this.handleSendtoEdit}
+            selectedData={this.state.selectedData}
           />
           <BaseButton titles="Edit" />
           <BaseButton titles="Delete" 
@@ -668,17 +673,17 @@ componentDidUpdate = (prevProps) => {
           {/* <BaseButton titles="Total" totalSelectedItems ={this.props.selectedServicePlans.length}/> */}
           <BaseButton titles="Approve"
             {...this.props}
-            // disabledButton = {this.props.selectedServicePlans.length < 1 }
+            disabledButton = {this.props.selectedServicePlans.length < 1 }
             totalSelectedItems ={this.props.selectedServicePlans.length}
             whatTabsIsRendered={this.state.isPaging}
             selectedServiceData={this.state.selectedServiceData}
             handleServiceApprove={this.handleServiceApprove}
           />
-          <BaseButton titles="Cancel Approve" />
+          <BaseButton titles="Cancel Approve"/>
           <BaseButton titles="Edit" />
           <BaseButton titles="Delete" 
             {...this.props}
-            // disabledButton = {this.props.selectedServicePlans.length < 1 }
+            disabledButton = {this.props.selectedServicePlans.length < 1 }
             totalSelectedItems ={this.props.selectedServicePlans.length}
             whatTabsIsRendered={this.state.isPaging}
             handleDeleteService={this.handleDeleteService}
@@ -724,7 +729,6 @@ componentDidUpdate = (prevProps) => {
           renderNotif={this._renderNotif()}
           onClickSalesOrder={this.onClickSalesOrder}        
           onClickServiceOrder={this.onClickServiceOrder}
-          // onSearchValue={this.onSearchValue}
           onChoosedService={this.updateAssignmentServiceStates}
           onChoosedSales={this.updateAssignmentSalesStates}
           selectedSalesPlanList={this.props.selectedSalesPlans}

@@ -415,9 +415,9 @@ componentDidUpdate = (prevProps) => {
   _renderSearchBar(){
     return (
       <>
-        <div>
+        {/* <div>
           <SapIssue data={this.props.salesOrderList.Lists}/>
-        </div>
+        </div> */}
         <div className="bottom-row">
           <SearchInput
           {...this.props}
@@ -552,7 +552,7 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
-      await this.props.approveSales({So : arr, IsApprove: true})
+      await this.props.approveSales({SoNumber : arr, IsApprove: true})
   }
 };
 
@@ -563,7 +563,7 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
       }
-    await this.props.approveService({Wo : arr, IsApprove: true})
+    await this.props.approveService({WoNumber : arr, IsApprove: true})
     }
   }
 
@@ -575,7 +575,7 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
-      await this.props.deleteSales({So : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
+      await this.props.deleteSales({SoNumber : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
     }
   }
 
@@ -587,7 +587,7 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
       }
-      await this.props.deleteService({Wo : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
+      await this.props.deleteService({WoNumber : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
     }
   }
 
@@ -639,70 +639,6 @@ componentDidUpdate = (prevProps) => {
       );
     }
   };
-
-  //KOMPONEN UNTUK BUTTON DOWNLOAD, APPROVE, DAN DELETE
-  // _renderBaseButton = (value) => {
-  //   if (value === 1) {
-  //     this.setState({whichTabs : true})
-  //   }if (value === 0) {
-  //     this.setState({whichTabs : false})
-  //   }
-  //   if (this.state.whichTabs === true) {
-  //     return(
-	// 			<div className="bottom-row">
-  //         <BaseButton titles="Total" totalSelectedItems ={this.props.selectedSalesPlans.length}/>
-  //         <BaseButton titles="Delete" 
-  //           {...this.props}
-  //           disabledButton = {this.props.selectedSalesPlans.length < 1 }
-  //           totalSelectedItems ={this.props.selectedSalesPlans.length}
-  //           whatTabsIsRendered={this.state.isPaging}
-  //           handleDeleteSales={this.handleDeleteSales}
-  //         />
-  //         <BaseButton titles="Download"
-  //           {...this.props}
-  //           whatTabsIsRendered={this.state.isPaging}
-  //           handleSalesApprovedDownload={this.handleSalesApprovedDownload}
-  //           // selectedDownloadData={this.state.selectedData.SoNumber} 
-  //         />
-  //         <BaseButton titles="Approve"
-  //           {...this.props}
-  //           whatTabsIsRendered={this.state.isPaging}
-  //           disabledButton = {this.props.selectedSalesPlans.length < 1 }
-  //           totalSelectedItems ={this.props.selectedSalesPlans.length}
-  //           handleSalesApprove={this.handleSalesApprove}
-  //           selectedData={this.state.selectedData}
-  //         />
-  //       </div>
-  //     );
-  //   }
-  //   if (this.state.whichTabs === false) {
-  //     return(
-	// 			<div className="bottom-row">
-  //         <BaseButton titles="Total" totalSelectedItems ={this.props.selectedServicePlans.length}/>
-  //         <BaseButton titles="Delete" 
-  //           {...this.props}
-  //           disabledButton = {this.props.selectedServicePlans.length < 1 }
-  //           totalSelectedItems ={this.props.selectedServicePlans.length}
-  //           whatTabsIsRendered={this.state.isPaging}
-  //           handleDeleteService={this.handleDeleteService}
-  //         />
-	// 				<BaseButton titles="Download"  
-  //           {...this.props}
-  //           whatTabsIsRendered={this.state.isPaging}
-  //           handleServiceApprovedDownload={this.handleServiceApprovedDownload}
-  //         />
-  //         <BaseButton titles="Approve"
-  //           {...this.props}
-  //           disabledButton = {this.props.selectedServicePlans.length < 1 }
-  //           totalSelectedItems ={this.props.selectedServicePlans.length}
-  //           whatTabsIsRendered={this.state.isPaging}
-  //           selectedServiceData={this.state.selectedServiceData}
-  //           handleServiceApprove={this.handleServiceApprove}
-  //         />
-  //       </div>
-  //     );
-  //   }
-  // };
     
   isChangeStat = (value,key) =>{
     this.setState({
@@ -736,13 +672,11 @@ componentDidUpdate = (prevProps) => {
       <>
         <PlanningDetailsTab
           {...this.props}
-          renderFilterByDataAction={this._renderFilterByDataAction()}  
-          // renderBaseButton={this._renderBaseButton()}
+          renderFilterByDataAction={this._renderFilterByDataAction()} 
           renderSearch={this._renderSearchBar()}
           renderNotif={this._renderNotif()}
           onClickSalesOrder={this.onClickSalesOrder}        
           onClickServiceOrder={this.onClickServiceOrder}
-          // onSearchValue={this.onSearchValue}
           onChoosedService={this.updateAssignmentServiceStates}
           onChoosedSales={this.updateAssignmentSalesStates}
           selectedSalesPlanList={this.props.selectedSalesPlans}
@@ -758,16 +692,13 @@ componentDidUpdate = (prevProps) => {
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}
           onPage={this._renderPagination}
-          // baseButton={this._renderBaseButton}
           isApproved={this.state.isApproved}
-          // whichTabs={this.state.whichTabs}
         />
       </>
     );
   };
 
-  render(){ 
-    // console.log('data selected filter', this.props.selectedFilters)     
+  render(){  
     console.log('selected sales plan : ',this.props.selectedSalesPlans)
     return(
       <main className="content">

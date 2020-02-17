@@ -22,7 +22,7 @@ export default class SalesOrderList extends React.PureComponent {
       checkedValue: false,
       stats: false,
       putLifetime: {
-        So : '',
+        SoNumber : '',
         LifeTimeComponent : '',
       }
     }
@@ -52,7 +52,7 @@ export default class SalesOrderList extends React.PureComponent {
   isPutLifetime =  async(key, value) => {
       this.setState({
         putLifetime: {
-          So: key,
+          SoNumber : key,
           LifeTimeComponent: value
         },
         stats: true
