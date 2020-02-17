@@ -10,6 +10,7 @@ import InputButton from '../../../../../components/Button/InputButton';
 import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+import moment from 'moment'
 // import { NotificationManager } from 'react-notifications';
 
 export default class DeletedSalesOrderList extends React.PureComponent {
@@ -34,6 +35,12 @@ export default class DeletedSalesOrderList extends React.PureComponent {
   }
   componentDidMount = () =>{
     this.props.onClickSalesOrderDeleted();
+  }
+
+  componentWillMount = () =>{
+    this.props.updateSalesDeletedParameter({ 
+      ...this.props.salesDeletedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+    });
   }
   
 
@@ -192,7 +199,7 @@ export default class DeletedSalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="center" className="table-cell"> {row.LifeTimeComponent} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
+        <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> Unknown </TableCell>
         <TableCell align="left" className="table-cell"> Unknowns </TableCell>
         {/* Ini tampilan HO, site gaada action */}

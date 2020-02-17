@@ -9,7 +9,7 @@ export const Menu = {
 	LOGIN: '/webcms/',
 	PLANNING : '/webcms/planning',
 	PLANNING_DETAILS : '/webcms/planning/details',
-	PLANNING_DETAILS_STATUS: '/webcms/planning/approval/sales-order/status',
+	PLANNING_DETAILS_STATUS: '/webcms/planning/approval/status',
 	PLANNING_APPROVAL:'/webcms/planning/approval',
 	PLANNING_DASHBOARD : '/webcms/planning/dashboard',
 	DASHBOARD: '/webcms/dashboard',
