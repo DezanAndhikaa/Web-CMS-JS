@@ -347,14 +347,14 @@ console.log('kondisi value terasek', value)
               {this.props.renderFilterByDataAction}
             </div>
           </div>
-      {/* TampilanHO renderTotalDataInput + renderFilter*/}
-        <div className="data-input-container">
-          {this._renderTotalDataInput()}
-        </div>
-        {/* Tampilan Site hanya renderFilter */}
-        <div className="filters-container">
-          {this._renderFilter()}
-        </div>
+          {/* TampilanHO renderTotalDataInput + renderFilter*/}
+          <div className="data-input-container">
+            {this._renderTotalDataInput()}
+          </div>
+          {/* Tampilan Site hanya renderFilter */}
+          <div className="filters-container">
+            {this._renderFilter()}
+          </div>
     {value === 0 && <TabContainer dir={theme.direction} >
       {/* {!this.props.isApproved ?  */}
     <div>{this._renderSalesOrderList()}</div> 

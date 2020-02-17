@@ -442,7 +442,9 @@ componentDidUpdate = (prevProps) => {
           {...this.props}
           titles="Input Lifetime"
         />
-        <NotifButton />
+        <NotifButton 
+        {...this.props}
+        />
       </>
     )
   }

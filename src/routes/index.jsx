@@ -6,6 +6,7 @@ import { Menu } from '../constants';
 import { DetailPages } from '../views/planning/details';
 import { TrackingHistory } from '../views/planning/details/components/TrackingHistory';
 import { ApprovalPages } from '../views/planning/details/components/Approve';
+import { Notification } from '../views/planning/details/components/Notification'
 // import { JobsPage } from '../pages/jobs-execution/jobs';
 import  { LoginPage }  from '../views/Login';
 // import MasterDataUploader from '../pages/master-data-uploader';
@@ -34,6 +35,7 @@ const routes = (
 			<Route exact path={Menu.PLANNING_DETAILS} component={requireAuth(DetailPages)} />
 			<Route exact path={Menu.PLANNING_DETAILS_STATUS} component={requireAuth(TrackingHistory)} />
 			<Route exact path={Menu.PLANNING_APPROVAL} component={requireAuth(ApprovalPages)} />
+			<Route exact path={Menu.PLANNING_ALL_NOTIF} component={requireAuth(Notification)} />
 			{/* <Route exact path={Menu.LOGIN} component={LoginPage} />
 			<Route exact path={Menu.DASHBOARD} component={requireAuth(Dashboard)} />
 			<Route exact path={Menu.JOBS_SUMMARY} component={requireAuth(JobsPage)} />

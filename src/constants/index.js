@@ -12,6 +12,7 @@ export const Menu = {
 	PLANNING_DETAILS_STATUS: '/webcms/planning/approval/sales-order/status',
 	PLANNING_APPROVAL:'/webcms/planning/approval',
 	PLANNING_DASHBOARD : '/webcms/planning/dashboard',
+	PLANNING_ALL_NOTIF : '/webcms/planning/all-notification',
 	DASHBOARD: '/webcms/dashboard',
 	ALLOCATION: '/webdcajs/allocation',
 	JOBS: '/webdcajs/jobs',
