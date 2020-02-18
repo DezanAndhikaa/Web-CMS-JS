@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './NotifButton.scss';
-import {Badge, Button} from '@material-ui/core/';
+import {Badge, Paper, MenuList, MenuItem, Typography} from '@material-ui/core/';
 // import Popover, {PopoverAnimationVertical} from 'material-ui/core/Popover';
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { IconNotif, IconHistory } from '../../../assets/icons';
@@ -17,18 +17,6 @@ const Badges = withStyles(theme => ({
 	},
 }))(Badge);
 
-const DotBadges = withStyles(theme => ({
-	badge: {
-        top: -1,
-		left: 4,
-        border: '2px solid white',
-        width: 'auto',
-        minWidth: '15px',
-        height: '15px',
-        borderRadius: '50%'
-	},
-}))(Badge);
-
 class NotifButton extends React.PureComponent {
 
   constructor(props) {
@@ -38,7 +26,7 @@ class NotifButton extends React.PureComponent {
       displayMenu: false,
     };
   }
-    
+
   showDropdownMenu = (event) => {
     event.preventDefault();
     this.setState({ displayMenu: true }, () => {
@@ -52,47 +40,62 @@ class NotifButton extends React.PureComponent {
     });
     // await this.props.onClickButton();
   }
-    
+
   selectItem = (item) => {
     this.props.onSelectAction(this.props.onSelectActionType, item);
   }
 
-  renderDropdown() {
-    return (
-        <Button className="notif-history" onClick={this.showDropdownMenu}>
-            <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
-                <img src={IconHistory} className="icon-notif" alt="" /><span className="label-history">Tracking History</span>
-            </DotBadges>
-        </Button>
-    );
-  }
-    
-  renderDropdownList() {
-    return (
-      <div className="list-tracking">
-          <Button className="list-item-tracking" variant="outlined">
-            Sales Order
-          </Button>
-          <Button className="list-item-tracking" variant="outlined">
-            Service Order
-          </Button>
-      </div>
-    );
-  }
-
-  handleClick = (menu) => {
+  handleClick = (menu, tab) => {
     this.props.push({
       pathname: menu,
-      // whichTab: tab
+      whichTab: tab
     });
   }
 
-	render() {
+  renderList(){
     return(
-      <div className="notif-history" onClick={ () => this.handleClick(Menu.PLANNING_ALL_NOTIF) }>
-          <Badges badgeContent={57} color="secondary" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
-              <img src={IconNotif} className="icon-notif" alt="" /> <span className="label-notif">Notification</span>
-          </Badges>
+      <Paper className="list-notif">
+      <MenuList>
+        <MenuItem>
+          <Typography className="list-item-notif" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales')}>Sales Order</Typography>
+        </MenuItem>
+        <MenuItem>
+          <Typography className="list-item-notif" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
+        </MenuItem>
+      </MenuList>
+      <div className="see-all-notif" onClick={ () => this.handleClick(Menu.PLANNING_ALL_NOTIF) }>See All Notification</div>
+    </Paper>
+    )
+  }
+
+  render() {
+    if (this.props.displayMode === 'mobile') {
+      return (
+        <div>
+          <div className="dropdown">
+            {this.renderDropdown()}
+          </div>
+          {
+            this.state.displayMenu && this.renderDropdownList()
+          }
+        </div>
+      );
+    }
+
+    return(
+      <div className="dropdown-notif">
+        <div className="dropdown-button-notif" onClick={this.showDropdownMenu}>
+          <div className="notif-selected-item">
+            <div className="notif-history">
+                <Badges badgeContent={57} color="secondary" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
+                    <img src={IconNotif} className="icon-notif" alt="" /> <span className="label-notif">Notification</span>
+                </Badges>
+            </div>
+          </div>
+        </div>
+        {
+          this.state.displayMenu && this.renderList()  
+        }
       </div>
     ) 
 	}

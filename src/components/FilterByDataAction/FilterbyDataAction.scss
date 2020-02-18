@@ -103,7 +103,7 @@
 }
 
 .list-items-fbdt {
-    top: vw(50);
+    top: vw(60);
     background-color: white;
     position: absolute;
     box-shadow: 0px 0.3vw 0.6vw 0px rgba(0,0,0,0.2);
@@ -116,7 +116,7 @@
     .list-item-fbdt {
         // padding: vw(6) vw(19);
         color: #3C3B3B;
-        font-family: 'Lato-Bold';
+        font-family: 'Lato-Regular';
         font-size: vw(20);
         // line-height: vw(17);
     }
@@ -129,14 +129,14 @@
 .list-items-fbdt::before {
     content:"";
     position: absolute;
-    right: 45%;
-    top: -5px;
+    right: 40%;
+    top: -10px;
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 0 8px 8px 8px;
+    border-width: 0 15px 15px 15px;
     border-color: transparent transparent white transparent;
-    z-index:9998;
+    z-index:0;
 }
 
 // .list-items {

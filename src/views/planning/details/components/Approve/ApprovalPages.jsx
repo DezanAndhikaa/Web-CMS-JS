@@ -395,12 +395,12 @@ componentDidUpdate = (prevProps) => {
   _renderShowPerPage(){
     return(
       <DropDownList 
-      {...this.props}
-      handleClickShowPerPage={this.handleClickShowPerPage}
+        {...this.props}
+        handleClickShowPerPage={this.handleClickShowPerPage}
       />
     )
   }
-  
+
   handleClickShowPerPage = (value) =>{
     if (this.state.isPaging === true) {
           this.props.clearSelectedSalesPlans();
