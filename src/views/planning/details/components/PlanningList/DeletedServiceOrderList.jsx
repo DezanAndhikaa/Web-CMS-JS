@@ -189,8 +189,6 @@ export default class DeletedServiceOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="center" className="table-cell"> {row.LifeTimeComponent} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
-        <TableCell align="left" className="table-cell"> Unknown </TableCell>
-        <TableCell align="left" className="table-cell"> Unknowns </TableCell>
         {/* Ini tampilan HO, site gaada action */}
         {/* <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.serviceOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.WoNumber} /></TableCell> */}
       </TableRow>

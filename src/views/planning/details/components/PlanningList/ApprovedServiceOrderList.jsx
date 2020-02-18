@@ -204,7 +204,6 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
     })
   }
 
-
   //LOADING SCENE
   showLoading(){
     switch (this.props.fetchStatusServiceApproved) {
