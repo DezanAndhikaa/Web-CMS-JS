@@ -167,20 +167,20 @@ export function putLifetimeCompAction(payload, accessToken){
 	return async (dispatch) => dispatch(callApi(PutLifetimeComp, requestConfig));
 }
 
-export function putSAPIssueAction(payload){
+export function putSAPIssueAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.PUT,
 		url: `${ApiUrlBase.SALESORDER_API_URL}/SapIssue`,
-		// headers: {
-		// 	Authorization: `Bearer ${accessToken}`,
-		// 	'Accept': 'application/json; charset=utf-8',
-		// 	'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
-		// 	'Content-Type': 'application/json; charset=utf-8',
-		// },
 		headers: {
+			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8',
+			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Content-Type': 'application/json; charset=utf-8',
 		},
+		// headers: {
+		// 	'Accept': 'application/json; charset=utf-8',
+		// 	'Content-Type': 'application/json; charset=utf-8',
+		// },
 		data: payload
 	};
 	return async (dispatch) => dispatch(callApi(PutSAPIssue, requestConfig));

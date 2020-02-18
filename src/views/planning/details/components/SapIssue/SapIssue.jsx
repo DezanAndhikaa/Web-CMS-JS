@@ -8,7 +8,6 @@ import NumberFormat from 'react-number-format';
 import CloseButton from '../../../../../components/CloseButton/CloseButton'
 import PlanningListHeader from '../../components/PlanningListHeader/PlanningListHeader'
 import moment from 'moment'
-import dummy from '../../../../../dummy.json'
 
 const validationSchema = Yup.object().shape({
     limitText: Yup.number()
@@ -29,10 +28,8 @@ export default class SapIssue extends React.Component{
       });
     }
 
-    // ({ ...this.props.salesParameter.dataFilter, PageSize: value})
     isSAPIssue = async(data) => {
-      // console.log('ini huhu ',data)
-      await this.props.putSAPIssue({SAPIssue: data });
+      await this.props.putSAPIssue({SAPIssue: data }, this.props.token);
       // await ( () => this.props.isClosedSap() )
     }
 
@@ -40,7 +37,7 @@ export default class SapIssue extends React.Component{
       const index = this.props.selectedDataSAP.length
       let arr = []
       for(let i=0; i<index; i++){
-        arr = [...arr,{So: this.props.selectedDataSAP[i].So, Message: description[i]}]
+        arr = [...arr,{So: this.props.selectedDataSAP[i].SoNumber, Message: description[i]}]
       }
       this.setState({
         SAPIssue: arr
