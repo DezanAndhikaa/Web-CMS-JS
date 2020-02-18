@@ -10,8 +10,9 @@ import InputButton from '../../../../../components/Button/InputButton';
 import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+import moment from 'moment'
 // import { NotificationManager } from 'react-notifications';
-import {Snackbar, Button} from '@material-ui/core';
+// import {Snackbar, Button} from '@material-ui/core';
 
 export default class ApprovedSalesOrderList extends React.PureComponent {
   constructor(props) {
@@ -20,7 +21,7 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
       checkedValue: false,
       stats: false,
       putLifetime: {
-        So : '',
+        SoNumber : '',
         LifeTimeComponent : '',
       }
     }
@@ -40,6 +41,10 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
   componentDidMount = () =>{
     this.props.onClickSalesOrderApproved();
   }
+
+    componentWillMount = ()=>{
+      this.props.updateSalesApprovedParameter({ ...this.props.salesApprovedParameter.dataFilter,  PageNumber: 1, PageSize: 2, Sort: [], Filter: []})
+    }
   
 
   isFilterLifetime = async( value1, value2 ) => {
@@ -197,7 +202,7 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="center" className="table-cell"> {row.LifeTimeComponent} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
+        <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> Unknown </TableCell>
         <TableCell align="left" className="table-cell"> Unknowns </TableCell>
         {/* Ini tampilan HO, site gaada action */}

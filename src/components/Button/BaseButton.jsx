@@ -59,37 +59,36 @@ class BaseButton extends React.Component{
                 console.log('masuk whatTabsIsRendered',this.props.selectedData)
                 await this.props.handleSalesApprove()
                 this.isClosed()
-                await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
-                await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
+                // await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
+                // await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
             }
             if (this.props.titles === "Delete") {
                 console.log('masuk whatTabsIsRendered',this.props.deleteSalesData)
                 await this.props.handleDeleteSales()
                 this.isClosed()
-                await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
-                await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
+                // await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
+                // await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
             }
             if (this.props.titles === "Cancel Approve"){
                 await this.props.handleSendtoEdit()
                 this.showModalInfo()
                 this.isClosed()
-                await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
-                await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
+                // await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
+                // await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
             }
         }
         if (this.props.whatTabsIsRendered === false) {
             if (this.props.titles === "Approve") {
                 await this.props.handleServiceApprove();
                 this.isClosed()
-                await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter)
-                this.props.clearSelectedServicePlans(this.props.selectedServicePlans)
+                // await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter)
+                // this.props.clearSelectedServicePlans(this.props.selectedServicePlans)
             }
             if (this.props.titles === "Delete") {
                 await this.props.handleDeleteService();
-                
                 this.isClosed()
-                await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter)
-                this.props.clearSelectedServicePlans(this.props.selectedServicePlans)
+                // await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter)
+                // this.props.clearSelectedServicePlans(this.props.selectedServicePlans)
             }
         }
     }

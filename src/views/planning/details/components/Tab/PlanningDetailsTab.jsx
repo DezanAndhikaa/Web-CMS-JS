@@ -325,9 +325,10 @@ console.log('kondisi value terasek', value)
     )
   }
 
-  handleClick = (menu) => {
+  handleClick = (menu, tab) => {
     this.props.push({
-      pathname: menu
+      pathname: menu,
+      whichTab: tab
     });
   }
 
@@ -338,7 +339,7 @@ console.log('kondisi value terasek', value)
     return (
         <div className="root">
           <div className="tab-container">
-            <Button className="btn-approval" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
+            <Button className="btn-approval" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL, 'sales') }>
               Approval
             </Button>
             <div className="btn-header">
@@ -346,14 +347,14 @@ console.log('kondisi value terasek', value)
               {this.props.renderFilterByDataAction}
             </div>
           </div>
-      {/* TampilanHO renderTotalDataInput + renderFilter*/}
-        <div className="data-input-container">
-          {this._renderTotalDataInput()}
-        </div>
-        {/* Tampilan Site hanya renderFilter */}
-        <div className="filters-container">
-          {this._renderFilter()}
-        </div>
+          {/* TampilanHO renderTotalDataInput + renderFilter*/}
+          <div className="data-input-container">
+            {this._renderTotalDataInput()}
+          </div>
+          {/* Tampilan Site hanya renderFilter */}
+          <div className="filters-container">
+            {this._renderFilter()}
+          </div>
     {value === 0 && <TabContainer dir={theme.direction} >
       {/* {!this.props.isApproved ?  */}
     <div>{this._renderSalesOrderList()}</div> 

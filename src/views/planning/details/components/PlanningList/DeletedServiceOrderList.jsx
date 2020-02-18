@@ -1,5 +1,5 @@
 import React from 'react';
-// import moment, { ISO_8601 } from 'moment';
+import moment, { ISO_8601 } from 'moment';
 import {
   Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Typography,
 } from '@material-ui/core';
@@ -19,7 +19,7 @@ export default class DeletedServiceOrderList extends React.PureComponent {
       checkedValue: false,
       stats: false,
       putLifetime: {
-        So : '',
+        SoNumber : '',
         LifeTimeComponent : '',
       }
     }
@@ -34,6 +34,12 @@ export default class DeletedServiceOrderList extends React.PureComponent {
   }
   componentDidMount = () =>{
     this.props.onClickServiceOrderDeleted();
+  }
+
+  componentWillMount = () =>{
+    this.props.updateServiceDeletedParameter({ 
+      ...this.props.serviceDeletedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
+    });
   }
   
 
@@ -182,7 +188,7 @@ export default class DeletedServiceOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="center" className="table-cell"> {row.LifeTimeComponent} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
+        <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> Unknown </TableCell>
         <TableCell align="left" className="table-cell"> Unknowns </TableCell>
         {/* Ini tampilan HO, site gaada action */}

@@ -1,5 +1,5 @@
 import React from 'react';
-// import moment, { ISO_8601 } from 'moment';
+import moment, { ISO_8601 } from 'moment';
 import {
   Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Typography,
 } from '@material-ui/core';
@@ -20,7 +20,7 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
       checkedValue: false,
       stats: false,
       putLifetime: {
-        So : '',
+        SoNumber : '',
         LifeTimeComponent : '',
       }
     }
@@ -41,6 +41,9 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
     this.props.onClickServiceOrderApproved();
   }
   
+  componentWillMount = ()=>{
+    this.props.updateServiceApprovedParameter({ ...this.props.serviceApprovedParameter.dataFilter,  PageNumber: 1, PageSize: 2, Sort: [], Filter: []})
+  }
 
   isFilterLifetime = async( value1, value2 ) => {
     this.props.lifetimeFilter( LifetimeFilterAction, value1, value2, this.props.serviceApprovedParameter.dataFilter.PageSize );
@@ -74,7 +77,8 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
   showTableHead() {
       return (
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
-        <TableRow classes={{ root: 'table-row' }}>
+        {/* <TableRow classes={{ root: 'table-row' }}> */}
+        <TableRow>
           <TableCell padding="checkbox">
             {this.props.displayServiceCheckbox && 
             <Checkbox 
@@ -187,7 +191,7 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="center" className="table-cell"> {row.LifeTimeComponent} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
+        <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         {/* Ini tampilan HO, site gaada action */}
         {/* <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.serviceOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} /></TableCell> */}
       </TableRow>

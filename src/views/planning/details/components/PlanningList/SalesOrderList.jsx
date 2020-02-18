@@ -22,7 +22,7 @@ export default class SalesOrderList extends React.PureComponent {
       checkedValue: false,
       stats: false,
       putLifetime: {
-        So : '',
+        SoNumber : '',
         LifeTimeComponent : '',
       }
     }
@@ -44,6 +44,12 @@ export default class SalesOrderList extends React.PureComponent {
     this.props.onClickSalesOrder();
   }
 
+  componentWillMount = () =>{
+    this.props.updateSalesParameter({
+      ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
+    });
+  }
+
   putLifetimke = async(data) => {
     await this.props.putLifetimeComp(data, this.props.token);
     await this.props.onClickSalesOrder();
@@ -52,7 +58,7 @@ export default class SalesOrderList extends React.PureComponent {
   isPutLifetime =  async(key, value) => {
       this.setState({
         putLifetime: {
-          So: key,
+          SoNumber : key,
           LifeTimeComponent: value
         },
         stats: true
@@ -222,7 +228,7 @@ export default class SalesOrderList extends React.PureComponent {
           <div>{this.props.salesOrderList.Lists[id].LifeTimeComponent}</div>
         }
         </TableCell>
-        <TableCell align="left" className="table-cell"> {moment(row.PlanExecution).format('DD-MM-YYYY')} </TableCell>
+        <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
         {/* Ini tampilan HO, site gaada action */}

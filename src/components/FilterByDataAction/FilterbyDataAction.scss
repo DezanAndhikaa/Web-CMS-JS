@@ -103,7 +103,7 @@
 }
 
 .list-items-fbdt {
-    top: vw(40);
+    top: vw(50);
     background-color: white;
     position: absolute;
     box-shadow: 0px 0.3vw 0.6vw 0px rgba(0,0,0,0.2);
@@ -124,6 +124,19 @@
     //     background-color: #e5e5e5;
     //     color: #3C3B3B;
     // }
+}
+
+.list-items-fbdt::before {
+    content:"";
+    position: absolute;
+    right: 45%;
+    top: -5px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 8px 8px 8px;
+    border-color: transparent transparent white transparent;
+    z-index:9998;
 }
 
 // .list-items {

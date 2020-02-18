@@ -47,10 +47,12 @@ componentWillUnmount = () => {
 
 componentDidUpdate = (prevProps) => {
   if (prevProps.salesParameter !== this.props.salesParameter) {
-    this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
+    // this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
+    this.onClickSalesOrder();
   }
   if (prevProps.serviceParameter !== this.props.serviceParameter) {
-    this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+    // this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+    this.onClickServiceOrder();
   }
   if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
     prevProps.approveSalesDownloaded.status === ApiRequestActionsStatus.LOADING) {
@@ -130,7 +132,7 @@ componentDidUpdate = (prevProps) => {
           PageNumber: 1,
           // PageSize: 2,
           Sort: [{
-            Field : 'Customer',
+            Field : 'CustomerName',
             Direction : 'desc'
           }],      
       });
@@ -141,7 +143,7 @@ componentDidUpdate = (prevProps) => {
           PageNumber: 1,
           // PageSize: 2,
           Sort: [{
-            Field : 'Customer',
+            Field : 'CustomerName',
             Direction : 'asc'
           }],      
       });
@@ -154,7 +156,7 @@ componentDidUpdate = (prevProps) => {
           PageNumber: 1,
           // PageSize: 2,
           Sort: [{
-            Field : 'Site',
+            Field : 'SiteCode',
             Direction : 'desc'
           }],
       });
@@ -165,7 +167,7 @@ componentDidUpdate = (prevProps) => {
           PageNumber: 1,
           // PageSize: 2,
           Sort: [{
-            Field : 'Site',
+            Field : 'SiteCode',
             Direction : 'asc'
           }],
       });
@@ -231,7 +233,7 @@ componentDidUpdate = (prevProps) => {
           PageNumber: 1,
           // PageSize: 2,
           Sort: [{
-            Field : 'Customer',
+            Field : 'CustomerName',
             Direction : 'desc'
           }]   
       });
@@ -242,7 +244,7 @@ componentDidUpdate = (prevProps) => {
           PageNumber: 1,
           // PageSize: 2,
           Sort: [{
-            Field : 'Customer',
+            Field : 'CustomerName',
             Direction : 'asc'
           }]   
       });
@@ -255,7 +257,7 @@ componentDidUpdate = (prevProps) => {
           PageNumber: 1,
           // PageSize: 2,
           Sort: [{
-            Field : 'Site',
+            Field : 'SiteCode',
             Direction : 'desc'
           }] 
       });
@@ -266,7 +268,7 @@ componentDidUpdate = (prevProps) => {
           PageNumber: 1,
           // PageSize: 2,
           Sort: [{
-            Field : 'Site',
+            Field : 'SiteCode',
             Direction : 'asc'
           }] 
       });
@@ -380,14 +382,14 @@ componentDidUpdate = (prevProps) => {
   }
 
   //SAAT MENGKLIK SERVICE ORDER TAB
-  onClickServiceOrder = () => {
-    this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
+  onClickServiceOrder = async() => {
+   await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
   }
 
   //SAAT MENGKLIK SALES ORDER TAB
-  onClickSalesOrder = () =>{
-    this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
-  }
+  onClickSalesOrder = async() =>{
+    await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
+  }  
 
   //KOMPONEN UNTUK SHOW PER/PAGE
   _renderShowPerPage(){
@@ -398,7 +400,7 @@ componentDidUpdate = (prevProps) => {
       />
     )
   }
-
+  
   handleClickShowPerPage = (value) =>{
     if (this.state.isPaging === true) {
           this.props.clearSelectedSalesPlans();
@@ -442,29 +444,31 @@ componentDidUpdate = (prevProps) => {
           {...this.props}
           titles="Input Lifetime"
         />
-        <NotifButton />
+        <NotifButton 
+        {...this.props}
+        />
       </>
     )
   }
 
   //FUNGSI UNTUK MENGAPROVE SALES ORDER
   onClickApprovedSales = () => {
-    this.props.fetchApprovedSales(this.props.salesParameter.dataFilter);
+    this.props.fetchApprovedSales(this.props.salesParameter.dataFilter,this.props.token);
   }
 
   //FUNGSI UNTUK MENGAPROVE SERVICE ORDER
   onClickApprovedService = () => {
-    this.props.fetchApprovedService(this.props.serviceParameter.dataFilter);
+    this.props.fetchApprovedService(this.props.serviceParameter.dataFilter, this.props.token);
   }
 
   //FUNGSI UNTUK memanggil Data SALES ORDER yang telah terhapus
   onClickDeletedSales = () => {
-    this.props.fetchDeletedSales(this.props.salesParameter.dataFilter);
+    this.props.fetchDeletedSales(this.props.salesParameter.dataFilter, this.props.token);
   }
 
   //FUNGSI UNTUK memanggil Data SERVICE ORDER yang telah terhapus
   onClickDeletedService = () => {
-    this.props.fetchDeletedService(this.props.serviceParameter.dataFilter);
+    this.props.fetchDeletedService(this.props.serviceParameter.dataFilter, this.props.token);
   }
 
   onClickDownloadSalesApproved = () => {
@@ -504,7 +508,7 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
-    }await this.props.downloadSalesApproved(arr);
+    }await this.props.downloadSalesApproved(arr, this.props.token);
     if (
       this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.FAILED
     ) {
@@ -520,7 +524,7 @@ componentDidUpdate = (prevProps) => {
         arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
       }
     }
-    await this.props.downloadServiceApproved(arr);
+    await this.props.downloadServiceApproved(arr, this.props.token);
     if (
       this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.FAILED
     ) {
@@ -535,7 +539,9 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
-      await this.props.approveSales({So : arr, IsApprove: true})
+      await this.props.approveSales({SoNumber : arr, IsApprove: true}, this.props.token)
+      this.onClickSalesOrder();
+      await this.props.clearSelectedSalesPlans();
   }
 };
 
@@ -546,7 +552,9 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
       }
-    await this.props.approveService({Wo : arr, IsApprove: true})
+    await this.props.approveService({WoNumber: arr, IsApprove: true}, this.props.token)
+    this.onClickServiceOrder();
+    await this.props.clearSelectedServicePlans();
     }
   }
 
@@ -557,7 +565,9 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedSalesPlans[i].So]
       }
-      await this.props.unapproveSales({So : arr, IsRevised: true})
+      await this.props.unapproveSales({So : arr, IsRevised: true}, this.props.token)
+      this.onClickSalesOrder();
+      await this.props.clearSelectedSalesPlans();
     }
   }
 
@@ -569,7 +579,9 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
-      await this.props.deleteSales({So : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
+      await this.props.deleteSales({SoNumber : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate}, this.props.token)
+      this.onClickSalesOrder();
+      await this.props.clearSelectedSalesPlans();
     }
   }
 
@@ -581,7 +593,9 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
       }
-      await this.props.deleteService({Wo : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate})
+      await this.props.deleteService({WoNumber : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate}, this.props.token)
+      this.onClickServiceOrder();
+      await this.props.clearSelectedServicePlans();
     }
   }
 

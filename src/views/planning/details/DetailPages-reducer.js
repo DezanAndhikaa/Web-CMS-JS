@@ -191,13 +191,13 @@ const initialSearchCompParameter =
 
 const initialSearchSalesParameter =
 [{
-	Field	: 'SO',
+	Field	: 'SoNumber',
 	Operator: 'contains',
 	Value 	: '',
 	Logic 	: 'OR'
 },
 {
-	Field	: 'Customer',
+	Field	: 'CustomerName',
 	Operator: 'contains',
 	Value 	: '',
 	Logic 	: 'OR'
@@ -253,13 +253,13 @@ const initialSearchSalesParameter =
 
 const initialSearchServiceParameter =
 [{
-	Field	: 'Wo',
+	Field	: 'WoNumber',
 	Operator: 'contains',
 	Value 	: '',
 	Logic 	: 'OR'
 },
 {
-	Field	: 'Customer',
+	Field	: 'CustomerName',
 	Operator: 'contains',
 	Value 	: '',
 	Logic 	: 'OR'
@@ -564,7 +564,7 @@ export function filterParameterReducer(state = initialFilterParameter, action){
 	if (action.type === SelectCustomerFilterAction)
 		if(state.Filter.length === 0){ //IF yang pertama ini,jika filternya belum di isi apa2 (filter belum di jalankan)
 			// return {...state, PageSize: action.page, Filter : [{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
-			return {...state,Filter : [{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
+			return {...state,Filter : [{Field: 'CustomerName', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
 		}else{
 			for(let i=0; i<state.Filter.length; i++){ //FOR di sini untuk mengecek pada objek sebelumnya
 				if(state.Filter[i].Field === action.head){ //JIKA pada objek sebelumnya pada "field" ada yang sama, maka akan merubah nilai pada "value" tersebut tanpa menambah array
@@ -575,7 +575,7 @@ export function filterParameterReducer(state = initialFilterParameter, action){
 					return { ...state, Filter : state.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) };
 				}
 			}
-			return { ...state, Filter : [...state.Filter,{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
+			return { ...state, Filter : [...state.Filter,{Field: 'CustomerName', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
 		}
 	if(action.type === SelectSiteFilterAction)
 		if(state.Filter.length === 0){

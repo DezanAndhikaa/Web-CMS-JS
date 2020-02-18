@@ -148,12 +148,8 @@ export default class SapIssue extends React.Component{
                             {this.props.selectedDataSAP
                                 && this.props.selectedDataSAP.map((row, id) => (this._showTableBody(row,id)) )
                             }
-                            {/* {this._showTableBody()}
-                            {this._showTableBody()}
-                            {this._showTableBody()} */}
                             </TableBody>
                         </Table>
-                        {/* {this._showDescription()} */}
                         </div>
                     <div className="bottom-row-issue">
                         <p className="btn-cancel-issue">* Please check again before pressing the send button</p>

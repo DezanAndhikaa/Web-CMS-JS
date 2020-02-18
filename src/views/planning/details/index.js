@@ -1,6 +1,6 @@
+import { push } from 'connected-react-router';
 import { connect } from 'react-redux';
 import { PlansReducers } from './DetailPages-reducer';
-import { push } from 'connected-react-router';
 import {
 	approveServiceDownloadAction, approveSalesDownloadAction,
 	putLifetimeCompAction,
@@ -67,7 +67,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	push: (path) => dispatch(push(path)),
+	push : (path) => dispatch(push(path)),
 	downloadSalesApproved : (soId) => dispatch(approveSalesDownloadAction(soId)),
 	downloadServiceApproved : (soId) => dispatch(approveServiceDownloadAction(soId)),
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
@@ -91,6 +91,7 @@ const mapDispatchToProps = (dispatch) => ({
 	onSearchComp: (keyword,sort) => dispatch(searchCompAction(SearchCompAction, keyword, sort)),
 	onSearchCompService: (keyword, sort) => dispatch(searchCompActionService(SearchCompActionService, keyword, sort)),
 	// pushTo: (url) => dispatch(push(url)),
+	push: (path) => dispatch(push(path)),
 	// savePlanData: (data) => dispatch(storeDataAction(PLAN_DATA, StorageKey.PLAN_DATA, data)),
 	lifetimeFilter: (type, payload, payload2, page) => dispatch(selectFilterAction(type, payload, payload2, page)),
 	dateFilter: (type, payload, payload2, page) => dispatch(dateFilterAction(type, payload, payload2, page)),

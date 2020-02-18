@@ -70,12 +70,14 @@ export const IndexFilterAction = 'INDEX FILTER';
 export const LifetimeFilterAction = 'SELECT_LIFETIME_FILTER';
 export const DateFilterAction = 'SELECT_DATE_FILTER';
 
-export function approveSalesAction(payload){
+export function approveSalesAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.PUT,
 		url: `${ApiUrlBase.SALESORDER_API_URL}/Approval`,
 		headers: {
 			'Accept': 'application/json; charset=utf-8',
+			Authorization: `Bearer ${accessToken}`,
+			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Content-Type': 'application/json; charset=utf-8',
 		},
 		data: payload,
@@ -83,12 +85,14 @@ export function approveSalesAction(payload){
 	return async (dispatch) => dispatch(callApi(ApproveSalesAction, requestConfig));
 }
 
-export function approveServiceAction(payload){
+export function approveServiceAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.PUT,
 		url: `${ApiUrlBase.SERVICEORDER_API_URL}/Approval`,
 		headers: {
 			'Accept': 'application/json; charset=utf-8',
+			Authorization: `Bearer ${accessToken}`,
+			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Content-Type': 'application/json; charset=utf-8',
 		},
 		data: payload,
@@ -96,12 +100,14 @@ export function approveServiceAction(payload){
 	return async (dispatch) => dispatch(callApi(ApproveServiceAction, requestConfig));
 }
 
-export function unapproveSalesAction(payload) {
+export function unapproveSalesAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.PUT,
 		url: `${ApiUrlBase.SALESORDER_API_URL}/Revision`,
 		headers: {
 			'Accept': 'application/json; charset=utf-8',
+			Authorization: `Bearer ${accessToken}`,
+			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Content-Type': 'application/json; charset=utf-8',
 		},
 		data: payload,
@@ -109,30 +115,30 @@ export function unapproveSalesAction(payload) {
 	return async (dispatch) => dispatch(callApi(UnapproveSalesAction, requestConfig));
 }
 
-export function approveSalesDownloadAction(soId){
+export function approveSalesDownloadAction(soId, accessToken){
 	const requestConfig = {
 		responseType: 'blob',
 		method: RequestMethod.POST,
 		url: `${ApiUrlBase.SALESORDER_API_URL}/DownloadSalesOrder`,
-		data: { So: soId },
+		data: { SoNumber: soId },
 		headers: {
-		//   Authorization: `Bearer ${accessToken}`,
-		//   'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID, // eslint-disable-line no-undef
-		  'Content-Type': 'application/json',
+			Authorization: `Bearer ${accessToken}`,
+			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+		  	'Content-Type': 'application/json',
 		},
 	  };
 	  return async (dispatch) => dispatch(callApi(PlanningApprovedSalesDownloadAction, requestConfig));
 }
-export function approveServiceDownloadAction(woId){
+export function approveServiceDownloadAction(woId, accessToken){
 	const requestConfig = {
 		responseType: 'blob',
 		method: RequestMethod.POST,
 		url: `${ApiUrlBase.SERVICEORDER_API_URL}/DownloadServiceOrder`,
-		data: { Wo: woId },
+		data: { WoNumber: woId },
 		headers: {
-		//   Authorization: `Bearer ${accessToken}`,
-		//   'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID, // eslint-disable-line no-undef
-		  'Content-Type': 'application/json',
+			Authorization: `Bearer ${accessToken}`,
+			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+		  	'Content-Type': 'application/json',
 		},
 	  };
 	  return async (dispatch) => dispatch(callApi(PlanningApprovedServiceDownloadAction, requestConfig));
@@ -186,11 +192,13 @@ export function putSAPIssueAction(payload, accessToken){
 	return async (dispatch) => dispatch(callApi(PutSAPIssue, requestConfig));
 }
 
-export function deleteSalesAction(payload){
+export function deleteSalesAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.DELETE,
 		url: `${ApiUrlBase.SALESORDER_API_URL}/Delete`,
 		headers: {
+			Authorization: `Bearer ${accessToken}`,
+			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
 		},
@@ -216,11 +224,13 @@ export function deletePermanentSalesAction(payload, accessToken){
 
 
 
-export function deleteServiceAction(payload){
+export function deleteServiceAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.DELETE,
 		url: `${ApiUrlBase.SERVICEORDER_API_URL}/Delete`,
 		headers: {
+			Authorization: `Bearer ${accessToken}`,
+			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
 		},
@@ -260,13 +270,15 @@ export function fetchSalesAction(payload, accessToken) {
 	return async (dispatch) => dispatch(callApi(FetchSalesAction, requestConfig));
 }
 
-export function fetchServiceAction(payload) {
+export function fetchServiceAction(payload, accessToken) {
 	const filter = payload;
 	console.log('kupi kupi ', filter);
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${ApiUrlBase.SERVICEORDER_API_URL}/FilterUnapproved`,
 		headers: {
+			Authorization: `Bearer ${accessToken}`,
+			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
 		},
@@ -275,11 +287,13 @@ export function fetchServiceAction(payload) {
 	return async (dispatch) => dispatch(callApi(FetchServiceAction, requestConfig));
 }
 
-export function fetchApprovedSalesAction(payload){
+export function fetchApprovedSalesAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${ApiUrlBase.SALESORDER_API_URL}/FilterApproved`,
 		headers: {
+			Authorization: `Bearer ${accessToken}`,
+			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
 		},
@@ -288,11 +302,13 @@ export function fetchApprovedSalesAction(payload){
 	return async (dispatch) => dispatch(callApi(FetchApprovedSalesAction, requestConfig));
 }
 
-export function fetchApprovedServiceAction(payload){
+export function fetchApprovedServiceAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${ApiUrlBase.SERVICEORDER_API_URL}/FilterApproved`,
 		headers: {
+			Authorization: `Bearer ${accessToken}`,
+			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
 		},
@@ -301,11 +317,13 @@ export function fetchApprovedServiceAction(payload){
 	return async (dispatch) => dispatch(callApi(FetchApprovedServiceAction, requestConfig));
 }
 
-export function fetchDeletedSalesAction(payload){
+export function fetchDeletedSalesAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${ApiUrlBase.SALESORDER_API_URL}/FilterDeleted`,
 		headers: {
+			Authorization: `Bearer ${accessToken}`,
+			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
 		},
@@ -314,11 +332,13 @@ export function fetchDeletedSalesAction(payload){
 	return async (dispatch) => dispatch(callApi(FetchDeletedSalesAction, requestConfig));
 }
 
-export function fetchDeletedServiceAction(payload){
+export function fetchDeletedServiceAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${ApiUrlBase.SERVICEORDER_API_URL}/FilterDeleted`,
 		headers: {
+			Authorization: `Bearer ${accessToken}`,
+			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
 		},
