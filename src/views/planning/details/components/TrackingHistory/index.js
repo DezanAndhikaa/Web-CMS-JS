@@ -2,6 +2,11 @@ import { connect } from 'react-redux';
 import { PlansReducers } from '../../DetailPages-reducer';
 import { push } from 'connected-react-router';
 import {
+	salesParameterDeletedAction,
+	serviceParameterApprovedAction,
+	UpdateServiceApprovedParameterAction,
+	serviceParameterDeletedAction,
+	UpdateServiceDeletedParameterAction,
 	approveSalesDownloadAction,
 	approveServiceDownloadAction,
 	selectSalesPlansAction,
@@ -88,10 +93,10 @@ const mapDispatchToProps = (dispatch) => ({
 	unselectSalesPlan: (payload) => dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
 	updateSalesParameter: (payload) => dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
 	updateSalesApprovedParameter: (payload) => dispatch(salesParameterApprovedAction(UpdateSalesApprovedParameterAction, payload)),
-	updateSalesDeletedParameter: (payload) => dispatch(salesParameterApprovedAction(UpdateSalesDeletedParameterAction, payload)),
+	updateSalesDeletedParameter: (payload) => dispatch(salesParameterDeletedAction(UpdateSalesDeletedParameterAction, payload)),
 	updateServiceParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
-	updateServiceApprovedParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
-	updateServiceDeletedParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
+	updateServiceApprovedParameter: (payload) => dispatch(serviceParameterApprovedAction(UpdateServiceApprovedParameterAction, payload)),
+	updateServiceDeletedParameter: (payload) => dispatch(serviceParameterDeletedAction(UpdateServiceDeletedParameterAction, payload)),
 	deletePermanentSales: (payload, token) => dispatch(deletePermanentSalesAction(payload, token)),
 	deletePermanentService: (payload, token) => dispatch(deletePermanentServiceAction(payload, token)),
 	

@@ -368,7 +368,16 @@ export function salesParameterAction(type, payload) {
 export function salesParameterApprovedAction(type, payload) {
 	return { type, payload };
 }
+export function salesParameterDeletedAction(type, payload) {
+	return { type, payload };
+}
 export function serviceParameterAction(type, payload) {
+	return { type, payload };
+}
+export function serviceParameterApprovedAction(type, payload) {
+	return { type, payload };
+}
+export function serviceParameterDeletedAction(type, payload) {
 	return { type, payload };
 }
 

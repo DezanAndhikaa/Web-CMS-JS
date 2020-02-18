@@ -301,10 +301,9 @@ export default class TrackingHistory extends React.PureComponent {
 							{web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive">{currentPropsService - 2}</div>}
 							{currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive">{currentPropsService - 1}</div>}
 							<div className="page-active">{currentPropsService}</div>
-							{currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateSserviceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive">{currentPropsService + 1}</div>}
-							{web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateSserviceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive">{currentPropsService + 2}</div>}
-							{web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateSserviceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive">{currentPropsService + 3}</div>}
-							
+							{currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateServiceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive">{currentPropsService + 1}</div>}
+							{web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive">{currentPropsService + 2}</div>}
+							{web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive">{currentPropsService + 3}</div>}
 						</div>
 						</div>
 					)
@@ -406,13 +405,13 @@ export default class TrackingHistory extends React.PureComponent {
 		this.setPropsToState();
 	}
 	onClickSalesOrderApproved = async() =>{
-		await this.props.fetchApprovedSales(this.props.salesParameter.dataFilter, this.props.token);
+		await this.props.fetchApprovedSales(this.props.salesApprovedParameter.dataFilter, this.props.token);
 		await this.props.clearSelectedSalesPlans()
 		this.setPropsToState();
 	}
 
 	onClickSalesOrderDeleted = async() =>{
-		await this.props.fetchDeletedSales(this.props.salesParameter.dataFilter, this.props.token);
+		await this.props.fetchDeletedSales(this.props.salesDeletedParameter.dataFilter, this.props.token);
 		await this.props.clearSelectedSalesPlans()
 		this.setPropsToState();
 	}
@@ -424,14 +423,14 @@ export default class TrackingHistory extends React.PureComponent {
 	}
 
 	onClickServiceOrderApproved = async() => {
-		await this.props.fetchApprovedService(this.props.serviceParameter.dataFilter, this.props.token);
+		await this.props.fetchApprovedService(this.props.serviceApprovedParameter.dataFilter, this.props.token);
 		this.props.clearSelectedServicePlans()
 		this.setPropsToState();
 
 	}
 
 	onClickServiceOrderDeleted = async() => {
-		await this.props.fetchDeletedService(this.props.serviceParameter.dataFilter, this.props.token);
+		await this.props.fetchDeletedService(this.props.serviceDeletedParameter.dataFilter, this.props.token);
 		this.props.clearSelectedServicePlans()
 		this.setPropsToState();
 	}
@@ -487,11 +486,11 @@ export default class TrackingHistory extends React.PureComponent {
 			<div className="plannings-list-containers">
 				<ApprovedServiceOrderList 
 				{...this.props}
-				displayServicesCheckbox={this.props.serviceApprovedParameter.paramsData.assigmentFilter || this.props.serviceApprovedParameter.paramsData.inProgressFilter}
+				displayServiceCheckbox={this.props.serviceApprovedParameter.paramsData.assigmentFilter || this.props.serviceApprovedParameter.paramsData.inProgressFilter}
 				sortServicesByState={this.props.sortServicesBy}
 				onClickServiceOrderApproved={this.onClickServiceOrderApproved}
-				onChoosedServices={this.updateAssignmentServicesStates}
-				selectedServicesPlanList={this.props.selectedServicesPlans}
+				onChoosedService={this.updateAssignmentServiceStates}
+				selectedServicePlanList={this.props.selectedServicePlans}
 				/>
 			</div>
 		)
@@ -538,22 +537,23 @@ export default class TrackingHistory extends React.PureComponent {
 
 	componentDidUpdate = (prevProps) => {
 		if (prevProps.salesParameter !== this.props.salesParameter) {
-			this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
+			this.onClickSalesOrder();
 		}
 		if (prevProps.salesApprovedParameter !== this.props.salesApprovedParameter) {
-			this.props.fetchApprovedSales(this.props.salesApprovedParameter.dataFilter, this.props.token);
+			this.onClickSalesOrderApproved();
 		}
 		if (prevProps.salesDeletedParameter !== this.props.salesDeletedParameter) {
-			this.props.fetchDeletedSales(this.props.salesDeletedParameter.dataFilter, this.props.token);
+			this.onClickSalesOrderDeleted();
 		}
 		if (prevProps.serviceParameter !== this.props.serviceParameter) {
-			this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
+			this.onClickServiceOrder();
 		}
 		if (prevProps.serviceApprovedParameter !== this.props.serviceApprovedParameter) {
-			this.props.fetchApprovedService(this.props.serviceApprovedParameter.dataFilter, this.props.token);
+			this.onClickServiceOrderApproved();
 		}
 		if (prevProps.serviceDeletedParameter !== this.props.serviceDeletedParameter) {
-			this.props.fetchDeletedService(this.props.serviceDeletedParameter.dataFilter, this.props.token);
+			console.log('pantej ke trigger', this.props.serviceDeletedParameter)
+			this.onClickServiceOrderDeleted()
 		}
 		if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
 			prevProps.approveSalesDownloaded.status === ApiRequestActionsStatus.LOADING) {
@@ -675,14 +675,8 @@ export default class TrackingHistory extends React.PureComponent {
 			case 'SAP ISSUE': 
 			this.setState({ isDisabled : true})
 			console.log('this is ', whatPageIsChoosed)
-				// return (
-				// 	this.salesOrderList()
-				// )
 			default:
 				console.log('this is default', whatPageIsChoosed)
-				// return(
-				// 	this.approvedSalesOrderList()
-				// )
 		}
 	}
 
