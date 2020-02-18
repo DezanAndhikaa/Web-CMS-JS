@@ -48,16 +48,16 @@ const routes = (
 			{/* End Route For BMS */}
 			{/* <Route exact path={Menu.BACKLOG_ENTRYSHEET} component={requireAuth(EntrySheet)} /> */}
 			{/* <Route exact path={Menu.BACKLOG} component={requireAuth(BacklogMonitoring)} /> */}
-			{/* <Route exact path={Menu.FC} component={requireAuth(FcMonitoring)} />
-			<Route exact path={Menu.MASTER_DATA} component={requireAuth(MasterDataUploader)} />
-			<Route exact path={Menu.SETTINGS} component={requireAuth(Settings)} />
-			<Route exact path={`${Menu.DETAIL_PI}:wo`} component={requireAuth(PIDetailPage)} />
-			<Route exact path={Menu.DETAIL_PROBLEMLOG} component={requireAuth(ProblemLogDetail)} />
-			<Route exact path={Menu.PROBLEMLOG} component={requireAuth(WorkingCenter)}/>
-			<Route exact path={Menu.PROBLEMLOG_JOBTYPE} component={requireAuth(JobType)}/>
-			<Route exact path={Menu.PROBLEMLOG_JOBLIST} component={requireAuth(JobList)}/>
-			<Route exact path={Menu.PROBLEMLOG_DETAIL} component={requireAuth(Detail)}/>
-			<Route exact path="*" component={requireAuth(Dashboard)} /> */}
+			{/* <Route exact path={Menu.FC} component={requireAuth(FcMonitoring)} /> */}
+			{/* <Route exact path={Menu.MASTER_DATA} component={requireAuth(MasterDataUploader)} /> */}
+			{/* <Route exact path={Menu.SETTINGS} component={requireAuth(Settings)} /> */}
+			{/* <Route exact path={`${Menu.DETAIL_PI}:wo`} component={requireAuth(PIDetailPage)} /> */}
+			{/* <Route exact path={Menu.DETAIL_PROBLEMLOG} component={requireAuth(ProblemLogDetail)} /> */}
+			{/* <Route exact path={Menu.PROBLEMLOG} component={requireAuth(WorkingCenter)}/> */}
+			{/* <Route exact path={Menu.PROBLEMLOG_JOBTYPE} component={requireAuth(JobType)}/> */}
+			{/* <Route exact path={Menu.PROBLEMLOG_JOBLIST} component={requireAuth(JobList)}/> */}
+			{/* <Route exact path={Menu.PROBLEMLOG_DETAIL} component={requireAuth(Detail)}/> */}
+			{/* <Route exact path="*" component={requireAuth(Dashboard)} /> */}
 		</Switch>
 	</div>
 );

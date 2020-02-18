@@ -34,6 +34,7 @@ import {
 import TrackingHistory from './TrackingHistory';
 
 const mapStateToProps = (state) => ({
+	token: state.userData.tokenResponse.accessToken,
 	location : state.router.location,
 	displayMode: state.displayMode,
 	approveSalesDownloaded : state.plansPageState.approveSalesDownloaded,

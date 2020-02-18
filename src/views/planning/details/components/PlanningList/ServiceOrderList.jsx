@@ -21,7 +21,16 @@ export default class ServiceOrderList extends React.PureComponent {
     if (prevState.serviceParameter !== this.props.serviceParameter || prevState.serviceSearch !== this.props.serviceSearch || 
       prevState.searchComp !==this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
       this.setState({checkedValue : false})
+    }if (this.props.fetchStatusService === ApiRequestActionsStatus.LOADING) {
+      // console.log('ke trigger')
+      this.setState({checkedValue : false})
     }
+  }
+
+  componentWillMount = () =>{
+    this.props.updateServiceParameter({
+      ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
+    });
   }
 
   handleClick = () =>{
@@ -159,7 +168,7 @@ export default class ServiceOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.LifeTimeComponent}</TableCell>
-        <TableCell align="left" className="table-cell"> {row.PlanExecution} </TableCell>
+        <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         {/* <TableCell align="center" className="table-cell"> <EditButton /></TableCell> */}
       </TableRow>
     )
