@@ -4,39 +4,76 @@ import { ImgSendtoEdit, ImgCancelApprove, ImgCancelEditSucc } from '../../assets
 import './UnapproveConfirmation.scss';
 import CloseNotif from '../CloseNotif/CloseNotif';
 import SapIssue from '../../views/planning/details/components/SapIssue/SapIssue'
+import { ApiRequestActionsStatus } from '../../core/RestClientHelpers';
+import ConfirmationModal from '../ConfirmationModal/ConfirmationModal'
 
 export default class UnapproveConfirmation extends React.PureComponent {
 
   state={
-    isShowModal1: false,
-    isShowModal2: false,
-    isShowModal3: false,
+    isShowModalUnapprove: false,
+    isShowModalSap: false,
+    isShowModalSend: false,
+    isShowModalSapSucced: false
   }
 
   componentDidUpdate = (prevProps) =>{
     if (prevProps.openModal != this.props.openModal)
     this.setState({
-      isShowModal1: this.props.openModal
+      isShowModalUnapprove: this.props.openModal
     })
   }
 
   isClickedSap = () => {
     this.setState({
-      isShowModal1: !this.state.isShowModal1,
-      isShowModal2: !this.state.isShowModal2
+      isShowModalUnapprove: !this.state.isShowModalUnapprove,
+      isShowModalSap: !this.state.isShowModalSap
     })
   }
 
   isClickedSend = () => {
     this.setState({
-      isShowModal1: !this.state.isShowModal1,
-      isShowModal3: !this.state.isShowModal3
+      isShowModalUnapprove: !this.state.isShowModalUnapprove,
+      isShowModalSend: !this.state.isShowModalSend
+    })
+  }
+
+  isClosedSap = () => {
+    if(this.props.fetchStatusPutSAPIssue === ApiRequestActionsStatus.SUCCEEDED)
+    {
+      this.setState({
+        isShowModalSap: !this.state.isShowModalSap,
+        isShowModalSapSucced: !this.state.isShowModalSapSucced
+        // isShowModalUnapprove: !this.state.isShowModalUnapprove
+      })
+    }else{
+      this.setState({
+        isShowModalSap: !this.state.isShowModalSap,
+        isShowModalUnapprove: !this.state.isShowModalUnapprove
+      })
+    }
+  }
+
+  isClosedSend = () => {
+    this.setState({
+      isShowModalSend: !this.state.isShowModalSend,
+      isShowModalUnapprove: !this.state.isShowModalUnapprove
     })
   }
 
   _renderSap(open){
     return(
-      <SapIssue {...this.props} isShowModal={open}/>
+      <SapIssue {...this.props} isShowModal={open} isClosed={this.isClosedSap}/>
+    )
+  }
+
+  _renderSapSucced(open){
+    console.log('uhuy sap ')
+    this.setState({
+      isShowModalSap: !this.state.isShowModalSap,
+      isShowModalSapSucced: !this.state.isShowModalSapSucced
+    })
+    return(
+      <ConfirmationModal isShowModal={open} idModal="SAP"/>
     )
   }
 
@@ -63,11 +100,12 @@ export default class UnapproveConfirmation extends React.PureComponent {
 }
 
 	render() {
+    console.log("ApiRequestActionsStatus",this.props.fetchStatusPutSAPIssue)
     if(this.props.idConfirm === "Cancel"){
         return (
           <>
-           {this.state.isShowModal1 && (
-            <Modal open={this.state.isShowModal1} onClose={this.props.onClose} className="modal-container">
+           {this.state.isShowModalUnapprove && (
+            <Modal open={this.state.isShowModalUnapprove} onClose={this.props.onClose} className="modal-container">
             <DialogContent className="confirmation-modal-content">
               <div className="confirmation-modal">
                 <CloseNotif onClose={this.props.onClose}/>
@@ -89,10 +127,13 @@ export default class UnapproveConfirmation extends React.PureComponent {
           </Modal>
           )     
           }
-          {this.state.isShowModal2 && (
-            this._renderSap(this.state.isShowModal2)
+          {this.state.isShowModalSap && (
+            this._renderSap(this.state.isShowModalSap)
+          )}
+          {this.props.fetchStatusPutSAPIssue === ApiRequestActionsStatus.SUCCEEDED && (
+            this._renderSapSucced(this.state.isShowModalSapSucced)
           )} 
-          {this.state.isShowModal3 && (this._renderSendtoEdit())}   
+          {this.state.isShowModalSend && (this._renderSendtoEdit())}   
         </>
         );
     } else if(this.props.idConfirm === "Successfull"){
@@ -109,7 +150,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
                 </div>
               </div>
             </div>
-          </DialogContent>
+          </DialogContent> 
         </Modal>
       );
     }

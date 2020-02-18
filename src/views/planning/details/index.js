@@ -29,6 +29,7 @@ import {
 import DetailPages from './DetailPages';
 
 const mapStateToProps = (state) => ({
+	path: state.router.location.pathname,
 	displayMode: state.displayMode,
 	salesOrderList: state.plansPageState.salesOrderList.data,
 	salesOrderListApproved: state.plansPageState.salesOrderListApproved.data,

@@ -381,15 +381,15 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  //SAAT MENGKLIK SALES ORDER TAB
+  //SAAT MENGKLIK SERVICE ORDER TAB
   onClickServiceOrder = async() => {
    await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
   }
 
-  //SAAT MENGKLIK SERVICE ORDER TAB
+  //SAAT MENGKLIK SALES ORDER TAB
   onClickSalesOrder = async() =>{
     await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
-  }
+  }  
 
   //KOMPONEN UNTUK SHOW PER/PAGE
   _renderShowPerPage(){
@@ -400,7 +400,7 @@ componentDidUpdate = (prevProps) => {
       />
     )
   }
-
+  
   handleClickShowPerPage = (value) =>{
     if (this.state.isPaging === true) {
           this.props.clearSelectedSalesPlans();

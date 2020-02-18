@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Modal, TextField, FormHelperText,Table, TableHead, TableRow, TableBody, TableCell } from '@material-ui/core'
+import { Button, Modal, TextField, FormHelperText,Table, TableHead, TableRow, TableBody, TableCell, Paper } from '@material-ui/core'
 import './SapIssue.scss'
 
 import * as Yup from 'yup';
@@ -18,7 +18,7 @@ const validationSchema = Yup.object().shape({
 export default class SapIssue extends React.Component{
 
     state={
-        isShowModal: true,
+        isShowModal: false,
         description: [],
         SAPIssue: []
     }
@@ -31,8 +31,9 @@ export default class SapIssue extends React.Component{
 
     // ({ ...this.props.salesParameter.dataFilter, PageSize: value})
     isSAPIssue = async(data) => {
-      console.log('ini huhu ',data)
+      // console.log('ini huhu ',data)
       await this.props.putSAPIssue({SAPIssue: data });
+      // await ( () => this.props.isClosedSap() )
     }
 
     onKelik =  async(length, description) => {
@@ -48,13 +49,14 @@ export default class SapIssue extends React.Component{
       )
     }
 
-    isClicked = () => {
-        this.setState({isShowModal: !this.state.isShowModal})
-    }
+    // isClicked = () => {
+    //     this.setState({isShowModal: !this.state.isShowModal})
+    // }
 
-    isClosed = () => {
-        this.setState({isShowModal: !this.state.isShowModal})
-    }
+    // isClosed = () => {
+    //   console.log('uuuuhhuk')
+    //     this.setState({isShowModal: !this.state.isShowModal})
+    // }
 
     _showTableHead() {
         return (
@@ -82,8 +84,8 @@ export default class SapIssue extends React.Component{
           <>
           <TableRow className="table-row-issue">
             <TableCell align="left" className="table-cell-issue"> {row.SoNumber} </TableCell>
-            <TableCell align="left" className="table-cell-issue"> {row.Customer} </TableCell>
-            <TableCell align="left" className="table-cell-issue"> {row.Site} </TableCell>
+            <TableCell align="left" className="table-cell-issue"> {row.CustomerName} </TableCell>
+            <TableCell align="left" className="table-cell-issue"> {row.SiteCode} </TableCell>
             <TableCell align="left" className="table-cell-issue"> {row.UnitModel} </TableCell>
             <TableCell align="left" className="table-cell-issue"> {row.ComponentDescription} </TableCell>
             <TableCell align="left" className="table-cell-issue"> {row.PartNumber} </TableCell>
@@ -106,7 +108,7 @@ export default class SapIssue extends React.Component{
             <TableCell align="left" className="table-cell-issue"> 330 </TableCell>
             <TableCell align="left" className="table-cell-issue"> 2019-12-12 </TableCell> */}
           </TableRow>
-          <TableRow style={{height: 10}}>
+          <TableRow className="table-row-bottom-issue">
             <TableCell><label>Description &nbsp; :</label></TableCell>
             <TableCell colSpan="11">{this._showDescription(id)}</TableCell>
           </TableRow>
@@ -137,13 +139,13 @@ export default class SapIssue extends React.Component{
             <div className="assign-mechanic-modal-issue">
                 <div className="container-issue">
                     <div className="top-row-issue">
-                        <div className="top-button-issue"><Button>kembali</Button></div>
+                        <div className="top-button-issue"><Button className="back_button" variant="outlined" onClick={this.props.isClosed}>Back</Button></div>
                         <div className="ut-underline-issue"/>
                         <p className="select-input-title-issue">SAP Issue</p>
-                        <CloseButton onClose={this.props.onClosed}/>
+                        <CloseButton onClose={this.props.isClosed}/>
                     </div>
                         <div className="top-middle-issue"> 
-                        <Table>
+                        <Table size="small" component={Paper}>
                             {this._showTableHead()}
                             <TableBody>
                             {this.props.selectedDataSAP
@@ -157,9 +159,10 @@ export default class SapIssue extends React.Component{
                         {/* {this._showDescription()} */}
                         </div>
                     <div className="bottom-row-issue">
-                        <Button className="btn-cancel-issue" onClick={this.props.onClosed}>Cancel</Button>
+                        <p className="btn-cancel-issue">* Please check again before pressing the send button</p>
                         {/* <Button className="btn-input-issue" onClick={ () => {this.props.onStats(this.props.id, this.state.limitText); this.props.onClosed()} } >Input</Button> */}
-                        <Button className="btn-input-issue" onClick={ ()=> this.onKelik(this.props.selectedDataSAP.length, this.state.description) } >Input</Button>
+                        {/* <Button className="btn-input-issue" onClick={ () => {this.onKelik(this.props.selectedDataSAP.length, this.state.description);this.props.isClosed()} } >Send</Button> */}
+                        <Button className="btn-input-issue" onClick={ () => {this.onKelik(this.props.selectedDataSAP.length, this.state.description)} } >Send</Button>
                     </div>
                 </div>
                
@@ -170,7 +173,7 @@ export default class SapIssue extends React.Component{
     render(){
         return(
             <div>
-              <Modal className="modal-pos-issue" open={this.props.isShowModal} onClose={this.isClosed} >
+              <Modal className="modal-pos-issue" open={this.props.isShowModal} onClose={this.props.isClosed} >
                   <div className="body-container">
                       {this._renderIssue()}
                   </div>
