@@ -73,7 +73,7 @@ export default class TrackingHistory extends React.PureComponent {
 			arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
 			console.log('pantek');
 		  }
-		}await this.props.downloadSalesApproved(arr);
+		}await this.props.downloadSalesApproved(arr, this.props.token);
 		if (
 		  this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.FAILED
 		) {
@@ -89,7 +89,7 @@ export default class TrackingHistory extends React.PureComponent {
 			arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
 		  }
 		}
-		await this.props.downloadServiceApproved(arr);
+		await this.props.downloadServiceApproved(arr, this.props.token);
 		if (
 		  this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.FAILED
 		) {
@@ -401,38 +401,38 @@ export default class TrackingHistory extends React.PureComponent {
 	}
 
 	onClickSalesOrder = async() =>{
-		await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
-		await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
+		await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
+		await this.props.clearSelectedSalesPlans()
 		this.setPropsToState();
 	}
 	onClickSalesOrderApproved = async() =>{
-		await this.props.fetchApprovedSales(this.props.salesParameter.dataFilter);
-		await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
+		await this.props.fetchApprovedSales(this.props.salesParameter.dataFilter, this.props.token);
+		await this.props.clearSelectedSalesPlans()
 		this.setPropsToState();
 	}
 
 	onClickSalesOrderDeleted = async() =>{
-		await this.props.fetchDeletedSales(this.props.salesParameter.dataFilter);
-		await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
+		await this.props.fetchDeletedSales(this.props.salesParameter.dataFilter, this.props.token);
+		await this.props.clearSelectedSalesPlans()
 		this.setPropsToState();
 	}
 
 	onClickServiceOrder = async() => {
-		await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
-		this.props.clearSelectedServicePlans(this.props.selectedServicePlans)
+		await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
+		this.props.clearSelectedServicePlans()
 		this.setPropsToState();
 	}
 
 	onClickServiceOrderApproved = async() => {
-		await this.props.fetchApprovedService(this.props.serviceParameter.dataFilter);
-		this.props.clearSelectedServicePlans(this.props.selectedServicePlans)
+		await this.props.fetchApprovedService(this.props.serviceParameter.dataFilter, this.props.token);
+		this.props.clearSelectedServicePlans()
 		this.setPropsToState();
 
 	}
 
 	onClickServiceOrderDeleted = async() => {
-		await this.props.fetchDeletedService(this.props.serviceParameter.dataFilter);
-		this.props.clearSelectedServicePlans(this.props.selectedServicePlans)
+		await this.props.fetchDeletedService(this.props.serviceParameter.dataFilter, this.props.token);
+		this.props.clearSelectedServicePlans()
 		this.setPropsToState();
 	}
 
@@ -538,22 +538,22 @@ export default class TrackingHistory extends React.PureComponent {
 
 	componentDidUpdate = (prevProps) => {
 		if (prevProps.salesParameter !== this.props.salesParameter) {
-			this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
+			this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
 		}
 		if (prevProps.salesApprovedParameter !== this.props.salesApprovedParameter) {
-			this.props.fetchApprovedSales(this.props.salesApprovedParameter.dataFilter);
+			this.props.fetchApprovedSales(this.props.salesApprovedParameter.dataFilter, this.props.token);
 		}
 		if (prevProps.salesDeletedParameter !== this.props.salesDeletedParameter) {
-			this.props.fetchDeletedSales(this.props.salesDeletedParameter.dataFilter);
+			this.props.fetchDeletedSales(this.props.salesDeletedParameter.dataFilter, this.props.token);
 		}
 		if (prevProps.serviceParameter !== this.props.serviceParameter) {
-			this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+			this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
 		}
 		if (prevProps.serviceApprovedParameter !== this.props.serviceApprovedParameter) {
-			this.props.fetchApprovedService(this.props.serviceApprovedParameter.dataFilter);
+			this.props.fetchApprovedService(this.props.serviceApprovedParameter.dataFilter, this.props.token);
 		}
 		if (prevProps.serviceDeletedParameter !== this.props.serviceDeletedParameter) {
-			this.props.fetchDeletedService(this.props.serviceDeletedParameter.dataFilter);
+			this.props.fetchDeletedService(this.props.serviceDeletedParameter.dataFilter, this.props.token);
 		}
 		if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
 			prevProps.approveSalesDownloaded.status === ApiRequestActionsStatus.LOADING) {
@@ -706,14 +706,14 @@ export default class TrackingHistory extends React.PureComponent {
 
 	componentDidMount = async() =>{
 		if(this.props.location.whichTab === "sales"){
-			await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
-			await this.props.fetchApprovedSales(this.props.salesParameter.dataFilter);
-			await this.props.fetchDeletedSales(this.props.salesParameter.dataFilter);
+			this.onClickSalesOrder();
+			this.onClickSalesOrderApproved();
+			this.onClickSalesOrderDeleted();
 			this.setPropsToState();
 		}if(this.props.location.whichTab === "service"){
-			await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
-			await this.props.fetchApprovedService(this.props.serviceParameter.dataFilter);
-			await this.props.fetchDeletedService(this.props.serviceParameter.dataFilter);
+			this.onClickServiceOrder();
+			this.onClickServiceOrderApproved();
+			this.onClickServiceOrderDeleted();
 			this.setPropsToState();
 		}else if(this.props.location.whichTab === undefined){
 			this.handleClick(Menu.PLANNING_APPROVAL);

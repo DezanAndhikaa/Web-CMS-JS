@@ -12,7 +12,7 @@ import  { LoginPage }  from '../views/Login';
 // import JobsReport from '../views/planning/details/DetailPages';
 // import Settings from '../pages/settings';
 import requireAuth from '../components/AuthGuardHoc';
-// import Dashboard from '../pages/dashboard/Dashboard';
+import Dashboard from '../views/Dashboard/';
 // import FcMonitoring from '../pages/fc-monitoring';
 // import PIDetailPage from '../pages/pi-detail';
 // import ProblemLogDetail from '../pages/pi-detail/components/problemlog-detail';
@@ -55,7 +55,7 @@ const routes = (
 			{/* <Route exact path={Menu.PROBLEMLOG_JOBTYPE} component={requireAuth(JobType)}/> */}
 			{/* <Route exact path={Menu.PROBLEMLOG_JOBLIST} component={requireAuth(JobList)}/> */}
 			{/* <Route exact path={Menu.PROBLEMLOG_DETAIL} component={requireAuth(Detail)}/> */}
-			{/* <Route exact path="*" component={requireAuth(Dashboard)} /> */}
+			<Route exact path="*" component={requireAuth(Dashboard)} />
 		</Switch>
 	</div>
 );
