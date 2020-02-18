@@ -77,8 +77,8 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
   showTableHead() {
       return (
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
-        {/* <TableRow classes={{ root: 'table-row' }}> */}
-        <TableRow>
+        <TableRow classes={{ root: 'table-row' }}>
+        {/* <TableRow> */}
           <TableCell padding="checkbox">
             {this.props.displayServiceCheckbox && 
             <Checkbox 
