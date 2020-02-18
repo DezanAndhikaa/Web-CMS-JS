@@ -78,26 +78,13 @@ class FilterbyDataAction extends React.Component {
     )
   }
 
-  renderDropdownList() {
-    return (
-      <div className="list-items-fbdt">
-          <Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales') }>
-            Sales Order
-          </Button>
-          <Button className="button-plan-del" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service') }>
-            Service Order
-          </Button>
-      </div>
-    );
-  }
-
-  // renderDropdownApproval() {
+  // renderDropdownList() {
   //   return (
-  //     <div className="list-items">
-  //         <Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_APPROVAL, 'sales') }>
-  //           Sales Orders
+  //     <div className="list-items-fbdt">
+  //         <Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales') }>
+  //           Sales Order
   //         </Button>
-  //         <Button className="button-plan-del" variant="outlined" onClick={() => this.handleClick(Menu.PLANNING_DETAILS_APPROVAL, 'service') }>
+  //         <Button className="button-plan-del" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service') }>
   //           Service Order
   //         </Button>
   //     </div>
@@ -130,8 +117,7 @@ class FilterbyDataAction extends React.Component {
             </div>
           </div>
         </div>
-          {
-            // this.state.displayMenu && this.renderDropdownList()  
+          { 
             this.state.displayMenu && this.renderList()  
           }
         </div>
