@@ -19,7 +19,7 @@ export default class PlanningListHeader extends React.PureComponent {
 						this.props.name === 'Plan' ?
 							<InputButton titles="Plan Execution" title="Plan Execution Date" onFilter={this.props.onFilter} /> : 
 						this.props.name === 'SO' ?
-							<InputButton titles="SO" placeholder="SO" onSearch={this.props.onSearch} sort="So"/> :
+							<InputButton titles="SO" placeholder="SO" onSearch={this.props.onSearch} sort="SoNumber"/> :
 						this.props.name === 'Part Number' ?
 							<InputButton titles="Part Number" placeholder="Part Number" onSearch={this.props.onSearch} sort="PartNumber"/> :
 						this.props.name === 'Unit Code' ?
@@ -27,7 +27,7 @@ export default class PlanningListHeader extends React.PureComponent {
 						this.props.name === 'Serial Number' ?
 							<InputButton titles="Serial Number" placeholder="Serial Number" onSearch={this.props.onSearch} sort="SerialNumber"/> :
 						this.props.name === 'Work Order' ?
-							<InputButton titles="Work Order" placeholder="WO" onSearch={this.props.onSearch} sort="Wo"/> :
+							<InputButton titles="Work Order" placeholder="WO" onSearch={this.props.onSearch} sort="WoNumber"/> :
 						this.props.name === 'SMR' ?
 							<InputButton titles='SMR' placeholder="SMR" onSearch={this.props.onSearch} sort="SMR"/> :
 						this.props.name === 'SMR Date' ?

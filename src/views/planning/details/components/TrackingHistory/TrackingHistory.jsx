@@ -528,11 +528,23 @@ export default class TrackingHistory extends React.PureComponent {
 
 	componentWillUnmount = () => {
 		this.props.updateSalesParameter({
-		  ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
+			...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
 		});
 		this.props.updateServiceParameter({
-		  ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
+			...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
 		});
+		this.props.updateSalesApprovedParameter({
+			...this.props.salesApprovedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+		})
+		this.props.updateSalesDeletedParameter({
+			...this.props.salesDeletedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+		})
+		this.props.updateServiceApprovedParameter({
+			...this.props.serviceApprovedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+		})
+		this.props.updateServiceDeletedParameter({
+			...this.props.serviceDeletedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+		})
 	  }
 
 	componentDidUpdate = (prevProps) => {
@@ -588,7 +600,7 @@ export default class TrackingHistory extends React.PureComponent {
 				case 'Delete' :
 					return this.props.updateServiceDeletedParameter({...prevProps.serviceDeletedParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber :1});
 				case 'SAP ISSUE':
-					return this.props.updateServiceSapIssueParameter({...prevProps.serviceSapIssueParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber :1});
+					// return this.props.updateServiceSapIssueParameter({...prevProps.serviceSapIssueParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber :1});
 				default:
 					break;
 			}
