@@ -31,11 +31,9 @@ class Notification extends React.Component{
           {},{},{}
         ],
         events: [
-          { id: 1, time: "10:00", title: "Breakfast with Simon", location: "jalan" },
-          { id: 2, time: "10:30", title: "lunch with Simon", location: "meja" },
-          { id: 3, time: "11:00", title: "lunch with Sim", location: "bangku" },
-          { id: 3, time: "11:00", title: "lunch with Sim", location: "bangku" },
-          { id: 3, time: "11:00", title: "lunch with Sim", location: "bangku" },
+          { id: 1, time: "22 agustus 2018 - 9:00", title: "Jembayan", location: "Telah Menginput Lifetime Component", push: "dengan SO : 138580736 dan 13751973" },
+          { id: 2, time: "22 agustus 2018 - 9:00", title: "Jembayan", location: "Telah Menginput Lifetime Component", push: "dengan SO : 138580733 dan 13151973" },
+          { id: 3, time: "22 agustus 2018 - 9:00", title: "Jembayan", location: "Telah Menginput Lifetime Component", push: "dengan SO : 138580731 dan 13451973" },
         ]
         // nextPage: true,
         // prevPage: false,
@@ -133,6 +131,14 @@ componentDidUpdate = (prevProps) => {
       // onPageSize={()=>this.handlePageSize()}
       handleClickShowPerPage={this.handleClickShowPerPage}
       />
+    )
+  }
+
+  _renderTitle(){
+    return(
+      <div className="title">
+        NOTIFICATION
+      </div>
     )
   }
 
@@ -269,7 +275,7 @@ componentDidUpdate = (prevProps) => {
     return(
       <main className="content">
             <div className="table-container">
-                <div className="tab-header-notif">
+                <div className="tab-header-notif">  
                     <Button className="btn-approval" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL, 'sales') }>
                     Approval
                     </Button>
@@ -278,24 +284,29 @@ componentDidUpdate = (prevProps) => {
                         {this._renderFilterByDataAction()}
                     </div>
                 </div>
+                <div className="title-container">
+                  {this._renderTitle()}
+                </div>
                 <div className="mid-container">
                 <Paper className="paper">
                   {this.state.col.map(() => (
                        <div className="filters-container">
                          {this.state.events.map(world => (
                               <Card className="kartu">
-                                <div>{world.time}</div>
-                                <div>{world.title}</div>
-                                <div>{world.location}</div>
+                                <div className="kartu-title">{world.time}</div>
+                                <div className="kartu-site">{world.title}</div>
+                                <div className="kartu-title">{world.location}</div>
+                                <div className="kartu-title">{world.push}</div>
                               </Card>
                          ))}
                        </div>
                   ))}
-                  </Paper>
-                </div>
-                <div className="bottom-row">
+                   <div className="bottom-row">
                   {this._renderShowPerPage()} {this._renderPagination()}
                 </div>
+                  </Paper>
+                </div>
+               
                       
             </div>
         </main>
