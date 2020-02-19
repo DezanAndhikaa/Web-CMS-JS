@@ -316,7 +316,6 @@ class ApprovalTab extends React.Component {
   render() {
     const { classes, theme } = this.props;
     const { value } = this.state;
-    // {!this.props.isApproved ? console.log('skuit kondisi false', this.props.totalSalesData) : console.log('skuit kondisi true', this.props.salesOrderListApproved)}
     return (
         <div className="root">
         <AppBar position="static" color="default" style={{boxShadow: "none"}}>
