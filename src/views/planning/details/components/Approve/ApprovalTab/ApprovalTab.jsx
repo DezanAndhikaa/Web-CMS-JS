@@ -89,7 +89,7 @@ class ApprovalTab extends React.Component {
 
 
   handleChange = (event, value) => {
-// console.log('kondisi value terasek', value)
+console.log('kondisi value terasek', value)
     if (value === 0) {
       this.props.onPage(this.state.value);
       this.props.baseButton(this.state.value);
@@ -235,7 +235,7 @@ class ApprovalTab extends React.Component {
             </div>
           </div>
           <div className="base-button">
-            {this.props.renderBaseButton}
+          {this.props.renderBaseButton}
           </div>
         </div>
       )

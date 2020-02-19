@@ -642,8 +642,15 @@ componentDidUpdate = (prevProps) => {
     }
   };
 
+  isChangeStat = (value,key) =>{
+    this.setState({
+      lifetime: { Lists :this.state.lifetime.Lists.map(el => (el.SoNumber === key ? {...el, LifeTimeComp : value} : el)) }
+    });
+  };
+
   //KOMPONEN UNTUK BUTTON DOWNLOAD, APPROVE, DAN DELETE
   _renderBaseButton = (value) => {
+    console.log('MAMAK KAU VALUE ', value)
     if (value === 1) {
       this.setState({whichTabs : true})
     }if (value === 0) {
@@ -705,12 +712,6 @@ componentDidUpdate = (prevProps) => {
         </div>
       );
     }
-  };
-    
-  isChangeStat = (value,key) =>{
-    this.setState({
-      lifetime: { Lists :this.state.lifetime.Lists.map(el => (el.SoNumber === key ? {...el, LifeTimeComp : value} : el)) }
-    });
   };
 
   //FUNGSI UNTUK MULTI SELECT SALES ORDER

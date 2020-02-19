@@ -21,7 +21,7 @@
 
 .root {
     flex-grow: 1;
-    z-index: 0;
+    // z-index: 0;
     justify-content: center;
     align-items: center;
     .tabsRoot {
@@ -54,7 +54,7 @@
     flex-direction: row;
     position: absolute;
     width: 100%;
-    z-index: 999;
+    // z-index: 1;
     flex: 1;
     padding-bottom: vw(20);
     border-bottom: 1.5px solid #E0E0E0;
@@ -89,7 +89,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    z-index: 3;
+    // z-index: 0;
     .data-input-container{
         display: flex;
         flex-direction: row;

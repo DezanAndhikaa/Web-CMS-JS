@@ -110,8 +110,8 @@
 .table-container-approval{
     display: flex;
     flex-direction: column;
-    position: relative;
-    z-index: 3;
+    position: absolute;
+    // z-index: 0;
     .filters-container-approval{
         display: flex;
         flex-direction: row;

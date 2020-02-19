@@ -4,7 +4,7 @@ import React from 'react';
 // import { ExpandMore } from '@material-ui/icons';
 import './FilterbyDataAction.scss';
 import { Button, Badge } from '@material-ui/core';
-import { IconApprove, IconHistory, IconInputLT } from '../../assets/icons';
+import { IconApprove, IconHistory, IconInputLT, IconNotif } from '../../assets/icons';
 import { withStyles } from '@material-ui/core/styles';
 import { Menu } from '../../constants';
 import MenuList from '@material-ui/core/MenuList';
@@ -26,6 +26,15 @@ const DotBadges = withStyles(theme => ({
         minWidth: '15px',
         height: '15px',
         borderRadius: '50%'
+	},
+}))(Badge);
+
+const Badges = withStyles(theme => ({
+	badge: {
+		top: -3,
+		left: -5,
+		fontSize: '10px',
+		border: '2px solid white'
 	},
 }))(Badge);
 
@@ -78,18 +87,29 @@ class FilterbyDataAction extends React.Component {
     )
   }
 
-  // renderDropdownList() {
-  //   return (
-  //     <div className="list-items-fbdt">
-  //         <Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales') }>
-  //           Sales Order
-  //         </Button>
-  //         <Button className="button-plan-del" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service') }>
-  //           Service Order
-  //         </Button>
-  //     </div>
-  //   );
-  // }
+  renderListNotif(){
+    return(
+      <Paper className="list-items-fbdt">
+      <MenuList>
+        <MenuItem>
+          <Typography className="list-item-fbdt" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales')}>Sales Order</Typography>
+        </MenuItem>
+        <MenuItem>
+          <Typography className="list-item-fbdt" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
+        </MenuItem>
+        <MenuItem>
+          <Typography className="list-item-fbdt" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
+        </MenuItem>
+        <MenuItem>
+          <Typography className="list-item-fbdt" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
+        </MenuItem>
+      </MenuList>
+      {/* <div className="see-all-notif">
+        <div className="label-all-notif" onClick={ () => this.handleClick(Menu.PLANNING_ALL_NOTIF) }>See All Notification</div>
+      </div> */}
+    </Paper>
+    )
+  }
 
   render() {
     if (this.props.displayMode === 'mobile') {
@@ -119,6 +139,24 @@ class FilterbyDataAction extends React.Component {
         </div>
           { 
             this.state.displayMenu && this.renderList()  
+          }
+        </div>
+      );
+    }
+    else if(this.props.titles === "Notif"){
+      return (
+        <div className="dropdown">
+          <div className="dropdown-button" onClick={this.showDropdownMenu}>
+            <div className="dropdown-selected-item">
+              <div className="tracking-history">
+                <Badges badgeContent={57} color="secondary" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
+                  <img src={IconNotif} className="icon-history" alt="" /> <span className="label-history">Notification</span>
+                </Badges>
+              </div>
+            </div>
+          </div>
+          { 
+            this.state.displayMenu && this.renderListNotif()  
           }
         </div>
       );

@@ -55,15 +55,25 @@ class NotifButton extends React.PureComponent {
   renderList(){
     return(
       <Paper className="list-notif">
-      <MenuList>
-        <MenuItem>
-          <Typography className="list-item-notif" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales')}>Sales Order</Typography>
-        </MenuItem>
-        <MenuItem>
-          <Typography className="list-item-notif" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
-        </MenuItem>
-      </MenuList>
-      <div className="see-all-notif" onClick={ () => this.handleClick(Menu.PLANNING_ALL_NOTIF) }>See All Notification</div>
+        <div className="list-container">
+          <MenuList>
+            <MenuItem>
+              <Typography className="list-item-notif" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales')}>Sales Order</Typography>
+            </MenuItem>
+            <MenuItem>
+              <Typography className="list-item-notif" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
+            </MenuItem>
+            <MenuItem>
+              <Typography className="list-item-notif" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
+            </MenuItem>
+            <MenuItem>
+              <Typography className="list-item-notif" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
+            </MenuItem>
+          </MenuList>
+        </div>
+      <div className="see-all-notif">
+        <div className="label-notif" onClick={ () => this.handleClick(Menu.PLANNING_ALL_NOTIF) }>See All Notification</div>
+      </div>
     </Paper>
     )
   }
