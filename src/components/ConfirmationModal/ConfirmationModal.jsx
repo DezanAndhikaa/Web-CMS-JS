@@ -8,6 +8,7 @@ import './ConfirmationModal.scss';
 export default class ConfirmationModal extends React.PureComponent {
   render() {
     if(this.props.idModal === "Approved"){
+      console.log('uhuy sap 2')
       return (
         <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
             <DialogContent className="confirmation-modal-content">
@@ -24,8 +25,7 @@ export default class ConfirmationModal extends React.PureComponent {
             </DialogContent>
             </Modal>
         );
-    }
-    if(this.props.idModal === "SAP"){
+    }else if(this.props.idModal === "SAP"){
       console.log('uhuy sap 3')
       return (
         <Modal open={this.props.isShowModal} onClose={this.props.onClose} className="modal-container">

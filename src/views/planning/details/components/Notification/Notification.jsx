@@ -1,5 +1,6 @@
 import React from 'react';
 import moment, { ISO_8601 } from "moment";
+import { Paper, Card, Grid } from '@material-ui/core'
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import './Notification.scss';
 import PlanningDetailsTab from '../Tab/PlanningDetailsTab';
@@ -24,6 +25,16 @@ class Notification extends React.Component{
         whichTabs: true,
         isApproved: false,
         snak: true,
+        col: [
+          {},
+          {},
+          {},{},{}
+        ],
+        events: [
+          { id: 1, time: "22 agustus 2018 - 9:00", title: "Jembayan", location: "Telah Menginput Lifetime Component", push: "dengan SO : 138580736 dan 13751973" },
+          { id: 2, time: "22 agustus 2018 - 9:00", title: "Jembayan", location: "Telah Menginput Lifetime Component", push: "dengan SO : 138580733 dan 13151973" },
+          { id: 3, time: "22 agustus 2018 - 9:00", title: "Jembayan", location: "Telah Menginput Lifetime Component", push: "dengan SO : 138580731 dan 13451973" },
+        ]
         // nextPage: true,
         // prevPage: false,
         // numberOfPage: 2,
@@ -120,6 +131,14 @@ componentDidUpdate = (prevProps) => {
       // onPageSize={()=>this.handlePageSize()}
       handleClickShowPerPage={this.handleClickShowPerPage}
       />
+    )
+  }
+
+  _renderTitle(){
+    return(
+      <div className="title">
+        NOTIFICATION
+      </div>
     )
   }
 
@@ -251,12 +270,12 @@ componentDidUpdate = (prevProps) => {
       whichTab: tab
     });
   }
-  
+
   render(){ 
     return(
       <main className="content">
             <div className="table-container">
-                <div className="tab-header-notif">
+                <div className="tab-header-notif">  
                     <Button className="btn-approval" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL, 'sales') }>
                     Approval
                     </Button>
@@ -265,9 +284,30 @@ componentDidUpdate = (prevProps) => {
                         {this._renderFilterByDataAction()}
                     </div>
                 </div>
-                <div className="bottom-row">
-                    {this._renderShowPerPage()} {this._renderPagination()}
+                <div className="title-container">
+                  {this._renderTitle()}
                 </div>
+                <div className="mid-container">
+                <Paper className="paper">
+                  {this.state.col.map(() => (
+                       <div className="filters-container">
+                         {this.state.events.map(world => (
+                              <Card className="kartu">
+                                <div className="kartu-title">{world.time}</div>
+                                <div className="kartu-site">{world.title}</div>
+                                <div className="kartu-title">{world.location}</div>
+                                <div className="kartu-title">{world.push}</div>
+                              </Card>
+                         ))}
+                       </div>
+                  ))}
+                   <div className="bottom-row">
+                  {this._renderShowPerPage()} {this._renderPagination()}
+                </div>
+                  </Paper>
+                </div>
+               
+                      
             </div>
         </main>
     )

@@ -31,9 +31,9 @@ class ApprovalPages extends React.Component{
     };
 }
 
-componentDidMount = () => {
-  console.log('tok tok tok : ',this.props.salesOrderList)
-}
+// componentDidMount = () => {
+//   console.log('tok tok tok : ',this.props.salesOrderList)
+// }
 
 componentWillUnmount = () => {
   this.props.updateSalesParameter({

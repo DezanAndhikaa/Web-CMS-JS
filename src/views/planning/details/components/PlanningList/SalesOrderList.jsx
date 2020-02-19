@@ -290,7 +290,6 @@ export default class SalesOrderList extends React.PureComponent {
   }
 
 render(){
-  console.log('INI TOKEK ', this.props.token)
         return(
           <>
             <Table classes={{ root: 'table' }} className="table">

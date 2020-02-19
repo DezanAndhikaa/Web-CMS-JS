@@ -19,11 +19,16 @@
     }
 }
 
-.title{
-    margin-top: vw(19) !important;
-    font-family: 'SFUIDisplay-Bold';
-    font-size: vw(25);
-    line-height: vw(30);
+.title-container{
+    width: 100%;
+    height: 80px;
+    .title{
+        // margin-top: auto;
+        margin-left: 2%;
+        font-family: 'Lato-Regular';
+        font-size: 30px;
+        line-height: vw(30);
+    }
 }
 
 .bottom-row{
@@ -35,14 +40,14 @@
     flex: 1;
     display: flex;
     flex-direction: row;
-    margin-top: vw(20);
+    // margin-top: 10%;
     position: relative;
     .pagination{
         display: flex;
         flex: 1;
         flex-direction: row;
         justify-content: flex-end;
-        margin-bottom: vw(30);
+        margin-bottom: 1px;
         .paging{
             display: flex;
             flex-direction: row;
@@ -219,4 +224,54 @@
             }
         }
     }
+
+    .mid-container{
+        position: relative; 
+        // margin-left: 10%;
+        // margin-top: 5%;
+        width: 100%;
+        height: 96%;
+        .paper{
+            width:100%;
+            height: 100%;
+        }
+        .kartu{
+            position: relative;
+            // display: flex;
+            margin-top: 2%;
+            margin-left: 7%;
+            // margin-right: 3%;
+            background-color: white;
+            width: 25%;
+            height: 90%;
+            // background-color: map-get($colors , page-background);
+            box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+            background-image: url('../../../../../assets/icons/notif_input.png');
+            background-size: 15%;
+            background-position-x: 5%;
+            background-position-y: center;
+            background-repeat: no-repeat;
+            border:none;
+            .kartu-title{
+                display: absolute;
+                flex-direction: column;
+                justify-content: left;
+                margin-bottom: 1%;
+                margin-top: 1%;
+                margin-left: 25%;
+                font-size: 12px;
+            }
+            .kartu-site{
+                display: absolute;
+                flex-direction: column;
+                justify-content: left;
+                margin-bottom: 1%;
+                margin-left: 25%;
+                font-size: 14px;
+                font-weight: 800;
+            }
+        }
+    }
+    
 }
+
