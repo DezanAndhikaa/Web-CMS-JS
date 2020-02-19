@@ -12,6 +12,7 @@ import FilterbyDataAction from '../../../../../components/FilterByDataAction/Fil
 import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton';
 import { Button } from '@material-ui/core';
 import { Menu } from '../../../../../constants';
+import CardData from './Components/Card'
 // import SapIssue from './components/SapIssue/SapIssue'
 
 class Notification extends React.Component{
@@ -25,16 +26,6 @@ class Notification extends React.Component{
         whichTabs: true,
         isApproved: false,
         snak: true,
-        col: [
-          {},
-          {},
-          {},{},{}
-        ],
-        events: [
-          { id: 1, time: "22 agustus 2018 - 9:00", title: "Jembayan", location: "Telah Menginput Lifetime Component", push: "dengan SO : 138580736 dan 13751973" },
-          { id: 2, time: "22 agustus 2018 - 9:00", title: "Jembayan", location: "Telah Menginput Lifetime Component", push: "dengan SO : 138580733 dan 13151973" },
-          { id: 3, time: "22 agustus 2018 - 9:00", title: "Jembayan", location: "Telah Menginput Lifetime Component", push: "dengan SO : 138580731 dan 13451973" },
-        ]
         // nextPage: true,
         // prevPage: false,
         // numberOfPage: 2,
@@ -52,10 +43,6 @@ componentWillUnmount = () => {
   this.props.updateServiceParameter({
     ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
   });
-}
-
-componentDidMount = () => {
-  console.log('tok token : ', this.props.token)
 }
 
 componentDidUpdate = (prevProps) => {
@@ -142,6 +129,12 @@ componentDidUpdate = (prevProps) => {
     )
   }
 
+  _renderData(){
+    return(
+      <CardData/>
+    )
+  }
+
   handleClickShowPerPage = async(value) =>{
     if (this.state.whichTabs === true) {
       console.log('pantej sales', value)
@@ -212,58 +205,6 @@ componentDidUpdate = (prevProps) => {
     })
   }
 
-  //FUNGSI UNTUK MULTI SELECT SALES ORDER
-  updateAssignmentSalesStates = (plan) => {
-    if (this.props.selectedSalesPlans
-      .some((plans) => plans.SoNumber === plan.SoNumber,
-        // console.log('sssss sales', this.state.selectedData.SoNumber)
-      )) 
-    { return this.props.unselectSalesPlan(plan); }
-    return this.props.selectSalesPlan(plan);
-  };
-
-  //FUNGSI UNTUK MULTI SELECT SERVICE ORDER
-  updateAssignmentServiceStates = (plan) => {
-    if (this.props.selectedServicePlans
-      .some((plans) => plans.WoNumber === plan.WoNumber,
-        // console.log('sssss sales', this.state.selectedServiceData.WoNumber)
-      ))
-    { return this.props.unselectServicePlan(plan); }
-    return this.props.selectServicePlan(plan);
-  };
-
-  //KOMPONEN UNTUK RENDER PAGE SALES ORDER DAN SERVICE ORDER
-//   _renderTabs(){
-//     return (
-//       <>
-//         <PlanningDetailsTab
-//           {...this.props}
-//           renderFilterByDataAction={this._renderFilterByDataAction()} 
-//           renderSearch={this._renderSearchBar()}
-//           renderNotif={this._renderNotif()}
-//           onClickSalesOrder={this.onClickSalesOrder}        
-//           onClickServiceOrder={this.onClickServiceOrder}
-//           onChoosedService={this.updateAssignmentServiceStates}
-//           onChoosedSales={this.updateAssignmentSalesStates}
-//           selectedSalesPlanList={this.props.selectedSalesPlans}
-//           selectedServicePlanList={this.props.selectedServicePlans}
-//           displaySalesCheckbox={this.props.salesParameter.paramsData.assigmentFilter || this.props.salesParameter.paramsData.inProgressFilter}
-//           displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
-//           stats={this.state.stats}
-//           onStats={this.isChangeStat}     
-//           totalSalesData={this.props.salesOrderList.TotalData}
-//           totalServiceData={this.props.serviceOrderList.TotalData}
-//           ApprovedSalesData={this.props.salesOrderListApproved.TotalData}
-//           onClickTabHead={this.props.onClickSortBy}
-//           sortSalesByState={this.props.sortSalesBy}
-//           sortServiceByState={this.props.sortServiceBy}
-//           onPage={this._renderPagination}
-//           isApproved={this.state.isApproved}
-//         />
-//       </>
-//     );
-//   };
-
   handleClick = (menu, tab) => {
     this.props.push({
       pathname: menu,
@@ -289,25 +230,12 @@ componentDidUpdate = (prevProps) => {
                 </div>
                 <div className="mid-container">
                 <Paper className="paper">
-                  {this.state.col.map(() => (
-                       <div className="filters-container">
-                         {this.state.events.map(world => (
-                              <Card className="kartu">
-                                <div className="kartu-title">{world.time}</div>
-                                <div className="kartu-site">{world.title}</div>
-                                <div className="kartu-title">{world.location}</div>
-                                <div className="kartu-title">{world.push}</div>
-                              </Card>
-                         ))}
-                       </div>
-                  ))}
+                  {this._renderData()}
                    <div className="bottom-row">
                   {this._renderShowPerPage()} {this._renderPagination()}
                 </div>
                   </Paper>
-                </div>
-               
-                      
+                </div>   
             </div>
         </main>
     )
