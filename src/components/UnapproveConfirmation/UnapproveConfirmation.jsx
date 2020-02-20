@@ -1,5 +1,5 @@
 import React from 'react';
-import { DialogContent, Button, Modal } from '@material-ui/core';
+import { DialogContent, Button, Modal, CircularProgress } from '@material-ui/core';
 import { ImgSendtoEdit, ImgCancelApprove, ImgCancelEditSucc } from '../../assets/imgs';
 import './UnapproveConfirmation.scss';
 import CloseNotif from '../CloseNotif/CloseNotif';
@@ -13,7 +13,25 @@ export default class UnapproveConfirmation extends React.PureComponent {
     isShowModalUnapprove: false,
     isShowModalSap: false,
     isShowModalSend: false,
-    isShowModalSapSucced: false
+    isShowModalSapSucced: true
+  }
+
+  isSAPIssue = async(data) => {
+    console.log('kluk  ')
+    await this.props.putSAPIssue({SAPIssue: data }, this.props.token);
+  }
+
+  onKelik =  async( description) => {
+    const index = this.props.selectedDataSAP.length
+    let arr = []
+    for(let i=0; i<index; i++){
+      arr = [...arr,{So: this.props.selectedDataSAP[i].SoNumber, Message: description[i]}]
+    }
+    this.setState({
+      SAPIssue: arr
+    },
+    () => this.isSAPIssue(arr) 
+    )
   }
 
   componentDidUpdate = (prevProps) =>{
@@ -21,6 +39,18 @@ export default class UnapproveConfirmation extends React.PureComponent {
     this.setState({
       isShowModalUnapprove: this.props.openModal
     })
+  }
+
+  isTry = () => {
+    this.setState({
+      isShowModalSap: !this.state.isShowModalSap,
+    })
+  }
+
+  isTryClosed = () => {
+      this.setState({
+        isShowModalSapSucced: !this.state.isShowModalSapSucced
+      })
   }
 
   isClickedSap = () => {
@@ -38,19 +68,10 @@ export default class UnapproveConfirmation extends React.PureComponent {
   }
 
   isClosedSap = () => {
-    if(this.props.fetchStatusPutSAPIssue === ApiRequestActionsStatus.SUCCEEDED)
-    {
-      this.setState({
-        isShowModalSap: !this.state.isShowModalSap,
-        isShowModalSapSucced: !this.state.isShowModalSapSucced
-        // isShowModalUnapprove: !this.state.isShowModalUnapprove
-      })
-    }else{
-      this.setState({
-        isShowModalSap: !this.state.isShowModalSap,
-        isShowModalUnapprove: !this.state.isShowModalUnapprove
-      })
-    }
+    this.setState({
+      isShowModalSap: !this.state.isShowModalSap,
+      isShowModalUnapprove: !this.state.isShowModalUnapprove
+    })
   }
 
   isClosedSend = () => {
@@ -62,18 +83,13 @@ export default class UnapproveConfirmation extends React.PureComponent {
 
   _renderSap(open){
     return(
-      <SapIssue {...this.props} isShowModal={open} isClosed={this.isClosedSap}/>
+      <SapIssue {...this.props} isShowModal={open} isClosed={this.isClosedSap} isTry={this.isTry} isSucced={this._renderSapSucced} onKelik={this.onKelik}/>
     )
   }
 
-  _renderSapSucced(open){
-    console.log('uhuy sap ')
-    this.setState({
-      isShowModalSap: !this.state.isShowModalSap,
-      isShowModalSapSucced: !this.state.isShowModalSapSucced
-    })
+  _renderSapSucced(){
     return(
-      <ConfirmationModal isShowModal={open} idModal="SAP"/>
+      <ConfirmationModal isModal={this.state.isShowModalSapSucced} idModal="SAP" isModalClosed={this.isTryClosed}/>
     )
   }
 
@@ -97,6 +113,10 @@ export default class UnapproveConfirmation extends React.PureComponent {
         </DialogContent>
       </Modal>
     )
+}
+
+renderCircularProgress() {
+    return <CircularProgress size={100} className="circular-progress" />;
 }
 
 	render() {
@@ -130,10 +150,15 @@ export default class UnapproveConfirmation extends React.PureComponent {
           {this.state.isShowModalSap && (
             this._renderSap(this.state.isShowModalSap)
           )}
+          {this.props.fetchStatusPutSAPIssue === ApiRequestActionsStatus.LOADING &&  (
+            this.renderCircularProgress()
+          )}
           {this.props.fetchStatusPutSAPIssue === ApiRequestActionsStatus.SUCCEEDED && (
-            this._renderSapSucced(this.state.isShowModalSapSucced)
+            this._renderSapSucced()
           )} 
-          {this.state.isShowModalSend && (this._renderSendtoEdit())}   
+          {this.state.isShowModalSend && (
+            this._renderSendtoEdit()
+          )}   
         </>
         );
     } else if(this.props.idConfirm === "Successfull"){

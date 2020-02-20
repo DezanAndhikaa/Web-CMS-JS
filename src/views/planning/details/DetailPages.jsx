@@ -79,7 +79,6 @@ componentDidUpdate = (prevProps) => {
   }
   //FILTER RANGE LIFETIME
   if(prevProps.filterLifetime !== this.props.filterLifetime){
-    console.log('dumtt,',this.props.filterLifetime)
     this.props.updateSalesParameter({
       ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterLifetime.Filter, PageNumber: 1
     })
@@ -87,6 +86,7 @@ componentDidUpdate = (prevProps) => {
   }
   //FILTER RANGE DATE
   if(prevProps.filterDate !== this.props.filterDate){
+    console.log('data props filter', this.props.filterDate)
     this.props.fetchSalesOrder(this.props.filterDate);
   }
 
