@@ -78,8 +78,8 @@ const styles = theme => ({
 class ApprovalTab extends React.Component {
   state = {
     value: 0,
-    invisible1: false,
-    invisible2: true,
+    // invisible1: false,
+    // invisible2: true,
     GroupCustomer: [],
     GroupSite: [],
     GroupUnitModel: [],
@@ -89,30 +89,32 @@ class ApprovalTab extends React.Component {
 
 
   handleChange = (event, value) => {
-// console.log('kondisi value terasek', value)
+
     if (value === 0) {
+      console.log('kondisi value terasek', value)
       this.props.onPage(this.state.value);
-      this.props.baseButton(this.state.value);
-      if (this.state.invisible1) {
-        this.setState({
-          invisible2 : true
-        })
-      }
+      // this.props.baseButton(this.state.value);
+      // if (this.state.invisible1) {
+      //   this.setState({
+      //     invisible2 : true
+      //   })
+      // }
       this.setState({
-        invisible1 : false,
+        // invisible1 : false,
         value,
       })
     }
-    if (value === 1) {    
+    if (value === 1) {  
+      console.log('kondisi value terasek', value)  
       this.props.onPage(this.state.value);
-      this.props.baseButton(this.state.value);
-      if (this.state.invisible2) {
-        this.setState({
-          invisible1 : true
-        })
-      }
+      // this.props.baseButton(this.state.value);
+      // if (this.state.invisible2) {
+      //   this.setState({
+      //     invisible1 : true
+      //   })
+      // }
       this.setState({
-        invisible2 : false,
+        // invisible2 : false,
         value
       })
     }
@@ -315,7 +317,7 @@ class ApprovalTab extends React.Component {
   render() {
     const { classes, theme } = this.props;
     const { value } = this.state;
-    {!this.props.isApproved ? console.log('skuit kondisi false', this.props.totalSalesData) : console.log('skuit kondisi true', this.props.salesOrderListApproved)}
+    // {!this.props.isApproved ? console.log('skuit kondisi false', this.props.totalSalesData) : console.log('skuit kondisi true', this.props.salesOrderListApproved)}
     return (
         <div className="root">
         <AppBar position="static" color="default" style={{boxShadow: "none"}}>

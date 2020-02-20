@@ -18,7 +18,6 @@ class DetailPages extends React.Component{
       super(props)
       this.state = {
         stats: true,
-        // isPaging: true,
         isShowPerPage: true,
         showPerPage : 0,
         whichTabs: true,

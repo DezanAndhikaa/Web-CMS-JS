@@ -191,19 +191,19 @@ const initialSearchCompParameter =
 
 const initialSearchSalesParameter =
 [{
-	Field	: 'SO',
+	Field	: 'SoNumber',
 	Operator: 'contains',
 	Value 	: '',
 	Logic 	: 'OR'
 },
 {
-	Field	: 'Customer',
+	Field	: 'CustomerName',
 	Operator: 'contains',
 	Value 	: '',
 	Logic 	: 'OR'
 },
 {
-	Field	: 'Site',
+	Field	: 'SiteCode',
 	Operator: 'contains',
 	Value 	: '',
 	Logic 	: 'OR'
@@ -245,7 +245,7 @@ const initialSearchSalesParameter =
 	Logic 	: 'OR'
 },
 {
-	Field	: 'PlanExecution',
+	Field	: 'PlanExecutionDate',
 	Operator: 'contains',
 	Value 	: '',
 	Logic 	: 'OR'
@@ -253,19 +253,19 @@ const initialSearchSalesParameter =
 
 const initialSearchServiceParameter =
 [{
-	Field	: 'Wo',
+	Field	: 'WoNumber',
 	Operator: 'contains',
 	Value 	: '',
 	Logic 	: 'OR'
 },
 {
-	Field	: 'Customer',
+	Field	: 'CustomerName',
 	Operator: 'contains',
 	Value 	: '',
 	Logic 	: 'OR'
 },
 {
-	Field	: 'Site',
+	Field	: 'SiteCode',
 	Operator: 'contains',
 	Value 	: '',
 	Logic 	: 'OR'
@@ -307,7 +307,7 @@ const initialSearchServiceParameter =
 	Logic 	: 'OR'
 },
 {
-	Field	: 'PlanExecution',
+	Field	: 'PlanExecutionDate',
 	Operator: 'contains',
 	Value 	: '',
 	Logic 	: 'OR'
@@ -552,9 +552,9 @@ export function filterDateReducer(state = initialFilterParameter, action){
 	if(action.type === DateFilterAction)
 		for(let i=0; i<2; i++){
 			if( i === 0){
-				state = {...state, PageSize: action.page, Filter : [...state.Filter,{Field: 'PlanExecution', Operator: 'gte', Value: action.payload, Logic: 'and'}] };
+				state = {...state, PageSize: action.page, Filter : [...state.Filter,{Field: 'PlanExecutionDate', Operator: 'gte', Value: action.payload, Logic: 'and'}] };
 			}else if( i === 1){
-				state = {...state, Filter : [...state.Filter,{Field: 'PlanExecution', Operator: 'lte', Value: action.payload2, Logic: 'and'}] };
+				state = {...state, Filter : [...state.Filter,{Field: 'PlanExecutionDate', Operator: 'lte', Value: action.payload2, Logic: 'and'}] };
 			}
 		}
 	return state;
@@ -564,7 +564,7 @@ export function filterParameterReducer(state = initialFilterParameter, action){
 	if (action.type === SelectCustomerFilterAction)
 		if(state.Filter.length === 0){ //IF yang pertama ini,jika filternya belum di isi apa2 (filter belum di jalankan)
 			// return {...state, PageSize: action.page, Filter : [{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
-			return {...state,Filter : [{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
+			return {...state,Filter : [{Field: 'CustomerName', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
 		}else{
 			for(let i=0; i<state.Filter.length; i++){ //FOR di sini untuk mengecek pada objek sebelumnya
 				if(state.Filter[i].Field === action.head){ //JIKA pada objek sebelumnya pada "field" ada yang sama, maka akan merubah nilai pada "value" tersebut tanpa menambah array
@@ -575,11 +575,11 @@ export function filterParameterReducer(state = initialFilterParameter, action){
 					return { ...state, Filter : state.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) };
 				}
 			}
-			return { ...state, Filter : [...state.Filter,{Field: 'Customer', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
+			return { ...state, Filter : [...state.Filter,{Field: 'CustomerName', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
 		}
 	if(action.type === SelectSiteFilterAction)
 		if(state.Filter.length === 0){
-			return {...state, Filter : [{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
+			return {...state, Filter : [{Field: 'SiteCode', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
 		}else{
 			for(let i=0; i<state.Filter.length; i++){
 				if(state.Filter[i].Field === action.head){
@@ -590,7 +590,7 @@ export function filterParameterReducer(state = initialFilterParameter, action){
 					return { ...state, Filter : state.Filter.map(el => (el.Field === action.head ? {...el,Value : action.payload} : el )) };
 				}
 			}
-			return { ...state, Filter : [...state.Filter,{Field: 'Site', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
+			return { ...state, Filter : [...state.Filter,{Field: 'SiteCode', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
 		}
 	if (action.type === SelectUnitModelFilterAction)
 		if(state.Filter.length === 0){
@@ -682,7 +682,7 @@ export function searchServicePlansReducer(state = initialSearchServiceParameter,
 
 export function searchCompReducer(state = initialSearchCompParameter, action) {
 	if (action.type === SearchCompAction) {
-		if(action.sort === 'So'){
+		if(action.sort === 'SoNumber'){
 			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
 			return updatedArray;
 		}else if(action.sort === 'PartNumber'){
@@ -696,7 +696,7 @@ export function searchCompReducer(state = initialSearchCompParameter, action) {
 			return updatedArray;
 		}
 	}else if(action.type === SearchCompActionService){
-		if(action.sort === 'Wo'){
+		if(action.sort === 'WoNumber'){
 			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
 			return updatedArray;
 		}else if(action.sort === 'PartNumber'){
