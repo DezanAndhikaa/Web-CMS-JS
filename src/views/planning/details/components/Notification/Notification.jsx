@@ -130,7 +130,10 @@ componentDidUpdate = (prevProps) => {
 
   _renderData(){
     return(
-      <CardData/>
+      <CardData 
+      {...this.props}
+      idCard = "See All"
+      />
     )
   }
 

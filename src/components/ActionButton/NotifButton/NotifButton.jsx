@@ -7,6 +7,7 @@ import { IconNotif, IconHistory } from '../../../assets/icons';
 import { withStyles } from '@material-ui/core/styles';
 import { Menu } from '../../../constants';
 import { withRouter } from "react-router-dom";
+import CardData from '../../../views/planning/details/components/Notification/Components/Card';
 
 const Badges = withStyles(theme => ({
 	badge: {
@@ -56,20 +57,14 @@ class NotifButton extends React.PureComponent {
     return(
       <Paper className="list-notif">
         <div className="list-container">
-          <MenuList>
-            <MenuItem>
-              <Typography className="list-item-notif" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales')}>Sales Order</Typography>
-            </MenuItem>
-            <MenuItem>
-              <Typography className="list-item-notif" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
-            </MenuItem>
-            <MenuItem>
-              <Typography className="list-item-notif" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
-            </MenuItem>
-            <MenuItem>
-              <Typography className="list-item-notif" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
-            </MenuItem>
-          </MenuList>
+          <div className="list-item-notif">
+            <div className="listnya">
+            <CardData 
+              {...this.props}
+              idCard = "Notification"
+            />
+            </div>
+          </div>
         </div>
       <div className="see-all-notif">
         <div className="label-notif" onClick={ () => this.handleClick(Menu.PLANNING_ALL_NOTIF) }>See All Notification</div>

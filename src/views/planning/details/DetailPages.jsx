@@ -9,6 +9,7 @@ import SearchInput from "../../../components/Searchbar/SearchInput";
 import BaseButton from '../../../components/Button/BaseButton';
 import FilterbyDataAction from '../../../components/FilterByDataAction/FilterbyDataAction';
 import NotifButton from '../../../components/ActionButton/NotifButton/NotifButton';
+import { Menu } from '../../../constants'
 import {Snackbar, Button} from '@material-ui/core';
 
 import SapIssue from './components/SapIssue/SapIssue'
@@ -33,6 +34,10 @@ class DetailPages extends React.Component{
     };
 }
 
+handleClick = (menu) => {
+  this.props.push(menu);
+}
+
 componentWillUnmount = () => {
   this.props.updateSalesParameter({
     ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
@@ -43,12 +48,16 @@ componentWillUnmount = () => {
 }
 
 componentDidMount = () => {
-  console.log('tok token : ', this.props.token)
+  console.log('tok token : ', this.props.location)
+  if(this.props.location.whichTab === undefined){
+    this.handleClick(Menu.PLANNING_APPROVAL)
+  }
 }
 
 componentDidUpdate = (prevProps) => {
   if (prevProps.salesParameter !== this.props.salesParameter) {
-    this.props.fetchSalesOrder(this.props.salesParameter.dataFilter,this.props.token);
+    this.onClickSalesOrder()
+    // this.props.fetchSalesOrder(this.props.salesParameter.dataFilter,this.props.token);
   }
   // if (prevProps.serviceParameter !== this.props.serviceParameter) {
   //   this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
@@ -57,10 +66,10 @@ componentDidUpdate = (prevProps) => {
     prevProps.approveSalesDownloaded.status === ApiRequestActionsStatus.LOADING) {
     this.onClickDownloadSalesApproved()
   }
-  if (this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
-    prevProps.approveServiceDownloaded.status === ApiRequestActionsStatus.LOADING) {
-    this.onClickDownloadServiceApproved()
-  }
+  // if (this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
+  //   prevProps.approveServiceDownloaded.status === ApiRequestActionsStatus.LOADING) {
+  //   this.onClickDownloadServiceApproved()
+  // }
 
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
@@ -79,7 +88,6 @@ componentDidUpdate = (prevProps) => {
   }
   //FILTER RANGE LIFETIME
   if(prevProps.filterLifetime !== this.props.filterLifetime){
-    console.log('dumtt,',this.props.filterLifetime)
     this.props.updateSalesParameter({
       ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterLifetime.Filter, PageNumber: 1
     })
@@ -87,6 +95,7 @@ componentDidUpdate = (prevProps) => {
   }
   //FILTER RANGE DATE
   if(prevProps.filterDate !== this.props.filterDate){
+    console.log('data props filter', this.props.filterDate)
     this.props.fetchSalesOrder(this.props.filterDate);
   }
 
@@ -129,7 +138,7 @@ componentDidUpdate = (prevProps) => {
           PageNumber: 1,
           // PageSize: 2,
           Sort: [{
-            Field : 'Customer',
+            Field : 'CustomerName',
             Direction : 'desc'
           }],      
       });
@@ -140,7 +149,7 @@ componentDidUpdate = (prevProps) => {
           PageNumber: 1,
           // PageSize: 2,
           Sort: [{
-            Field : 'Customer',
+            Field : 'CustomerName',
             Direction : 'asc'
           }],      
       });
@@ -153,7 +162,7 @@ componentDidUpdate = (prevProps) => {
           PageNumber: 1,
           // PageSize: 2,
           Sort: [{
-            Field : 'Site',
+            Field : 'SiteCode',
             Direction : 'desc'
           }],
       });
@@ -164,7 +173,7 @@ componentDidUpdate = (prevProps) => {
           PageNumber: 1,
           // PageSize: 2,
           Sort: [{
-            Field : 'Site',
+            Field : 'SiteCode',
             Direction : 'asc'
           }],
       });
@@ -379,13 +388,32 @@ componentDidUpdate = (prevProps) => {
   }
 
   //SAAT MENGKLIK SALES ORDER TAB
-  onClickServiceOrder = () => {
-    this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+  onClickServiceOrder = async() => {
+    await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
   }
 
   //SAAT MENGKLIK SERVICE ORDER TAB
-  onClickSalesOrder = () =>{
-    this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
+  onClickSalesOrder = async() =>{
+    if (this.props.location.whichTab === 'lifetime') {
+      await this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter, 
+        Filter : [{
+          Field : 'LifeTimeComponent',
+          Operator : "eq",
+          Value : null,
+          Logic : "AND"
+      }]
+    }, this.props.token)
+    }else if(this.props.location.whichTab === undefined){
+      await this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter,
+        Filter : [{
+          Field : 'LifeTimeComponent',
+          Operator : "neq",
+          Value : null,
+          Logic : "AND"
+      }]
+    }, this.props.token);
+    }
+    // this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
   }
 
   //KOMPONEN UNTUK SHOW PER/PAGE
@@ -571,7 +599,7 @@ componentDidUpdate = (prevProps) => {
   };
 
   render(){  
-    console.log('selected sales plan : ',this.props.selectedSalesPlans)
+    console.log('tempat kejadian perkara : ',this.props.location)
     return(
       <main className="content">
           <div className="table-container">

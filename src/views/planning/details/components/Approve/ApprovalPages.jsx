@@ -64,7 +64,6 @@ componentDidUpdate = (prevProps) => {
 
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
-    console.log('dumtt,',this.props.filterParameter)
       if(this.props.indexFilterParameter.indexTabParameter === 0){
         // this.props.fetchSalesOrder(this.props.filterParameter);
         this.props.updateSalesParameter({
@@ -80,7 +79,6 @@ componentDidUpdate = (prevProps) => {
 
   //FILTER RANGE LIFETIME
   if(prevProps.filterLifetime !== this.props.filterLifetime){
-    console.log('dumtt,',this.props.filterLifetime)
     this.props.updateSalesParameter({
       ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterLifetime.Filter, PageNumber: 1
     })
@@ -387,7 +385,25 @@ componentDidUpdate = (prevProps) => {
 
   //SAAT MENGKLIK SALES ORDER TAB
   onClickSalesOrder = async() =>{
-    await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
+    if (this.props.location.whichTab === 'lifetime') {
+      await this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter, 
+        Filter : [{
+          Field : 'LifeTimeComponent',
+          Operator : "eq",
+          Value : null,
+          Logic : "AND"
+      }]
+    })
+    }else if(this.props.location.whichTab === undefined){
+      await this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter,
+        Filter : [{
+          Field : 'LifeTimeComponent',
+          Operator : "neq",
+          Value : null,
+          Logic : "AND"
+      }]
+    }, this.props.token);
+    }
   }  
 
   //KOMPONEN UNTUK SHOW PER/PAGE

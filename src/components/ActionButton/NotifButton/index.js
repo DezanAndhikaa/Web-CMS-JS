@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import ActionButton from './ActionButton';
+import NotifButton from './NotifButton';
 
 const mapDispatchToProps = (dispatch) => ({
 	push : (path) => dispatch(push(path)),
 });
 
-const actbtn = connect(mapDispatchToProps)(ActionButton);
+const notifbtn = connect(mapDispatchToProps)(NotifButton);
 
-export { actbtn as ActionButton };
+export { notifbtn as NotifButton };

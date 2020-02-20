@@ -27,8 +27,9 @@ export default class ConfirmationModal extends React.PureComponent {
         );
     }else if(this.props.idModal === "SAP"){
       console.log('uhuy sap 3')
+      console.log('uhuy sap 3 mod : ', this.props.isModal)
       return (
-        <Modal open={this.props.isShowModal} onClose={this.props.onClose} className="modal-container">
+        <Modal open={this.props.isModal} onClose={this.props.onClose} className="modal-container">
             <DialogContent className="confirmation-modal-content">
               <div className="confirmation-modal">
                   <div className="confirmation-container">
@@ -37,7 +38,7 @@ export default class ConfirmationModal extends React.PureComponent {
                     <p className="confirmation-caption">You can see the data SAP Issue</p>
                     <p className="confirmation-caption">to the <b>Status</b></p>
                     <br></br>
-                    <Button className="btn-ok" onClick={this.props.onClose}>Continue</Button>
+                    <Button className="btn-ok" onClick={() => {this.props.isModalClosed()} }>Continue</Button>
                   </div>
               </div>
             </DialogContent>

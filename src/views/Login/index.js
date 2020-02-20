@@ -7,15 +7,15 @@ import LoginPageReducers from './LoginPage.reducer';
 import LoginPage from './LoginPage';
 
 const mapStateToProps = (state) => ({
-  displayMode: state.displayMode,
-  loginRequest: state.loginPageState.loginRequestState,
-  userData: state.userData,
+	displayMode: state.displayMode,
+	loginRequest: state.loginPageState.loginRequestState,
+	userData: state.userData,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  login: (username, password) => dispatch(requestLoginAction(username, password)),
-  push: (url) => dispatch(push(url)),
-  saveUserData: (userData) => dispatch(storeDataAction(USER_DATA, StorageKey.USER_DATA, userData)),
+	login: (username, password) => dispatch(requestLoginAction(username, password)),
+	push: (url) => dispatch(push(url)),
+	saveUserData: (userData) => dispatch(storeDataAction(USER_DATA, StorageKey.USER_DATA, userData)),
 });
 
 const loginPage = connect(mapStateToProps, mapDispatchToProps)(LoginPage);
