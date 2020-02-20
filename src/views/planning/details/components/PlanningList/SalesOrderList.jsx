@@ -40,6 +40,7 @@ export default class SalesOrderList extends React.PureComponent {
     }
   }
   componentDidMount = async() =>{    
+    console.log('tok token sales order list', this.props.location)
     await this.props.clearSelectedSalesPlans();
     this.props.onClickSalesOrder();
   }
