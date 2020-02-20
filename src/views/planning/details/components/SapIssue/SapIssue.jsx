@@ -28,23 +28,23 @@ export default class SapIssue extends React.Component{
       });
     }
 
-    isSAPIssue = async(data) => {
-      await this.props.putSAPIssue({SAPIssue: data }, this.props.token);
-      // await ( () => this.props.isClosedSap() )
-    }
+    // isSAPIssue = async(data) => {
+    //   console.log('kluk kluk ')
+    //   await this.props.putSAPIssue({SAPIssue: data }, this.props.token);
+    // }
 
-    onKelik =  async(length, description) => {
-      const index = this.props.selectedDataSAP.length
-      let arr = []
-      for(let i=0; i<index; i++){
-        arr = [...arr,{So: this.props.selectedDataSAP[i].SoNumber, Message: description[i]}]
-      }
-      this.setState({
-        SAPIssue: arr
-      },
-      () => this.isSAPIssue(arr) 
-      )
-    }
+    // onKelik =  async( description) => {
+    //   const index = this.props.selectedDataSAP.length
+    //   let arr = []
+    //   for(let i=0; i<index; i++){
+    //     arr = [...arr,{So: this.props.selectedDataSAP[i].SoNumber, Message: description[i]}]
+    //   }
+    //   this.setState({
+    //     SAPIssue: arr
+    //   },
+    //   () => this.isSAPIssue(arr) 
+    //   )
+    // }
 
     // isClicked = () => {
     //     this.setState({isShowModal: !this.state.isShowModal})
@@ -92,18 +92,6 @@ export default class SapIssue extends React.Component{
             <TableCell align="left" className="table-cell-issue"> {moment(row.PlanExecution).format('DD-MM-YYYY')} </TableCell>
             <TableCell align="left" className="table-cell-issue"> {row.SMR} </TableCell>
             <TableCell align="left" className="table-cell-issue"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
-            {/* <TableCell align="left" className="table-cell-issue"> 1234 </TableCell>
-            <TableCell align="left" className="table-cell-issue"> ULOKLKO </TableCell>
-            <TableCell align="left" className="table-cell-issue"> JKT </TableCell>
-            <TableCell align="left" className="table-cell-issue"> PCX-01 </TableCell>
-            <TableCell align="left" className="table-cell-issue"> BARANG BAGUS </TableCell>
-            <TableCell align="left" className="table-cell-issue"> 11111 </TableCell>
-            <TableCell align="left" className="table-cell-issue"> 123sad </TableCell>
-            <TableCell align="left" className="table-cell-issue"> 1003213 </TableCell>
-            <TableCell align="center" className="table-cell-issue"> 1000</TableCell>
-            <TableCell align="left" className="table-cell-issue"> 2020-02-12 </TableCell>
-            <TableCell align="left" className="table-cell-issue"> 330 </TableCell>
-            <TableCell align="left" className="table-cell-issue"> 2019-12-12 </TableCell> */}
           </TableRow>
           <TableRow className="table-row-bottom-issue">
             <TableCell><label>Description &nbsp; :</label></TableCell>
@@ -155,10 +143,10 @@ export default class SapIssue extends React.Component{
                         <p className="btn-cancel-issue">* Please check again before pressing the send button</p>
                         {/* <Button className="btn-input-issue" onClick={ () => {this.props.onStats(this.props.id, this.state.limitText); this.props.onClosed()} } >Input</Button> */}
                         {/* <Button className="btn-input-issue" onClick={ () => {this.onKelik(this.props.selectedDataSAP.length, this.state.description);this.props.isClosed()} } >Send</Button> */}
-                        <Button className="btn-input-issue" onClick={ () => {this.onKelik(this.props.selectedDataSAP.length, this.state.description)} } >Send</Button>
+                        <Button className="btn-input-issue" onClick={ async () => {this.props.onKelik(this.state.description);this.props.isTry()} } >Send</Button>
+                        {/* <Button className="btn-input-issue" onClick={ () => {this.props.isTry()} } >Send</Button> */}
                     </div>
                 </div>
-               
             </div>
         )
     }

@@ -245,7 +245,7 @@ console.log('kondisi value terasek', value)
             onSelectActionType={SelectCustomerFilterAction}
             onSelectAction={this.props.selectFilter2}
             indexTab={this.state.value}
-            head={"Customer"}
+            head={"CustomerName"}
           />
         </div>
         <div className="dropdown-container">
@@ -256,7 +256,7 @@ console.log('kondisi value terasek', value)
             onSelectActionType={SelectSiteFilterAction}
             onSelectAction={this.props.selectFilter2}
             indexTab={this.state.value}
-            head={"Site"}
+            head={"SiteCode"}
           />
         </div>
         <div className="dropdown-container">
