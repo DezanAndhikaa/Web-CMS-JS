@@ -15,7 +15,7 @@ class LoginPage extends React.Component{
     }
 
     componentWillMount() {
-        if (isAccessTokenValid()) { this.props.push(Menu.PLANNING_APPROVAL); }
+        if (isAccessTokenValid()) { this.props.push(Menu.PLANNING); }
     }
 
     componentDidUpdate(prevProps) {
@@ -23,7 +23,7 @@ class LoginPage extends React.Component{
           && this.props.loginRequest.status === ApiRequestActionsStatus.SUCCEEDED) {
           this.props.saveUserData(this.props.loginRequest.payload);
         //   this.props.push(Menu.DASHBOARD);
-        this.props.push(Menu.PLANNING_APPROVAL);
+        this.props.push(Menu.PLANNING);
         }
     }
 
