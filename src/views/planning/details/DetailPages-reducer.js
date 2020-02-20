@@ -84,7 +84,7 @@ const initialSalesParameter = {
 	dataFilter : {
 		PageNumber : 1,
 		PageSize: 2,
-		Sort: '',
+		Sort: [],
 		Filter: []
 	},
 	paramsData : {
@@ -119,7 +119,7 @@ const initialServiceParameter = {
 	dataFilter: {
 			  PageNumber : 1,
 			  PageSize: 2,
-			  Sort: '',
+			  Sort: [],
 		  Filter: [
 			// {
 			//   Field: '',

@@ -29,7 +29,7 @@ import {
 import DetailPages from './DetailPages';
 
 const mapStateToProps = (state) => ({
-	path: state.router.location.pathname,
+	location: state.router.location,
 	displayMode: state.displayMode,
 	salesOrderList: state.plansPageState.salesOrderList.data,
 	salesOrderListApproved: state.plansPageState.salesOrderListApproved.data,
@@ -67,7 +67,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	push : (path) => dispatch(push(path)),
+	push : (path, whichTab) => dispatch(push(path, whichTab)),
 	downloadSalesApproved : (soId) => dispatch(approveSalesDownloadAction(soId)),
 	downloadServiceApproved : (soId) => dispatch(approveServiceDownloadAction(soId)),
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),

@@ -81,7 +81,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	push: (path, state) => dispatch(push(path, state)),
+	push: (path, whichTab) => dispatch(push(path, whichTab)),
 	downloadSalesApproved : (soId, token) => dispatch(approveSalesDownloadAction(soId, token)),
 	downloadServiceApproved : (soId, token) => dispatch(approveServiceDownloadAction(soId, token)),
 	unapproveSales: (payload, token) => dispatch(unapproveSalesAction(payload, token)),
