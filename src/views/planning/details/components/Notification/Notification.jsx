@@ -12,8 +12,7 @@ import FilterbyDataAction from '../../../../../components/FilterByDataAction/Fil
 import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton';
 import { Button } from '@material-ui/core';
 import { Menu } from '../../../../../constants';
-import CardData from './Components/Card'
-// import SapIssue from './components/SapIssue/SapIssue'
+import CardData from './Components/Card';
 
 class Notification extends React.Component{
     constructor(props) {
