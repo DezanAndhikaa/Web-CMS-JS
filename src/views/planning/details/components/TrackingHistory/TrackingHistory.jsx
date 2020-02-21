@@ -256,7 +256,6 @@ export default class TrackingHistory extends React.PureComponent {
 			const { TotalPages } = data;
 		  switch (this.state.whatPageIsChoosed) {
 		  case 'Approve':
-				console.log('MASOK APPROVE BAPAKK')
 					return(
 						<div className="pagination">
 						  <div className="paging">
