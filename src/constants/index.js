@@ -11,6 +11,7 @@ export const Menu = {
 	PLANNING_DETAILS : '/webcms/planning/details',
 	PLANNING_DETAILS_STATUS: '/webcms/planning/approval/status',
 	PLANNING_APPROVAL:'/webcms/planning/approval',
+	PLANNING_TRACKING_HISTORY:'/webcms/planning/tracking-history',
 	PLANNING_DASHBOARD : '/webcms/planning/dashboard',
 	PLANNING_ALL_NOTIF : '/webcms/planning/all-notification',
 	DASHBOARD: '/webcms/dashboard',
