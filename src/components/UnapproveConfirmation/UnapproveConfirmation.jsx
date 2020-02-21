@@ -13,7 +13,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
     isShowModalUnapprove: false,
     isShowModalSap: false,
     isShowModalSend: false,
-    isShowModalSapSucced: true
+    isShowModalSapSucced: false
   }
 
   isSAPIssue = async(data) => {
@@ -44,6 +44,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
   isTry = () => {
     this.setState({
       isShowModalSap: !this.state.isShowModalSap,
+      isShowModalSapSucced: !this.state.isShowModalSapSucced
     })
   }
 

@@ -91,12 +91,14 @@ componentDidUpdate = (prevProps) => {
     this.props.updateSalesParameter({
       ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterLifetime.Filter, PageNumber: 1
     })
-    // this.props.fetchSalesOrder(this.props.filterLifetime);
   }
   //FILTER RANGE DATE
   if(prevProps.filterDate !== this.props.filterDate){
     console.log('data props filter', this.props.filterDate)
-    this.props.fetchSalesOrder(this.props.filterDate);
+    this.props.updateSalesParameter({
+      ...prevProps.salesParameter.dataFilter, Filter : this.props.filterDate.Filter, PageNumber: 1
+    })
+    // this.props.fetchSalesOrder(this.props.filterDate);
   }
 
   //ini untuk trigger sales global search
@@ -394,26 +396,26 @@ componentDidUpdate = (prevProps) => {
 
   //SAAT MENGKLIK SERVICE ORDER TAB
   onClickSalesOrder = async() =>{
-    if (this.props.location.whichTab === 'lifetime') {
-      await this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter, 
-        Filter : [{
-          Field : 'LifeTimeComponent',
-          Operator : "eq",
-          Value : null,
-          Logic : "AND"
-      }]
-    }, this.props.token)
-    }else if(this.props.location.whichTab === undefined){
-      await this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter,
-        Filter : [{
-          Field : 'LifeTimeComponent',
-          Operator : "neq",
-          Value : null,
-          Logic : "AND"
-      }]
-    }, this.props.token);
-    }
-    // this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
+    // if (this.props.location.whichTab === 'lifetime') {
+    //   await this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter, 
+    //     Filter : [{
+    //       Field : 'LifeTimeComponent',
+    //       Operator : "eq",
+    //       Value : null,
+    //       Logic : "AND"
+    //   }]
+    // }, this.props.token)
+    // }else if(this.props.location.whichTab === undefined){
+    //   await this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter,
+    //     Filter : [{
+    //       Field : 'LifeTimeComponent',
+    //       Operator : "neq",
+    //       Value : null,
+    //       Logic : "AND"
+    //   }]
+    // }, this.props.token);
+    // }
+    this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
   }
 
   //KOMPONEN UNTUK SHOW PER/PAGE
