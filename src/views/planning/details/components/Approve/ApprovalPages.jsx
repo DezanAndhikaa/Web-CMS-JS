@@ -385,25 +385,26 @@ componentDidUpdate = (prevProps) => {
 
   //SAAT MENGKLIK SALES ORDER TAB
   onClickSalesOrder = async() =>{
-    if (this.props.location.whichTab === 'lifetime') {
-      await this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter, 
-        Filter : [{
-          Field : 'LifeTimeComponent',
-          Operator : "eq",
-          Value : null,
-          Logic : "AND"
-      }]
-    })
-    }else if(this.props.location.whichTab === undefined){
-      await this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter,
-        Filter : [{
-          Field : 'LifeTimeComponent',
-          Operator : "neq",
-          Value : null,
-          Logic : "AND"
-      }]
-    }, this.props.token);
-    }
+    await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
+    // if (this.props.location.whichTab === 'lifetime') {
+    //   await this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter, 
+    //     Filter : [{
+    //       Field : 'LifeTimeComponent',
+    //       Operator : "eq",
+    //       Value : null,
+    //       Logic : "AND"
+    //   }]
+    // })
+    // }else if(this.props.location.whichTab === undefined){
+    //   await this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter,
+    //     Filter : [{
+    //       Field : 'LifeTimeComponent',
+    //       Operator : "neq",
+    //       Value : null,
+    //       Logic : "AND"
+    //   }]
+    // }, this.props.token);
+    // }
   }  
 
   //KOMPONEN UNTUK SHOW PER/PAGE

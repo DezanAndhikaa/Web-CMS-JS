@@ -389,13 +389,14 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  //SAAT MENGKLIK SALES ORDER TAB
+  //SAAT MENGKLIK service ORDER TAB
   onClickServiceOrder = async() => {
-    await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+    await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
   }
 
-  //SAAT MENGKLIK SERVICE ORDER TAB
+  //SAAT MENGKLIK sales ORDER TAB
   onClickSalesOrder = async() =>{
+    await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
     // if (this.props.location.whichTab === 'lifetime') {
     //   await this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter, 
     //     Filter : [{
@@ -415,7 +416,6 @@ componentDidUpdate = (prevProps) => {
     //   }]
     // }, this.props.token);
     // }
-    this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
   }
 
   //KOMPONEN UNTUK SHOW PER/PAGE
