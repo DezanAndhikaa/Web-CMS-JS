@@ -71,7 +71,6 @@ export default class TrackingHistory extends React.PureComponent {
 		if (this.props.selectedSalesPlans.length > 0) {
 		  for (let i = 0; i < index; i++) {
 			arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
-			console.log('pantek');
 		  }
 		}await this.props.downloadSalesApproved(arr, this.props.token);
 		if (
