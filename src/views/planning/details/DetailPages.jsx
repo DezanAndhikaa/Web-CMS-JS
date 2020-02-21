@@ -487,7 +487,9 @@ componentDidUpdate = (prevProps) => {
 
   _renderNotif(){
     return (
-      <NotifButton />
+      <NotifButton 
+        {...this.props}
+      />
     )
   }
 
