@@ -27,12 +27,24 @@
                 align-items: center;
                 justify-content: center;
                 flex: 1;
-                .confirmation-title{
+                .title-confirmation{
                     margin: 0;
                     padding-top: vw(20);
-                    font-size: vw(33);
+                    font-size: vw(28);
                     font-family: 'SFUIDisplay-Bold';
                     color: #3C3B3B;
+                }
+                .confirmation-titles{
+                    margin: 0;
+                    font-size: vw(28);
+                    padding-top: vw(10);
+                    font-family: 'SFUIDisplay-Bold';
+                    color: #3C3B3B;
+                }
+                .confirmation-images{
+                    width: vw(200);
+                    margin-top: vw(15);
+                    margin-bottom: vw(15);
                 }
                 .confirmation-image{
                     width: vw(175);
@@ -57,9 +69,10 @@
         margin-top: vw(20);
         .btn-yes{
             display: flex;
+            text-transform: capitalize;
             align-items: center;
             justify-content: center;
-            width: vw(100.22);
+            width: 40%;//w(100.22);
             height: vw(45.07);
             font-size: vw(13) !important;
             font-weight: bold;
@@ -75,9 +88,10 @@
         }
         .btn-no{
             display: flex;
+            text-transform: capitalize;
             align-items: center;
             justify-content: center;
-            width: vw(170.22);
+            width: 60%;//vw(170.22);
             height: vw(45.07);
             font-size: vw(13) !important;
             font-weight: bold;

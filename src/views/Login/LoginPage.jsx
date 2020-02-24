@@ -23,7 +23,7 @@ class LoginPage extends React.Component{
           && this.props.loginRequest.status === ApiRequestActionsStatus.SUCCEEDED) {
           this.props.saveUserData(this.props.loginRequest.payload);
         //   this.props.push(Menu.DASHBOARD);
-        this.props.push(Menu.PLANNING);
+        this.props.push(Menu.DASHBOARD);
         }
     }
 
