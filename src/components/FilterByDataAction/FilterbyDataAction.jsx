@@ -112,18 +112,18 @@ class FilterbyDataAction extends React.Component {
   }
 
   render() {
-    if (this.props.displayMode === 'mobile') {
-      return (
-        <div>
-          <div className="dropdown">
-            {this.renderDropdown()}
-          </div>
-          {
-            this.state.displayMenu && this.renderDropdownList()
-          }
-        </div>
-      );
-    }
+    // if (this.props.displayMode === 'mobile') {
+    //   return (
+    //     <div>
+    //       <div className="dropdown">
+    //         {this.renderDropdown()}
+    //       </div>
+    //       {
+    //         this.state.displayMenu && this.renderDropdownList()
+    //       }
+    //     </div>
+    //   );
+    // }
 
     if(this.props.titles === "Status"){
       return (
@@ -164,7 +164,7 @@ class FilterbyDataAction extends React.Component {
     else if(this.props.titles === "Tracking History"){
       return (
         <div className="dropdown">
-          <div className="dropdown-button" onClick={this.showDropdownMenu}>
+          <div className="dropdown-button" onClick={() => this.handleClick(Menu.PLANNING_TRACKING_HISTORY, 'tracking')}>
             <div className="dropdown-selected-item">
               <div className="tracking-history">
                 {/* <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}> */}

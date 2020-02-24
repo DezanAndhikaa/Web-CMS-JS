@@ -15,7 +15,8 @@ export default class ServiceOrderList extends React.PureComponent {
   }
 
   componentDidMount = async () => {
-    await this.props.onClickServiceOrder();
+    await this.props.clearSelectedServicePlans();
+    // await this.props.onClickServiceOrder();
   }
   componentDidUpdate = (prevState) =>{
     if (prevState.serviceParameter !== this.props.serviceParameter || prevState.serviceSearch !== this.props.serviceSearch || 
