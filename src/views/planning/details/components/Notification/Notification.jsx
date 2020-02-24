@@ -128,6 +128,14 @@ componentDidUpdate = (prevProps) => {
     )
   }
 
+  _renderTitleTab(){
+    return(
+      <div className="title-tab">
+        &nbsp;&nbsp;&nbsp;&nbsp;BRANCH/SITE&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+    )
+  }
+
   _renderData(){
     return(
       <CardData 
@@ -229,14 +237,16 @@ componentDidUpdate = (prevProps) => {
                 </div>
                 <div className="title-container">
                   {this._renderTitle()}
+                  {this._renderTitleTab()}
                 </div>
                 <div className="mid-container">
                 <Paper className="paper">
                   {this._renderData()}
-                   <div className="bottom-row">
-                  {this._renderShowPerPage()} {this._renderPagination()}
-                </div>
-                  </Paper>
+                  <div className="bottom-row-notif">
+                   {this._renderShowPerPage()} {this._renderPagination()}
+                  </div>
+                </Paper>
+                  
                 </div>   
             </div>
         </main>

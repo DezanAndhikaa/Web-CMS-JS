@@ -91,12 +91,14 @@ componentDidUpdate = (prevProps) => {
     this.props.updateSalesParameter({
       ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterLifetime.Filter, PageNumber: 1
     })
-    // this.props.fetchSalesOrder(this.props.filterLifetime);
   }
   //FILTER RANGE DATE
   if(prevProps.filterDate !== this.props.filterDate){
     console.log('data props filter', this.props.filterDate)
-    this.props.fetchSalesOrder(this.props.filterDate);
+    this.props.updateSalesParameter({
+      ...prevProps.salesParameter.dataFilter, Filter : this.props.filterDate.Filter, PageNumber: 1
+    })
+    // this.props.fetchSalesOrder(this.props.filterDate);
   }
 
   //ini untuk trigger sales global search
@@ -394,7 +396,29 @@ componentDidUpdate = (prevProps) => {
 
   //SAAT MENGKLIK sales ORDER TAB
   onClickSalesOrder = async() =>{
-    await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
+    if (this.props.location.whichTab === 'lifetime') {
+      await this.props.fetchSalesOrder({
+        ...this.props.salesParameter.dataFilter, 
+        Filter : 
+              [...this.props.salesParameter.dataFilter.Filter, {
+                Field : 'LifeTimeComponent',
+                Operator : "eq",
+                Value : '-',
+                Logic : "AND"
+        }]
+      }, this.props.token);
+    }else if (this.props.location.whichTab === undefined) {
+      await this.props.fetchSalesOrder({
+        ...this.props.salesParameter.dataFilter, 
+        Filter : 
+              [...this.props.salesParameter.dataFilter.Filter, {
+                Field : 'LifeTimeComponent',
+                Operator : "neq",
+                Value : '-',
+                Logic : "AND"
+        }]
+      }, this.props.token);
+    }
     // if (this.props.location.whichTab === 'lifetime') {
     //   await this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter, 
     //     Filter : [{
@@ -487,7 +511,9 @@ componentDidUpdate = (prevProps) => {
 
   _renderNotif(){
     return (
-      <NotifButton />
+      <NotifButton 
+        {...this.props}
+      />
     )
   }
 

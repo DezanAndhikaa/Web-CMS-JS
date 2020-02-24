@@ -10,7 +10,7 @@ class DropDown extends React.Component {
   
       this.state = {
         displayMenu: false,
-        data: ['Planning', 'Production', 'Allocation', 'Delivery']
+        data: ['PLANNING', 'PRODUCTION', 'ALLOCATION', 'DELIVERY']
       };
     }
   

@@ -13,19 +13,19 @@ export default class UnapproveConfirmation extends React.PureComponent {
     isShowModalUnapprove: false,
     isShowModalSap: false,
     isShowModalSend: false,
-    isShowModalSapSucced: true
+    isShowModalSapSucced: false
   }
 
   isSAPIssue = async(data) => {
-    console.log('kluk  ')
-    await this.props.putSAPIssue({SAPIssue: data }, this.props.token);
+    console.log('kluk  '+ data)
+    await this.props.putSAPIssue({SAPIssues: data }, this.props.token);
   }
 
   onKelik =  async( description) => {
     const index = this.props.selectedDataSAP.length
     let arr = []
     for(let i=0; i<index; i++){
-      arr = [...arr,{So: this.props.selectedDataSAP[i].SoNumber, Message: description[i]}]
+      arr = [...arr,{SoNumber: this.props.selectedDataSAP[i].SoNumber, Message: description[i]}]
     }
     this.setState({
       SAPIssue: arr
@@ -44,6 +44,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
   isTry = () => {
     this.setState({
       isShowModalSap: !this.state.isShowModalSap,
+      isShowModalSapSucced: !this.state.isShowModalSapSucced
     })
   }
 
@@ -115,9 +116,28 @@ export default class UnapproveConfirmation extends React.PureComponent {
     )
 }
 
-renderCircularProgress() {
-    return <CircularProgress size={100} className="circular-progress" />;
-}
+  renderCircularProgress() {
+      return <CircularProgress size={100} className="circular-progress" />;
+  }
+
+  _renderEditSuccess(){
+    return (
+      <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
+        <DialogContent className="confirmation-modal-content">
+          <div className="confirmation-modal">
+            <div className="confirmation-container">
+              <p className="title-success">Successful</p>
+              <img className="confirmation-success" src={ImgCancelEditSucc} alt="" />
+              <p className="confirmation-caption">You have sent data to be repaired again</p>
+              <div className="btn-row">
+                <Button className="button-continue" onClick={this.props.onClose}>Continue</Button>
+              </div>
+            </div>
+          </div>
+        </DialogContent> 
+      </Modal>
+    );
+  }
 
 	render() {
     console.log("ApiRequestActionsStatus",this.props.fetchStatusPutSAPIssue)
@@ -158,26 +178,15 @@ renderCircularProgress() {
           )} 
           {this.state.isShowModalSend && (
             this._renderSendtoEdit()
+          )}
+          {this.props.fetchStatusUnapprove === ApiRequestActionsStatus.LOADING &&  (
+            this.renderCircularProgress()
           )}   
+          {this.props.fetchStatusUnapprove === ApiRequestActionsStatus.SUCCEEDED && (
+            this._renderEditSuccess()
+          )} 
         </>
         );
-    } else if(this.props.idConfirm === "Successfull"){
-      return (
-        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
-          <DialogContent className="confirmation-modal-content">
-            <div className="confirmation-modal">
-              <div className="confirmation-container">
-                <p className="title-success">Successful</p>
-                <img className="confirmation-success" src={ImgCancelEditSucc} alt="" />
-                <p className="confirmation-caption">You have sent data to be repaired again</p>
-                <div className="btn-row">
-                  <Button className="button-continue" onClick={this.props.onClose}>Continue</Button>
-                </div>
-              </div>
-            </div>
-          </DialogContent> 
-        </Modal>
-      );
     }
 	}
 }

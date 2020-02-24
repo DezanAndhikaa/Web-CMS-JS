@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import update from 'immutability-helper';
 import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
 import {
-	// ApproveSalesAction, 
+	UnapproveSalesAction, 
 	PlanningApprovedSalesDownloadAction,
 	PlanningApprovedServiceDownloadAction,
 	ClearSelectedPlans,
@@ -369,6 +369,24 @@ export function PutSAPIssueReducer(state = initialSalesState, action) {
 		default:
 		  return { data: initialSalesState.data, status: ApiRequestActionsStatus.LOADING };
 	  }
+	}
+	return state;
+}
+
+export function unapproveSalesReducer(state = initialSalesState, action) {
+	if (action.type === UnapproveSalesAction) {
+		switch (action.status) {
+		case ApiRequestActionsStatus.SUCCEEDED:
+			return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		case ApiRequestActionsStatus.FAILED:
+			return {
+				data: initialSalesState.data,
+				status: ApiRequestActionsStatus.FAILED,
+				error: action.error,
+			};
+		default:
+			return { data: initialSalesState.data, status: ApiRequestActionsStatus.LOADING };
+		}
 	}
 	return state;
 }
@@ -831,24 +849,6 @@ export function storePlanDataReducer(state = {}, action) {
 	return { ...state };
 }
 
-// export function unapproveSalesReducer(state = initialAssignmentState, action) {
-// 	if (action.type === UnapproveSalesAction) {
-// 		switch (action.status) {
-// 		case ApiRequestActionsStatus.SUCCEEDED:
-// 			return { response: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
-// 		case ApiRequestActionsStatus.FAILED:
-// 			return {
-// 				response: state.response,
-// 				status: ApiRequestActionsStatus.FAILED,
-// 				error: action.error,
-// 			};
-// 		default:
-// 			return { response: state.response, status: ApiRequestActionsStatus.LOADING };
-// 		}
-// 	}
-// 	return state;
-// }
-
 const PlansReducers = combineReducers({
 	selectedLeader: selectLeaderReducer,
 	selectedFilters: selectedFiltersReducer,
@@ -865,7 +865,7 @@ const PlansReducers = combineReducers({
 	selectedServicePlans: selectServicePlansReducer,
 	selectedMechanics: selectMechanicsReducer,
 	// approveSalesStatus: approveSalesReducer,
-	// unapproveSalesStatus: unapproveSalesReducer,
+	unApprove: unapproveSalesReducer,
 	salesParameter: salesParameterReducer,
 	salesApprovedParameter : salesApprovedParameterReducer,
 	salesDeletedParameter : salesDeletedParameterReducer,

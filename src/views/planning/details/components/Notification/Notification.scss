@@ -20,7 +20,9 @@
 }
 
 .title-container{
-    width: 100%;
+    display: flex;
+    flex-direction: row;
+    width: 20%;
     height: 80px;
     .title{
         // margin-top: auto;
@@ -29,9 +31,22 @@
         font-size: 30px;
         line-height: vw(30);
     }
+    .title-tab{
+        border-bottom: 60px solid white;
+        border-left: 25px solid transparent;
+        border-right: 25px solid transparent;
+        border-radius: 15px;
+        height: 0;
+        width: 150px;
+        margin-top: 9%;
+        margin-left: 2%;
+        font-family: 'Lato-Regular';
+        font-size: 15px;
+        line-height: vw(30);
+    }
 }
 
-.bottom-row{
+.bottom-row-notif{
     // flex: 1;
     // display: flex;
     // align-self: flex-end;
@@ -40,7 +55,7 @@
     flex: 1;
     display: flex;
     flex-direction: row;
-    // margin-top: 10%;
+    margin: 2.5% 7% 6% 6%;
     position: relative;
     .pagination{
         display: flex;
@@ -233,19 +248,19 @@
         height: 96%;
         .paper{
             width:100%;
-            height: 100%;
+            height: 35vw;
         }
         .kartu{
             position: relative;
             // display: flex;
-            margin-top: 2%;
-            margin-left: 7%;
+            margin-top: 1%;
+            margin-left: 6%;
             // margin-right: 3%;
             background-color: white;
             width: 25%;
-            height: 90%;
+            height: 90px;
             // background-color: map-get($colors , page-background);
-            box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+            box-shadow: 0px vw(1)  rgba(0, 0, 0, 0.161);
             background-image: url('../../../../../assets/icons/notif_input.png');
             background-size: 15%;
             background-position-x: 5%;

@@ -76,6 +76,13 @@ class BaseButton extends React.Component{
                 // await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
                 // await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
             }
+            if (this.props.titles === "Permanently"){
+                // await this.props.handleSendtoEdit()
+                // this.showModalInfo()
+                this.isClosed()
+                // await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
+                // await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
+            }
         }
         if (this.props.whatTabsIsRendered === false) {
             if (this.props.titles === "Approve") {
@@ -169,6 +176,7 @@ class BaseButton extends React.Component{
                     <DeleteConfirmation
                         {...this.props}
                         {...this.state}
+                        idDelete="Delete"
                         onClose={this.isClosed}
                         openModal={this.state.isShowModal}
                         totalData={this.props.totalSelectedItems}
@@ -179,9 +187,22 @@ class BaseButton extends React.Component{
         }else if(this.props.titles === "Permanently"){
             return(
                 <div className="button-inline">
-                    <div className="button-inline">
-                        <Button className="btn-permanently" onClick={this.props.handleDeletePermanent} disabled={this.props.isDisabled} > Delete Permanently </Button>
-                    </div>
+                    {/* <Button className="btn-permanently" onClick={this.props.handleDeletePermanent} disabled={this.props.isDisabled} > Delete Permanently </Button> */}
+                    <DeleteButton 
+                        {...this.props}
+                        {...this.state}
+                        onClick={this.isClicked}
+                        disabled={this.props.disabledButton}
+                    />
+                    <DeleteConfirmation
+                        {...this.props}
+                        {...this.state}
+                        idDelete="Permanent"
+                        onClose={this.isClosed}
+                        openModal={this.state.isShowModal}
+                        totalData={this.props.totalSelectedItems}
+                        onDelete={this.isApproved}
+                    />
                 </div>
             )
         } 

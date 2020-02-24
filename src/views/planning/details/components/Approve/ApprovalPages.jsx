@@ -31,8 +31,24 @@ class ApprovalPages extends React.Component{
     };
 }
 
-// componentDidMount = () => {
-//   console.log('tok tok tok : ',this.props.salesOrderList)
+componentDidMount = () => {
+  // console.log('tok tok tok : ',this.props.salesOrderList)
+  // this.handleLifeTime();
+}
+
+// handleLifeTime = async() =>{
+//   if (this.props.location.whichTab === undefined) {
+//     await this.props.updateSalesParameter({
+//       ...this.props.salesParameter.dataFilter, 
+//       Filter : 
+//             [...this.props.salesParameter.dataFilter.Filter, {
+//               Field : 'LifeTimeComponent',
+//               Operator : "neq",
+//               Value : '-',
+//               Logic : "AND"
+//       }]
+//     });
+//   }
 // }
 
 componentWillUnmount = () => {
@@ -47,6 +63,7 @@ componentWillUnmount = () => {
 componentDidUpdate = (prevProps) => {
   if (prevProps.salesParameter !== this.props.salesParameter) {
     // this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
+    // this.handleLifeTime();
     this.onClickSalesOrder();
   }
   if (prevProps.serviceParameter !== this.props.serviceParameter) {
@@ -69,6 +86,7 @@ componentDidUpdate = (prevProps) => {
         this.props.updateSalesParameter({
           ...prevProps.salesParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
         })
+        // this.handleLifeTime();
       }else{
         // this.props.fetchServiceOrder(this.props.filterParameter);
         this.props.updateServiceParameter({
@@ -385,7 +403,31 @@ componentDidUpdate = (prevProps) => {
 
   //SAAT MENGKLIK SALES ORDER TAB
   onClickSalesOrder = async() =>{
-    await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
+    // await this.handleLifeTime();
+    if (this.props.location.whichTab === 'lifetime') {
+      await this.props.fetchSalesOrder({
+        ...this.props.salesParameter.dataFilter, 
+        Filter : 
+              [...this.props.salesParameter.dataFilter.Filter, {
+                Field : 'LifeTimeComponent',
+                Operator : "eq",
+                Value : '-',
+                Logic : "AND"
+        }]
+      }, this.props.token);
+    }else if (this.props.location.whichTab === undefined) {
+      await this.props.fetchSalesOrder({
+        ...this.props.salesParameter.dataFilter, 
+        Filter : 
+              [...this.props.salesParameter.dataFilter.Filter, {
+                Field : 'LifeTimeComponent',
+                Operator : "neq",
+                Value : '-',
+                Logic : "AND"
+        }]
+      }, this.props.token);
+    }
+    // await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
     // if (this.props.location.whichTab === 'lifetime') {
     //   await this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter, 
     //     Filter : [{
@@ -394,7 +436,7 @@ componentDidUpdate = (prevProps) => {
     //       Value : null,
     //       Logic : "AND"
     //   }]
-    // })
+    // }, this.props.token)
     // }else if(this.props.location.whichTab === undefined){
     //   await this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter,
     //     Filter : [{
