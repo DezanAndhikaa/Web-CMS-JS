@@ -28,33 +28,6 @@ export default class SapIssue extends React.Component{
       });
     }
 
-    // isSAPIssue = async(data) => {
-    //   console.log('kluk kluk ')
-    //   await this.props.putSAPIssue({SAPIssue: data }, this.props.token);
-    // }
-
-    // onKelik =  async( description) => {
-    //   const index = this.props.selectedDataSAP.length
-    //   let arr = []
-    //   for(let i=0; i<index; i++){
-    //     arr = [...arr,{So: this.props.selectedDataSAP[i].SoNumber, Message: description[i]}]
-    //   }
-    //   this.setState({
-    //     SAPIssue: arr
-    //   },
-    //   () => this.isSAPIssue(arr) 
-    //   )
-    // }
-
-    // isClicked = () => {
-    //     this.setState({isShowModal: !this.state.isShowModal})
-    // }
-
-    // isClosed = () => {
-    //   console.log('uuuuhhuk')
-    //     this.setState({isShowModal: !this.state.isShowModal})
-    // }
-
     _showTableHead() {
         return (
           <TableHead className="table-head-issue" >
@@ -141,10 +114,7 @@ export default class SapIssue extends React.Component{
                         </div>
                     <div className="bottom-row-issue">
                         <p className="btn-cancel-issue">* Please check again before pressing the send button</p>
-                        {/* <Button className="btn-input-issue" onClick={ () => {this.props.onStats(this.props.id, this.state.limitText); this.props.onClosed()} } >Input</Button> */}
-                        {/* <Button className="btn-input-issue" onClick={ () => {this.onKelik(this.props.selectedDataSAP.length, this.state.description);this.props.isClosed()} } >Send</Button> */}
                         <Button className="btn-input-issue" onClick={ async () => {this.props.onKelik(this.state.description);this.props.isTry()} } >Send</Button>
-                        {/* <Button className="btn-input-issue" onClick={ () => {this.props.isTry()} } >Send</Button> */}
                     </div>
                 </div>
             </div>

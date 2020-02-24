@@ -62,8 +62,10 @@
         flex-direction: row;
         .dropdowns-containers{
             // position: absolute;
+            // margin: 0 -5px;
             display: flex;
             flex-direction: row;
+            width: 100%;
         }
     }
 }

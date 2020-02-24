@@ -17,15 +17,15 @@ export default class UnapproveConfirmation extends React.PureComponent {
   }
 
   isSAPIssue = async(data) => {
-    console.log('kluk  ')
-    await this.props.putSAPIssue({SAPIssue: data }, this.props.token);
+    console.log('kluk  '+ data)
+    await this.props.putSAPIssue({SAPIssues: data }, this.props.token);
   }
 
   onKelik =  async( description) => {
     const index = this.props.selectedDataSAP.length
     let arr = []
     for(let i=0; i<index; i++){
-      arr = [...arr,{So: this.props.selectedDataSAP[i].SoNumber, Message: description[i]}]
+      arr = [...arr,{SoNumber: this.props.selectedDataSAP[i].SoNumber, Message: description[i]}]
     }
     this.setState({
       SAPIssue: arr
