@@ -57,6 +57,7 @@
         margin-top: vw(20);
         .button-rejected{
             display: flex;
+            text-transform: capitalize;
             align-items: center;
             justify-content: center;
             width: 40%;
@@ -75,6 +76,7 @@
         }
         .button-approved{
             display: flex;
+            text-transform: capitalize;
             align-items: center;
             justify-content: center;
             width: 60%;//vw(170.22);

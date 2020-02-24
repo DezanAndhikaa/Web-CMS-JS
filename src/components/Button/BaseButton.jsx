@@ -122,20 +122,20 @@ class BaseButton extends React.Component{
             return(
                 <div className="button-inline">
                     <Button className="btn-approve" onClick={this.isClicked} disabled={this.props.disabledButton}>Approve</Button>
-                    <ApproveConfirmation
+                    {/* <ApproveConfirmation
                         {...this.props}
                         {...this.state}
                         onClose={this.isClosed}
                         openModal={this.state.isShowModal}
                         totalData={this.props.totalSelectedItems}
                         onApprove={this.isApproved}
-                    />
-                    {/* <ConfirmationModal 
+                    /> */}
+                    <ConfirmationModal 
                         {...this.props}
-                        idModal = "SAP"
+                        idModal = "Approved"
                         onClose={this.isClosed}
                         openModal={this.state.isShowModal}
-                    /> */}
+                    />
                 </div>
             )
         }else if(this.props.titles === "Cancel Approve"){

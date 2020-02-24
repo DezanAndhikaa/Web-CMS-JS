@@ -101,10 +101,10 @@ class PlanningDetailsTab extends React.Component {
     value: 0,
     invisible1: false,
     invisible2: true,
-    GroupCustomer: [],
-    GroupSite: [],
-    GroupUnitModel: [],
-    GroupComponentDescription: []
+    Customers: [],
+    Sites: [],
+    UnitModels: [],
+    ComponentDescriptions: []
   };
 
   handleChange = (event, value) => {
@@ -164,12 +164,12 @@ console.log('kondisi value terasek', value)
 
   _dataFilterCustomer(){
     if(this.state.value === 0){
-      let arr = this.props.salesOrderList.GroupCustomer;
+      let arr = this.props.salesOrderList.Customers;
       arr.splice(0, 0, "All Customer")
       return arr
     }
     else{
-      let arr = this.props.serviceOrderList.GroupCustomer;
+      let arr = this.props.serviceOrderList.Customers;
       arr.splice(0, 0, "All Customer")
       return arr
     }
@@ -177,12 +177,12 @@ console.log('kondisi value terasek', value)
 
   _dataFilterSite(){
     if(this.state.value === 0){
-      let arr = this.props.salesOrderList.GroupSite;
+      let arr = this.props.salesOrderList.Sites;
       arr.splice(0, 0, "All Site")
       return arr
     }
     else{
-      let arr = this.props.serviceOrderList.GroupSite;
+      let arr = this.props.serviceOrderList.Sites;
       arr.splice(0, 0, "All Site")
       return arr
     }
@@ -190,12 +190,12 @@ console.log('kondisi value terasek', value)
 
   _dataFilterUnitModel(){
     if(this.state.value === 0){
-      let arr = this.props.salesOrderList.GroupUnitModel;
+      let arr = this.props.salesOrderList.UnitModels;
       arr.splice(0, 0, "All Unit Model")
       return arr
     }
     else{
-      let arr = this.props.serviceOrderList.GroupUnitModel;
+      let arr = this.props.serviceOrderList.UnitModels;
       arr.splice(0, 0, "All Unit Model")
       return arr
     }
@@ -203,12 +203,12 @@ console.log('kondisi value terasek', value)
 
   _dataFilterComponentDescription(){
     if(this.state.value === 0){
-      let arr = this.props.salesOrderList.GroupComponentDescription;
+      let arr = this.props.salesOrderList.ComponentDescriptions;
       arr.splice(0, 0, "All Component Description")
       return arr
     }
     else{
-      let arr = this.props.serviceOrderList.GroupComponentDescription;
+      let arr = this.props.serviceOrderList.ComponentDescriptions;
       arr.splice(0, 0, "All Component Description")
       return arr
     }

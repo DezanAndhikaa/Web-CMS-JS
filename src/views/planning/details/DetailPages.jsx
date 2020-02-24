@@ -491,6 +491,7 @@ componentDidUpdate = (prevProps) => {
     return (
       <NotifButton 
         {...this.props}
+        idNotif = "Non-Status"
       />
     )
   }
