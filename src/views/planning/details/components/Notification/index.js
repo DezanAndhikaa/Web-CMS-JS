@@ -66,7 +66,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	push : (path) => dispatch(push(path)),
+	push : (path, whichTab) => dispatch(push(path, whichTab)),
 	downloadSalesApproved : (soId) => dispatch(approveSalesDownloadAction(soId)),
 	downloadServiceApproved : (soId) => dispatch(approveServiceDownloadAction(soId)),
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),

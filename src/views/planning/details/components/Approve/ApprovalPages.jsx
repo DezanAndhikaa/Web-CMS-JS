@@ -415,7 +415,8 @@ componentDidUpdate = (prevProps) => {
                 Logic : "AND"
         }]
       }, this.props.token);
-    }else if (this.props.location.whichTab === undefined) {
+    }else {
+    // if (this.props.location.whichTab === undefined) {
       await this.props.fetchSalesOrder({
         ...this.props.salesParameter.dataFilter, 
         Filter : 
@@ -815,7 +816,7 @@ componentDidUpdate = (prevProps) => {
   };
 
   render(){     
-    console.log('history', this.props.token)
+    console.log('locations', this.props.location)
     return(
       <main className="content">
           <div className="table-container-approval">
