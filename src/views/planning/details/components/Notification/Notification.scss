@@ -393,7 +393,8 @@ justify-content: center;
     background-position-x: 5%;
     background-position-y: center;
     background-repeat: no-repeat;
-    border: none;
+    // border: none;
+    border-bottom: 1px solid #707070;
         .kartu-judul{
             display: absolute;
             flex-direction: column;

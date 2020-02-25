@@ -40,12 +40,12 @@ export default class CardData extends React.Component {
           {this.state.notif.map(() => (
             <>
               {this.state.list.map(world => (
-                <Card className="list-item-notif">
+                <div className="list-item-notif">
                   <div className="kartu-judul">{world.time}</div>
                   <div className="kartu-nama-site">{world.title}</div>
                   <div className="kartu-judul">{world.location}</div>
                   <div className="kartu-judul">{world.push}</div>
-                </Card>
+                </div>
               ))}
             </>
           ))}

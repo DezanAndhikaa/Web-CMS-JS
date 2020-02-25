@@ -620,7 +620,7 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedSalesPlans[i].So]
       }
-      await this.props.unapproveSales({So : arr, IsRevised: true}, this.props.token)
+      await this.props.unapproveSales({SoNumbers : arr, IsRevised: true}, this.props.token)
       this.onClickSalesOrder();
       await this.props.clearSelectedSalesPlans();
     }
@@ -784,10 +784,11 @@ componentDidUpdate = (prevProps) => {
       <>
         <ApprovalTab
           {...this.props}
+          
+          renderNotif={this._renderNotif()}
           renderFilterByDataAction={this._renderFilterByDataAction()}  
           renderBaseButton={this._renderBaseButton()}
           renderSearch={this._renderSearchBar()}
-          renderNotif={this._renderNotif()}
           onClickSalesOrder={this.onClickSalesOrder}        
           onClickServiceOrder={this.onClickServiceOrder}
           onChoosedService={this.updateAssignmentServiceStates}
