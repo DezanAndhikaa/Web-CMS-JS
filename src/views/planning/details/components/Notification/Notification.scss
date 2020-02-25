@@ -46,7 +46,7 @@
     }
 }
 
-.bottom-row{
+.bottom-row-notif{
     // flex: 1;
     // display: flex;
     // align-self: flex-end;
@@ -55,7 +55,7 @@
     flex: 1;
     display: flex;
     flex-direction: row;
-    // margin-top: 10%;
+    margin: 2.5% 7% 6% 6%;
     position: relative;
     .pagination{
         display: flex;
@@ -248,13 +248,13 @@
         height: 96%;
         .paper{
             width:100%;
-            height: 100%;
+            height: 35vw;
         }
         .kartu{
             position: relative;
             // display: flex;
             margin-top: 1%;
-            margin-left: 7%;
+            margin-left: 6%;
             // margin-right: 3%;
             background-color: white;
             width: 25%;

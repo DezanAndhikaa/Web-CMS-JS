@@ -243,10 +243,11 @@ componentDidUpdate = (prevProps) => {
                 <div className="mid-container">
                 <Paper className="paper">
                   {this._renderData()}
-                   <div className="bottom-row">
-                  {this._renderShowPerPage()} {this._renderPagination()}
-                </div>
-                  </Paper>
+                  <div className="bottom-row-notif">
+                   {this._renderShowPerPage()} {this._renderPagination()}
+                  </div>
+                </Paper>
+                  
                 </div>   
             </div>
         </main>

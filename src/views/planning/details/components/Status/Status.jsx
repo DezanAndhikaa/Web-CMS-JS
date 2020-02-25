@@ -789,6 +789,7 @@ export default class Status extends React.PureComponent {
 							idNotif = "Status"
 						/>
 						<FilterbyDataAction
+							{...this.props}
 							titles = "Tracking History"
 						/>
 					</div>
@@ -796,7 +797,7 @@ export default class Status extends React.PureComponent {
 				<div className="table-containers">
 					<div className="title-containers">
 						<div className="title">
-							{this.props.location.whichTab === 'sales' ? 'Tracking history - Sales Order' : 'Tracking History - Service Order'}
+							{this.props.location.whichTab === 'sales' ? 'Status - Sales Order' : 'Status - Service Order'}
 						</div>
 						<div className="search-containers">							
 							{this._renderSearchBar()}

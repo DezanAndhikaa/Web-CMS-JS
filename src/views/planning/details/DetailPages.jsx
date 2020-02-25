@@ -396,7 +396,29 @@ componentDidUpdate = (prevProps) => {
 
   //SAAT MENGKLIK sales ORDER TAB
   onClickSalesOrder = async() =>{
-    await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
+    if (this.props.location.whichTab === 'lifetime') {
+      await this.props.fetchSalesOrder({
+        ...this.props.salesParameter.dataFilter, 
+        Filter : 
+              [...this.props.salesParameter.dataFilter.Filter, {
+                Field : 'LifeTimeComponent',
+                Operator : "eq",
+                Value : '-',
+                Logic : "AND"
+        }]
+      }, this.props.token);
+    }else if (this.props.location.whichTab === undefined) {
+      await this.props.fetchSalesOrder({
+        ...this.props.salesParameter.dataFilter, 
+        Filter : 
+              [...this.props.salesParameter.dataFilter.Filter, {
+                Field : 'LifeTimeComponent',
+                Operator : "neq",
+                Value : '-',
+                Logic : "AND"
+        }]
+      }, this.props.token);
+    }
     // if (this.props.location.whichTab === 'lifetime') {
     //   await this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter, 
     //     Filter : [{

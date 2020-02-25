@@ -1,6 +1,7 @@
 @import '../../../../../themes/variables';
 @import '../../../../../themes/functions';
 
+@media (min-width: 1025px) {
 .head-containers{
     display: inline-flex;
     justify-content: space-between;
@@ -18,11 +19,74 @@
     }
     .notif_button{
         flex: 1;
-        position: relative;
+        // align-self: center;
         display: flex;
         justify-content: flex-end;
     }
     
+}
+
+.paper{
+    flex: 1;
+    display: flex;
+    margin-top: 1%;
+    flex-direction: row;
+    position: relative;
+    // padding: 10px;
+}
+
+.menu-tracking{
+    flex-shrink: 0;
+    .drawer-paper-tracking{
+        border: none;
+        box-shadow: 0 vw(15) vw(30) rgba(0, 0, 0, 0.161);
+        width: vw(281) !important;
+        margin-top: vw(88);
+        .menu-item-tracking{
+            height: vw(37);
+            margin-bottom: vw(10);
+            margin-left: vw(12);
+            border-radius: vw(15);
+            padding-left: vw(32);
+            .item-text-tracking{
+                font-family: 'Lato-Bold' !important;
+                font-style: normal;
+                font-size: vw(15);
+                line-height: vw(18);
+                padding: 0 !important;
+            }
+            .item-icon-tracking{
+                height: vw(16.31);
+            }
+        }
+        .menu-item-tracking:hover{
+            background-color: map-get($colors , primary);
+            // width: 80%;
+            // margin-right: vw(200);
+        }
+        .icon-root-tracking{
+            min-width: vw(10);
+            margin-right: vw(10);
+        }
+        .menu-item-selected-tracking{
+            height: vw(37);
+            margin-bottom: vw(10);
+            margin-left: vw(50);
+            background-color: map-get($colors , primary);
+            border-radius: vw(15);
+            padding-left: vw(32);
+            .item-text-tracking{
+                font-family: 'Lato-Bold' !important;
+                font-style: normal;
+                font-size: vw(15);
+                line-height: vw(18);
+                padding: 0 !important;
+            }
+            .item-icon-tracking{
+                height: vw(16.31);
+            }
+        };
+    }
 }
 
 .table-containers{
@@ -62,10 +126,8 @@
         flex-direction: row;
         .dropdowns-containers{
             // position: absolute;
-            // margin: 0 -5px;
             display: flex;
             flex-direction: row;
-            width: 100%;
         }
     }
 }
@@ -265,4 +327,5 @@
             }
         }
     }
+}
 }

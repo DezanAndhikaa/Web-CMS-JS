@@ -52,9 +52,9 @@ const initialSalesAssignment = {
 	Sites: ['All Site'],
 	UnitModels: ['All Unit Model'],
 	ComponentDescriptions: ['All Component Description'],
-	GroupSerialNumber: [],
-	GroupLifeTimeComponent: [],
-	GroupPlanExecution: [],
+	SerialNumbers: [],
+	LifeTimeComponents: [],
+	PlanExecutions: [],
 };
 const initialServiceAssignment = {
 	TotalData: 0,
@@ -64,13 +64,13 @@ const initialServiceAssignment = {
 	Lists: [],
 	NextPage: false,
 	PrevPage: false,
-	Customers: ['All Customer'],
-	Sites: ['All Site'],
-	UnitModels: ['All Unit Model'],
+	Customers: ['ALL Customer'],
+	Sites: ['ALL Site'],
+	UnitModels: ['ALL Unit Model'],
 	ComponentDescriptions: ['All Component Description'],
-	GroupSerialNumber: [],
-	GroupLifeTimeComponent: [],
-	GroupPlanExecution: [],
+	SerialNumbers: [],
+	LifeTimeComponents: [],
+	PlanExecutions: [],
 };
 
 const initialSelectedFilter = {
