@@ -42,9 +42,9 @@ componentWillUnmount = () => {
   this.props.updateSalesParameter({
     ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
   });
-  this.props.updateServiceParameter({
-    ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
-  });
+  // this.props.updateServiceParameter({
+  //   ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
+  // });
 }
 
 componentDidMount = () => {
