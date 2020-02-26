@@ -19,8 +19,9 @@ class ApprovalPages extends React.Component{
         whichTabs: true,
         isShowPerPage: true,
         showPerPage : 0,
-        isApproved: false,
-        snak: true,
+        isApproveConfirmationShown: false,
+        isShowApproveSucceed: false,
+        snak: true
         // nextPage: true,
         // prevPage: false,
         // numberOfPage: 2,
@@ -595,7 +596,8 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
-      await this.props.approveSales({SoNumber : arr, IsApprove: true}, this.props.token)
+      await this.props.approveSales({SoNumbers : arr, IsApprove: true}, this.props.token)
+      this.setState({ isApproveConfirmationShown: false, isShowApproveSucceed: true });
       this.onClickSalesOrder();
       await this.props.clearSelectedSalesPlans();
   }

@@ -3,6 +3,8 @@ import { combineReducers } from 'redux';
 import update from 'immutability-helper';
 import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
 import {
+	ApproveSalesAction,
+	ApproveServiceAction,
 	UnapproveSalesAction, 
 	PlanningApprovedSalesDownloadAction,
 	PlanningApprovedServiceDownloadAction,
@@ -368,6 +370,42 @@ export function PutSAPIssueReducer(state = initialSalesState, action) {
 		  };
 		default:
 		  return { data: initialSalesState.data, status: ApiRequestActionsStatus.LOADING };
+	  }
+	}
+	return state;
+}
+
+export function approvedSalesReducer(state = initialSalesState, action) {
+	if (action.type === ApproveSalesAction) {
+	  switch (action.status) {
+		case ApiRequestActionsStatus.SUCCEEDED:
+		  return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		case ApiRequestActionsStatus.FAILED:
+		  return {
+				data: initialSalesState.data,
+				status: ApiRequestActionsStatus.FAILED,
+				error: action.error,
+		  };
+		default:
+		  return { data: initialSalesState.data, status: ApiRequestActionsStatus.LOADING };
+	  }
+	}
+	return state;
+}
+
+export function approvedServiceReducer(state = initialServiceState, action) {
+	if (action.type === ApproveServiceAction) {
+	  switch (action.status) {
+		case ApiRequestActionsStatus.SUCCEEDED:
+		  return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		case ApiRequestActionsStatus.FAILED:
+		  return {
+				data: initialServiceState.data,
+				status: ApiRequestActionsStatus.FAILED,
+				error: action.error,
+		  };
+		default:
+		  return { data: initialServiceState.data, status: ApiRequestActionsStatus.LOADING };
 	  }
 	}
 	return state;
@@ -885,6 +923,8 @@ const PlansReducers = combineReducers({
 	approveServiceDownloaded : downloadApprovedServiceReducer,
 	putLifetimeList: fetchPutLifetimeReducer,
 	putSAPIssue: PutSAPIssueReducer,
+	salesApproved : approvedSalesReducer,
+	serviceApproved : approvedServiceReducer,
 	filterLifetime : filterLifetimeReducer,
 	filterDate : filterDateReducer
 });

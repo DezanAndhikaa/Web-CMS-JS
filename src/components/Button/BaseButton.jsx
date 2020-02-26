@@ -14,7 +14,7 @@ class BaseButton extends React.Component{
         super(props);
         this.state={
             isShowModal: false,
-            isSuccess: false,
+            isShowApprovedModal: false,
             index:0
         }
     }
@@ -31,25 +31,16 @@ class BaseButton extends React.Component{
         this.setState({isShowModal: !this.state.isShowModal})
     }
 
-    isShowModalInfo = () => {
+    isApprovalClosed = () => {
         this.setState({
-            isShowModal: !this.state.isShowModal,
-            isSuccess: !this.state.isSuccess
+          isShowApprovedModal: !this.state.isShowApprovedModal
         })
     }
 
-    showModalInfo(){
-        console.log('cek masuk gak: ', this.props.fetchStatusSales)
-        if(this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED){
-          return(
-            <UnapproveConfirmation
-                {...this.props}
-                idConfirm= "Successfull"
-                onClose={this.isClosed}
-                openModal={this.state.isShowModal}
-            />
-          )
-        }
+    _renderApprovedModal(){
+        return(
+          <ConfirmationModal isModal={this.state.isShowApprovedModal} idModal="Approved" isModalClosed={this.isApprovalClosed}/>
+        )
     }
 
     isApproved = async() => {
@@ -58,7 +49,10 @@ class BaseButton extends React.Component{
             if (this.props.titles === "Approve") {
                 console.log('masuk whatTabsIsRendered',this.props.selectedData)
                 await this.props.handleSalesApprove()
-                this.isClosed()
+                this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED && (
+                    this._renderApprovedModal()
+                )
+                // this.isClosed()
                 // await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
                 // await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
             }
@@ -122,20 +116,20 @@ class BaseButton extends React.Component{
             return(
                 <div className="button-inline">
                     <Button className="btn-approve" onClick={this.isClicked} disabled={this.props.disabledButton}>Approve</Button>
-                    {/* <ApproveConfirmation
+                    <ApproveConfirmation
                         {...this.props}
                         {...this.state}
                         onClose={this.isClosed}
                         openModal={this.state.isShowModal}
                         totalData={this.props.totalSelectedItems}
                         onApprove={this.isApproved}
-                    /> */}
-                    <ConfirmationModal 
+                    />
+                    {/* <ConfirmationModal 
                         {...this.props}
                         idModal = "Approved"
                         onClose={this.isClosed}
                         openModal={this.state.isShowModal}
-                    />
+                    /> */}
                 </div>
             )
         }else if(this.props.titles === "Cancel Approve"){

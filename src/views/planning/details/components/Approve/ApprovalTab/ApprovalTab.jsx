@@ -203,7 +203,7 @@ class ApprovalTab extends React.Component {
           <div className="total-data">
             <div className="header-approval">
               <div className="header1">
-                Approval -
+                Approval
               </div>
               <div className="header2">
                 Sales Order
@@ -225,7 +225,7 @@ class ApprovalTab extends React.Component {
           <div className="total-data">
             <div className="header-approval">
               <div className="header1">
-                Approval -
+                Approval
               </div>
               <div className="header2">
                 Service Order
