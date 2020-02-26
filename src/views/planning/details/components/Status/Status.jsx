@@ -7,6 +7,7 @@ import SalesOrderList from '../PlanningList/SalesOrderList';
 import ServiceOrderList from '../PlanningList/ServiceOrderList';
 import ApprovedSalesOrderList from '../PlanningList/ApprovedSalesOrderList';
 import DeletedSalesOrderList from '../PlanningList/DeletedSalesOrderList';
+import SapSalesOrderList from '../PlanningList/SapSalesOrderList'
 import ApprovedServiceOrderList from '../PlanningList/ApprovedServiceOrderList';
 import DeletedServiceOrderList from '../PlanningList/DeletedServiceOrderList';
 import Button from '@material-ui/core/Button';
@@ -416,6 +417,12 @@ export default class Status extends React.PureComponent {
 		this.setPropsToState();
 	}
 
+	onClickSalesOrderSap = async() => {
+		await this.props.fetchSapSales(this.props.salesSapParameter.dataFilter, this.props.token);
+		await this.props.clearSelectedSalesPlans()
+		this.setPropsToState();
+	}
+
 	onClickServiceOrder = async() => {
 		await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
 		this.props.clearSelectedServicePlans()
@@ -526,6 +533,21 @@ export default class Status extends React.PureComponent {
 		);
 	}
 
+	sapSalesOrderList(){
+		return(
+			<div className="plannings-list-containers">
+				<SapSalesOrderList 
+				{...this.props}
+				displaySalesCheckbox={this.props.salesSapParameter.paramsData.assigmentFilter || this.props.salesSapParameter.paramsData.inProgressFilter}
+				sortSalesByState={this.props.sortSalesBy}
+				onClickSalesOrderSap={this.onClickSalesOrderSap}
+				onChoosedSales={this.updateAssignmentSalesStates}
+				selectedSalesPlanList={this.props.selectedSalesPlans}
+				/>
+			</div>
+		);
+	}
+
 	componentWillUnmount = () => {
 		this.props.updateSalesParameter({
 			...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
@@ -538,6 +560,9 @@ export default class Status extends React.PureComponent {
 		})
 		this.props.updateSalesDeletedParameter({
 			...this.props.salesDeletedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+		})
+		this.props.updateSalesSapParameter({
+			...this.props.salesSapParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
 		})
 		this.props.updateServiceApprovedParameter({
 			...this.props.serviceApprovedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
@@ -687,8 +712,26 @@ export default class Status extends React.PureComponent {
 			case 'SAP ISSUE': 
 			this.setState({ isDisabled : true})
 			console.log('this is ', whatPageIsChoosed)
-			default:
-				console.log('this is default', whatPageIsChoosed)
+			if(this.props.location.whichTab === 'sales'){
+				return(
+					<>
+						{this.sapSalesOrderList()}
+					<div className="bottom-row">
+					{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderListDeleted)}
+					</div>
+					</>
+				)
+			}else if(this.props.location.whichTab === 'service'){
+				return(
+					<>
+						{this.sapServiceOrderList()}
+					<div className="bottom-row">
+					{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderListDeleted)}
+					</div>
+					</>
+				)
+			}
+
 		}
 	}
 
