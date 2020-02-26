@@ -19,8 +19,9 @@ class ApprovalPages extends React.Component{
         whichTabs: true,
         isShowPerPage: true,
         showPerPage : 0,
-        isApproved: false,
-        snak: true,
+        isApproveConfirmationShown: false,
+        isShowApproveSucceed: false,
+        snak: true
         // nextPage: true,
         // prevPage: false,
         // numberOfPage: 2,
@@ -505,6 +506,7 @@ componentDidUpdate = (prevProps) => {
         />
         <NotifButton 
         {...this.props}
+        idNotif = "Non-Status"
         />
       </>
     )
@@ -594,7 +596,8 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
-      await this.props.approveSales({SoNumber : arr, IsApprove: true}, this.props.token)
+      await this.props.approveSales({SoNumbers : arr, IsApprove: true}, this.props.token)
+      this.setState({ isApproveConfirmationShown: false, isShowApproveSucceed: true });
       this.onClickSalesOrder();
       await this.props.clearSelectedSalesPlans();
   }
@@ -620,7 +623,7 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedSalesPlans[i].So]
       }
-      await this.props.unapproveSales({So : arr, IsRevised: true}, this.props.token)
+      await this.props.unapproveSales({SoNumbers : arr, IsRevised: true}, this.props.token)
       this.onClickSalesOrder();
       await this.props.clearSelectedSalesPlans();
     }
@@ -787,7 +790,6 @@ componentDidUpdate = (prevProps) => {
           renderFilterByDataAction={this._renderFilterByDataAction()}  
           renderBaseButton={this._renderBaseButton()}
           renderSearch={this._renderSearchBar()}
-          renderNotif={this._renderNotif()}
           onClickSalesOrder={this.onClickSalesOrder}        
           onClickServiceOrder={this.onClickServiceOrder}
           onChoosedService={this.updateAssignmentServiceStates}
@@ -808,6 +810,7 @@ componentDidUpdate = (prevProps) => {
           // baseButton={this._renderBaseButton}
           isApproved={this.state.isApproved}
           token={this.props.token}
+          renderNotif={this._renderNotif()}
         />
       </>
     );

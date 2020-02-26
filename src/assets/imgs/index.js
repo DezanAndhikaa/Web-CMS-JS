@@ -30,8 +30,10 @@ import DelSuccess from './del-success.png';
 import ImgSendtoEdit from './send-to-edit.png';
 import ImgCancelEditSucc from './cancel-edit-success.png';
 import ImgCancelApprove from './cancel-approve.png';
+import ImgApproved from './approved.png';
 
 export {
+	ImgApproved,
 	ImgSendtoEdit,
 	ImgCancelApprove,
 	ImgCancelEditSucc,

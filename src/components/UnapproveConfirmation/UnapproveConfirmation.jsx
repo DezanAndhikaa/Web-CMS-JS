@@ -13,7 +13,8 @@ export default class UnapproveConfirmation extends React.PureComponent {
     isShowModalUnapprove: false,
     isShowModalSap: false,
     isShowModalSend: false,
-    isShowModalSapSucced: false
+    isShowModalSapSucced: false,
+    isShowModalSendSucced: false
   }
 
   isSAPIssue = async(data) => {

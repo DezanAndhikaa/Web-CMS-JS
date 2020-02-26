@@ -784,7 +784,10 @@ export default class Status extends React.PureComponent {
 						</Button>
 					</div>
 					<div className="notif_button">
-						<NotifButton/>
+						<NotifButton
+							{...this.props}
+							idNotif = "Status"
+						/>
 						<FilterbyDataAction
 							{...this.props}
 							titles = "Tracking History"
