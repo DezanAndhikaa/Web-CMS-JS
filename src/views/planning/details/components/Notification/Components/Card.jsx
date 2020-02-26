@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card } from '@material-ui/core'
+import '../Notification.scss'
 
 export default class CardData extends React.Component {
 
@@ -56,7 +57,7 @@ export default class CardData extends React.Component {
       return(
           <>
           {this.state.col.map(() => (
-            <div className="filters-container">
+            <div className="filters-container-notif">
               {this.state.events.map(world => (
                 <div className="kartu">
                 {/* <Card className="kartu"> */}

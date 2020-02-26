@@ -17,6 +17,7 @@ export const FetchApprovedSalesAction = 'FETCH_APPROVED_SALES';
 export const FetchApprovedServiceAction = 'FETCH_APPROVED_SERVICE';
 export const FetchDeletedSalesAction = 'FETCH_DELETED_SALES';
 export const FetchDeletedServiceAction = 'FETCH_DELETED_SERVICE';
+export const FetchSapSalesAction = 'FETCH_SAP_SALES';
 export const DeleteSalesAction = 'DELETE_SALES';
 export const DeletePermanentSalesAction = 'DELETE_PERMANENT_SALES';
 export const DeleteServiceAction = 'DELETE_SERVICE';
@@ -58,6 +59,7 @@ export const UnselectMechanicAction = 'UNSELECT_MECHANIC';
 export const UpdateSalesParameterAction = 'SALES_PARAMETER';
 export const UpdateSalesApprovedParameterAction = 'SALES_APPROVED_PARAMETER';
 export const UpdateSalesDeletedParameterAction = 'SALES_DELETED_PARAMETER';
+export const UpdateSalesSapParameterAction = 'SALES_SAP_PARAMETER';
 export const UpdateServiceParameterAction = 'SERVICE_PARAMETER';
 export const UpdateServiceApprovedParameterAction = 'SERVICE_APPROVED_PARAMETER';
 export const UpdateServiceDeletedParameterAction = 'SERVICE_DELETED_PARAMETER';
@@ -347,6 +349,21 @@ export function fetchDeletedServiceAction(payload, accessToken){
 	return async (dispatch) => dispatch(callApi(FetchDeletedServiceAction, requestConfig));
 }
 
+export function fetchSapSalesAction(payload, accessToken){
+	const requestConfig = {
+		method: RequestMethod.POST,
+		url: `${ApiUrlBase.SALESORDER_API_URL}/FilterUnapproved`,
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'Accept': 'application/json; charset=utf-8',
+			'Content-Type': 'application/json; charset=utf-8',
+		},
+		data: payload,
+	};
+	return async (dispatch) => dispatch(callApi(FetchSapSalesAction, requestConfig));
+}
+
 export function getServiceOrderAction(payload) {
 	const requestConfig = {
 		method: RequestMethod.POST,
@@ -367,6 +384,9 @@ export function salesParameterApprovedAction(type, payload) {
 	return { type, payload };
 }
 export function salesParameterDeletedAction(type, payload) {
+	return { type, payload };
+}
+export function salesParameterSapAction(type, payload){
 	return { type, payload };
 }
 export function serviceParameterAction(type, payload) {

@@ -11,12 +11,14 @@ import {
 	FetchApprovedServiceAction,
 	FetchDeletedSalesAction,
 	FetchDeletedServiceAction,
+	FetchSapSalesAction,
 	// FetchSearchValueAction, 
 	// FetchPlansAction, 
 	// GetMechanicsAction, 
 	// GetServiceOrderAction, GetSalesOrderAction, 
 	UpdateSalesApprovedParameterAction,
 	UpdateSalesDeletedParameterAction,
+	UpdateSalesSapParameterAction,
 	UpdateSalesParameterAction, ResetSelectedMechanicsAction, 
 	SearchSalesAction,
 	SearchServiceAction,
@@ -463,6 +465,7 @@ export function fetchDeletedSalesReducer(state = initialSalesState, action) {
 	return state;
 }
 
+
 export function fetchDeletedServiceReducer(state = initialServiceState, action) {
 	if (action.type === FetchDeletedServiceAction) {
 		switch (action.status) {
@@ -477,6 +480,24 @@ export function fetchDeletedServiceReducer(state = initialServiceState, action) 
 		default:
 			return { data: initialServiceState.data, status: ApiRequestActionsStatus.LOADING };
 		}
+	}
+	return state;
+}
+
+export function fetchSapSalesReducer(state = initialSalesState, action) {
+	if (action.type === FetchSapSalesAction) {
+	  switch (action.status) {
+		case ApiRequestActionsStatus.SUCCEEDED:
+		  return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		case ApiRequestActionsStatus.FAILED:
+		  return {
+				data: initialSalesState.data,
+				status: ApiRequestActionsStatus.FAILED,
+				error: action.error,
+		  };
+		default:
+		  return { data: initialSalesState.data, status: ApiRequestActionsStatus.LOADING };
+	  }
 	}
 	return state;
 }
@@ -551,6 +572,12 @@ export function salesDeletedParameterReducer(state = initialSalesParameter, acti
 	if (action.type === UpdateSalesDeletedParameterAction)
 		return {...state, dataFilter: action.payload};
 		// console.log('dums',state)
+	return state;
+}
+
+export function salesSapParameterReducer(state = initialSalesParameter, action){
+	if(action.type === UpdateSalesSapParameterAction)
+		return {...state, dataFilter: action.payload};
 	return state;
 }
 
@@ -858,6 +885,7 @@ const PlansReducers = combineReducers({
 	serviceOrderListApproved : fetchApprovedServiceReducer,
 	salesOrderListDeleted : fetchDeletedSalesReducer,
 	serviceOrderListDeleted : fetchDeletedServiceReducer,
+	salesOrderListSap : fetchSapSalesReducer,
 	// salesOrderList : getSearchValueReducer,
 	// salesOrderList: getSalesOrderReducer,
 	// mechanicList: getMechanicsReducer,
@@ -869,6 +897,7 @@ const PlansReducers = combineReducers({
 	salesParameter: salesParameterReducer,
 	salesApprovedParameter : salesApprovedParameterReducer,
 	salesDeletedParameter : salesDeletedParameterReducer,
+	salesSapParameter : salesSapParameterReducer,
 	serviceParameter: serviceParameterReducer,
 	serviceApprovedParameter: serviceParameterApprovedReducer,
 	serviceDeletedParameter: serviceParameterDeletedReducer,
