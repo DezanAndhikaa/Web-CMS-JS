@@ -2,13 +2,13 @@
 @import '../../../../../themes/functions';
 
 @media (min-width: 1025px) {
-.head-containers{
+.head-containers-tracking{
     display: inline-flex;
     justify-content: space-between;
     // position: relative;
     // z-index:0;
     width: 100%;
-    .back_button{
+    .back_button-tracking{
         display: flex;
         width: 50%;
         background-image: url('../../../../../assets/icons/Arrow_Left.png');
@@ -17,7 +17,7 @@
         background-position-y: center;
         background-repeat: no-repeat;
     }
-    .notif_button{
+    .notif_button-tracking{
         flex: 1;
         // align-self: center;
         display: flex;
@@ -26,7 +26,7 @@
     
 }
 
-.paper{
+.paper-tracking{
     flex: 1;
     display: flex;
     margin-top: 1%;
@@ -89,22 +89,22 @@
     }
 }
 
-.table-containers{
+.table-containers-tracking{
     display: flex;
     top: 8%;
     flex-direction: column;
     position: relative;
     // z-index: 3;
-    .title-containers{
+    .title-containers-tracking{
         display: inline-flex;
         justify-content: space-between;
         width: 100%;
-        .title{
+        .title-tracking{
             display: flex;
             width: 50%;
             margin-bottom: 2%;
         }
-        .search-containers{
+        .search-containers-tracking{
             flex: 1;
             align-self: flex-end;
             // margin-left: 20vw;
@@ -121,10 +121,10 @@
     //     display: flex;
     //     justify-content: flex-end;
     // }
-    .filters-containers{
+    .filters-containers-tracking{
         display: flex;
         flex-direction: row;
-        .dropdowns-containers{
+        .dropdowns-containers-tracking{
             // position: absolute;
             display: flex;
             flex-direction: row;
@@ -132,7 +132,7 @@
     }
 }
 
-.bottom-rows{
+.bottom-rows-tracking{
     // flex: 1;
     display: flex;
     flex-direction: row;
@@ -168,9 +168,9 @@
 }
 
 
-.plannings-list-containers{
+.plannings-list-containers-tracking{
     margin-top: 1.5vw !important;
-    .table{
+    .table-tracking{
         // display: block;
         font-size: 0.5vw;
         .table-head{

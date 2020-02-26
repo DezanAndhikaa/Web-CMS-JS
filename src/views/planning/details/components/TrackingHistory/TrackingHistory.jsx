@@ -36,7 +36,6 @@ export default class Status extends React.PureComponent {
     }    
     componentDidMount = async() =>{
 		if(this.props.location.whichTab === "tracking"){
-            console.log('mantap mantap')
 		}else if(this.props.location.whichTab === undefined){
 			this.handleClick(Menu.PLANNING_APPROVAL);
 		}
@@ -73,13 +72,13 @@ export default class Status extends React.PureComponent {
         console.log('ini halaman tracking history', this.state.selected);
 		return(
             <main className="content">
-                <div className="head-containers">
-                    <div className="back_button">
+                <div className="head-containers-tracking">
+                    <div className="back_button-tracking">
                         <Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
                             Detail
                         </Button>
                     </div>
-                    <div className="notif_button">
+                    <div className="notif_button-tracking">
                         <FilterbyDataAction
                                 {...this.props}
                                 titles = "Input Lifetime"
@@ -87,7 +86,7 @@ export default class Status extends React.PureComponent {
                         <NotifButton/>
                     </div>
                 </div>
-                <div className="paper">
+                <div className="paper-tracking">
                     <LayoutTime
                     renderLayoutTime={this._renderLayoutTime}
                     />
