@@ -10,11 +10,12 @@ import DropDown from './DropDown';
 
 const styles = theme =>({
 	root: {
-		minWidth: 250,
-		maxWidth: 250,
-		minHeight: 500,
-		maxHeight: 500,
-		marginRight: 10
+		minWidth: 237,
+		width: '30%',
+		minHeight: theme.spacing.unit * 84,
+		maxHeight: 670,
+		height : '100%',
+		marginRight: theme.spacing.unit *1
 	},
 	bullet: {
 		display: 'inline-block',
