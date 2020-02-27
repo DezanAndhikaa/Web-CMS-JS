@@ -37,9 +37,18 @@ class BaseButton extends React.Component{
         })
     }
 
+    isOpened(){
+        this.setState({
+            isShowModal: !this.state.isShowModal,
+            isShowApprovedModal: !this.state.isShowApprovedModal
+        })
+    }
+
     _renderApprovedModal(){
         return(
-          <ConfirmationModal isModal={this.state.isShowApprovedModal} idModal="Approved" isModalClosed={this.isApprovalClosed}/>
+            <>
+          <ConfirmationModal openModal={this.state.isShowApprovedModal} idModal="Approved" onClose={this.isApprovalClosed}/>
+        </>
         )
     }
 
@@ -47,17 +56,10 @@ class BaseButton extends React.Component{
         console.log('masuk isAPprove')
         if (this.props.whatTabsIsRendered === true) {
             if (this.props.titles === "Approve") {
-                console.log('masuk whatTabsIsRendered',this.props.selectedData)
+                // this.isOpened()
                 await this.props.handleSalesApprove()
-                this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED && (
-                    this._renderApprovedModal()
-                )
-                // this.isClosed()
-                // await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
-                // await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
             }
             if (this.props.titles === "Delete") {
-                console.log('masuk whatTabsIsRendered',this.props.deleteSalesData)
                 await this.props.handleDeleteSales()
                 this.isClosed()
                 // await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
@@ -67,39 +69,27 @@ class BaseButton extends React.Component{
                 await this.props.handleSendtoEdit()
                 this.showModalInfo()
                 this.isClosed()
-                // await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
-                // await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
             }
             if (this.props.titles === "Permanently"){
-                // await this.props.handleSendtoEdit()
-                // this.showModalInfo()
                 this.isClosed()
-                // await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
-                // await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
             }
         }
         if (this.props.whatTabsIsRendered === false) {
             if (this.props.titles === "Approve") {
                 await this.props.handleServiceApprove();
                 this.isClosed()
-                // await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter)
-                // this.props.clearSelectedServicePlans(this.props.selectedServicePlans)
             }
             if (this.props.titles === "Delete") {
                 await this.props.handleDeleteService();
                 this.isClosed()
-                // await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter)
-                // this.props.clearSelectedServicePlans(this.props.selectedServicePlans)
             }
         }
     }
 
     isDownloaded = async() => {
         if (this.props.whatTabsIsRendered === true) {
-            console.log('kkkkkk sales')
             await this.props.handleSalesApprovedDownload()
         }if (this.props.whatTabsIsRendered === false) {
-            console.log('kkkkkk')
             await this.props.handleServiceApprovedDownload()
         }
        
@@ -124,6 +114,9 @@ class BaseButton extends React.Component{
                         totalData={this.props.totalSelectedItems}
                         onApprove={this.isApproved}
                     />
+                    {/* {this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED && (
+                        this._renderApprovedModal()
+                    )} */}
                     {/* <ConfirmationModal 
                         {...this.props}
                         idModal = "Approved"
@@ -199,6 +192,8 @@ class BaseButton extends React.Component{
                     />
                 </div>
             )
+        }else if(this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED){
+            this._renderApprovedModal()
         } 
     }
 }
