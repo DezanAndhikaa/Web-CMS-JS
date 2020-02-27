@@ -5,7 +5,7 @@ import Card from '@material-ui/core/Card';
 // import Cards from '../../Status/components/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Buttons from './Buttons';
+import Buttons from './SiteListCard';
 import Typography from '@material-ui/core/Typography';
 import SearchInput from '../../../../../../components/Searchbar/SearchInput';
 // import { Autorenew } from '@material-ui/icons';
