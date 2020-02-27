@@ -339,7 +339,7 @@ console.log('kondisi value terasek', value)
     return (
         <div className="root">
           <div className="tab-container">
-            <Button className="btn-approval" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL, 'sales') }>
+            <Button className="btn-approval" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
               Approval
             </Button>
             <div className="btn-header">
