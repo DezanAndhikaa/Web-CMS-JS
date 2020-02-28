@@ -65,9 +65,13 @@ class LayoutSite extends React.Component {
 					</Typography>
 				</CardContent>
 				<Card className={classes.content} variant="outlined">
-					<CardActions>
-						<SiteListCard />
-					</CardActions>
+					<div className="list-container">
+						<div className="list-item-notif">
+							<div className="listnya">
+								<SiteListCard/>
+							</div>
+						</div>
+					</div>
 				</Card>
 			</Card>
 		);

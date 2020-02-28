@@ -34,6 +34,7 @@ import ImgApproved from './approved.png';
 import Woman from './woman.png';
 import Text1 from './text-1.png';
 import Text2 from './text-2.png';
+import IceFace from './ice-face.png';
 
 export {
 	ImgApproved,
@@ -71,5 +72,6 @@ export {
 	DelSuccess,
 	Woman,
 	Text1,
-	Text2
+	Text2,
+	IceFace
 };

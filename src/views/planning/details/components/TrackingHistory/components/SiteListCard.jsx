@@ -1,13 +1,50 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
+import { withStyles } from '@material-ui/core/styles';
+import { IceFace } from '../../../../../../assets/imgs';
+import './SiteListCard.scss';
 import { List } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 
-
+const styles = theme =>({
+	root: {
+		minWidth: 274,
+		width: '50%',
+		maxHeight: 670,
+		minHeight: theme.spacing.unit * 84,
+		height : '100%',
+		marginRight: theme.spacing.unit *1,
+		// overflowY: 'auto'
+	},
+	content : {
+		width: '100%',
+		height : '100%',
+		lineHeight : '70px'
+	}
+});
 class SiteListCard extends React.Component {
 	state ={
-		dataSite : ['Jembayan', 'Muaratae', 'Bontang East', 'Soroako', 
-				'Damai', 'Bendili', 'Adaro', 'MTBU', 'Muaralawa']
+		dataSite : [
+			{ site : "Jembayan"},
+			{ site : "Muarante"},
+			{ site : "Bontang East"},
+			{ site : "Soroako"},
+			{ site : "Damai"},
+			{ site : "Kutai"},
+			{ site : "Bontang East"},
+			{ site : "Bontang West"},
+			{ site : "Bontang South"},
+			{ site : "Bontang North"},
+			{ site : "Bendili"},
+			{ site : "Bendili"},
+			{ site : "Bendili"},
+			{ site : "Bendili"},
+			{ site : "Bendili"},
+			{ site : "Bendili"},
+			{ site : "Bendili"},
+			{ site : "Bendili"},
+			{ site : "Bendili"},
+		]
 	}
 	handleClick (value){
 		alert(value);
@@ -19,17 +56,18 @@ class SiteListCard extends React.Component {
 		);
 	}
 	render(){
-		console.log('tekkk ', this.state.dataSite)
+		const { classes } = this.props;
 		return(
-			<>
-				<List>
-				{this.state.dataSite && this.state.dataSite.map((row) => (
-					this.renderList(row)
+			<div>
+				{this.state.dataSite.map( (row) => (
+					<Card className="site-text-content" onClick={()=>this.handleClick(row.site)}>
+						<img className="ice-face" src={IceFace} />
+						{row.site}
+					</Card>
 				))}
-				</List>
-			</>
+			</div>
 		);
 	}
 }
 
-export default SiteListCard;
+export default withStyles(styles, { withTheme: true })(SiteListCard);

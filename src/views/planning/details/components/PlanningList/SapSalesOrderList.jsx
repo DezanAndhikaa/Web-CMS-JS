@@ -4,6 +4,7 @@ import {
   Checkbox, Table, TableBody, TableCell, TableHead, TableRow, TextField, 
 } from '@material-ui/core';
 import './PlanningList.scss';
+import '../SapIssue/SapIssue.scss'
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
 import InputButton from '../../../../../components/Button/InputButton';
@@ -169,7 +170,7 @@ export default class SapSalesOrderList extends React.PureComponent {
     )
   }
 
-  _showDescription(id){
+  _showDescription(row){
     return(
       <div className="teks">
             <TextField 
@@ -177,7 +178,7 @@ export default class SapSalesOrderList extends React.PureComponent {
                 type='text' 
                 variant="outlined" 
                 size="small"
-                value="uhuy"
+                value={row.SAPIssueMessage}
             />
       </div>
     )
@@ -210,8 +211,8 @@ export default class SapSalesOrderList extends React.PureComponent {
       </TableRow>
       {this.state.expand ? 
         <TableRow className="table-row-bottom-issue">
-            <TableCell><label>Description &nbsp; :</label></TableCell>
-            <TableCell colSpan="11">{this._showDescription(id)}</TableCell>
+            <TableCell><label>Description</label></TableCell>
+            <TableCell colSpan="12">{this._showDescription(row)}</TableCell>
         </TableRow> : null }
     </>  
     )

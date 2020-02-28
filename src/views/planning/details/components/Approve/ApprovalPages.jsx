@@ -9,6 +9,7 @@ import SearchInput from "../../../../../components/Searchbar/SearchInput";
 import BaseButton from '../../../../../components/Button/BaseButton';
 import FilterbyDataAction from '../../../../../components/FilterByDataAction/FilterbyDataAction';
 import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton';
+import ConfirmationModal from '../../../../../components/ConfirmationModal/ConfirmationModal'
 import {Snackbar, Button} from '@material-ui/core';
 
 class ApprovalPages extends React.Component{
@@ -19,9 +20,8 @@ class ApprovalPages extends React.Component{
         whichTabs: true,
         isShowPerPage: true,
         showPerPage : 0,
-        isApproveConfirmationShown: false,
         isShowApproveSucceed: false,
-        snak: true
+        snak: true,
         // nextPage: true,
         // prevPage: false,
         // numberOfPage: 2,
@@ -32,10 +32,10 @@ class ApprovalPages extends React.Component{
     };
 }
 
-componentDidMount = () => {
-  // console.log('tok tok tok : ',this.props.salesOrderList)
-  // this.handleLifeTime();
-}
+// componentDidMount = () => {
+//   console.log('tok tok tok : ',this.props.salesOrderList)
+//   this.handleLifeTime();
+// }
 
 // handleLifeTime = async() =>{
 //   if (this.props.location.whichTab === undefined) {
@@ -421,34 +421,19 @@ componentDidUpdate = (prevProps) => {
       await this.props.fetchSalesOrder({
         ...this.props.salesParameter.dataFilter, 
         Filter : 
-              [...this.props.salesParameter.dataFilter.Filter, {
-                Field : 'LifeTimeComponent',
-                Operator : "neq",
-                Value : '-',
-                Logic : "AND"
-        }]
+          [...this.props.salesParameter.dataFilter.Filter, {
+            Field : 'LifeTimeComponent',
+            Operator : "neq",
+            Value : '-',
+            Logic : "AND"
+          },{
+            Field : 'SAPIssueMessage',
+            Operator : 'eq',
+            Value : '-',
+            Logic : 'AND'
+          }]
       }, this.props.token);
     }
-    // await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
-    // if (this.props.location.whichTab === 'lifetime') {
-    //   await this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter, 
-    //     Filter : [{
-    //       Field : 'LifeTimeComponent',
-    //       Operator : "eq",
-    //       Value : null,
-    //       Logic : "AND"
-    //   }]
-    // }, this.props.token)
-    // }else if(this.props.location.whichTab === undefined){
-    //   await this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter,
-    //     Filter : [{
-    //       Field : 'LifeTimeComponent',
-    //       Operator : "neq",
-    //       Value : null,
-    //       Logic : "AND"
-    //   }]
-    // }, this.props.token);
-    // }
   }  
 
   //KOMPONEN UNTUK SHOW PER/PAGE
@@ -597,7 +582,7 @@ componentDidUpdate = (prevProps) => {
         arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
       await this.props.approveSales({SoNumbers : arr, IsApprove: true}, this.props.token)
-      this.setState({ isApproveConfirmationShown: false, isShowApproveSucceed: true });
+      // this.setState({ isApproveConfirmationShown: false, isShowApproveSucceed: true });
       this.onClickSalesOrder();
       await this.props.clearSelectedSalesPlans();
   }
@@ -715,6 +700,8 @@ componentDidUpdate = (prevProps) => {
             totalSelectedItems ={this.props.selectedSalesPlans.length}
             handleSalesApprove={this.handleSalesApprove}
             selectedData={this.state.selectedData}
+            renderSakses = {this._renderSakses}
+            renderClose = {this._renderClose}
           />
           <BaseButton titles="Cancel Approve"
             {...this.props}
@@ -816,10 +803,30 @@ componentDidUpdate = (prevProps) => {
     );
   };
 
+  _renderClose = () => {
+    return(
+      <>
+        {this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED && (
+          <ConfirmationModal idModal="Approved" openModal={false} onClose={true}/>
+        )}
+      </>
+    )
+  }
+
+  _renderSakses = () => {
+    return(
+    <>
+      {this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED && (
+        <ConfirmationModal idModal="Approved" openModal={true} onClose={false}/>
+      )}
+    </>
+    )
+  }
+
   render(){     
-    console.log('locations', this.props.location)
     return(
       <main className="content">
+        {this._renderSakses()}
           <div className="table-container-approval">
                 {this._renderTabs()}
             </div>
