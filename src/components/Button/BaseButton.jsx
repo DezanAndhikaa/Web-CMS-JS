@@ -31,27 +31,6 @@ class BaseButton extends React.Component{
         this.setState({isShowModal: !this.state.isShowModal})
     }
 
-    isApprovalClosed = () => {
-        this.setState({
-          isShowApprovedModal: !this.state.isShowApprovedModal
-        })
-    }
-
-    isOpened(){
-        this.setState({
-            isShowModal: !this.state.isShowModal,
-            isShowApprovedModal: !this.state.isShowApprovedModal
-        })
-    }
-
-    _renderApprovedModal(){
-        return(
-            <>
-          <ConfirmationModal openModal={this.state.isShowApprovedModal} idModal="Approved" onClose={this.isApprovalClosed}/>
-        </>
-        )
-    }
-
     isApproved = async() => {
         console.log('masuk isAPprove')
         if (this.props.whatTabsIsRendered === true) {
@@ -114,15 +93,6 @@ class BaseButton extends React.Component{
                         totalData={this.props.totalSelectedItems}
                         onApprove={this.isApproved}
                     />
-                    {/* {this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED && (
-                        this._renderApprovedModal()
-                    )} */}
-                    {/* <ConfirmationModal 
-                        {...this.props}
-                        idModal = "Approved"
-                        onClose={this.isClosed}
-                        openModal={this.state.isShowModal}
-                    /> */}
                 </div>
             )
         }else if(this.props.titles === "Cancel Approve"){
@@ -174,7 +144,6 @@ class BaseButton extends React.Component{
         }else if(this.props.titles === "Permanently"){
             return(
                 <div className="button-inline">
-                    {/* <Button className="btn-permanently" onClick={this.props.handleDeletePermanent} disabled={this.props.isDisabled} > Delete Permanently </Button> */}
                     <DeleteButton 
                         {...this.props}
                         {...this.state}

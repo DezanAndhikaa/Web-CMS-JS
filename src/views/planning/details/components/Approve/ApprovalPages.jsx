@@ -22,35 +22,9 @@ class ApprovalPages extends React.Component{
         showPerPage : 0,
         isShowApproveSucceed: false,
         snak: true,
-        // nextPage: true,
-        // prevPage: false,
-        // numberOfPage: 2,
-        // currentPage: 1,
-        // filter: {
-        //   filter : {}
-        // }
+        openSuccess : false,
     };
 }
-
-// componentDidMount = () => {
-//   console.log('tok tok tok : ',this.props.salesOrderList)
-//   this.handleLifeTime();
-// }
-
-// handleLifeTime = async() =>{
-//   if (this.props.location.whichTab === undefined) {
-//     await this.props.updateSalesParameter({
-//       ...this.props.salesParameter.dataFilter, 
-//       Filter : 
-//             [...this.props.salesParameter.dataFilter.Filter, {
-//               Field : 'LifeTimeComponent',
-//               Operator : "neq",
-//               Value : '-',
-//               Logic : "AND"
-//       }]
-//     });
-//   }
-// }
 
 componentWillUnmount = () => {
   this.props.updateSalesParameter({
@@ -700,7 +674,7 @@ componentDidUpdate = (prevProps) => {
             totalSelectedItems ={this.props.selectedSalesPlans.length}
             handleSalesApprove={this.handleSalesApprove}
             selectedData={this.state.selectedData}
-            renderSakses = {this._renderSakses}
+            renderSakses = {this.changeSuccess}
             renderClose = {this._renderClose}
           />
           <BaseButton titles="Cancel Approve"
@@ -803,30 +777,35 @@ componentDidUpdate = (prevProps) => {
     );
   };
 
-  _renderClose = () => {
-    return(
-      <>
-        {this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED && (
-          <ConfirmationModal idModal="Approved" openModal={false} onClose={true}/>
-        )}
-      </>
-    )
+  changeSuccess = () => {
+    this.setState({
+      openSuccess : !this.state.openSuccess
+    })
   }
 
-  _renderSakses = () => {
+  closeSuccess = () => {
+    this.setState({
+      openSuccess: !this.state.openSuccess
+    })
+  }
+
+  _renderSuccess = () => {
     return(
-    <>
-      {this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED && (
-        <ConfirmationModal idModal="Approved" openModal={true} onClose={false}/>
-      )}
-    </>
+      <>
+        <ConfirmationModal idModal="Approved" openModal={this.state.openSuccess} onClose={this.closeSuccess}/>
+      </>
     )
   }
 
   render(){     
     return(
       <main className="content">
-        {this._renderSakses()}
+        {/* {this._renderSakses()} */}
+          {this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED && (
+            <>
+              {this._renderSuccess()}
+            </>
+          )}
           <div className="table-container-approval">
                 {this._renderTabs()}
             </div>
