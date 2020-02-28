@@ -67,7 +67,7 @@ class BaseButton extends React.Component{
             }
             if (this.props.titles === "Cancel Approve"){
                 await this.props.handleSendtoEdit()
-                this.showModalInfo()
+                // this.showModalInfo()
                 this.isClosed()
             }
             if (this.props.titles === "Permanently"){
