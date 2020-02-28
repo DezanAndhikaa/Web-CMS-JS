@@ -426,6 +426,11 @@ componentDidUpdate = (prevProps) => {
                 Operator : "neq",
                 Value : '-',
                 Logic : "AND"
+        },{
+          Field : 'SAPIssueMessage',
+          Operator : 'eq',
+          Value : '-',
+          Logic : 'AND'
         }]
       }, this.props.token);
     }
