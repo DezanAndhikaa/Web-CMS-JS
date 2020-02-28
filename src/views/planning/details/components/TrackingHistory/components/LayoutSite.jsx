@@ -8,6 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Buttons from './SiteListCard';
 import Typography from '@material-ui/core/Typography';
 import SearchInput from '../../../../../../components/Searchbar/SearchInput';
+import SiteListCard from './SiteListCard'
 // import { Autorenew } from '@material-ui/icons';
 
 const styles = theme =>({
@@ -65,51 +66,13 @@ class LayoutSite extends React.Component {
 					</Typography>
 				</CardContent>
 				<Card className={classes.content} variant="outlined">
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
+					<div className="list-container">
+						<div className="list-item-notif">
+							<div className="listnya">
+								<SiteListCard/>
+							</div>
+						</div>
+					</div>
 				</Card>
 			</Card>
 		);

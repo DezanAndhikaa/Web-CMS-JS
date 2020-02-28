@@ -6,8 +6,14 @@ import Typography from '@material-ui/core/Typography';
 
 class SiteListCard extends React.Component {
 	state ={
-		dataSite : ['Jembayan', 'Muaratae', 'Bontang East', 'Soroako', 
-				'Damai', 'Bendili', 'Adaro', 'MTBU', 'Muaralawa']
+		dataSite : [
+			{ site : "Jembayan"},
+			{ site : "Muarante"},
+			{ site : "Bontang East"},
+			{ site : "Soroako"},
+			{ site : "Damai"},
+			{ site : "Bendili"},
+		]
 	}
 	handleClick (value){
 		alert(value);
@@ -21,13 +27,12 @@ class SiteListCard extends React.Component {
 		// );
 	}
 	render(){
-		console.log('tekkk ', this.state.dataSite)
 		return(
-			<>
-				{/* {this.state.dataSite && this.state.dataSite.map((row) => (
-					this.renderList(row)
-				))} */}
-			</>
+			<div>
+				{this.state.dataSite.map( (row) => (
+					<div>{row.site}</div>
+				))}
+			</div>
 		);
 	}
 }
