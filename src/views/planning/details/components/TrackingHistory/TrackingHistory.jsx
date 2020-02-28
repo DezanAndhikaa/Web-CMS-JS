@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import LayoutRecorded from './components/LayoutRecorded';
+import LayoutRecorded from './components/LayoutRecorded/LayoutRecorded';
 import LayoutSite from './components/LayoutSite';
 import LayoutTime from './components/LayoutTime';
 import { Menu } from '../../../../../constants';

@@ -140,7 +140,7 @@ class SideMenuComponent extends React.Component {
                   button
                   key="plans-assignment"
                   className={
-                    this.props.path === Menu.PLANNING_DASHBOARD
+                    this.props.path === Menu.PLANNING_DASHBOARD 
                       ? "sub-menu-selected"
                       : "sub-menu"
                   }
@@ -162,7 +162,7 @@ class SideMenuComponent extends React.Component {
                   button
                   key="jobs-report"
                   className={
-                    this.props.path === Menu.PLANNING_APPROVAL
+                    this.props.path === Menu.PLANNING_APPROVAL || this.props.path === Menu.PLANNING_TRACKING_HISTORY || this.props.path === Menu.PLANNING_DETAILS_STATUS || this.props.path === Menu.PLANNING_DETAILS || this.props.path === Menu.PLANNING_ALL_NOTIF
                       ? "sub-menu-selected"
                       : "sub-menu"
                   }

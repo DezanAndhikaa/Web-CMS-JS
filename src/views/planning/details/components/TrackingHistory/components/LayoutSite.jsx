@@ -5,7 +5,7 @@ import Card from '@material-ui/core/Card';
 // import Cards from '../../Status/components/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Buttons from './SiteListCard';
+import SiteListCard from './SiteListCard';
 import Typography from '@material-ui/core/Typography';
 import SearchInput from '../../../../../../components/Searchbar/SearchInput';
 // import { Autorenew } from '@material-ui/icons';
@@ -66,49 +66,7 @@ class LayoutSite extends React.Component {
 				</CardContent>
 				<Card className={classes.content} variant="outlined">
 					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
-					</CardActions>
-					<CardActions>
-						<Buttons />
+						<SiteListCard />
 					</CardActions>
 				</Card>
 			</Card>

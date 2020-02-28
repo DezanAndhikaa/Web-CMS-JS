@@ -7,64 +7,64 @@ import './ConfirmationModal.scss';
 import CloseNotif from '../CloseNotif/CloseNotif';
 
 export default class ConfirmationModal extends React.PureComponent {
-  render() {
-    if(this.props.idModal === "Approved"){
-      console.log('uhuy sap 2')
-      return (
-        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
-            <DialogContent className="confirmation-modal-content">
-              <div className="confirmation-modal">
-              <CloseNotif onClose={this.props.onClose}/>
-                  <div className="confirmation-container">
-                    <p className="confirmation-title">Successful</p>
-                    <img className="image-approved" src={ImgApproved} alt="" />
-                    <p className="confirmation-caption">Please resume your activities</p>
-                    <br></br>
-                    <Button className="btn-ok" onClick={() => {this.props.isModalClosed()} }>Continue</Button>
-                  </div>
-              </div>
-            </DialogContent>
-            </Modal>
-        );
-    }else if(this.props.idModal === "SAP"){
-      console.log('uhuy sap 3')
-      console.log('uhuy sap 3 mod : ', this.props.isModal)
-      return (
-        <Modal open={this.props.isModal} onClose={this.props.onClose} className="modal-container">
-            <DialogContent className="confirmation-modal-content">
-              <div className="confirmation-modal">
-                  <div className="confirmation-container">
-                    <p className="confirmation-title">Successful</p>
-                    <img className="confirmation-image" src={Success} alt="" />
-                    <p className="confirmation-caption">You can see the data SAP Issue</p>
-                    <p className="confirmation-caption">to the <b>Status</b></p>
-                    <br></br>
-                    <Button className="btn-ok" onClick={() => {this.props.isModalClosed()} }>Continue</Button>
-                  </div>
-              </div>
-            </DialogContent>
-            </Modal>
-        );
-    } else if(this.props.idModal === "SAP-Failed"){
-      return (
-        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
+	render() {
+		if(this.props.idModal === "Approved"){
+			console.log('uhuy sap 2')
+			return (
+				<Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
+					<DialogContent className="confirmation-modal-content">
+						<div className="confirmation-modal">
+							<CloseNotif onClose={this.props.onClose}/>
+							<div className="confirmation-container">
+								<p className="confirmation-title">Successful</p>
+								<img className="image-approved" src={ImgApproved} alt="" />
+								<p className="confirmation-caption">Please resume your activities</p>
+								<br></br>
+								<Button className="btn-ok" onClick={() => {this.props.isModalClosed()} }>Continue</Button>
+							</div>
+						</div>
+					</DialogContent>
+				</Modal>
+			);
+		}else if(this.props.idModal === "SAP"){
+			console.log('uhuy sap 3')
+			console.log('uhuy sap 3 mod : ', this.props.isModal)
+			return (
+				<Modal open={this.props.isModal} onClose={this.props.onClose} className="modal-container">
+					<DialogContent className="confirmation-modal-content">
+						<div className="confirmation-modal">
+							<div className="confirmation-container">
+								<p className="confirmation-title">Successful</p>
+								<img className="confirmation-image" src={Success} alt="" />
+								<p className="confirmation-caption">You can see the data SAP Issue</p>
+								<p className="confirmation-caption">to the <b>Status</b></p>
+								<br></br>
+								<Button className="btn-ok" onClick={() => {this.props.isModalClosed()} }>Continue</Button>
+							</div>
+						</div>
+					</DialogContent>
+				</Modal>
+			);
+		} else if(this.props.idModal === "SAP-Failed"){
+			return (
+				<Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
 				  <DialogContent className="confirmation-modal-content">
-            <div className="confirmation-modal">
-              <CloseNotif onClose={this.props.onClose}/>
-              <div className="confirmation-container">
-                <p className="confirmation-title">You have not completed</p>
-                <p className="confirmation-title">the SAP Issue form</p>
-                <img className="confirmation-image" src={DelSuccess} alt="" />
-                <p className="confirmation-caption">Do you want to continue?</p>
-                <div className="btn-row">
-                  <Button className="btn-tidak" onClick={this.props.onClose}>No</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <Button className="btn-ya" onClick={this.props.onApprove}>Yes</Button>
-                </div>
-              </div>
-            </div>
-          </DialogContent>
-        </Modal>
-      );
-    }
-  }
+						<div className="confirmation-modal">
+							<CloseNotif onClose={this.props.onClose}/>
+							<div className="confirmation-container">
+								<p className="confirmation-title">You have not completed</p>
+								<p className="confirmation-title">the SAP Issue form</p>
+								<img className="confirmation-image" src={DelSuccess} alt="" />
+								<p className="confirmation-caption">Do you want to continue?</p>
+								<div className="btn-row">
+									<Button className="btn-tidak" onClick={this.props.onClose}>No</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<Button className="btn-ya" onClick={this.props.onApprove}>Yes</Button>
+								</div>
+							</div>
+						</div>
+					</DialogContent>
+				</Modal>
+			);
+		}
+	}
 }

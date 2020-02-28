@@ -13,20 +13,20 @@ class SiteListCard extends React.Component {
 		alert(value);
 	}
 	renderList(row){
-		// console.log('pann ter render')
-		// return (
-		// <List>
-		// 	<Card onClick={()=>this.handleClick(row.dataSite)}>{row.dataSite}</Card>
-		// </List>
-		// );
+		console.log('pann ter render')
+		return (
+			<Card onClick={()=>this.handleClick(row.dataSite)}>{row.dataSite}</Card>
+		);
 	}
 	render(){
 		console.log('tekkk ', this.state.dataSite)
 		return(
 			<>
-				{/* {this.state.dataSite && this.state.dataSite.map((row) => (
+				<List>
+				{this.state.dataSite && this.state.dataSite.map((row) => (
 					this.renderList(row)
-				))} */}
+				))}
+				</List>
 			</>
 		);
 	}
