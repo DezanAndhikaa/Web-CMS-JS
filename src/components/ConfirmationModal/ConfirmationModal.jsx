@@ -19,7 +19,7 @@ export default class ConfirmationModal extends React.PureComponent {
                     <img className="image-approved" src={ImgApproved} alt="" />
                     <p className="confirmation-caption">Please resume your activities</p>
                     <br></br>
-                    <Button className="btn-ok" onClick={this.props.onClose}>Continue</Button>
+                    <Button className="btn-ok" onClick={ () => (this.props.renderClose())}>Continue</Button>
                   </div>
               </div>
             </DialogContent>

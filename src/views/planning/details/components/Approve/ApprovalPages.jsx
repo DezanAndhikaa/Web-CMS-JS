@@ -421,39 +421,19 @@ componentDidUpdate = (prevProps) => {
       await this.props.fetchSalesOrder({
         ...this.props.salesParameter.dataFilter, 
         Filter : 
-              [...this.props.salesParameter.dataFilter.Filter, {
-                Field : 'LifeTimeComponent',
-                Operator : "neq",
-                Value : '-',
-                Logic : "AND"
-        },{
-          Field : 'SAPIssueMessage',
-          Operator : 'eq',
-          Value : '-',
-          Logic : 'AND'
-        }]
+          [...this.props.salesParameter.dataFilter.Filter, {
+            Field : 'LifeTimeComponent',
+            Operator : "neq",
+            Value : '-',
+            Logic : "AND"
+          },{
+            Field : 'SAPIssueMessage',
+            Operator : 'eq',
+            Value : '-',
+            Logic : 'AND'
+          }]
       }, this.props.token);
     }
-    // await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
-    // if (this.props.location.whichTab === 'lifetime') {
-    //   await this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter, 
-    //     Filter : [{
-    //       Field : 'LifeTimeComponent',
-    //       Operator : "eq",
-    //       Value : null,
-    //       Logic : "AND"
-    //   }]
-    // }, this.props.token)
-    // }else if(this.props.location.whichTab === undefined){
-    //   await this.props.fetchSalesOrder({...this.props.salesParameter.dataFilter,
-    //     Filter : [{
-    //       Field : 'LifeTimeComponent',
-    //       Operator : "neq",
-    //       Value : null,
-    //       Logic : "AND"
-    //   }]
-    // }, this.props.token);
-    // }
   }  
 
   //KOMPONEN UNTUK SHOW PER/PAGE
@@ -721,6 +701,7 @@ componentDidUpdate = (prevProps) => {
             handleSalesApprove={this.handleSalesApprove}
             selectedData={this.state.selectedData}
             renderSakses = {this._renderSakses}
+            renderClose = {this._renderClose}
           />
           <BaseButton titles="Cancel Approve"
             {...this.props}
@@ -822,12 +803,21 @@ componentDidUpdate = (prevProps) => {
     );
   };
 
+  _renderClose = () => {
+    return(
+      <>
+        {this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED && (
+          <ConfirmationModal idModal="Approved" openModal={false} onClose={true}/>
+        )}
+      </>
+    )
+  }
+
   _renderSakses = () => {
-    console.log("masuk spontan ")
     return(
     <>
       {this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED && (
-        <ConfirmationModal idModal="Approved" openModal={true} onClose={true}/>
+        <ConfirmationModal idModal="Approved" openModal={true} onClose={false}/>
       )}
     </>
     )
