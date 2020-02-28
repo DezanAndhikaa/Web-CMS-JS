@@ -9,7 +9,6 @@ import CloseNotif from '../CloseNotif/CloseNotif';
 export default class ConfirmationModal extends React.PureComponent {
   render() {
     if(this.props.idModal === "Approved"){
-      console.log('uhuy sap 2')
       return (
         <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
             <DialogContent className="confirmation-modal-content">
@@ -27,8 +26,8 @@ export default class ConfirmationModal extends React.PureComponent {
             </Modal>
         );
     }else if(this.props.idModal === "SAP"){
-      console.log('uhuy sap 3')
-      console.log('uhuy sap 3 mod : ', this.props.isModal)
+      // console.log('uhuy sap 3')
+      // console.log('uhuy sap 3 mod : ', this.props.isModal)
       return (
         <Modal open={this.props.isModal} onClose={this.props.onClose} className="modal-container">
             <DialogContent className="confirmation-modal-content">

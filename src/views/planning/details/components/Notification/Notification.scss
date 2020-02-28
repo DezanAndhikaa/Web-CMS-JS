@@ -325,13 +325,6 @@
             color: black;
             cursor: pointer;
             .notif-history{
-              // display: flex;
-              // flex-direction: row;
-              // align-self: flex-end;
-              // cursor: pointer;
-              // background-color: transparent;
-              // align-items: center;
-              // margin-left: 25px;
                 display: flex;
                 flex-direction: row;
                 align-self: flex-end;
@@ -343,7 +336,7 @@
                   margin-right: 10px; //vw(10)
               }
               .label-notif{
-                  font-family: 'Lato-Bold';
+                  font-family: 'Lato-Regular';
                   font-size: 14px; //vw(20)
                   line-height: 18px; // vw(24)
                   color: #3C3B3B;

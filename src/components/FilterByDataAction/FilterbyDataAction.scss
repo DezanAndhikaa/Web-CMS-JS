@@ -59,14 +59,24 @@
                     margin-right: 10px; //vw(10)
                 }
                 .label-history{
-                    font-family: 'Lato-Bold';
+                    font-family: 'Lato-Regular';
                     font-size: 14px; //vw(20)
                     line-height: 18px; // vw(24)
                     color: #3C3B3B;
                     text-transform: capitalize;
+                }.label-status{
+                    font-family: 'Lato-Regular';
+                    font-size: 14px; //vw(20)
+                    line-height: 18px; // vw(24)
+                    color: #3C3B3B;
+                    text-transform: capitalize;
+                    margin-right: 10px;
                 }
                 .label-history:hover{
                 color: #FC9517;
+                }
+                .label-status:hover{
+                    color: #FC9517;
                 }
             }
             .input-lt{
@@ -84,11 +94,12 @@
                 //     background-image: url('../../assets/icons/clock.png');
                 // }
                 .label-lt{
-                    font-family: 'Lato-Bold';
+                    font-family: 'Lato-Regular';
                     font-size: 14px; //vw(20)
                     line-height: 18px; // vw(24)
                     color: #3C3B3B;
                     text-transform: capitalize;
+                    margin-right: 20px;
                 }
                 .label-lt:hover{
                 color: #FC9517;

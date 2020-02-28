@@ -1,18 +1,19 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Buttons from './Buttons';
+import Buttons from './SiteListCard';
 import Typography from '@material-ui/core/Typography';
 
-const useStyles = makeStyles({
+const styles = theme =>({
 	root: {
-		minWidth: 450,
-		maxWidth: 450,
-		minHeight: 500,
-		maxHeight: 500,
-		marginRight: 10
+		minWidth: 659,
+		width: '100%',
+		maxHeight: 670,
+		minHeight: theme.spacing.unit * 84,
+		height: '100%',
+		marginRight: theme.spacing.unit *1
 	},
 	bullet: {
 		display: 'inline-block',
@@ -27,20 +28,23 @@ const useStyles = makeStyles({
 	},
 });
 
-export default function LayoutRecorded() {
-	const classes = useStyles();
-	const bull = <span className={classes.bullet}>•</span>;
+class LayoutRecorded extends React.Component {
+	render(){
+		const { classes } = this.props;
 
-	return (
-		<Card className={classes.root} variant="outlined">
-			<CardContent>
-				<Typography className={classes.title} color="textSecondary" gutterBottom>
+		return (
+			<Card className={classes.root} variant="outlined">
+				<CardContent>
+					<Typography className={classes.title} color="textSecondary" gutterBottom>
           RECORDED
-				</Typography>
-			</CardContent>
-			<CardActions>
-				<Buttons />
-			</CardActions>
-		</Card>
-	);
+					</Typography>
+				</CardContent>
+				<CardActions>
+					<Buttons />
+				</CardActions>
+			</Card>
+		);
+	}
 }
+
+export default withStyles(styles, { withTheme: true })(LayoutRecorded);

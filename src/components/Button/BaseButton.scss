@@ -48,7 +48,7 @@
     }
     .btn-approve{
         display: flex;
-        padding-right: 20%;
+        padding-right: 23%;
         width: vw(153.22);
         height: vw(38.07);
         font-size: vw(18); //16
@@ -60,7 +60,7 @@
         background-color: map-get($colors , third);
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
         background-image: url('../../assets/icons/send.png');
-        background-size: 12%;
+        background-size: 15%;
         background-position-x: 82%;
         background-position-y: center;
         background-repeat: no-repeat;
@@ -68,6 +68,13 @@
     }
     .btn-approve:hover{
         background-color: map-get($colors, third-dark);
+    }
+    .btn-approve:disabled{
+        background-image: url('../../assets/icons/send-disabled.png');
+        background-size: 15%;
+        background-position-x: 82%;
+        background-position-y: center;
+        background-repeat: no-repeat;
     }
     .btn-cancel-approve{
         display: flex;

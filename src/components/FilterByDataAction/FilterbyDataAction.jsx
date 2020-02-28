@@ -132,7 +132,7 @@ class FilterbyDataAction extends React.Component {
           <div className="dropdown-selected-item">
             <div className="tracking-history">
               <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
-                  <img src={IconApprove} className="icon-history" alt="" /><span className="label-history">Status</span>
+                  <img src={IconApprove} className="icon-history" alt="" /><span className="label-status">Status</span>
               </DotBadges>
             </div>
           </div>

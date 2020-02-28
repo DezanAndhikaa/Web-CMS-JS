@@ -1,21 +1,38 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import Cards from '../../Status/components/Card';
+// import Cards from '../../Status/components/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Buttons from './Buttons';
+import Buttons from './SiteListCard';
 import Typography from '@material-ui/core/Typography';
-import { Autorenew } from '@material-ui/icons';
+import SearchInput from '../../../../../../components/Searchbar/SearchInput';
+// import { Autorenew } from '@material-ui/icons';
 
-const useStyles = makeStyles({
+const styles = theme =>({
 	root: {
-		minWidth: 300,
-		maxWidth: 300,
-		minHeight: 500,
-		maxHeight: 500,
-		marginRight: 10,
+		minWidth: 274,
+		width: '50%',
+		maxHeight: 670,
+		minHeight: theme.spacing.unit * 84,
+		height : '100%',
+		marginRight: theme.spacing.unit *1,
+		// overflowY: 'auto'
+	},
+	content : {
+		minWidth: 274,
+		width: '100%',
+		maxHeight: 670,
+		minHeight: theme.spacing.unit * 84,
+		height : '100%',
+		marginRight: theme.spacing.unit *1,
 		overflowY: 'auto'
+	},
+	search : {
+		marginLeft : '-25px',
+		marginRight : '10px',
+		marginBottom : '10px',
 	},
 	bullet: {
 		display: 'inline-block',
@@ -30,62 +47,73 @@ const useStyles = makeStyles({
 	},
 });
 
-export default function LayoutSite() {
-	const classes = useStyles();
-	const bull = <span className={classes.bullet}>•</span>;
+class LayoutSite extends React.Component {
+	render(){
+		const { classes } = this.props;
 
-	return (
-		<Card className={classes.root} variant="outlined">
-			<CardContent>
-				<Typography className={classes.title} color="textSecondary" gutterBottom>
-          SITE
-				</Typography>
-			</CardContent>
-			<CardActions>
-				<Buttons />
-			</CardActions>
-			<CardActions>
-				<Buttons />
-			</CardActions>
-			<CardActions>
-				<Buttons />
-			</CardActions>
-			<CardActions>
-				<Buttons />
-			</CardActions>
-			<CardActions>
-				<Buttons />
-			</CardActions>
-			<CardActions>
-				<Buttons />
-			</CardActions>
-			{/* <CardActions>
-				<Buttons />
-			</CardActions>
-			<CardActions>
-				<Buttons />
-			</CardActions>
-			<CardActions>
-				<Buttons />
-			</CardActions>
-			<CardActions>
-				<Buttons />
-			</CardActions>
-			<CardActions>
-				<Buttons />
-			</CardActions>
-			<CardActions>
-				<Buttons />
-			</CardActions>
-			<CardActions>
-				<Buttons />
-			</CardActions>
-			<CardActions>
-				<Buttons />
-			</CardActions>
-			<CardActions>
-				<Buttons />
-			</CardActions> */}
-		</Card>
-	);
+		return (
+			<Card className={classes.root} variant="outlined">
+				<CardContent>
+					<div className={classes.search}>
+						<SearchInput
+							{...this.props}
+							webInfo="Search"
+							handleSearch={this.handleSearch}/>
+					</div>
+					<Typography className={classes.title} color="textSecondary" gutterBottom>
+							SITE
+					</Typography>
+				</CardContent>
+				<Card className={classes.content} variant="outlined">
+					<CardActions>
+						<Buttons />
+					</CardActions>
+					<CardActions>
+						<Buttons />
+					</CardActions>
+					<CardActions>
+						<Buttons />
+					</CardActions>
+					<CardActions>
+						<Buttons />
+					</CardActions>
+					<CardActions>
+						<Buttons />
+					</CardActions>
+					<CardActions>
+						<Buttons />
+					</CardActions>
+					<CardActions>
+						<Buttons />
+					</CardActions>
+					<CardActions>
+						<Buttons />
+					</CardActions>
+					<CardActions>
+						<Buttons />
+					</CardActions>
+					<CardActions>
+						<Buttons />
+					</CardActions>
+					<CardActions>
+						<Buttons />
+					</CardActions>
+					<CardActions>
+						<Buttons />
+					</CardActions>
+					<CardActions>
+						<Buttons />
+					</CardActions>
+					<CardActions>
+						<Buttons />
+					</CardActions>
+					<CardActions>
+						<Buttons />
+					</CardActions>
+				</Card>
+			</Card>
+		);
+	}
 }
+
+export default withStyles(styles, { withTheme: true })(LayoutSite);

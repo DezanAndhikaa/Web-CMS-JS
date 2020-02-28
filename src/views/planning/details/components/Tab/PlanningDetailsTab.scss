@@ -108,32 +108,32 @@
                 box-shadow: 0px vw-tab(3) vw-tab(6) rgba(0, 0, 0, 0.161);
                 .header-input{
                     // position: absolute;
-                    width: 93px;
+                    // width: 93px;
                     flex-wrap: nowrap;
                     .input1{
                         width: 93px;
                         display: inline-flex;
-                        margin-left: 17.94%;
+                        margin-left: 22.94%;
                         // margin-right: 75.26%;
                         margin-top: 16.72%;
-                        font-size: vw(25); //20px;
+                        font-size: 20px;//vw(25);
                         font-family: 'Lato-Bold';
                         line-height: vw(34); //24px; 
                     }
                     .input2{
                         width: 93px;
-                        margin-left: 17.86%;
+                        margin-left: 22.86%;
                         font-family: 'Lato-Regular';
-                        font-size: vw(20); //15px;
-                        line-height: vw(28);//18px;
+                        font-size: 15px;//vw(20);
+                        line-height: vw(48);//18px;
                     }
                 }
                 .total-data-input{                    
                     width: 153px;
-                    margin-left: 45.72%;//32.72%;
+                    margin-left: 54.72%;//40.72%;//32.72%;
                     margin-top: 12.8%;//19.8%;
                     font-family: 'Lato-Bold';
-                    font-size: vw(36);
+                    font-size: 36px;//vw(36);
                     line-height: vw(43);
                     color: #3C3B3B;
                 }

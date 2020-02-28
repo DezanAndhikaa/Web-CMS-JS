@@ -9,6 +9,7 @@ import SearchInput from "../../../../../components/Searchbar/SearchInput";
 import BaseButton from '../../../../../components/Button/BaseButton';
 import FilterbyDataAction from '../../../../../components/FilterByDataAction/FilterbyDataAction';
 import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton';
+import ConfirmationModal from '../../../../../components/ConfirmationModal/ConfirmationModal'
 import {Snackbar, Button} from '@material-ui/core';
 
 class ApprovalPages extends React.Component{
@@ -19,7 +20,7 @@ class ApprovalPages extends React.Component{
         whichTabs: true,
         isShowPerPage: true,
         showPerPage : 0,
-        isApproved: false,
+        isShowApproveSucceed: false,
         snak: true,
         // nextPage: true,
         // prevPage: false,
@@ -31,10 +32,10 @@ class ApprovalPages extends React.Component{
     };
 }
 
-componentDidMount = () => {
-  // console.log('tok tok tok : ',this.props.salesOrderList)
-  // this.handleLifeTime();
-}
+// componentDidMount = () => {
+//   console.log('tok tok tok : ',this.props.salesOrderList)
+//   this.handleLifeTime();
+// }
 
 // handleLifeTime = async() =>{
 //   if (this.props.location.whichTab === undefined) {
@@ -600,7 +601,8 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
-      await this.props.approveSales({SoNumber : arr, IsApprove: true}, this.props.token)
+      await this.props.approveSales({SoNumbers : arr, IsApprove: true}, this.props.token)
+      // this.setState({ isApproveConfirmationShown: false, isShowApproveSucceed: true });
       this.onClickSalesOrder();
       await this.props.clearSelectedSalesPlans();
   }
@@ -718,6 +720,7 @@ componentDidUpdate = (prevProps) => {
             totalSelectedItems ={this.props.selectedSalesPlans.length}
             handleSalesApprove={this.handleSalesApprove}
             selectedData={this.state.selectedData}
+            renderSakses = {this._renderSakses}
           />
           <BaseButton titles="Cancel Approve"
             {...this.props}
@@ -819,10 +822,21 @@ componentDidUpdate = (prevProps) => {
     );
   };
 
+  _renderSakses = () => {
+    console.log("masuk spontan ")
+    return(
+    <>
+      {this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED && (
+        <ConfirmationModal idModal="Approved" openModal={true} onClose={true}/>
+      )}
+    </>
+    )
+  }
+
   render(){     
-    console.log('locations', this.props.location)
     return(
       <main className="content">
+        {this._renderSakses()}
           <div className="table-container-approval">
                 {this._renderTabs()}
             </div>
