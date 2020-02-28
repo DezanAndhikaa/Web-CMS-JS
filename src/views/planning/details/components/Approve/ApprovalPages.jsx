@@ -417,7 +417,6 @@ componentDidUpdate = (prevProps) => {
         }]
       }, this.props.token);
     }else {
-    // if (this.props.location.whichTab === undefined) {
       await this.props.fetchSalesOrder({
         ...this.props.salesParameter.dataFilter, 
         Filter : 
