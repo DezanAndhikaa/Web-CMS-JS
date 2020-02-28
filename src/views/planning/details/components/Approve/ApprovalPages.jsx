@@ -32,10 +32,10 @@ class ApprovalPages extends React.Component{
     };
 }
 
-componentDidMount = () => {
-  // console.log('tok tok tok : ',this.props.salesOrderList)
-  // this.handleLifeTime();
-}
+// componentDidMount = () => {
+//   console.log('tok tok tok : ',this.props.salesOrderList)
+//   this.handleLifeTime();
+// }
 
 // handleLifeTime = async() =>{
 //   if (this.props.location.whichTab === undefined) {
