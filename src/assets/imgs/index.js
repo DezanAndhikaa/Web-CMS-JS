@@ -35,6 +35,7 @@ import Woman from './woman.png';
 import Text1 from './text-1.png';
 import Text2 from './text-2.png';
 import IceFace from './ice-face.png';
+import Clock from './clock.png';
 
 export {
 	ImgApproved,
@@ -73,5 +74,6 @@ export {
 	Woman,
 	Text1,
 	Text2,
-	IceFace
+	IceFace,
+	Clock
 };
