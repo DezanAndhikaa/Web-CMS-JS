@@ -35,14 +35,11 @@ class BaseButton extends React.Component{
         console.log('masuk isAPprove')
         if (this.props.whatTabsIsRendered === true) {
             if (this.props.titles === "Approve") {
-                // this.isOpened()
                 await this.props.handleSalesApprove()
             }
             if (this.props.titles === "Delete") {
                 await this.props.handleDeleteSales()
-                this.isClosed()
-                // await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
-                // await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
+                // this.isClosed()
             }
             if (this.props.titles === "Cancel Approve"){
                 await this.props.handleSendtoEdit()

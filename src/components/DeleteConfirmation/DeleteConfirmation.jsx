@@ -20,7 +20,7 @@ export default class DeleteConfirmation extends React.PureComponent {
                   <p className="confirmation-caption">Are you sure want to</p>
                   <p className="confirmation-caption">delete {this.props.totalData} items?</p>
                   <div className="btn-row">
-                    <Button className="btn-yes" onClick={this.props.onDelete}>Yes</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button className="btn-yes" onClick={ () => {this.props.renderSakses(); this.props.onDelete(); this.props.onClose() }}>Yes</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Button className="btn-no" onClick={this.props.onClose}>No</Button>
                     </div>
                 </div>

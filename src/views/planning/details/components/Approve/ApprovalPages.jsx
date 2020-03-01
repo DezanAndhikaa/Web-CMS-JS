@@ -9,8 +9,10 @@ import SearchInput from "../../../../../components/Searchbar/SearchInput";
 import BaseButton from '../../../../../components/Button/BaseButton';
 import FilterbyDataAction from '../../../../../components/FilterByDataAction/FilterbyDataAction';
 import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton';
-import ConfirmationModal from '../../../../../components/ConfirmationModal/ConfirmationModal'
-import {Snackbar, Button} from '@material-ui/core';
+import ConfirmationModal from '../../../../../components/ConfirmationModal/ConfirmationModal';
+import DeleteSuccess from '../../../../../components/DeleteConfirmation/DeleteSuccess';
+import {Snackbar, Button, CircularProgress} from '@material-ui/core';
+import UnapproveConfirmation from '../../../../../components/UnapproveConfirmation/UnapproveConfirmation';
 
 class ApprovalPages extends React.Component{
     constructor(props) {
@@ -555,7 +557,6 @@ componentDidUpdate = (prevProps) => {
         arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
       await this.props.approveSales({SoNumbers : arr, IsApprove: true}, this.props.token)
-      // this.setState({ isApproveConfirmationShown: false, isShowApproveSucceed: true });
       this.onClickSalesOrder();
       await this.props.clearSelectedSalesPlans();
   }
@@ -595,7 +596,7 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
-      await this.props.deleteSales({SoNumber : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate}, this.props.token)
+      await this.props.deleteSales({SoNumbers : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate}, this.props.token)
       this.onClickSalesOrder();
       await this.props.clearSelectedSalesPlans();
     }
@@ -609,7 +610,7 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
       }
-      await this.props.deleteService({WoNumber : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate}, this.props.token)
+      await this.props.deleteService({WoNumbers : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate}, this.props.token)
       this.onClickServiceOrder();
       await this.props.clearSelectedServicePlans();
     }
@@ -674,7 +675,6 @@ componentDidUpdate = (prevProps) => {
             handleSalesApprove={this.handleSalesApprove}
             selectedData={this.state.selectedData}
             renderSakses = {this.changeSuccess}
-            renderClose = {this._renderClose}
           />
           <BaseButton titles="Cancel Approve"
             {...this.props}
@@ -692,6 +692,7 @@ componentDidUpdate = (prevProps) => {
             totalSelectedItems ={this.props.selectedSalesPlans.length}
             whatTabsIsRendered={this.state.whichTabs}
             handleDeleteSales={this.handleDeleteSales}
+            renderSakses = {this.changeSuccess}
           />
         </div>
       );
@@ -788,7 +789,11 @@ componentDidUpdate = (prevProps) => {
     })
   }
 
-  _renderSuccess = () => {
+  renderCircularProgress() {
+    return <CircularProgress size={100} className="circular-progress" />;
+  }
+
+  _renderSalesApproved = () => {
     return(
       <>
         <ConfirmationModal idModal="Approved" openModal={this.state.openSuccess} onClose={this.closeSuccess}/>
@@ -796,15 +801,62 @@ componentDidUpdate = (prevProps) => {
     )
   }
 
+  _renderSalesDeleted = () => {
+    return(
+      <>
+        <DeleteSuccess openModal={this.state.openSuccess} onClose={this.closeSuccess}/>
+      </>
+    )
+  }
+  _renderEditSuccess = () => {
+    return(
+      <>
+        <UnapproveConfirmation idConfirm="Send Success" openModal={this.state.openSuccess} onClose={this.closeSuccess} />
+      </>
+    )
+  }
+
   render(){     
     return(
       <main className="content">
-        {/* {this._renderSakses()} */}
-          {this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED && (
+          {this.props.fetchStatusApprovedSales === ApiRequestActionsStatus.LOADING &&  (
+            this.renderCircularProgress()
+          )}
+          {this.props.fetchStatusApprovedSales === ApiRequestActionsStatus.SUCCEEDED && (
             <>
-              {this._renderSuccess()}
+              {this._renderSalesApproved()}
             </>
           )}
+          {this.props.fetchStatusApprovedService === ApiRequestActionsStatus.LOADING &&  (
+            this.renderCircularProgress()
+          )}
+          {this.props.fetchStatusApprovedService === ApiRequestActionsStatus.SUCCEEDED && (
+            <>
+              {this._renderSalesApproved()}
+            </>
+          )}
+          {this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.LOADING &&  (
+            this.renderCircularProgress()
+          )}
+          {this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED && (
+            <>
+              {this._renderSalesDeleted()}
+            </>
+          )}
+          {this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.LOADING &&  (
+            this.renderCircularProgress()
+          )}
+          {this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.SUCCEEDED && (
+            <>
+              {this._renderSalesDeleted()}
+            </>
+          )}
+          {this.props.fetchStatusUnapprove === ApiRequestActionsStatus.LOADING &&  (
+            this.renderCircularProgress()
+          )}   
+          {this.props.fetchStatusUnapprove === ApiRequestActionsStatus.SUCCEEDED && (
+            this._renderEditSuccess()
+          )} 
           <div className="table-container-approval">
                 {this._renderTabs()}
             </div>

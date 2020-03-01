@@ -14,10 +14,8 @@ import {
 	FetchDeletedSalesAction,
 	FetchDeletedServiceAction,
 	FetchSapSalesAction,
-	// FetchSearchValueAction, 
-	// FetchPlansAction, 
-	// GetMechanicsAction, 
-	// GetServiceOrderAction, GetSalesOrderAction, 
+	DeleteSalesAction,
+	DeleteServiceAction,
 	UpdateSalesApprovedParameterAction,
 	UpdateSalesDeletedParameterAction,
 	UpdateSalesSapParameterAction,
@@ -26,22 +24,17 @@ import {
 	SearchServiceAction,
 	UpdateServiceApprovedParameterAction,UpdateServiceDeletedParameterAction,
 	SearchCompAction,SearchCompActionService,
-	// SelectCustomerFilterAction, 
 	SelectSalesPlanAction,
 	SelectServicePlanAction, 
-	// SelectPlansAssignmentFilterAction,
-	// SelectPlansTypeFilterAction, 
 	SelectLeaderAction, SelectMechanicAction,
 	SelectCustomerFilterAction,SelectComponentFilterAction,
 	SelectSiteFilterAction,SelectUnitModelFilterAction,
-	// SelectUnitModelFilterAction,
 	SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, UpdateServiceParameterAction,
 	FetchSalesAction, PutLifetimeComp,PutSAPIssue,
 	SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc,
-	// UnassignPlansAction, 
 	UnselectSalesPlanAction, UnselectServicePlanAction,
-	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, getSearchValueAction, fetchServiceAction, FetchServiceAction, 
-	UpdateFilterUnit,IndexFilterAction, SelectAllSalesPlanAction, LifetimeFilterAction, DateFilterAction
+	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, FetchServiceAction, 
+	IndexFilterAction, LifetimeFilterAction, DateFilterAction
 } from './DetailPages-action';
 
 const initialSalesAssignment = {
@@ -372,6 +365,42 @@ export function PutSAPIssueReducer(state = initialSalesState, action) {
 		  };
 		default:
 		  return { data: initialSalesState.data, status: ApiRequestActionsStatus.LOADING };
+	  }
+	}
+	return state;
+}
+
+export function deletedSalesReducer(state = initialSalesState, action) {
+	if (action.type === DeleteSalesAction) {
+	  switch (action.status) {
+		case ApiRequestActionsStatus.SUCCEEDED:
+		  return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		case ApiRequestActionsStatus.FAILED:
+		  return {
+				data: initialSalesState.data,
+				status: ApiRequestActionsStatus.FAILED,
+				error: action.error,
+		  };
+		default:
+		  return { data: initialSalesState.data, status: ApiRequestActionsStatus.LOADING };
+	  }
+	}
+	return state;
+}
+
+export function deletedServiceReducer(state = initialServiceState, action) {
+	if (action.type === DeleteServiceAction) {
+	  switch (action.status) {
+		case ApiRequestActionsStatus.SUCCEEDED:
+		  return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		case ApiRequestActionsStatus.FAILED:
+		  return {
+				data: initialServiceState.data,
+				status: ApiRequestActionsStatus.FAILED,
+				error: action.error,
+		  };
+		default:
+		  return { data: initialServiceState.data, status: ApiRequestActionsStatus.LOADING };
 	  }
 	}
 	return state;
@@ -954,6 +983,8 @@ const PlansReducers = combineReducers({
 	putSAPIssue: PutSAPIssueReducer,
 	salesApproved : approvedSalesReducer,
 	serviceApproved : approvedServiceReducer,
+	salesDeleted : deletedSalesReducer,
+	serviceDeleted : deletedServiceReducer,
 	filterLifetime : filterLifetimeReducer,
 	filterDate : filterDateReducer
 });

@@ -121,24 +121,24 @@ export default class UnapproveConfirmation extends React.PureComponent {
       return <CircularProgress size={100} className="circular-progress" />;
   }
 
-  _renderEditSuccess(){
-    return (
-      <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
-        <DialogContent className="confirmation-modal-content">
-          <div className="confirmation-modal">
-            <div className="confirmation-container">
-              <p className="title-success">Successful</p>
-              <img className="confirmation-success" src={ImgCancelEditSucc} alt="" />
-              <p className="confirmation-caption">You have sent data to be repaired again</p>
-              <div className="btn-row">
-                <Button className="button-continue" onClick={this.props.onClose}>Continue</Button>
-              </div>
-            </div>
-          </div>
-        </DialogContent> 
-      </Modal>
-    );
-  }
+  // _renderEditSuccess(){
+  //   return (
+  //     <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
+  //       <DialogContent className="confirmation-modal-content">
+  //         <div className="confirmation-modal">
+  //           <div className="confirmation-container">
+  //             <p className="title-success">Successful</p>
+  //             <img className="confirmation-success" src={ImgCancelEditSucc} alt="" />
+  //             <p className="confirmation-caption">You have sent data to be repaired again</p>
+  //             <div className="btn-row">
+  //               <Button className="button-continue" onClick={this.props.onClose}>Continue</Button>
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </DialogContent> 
+  //     </Modal>
+  //   );
+  // }
 
 	render() {
     console.log("ApiRequestActionsStatus",this.props.fetchStatusPutSAPIssue)
@@ -180,14 +180,25 @@ export default class UnapproveConfirmation extends React.PureComponent {
           {this.state.isShowModalSend && (
             this._renderSendtoEdit()
           )}
-          {this.props.fetchStatusUnapprove === ApiRequestActionsStatus.LOADING &&  (
-            this.renderCircularProgress()
-          )}   
-          {this.props.fetchStatusUnapprove === ApiRequestActionsStatus.SUCCEEDED && (
-            this._renderEditSuccess()
-          )} 
         </>
         );
+    } else if(this.props.idConfirm === "Send Success"){
+      return(
+        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
+        <DialogContent className="confirmation-modal-content">
+          <div className="confirmation-modal">
+            <div className="confirmation-container">
+              <p className="title-success">Successful</p>
+              <img className="confirmation-success" src={ImgCancelEditSucc} alt="" />
+              <p className="confirmation-caption">You have sent data to be repaired again</p>
+              <div className="btn-row">
+                <Button className="button-continue" onClick={ () => {this.props.onClose()} }>Continue</Button>
+              </div>
+            </div>
+          </div>
+        </DialogContent> 
+      </Modal>
+      )
     }
 	}
 }

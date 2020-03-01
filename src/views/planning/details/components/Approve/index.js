@@ -79,8 +79,10 @@ const mapStateToProps = (state) => ({
 	fetchStatusServiceApproved: state.plansPageState.serviceOrderListApproved.status,
 	fetchStatusPutSAPIssue: state.plansPageState.putSAPIssue.status,	
 	fetchStatusUnapprove: state.plansPageState.unApprove.status,
-	fetchStatusSalesApproved: state.plansPageState.salesApproved.status,
-	fetchStatusServiceApproved: state.plansPageState.serviceApproved.status
+	fetchStatusApprovedSales: state.plansPageState.salesApproved.status,
+	fetchStatusApprovedService: state.plansPageState.serviceApproved.status,
+	fetchStatusSalesDeleted: state.plansPageState.salesDeleted.status,
+	fetchStatusServiceDeleted: state.plansPageState.serviceDeleted.status
 });
 
 const mapDispatchToProps = (dispatch) => ({

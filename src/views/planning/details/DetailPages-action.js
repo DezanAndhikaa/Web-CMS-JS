@@ -206,7 +206,7 @@ export function deleteSalesAction(payload, accessToken){
 		},
 		data: payload,
 	};
-	return async (dispatch) => dispatch(callApi(ApproveSalesAction, requestConfig));
+	return async (dispatch) => dispatch(callApi(DeleteSalesAction, requestConfig));
 }
 
 export function deletePermanentSalesAction(payload, accessToken){
