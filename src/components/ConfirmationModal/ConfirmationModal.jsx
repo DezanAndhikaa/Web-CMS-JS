@@ -20,15 +20,12 @@ export default class ConfirmationModal extends React.PureComponent {
                     <p className="confirmation-caption">Please resume your activities</p>
                     <br></br>
                     <Button className="btn-ok" onClick={ () => {this.props.onClose()} }>Continue</Button>
-                    {/* onClick={ async () => {this.props.onKelik(this.state.description);this.props.isTry()} } */}
                   </div>
               </div>
             </DialogContent>
             </Modal>
         );
     }else if(this.props.idModal === "SAP"){
-      // console.log('uhuy sap 3')
-      // console.log('uhuy sap 3 mod : ', this.props.isModal)
       return (
         <Modal open={this.props.isModal} onClose={this.props.onClose} className="modal-container">
             <DialogContent className="confirmation-modal-content">
@@ -60,6 +57,23 @@ export default class ConfirmationModal extends React.PureComponent {
                   <Button className="btn-tidak" onClick={this.props.onClose}>No</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <Button className="btn-ya" onClick={this.props.onApprove}>Yes</Button>
                 </div>
+              </div>
+            </div>
+          </DialogContent>
+        </Modal>
+      );
+    } else if(this.props.idModal === "Delete Success"){
+      return (
+        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
+          <DialogContent className="confirmation-modal-content">
+            <div className="confirmation-modal">
+              <div className="confirmation-container">
+                  <p className="confirmation-title">Successful</p>
+                  <img className="confirmation-image" src={Success} alt="" /> 
+                  <p className="confirmation-caption">The data was deleted</p>
+                  <p className="confirmation-caption">successfully.</p>
+                  <br></br>
+                  <Button className="btn-ok" onClick={ () => {this.props.onClose()} }>Continue</Button>
               </div>
             </div>
           </DialogContent>

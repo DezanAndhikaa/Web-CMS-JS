@@ -1,16 +1,16 @@
 @import '../../themes/functions';
 @import '../../themes/variables';
 
-.modal-container{
+.modal-unapprove{
     width: fit-content;
     height: fit-content;
     margin: auto;
-    .confirmation-modal-content{
+    .unapprove-confirmation-content{
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 0;
-        .confirmation-modal{
+        .confirmation-modal-unapprove{
             width: vw(519);
             // height: vh(481);
             background-color: white;
@@ -21,13 +21,13 @@
             align-items: center;
             justify-content: center;
             padding: vw(15) vw(24) vw(30) vw(24);
-            .confirmation-container{
+            .confirmation-container-unapprove{
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
                 flex: 1;
-                .confirmation-title{
+                .confirmation-title-unapprove{
                     line-height: vw(20);
                     margin: 0;
                     padding-top: vw(20);
@@ -35,23 +35,23 @@
                     font-family: 'SFUIDisplay-Bold';
                     color: #3C3B3B;
                 }
-                .confirmation-image{
+                .confirmation-image-unapprove{
                     width: vw(175);
                     margin-top: vw(16);
                     margin-bottom: vw(25);
                 }
-                .title-success{
+                .title-success-unapprove{
                     line-height: vw(20);
                     margin-top: vw(38);
                     font-size: vw(28);
                     font-family: 'SFUIDisplay-Bold';
                     color: #3C3B3B;
                 }
-                .confirmation-success{
+                .confirmation-success-unapprove{
                     margin-top: vw(30);
                     margin-bottom: vw(35);
                 }
-                .confirmation-caption{
+                .confirmation-caption-unapprove{
                     margin: 0;
                     font-size: vw(20);
                     font-family: 'SFUIDisplay-Regular';
@@ -175,16 +175,16 @@
 }
 
 @media (min-width: 600px) and (max-width: 1025px) {    
-    .modal-container{
+    .modal-unapprove{
         width: fit-content;
         height: fit-content;
         margin: auto;
-        .confirmation-modal-content{
+        .unapprove-confirmation-content{
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 0;
-            .confirmation-modal{
+            .confirmation-modal-unapprove{
                 width: vw-tab(450);
                 height: vw-tab(300);
                 background-color: white;
@@ -195,24 +195,24 @@
                 align-items: center;
                 justify-content: space-between;
                 padding: vw-tab(15) vw-tab(24) vw-tab(30) vw-tab(24);
-                .confirmation-container{
+                .confirmation-container-unapprove{
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
                     flex: 1;   
-                    .confirmation-title{
+                    .confirmation-title-unapprove{
                         margin: 0;
                         font-size: vw-tab(33);
                         font-family: 'SFUIDisplay-Bold';
                         color: #3C3B3B;
                     }
-                    .confirmation-image{
+                    .confirmation-image-unapprove{
                         width: vw-tab(150);
                         margin-top: vw-tab(16);
                         margin-bottom: vw-tab(25);
                     }
-                    .confirmation-caption{
+                    .confirmation-caption-unapprove{
                         margin: 0;
                         font-size: vw-tab(20);
                         font-family: 'SFUIDisplay-Regular';
@@ -227,16 +227,16 @@
 }
 
 @media (max-width: 599px) {    
-    .modal-container{
+    .modal-unapprove{
         width: fit-content;
         height: fit-content;
         margin: auto;
-        .confirmation-modal-content{
+        .unapprove-confirmation-content{
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 0;
-            .confirmation-modal{
+            .confirmation-modal-unapprove{
                 margin: 0;
                 width: vw-mobile(215);
                 height: vw-mobile(200);
@@ -247,24 +247,24 @@
                 align-items: center;
                 justify-content: space-between;
                 padding: vw-mobile(10);
-                .confirmation-container{
+                .confirmation-container-unapprove{
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
                     flex: 1;   
-                    .confirmation-title{
+                    .confirmation-title-unapprove{
                         margin: 0;
                         font-size: vw-mobile(20);
                         font-family: 'SFUIDisplay-Bold';
                         color: #3C3B3B;
                     }
-                    .confirmation-image{
+                    .confirmation-image-unapprove{
                         width: vw-mobile(100);
                         margin-top: vw-mobile(5);
                         margin-bottom: vw-mobile(10);
                     }
-                    .confirmation-caption{
+                    .confirmation-caption-unapprove{
                         margin: 0;
                         font-size: vw-mobile(15);
                         font-family: 'SFUIDisplay-Regular';

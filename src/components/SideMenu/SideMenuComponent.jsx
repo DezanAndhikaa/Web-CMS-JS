@@ -180,6 +180,28 @@ class SideMenuComponent extends React.Component {
                     classes={{ primary: "item-text", root: "item-text" }}
                   />
                 </ListItem>
+                <ListItem
+                  button
+                  key="jobs-report"
+                  className={
+                    this.props.path === Menu.PLANNING_DETAILS_SITE
+                      ? "sub-menu-selected"
+                      : "sub-menu"
+                  }
+                  onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_DETAILS_SITE)}
+                >
+                  <ListItemIcon classes={{ root: "icon-root" }}>
+                    <img
+                      src={AssignmentIcon}
+                      alt="assignment icon"
+                      className="item-icon"
+                    />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Detail"
+                    classes={{ primary: "item-text", root: "item-text" }}
+                  />
+                </ListItem>
               </List>
             </Collapse>
             {/* Production */}

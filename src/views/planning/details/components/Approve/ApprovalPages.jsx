@@ -10,7 +10,6 @@ import BaseButton from '../../../../../components/Button/BaseButton';
 import FilterbyDataAction from '../../../../../components/FilterByDataAction/FilterbyDataAction';
 import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton';
 import ConfirmationModal from '../../../../../components/ConfirmationModal/ConfirmationModal';
-import DeleteSuccess from '../../../../../components/DeleteConfirmation/DeleteSuccess';
 import {Snackbar, Button, CircularProgress} from '@material-ui/core';
 import UnapproveConfirmation from '../../../../../components/UnapproveConfirmation/UnapproveConfirmation';
 
@@ -569,7 +568,7 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
       }
-    await this.props.approveService({WoNumber: arr, IsApprove: true}, this.props.token)
+    await this.props.approveService({WoNumbers: arr, IsApprove: true}, this.props.token)
     this.onClickServiceOrder();
     await this.props.clearSelectedServicePlans();
     }
@@ -684,6 +683,7 @@ componentDidUpdate = (prevProps) => {
             totalSelectedItems ={this.props.selectedSalesPlans.length}
             handleSendtoEdit={this.handleSendtoEdit}
             selectedData={this.state.selectedData}
+            renderSakses = {this.changeSuccess}
           />
           <BaseButton titles="Edit" />
           <BaseButton titles="Delete" 
@@ -709,6 +709,7 @@ componentDidUpdate = (prevProps) => {
             whatTabsIsRendered={this.state.whichTabs}
             selectedServiceData={this.state.selectedServiceData}
             handleServiceApprove={this.handleServiceApprove}
+            renderSakses = {this.changeSuccess}
           />
           <BaseButton titles="Cancel Approve"/>
           <BaseButton titles="Edit" />
@@ -718,6 +719,7 @@ componentDidUpdate = (prevProps) => {
             totalSelectedItems ={this.props.selectedServicePlans.length}
             whatTabsIsRendered={this.state.whichTabs}
             handleDeleteService={this.handleDeleteService}
+            renderSakses = {this.changeSuccess}
           />
         </div>
       );
@@ -804,7 +806,7 @@ componentDidUpdate = (prevProps) => {
   _renderSalesDeleted = () => {
     return(
       <>
-        <DeleteSuccess openModal={this.state.openSuccess} onClose={this.closeSuccess}/>
+        <ConfirmationModal idModal="Delete Success" openModal={this.state.openSuccess} onClose={this.closeSuccess}/>
       </>
     )
   }
