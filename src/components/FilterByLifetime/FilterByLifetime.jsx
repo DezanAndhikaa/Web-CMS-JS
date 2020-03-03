@@ -1,7 +1,7 @@
-import React from 'react'
-import './FilterByLifetime.scss'
-import CloseButton from '../../components/CloseButton/CloseButton'
-import { Button, TextField, FormHelperText } from '@material-ui/core'
+import React from 'react';
+import './FilterByLifetime.scss';
+import CloseButton from '../../components/CloseButton/CloseButton';
+import { Button } from '@material-ui/core';
 
 class FilterByLifetime extends React.Component{
 

@@ -7,7 +7,7 @@ import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc } from '../../DetailPages-action';
-import { Spinner } from '../../../../../assets/icons'
+import { Spinner } from '../../../../../assets/icons';
 
 export default class ServiceOrderList extends React.PureComponent {
   state = {

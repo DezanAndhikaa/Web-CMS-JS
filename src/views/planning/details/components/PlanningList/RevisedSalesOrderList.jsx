@@ -1,5 +1,4 @@
 import React from 'react';
-// import moment, { ISO_8601 } from 'moment';
 import {
   Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Typography,
 } from '@material-ui/core';
@@ -10,10 +9,8 @@ import InputButton from '../../../../../components/Button/InputButton';
 import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
-// import { NotificationManager } from 'react-notifications';
 import {Snackbar} from '@material-ui/core';
-// import Loading from '../../../../../components/Loading/Loading'
-import moment from 'moment'
+import moment from 'moment';
 
 export default class RevisedSalesOrderList extends React.PureComponent {
   constructor(props) {
@@ -28,21 +25,20 @@ export default class RevisedSalesOrderList extends React.PureComponent {
     }
   }
 
-  componentDidUpdate = (prevState) =>{
-    //untuk menghilangkan checkbox
-    // console.log('ke trigger status')
-    if (prevState.salesParameter !== this.props.salesParameter || prevState.salesSearch !== this.props.salesSearch || 
-      prevState.searchComp !==this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
-      this.setState({checkedValue : false})
-    }if (this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING) {
-      // console.log('ke trigger')
-      this.setState({checkedValue : false})
-    }
-  }
+  // componentDidUpdate = (prevState) =>{
+  //   //untuk menghilangkan checkbox
+  //   // console.log('ke trigger status')
+  //   if (prevState.salesParameter !== this.props.salesParameter || prevState.salesSearch !== this.props.salesSearch || 
+  //     prevState.searchComp !==this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
+  //     this.setState({checkedValue : false})
+  //   }if (this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING) {
+  //     // console.log('ke trigger')
+  //     this.setState({checkedValue : false})
+  //   }
+  // }
+
   componentDidMount = async() =>{    
-    console.log('tok token sales order list', this.props.location)
-    await this.props.clearSelectedSalesPlans();
-    // this.props.onClickSalesOrder();
+    this.props.onClickRevisedSales();
   }
 
   componentWillMount = () =>{
@@ -101,7 +97,7 @@ export default class RevisedSalesOrderList extends React.PureComponent {
       return (
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow classes={{ root: 'table-row' }}>
-          <TableCell padding="checkbox">
+          {/* <TableCell padding="checkbox">
             {this.props.displaySalesCheckbox && 
             <Checkbox 
               checked={this.state.checkedValue}
@@ -109,7 +105,7 @@ export default class RevisedSalesOrderList extends React.PureComponent {
               onClick={() => {this.props.salesOrderList.Lists.map((row,id) => 
               this.props.onChoosedSales(row,id))}}
               className="checkbox-checked-header"/>}
-          </TableCell>
+          </TableCell> */}
           <PlanningListHeader
             name="SO"
             delay={300}
@@ -145,38 +141,28 @@ export default class RevisedSalesOrderList extends React.PureComponent {
           />
           <PlanningListHeader
             name="Part Number"
-          // //   isActive={this.props.sortJobsByState.backlogOpen.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-          // //   isAscending={this.props.sortJobsByState.backlogOpen.isAscending}
           />
           <PlanningListHeader
             name="Unit Code"
-          // //   isActive={this.props.sortJobsByState.plantExecution.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-          // //   isAscending={this.props.sortJobsByState.plantExecution.isAscending}
           />
           <PlanningListHeader
             name="Serial Number"
-          // //   isActive={this.props.sortJobsByState.status.isActive}
             delay={300}
-            onSearch={this.props.onSearchComp}
-          // //   isAscending={this.props.sortJobsByState.status.isAscending}            
+            onSearch={this.props.onSearchComp}            
           />
           <PlanningListHeader
             name="Lifetime"
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
             delay={300}
             onFilter={this.isFilterLifetime}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
           />
           <PlanningListHeader
             name="Plan"
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
             delay={300}
             onFilter={this.isFilterDate}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
           />
           <PlanningListHeader
             name="SMR"
@@ -197,9 +183,7 @@ export default class RevisedSalesOrderList extends React.PureComponent {
   showTableBody(row,id) {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
-        {/* Nanti ada if user ho atau site
-              Ini tampilan HO */}
-        <TableCell padding="checkbox">
+        {/* <TableCell padding="checkbox">
           {this.props.displaySalesCheckbox && 
           <Checkbox 
           // checked={true}
@@ -208,7 +192,7 @@ export default class RevisedSalesOrderList extends React.PureComponent {
           onClick={() => this.props.onChoosedSales(row)} 
           classes={{ checked: 'checkbox-checked' }} 
           />}
-        </TableCell>
+        </TableCell> */}
         <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
@@ -225,7 +209,6 @@ export default class RevisedSalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
-        {/* Ini tampilan HO, site gaada action */}
         <TableCell align="center" className="table-cell">
         {this.props.salesOrderList.Lists[id].LifeTimeComponent !== "-" ? <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} /> : ""}
         </TableCell>

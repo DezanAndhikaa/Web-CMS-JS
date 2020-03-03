@@ -51,6 +51,7 @@ const mapStateToProps = (state) => ({
 	salesOrderListApproved: state.plansPageState.salesOrderListApproved.data,
 	salesOrderListDeleted: state.plansPageState.salesOrderListDeleted.data,
 	salesOrderListSap: state.plansPageState.salesOrderListSap.data,
+	salesOrderRevised: state.plansPageState.salesOrderRevised.data,
 	serviceOrderList: state.plansPageState.serviceOrderList.data,
 	serviceOrderListApproved: state.plansPageState.serviceOrderListApproved.data,
 	serviceOrderListDeleted: state.plansPageState.serviceOrderListDeleted.data,
@@ -74,6 +75,7 @@ const mapStateToProps = (state) => ({
 	fetchStatusService: state.plansPageState.serviceOrderList.status,
 	fetchStatusServiceApproved: state.plansPageState.serviceOrderListApproved.status,
 	fetchStatusServiceDeleted: state.plansPageState.serviceOrderListDeleted.status,
+	fetchStatusRevised: state.plansPageState.salesOrderRevised.status,
 	sortSalesBy: state.plansPageState.sortSalesBy,
 	sortServiceBy: state.plansPageState.sortServiceBy,
 });

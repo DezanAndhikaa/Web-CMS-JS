@@ -1,12 +1,11 @@
-import React from 'react'
-import './FilterByPeriodeDate.scss'
-import CloseButton from '../../components/CloseButton/CloseButton'
-import { Button, TextField, FormHelperText } from '@material-ui/core'
-import DatePicker from 'react-datepicker'
+import React from 'react';
+import './FilterByPeriodeDate.scss';
+import CloseButton from '../../components/CloseButton/CloseButton';
+import { Button } from '@material-ui/core';
+import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import moment from 'moment';
-// import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 
 class FilterByPeriodeDate extends React.Component{
 

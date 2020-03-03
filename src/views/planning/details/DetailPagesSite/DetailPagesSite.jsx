@@ -1,94 +1,91 @@
 import React from 'react';
+import moment from "moment";
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import './DetailPagesSite.scss';
 import DetailsTab from './Tab/DetailsTab';
+import { ApiRequestActionsStatus } from "../../../../core/RestClientHelpers";
 import DropDownList from '../../../../components/DropdownList/DropDownList';
 import SearchInput from "../../../../components/Searchbar/SearchInput";
 import BaseButton from '../../../../components/Button/BaseButton';
 import FilterbyDataAction from '../../../../components/FilterByDataAction/FilterbyDataAction';
 import NotifButton from '../../../../components/ActionButton/NotifButton/NotifButton';
+import ConfirmationModal from '../../../../components/ConfirmationModal/ConfirmationModal';
+import {CircularProgress} from '@material-ui/core';
+import UnapproveConfirmation from '../../../../components/UnapproveConfirmation/UnapproveConfirmation';
 
 class DetailPagesSite extends React.Component{
     constructor(props) {
       super(props)
       this.state = {
         stats: true,
-        lifetime: this.props.salesOrderList.Lists,
-        isPaging: true,
+        whichTabs: true,
         isShowPerPage: true,
         showPerPage : 0,
-        selectedData: {
-          So : [],
-          IsApprove: false,
-          UpdatedBy: "string",
-          UpdatedByName: "string",
-          UpdatedDate: ""
-        },
-        selectedServiceData: {
-          Wo : [],
-          IsApprove: false,
-        },
-        deleteSalesData: {
-          So : [],
-          IsDelete: false,
-          UpdatedBy: "string",
-          UpdatedByName: "string",
-          UpdatedDate: ""
-        },
-        deleteServiceData: {
-          Wo : [],
-          IsDelete: false
-        },
-        wasApprove: true
-        // nextPage: true,
-        // prevPage: false,
-        // numberOfPage: 2,
-        // currentPage: 1,
-        // filter: {
-        //   filter : {}
-        // }
+        isShowApproveSucceed: false,
+        snak: true,
+        openSuccess : false,
     };
 }
 
-// componentWillUnmount = () => {
-//   this.props.onSearch('');
-
-//   this.props.updateSalesParameter({
-//     ...this.props.salesParameter.dataFilter, Search: '',
-//   });
-// }
-
-// componentWillUnmount = () => {
-//   this.props.updateSalesParameter({
-//     ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
-//   });
-//   this.props.updateServiceParameter({
-//     ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
-//   });
-// }
+componentWillUnmount = () => {
+  this.props.updateSalesParameter({
+    ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
+  });
+  this.props.updateServiceParameter({
+    ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
+  });
+}
 
 componentDidUpdate = (prevProps) => {
   if (prevProps.salesParameter !== this.props.salesParameter) {
-    this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
+    // this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
+    // this.handleLifeTime();
+    this.onClickSalesOrder();
+  }
+  if (prevProps.serviceParameter !== this.props.serviceParameter) {
+    // this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+    this.onClickServiceOrder();
+  }
+  if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
+    prevProps.approveSalesDownloaded.status === ApiRequestActionsStatus.LOADING) {
+    this.onClickDownloadSalesApproved()
+  }
+  if (this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
+    prevProps.approveServiceDownloaded.status === ApiRequestActionsStatus.LOADING) {
+    this.onClickDownloadServiceApproved()
   }
 
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
       if(this.props.indexFilterParameter.indexTabParameter === 0){
-        this.props.fetchSalesOrder(this.props.filterParameter.dataFilter);
-        // this.props.clearSelectedSalesPlans();
+        // this.props.fetchSalesOrder(this.props.filterParameter);
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
+        })
+        // this.handleLifeTime();
       }else{
-        this.props.fetchServiceOrder(this.props.filterParameter.dataFilter);
-        // this.props.clearSelectedServicePlans();
+        // this.props.fetchServiceOrder(this.props.filterParameter);
+        this.props.updateServiceParameter({
+          ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
+        })
       }
   }
-  if (prevProps.serviceParameter !== this.props.serviceParameter) {
-    this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+
+  //FILTER RANGE LIFETIME
+  if(prevProps.filterLifetime !== this.props.filterLifetime){
+    this.props.updateSalesParameter({
+      ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterLifetime.Filter, PageNumber: 1
+    })
+    // this.props.fetchSalesOrder(this.props.filterLifetime);
   }
+
+    //FILTER RANGE DATE
+    if(prevProps.filterDate !== this.props.filterDate){
+      this.props.fetchSalesOrder(this.props.filterDate);
+    }
 
   //ini untuk trigger sales global search
   if (prevProps.salesSearch !== this.props.salesSearch) {
-    
     this.props.updateSalesParameter({
       ...prevProps.salesParameter.dataFilter, Filter : this.props.salesSearch, PageNumber: 1,
     });
@@ -100,12 +97,21 @@ componentDidUpdate = (prevProps) => {
       ...prevProps.serviceParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber: 1,
     });
   }
-  //searc per component
-  if(prevProps.searchComp !== this.props.searchComp){
-    this.props.updateSalesParameter({
-      ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
-    });
+  //search per component
+  if(this.state.whichTabs){
+    if(prevProps.searchComp !== this.props.searchComp){
+      this.props.updateSalesParameter({
+        ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+      });
+    }
+  }else{
+    if(prevProps.searchComp !== this.props.searchComp){
+      this.props.updateServiceParameter({
+        ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+      });
+    }
   }
+  
   // SALES ORDER SORTING
   if (prevProps.sortSalesBy !== this.props.sortSalesBy) {
     const { sortSalesBy } = this.props;
@@ -117,7 +123,7 @@ componentDidUpdate = (prevProps) => {
           PageNumber: 1,
           // PageSize: 2,
           Sort: [{
-            Field : 'Customer',
+            Field : 'CustomerName',
             Direction : 'desc'
           }],      
       });
@@ -128,7 +134,7 @@ componentDidUpdate = (prevProps) => {
           PageNumber: 1,
           // PageSize: 2,
           Sort: [{
-            Field : 'Customer',
+            Field : 'CustomerName',
             Direction : 'asc'
           }],      
       });
@@ -141,7 +147,7 @@ componentDidUpdate = (prevProps) => {
           PageNumber: 1,
           // PageSize: 2,
           Sort: [{
-            Field : 'Site',
+            Field : 'SiteCode',
             Direction : 'desc'
           }],
       });
@@ -152,7 +158,7 @@ componentDidUpdate = (prevProps) => {
           PageNumber: 1,
           // PageSize: 2,
           Sort: [{
-            Field : 'Site',
+            Field : 'SiteCode',
             Direction : 'asc'
           }],
       });
@@ -218,7 +224,7 @@ componentDidUpdate = (prevProps) => {
           PageNumber: 1,
           // PageSize: 2,
           Sort: [{
-            Field : 'Customer',
+            Field : 'CustomerName',
             Direction : 'desc'
           }]   
       });
@@ -229,7 +235,7 @@ componentDidUpdate = (prevProps) => {
           PageNumber: 1,
           // PageSize: 2,
           Sort: [{
-            Field : 'Customer',
+            Field : 'CustomerName',
             Direction : 'asc'
           }]   
       });
@@ -242,7 +248,7 @@ componentDidUpdate = (prevProps) => {
           PageNumber: 1,
           // PageSize: 2,
           Sort: [{
-            Field : 'Site',
+            Field : 'SiteCode',
             Direction : 'desc'
           }] 
       });
@@ -253,7 +259,7 @@ componentDidUpdate = (prevProps) => {
           PageNumber: 1,
           // PageSize: 2,
           Sort: [{
-            Field : 'Site',
+            Field : 'SiteCode',
             Direction : 'asc'
           }] 
       });
@@ -310,13 +316,14 @@ componentDidUpdate = (prevProps) => {
   }
 }
 
+  // PAGINATION DENGAN KONDISI UNTUK TAB SALES ORDER ATAU SERVICE ORDER
   _renderPagination= (pageValue) =>  {
     if (pageValue === 1) {
-      this.setState({isPaging : true})
+      this.setState({whichTabs : true})
     }if (pageValue === 0) {
-      this.setState({isPaging : false})
+      this.setState({whichTabs : false})
     }
-    if (this.state.isPaging === true) {
+    if (this.state.whichTabs === true) {
       const web = this.props.displayMode === 'web';
       const nextSales = this.props.salesOrderList.NextPage;
       const prevSales = this.props.salesOrderList.PrevPage;
@@ -324,22 +331,22 @@ componentDidUpdate = (prevProps) => {
       const { TotalPages } = this.props.salesOrderList;
       
       return(
-        <div className="pagination">
-          <div className="paging">
+        <div className="paginations">
+          <div className="paging-approval">
             {/* {prevSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
-            {web && currentPropsSales - 3 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 3 })} className="page-inactive">{currentPropsSales - 3}</div>}
-            {web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive">{currentPropsSales - 2}</div>}
-            {currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive">{currentPropsSales - 1}</div>}
-            <div className="page-active">{currentPropsSales}</div>
-            {currentPropsSales + 1 <= TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive">{currentPropsSales + 1}</div>}
-            {web && currentPropsSales + 2 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive">{currentPropsSales + 2}</div>}
-            {web && currentPropsSales + 3 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive">{currentPropsSales + 3}</div>}
+            {web && currentPropsSales - 3 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 3 })} className="page-inactive-approval">{currentPropsSales - 3}</div>}
+            {web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive-approval">{currentPropsSales - 2}</div>}
+            {currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive-approval">{currentPropsSales - 1}</div>}
+            <div className="page-active-approval">{currentPropsSales}</div>
+            {currentPropsSales + 1 <= TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive-approval">{currentPropsSales + 1}</div>}
+            {web && currentPropsSales + 2 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive-approval">{currentPropsSales + 2}</div>}
+            {web && currentPropsSales + 3 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive-approval">{currentPropsSales + 3}</div>}
             {/* {nextSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>} */}
           </div>
         </div>
       )
-    }
-    if (this.state.isPaging === false) {
+      }
+    if (this.state.whichTabs === false) {
       const web = this.props.displayMode === 'web';
       const nextSales = this.props.serviceOrderList.NextPage;
       const prevSales = this.props.serviceOrderList.PrevPage;
@@ -347,97 +354,286 @@ componentDidUpdate = (prevProps) => {
       const { TotalPages } = this.props.serviceOrderList;
       
       return(
-        <div className="pagination">
-          <div className="paging">
-            {prevSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>}
-            {web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive">{currentPropsService - 3}</div>}
-            {web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive">{currentPropsService - 2}</div>}
-            {currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive">{currentPropsService - 1}</div>}
-            <div className="page-active">{currentPropsService}</div>
+        <div className="paginations">
+          <div className="paging-approval">
+            {prevSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="next-page-approval"><KeyboardArrowLeft className="arrow-icon-approval" /></div>}
+            {web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive-approval">{currentPropsService - 3}</div>}
+            {web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive-approval">{currentPropsService - 2}</div>}
+            {currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive-approval">{currentPropsService - 1}</div>}
+            <div className="page-active-approval">{currentPropsService}</div>
             {/* <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService })} className="page-active">{currentPropsService}</div> */}
-            {currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive">{currentPropsService + 1}</div>}
-            {web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive">{currentPropsService + 2}</div>}
-            {web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive">{currentPropsService + 3}</div>}
-            {nextSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>}
+            {currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive-approval">{currentPropsService + 1}</div>}
+            {web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive-approval">{currentPropsService + 2}</div>}
+            {web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive-approval">{currentPropsService + 3}</div>}
+            {nextSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="next-page-approval"><KeyboardArrowRight className="arrow-icon-approval" /></div>}
           </div>
         </div>
       )
     }
   }
 
-  onClickServiceOrder = () => {
-    this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+  //SAAT MENGKLIK SERVICE ORDER TAB
+  onClickServiceOrder = async() => {
+   await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
   }
 
-  onClickSalesOrder = () =>{
-    this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
-  }
+  //SAAT MENGKLIK SALES ORDER TAB
+  onClickSalesOrder = async() =>{
+    // await this.handleLifeTime();
+    if (this.props.location.whichTab === 'lifetime') {
+      await this.props.fetchSalesOrder({
+        ...this.props.salesParameter.dataFilter, 
+        Filter : 
+              [...this.props.salesParameter.dataFilter.Filter, {
+                Field : 'LifeTimeComponent',
+                Operator : "eq",
+                Value : '-',
+                Logic : "AND"
+        }]
+      }, this.props.token);
+    }else {
+      await this.props.fetchSalesOrder({
+        ...this.props.salesParameter.dataFilter, 
+        Filter : 
+          [...this.props.salesParameter.dataFilter.Filter, {
+            Field : 'LifeTimeComponent',
+            Operator : "neq",
+            Value : '-',
+            Logic : "AND"
+          },{
+            Field : 'SAPIssueMessage',
+            Operator : 'eq',
+            Value : '-',
+            Logic : 'AND'
+          }]
+      }, this.props.token);
+    }
+  }  
 
+  onClickRevisedSales = async() => {
+    await this.props.fetchRevisedSales({
+      ...this.props.salesRevisedParam.dataFilter,
+      Filter : 
+        [...this.props.salesRevisedParam.dataFilter.Filter, {
+          Field 	 : 'IsRevised',
+          Operator : 'eq',
+          Value 	 : 'true',
+          Logic 	 : 'AND'
+        }]
+    },this.props.token);
+    // await this.props.clearSelectedSalesPlans()
+    // this.setPropsToState();
+  }
+  //KOMPONEN UNTUK SHOW PER/PAGE
   _renderShowPerPage(){
     return(
       <DropDownList 
-      {...this.props}
-      onPageSize={()=>this.handlePageSize()}
+        {...this.props}
+        handleClickShowPerPage={this.handleClickShowPerPage}
       />
     )
   }
+
+  handleClickShowPerPage = (value) =>{
+    if (this.state.whichTabs === true) {
+          this.props.clearSelectedSalesPlans();
+					this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value})
+    }else{
+      this.props.clearSelectedServicePlans();
+					this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value})
+    }
+  }
+
+  //KOMPONEN UNTUK GLOBAL SEARCH
   _renderSearchBar(){
     return (
-      <SearchInput
+      <div className="bottom-row-approval">
+        <SearchInput
         {...this.props}
-        wasApprove={this.state.wasApprove}
         webInfo="Search"
-        onSalesSearch={this.props.onSearchSales}
-        onServiceSearch={this.props.onSearchService}
+        handleSearch={this.handleSearch}
       />
+      </div>
     );
   }
 
+  handleSearch=(value)=>{
+		this.setState({ searchVal : value})
+		if (this.state.whichTabs === true) {
+			setTimeout(() => {
+				this.props.onSearchSales(this.state.searchVal)
+			}, 1000);
+		}if (this.state.whichTabs === false) {
+			setTimeout(() => {
+				this.props.onSearchService(this.state.searchVal)
+			}, 1000);
+		}
+	}
+
   _renderNotif(){
     return (
-      <NotifButton 
-        {...this.props}
-        idNotif = "Non-Status"
-      />
+      <>
+        <NotifButton 
+          {...this.props}
+          idNotif = "Non-Status"
+        />
+      </>
     )
   }
 
+  //FUNGSI UNTUK MENGAPROVE SALES ORDER
   onClickApprovedSales = () => {
-    this.props.fetchApprovedSales(this.props.salesParameter.dataFilter);
+    this.props.fetchApprovedSales(this.props.salesParameter.dataFilter,this.props.token);
   }
-
+  //FUNGSI UNTUK MENGAPROVE SERVICE ORDER
   onClickApprovedService = () => {
-    this.props.fetchApprovedService(this.props.serviceParameter.dataFilter);
+    this.props.fetchApprovedService(this.props.serviceParameter.dataFilter, this.props.token);
   }
-
+  //FUNGSI UNTUK memanggil Data SALES ORDER yang telah terhapus
   onClickDeletedSales = () => {
-    this.props.fetchDeletedSales(this.props.salesParameter.dataFilter);
+    this.props.fetchDeletedSales(this.props.salesParameter.dataFilter, this.props.token);
   }
-
+  //FUNGSI UNTUK memanggil Data SERVICE ORDER yang telah terhapus
   onClickDeletedService = () => {
-    this.props.fetchDeletedService(this.props.serviceParameter.dataFilter);
+    this.props.fetchDeletedService(this.props.serviceParameter.dataFilter, this.props.token);
+  }
+  onClickDownloadSalesApproved = () => {
+    let link = document.createElement("a");
+    document.body.appendChild(link);
+    link.style = "display: none";
+    const todayDate = moment(new Date()).format('DD-MM-YYYY');
+    // const salesOrder  = this.state.selectedData.SoNumber;
+    let fileName = "Sales-Order-Planning-"+todayDate+".csv";
+    let blob = new Blob([this.props.approveSalesDownloaded.data]),
+      url = window.URL.createObjectURL(blob);
+    link.href = url;
+    link.download = fileName;
+    link.click();
+    window.URL.revokeObjectURL(url);
   }
 
+  onClickDownloadServiceApproved = () => {
+    let link = document.createElement("a");
+    document.body.appendChild(link);
+    link.style = "display: none";
+    const todayDate = moment(new Date()).format('DD-MM-YYYY');
+    // const serviceOrder  = this.state.selectedServiceData.WoNumber;
+    let fileName = "Service-Order-Planning-"+todayDate+".csv";
+    let blob = new Blob([this.props.approveServiceDownloaded.data]),
+      url = window.URL.createObjectURL(blob);
+    link.href = url;
+    link.download = fileName;
+    link.click();
+    window.URL.revokeObjectURL(url);
+  }
+
+  handleSalesApprovedDownload = async() => {
+    let arr = []
+    const index = this.props.selectedSalesPlans.length
+    if (this.props.selectedSalesPlans.length > 0) {
+      for (let i = 0; i < index; i++) {
+        arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
+      }
+    }await this.props.downloadSalesApproved(arr, this.props.token);
+    if (
+      this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.FAILED
+    ) {
+      this.setState({ showError: true });
+    }
+  };
+
+  handleServiceApprovedDownload = async() => {
+    let arr = []
+    const index = this.props.selectedServicePlans.length
+    if (this.props.selectedServicePlans.length > 0) {
+      for (let i = 0; i < index; i++) {
+        arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
+      }
+    }
+    await this.props.downloadServiceApproved(arr, this.props.token);
+    if (
+      this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.FAILED
+    ) {
+      this.setState({ showError: true });
+    }
+  };
+
+  handleSalesApprove = async() => {
+    let arr = []
+    const index = this.props.selectedSalesPlans.length
+    if (this.props.selectedSalesPlans.length > 0) {
+      for (let i = 0; i < index; i++) {
+        arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
+      }
+      await this.props.approveSales({SoNumbers : arr, IsApprove: true}, this.props.token)
+      this.onClickSalesOrder();
+      await this.props.clearSelectedSalesPlans();
+  }
+};
+
+  handleServiceApprove = async() => {
+  let arr = []
+  const index = this.props.selectedServicePlans.length
+    if (this.props.selectedServicePlans.length > 0) {
+      for (let i = 0; i < index; i++) {
+        arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
+      }
+    await this.props.approveService({WoNumbers: arr, IsApprove: true}, this.props.token)
+    this.onClickServiceOrder();
+    await this.props.clearSelectedServicePlans();
+    }
+  }
+
+  handleSendtoEdit = async() => {
+    let arr = []
+    const index = this.props.selectedSalesPlans.length
+    if (this.props.selectedSalesPlans.length > 0) {
+      for (let i = 0; i < index; i++) {
+        arr = [...arr, this.props.selectedSalesPlans[i].So]
+      }
+      await this.props.unapproveSales({SoNumbers : arr, IsRevised: true}, this.props.token)
+      this.onClickSalesOrder();
+      await this.props.clearSelectedSalesPlans();
+    }
+  }
+
+  handleDeleteSales = async() => {
+    let arr = []
+    const index = this.props.selectedSalesPlans.length
+    const todayDate = moment(new Date()).format('YYYY-MM-DD');
+    if (this.props.selectedSalesPlans.length > 0) {
+      for (let i = 0; i < index; i++) {
+        arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
+      }
+      await this.props.deleteSales({SoNumbers : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate}, this.props.token)
+      this.onClickSalesOrder();
+      await this.props.clearSelectedSalesPlans();
+    }
+  }
+
+  handleDeleteService = async() => {
+    let arr = []
+    const index = this.props.selectedServicePlans.length
+    const todayDate = moment(new Date()).format('YYYY-MM-DD');
+    if (this.props.selectedServicePlans.length > 0) {
+      for (let i = 0; i < index; i++) {
+        arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
+      }
+      await this.props.deleteService({WoNumbers : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate}, this.props.token)
+      this.onClickServiceOrder();
+      await this.props.clearSelectedServicePlans();
+    }
+  }
+
+  handleClickFilterByDataAction = () =>{
+    this.setState({
+      isApproved : !this.state.isApproved
+    })
+  }
+
+  //KOMPONEN UNTUK FILTER DATA ACTION
   _renderFilterByDataAction = (value) => {
-    if (value === 1) {
-      this.setState({wasApprove : true})
-    }if (value === 0) {
-      this.setState({wasApprove : false})
-    }
-    if (this.state.wasApprove === true) {
-      return(
-        <>
-          <FilterbyDataAction 
-            {...this.props}
-            titles="Status"
-            // onClickPlanningApprove={this.onClickApprovedSales}
-            // onClickPlanningDelete={this.onClickDeletedSales}
-            // onClickButton={this.handleClickFilterByDataAction}
-          />
-        </>
-      );
-    }
-    if (this.state.wasApprove === false) {
+    if (this.state.whichTabs === true) {
       return(
         <>
           <FilterbyDataAction 
@@ -447,102 +643,120 @@ componentDidUpdate = (prevProps) => {
         </>
       );
     }
-  }
+    if (this.state.whichTabs === false) {
+      return(
+        <>
+          <FilterbyDataAction 
+            {...this.props}
+            titles="Status"
+          />
+        </>
+      );
+    }
+  };
 
-  _renderBaseButton = (value) => {
-    if (value === 1) {
-      this.setState({wasApprove : true})
-    }if (value === 0) {
-      this.setState({wasApprove : false})
-    }
-    if (this.state.wasApprove === true) {
-      return(
-				<div className="bottom-row">
-          <BaseButton titles="Total" totalSelectedItems ={this.props.selectedSalesPlans.length}/>
-          <BaseButton titles="Delete" 
-            {...this.props}
-            disabledButton = {this.props.selectedSalesPlans.length < 1 }
-            totalSelectedItems ={this.props.selectedSalesPlans.length}
-            whatTabsIsRendered={this.state.isPaging}
-            deleteSalesData={this.state.deleteSalesData}
-          />
-					<BaseButton titles="Download" />
-          <BaseButton titles="Approve"
-            {...this.props}
-            disabledButton = {this.props.selectedSalesPlans.length < 1 }
-            totalSelectedItems ={this.props.selectedSalesPlans.length}
-            whatTabsIsRendered={this.state.isPaging}
-            selectedData={this.state.selectedData}
-          />
-        </div>
-      );
-    }
-    if (this.state.wasApprove === false) {
-      return(
-				<div className="bottom-row">
-          <BaseButton titles="Total" totalSelectedItems ={this.props.selectedServicePlans.length}/>
-          <BaseButton titles="Delete" 
-            {...this.props}
-            disabledButton = {this.props.selectedServicePlans.length < 1 }
-            totalSelectedItems ={this.props.selectedServicePlans.length}
-            whatTabsIsRendered={this.state.isPaging}
-            deleteServiceData={this.state.deleteServiceData}
-          />
-					<BaseButton titles="Download"  />
-          <BaseButton titles="Approve"
-            {...this.props}
-            disabledButton = {this.props.selectedServicePlans.length < 1 }
-            totalSelectedItems ={this.props.selectedServicePlans.length}
-            whatTabsIsRendered={this.state.isPaging}
-            selectedServiceData={this.state.selectedServiceData}
-          />
-        </div>
-      );
-    }
-  }
-    
   isChangeStat = (value,key) =>{
     this.setState({
-      lifetime: { Lists :this.state.lifetime.Lists.map(el => (el.SO === key ? {...el, LifeTimeComp : value} : el)) }
+      lifetime: { Lists :this.state.lifetime.Lists.map(el => (el.SoNumber === key ? {...el, LifeTimeComp : value} : el)) }
     });
-  }
+  };
 
+  //KOMPONEN UNTUK BUTTON DOWNLOAD, APPROVE, DAN DELETE
+  _renderBaseButton = (value) => {
+    if (this.state.whichTabs === true) {
+      console.log('TAB SALES')
+      return(
+        <div className="header-rows">
+          {/* <BaseButton titles="Total" totalSelectedItems ={this.props.selectedSalesPlans.length}/> */}
+          <BaseButton titles="Approve"
+            {...this.props}
+            whatTabsIsRendered={this.state.whichTabs}
+            disabledButton = {this.props.selectedSalesPlans.length < 1 }
+            totalSelectedItems ={this.props.selectedSalesPlans.length}
+            handleSalesApprove={this.handleSalesApprove}
+            selectedData={this.state.selectedData}
+            renderSakses = {this.changeSuccess}
+          />
+          <BaseButton titles="Cancel Approve"
+            {...this.props}
+            selectedDataSAP={this.props.selectedSalesPlans}
+            whatTabsIsRendered={this.state.whichTabs}
+            disabledButton = {this.props.selectedSalesPlans.length < 1 }
+            totalSelectedItems ={this.props.selectedSalesPlans.length}
+            handleSendtoEdit={this.handleSendtoEdit}
+            selectedData={this.state.selectedData}
+            renderSakses = {this.changeSuccess}
+          />
+          <BaseButton titles="Edit" />
+          <BaseButton titles="Delete" 
+            {...this.props}
+            disabledButton = {this.props.selectedSalesPlans.length < 1 }
+            totalSelectedItems ={this.props.selectedSalesPlans.length}
+            whatTabsIsRendered={this.state.whichTabs}
+            handleDeleteSales={this.handleDeleteSales}
+            renderSakses = {this.changeSuccess}
+          />
+        </div>
+      );
+    }
+    if (this.state.whichTabs === false) {
+      console.log('TAB service')
+      return(
+				<div className="header-rows">
+          {/* <BaseButton titles="Total" totalSelectedItems ={this.props.selectedServicePlans.length}/> */}
+          <BaseButton titles="Approve"
+            {...this.props}
+            disabledButton = {this.props.selectedServicePlans.length < 1 }
+            totalSelectedItems ={this.props.selectedServicePlans.length}
+            whatTabsIsRendered={this.state.whichTabs}
+            selectedServiceData={this.state.selectedServiceData}
+            handleServiceApprove={this.handleServiceApprove}
+            renderSakses = {this.changeSuccess}
+          />
+          <BaseButton titles="Cancel Approve"/>
+          <BaseButton titles="Edit" />
+          <BaseButton titles="Delete" 
+            {...this.props}
+            disabledButton = {this.props.selectedServicePlans.length < 1 }
+            totalSelectedItems ={this.props.selectedServicePlans.length}
+            whatTabsIsRendered={this.state.whichTabs}
+            handleDeleteService={this.handleDeleteService}
+            renderSakses = {this.changeSuccess}
+          />
+        </div>
+      );
+    }
+  };
+
+  //FUNGSI UNTUK MULTI SELECT SALES ORDER
   updateAssignmentSalesStates = (plan) => {
     if (this.props.selectedSalesPlans
-      .some((plans) => plans.So === plan.So,
-        this.setState({
-          selectedData : {So:[...this.state.selectedData.So, plan.So], IsApprove: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: ""},
-          deleteSalesData : {So:[...this.state.deleteSalesData.So, plan.So], IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: "2019-01-15"}
-        }),
+      .some((plans) => plans.SoNumber === plan.SoNumber,
       )) 
     { return this.props.unselectSalesPlan(plan); }
     return this.props.selectSalesPlan(plan);
   };
 
+  //FUNGSI UNTUK MULTI SELECT SERVICE ORDER
   updateAssignmentServiceStates = (plan) => {
     if (this.props.selectedServicePlans
-      .some((plans) => plans.Wo === plan.Wo,
-        this.setState({
-          selectedServiceData : {Wo:[...this.state.selectedServiceData.Wo, plan.Wo], IsApprove: true},
-          deleteServiceData : {Wo:[...this.state.deleteServiceData.Wo, plan.Wo], IsDelete: true}
-        }),
+      .some((plans) => plans.WoNumber === plan.WoNumber,
       ))
     { return this.props.unselectServicePlan(plan); }
     return this.props.selectServicePlan(plan);
   };
 
+  //KOMPONEN UNTUK RENDER PAGE SALES ORDER DAN SERVICE ORDER
   _renderTabs(){
     return (
       <>
         <DetailsTab
           {...this.props}
-          renderFilterByDataAction={this._renderFilterByDataAction()}
+          renderFilterByDataAction={this._renderFilterByDataAction()}  
           renderBaseButton={this._renderBaseButton()}
           renderSearch={this._renderSearchBar()}
-          renderNotif={this._renderNotif()}
           onClickSalesOrder={this.onClickSalesOrder}        
           onClickServiceOrder={this.onClickServiceOrder}
-          // onSearchValue={this.onSearchValue}
           onChoosedService={this.updateAssignmentServiceStates}
           onChoosedSales={this.updateAssignmentSalesStates}
           selectedSalesPlanList={this.props.selectedSalesPlans}
@@ -553,29 +767,110 @@ componentDidUpdate = (prevProps) => {
           onStats={this.isChangeStat}     
           totalSalesData={this.props.salesOrderList.TotalData}
           totalServiceData={this.props.serviceOrderList.TotalData}
+          ApprovedSalesData={this.props.salesOrderListApproved.TotalData}
           onClickTabHead={this.props.onClickSortBy}
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}
           onPage={this._renderPagination}
-          wasApprove={this._renderBaseButton}
+          // baseButton={this._renderBaseButton}
+          isApproved={this.state.isApproved}
+          token={this.props.token}
+          renderNotif={this._renderNotif()}
         />
       </>
     );
   };
 
-    render(){      
-      return(
-          <main className="content">
-              <div className="table-container">
-                    {this._renderTabs()}
-                </div>
-                <div></div>
-                <div className="bottom-row">
-                    {this._renderShowPerPage()} {this._renderPagination()}
-                </div>
-          </main>
-      )
-    }
+  changeSuccess = () => {
+    this.setState({
+      openSuccess : !this.state.openSuccess
+    })
   }
+
+  closeSuccess = () => {
+    this.setState({
+      openSuccess: !this.state.openSuccess
+    })
+  }
+
+  renderCircularProgress() {
+    return <CircularProgress size={100} className="circular-progress" />;
+  }
+
+  _renderSalesApproved = () => {
+    return(
+      <>
+        <ConfirmationModal idModal="Approved" openModal={this.state.openSuccess} onClose={this.closeSuccess}/>
+      </>
+    )
+  }
+
+  _renderSalesDeleted = () => {
+    return(
+      <>
+        <ConfirmationModal idModal="Delete Success" openModal={this.state.openSuccess} onClose={this.closeSuccess}/>
+      </>
+    )
+  }
+  _renderEditSuccess = () => {
+    return(
+      <>
+        <UnapproveConfirmation idConfirm="Send Success" openModal={this.state.openSuccess} onClose={this.closeSuccess} />
+      </>
+    )
+  }
+
+  render(){     
+    return(
+      <main className="content">
+          {this.props.fetchStatusApprovedSales === ApiRequestActionsStatus.LOADING &&  (
+            this.renderCircularProgress()
+          )}
+          {this.props.fetchStatusApprovedSales === ApiRequestActionsStatus.SUCCEEDED && (
+            <>
+              {this._renderSalesApproved()}
+            </>
+          )}
+          {this.props.fetchStatusApprovedService === ApiRequestActionsStatus.LOADING &&  (
+            this.renderCircularProgress()
+          )}
+          {this.props.fetchStatusApprovedService === ApiRequestActionsStatus.SUCCEEDED && (
+            <>
+              {this._renderSalesApproved()}
+            </>
+          )}
+          {this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.LOADING &&  (
+            this.renderCircularProgress()
+          )}
+          {this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED && (
+            <>
+              {this._renderSalesDeleted()}
+            </>
+          )}
+          {this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.LOADING &&  (
+            this.renderCircularProgress()
+          )}
+          {this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.SUCCEEDED && (
+            <>
+              {this._renderSalesDeleted()}
+            </>
+          )}
+          {this.props.fetchStatusUnapprove === ApiRequestActionsStatus.LOADING &&  (
+            this.renderCircularProgress()
+          )}   
+          {this.props.fetchStatusUnapprove === ApiRequestActionsStatus.SUCCEEDED && (
+            this._renderEditSuccess()
+          )} 
+          <div className="table-container-approval">
+                {this._renderTabs()}
+            </div>
+            <div></div>
+            <div className="bottom-row-approval">
+                {this._renderShowPerPage()} {this._renderPagination()}
+            </div>
+      </main>
+    )
+  }
+}
 
 export default DetailPagesSite;

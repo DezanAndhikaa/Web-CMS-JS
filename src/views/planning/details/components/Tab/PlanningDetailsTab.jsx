@@ -1,19 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
 import SalesOrderList from '../PlanningList/SalesOrderList';
 import ServiceOrderList from '../PlanningList/ServiceOrderList';
-import ApprovedSalesOrderList from '../PlanningList/ApprovedSalesOrderList';
-import { IconNotif, IconHistory } from '../../../../../assets/icons';
-import {Badge, Button} from '@material-ui/core';
+import {Badge, Button, Typography} from '@material-ui/core';
 import { Menu } from '../../../../../constants';
 import './PlanningDetailsTab.scss';
 import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
-import { SelectCustomerFilterAction,SelectSiteFilterAction, SelectUnitModelFilterAction, SelectComponentFilterAction } from '../../DetailPages-action'
+import { 
+  SelectCustomerFilterAction,
+  SelectSiteFilterAction, 
+  SelectUnitModelFilterAction, 
+  SelectComponentFilterAction } 
+  from '../../DetailPages-action'
 
 function TabContainer({ children, dir }) {
   return (
@@ -281,12 +280,7 @@ console.log('kondisi value terasek', value)
             head={"ComponentDescription"}
           />
         </div>
-        {/* <div className="base-button-container"> */}
-          {/* Tampilan HO */}
-          {/* {this.props.renderBaseButton} */}
-        {/* </div> */}
         <div className="search-container">
-          {/* Tampilan Site */}
           {this.props.renderSearch}
         </div>
       </div>
@@ -333,9 +327,8 @@ console.log('kondisi value terasek', value)
   }
 
   render() {
-    const { classes, theme } = this.props;
+    const { theme } = this.props; //const { classes, theme } = this.props;
     const { value } = this.state;
-    {!this.props.isApproved ? console.log('skuit kondisi false', this.props.totalSalesData) : console.log('skuit kondisi true', this.props.salesOrderListApproved)}
     return (
         <div className="root">
           <div className="tab-container">
@@ -347,11 +340,9 @@ console.log('kondisi value terasek', value)
               {this.props.renderFilterByDataAction}
             </div>
           </div>
-          {/* TampilanHO renderTotalDataInput + renderFilter*/}
           <div className="data-input-container">
             {this._renderTotalDataInput()}
           </div>
-          {/* Tampilan Site hanya renderFilter */}
           <div className="filters-container">
             {this._renderFilter()}
           </div>

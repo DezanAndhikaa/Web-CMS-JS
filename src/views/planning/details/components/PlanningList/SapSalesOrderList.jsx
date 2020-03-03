@@ -1,18 +1,21 @@
 import React from 'react';
-// import moment, { ISO_8601 } from 'moment';
 import {
   Checkbox, Table, TableBody, TableCell, TableHead, TableRow, TextField, 
 } from '@material-ui/core';
 import './PlanningList.scss';
 import '../SapIssue/SapIssue.scss'
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
-import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
-import InputButton from '../../../../../components/Button/InputButton';
-import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
-import { Spinner } from '../../../../../assets/icons'
+import { 
+  SortSalesByCustomer, 
+  SortSalesBySite, 
+  SortSalesByUnitModel, 
+  SortSalesByCompDesc, 
+  LifetimeFilterAction, 
+  DateFilterAction } 
+  from '../../DetailPages-action';
+import { Spinner } from '../../../../../assets/icons';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
-import moment from 'moment'
-// import { NotificationManager } from 'react-notifications';
+import moment from 'moment';
 
 export default class SapSalesOrderList extends React.PureComponent {
   constructor(props) {

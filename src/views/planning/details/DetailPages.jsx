@@ -1,18 +1,13 @@
 import React from 'react';
-import moment, { ISO_8601 } from "moment";
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import './DetailPages.scss';
 import PlanningDetailsTab from './components/Tab/PlanningDetailsTab';
 import { ApiRequestActionsStatus } from "../../../core/RestClientHelpers";
 import DropDownList from '../../../components/DropdownList/DropDownList';
 import SearchInput from "../../../components/Searchbar/SearchInput";
-import BaseButton from '../../../components/Button/BaseButton';
 import FilterbyDataAction from '../../../components/FilterByDataAction/FilterbyDataAction';
 import NotifButton from '../../../components/ActionButton/NotifButton/NotifButton';
-import { Menu } from '../../../constants'
-import {Snackbar, Button} from '@material-ui/core';
-
-import SapIssue from './components/SapIssue/SapIssue'
+import { Menu } from '../../../constants';
 
 class DetailPages extends React.Component{
     constructor(props) {
@@ -48,7 +43,6 @@ componentWillUnmount = () => {
 }
 
 componentDidMount = () => {
-  console.log('tok token : ', this.props.location)
   if(this.props.location.whichTab === undefined){
     this.handleClick(Menu.PLANNING_APPROVAL)
   }
@@ -73,7 +67,6 @@ componentDidUpdate = (prevProps) => {
 
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
-    console.log('dumtt,',this.props.filterParameter)
       if(this.props.indexFilterParameter.indexTabParameter === 0){
         // this.props.fetchSalesOrder(this.props.filterParameter);
         this.props.updateSalesParameter({

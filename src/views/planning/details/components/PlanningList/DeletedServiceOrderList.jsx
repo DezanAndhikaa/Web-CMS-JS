@@ -1,16 +1,13 @@
 import React from 'react';
-import moment, { ISO_8601 } from 'moment';
+import moment from 'moment';
 import {
-  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Typography,
+  Checkbox, Table, TableBody, TableCell, TableHead, TableRow
 } from '@material-ui/core';
 import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
-import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
-import InputButton from '../../../../../components/Button/InputButton';
 import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
-// import { NotificationManager } from 'react-notifications';
 
 export default class DeletedServiceOrderList extends React.PureComponent {
   constructor(props) {

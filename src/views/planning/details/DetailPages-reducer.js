@@ -14,12 +14,15 @@ import {
 	FetchDeletedSalesAction,
 	FetchDeletedServiceAction,
 	FetchSapSalesAction,
+	FetchRevisedSalesAction,
 	DeleteSalesAction,
 	DeleteServiceAction,
 	UpdateSalesApprovedParameterAction,
 	UpdateSalesDeletedParameterAction,
 	UpdateSalesSapParameterAction,
-	UpdateSalesParameterAction, ResetSelectedMechanicsAction, 
+	UpdateSalesParameterAction, 
+	UpdateSalesRevisedParamAction,
+	ResetSelectedMechanicsAction, 
 	SearchSalesAction,
 	SearchServiceAction,
 	UpdateServiceApprovedParameterAction,UpdateServiceDeletedParameterAction,
@@ -159,10 +162,10 @@ const initialFilterParameter = {
 	Filter: []
 };
 
-const initialSelectedAssignment = {
-	selectedService: [],
-	selectedSales: [],
-};
+// const initialSelectedAssignment = {
+// 	selectedService: [],
+// 	selectedSales: [],
+// };
 
 const defaultState = { isActive: false, isAscending: true };
 const salesSortbyInitialState = {	
@@ -311,10 +314,10 @@ const initialSearchServiceParameter =
 }];
 
 const initialDownloadState = { data: new Blob(), status: ApiRequestActionsStatus.IDLE };
-const initialAssignmentState = { response: false, status: ApiRequestActionsStatus.IDLE };
+// const initialAssignmentState = { response: false, status: ApiRequestActionsStatus.IDLE };
 const initialSalesState = { data: initialSalesAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialServiceState = { data: initialServiceAssignment, status: ApiRequestActionsStatus.IDLE };
-const initialMechanicsState = { data: [], status: ApiRequestActionsStatus.IDLE };
+// const initialMechanicsState = { data: [], status: ApiRequestActionsStatus.IDLE };
 
 export function fetchSalesReducer(state = initialSalesState, action) {
 	if (action.type === FetchSalesAction) {
@@ -569,6 +572,24 @@ export function fetchSapSalesReducer(state = initialSalesState, action) {
 	return state;
 }
 
+export function fetchRevisedSalesReducer(state = initialSalesState, action){
+	if (action.type === FetchRevisedSalesAction) {
+		switch (action.status) {
+		  case ApiRequestActionsStatus.SUCCEEDED:
+			return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		  case ApiRequestActionsStatus.FAILED:
+			return {
+				  data: initialSalesState.data,
+				  status: ApiRequestActionsStatus.FAILED,
+				  error: action.error,
+			};
+		  default:
+			return { data: initialSalesState.data, status: ApiRequestActionsStatus.LOADING };
+		}
+	  }
+	  return state;
+}
+
 export function downloadApprovedSalesReducer(state = initialDownloadState, action) {
 	if (action.type === PlanningApprovedSalesDownloadAction) {
 	  switch (action.status) {
@@ -644,6 +665,12 @@ export function salesDeletedParameterReducer(state = initialSalesParameter, acti
 
 export function salesSapParameterReducer(state = initialSalesParameter, action){
 	if(action.type === UpdateSalesSapParameterAction)
+		return {...state, dataFilter: action.payload};
+	return state;
+}
+
+export function salesRevisedParameterReducer(state = initialSalesParameter, action){
+	if(action.type === UpdateSalesRevisedParamAction)
 		return {...state, dataFilter: action.payload};
 	return state;
 }
@@ -953,6 +980,7 @@ const PlansReducers = combineReducers({
 	salesOrderListDeleted : fetchDeletedSalesReducer,
 	serviceOrderListDeleted : fetchDeletedServiceReducer,
 	salesOrderListSap : fetchSapSalesReducer,
+	salesOrderRevised : fetchRevisedSalesReducer,
 	// salesOrderList : getSearchValueReducer,
 	// salesOrderList: getSalesOrderReducer,
 	// mechanicList: getMechanicsReducer,
@@ -965,6 +993,7 @@ const PlansReducers = combineReducers({
 	salesApprovedParameter : salesApprovedParameterReducer,
 	salesDeletedParameter : salesDeletedParameterReducer,
 	salesSapParameter : salesSapParameterReducer,
+	salesRevisedParam : salesRevisedParameterReducer,
 	serviceParameter: serviceParameterReducer,
 	serviceApprovedParameter: serviceParameterApprovedReducer,
 	serviceDeletedParameter: serviceParameterDeletedReducer,

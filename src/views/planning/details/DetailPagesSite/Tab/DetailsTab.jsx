@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import {AppBar, Tabs, Tab, Typography, Badge, Paper} from '@material-ui/core';
 import SalesOrderList from '../../components/PlanningList/SalesOrderList';
 import ServiceOrderList from '../../components/PlanningList/ServiceOrderList';
-import RevisedSalesOrderList from '../../components/PlanningList/ServiceOrderList';
+// import RevisedSalesOrderList from '../../components/PlanningList/RevisedSalesOrderList';
 import './DetailsTab.scss';
 import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
 import { 
@@ -152,7 +152,10 @@ console.log('kondisi value terasek', value)
   _renderRevisionList(){
     return(
         <Paper className="paper-revision">
-            <RevisedSalesOrderList />
+            <ServiceOrderList 
+            {...this.props}
+            // isClick={this.props.isClick}
+            />
         </Paper>
     )
   }

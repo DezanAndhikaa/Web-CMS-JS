@@ -1,16 +1,10 @@
 import React from 'react';
-import moment, { ISO_8601 } from "moment";
-import { Paper, Card, Grid } from '@material-ui/core'
+import { Paper, Button } from '@material-ui/core'
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import './Notification.scss';
-import PlanningDetailsTab from '../Tab/PlanningDetailsTab';
-import { ApiRequestActionsStatus } from "../../../../../core/RestClientHelpers";
 import DropDownList from '../../../../../components/DropdownList/DropDownList';
-// import SearchInput from "../../../../../components/Searchbar/SearchInput";
-// import BaseButton from '../../../components/Button/BaseButton';
 import FilterbyDataAction from '../../../../../components/FilterByDataAction/FilterbyDataAction';
 import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton';
-import { Button } from '@material-ui/core';
 import { Menu } from '../../../../../constants';
 import CardData from './Components/Card';
 
@@ -62,8 +56,8 @@ componentDidUpdate = (prevProps) => {
     }
     if (this.state.whichTabs === true) {
       const web = this.props.displayMode === 'web';
-      const nextSales = this.props.salesOrderList.NextPage;
-      const prevSales = this.props.salesOrderList.PrevPage;
+      // const nextSales = this.props.salesOrderList.NextPage;
+      // const prevSales = this.props.salesOrderList.PrevPage;
       const currentPropsSales = this.props.salesOrderList.PageNumber;
       const { TotalPages } = this.props.salesOrderList;
       

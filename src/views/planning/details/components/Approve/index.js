@@ -36,10 +36,8 @@ import {
 	UnselectServicePlanAction, 
 	selectSalesPlansAction, 
 	selectServicePlansAction, 
-	selectLeaderAction, 
 	SelectSalesPlanAction,
 	SelectServicePlanAction,
-	selectMechanicAction, 
 	sortByAction, 
 	storePlanDataAction,
 } from '../../DetailPages-action';

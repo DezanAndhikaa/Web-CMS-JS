@@ -1,8 +1,4 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import { List } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-
 
 class SiteListCard extends React.Component {
 	state ={

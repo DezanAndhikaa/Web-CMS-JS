@@ -9,7 +9,6 @@ import {
   DialogContent,
   Collapse
 } from "@material-ui/core";
-import { UTLogoNew} from "../../assets/imgs/";
 import { AssignmentIcon, LogoutIcon, AllocationIcon, DeliveryIcon, TrackingIcon,
 SettingIcon, ProductionIcon, ExecutionIcon, DashboardIcon, PlanningIcon } from "../../assets/icons";
 import { Menu, StorageKey } from "../../constants";

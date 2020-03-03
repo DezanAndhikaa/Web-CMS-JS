@@ -1,9 +1,7 @@
 import React from 'react';
 import './NotifButton.scss';
-import {Badge, Paper, MenuList, MenuItem, Typography} from '@material-ui/core/';
-// import Popover, {PopoverAnimationVertical} from 'material-ui/core/Popover';
-// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { IconNotif, IconHistory } from '../../../assets/icons';
+import {Badge, Paper } from '@material-ui/core/';
+import { IconNotif } from '../../../assets/icons';
 import { withStyles } from '@material-ui/core/styles';
 import { Menu } from '../../../constants';
 import { withRouter } from "react-router-dom";

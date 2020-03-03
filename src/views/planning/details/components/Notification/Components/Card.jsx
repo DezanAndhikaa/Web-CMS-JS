@@ -1,6 +1,5 @@
-import React from 'react'
-import { Card } from '@material-ui/core'
-import '../Notification.scss'
+import React from 'react';
+import '../Notification.scss';
 
 export default class CardData extends React.Component {
 

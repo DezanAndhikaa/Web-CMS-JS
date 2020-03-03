@@ -7,7 +7,7 @@ import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 import ApproveConfirmation from '../ApproveConfirmation/ApproveConfirmation';
 import UnapproveConfirmation from '../UnapproveConfirmation/UnapproveConfirmation'
 import { ApiRequestActionsStatus } from '../../core/RestClientHelpers';
-import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
+// import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 
 class BaseButton extends React.Component{
     constructor(props){
@@ -53,11 +53,11 @@ class BaseButton extends React.Component{
         if (this.props.whatTabsIsRendered === false) {
             if (this.props.titles === "Approve") {
                 await this.props.handleServiceApprove();
-                this.isClosed()
+                // this.isClosed()
             }
             if (this.props.titles === "Delete") {
                 await this.props.handleDeleteService();
-                this.isClosed()
+                // this.isClosed()
             }
         }
     }

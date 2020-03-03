@@ -1,5 +1,5 @@
 import React from 'react';
-import moment, { ISO_8601 } from "moment";
+import moment from "moment";
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import './ApprovalPages.scss';
 import ApprovalTab from './ApprovalTab/ApprovalTab';
@@ -10,7 +10,7 @@ import BaseButton from '../../../../../components/Button/BaseButton';
 import FilterbyDataAction from '../../../../../components/FilterByDataAction/FilterbyDataAction';
 import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton';
 import ConfirmationModal from '../../../../../components/ConfirmationModal/ConfirmationModal';
-import {Snackbar, Button, CircularProgress} from '@material-ui/core';
+import {CircularProgress} from '@material-ui/core';
 import UnapproveConfirmation from '../../../../../components/UnapproveConfirmation/UnapproveConfirmation';
 
 class ApprovalPages extends React.Component{
@@ -659,6 +659,46 @@ componentDidUpdate = (prevProps) => {
     });
   };
 
+  
+  changeSuccess = () => {
+    this.setState({
+      openSuccess : !this.state.openSuccess
+    })
+  }
+
+  closeSuccess = () => {
+    this.setState({
+      openSuccess: !this.state.openSuccess
+    })
+  }
+
+  renderCircularProgress() {
+    return <CircularProgress size={100} className="circular-progress" />;
+  }
+
+  _renderSalesApproved = () => {
+    return(
+      <>
+        <ConfirmationModal idModal="Approved" openModal={this.state.openSuccess} onClose={this.closeSuccess}/>
+      </>
+    )
+  }
+
+  _renderSalesDeleted = () => {
+    return(
+      <>
+        <ConfirmationModal idModal="Delete Success" openModal={this.state.openSuccess} onClose={this.closeSuccess}/>
+      </>
+    )
+  }
+  _renderEditSuccess = () => {
+    return(
+      <>
+        <UnapproveConfirmation idConfirm="Send Success" openModal={this.state.openSuccess} onClose={this.closeSuccess} />
+      </>
+    )
+  }
+
   //KOMPONEN UNTUK BUTTON DOWNLOAD, APPROVE, DAN DELETE
   _renderBaseButton = (value) => {
     if (this.state.whichTabs === true) {
@@ -707,7 +747,7 @@ componentDidUpdate = (prevProps) => {
             disabledButton = {this.props.selectedServicePlans.length < 1 }
             totalSelectedItems ={this.props.selectedServicePlans.length}
             whatTabsIsRendered={this.state.whichTabs}
-            selectedServiceData={this.state.selectedServiceData}
+            // selectedServiceData={this.state.selectedServiceData}
             handleServiceApprove={this.handleServiceApprove}
             renderSakses = {this.changeSuccess}
           />
@@ -778,45 +818,6 @@ componentDidUpdate = (prevProps) => {
       </>
     );
   };
-
-  changeSuccess = () => {
-    this.setState({
-      openSuccess : !this.state.openSuccess
-    })
-  }
-
-  closeSuccess = () => {
-    this.setState({
-      openSuccess: !this.state.openSuccess
-    })
-  }
-
-  renderCircularProgress() {
-    return <CircularProgress size={100} className="circular-progress" />;
-  }
-
-  _renderSalesApproved = () => {
-    return(
-      <>
-        <ConfirmationModal idModal="Approved" openModal={this.state.openSuccess} onClose={this.closeSuccess}/>
-      </>
-    )
-  }
-
-  _renderSalesDeleted = () => {
-    return(
-      <>
-        <ConfirmationModal idModal="Delete Success" openModal={this.state.openSuccess} onClose={this.closeSuccess}/>
-      </>
-    )
-  }
-  _renderEditSuccess = () => {
-    return(
-      <>
-        <UnapproveConfirmation idConfirm="Send Success" openModal={this.state.openSuccess} onClose={this.closeSuccess} />
-      </>
-    )
-  }
 
   render(){     
     return(
