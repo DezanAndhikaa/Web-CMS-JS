@@ -12,7 +12,7 @@ import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import {Snackbar} from '@material-ui/core';
 import moment from 'moment';
 
-export default class SalesOrderList extends React.PureComponent {
+export default class SalesOrderListSite extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
@@ -97,15 +97,6 @@ export default class SalesOrderList extends React.PureComponent {
       return (
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow classes={{ root: 'table-row' }}>
-          <TableCell padding="checkbox">
-            {this.props.displaySalesCheckbox && 
-            <Checkbox 
-              checked={this.state.checkedValue}
-              onChange={this.handleClickCheckbox}
-              onClick={() => {this.props.salesOrderList.Lists.map((row,id) => 
-              this.props.onChoosedSales(row,id))}}
-              className="checkbox-checked-header"/>}
-          </TableCell>
           <PlanningListHeader
             name="SO"
             // isActive={this.props.sortJobsByState.unitModel.isActive}
@@ -200,18 +191,6 @@ export default class SalesOrderList extends React.PureComponent {
   showTableBody(row,id) {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
-        {/* Nanti ada if user ho atau site
-              Ini tampilan HO */}
-        <TableCell padding="checkbox">
-          {this.props.displaySalesCheckbox && 
-          <Checkbox 
-          // checked={true}
-          disabled={this.isCheckboxAvailable(row)} 
-          checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
-          onClick={() => this.props.onChoosedSales(row)} 
-          classes={{ checked: 'checkbox-checked' }} 
-          />}
-        </TableCell>
         <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>

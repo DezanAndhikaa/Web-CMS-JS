@@ -1,27 +1,9 @@
 @import '../../../../../themes/variables';
 @import '../../../../../themes/functions';
 
-.badge{
-    right: -20px;
-    top: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 15px;
-}
-
-.badges{
-    right: 0px;
-    top: 0px;
-    padding: 0px 15px;
-    color: white;
-    background-color:map-get($colors, third-dark);
-    border-radius: vw(5) !important;
-    padding: 2px 6px;
-}
-
-.root {
+.root{
     flex-grow: 1;
-    z-index: 0;
+    // z-index: 0;
     justify-content: center;
     align-items: center;
     .tabsRoot {
@@ -38,21 +20,38 @@
       }
     }
 }
-.tab-coba{
-    width: 100%;
-    display: inline-flex;
-    width: 165px;
-    .tab-label{
+.tab-detail-site{
+    // width: 100%;
+    // display: inline-flex;
+    // width: 165px;
+    display: flex;
+    .label-detail-site{
         font-family: 'Lato-Bold';
-        font-size: vw(22); //vw(20)
+        font-size: vw(24); //vw(22)
         line-height: vw(24); // vw(24)
     }
 }
 
 .paper-revision{
-    display: flex;
+    // display: flex;
+    margin-top: vw(35);
     border: 1.5px solid #E0E0E0;
     background-color: transparent;
+    border-radius: 8px;
+    .ut-underline-rev{
+        margin-top: vw(1.5);
+        margin-bottom: vw(10);
+        width: vw(8);
+        height: vw(20);
+        background-color: map-get($colors, primary);
+    }
+    .revision-title{
+        margin: 0;
+        margin-right: vw(17);
+        font-weight: bold;
+        font-size: 15px; 
+        width: 60%;
+    }
 }
 
 .tab-container-site{
@@ -64,42 +63,37 @@
     align-self: flex-end;
 }
 
-.table-container{
+.table-detail-site{
     display: flex;
     flex-direction: column;
     position: relative;
     z-index: 3;
-    .filters-container{
+    width: 100%;
+    .filters-detail-site{
         display: flex;
         flex-direction: row;
-        .dropdowns-container{
+        .dropdowns-detail-site{
             // position: absolute;
             width: 100%;
             display: flex;
             flex-direction: row;
-            .dropdown-container{
+            .dropdown-detail-site{
                 margin-left: 0.8vw;
             }
-            .search-container{
+            .search-detail-site{
                 flex: 1;
                 align-self: flex-end;
-                margin-left: 16vw;
+                margin-left: 10.3vw;
                 display: flex;
                 justify-content: flex-end;
             }
-            .dropdown-container:first-child{
+            .dropdown-detail-site:first-child{
                 margin-left: 0;
-            }
-            .base-button-container{
-                flex: 1;
-                align-self: flex-end;
-                display: flex;
-                justify-content: flex-end;
             }
         }
     }
-    .plannings-list-containers{
-        margin-top: 6vw !important;
+    .plannings-list-detail{
+        // margin-top: 6vw !important;
         .table{
             // display: block;
             font-size: 0.5vw;
@@ -143,58 +137,58 @@
     }
 }
 
-@media (min-width: 600px) and (max-width: 1025px) {
-    .table-container{
-        display: flex;
-        flex-direction: column;
-        .plannings-list-container{
-            margin-top: vw-tab(50) !important;
-            margin-bottom: vw-tab(20) !important;
-            overflow-x: scroll;
-            .table{
-                font-size: vw(5);
-                width: 220%;
-                .table-head{
-                    border-bottom: vw-tab(20) solid #F4F6F8;
-                    padding-left: vw-tab(5);
-                    .table-cell{
-                        padding: 0;
-                        height: vw-tab(50);
-                        font-size: vw-tab(13) !important;
-                        line-height: vw-tab(16) !important;
-                        font-family: 'Lato-Bold';
-                        color: #3C3B3B;
-                    }
-                }
-                .table-body{
-                    background-color: #ffffff;
-                    .table-row{
-                        border-bottom: vw-tab(10) solid #F4F6F8;
-                        .table-cell{
-                            padding: 0;
-                            height: vw-tab(50);
-                            font-size: vw-tab(14) !important;
-                            line-height: vw-tab(17) !important;
-                            font-family: 'Lato-Medium';
-                            color: #3C3B3B;
-                        }
-                        .checkbox-checked{
-                            color: #3C3B3B;
-                        }
-                    }
-                    // .table-row:hover{
-                    //     background-color:map-get($colors, primary);
-                    // }
-                }
-            }
-        }
-    }
-}
+// @media (min-width: 600px) and (max-width: 1025px) {
+//     .table-container{
+//         display: flex;
+//         flex-direction: column;
+//         .plannings-list-container{
+//             margin-top: vw-tab(50) !important;
+//             margin-bottom: vw-tab(20) !important;
+//             overflow-x: scroll;
+//             .table{
+//                 font-size: vw(5);
+//                 width: 220%;
+//                 .table-head{
+//                     border-bottom: vw-tab(20) solid #F4F6F8;
+//                     padding-left: vw-tab(5);
+//                     .table-cell{
+//                         padding: 0;
+//                         height: vw-tab(50);
+//                         font-size: vw-tab(13) !important;
+//                         line-height: vw-tab(16) !important;
+//                         font-family: 'Lato-Bold';
+//                         color: #3C3B3B;
+//                     }
+//                 }
+//                 .table-body{
+//                     background-color: #ffffff;
+//                     .table-row{
+//                         border-bottom: vw-tab(10) solid #F4F6F8;
+//                         .table-cell{
+//                             padding: 0;
+//                             height: vw-tab(50);
+//                             font-size: vw-tab(14) !important;
+//                             line-height: vw-tab(17) !important;
+//                             font-family: 'Lato-Medium';
+//                             color: #3C3B3B;
+//                         }
+//                         .checkbox-checked{
+//                             color: #3C3B3B;
+//                         }
+//                     }
+//                     // .table-row:hover{
+//                     //     background-color:map-get($colors, primary);
+//                     // }
+//                 }
+//             }
+//         }
+//     }
+// }
 
-@media (max-width: 599px) {
-    .planning-list-container{
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    } 
-}
+// @media (max-width: 599px) {
+//     .planning-list-container{
+//         display: flex;
+//         flex-direction: column;
+//         width: 100%;
+//     } 
+// }

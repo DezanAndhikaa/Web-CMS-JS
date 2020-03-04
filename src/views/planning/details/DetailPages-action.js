@@ -416,6 +416,10 @@ export function serviceParameterDeletedAction(type, payload) {
 	return { type, payload };
 }
 
+export function salesParameterRevAction(type, payload){
+	return { type, payload };
+}
+
 export function searchAction(type, payload) {
 	return { type, payload };
 }

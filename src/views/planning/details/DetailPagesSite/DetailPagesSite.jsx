@@ -12,6 +12,7 @@ import NotifButton from '../../../../components/ActionButton/NotifButton/NotifBu
 import ConfirmationModal from '../../../../components/ConfirmationModal/ConfirmationModal';
 import {CircularProgress} from '@material-ui/core';
 import UnapproveConfirmation from '../../../../components/UnapproveConfirmation/UnapproveConfirmation';
+// import RevisedSalesOrderList from '../components/PlanningList/RevisedSalesOrderList';
 
 class DetailPagesSite extends React.Component{
     constructor(props) {
@@ -33,6 +34,9 @@ componentWillUnmount = () => {
   });
   this.props.updateServiceParameter({
     ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
+  });
+  this.props.updateSalesRevParameter({
+    ...this.props.salesRevisedParam.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
   });
 }
 
@@ -421,9 +425,8 @@ componentDidUpdate = (prevProps) => {
           Logic 	 : 'AND'
         }]
     },this.props.token);
-    // await this.props.clearSelectedSalesPlans()
-    // this.setPropsToState();
   }
+
   //KOMPONEN UNTUK SHOW PER/PAGE
   _renderShowPerPage(){
     return(
@@ -447,7 +450,7 @@ componentDidUpdate = (prevProps) => {
   //KOMPONEN UNTUK GLOBAL SEARCH
   _renderSearchBar(){
     return (
-      <div className="bottom-row-approval">
+      <div className="bottom-row-detail-site">
         <SearchInput
         {...this.props}
         webInfo="Search"
@@ -497,6 +500,7 @@ componentDidUpdate = (prevProps) => {
   onClickDeletedService = () => {
     this.props.fetchDeletedService(this.props.serviceParameter.dataFilter, this.props.token);
   }
+
   onClickDownloadSalesApproved = () => {
     let link = document.createElement("a");
     document.body.appendChild(link);
@@ -632,7 +636,7 @@ componentDidUpdate = (prevProps) => {
   }
 
   //KOMPONEN UNTUK FILTER DATA ACTION
-  _renderFilterByDataAction = (value) => {
+  _renderFilterByDataAction = () => {
     if (this.state.whichTabs === true) {
       return(
         <>
@@ -661,73 +665,6 @@ componentDidUpdate = (prevProps) => {
     });
   };
 
-  //KOMPONEN UNTUK BUTTON DOWNLOAD, APPROVE, DAN DELETE
-  _renderBaseButton = (value) => {
-    if (this.state.whichTabs === true) {
-      console.log('TAB SALES')
-      return(
-        <div className="header-rows">
-          {/* <BaseButton titles="Total" totalSelectedItems ={this.props.selectedSalesPlans.length}/> */}
-          <BaseButton titles="Approve"
-            {...this.props}
-            whatTabsIsRendered={this.state.whichTabs}
-            disabledButton = {this.props.selectedSalesPlans.length < 1 }
-            totalSelectedItems ={this.props.selectedSalesPlans.length}
-            handleSalesApprove={this.handleSalesApprove}
-            selectedData={this.state.selectedData}
-            renderSakses = {this.changeSuccess}
-          />
-          <BaseButton titles="Cancel Approve"
-            {...this.props}
-            selectedDataSAP={this.props.selectedSalesPlans}
-            whatTabsIsRendered={this.state.whichTabs}
-            disabledButton = {this.props.selectedSalesPlans.length < 1 }
-            totalSelectedItems ={this.props.selectedSalesPlans.length}
-            handleSendtoEdit={this.handleSendtoEdit}
-            selectedData={this.state.selectedData}
-            renderSakses = {this.changeSuccess}
-          />
-          <BaseButton titles="Edit" />
-          <BaseButton titles="Delete" 
-            {...this.props}
-            disabledButton = {this.props.selectedSalesPlans.length < 1 }
-            totalSelectedItems ={this.props.selectedSalesPlans.length}
-            whatTabsIsRendered={this.state.whichTabs}
-            handleDeleteSales={this.handleDeleteSales}
-            renderSakses = {this.changeSuccess}
-          />
-        </div>
-      );
-    }
-    if (this.state.whichTabs === false) {
-      console.log('TAB service')
-      return(
-				<div className="header-rows">
-          {/* <BaseButton titles="Total" totalSelectedItems ={this.props.selectedServicePlans.length}/> */}
-          <BaseButton titles="Approve"
-            {...this.props}
-            disabledButton = {this.props.selectedServicePlans.length < 1 }
-            totalSelectedItems ={this.props.selectedServicePlans.length}
-            whatTabsIsRendered={this.state.whichTabs}
-            selectedServiceData={this.state.selectedServiceData}
-            handleServiceApprove={this.handleServiceApprove}
-            renderSakses = {this.changeSuccess}
-          />
-          <BaseButton titles="Cancel Approve"/>
-          <BaseButton titles="Edit" />
-          <BaseButton titles="Delete" 
-            {...this.props}
-            disabledButton = {this.props.selectedServicePlans.length < 1 }
-            totalSelectedItems ={this.props.selectedServicePlans.length}
-            whatTabsIsRendered={this.state.whichTabs}
-            handleDeleteService={this.handleDeleteService}
-            renderSakses = {this.changeSuccess}
-          />
-        </div>
-      );
-    }
-  };
-
   //FUNGSI UNTUK MULTI SELECT SALES ORDER
   updateAssignmentSalesStates = (plan) => {
     if (this.props.selectedSalesPlans
@@ -752,17 +689,14 @@ componentDidUpdate = (prevProps) => {
       <>
         <DetailsTab
           {...this.props}
-          renderFilterByDataAction={this._renderFilterByDataAction()}  
-          renderBaseButton={this._renderBaseButton()}
+          renderNotif={this._renderNotif()}
+          renderFilterByDataAction={this._renderFilterByDataAction()} 
           renderSearch={this._renderSearchBar()}
           onClickSalesOrder={this.onClickSalesOrder}        
           onClickServiceOrder={this.onClickServiceOrder}
+          onClickRevisedSales={this.onClickRevisedSales}
           onChoosedService={this.updateAssignmentServiceStates}
           onChoosedSales={this.updateAssignmentSalesStates}
-          selectedSalesPlanList={this.props.selectedSalesPlans}
-          selectedServicePlanList={this.props.selectedServicePlans}
-          displaySalesCheckbox={this.props.salesParameter.paramsData.assigmentFilter || this.props.salesParameter.paramsData.inProgressFilter}
-          displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
           stats={this.state.stats}
           onStats={this.isChangeStat}     
           totalSalesData={this.props.salesOrderList.TotalData}
@@ -772,10 +706,8 @@ componentDidUpdate = (prevProps) => {
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}
           onPage={this._renderPagination}
-          // baseButton={this._renderBaseButton}
           isApproved={this.state.isApproved}
           token={this.props.token}
-          renderNotif={this._renderNotif()}
         />
       </>
     );
@@ -861,13 +793,13 @@ componentDidUpdate = (prevProps) => {
           {this.props.fetchStatusUnapprove === ApiRequestActionsStatus.SUCCEEDED && (
             this._renderEditSuccess()
           )} 
-          <div className="table-container-approval">
-                {this._renderTabs()}
-            </div>
-            <div></div>
-            <div className="bottom-row-approval">
-                {this._renderShowPerPage()} {this._renderPagination()}
-            </div>
+          <div className="table-detail-site">
+              {this._renderTabs()}
+          </div>
+          <div></div>
+          <div className="bottom-row-detail-site">
+              {this._renderShowPerPage()} {this._renderPagination()}
+          </div>
       </main>
     )
   }

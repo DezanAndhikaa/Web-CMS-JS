@@ -51,7 +51,6 @@ const mapStateToProps = (state) => ({
 	salesOrderListApproved: state.plansPageState.salesOrderListApproved.data,
 	salesOrderListDeleted: state.plansPageState.salesOrderListDeleted.data,
 	salesOrderListSap: state.plansPageState.salesOrderListSap.data,
-	salesOrderRevised: state.plansPageState.salesOrderRevised.data,
 	serviceOrderList: state.plansPageState.serviceOrderList.data,
 	serviceOrderListApproved: state.plansPageState.serviceOrderListApproved.data,
 	serviceOrderListDeleted: state.plansPageState.serviceOrderListDeleted.data,
@@ -60,10 +59,8 @@ const mapStateToProps = (state) => ({
 	salesDeletedParameter: state.plansPageState.salesDeletedParameter,
 	salesSapParameter: state.plansPageState.salesSapParameter,
 	serviceParameter: state.plansPageState.serviceParameter,
-	//
 	serviceApprovedParameter : state.plansPageState.serviceApprovedParameter,
 	serviceDeletedParameter : state.plansPageState.serviceDeletedParameter,
-	//
 	salesSearch: state.plansPageState.salesSearch,
 	serviceSearch: state.plansPageState.serviceSearch,
 	selectedSalesPlans: state.plansPageState.selectedSalesPlans,
@@ -75,7 +72,6 @@ const mapStateToProps = (state) => ({
 	fetchStatusService: state.plansPageState.serviceOrderList.status,
 	fetchStatusServiceApproved: state.plansPageState.serviceOrderListApproved.status,
 	fetchStatusServiceDeleted: state.plansPageState.serviceOrderListDeleted.status,
-	fetchStatusRevised: state.plansPageState.salesOrderRevised.status,
 	sortSalesBy: state.plansPageState.sortSalesBy,
 	sortServiceBy: state.plansPageState.sortServiceBy,
 });

@@ -823,7 +823,6 @@ export default class Status extends React.PureComponent {
 	  }
 
 	render(){
-		console.log('pantej location ', this.props.location)
 		return(
 			<main className="content" >
 				{/* {this.showLoading()} */}

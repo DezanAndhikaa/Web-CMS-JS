@@ -22,6 +22,7 @@ import {
 	ClearSelectedPlans, 
 	UpdateServiceParameterAction,
 	UpdateSalesParameterAction, 
+	UpdateSalesRevisedParamAction,
 	searchAction,
 	SearchSalesAction, 
 	SearchServiceAction,
@@ -41,6 +42,7 @@ import {
 	SelectServicePlanAction,
 	sortByAction, 
 	storePlanDataAction,
+	salesParameterRevAction
 } from '../../details/DetailPages-action';
 import DetailPagesSite from './DetailPagesSite';
 
@@ -53,7 +55,9 @@ const mapStateToProps = (state) => ({
 	serviceOrderList: state.plansPageState.serviceOrderList.data,
 	serviceOrderListApproved: state.plansPageState.serviceOrderListApproved.data,
 	serviceOrderListDeleted: state.plansPageState.serviceOrderListDeleted.data,
-	salesParameter: state.plansPageState.salesParameter,
+	salesOrderRevised: state.plansPageState.salesOrderRevised.data,
+	salesParameter: state.plansPageState.salesParameter,	
+	salesRevisedParam: state.plansPageState.salesRevisedParam,
 	filterParameter: state.plansPageState.filterParameter,
 	filterLifetime: state.plansPageState.filterLifetime,
 	indexFilterParameter: state.plansPageState.indexFilterParameter,
@@ -81,7 +85,8 @@ const mapStateToProps = (state) => ({
 	fetchStatusApprovedSales: state.plansPageState.salesApproved.status,
 	fetchStatusApprovedService: state.plansPageState.serviceApproved.status,
 	fetchStatusSalesDeleted: state.plansPageState.salesDeleted.status,
-	fetchStatusServiceDeleted: state.plansPageState.serviceDeleted.status
+	fetchStatusServiceDeleted: state.plansPageState.serviceDeleted.status,
+	fetchStatusRevised: state.plansPageState.salesOrderRevised.status,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -119,6 +124,7 @@ const mapDispatchToProps = (dispatch) => ({
 	unselectSalesPlan: (payload) => dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
 	updateSalesParameter: (payload) => dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
 	updateServiceParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
+	updateSalesRevParameter: (payload) => dispatch(salesParameterRevAction(UpdateSalesRevisedParamAction, payload)),
 });
 
 const detailPagesSite = connect(mapStateToProps, mapDispatchToProps)(DetailPagesSite);

@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import {AppBar, Tabs, Tab, Typography, Badge, Paper} from '@material-ui/core';
-import SalesOrderList from '../../components/PlanningList/SalesOrderList';
+import SalesOrderList from '../../components/PlanningList/SalesOrderListSite';
 import ServiceOrderList from '../../components/PlanningList/ServiceOrderList';
-// import RevisedSalesOrderList from '../../components/PlanningList/RevisedSalesOrderList';
+import RevisedSalesOrderList from '../../components/PlanningList/RevisedSalesOrderList';
 import './DetailsTab.scss';
 import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
 import { 
@@ -108,7 +108,6 @@ class DetailsTab extends React.Component {
 
 
   handleChange = (event, value) => {
-console.log('kondisi value terasek', value)
     if (value === 0) {
       this.props.onPage(this.state.value);
       if (this.state.invisible1) {
@@ -141,9 +140,9 @@ console.log('kondisi value terasek', value)
 
   _renderSalesOrderList(){
     return(
-      <div className="plannings-list-containers">
+      <div className="plannings-list-detail">
         <SalesOrderList 
-            {...this.props}
+          {...this.props}
         />
       </div>
     );
@@ -151,18 +150,21 @@ console.log('kondisi value terasek', value)
 
   _renderRevisionList(){
     return(
-        <Paper className="paper-revision">
-            <ServiceOrderList 
+      <div className="paper-revision">
+        <div className="ut-underline-rev" />
+        <div className= "revision-title">Revision</div>
+        <div className="plannings-list-detail">
+            <RevisedSalesOrderList
             {...this.props}
-            // isClick={this.props.isClick}
             />
-        </Paper>
+        </div>
+      </div>
     )
   }
 
   _renderServiceOrderList(){
     return(
-        <div className="plannings-list-containers">
+        <div className="plannings-list-detail">
           <ServiceOrderList 
           {...this.props}
           isClick={this.props.isClick}
@@ -225,8 +227,8 @@ console.log('kondisi value terasek', value)
 
   _renderFilter() {
     return (
-      <div className="dropdowns-container">
-        <div className="dropdown-container">
+      <div className="dropdowns-detail-site">
+        <div className="dropdown-detail-site">
           <DropdownFilter
           {...this.props}
             data={this._dataFilterCustomer()}
@@ -237,7 +239,7 @@ console.log('kondisi value terasek', value)
             head={"Customer"}
           />
         </div>
-        <div className="dropdown-container">
+        <div className="dropdown-detail-site">
           <DropdownFilter
             {...this.props}
             data={this._dataFilterSite()}
@@ -248,7 +250,7 @@ console.log('kondisi value terasek', value)
             head={"Site"}
           />
         </div>
-        <div className="dropdown-container">
+        <div className="dropdown-detail-site">
           <DropdownFilter
             {...this.props}
             data={this._dataFilterUnitModel()}
@@ -259,7 +261,7 @@ console.log('kondisi value terasek', value)
             head={"UnitModel"}
           />
         </div>
-        <div className="dropdown-container">
+        <div className="dropdown-detail-site">
           <DropdownFilter
             {...this.props}
             data={this._dataFilterComponentDescription()}
@@ -270,7 +272,7 @@ console.log('kondisi value terasek', value)
             head={"ComponentDescription"}
           />
         </div>
-        <div className="search-container">
+        <div className="search-detail-site">
           {this.props.renderSearch}
         </div>
       </div>
@@ -279,8 +281,8 @@ console.log('kondisi value terasek', value)
 
   renderTotalSales(){
     return(
-      <div className="tab-coba">
-        <div className="tab-label">Sales Order 
+      <div className="tab-detail-site">
+        <div className="label-detail-site">Sales Order 
           <span>
             <StyledBadge 
               badgeContent={this.props.totalSalesData} 
@@ -295,8 +297,8 @@ console.log('kondisi value terasek', value)
 
   renderTotalService(){
     return(
-      <div className="tab-coba">
-        <div className="tab-label">Service Order 
+      <div className="tab-detail-site">
+        <div className="label-detail-site">Service Order 
         <span>
           <Badges 
             badgeContent={this.props.totalServiceData} 
@@ -338,11 +340,11 @@ console.log('kondisi value terasek', value)
             />
           </Tabs>
         </AppBar>
-        <div className="filters-container">
+        {this._renderRevisionList()}
+        <div className="filters-detail-site">
           {this._renderFilter()}
         </div>
     {value === 0 && <TabContainer dir={theme.direction} >
-    <div>{this._renderRevisionList()}</div>
     <div>{this._renderSalesOrderList()}</div>
     </TabContainer>}
         {value === 1 && <TabContainer dir={theme.direction} ><div>{this._renderServiceOrderList()}</div></TabContainer>}
