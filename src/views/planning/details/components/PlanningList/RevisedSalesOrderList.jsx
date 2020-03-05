@@ -45,18 +45,18 @@ export default class RevisedSalesOrderList extends React.PureComponent {
       return (
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
           <TableRow classes={{ root: 'table-row' }}>
-            <TableCell align="center" className="table-cell">SO</TableCell>
-            <TableCell align="center" className="table-cell">Customer</TableCell>
-            <TableCell align="center" className="table-cell">Site</TableCell>
-            <TableCell align="center" className="table-cell">Unit Model</TableCell>
-            <TableCell align="center" className="table-cell">Comp Desc</TableCell>
-            <TableCell align="center" className="table-cell">Part Number</TableCell>
-            <TableCell align="center" className="table-cell">Unit Code</TableCell>
-            <TableCell align="center" className="table-cell">Serial Number</TableCell>
-            <TableCell align="center" className="table-cell">Lifetime Component</TableCell>
-            <TableCell align="center" className="table-cell">Plan Execution</TableCell>
-            <TableCell align="center" className="table-cell">SMR</TableCell>
-            <TableCell align="center" className="table-cell">SMR Date</TableCell>
+            <TableCell align="left" className="table-cell">SO</TableCell>
+            <TableCell align="left" className="table-cell">Customer</TableCell>
+            <TableCell align="left" className="table-cell">Site</TableCell>
+            <TableCell align="left" className="table-cell">Unit Model</TableCell>
+            <TableCell align="left" className="table-cell">Comp Desc</TableCell>
+            <TableCell align="left" className="table-cell">Part Number</TableCell>
+            <TableCell align="left" className="table-cell">Unit Code</TableCell>
+            <TableCell align="left" className="table-cell">Serial Number</TableCell>
+            <TableCell align="left" className="table-cell">Lifetime Component</TableCell>
+            <TableCell align="left" className="table-cell">Plan Execution</TableCell>
+            <TableCell align="left" className="table-cell">SMR</TableCell>
+            <TableCell align="left" className="table-cell">SMR Date</TableCell>
           </TableRow>
       </TableHead>
     )

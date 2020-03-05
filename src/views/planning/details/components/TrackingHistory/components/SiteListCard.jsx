@@ -3,8 +3,6 @@ import Card from '@material-ui/core/Card';
 import { withStyles } from '@material-ui/core/styles';
 import { IceFace } from '../../../../../../assets/imgs';
 import './SiteListCard.scss';
-import { List } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 
 const styles = theme =>({
 	root: {

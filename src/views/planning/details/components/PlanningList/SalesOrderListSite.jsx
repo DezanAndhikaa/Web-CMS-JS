@@ -177,11 +177,6 @@ export default class SalesOrderListSite extends React.PureComponent {
             delay={300}
             onFilter={this.isFilterDate}
           />
-          {/* <Typography
-            name="Action" style={{marginTop: "10px"}}
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
-          >Action</Typography> */}
         </TableRow>
       </TableHead>
     )
@@ -207,10 +202,6 @@ export default class SalesOrderListSite extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
-        {/* Ini tampilan HO, site gaada action */}
-        <TableCell align="center" className="table-cell">
-        {this.props.salesOrderList.Lists[id].LifeTimeComponent !== "-" ? <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} /> : ""}
-        </TableCell>
       </TableRow>
     )
   }
