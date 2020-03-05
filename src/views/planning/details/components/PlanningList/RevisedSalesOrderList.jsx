@@ -49,7 +49,7 @@ export default class RevisedSalesOrderList extends React.PureComponent {
             <TableCell align="left" className="table-cell">Customer</TableCell>
             <TableCell align="left" className="table-cell">Site</TableCell>
             <TableCell align="left" className="table-cell">Unit Model</TableCell>
-            <TableCell align="left" className="table-cell">Comp Desc</TableCell>
+            <TableCell align="left" className="table-cell">Component Description</TableCell>
             <TableCell align="left" className="table-cell">Part Number</TableCell>
             <TableCell align="left" className="table-cell">Unit Code</TableCell>
             <TableCell align="left" className="table-cell">Serial Number</TableCell>
@@ -146,7 +146,7 @@ render(){
         return(
           // className="paper-revision"
           <div> 
-            <Table classes={{ root: 'table' }} className="table">
+            <Table classes={{ root: 'table' }} className="table-rev">
             {this.showTableHead()}
             <TableBody classes={{ root: 'table-body' }}>
               {this.props.salesOrderRevised.Lists

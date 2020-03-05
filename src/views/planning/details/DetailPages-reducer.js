@@ -645,7 +645,6 @@ export function selectedFiltersReducer(state = initialSelectedFilter, action) {
 export function salesParameterReducer(state = initialSalesParameter, action) {
 	if (action.type === UpdateSalesParameterAction)
 		return {...state, dataFilter: action.payload};
-		// console.log('dums',state)
 	return state;
 }
 

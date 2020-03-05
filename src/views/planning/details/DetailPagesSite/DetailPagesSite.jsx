@@ -6,13 +6,11 @@ import DetailsTab from './Tab/DetailsTab';
 import { ApiRequestActionsStatus } from "../../../../core/RestClientHelpers";
 import DropDownList from '../../../../components/DropdownList/DropDownList';
 import SearchInput from "../../../../components/Searchbar/SearchInput";
-import BaseButton from '../../../../components/Button/BaseButton';
 import FilterbyDataAction from '../../../../components/FilterByDataAction/FilterbyDataAction';
 import NotifButton from '../../../../components/ActionButton/NotifButton/NotifButton';
 import ConfirmationModal from '../../../../components/ConfirmationModal/ConfirmationModal';
 import {CircularProgress} from '@material-ui/core';
 import UnapproveConfirmation from '../../../../components/UnapproveConfirmation/UnapproveConfirmation';
-// import RevisedSalesOrderList from '../components/PlanningList/RevisedSalesOrderList';
 
 class DetailPagesSite extends React.Component{
     constructor(props) {
@@ -336,15 +334,15 @@ componentDidUpdate = (prevProps) => {
       
       return(
         <div className="paginations">
-          <div className="paging-approval">
+          <div className="paging-revision">
             {/* {prevSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
-            {web && currentPropsSales - 3 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 3 })} className="page-inactive-approval">{currentPropsSales - 3}</div>}
-            {web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive-approval">{currentPropsSales - 2}</div>}
-            {currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive-approval">{currentPropsSales - 1}</div>}
-            <div className="page-active-approval">{currentPropsSales}</div>
-            {currentPropsSales + 1 <= TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive-approval">{currentPropsSales + 1}</div>}
-            {web && currentPropsSales + 2 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive-approval">{currentPropsSales + 2}</div>}
-            {web && currentPropsSales + 3 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive-approval">{currentPropsSales + 3}</div>}
+            {web && currentPropsSales - 3 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 3 })} className="page-inactive-revision">{currentPropsSales - 3}</div>}
+            {web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive-revision">{currentPropsSales - 2}</div>}
+            {currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive-revision">{currentPropsSales - 1}</div>}
+            <div className="page-active-revision">{currentPropsSales}</div>
+            {currentPropsSales + 1 <= TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive-revision">{currentPropsSales + 1}</div>}
+            {web && currentPropsSales + 2 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive-revision">{currentPropsSales + 2}</div>}
+            {web && currentPropsSales + 3 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive-revision">{currentPropsSales + 3}</div>}
             {/* {nextSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>} */}
           </div>
         </div>
@@ -359,17 +357,48 @@ componentDidUpdate = (prevProps) => {
       
       return(
         <div className="paginations">
-          <div className="paging-approval">
-            {prevSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="next-page-approval"><KeyboardArrowLeft className="arrow-icon-approval" /></div>}
-            {web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive-approval">{currentPropsService - 3}</div>}
-            {web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive-approval">{currentPropsService - 2}</div>}
-            {currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive-approval">{currentPropsService - 1}</div>}
-            <div className="page-active-approval">{currentPropsService}</div>
+          <div className="paging-revision">
+            {prevSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="next-page-revision"><KeyboardArrowLeft className="arrow-icon-revision" /></div>}
+            {web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive-revision">{currentPropsService - 3}</div>}
+            {web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive-revision">{currentPropsService - 2}</div>}
+            {currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive-revision">{currentPropsService - 1}</div>}
+            <div className="page-active-revision">{currentPropsService}</div>
             {/* <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService })} className="page-active">{currentPropsService}</div> */}
-            {currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive-approval">{currentPropsService + 1}</div>}
-            {web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive-approval">{currentPropsService + 2}</div>}
-            {web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive-approval">{currentPropsService + 3}</div>}
-            {nextSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="next-page-approval"><KeyboardArrowRight className="arrow-icon-approval" /></div>}
+            {currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive-revision">{currentPropsService + 1}</div>}
+            {web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive-revision">{currentPropsService + 2}</div>}
+            {web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive-revision">{currentPropsService + 3}</div>}
+            {nextSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="next-page-revision"><KeyboardArrowRight className="arrow-icon-revision" /></div>}
+          </div>
+        </div>
+      )
+    }
+  }
+
+  _renderPaginationRev= (pageValue) =>  {
+    if (pageValue === 1) {
+      this.setState({whichTabs : true})
+    }if (pageValue === 0) {
+      this.setState({whichTabs : false})
+    }
+    if (this.state.whichTabs === true) {
+      const web = this.props.displayMode === 'web';
+      const nextSales = this.props.salesOrderRevised.NextPage;
+      const prevSales = this.props.salesOrderRevised.PrevPage;
+      const currentPropsRev = this.props.salesOrderRevised.PageNumber;
+      const { TotalPages } = this.props.salesOrderRevised;
+      
+      return(
+        <div className="paginations-rev">
+          <div className="paging-rev">
+            {/* {prevSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
+            {web && currentPropsRev - 3 > 0 && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsRev - 3 })} className="page-inactive-rev">{currentPropsRev - 3}</div>}
+            {web && currentPropsRev - 2 > 0 && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsRev - 2 })} className="page-inactive-rev">{currentPropsRev - 2}</div>}
+            {currentPropsRev - 1 > 0 && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsRev - 1 })} className="page-inactive-rev">{currentPropsRev - 1}</div>}
+            <div className="page-active-rev">{currentPropsRev}</div>
+            {currentPropsRev + 1 <= TotalPages && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsRev + 1 })} className="page-inactive-rev">{currentPropsRev + 1}</div>}
+            {web && currentPropsRev + 2 < TotalPages && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsRev + 2 })} className="page-inactive-rev">{currentPropsRev + 2}</div>}
+            {web && currentPropsRev + 3 < TotalPages && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsRev + 3 })} className="page-inactive-rev">{currentPropsRev + 3}</div>}
+            {/* {nextSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>} */}
           </div>
         </div>
       )
@@ -445,6 +474,17 @@ componentDidUpdate = (prevProps) => {
       this.props.clearSelectedServicePlans();
 					this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value})
     }
+  }
+
+  _renderPagingRev(){
+    return(
+      <div className="bottom-row-rev">
+        <div className="total-data-rev">
+          *There are <b>{this.props.salesOrderRevised.TotalData} items </b>of sales orders that have not been revised.
+        </div>
+        {this._renderPaginationRev()}
+      </div>
+    )
   }
 
   //KOMPONEN UNTUK GLOBAL SEARCH
@@ -692,6 +732,7 @@ componentDidUpdate = (prevProps) => {
           renderNotif={this._renderNotif()}
           renderFilterByDataAction={this._renderFilterByDataAction()} 
           renderSearch={this._renderSearchBar()}
+          renderPaginationRev={this._renderPagingRev()}
           onClickSalesOrder={this.onClickSalesOrder}        
           onClickServiceOrder={this.onClickServiceOrder}
           onClickRevisedSales={this.onClickRevisedSales}

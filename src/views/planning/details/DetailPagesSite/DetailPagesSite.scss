@@ -22,11 +22,11 @@
 .header-detail-site{
     display: flex;
     flex-direction: row;
-    // margin-top: vw(41.93);
+    margin-top: vw(41.93);
 }
 
 .title{
-    // margin-top: vw(19) !important;
+    margin-top: vw(19) !important;
     font-family: 'SFUIDisplay-Bold';
     font-size: vw(25);
     line-height: vw(30);
@@ -36,24 +36,27 @@
     flex: 1;
     display: flex;
     flex-direction: row;
-    // margin-top: vw(30);
+    margin-top: vw(30);
     .paginations{
         display: flex;
         flex: 1;
         flex-direction: row;
         justify-content: flex-end;
         margin-bottom: vw(30);
-        .paging-approval{
+        .paging-revision{
             display: flex;
             flex-direction: row;
             box-shadow: 0px vw(2) vw(4) rgba(0, 0, 0, 0.161);
-            .page-active-approval{
+            border-radius: 6px;
+            .page-active-revision{
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: vw(45.99);
-                min-width: vw(45.99);
-                height: vw(35.3);
+                width: 26px;
+                height: 25px;
+                // width: vw(45.99);
+                // min-width: vw(45.99);
+                // height: vw(35.3);
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -61,13 +64,15 @@
                 background-color: map-get($colors , primary);
                 font-size: vw(13);
                 line-height: vw(16);
-                border-radius: 0;
+                border-radius: 6px;
                 cursor: pointer
             }
-            .page-inactive-approval{
-                width: vw(45.99);
-                min-width: vw(45.99);
-                height: vw(35.3);
+            .page-inactive-revision{
+                // width: vw(45.99);
+                // min-width: vw(45.99);
+                // height: vw(35.3);
+                width: 26px;
+                height: 25px;
                 background-color: white;
                 display: flex;
                 align-items: center;
@@ -78,28 +83,113 @@
                 border-radius: 0;
                 cursor: pointer
             }
-            .page-inactive-approval:hover{
+            .page-inactive-revision:hover{
                 background-color: map-get($colors , primary);
                 cursor: pointer
             }
-            .next-page-approval{
-                width: vw(45.99);
-                min-width: vw(45.99);
-                height: vw(35.3);
-                width: vw(45.99);
-                min-width: vw(45.99);
-                height: vw(35.3);
+            .next-page-revision{
+                width: 26px;
+                height: 25px;
+                // width: vw(45.99);
+                // min-width: vw(45.99);
+                // height: vw(35.3);
                 background-color: white;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 border-radius: 0;
                 cursor: pointer;
-                .arrow-icon-approval{
+                .arrow-icon-revision{
                     font-size: vw(24);
                 }
             }
-            .next-page-approval:hover{
+            .next-page-revision:hover{
+                background-color: map-get($colors , primary);
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.bottom-row-rev{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    margin-top: vw(30);
+    .total-data-rev{
+        font-family: 'Lato';
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 14px;
+    }
+    .paginations-rev{
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+        justify-content: flex-end;
+        // margin-bottom: vw(30);
+        .paging-rev{
+            display: flex;
+            flex-direction: row;
+            background: #D8D8D8;
+            box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.07);
+            border-radius: 6px;
+            .page-active-rev{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 26px;
+                height: 25px;
+                // width: vw(45.99);
+                // min-width: vw(45.99);
+                // height: vw(35.3);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: 'Gotham-Regular';
+                background-color: map-get($colors , primary);
+                font-size: vw(13);
+                line-height: vw(16);
+                border-radius: 6px;
+                cursor: pointer
+            }
+            .page-inactive-rev{
+                // width: vw(45.99);
+                // min-width: vw(45.99);
+                // height: vw(35.3);
+                width: 26px;
+                height: 25px;
+                background-color: #D8D8D8;
+                display: flex;
+                align-items: center;
+                font-family: 'Gotham-Regular';
+                justify-content: center;
+                font-size: vw(13);
+                line-height: vw(16);
+                border-radius: 0;
+                cursor: pointer
+            }
+            .page-inactive-rev:hover{
+                background-color: map-get($colors , primary);
+                cursor: pointer
+            }
+            .next-page-rev{
+                width: 26px;
+                height: 25px;
+                // width: vw(45.99);
+                // min-width: vw(45.99);
+                // height: vw(35.3);
+                background-color:  #D8D8D8;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 0;
+                cursor: pointer;
+                .arrow-icon-rev{
+                    font-size: vw(24);
+                }
+            }
+            .next-page-rev:hover{
                 background-color: map-get($colors , primary);
                 cursor: pointer;
             }

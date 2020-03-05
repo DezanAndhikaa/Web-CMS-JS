@@ -151,12 +151,19 @@ class DetailsTab extends React.Component {
   _renderRevisionList(){
     return(
       <div className="paper-revision">
-        <div className="ut-underline-rev" />
-        <div className= "revision-title">Revision</div>
-        <div className="plannings-list-detail">
-            <RevisedSalesOrderList
-            {...this.props}
-            />
+        <div className="revision-container">
+          <div className="rev-title-container">
+            <div className="ut-underline-rev" />
+            <div className= "revision-title">Revision List</div>
+          </div>
+          <div className="plannings-list-detail">
+              <RevisedSalesOrderList
+              {...this.props}
+              />
+          </div>
+          <div className="bottom-row-rev">
+            {this.props.renderPaginationRev}
+          </div>
         </div>
       </div>
     )
