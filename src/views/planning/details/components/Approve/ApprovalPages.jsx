@@ -379,7 +379,6 @@ componentDidUpdate = (prevProps) => {
 
   //SAAT MENGKLIK SALES ORDER TAB
   onClickSalesOrder = async() =>{
-    // await this.handleLifeTime();
     if (this.props.location.whichTab === 'lifetime') {
       await this.props.fetchSalesOrder({
         ...this.props.salesParameter.dataFilter, 

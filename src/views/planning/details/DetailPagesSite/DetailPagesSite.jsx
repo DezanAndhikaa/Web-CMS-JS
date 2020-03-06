@@ -40,33 +40,19 @@ componentWillUnmount = () => {
 
 componentDidUpdate = (prevProps) => {
   if (prevProps.salesParameter !== this.props.salesParameter) {
-    // this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
-    // this.handleLifeTime();
     this.onClickSalesOrder();
   }
   if (prevProps.serviceParameter !== this.props.serviceParameter) {
-    // this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
     this.onClickServiceOrder();
-  }
-  if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
-    prevProps.approveSalesDownloaded.status === ApiRequestActionsStatus.LOADING) {
-    this.onClickDownloadSalesApproved()
-  }
-  if (this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
-    prevProps.approveServiceDownloaded.status === ApiRequestActionsStatus.LOADING) {
-    this.onClickDownloadServiceApproved()
   }
 
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
       if(this.props.indexFilterParameter.indexTabParameter === 0){
-        // this.props.fetchSalesOrder(this.props.filterParameter);
         this.props.updateSalesParameter({
           ...prevProps.salesParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
         })
-        // this.handleLifeTime();
       }else{
-        // this.props.fetchServiceOrder(this.props.filterParameter);
         this.props.updateServiceParameter({
           ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
         })
@@ -78,7 +64,6 @@ componentDidUpdate = (prevProps) => {
     this.props.updateSalesParameter({
       ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterLifetime.Filter, PageNumber: 1
     })
-    // this.props.fetchSalesOrder(this.props.filterLifetime);
   }
 
     //FILTER RANGE DATE
@@ -412,36 +397,17 @@ componentDidUpdate = (prevProps) => {
 
   //SAAT MENGKLIK SALES ORDER TAB
   onClickSalesOrder = async() =>{
-    // await this.handleLifeTime();
-    if (this.props.location.whichTab === 'lifetime') {
-      await this.props.fetchSalesOrder({
-        ...this.props.salesParameter.dataFilter, 
-        Filter : 
-              [...this.props.salesParameter.dataFilter.Filter, {
-                Field : 'LifeTimeComponent',
-                Operator : "eq",
-                Value : '-',
-                Logic : "AND"
-        }]
-      }, this.props.token);
-    }else {
-      await this.props.fetchSalesOrder({
-        ...this.props.salesParameter.dataFilter, 
-        Filter : 
-          [...this.props.salesParameter.dataFilter.Filter, {
-            Field : 'LifeTimeComponent',
-            Operator : "neq",
-            Value : '-',
-            Logic : "AND"
-          },{
-            Field : 'SAPIssueMessage',
-            Operator : 'eq',
-            Value : '-',
-            Logic : 'AND'
-          }]
-      }, this.props.token);
-    }
-  }  
+    await this.props.fetchSalesOrder({
+      ...this.props.salesParameter.dataFilter, 
+      Filter : 
+            [...this.props.salesParameter.dataFilter.Filter, {
+              Field : 'LifeTimeComponent',
+              Operator : "eq",
+              Value : '-',
+              Logic : "AND"
+      }]
+    }, this.props.token);
+  }
 
   onClickRevisedSales = async() => {
     await this.props.fetchRevisedSales({
@@ -524,151 +490,6 @@ componentDidUpdate = (prevProps) => {
     )
   }
 
-  //FUNGSI UNTUK MENGAPROVE SALES ORDER
-  onClickApprovedSales = () => {
-    this.props.fetchApprovedSales(this.props.salesParameter.dataFilter,this.props.token);
-  }
-  //FUNGSI UNTUK MENGAPROVE SERVICE ORDER
-  onClickApprovedService = () => {
-    this.props.fetchApprovedService(this.props.serviceParameter.dataFilter, this.props.token);
-  }
-  //FUNGSI UNTUK memanggil Data SALES ORDER yang telah terhapus
-  onClickDeletedSales = () => {
-    this.props.fetchDeletedSales(this.props.salesParameter.dataFilter, this.props.token);
-  }
-  //FUNGSI UNTUK memanggil Data SERVICE ORDER yang telah terhapus
-  onClickDeletedService = () => {
-    this.props.fetchDeletedService(this.props.serviceParameter.dataFilter, this.props.token);
-  }
-
-  onClickDownloadSalesApproved = () => {
-    let link = document.createElement("a");
-    document.body.appendChild(link);
-    link.style = "display: none";
-    const todayDate = moment(new Date()).format('DD-MM-YYYY');
-    // const salesOrder  = this.state.selectedData.SoNumber;
-    let fileName = "Sales-Order-Planning-"+todayDate+".csv";
-    let blob = new Blob([this.props.approveSalesDownloaded.data]),
-      url = window.URL.createObjectURL(blob);
-    link.href = url;
-    link.download = fileName;
-    link.click();
-    window.URL.revokeObjectURL(url);
-  }
-
-  onClickDownloadServiceApproved = () => {
-    let link = document.createElement("a");
-    document.body.appendChild(link);
-    link.style = "display: none";
-    const todayDate = moment(new Date()).format('DD-MM-YYYY');
-    // const serviceOrder  = this.state.selectedServiceData.WoNumber;
-    let fileName = "Service-Order-Planning-"+todayDate+".csv";
-    let blob = new Blob([this.props.approveServiceDownloaded.data]),
-      url = window.URL.createObjectURL(blob);
-    link.href = url;
-    link.download = fileName;
-    link.click();
-    window.URL.revokeObjectURL(url);
-  }
-
-  handleSalesApprovedDownload = async() => {
-    let arr = []
-    const index = this.props.selectedSalesPlans.length
-    if (this.props.selectedSalesPlans.length > 0) {
-      for (let i = 0; i < index; i++) {
-        arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
-      }
-    }await this.props.downloadSalesApproved(arr, this.props.token);
-    if (
-      this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.FAILED
-    ) {
-      this.setState({ showError: true });
-    }
-  };
-
-  handleServiceApprovedDownload = async() => {
-    let arr = []
-    const index = this.props.selectedServicePlans.length
-    if (this.props.selectedServicePlans.length > 0) {
-      for (let i = 0; i < index; i++) {
-        arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
-      }
-    }
-    await this.props.downloadServiceApproved(arr, this.props.token);
-    if (
-      this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.FAILED
-    ) {
-      this.setState({ showError: true });
-    }
-  };
-
-  handleSalesApprove = async() => {
-    let arr = []
-    const index = this.props.selectedSalesPlans.length
-    if (this.props.selectedSalesPlans.length > 0) {
-      for (let i = 0; i < index; i++) {
-        arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
-      }
-      await this.props.approveSales({SoNumbers : arr, IsApprove: true}, this.props.token)
-      this.onClickSalesOrder();
-      await this.props.clearSelectedSalesPlans();
-  }
-};
-
-  handleServiceApprove = async() => {
-  let arr = []
-  const index = this.props.selectedServicePlans.length
-    if (this.props.selectedServicePlans.length > 0) {
-      for (let i = 0; i < index; i++) {
-        arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
-      }
-    await this.props.approveService({WoNumbers: arr, IsApprove: true}, this.props.token)
-    this.onClickServiceOrder();
-    await this.props.clearSelectedServicePlans();
-    }
-  }
-
-  handleSendtoEdit = async() => {
-    let arr = []
-    const index = this.props.selectedSalesPlans.length
-    if (this.props.selectedSalesPlans.length > 0) {
-      for (let i = 0; i < index; i++) {
-        arr = [...arr, this.props.selectedSalesPlans[i].So]
-      }
-      await this.props.unapproveSales({SoNumbers : arr, IsRevised: true}, this.props.token)
-      this.onClickSalesOrder();
-      await this.props.clearSelectedSalesPlans();
-    }
-  }
-
-  handleDeleteSales = async() => {
-    let arr = []
-    const index = this.props.selectedSalesPlans.length
-    const todayDate = moment(new Date()).format('YYYY-MM-DD');
-    if (this.props.selectedSalesPlans.length > 0) {
-      for (let i = 0; i < index; i++) {
-        arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
-      }
-      await this.props.deleteSales({SoNumbers : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate}, this.props.token)
-      this.onClickSalesOrder();
-      await this.props.clearSelectedSalesPlans();
-    }
-  }
-
-  handleDeleteService = async() => {
-    let arr = []
-    const index = this.props.selectedServicePlans.length
-    const todayDate = moment(new Date()).format('YYYY-MM-DD');
-    if (this.props.selectedServicePlans.length > 0) {
-      for (let i = 0; i < index; i++) {
-        arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
-      }
-      await this.props.deleteService({WoNumbers : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate}, this.props.token)
-      this.onClickServiceOrder();
-      await this.props.clearSelectedServicePlans();
-    }
-  }
-
   handleClickFilterByDataAction = () =>{
     this.setState({
       isApproved : !this.state.isApproved
@@ -705,24 +526,6 @@ componentDidUpdate = (prevProps) => {
     });
   };
 
-  //FUNGSI UNTUK MULTI SELECT SALES ORDER
-  updateAssignmentSalesStates = (plan) => {
-    if (this.props.selectedSalesPlans
-      .some((plans) => plans.SoNumber === plan.SoNumber,
-      )) 
-    { return this.props.unselectSalesPlan(plan); }
-    return this.props.selectSalesPlan(plan);
-  };
-
-  //FUNGSI UNTUK MULTI SELECT SERVICE ORDER
-  updateAssignmentServiceStates = (plan) => {
-    if (this.props.selectedServicePlans
-      .some((plans) => plans.WoNumber === plan.WoNumber,
-      ))
-    { return this.props.unselectServicePlan(plan); }
-    return this.props.selectServicePlan(plan);
-  };
-
   //KOMPONEN UNTUK RENDER PAGE SALES ORDER DAN SERVICE ORDER
   _renderTabs(){
     return (
@@ -754,86 +557,9 @@ componentDidUpdate = (prevProps) => {
     );
   };
 
-  changeSuccess = () => {
-    this.setState({
-      openSuccess : !this.state.openSuccess
-    })
-  }
-
-  closeSuccess = () => {
-    this.setState({
-      openSuccess: !this.state.openSuccess
-    })
-  }
-
-  renderCircularProgress() {
-    return <CircularProgress size={100} className="circular-progress" />;
-  }
-
-  _renderSalesApproved = () => {
-    return(
-      <>
-        <ConfirmationModal idModal="Approved" openModal={this.state.openSuccess} onClose={this.closeSuccess}/>
-      </>
-    )
-  }
-
-  _renderSalesDeleted = () => {
-    return(
-      <>
-        <ConfirmationModal idModal="Delete Success" openModal={this.state.openSuccess} onClose={this.closeSuccess}/>
-      </>
-    )
-  }
-  _renderEditSuccess = () => {
-    return(
-      <>
-        <UnapproveConfirmation idConfirm="Send Success" openModal={this.state.openSuccess} onClose={this.closeSuccess} />
-      </>
-    )
-  }
-
   render(){     
     return(
       <main className="content">
-          {this.props.fetchStatusApprovedSales === ApiRequestActionsStatus.LOADING &&  (
-            this.renderCircularProgress()
-          )}
-          {this.props.fetchStatusApprovedSales === ApiRequestActionsStatus.SUCCEEDED && (
-            <>
-              {this._renderSalesApproved()}
-            </>
-          )}
-          {this.props.fetchStatusApprovedService === ApiRequestActionsStatus.LOADING &&  (
-            this.renderCircularProgress()
-          )}
-          {this.props.fetchStatusApprovedService === ApiRequestActionsStatus.SUCCEEDED && (
-            <>
-              {this._renderSalesApproved()}
-            </>
-          )}
-          {this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.LOADING &&  (
-            this.renderCircularProgress()
-          )}
-          {this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED && (
-            <>
-              {this._renderSalesDeleted()}
-            </>
-          )}
-          {this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.LOADING &&  (
-            this.renderCircularProgress()
-          )}
-          {this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.SUCCEEDED && (
-            <>
-              {this._renderSalesDeleted()}
-            </>
-          )}
-          {this.props.fetchStatusUnapprove === ApiRequestActionsStatus.LOADING &&  (
-            this.renderCircularProgress()
-          )}   
-          {this.props.fetchStatusUnapprove === ApiRequestActionsStatus.SUCCEEDED && (
-            this._renderEditSuccess()
-          )} 
           <div className="table-detail-site">
               {this._renderTabs()}
           </div>

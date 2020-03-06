@@ -87,12 +87,6 @@ export default class SalesOrderListSite extends React.PureComponent {
   //   });
   // }
 
-  handleClickCheckbox = () =>{
-    this.setState({
-      checkedValue : !this.state.checkedValue
-    })
-  }
-
   showTableHead() {
       return (
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
