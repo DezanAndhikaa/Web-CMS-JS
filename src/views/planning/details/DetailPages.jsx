@@ -387,7 +387,7 @@ componentDidUpdate = (prevProps) => {
               [...this.props.salesParameter.dataFilter.Filter, {
                 Field : 'LifeTimeComponent',
                 Operator : "neq",
-                Value : '-',
+                Value : ' - ',
                 Logic : "AND"
         }]
       }, this.props.token);
