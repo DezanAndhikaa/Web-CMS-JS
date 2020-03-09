@@ -716,6 +716,7 @@ componentDidUpdate = (prevProps) => {
           />
           <BaseButton titles="Cancel Approve"
             {...this.props}
+            whichTabs = {this.state.whichTabs}
             selectedDataSAP={this.props.selectedSalesPlans}
             whatTabsIsRendered={this.state.whichTabs}
             disabledButton = {this.props.selectedSalesPlans.length < 1 }
@@ -751,14 +752,15 @@ componentDidUpdate = (prevProps) => {
             renderSakses = {this.changeSuccess}
           />
           <BaseButton titles="Cancel Approve"
-            {...this.props}
-            selectedDataSAP={this.props.selectedServicePlans}
-            whatTabsIsRendered={this.state.whichTabs}
-            disabledButton = {this.props.selectedServicePlans.length < 1 }
-            totalSelectedItems ={this.props.selectedServicePlans.length}
-            handleSendtoEdit={this.handleSendtoEdit}
-            selectedData={this.state.selectedData}
-            renderSakses = {this.changeSuccess}
+             {...this.props}
+             whichTabs = {this.state.whichTabs}
+             selectedDataSAP={this.props.selectedServicePlans}
+             whatTabsIsRendered={this.state.whichTabs}
+             disabledButton = {this.props.selectedServicePlans.length < 1 }
+             totalSelectedItems ={this.props.selectedServicePlans.length}
+             handleSendtoEdit={this.handleSendtoEdit}
+             selectedData={this.state.selectedData}
+             renderSakses = {this.changeSuccess}
           />
           <BaseButton titles="Edit" />
           <BaseButton titles="Delete" 

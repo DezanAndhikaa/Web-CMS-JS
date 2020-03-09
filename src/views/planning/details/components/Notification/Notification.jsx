@@ -141,11 +141,9 @@ componentDidUpdate = (prevProps) => {
 
   handleClickShowPerPage = async(value) =>{
     if (this.state.whichTabs === true) {
-      console.log('pantej sales', value)
       await this.props.clearSelectedSalesPlans();
       await this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value})
     }else if (this.state.whichTabs === false) {
-      console.log('pantej service', value)
       await this.props.clearSelectedServicePlans();
       await this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value})
     }
