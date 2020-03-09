@@ -1,7 +1,7 @@
 import React from 'react';
 import './LoginPage.scss'
 import { Button, Input } from '@material-ui/core';
-import { Menu, BasePath } from '../../constants';
+import { Menu } from '../../constants';
 import { ApiRequestActionsStatus } from '../../core/RestClientHelpers';
 import isAccessTokenValid from '../../core/HelpersFunction'
 

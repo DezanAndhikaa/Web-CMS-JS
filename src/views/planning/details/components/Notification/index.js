@@ -20,9 +20,9 @@ import {
 	searchAction,
 	SearchSalesAction, SearchServiceAction,searchCompAction,
 	SearchCompAction,SearchCompActionService,searchCompActionService,
-	selectFilterAction,selectFilterAction2,indexFilterAction, UnselectSalesPlanAction, planParameterAction, UpdatePlansParameterAction, serviceParameterAction,
+	selectFilterAction,selectFilterAction2,indexFilterAction, UnselectSalesPlanAction, serviceParameterAction,
 	UnselectServicePlanAction, selectSalesPlansAction, selectServicePlansAction, selectLeaderAction, SelectSalesPlanAction,
-	SelectServicePlanAction, FetchSalesAction,
+	SelectServicePlanAction,
 	selectMechanicAction, sortByAction, 
 	storePlanDataAction,dateFilterAction
 } from '../../DetailPages-action';

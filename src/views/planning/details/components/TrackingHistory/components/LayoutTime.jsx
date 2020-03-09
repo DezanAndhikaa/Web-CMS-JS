@@ -1,11 +1,17 @@
 import React from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-// import Buttons from './Buttons';
 import Typography from '@material-ui/core/Typography';
 import DropDown from './DropDown';
+import {
+	ListItemText,
+	ListItemIcon,
+	ListItem,
+	List
+} from '@material-ui/core';
+import { Clock } from '../../../../../../assets/imgs';
 
 
 const styles = theme =>({
@@ -35,7 +41,7 @@ class LayoutTime extends React.Component {
 // 
 // export default function LayoutTime() {
 	render(){
-		const { classes, theme } = this.props;
+		const { classes } = this.props; //const { classes, theme } = this.props;
 		// const bull = <span className={classes.bullet}>•</span>;
 
 		return (
@@ -49,7 +55,32 @@ class LayoutTime extends React.Component {
 					</div>
 				</CardContent>
 				<CardActions>
-					{this.props.renderLayoutTime()}
+					<List>
+						{this.props.data.map((row) => 
+							<ListItem 
+								button
+								key={row.key}
+								className={
+									this.props.selected === row.key
+										? 'menu-item-selected-tracking'
+										: 'menu-item-tracking'
+								}
+								onClick={ () => this.props.handleTime(row.key)}
+							>
+								<ListItemIcon classes={{ root: 'icon-root' }}>
+									<img
+										src={Clock}
+									/>
+								</ListItemIcon>
+								<ListItemText 
+									primary={row.key}
+									classes={{ primary : 'item-text-tracking', root: 'item-text-tracking'}}
+								>
+									{/* {row.key} */}
+								</ListItemText>
+							</ListItem>
+						)}
+					</List>
 				</CardActions>
 			</Card>
 		);

@@ -7,7 +7,6 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import SalesOrderList from '../../PlanningList/SalesOrderList';
 import ServiceOrderList from '../../PlanningList/ServiceOrderList';
-import Badge from '@material-ui/core/Badge';
 import './ApprovalTab.scss';
 import DropdownFilter from '../../../../../../components/FilterByTitle/DropdownFilter';
 import { SelectCustomerFilterAction,SelectSiteFilterAction, SelectUnitModelFilterAction, SelectComponentFilterAction } from '../../../DetailPages-action'

@@ -1,57 +1,75 @@
 import React from 'react';
 import {
-  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, TextField, 
+  Checkbox, Table, TableBody, TableCell, TableHead, TableRow
 } from '@material-ui/core';
 import './PlanningList.scss';
-import '../SapIssue/SapIssue.scss'
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
-import { 
-  SortSalesByCustomer, 
-  SortSalesBySite, 
-  SortSalesByUnitModel, 
-  SortSalesByCompDesc, 
-  LifetimeFilterAction, 
-  DateFilterAction } 
-  from '../../DetailPages-action';
-import { Spinner } from '../../../../../assets/icons';
+import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
+import InputButton from '../../../../../components/Button/InputButton';
+import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
+import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+import {Snackbar} from '@material-ui/core';
 import moment from 'moment';
 
-export default class SapSalesOrderList extends React.PureComponent {
+export default class SalesOrderListSite extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
       checkedValue: false,
       stats: false,
+      putLifetime: {
+        SoNumber : '',
+        LifeTimeComponent : '',
+      }
     }
-
-    this.handleExpand = this.handleExpand.bind(this);
   }
 
   componentDidUpdate = (prevState) =>{
     //untuk menghilangkan checkbox
-    if (prevState.salesDeletedParameter !== this.props.salesDeletedParameter || prevState.salesSearch !== this.props.salesSearch || 
-      prevState.searchComp !==this.props.searchComp) {
+    // console.log('ke trigger status')
+    if (prevState.salesParameter !== this.props.salesParameter || prevState.salesSearch !== this.props.salesSearch || 
+      prevState.searchComp !==this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
+      this.setState({checkedValue : false})
+    }if (this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING) {
+      // console.log('ke trigger')
       this.setState({checkedValue : false})
     }
   }
-  componentDidMount = () =>{
-    this.props.onClickSalesOrderSap();
+  componentDidMount = async() =>{    
+    await this.props.clearSelectedSalesPlans();
+    // this.props.onClickSalesOrder();
   }
 
   componentWillMount = () =>{
-    this.props.updateSalesSapParameter({ 
-      ...this.props.salesSapParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+    this.props.updateSalesParameter({
+      ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
     });
   }
+
+  putLifetimke = async(data) => {
+    await this.props.putLifetimeComp(data, this.props.token);
+    await this.props.onClickSalesOrder();
+  }
   
+  isPutLifetime =  async(key, value) => {
+      this.setState({
+        putLifetime: {
+          SoNumber : key,
+          LifeTimeComponent: value
+        },
+        stats: true
+      }, 
+      () => this.putLifetimke(this.state.putLifetime) 
+      )
+  }
 
   isFilterLifetime = async( value1, value2 ) => {
-    this.props.lifetimeFilter( LifetimeFilterAction, value1, value2, this.props.salesDeletedParameter.dataFilter.PageSize );
+    this.props.lifetimeFilter( LifetimeFilterAction, value1, value2, this.props.salesParameter.dataFilter.PageSize );
   }
 
   isFilterDate = async ( value1, value2) => {
-    this.props.dateFilter( DateFilterAction, value1, value2, this.props.salesDeletedParameter.dataFilter.PageSize );
+    this.props.dateFilter( DateFilterAction, value1, value2, this.props.salesParameter.dataFilter.PageSize );
   }
 
   isCheckboxAvailable = (data) => {
@@ -62,31 +80,17 @@ export default class SapSalesOrderList extends React.PureComponent {
     return isAvailable;
   }
 
-  handleClicks = () =>{
-    this.setState({
-      checkedValue : !this.state.checkedValue
-    })
-  }
-
-  handleExpand (id){
-    this.setState({
-        [id]: !this.state[id],
-    })
-  }
+  // isChangeStat = (value,key) =>{
+  //   this.setState({
+  //     stats: 1,
+  //     lifetime: this.state.lifetime.map(el => (el.SoNumber === key ? {...el, LifeTimeComp : value} : el))
+  //   });
+  // }
 
   showTableHead() {
       return (
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow classes={{ root: 'table-row' }}>
-          <TableCell padding="checkbox">
-            {this.props.displaySalesCheckbox && 
-            <Checkbox 
-              checked={this.state.checkedValue}
-              onChange={this.handleClicks}
-              onClick={() => {this.props.salesOrderListSap.Lists.map((row,id) => 
-              this.props.onChoosedSales(row,id))}}
-              className="checkbox-checked-header"/>}
-          </TableCell>
           <PlanningListHeader
             name="SO"
             // isActive={this.props.sortJobsByState.unitModel.isActive}
@@ -165,39 +169,17 @@ export default class SapSalesOrderList extends React.PureComponent {
           <PlanningListHeader
             name="SMR Date"
             delay={300}
-            onSearch={this.props.onSearchComp}
+            onFilter={this.isFilterDate}
           />
         </TableRow>
       </TableHead>
     )
   }
 
-  _showDescription(row){
-    return(
-      <div className="teks">
-            <TextField 
-                className="teks"
-                type='text' 
-                variant="outlined" 
-                size="small"
-                value={row.SAPIssueMessage}
-            />
-      </div>
-    )
-  }
 
   showTableBody(row,id) {
     return (
-    <>
-      <TableRow key={id} classes={{ root: 'table-row' }} onClick={() => this.handleExpand(id)}>
-        <TableCell padding="checkbox">
-          {this.props.displaySalesCheckbox && 
-          <Checkbox 
-          disabled={this.isCheckboxAvailable(row)} 
-          checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
-          onClick={() => this.props.onChoosedSales(row)} 
-          classes={{ checked: 'checkbox-checked' }} />}
-        </TableCell>
+      <TableRow key={id} classes={{ root: 'table-row' }}>
         <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
@@ -206,17 +188,15 @@ export default class SapSalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
-        <TableCell align="center" className="table-cell"> {row.LifeTimeComponent} </TableCell>
+        <TableCell align="center" className="table-cell"> 
+        {this.props.salesOrderList.Lists[id].LifeTimeComponent === "-" ? <InputButton title="Input Lifetime Component" onStats={this.isPutLifetime} titles="Input" key={row.SoNumber} id={row.SoNumber} field="input"/> : 
+          <div>{this.props.salesOrderList.Lists[id].LifeTimeComponent}</div>
+        }
+        </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
-        <TableCell align="left" className="table-cell"> Unknown </TableCell>
-        <TableCell align="left" className="table-cell"> Unknowns </TableCell>
+        <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
+        <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
       </TableRow>
-      {this.state[id] ? 
-        <TableRow className="table-row-bottom-issue">
-            <TableCell><label>Description</label></TableCell>
-            <TableCell colSpan="12">{this._showDescription(row)}</TableCell>
-        </TableRow> : null }
-    </>  
     )
   }
 
@@ -232,65 +212,44 @@ export default class SapSalesOrderList extends React.PureComponent {
     })
   }
 
-  //LOADING SCENE
   showLoading(){
-    switch (this.props.fetchStatusSalesSap) {
-      case ApiRequestActionsStatus.LOADING:
-        return(
-          <div className="loading-container">
-            <img 
-              src={Spinner}
-              alt="loading-spinner"
-              className="loading-icon"
-              />
-          </div>
-        )
-        case ApiRequestActionsStatus.FAILED:
-          return(
-            <div className="loading-container">
-              OOPS THERE WAS AN ERROR :'(
-            </div>
+    if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
+      return(
+        <div className="loading-container">
+          <img 
+            src={Spinner}
+            alt="loading-spinner"
+            className="loading-icon"
+            />
+        </div>
       )
-      default:
-        console.log('STATUS oioi', this.props.fetchStatusSalesSap)
+    }else if(this.props.fetchStatusPutLifetime === ApiRequestActionsStatus.LOADING){
+      return(
+            <div>
+            <Snackbar
+              anchorOrigin={{ vertical: 'center',horizontal: 'center'}}
+              bodyStyle={{ backgroundColor: 'teal', color: 'coral' }}
+              open={this.state.stats}
+              onClose={this.handleClose}
+              autoHideDuration={3000}
+              message="Please Wait. Page will reload automatically"
+            />
+          </div>
+          )
     }
-    // if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
-    //   return(
-    //     <div className="loading-container">
-    //       <img 
-    //         src={Spinner}
-    //         alt="loading-spinner"
-    //         className="loading-icon"
-    //         />
-    //     </div>
-    //   )
-    // }else if(this.props.fetchStatusPutLifetime === ApiRequestActionsStatus.LOADING){
-    //   return(
-    //         <div>
-    //         <Snackbar
-    //           anchorOrigin={{ vertical: 'center',horizontal: 'right'}}
-    //           bodyStyle={{ backgroundColor: 'teal', color: 'coral' }}
-    //           open={this.state.stats}
-    //           onClose={this.handleClose}
-    //           autoHideDuration={3000}
-    //           message="Please Wait. Page will reload automatically"
-    //         />
-    //       </div>
-    //       )
-    // }
-    // else if(this.props.fetchStatusSales === ApiRequestActionsStatus.FAILED){
-    //   return(
-    //     <div className="loading-container">
-    //       OOPS THERE WAS AN ERROR :'(
-    //     </div>
-    //   )
-    // }else if(this.props.salesOrderListDeletedfetchStatusSalesDeleted.Lists.length === 0){
-    //   return(
-    //     <div className="loading-container">
-    //       DATA NOT FOUND
-    //     </div>
-    //   )
-    // }
+    else if(this.props.fetchStatusSales === ApiRequestActionsStatus.FAILED){
+      return(
+        <div className="loading-container">
+          OOPS THERE WAS AN ERROR :'(
+        </div>
+      )
+    }else if(this.props.salesOrderList.Lists.length === 0){
+      return(
+        <div className="loading-container">
+          DATA NOT FOUND
+        </div>
+      )
+    }
   }
 
 render(){
@@ -299,14 +258,16 @@ render(){
             <Table classes={{ root: 'table' }} className="table">
             {this.showTableHead()}
             <TableBody classes={{ root: 'table-body' }}>
-              {this.props.salesOrderListSap.Lists
-                && this.props.salesOrderListSap.Lists.map((row, id) => (
+              {this.props.salesOrderList.Lists
+                && this.props.salesOrderList.Lists.map((row, id) => (
                   this.showTableBody(row,id)
                 ))}
               </TableBody>
             </Table>
             {this.showLoading()}
+            {/* <Loading/> */}
           </>
         )
       }
   }
+// }

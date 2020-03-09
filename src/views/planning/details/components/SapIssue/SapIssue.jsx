@@ -1,18 +1,14 @@
 import React from 'react'
-import { Button, Modal, TextField, FormHelperText,Table, TableHead, TableRow, TableBody, TableCell, Paper } from '@material-ui/core'
+import { Button, Modal, TextField,Table, TableHead, TableRow, TableBody, TableCell, Paper } from '@material-ui/core'
 import './SapIssue.scss'
+// import * as Yup from 'yup';
+import CloseButton from '../../../../../components/CloseButton/CloseButton';
+import moment from 'moment';
 
-import * as Yup from 'yup';
-import { Formik } from 'formik';
-import NumberFormat from 'react-number-format';
-import CloseButton from '../../../../../components/CloseButton/CloseButton'
-import PlanningListHeader from '../../components/PlanningListHeader/PlanningListHeader'
-import moment from 'moment'
-
-const validationSchema = Yup.object().shape({
-    limitText: Yup.number()
-    .typeError('Harus Angka')
-})
+// const validationSchema = Yup.object().shape({
+//     limitText: Yup.number()
+//     .typeError('Harus Angka')
+// })
 
 export default class SapIssue extends React.Component{
 

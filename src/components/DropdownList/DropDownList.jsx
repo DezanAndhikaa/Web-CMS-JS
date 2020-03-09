@@ -1,5 +1,5 @@
 import React from 'react'
-import { Select, MenuItem, FormLabel, Menu } from '@material-ui/core'
+import { Select, MenuItem, FormLabel } from '@material-ui/core'
 import './DropDownList.scss'
 
 class DropDownList extends React.Component{

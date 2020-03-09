@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import SalesOrderList from '../PlanningList/SalesOrderList';
-import ServiceOrderList from '../PlanningList/ServiceOrderList';
-import {Badge, Button, Typography} from '@material-ui/core';
-import { Menu } from '../../../../../constants';
-import './PlanningDetailsTab.scss';
+import {AppBar, Tabs, Tab, Typography, Badge, Paper} from '@material-ui/core';
+import SalesOrderList from '../../components/PlanningList/SalesOrderListSite';
+import ServiceOrderList from '../../components/PlanningList/ServiceOrderList';
+import RevisedSalesOrderList from '../../components/PlanningList/RevisedSalesOrderList';
+import './DetailsTab.scss';
 import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
 import { 
-  SelectCustomerFilterAction,
-  SelectSiteFilterAction, 
-  SelectUnitModelFilterAction, 
-  SelectComponentFilterAction } 
-  from '../../DetailPages-action'
+    SelectCustomerFilterAction,
+    SelectSiteFilterAction, 
+    SelectUnitModelFilterAction, 
+    SelectComponentFilterAction } 
+    from '../../DetailPages-action';
 
 function TabContainer({ children, dir }) {
   return (
@@ -95,22 +95,21 @@ const styles = theme => ({
   },
 });
 
-class PlanningDetailsTab extends React.Component {
+class DetailsTab extends React.Component {
   state = {
     value: 0,
     invisible1: false,
     invisible2: true,
-    Customers: [],
-    Sites: [],
-    UnitModels: [],
-    ComponentDescriptions: []
+    GroupCustomer: [],
+    GroupSite: [],
+    GroupUnitModel: [],
+    GroupComponentDescription: []
   };
 
+
   handleChange = (event, value) => {
-console.log('kondisi value terasek', value)
     if (value === 0) {
       this.props.onPage(this.state.value);
-      // this.props.baseButton(this.state.value);
       if (this.state.invisible1) {
         this.setState({
           invisible2 : true
@@ -123,7 +122,6 @@ console.log('kondisi value terasek', value)
     }
     if (value === 1) {    
       this.props.onPage(this.state.value);
-      // this.props.baseButton(this.state.value);
       if (this.state.invisible2) {
         this.setState({
           invisible1 : true
@@ -142,17 +140,38 @@ console.log('kondisi value terasek', value)
 
   _renderSalesOrderList(){
     return(
-      <div className="plannings-list-containers">
+      <div className="plannings-list-detail">
         <SalesOrderList 
-        {...this.props}
+          {...this.props}
         />
       </div>
     );
   }
 
+  _renderRevisionList(){
+    return(
+      <div className="paper-revision">
+        <div className="revision-container">
+          <div className="rev-title-container">
+            <div className="ut-underline-rev" />
+            <div className= "revision-title">Revision List</div>
+          </div>
+          <div className="plannings-list-detail">
+              <RevisedSalesOrderList
+              {...this.props}
+              />
+          </div>
+          <div className="bottom-row-rev">
+            {this.props.renderPaginationRev}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   _renderServiceOrderList(){
     return(
-        <div className="plannings-list-containers">
+        <div className="plannings-list-detail">
           <ServiceOrderList 
           {...this.props}
           isClick={this.props.isClick}
@@ -213,30 +232,10 @@ console.log('kondisi value terasek', value)
     }
   }
 
-  _renderTotalDataInput() {
-    return(
-      <div className="total-input-container">
-        <div className="label-header-input">
-          <div className="header-input">
-            <div className="input1">
-              Data Input
-            </div>
-            <div className="input2">
-              Sales Order
-            </div>
-          </div>
-          <div className="total-data-input">
-            {this.props.totalSalesData}
-          </div>
-        </div>
-      </div>
-    )
-  }
-
   _renderFilter() {
     return (
-      <div className="dropdowns-container">
-        <div className="dropdown-container">
+      <div className="dropdowns-detail-site">
+        <div className="dropdown-detail-site">
           <DropdownFilter
           {...this.props}
             data={this._dataFilterCustomer()}
@@ -244,10 +243,10 @@ console.log('kondisi value terasek', value)
             onSelectActionType={SelectCustomerFilterAction}
             onSelectAction={this.props.selectFilter2}
             indexTab={this.state.value}
-            head={"CustomerName"}
+            head={"Customer"}
           />
         </div>
-        <div className="dropdown-container">
+        <div className="dropdown-detail-site">
           <DropdownFilter
             {...this.props}
             data={this._dataFilterSite()}
@@ -255,10 +254,10 @@ console.log('kondisi value terasek', value)
             onSelectActionType={SelectSiteFilterAction}
             onSelectAction={this.props.selectFilter2}
             indexTab={this.state.value}
-            head={"SiteCode"}
+            head={"Site"}
           />
         </div>
-        <div className="dropdown-container">
+        <div className="dropdown-detail-site">
           <DropdownFilter
             {...this.props}
             data={this._dataFilterUnitModel()}
@@ -269,7 +268,7 @@ console.log('kondisi value terasek', value)
             head={"UnitModel"}
           />
         </div>
-        <div className="dropdown-container">
+        <div className="dropdown-detail-site">
           <DropdownFilter
             {...this.props}
             data={this._dataFilterComponentDescription()}
@@ -280,7 +279,7 @@ console.log('kondisi value terasek', value)
             head={"ComponentDescription"}
           />
         </div>
-        <div className="search-container">
+        <div className="search-detail-site">
           {this.props.renderSearch}
         </div>
       </div>
@@ -289,8 +288,8 @@ console.log('kondisi value terasek', value)
 
   renderTotalSales(){
     return(
-      <div className="tab-coba">
-        <div className="tab-label">Sales Order 
+      <div className="tab-detail-site">
+        <div className="label-detail-site">Sales Order 
           <span>
             <StyledBadge 
               badgeContent={this.props.totalSalesData} 
@@ -305,8 +304,8 @@ console.log('kondisi value terasek', value)
 
   renderTotalService(){
     return(
-      <div className="tab-coba">
-        <div className="tab-label">Service Order 
+      <div className="tab-detail-site">
+        <div className="label-detail-site">Service Order 
         <span>
           <Badges 
             badgeContent={this.props.totalServiceData} 
@@ -319,37 +318,41 @@ console.log('kondisi value terasek', value)
     )
   }
 
-  handleClick = (menu, tab) => {
-    this.props.push({
-      pathname: menu,
-      whichTab: tab
-    });
-  }
-
   render() {
-    const { theme } = this.props; //const { classes, theme } = this.props;
+    const { classes, theme } = this.props;
     const { value } = this.state;
     return (
         <div className="root">
-          <div className="tab-container">
-            <Button className="btn-approval" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
-              Approval
-            </Button>
-            <div className="btn-header">
-              {this.props.renderNotif}
-              {this.props.renderFilterByDataAction}
-            </div>
-          </div>
-          <div className="data-input-container">
-            {this._renderTotalDataInput()}
-          </div>
-          <div className="filters-container">
-            {this._renderFilter()}
-          </div>
+        <AppBar position="static" color="default" style={{boxShadow: "none"}}>
+        <div className="tab-container-site">
+            {this.props.renderNotif}
+            {this.props.renderFilterByDataAction}
+        </div>
+          <Tabs
+            classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
+            value={this.state.value}
+            onChange={this.handleChange}
+            indicatorColor="primary" >
+            <Tab 
+              centered={true}
+              onClick={() => this.props.clearSelectedSalesPlans()} 
+              classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+              label= {this.renderTotalSales()} 
+            />
+            <Tab 
+              centered={true}
+              onClick={() => this.props.clearSelectedServicePlans()} 
+              classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+              label= {this.renderTotalService()}
+            />
+          </Tabs>
+        </AppBar>
+        {this._renderRevisionList()}
+        <div className="filters-detail-site">
+          {this._renderFilter()}
+        </div>
     {value === 0 && <TabContainer dir={theme.direction} >
-      {/* {!this.props.isApproved ?  */}
-    <div>{this._renderSalesOrderList()}</div> 
-    {/* <div>{this._renderApprovedSalesOrderList()}</div>}   */}
+    <div>{this._renderSalesOrderList()}</div>
     </TabContainer>}
         {value === 1 && <TabContainer dir={theme.direction} ><div>{this._renderServiceOrderList()}</div></TabContainer>}
       </div>
@@ -357,9 +360,9 @@ console.log('kondisi value terasek', value)
   }
 }
 
-PlanningDetailsTab.propTypes = {
+DetailsTab.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(PlanningDetailsTab);
+export default withStyles(styles, { withTheme: true })(DetailsTab);

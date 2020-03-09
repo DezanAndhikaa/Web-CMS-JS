@@ -11,14 +11,13 @@ import SapSalesOrderList from '../PlanningList/SapSalesOrderList'
 import ApprovedServiceOrderList from '../PlanningList/ApprovedServiceOrderList';
 import DeletedServiceOrderList from '../PlanningList/DeletedServiceOrderList';
 import Button from '@material-ui/core/Button';
-import './Status.scss'
-import { Menu } from '../../../../../constants'
-import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton'
-import FilterbyDataAction  from '../../../../../components/FilterByDataAction/FilterbyDataAction'
-import { Spinner } from '../../../../../assets/icons'
+import './Status.scss';
+import { Menu } from '../../../../../constants';
+import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton';
+import FilterbyDataAction  from '../../../../../components/FilterByDataAction/FilterbyDataAction';
+import { Spinner } from '../../../../../assets/icons';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
-import moment, { ISO_8601 } from "moment";
-import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
+import moment from "moment";
 import DropDownList from '../../../../../components/DropdownList/DropDownList';
 
 export default class Status extends React.PureComponent {
@@ -152,33 +151,32 @@ export default class Status extends React.PureComponent {
 		if (this.props.location.whichTab === "sales") {
 			return(
 				<>
+					<BaseButton titles="Download"
+						{...this.props}
+						whatTabsIsRendered={true}
+						handleSalesApprovedDownload={this.handleSalesApprovedDownload}
+					/>
 					<BaseButton titles="Permanently" 
 					{...this.props}
 					whatTabsIsRendered={true}
 					handleDeletePermanent={this.handleDeletePermanent}
 					isDisabled={this.state.isDisabled}
 					/>
-
-					<BaseButton titles="Download"
-						{...this.props}
-						whatTabsIsRendered={true}
-						handleSalesApprovedDownload={this.handleSalesApprovedDownload}
-					/>
 				</>
 			)
 		}else if (this.props.location.whichTab === "service"){
 			return(
 				<>
+					<BaseButton titles="Download"
+						{...this.props}
+						whatTabsIsRendered={false}
+						handleServiceApprovedDownload={this.handleServiceApprovedDownload}
+					/>
 					<BaseButton titles="Permanently" 
 					{...this.props}
 					whatTabsIsRendered={false}
 					handleDeletePermanent={this.handleDeletePermanent}
 					isDisabled={this.state.isDisabled}
-					/>
-					<BaseButton titles="Download"
-						{...this.props}
-						whatTabsIsRendered={false}
-						handleServiceApprovedDownload={this.handleServiceApprovedDownload}
 					/>
 				</>
 			)
@@ -825,7 +823,6 @@ export default class Status extends React.PureComponent {
 	  }
 
 	render(){
-		console.log('pantej location ', this.props.location)
 		return(
 			<main className="content" >
 				{/* {this.showLoading()} */}

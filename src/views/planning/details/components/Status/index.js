@@ -59,10 +59,8 @@ const mapStateToProps = (state) => ({
 	salesDeletedParameter: state.plansPageState.salesDeletedParameter,
 	salesSapParameter: state.plansPageState.salesSapParameter,
 	serviceParameter: state.plansPageState.serviceParameter,
-	//
 	serviceApprovedParameter : state.plansPageState.serviceApprovedParameter,
 	serviceDeletedParameter : state.plansPageState.serviceDeletedParameter,
-	//
 	salesSearch: state.plansPageState.salesSearch,
 	serviceSearch: state.plansPageState.serviceSearch,
 	selectedSalesPlans: state.plansPageState.selectedSalesPlans,

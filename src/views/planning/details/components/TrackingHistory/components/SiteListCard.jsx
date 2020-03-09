@@ -1,9 +1,25 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
-import { List } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import { IceFace } from '../../../../../../assets/imgs';
+import './SiteListCard.scss';
 
-
+const styles = theme =>({
+	root: {
+		minWidth: 274,
+		width: '50%',
+		maxHeight: 670,
+		minHeight: theme.spacing.unit * 84,
+		height : '100%',
+		marginRight: theme.spacing.unit *1,
+		// overflowY: 'auto'
+	},
+	content : {
+		width: '100%',
+		height : '100%',
+		lineHeight : '70px'
+	}
+});
 class SiteListCard extends React.Component {
 	state ={
 		dataSite : [
@@ -12,6 +28,19 @@ class SiteListCard extends React.Component {
 			{ site : "Bontang East"},
 			{ site : "Soroako"},
 			{ site : "Damai"},
+			{ site : "Kutai"},
+			{ site : "Bontang East"},
+			{ site : "Bontang West"},
+			{ site : "Bontang South"},
+			{ site : "Bontang North"},
+			{ site : "Bendili"},
+			{ site : "Bendili"},
+			{ site : "Bendili"},
+			{ site : "Bendili"},
+			{ site : "Bendili"},
+			{ site : "Bendili"},
+			{ site : "Bendili"},
+			{ site : "Bendili"},
 			{ site : "Bendili"},
 		]
 	}
@@ -19,22 +48,24 @@ class SiteListCard extends React.Component {
 		alert(value);
 	}
 	renderList(row){
-		// console.log('pann ter render')
-		// return (
-		// <List>
-		// 	<Card onClick={()=>this.handleClick(row.dataSite)}>{row.dataSite}</Card>
-		// </List>
-		// );
+		console.log('pann ter render')
+		return (
+			<Card onClick={()=>this.handleClick(row.dataSite)}>{row.dataSite}</Card>
+		);
 	}
 	render(){
+		const { classes } = this.props;
 		return(
 			<div>
 				{this.state.dataSite.map( (row) => (
-					<div>{row.site}</div>
+					<Card className="site-text-content" onClick={()=>this.handleClick(row.site)}>
+						<img className="ice-face" src={IceFace} />
+						{row.site}
+					</Card>
 				))}
 			</div>
 		);
 	}
 }
 
-export default SiteListCard;
+export default withStyles(styles, { withTheme: true })(SiteListCard);

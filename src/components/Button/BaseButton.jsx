@@ -7,7 +7,7 @@ import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 import ApproveConfirmation from '../ApproveConfirmation/ApproveConfirmation';
 import UnapproveConfirmation from '../UnapproveConfirmation/UnapproveConfirmation'
 import { ApiRequestActionsStatus } from '../../core/RestClientHelpers';
-import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
+// import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 
 class BaseButton extends React.Component{
     constructor(props){
@@ -35,14 +35,11 @@ class BaseButton extends React.Component{
         console.log('masuk isAPprove')
         if (this.props.whatTabsIsRendered === true) {
             if (this.props.titles === "Approve") {
-                // this.isOpened()
                 await this.props.handleSalesApprove()
             }
             if (this.props.titles === "Delete") {
                 await this.props.handleDeleteSales()
-                this.isClosed()
-                // await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter)
-                // await this.props.clearSelectedSalesPlans(this.props.selectedSalesPlans)
+                // this.isClosed()
             }
             if (this.props.titles === "Cancel Approve"){
                 await this.props.handleSendtoEdit()
@@ -56,11 +53,11 @@ class BaseButton extends React.Component{
         if (this.props.whatTabsIsRendered === false) {
             if (this.props.titles === "Approve") {
                 await this.props.handleServiceApprove();
-                this.isClosed()
+                // this.isClosed()
             }
             if (this.props.titles === "Delete") {
                 await this.props.handleDeleteService();
-                this.isClosed()
+                // this.isClosed()
             }
         }
     }

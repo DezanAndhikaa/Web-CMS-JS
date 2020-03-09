@@ -1,21 +1,11 @@
 
 
 import React from 'react';
-import { AppBar, Toolbar, Badge } from '@material-ui/core';
+import { AppBar, Toolbar } from '@material-ui/core';
 import { UTLogoNew, AccountPic, DcaLogo } from '../../assets/imgs';
-import { MenuToggle, IconNotif, IconHistory } from '../../assets/icons';
+import { MenuToggle } from '../../assets/icons';
 import isAccessTokenValid from '../../core/HelpersFunction';
 import './NavBarComponent.scss';
-import { withStyles } from '@material-ui/core/styles';
-
-const Badges = withStyles(theme => ({
-	badge: {
-		left: -5,
-		fontSize: '10px',
-		border: '2px solid white'
-	},
-  }))(Badge);
-
 class NavBarComponent extends React.Component {
 	render() {
 		let navBar = null;

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { PlansReducers } from '../../DetailPages-reducer';
+import { PlansReducers } from '../../details/DetailPages-reducer';
 import { push } from 'connected-react-router';
 import {
 	approveServiceDownloadAction, 
@@ -16,11 +16,13 @@ import {
 	fetchDeletedSalesAction,
 	fetchDeletedServiceAction,
 	fetchSalesAction, 
-	salesParameterAction, 
+	salesParameterAction,
+	fetchRevisedSalesAction, 
 	fetchServiceAction,
 	ClearSelectedPlans, 
 	UpdateServiceParameterAction,
 	UpdateSalesParameterAction, 
+	UpdateSalesRevisedParamAction,
 	searchAction,
 	SearchSalesAction, 
 	SearchServiceAction,
@@ -40,8 +42,9 @@ import {
 	SelectServicePlanAction,
 	sortByAction, 
 	storePlanDataAction,
-} from '../../DetailPages-action';
-import ApprovalPages from './ApprovalPages';
+	salesParameterRevAction
+} from '../../details/DetailPages-action';
+import DetailPagesSite from './DetailPagesSite';
 
 const mapStateToProps = (state) => ({
 	location : state.router.location,
@@ -52,7 +55,9 @@ const mapStateToProps = (state) => ({
 	serviceOrderList: state.plansPageState.serviceOrderList.data,
 	serviceOrderListApproved: state.plansPageState.serviceOrderListApproved.data,
 	serviceOrderListDeleted: state.plansPageState.serviceOrderListDeleted.data,
-	salesParameter: state.plansPageState.salesParameter,
+	salesOrderRevised: state.plansPageState.salesOrderRevised.data,
+	salesParameter: state.plansPageState.salesParameter,	
+	salesRevisedParam: state.plansPageState.salesRevisedParam,
 	filterParameter: state.plansPageState.filterParameter,
 	filterLifetime: state.plansPageState.filterLifetime,
 	indexFilterParameter: state.plansPageState.indexFilterParameter,
@@ -80,7 +85,8 @@ const mapStateToProps = (state) => ({
 	fetchStatusApprovedSales: state.plansPageState.salesApproved.status,
 	fetchStatusApprovedService: state.plansPageState.serviceApproved.status,
 	fetchStatusSalesDeleted: state.plansPageState.salesDeleted.status,
-	fetchStatusServiceDeleted: state.plansPageState.serviceDeleted.status
+	fetchStatusServiceDeleted: state.plansPageState.serviceDeleted.status,
+	fetchStatusRevised: state.plansPageState.salesOrderRevised.status,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -102,6 +108,7 @@ const mapDispatchToProps = (dispatch) => ({
 	fetchDeletedService: (payload, token) => dispatch(fetchDeletedServiceAction(payload, token)),
 	fetchSalesOrder: (payload, token) => dispatch(fetchSalesAction(payload, token)),
 	fetchServiceOrder: (payload, token) => dispatch(fetchServiceAction(payload, token)),
+	fetchRevisedSales: (payload,token) => dispatch(fetchRevisedSalesAction(payload, token)),
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	onSearchSales: (keyword) => dispatch(searchAction(SearchSalesAction, keyword)),
 	onSearchService: (keyword) => dispatch(searchAction(SearchServiceAction, keyword)),
@@ -117,8 +124,9 @@ const mapDispatchToProps = (dispatch) => ({
 	unselectSalesPlan: (payload) => dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
 	updateSalesParameter: (payload) => dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
 	updateServiceParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
+	updateSalesRevParameter: (payload) => dispatch(salesParameterRevAction(UpdateSalesRevisedParamAction, payload)),
 });
 
-const approvalPages = connect(mapStateToProps, mapDispatchToProps)(ApprovalPages);
+const detailPagesSite = connect(mapStateToProps, mapDispatchToProps)(DetailPagesSite);
 
-export { approvalPages as ApprovalPages, PlansReducers };
+export { detailPagesSite as DetailPagesSite, PlansReducers };

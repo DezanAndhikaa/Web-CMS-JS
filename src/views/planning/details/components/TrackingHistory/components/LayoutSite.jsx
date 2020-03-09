@@ -2,14 +2,10 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-// import Cards from '../../Status/components/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Buttons from './SiteListCard';
 import Typography from '@material-ui/core/Typography';
 import SearchInput from '../../../../../../components/Searchbar/SearchInput';
-import SiteListCard from './SiteListCard'
-// import { Autorenew } from '@material-ui/icons';
+import SiteListCard from './SiteListCard';
 
 const styles = theme =>({
 	root: {
@@ -18,8 +14,7 @@ const styles = theme =>({
 		maxHeight: 670,
 		minHeight: theme.spacing.unit * 84,
 		height : '100%',
-		marginRight: theme.spacing.unit *1,
-		// overflowY: 'auto'
+		marginRight: theme.spacing.unit *1
 	},
 	content : {
 		minWidth: 274,

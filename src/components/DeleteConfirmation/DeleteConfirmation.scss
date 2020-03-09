@@ -1,16 +1,16 @@
 @import '../../themes/functions';
 @import '../../themes/variables';
 
-.modal-container{
+.modal-container-delete{
     width: fit-content;
     height: fit-content;
     margin: auto;
-    .confirmation-modal-content{
+    .delete-confirmation-content{
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 0;
-        .confirmation-modal{
+        .confirmation-modal-delete{
             width: vw(519);
             height: vh(451);
             background-color: white;
@@ -21,37 +21,37 @@
             align-items: center;
             justify-content: center;
             padding: vw(15) vw(24) vw(30) vw(24);
-            .confirmation-container{
+            .confirmation-container-delete{
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
                 flex: 1;
-                .title-confirmation{
+                .title-confirmation-delete{
                     margin: 0;
                     padding-top: vw(20);
                     font-size: vw(28);
                     font-family: 'SFUIDisplay-Bold';
                     color: #3C3B3B;
                 }
-                .confirmation-titles{
+                .confirmation-titles-delete{
                     margin: 0;
                     font-size: vw(28);
                     padding-top: vw(10);
                     font-family: 'SFUIDisplay-Bold';
                     color: #3C3B3B;
                 }
-                .confirmation-images{
+                .confirmation-images-delete{
                     width: vw(200);
                     margin-top: vw(15);
                     margin-bottom: vw(15);
                 }
-                .confirmation-image{
+                .confirmation-image-delete{
                     width: vw(175);
                     margin-top: vw(16);
                     margin-bottom: vw(25);
                 }
-                .confirmation-caption{
+                .confirmation-caption-delete{
                     margin: 0;
                     font-size: vw(20);
                     font-family: 'SFUIDisplay-Regular';
@@ -67,6 +67,7 @@
         display: flex;
         flex-direction: row;
         margin-top: vw(20);
+        width: 100%;
         .btn-yes{
             display: flex;
             text-transform: capitalize;
@@ -108,16 +109,16 @@
 }
 
 @media (min-width: 600px) and (max-width: 1025px) {    
-    .modal-container{
+    .modal-container-delete{
         width: fit-content;
         height: fit-content;
         margin: auto;
-        .confirmation-modal-content{
+        .delete-confirmation-content{
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 0;
-            .confirmation-modal{
+            .confirmation-modal-delete{
                 width: vw-tab(450);
                 height: vw-tab(300);
                 background-color: white;
@@ -128,24 +129,24 @@
                 align-items: center;
                 justify-content: space-between;
                 padding: vw-tab(15) vw-tab(24) vw-tab(30) vw-tab(24);
-                .confirmation-container{
+                .confirmation-container-delete{
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
                     flex: 1;   
-                    .confirmation-title{
+                    .confirmation-title-delete{
                         margin: 0;
                         font-size: vw-tab(33);
                         font-family: 'SFUIDisplay-Bold';
                         color: #3C3B3B;
                     }
-                    .confirmation-image{
+                    .confirmation-image-delete{
                         width: vw-tab(150);
                         margin-top: vw-tab(16);
                         margin-bottom: vw-tab(25);
                     }
-                    .confirmation-caption{
+                    .confirmation-caption-delete{
                         margin: 0;
                         font-size: vw-tab(20);
                         font-family: 'SFUIDisplay-Regular';
@@ -160,16 +161,16 @@
 }
 
 @media (max-width: 599px) {    
-    .modal-container{
+    .modal-container-delete{
         width: fit-content;
         height: fit-content;
         margin: auto;
-        .confirmation-modal-content{
+        .delete-confirmation-content{
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 0;
-            .confirmation-modal{
+            .confirmation-modal-delete{
                 margin: 0;
                 width: vw-mobile(215);
                 height: vw-mobile(200);
@@ -180,24 +181,24 @@
                 align-items: center;
                 justify-content: space-between;
                 padding: vw-mobile(10);
-                .confirmation-container{
+                .confirmation-container-delete{
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
                     flex: 1;   
-                    .confirmation-title{
+                    .confirmation-title-delete{
                         margin: 0;
                         font-size: vw-mobile(20);
                         font-family: 'SFUIDisplay-Bold';
                         color: #3C3B3B;
                     }
-                    .confirmation-image{
+                    .confirmation-image-delete{
                         width: vw-mobile(100);
                         margin-top: vw-mobile(5);
                         margin-bottom: vw-mobile(10);
                     }
-                    .confirmation-caption{
+                    .confirmation-caption-delete{
                         margin: 0;
                         font-size: vw-mobile(15);
                         font-family: 'SFUIDisplay-Regular';

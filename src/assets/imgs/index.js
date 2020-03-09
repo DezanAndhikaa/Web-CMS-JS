@@ -31,6 +31,11 @@ import ImgSendtoEdit from './send-to-edit.png';
 import ImgCancelEditSucc from './cancel-edit-success.png';
 import ImgCancelApprove from './cancel-approve.png';
 import ImgApproved from './approved.png';
+import Woman from './woman.png';
+import Text1 from './text-1.png';
+import Text2 from './text-2.png';
+import IceFace from './ice-face.png';
+import Clock from './clock.png';
 
 export {
 	ImgApproved,
@@ -65,5 +70,10 @@ export {
 	Low,
 	Confirm,
 	Delete,
-	DelSuccess
+	DelSuccess,
+	Woman,
+	Text1,
+	Text2,
+	IceFace,
+	Clock
 };
