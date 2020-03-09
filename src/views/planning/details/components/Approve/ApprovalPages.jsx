@@ -750,7 +750,16 @@ componentDidUpdate = (prevProps) => {
             handleServiceApprove={this.handleServiceApprove}
             renderSakses = {this.changeSuccess}
           />
-          <BaseButton titles="Cancel Approve"/>
+          <BaseButton titles="Cancel Approve"
+            {...this.props}
+            selectedDataSAP={this.props.selectedServicePlans}
+            whatTabsIsRendered={this.state.whichTabs}
+            disabledButton = {this.props.selectedServicePlans.length < 1 }
+            totalSelectedItems ={this.props.selectedServicePlans.length}
+            handleSendtoEdit={this.handleSendtoEdit}
+            selectedData={this.state.selectedData}
+            renderSakses = {this.changeSuccess}
+          />
           <BaseButton titles="Edit" />
           <BaseButton titles="Delete" 
             {...this.props}
