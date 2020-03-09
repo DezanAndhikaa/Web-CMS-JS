@@ -20,7 +20,6 @@ export default class SapSalesOrderList extends React.PureComponent {
     this.state = {
       checkedValue: false,
       stats: false,
-      expand: false
     }
 
     this.handleExpand = this.handleExpand.bind(this);
@@ -68,7 +67,7 @@ export default class SapSalesOrderList extends React.PureComponent {
 
   handleExpand (id){
     this.setState({
-        expand: !this.state.expand
+        [id]: !this.state[id],
     })
   }
 
@@ -209,7 +208,7 @@ export default class SapSalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> Unknown </TableCell>
         <TableCell align="left" className="table-cell"> Unknowns </TableCell>
       </TableRow>
-      {this.state.expand ? 
+      {this.state[id] ? 
         <TableRow className="table-row-bottom-issue">
             <TableCell><label>Description</label></TableCell>
             <TableCell colSpan="12">{this._showDescription(row)}</TableCell>
