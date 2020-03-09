@@ -91,7 +91,7 @@ const mapDispatchToProps = (dispatch) => ({
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
 	clearSelectedServicePlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
 	putLifetimeComp : (payload, token) => dispatch(putLifetimeCompAction(payload, token)),
-	putSAPIssue : (payload, token) => dispatch(putSAPIssueAction(payload, token)),
+	putSAPIssue : (payload, token, whichTabs) => dispatch(putSAPIssueAction(payload, token, whichTabs)),
 	approveSales: (payload, token) => dispatch(approveSalesAction(payload, token)),
 	approveService: (payload, token) => dispatch(approveServiceAction(payload, token)),
 	deleteSales: (payload, token) => dispatch(deleteSalesAction(payload, token)),

@@ -18,8 +18,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
   }
 
   isSAPIssue = async(data) => {
-    console.log('kluk  '+ data)
-    await this.props.putSAPIssue({SAPIssues: data }, this.props.token);
+    await this.props.putSAPIssue({SAPIssues: data }, this.props.token, this.props.whichTabs);
   }
 
   onKelik =  async( description) => {
@@ -121,27 +120,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
       return <CircularProgress size={100} className="circular-progress" />;
   }
 
-  // _renderEditSuccess(){
-  //   return (
-  //     <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
-  //       <DialogContent className="confirmation-modal-content">
-  //         <div className="confirmation-modal">
-  //           <div className="confirmation-container">
-  //             <p className="title-success">Successful</p>
-  //             <img className="confirmation-success" src={ImgCancelEditSucc} alt="" />
-  //             <p className="confirmation-caption">You have sent data to be repaired again</p>
-  //             <div className="btn-row">
-  //               <Button className="button-continue" onClick={this.props.onClose}>Continue</Button>
-  //             </div>
-  //           </div>
-  //         </div>
-  //       </DialogContent> 
-  //     </Modal>
-  //   );
-  // }
-
 	render() {
-    console.log("ApiRequestActionsStatus",this.props.fetchStatusPutSAPIssue)
     if(this.props.idConfirm === "Cancel"){
         return (
           <>
@@ -156,7 +135,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
                   <img className="confirmation-image-unapprove" src={ImgCancelApprove} alt="" />
                   <p className="confirmation-caption-unapprove"><b>Select one</b> to continue cancel approve</p>
                   <div className="btn-row">
-                    <Button className="button-edit-lt" onClick={() => this.isClickedSend()}>Edit Lifetime</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    {this.props.whichTabs ? <Button className="button-edit-lt" onClick={() => this.isClickedSend()}>Edit Lifetime</Button> : null }
                     <Button className="button-sap-issue" onClick={() => this.isClickedSap()}>SAP Issue</Button>
                   </div>
                   <div className="labelMax">

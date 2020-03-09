@@ -243,7 +243,7 @@ class DetailsTab extends React.Component {
             onSelectActionType={SelectCustomerFilterAction}
             onSelectAction={this.props.selectFilter2}
             indexTab={this.state.value}
-            head={"Customer"}
+            head={"CustomerName"}
           />
         </div>
         <div className="dropdown-detail-site">
@@ -254,7 +254,7 @@ class DetailsTab extends React.Component {
             onSelectActionType={SelectSiteFilterAction}
             onSelectAction={this.props.selectFilter2}
             indexTab={this.state.value}
-            head={"Site"}
+            head={"SiteCode"}
           />
         </div>
         <div className="dropdown-detail-site">

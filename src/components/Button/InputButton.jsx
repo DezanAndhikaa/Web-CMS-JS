@@ -24,7 +24,6 @@ export default class InputButton extends React.Component{
     }
 
     handleKeyUp = (event, sort) => {
-        console.log("kaca ",sort)
           this.setState({ value: event.target.value });
           setTimeout(() => {
             this.props.onSearch(this.state.value, sort)

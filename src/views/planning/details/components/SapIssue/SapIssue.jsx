@@ -28,7 +28,9 @@ export default class SapIssue extends React.Component{
         return (
           <TableHead className="table-head-issue" >
           <TableRow className="table-row-issue">
-            <TableCell>SO</TableCell>
+            {this.props.whichTabs ? 
+              <TableCell>SO</TableCell> : 
+              <TableCell>WO</TableCell>}
             <TableCell>Customer</TableCell>
             <TableCell>Site</TableCell>
             <TableCell>Unit Model</TableCell>
@@ -38,8 +40,13 @@ export default class SapIssue extends React.Component{
             <TableCell>Serial &nbsp; Number</TableCell>
             <TableCell>Lifetime</TableCell>
             <TableCell>Plan</TableCell>
-            <TableCell>SMR</TableCell>
-            <TableCell>SMR &nbsp;Date</TableCell>
+            {this.props.whichTabs ? 
+              <div>
+                <TableCell>SMR</TableCell>
+                <TableCell>SMR &nbsp;Date</TableCell>
+              </div>:
+              null
+            }
           </TableRow>
         </TableHead>
       )
@@ -49,7 +56,10 @@ export default class SapIssue extends React.Component{
         return (
           <>
           <TableRow className="table-row-issue">
-            <TableCell align="left" className="table-cell-issue"> {row.SoNumber} </TableCell>
+            {this.props.whichTabs ?
+              <TableCell align="left" className="table-cell-issue"> {row.SoNumber} </TableCell> : 
+              <TableCell align="left" className="table-cell-issue"> {row.WoNumber} </TableCell>
+            }
             <TableCell align="left" className="table-cell-issue"> {row.CustomerName} </TableCell>
             <TableCell align="left" className="table-cell-issue"> {row.SiteCode} </TableCell>
             <TableCell align="left" className="table-cell-issue"> {row.UnitModel} </TableCell>
@@ -59,8 +69,13 @@ export default class SapIssue extends React.Component{
             <TableCell align="left" className="table-cell-issue"> {row.SerialNumber} </TableCell>
             <TableCell align="center" className="table-cell-issue"> {row.LifeTimeComponent}</TableCell>
             <TableCell align="left" className="table-cell-issue"> {moment(row.PlanExecution).format('DD-MM-YYYY')} </TableCell>
-            <TableCell align="left" className="table-cell-issue"> {row.SMR} </TableCell>
-            <TableCell align="left" className="table-cell-issue"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
+            {this.props.whichTabs ?
+              <div>
+                  <TableCell align="left" className="table-cell-issue"> {row.SMR} </TableCell>
+                  <TableCell align="left" className="table-cell-issue"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
+              </div> : 
+              null
+            }
           </TableRow>
           <TableRow className="table-row-bottom-issue">
             <TableCell><label>Description &nbsp; :</label></TableCell>
@@ -118,6 +133,7 @@ export default class SapIssue extends React.Component{
     }
 
     render(){
+      console.log("ini tab mana : ",this.props.whichTabs)
         return(
             <div>
               <Modal className="modal-pos-issue" open={this.props.isShowModal} onClose={this.props.isClosed} >
