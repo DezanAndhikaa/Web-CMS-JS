@@ -24,8 +24,14 @@ export default class UnapproveConfirmation extends React.PureComponent {
   onKelik =  async( description) => {
     const index = this.props.selectedDataSAP.length
     let arr = []
-    for(let i=0; i<index; i++){
-      arr = [...arr,{SoNumber: this.props.selectedDataSAP[i].SoNumber, Message: description[i]}]
+    if(this.props.whichTabs){
+      for(let i=0; i<index; i++){
+        arr = [...arr,{NumberOrder: this.props.selectedDataSAP[i].SoNumber, Message: description[i]}]
+      }
+    }else{
+      for(let i=0; i<index; i++){
+        arr = [...arr,{NumberOrder: this.props.selectedDataSAP[i].WoNumber, Message: description[i]}]
+      }
     }
     this.setState({
       SAPIssue: arr
@@ -50,7 +56,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
 
   isTryClosed = () => {
       this.setState({
-        isShowModalSapSucced: !this.state.isShowModalSapSucced
+        isShowModalSapSucced: !this.state.isShowModalSapSucced,
       })
   }
 
@@ -82,6 +88,10 @@ export default class UnapproveConfirmation extends React.PureComponent {
     })
   }
 
+  isReload = () => {
+    window.location.reload(false)
+  }
+
   _renderSap(open){
     return(
       <SapIssue {...this.props} isShowModal={open} isClosed={this.isClosedSap} isTry={this.isTry} isSucced={this._renderSapSucced} onKelik={this.onKelik}/>
@@ -90,7 +100,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
 
   _renderSapSucced(){
     return(
-      <ConfirmationModal isModal={this.state.isShowModalSapSucced} idModal="SAP" isModalClosed={this.isTryClosed}/>
+      <ConfirmationModal handleReload={this.isReload} isModal={this.state.isShowModalSapSucced} idModal="SAP" isModalClosed={this.isTryClosed} />
     )
   }
 
@@ -136,9 +146,9 @@ export default class UnapproveConfirmation extends React.PureComponent {
                   <p className="confirmation-caption-unapprove"><b>Select one</b> to continue cancel approve</p>
                   <div className="btn-row">
                     {this.props.whichTabs ? <Button className="button-edit-lt" onClick={() => this.isClickedSend()}>Edit Lifetime</Button> : null }
-                    <Button className="button-sap-issue" onClick={() => this.isClickedSap()}>SAP Issue</Button>
+                    <Button className={this.props.whichTabs ? "button-sap-issue" : "button-sap-issue-service"} onClick={() => this.isClickedSap()}>SAP Issue</Button>
                   </div>
-                  <div className="labelMax">
+                  <div className={this.props.whichTabs ? "labelMax" : "labelMax-service" }>
                     <label>* Max 5 Items</label>
                   </div>
                 </div>

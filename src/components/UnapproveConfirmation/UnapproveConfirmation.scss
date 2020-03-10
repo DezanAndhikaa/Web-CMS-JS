@@ -112,6 +112,28 @@
             background-color: #FC9517;
             color: white;
         }
+        .button-sap-issue-service{
+            margin-left: 27%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: capitalize;
+            width: 50%; //vw(170.22);
+            height: vw(45.07);
+            font-size: vw(13) !important;
+            font-weight: bold;
+            line-height: vw(16) !important;
+            font-family: 'Lato-Regular';
+            background-color: #F2F2F4;
+            color: #1D1D1D;
+            border: 1px solid #FC9517;
+            box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+            cursor: pointer;
+        }
+        .button-sap-issue-service:hover {
+            background-color: #FC9517;
+            color: white;
+        }
         .button-yes{
             display: flex;
             align-items: center;
@@ -168,6 +190,15 @@
     .labelMax{
         margin-top: 1%;
         margin-left:50%;
+        font-size: vw(13) !important;
+        font-weight: bold;
+        line-height: vw(16) !important;
+        font-family: 'Lato-Regular';
+        color: red;
+    }
+    .labelMax-service{
+        margin-top: 1%;
+        margin-left:5%;
         font-size: vw(13) !important;
         font-weight: bold;
         line-height: vw(16) !important;

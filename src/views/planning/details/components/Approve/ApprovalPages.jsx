@@ -374,7 +374,16 @@ componentDidUpdate = (prevProps) => {
 
   //SAAT MENGKLIK SERVICE ORDER TAB
   onClickServiceOrder = async() => {
-   await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
+   await this.props.fetchServiceOrder({
+    ...this.props.serviceParameter.dataFilter, 
+    Filter : 
+          [...this.props.serviceParameter.dataFilter.Filter, {
+            Field : 'SAPIssueMessage',
+            Operator : "neq",
+            Value : '-',
+            Logic : "AND"
+    }]
+  }, this.props.token);
   }
 
   //SAAT MENGKLIK SALES ORDER TAB
@@ -403,6 +412,11 @@ componentDidUpdate = (prevProps) => {
             Field : 'SAPIssueMessage',
             Operator : 'eq',
             Value : '-',
+            Logic : 'AND'
+          },{
+            Field : 'IsRevised',
+            Operator : 'eq',
+            Value : 'false',
             Logic : 'AND'
           }]
       }, this.props.token);
@@ -578,9 +592,9 @@ componentDidUpdate = (prevProps) => {
     const index = this.props.selectedSalesPlans.length
     if (this.props.selectedSalesPlans.length > 0) {
       for (let i = 0; i < index; i++) {
-        arr = [...arr, this.props.selectedSalesPlans[i].So]
+        arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
-      await this.props.unapproveSales({SoNumbers : arr, IsRevised: true}, this.props.token)
+      await this.props.unapproveSales({SoNumbers : arr}, this.props.token)
       this.onClickSalesOrder();
       await this.props.clearSelectedSalesPlans();
     }
