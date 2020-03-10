@@ -369,7 +369,6 @@ class DetailsTab extends React.Component {
         {value === 0 && <TabContainer dir={theme.direction} >
           <div>{this._renderRevisionList()}</div>
         </TabContainer>}
-        {/* {this._renderRevisionList()}} */}
         <div className="filters-detail-site">
           {this._renderFilter()}
         </div>

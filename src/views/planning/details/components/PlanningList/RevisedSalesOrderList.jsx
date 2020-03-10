@@ -5,11 +5,13 @@ import {
 import './PlanningList.scss';import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from 'moment';
+import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
 
 export default class RevisedSalesOrderList extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
+      isShowModal: false,
       checkedValue: false,
       stats: false,
       putLifetime: {
@@ -39,6 +41,38 @@ export default class RevisedSalesOrderList extends React.PureComponent {
     this.props.updateSalesRevParameter({
       ...this.props.salesRevisedParam.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
     });
+  }
+
+  isClicked = () => {
+    this.setState({isShowModal: !this.state.isShowModal})
+  }
+
+  isCloseds = () => {
+    this.setState({isShowModal: !this.state.isShowModal})
+  }
+
+  isShowEdit = (id, row) => {
+    return(
+      <EditButton idEdit="Rev" title="Input Lifetime Component" onStats={this.isPutLifetime} 
+          values={this.props.salesOrderRevised.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} />
+    )
+  }
+
+  putLifetimke = async(data) => {
+    await this.props.putLifetimeComp(data, this.props.token);
+    await this.props.onClickSalesOrder();
+  }
+  
+  isPutLifetime =  async(key, value) => {
+      this.setState({
+        putLifetime: {
+          SoNumber : key,
+          LifeTimeComponent: value
+        },
+        stats: true
+      }, 
+      () => this.putLifetimke(this.state.putLifetime) 
+      )
   }
 
   showTableHead() {
@@ -73,18 +107,12 @@ export default class RevisedSalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
-        {/* <TableCell align="center" className="table-cell"> 
-        {this.props.salesOrderList.Lists[id].LifeTimeComponent === "-" ? <InputButton title="Input Lifetime Component" onStats={this.isPutLifetime} titles="Input" key={row.SoNumber} id={row.SoNumber} field="input"/> : 
-          <div>{this.props.salesOrderList.Lists[id].LifeTimeComponent}</div>
-        }
-        </TableCell> */}
-        <TableCell align="left" className="table-cell"> {row.LifeTimeComponent} </TableCell>
+        <TableCell align="left" className="table-cell-lt" onClick={this.isShowEdit}> 
+        {row.LifeTimeComponent} 
+        </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
-        {/* <TableCell align="center" className="table-cell">
-        {this.props.salesOrderList.Lists[id].LifeTimeComponent !== "-" ? <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} /> : ""}
-        </TableCell> */}
       </TableRow>
     )
   }

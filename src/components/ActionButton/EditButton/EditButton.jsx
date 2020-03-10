@@ -21,21 +21,36 @@ class EditButton extends React.PureComponent {
     }
 
 	render() {
-		return (
-			<div className="edit-button-row">
-				<div className="edit-button-visible" onClick={this.isClicked} />
-					<Modal 
-					className="modal-pos" open={this.state.isShowModal} onClose={this.isCloseds}>
-                        <div>
-                            <InputText 
-                                {...this.props}
-                                {...this.state}
-                                onClosed={this.isCloseds}
-                            />
-                        </div>
-                    </Modal>
-			</div>
-		);
+        if(this.props.idEdit === "Approval"){
+            return (
+                <div className="edit-button-row">
+                    <div className="edit-button-visible" onClick={this.isClicked} />
+                        <Modal 
+                        className="modal-pos" open={this.state.isShowModal} onClose={this.isCloseds}>
+                            <div>
+                                <InputText 
+                                    {...this.props}
+                                    {...this.state}
+                                    onClosed={this.isCloseds}
+                                />
+                            </div>
+                        </Modal>
+                </div>
+            );
+        }
+		else if(this.props.idEdit === "Rev"){
+            return (
+                <Modal className="modal-pos" open={this.props.openModal} onClose={this.isCloseds}>
+                    <div>
+                        <InputText 
+                            {...this.props}
+                            {...this.state}
+                            onClosed={this.isCloseds}
+                        />
+                    </div>
+                </Modal>
+            );
+        }
 	}
 }
 

@@ -580,7 +580,7 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedSalesPlans[i].So]
       }
-      await this.props.unapproveSales({SoNumbers : arr, IsRevised: true}, this.props.token)
+      await this.props.unapproveSales({SoNumbers : arr}, this.props.token)
       this.onClickSalesOrder();
       await this.props.clearSelectedSalesPlans();
     }
