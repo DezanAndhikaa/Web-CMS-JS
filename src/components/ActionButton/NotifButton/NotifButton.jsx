@@ -53,7 +53,8 @@ class NotifButton extends React.PureComponent {
 
   renderList(){
     return(
-      <Paper classes={{root: this.props.idNotif === "Status" ? "list-notif-status" : "list-notif" }}>
+      <Paper classes={{root: this.props.idNotif === "Status" ? "list-notif-status" : 
+      this.props.idNotif === "DetailSite" ? "list-notif-site" : "list-notif" }}>
         <div className="list-container">
           <div className="list-item-notif">
             <div className="listnya">

@@ -342,39 +342,39 @@ class DetailsTab extends React.Component {
     const { value } = this.state;
     return (
         <div className="root">
-        <AppBar position="static" color="default" style={{boxShadow: "none"}}>
-        <div className="tab-container-site">
+          <div className="tab-container-site">
             {this.props.renderNotif}
             {this.props.renderFilterByDataAction}
-        </div>
-          <Tabs
-            classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
-            value={this.state.value}
-            onChange={this.handleChange}
-            indicatorColor="primary" >
-            <Tab 
-              centered={true}
-              onClick={() => this.props.clearSelectedSalesPlans()} 
-              classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-              label= {this.renderTotalSales()} 
-            />
-            <Tab 
-              centered={true}
-              onClick={() => this.props.clearSelectedServicePlans()} 
-              classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-              label= {this.renderTotalService()}
-            />
-          </Tabs>
-        </AppBar>
-        {value === 0 && <TabContainer dir={theme.direction} >
-          <div>{this._renderRevisionList()}</div>
-        </TabContainer>}
-        <div className="filters-detail-site">
-          {this._renderFilter()}
-        </div>
-    {value === 0 && <TabContainer dir={theme.direction} >
-    <div>{this._renderSalesOrderList()}</div>
-    </TabContainer>}
+          </div>
+          <AppBar position="static" color="default" style={{boxShadow: "none"}}>
+            <Tabs
+              classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
+              value={this.state.value}
+              onChange={this.handleChange}
+              indicatorColor="primary" >
+              <Tab 
+                centered={true}
+                onClick={() => this.props.clearSelectedSalesPlans()} 
+                classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+                label= {this.renderTotalSales()} 
+              />
+              <Tab 
+                centered={true}
+                onClick={() => this.props.clearSelectedServicePlans()} 
+                classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+                label= {this.renderTotalService()}
+              />
+            </Tabs>
+          </AppBar>
+          {value === 0 && <TabContainer dir={theme.direction} >
+            <div>{this._renderRevisionList()}</div>
+          </TabContainer>}
+          <div className="filters-detail-site">
+            {this._renderFilter()}
+          </div>
+          {value === 0 && <TabContainer dir={theme.direction} >
+            <div>{this._renderSalesOrderList()}</div>
+          </TabContainer>}
         {value === 1 && <TabContainer dir={theme.direction} ><div>{this._renderServiceOrderList()}</div></TabContainer>}
       </div>
     );

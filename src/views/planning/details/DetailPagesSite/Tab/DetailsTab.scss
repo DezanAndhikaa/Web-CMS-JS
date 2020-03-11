@@ -149,10 +149,10 @@
 
 .tab-container-site{
     display: flex;
-    flex-direction: row;
+    width: 100%;
     position: absolute;
-    z-index: 999;
-    align-self: flex-end;
+    z-index: 1;
+    justify-content: flex-end;
 }
 
 .table-detail-site{
