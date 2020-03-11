@@ -101,7 +101,7 @@ componentDidUpdate = (prevProps) => {
   if(this.state.whichTabs){
     if(prevProps.searchComp !== this.props.searchComp){
       this.props.updateSalesParameter({
-        ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+        ...prevProps.salesParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
       });
     }
   }else{
