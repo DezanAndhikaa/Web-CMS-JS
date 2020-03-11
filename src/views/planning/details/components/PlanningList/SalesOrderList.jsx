@@ -288,22 +288,20 @@ export default class SalesOrderList extends React.PureComponent {
     }
   }
 
-render(){
-        return(
-          <>
-            <Table classes={{ root: 'table' }} className="table">
-            {this.showTableHead()}
-            <TableBody classes={{ root: 'table-body' }}>
-              {this.props.salesOrderList.Lists
-                && this.props.salesOrderList.Lists.map((row, id) => (
-                  this.showTableBody(row,id)
-                ))}
-              </TableBody>
-            </Table>
-            {this.showLoading()}
-            {/* <Loading/> */}
-          </>
-        )
-      }
+  render(){
+    return(
+      <>
+        <Table classes={{ root: 'table' }} className="table">
+        {this.showTableHead()}
+        <TableBody classes={{ root: 'table-body' }}>
+          {this.props.salesOrderList.Lists
+            && this.props.salesOrderList.Lists.map((row, id) => (
+              this.showTableBody(row,id)
+            ))}
+          </TableBody>
+        </Table>
+        {this.showLoading()}
+      </>
+    )
   }
-// }
+}

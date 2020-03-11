@@ -40,15 +40,19 @@ class EditButton extends React.PureComponent {
         }
 		else if(this.props.idEdit === "Rev"){
             return (
-                <Modal className="modal-pos" open={this.props.openModal} onClose={this.isCloseds}>
-                    <div>
-                        <InputText 
-                            {...this.props}
-                            {...this.state}
-                            onClosed={this.isCloseds}
-                        />
-                    </div>
-                </Modal>
+                <div className="edit-button-row">
+                    <div className="table-cell-lt" onClick={this.isClicked}>{this.props.RowData}</div>
+                        <Modal 
+                        className="modal-pos" open={this.state.isShowModal} onClose={this.isCloseds}>
+                            <div>
+                                <InputText 
+                                    {...this.props}
+                                    {...this.state}
+                                    onClosed={this.isCloseds}
+                                />
+                            </div>
+                        </Modal>
+                </div>
             );
         }
 	}

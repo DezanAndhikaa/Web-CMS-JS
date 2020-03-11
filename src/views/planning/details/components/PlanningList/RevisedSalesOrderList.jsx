@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Table, TableBody, TableCell, TableHead, TableRow
+  Table, TableBody, TableCell, TableHead, TableRow, Snackbar
 } from '@material-ui/core';
 import './PlanningList.scss';import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
@@ -43,24 +43,9 @@ export default class RevisedSalesOrderList extends React.PureComponent {
     });
   }
 
-  isClicked = () => {
-    this.setState({isShowModal: !this.state.isShowModal})
-  }
-
-  isCloseds = () => {
-    this.setState({isShowModal: !this.state.isShowModal})
-  }
-
-  isShowEdit = (id, row) => {
-    return(
-      <EditButton idEdit="Rev" title="Input Lifetime Component" onStats={this.isPutLifetime} 
-          values={this.props.salesOrderRevised.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} />
-    )
-  }
-
   putLifetimke = async(data) => {
     await this.props.putLifetimeComp(data, this.props.token);
-    await this.props.onClickSalesOrder();
+    await this.props.onClickRevisedSales();
   }
   
   isPutLifetime =  async(key, value) => {
@@ -107,8 +92,17 @@ export default class RevisedSalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
-        <TableCell align="left" className="table-cell-lt" onClick={this.isShowEdit}> 
-        {row.LifeTimeComponent} 
+        <TableCell align="left" className="table-cell"> 
+        {this.props.salesOrderRevised.Lists[id].LifeTimeComponent !== "-" ? 
+        <EditButton 
+          {...this.props}
+          idEdit="Rev" 
+          title="Input Lifetime Component" 
+          RowData={row.LifeTimeComponent}
+          onStats={this.isPutLifetime} 
+          values={this.props.salesOrderRevised.Lists[id].LifeTimeComponent} 
+          field="edit" 
+          id={row.SoNumber} /> : ""}
         </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
@@ -141,20 +135,20 @@ export default class RevisedSalesOrderList extends React.PureComponent {
         </div>
       )
     }
-    // else if(this.props.fetchStatusPutLifetime === ApiRequestActionsStatus.LOADING){
-    //   return(
-    //         <div>
-    //         <Snackbar
-    //           anchorOrigin={{ vertical: 'center',horizontal: 'center'}}
-    //           bodyStyle={{ backgroundColor: 'teal', color: 'coral' }}
-    //           open={this.state.stats}
-    //           onClose={this.handleClose}
-    //           autoHideDuration={3000}
-    //           message="Please Wait. Page will reload automatically"
-    //         />
-    //       </div>
-    //       )
-    // }
+    else if(this.props.fetchStatusPutLifetime === ApiRequestActionsStatus.LOADING){
+      return(
+            <div>
+            <Snackbar
+              anchorOrigin={{ vertical: 'center',horizontal: 'center'}}
+              bodyStyle={{ backgroundColor: 'teal', color: 'coral' }}
+              open={this.state.stats}
+              onClose={this.handleClose}
+              autoHideDuration={3000}
+              message="Please Wait. Page will reload automatically"
+            />
+          </div>
+          )
+    }
     else if(this.props.fetchStatusRevised === ApiRequestActionsStatus.FAILED){
       return(
         <div className="loading-container">
@@ -172,7 +166,6 @@ export default class RevisedSalesOrderList extends React.PureComponent {
 
 render(){
         return(
-          // className="paper-revision"
           <div> 
             <Table classes={{ root: 'table' }} className="table-rev">
             {this.showTableHead()}

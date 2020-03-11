@@ -800,6 +800,7 @@ componentDidUpdate = (prevProps) => {
       <>
         <ApprovalTab
           {...this.props}
+          renderNotif={this._renderNotif()}
           renderFilterByDataAction={this._renderFilterByDataAction()}  
           renderBaseButton={this._renderBaseButton()}
           renderSearch={this._renderSearchBar()}
@@ -823,7 +824,6 @@ componentDidUpdate = (prevProps) => {
           // baseButton={this._renderBaseButton}
           isApproved={this.state.isApproved}
           token={this.props.token}
-          renderNotif={this._renderNotif()}
         />
       </>
     );
