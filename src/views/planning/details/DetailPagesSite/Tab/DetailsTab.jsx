@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import {AppBar, Tabs, Tab, Typography, Badge, Paper} from '@material-ui/core';
 import SalesOrderList from '../../components/PlanningList/SalesOrderListSite';
-import ServiceOrderList from '../../components/PlanningList/ServiceOrderList';
+import ServiceOrderList from '../../components/PlanningList/ServiceOrderListSite';
 import RevisedSalesOrderList from '../../components/PlanningList/RevisedSalesOrderList';
 import './DetailsTab.scss';
 import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
@@ -100,6 +100,7 @@ class DetailsTab extends React.Component {
     value: 0,
     invisible1: false,
     invisible2: true,
+    whichTabs: true,
     GroupCustomer: [],
     GroupSite: [],
     GroupUnitModel: [],
@@ -140,11 +141,29 @@ class DetailsTab extends React.Component {
 
   _renderSalesOrderList(){
     return(
+      <>
+      {/* <div className="paper-revision">
+        <div className="revision-container">
+          <div className="rev-title-container">
+            <div className="ut-underline-rev" />
+            <div className= "revision-title">Revision List</div>
+          </div>
+          <div className="plannings-list-detail">
+              <RevisedSalesOrderList
+              {...this.props}
+              />
+          </div>
+          <div className="bottom-row-rev">
+            {this.props.renderPaginationRev}
+          </div>
+        </div>
+      </div> */}
       <div className="plannings-list-detail">
         <SalesOrderList 
           {...this.props}
         />
       </div>
+      </>
     );
   }
 
@@ -347,7 +366,9 @@ class DetailsTab extends React.Component {
             />
           </Tabs>
         </AppBar>
-        {this._renderRevisionList()}
+        {value === 0 && <TabContainer dir={theme.direction} >
+          <div>{this._renderRevisionList()}</div>
+        </TabContainer>}
         <div className="filters-detail-site">
           {this._renderFilter()}
         </div>

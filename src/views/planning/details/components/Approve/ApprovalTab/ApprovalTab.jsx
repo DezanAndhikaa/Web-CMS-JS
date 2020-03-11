@@ -10,6 +10,7 @@ import ServiceOrderList from '../../PlanningList/ServiceOrderList';
 import './ApprovalTab.scss';
 import DropdownFilter from '../../../../../../components/FilterByTitle/DropdownFilter';
 import { SelectCustomerFilterAction,SelectSiteFilterAction, SelectUnitModelFilterAction, SelectComponentFilterAction } from '../../../DetailPages-action'
+import { Toolbar } from '@material-ui/core';
 
 function TabContainer({ children, dir }) {
   return (
@@ -318,10 +319,6 @@ class ApprovalTab extends React.Component {
     return (
         <div className="root">
         <AppBar position="static" color="default" style={{boxShadow: "none"}}>
-        <div className="tab-container-approval">
-            {this.props.renderNotif}
-            {this.props.renderFilterByDataAction}
-        </div>
           <Tabs
             classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
             value={this.state.value}
@@ -343,6 +340,10 @@ class ApprovalTab extends React.Component {
             />
           </Tabs>
         </AppBar>
+          <div className="tab-container-approval">
+            {this.props.renderNotif}
+            {this.props.renderFilterByDataAction}
+        </div>
         <div className="base-button-container">
           {this._renderBaseBtn()}
         </div>
@@ -351,7 +352,7 @@ class ApprovalTab extends React.Component {
         </div>
     {value === 0 && <TabContainer dir={theme.direction} >
       {/* {!this.props.isApproved ?  */}
-    <div>{this._renderSalesOrderList()}</div> 
+    <>{this._renderSalesOrderList()}</> 
     {/* <div>{this._renderApprovedSalesOrderList()}</div>}   */}
     </TabContainer>}
         {value === 1 && <TabContainer dir={theme.direction} ><div>{this._renderServiceOrderList()}</div></TabContainer>}

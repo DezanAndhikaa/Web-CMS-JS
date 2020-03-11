@@ -115,7 +115,7 @@ class BaseButton extends React.Component{
         }else if(this.props.titles === "Edit"){
             return(
                 <div className="button-inline">
-                    <EditButton />
+                    <EditButton idEdit="Approval" />
                 </div>
             )
         }else if(this.props.titles === "Delete"){
