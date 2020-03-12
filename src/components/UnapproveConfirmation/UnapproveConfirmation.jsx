@@ -89,7 +89,26 @@ export default class UnapproveConfirmation extends React.PureComponent {
   }
 
   isReload = () => {
-    window.location.reload(false)
+    this.props.fetchSalesOrder({
+      ...this.props.salesParameter.dataFilter, 
+      Filter : 
+        [...this.props.salesParameter.dataFilter.Filter, {
+          Field : 'LifeTimeComponent',
+          Operator : "neq",
+          Value : '-',
+          Logic : "AND"
+        },{
+          Field : 'SAPIssueMessage',
+          Operator : 'eq',
+          Value : '-',
+          Logic : 'AND'
+        },{
+          Field : 'IsRevised',
+          Operator : 'eq',
+          Value : 'false',
+          Logic : 'AND'
+        }]
+    }, this.props.token);
   }
 
   _renderSap(open){
@@ -173,7 +192,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
         );
     } else if(this.props.idConfirm === "Send Success"){
       return(
-        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
+        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-unapprove">
         <DialogContent className="unapprove-confirmation-content">
           <div className="confirmation-modal-unapprove">
             <div className="confirmation-container-unapprove">

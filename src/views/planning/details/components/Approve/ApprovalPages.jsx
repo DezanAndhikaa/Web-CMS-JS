@@ -24,6 +24,7 @@ class ApprovalPages extends React.Component{
         isShowApproveSucceed: false,
         snak: true,
         openSuccess : false,
+        openSuccessEdit : false
     };
 }
 
@@ -379,7 +380,7 @@ componentDidUpdate = (prevProps) => {
     Filter : 
           [...this.props.serviceParameter.dataFilter.Filter, {
             Field : 'SAPIssueMessage',
-            Operator : "neq",
+            Operator : "eq",
             Value : '-',
             Logic : "AND"
     }]
@@ -595,7 +596,9 @@ componentDidUpdate = (prevProps) => {
         arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
       await this.props.unapproveSales({SoNumbers : arr}, this.props.token)
-      this.onClickSalesOrder();
+      this.setState({
+        openSuccessEdit : !this.state.openSuccessEdit
+      })
       await this.props.clearSelectedSalesPlans();
     }
   }
@@ -685,6 +688,12 @@ componentDidUpdate = (prevProps) => {
     })
   }
 
+  closeSuccessEdit = () => {
+    this.setState({
+      openSuccessEdit: !this.state.openSuccessEdit
+    })
+    this.onClickSalesOrder();
+  }
   renderCircularProgress() {
     return <CircularProgress size={100} className="circular-progress" />;
   }
@@ -705,9 +714,10 @@ componentDidUpdate = (prevProps) => {
     )
   }
   _renderEditSuccess = () => {
+    console.log("ini open open",this.state.openSuccess)
     return(
       <>
-        <UnapproveConfirmation idConfirm="Send Success" openModal={this.state.openSuccess} onClose={this.closeSuccess} />
+        <UnapproveConfirmation idConfirm="Send Success" openModal={this.state.openSuccessEdit} onClose={this.closeSuccessEdit} />
       </>
     )
   }
@@ -738,6 +748,7 @@ componentDidUpdate = (prevProps) => {
             handleSendtoEdit={this.handleSendtoEdit}
             selectedData={this.state.selectedData}
             renderSakses = {this.changeSuccess}
+            onClicksalesOrder = {this.onClicksalesOrder}
           />
           <BaseButton titles="Edit" />
           <BaseButton titles="Delete" 
