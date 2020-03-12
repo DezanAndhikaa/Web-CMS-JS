@@ -318,6 +318,10 @@ class ApprovalTab extends React.Component {
     const { value } = this.state;
     return (
         <div className="root">
+          <div className="tab-container-approval">
+            {this.props.renderNotif}
+            {this.props.renderFilterByDataAction}
+          </div>
         <AppBar position="static" color="default" style={{boxShadow: "none"}}>
           <Tabs
             classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
@@ -329,21 +333,15 @@ class ApprovalTab extends React.Component {
               onClick={() => this.props.clearSelectedSalesPlans()} 
               classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
               label= {this.renderTotalSales()} 
-              //{<div className="tab-label-approval">Sales Order</div>}
             />
             <Tab 
               centered={true}
               onClick={() => this.props.clearSelectedServicePlans()} 
-              classes={{ root: classes.tabRoot, selected: classes.tabSelected }}  
+              classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
               label= {this.renderTotalService()}
-              //
             />
           </Tabs>
         </AppBar>
-          <div className="tab-container-approval">
-            {this.props.renderNotif}
-            {this.props.renderFilterByDataAction}
-        </div>
         <div className="base-button-container">
           {this._renderBaseBtn()}
         </div>
@@ -351,9 +349,7 @@ class ApprovalTab extends React.Component {
           {this._renderFilter()}
         </div>
     {value === 0 && <TabContainer dir={theme.direction} >
-      {/* {!this.props.isApproved ?  */}
     <>{this._renderSalesOrderList()}</> 
-    {/* <div>{this._renderApprovedSalesOrderList()}</div>}   */}
     </TabContainer>}
         {value === 1 && <TabContainer dir={theme.direction} ><div>{this._renderServiceOrderList()}</div></TabContainer>}
       </div>

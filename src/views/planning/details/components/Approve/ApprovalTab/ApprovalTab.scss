@@ -34,11 +34,10 @@
 
 .tab-container-approval{
     display: flex;
-    flex-direction: row;
-    // margin-left: 50vw;
+    width: 100%;
     position: absolute;
-    z-index: 1; //999
-    align-self: flex-end;
+    z-index: 1;
+    justify-content: flex-end;
 }
 
 .table-container-approval{
