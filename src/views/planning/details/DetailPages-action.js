@@ -18,6 +18,7 @@ export const FetchApprovedServiceAction = 'FETCH_APPROVED_SERVICE';
 export const FetchDeletedSalesAction = 'FETCH_DELETED_SALES';
 export const FetchDeletedServiceAction = 'FETCH_DELETED_SERVICE';
 export const FetchSapSalesAction = 'FETCH_SAP_SALES';
+export const FetchSapServiceAction = 'FETCH_SAP_SERVICE';
 export const FetchRevisedSalesAction = 'FETCH_REVISED_SALES';
 export const DeleteSalesAction = 'DELETE_SALES';
 export const DeletePermanentSalesAction = 'DELETE_PERMANENT_SALES';
@@ -65,6 +66,7 @@ export const UpdateSalesRevisedParamAction = 'SALES_REVISED_PARAMETER';
 export const UpdateServiceParameterAction = 'SERVICE_PARAMETER';
 export const UpdateServiceApprovedParameterAction = 'SERVICE_APPROVED_PARAMETER';
 export const UpdateServiceDeletedParameterAction = 'SERVICE_DELETED_PARAMETER';
+export const UpdateServiceSapParameterAction = 'SERVICE_SAP_PARAMETER';
 export const SalesOrderFilterAction = 'SALES_ORDER_FILTER';
 export const SelectCustomerFilterAction = 'SELECT_CUSTOMER_FILTER';
 export const SelectSiteFilterAction = 'SELECT_SITE_FILTER';
@@ -278,7 +280,6 @@ export function fetchSalesAction(payload, accessToken) {
 
 export function fetchServiceAction(payload, accessToken) {
 	const filter = payload;
-	console.log('kupi kupi ', filter);
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${ApiUrlBase.SERVICEORDER_API_URL}/FilterUnapproved`,
@@ -383,6 +384,21 @@ export function fetchSapSalesAction(payload, accessToken){
 	return async (dispatch) => dispatch(callApi(FetchSapSalesAction, requestConfig));
 }
 
+export function fetchSapServiceAction(payload, accessToken){
+	const requestConfig = {
+		method: RequestMethod.POST,
+		url: `${ApiUrlBase.SERVICEORDER_API_URL}/FilterUnapproved`,
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'Accept': 'application/json; charset=utf-8',
+			'Content-Type': 'application/json; charset=utf-8',
+		},
+		data: payload,
+	};
+	return async (dispatch) => dispatch(callApi(FetchSapServiceAction, requestConfig));
+}
+
 export function getServiceOrderAction(payload) {
 	const requestConfig = {
 		method: RequestMethod.POST,
@@ -417,58 +433,48 @@ export function serviceParameterApprovedAction(type, payload) {
 export function serviceParameterDeletedAction(type, payload) {
 	return { type, payload };
 }
-
+export function serviceParameterSapAction(type, payload){
+	return { type, payload };
+}
 export function salesParameterRevAction(type, payload){
 	return { type, payload };
 }
-
 export function searchAction(type, payload) {
 	return { type, payload };
 }
-
 export function searchCompAction(type, payload, sort){
 	return { type, payload, sort };
 }
-
 export function searchCompActionService(type, payload, sort){
 	return { type, payload, sort };
 }
-
 export function dateFilterAction(type, payload, payload2, page){
 	return { type, payload, payload2, page };
 }
-
 export function selectFilterAction(type, payload, payload2, page) {
 	return { type, payload, payload2, page };
 }
-
 export function selectFilterAction2(type, payload, head, page) {
 	return { type, payload, head, page };
 }
-
 export function indexFilterAction(type, payload){
 	return { type, payload };
 }
-
 export function selectSalesPlansAction(type, payload) {
 	return { type, payload };
 }
 export function selectServicePlansAction(type, payload) {
 	return { type, payload };
 }
-
 export function selectLeaderAction(type, payload) {
 	return { type, payload };
 }
-
 export function selectMechanicAction(type, payload) {
 	return { type, payload };
 }
-
 export function sortByAction(type) {
 	return { type };
 }
-
 export function storePlanDataAction(payload) {
 	return { type: StoreSelectedPlanDataAction, payload };
 }

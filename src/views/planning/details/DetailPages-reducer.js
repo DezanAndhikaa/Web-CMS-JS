@@ -14,6 +14,7 @@ import {
 	FetchDeletedSalesAction,
 	FetchDeletedServiceAction,
 	FetchSapSalesAction,
+	FetchSapServiceAction,
 	FetchRevisedSalesAction,
 	DeleteSalesAction,
 	DeleteServiceAction,
@@ -26,6 +27,7 @@ import {
 	SearchSalesAction,
 	SearchServiceAction,
 	UpdateServiceApprovedParameterAction,UpdateServiceDeletedParameterAction,
+	UpdateServiceSapParameterAction,
 	SearchCompAction,SearchCompActionService,
 	SelectSalesPlanAction,
 	SelectServicePlanAction, 
@@ -572,6 +574,24 @@ export function fetchSapSalesReducer(state = initialSalesState, action) {
 	return state;
 }
 
+export function fetchSapServiceReducer(state = initialServiceState, action) {
+	if (action.type === FetchSapServiceAction) {
+	  switch (action.status) {
+		case ApiRequestActionsStatus.SUCCEEDED:
+		  return { ...state, data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
+		case ApiRequestActionsStatus.FAILED:
+		  return {
+				data: initialServiceState.data,
+				status: ApiRequestActionsStatus.FAILED,
+				error: action.error,
+		  };
+		default:
+		  return { data: initialServiceState.data, status: ApiRequestActionsStatus.LOADING };
+	  }
+	}
+	return state;
+}
+
 export function fetchRevisedSalesReducer(state = initialSalesState, action){
 	if (action.type === FetchRevisedSalesAction) {
 		switch (action.status) {
@@ -664,6 +684,12 @@ export function salesDeletedParameterReducer(state = initialSalesParameter, acti
 
 export function salesSapParameterReducer(state = initialSalesParameter, action){
 	if(action.type === UpdateSalesSapParameterAction)
+		return {...state, dataFilter: action.payload};
+	return state;
+}
+
+export function serviceSapParameterReducer(state = initialServiceParameter, action){
+	if(action.type === UpdateServiceSapParameterAction)
 		return {...state, dataFilter: action.payload};
 	return state;
 }
@@ -788,6 +814,8 @@ export function serviceParameterDeletedReducer(state = initialServiceParameter, 
 		return {...state, dataFilter: action.payload};
 	return state;
 }
+
+
 
 //ini reducer untuk global search dibagian sales order, menggunakan react-addons-update
 export function searchSalesPlansReducer(state = initialSearchSalesParameter, action) {
@@ -980,6 +1008,7 @@ const PlansReducers = combineReducers({
 	salesOrderListDeleted : fetchDeletedSalesReducer,
 	serviceOrderListDeleted : fetchDeletedServiceReducer,
 	salesOrderListSap : fetchSapSalesReducer,
+	serviceOrderListSap : fetchSapServiceReducer,
 	salesOrderRevised : fetchRevisedSalesReducer,
 	selectedSalesPlans: selectSalesPlansReducer,
 	selectedServicePlans: selectServicePlansReducer,
@@ -994,6 +1023,7 @@ const PlansReducers = combineReducers({
 	serviceParameter: serviceParameterReducer,
 	serviceApprovedParameter: serviceParameterApprovedReducer,
 	serviceDeletedParameter: serviceParameterDeletedReducer,
+	serviceSapParameter : serviceSapParameterReducer,
 	filterParameter: filterParameterReducer,
 	indexFilterParameter: indexFilterParameterReducer,
 	sortSalesBy: sortSalesByReducer,

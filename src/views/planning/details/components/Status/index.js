@@ -4,6 +4,7 @@ import { push } from 'connected-react-router';
 import {
 	salesParameterDeletedAction,
 	salesParameterSapAction,
+	serviceParameterSapAction,
 	serviceParameterApprovedAction,
 	UpdateServiceApprovedParameterAction,
 	serviceParameterDeletedAction,
@@ -17,6 +18,7 @@ import {
 	fetchDeletedSalesAction,
 	fetchDeletedServiceAction,
 	fetchSapSalesAction,
+	fetchSapServiceAction,
 	fetchSalesAction,
 	fetchServiceAction,
 	searchAction,
@@ -37,7 +39,8 @@ import {
 	UpdateSalesApprovedParameterAction,
 	UpdateSalesDeletedParameterAction,
 	UpdateServiceParameterAction,
-	UpdateSalesSapParameterAction
+	UpdateSalesSapParameterAction,
+	UpdateServiceSapParameterAction
 } from '../../DetailPages-action';
 import Status from './Status';
 
@@ -54,6 +57,7 @@ const mapStateToProps = (state) => ({
 	serviceOrderList: state.plansPageState.serviceOrderList.data,
 	serviceOrderListApproved: state.plansPageState.serviceOrderListApproved.data,
 	serviceOrderListDeleted: state.plansPageState.serviceOrderListDeleted.data,
+	serviceOrderListSap: state.plansPageState.serviceOrderListSap.data,
 	salesParameter: state.plansPageState.salesParameter,
 	salesApprovedParameter: state.plansPageState.salesApprovedParameter,
 	salesDeletedParameter: state.plansPageState.salesDeletedParameter,
@@ -61,6 +65,7 @@ const mapStateToProps = (state) => ({
 	serviceParameter: state.plansPageState.serviceParameter,
 	serviceApprovedParameter : state.plansPageState.serviceApprovedParameter,
 	serviceDeletedParameter : state.plansPageState.serviceDeletedParameter,
+	serviceSapParameter: state.plansPageState.serviceSapParameter,
 	salesSearch: state.plansPageState.salesSearch,
 	serviceSearch: state.plansPageState.serviceSearch,
 	selectedSalesPlans: state.plansPageState.selectedSalesPlans,
@@ -72,6 +77,7 @@ const mapStateToProps = (state) => ({
 	fetchStatusService: state.plansPageState.serviceOrderList.status,
 	fetchStatusServiceApproved: state.plansPageState.serviceOrderListApproved.status,
 	fetchStatusServiceDeleted: state.plansPageState.serviceOrderListDeleted.status,
+	fetchStatusServiceSap: state.plansPageState.serviceOrderListSap.status,
 	sortSalesBy: state.plansPageState.sortSalesBy,
 	sortServiceBy: state.plansPageState.sortServiceBy,
 });
@@ -89,6 +95,7 @@ const mapDispatchToProps = (dispatch) => ({
 	fetchSalesOrder: (payload, token) => dispatch(fetchSalesAction(payload, token)),
 	fetchServiceOrder: (payload, token) => dispatch(fetchServiceAction(payload, token)),
 	fetchSapSales: (payload,token) => dispatch(fetchSapSalesAction(payload, token)),
+	fetchSapService: (payload,token) => dispatch(fetchSapServiceAction(payload, token)),
 	onSearchSales: (keyword) => dispatch(searchAction(SearchSalesAction, keyword)),
 	onSearchService: (keyword) => dispatch(searchAction(SearchServiceAction, keyword)),
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
@@ -103,6 +110,7 @@ const mapDispatchToProps = (dispatch) => ({
 	updateServiceParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
 	updateServiceApprovedParameter: (payload) => dispatch(serviceParameterApprovedAction(UpdateServiceApprovedParameterAction, payload)),
 	updateServiceDeletedParameter: (payload) => dispatch(serviceParameterDeletedAction(UpdateServiceDeletedParameterAction, payload)),
+	updateServiceSapParameter: (payload) => dispatch(serviceParameterSapAction(UpdateServiceSapParameterAction, payload)),
 	deletePermanentSales: (payload, token) => dispatch(deletePermanentSalesAction(payload, token)),
 	deletePermanentService: (payload, token) => dispatch(deletePermanentServiceAction(payload, token)),
 	

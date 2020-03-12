@@ -8,6 +8,7 @@ import ServiceOrderList from '../PlanningList/ServiceOrderList';
 import ApprovedSalesOrderList from '../PlanningList/ApprovedSalesOrderList';
 import DeletedSalesOrderList from '../PlanningList/DeletedSalesOrderList';
 import SapSalesOrderList from '../PlanningList/SapSalesOrderList'
+import SapServiceOrderList from '../PlanningList/SapServiceOrderList'
 import ApprovedServiceOrderList from '../PlanningList/ApprovedServiceOrderList';
 import DeletedServiceOrderList from '../PlanningList/DeletedServiceOrderList';
 import Button from '@material-ui/core/Button';
@@ -29,6 +30,24 @@ export default class Status extends React.PureComponent {
 		sapIssueTotalData : 0,
 		searchVal : '',
 		isDisabled: true,
+	}
+
+	componentDidMount = async() =>{
+		if(this.props.location.whichTab === "sales"){
+			this.onClickSalesOrder();
+			this.onClickSalesOrderApproved();
+			this.onClickSalesOrderDeleted();
+			this.onClickSalesOrderSap();
+			this.setPropsToState();
+		}if(this.props.location.whichTab === "service"){
+			this.onClickServiceOrder();
+			this.onClickServiceOrderApproved();
+			this.onClickServiceOrderDeleted();
+			this.onClickServiceOrderSap();
+			this.setPropsToState();
+		}else if(this.props.location.whichTab === undefined){
+			this.handleClick(Menu.PLANNING_APPROVAL);
+		}
 	}
 
 	handleClick = (menu) => {
@@ -192,7 +211,6 @@ export default class Status extends React.PureComponent {
 		  const { TotalPages } = data;
 		  switch (this.state.whatPageIsChoosed) {
 			case 'Approve':
-				console.log('MASOK APPROVE BAPAKK')
 				return(
 					<div className="pagination">
 					<div className="paging">
@@ -209,7 +227,6 @@ export default class Status extends React.PureComponent {
 					</div>
 				)
 			case 'Not Approve': 
-			console.log('MASOK NOT APPROVE')
 				return(
 					<div className="pagination">
 					<div className="paging">
@@ -226,7 +243,6 @@ export default class Status extends React.PureComponent {
 					</div>
 				)
 			case 'Delete':
-					console.log('MASOK DELETE')
 					return(
 						<div className="pagination">
 						<div className="paging">
@@ -244,7 +260,19 @@ export default class Status extends React.PureComponent {
 					)
 			case 'SAP ISSUE' :
 				return(
-					console.log('MASOK SAP ISSUE')
+					<div className="pagination">
+						<div className="paging">
+							{/* {prevSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
+							{web && currentPropsSales - 3 > 0 && <div onClick={() => this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageNumber: currentPropsSales - 3 })} className="page-inactive">{currentPropsSales - 3}</div>}
+							{web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive">{currentPropsSales - 2}</div>}
+							{currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive">{currentPropsSales - 1}</div>}
+							<div className="page-active">{currentPropsSales}</div>
+							{currentPropsSales + 1 <= TotalPages && <div onClick={() => this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive">{currentPropsSales + 1}</div>}
+							{web && currentPropsSales + 2 < TotalPages && <div onClick={() => this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive">{currentPropsSales + 2}</div>}
+							{web && currentPropsSales + 3 < TotalPages && <div onClick={() => this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive">{currentPropsSales + 3}</div>}
+							{/* {nextSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>} */}
+						</div>
+						</div>
 				)
 		  default:
 				return(
@@ -257,10 +285,9 @@ export default class Status extends React.PureComponent {
 			const { TotalPages } = data;
 		  switch (this.state.whatPageIsChoosed) {
 		  case 'Approve':
-				console.log('MASOK APPROVE BAPAKK')
-					return(
-						<div className="pagination">
-						  <div className="paging">
+				return(
+					<div className="pagination">
+						<div className="paging">
 							{/* {prevService && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceApprovedParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
 							{web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceApprovedParameter({ ...this.props.serviceApprovedParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive">{currentPropsService - 3}</div>}
 							{web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceApprovedParameter({ ...this.props.serviceApprovedParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive">{currentPropsService - 2}</div>}
@@ -271,30 +298,28 @@ export default class Status extends React.PureComponent {
 							{web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceApprovedParameter({ ...this.props.serviceApprovedParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive">{currentPropsService + 2}</div>}
 							{web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceApprovedParameter({ ...this.props.serviceApprovedParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive">{currentPropsService + 3}</div>}
 							{/* {nextService && <div onClick={() => this.props.updateServiceApprovedParameter({ ...this.props.serviceApprovedParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>} */}
-						  </div>
 						</div>
+					</div>
 				)
 			case 'Not Approve': 
-			console.log('MASOK NOT APPROVE')
-			return(
-				<div className="pagination">
-				  <div className="paging">
-					{/* {prevService && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
-					{web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive">{currentPropsService - 3}</div>}
-					{web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive">{currentPropsService - 2}</div>}
-					{currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive">{currentPropsService - 1}</div>}
-					<div className="page-active">{currentPropsService}</div>
-					{currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive">{currentPropsService + 1}</div>}
-					{web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive">{currentPropsService + 2}</div>}
-					{web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive">{currentPropsService + 3}</div>}
-					{/* {nextService && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>} */}
-				  </div>
-				</div>
-		)
+				return(
+					<div className="pagination">
+						<div className="paging">
+							{/* {prevService && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
+							{web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive">{currentPropsService - 3}</div>}
+							{web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive">{currentPropsService - 2}</div>}
+							{currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive">{currentPropsService - 1}</div>}
+							<div className="page-active">{currentPropsService}</div>
+							{currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive">{currentPropsService + 1}</div>}
+							{web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive">{currentPropsService + 2}</div>}
+							{web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive">{currentPropsService + 3}</div>}
+							{/* {nextService && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>} */}
+						</div>
+					</div>
+				)
 			case 'Delete':
-					console.log('MASOK DELETE')
-					return(
-						<div className="pagination">
+				return(
+					<div className="pagination">
 						<div className="paging">
 							{web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive">{currentPropsService - 3}</div>}
 							{web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive">{currentPropsService - 2}</div>}
@@ -304,11 +329,21 @@ export default class Status extends React.PureComponent {
 							{web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive">{currentPropsService + 2}</div>}
 							{web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive">{currentPropsService + 3}</div>}
 						</div>
-						</div>
-					)
+					</div>
+				)
 			case 'SAP ISSUE' :
 				return(
-					console.log('MASOK SAP ISSUE')
+					<div className="pagination">
+						<div className="paging">
+							{web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceSapParameter({ ...this.props.serviceSapParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive">{currentPropsService - 3}</div>}
+							{web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceSapParameter({ ...this.props.serviceSapParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive">{currentPropsService - 2}</div>}
+							{currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceSapParameter({ ...this.props.serviceSapParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive">{currentPropsService - 1}</div>}
+							<div className="page-active">{currentPropsService}</div>
+							{currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateServiceSapParameter({ ...this.props.serviceSapParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive">{currentPropsService + 1}</div>}
+							{web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceSapParameter({ ...this.props.serviceSapParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive">{currentPropsService + 2}</div>}
+							{web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceSapParameter({ ...this.props.serviceSapParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive">{currentPropsService + 3}</div>}
+						</div>
+					</div>
 				)
 		  default:
 
@@ -328,10 +363,8 @@ export default class Status extends React.PureComponent {
 
 	handleClickShowPerPage = (value) =>{
 		if (this.props.location.whichTab === 'sales') {
-			console.log('pantej masuk sales')
 			 switch (this.state.whatPageIsChoosed) {
 				 case 'Approve':
-					console.log('pantej case sales', this.state.whatPageIsChoosed)
 					 return(
 						<>
 						{this.props.clearSelectedSalesPlans()};
@@ -339,7 +372,6 @@ export default class Status extends React.PureComponent {
 					</>
 					 )
 				 case 'Not Approve':
-					console.log('pantej case sales not', value)
 					 return(
 						 <>
 					{this.props.clearSelectedSalesPlans()};
@@ -347,7 +379,6 @@ export default class Status extends React.PureComponent {
 					 </>
 					 )
 				 case 'Delete':
-					console.log('pantej case sales del',  this.state.whatPageIsChoosed) 
 					return(
 						<>
 						{this.props.clearSelectedSalesPlans()};
@@ -356,41 +387,44 @@ export default class Status extends React.PureComponent {
 					)
 				 case 'SAP ISSUE':
 					 return(
-						console.log('pantej case sales issue',  this.state.whatPageIsChoosed)
+						<>
+						{this.props.clearSelectedSalesPlans()};
+						{this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageSize: value })}
+						</>
 					 )
 				 default:
 					 console.log('lol')
 			 }
 		}else if (this.props.location.whichTab === 'service') {
-		  console.log('pantej masuk service', value)
 		  switch (this.state.whatPageIsChoosed) {
 			case 'Approve':
-			   console.log('pantej case service', this.state.whatPageIsChoosed)
 				return(
-				   <>
-				   	   {this.props.clearSelectedServicePlans()};
-		  {this.props.updateServiceApprovedParameter({ ...this.props.serviceApprovedParameter.dataFilter, PageSize: value})}
-			   </>
+				   	<>
+						{this.props.clearSelectedServicePlans()};
+						{this.props.updateServiceApprovedParameter({ ...this.props.serviceApprovedParameter.dataFilter, PageSize: value})}
+			   		</>
 				)
 			case 'Not Approve':
-			   console.log('pantej case service not', value)
 				return(
 					<>
-			   {this.props.clearSelectedServicePlans()};
-		  {this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value})}
-				</>
+						{this.props.clearSelectedServicePlans()};
+						{this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value})}
+					</>
 				)
 			case 'Delete':
-			   console.log('pantej case service del',  this.state.whatPageIsChoosed) 
 			   return(
 				   <>
-				   	{this.props.clearSelectedServicePlans()};
-		  			{this.props.updateServiceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageSize: value})}
+						{this.props.clearSelectedServicePlans()};
+						{this.props.updateServiceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageSize: value})}
 				   </>
 			   )
 			case 'SAP ISSUE':
+				console.log("masok pak haji")
 				return(
-				   console.log('pantej case service issue',  this.state.whatPageIsChoosed)
+					<>
+						{this.props.clearSelectedServicePlans()};
+						{this.props.updateServiceSapParameter({ ...this.props.serviceSapParameter.dataFilter, PageSize: value})}
+					</>
 				)
 			default:
 				console.log('lol')
@@ -446,6 +480,21 @@ export default class Status extends React.PureComponent {
 	onClickServiceOrderDeleted = async() => {
 		await this.props.fetchDeletedService(this.props.serviceDeletedParameter.dataFilter, this.props.token);
 		this.props.clearSelectedServicePlans()
+		this.setPropsToState();
+	}
+
+	onClickServiceOrderSap = async() => {
+		await this.props.fetchSapService({
+			...this.props.serviceSapParameter.dataFilter,
+			Filter : 
+				[...this.props.serviceSapParameter.dataFilter.Filter, {
+					Field 	 : 'SAPIssueMessage',
+					Operator : 'neq',
+					Value 	 : '-',
+					Logic 	 : 'and'
+				}]
+		},this.props.token);
+		await this.props.clearSelectedSalesPlans()
 		this.setPropsToState();
 	}
 
@@ -555,6 +604,21 @@ export default class Status extends React.PureComponent {
 		);
 	}
 
+	sapServiceOrderList(){
+		return(
+			<div className="plannings-list-containers">
+				<SapServiceOrderList 
+				{...this.props}
+				displayServiceCheckbox={this.props.serviceSapParameter.paramsData.assigmentFilter || this.props.serviceSapParameter.paramsData.inProgressFilter}
+				sortServiceByState={this.props.sortServiceBy}
+				onClickServiceOrderSap={this.onClickServiceOrderSap}
+				onChoosedService={this.updateAssignmentserviceStates}
+				selectedServicePlanList={this.props.selectedServicePlans}
+				/>
+			</div>
+		);
+	}
+
 	componentWillUnmount = () => {
 		this.props.updateSalesParameter({
 			...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
@@ -565,17 +629,20 @@ export default class Status extends React.PureComponent {
 		this.props.updateSalesApprovedParameter({
 			...this.props.salesApprovedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
 		})
+		this.props.updateServiceApprovedParameter({
+			...this.props.serviceApprovedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+		})
 		this.props.updateSalesDeletedParameter({
 			...this.props.salesDeletedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+		})
+		this.props.updateServiceDeletedParameter({
+			...this.props.serviceDeletedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
 		})
 		this.props.updateSalesSapParameter({
 			...this.props.salesSapParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
 		})
-		this.props.updateServiceApprovedParameter({
-			...this.props.serviceApprovedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
-		})
-		this.props.updateServiceDeletedParameter({
-			...this.props.serviceDeletedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+		this.props.updateServiceSapParameter({
+			...this.props.serviceSapParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
 		})
 	  }
 
@@ -589,6 +656,9 @@ export default class Status extends React.PureComponent {
 		if (prevProps.salesDeletedParameter !== this.props.salesDeletedParameter) {
 			this.onClickSalesOrderDeleted();
 		}
+		if (prevProps.salesSapParameter !== this.props.salesSapParameter ){
+			this.onClickSalesOrderSap();
+		}
 		if (prevProps.serviceParameter !== this.props.serviceParameter) {
 			this.onClickServiceOrder();
 		}
@@ -596,16 +666,18 @@ export default class Status extends React.PureComponent {
 			this.onClickServiceOrderApproved();
 		}
 		if (prevProps.serviceDeletedParameter !== this.props.serviceDeletedParameter) {
-			console.log('pantej ke trigger', this.props.serviceDeletedParameter)
-			this.onClickServiceOrderDeleted()
+			this.onClickServiceOrderDeleted();
+		}
+		if (prevProps.serviceSapParameter !== this.props.serviceSapParameter) {
+			this.onClickServiceOrderSap();
 		}
 		if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
 			prevProps.approveSalesDownloaded.status === ApiRequestActionsStatus.LOADING) {
 			this.onClickDownloadSalesApproved()
 		}
 		if (this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
-		prevProps.approveServiceDownloaded.status === ApiRequestActionsStatus.LOADING) {
-		this.onClickDownloadServiceApproved()
+			prevProps.approveServiceDownloaded.status === ApiRequestActionsStatus.LOADING) {
+			this.onClickDownloadServiceApproved()
 		}
 		  //ini untuk trigger sales global search
 		if (prevProps.salesSearch !== this.props.salesSearch) {
@@ -617,7 +689,7 @@ export default class Status extends React.PureComponent {
 				case 'Delete' :
 					return this.props.updateSalesDeletedParameter({...prevProps.salesDeletedParameter.dataFilter, Filter : this.props.salesSearch, PageNumber :1});
 				case 'SAP ISSUE':
-					// this.props.updateSalesSapIssueParameter({...prevProps.salesSapIssueParameter.dataFilter, Filter : this.props.salesSearch, PageNumber :1});
+					return this.props.updateSalesSapParameter({...prevProps.salesSapParameter.dataFilter, Filter : this.props.salesSearch, PageNumber :1});
 				default:
 					break;
 			}
@@ -632,13 +704,12 @@ export default class Status extends React.PureComponent {
 				case 'Delete' :
 					return this.props.updateServiceDeletedParameter({...prevProps.serviceDeletedParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber :1});
 				case 'SAP ISSUE':
-					// return this.props.updateServiceSapIssueParameter({...prevProps.serviceSapIssueParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber :1});
+					return this.props.updateServiceSapParameter({...prevProps.serviceSapParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber :1});
 				default:
 					break;
 			}
 			console.log('masuk search ', this.props.serviceSearch)
 		}
-	
 	}
 
 	_renderList = (whatPageIsChoosed) =>{
@@ -724,7 +795,7 @@ export default class Status extends React.PureComponent {
 					<>
 						{this.sapSalesOrderList()}
 					<div className="bottom-row">
-					{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderListDeleted)}
+					{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderListSap)}
 					</div>
 					</>
 				)
@@ -733,7 +804,7 @@ export default class Status extends React.PureComponent {
 					<>
 						{this.sapServiceOrderList()}
 					<div className="bottom-row">
-					{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderListDeleted)}
+					{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderListSap)}
 					</div>
 					</>
 				)
@@ -760,22 +831,6 @@ export default class Status extends React.PureComponent {
 		return this.props.selectServicePlan(plan);
 	};
 
-	componentDidMount = async() =>{
-		if(this.props.location.whichTab === "sales"){
-			this.onClickSalesOrder();
-			this.onClickSalesOrderApproved();
-			this.onClickSalesOrderDeleted();
-			this.setPropsToState();
-		}if(this.props.location.whichTab === "service"){
-			this.onClickServiceOrder();
-			this.onClickServiceOrderApproved();
-			this.onClickServiceOrderDeleted();
-			this.setPropsToState();
-		}else if(this.props.location.whichTab === undefined){
-			this.handleClick(Menu.PLANNING_APPROVAL);
-		}
-	}
-
 	setPropsToState(){
 		console.log('pantek ke trigger')
 		if (this.props.location.whichTab === "sales") {
@@ -783,14 +838,14 @@ export default class Status extends React.PureComponent {
 				approveTotalData : this.props.salesOrderListApproved.TotalData,
 				notApproveTotalData : this.props.salesOrderList.TotalData,
 				deleteTotalData : this.props.salesOrderListDeleted.TotalData,
-				sapIssueTotalData : 0
+				sapIssueTotalData : this.props.salesOrderListSap.TotalData
 			})
 		}else if (this.props.location.whichTab === "service") {
 			this.setState({
 				approveTotalData : this.props.serviceOrderListApproved.TotalData,
 				notApproveTotalData : this.props.serviceOrderList.TotalData,
 				deleteTotalData : this.props.serviceOrderListDeleted.TotalData,
-				sapIssueTotalData : 0
+				sapIssueTotalData : this.props.serviceOrderListSap.TotalData
 			})
 		}
 		
