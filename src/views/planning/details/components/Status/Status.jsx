@@ -433,7 +433,21 @@ export default class Status extends React.PureComponent {
 	}
 
 	onClickSalesOrder = async() =>{
-		await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
+		await this.props.fetchSalesOrder({
+			...this.props.salesParameter.dataFilter, 
+			Filter : 
+			  [...this.props.salesParameter.dataFilter.Filter, {
+				Field : 'IsApproved',
+				Operator : "eq",
+				Value : false,
+				Logic : "AND"
+			  },{
+				Field : 'SAPIssueMessage',
+				Operator : 'eq',
+				Value : '-',
+				Logic : 'AND'
+			  }]
+		  }, this.props.token);
 		await this.props.clearSelectedSalesPlans()
 		this.setPropsToState();
 	}
@@ -621,28 +635,28 @@ export default class Status extends React.PureComponent {
 
 	componentWillUnmount = () => {
 		this.props.updateSalesParameter({
-			...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
+			...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
 		});
 		this.props.updateServiceParameter({
-			...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
+			...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
 		});
 		this.props.updateSalesApprovedParameter({
-			...this.props.salesApprovedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+			...this.props.salesApprovedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
 		})
 		this.props.updateServiceApprovedParameter({
-			...this.props.serviceApprovedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+			...this.props.serviceApprovedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
 		})
 		this.props.updateSalesDeletedParameter({
-			...this.props.salesDeletedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+			...this.props.salesDeletedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
 		})
 		this.props.updateServiceDeletedParameter({
-			...this.props.serviceDeletedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+			...this.props.serviceDeletedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
 		})
 		this.props.updateSalesSapParameter({
-			...this.props.salesSapParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+			...this.props.salesSapParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
 		})
 		this.props.updateServiceSapParameter({
-			...this.props.serviceSapParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+			...this.props.serviceSapParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
 		})
 	  }
 
