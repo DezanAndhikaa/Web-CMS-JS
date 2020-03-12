@@ -163,7 +163,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
         );
     } else if(this.props.idConfirm === "Send Success"){
       return(
-        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
+        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-unapprove">
         <DialogContent className="unapprove-confirmation-content">
           <div className="confirmation-modal-unapprove">
             <div className="confirmation-container-unapprove">

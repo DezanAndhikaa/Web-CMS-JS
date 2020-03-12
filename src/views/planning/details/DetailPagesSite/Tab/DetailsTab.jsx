@@ -23,20 +23,21 @@ function TabContainer({ children, dir }) {
 }
 const StyledBadge = withStyles(theme => ({
   badge: {
+    height: '30px',
     right: -42,
     padding: '10px',
     borderRadius: '5px',
-    fontSize: '15px'
+    fontSize: '18px'
   },
 }))(Badge);
 
 const Badges = withStyles(theme => ({
   badge: {
+    height: '30px',
     right: -32,
-    // top: 10,
     padding: '10px',
     borderRadius: '5px',
-    fontSize: '15px'
+    fontSize: '18px'
   },
 }))(Badge);
 
@@ -62,7 +63,7 @@ const styles = theme => ({
     textTransform: 'initial',
     alignItem: 'center',
     marginLeft:0,
-    // minWidth: 72,
+    minWidth: 72,
     fontWeight: theme.typography.fontWeightRegular,
     marginRight: theme.spacing.unit * 0,
     fontFamily: [
@@ -142,22 +143,6 @@ class DetailsTab extends React.Component {
   _renderSalesOrderList(){
     return(
       <>
-      {/* <div className="paper-revision">
-        <div className="revision-container">
-          <div className="rev-title-container">
-            <div className="ut-underline-rev" />
-            <div className= "revision-title">Revision List</div>
-          </div>
-          <div className="plannings-list-detail">
-              <RevisedSalesOrderList
-              {...this.props}
-              />
-          </div>
-          <div className="bottom-row-rev">
-            {this.props.renderPaginationRev}
-          </div>
-        </div>
-      </div> */}
       <div className="plannings-list-detail">
         <SalesOrderList 
           {...this.props}
@@ -307,8 +292,8 @@ class DetailsTab extends React.Component {
 
   renderTotalSales(){
     return(
-      <div className="tab-detail-site">
-        <div className="label-detail-site">Sales Order 
+      <div className="tab-sales-site">
+        <div className="label-sales-site">Sales Order 
           <span>
             <StyledBadge 
               badgeContent={this.props.totalSalesData} 
@@ -323,8 +308,8 @@ class DetailsTab extends React.Component {
 
   renderTotalService(){
     return(
-      <div className="tab-detail-site">
-        <div className="label-detail-site">Service Order 
+      <div className="tab-service-site">
+        <div className="label-service-site">Service Order 
         <span>
           <Badges 
             badgeContent={this.props.totalServiceData} 

@@ -97,15 +97,17 @@ export default class SalesOrderList extends React.PureComponent {
       return (
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow classes={{ root: 'table-row' }}>
-          <TableCell padding="checkbox">
-            {this.props.displaySalesCheckbox && 
-            <Checkbox 
-              checked={this.state.checkedValue}
-              onChange={this.handleClickCheckbox}
-              onClick={() => {this.props.salesOrderList.Lists.map((row,id) => 
-              this.props.onChoosedSales(row,id))}}
-              className="checkbox-checked-header"/>}
-          </TableCell>
+          { this.props.idSales === "Data Input" ? "" :
+            <TableCell padding="checkbox">
+              {this.props.displaySalesCheckbox && 
+              <Checkbox 
+                checked={this.state.checkedValue}
+                onChange={this.handleClickCheckbox}
+                onClick={() => {this.props.salesOrderList.Lists.map((row,id) => 
+                this.props.onChoosedSales(row,id))}}
+                className="checkbox-checked-header"/>}
+            </TableCell>
+          }
           <PlanningListHeader
             name="SO"
             // isActive={this.props.sortJobsByState.unitModel.isActive}
@@ -200,18 +202,18 @@ export default class SalesOrderList extends React.PureComponent {
   showTableBody(row,id) {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
-        {/* Nanti ada if user ho atau site
-              Ini tampilan HO */}
-        <TableCell padding="checkbox">
-          {this.props.displaySalesCheckbox && 
-          <Checkbox 
-          // checked={true}
-          disabled={this.isCheckboxAvailable(row)} 
-          checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
-          onClick={() => this.props.onChoosedSales(row)} 
-          classes={{ checked: 'checkbox-checked' }} 
-          />}
-        </TableCell>
+        { this.props.idSales === "Data Input" ? "" :
+          <TableCell padding="checkbox">
+            {this.props.displaySalesCheckbox && 
+            <Checkbox 
+            // checked={true}
+            disabled={this.isCheckboxAvailable(row)} 
+            checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
+            onClick={() => this.props.onChoosedSales(row)} 
+            classes={{ checked: 'checkbox-checked' }} 
+            />}
+          </TableCell>
+        }
         <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
@@ -228,7 +230,6 @@ export default class SalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
-        {/* Ini tampilan HO, site gaada action */}
         <TableCell align="center" className="table-cell">
         {this.props.salesOrderList.Lists[id].LifeTimeComponent !== "-" ? <EditButton idEdit="Approval" title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} /> : ""}
         </TableCell>
@@ -289,19 +290,36 @@ export default class SalesOrderList extends React.PureComponent {
   }
 
   render(){
-    return(
-      <>
-        <Table classes={{ root: 'table' }} className="table">
-        {this.showTableHead()}
-        <TableBody classes={{ root: 'table-body' }}>
-          {this.props.salesOrderList.Lists
-            && this.props.salesOrderList.Lists.map((row, id) => (
-              this.showTableBody(row,id)
-            ))}
-          </TableBody>
-        </Table>
-        {this.showLoading()}
-      </>
-    )
+    if(this.props.idSales === "Data Input"){
+      return(
+        <>
+          <Table classes={{ root: 'table' }} className="table">
+          {this.showTableHead()}
+          <TableBody classes={{ root: 'table-body' }}>
+            {this.props.salesOrderList.Lists
+              && this.props.salesOrderList.Lists.map((row, id) => (
+                this.showTableBody(row,id)
+              ))}
+            </TableBody>
+          </Table>
+          {this.showLoading()}
+        </>
+      )
+    } else{
+      return(
+        <>
+          <Table classes={{ root: 'table' }} className="table">
+          {this.showTableHead()}
+          <TableBody classes={{ root: 'table-body' }}>
+            {this.props.salesOrderList.Lists
+              && this.props.salesOrderList.Lists.map((row, id) => (
+                this.showTableBody(row,id)
+              ))}
+            </TableBody>
+          </Table>
+          {this.showLoading()}
+        </>
+      )
+    }
   }
 }

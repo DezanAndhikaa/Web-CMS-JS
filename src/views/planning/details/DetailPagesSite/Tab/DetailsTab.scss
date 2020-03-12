@@ -20,12 +20,20 @@
       }
     }
 }
-.tab-detail-site{
-    // width: 100%;
-    // display: inline-flex;
-    // width: 165px;
+
+.tab-sales-site{
+    width: 170px;
     display: flex;
-    .label-detail-site{
+    .label-sales-site{
+        font-family: 'Lato-Bold';
+        font-size: vw(24); //vw(22)
+        line-height: vw(24); // vw(24)
+    }
+}
+.tab-service-site{
+    width: 180px;
+    display: flex;
+    .label-service-site{
         font-family: 'Lato-Bold';
         font-size: vw(24); //vw(22)
         line-height: vw(24); // vw(24)
@@ -149,7 +157,8 @@
 
 .tab-container-site{
     display: flex;
-    width: 100%;
+    width: 70%;
+    left: 30%;
     position: absolute;
     z-index: 1;
     justify-content: flex-end;

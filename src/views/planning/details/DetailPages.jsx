@@ -368,7 +368,6 @@ componentDidUpdate = (prevProps) => {
 
   //SAAT MENGKLIK sales ORDER TAB
   onClickSalesOrder = async() =>{
-    console.log('lokasinya dimana input: ', this.props.location.whichTab)
     if (this.props.location.whichTab === 'lifetime') {
       await this.props.fetchSalesOrder({
         ...this.props.salesParameter.dataFilter, 
@@ -532,8 +531,7 @@ componentDidUpdate = (prevProps) => {
           renderFilterByDataAction={this._renderFilterByDataAction()} 
           renderSearch={this._renderSearchBar()}
           renderNotif={this._renderNotif()}
-          onClickSalesOrder={this.onClickSalesOrder}        
-          onClickServiceOrder={this.onClickServiceOrder}
+          onClickSalesOrder={this.onClickSalesOrder}      
           onChoosedService={this.updateAssignmentServiceStates}
           onChoosedSales={this.updateAssignmentSalesStates}
           selectedSalesPlanList={this.props.selectedSalesPlans}

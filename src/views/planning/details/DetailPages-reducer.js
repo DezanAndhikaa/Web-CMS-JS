@@ -186,7 +186,7 @@ const initialSearchCompParameter =
 	Field	: '',
 	Operator: 'contains',
 	Value   : '',
-	Logic   : 'OR'
+	Logic   : 'AND'
 }];
 
 const initialSearchSalesParameter =

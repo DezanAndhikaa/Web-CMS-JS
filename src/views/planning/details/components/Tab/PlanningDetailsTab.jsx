@@ -144,7 +144,8 @@ console.log('kondisi value terasek', value)
     return(
       <div className="plannings-list-containers">
         <SalesOrderList 
-        {...this.props}
+          idSales= "Data Input"
+          {...this.props}
         />
       </div>
     );
