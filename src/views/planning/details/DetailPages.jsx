@@ -67,7 +67,6 @@ componentDidUpdate = (prevProps) => {
   }
   //FILTER RANGE DATE
   if(prevProps.filterDate !== this.props.filterDate){
-    console.log('data props filter', this.props.filterDate)
     this.props.updateSalesParameter({
       ...prevProps.salesParameter.dataFilter, Filter : this.props.filterDate.Filter, PageNumber: 1
     })

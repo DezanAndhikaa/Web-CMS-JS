@@ -14,6 +14,5 @@ export default function isAccessTokenValid() {
 	if (currentTime > jwt.exp) {
 		return false;
 	}
-	console.log('ini decode jwt ', jwt.role_name);
 	return true;
 }

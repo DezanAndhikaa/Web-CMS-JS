@@ -8,7 +8,6 @@ import CloseNotif from '../CloseNotif/CloseNotif';
 
 export default class ConfirmationModal extends React.PureComponent {
   render() {
-    console.log("bibibi ",this.props.handleReload)
     if(this.props.idModal === "Approved"){
       return (
         <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">

@@ -17,7 +17,6 @@ export default class SearchInput extends React.PureComponent {
       this.setState({ value: event.target.value });
       setTimeout(() => {
         this.props.handleSearch(this.state.value)
-        console.log('pantej ke trig')
       }, 1000)
   }
 

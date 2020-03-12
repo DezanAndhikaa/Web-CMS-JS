@@ -26,7 +26,6 @@ class InputText extends React.Component{
         this.setState({
             [name] : value
         })
-        console.log("nilai state teks : "+this.state.limitText)
     }
 
     render(){

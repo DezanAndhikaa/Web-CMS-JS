@@ -150,21 +150,7 @@ export function approveServiceDownloadAction(woId, accessToken){
 	  return async (dispatch) => dispatch(callApi(PlanningApprovedServiceDownloadAction, requestConfig));
 }
 
-// export function fetchPlansAssignment(type, payload, accessToken) {
-// 	const requestConfig = {
-// 		method: RequestMethod.POST,
-// 		url: `${ApiUrlBase.SALESORDER_API_URL}Filters`,
-// 		data: payload,
-// 		headers: {
-// 			Authorization: `Bearer ${accessToken}`,
-// 'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID, // eslint-disable-line no-undef
-// 			'Content-Type': 'application/json',
-// 		},
-// 	};
-// 	return async (dispatch) => dispatch(callApi(type, requestConfig));
-// }
 export function putLifetimeCompAction(payload, accessToken){
-	console.log('tok token aksi : ',accessToken);
 	const requestConfig = {
 		method: RequestMethod.PUT,
 		url: `${ApiUrlBase.SALESORDER_API_URL}/LifeTimeComponent`,

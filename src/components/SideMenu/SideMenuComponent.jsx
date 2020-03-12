@@ -32,8 +32,6 @@ class SideMenuComponent extends React.Component {
   };
 
   handleClick(menu, subMenu) {
-    console.log('skuit router menu', menu)
-    console.log('skuit router sub', subMenu)
     this.props.clickMenu(menu, subMenu);
     if (menu === Menu.PLANNING) {
       if (subMenu !== "") this.props.push(subMenu);

@@ -19,10 +19,6 @@ class BaseButton extends React.Component{
         }
     }
 
-    componentDidMount(){
-        // console.log('sel sel sel masok 2',  this.props.selectedDataSAP)
-    }
-
      isClicked = () => {
        this.setState({isShowModal: !this.state.isShowModal})
     }
@@ -32,7 +28,6 @@ class BaseButton extends React.Component{
     }
 
     isApproved = async() => {
-        console.log('masuk isAPprove')
         if (this.props.whatTabsIsRendered === true) {
             if (this.props.titles === "Approve") {
                 await this.props.handleSalesApprove()
