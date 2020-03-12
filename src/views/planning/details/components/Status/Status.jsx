@@ -433,7 +433,21 @@ export default class Status extends React.PureComponent {
 	}
 
 	onClickSalesOrder = async() =>{
-		await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
+		await this.props.fetchSalesOrder({
+			...this.props.salesParameter.dataFilter, 
+			Filter : 
+			  [...this.props.salesParameter.dataFilter.Filter, {
+				Field : 'IsApproved',
+				Operator : "eq",
+				Value : false,
+				Logic : "AND"
+			  },{
+				Field : 'SAPIssueMessage',
+				Operator : 'eq',
+				Value : '-',
+				Logic : 'AND'
+			  }]
+		  }, this.props.token);
 		await this.props.clearSelectedSalesPlans()
 		this.setPropsToState();
 	}
