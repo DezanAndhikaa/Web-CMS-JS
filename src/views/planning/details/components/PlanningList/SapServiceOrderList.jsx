@@ -41,7 +41,7 @@ export default class SapServiceOrderList extends React.PureComponent {
 
   componentWillMount = () =>{
     this.props.updateServiceSapParameter({ 
-      ...this.props.serviceSapParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+      ...this.props.serviceSapParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
     });
   }
   

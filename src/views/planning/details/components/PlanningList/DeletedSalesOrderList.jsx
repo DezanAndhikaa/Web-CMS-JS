@@ -35,7 +35,7 @@ export default class DeletedSalesOrderList extends React.PureComponent {
 
   componentWillMount = () =>{
     this.props.updateSalesDeletedParameter({ 
-      ...this.props.salesDeletedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+      ...this.props.salesDeletedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
     });
   }
   

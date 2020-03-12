@@ -38,7 +38,7 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
   }
 
     componentWillMount = ()=>{
-      this.props.updateSalesApprovedParameter({ ...this.props.salesApprovedParameter.dataFilter,  PageNumber: 1, PageSize: 2, Sort: [], Filter: []})
+      this.props.updateSalesApprovedParameter({ ...this.props.salesApprovedParameter.dataFilter,  PageNumber: 1, PageSize: 10, Sort: [], Filter: []})
     }
   
 

@@ -41,7 +41,7 @@ export default class SapSalesOrderList extends React.PureComponent {
 
   componentWillMount = () =>{
     this.props.updateSalesSapParameter({ 
-      ...this.props.salesSapParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+      ...this.props.salesSapParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
     });
   }
   

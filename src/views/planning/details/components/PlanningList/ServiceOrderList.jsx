@@ -30,7 +30,7 @@ export default class ServiceOrderList extends React.PureComponent {
 
   componentWillMount = () =>{
     this.props.updateServiceParameter({
-      ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
+      ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
     });
   }
 

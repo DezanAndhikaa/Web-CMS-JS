@@ -621,28 +621,28 @@ export default class Status extends React.PureComponent {
 
 	componentWillUnmount = () => {
 		this.props.updateSalesParameter({
-			...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
+			...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
 		});
 		this.props.updateServiceParameter({
-			...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
+			...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
 		});
 		this.props.updateSalesApprovedParameter({
-			...this.props.salesApprovedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+			...this.props.salesApprovedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
 		})
 		this.props.updateServiceApprovedParameter({
-			...this.props.serviceApprovedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+			...this.props.serviceApprovedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
 		})
 		this.props.updateSalesDeletedParameter({
-			...this.props.salesDeletedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+			...this.props.salesDeletedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
 		})
 		this.props.updateServiceDeletedParameter({
-			...this.props.serviceDeletedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+			...this.props.serviceDeletedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
 		})
 		this.props.updateSalesSapParameter({
-			...this.props.salesSapParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+			...this.props.salesSapParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
 		})
 		this.props.updateServiceSapParameter({
-			...this.props.serviceSapParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: []
+			...this.props.serviceSapParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
 		})
 	  }
 
@@ -883,7 +883,7 @@ export default class Status extends React.PureComponent {
 				{/* {this.showLoading()} */}
 				<div className="head-containers">
 					<div className="back_button">
-						<Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
+						<Button variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
 							Detail
 						</Button>
 					</div>

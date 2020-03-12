@@ -35,7 +35,7 @@ export default class DeletedServiceOrderList extends React.PureComponent {
 
   componentWillMount = () =>{
     this.props.updateServiceDeletedParameter({ 
-      ...this.props.serviceDeletedParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
+      ...this.props.serviceDeletedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
     });
   }
   

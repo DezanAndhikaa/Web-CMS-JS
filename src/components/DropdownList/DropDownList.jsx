@@ -41,15 +41,15 @@ class DropDownList extends React.Component{
 						className="dropdown-list" 
                         labelId="label" id="select" 
                         // value={this.state.pagesize}
-                        defaultValue={2}
+                        defaultValue={10}
                         onChange={this.handleChange}
                         // onClick={this.handleClick}
 					>
-						<MenuItem className="dropdown-list" value="2">2</MenuItem>
-						<MenuItem className="dropdown-list" value="4">4</MenuItem>
 						<MenuItem className="dropdown-list" value="5">5</MenuItem>
-						<MenuItem className="dropdown-list" value="100">100</MenuItem>
-						<MenuItem className="dropdown-list" value="100000">All</MenuItem>
+						<MenuItem className="dropdown-list" value="10">10</MenuItem>
+						<MenuItem className="dropdown-list" value="15">15</MenuItem>
+						<MenuItem className="dropdown-list" value="20">20</MenuItem>
+						<MenuItem className="dropdown-list" value="25">25</MenuItem>
 					</Select>
 					<FormLabel className="label">entries</FormLabel>
 				</span>

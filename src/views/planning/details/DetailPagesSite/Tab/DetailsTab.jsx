@@ -165,7 +165,7 @@ class DetailsTab extends React.Component {
               {...this.props}
               />
           </div>
-          <div className="bottom-row-rev">
+          <div>
             {this.props.renderPaginationRev}
           </div>
         </div>

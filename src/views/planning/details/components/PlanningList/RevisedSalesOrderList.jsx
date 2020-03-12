@@ -39,7 +39,7 @@ export default class RevisedSalesOrderList extends React.PureComponent {
 
   componentWillMount = () =>{
     this.props.updateSalesRevParameter({
-      ...this.props.salesRevisedParam.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
+      ...this.props.salesRevisedParam.dataFilter, PageNumber: 1, PageSize: 5, Sort: [], Filter: [],
     });
   }
 

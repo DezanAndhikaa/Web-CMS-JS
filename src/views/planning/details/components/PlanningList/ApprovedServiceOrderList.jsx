@@ -38,7 +38,7 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
   }
   
   componentWillMount = ()=>{
-    this.props.updateServiceApprovedParameter({ ...this.props.serviceApprovedParameter.dataFilter,  PageNumber: 1, PageSize: 2, Sort: [], Filter: []})
+    this.props.updateServiceApprovedParameter({ ...this.props.serviceApprovedParameter.dataFilter,  PageNumber: 1, PageSize: 10, Sort: [], Filter: []})
   }
 
   isFilterLifetime = async( value1, value2 ) => {

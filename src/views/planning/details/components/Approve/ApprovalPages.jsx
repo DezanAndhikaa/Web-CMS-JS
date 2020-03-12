@@ -30,10 +30,10 @@ class ApprovalPages extends React.Component{
 
 componentWillUnmount = () => {
   this.props.updateSalesParameter({
-    ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
+    ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
   });
   this.props.updateServiceParameter({
-    ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 2, Sort: [], Filter: [],
+    ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
   });
 }
 
