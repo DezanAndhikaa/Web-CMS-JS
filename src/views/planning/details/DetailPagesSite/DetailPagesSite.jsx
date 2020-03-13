@@ -535,6 +535,18 @@ componentDidUpdate = (prevProps) => {
     });
   };
 
+  changeSuccess = () => {
+    this.setState({
+      openSuccess : !this.state.openSuccess
+    })
+  }
+
+  closeSuccess = () => {
+    this.setState({
+      openSuccess: !this.state.openSuccess
+    })
+  }
+
   //KOMPONEN UNTUK RENDER PAGE SALES ORDER DAN SERVICE ORDER
   _renderTabs(){
     return (

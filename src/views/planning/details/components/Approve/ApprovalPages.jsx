@@ -694,6 +694,7 @@ componentDidUpdate = (prevProps) => {
     })
     this.onClickSalesOrder();
   }
+  
   renderCircularProgress() {
     return <CircularProgress size={100} className="circular-progress" />;
   }

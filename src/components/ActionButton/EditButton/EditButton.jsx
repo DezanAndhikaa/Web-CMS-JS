@@ -42,8 +42,7 @@ class EditButton extends React.PureComponent {
             return (
                 <div className="edit-button-row">
                     <div className="table-cell-lt" onClick={this.isClicked}>{this.props.RowData}</div>
-                        <Modal 
-                        className="modal-pos" open={this.state.isShowModal} onClose={this.isCloseds}>
+                        <Modal className="modal-pos" open={this.state.isShowModal} onClose={this.isCloseds}>
                             <div>
                                 <InputText 
                                     {...this.props}

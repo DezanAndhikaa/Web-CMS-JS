@@ -53,7 +53,10 @@ class InputText extends React.Component{
                 </Formik>
                 <div className="bottom-row">
                     <Button className="btn-cancel" onClick={this.props.onClosed}>Cancel</Button>
-                    <Button className="btn-input" onClick={ () => {this.props.onStats(this.props.id, this.state.limitText); this.props.onClosed()} } >Input</Button>
+                    {this.props.idInput === "EditSite" ? 
+                        <Button className="btn-input" onClick={ () => {this.props.onStats(this.props.id, this.state.limitText); this.props.onClosed()} } >Input</Button> :
+                        <Button className="btn-input" onClick={ () => {this.props.onStats(this.props.id, this.state.limitText); this.props.onClosed()} } >Input</Button>
+                    }                    
                 </div>
             </div>
         )
