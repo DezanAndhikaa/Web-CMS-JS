@@ -292,34 +292,55 @@ class DetailsTab extends React.Component {
 
   renderTotalSales(){
     return(
-      <div className="tab-sales-site">
-        <div className="label-sales-site">Sales Order 
-          <span>
-            <StyledBadge 
-              badgeContent={this.props.totalSalesData} 
-              color="primary" 
-              invisible={this.state.invisible1}>
-            </StyledBadge >
-          </span> 
-        </div>
+      <div className="tab-site">
+        <div className="label-site">Sales Order</div>
       </div>      
     )
   }
 
   renderTotalService(){
     return(
-      <div className="tab-service-site">
-        <div className="label-service-site">Service Order 
-        <span>
-          <Badges 
-            badgeContent={this.props.totalServiceData} 
-            color="primary" 
-            invisible={this.state.invisible2}>
-          </Badges >
-        </span> 
-      </div>
+      <div className="tab-site">
+        <div className="label-site">Service Order</div>
       </div>      
     )
+  }
+
+  _renderTotalData(){
+    if (this.state.value === 0) {
+      return(
+        <div className="total-site-container">
+          <div className="header-site">
+            <div className="header-site-1">
+              Total Data
+            </div>
+            <div className="header-site-2">
+              Sales Order
+            </div>
+          </div>
+          <div className="total-site">
+            {this.props.totalSalesData}
+          </div>
+        </div>
+      )
+    }
+    else{
+      return(
+        <div className="total-site-container">
+          <div className="header-site">
+            <div className="header-site-1">
+              Total Data
+            </div>
+            <div className="header-site-2">
+              Service Order
+            </div>
+          </div>
+          <div className="total-site">
+            {this.props.totalServiceData}
+          </div>
+        </div>
+      )
+    }
   }
 
   render() {
@@ -354,6 +375,9 @@ class DetailsTab extends React.Component {
           {value === 0 && <TabContainer dir={theme.direction} >
             <div>{this._renderRevisionList()}</div>
           </TabContainer>}
+          <div className="site-container">
+            {this._renderTotalData()}
+          </div>
           <div className="filters-detail-site">
             {this._renderFilter()}
           </div>

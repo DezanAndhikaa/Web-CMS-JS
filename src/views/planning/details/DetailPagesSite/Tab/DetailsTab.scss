@@ -21,19 +21,9 @@
     }
 }
 
-.tab-sales-site{
-    width: 170px;
+.tab-site{
     display: flex;
-    .label-sales-site{
-        font-family: 'Lato-Bold';
-        font-size: vw(24); //vw(22)
-        line-height: vw(24); // vw(24)
-    }
-}
-.tab-service-site{
-    width: 180px;
-    display: flex;
-    .label-service-site{
+    .label-site{
         font-family: 'Lato-Bold';
         font-size: vw(24); //vw(22)
         line-height: vw(24); // vw(24)
@@ -170,6 +160,58 @@
     position: relative;
     z-index: 3;
     width: 100%;
+    .site-container{
+        // width: 100%;
+        display: flex;
+        flex-direction: row;
+        margin-top: vw(41.93);
+        .total-site-container{
+            display: flex;
+            // position: absolute;
+            width: 306px;
+            height: 89px;
+            background-color: white;
+            border-radius: vw(8) !important;
+            box-shadow: 0px vw-tab(3) vw-tab(6) rgba(0, 0, 0, 0.161);
+            .header-site{
+                // position: absolute;
+                width: 93px;
+                flex-wrap: nowrap;
+                .header-site-1{
+                    width: 93px;
+                    display: inline-flex;
+                    margin-left: 22.94%;
+                    // margin-right: 75.26%;
+                    margin-top: 16.72%;
+                    font-size: 20px;//vw(25);
+                    font-family: 'Lato-Bold';
+                    line-height: vw(34); //24px; 
+                }
+                .header-site-2{
+                    width: 93px;
+                    margin-left: 22.86%;
+                    font-family: 'Lato-Regular';
+                    font-size: 15px;//vw(20);
+                    line-height: vw(48);//18px;
+                }
+            }
+            .total-site{                    
+                width: 153px;
+                margin-left: 54.72%;//40.72%;//32.72%;
+                margin-top: 12.8%;//19.8%;
+                font-family: 'Lato-Bold';
+                font-size: 36px;//vw(36);
+                line-height: vw(43);
+                color: #3C3B3B;
+            }
+        }
+        .base-button{
+            flex: 1;
+            align-self: flex-end;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
     .filters-detail-site{
         display: flex;
         flex-direction: row;
