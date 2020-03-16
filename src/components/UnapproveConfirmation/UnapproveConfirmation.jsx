@@ -14,7 +14,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
     isShowModalSap: false,
     isShowModalSend: false,
     isShowModalSapSucced: false,
-    isShowModalSendSucced: false
+    isShowModalSapFailed: false
   }
 
   isSAPIssue = async(data) => {
@@ -54,10 +54,23 @@ export default class UnapproveConfirmation extends React.PureComponent {
     })
   }
 
+  isTryFailed = () => {
+    this.setState({
+      isShowModalSap: !this.state.isShowModalSap,
+      isShowModalSapFailed: !this.state.isShowModalSapFailed
+    })
+  }
+
   isTryClosed = () => {
-      this.setState({
-        isShowModalSapSucced: !this.state.isShowModalSapSucced,
-      })
+    this.setState({
+      isShowModalSapSucced: !this.state.isShowModalSapSucced,
+    })
+  }
+
+  isClosedFailed = () => {
+    this.setState({
+      isShowModalSapFailed: !this.state.isShowModalSapFailed,
+    })
   }
 
   isClickedSap = () => {
@@ -123,6 +136,12 @@ export default class UnapproveConfirmation extends React.PureComponent {
     )
   }
 
+  _renderSapFailed(){
+    return(
+      <ConfirmationModal handleReload={this.isReload} isModal={this.state.isShowModalSapSucced} idModal="SAP-Failed" isModalClosed={this.isTryClosed} />
+    )
+  }
+
   _renderSendtoEdit(){
     return(
       <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-unapprove">
@@ -143,7 +162,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
         </DialogContent>
       </Modal>
     )
-}
+  }
 
   renderCircularProgress() {
       return <CircularProgress size={100} className="circular-progress" />;

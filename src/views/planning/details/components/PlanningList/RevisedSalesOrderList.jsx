@@ -99,6 +99,7 @@ export default class RevisedSalesOrderList extends React.PureComponent {
           idEdit="Rev" 
           title="Input Lifetime Component" 
           RowData={row.LifeTimeComponent}
+          lifetime={row.LifeTimeComponent}
           onStats={this.isPutLifetime} 
           values={this.props.salesOrderRevised.Lists[id].LifeTimeComponent} 
           field="edit" 

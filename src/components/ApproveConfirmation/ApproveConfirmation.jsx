@@ -7,6 +7,13 @@ import './ApproveConfirmation.scss';
 import CloseNotif from '../CloseNotif/CloseNotif';
 
 export default class ApproveConfirmation extends React.PureComponent {
+	constructor(props){
+        super(props);
+        this.state ={ 
+            limitText: (this.props.field === "edit" ? this.props.values : '')
+        }
+	}
+	
 	render() {
 		if(this.props.idApprove === "RevLt"){
 			return (
@@ -18,10 +25,10 @@ export default class ApproveConfirmation extends React.PureComponent {
 								<p className="confirmation-title-approve">Confirmation</p>
 								<p className="confirmation-title-approve">Revised</p>
 								<img className="confirmation-image-approve" src={ImgSendtoEdit} alt="" />
-								<p className="confirmation-caption-approve">Are you sure want to Edit <b> {this.props.totalData} items</b>?</p>
+								<p className="confirmation-caption-approve">Are you sure want to Edit <b>{this.props.dataLf} to {this.props.dataRev} ?</b></p>
 								<div className="btn-row">
 									<Button className="button-rejected" onClick={this.props.onClose}>No</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<Button className="button-approved" onClick={ () => {this.props.renderSakses(); this.props.onApprove(); this.props.onClose() }}>Yes</Button>
+									<Button className="button-approved" onClick={ () => {this.props.onStats(this.props.id, this.state.limitText); this.props.onClose()} }>Yes</Button>
 								</div>
 							</div>
 						</div>
