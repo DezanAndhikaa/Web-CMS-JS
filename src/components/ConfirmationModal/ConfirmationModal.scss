@@ -73,42 +73,49 @@
     .btn-ok:hover {
         background-color: map-get($colors, primary-dark);
     }
-    .btn-tidak{
+    .btn-container{
+        flex: 1;
         display: flex;
-        text-transform: capitalize;
-        align-items: center;
-        justify-content: center;
-        width: 40%;//w(100.22);
-        height: vw(45.07);
-        font-size: vw(13) !important;
-        font-weight: bold;
-        line-height: vw(16) !important;
-        font-family: 'Lato-Regular';
-        background-color: #F2F2F4;
-        color: #1D1D1D;
-        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-        cursor: pointer;
-    }
-    .btn-tidak:hover {
-        background-color: rgb(227, 227, 230);
-    }
-    .btn-ya{
-        display: flex;
-        text-transform: capitalize;
-        align-items: center;
-        justify-content: center;
-        width: 60%;//vw(170.22);
-        height: vw(45.07);
-        font-size: vw(13) !important;
-        font-weight: bold;
-        line-height: vw(16) !important;
-        font-family: 'Lato-Regular';
-        background-color: map-get($colors , primary);
-        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-        cursor: pointer;
-    }
-    .btn-ya:hover {
-        background-color: map-get($colors, primary-dark);
+        flex-direction: row;
+        margin-top: vw(20);
+        width: 100%;
+        .btn-tidak{
+            display: flex;
+            text-transform: capitalize;
+            align-items: center;
+            justify-content: center;
+            width: 40%;//w(100.22);
+            height: vw(45.07);
+            font-size: vw(13) !important;
+            font-weight: bold;
+            line-height: vw(16) !important;
+            font-family: 'Lato-Regular';
+            background-color: #F2F2F4;
+            color: #1D1D1D;
+            box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+            cursor: pointer;
+        }
+        .btn-tidak:hover {
+            background-color: rgb(227, 227, 230);
+        }
+        .btn-ya{
+            display: flex;
+            text-transform: capitalize;
+            align-items: center;
+            justify-content: center;
+            width: 60%;//vw(170.22);
+            height: vw(45.07);
+            font-size: vw(13) !important;
+            font-weight: bold;
+            line-height: vw(16) !important;
+            font-family: 'Lato-Regular';
+            background-color: map-get($colors , primary);
+            box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+            cursor: pointer;
+        }
+        .btn-ya:hover {
+            background-color: map-get($colors, primary-dark);
+        }
     }
 }
 

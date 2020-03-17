@@ -108,10 +108,10 @@ export default class SapIssue extends React.Component{
             <div className="assign-mechanic-modal-issue">
                 <div className="container-issue">
                     <div className="top-row-issue">
-                        <div className="top-button-issue"><Button className="back_button" variant="outlined" onClick={this.props.isClosed}>Back</Button></div>
+                        <div className="top-button-issue"><Button className="back_button" variant="outlined" onClick={this.props.isBack}>Back</Button></div>
                         <div className="ut-underline-issue"/>
                         <p className="select-input-title-issue">SAP Issue</p>
-                        <CloseButton onClose={this.props.isClosed}/>
+                        <CloseButton onClose={this.props.isClose}/>
                     </div>
                         <div className="top-middle-issue"> 
                         <Table size="small" component={Paper}>

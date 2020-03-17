@@ -44,18 +44,22 @@ export default class ConfirmationModal extends React.PureComponent {
         );
     } else if(this.props.idModal === "SAP-Failed"){
       return (
-        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
+        <Modal open={this.props.isModal} onClose={this.props.isModalClosed} className="modal-container">
 				  <DialogContent className="confirmation-modal-content">
             <div className="confirmation-modal">
-              <CloseNotif onClose={this.props.onClose}/>
+              <CloseNotif onClose={this.props.isModalClosed}/>
               <div className="confirmation-container">
                 <p className="confirmation-title">You have not completed</p>
                 <p className="confirmation-title">the SAP Issue form</p>
                 <img className="confirmation-image" src={DelSuccess} alt="" />
                 <p className="confirmation-caption">Do you want to continue?</p>
-                <div className="btn-row">
-                  <Button className="btn-tidak" onClick={this.props.onClose}>No</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <Button className="btn-ya" onClick={this.props.onApprove}>Yes</Button>
+                <div className="btn-container">
+                  {this.props.idFailed === "CloseBtn" ? 
+                    <Button className="btn-tidak" onClick={ () => {this.props.isModalClosed();this.props.handleReload()} }>No</Button>
+                  : 
+                    <Button className="btn-tidak" onClick={this.props.backToConfirmModal}>No</Button>
+                  }
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Button className="btn-ya" onClick={this.props.backToSAP}>Yes</Button>
                 </div>
               </div>
             </div>

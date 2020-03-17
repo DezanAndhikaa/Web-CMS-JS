@@ -50,14 +50,22 @@ export default class UnapproveConfirmation extends React.PureComponent {
   isTry = () => {
     this.setState({
       isShowModalSap: !this.state.isShowModalSap,
-      isShowModalSapSucced: !this.state.isShowModalSapSucced
+      isShowModalSapSucced: !this.state.isShowModalSapSucced,
+      isShowModalSapFailed: !this.state.isShowModalSapFailed
     })
   }
 
-  isTryFailed = () => {
+  isClickedCloseBtn = () => {
     this.setState({
       isShowModalSap: !this.state.isShowModalSap,
       isShowModalSapFailed: !this.state.isShowModalSapFailed
+    })
+  }
+
+  isClickedBackBtn = () => {
+    this.setState({
+      isShowModalSapFailed: !this.state.isShowModalSapFailed,
+      isShowModalUnapprove: !this.state.isShowModalUnapprove
     })
   }
 
@@ -126,7 +134,15 @@ export default class UnapproveConfirmation extends React.PureComponent {
 
   _renderSap(open){
     return(
-      <SapIssue {...this.props} isShowModal={open} isClosed={this.isClosedSap} isTry={this.isTry} isSucced={this._renderSapSucced} onKelik={this.onKelik}/>
+      <SapIssue 
+        {...this.props} 
+        isShowModal={open} 
+        isClosed={this.isClosedSap} 
+        isTry={this.isTry} 
+        onKelik={this.onKelik}
+        isClose={this.isClickedCloseBtn}
+        isBack={this.isClickedCloseBtn}
+      />
     )
   }
 
@@ -138,7 +154,28 @@ export default class UnapproveConfirmation extends React.PureComponent {
 
   _renderSapFailed(){
     return(
-      <ConfirmationModal handleReload={this.isReload} isModal={this.state.isShowModalSapSucced} idModal="SAP-Failed" isModalClosed={this.isTryClosed} />
+      <>
+      <ConfirmationModal 
+        {...this.props}
+        handleReload={this.isReload} 
+        isModal={this.state.isShowModalSapFailed} 
+        idModal="SAP-Failed"
+        idFailed="CloseBtn" 
+        isModalClosed={this.isClosedFailed}
+        backToSAP={this.isClickedCloseBtn}
+        backToConfirmModal={this.isClickedBackBtn}
+      />
+      <ConfirmationModal 
+        {...this.props}
+        handleReload={this.isReload} 
+        isModal={this.state.isShowModalSapFailed} 
+        idModal="SAP-Failed"
+        // idFailed="CloseBtn" 
+        isModalClosed={this.isClosedFailed}
+        backToSAP={this.isClickedCloseBtn}
+        backToConfirmModal={this.isClickedBackBtn}
+      />
+      </>
     )
   }
 
@@ -203,9 +240,12 @@ export default class UnapproveConfirmation extends React.PureComponent {
           )}
           {this.props.fetchStatusPutSAPIssue === ApiRequestActionsStatus.SUCCEEDED && (
             this._renderSapSucced()
-          )} 
+          )}
           {this.state.isShowModalSend && (
             this._renderSendtoEdit()
+          )}
+          {this.state.isShowModalSapFailed && (
+            this._renderSapFailed()
           )}
         </>
         );
