@@ -21,7 +21,7 @@ class EditButton extends React.PureComponent {
         this.state ={ 
             isShowModal: false,
             isShowModalConfirm: false,
-            limitText: (this.props.field === "edit" ? this.props.values : '')
+            putLf: ''
         }
     }
     
@@ -48,46 +48,31 @@ class EditButton extends React.PureComponent {
         })
     }
 
-    renderConfirmModal() {
-        return(
-            <ApproveConfirmation 
-                idApprove="RevLt" 
-                openModal={this.state.isShowModalConfirm} 
-                onClose={this.isOpenModal}            
-                dataLf={this.props.lifetime}
-                dataRev={this.props.revLifetime}
-            />
-        )
+    isClosedModal = () => {
+        this.setState({
+            isShowModal: false,
+            isShowModalConfirm: !this.state.isShowModalConfirm
+        })
     }
 
-    renderInputText(){
+    getRevLf = (value) => {
+        this.setState({
+            putLf: value
+        })
+    }
+
+    renderConfirmModal() {
         return(
-            <div className="assign-mechanic-modal">
-                <div className="top-row">
-                    <div className="ut-underline"/>
-                    <p className="select-input-title">{this.props.title}</p>
-                    <CloseButton onClose={this.isCloseds}/>
-                </div>
-                <Formik 
-                    initialValues={this.state}
-                    validationSchema={validationSchema}
-                >
-                    <div className="top-middle"> 
-                        <NumberFormat 
-                            className="teks"
-                            customInput={TextField}
-                            name="limitText"
-                            value={this.state.limitText}
-                            onChange={this.handleChange}
-                        />
-                        <FormHelperText className="label">* Don't Add Space Before and After Lifetime Component</FormHelperText>
-                    </div>
-                </Formik>
-                <div className="bottom-row">
-                    <Button className="btn-cancel" onClick={this.isCloseds}>Cancel</Button>
-                    <Button className="btn-input" onClick={this.isOpenModal} >Input</Button>                   
-                </div>
-            </div>
+            <ApproveConfirmation
+                {...this.props}
+                idApprove="RevLt" 
+                openModal={this.state.isShowModalConfirm} 
+                onCloseRev={this.isOpenModal}
+                onClose={this.isClosedModal}            
+                dataLf={this.props.lifetime}
+                // dataRev={this.props.revLifetime}
+                dataRev={this.state.putLf}
+            />
         )
     }
 
@@ -122,6 +107,8 @@ class EditButton extends React.PureComponent {
                                     idInput="EditSite"
                                     onClosed={this.isCloseds}
                                     openConfirmModal={this.isOpenModal}
+                                    dataRevLt={this.getRevLf}
+
                                 />
                             </div>
                         </Modal>

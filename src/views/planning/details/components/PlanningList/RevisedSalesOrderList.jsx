@@ -6,6 +6,7 @@ import './PlanningList.scss';import { Spinner } from '../../../../../assets/icon
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from 'moment';
 import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
+import ConfirmationModal from '../../../../../components/ConfirmationModal/ConfirmationModal';
 
 export default class RevisedSalesOrderList extends React.PureComponent {
   constructor(props) {
@@ -14,6 +15,7 @@ export default class RevisedSalesOrderList extends React.PureComponent {
       isShowModal: false,
       checkedValue: false,
       stats: false,
+      openModalrevised: false,
       putLifetime: {
         SoNumber : '',
         LifeTimeComponent : '',
@@ -45,6 +47,9 @@ export default class RevisedSalesOrderList extends React.PureComponent {
 
   putLifetimke = async(data) => {
     await this.props.putLifetimeComp(data, this.props.token);
+    this.setState({
+      openModalrevised : !this.state.openModalrevised
+    })
     await this.props.onClickRevisedSales();
   }
   
@@ -124,6 +129,25 @@ export default class RevisedSalesOrderList extends React.PureComponent {
     })
   }
 
+  closeSuccessEdit = () => {
+    this.setState({
+      openModalrevised: !this.state.openModalrevised
+    })
+    // this.onClickRevisedSales()    
+    // await this.props.onClickRevisedSales();
+  }
+  
+  renderModalRevised(){
+    return(
+      <ConfirmationModal 
+        {...this.props}
+        idModal="Revised"
+        openModal={this.state.openModalrevised}
+        onClose={this.closeSuccessEdit}
+      />
+    )
+  }
+
   showLoading(){
     if(this.props.fetchStatusRevised === ApiRequestActionsStatus.LOADING){
       return(
@@ -134,6 +158,11 @@ export default class RevisedSalesOrderList extends React.PureComponent {
             className="loading-icon"
             />
         </div>
+      )
+    }
+    else if(this.props.fetchStatusPutLifetime === ApiRequestActionsStatus.SUCCEEDED){
+      return(
+        this.renderModalRevised()
       )
     }
     else if(this.props.fetchStatusPutLifetime === ApiRequestActionsStatus.LOADING){
