@@ -35,7 +35,6 @@ const Badges = withStyles(theme => ({
 class FilterbyDataAction extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       displayMenu: false,
     };
