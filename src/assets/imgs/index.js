@@ -1,4 +1,5 @@
 import DcaLogo from './dcalogo.png';
+import CmsLogo from './logo-cms.png';
 import LoginBg from './background-login.png';
 import MovingAsOneLogo from './movingasone.png';
 import MovingAsOneInverse from './movingasone-inverse.png';
@@ -43,6 +44,7 @@ export {
 	ImgCancelApprove,
 	ImgCancelEditSucc,
 	DcaLogo,
+	CmsLogo,
 	LoginBg,
 	MovingAsOneLogo,
 	MovingAsOneInverse,
