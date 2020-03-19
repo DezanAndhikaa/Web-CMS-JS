@@ -252,7 +252,6 @@ export default class SapSalesOrderList extends React.PureComponent {
             </div>
       )
       default:
-        console.log('STATUS oioi', this.props.fetchStatusSalesSap)
     }
     // if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
     //   return(

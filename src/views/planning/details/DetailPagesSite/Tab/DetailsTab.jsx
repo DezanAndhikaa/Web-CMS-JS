@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import {AppBar, Tabs, Tab, Typography, Badge, Paper} from '@material-ui/core';
+import {AppBar, Tabs, Tab, Typography} from '@material-ui/core';
 import SalesOrderList from '../../components/PlanningList/SalesOrderListSite';
 import ServiceOrderList from '../../components/PlanningList/ServiceOrderListSite';
 import RevisedSalesOrderList from '../../components/PlanningList/RevisedSalesOrderList';
@@ -21,25 +21,6 @@ function TabContainer({ children, dir }) {
     </Typography>
   );
 }
-const StyledBadge = withStyles(theme => ({
-  badge: {
-    height: '30px',
-    right: -42,
-    padding: '10px',
-    borderRadius: '5px',
-    fontSize: '18px'
-  },
-}))(Badge);
-
-const Badges = withStyles(theme => ({
-  badge: {
-    height: '30px',
-    right: -32,
-    padding: '10px',
-    borderRadius: '5px',
-    fontSize: '18px'
-  },
-}))(Badge);
 
 TabContainer.propTypes = {
   children: PropTypes.node.isRequired,
@@ -162,7 +143,7 @@ class DetailsTab extends React.Component {
           </div>
           <div className="plannings-list-detail">
               <RevisedSalesOrderList
-              {...this.props}
+                {...this.props}
               />
           </div>
           <div>

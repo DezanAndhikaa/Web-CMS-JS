@@ -2,17 +2,12 @@ import React from 'react';
 import InputText from '../../InputText/InputText'
 import { Modal } from '@material-ui/core'
 import './EditButton.scss';
-import CloseButton from '../../../components/CloseButton/CloseButton'
-import { Button, TextField, FormHelperText } from '@material-ui/core'
-import * as Yup from 'yup';
-import { Formik } from 'formik';
-import NumberFormat from 'react-number-format';
 import ApproveConfirmation from '../../ApproveConfirmation/ApproveConfirmation';
 
-const validationSchema = Yup.object().shape({
-    limitText: Yup.number()
-    .typeError('Harus Angka')
-})
+// const validationSchema = Yup.object().shape({
+//     limitText: Yup.number()
+//     .typeError('Harus Angka')
+// })
 
 class EditButton extends React.PureComponent {
 

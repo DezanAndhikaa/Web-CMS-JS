@@ -68,7 +68,7 @@ class LayoutTime extends React.Component {
 								onClick={ () => this.props.handleTime(row.key)}
 							>
 								<ListItemIcon classes={{ root: 'icon-root' }}>
-									<img
+									<img alt=""
 										src={Clock}
 									/>
 								</ListItemIcon>

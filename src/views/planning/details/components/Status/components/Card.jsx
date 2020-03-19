@@ -5,10 +5,6 @@ import './Card.scss'
 
 
 class Cards extends React.Component {
-	// const classes = useStyles();
-	
-	// const totalData = props.title;
-	// console.log('kon....t',totalData);
 	handleClick = () =>{
 		this.props.renderList(this.props.title);
 	}

@@ -236,7 +236,6 @@ export default class DeletedSalesOrderList extends React.PureComponent {
             </div>
       )
       default:
-        console.log('STATUS oioi', this.props.fetchStatusSalesDeleted)
     }
     // if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
     //   return(

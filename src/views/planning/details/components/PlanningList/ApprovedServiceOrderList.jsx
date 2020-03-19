@@ -29,7 +29,6 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
       this.setState({checkedValue : false})
     }
     if (this.props.fetchStatusServiceApproved === ApiRequestActionsStatus.LOADING) {
-      // console.log('ke trigger')
       this.setState({checkedValue : false})
     }
   }
@@ -220,7 +219,6 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
             </div>
       )
       default:
-        console.log('STATUS oioi', this.props.fetchStatusServiceApproved)
     }
     // if(this.props.fetchStatusService === ApiRequestActionsStatus.LOADING){
     //   return(

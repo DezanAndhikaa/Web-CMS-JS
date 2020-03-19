@@ -29,7 +29,6 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
       this.setState({checkedValue : false})
     }
     if (this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.LOADING) {
-      // console.log('ke trigger')
       this.setState({checkedValue : false})
     }
   }
@@ -238,7 +237,6 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
             </div>
       )
       default:
-        console.log('STATUS oioi', this.props.fetchStatusSalesApproved)
     }
     // if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
     //   return(

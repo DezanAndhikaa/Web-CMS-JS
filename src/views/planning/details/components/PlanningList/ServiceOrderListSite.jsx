@@ -1,7 +1,7 @@
 import React from 'react';
 import moment, { ISO_8601 } from 'moment';
 import {
-  Checkbox, Table, TableBody, TableCell, TableHead, TableRow,
+  Table, TableBody, TableCell, TableHead, TableRow,
 } from '@material-ui/core';
 import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
@@ -23,7 +23,6 @@ export default class ServiceOrderList extends React.PureComponent {
       prevState.searchComp !==this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
       this.setState({checkedValue : false})
     }if (this.props.fetchStatusService === ApiRequestActionsStatus.LOADING) {
-      // console.log('ke trigger')
       this.setState({checkedValue : false})
     }
   }

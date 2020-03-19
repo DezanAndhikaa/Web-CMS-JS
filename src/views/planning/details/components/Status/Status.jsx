@@ -90,7 +90,6 @@ export default class Status extends React.PureComponent {
 		if (this.props.selectedSalesPlans.length > 0) {
 		  for (let i = 0; i < index; i++) {
 			arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
-			console.log('pantek');
 		  }
 		}await this.props.downloadSalesApproved(arr, this.props.token);
 		if (
@@ -143,7 +142,6 @@ export default class Status extends React.PureComponent {
 
 	handleDeletePermanent = async() =>{
 		if (this.props.location.whichTab === "sales") {
-			console.log('pantej terklik sales')
 			let arr = []
 			const index = this.props.selectedSalesPlans.length
 			if (this.props.selectedSalesPlans.length > 0) {
@@ -154,7 +152,6 @@ export default class Status extends React.PureComponent {
 			await this.props.deletePermanentSales({SoNumber : arr});
 		}
 		if (this.props.location.whichTab === "service") {
-			console.log('pantej terklik service')
 			let arr = []
 			const index = this.props.selectedServicePlans.length
 			if (this.props.selectedServicePlans.length > 0) {
@@ -204,7 +201,6 @@ export default class Status extends React.PureComponent {
 	}
 
 	_renderPagination= (data) =>  {
-		console.log('pantej', data)
 		if (this.props.location.whichTab === "sales") {
 		  const web = this.props.displayMode === 'web';
 		  const currentPropsSales = data.PageNumber;
@@ -275,9 +271,6 @@ export default class Status extends React.PureComponent {
 						</div>
 				)
 		  default:
-				return(
-					console.log('lol')
-				) 
 		  }
 		}else if(this.props.location.whichTab === "service"){
 			const web = this.props.displayMode === 'web';
@@ -346,7 +339,6 @@ export default class Status extends React.PureComponent {
 					</div>
 				)
 		  default:
-
 		}
 	  }
 	}
@@ -367,33 +359,32 @@ export default class Status extends React.PureComponent {
 				 case 'Approve':
 					 return(
 						<>
-						{this.props.clearSelectedSalesPlans()};
-					{this.props.updateSalesApprovedParameter({ ...this.props.salesApprovedParameter.dataFilter, PageSize: value})}
-					</>
+							{this.props.clearSelectedSalesPlans()};
+							{this.props.updateSalesApprovedParameter({ ...this.props.salesApprovedParameter.dataFilter, PageSize: value})}
+						</>
 					 )
 				 case 'Not Approve':
 					 return(
 						 <>
-					{this.props.clearSelectedSalesPlans()};
-					{this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value})}
-					 </>
+							{this.props.clearSelectedSalesPlans()};
+							{this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value})}
+					 	</>
 					 )
 				 case 'Delete':
 					return(
 						<>
-						{this.props.clearSelectedSalesPlans()};
-					{this.props.updateSalesDeletedParameter({ ...this.props.salesDeletedParameter.dataFilter, PageSize: value})}
+							{this.props.clearSelectedSalesPlans()};
+							{this.props.updateSalesDeletedParameter({ ...this.props.salesDeletedParameter.dataFilter, PageSize: value})}
 						</>
 					)
 				 case 'SAP ISSUE':
 					 return(
 						<>
-						{this.props.clearSelectedSalesPlans()};
-						{this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageSize: value })}
+							{this.props.clearSelectedSalesPlans()};
+							{this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageSize: value })}
 						</>
 					 )
 				 default:
-					 console.log('lol')
 			 }
 		}else if (this.props.location.whichTab === 'service') {
 		  switch (this.state.whatPageIsChoosed) {
@@ -419,7 +410,6 @@ export default class Status extends React.PureComponent {
 				   </>
 			   )
 			case 'SAP ISSUE':
-				console.log("masok pak haji")
 				return(
 					<>
 						{this.props.clearSelectedServicePlans()};
@@ -427,7 +417,6 @@ export default class Status extends React.PureComponent {
 					</>
 				)
 			default:
-				console.log('lol')
 		}
 		}
 	}
@@ -451,6 +440,26 @@ export default class Status extends React.PureComponent {
 		await this.props.clearSelectedSalesPlans()
 		this.setPropsToState();
 	}
+	
+	onClickRevisedSales = async() => {
+		await this.props.fetchRevisedSales({
+		  ...this.props.salesRevisedParam.dataFilter,
+		  Filter : 
+			[...this.props.salesRevisedParam.dataFilter.Filter, 
+			{
+			  Field 	 : 'IsRevised',
+			  Operator : 'eq',
+			  Value 	 : 'true',
+			  Logic 	 : 'AND'
+			},{
+			  Field    : 'IsChanged',
+			  Operator : 'eq',
+			  Value    : 'false',
+			  Logic    : "AND"
+			}]
+		},this.props.token);
+	}
+
 	onClickSalesOrderApproved = async() =>{
 		await this.props.fetchApprovedSales(this.props.salesApprovedParameter.dataFilter, this.props.token);
 		await this.props.clearSelectedSalesPlans()
@@ -707,7 +716,6 @@ export default class Status extends React.PureComponent {
 				default:
 					break;
 			}
-			console.log('masuk search ', this.props.salesSearch)
 		}
 		if (prevProps.serviceSearch !== this.props.serviceSearch) {
 			switch (this.state.whatPageIsChoosed) {
@@ -722,7 +730,6 @@ export default class Status extends React.PureComponent {
 				default:
 					break;
 			}
-			console.log('masuk search ', this.props.serviceSearch)
 		}
 	}
 
@@ -733,7 +740,6 @@ export default class Status extends React.PureComponent {
 	})
 		switch (this.state.whatPageIsChoosed) {
 			case 'Approve':
-				console.log('this is ', whatPageIsChoosed)
 				this.setState({ isDisabled : true})
 				if(this.props.location.whichTab === 'sales'){
 				return(
@@ -745,7 +751,6 @@ export default class Status extends React.PureComponent {
 					</>
 				)
 				}else{
-					console.log('ini serpis order approved')
 					return(
 						<>
 							{this.approvedServiceOrderList()}
@@ -756,15 +761,14 @@ export default class Status extends React.PureComponent {
 					)
 				}
 			case 'Not Approve': 
-			console.log('this is ', whatPageIsChoosed)
 			this.setState({ isDisabled : true})
 				if(this.props.location.whichTab === 'sales'){
 					return (
 						<>
 							{this.salesOrderList()}
-						<div className="bottom-row">
-						{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderList)}
-						</div>
+							<div className="bottom-row">
+								{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderList)}
+							</div>
 						</>
 					)
 				// }else
@@ -778,8 +782,8 @@ export default class Status extends React.PureComponent {
 						</>
 					)
 				}
+				break;
 			case 'Delete': 
-			console.log('this is ', whatPageIsChoosed)
 			this.setState({ isDisabled : false})
 			if(this.props.location.whichTab === 'sales'){
 				return(
@@ -791,7 +795,6 @@ export default class Status extends React.PureComponent {
 					</>
 				)
 			}else if(this.props.location.whichTab === 'service'){
-				console.log('delete serpis')
 				return(
 					<>
 						{this.deletedServiceOrderList()}
@@ -801,9 +804,9 @@ export default class Status extends React.PureComponent {
 					</>
 				)
 			}
+			break;
 			case 'SAP ISSUE': 
 			this.setState({ isDisabled : true})
-			console.log('this is ', whatPageIsChoosed)
 			if(this.props.location.whichTab === 'sales'){
 				return(
 					<>
@@ -823,14 +826,14 @@ export default class Status extends React.PureComponent {
 					</>
 				)
 			}
-
+			break;			
+			default:
 		}
 	}
 
 	updateAssignmentSalesStates = (plan) => {
 	if (this.props.selectedSalesPlans
 		.some((plans) => plans.SoNumber === plan.SoNumber,
-		// console.log('sssss sales', this.state.selectedData.SoNumber)
 		)) 
 	{ return this.props.unselectSalesPlan(plan); }
 	return this.props.selectSalesPlan(plan);
@@ -839,14 +842,12 @@ export default class Status extends React.PureComponent {
 	updateAssignmentServiceStates = (plan) => {
 		if (this.props.selectedServicePlans
 			.some((plans) => plans.WoNumber === plan.WoNumber,
-			// console.log('sssss sales', this.state.selectedData.SoNumber)
 			)) 
 		{ return this.props.unselectServicePlan(plan); }
 		return this.props.selectServicePlan(plan);
 	};
 
 	setPropsToState(){
-		console.log('pantek ke trigger')
 		if (this.props.location.whichTab === "sales") {
 			this.setState({
 				approveTotalData : this.props.salesOrderListApproved.TotalData,

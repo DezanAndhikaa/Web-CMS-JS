@@ -23,18 +23,6 @@ export default class RevisedSalesOrderList extends React.PureComponent {
     }
   }
 
-  // componentDidUpdate = (prevState) =>{
-  //   //untuk menghilangkan checkbox
-  //   // console.log('ke trigger status')
-  //   if (prevState.salesParameter !== this.props.salesParameter || prevState.salesSearch !== this.props.salesSearch || 
-  //     prevState.searchComp !==this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
-  //     this.setState({checkedValue : false})
-  //   }if (this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING) {
-  //     // console.log('ke trigger')
-  //     this.setState({checkedValue : false})
-  //   }
-  // }
-
   componentDidMount = async () => {
     await this.props.onClickRevisedSales();
   }

@@ -7,14 +7,7 @@ import { Menu } from '../../../../../constants';
 import Button from '@material-ui/core/Button';
 import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton';
 import FilterbyDataAction  from '../../../../../components/FilterByDataAction/FilterbyDataAction';
-import Card from '@material-ui/core/Card';
-import { Clock } from '../../../../../assets/imgs';
 import './TrackingHistory.scss';
-import {
-	ListItemText,
-	ListItem,
-	List
-} from '@material-ui/core';
 
 export default class TrackingHistory extends React.PureComponent {
 
@@ -47,170 +40,7 @@ export default class TrackingHistory extends React.PureComponent {
 		}
     }
 
-    // _renderLayoutTime = () =>{
-    //     return(
-    //     <>
-    //     <List>
-    //         {this.state.timeData.map((row) => 
-    //         <ListItem 
-    //         button
-    //         key={row.key}
-    //         className={
-    //             this.state.selected === row.key
-    //             ? "menu-item-selected-tracking"
-    //             : "menu-item-tracking"
-    //         }
-    //         onClick={ () => this.handleTime(row.key)}
-    //         >
-    //             <ListItemIcon classes={{ root: "icon-root" }}>
-    //             <img
-    //                 src={Clock}
-    //             />
-    //         </ListItemIcon>
-    //         <ListItemText 
-    //             primary={row.key}
-    //             classes={{ primary : "item-text-tracking", root: "item-text-tracking"}}
-    //         >
-    //             {row.key}
-    //         </ListItemText>
-    //         </ListItem>
-    //         )}
-            
-            
-    //         <ListItem 
-    //         button
-    //         key="yesterday"
-    //         className={
-    //             this.state.selected === 'yesterday'
-    //             ? "menu-item-selected-tracking"
-    //             : "menu-item-tracking"
-    //         }
-    //         onClick={ () => this.handleTime('yesterday')}
-    //         >
-    //         <ListItemText 
-    //             primary="Yesterday"
-    //             classes={{ primary : "item-text-tracking", root: "item-text-tracking"}}
-    //         >
-    //             Yesterday
-    //         </ListItemText>
-    //         </ListItem>
-    //         <ListItem 
-    //         button
-    //         key="last7Days"
-    //         className={
-    //             this.state.selected === 'last7Days'
-    //             ? "menu-item-selected-tracking"
-    //             : "menu-item-tracking"
-    //         }
-    //         onClick={ () => this.handleTime('last7Days')}
-    //         >
-    //         <ListItemText 
-    //             primary="Last 7 Days"
-    //             classes={{ primary : "item-text-tracking", root: "item-text-tracking"}}
-    //         >
-    //             Last 7 Days
-    //         </ListItemText>
-    //         </ListItem>
-    //         <ListItem 
-    //         button
-    //         key="last1month"
-    //         className={
-    //             this.state.selected === 'last1month'
-    //             ? "menu-item-selected-tracking"
-    //             : "menu-item-tracking"
-    //         }
-    //         onClick={ () => this.handleTime('last1month')}
-    //         >
-    //         <ListItemText 
-    //             primary="Last 1 Month"
-    //             classes={{ primary : "item-text-tracking", root: "item-text-tracking"}}
-    //         >
-    //             Last 1 Month
-    //         </ListItemText>
-    //         </ListItem>
-    //         <ListItem 
-    //         button
-    //         key="last3month"
-    //         className={
-    //             this.state.selected === 'last3month'
-    //             ? "menu-item-selected-tracking"
-    //             : "menu-item-tracking"
-    //         }
-    //         onClick={ () => this.handleTime('last3month')}
-    //         >
-    //         <ListItemText 
-    //             primary="Last 3 Month"
-    //             classes={{ primary : "item-text-tracking", root: "item-text-tracking"}}
-    //         >
-    //             Last 3 Month
-    //         </ListItemText>
-    //         </ListItem>
-    //         <ListItem 
-    //         button
-    //         key="last5month"
-    //         className={
-    //             this.state.selected === 'last5month'
-    //             ? "menu-item-selected-tracking"
-    //             : "menu-item-tracking"
-    //         }
-    //         onClick={ () => this.handleTime('last5month')}
-    //         >
-    //         <ListItemText 
-    //             primary="Last 5 Month"
-    //             classes={{ primary : "item-text-tracking", root: "item-text-tracking"}}
-    //         >
-    //             Last 5 Month
-    //         </ListItemText>
-    //         </ListItem>
-    //         <ListItem 
-    //         button
-    //         key="last7month"
-    //         className={
-    //             this.state.selected === 'last7month'
-    //             ? "menu-item-selected-tracking"
-    //             : "menu-item-tracking"
-    //         }
-    //         onClick={ () => this.handleTime('last7month')}
-    //         >
-    //         <ListItemText 
-    //             primary="Last 7 Month"
-    //             classes={{ primary : "item-text-tracking", root: "item-text-tracking"}}
-    //         >
-    //             Last 7 Month
-    //         </ListItemText>
-    //         </ListItem>
-    //         <ListItem 
-    //         button
-    //         key="lastyear"
-    //         className={
-    //             this.state.selected === 'lastyear'
-    //             ? "menu-item-selected-tracking"
-    //             : "menu-item-tracking"
-    //         }
-    //         onClick={ () => this.handleTime('lastyear')}
-    //         >
-    //         <ListItemText 
-    //             primary="Last Year"
-    //             classes={{ primary : "item-text-tracking", root: "item-text-tracking"}}
-    //         >
-    //             Last Year
-    //         </ListItemText>
-    //         </ListItem>
-    //     </List>
-    //     </>
-    //     )
-    // }
-
-
-
-    
-    handleSearch =()=>{
-
-    }
-
 	render(){
-        console.log('ini halaman tracking history', this.props.location);
-        console.log('ini halaman tracking history', this.state.selected);
 		return(
             <main className="content">
                 <div className="head-containers-tracking">
@@ -229,10 +59,9 @@ export default class TrackingHistory extends React.PureComponent {
                 </div>
                 <div className="paper-tracking">
                     <LayoutTime
-                    // renderLayoutTime={this._renderLayoutTime}
-                    data={this.state.timeData}
-                    selected={this.state.selected}
-                    handleTime={this.handleTime}
+                        data={this.state.timeData}
+                        selected={this.state.selected}
+                        handleTime={this.handleTime}
                     />
                     <LayoutSite/>
                     <LayoutRecorded/>

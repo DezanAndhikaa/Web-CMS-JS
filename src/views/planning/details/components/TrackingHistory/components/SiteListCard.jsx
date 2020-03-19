@@ -12,7 +12,6 @@ const styles = theme =>({
 		minHeight: theme.spacing.unit * 84,
 		height : '100%',
 		marginRight: theme.spacing.unit *1,
-		// overflowY: 'auto'
 	},
 	content : {
 		width: '100%',
@@ -48,18 +47,16 @@ class SiteListCard extends React.Component {
 		alert(value);
 	}
 	renderList(row){
-		console.log('pann ter render')
 		return (
 			<Card onClick={()=>this.handleClick(row.dataSite)}>{row.dataSite}</Card>
 		);
 	}
 	render(){
-		const { classes } = this.props;
 		return(
 			<div>
 				{this.state.dataSite.map( (row) => (
 					<Card className="site-text-content" onClick={()=>this.handleClick(row.site)}>
-						<img className="ice-face" src={IceFace} />
+						<img className="ice-face" src={IceFace} alt=""/>
 						{row.site}
 					</Card>
 				))}

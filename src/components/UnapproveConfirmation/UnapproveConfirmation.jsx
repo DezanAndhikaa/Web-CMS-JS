@@ -41,7 +41,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
   }
 
   componentDidUpdate = (prevProps) =>{
-    if (prevProps.openModal != this.props.openModal)
+    if (prevProps.openModal !== this.props.openModal)
     this.setState({
       isShowModalUnapprove: this.props.openModal
     })

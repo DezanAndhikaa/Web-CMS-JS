@@ -224,7 +224,6 @@ export default class DeletedServiceOrderList extends React.PureComponent {
             </div>
       )
       default:
-        console.log('STATUS oioi', this.props.fetchStatusServiceDeleted)
     }
     // if(this.props.fetchStatusService === ApiRequestActionsStatus.LOADING){
     //   return(

@@ -27,12 +27,10 @@ export default class SalesOrderList extends React.PureComponent {
 
   componentDidUpdate = (prevState) =>{
     //untuk menghilangkan checkbox
-    // console.log('ke trigger status')
     if (prevState.salesParameter !== this.props.salesParameter || prevState.salesSearch !== this.props.salesSearch || 
       prevState.searchComp !==this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
       this.setState({checkedValue : false})
     }if (this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING) {
-      // console.log('ke trigger')
       this.setState({checkedValue : false})
     }
   }
@@ -223,8 +221,9 @@ export default class SalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="center" className="table-cell"> 
-        {this.props.salesOrderList.Lists[id].LifeTimeComponent === "-" ? <InputButton title="Input Lifetime Component" onStats={this.isPutLifetime} titles="Input" key={row.SoNumber} id={row.SoNumber} field="input"/> : 
-          <div>{this.props.salesOrderList.Lists[id].LifeTimeComponent}</div>
+        {this.props.salesOrderList.Lists[id].LifeTimeComponent === "-" ? 
+          <InputButton title="Input Lifetime Component" onStats={this.isPutLifetime} titles="Input" key={row.SoNumber} id={row.SoNumber} field="input"/> : 
+          <div className={this.props.salesOrderList.Lists[id].IsRevised === true && this.props.salesOrderList.Lists[id].IsChanged === false ? "table-cell-rev" : ""}>{this.props.salesOrderList.Lists[id].LifeTimeComponent}</div>
         }
         </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>

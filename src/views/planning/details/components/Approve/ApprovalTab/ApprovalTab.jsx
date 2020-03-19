@@ -10,7 +10,6 @@ import ServiceOrderList from '../../PlanningList/ServiceOrderList';
 import './ApprovalTab.scss';
 import DropdownFilter from '../../../../../../components/FilterByTitle/DropdownFilter';
 import { SelectCustomerFilterAction,SelectSiteFilterAction, SelectUnitModelFilterAction, SelectComponentFilterAction } from '../../../DetailPages-action'
-import { Toolbar } from '@material-ui/core';
 
 function TabContainer({ children, dir }) {
   return (
@@ -90,30 +89,14 @@ class ApprovalTab extends React.Component {
 
   handleChange = (event, value) => {
     if (value === 0) {
-      console.log('kondisi value terasek', value)
       this.props.onPage(this.state.value);
-      // this.props.baseButton(this.state.value);
-      // if (this.state.invisible1) {
-      //   this.setState({
-      //     invisible2 : true
-      //   })
-      // }
       this.setState({
-        // invisible1 : false,
         value,
       })
     }
-    if (value === 1) {  
-      console.log('kondisi value terasek', value)  
+    if (value === 1) { 
       this.props.onPage(this.state.value);
-      // this.props.baseButton(this.state.value);
-      // if (this.state.invisible2) {
-      //   this.setState({
-      //     invisible1 : true
-      //   })
-      // }
       this.setState({
-        // invisible2 : false,
         value
       })
     }

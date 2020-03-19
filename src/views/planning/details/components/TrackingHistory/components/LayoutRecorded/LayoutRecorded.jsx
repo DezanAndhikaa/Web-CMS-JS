@@ -2,7 +2,6 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import { Woman, Text1, Text2 } from '../../../../../../../assets/imgs';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import './LayoutRecorded.scss';
@@ -37,15 +36,12 @@ class LayoutRecorded extends React.Component {
 			<Card className={classes.root} variant="outlined">
 				<CardContent>
 					<Typography className={classes.title} color="textSecondary" gutterBottom>
-          RECORDED
+          				RECORDED
 					</Typography>
-					<img className="mid-woman" src={Woman} />
-					<img className="text-1-tracking" src={Text1}/>
-					<img className="text-2-tracking" src={Text2}/>
+					<img className="mid-woman" src={Woman} alt=""/>
+					<img className="text-1-tracking" alt="" src={Text1}/>
+					<img className="text-2-tracking" alt="" src={Text2}/>
 				</CardContent>
-				{/* <CardActions>
-					
-				</CardActions> */}
 			</Card>
 		);
 	}

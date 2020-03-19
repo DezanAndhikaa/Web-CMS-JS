@@ -107,10 +107,8 @@ class PlanningDetailsTab extends React.Component {
   };
 
   handleChange = (event, value) => {
-console.log('kondisi value terasek', value)
     if (value === 0) {
       this.props.onPage(this.state.value);
-      // this.props.baseButton(this.state.value);
       if (this.state.invisible1) {
         this.setState({
           invisible2 : true
@@ -123,7 +121,6 @@ console.log('kondisi value terasek', value)
     }
     if (value === 1) {    
       this.props.onPage(this.state.value);
-      // this.props.baseButton(this.state.value);
       if (this.state.invisible2) {
         this.setState({
           invisible1 : true
@@ -328,7 +325,7 @@ console.log('kondisi value terasek', value)
   }
 
   render() {
-    const { theme } = this.props; //const { classes, theme } = this.props;
+    const { theme } = this.props;
     const { value } = this.state;
     return (
         <div className="root">
@@ -348,9 +345,7 @@ console.log('kondisi value terasek', value)
             {this._renderFilter()}
           </div>
     {value === 0 && <TabContainer dir={theme.direction} >
-      {/* {!this.props.isApproved ?  */}
     <div>{this._renderSalesOrderList()}</div> 
-    {/* <div>{this._renderApprovedSalesOrderList()}</div>}   */}
     </TabContainer>}
         {value === 1 && <TabContainer dir={theme.direction} ><div>{this._renderServiceOrderList()}</div></TabContainer>}
       </div>

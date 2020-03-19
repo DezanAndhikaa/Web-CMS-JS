@@ -133,7 +133,6 @@ export default class SapIssue extends React.Component{
     }
 
     render(){
-      console.log("ini tab mana : ",this.props.whichTabs)
         return(
             <div>
               <Modal className="modal-pos-issue" open={this.props.isShowModal} onClose={this.props.isClosed} >

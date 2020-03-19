@@ -671,14 +671,12 @@ export function salesParameterReducer(state = initialSalesParameter, action) {
 export function salesApprovedParameterReducer(state = initialSalesParameter, action) {
 	if (action.type === UpdateSalesApprovedParameterAction)
 		return {...state, dataFilter: action.payload};
-		// console.log('dums',state)
 	return state;
 }
 
 export function salesDeletedParameterReducer(state = initialSalesParameter, action) {
 	if (action.type === UpdateSalesDeletedParameterAction)
 		return {...state, dataFilter: action.payload};
-		// console.log('dums',state)
 	return state;
 }
 
@@ -730,8 +728,6 @@ export function filterParameterReducer(state = initialFilterParameter, action){
 			return {...state,Filter : [{Field: 'CustomerName', Operator: 'eq', Value: action.payload, Logic: 'and'}] };
 		}else{
 			for(let i=0; i<state.Filter.length; i++){ //FOR di sini untuk mengecek pada objek sebelumnya
-				console.log("uhuk uhuk 1 : ",action.payload)
-				console.log("uhuk uhuk 2 : ",state.Filter[i].Field)
 				if(state.Filter[i].Field === action.head){ //JIKA pada objek sebelumnya pada "field" ada yang sama, maka akan merubah nilai pada "value" tersebut tanpa menambah array
 					if(action.payload.includes('All') ){
 						state.Filter.splice(i,1);

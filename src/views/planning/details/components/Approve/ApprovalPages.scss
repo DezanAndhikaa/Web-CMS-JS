@@ -172,6 +172,23 @@
                     .checkbox-checked-body{
                         color: #3C3B3B;
                     }
+                    .table-cell-rev{
+                        display: inline-flex;
+                        align-items: center;
+                        width: 100%;
+                        padding: 0;
+                        height: vw(40);
+                        font-size: vw(14) !important;
+                        line-height: vw(17) !important;
+                        font-family: 'Lato-Bold';
+                        color: #DB3434;
+                        background-image: url('../../../../../assets/icons/must_revised.png');
+                        background-size: vw(14);//10%;
+                        background-position-x: 55%;
+                        background-position-y: center;
+                        background-repeat: no-repeat;
+                        cursor: pointer;
+                    }
                 }
                 .table-row-approval:hover{
                     background-color:map-get($colors, primary);

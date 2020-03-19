@@ -94,7 +94,7 @@ export default class InputButton extends React.Component{
         else{
             return(
                 <div className="button-rows">
-                <Button onClick={this.isClicked} className="btn-assigns-lifetime" style={{justifyContent: "unset"}}>{this.props.titles}</Button>
+                <Button onClick={this.isClicked} className="btn-filter-by-date" style={{justifyContent: "unset"}}>{this.props.titles}</Button>
                     <Modal className="modal-pos" open={this.state.isShowModal} onClose={this.isClosed}>
                         <div>
                             <FilterByPeriodeDate 

@@ -1,16 +1,12 @@
 import React from 'react';
-import moment from "moment";
-import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
+// import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import './DetailPagesSite.scss';
 import DetailsTab from './Tab/DetailsTab';
-import { ApiRequestActionsStatus } from "../../../../core/RestClientHelpers";
+// import { ApiRequestActionsStatus } from "../../../../core/RestClientHelpers";
 import DropDownList from '../../../../components/DropdownList/DropDownList';
 import SearchInput from "../../../../components/Searchbar/SearchInput";
 import FilterbyDataAction from '../../../../components/FilterByDataAction/FilterbyDataAction';
 import NotifButton from '../../../../components/ActionButton/NotifButton/NotifButton';
-import ConfirmationModal from '../../../../components/ConfirmationModal/ConfirmationModal';
-import {CircularProgress} from '@material-ui/core';
-import UnapproveConfirmation from '../../../../components/UnapproveConfirmation/UnapproveConfirmation';
 
 class DetailPagesSite extends React.Component{
     constructor(props) {
@@ -315,8 +311,8 @@ componentDidUpdate = (prevProps) => {
     }
     if (this.state.whichTabs === true) {
       const web = this.props.displayMode === 'web';
-      const nextSales = this.props.salesOrderList.NextPage;
-      const prevSales = this.props.salesOrderList.PrevPage;
+      // const nextSales = this.props.salesOrderList.NextPage;
+      // const prevSales = this.props.salesOrderList.PrevPage;
       const currentPropsSales = this.props.salesOrderList.PageNumber;
       const { TotalPages } = this.props.salesOrderList;
       
@@ -338,15 +334,15 @@ componentDidUpdate = (prevProps) => {
       }
     if (this.state.whichTabs === false) {
       const web = this.props.displayMode === 'web';
-      const nextSales = this.props.serviceOrderList.NextPage;
-      const prevSales = this.props.serviceOrderList.PrevPage;
+      // const nextSales = this.props.serviceOrderList.NextPage;
+      // const prevSales = this.props.serviceOrderList.PrevPage;
       const currentPropsService = this.props.serviceOrderList.PageNumber;
       const { TotalPages } = this.props.serviceOrderList;
       
       return(
         <div className="paginations">
           <div className="paging-revision">
-            {prevSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="next-page-revision"><KeyboardArrowLeft className="arrow-icon-revision" /></div>}
+            {/* {prevSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="next-page-revision"><KeyboardArrowLeft className="arrow-icon-revision" /></div>} */}
             {web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive-revision">{currentPropsService - 3}</div>}
             {web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive-revision">{currentPropsService - 2}</div>}
             {currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive-revision">{currentPropsService - 1}</div>}
@@ -355,7 +351,7 @@ componentDidUpdate = (prevProps) => {
             {currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive-revision">{currentPropsService + 1}</div>}
             {web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive-revision">{currentPropsService + 2}</div>}
             {web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive-revision">{currentPropsService + 3}</div>}
-            {nextSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="next-page-revision"><KeyboardArrowRight className="arrow-icon-revision" /></div>}
+            {/* {nextSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="next-page-revision"><KeyboardArrowRight className="arrow-icon-revision" /></div>} */}
           </div>
         </div>
       )
@@ -370,8 +366,8 @@ componentDidUpdate = (prevProps) => {
     }
     if (this.state.whichTabs === true) {
       const web = this.props.displayMode === 'web';
-      const nextSalesRev = this.props.salesOrderRevised.NextPage;
-      const prevSalesRev = this.props.salesOrderRevised.PrevPage;
+      // const nextSalesRev = this.props.salesOrderRevised.NextPage;
+      // const prevSalesRev = this.props.salesOrderRevised.PrevPage;
       const currentPropsRev = this.props.salesOrderRevised.PageNumber;
       const { TotalPages } = this.props.salesOrderRevised;
       

@@ -23,7 +23,6 @@ export default class ServiceOrderList extends React.PureComponent {
       prevState.searchComp !==this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
       this.setState({checkedValue : false})
     }if (this.props.fetchStatusService === ApiRequestActionsStatus.LOADING) {
-      // console.log('ke trigger')
       this.setState({checkedValue : false})
     }
   }
