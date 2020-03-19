@@ -811,8 +811,6 @@ export function serviceParameterDeletedReducer(state = initialServiceParameter, 
 	return state;
 }
 
-
-
 //ini reducer untuk global search dibagian sales order, menggunakan react-addons-update
 export function searchSalesPlansReducer(state = initialSearchSalesParameter, action) {
 	if (action.type === SearchSalesAction){
