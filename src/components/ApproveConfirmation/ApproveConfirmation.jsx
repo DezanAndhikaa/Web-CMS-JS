@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { DialogContent, Button, Modal } from '@material-ui/core';
 import { ImgSendtoEdit } from '../../assets/imgs';

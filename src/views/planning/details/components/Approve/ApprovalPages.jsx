@@ -82,7 +82,7 @@ componentDidUpdate = (prevProps) => {
 
     //FILTER RANGE DATE
     if(prevProps.filterDate !== this.props.filterDate){
-      this.props.fetchSalesOrder(this.props.filterDate);
+      this.props.fetchSalesOrder(this.props.filterDate,this.props.token);
     }
 
   //ini untuk trigger sales global search
@@ -101,9 +101,15 @@ componentDidUpdate = (prevProps) => {
   //search per component
   if(this.state.whichTabs){
     if(prevProps.searchComp !== this.props.searchComp){
-      this.props.updateSalesParameter({
-        ...prevProps.salesParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
-      });
+      if(this.props.searchComp[0].Value === ""){
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter // gimana cara hapus row ke 0
+        })  
+      }else{
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+        });
+      }
     }
   }else{
     if(prevProps.searchComp !== this.props.searchComp){
@@ -734,7 +740,7 @@ componentDidUpdate = (prevProps) => {
             disabledButton = {this.props.selectedSalesPlans.length < 1 }
             totalSelectedItems ={this.props.selectedSalesPlans.length}
             handleSalesApprove={this.handleSalesApprove}
-            selectedData={this.state.selectedData}
+            // selectedData={this.state.selectedData}
             renderSakses = {this.changeSuccess}
           />
           <BaseButton titles="Cancel Approve"
@@ -749,7 +755,6 @@ componentDidUpdate = (prevProps) => {
             renderSakses = {this.changeSuccess}
             onClicksalesOrder = {this.onClicksalesOrder}
           />
-          <BaseButton titles="Edit" />
           <BaseButton titles="Delete" 
             {...this.props}
             disabledButton = {this.props.selectedSalesPlans.length < 1 }
@@ -767,10 +772,9 @@ componentDidUpdate = (prevProps) => {
           {/* <BaseButton titles="Total" totalSelectedItems ={this.props.selectedServicePlans.length}/> */}
           <BaseButton titles="Approve"
             {...this.props}
+            whatTabsIsRendered={this.state.whichTabs}
             disabledButton = {this.props.selectedServicePlans.length < 1 }
             totalSelectedItems ={this.props.selectedServicePlans.length}
-            whatTabsIsRendered={this.state.whichTabs}
-            // selectedServiceData={this.state.selectedServiceData}
             handleServiceApprove={this.handleServiceApprove}
             renderSakses = {this.changeSuccess}
           />
@@ -785,7 +789,6 @@ componentDidUpdate = (prevProps) => {
              selectedData={this.state.selectedData}
              renderSakses = {this.changeSuccess}
           />
-          <BaseButton titles="Edit" />
           <BaseButton titles="Delete" 
             {...this.props}
             disabledButton = {this.props.selectedServicePlans.length < 1 }

@@ -3,6 +3,7 @@
 import { connect } from 'react-redux';
 import NavBarComponent from './NavBarComponent';
 import { toggleMenuAction } from './NavbarComponent.actions';
+import { push } from 'connected-react-router';
 
 const mapStateToProps = (state) => ({
 	path: state.router.location.pathname,
@@ -13,6 +14,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	toggleMenu: (isOpen) => dispatch(toggleMenuAction(isOpen)),
+	push : (path) => dispatch(push(path))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBarComponent);

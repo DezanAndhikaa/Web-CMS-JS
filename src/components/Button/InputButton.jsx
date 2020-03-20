@@ -100,6 +100,7 @@ export default class InputButton extends React.Component{
                             <FilterByPeriodeDate 
                                 {...this.props}
                                 {...this.state}
+                                kluk={"kluk"}
                                 title={this.props.title} 
                                 onClosed={this.isClosed}
                             />

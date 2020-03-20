@@ -170,7 +170,6 @@ export default class UnapproveConfirmation extends React.PureComponent {
         handleReload={this.isReload} 
         isModal={this.state.isShowModalSapFailed} 
         idModal="SAP-Failed"
-        // idFailed="CloseBtn" 
         isModalClosed={this.isClosedFailed}
         backToSAP={this.isClickedCloseBtn}
         backToConfirmModal={this.isClickedBackBtn}

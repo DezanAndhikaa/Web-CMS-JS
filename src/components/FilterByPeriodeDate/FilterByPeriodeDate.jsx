@@ -32,6 +32,7 @@ class FilterByPeriodeDate extends React.Component{
     }
 
     render(){
+        console.log("waktunya pulang : ",this.props.kluk)
         return(
             <div className="assign-lifetime-modal">
                 <div className="top-row">

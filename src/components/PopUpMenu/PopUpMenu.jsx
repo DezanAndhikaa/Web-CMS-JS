@@ -1,39 +1,46 @@
 import React from 'react';
 import './PopUpMenu.scss';
-import MenuList from '@material-ui/core/MenuList';
-import MenuItem from '@material-ui/core/MenuItem';
-import Paper from '@material-ui/core/Paper';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import LogOut from '@material-ui/icons/PowerSettingsNew';
-import Typography from '@material-ui/core/Typography';
 import Setting from '@material-ui/icons/BrightnessLow';
 import HistoryIcon from '@material-ui/icons/History';
+import { Menu } from '../../constants';
+import { ListItemIcon,MenuItem, MenuList, Modal, Paper, Typography } from '@material-ui/core';
 
 export default class PopUpMenu extends React.PureComponent {
+
+  handleClick = (menu, tab) => {
+    this.props.push({
+      pathname: menu,
+      whichTab: tab
+    });
+  }
+
   render() {
     return (
-      <Paper className="pop-up">
-        <MenuList>
-          <MenuItem>
-            <ListItemIcon>
-              <HistoryIcon/>
-            </ListItemIcon>
-            <Typography variant="inherit">Tracking History</Typography>
-          </MenuItem>
-          <MenuItem>
-            <ListItemIcon>
-              <Setting/>
-            </ListItemIcon>
-            <Typography variant="inherit">Setting</Typography>
-          </MenuItem>
-          <MenuItem>
-            <ListItemIcon>
-              <LogOut/>
-            </ListItemIcon>
-            <Typography variant="inherit" noWrap>Log Out</Typography>
-          </MenuItem>
-        </MenuList>
-      </Paper>
+      <Modal className="pop-up" open={this.props.openModal} onClose={this.props.closeModal}>
+        <Paper>
+          <MenuList>
+            <MenuItem onClick={() => this.handleClick(Menu.PLANNING_TRACKING_HISTORY)}>
+              <ListItemIcon>
+                <HistoryIcon/>
+              </ListItemIcon>
+              <Typography variant="inherit">Tracking History</Typography>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <Setting/>
+              </ListItemIcon>
+              <Typography variant="inherit">Setting</Typography>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <LogOut/>
+              </ListItemIcon>
+              <Typography variant="inherit" noWrap>Log Out</Typography>
+            </MenuItem>
+          </MenuList>
+        </Paper>
+      </Modal>
     );
   }
 }

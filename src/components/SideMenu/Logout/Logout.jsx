@@ -10,10 +10,10 @@ export default class LogoutModal extends React.PureComponent {
 				<p className="title">Are you sure you want to Logout now?</p>
 				<div className="btn-container">
 					<div className="btn-yes" onClick={this.props.onYesClicked}>
-            Yes
+            			Yes
 					</div>
 					<div className="btn-no" onClick={this.props.onNoClicked}>
-            No
+            			No
 					</div>
 				</div>
 			</div>

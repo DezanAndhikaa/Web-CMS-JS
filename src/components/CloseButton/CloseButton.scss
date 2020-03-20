@@ -16,6 +16,16 @@
     .close-button:hover{
         background-image: url('../../assets/imgs/close-hover.png');
     }
+    .btn-close{
+        height: vw(22);
+        width: vw(22);
+        background-image: url('../../assets/imgs/close.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    .btn-close:hover{
+        background-image: url('../../assets/imgs/close-hover.png');
+    }
 }
 
 @media (min-width: 600px) and (max-width: 1025px) {

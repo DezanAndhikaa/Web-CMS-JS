@@ -19,7 +19,7 @@ class BaseButton extends React.Component{
         }
     }
 
-     isClicked = () => {
+    isClicked = () => {
        this.setState({isShowModal: !this.state.isShowModal})
     }
 
