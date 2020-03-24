@@ -73,7 +73,6 @@ const mapDispatchToProps = (dispatch) => ({
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
 	clearSelectedServicePlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
 	putLifetimeComp : (payload, token) => dispatch(putLifetimeCompAction(payload, token)),
-	// putSAPIssue : (payload, so) => dispatch(putSAPIssueAction(payload, so)),
 	approveSales: (payload) => dispatch(approveSalesAction(payload)),
 	unapproveSales: (payload) => dispatch(unapproveSalesAction(payload)),
 	approveService: (payload) => dispatch(approveServiceAction(payload)),
@@ -85,7 +84,7 @@ const mapDispatchToProps = (dispatch) => ({
 	fetchDeletedService: (payload) => dispatch(fetchDeletedServiceAction(payload)),
 	fetchSalesOrder: (payload, token) => dispatch(fetchSalesAction(payload, token)),
 	fetchServiceOrder: (payload) => dispatch(fetchServiceAction(payload)),
-	fetchSearchSales: (payload) => dispatch(fetchSearchSalesAction(payload)),
+	fetchSearchSales: (payload) => dispatch(fetchSearchSalesAction(payload)), //baru
 	fetchSearchService: (payload) => dispatch(fetchSearchServiceAction(payload)),
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	onSearchSales: (keyword) => dispatch(searchAction(SearchSalesAction, keyword)),

@@ -55,6 +55,8 @@ import Zoom from './zoom-icon.png';
 import LogoutIcon from './ic_logout.png';
 import MenuToggle from './menu-toggle.png';
 import IconFilter from './filter.png';
+import IcDbMenu from './ic_dashboard.png';
+import IcApproval from './ic_approval_menu.png';
 import IconSort from './sort.png';
 import Warning from './warning.png';
 import ACEmpty from './ac-empty.png';
@@ -116,6 +118,8 @@ import IconBack from './back.png';
 import IconDate from './ic_date.png';
 
 export {
+	IcDbMenu,
+	IcApproval,
 	IconDate,
 	IconBack,
 	IconInputLT,

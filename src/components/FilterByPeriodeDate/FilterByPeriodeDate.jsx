@@ -32,7 +32,6 @@ class FilterByPeriodeDate extends React.Component{
     }
 
     render(){
-        console.log("waktunya pulang : ",this.props.kluk)
         return(
             <div className="assign-lifetime-modal">
                 <div className="top-row">
@@ -59,7 +58,6 @@ class FilterByPeriodeDate extends React.Component{
                         onChange={this.handleChangeEnd}
                     />
                 </div>
-                
                 <div className="bottom-rows">
                     <Button className="btn-search" onClick={ () => {this.props.onFilter(this.state.startFilter, this.state.endFilter); this.props.onClosed() }} >Search Plan</Button>
                 </div>

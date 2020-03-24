@@ -9,8 +9,8 @@ import {
   DialogContent,
   Collapse
 } from "@material-ui/core";
-import { AssignmentIcon, LogoutIcon, AllocationIcon, DeliveryIcon, TrackingIcon,
-SettingIcon, ProductionIcon, ExecutionIcon, DashboardIcon, PlanningIcon } from "../../assets/icons";
+import { AssignmentIcon, IcDbMenu, IcApproval, LogoutIcon, AllocationIcon, DeliveryIcon, TrackingIcon, 
+  ProductionIcon, ExecutionIcon, DashboardIcon, PlanningIcon } from "../../assets/icons";
 import { Menu, StorageKey } from "../../constants";
 import LogoutModal from "./Logout";
 import "./SideMenuComponent.scss";
@@ -145,7 +145,7 @@ class SideMenuComponent extends React.Component {
                 >
                   <ListItemIcon classes={{ root: "icon-root" }}>
                     <img
-                      src={AssignmentIcon}
+                      src={IcDbMenu}
                       alt="assignment icon"
                       className="item-icon"
                     />
@@ -167,7 +167,7 @@ class SideMenuComponent extends React.Component {
                 >
                   <ListItemIcon classes={{ root: "icon-root" }}>
                     <img
-                      src={AssignmentIcon}
+                      src={IcApproval}
                       alt="assignment icon"
                       className="item-icon"
                     />
@@ -293,30 +293,6 @@ class SideMenuComponent extends React.Component {
                 classes={{ primary: "item-text", root: "item-text" }}
               />
             </ListItem>
-            {/* Setting */}
-            <ListItem
-              button
-              key="settings"
-              className={
-                this.props.path === Menu.SETTINGS
-                  ? "menu-item-selected"
-                  : "menu-item"
-              }
-              onClick={() => this.handleClick(Menu.SETTINGS, "")}
-            >
-              <ListItemIcon classes={{ root: "icon-root" }}>
-                <img
-                  src={SettingIcon}
-                  alt="assignment icon"
-                  className="item-icon"
-                />
-              </ListItemIcon>
-              <ListItemText
-                primary="Settings"
-                classes={{ primary: "item-text", root: "item-text" }}
-              />
-            </ListItem>
-            <ListItem />
             <ListItem
               button
               key="logout"

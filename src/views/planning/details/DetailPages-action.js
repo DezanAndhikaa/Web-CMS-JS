@@ -45,7 +45,6 @@ export const SelectPlansAssignmentFilterAction = 'SELECT_PLANS_ASSIGNMENT_FILTER
 export const SelectPlansTypeFilterAction = 'SELECT_PLANS_TYPE_FILTER';
 export const SelectLeaderAction = 'SELECT_LEADER';
 export const SelectMechanicAction = 'SELECT_MECHANIC';
-// export const SelectUnitModelFilterAction = 'SELECT_UNIT_MODEL_FILTER';
 export const SortSalesByCustomer = 'SORT_SALES_BY_CUSTOMER';
 export const SortSalesBySite = 'SORT_SALES_BY_SITE';
 export const SortSalesByUnitModel = 'SORT_SALES_BY_UNIT_MODEL';

@@ -100,38 +100,15 @@ const initialSalesParameter = {
 		assigmentFilter: true,
 		inProgressFilter: false,
 	}
-	// approvalFilter: false,
-	// sortByUnitModel: false,
-	// sortByUnitCode: false,
-	// sortByPlanType: true,
-	// sortByWorkOrder: false,
-	// sortByWorkCenter: false,
-	// sortByCustomer: false,
-	// sortByPlantExecution: false,
-	// sortByStatus: false,
-	// sortByOpenBacklog: false,
-	// sortByStaging: false,
-	// orderDesc: false,
-	// currentPage: 1,
-	// pageSize: 10,
 };
 
 const initialServiceParameter = {
-	// dataFilter : {
 	dataFilter: {
-			  PageNumber : 1,
-			  PageSize: 10,
-			  Sort: [],
-		  Filter: [
-			// {
-			//   Field: '',
-			//   Operator: '',
-			//   Value: '',
-			//   Logic: ''
-			// }
-		  ]
+		PageNumber : 1,
+		PageSize: 10,
+		Sort: [],
+		Filter: []
 	},
-	// },
 	paramsData : {
 		PageNumber: 0,
 		searchValue: '',
@@ -143,31 +120,12 @@ const initialServiceParameter = {
 		assigmentFilter: true,
 		inProgressFilter: false,
 	}
-	// approvalFilter: false,
-	// sortByUnitModel: false,
-	// sortByUnitCode: false,
-	// sortByPlanType: true,
-	// sortByWorkOrder: false,
-	// sortByWorkCenter: false,
-	// sortByCustomer: false,
-	// sortByPlantExecution: false,
-	// sortByStatus: false,
-	// sortByOpenBacklog: false,
-	// sortByStaging: false,
-	// orderDesc: false,
-	// currentPage: 1,
-	// pageSize: 10,
 };
 
 const initialFilterParameter = {
 
 	Filter: []
 };
-
-// const initialSelectedAssignment = {
-// 	selectedService: [],
-// 	selectedSales: [],
-// };
 
 const defaultState = { isActive: false, isAscending: true };
 const salesSortbyInitialState = {	
@@ -316,10 +274,8 @@ const initialSearchServiceParameter =
 }];
 
 const initialDownloadState = { data: new Blob(), status: ApiRequestActionsStatus.IDLE };
-// const initialAssignmentState = { response: false, status: ApiRequestActionsStatus.IDLE };
 const initialSalesState = { data: initialSalesAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialServiceState = { data: initialServiceAssignment, status: ApiRequestActionsStatus.IDLE };
-// const initialMechanicsState = { data: [], status: ApiRequestActionsStatus.IDLE };
 
 export function fetchSalesReducer(state = initialSalesState, action) {
 	if (action.type === FetchSalesAction) {
@@ -878,11 +834,7 @@ export function selectSalesPlansReducer(state = [], action) {
 	switch (action.type) {
 	case SelectSalesPlanAction: {
 		return [...state, action.payload];
-		// return [...state.map(((item) => item.SONumber !== action.payload))];
 	}
-	// case SelectAllSalesPlanAction:{
-	// 	return [...state.(((item) => item.SONumber === action.payload))];
-	// }
 	case UnselectSalesPlanAction: {
 		return [...state.filter(((item) => item.SoNumber !== action.payload.SoNumber))];
 	}
@@ -1007,7 +959,6 @@ const PlansReducers = combineReducers({
 	selectedSalesPlans: selectSalesPlansReducer,
 	selectedServicePlans: selectServicePlansReducer,
 	selectedMechanics: selectMechanicsReducer,
-	// approveSalesStatus: approveSalesReducer,
 	unApprove: unapproveSalesReducer,
 	salesParameter: salesParameterReducer,
 	salesApprovedParameter : salesApprovedParameterReducer,
