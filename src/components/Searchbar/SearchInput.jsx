@@ -14,10 +14,10 @@ export default class SearchInput extends React.PureComponent {
   }
 
   handleKeyUp = (event) => {
-      this.setState({ value: event.target.value });
-      setTimeout(() => {
-        this.props.handleSearch(this.state.value)
-      }, 1000)
+    this.setState({ value: event.target.value });
+    setTimeout(() => {
+      this.props.handleSearch(this.state.value)
+    }, 1000)
   }
 
   render() {

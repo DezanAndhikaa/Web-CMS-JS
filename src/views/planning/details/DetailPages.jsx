@@ -417,12 +417,12 @@ componentDidUpdate = (prevProps) => {
       <>
         <div className="bottom-row">
           <SearchInput
-          {...this.props}
-          whichTabs={this.state.whichTabs}
-          webInfo="Search"
-          onSalesSearch={this.props.onSearchSales}
-          onServiceSearch={this.props.onSearchService}
-        />
+            {...this.props}
+            whichTabs={this.state.whichTabs}
+            webInfo="Search"
+            onSalesSearch={this.props.onSearchSales}
+            onServiceSearch={this.props.onSearchService}
+          />
         </div>
       </>
     );

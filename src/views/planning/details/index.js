@@ -24,7 +24,7 @@ import {
 	UnselectServicePlanAction, selectSalesPlansAction, selectServicePlansAction, selectLeaderAction, SelectSalesPlanAction,
 	SelectServicePlanAction, 
 	selectMechanicAction, sortByAction, 
-	storePlanDataAction,dateFilterAction
+	storePlanDataAction,dateFilterAction, fetchSearchSalesAction, fetchSearchServiceAction
 } from './DetailPages-action';
 import DetailPages from './DetailPages';
 
@@ -85,6 +85,8 @@ const mapDispatchToProps = (dispatch) => ({
 	fetchDeletedService: (payload) => dispatch(fetchDeletedServiceAction(payload)),
 	fetchSalesOrder: (payload, token) => dispatch(fetchSalesAction(payload, token)),
 	fetchServiceOrder: (payload) => dispatch(fetchServiceAction(payload)),
+	fetchSearchSales: (payload) => dispatch(fetchSearchSalesAction(payload)),
+	fetchSearchService: (payload) => dispatch(fetchSearchServiceAction(payload)),
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	onSearchSales: (keyword) => dispatch(searchAction(SearchSalesAction, keyword)),
 	onSearchService: (keyword) => dispatch(searchAction(SearchServiceAction, keyword)),
