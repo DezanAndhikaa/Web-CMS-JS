@@ -19,35 +19,8 @@
   .login-bg{
     width: 100%;
     position: absolute;
-    z-index: 0;
     height: 100%;
-    opacity: .25;
     top: 0;
-  }
-  .logo-ut{
-    z-index: 1;
-    position: absolute;
-    top: vw(49);
-    left: vw(46);
-    width: vw(315);
-  }
-  .appname1{
-    z-index: 1;
-    font-size: vw(72);
-    font-family: 'SFUIDisplay-Bold';
-    color: map-get($colors , primary);
-    text-align: center;
-    letter-spacing: vw(5);
-    margin: 0;
-  }
-  .appname2{
-    z-index: 1;
-    font-size: vw(63);
-    font-family: 'SFUIDisplay-Regular';
-    letter-spacing: vw(19);
-    text-align: center;
-    color: white;
-    margin: 0;
   }
 }
 
@@ -59,11 +32,11 @@
   background-color: map-get($colors , primary) !important;
 }
 
-.movingasone{
+.logo-ut-login{
   position: absolute;
   top: vw(39);
-  right: vw(46);
-  width: vw(205);
+  right: vw(66);
+  width: vw(305);
 }
 
 .login-form-container{
@@ -75,28 +48,28 @@
     margin-top: vw(258);
     margin-left: vw(124);
     .login-title{
-      font-family: 'Roboto';
+      font-family: 'Roboto'; //Open-Sans
       font-weight: bold;
-      font-size: vw(47);
-      line-height: vw(55);
-      margin: 0 0 vw(62) 0;
+      font-size: 3.25vw;//vw(47);
+      line-height: 4.4vw;//vw(55);
+      margin: 0 0 0.4vw 0;
+    }
+    .login-title-cms{
+      font-family: 'Roboto'; //Open-Sans
+      font-weight: normal;
+      font-size: 1.3vw;
+      line-height: 1.8vw;
+      margin: 0 0 vw(20) 0;
     }
     .login-form{
       display: flex;
       flex-direction: column;
-      
-      .username-label{
-        color: #3C3B3B;
-        font-family: 'SFUIDisplay-Regular';
-        letter-spacing: 0.05em;
-        font-size: vw(20);
-        opacity: 0.5;
-      }
   
       .username-input{
         margin-top: vw(20);
         width: vw(675);
         padding-bottom: vw(26.5);
+        border-radius: 0.65vw;
       }
 
       .username-input-text{
@@ -108,25 +81,17 @@
         padding: 0;
       }
   
-      .password-label{
-        margin-top: vw(60.5);
-        color: #3C3B3B;
-        font-family: 'SFUIDisplay-Regular';
-        letter-spacing: 0.05em;
-        font-size: vw(20);
-        opacity: 0.5;
-      }
-  
       .password-input{
         margin-top: 1.04vw;
         font-size: 2.04vw;
         width: 35.16vw;
         padding-bottom: 1.38vw;
+        border-radius: 0.65vw;
       }
 
       .visibility-icon{
         position: absolute;
-        top: 30vw;
+        top: 29.2vw;
         right: 9vw;
         opacity: 0.5;
         color: #444444;
@@ -138,9 +103,9 @@
         font-family: 'Lato-Bold';
         font-size: vw(27);
         line-height: vw(32);
-        border-radius: 2vw;
-        width: vw(309);
-        height: vw(78);
+        border-radius: 0.65vw;
+        width: 11vw;//vw(309);
+        height: 3vw;//vw(78);
         text-transform: none;
         background-color: map-get($colors, primary);
         transition: ease;
@@ -156,18 +121,13 @@
         font-family: 'Lato-Bold';
         font-size: vw(27);
         line-height: vw(32);
-        border-radius: 2vw;
-        width: vw(309);
-        height: vw(78);
+        border-radius: 0.65vw;
+        width: 11vw;//vw(309);
+        height: 3vw;//vw(78);
         text-transform: none;
         opacity: 0.5;
         color: black;
         background-color: map-get($colors, primary);
-      }
-  
-      .arrow-icon{
-        margin-top: 0.3vw;
-        width: 1vw;
       }
     }
   }

@@ -1,17 +1,28 @@
 import React from 'react';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import { Button, Input } from '@material-ui/core';
+import { Button, TextField, withStyles, LinearProgress } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-import {
-  MovingAsOneLogo, UTLogo, ArrowRight,
-  CmsLogo, MovingAsOneInverse, LoginBg
-} from '../../assets/imgs';
+import { UTLogo, CmsLogo, CmsLoginBg, MovingAsOneInverse, LoginBg, UTLogoBlack } from '../../assets/imgs';
 import './LoginPage.scss';
 import isAccessTokenValid from '../../core/HelpersFunction';
 import Message from '../../components/Message/Message';
 import { Menu, BasePath } from '../../constants';
 import { ApiRequestActionsStatus } from '../../core/RestClientHelpers';
 
+const CssTextField = withStyles({
+  root: {
+    '& label.Mui-focused': {
+      color: '#FFD500',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: '#FFD500',
+    },
+    '& .MuiOutlinedInput-root': {
+      '&.Mui-focused fieldset': {
+        borderColor: '#FFD500',
+      },
+    },
+  },
+})(TextField);
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
@@ -50,18 +61,31 @@ class LoginPage extends React.Component {
   renderForm() {
     return (
       <form noValidate autoComplete="off" className="login-form">
-        <label htmlFor="username" className="username-label">USERNAME</label>
-        <Input id="username" type="text" value={this.state.username} onChange={this.handleUsernameChange} className="username-input" placeholder="Input your username" classes={{ input: 'username-input-text' }} />
-        <label htmlFor="password" className="password-label">PASSWORD</label>
-        <Input onKeyPress={this.handleKeyPress} id="password" type={this.state.showPassword ? 'text' : 'password'} value={this.state.password} onChange={this.handlePasswordChange} className="password-input" placeholder="Input your password" classes={{ input: 'username-input-text' }} />
+        <CssTextField 
+          id="username" 
+          variant="outlined" 
+          type="text" 
+          value={this.state.username} 
+          onChange={this.handleUsernameChange} 
+          className="username-input" 
+          label="Username" 
+          classes={{ input: 'username-input-text' }} />
+        <CssTextField 
+          id="password" 
+          variant="outlined" 
+          onKeyPress={this.handleKeyPress} 
+          type={this.state.showPassword ? 'text' : 'password'} 
+          value={this.state.password} onChange={this.handlePasswordChange} 
+          className="password-input" 
+          label="Password" 
+          classes={{ input: 'username-input-text' }} />
         {
           this.state.showPassword
             ? <Visibility className="visibility-icon" onClick={() => this.setState((prevState) => ({ showPassword: !prevState.showPassword }))} />
             : <VisibilityOff className="visibility-icon" onClick={() => this.setState((prevState) => ({ showPassword: !prevState.showPassword }))} />
         }
         <Button disabled={this.isDisabled()} variant="contained" className={this.isDisabled() ? 'btn-login-disabled' : 'btn-login'} onClick={this.handleLogin}>
-          Log In &nbsp; &nbsp;
-          <img alt="" src={ArrowRight} className="arrow-icon" />
+          Log In
         </Button>
       </form>
     );
@@ -78,19 +102,15 @@ class LoginPage extends React.Component {
           {this.renderLinearProgress()}
           <div className="login-page">
             <div className="left-pane">
-              <img src={BasePath + LoginBg} className="login-bg" alt="" />
-              <img src={UTLogo} className="logo-ut" alt="united tractors" />
-              <div className="app-title">
-                <p className="appname1">COMPONENT</p>
-                <p className="appname2">MANAGEMENT SYSTEM</p>
-              </div>
+              <img src={CmsLoginBg} className="login-bg" alt="" />
             </div>
             <div className="right-pane">
-              <img src={MovingAsOneLogo} className="movingasone" alt="logo" />
+              <img src={UTLogoBlack} className="logo-ut-login" alt="logo" />
               <div className="login-form-container">
                 <div className="login-form-inner">
                   {this.renderError()}
                   <h2 className="login-title">Log In</h2>
+                  <div className="login-title-cms">Welcome to the CMS Website</div>
                   {this.renderForm()}
                 </div>
               </div>
@@ -110,7 +130,7 @@ class LoginPage extends React.Component {
             {this.renderError()}
             {this.renderForm()}
           </div>
-          <img alt="" src={`${BasePath + MovingAsOneInverse}`} className="movingasone" />
+          <img alt="" src={`${BasePath + MovingAsOneInverse}`} className="logo-ut" />
         </div>
       </div>
     );

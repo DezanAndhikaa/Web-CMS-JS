@@ -1,5 +1,5 @@
 import DcaLogo from './dcalogo.png';
-import CmsLogo from './logo-cms.png';
+import CmsLoginBg from './bg-login.png';
 import LoginBg from './background-login.png';
 import MovingAsOneLogo from './movingasone.png';
 import MovingAsOneInverse from './movingasone-inverse.png';
@@ -37,6 +37,7 @@ import Text1 from './text-1.png';
 import Text2 from './text-2.png';
 import IceFace from './ice-face.png';
 import Clock from './clock.png';
+import CmsLogo from './logo-cms.png';
 
 export {
 	ImgApproved,
@@ -45,6 +46,7 @@ export {
 	ImgCancelEditSucc,
 	DcaLogo,
 	CmsLogo,
+	CmsLoginBg,
 	LoginBg,
 	MovingAsOneLogo,
 	MovingAsOneInverse,
