@@ -1,7 +1,6 @@
 import { ApiUrlBase, RequestMethod } from '../../constants';
 import { callApi } from '../../core/RestClientHelpers';
 
-
 export const RequestLoginAction = 'REQUEST_LOGIN';
 
 export function requestLoginAction(username, password) {
@@ -12,7 +11,7 @@ export function requestLoginAction(username, password) {
 
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: ApiUrlBase.AUTH_API_URL,
+		url: `${ApiUrlBase.REACT_API_URL}/api/login`,
 		data: body,
 		headers: {
 			'Content-Type': 'application/json',
