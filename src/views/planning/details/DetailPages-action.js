@@ -263,38 +263,6 @@ export function fetchSalesAction(payload, accessToken) {
 	return async (dispatch) => dispatch(callApi(FetchSalesAction, requestConfig));
 }
 
-export function fetchSearchSalesAction(payload, accessToken){
-	const filter = payload;
-	const requestConfig = {
-		method: RequestMethod.POST,
-		url: `${ApiUrlBase.REACT_API_URL}/v1/salesorder/globalsearch`,
-		headers: {
-			Authorization: `Bearer ${accessToken}`,
-			'Accept': 'application/json; charset=utf-8',
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
-			'Content-Type': 'application/json; charset=utf-8',
-		},
-		data: filter,
-	};
-	return async (dispatch) => dispatch(callApi(SearchSalesAction, requestConfig));
-}
-
-export function fetchSearchServiceAction(payload, accessToken){
-	const filter = payload;
-	const requestConfig = {
-		method: RequestMethod.POST,
-		url: `${ApiUrlBase.REACT_API_URL}/v1/serviceorder/globalsearch`,
-		headers: {
-			Authorization: `Bearer ${accessToken}`,
-			'Accept': 'application/json; charset=utf-8',
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
-			'Content-Type': 'application/json; charset=utf-8',
-		},
-		data: filter,
-	};
-	return async (dispatch) => dispatch(callApi(SearchServiceAction, requestConfig));
-}
-
 export function fetchServiceAction(payload, accessToken) {
 	const filter = payload;
 	const requestConfig = {

@@ -431,10 +431,10 @@ componentDidUpdate = (prevProps) => {
 
   handleSearch = (value) => {
     if (this.state.whichTabs === true) {
-        this.props.onSearchSales(value)
+        this.props.onSearchSales(value) && this.props.updateSalesParameter({...this.props.salesParameter.dataFilter.Category="SN"})
     }else if (this.state.whichTabs === false) {
       setTimeout(() => {
-        this.props.onSearchService(value)
+        this.props.onSearchService(value) && this.props.updateServiceParameter({...this.props.serviceParameter.dataFilter.Category="SN"})
       }, 1000)
   }
 };

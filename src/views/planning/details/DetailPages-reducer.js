@@ -84,6 +84,7 @@ const initialSelectedFilter = {
 
 const initialSalesParameter = {
 	dataFilter : {
+		Category: '',
 		PageNumber : 1,
 		PageSize: 10,
 		Sort: [],
@@ -767,6 +768,16 @@ export function serviceParameterDeletedReducer(state = initialServiceParameter, 
 	return state;
 }
 
+export function searchSalesReducer(state = initialSalesParameter, action) {
+	if (action.type === SearchSalesAction) return action.payload;
+	return state;
+}
+
+export function searchServiceReducer(state = initialServiceParameter, action) {
+	if (action.type === SearchServiceAction) return action.payload;
+	return state;
+}
+
 //ini reducer untuk global search dibagian sales order, menggunakan react-addons-update
 export function searchSalesPlansReducer(state = initialSearchSalesParameter, action) {
 	if (action.type === SearchSalesAction){
@@ -973,8 +984,10 @@ const PlansReducers = combineReducers({
 	indexFilterParameter: indexFilterParameterReducer,
 	sortSalesBy: sortSalesByReducer,
 	sortServiceBy: sortServiceByReducer,
-	salesSearch: searchSalesPlansReducer,
-	serviceSearch: searchServicePlansReducer,
+	// salesSearch: searchSalesPlansReducer,
+	// serviceSearch: searchServicePlansReducer,
+	salesSearch: searchSalesReducer,
+	serviceSearch: searchServiceReducer,
 	searchComp: searchCompReducer,
 	selectedPlanData: storePlanDataReducer,
 	approveSalesDownloaded : downloadApprovedSalesReducer,
