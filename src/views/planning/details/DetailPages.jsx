@@ -420,8 +420,7 @@ componentDidUpdate = (prevProps) => {
             {...this.props}
             whichTabs={this.state.whichTabs}
             webInfo="Search"
-            onSalesSearch={this.props.onSearchSales}
-            onServiceSearch={this.props.onSearchService}
+            handleSearch={this.handleSearch}
           />
         </div>
       </>
@@ -429,15 +428,14 @@ componentDidUpdate = (prevProps) => {
   }
 
 
-  handleSearch = (value) => {
-    if (this.state.whichTabs === true) {
-        this.props.onSearchSales(value) && this.props.updateSalesParameter({...this.props.salesParameter.dataFilter.Category="SN"})
-    }else if (this.state.whichTabs === false) {
-      setTimeout(() => {
-        this.props.onSearchService(value) && this.props.updateServiceParameter({...this.props.serviceParameter.dataFilter.Category="SN"})
-      }, 1000)
-  }
-};
+  handleSearch=(value)=>{
+		this.setState({ searchVal : value})
+		if (this.state.whichTabs === true) {
+			setTimeout(() => {
+				this.props.onSearchSales(this.state.searchVal)
+      }, 1000);
+    }
+	}
 
   _renderNotif(){
     return (

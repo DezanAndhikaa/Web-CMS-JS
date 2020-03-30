@@ -85,6 +85,7 @@ const initialSelectedFilter = {
 const initialSalesParameter = {
 	dataFilter : {
 		Category: '',
+		Keyword: '',
 		PageNumber : 1,
 		PageSize: 10,
 		Sort: [],
@@ -151,128 +152,180 @@ const initialSearchCompParameter =
 }];
 
 const initialSearchSalesParameter =
-[{
-	Field	: 'SoNumber',
-	Operator: 'contains',
-	Value 	: '',
-	Logic 	: 'OR'
-},
-{
-	Field	: 'CustomerName',
-	Operator: 'contains',
-	Value 	: '',
-	Logic 	: 'OR'
-},
-{
-	Field	: 'SiteCode',
-	Operator: 'contains',
-	Value 	: '',
-	Logic 	: 'OR'
-},
-{
-	Field	: 'UnitModel',
-	Operator: 'contains',
-	Value 	: '',
-	Logic 	: 'OR'
-},
-{
-	Field	: 'ComponentDescription',
-	Operator: 'contains',
-	Value 	: '',
-	Logic 	: 'OR'
-},
-{
-	Field	: 'PartNumber',
-	Operator: 'contains',
-	Value 	: '',
-	Logic 	: 'OR'
-},
-{
-	Field	: 'UnitCode',
-	Operator: 'contains',
-	Value 	: '',
-	Logic 	: 'OR'
-},
-{
-	Field	: 'SerialNumber',
-	Operator: 'contains',
-	Value 	: '',
-	Logic 	: 'OR'
-},
-{
-	Field	: 'LifeTimeComponent',
-	Operator: 'contains',
-	Value 	: '',
-	Logic 	: 'OR'
-},
-{
-	Field	: 'PlanExecutionDate',
-	Operator: 'contains',
-	Value 	: '',
-	Logic 	: 'OR'
-}];
+[
+	{
+		Category: 'Lifetime', //Category buat input lifetime
+		Keyword: ''
+	},
+	{
+		Category: 'Approval', //Category buat approval pages
+		Keyword: ''
+	},
+	{
+		Category: 'SA', //Category buat status approve
+		Keyword: ''
+	},
+	{
+		Category: 'SN', //Category buat status not approve
+		Keyword: ''
+	},
+	{
+		Category: 'SD', //Category buat status deleted
+		Keyword: ''
+	},
+	{
+		Category: 'SSAP', //Category buat status sap message
+		Keyword: ''
+	}
+// {
+// 	Field	: 'SoNumber',
+// 	Operator: 'contains',
+// 	Value 	: '',
+// 	Logic 	: 'OR'
+// },
+// {
+// 	Field	: 'CustomerName',
+// 	Operator: 'contains',
+// 	Value 	: '',
+// 	Logic 	: 'OR'
+// },
+// {
+// 	Field	: 'SiteCode',
+// 	Operator: 'contains',
+// 	Value 	: '',
+// 	Logic 	: 'OR'
+// },
+// {
+// 	Field	: 'UnitModel',
+// 	Operator: 'contains',
+// 	Value 	: '',
+// 	Logic 	: 'OR'
+// },
+// {
+// 	Field	: 'ComponentDescription',
+// 	Operator: 'contains',
+// 	Value 	: '',
+// 	Logic 	: 'OR'
+// },
+// {
+// 	Field	: 'PartNumber',
+// 	Operator: 'contains',
+// 	Value 	: '',
+// 	Logic 	: 'OR'
+// },
+// {
+// 	Field	: 'UnitCode',
+// 	Operator: 'contains',
+// 	Value 	: '',
+// 	Logic 	: 'OR'
+// },
+// {
+// 	Field	: 'SerialNumber',
+// 	Operator: 'contains',
+// 	Value 	: '',
+// 	Logic 	: 'OR'
+// },
+// {
+// 	Field	: 'LifeTimeComponent',
+// 	Operator: 'contains',
+// 	Value 	: '',
+// 	Logic 	: 'OR'
+// },
+// {
+// 	Field	: 'PlanExecutionDate',
+// 	Operator: 'contains',
+// 	Value 	: '',
+// 	Logic 	: 'OR'
+// }
+];
 
 const initialSearchServiceParameter =
-[{
-	Field	: 'WoNumber',
-	Operator: 'contains',
-	Value 	: '',
-	Logic 	: 'OR'
-},
-{
-	Field	: 'CustomerName',
-	Operator: 'contains',
-	Value 	: '',
-	Logic 	: 'OR'
-},
-{
-	Field	: 'SiteCode',
-	Operator: 'contains',
-	Value 	: '',
-	Logic 	: 'OR'
-},
-{
-	Field	: 'UnitModel',
-	Operator: 'contains',
-	Value 	: '',
-	Logic 	: 'OR'
-},
-{
-	Field	: 'ComponentDescription',
-	Operator: 'contains',
-	Value 	: '',
-	Logic 	: 'OR'
-},
-{
-	Field	: 'PartNumber',
-	Operator: 'contains',
-	Value 	: '',
-	Logic 	: 'OR'
-},
-{
-	Field	: 'UnitCode',
-	Operator: 'contains',
-	Value 	: '',
-	Logic 	: 'OR'
-},
-{
-	Field	: 'SerialNumber',
-	Operator: 'contains',
-	Value 	: '',
-	Logic 	: 'OR'
-},
-{
-	Field	: 'LifeTimeComponent',
-	Operator: 'contains',
-	Value 	: '',
-	Logic 	: 'OR'
-},
-{
-	Field	: 'PlanExecutionDate',
-	Operator: 'contains',
-	Value 	: '',
-	Logic 	: 'OR'
-}];
+[
+	{
+		Category: 'Lifetime', //Category buat input lifetime
+		Keyword: ''
+	},
+	{
+		Category: 'Approval', //Category buat approval pages
+		Keyword: ''
+	},
+	{
+		Category: 'SA', //Category buat status approve
+		Keyword: ''
+	},
+	{
+		Category: 'SN', //Category buat status not approve
+		Keyword: ''
+	},
+	{
+		Category: 'SD', //Category buat status deleted
+		Keyword: ''
+	},
+	{
+		Category: 'SSAP', //Category buat status sap message
+		Keyword: ''
+	}
+// {
+// 	Field	: 'WoNumber',
+// 	Operator: 'contains',
+// 	Value 	: '',
+// 	Logic 	: 'OR'
+// },
+// {
+// 	Field	: 'CustomerName',
+// 	Operator: 'contains',
+// 	Value 	: '',
+// 	Logic 	: 'OR'
+// },
+// {
+// 	Field	: 'SiteCode',
+// 	Operator: 'contains',
+// 	Value 	: '',
+// 	Logic 	: 'OR'
+// },
+// {
+// 	Field	: 'UnitModel',
+// 	Operator: 'contains',
+// 	Value 	: '',
+// 	Logic 	: 'OR'
+// },
+// {
+// 	Field	: 'ComponentDescription',
+// 	Operator: 'contains',
+// 	Value 	: '',
+// 	Logic 	: 'OR'
+// },
+// {
+// 	Field	: 'PartNumber',
+// 	Operator: 'contains',
+// 	Value 	: '',
+// 	Logic 	: 'OR'
+// },
+// {
+// 	Field	: 'UnitCode',
+// 	Operator: 'contains',
+// 	Value 	: '',
+// 	Logic 	: 'OR'
+// },
+// {
+// 	Field	: 'SerialNumber',
+// 	Operator: 'contains',
+// 	Value 	: '',
+// 	Logic 	: 'OR'
+// },
+// {
+// 	Field	: 'LifeTimeComponent',
+// 	Operator: 'contains',
+// 	Value 	: '',
+// 	Logic 	: 'OR'
+// },
+// {
+// 	Field	: 'PlanExecutionDate',
+// 	Operator: 'contains',
+// 	Value 	: '',
+// 	Logic 	: 'OR'
+// }
+];
 
 const initialDownloadState = { data: new Blob(), status: ApiRequestActionsStatus.IDLE };
 const initialSalesState = { data: initialSalesAssignment, status: ApiRequestActionsStatus.IDLE };
@@ -768,12 +821,12 @@ export function serviceParameterDeletedReducer(state = initialServiceParameter, 
 	return state;
 }
 
-export function searchSalesReducer(state = initialSalesParameter, action) {
+export function searchSalesReducer(state = '', action) {
 	if (action.type === SearchSalesAction) return action.payload;
 	return state;
 }
 
-export function searchServiceReducer(state = initialServiceParameter, action) {
+export function searchServiceReducer(state = '', action) {
 	if (action.type === SearchServiceAction) return action.payload;
 	return state;
 }
@@ -984,10 +1037,10 @@ const PlansReducers = combineReducers({
 	indexFilterParameter: indexFilterParameterReducer,
 	sortSalesBy: sortSalesByReducer,
 	sortServiceBy: sortServiceByReducer,
-	// salesSearch: searchSalesPlansReducer,
-	// serviceSearch: searchServicePlansReducer,
-	salesSearch: searchSalesReducer,
-	serviceSearch: searchServiceReducer,
+	salesSearch: searchSalesPlansReducer,
+	serviceSearch: searchServicePlansReducer,
+	// salesSearch: searchSalesReducer,
+	// serviceSearch: searchServiceReducer,
 	searchComp: searchCompReducer,
 	selectedPlanData: storePlanDataReducer,
 	approveSalesDownloaded : downloadApprovedSalesReducer,
