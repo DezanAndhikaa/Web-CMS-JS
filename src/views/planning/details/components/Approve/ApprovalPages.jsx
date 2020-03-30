@@ -39,12 +39,9 @@ componentWillUnmount = () => {
 
 componentDidUpdate = (prevProps) => {
   if (prevProps.salesParameter !== this.props.salesParameter) {
-    // this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.props.token);
-    // this.handleLifeTime();
     this.onClickSalesOrder();
   }
   if (prevProps.serviceParameter !== this.props.serviceParameter) {
-    // this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
     this.onClickServiceOrder();
   }
   if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
@@ -59,13 +56,10 @@ componentDidUpdate = (prevProps) => {
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
       if(this.props.indexFilterParameter.indexTabParameter === 0){
-        // this.props.fetchSalesOrder(this.props.filterParameter);
         this.props.updateSalesParameter({
           ...prevProps.salesParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
         })
-        // this.handleLifeTime();
       }else{
-        // this.props.fetchServiceOrder(this.props.filterParameter);
         this.props.updateServiceParameter({
           ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
         })
@@ -77,25 +71,25 @@ componentDidUpdate = (prevProps) => {
     this.props.updateSalesParameter({
       ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterLifetime.Filter, PageNumber: 1
     })
-    // this.props.fetchSalesOrder(this.props.filterLifetime);
   }
 
-    //FILTER RANGE DATE
-    if(prevProps.filterDate !== this.props.filterDate){
-      this.props.fetchSalesOrder(this.props.filterDate,this.props.token);
-    }
+  //FILTER RANGE DATE
+  if(prevProps.filterDate !== this.props.filterDate){
+    this.props.fetchSalesOrder(this.props.filterDate,this.props.token);
+  }
 
   //ini untuk trigger sales global search
   if (prevProps.salesSearch !== this.props.salesSearch) {
     this.props.updateSalesParameter({
-      ...prevProps.salesParameter.dataFilter, Filter : this.props.salesSearch, PageNumber: 1,
+      ...prevProps.salesParameter.dataFilter, Category: 'Approval', Keyword: this.props.salesSearch, PageNumber: 1,
     });
+    this.onClickSalesOrder();
   }
   
   //ini untuk trigger service global search
   if(prevProps.serviceSearch !== this.props.serviceSearch){
     this.props.updateServiceParameter({
-      ...prevProps.serviceParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber: 1,
+      ...prevProps.serviceParameter.dataFilter, Category: 'Approval', Keyword: this.props.serviceSearch, PageNumber: 1,
     });
   }
   //search per component

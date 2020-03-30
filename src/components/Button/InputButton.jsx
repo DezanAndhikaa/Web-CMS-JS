@@ -24,10 +24,10 @@ export default class InputButton extends React.Component{
     }
 
     handleKeyUp = (event, sort) => {
-          this.setState({ value: event.target.value });
-          setTimeout(() => {
-            this.props.onSearch(this.state.value, sort)
-          }, 1000);
+        this.setState({ value: event.target.value });
+        setTimeout(() => {
+        this.props.onSearch(this.state.value, sort)
+        }, 1000);
     }
 
     render(){

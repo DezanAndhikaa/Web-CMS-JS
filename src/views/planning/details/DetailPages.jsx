@@ -42,11 +42,7 @@ componentDidUpdate = (prevProps) => {
   if (prevProps.salesParameter !== this.props.salesParameter) {
     this.onClickSalesOrder()
   }
-  if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
-    prevProps.approveSalesDownloaded.status === ApiRequestActionsStatus.LOADING) {
-    this.onClickDownloadSalesApproved()
-  }
-
+  
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
       if(this.props.indexFilterParameter.indexTabParameter === 0){
@@ -59,12 +55,14 @@ componentDidUpdate = (prevProps) => {
         })
       }
   }
+
   //FILTER RANGE LIFETIME
   if(prevProps.filterLifetime !== this.props.filterLifetime){
     this.props.updateSalesParameter({
       ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterLifetime.Filter, PageNumber: 1
     })
   }
+
   //FILTER RANGE DATE
   if(prevProps.filterDate !== this.props.filterDate){
     this.props.updateSalesParameter({
@@ -75,16 +73,10 @@ componentDidUpdate = (prevProps) => {
   //ini untuk trigger sales global search
   if (prevProps.salesSearch !== this.props.salesSearch) {
     this.props.updateSalesParameter({
-      ...prevProps.salesParameter.dataFilter, Filter : this.props.salesSearch, PageNumber: 1,
+      ...prevProps.salesParameter.dataFilter, Category: 'Lifetime', Keyword: this.props.salesSearch, PageNumber: 1,
     });
   }
-  
-  //ini untuk trigger service global search
-  if(prevProps.serviceSearch !== this.props.serviceSearch){
-    this.props.updateServiceParameter({
-      ...prevProps.serviceParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber: 1,
-    });
-  }
+
   //search per component
   if(this.state.whichTabs){
     if(prevProps.searchComp !== this.props.searchComp){
@@ -201,6 +193,7 @@ componentDidUpdate = (prevProps) => {
     }
     };
   }
+
   // SERVICE ORDER SORTING
   if (prevProps.sortServiceBy !== this.props.sortServiceBy) {
     const { sortServiceBy } = this.props;
@@ -220,12 +213,12 @@ componentDidUpdate = (prevProps) => {
       isDescending = !sortServiceBy.Customer.isAscending;
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          // PageSize: 2,
-          Sort: [{
-            Field : 'Customer',
-            Direction : 'asc'
-          }]   
+        PageNumber: 1,
+        // PageSize: 2,
+        Sort: [{
+          Field : 'Customer',
+          Direction : 'asc'
+        }]   
       });
     }
   }
@@ -401,6 +394,7 @@ componentDidUpdate = (prevProps) => {
       />
     )
   }
+  
   handleClickShowPerPage = async(value) =>{
     if (this.state.whichTabs === true) {
       await this.props.clearSelectedSalesPlans();
@@ -426,7 +420,6 @@ componentDidUpdate = (prevProps) => {
       </>
     );
   }
-
 
   handleSearch=(value)=>{
 		this.setState({ searchVal : value})

@@ -84,8 +84,6 @@ const initialSelectedFilter = {
 
 const initialSalesParameter = {
 	dataFilter : {
-		Category: '',
-		Keyword: '',
 		PageNumber : 1,
 		PageSize: 10,
 		Sort: [],
@@ -125,7 +123,6 @@ const initialServiceParameter = {
 };
 
 const initialFilterParameter = {
-
 	Filter: []
 };
 
@@ -150,182 +147,6 @@ const initialSearchCompParameter =
 	Value   : '',
 	Logic   : 'AND'
 }];
-
-const initialSearchSalesParameter =
-[
-	{
-		Category: 'Lifetime', //Category buat input lifetime
-		Keyword: ''
-	},
-	{
-		Category: 'Approval', //Category buat approval pages
-		Keyword: ''
-	},
-	{
-		Category: 'SA', //Category buat status approve
-		Keyword: ''
-	},
-	{
-		Category: 'SN', //Category buat status not approve
-		Keyword: ''
-	},
-	{
-		Category: 'SD', //Category buat status deleted
-		Keyword: ''
-	},
-	{
-		Category: 'SSAP', //Category buat status sap message
-		Keyword: ''
-	}
-// {
-// 	Field	: 'SoNumber',
-// 	Operator: 'contains',
-// 	Value 	: '',
-// 	Logic 	: 'OR'
-// },
-// {
-// 	Field	: 'CustomerName',
-// 	Operator: 'contains',
-// 	Value 	: '',
-// 	Logic 	: 'OR'
-// },
-// {
-// 	Field	: 'SiteCode',
-// 	Operator: 'contains',
-// 	Value 	: '',
-// 	Logic 	: 'OR'
-// },
-// {
-// 	Field	: 'UnitModel',
-// 	Operator: 'contains',
-// 	Value 	: '',
-// 	Logic 	: 'OR'
-// },
-// {
-// 	Field	: 'ComponentDescription',
-// 	Operator: 'contains',
-// 	Value 	: '',
-// 	Logic 	: 'OR'
-// },
-// {
-// 	Field	: 'PartNumber',
-// 	Operator: 'contains',
-// 	Value 	: '',
-// 	Logic 	: 'OR'
-// },
-// {
-// 	Field	: 'UnitCode',
-// 	Operator: 'contains',
-// 	Value 	: '',
-// 	Logic 	: 'OR'
-// },
-// {
-// 	Field	: 'SerialNumber',
-// 	Operator: 'contains',
-// 	Value 	: '',
-// 	Logic 	: 'OR'
-// },
-// {
-// 	Field	: 'LifeTimeComponent',
-// 	Operator: 'contains',
-// 	Value 	: '',
-// 	Logic 	: 'OR'
-// },
-// {
-// 	Field	: 'PlanExecutionDate',
-// 	Operator: 'contains',
-// 	Value 	: '',
-// 	Logic 	: 'OR'
-// }
-];
-
-const initialSearchServiceParameter =
-[
-	{
-		Category: 'Lifetime', //Category buat input lifetime
-		Keyword: ''
-	},
-	{
-		Category: 'Approval', //Category buat approval pages
-		Keyword: ''
-	},
-	{
-		Category: 'SA', //Category buat status approve
-		Keyword: ''
-	},
-	{
-		Category: 'SN', //Category buat status not approve
-		Keyword: ''
-	},
-	{
-		Category: 'SD', //Category buat status deleted
-		Keyword: ''
-	},
-	{
-		Category: 'SSAP', //Category buat status sap message
-		Keyword: ''
-	}
-// {
-// 	Field	: 'WoNumber',
-// 	Operator: 'contains',
-// 	Value 	: '',
-// 	Logic 	: 'OR'
-// },
-// {
-// 	Field	: 'CustomerName',
-// 	Operator: 'contains',
-// 	Value 	: '',
-// 	Logic 	: 'OR'
-// },
-// {
-// 	Field	: 'SiteCode',
-// 	Operator: 'contains',
-// 	Value 	: '',
-// 	Logic 	: 'OR'
-// },
-// {
-// 	Field	: 'UnitModel',
-// 	Operator: 'contains',
-// 	Value 	: '',
-// 	Logic 	: 'OR'
-// },
-// {
-// 	Field	: 'ComponentDescription',
-// 	Operator: 'contains',
-// 	Value 	: '',
-// 	Logic 	: 'OR'
-// },
-// {
-// 	Field	: 'PartNumber',
-// 	Operator: 'contains',
-// 	Value 	: '',
-// 	Logic 	: 'OR'
-// },
-// {
-// 	Field	: 'UnitCode',
-// 	Operator: 'contains',
-// 	Value 	: '',
-// 	Logic 	: 'OR'
-// },
-// {
-// 	Field	: 'SerialNumber',
-// 	Operator: 'contains',
-// 	Value 	: '',
-// 	Logic 	: 'OR'
-// },
-// {
-// 	Field	: 'LifeTimeComponent',
-// 	Operator: 'contains',
-// 	Value 	: '',
-// 	Logic 	: 'OR'
-// },
-// {
-// 	Field	: 'PlanExecutionDate',
-// 	Operator: 'contains',
-// 	Value 	: '',
-// 	Logic 	: 'OR'
-// }
-];
 
 const initialDownloadState = { data: new Blob(), status: ApiRequestActionsStatus.IDLE };
 const initialSalesState = { data: initialSalesAssignment, status: ApiRequestActionsStatus.IDLE };
@@ -831,36 +652,6 @@ export function searchServiceReducer(state = '', action) {
 	return state;
 }
 
-//ini reducer untuk global search dibagian sales order, menggunakan react-addons-update
-export function searchSalesPlansReducer(state = initialSearchSalesParameter, action) {
-	if (action.type === SearchSalesAction){
-		var howManyRows = state.length;
-		var j = 0;
-		let array = [];
-		for( j ; j < howManyRows; j++){
-			let updatedArray = update(state[j], {Value:{$set: action.payload}});
-			array = [...array, updatedArray];
-		}
-		return array;
-	}
-	return state;
-}
-
-//ini reducer untuk global search dibagian service order, menggunakan react-addons-update
-export function searchServicePlansReducer(state = initialSearchServiceParameter, action) {
-	if (action.type === SearchServiceAction){
-		var howManyRows = state.length;
-		var j = 0;
-		let array = [];
-		for( j ; j < howManyRows; j++){
-			let updatedArray = update(state[j], {Value:{$set: action.payload}});
-			array = [...array, updatedArray];
-		}
-		return array;
-	}
-	return state;
-}
-
 export function searchCompReducer(state = initialSearchCompParameter, action) {
 	if (action.type === SearchCompAction) {
 		if(action.sort === 'SoNumber'){
@@ -1037,10 +828,10 @@ const PlansReducers = combineReducers({
 	indexFilterParameter: indexFilterParameterReducer,
 	sortSalesBy: sortSalesByReducer,
 	sortServiceBy: sortServiceByReducer,
-	salesSearch: searchSalesPlansReducer,
-	serviceSearch: searchServicePlansReducer,
-	// salesSearch: searchSalesReducer,
-	// serviceSearch: searchServiceReducer,
+	// salesSearch: searchSalesPlansReducer,
+	// serviceSearch: searchServicePlansReducer,
+	salesSearch: searchSalesReducer,
+	serviceSearch: searchServiceReducer,
 	searchComp: searchCompReducer,
 	selectedPlanData: storePlanDataReducer,
 	approveSalesDownloaded : downloadApprovedSalesReducer,
