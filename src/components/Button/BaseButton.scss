@@ -1,0 +1,132 @@
+@import '../../themes/functions';
+@import '../../themes/variables';
+
+.button-inline{
+    display: flex;
+    // width: auto;
+    .label-selected-data{
+        display: flex;
+        color: map-get($colors, primary-dark);
+        font-size: 14px;
+        width: 16.2vw;
+        align-items: center;
+        justify-content: flex-end;
+        margin-right: 0.8vw;
+    }
+    .btn-download-icon{
+        height: vw(38.07);
+        width: vw(40.07);
+        margin-left: vw(15);
+        border-radius: vw(10) !important;
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        background-image: url('../../assets/icons/ic_download.png');
+        background-color: white;
+        background-repeat: no-repeat;
+        background-size: 45%;
+        background-position: center;
+    }
+    .btn-download{
+        display: flex;
+        padding-left: 10%;
+        padding-right: 0%;
+        width: vw(153.22);
+        height: vw(38.07);
+        margin-left: vw(15);
+        font-size: vw(16);
+        font-weight: bold;
+        line-height: vw(16) !important;
+        font-family: 'Lato-Regular';
+        text-transform: capitalize;
+        background-color: white;
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        background-image: url('../../assets/icons/ic_download.png');
+        background-size: 10%;
+        background-position-x: 18%;
+        background-position-y: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+    .btn-approve{
+        display: flex;
+        padding-right: 23%;
+        width: vw(153.22);
+        height: vw(38.07);
+        font-size: vw(18); //16
+        font-weight: bold;
+        line-height: vw(16) !important;
+        font-family: 'Lato-Regular';
+        text-transform: capitalize;
+        color: white;
+        background-color: map-get($colors , third);
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        background-image: url('../../assets/icons/send.png');
+        background-size: 15%;
+        background-position-x: 82%;
+        background-position-y: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+    .btn-approve:hover{
+        background-color: map-get($colors, third-dark);
+    }
+    .btn-approve:disabled{
+        background-image: url('../../assets/icons/send-disabled.png');
+        background-size: 15%;
+        background-position-x: 82%;
+        background-position-y: center;
+        background-repeat: no-repeat;
+    }
+    .btn-cancel-approve{
+        display: flex;
+        padding-left: 22%;
+        width: vw(203.22);
+        height: vw(38.07);
+        margin-left: vw(15);
+        font-size: vw(18);
+        font-weight: bold;
+        line-height: vw(16) !important;
+        font-family: 'Lato-Regular';
+        text-transform: capitalize;
+        color: #707070;
+        background-color: transparent;
+        border: 1px solid #FF736A;
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        background-image: url('../../assets/icons/cancel_approve.png');
+        background-size: 15%;
+        background-position-x: 8%;
+        background-position-y: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+    .btn-cancel-approve:hover{
+        background-image: url('../../assets/icons/cancel_approve_hover.png');
+        background-size: 15%;
+        background-position-x: 8%;
+        background-color: map-get($colors, delete);
+        color: white;
+    }
+    .btn-permanently{
+        display: flex;
+        padding-left: 15%;
+        width: vw(223.22);
+        height: vw(38.07);
+        margin-left: vw(15);
+        font-size: vw(16);
+        font-weight: bold;
+        line-height: vw(16) !important;
+        font-family: 'Lato-Regular';
+        text-transform: capitalize;
+        color: white;
+        background-color: map-get($colors, delete);
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        background-image: url('../../assets/icons/bin.png');
+        background-size: 8%;
+        background-position-x: 10%;
+        background-position-y: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+    .btn-permanently:hover{
+        background-color: map-get($colors, danger);
+    }
+}
