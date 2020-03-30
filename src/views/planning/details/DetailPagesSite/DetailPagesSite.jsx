@@ -73,14 +73,14 @@ componentDidUpdate = (prevProps) => {
   //ini untuk trigger sales global search
   if (prevProps.salesSearch !== this.props.salesSearch) {
     this.props.updateSalesParameter({
-      ...prevProps.salesParameter.dataFilter, Filter : this.props.salesSearch, PageNumber: 1,
+      ...prevProps.salesParameter.dataFilter, Category: 'Lifetime', Keyword: this.props.salesSearch, PageNumber: 1,
     });
   }
   
   //ini untuk trigger service global search
   if(prevProps.serviceSearch !== this.props.serviceSearch){
     this.props.updateServiceParameter({
-      ...prevProps.serviceParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber: 1,
+      ...prevProps.serviceParameter.dataFilter, Category: 'Approval', Keyword: this.props.serviceSearch, PageNumber: 1,
     });
   }
   //search per component

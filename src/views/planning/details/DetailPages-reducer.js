@@ -102,6 +102,13 @@ const initialSalesParameter = {
 	}
 };
 
+const initialSearchParameter = {
+	dataFilter:{
+		Category : '',
+		Keyword: '',
+	}
+}
+
 const initialServiceParameter = {
 	dataFilter: {
 		PageNumber : 1,
@@ -642,12 +649,12 @@ export function serviceParameterDeletedReducer(state = initialServiceParameter, 
 	return state;
 }
 
-export function searchSalesReducer(state = '', action) {
+export function searchSalesReducer(state = initialSearchParameter, action) {
 	if (action.type === SearchSalesAction) return action.payload;
 	return state;
 }
 
-export function searchServiceReducer(state = '', action) {
+export function searchServiceReducer(state = initialSearchParameter, action) {
 	if (action.type === SearchServiceAction) return action.payload;
 	return state;
 }

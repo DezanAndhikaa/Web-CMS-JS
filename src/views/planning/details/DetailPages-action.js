@@ -57,6 +57,7 @@ export const StoreSelectedPlanDataAction = 'SELECTED_PLAN_DATA';
 export const UnselectSalesPlanAction = 'UNSELECT_SALES_PLANS';
 export const UnselectServicePlanAction = 'UNSELECT_SERVICE_PLANS';
 export const UnselectMechanicAction = 'UNSELECT_MECHANIC';
+export const UpdateSearchParameterAction = 'SEARCH_PARAMETER';
 export const UpdateSalesParameterAction = 'SALES_PARAMETER';
 export const UpdateSalesApprovedParameterAction = 'SALES_APPROVED_PARAMETER';
 export const UpdateSalesDeletedParameterAction = 'SALES_DELETED_PARAMETER';
@@ -395,6 +396,10 @@ export function getServiceOrderAction(payload) {
 		data: payload,
 	};
 	return async (dispatch) => dispatch(callApi(GetServiceOrderAction, requestConfig));
+}
+
+export function searchParameterAction(type, payload) {
+	return { type, payload };
 }
 
 export function salesParameterAction(type, payload) {

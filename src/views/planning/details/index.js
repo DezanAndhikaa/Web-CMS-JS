@@ -17,6 +17,8 @@ import {
 	fetchSalesAction, salesParameterAction, fetchServiceAction,
 	ClearSelectedPlans, UpdateServiceParameterAction,
 	UpdateSalesParameterAction, 
+	UpdateSearchParameterAction,
+	searchParameterAction,
 	searchAction,
 	SearchSalesAction, SearchServiceAction,searchCompAction,
 	SearchCompAction,SearchCompActionService,searchCompActionService,
@@ -102,6 +104,7 @@ const mapDispatchToProps = (dispatch) => ({
 	unselectSalesPlan: (payload) => dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
 	updateSalesParameter: (payload) => dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
 	updateServiceParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
+	updateSearchParameter: (payload) => dispatch(searchParameterAction(UpdateSearchParameterAction, payload)),
 });
 
 const detailPages = connect(mapStateToProps, mapDispatchToProps)(DetailPages);

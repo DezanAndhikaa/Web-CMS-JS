@@ -21,6 +21,8 @@ import {
 	ClearSelectedPlans, 
 	UpdateServiceParameterAction,
 	UpdateSalesParameterAction, 
+	searchParameterAction,
+	UpdateSearchParameterAction,
 	searchAction,
 	SearchSalesAction, 
 	SearchServiceAction,
@@ -119,6 +121,7 @@ const mapDispatchToProps = (dispatch) => ({
 	unselectSalesPlan: (payload) => dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
 	updateSalesParameter: (payload) => dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
 	updateServiceParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
+	updateSearchParameter: (payload) => dispatch(searchParameterAction(UpdateSearchParameterAction, payload)),
 });
 
 const approvalPages = connect(mapStateToProps, mapDispatchToProps)(ApprovalPages);
