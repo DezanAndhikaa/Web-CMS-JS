@@ -122,21 +122,69 @@ export default class Status extends React.PureComponent {
 			{...this.props}
 			webInfo="Search"
 			handleSearch={this.handleSearch}
-			// onServiceSearch={this.props.onSearchService}
 		  />
 		  </div>
 		);
 	}
+
 	handleSearch=(value)=>{
 		this.setState({ searchVal : value})
 		if (this.props.location.whichTab === "sales") {
-			setTimeout(() => {
-				this.props.onSearchSales(this.state.searchVal)
-			}, 1000);
+			switch (this.state.whatPageIsChoosed) {
+				case 'Approve':
+					return(
+						setTimeout(() => {
+							this.props.onSearchSales(this.state.searchVal)
+						}, 1000)
+					)
+				case 'Not Approve': 
+					return(
+						setTimeout(() => {
+							this.props.onSearchSales(this.state.searchVal)
+						}, 1000)
+					)
+				case 'Delete': 
+					return(
+						setTimeout(() => {
+							this.props.onSearchSales(this.state.searchVal)
+						}, 1000)
+					)
+				case 'SAP ISSUE' :
+					return(
+						setTimeout(() => {
+							this.props.onSearchSales(this.state.searchVal)
+						}, 1000)
+					)
+				default:
+			}
 		}else if (this.props.location.whichTab === "service") {
-			setTimeout(() => {
-				this.props.onSearchService(this.state.searchVal)
-			}, 1000);
+			switch (this.state.whatPageIsChoosed) {
+				case 'Approve':
+					return(
+						setTimeout(() => {
+							this.props.onSearchSales(this.state.searchVal)
+						}, 1000)
+					)
+				case 'Not Approve': 
+					return(
+						setTimeout(() => {
+							this.props.onSearchSales(this.state.searchVal)
+						}, 1000)
+					)
+				case 'Delete': 
+					return(
+						setTimeout(() => {
+							this.props.onSearchSales(this.state.searchVal)
+						}, 1000)
+					)
+				case 'SAP ISSUE' :
+					return(
+						setTimeout(() => {
+							this.props.onSearchSales(this.state.searchVal)
+						}, 1000)
+					)
+				default:
+			}
 		}
 	}
 
@@ -731,6 +779,45 @@ export default class Status extends React.PureComponent {
 					break;
 			}
 		}
+		//ini untuk trigger sales global search
+		if (prevProps.salesSearch !== this.props.salesSearch) {
+			switch (this.state.whatPageIsChoosed) {
+				case 'Approve':
+					return this.props.updateSalesApprovedParameter(
+						{...prevProps.searchSalesApprovedParam, Category: 'SA', Keyword: this.props.salesSearch});
+				case 'Not Approve':
+					return this.props.updateSalesParameter(
+						{...prevProps.searchSalesParameter, Category: 'SN', Keyword: this.props.salesSearch});
+				case 'Delete' :
+					return this.props.updateSalesDeletedParameter(
+						{...prevProps.searchSerrviceDeletedParam, Category: 'SD', Keyword: this.props.salesSearch});
+				case 'SAP ISSUE':
+					return this.props.updateSalesSapParameter(
+						{...prevProps.searchSalesSapParam, Category: 'SSAP', Keyword: this.props.salesSearch});
+				default:
+					break;
+			}
+		}
+		  
+		  //ini untuk trigger service global search
+		if(prevProps.serviceSearch !== this.props.serviceSearch){
+			switch (this.state.whatPageIsChoosed) {
+				case 'Approve':
+					return this.props.updateServiceApprovedParameter(
+						{...prevProps.searchServiceApprovedParam, Category: 'SA', Keyword: this.props.serviceSearch});
+				case 'Not Approve':
+					return this.props.updateServiceParameter(
+						{...prevProps.searchServiceParameter, Category: 'SN', Keyword: this.props.serviceSearch});
+				case 'Delete' :
+					return this.props.updateServiceDeletedParameter(
+						{...prevProps.searchSerrviceDeletedParam, Category: 'SD', Keyword: this.props.serviceSearch});
+				case 'SAP ISSUE':
+					return this.props.updateServiceSapParameter(
+						{...prevProps.searchServiceSapParam, Category: 'SSAP', Keyword: this.props.serviceSearch});
+				default:
+					break;
+			}
+		  }
 	}
 
 	_renderList = (whatPageIsChoosed) =>{

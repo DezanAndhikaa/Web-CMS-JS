@@ -17,6 +17,10 @@ import {
 	fetchApprovedServiceAction,
 	fetchDeletedSalesAction,
 	fetchDeletedServiceAction,
+	searchSalesParameterAction, 
+	UpdateSearchSalesAction,
+	searchServiceParameterAction,
+	UpdateSearchServiceAction,
 	fetchSapSalesAction,
 	fetchSapServiceAction,
 	fetchSalesAction,
@@ -66,6 +70,14 @@ const mapStateToProps = (state) => ({
 	serviceApprovedParameter : state.plansPageState.serviceApprovedParameter,
 	serviceDeletedParameter : state.plansPageState.serviceDeletedParameter,
 	serviceSapParameter: state.plansPageState.serviceSapParameter,
+	searchSalesParameter: state.plansPageState.searchSalesParameter, //search
+	searchSalesApprovedParam: state.plansPageState.searchSalesApprovedParam,
+	searchSalesDeletedParam: state.plansPageState.searchSalesDeletedParam,
+	searchSalesSapParam: state.plansPageState.searchSalesSapParam,
+	searchServiceParameter: state.plansPageState.searchServiceParameter,
+	searchServiceApprovedParam: state.plansPageState.searchServiceApprovedParam,
+	searchServiceDeletedParam: state.plansPageState.searchServiceDeletedParam,
+	searchServiceSapParam: state.plansPageState.searchServiceSapParam,
 	salesSearch: state.plansPageState.salesSearch,
 	serviceSearch: state.plansPageState.serviceSearch,
 	selectedSalesPlans: state.plansPageState.selectedSalesPlans,
@@ -113,6 +125,8 @@ const mapDispatchToProps = (dispatch) => ({
 	updateServiceSapParameter: (payload) => dispatch(serviceParameterSapAction(UpdateServiceSapParameterAction, payload)),
 	deletePermanentSales: (payload, token) => dispatch(deletePermanentSalesAction(payload, token)),
 	deletePermanentService: (payload, token) => dispatch(deletePermanentServiceAction(payload, token)),
+	updateSearchSales: (payload) => dispatch(searchSalesParameterAction(UpdateSearchSalesAction, payload)),
+	updateSearchService: (payload) => dispatch(searchServiceParameterAction(UpdateSearchServiceAction, payload)),
 	
 });
 

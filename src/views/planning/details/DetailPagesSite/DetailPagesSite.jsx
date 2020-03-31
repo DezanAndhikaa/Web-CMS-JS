@@ -44,7 +44,12 @@ componentDidUpdate = (prevProps) => {
   if (prevProps.salesRevisedParam !== this.props.salesRevisedParam) {
     this.onClickRevisedSales();
   }
-
+  if(prevProps.searchSalesParameter !== this.props.searchSalesParameter){
+    this.fetchSearchSales();
+  }
+  if(prevProps.searchServiceParameter !== this.props.searchServiceParameter){
+    this.fetchSearchService();
+  }
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
       if(this.props.indexFilterParameter.indexTabParameter === 0){
@@ -70,19 +75,20 @@ componentDidUpdate = (prevProps) => {
       this.props.fetchSalesOrder(this.props.filterDate);
     }
 
-  //ini untuk trigger sales global search
-  if (prevProps.salesSearch !== this.props.salesSearch) {
-    this.props.updateSalesParameter({
-      ...prevProps.salesParameter.dataFilter, Category: 'Lifetime', Keyword: this.props.salesSearch, PageNumber: 1,
-    });
-  }
-  
-  //ini untuk trigger service global search
-  if(prevProps.serviceSearch !== this.props.serviceSearch){
-    this.props.updateServiceParameter({
-      ...prevProps.serviceParameter.dataFilter, Category: 'Approval', Keyword: this.props.serviceSearch, PageNumber: 1,
-    });
-  }
+    //ini untuk trigger sales global search
+    if (prevProps.salesSearch !== this.props.salesSearch) {
+      this.props.updateSearchSales({
+        ...prevProps.searchSalesParameter, Category: 'Lifetime', Keyword: this.props.salesSearch,
+      });
+    }
+    
+    //ini untuk trigger service global search
+    if(prevProps.serviceSearch !== this.props.serviceSearch){
+      this.props.updateSearchService({
+        ...prevProps.searchServiceParameter, Category: 'Approval', Keyword: this.props.serviceSearch,
+      });
+    }
+
   //search per component
   if(this.state.whichTabs){
     if(prevProps.searchComp !== this.props.searchComp){
@@ -387,6 +393,14 @@ componentDidUpdate = (prevProps) => {
         </div>
       )
     }
+  }
+
+  fetchSearchSales = async() => {
+    await this.props.fetchSalesOrder(this.props.searchSalesParameter, this.props.token);
+  } 
+
+  fetchSearchService = async() => {
+    await this.props.fetchServiceOrder(this.props.searchServiceParameter, this.props.token);
   }
 
   //SAAT MENGKLIK SERVICE ORDER TAB

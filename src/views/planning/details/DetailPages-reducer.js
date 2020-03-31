@@ -26,8 +26,17 @@ import {
 	ResetSelectedMechanicsAction, 
 	SearchSalesAction,
 	SearchServiceAction,
-	UpdateServiceApprovedParameterAction,UpdateServiceDeletedParameterAction,
+	UpdateServiceApprovedParameterAction,
+	UpdateServiceDeletedParameterAction,
 	UpdateServiceSapParameterAction,
+	UpdateSearchSalesAction,
+	UpdateSearchSalesApprovedAction, 
+	UpdateSearchSalesDeletedAction,
+	UpdateSearchSalesSapAction,
+	UpdateSearchServiceAction ,
+	UpdateSearchServiceApprovedAction,
+	UpdateSearchServiceDeletedAction,
+	UpdateSearchServiceSapAction,
 	SearchCompAction,SearchCompActionService,
 	SelectSalesPlanAction,
 	SelectServicePlanAction, 
@@ -102,13 +111,6 @@ const initialSalesParameter = {
 	}
 };
 
-const initialSearchParameter = {
-	dataFilter:{
-		Category : '',
-		Keyword: '',
-	}
-}
-
 const initialServiceParameter = {
 	dataFilter: {
 		PageNumber : 1,
@@ -128,6 +130,11 @@ const initialServiceParameter = {
 		inProgressFilter: false,
 	}
 };
+
+const initialSearchParameter = {
+	Category : '',
+	Keyword: '',
+}
 
 const initialFilterParameter = {
 	Filter: []
@@ -483,8 +490,6 @@ export function downloadApprovedServiceReducer(state = initialDownloadState, act
 	return state;
 }
 
-
-
 export function selectedFiltersReducer(state = initialSelectedFilter, action) {
 	switch (action.type) {
 	  case SelectCustomerFilterAction:
@@ -498,6 +503,45 @@ export function selectedFiltersReducer(state = initialSelectedFilter, action) {
 	  default:
 		return state;
 	}
+}
+
+export function searchSalesParameterReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchSalesAction) return action.payload;
+	return state;
+}
+
+export function searchSalesApprovedReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchSalesApprovedAction) return action.payload;
+	return state;
+}
+
+export function searchSalesDeletedReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchSalesDeletedAction) return action.payload;
+	return state;
+}
+export function searchSalesSapReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchSalesSapAction) return action.payload;
+	return state;
+}
+
+export function searchServiceParameterReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchServiceAction) return action.payload;
+	return state;
+}
+
+export function searchServiceApprovedReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchServiceApprovedAction) return action.payload;
+	return state;
+}
+
+export function searchServiceDeletedReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchServiceDeletedAction) return action.payload;
+	return state;
+}
+
+export function searchServiceSapReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchServiceSapAction) return action.payload;
+	return state;
 }
 
 export function salesParameterReducer(state = initialSalesParameter, action) {
@@ -649,12 +693,12 @@ export function serviceParameterDeletedReducer(state = initialServiceParameter, 
 	return state;
 }
 
-export function searchSalesReducer(state = initialSearchParameter, action) {
+export function searchSalesReducer(state = '', action) {
 	if (action.type === SearchSalesAction) return action.payload;
 	return state;
 }
 
-export function searchServiceReducer(state = initialSearchParameter, action) {
+export function searchServiceReducer(state = '', action) {
 	if (action.type === SearchServiceAction) return action.payload;
 	return state;
 }
@@ -839,6 +883,14 @@ const PlansReducers = combineReducers({
 	// serviceSearch: searchServicePlansReducer,
 	salesSearch: searchSalesReducer,
 	serviceSearch: searchServiceReducer,
+	searchSalesParameter: searchSalesParameterReducer,
+	searchSalesApprovedParam: searchSalesApprovedReducer,
+	searchSalesDeletedParam: searchSalesDeletedReducer,
+	searchSalesSapParam: searchSalesSapReducer,
+	searchServiceParameter: searchServiceParameterReducer,
+	searchServiceApprovedParam: searchServiceApprovedReducer,
+	searchServiceDeletedParam: searchServiceDeletedReducer,
+	searchServiceSapParam: searchServiceSapReducer,
 	searchComp: searchCompReducer,
 	selectedPlanData: storePlanDataReducer,
 	approveSalesDownloaded : downloadApprovedSalesReducer,
