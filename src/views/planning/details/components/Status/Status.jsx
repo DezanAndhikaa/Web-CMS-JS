@@ -317,25 +317,25 @@ export default class Status extends React.PureComponent {
 				case 'Approve':
 					return(
 						setTimeout(() => {
-							this.props.onSearchSales(this.state.searchVal)
+							this.props.onSearchService(this.state.searchVal)
 						}, 1000)
 					)
 				case 'Not Approve': 
 					return(
 						setTimeout(() => {
-							this.props.onSearchSales(this.state.searchVal)
+							this.props.onSearchService(this.state.searchVal)
 						}, 1000)
 					)
 				case 'Delete': 
 					return(
 						setTimeout(() => {
-							this.props.onSearchSales(this.state.searchVal)
+							this.props.onSearchService(this.state.searchVal)
 						}, 1000)
 					)
 				case 'SAP ISSUE' :
 					return(
 						setTimeout(() => {
-							this.props.onSearchSales(this.state.searchVal)
+							this.props.onSearchService(this.state.searchVal)
 						}, 1000)
 					)
 				default:
