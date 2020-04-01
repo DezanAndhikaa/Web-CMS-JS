@@ -50,9 +50,164 @@ export default class Status extends React.PureComponent {
 		}
 	}
 
+	componentWillUnmount = () => {
+		this.props.updateSalesParameter({
+			...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+		});
+		this.props.updateServiceParameter({
+			...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+		});
+		this.props.updateSalesApprovedParameter({
+			...this.props.salesApprovedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
+		})
+		this.props.updateServiceApprovedParameter({
+			...this.props.serviceApprovedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
+		})
+		this.props.updateSalesDeletedParameter({
+			...this.props.salesDeletedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
+		})
+		this.props.updateServiceDeletedParameter({
+			...this.props.serviceDeletedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
+		})
+		this.props.updateSalesSapParameter({
+			...this.props.salesSapParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
+		})
+		this.props.updateServiceSapParameter({
+			...this.props.serviceSapParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
+		})
+	  }
+
+	componentDidUpdate = (prevProps) => {
+		if (prevProps.salesParameter !== this.props.salesParameter) {
+			this.onClickSalesOrder();
+		}
+		if (prevProps.salesApprovedParameter !== this.props.salesApprovedParameter) {
+			this.onClickSalesOrderApproved();
+		}
+		if (prevProps.salesDeletedParameter !== this.props.salesDeletedParameter) {
+			this.onClickSalesOrderDeleted();
+		}
+		if (prevProps.salesSapParameter !== this.props.salesSapParameter ){
+			this.onClickSalesOrderSap();
+		}
+		if (prevProps.serviceParameter !== this.props.serviceParameter) {
+			this.onClickServiceOrder();
+		}
+		if (prevProps.serviceApprovedParameter !== this.props.serviceApprovedParameter) {
+			this.onClickServiceOrderApproved();
+		}
+		if (prevProps.serviceDeletedParameter !== this.props.serviceDeletedParameter) {
+			this.onClickServiceOrderDeleted();
+		}
+		if (prevProps.serviceSapParameter !== this.props.serviceSapParameter) {
+			this.onClickServiceOrderSap();
+		}
+		if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
+			prevProps.approveSalesDownloaded.status === ApiRequestActionsStatus.LOADING) {
+			this.onClickDownloadSalesApproved()
+		}
+		if (this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
+			prevProps.approveServiceDownloaded.status === ApiRequestActionsStatus.LOADING) {
+			this.onClickDownloadServiceApproved()
+		}
+
+		if(prevProps.searchSalesApprovedParam !== this.props.searchSalesApprovedParam){
+			this.fetchSearchSalesApproved();
+		}
+		if(prevProps.searchSalesParameter !== this.props.searchSalesParameter){
+			this.fetchSearchSales();
+		}
+		if(prevProps.searchSalesDeletedParam !== this.props.searchSalesDeletedParam){
+			this.fetchSearchSalesDeleted();
+		}
+		if(prevProps.searchSalesSapParam !== this.props.searchSalesSapParam){
+			this.fetchSearchSalesSap();
+		}
+
+		if(prevProps.searchServiceApprovedParam !== this.props.searchServiceApprovedParam){
+			this.fetchSearchServiceApproved();
+		}
+		if(prevProps.searchServiceParameter !== this.props.searchServiceParameter){
+			this.fetchSearchService();
+		}
+		if(prevProps.searchServiceDeletedParam !== this.props.searchServiceDeletedParam){
+			this.fetchSearchServiceDeleted();
+		}
+		if(prevProps.searchServiceSapParam !== this.props.searchServiceSapParam){
+			this.fetchSearchServiceSap();
+		}
+
+		//ini untuk trigger sales global search
+		if (prevProps.salesSearch !== this.props.salesSearch) {
+			switch (this.state.whatPageIsChoosed) {
+				case 'Approve':
+					return this.props.updateSearchSalesApproved(
+						{...prevProps.searchSalesApprovedParam, Category: 'SA', Keyword: this.props.salesSearch});
+				case 'Not Approve':
+					return this.props.updateSearchSales(
+						{...prevProps.searchSalesParameter, Category: 'SN', Keyword: this.props.salesSearch});
+				case 'Delete' :
+					return this.props.updateSearchSalesDeleted(
+						{...prevProps.searchSalesDeletedParam, Category: 'SD', Keyword: this.props.salesSearch});
+				case 'SAP ISSUE':
+					return this.props.updateSearchSalesSap(
+						{...prevProps.searchSalesSapParam, Category: 'SSAP', Keyword: this.props.salesSearch});
+				default:
+					break;
+			}
+		}
+		  
+		  //ini untuk trigger service global search
+		if(prevProps.serviceSearch !== this.props.serviceSearch){
+			switch (this.state.whatPageIsChoosed) {
+				case 'Approve':
+					return this.props.updateServiceApprovedParameter(
+						{...prevProps.searchServiceApprovedParam, Category: 'SA', Keyword: this.props.serviceSearch});
+				case 'Not Approve':
+					return this.props.updateServiceParameter(
+						{...prevProps.searchServiceParameter, Category: 'SN', Keyword: this.props.serviceSearch});
+				case 'Delete' :
+					return this.props.updateServiceDeletedParameter(
+						{...prevProps.searchSerrviceDeletedParam, Category: 'SD', Keyword: this.props.serviceSearch});
+				case 'SAP ISSUE':
+					return this.props.updateServiceSapParameter(
+						{...prevProps.searchServiceSapParam, Category: 'SSAP', Keyword: this.props.serviceSearch});
+				default:
+					break;
+			}
+		  }
+	}
+
 	handleClick = (menu) => {
 		this.props.push(menu);
-	  }
+	}
+
+	fetchSearchSales = async() => {
+		await this.props.fetchSalesOrder(this.props.searchSalesParameter, this.props.token);
+	} 
+	fetchSearchSalesApproved = async() => {
+		await this.props.fetchApprovedSales(this.props.searchSalesApprovedParam, this.props.token);
+	}
+	fetchSearchSalesDeleted = async() => {
+		await this.props.fetchDeletedSales(this.props.searchSalesDeletedParam, this.props.token);
+	}
+	fetchSearchSalesSap = async() => {
+		await this.props.fetchSapSales(this.props.searchSalesSapParam, this.props.token);
+	}
+
+	//FetchService
+	fetchSearchService = async() => {
+		await this.props.fetchServiceOrder(this.props.searchServiceParameter, this.props.token);
+	} 
+	fetchSearchServiceApproved = async() => {
+		await this.props.fetchApprovedService(this.props.searchSerrviceApprovedParam, this.props.token);
+	}
+	fetchSearchServiceDeleted = async() => {
+		await this.props.fetchDeletedService(this.props.searchSerrviceDeletedParam, this.props.token);
+	}
+	fetchSearchServiceSap = async() => {
+		await this.props.fetchSapService(this.props.searchSerrviceSapParam, this.props.token);
+	}
 
 	onClickDownloadSalesApproved = () => {
 		let link = document.createElement("a");
@@ -688,136 +843,6 @@ export default class Status extends React.PureComponent {
 				/>
 			</div>
 		);
-	}
-
-	componentWillUnmount = () => {
-		this.props.updateSalesParameter({
-			...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
-		});
-		this.props.updateServiceParameter({
-			...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
-		});
-		this.props.updateSalesApprovedParameter({
-			...this.props.salesApprovedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
-		})
-		this.props.updateServiceApprovedParameter({
-			...this.props.serviceApprovedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
-		})
-		this.props.updateSalesDeletedParameter({
-			...this.props.salesDeletedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
-		})
-		this.props.updateServiceDeletedParameter({
-			...this.props.serviceDeletedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
-		})
-		this.props.updateSalesSapParameter({
-			...this.props.salesSapParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
-		})
-		this.props.updateServiceSapParameter({
-			...this.props.serviceSapParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
-		})
-	  }
-
-	componentDidUpdate = (prevProps) => {
-		if (prevProps.salesParameter !== this.props.salesParameter) {
-			this.onClickSalesOrder();
-		}
-		if (prevProps.salesApprovedParameter !== this.props.salesApprovedParameter) {
-			this.onClickSalesOrderApproved();
-		}
-		if (prevProps.salesDeletedParameter !== this.props.salesDeletedParameter) {
-			this.onClickSalesOrderDeleted();
-		}
-		if (prevProps.salesSapParameter !== this.props.salesSapParameter ){
-			this.onClickSalesOrderSap();
-		}
-		if (prevProps.serviceParameter !== this.props.serviceParameter) {
-			this.onClickServiceOrder();
-		}
-		if (prevProps.serviceApprovedParameter !== this.props.serviceApprovedParameter) {
-			this.onClickServiceOrderApproved();
-		}
-		if (prevProps.serviceDeletedParameter !== this.props.serviceDeletedParameter) {
-			this.onClickServiceOrderDeleted();
-		}
-		if (prevProps.serviceSapParameter !== this.props.serviceSapParameter) {
-			this.onClickServiceOrderSap();
-		}
-		if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
-			prevProps.approveSalesDownloaded.status === ApiRequestActionsStatus.LOADING) {
-			this.onClickDownloadSalesApproved()
-		}
-		if (this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
-			prevProps.approveServiceDownloaded.status === ApiRequestActionsStatus.LOADING) {
-			this.onClickDownloadServiceApproved()
-		}
-		  //ini untuk trigger sales global search
-		if (prevProps.salesSearch !== this.props.salesSearch) {
-			switch (this.state.whatPageIsChoosed) {
-				case 'Approve':
-					return this.props.updateSalesApprovedParameter({...prevProps.salesApprovedParameter.dataFilter, Filter : this.props.salesSearch, PageNumber :1});
-				case 'Not Approve':
-					return this.props.updateSalesParameter({...prevProps.salesParameter.dataFilter, Filter : this.props.salesSearch, PageNumber: 1});
-				case 'Delete' :
-					return this.props.updateSalesDeletedParameter({...prevProps.salesDeletedParameter.dataFilter, Filter : this.props.salesSearch, PageNumber :1});
-				case 'SAP ISSUE':
-					return this.props.updateSalesSapParameter({...prevProps.salesSapParameter.dataFilter, Filter : this.props.salesSearch, PageNumber :1});
-				default:
-					break;
-			}
-		}
-		if (prevProps.serviceSearch !== this.props.serviceSearch) {
-			switch (this.state.whatPageIsChoosed) {
-				case 'Approve':
-					return this.props.updateServiceApprovedParameter({...prevProps.serviceApprovedParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber :1});
-				case 'Not Approve':
-					return this.props.updateServiceParameter({...prevProps.serviceParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber: 1});
-				case 'Delete' :
-					return this.props.updateServiceDeletedParameter({...prevProps.serviceDeletedParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber :1});
-				case 'SAP ISSUE':
-					return this.props.updateServiceSapParameter({...prevProps.serviceSapParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber :1});
-				default:
-					break;
-			}
-		}
-		//ini untuk trigger sales global search
-		if (prevProps.salesSearch !== this.props.salesSearch) {
-			switch (this.state.whatPageIsChoosed) {
-				case 'Approve':
-					return this.props.updateSalesApprovedParameter(
-						{...prevProps.searchSalesApprovedParam, Category: 'SA', Keyword: this.props.salesSearch});
-				case 'Not Approve':
-					return this.props.updateSalesParameter(
-						{...prevProps.searchSalesParameter, Category: 'SN', Keyword: this.props.salesSearch});
-				case 'Delete' :
-					return this.props.updateSalesDeletedParameter(
-						{...prevProps.searchSerrviceDeletedParam, Category: 'SD', Keyword: this.props.salesSearch});
-				case 'SAP ISSUE':
-					return this.props.updateSalesSapParameter(
-						{...prevProps.searchSalesSapParam, Category: 'SSAP', Keyword: this.props.salesSearch});
-				default:
-					break;
-			}
-		}
-		  
-		  //ini untuk trigger service global search
-		if(prevProps.serviceSearch !== this.props.serviceSearch){
-			switch (this.state.whatPageIsChoosed) {
-				case 'Approve':
-					return this.props.updateServiceApprovedParameter(
-						{...prevProps.searchServiceApprovedParam, Category: 'SA', Keyword: this.props.serviceSearch});
-				case 'Not Approve':
-					return this.props.updateServiceParameter(
-						{...prevProps.searchServiceParameter, Category: 'SN', Keyword: this.props.serviceSearch});
-				case 'Delete' :
-					return this.props.updateServiceDeletedParameter(
-						{...prevProps.searchSerrviceDeletedParam, Category: 'SD', Keyword: this.props.serviceSearch});
-				case 'SAP ISSUE':
-					return this.props.updateServiceSapParameter(
-						{...prevProps.searchServiceSapParam, Category: 'SSAP', Keyword: this.props.serviceSearch});
-				default:
-					break;
-			}
-		  }
 	}
 
 	_renderList = (whatPageIsChoosed) =>{

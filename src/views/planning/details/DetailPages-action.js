@@ -441,7 +441,31 @@ export function searchSalesParameterAction(type, payload) {
 	return { type, payload };
 }
 
+export function searchSalesApprovedAction(type, payload) {
+	return { type, payload };
+}
+
+export function searchSalesDeletedAction(type, payload) {
+	return { type, payload };
+}
+
+export function searchSalesSapAction(type, payload) {
+	return { type, payload };
+}
+
 export function searchServiceParameterAction(type, payload) {
+	return { type, payload };
+}
+
+export function searchServiceApprovedAction(type, payload) {
+	return { type, payload };
+}
+
+export function searchServiceDeletedAction(type, payload) {
+	return { type, payload };
+}
+
+export function searchServiceSapAction(type, payload) {
 	return { type, payload };
 }
 

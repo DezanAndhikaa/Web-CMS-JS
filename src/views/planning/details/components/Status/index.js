@@ -21,6 +21,18 @@ import {
 	UpdateSearchSalesAction,
 	searchServiceParameterAction,
 	UpdateSearchServiceAction,
+	searchSalesApprovedAction,
+	UpdateSearchSalesApprovedAction,
+	searchSalesDeletedAction, 
+	UpdateSearchSalesDeletedAction,
+	searchSalesSapAction, 
+	UpdateSearchSalesSapAction, 
+	searchServiceApprovedAction, 
+	UpdateSearchServiceApprovedAction,
+	searchServiceDeletedAction, 
+	UpdateSearchServiceDeletedAction,
+	searchServiceSapAction, 
+	UpdateSearchServiceSapAction, 
 	fetchSapSalesAction,
 	fetchSapServiceAction,
 	fetchSalesAction,
@@ -125,9 +137,14 @@ const mapDispatchToProps = (dispatch) => ({
 	updateServiceSapParameter: (payload) => dispatch(serviceParameterSapAction(UpdateServiceSapParameterAction, payload)),
 	deletePermanentSales: (payload, token) => dispatch(deletePermanentSalesAction(payload, token)),
 	deletePermanentService: (payload, token) => dispatch(deletePermanentServiceAction(payload, token)),
-	updateSearchSales: (payload) => dispatch(searchSalesParameterAction(UpdateSearchSalesAction, payload)),
-	updateSearchService: (payload) => dispatch(searchServiceParameterAction(UpdateSearchServiceAction, payload)),
-	
+	updateSearchSales: (payload) => dispatch(searchSalesParameterAction(UpdateSearchSalesAction, payload)),	//updatesearch sales
+	updateSearchSalesApproved: (payload) => dispatch(searchSalesApprovedAction(UpdateSearchSalesApprovedAction, payload)),
+	updateSearchSalesDeleted: (payload) => dispatch(searchSalesDeletedAction(UpdateSearchSalesDeletedAction, payload)),	
+	updateSearchSalesSap: (payload) => dispatch(searchSalesSapAction(UpdateSearchSalesSapAction, payload)),  
+	updateSearchService: (payload) => dispatch(searchServiceParameterAction(UpdateSearchServiceAction, payload)),//service
+	updateSearchServiceApproved: (payload) => dispatch(searchServiceApprovedAction(UpdateSearchServiceApprovedAction, payload)),
+	updateSearchServiceDeleted: (payload) => dispatch(searchServiceDeletedAction(UpdateSearchServiceDeletedAction, payload)),
+	updateSearchServiceSap: (payload) => dispatch(searchServiceSapAction(UpdateSearchServiceSapAction, payload)),
 });
 
 const status = connect(mapStateToProps, mapDispatchToProps)(Status);
