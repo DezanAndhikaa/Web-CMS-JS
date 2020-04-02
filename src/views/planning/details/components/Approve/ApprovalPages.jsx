@@ -381,6 +381,7 @@ componentDidUpdate = (prevProps) => {
 
   fetchSearchSales = async() => {
     await this.props.fetchSalesOrder(this.props.searchSalesParameter, this.props.token);
+    this.onClickSalesOrder();
   } 
 
   fetchSearchService = async() => {

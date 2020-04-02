@@ -199,6 +199,7 @@ componentDidUpdate = (prevProps) => {
 
 fetchSearchSales = async() => {
   await this.props.fetchSalesOrder(this.props.searchSalesParameter, this.props.token);
+  this.onClickSalesOrder();
 } 
   // PAGINATION DENGAN KONDISI UNTUK TAB SALES ORDER ATAU SERVICE ORDER
   _renderPagination= (pageValue) =>  {
