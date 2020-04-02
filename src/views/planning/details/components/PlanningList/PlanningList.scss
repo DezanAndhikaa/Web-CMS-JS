@@ -1,0 +1,93 @@
+@import '../../../../../themes/variables';
+@import '../../../../../themes/functions';
+
+.table{
+    margin-top: vw(35);
+}
+
+.table-rev{
+  margin-top: vw(5);
+}
+
+.table-cell-rev{
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  height: vw(40);
+  font-size: vw(14) !important;
+  line-height: vw(17) !important;
+  font-family: 'Lato-Bold';
+  color: #DB3434;
+  background-image: url('../../../../../assets/icons/must_revised.png');
+  background-size: vw(14);//10%;
+  background-position-x: 55%;
+  background-position-y: center;
+  background-repeat: no-repeat;
+}
+
+.is-checkbox{
+    background-color: white;
+    width: vw(124.22) !important;
+    height: vw(35.07) !important;
+}
+
+.loading-container{
+  left: 43%;
+  position: relative;
+  width:50%;
+}
+// @media (max-width: 599px) {
+//     .job-list-mobile-card{
+//         width: 100%;
+//         display: flex;
+//         box-shadow: 0px vw-mobile(4) vw-mobile(10) rgba(0, 0, 0, 0.161);
+//         border-radius: vw-mobile(5);
+//         height: vw-mobile(213);
+//         margin-bottom: vw-mobile(20);
+//         .job-list-mobile-content{
+//             width: 100%;
+//             height: 100%;
+//             padding: vw-mobile(15) vw-mobile(23);
+//             position: relative;
+//             .check-box-mobile{
+//                 position: absolute;
+//                 top: 0;
+//                 right: 0;
+//             }
+//             .yellow-line{
+//                 width: 100%;
+//                 height: vw-mobile(2);
+//                 margin-bottom: vw-mobile(12); 
+//                 background-color: #FFD500;
+//             }
+//             .job-list-label{
+//                 font-family: 'Lato-Regular';
+//                 line-height: vw-mobile(12);
+//                 font-size: vw-mobile(10);
+//                 color: #9A9A9A;
+//                 white-space: nowrap;
+//             }
+//             .job-list-detail{
+//                 font-family: 'Lato-Medium';
+//                 font-size: vw-mobile(12);
+//                 line-height: vw-mobile(14);
+//                 color: black;
+//                 white-space: nowrap;
+//             }
+            
+//             .job-list-row{
+//                 height: vw-mobile(32);
+//                 display: flex;
+//                 flex-direction: row;
+//                 margin-bottom: vw-mobile(12);
+//                 .job-list-detail-container{
+//                     display: flex;
+//                     flex-direction: column;
+//                     justify-content: space-between;   
+//                     flex: 1;
+//                 }
+//             }            
+//         }
+//     }
+// }

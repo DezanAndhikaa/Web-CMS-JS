@@ -1,0 +1,201 @@
+@import '../../themes/functions';
+@import '../../themes/variables';
+
+.modal-container-approve{
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+    .approve-confirmation-content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        .confirmation-modal-approve{
+            width: vw(519);
+            // height: vh(481);
+            background-color: white;
+            margin: auto;
+            border-radius: vw(15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: vw(15) vw(24) vw(30) vw(24);
+            .confirmation-container-approve{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                flex: 1;
+                .confirmation-title-approve{
+                    margin: 0;
+                    padding-top: vw(20);
+                    font-size: vw(28);
+                    font-family: 'SFUIDisplay-Bold';
+                    color: #3C3B3B;
+                }
+                .confirmation-image-approve{
+                    width: vw(175);
+                    margin-top: vw(16);
+                    margin-bottom: vw(25);
+                }
+                .confirmation-caption-approve{
+                    margin: 0;
+                    font-size: vw(20);
+                    font-family: 'SFUIDisplay-Regular';
+                    opacity: 0.5;
+                    text-align: center;
+                    color: rgb(0, 0, 0);
+                }
+            }
+        }
+    }
+    .btn-row{
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        margin-top: vw(20);
+        width: 100%;
+        .button-rejected{
+            display: flex;
+            text-transform: capitalize;
+            align-items: center;
+            justify-content: center;
+            width: 40%;
+            height: vw(45.07);
+            font-size: vw(13) !important;
+            font-weight: bold;
+            line-height: vw(16) !important;
+            font-family: 'Lato-Regular';
+            background-color: #F2F2F4;
+            color: #1D1D1D;
+            box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+            cursor: pointer;
+        }
+        .button-rejected:hover {
+            background-color: rgb(227, 227, 230);
+        }
+        .button-approved{
+            display: flex;
+            text-transform: capitalize;
+            align-items: center;
+            justify-content: center;
+            width: 60%;//vw(170.22);
+            height: vw(45.07);
+            font-size: vw(13) !important;
+            font-weight: bold;
+            line-height: vw(16) !important;
+            font-family: 'Lato-Regular';
+            background-color: map-get($colors , primary);
+            box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+            cursor: pointer;
+        }
+        .button-approved:hover {
+            background-color: map-get($colors, primary-dark);
+        }
+    }
+}
+
+@media (min-width: 600px) and (max-width: 1025px) {    
+    .modal-container-approve{
+        width: fit-content;
+        height: fit-content;
+        margin: auto;
+        .approve-confirmation-content{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            .confirmation-modal-approve{
+                width: vw-tab(450);
+                height: vw-tab(300);
+                background-color: white;
+                margin: auto;
+                border-radius: vw-tab(5);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                padding: vw-tab(15) vw-tab(24) vw-tab(30) vw-tab(24);
+                .confirmation-container-approve{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    flex: 1;   
+                    .confirmation-title-approve{
+                        margin: 0;
+                        font-size: vw-tab(33);
+                        font-family: 'SFUIDisplay-Bold';
+                        color: #3C3B3B;
+                    }
+                    .confirmation-image-approve{
+                        width: vw-tab(150);
+                        margin-top: vw-tab(16);
+                        margin-bottom: vw-tab(25);
+                    }
+                    .confirmation-caption-approve{
+                        margin: 0;
+                        font-size: vw-tab(20);
+                        font-family: 'SFUIDisplay-Regular';
+                        text-align: center;
+                        opacity: 0.5;
+                        color: #3C3B3B;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 599px) {    
+    .modal-container-approve{
+        width: fit-content;
+        height: fit-content;
+        margin: auto;
+        .approve-confirmation-content{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            .confirmation-modal-approve{
+                margin: 0;
+                width: vw-mobile(215);
+                height: vw-mobile(200);
+                background-color: white;
+                border-radius: vw-mobile(15);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                padding: vw-mobile(10);
+                .confirmation-container-approve{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    flex: 1;   
+                    .confirmation-title-approve{
+                        margin: 0;
+                        font-size: vw-mobile(20);
+                        font-family: 'SFUIDisplay-Bold';
+                        color: #3C3B3B;
+                    }
+                    .confirmation-image-approve{
+                        width: vw-mobile(100);
+                        margin-top: vw-mobile(5);
+                        margin-bottom: vw-mobile(10);
+                    }
+                    .confirmation-caption-approve{
+                        margin: 0;
+                        font-size: vw-mobile(15);
+                        font-family: 'SFUIDisplay-Regular';
+                        text-align: center;
+                        opacity: 0.5;
+                        color: #3C3B3B;
+                    }
+                }
+            }
+        }
+    }
+}
