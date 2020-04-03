@@ -102,7 +102,6 @@ componentDidUpdate = (prevProps) => {
   if(this.state.whichTabs){
     if(prevProps.searchComp !== this.props.searchComp){
       if(this.props.searchComp[0].Value === ""){
-        // this.props.searchComp[0].Value = "";
         this.props.updateSalesParameter({
           ...prevProps.salesParameter.dataFilter, Filter: this.props.searchComp.Value = "",
         });  
