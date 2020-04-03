@@ -34,8 +34,8 @@ export default class SalesOrderListSite extends React.PureComponent {
     }
   }
   componentDidMount = async() =>{    
-    await this.props.clearSelectedSalesPlans();
-    // this.props.onClickSalesOrder();
+    // await this.props.clearSelectedSalesPlans();
+    this.props.onClickSalesOrder();
   }
 
   componentWillMount = () =>{
