@@ -11,7 +11,7 @@ export function requestLoginAction(username, password) {
 
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${ApiUrlBase.REACT_API_URL}/api/login`,
+		url: `${process.env.REACT_APP_API_URL}/api/login`,
 		data: body,
 		headers: {
 			'Content-Type': 'application/json',
@@ -19,6 +19,6 @@ export function requestLoginAction(username, password) {
 		},
 	};
 
-
+	console.log ('test: ', requestConfig.url)
 	return async (dispatch) => dispatch(callApi(RequestLoginAction, requestConfig));
 }
