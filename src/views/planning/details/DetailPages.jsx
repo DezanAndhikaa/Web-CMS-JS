@@ -82,15 +82,15 @@ componentDidUpdate = (prevProps) => {
   //search per component
   if(this.state.whichTabs){
     if(prevProps.searchComp !== this.props.searchComp){
-      this.props.updateSalesParameter({
-        ...prevProps.salesParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
-      });
-    }
-  }else{
-    if(prevProps.searchComp !== this.props.searchComp){
-      this.props.updateServiceParameter({
-        ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
-      });
+      if(this.props.searchComp[0].Value === ""){
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+        });  
+      }else{
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+        });
+      }
     }
   }
   
