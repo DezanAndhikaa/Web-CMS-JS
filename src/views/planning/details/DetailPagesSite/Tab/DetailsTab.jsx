@@ -299,7 +299,7 @@ class DetailsTab extends React.Component {
               Sales Order
             </div>
           </div>
-          <div className={this.props.totalSalesData.toString().length >= 1 ? "total-sites" : "total-site"}>
+          <div className={this.props.totalSalesData.toString().length > 1 ? "total-sites" : "total-site"}>
             {this.props.totalSalesData}
           </div>
         </div>
@@ -316,7 +316,7 @@ class DetailsTab extends React.Component {
               Service Order
             </div>
           </div>
-          <div className={this.props.totalServiceData.toString().length >= 1 ? "total-sites" : "total-site"}>
+          <div className={this.props.totalServiceData.toString().length > 1 ? "total-sites" : "total-site"}>
             {this.props.totalServiceData}
           </div>
         </div>

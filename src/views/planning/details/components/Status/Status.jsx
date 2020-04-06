@@ -222,6 +222,35 @@ export default class Status extends React.PureComponent {
 					default:
 						break;
 				}
+			}else{
+				switch (this.state.whatPageIsChoosed) {
+					case 'Approve':
+						if(prevProps.searchComp !== this.props.searchComp){
+							this.props.updateServiceApprovedParameter({
+								...prevProps.serviceApprovedParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+							});
+						}
+					case 'Not Approve':
+						if(prevProps.searchComp !== this.props.searchComp){
+							this.props.updateServiceParameter({
+								...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+							});
+						}
+					case 'Delete':
+						if(prevProps.searchComp !== this.props.searchComp){
+							this.props.updateServiceDeletedParameter({
+								...prevProps.serviceDeletedParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+							});
+						}
+					case 'SAP ISSUE':
+						if(prevProps.searchComp !== this.props.searchComp){
+							this.props.updateServiceSapParameter({
+								...prevProps.serviceSapParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+							});
+						}
+					default:
+						break;
+				}
 			}
 		}
 	}

@@ -224,7 +224,7 @@ class PlanningDetailsTab extends React.Component {
               Sales Order
             </div>
           </div>
-          <div className={this.props.totalSalesData.toString().length >= 1 ? "total-data-inputs" : "total-data-input"}>
+          <div className={this.props.totalSalesData.toString().length > 1 ? "total-data-inputs" : "total-data-input"}>
             {this.props.totalSalesData}
           </div>
         </div>
