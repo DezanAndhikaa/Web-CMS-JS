@@ -110,7 +110,6 @@ export default class Status extends React.PureComponent {
 			prevProps.approveServiceDownloaded.status === ApiRequestActionsStatus.LOADING) {
 			this.onClickDownloadServiceApproved()
 		}
-
 		if(prevProps.searchSalesApprovedParam !== this.props.searchSalesApprovedParam){
 			this.fetchSearchSalesApproved();
 		}
@@ -123,7 +122,6 @@ export default class Status extends React.PureComponent {
 		if(prevProps.searchSalesSapParam !== this.props.searchSalesSapParam){
 			this.fetchSearchSalesSap();
 		}
-
 		if(prevProps.searchServiceApprovedParam !== this.props.searchServiceApprovedParam){
 			this.fetchSearchServiceApproved();
 		}
@@ -157,7 +155,7 @@ export default class Status extends React.PureComponent {
 			}
 		}
 		  
-		  //ini untuk trigger service global search
+		//ini untuk trigger service global search
 		if(prevProps.serviceSearch !== this.props.serviceSearch){
 			switch (this.state.whatPageIsChoosed) {
 				case 'Approve':
@@ -175,7 +173,57 @@ export default class Status extends React.PureComponent {
 				default:
 					break;
 			}
-		  }
+		}
+
+		//search per component
+		if(prevProps.searchComp !== this.props.searchComp){
+			if (this.props.location.whichTab === "sales") {
+				switch (this.state.whatPageIsChoosed) {
+					case 'Approve':
+						if(this.props.searchComp[0].Value === ""){
+							this.props.updateSalesApprovedParameter({
+							...prevProps.salesApprovedParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+							});  
+						}else{
+							this.props.updateSalesApprovedParameter({
+							...prevProps.salesApprovedParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+							});
+						}
+					case 'Not Approve':
+						if(this.props.searchComp[0].Value === ""){
+							this.props.updateSalesParameter({
+							...prevProps.salesParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+							});  
+						}else{
+							this.props.updateSalesParameter({
+							...prevProps.salesParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+							});
+						}
+					case 'Delete':
+						if(this.props.searchComp[0].Value === ""){
+							this.props.updateSalesDeletedParameter({
+							...prevProps.salesDeletedParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+							});  
+						}else{
+							this.props.updateSalesDeletedParameter({
+							...prevProps.salesDeletedParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+							});
+						}
+					case 'SAP ISSUE':
+						if(this.props.searchComp[0].Value === ""){
+							this.props.updateSalesSapParameter({
+							...prevProps.salesSapParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+							});  
+						}else{
+							this.props.updateSalesSapParameter({
+							...prevProps.salesSapParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+							});
+						}
+					default:
+						break;
+				}
+			}
+		}
 	}
 
 	handleClick = (menu) => {

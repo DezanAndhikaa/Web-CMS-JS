@@ -212,6 +212,7 @@ class PlanningDetailsTab extends React.Component {
   }
 
   _renderTotalDataInput() {
+    console.log('length berapa oy : ', this.props.totalSalesData.length)
     return(
       <div className="total-input-container">
         <div className="label-header-input">
@@ -223,7 +224,7 @@ class PlanningDetailsTab extends React.Component {
               Sales Order
             </div>
           </div>
-          <div className="total-data-input">
+          <div className={this.props.totalSalesData.toString().length >= 1 ? "total-data-inputs" : "total-data-input"}>
             {this.props.totalSalesData}
           </div>
         </div>

@@ -37,7 +37,14 @@ import {
 	UpdateSearchServiceApprovedAction,
 	UpdateSearchServiceDeletedAction,
 	UpdateSearchServiceSapAction,
-	SearchCompAction,SearchCompActionService,
+	SearchCompAction,
+	SearchCompActionApproved,
+	SearchCompActionDeleted,
+	SearchCompActionSap,
+	SearchCompActionService,
+	SearchCompActionServiceApproved,
+	SearchCompActionServiceDeleted,
+	SearchCompActionServiceSap,
 	SelectSalesPlanAction,
 	SelectServicePlanAction, 
 	SelectLeaderAction, SelectMechanicAction,
@@ -705,6 +712,48 @@ export function searchServiceReducer(state = '', action) {
 
 export function searchCompReducer(state = initialSearchCompParameter, action) {
 	if (action.type === SearchCompAction) {
+		if(action.sort === 'SoNumber'){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else if(action.sort === 'PartNumber'){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else if(action.sort === 'UnitCode'){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else{
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}
+	}else if (action.type === SearchCompActionApproved) {
+		if(action.sort === 'SoNumber'){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else if(action.sort === 'PartNumber'){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else if(action.sort === 'UnitCode'){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else{
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}
+	}else if (action.type === SearchCompActionDeleted) {
+		if(action.sort === 'SoNumber'){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else if(action.sort === 'PartNumber'){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else if(action.sort === 'UnitCode'){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else{
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}
+	}else if (action.type === SearchCompActionSap) {
 		if(action.sort === 'SoNumber'){
 			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
 			return updatedArray;
