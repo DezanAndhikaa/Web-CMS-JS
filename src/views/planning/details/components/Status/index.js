@@ -106,7 +106,13 @@ const mapStateToProps = (state) => ({
 	fetchStatusServiceDeleted: state.plansPageState.serviceOrderListDeleted.status,
 	fetchStatusServiceSap: state.plansPageState.serviceOrderListSap.status,
 	sortSalesBy: state.plansPageState.sortSalesBy,
+	sortSalesByApproved: state.plansPageState.sortSalesByApproved,
+	sortSalesByDeleted: state.plansPageState.sortSalesByDeleted,
+	sortSalesBySap: state.plansPageState.sortSalesBySap,
 	sortServiceBy: state.plansPageState.sortServiceBy,
+	sortServiceByApproved: state.plansPageState.sortServiceByApproved,
+	sortServiceByDeleted: state.plansPageState.sortServiceByDeleted,
+	sortServiceBySap: state.plansPageState.sortServiceBySap,
 });
 
 const mapDispatchToProps = (dispatch) => ({
