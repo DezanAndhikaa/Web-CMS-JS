@@ -191,16 +191,25 @@
                     width: 93px;
                     margin-left: 22.86%;
                     font-family: 'Lato-Regular';
-                    font-size: 15px;//vw(20);
-                    line-height: vw(48);//18px;
+                    font-size: 15px;
+                    line-height: vw(48);
                 }
             }
             .total-site{                    
                 width: 153px;
-                margin-left: 54.72%;//40.72%;//32.72%;
-                margin-top: 12.8%;//19.8%;
+                margin-left: 54.72%;
+                margin-top: 12.8%;
                 font-family: 'Lato-Bold';
-                font-size: 36px;//vw(36);
+                font-size: 36px;
+                line-height: vw(43);
+                color: #3C3B3B;
+            }
+            .total-sites{                    
+                width: 153px;
+                margin-left: 48.72%;
+                margin-top: 12.8%;
+                font-family: 'Lato-Bold';
+                font-size: 36px;
                 line-height: vw(43);
                 color: #3C3B3B;
             }

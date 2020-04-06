@@ -41,6 +41,12 @@ componentDidUpdate = (prevProps) => {
   if (prevProps.salesParameter !== this.props.salesParameter) {
     this.onClickSalesOrder();
   }
+  if(prevProps.searchSalesParameter !== this.props.searchSalesParameter){
+    this.fetchSearchSales();
+  }
+  if(prevProps.searchServiceParameter !== this.props.searchServiceParameter){
+    this.fetchSearchService();
+  }
   if (prevProps.serviceParameter !== this.props.serviceParameter) {
     this.onClickServiceOrder();
   }
@@ -80,25 +86,25 @@ componentDidUpdate = (prevProps) => {
 
   //ini untuk trigger sales global search
   if (prevProps.salesSearch !== this.props.salesSearch) {
-    this.props.updateSearchParameter({
-      Category: 'Approval', Keyword: this.props.salesSearch,
+    this.props.updateSearchSales({
+      ...prevProps.searchSalesParameter, Category: 'Approval', Keyword: this.props.salesSearch,
     });
   }
   
   //ini untuk trigger service global search
   if(prevProps.serviceSearch !== this.props.serviceSearch){
-    console.log('coba masuk gk: ', prevProps.serviceSearch)
-    this.props.updateSearchParameter({
-      ...prevProps.dataFilter, Category: 'Approval', Keyword: this.props.serviceSearch,
+    this.props.updateSearchService({
+      ...prevProps.searchServiceParameter, Category: 'Approval', Keyword: this.props.serviceSearch,
     });
   }
+
   //search per component
   if(this.state.whichTabs){
     if(prevProps.searchComp !== this.props.searchComp){
       if(this.props.searchComp[0].Value === ""){
         this.props.updateSalesParameter({
-          ...prevProps.salesParameter.dataFilter // gimana cara hapus row ke 0
-        })  
+          ...prevProps.salesParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+        });  
       }else{
         this.props.updateSalesParameter({
           ...prevProps.salesParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
@@ -373,18 +379,27 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
+  fetchSearchSales = async() => {
+    await this.props.fetchSalesOrder(this.props.searchSalesParameter, this.props.token);
+    this.onClickSalesOrder();
+  } 
+
+  fetchSearchService = async() => {
+    await this.props.fetchServiceOrder(this.props.searchServiceParameter, this.props.token);
+  } 
+
   //SAAT MENGKLIK SERVICE ORDER TAB
   onClickServiceOrder = async() => {
-   await this.props.fetchServiceOrder({
-    ...this.props.serviceParameter.dataFilter, 
-    Filter : 
-          [...this.props.serviceParameter.dataFilter.Filter, {
-            Field : 'SAPIssueMessage',
-            Operator : "eq",
-            Value : '-',
-            Logic : "AND"
-    }]
-  }, this.props.token);
+    await this.props.fetchServiceOrder({
+      ...this.props.serviceParameter.dataFilter, 
+      Filter : 
+            [...this.props.serviceParameter.dataFilter.Filter, {
+              Field : 'SAPIssueMessage',
+              Operator : "eq",
+              Value : '-',
+              Logic : "AND"
+      }]
+    }, this.props.token);
   }
 
   //SAAT MENGKLIK SALES ORDER TAB

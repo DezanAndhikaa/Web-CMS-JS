@@ -192,7 +192,7 @@ class ApprovalTab extends React.Component {
                 Sales Order
               </div>
             </div>
-            <div className="total-container">
+            <div className={this.props.totalSalesData.toString().length > 1 ? "total-containers" : "total-container"}>
               {this.props.totalSalesData}
             </div>
           </div>
@@ -214,7 +214,7 @@ class ApprovalTab extends React.Component {
                 Service Order
               </div>
             </div>
-            <div className="total-container">
+            <div className={this.props.totalServiceData.toString().length > 1 ? "total-containers" : "total-container"}>
               {this.props.totalServiceData}
             </div>
           </div>

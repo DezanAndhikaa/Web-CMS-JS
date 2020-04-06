@@ -42,7 +42,9 @@ componentDidUpdate = (prevProps) => {
   if (prevProps.salesParameter !== this.props.salesParameter) {
     this.onClickSalesOrder()
   }
-  
+  if(prevProps.searchSalesParameter !== this.props.searchSalesParameter){
+    this.fetchSearchSales();
+  }
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
       if(this.props.indexFilterParameter.indexTabParameter === 0){
@@ -72,23 +74,23 @@ componentDidUpdate = (prevProps) => {
 
   //ini untuk trigger sales global search
   if (prevProps.salesSearch !== this.props.salesSearch) {
-    this.props.updateSalesParameter({
-      ...prevProps.salesParameter.dataFilter, Category: 'Lifetime', Keyword: this.props.salesSearch, PageNumber: 1,
+    this.props.updateSearchSales({
+      ...prevProps.searchSalesParameter, Category: 'Lifetime', Keyword: this.props.salesSearch,
     });
   }
 
   //search per component
   if(this.state.whichTabs){
     if(prevProps.searchComp !== this.props.searchComp){
-      this.props.updateSalesParameter({
-        ...prevProps.salesParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
-      });
-    }
-  }else{
-    if(prevProps.searchComp !== this.props.searchComp){
-      this.props.updateServiceParameter({
-        ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
-      });
+      if(this.props.searchComp[0].Value === ""){
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+        });  
+      }else{
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+        });
+      }
     }
   }
   
@@ -193,110 +195,12 @@ componentDidUpdate = (prevProps) => {
     }
     };
   }
-
-  // SERVICE ORDER SORTING
-  if (prevProps.sortServiceBy !== this.props.sortServiceBy) {
-    const { sortServiceBy } = this.props;
-    let isDescending = false;
-    if (sortServiceBy.Customer.isActive) {
-      isDescending = !sortServiceBy.Customer.isAscending;
-      this.props.updateServiceParameter({
-        ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          // PageSize: 2,
-          Sort: [{
-            Field : 'Customer',
-            Direction : 'desc'
-          }]   
-      });
-    if (sortServiceBy.Customer.isAscending === !sortServiceBy.Customer.isActive) {
-      isDescending = !sortServiceBy.Customer.isAscending;
-      this.props.updateServiceParameter({
-        ...this.props.serviceParameter.dataFilter,
-        PageNumber: 1,
-        // PageSize: 2,
-        Sort: [{
-          Field : 'Customer',
-          Direction : 'asc'
-        }]   
-      });
-    }
-  }
-    if (sortServiceBy.Site.isActive){
-      isDescending = !sortServiceBy.Site.isAscending;
-      this.props.updateServiceParameter({
-        ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          // PageSize: 2,
-          Sort: [{
-            Field : 'Site',
-            Direction : 'desc'
-          }] 
-      });
-    if (sortServiceBy.Site.isAscending === !sortServiceBy.Site.isActive) {
-      isDescending = !sortServiceBy.Site.isAscending;
-      this.props.updateServiceParameter({
-        ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          // PageSize: 2,
-          Sort: [{
-            Field : 'Site',
-            Direction : 'asc'
-          }] 
-      });
-    }
-    } 
-    if (sortServiceBy.UnitModel.isActive) {
-      isDescending = !sortServiceBy.UnitModel.isAscending;
-      this.props.updateServiceParameter({
-        ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          // PageSize: 2,
-          Sort: [{
-            Field : 'UnitModel',
-            Direction : 'desc'
-          }] 
-      });
-    if (sortServiceBy.UnitModel.isAscending === !sortServiceBy.UnitModel.isActive) {
-      isDescending = !sortServiceBy.UnitModel.isAscending;
-      this.props.updateServiceParameter({
-        ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          // PageSize: 2,
-          Sort: [{
-            Field : 'UnitModel',
-            Direction : 'asc'
-          }] 
-      });
-    }
-    };
-    if (sortServiceBy.CompDesc.isActive) {
-      isDescending = !sortServiceBy.CompDesc.isAscending;
-      this.props.updateServiceParameter({
-        ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          // PageSize: 2,
-          Sort: [{
-            Field : 'ComponentDescription',
-            Direction : 'desc'
-          }] 
-      });
-    if (sortServiceBy.CompDesc.isAscending === !sortServiceBy.CompDesc.isActive) {
-      isDescending = !sortServiceBy.CompDesc.isAscending;
-      this.props.updateServiceParameter({
-        ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          // PageSize: 2,
-          Sort: [{
-            Field : 'ComponentDescription',
-            Direction : 'asc'
-          }] 
-      });
-    }
-    };
-  }
 }
 
+fetchSearchSales = async() => {
+  await this.props.fetchSalesOrder(this.props.searchSalesParameter, this.props.token);
+  this.onClickSalesOrder();
+} 
   // PAGINATION DENGAN KONDISI UNTUK TAB SALES ORDER ATAU SERVICE ORDER
   _renderPagination= (pageValue) =>  {
     if (pageValue === 1) {
