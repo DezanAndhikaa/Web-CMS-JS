@@ -623,6 +623,372 @@ export default class Status extends React.PureComponent {
 		}
 
 		//sorting service
+		if (prevProps.sortServiceBy !== this.props.sortServiceBy) {
+			const { sortServiceBy } = this.props;
+			let isDescending = false;
+			if (this.props.location.whichTab === "service") {
+				switch (this.state.whatPageIsChoosed) {
+					case 'Approve':
+						if (sortServiceBy.Customer.isActive) {
+							isDescending = !sortServiceBy.Customer.isAscending;
+							this.props.updateServiceApprovedParameter({
+								...this.props.serviceApprovedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'CustomerName',
+									Direction : 'desc'
+								}]   
+							});
+							if (sortServiceBy.Customer.isAscending === !sortServiceBy.Customer.isActive) {
+								isDescending = !sortServiceBy.Customer.isAscending;
+								this.props.updateServiceApprovedParameter({
+									...this.props.serviceApprovedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'CustomerName',
+										Direction : 'asc'
+									}]   
+								});
+							}
+						}
+						if (sortServiceBy.Site.isActive){
+							isDescending = !sortServiceBy.Site.isAscending;
+							this.props.updateServiceApprovedParameter({
+								...this.props.serviceApprovedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'SiteCode',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.Site.isAscending === !sortServiceBy.Site.isActive) {
+								isDescending = !sortServiceBy.Site.isAscending;
+								this.props.updateServiceApprovedParameter({
+									...this.props.serviceApprovedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'SiteCode',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						} 
+						if (sortServiceBy.UnitModel.isActive) {
+							isDescending = !sortServiceBy.UnitModel.isAscending;
+							this.props.updateServiceApprovedParameter({
+								...this.props.serviceApprovedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'UnitModel',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.UnitModel.isAscending === !sortServiceBy.UnitModel.isActive) {
+								isDescending = !sortServiceBy.UnitModel.isAscending;
+								this.props.updateServiceApprovedParameter({
+									...this.props.serviceApprovedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'UnitModel',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						};
+						if (sortServiceBy.CompDesc.isActive) {
+							isDescending = !sortServiceBy.CompDesc.isAscending;
+							this.props.updateServiceApprovedParameter({
+								...this.props.serviceApprovedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'ComponentDescription',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.CompDesc.isAscending === !sortServiceBy.CompDesc.isActive) {
+								isDescending = !sortServiceBy.CompDesc.isAscending;
+								this.props.updateServiceApprovedParameter({
+									...this.props.serviceApprovedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'ComponentDescription',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						};
+					case 'Not Approve':
+						if (sortServiceBy.Customer.isActive) {
+							isDescending = !sortServiceBy.Customer.isAscending;
+							this.props.updateServiceParameter({
+								...this.props.serviceParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'CustomerName',
+									Direction : 'desc'
+								}]   
+							});
+							if (sortServiceBy.Customer.isAscending === !sortServiceBy.Customer.isActive) {
+								isDescending = !sortServiceBy.Customer.isAscending;
+								this.props.updateServiceParameter({
+									...this.props.serviceParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'CustomerName',
+										Direction : 'asc'
+									}]   
+								});
+							}
+						}
+						if (sortServiceBy.Site.isActive){
+							isDescending = !sortServiceBy.Site.isAscending;
+							this.props.updateServiceParameter({
+								...this.props.serviceParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'SiteCode',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.Site.isAscending === !sortServiceBy.Site.isActive) {
+								isDescending = !sortServiceBy.Site.isAscending;
+								this.props.updateServiceParameter({
+									...this.props.serviceParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'SiteCode',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						} 
+						if (sortServiceBy.UnitModel.isActive) {
+							isDescending = !sortServiceBy.UnitModel.isAscending;
+							this.props.updateServiceParameter({
+								...this.props.serviceParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'UnitModel',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.UnitModel.isAscending === !sortServiceBy.UnitModel.isActive) {
+								isDescending = !sortServiceBy.UnitModel.isAscending;
+								this.props.updateServiceParameter({
+									...this.props.serviceParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'UnitModel',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						};
+						if (sortServiceBy.CompDesc.isActive) {
+							isDescending = !sortServiceBy.CompDesc.isAscending;
+							this.props.updateServiceParameter({
+								...this.props.serviceParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'ComponentDescription',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.CompDesc.isAscending === !sortServiceBy.CompDesc.isActive) {
+								isDescending = !sortServiceBy.CompDesc.isAscending;
+								this.props.updateServiceParameter({
+									...this.props.serviceParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'ComponentDescription',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						};
+					case 'Delete':
+						if (sortServiceBy.Customer.isActive) {
+							isDescending = !sortServiceBy.Customer.isAscending;
+							this.props.updateServiceDeletedParameter({
+								...this.props.serviceDeletedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'CustomerName',
+									Direction : 'desc'
+								}]   
+							});
+							if (sortServiceBy.Customer.isAscending === !sortServiceBy.Customer.isActive) {
+								isDescending = !sortServiceBy.Customer.isAscending;
+								this.props.updateServiceDeletedParameter({
+									...this.props.serviceDeletedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'CustomerName',
+										Direction : 'asc'
+									}]   
+								});
+							}
+						}
+						if (sortServiceBy.Site.isActive){
+							isDescending = !sortServiceBy.Site.isAscending;
+							this.props.updateServiceDeletedParameter({
+								...this.props.serviceDeletedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'SiteCode',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.Site.isAscending === !sortServiceBy.Site.isActive) {
+								isDescending = !sortServiceBy.Site.isAscending;
+								this.props.updateServiceDeletedParameter({
+									...this.props.serviceDeletedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'SiteCode',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						} 
+						if (sortServiceBy.UnitModel.isActive) {
+							isDescending = !sortServiceBy.UnitModel.isAscending;
+							this.props.updateServiceDeletedParameter({
+								...this.props.serviceDeletedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'UnitModel',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.UnitModel.isAscending === !sortServiceBy.UnitModel.isActive) {
+								isDescending = !sortServiceBy.UnitModel.isAscending;
+								this.props.updateServiceDeletedParameter({
+									...this.props.serviceDeletedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'UnitModel',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						};
+						if (sortServiceBy.CompDesc.isActive) {
+							isDescending = !sortServiceBy.CompDesc.isAscending;
+							this.props.updateServiceDeletedParameter({
+								...this.props.serviceDeletedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'ComponentDescription',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.CompDesc.isAscending === !sortServiceBy.CompDesc.isActive) {
+								isDescending = !sortServiceBy.CompDesc.isAscending;
+								this.props.updateServiceDeletedParameter({
+									...this.props.serviceDeletedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'ComponentDescription',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						};
+					case 'SAP ISSUE':
+						if (sortServiceBy.Customer.isActive) {
+							isDescending = !sortServiceBy.Customer.isAscending;
+							this.props.updateServiceSapParameter({
+								...this.props.serviceSapParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'CustomerName',
+									Direction : 'desc'
+								}]   
+							});
+							if (sortServiceBy.Customer.isAscending === !sortServiceBy.Customer.isActive) {
+								isDescending = !sortServiceBy.Customer.isAscending;
+								this.props.updateServiceSapParameter({
+									...this.props.serviceSapParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'CustomerName',
+										Direction : 'asc'
+									}]   
+								});
+							}
+						}
+						if (sortServiceBy.Site.isActive){
+							isDescending = !sortServiceBy.Site.isAscending;
+							this.props.updateServiceSapParameter({
+								...this.props.serviceSapParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'SiteCode',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.Site.isAscending === !sortServiceBy.Site.isActive) {
+								isDescending = !sortServiceBy.Site.isAscending;
+								this.props.updateServiceSapParameter({
+									...this.props.serviceSapParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'SiteCode',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						} 
+						if (sortServiceBy.UnitModel.isActive) {
+							isDescending = !sortServiceBy.UnitModel.isAscending;
+							this.props.updateServiceSapParameter({
+								...this.props.serviceSapParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'UnitModel',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.UnitModel.isAscending === !sortServiceBy.UnitModel.isActive) {
+								isDescending = !sortServiceBy.UnitModel.isAscending;
+								this.props.updateServiceSapParameter({
+									...this.props.serviceSapParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'UnitModel',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						};
+						if (sortServiceBy.CompDesc.isActive) {
+							isDescending = !sortServiceBy.CompDesc.isAscending;
+							this.props.updateServiceSapParameter({
+								...this.props.serviceSapParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'ComponentDescription',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.CompDesc.isAscending === !sortServiceBy.CompDesc.isActive) {
+								isDescending = !sortServiceBy.CompDesc.isAscending;
+								this.props.updateServiceSapParameter({
+									...this.props.serviceSapParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'ComponentDescription',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						};
+					default:
+						break;
+				}
+			}		
+		}
 
 	}
 
@@ -1462,11 +1828,9 @@ export default class Status extends React.PureComponent {
 		return(
 			<main className="content" >
 				<div className="head-containers">
-					<div className="back_button">
-						<Button variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
-							Detail
-						</Button>
-					</div>
+					<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
+						Detail
+					</Button>
 					<div className="notif_button">
 						<NotifButton
 							{...this.props}
