@@ -6,7 +6,7 @@ import {
 import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
-import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc } from '../../DetailPages-action';
+import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons';
 
 export default class ServiceOrderList extends React.PureComponent {
@@ -37,6 +37,14 @@ export default class ServiceOrderList extends React.PureComponent {
     this.setState({
       checkedValue : !this.state.checkedValue
     })
+  }
+
+  isFilterLifetime = async( value1, value2 ) => {
+    this.props.lifetimeFilter( LifetimeFilterAction, value1, value2, this.props.serviceParameter.dataFilter.PageSize );
+  }
+
+  isFilterDate = async ( value1, value2) => {
+    this.props.dateFilter( DateFilterAction, value1, value2, this.props.serviceParameter.dataFilter.PageSize );
   }
   
   isCheckboxAvailable = (data) => {
@@ -126,12 +134,14 @@ export default class ServiceOrderList extends React.PureComponent {
               name="Lifetime"
             // //   isActive={this.props.sortJobsByState.staging.isActive}
               delay={300}
+              onFilter={this.isFilterLifetime}
             // //   isAscending={this.props.sortJobsByState.staging.isAscending}
             />
             <PlanningListHeader
               name="Plan"
             // //   isActive={this.props.sortJobsByState.staging.isActive}
               delay={300}
+              onFilter={this.isFilterDate}
             // //   isAscending={this.props.sortJobsByState.staging.isAscending}
             />
             {/* <PlanningListHeader

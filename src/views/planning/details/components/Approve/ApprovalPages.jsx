@@ -381,7 +381,6 @@ componentDidUpdate = (prevProps) => {
 
   fetchSearchSales = async() => {
     await this.props.fetchSalesOrder(this.props.searchSalesParameter, this.props.token);
-    this.onClickSalesOrder();
   } 
 
   fetchSearchService = async() => {
@@ -626,7 +625,7 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
-      await this.props.deleteSales({SoNumbers : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate}, this.props.token)
+      await this.props.deleteSales({SoNumbers : arr, IsDelete: true}, this.props.token)
       this.onClickSalesOrder();
       await this.props.clearSelectedSalesPlans();
     }
