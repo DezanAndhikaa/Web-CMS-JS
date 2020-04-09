@@ -43,8 +43,7 @@ export default class SapSalesOrderList extends React.PureComponent {
     this.props.updateSalesSapParameter({ 
       ...this.props.salesSapParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
     });
-  }
-  
+  }  
 
   isFilterLifetime = async( value1, value2 ) => {
     this.props.lifetimeFilter( LifetimeFilterAction, value1, value2, this.props.salesSapParameter.dataFilter.PageSize );
@@ -89,10 +88,8 @@ export default class SapSalesOrderList extends React.PureComponent {
           </TableCell>
           <PlanningListHeader
             name="SO"
-            // isActive={this.props.sortJobsByState.unitModel.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-            // isAscending={this.props.sortJobsByState.unitModel.isAscending}
           />
           <PlanningListHeader
             name="Customer"
@@ -124,38 +121,28 @@ export default class SapSalesOrderList extends React.PureComponent {
           />
           <PlanningListHeader
             name="Part Number"
-          // //   isActive={this.props.sortJobsByState.backlogOpen.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-          // //   isAscending={this.props.sortJobsByState.backlogOpen.isAscending}
           />
           <PlanningListHeader
             name="Unit Code"
-          // //   isActive={this.props.sortJobsByState.plantExecution.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-          // //   isAscending={this.props.sortJobsByState.plantExecution.isAscending}
           />
           <PlanningListHeader
             name="Serial Number"
-          // //   isActive={this.props.sortJobsByState.status.isActive}
             delay={300}
-            onSearch={this.props.onSearchComp}
-          // //   isAscending={this.props.sortJobsByState.status.isAscending}            
+            onSearch={this.props.onSearchComp}       
           />
           <PlanningListHeader
             name="Lifetime"
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
             delay={300}
             onFilter={this.isFilterLifetime}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
           />
           <PlanningListHeader
             name="Plan"
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
             delay={300}
             onFilter={this.isFilterDate}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
           />
           <PlanningListHeader
             name="SMR"
@@ -253,59 +240,22 @@ export default class SapSalesOrderList extends React.PureComponent {
       )
       default:
     }
-    // if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
-    //   return(
-    //     <div className="loading-container">
-    //       <img 
-    //         src={Spinner}
-    //         alt="loading-spinner"
-    //         className="loading-icon"
-    //         />
-    //     </div>
-    //   )
-    // }else if(this.props.fetchStatusPutLifetime === ApiRequestActionsStatus.LOADING){
-    //   return(
-    //         <div>
-    //         <Snackbar
-    //           anchorOrigin={{ vertical: 'center',horizontal: 'right'}}
-    //           bodyStyle={{ backgroundColor: 'teal', color: 'coral' }}
-    //           open={this.state.stats}
-    //           onClose={this.handleClose}
-    //           autoHideDuration={3000}
-    //           message="Please Wait. Page will reload automatically"
-    //         />
-    //       </div>
-    //       )
-    // }
-    // else if(this.props.fetchStatusSales === ApiRequestActionsStatus.FAILED){
-    //   return(
-    //     <div className="loading-container">
-    //       OOPS THERE WAS AN ERROR :'(
-    //     </div>
-    //   )
-    // }else if(this.props.salesOrderListDeletedfetchStatusSalesDeleted.Lists.length === 0){
-    //   return(
-    //     <div className="loading-container">
-    //       DATA NOT FOUND
-    //     </div>
-    //   )
-    // }
   }
 
-render(){
-        return(
-          <>
-            <Table classes={{ root: 'table' }} className="table">
-            {this.showTableHead()}
-            <TableBody classes={{ root: 'table-body' }}>
-              {this.props.salesOrderListSap.Lists
-                && this.props.salesOrderListSap.Lists.map((row, id) => (
-                  this.showTableBody(row,id)
-                ))}
-              </TableBody>
-            </Table>
-            {this.showLoading()}
-          </>
-        )
-      }
+  render(){
+    return(
+      <>
+        <Table classes={{ root: 'table' }} className="table">
+        {this.showTableHead()}
+        <TableBody classes={{ root: 'table-body' }}>
+          {this.props.salesOrderListSap.Lists
+            && this.props.salesOrderListSap.Lists.map((row, id) => (
+              this.showTableBody(row,id)
+            ))}
+          </TableBody>
+        </Table>
+        {this.showLoading()}
+      </>
+    )
   }
+}

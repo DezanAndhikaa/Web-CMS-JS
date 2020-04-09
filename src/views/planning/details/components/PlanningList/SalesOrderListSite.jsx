@@ -77,23 +77,14 @@ export default class SalesOrderListSite extends React.PureComponent {
     return isAvailable;
   }
 
-  // isChangeStat = (value,key) =>{
-  //   this.setState({
-  //     stats: 1,
-  //     lifetime: this.state.lifetime.map(el => (el.SoNumber === key ? {...el, LifeTimeComp : value} : el))
-  //   });
-  // }
-
   showTableHead() {
       return (
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow classes={{ root: 'table-row' }}>
           <PlanningListHeader
             name="SO"
-            // isActive={this.props.sortJobsByState.unitModel.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-            // isAscending={this.props.sortJobsByState.unitModel.isAscending}
           />
           <PlanningListHeader
             name="Customer"
@@ -125,38 +116,28 @@ export default class SalesOrderListSite extends React.PureComponent {
           />
           <PlanningListHeader
             name="Part Number"
-          // //   isActive={this.props.sortJobsByState.backlogOpen.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-          // //   isAscending={this.props.sortJobsByState.backlogOpen.isAscending}
           />
           <PlanningListHeader
             name="Unit Code"
-          // //   isActive={this.props.sortJobsByState.plantExecution.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-          // //   isAscending={this.props.sortJobsByState.plantExecution.isAscending}
           />
           <PlanningListHeader
             name="Serial Number"
-          // //   isActive={this.props.sortJobsByState.status.isActive}
             delay={300}
-            onSearch={this.props.onSearchComp}
-          // //   isAscending={this.props.sortJobsByState.status.isAscending}            
+            onSearch={this.props.onSearchComp}          
           />
           <PlanningListHeader
             name="Lifetime"
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
             delay={300}
             onFilter={this.isFilterLifetime}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
           />
           <PlanningListHeader
             name="Plan"
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
             delay={300}
             onFilter={this.isFilterDate}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
           />
           <PlanningListHeader
             name="SMR"
@@ -249,22 +230,21 @@ export default class SalesOrderListSite extends React.PureComponent {
     }
   }
 
-render(){
-        return(
-          <>
-            <Table classes={{ root: 'table' }} className="table">
-            {this.showTableHead()}
-            <TableBody classes={{ root: 'table-body' }}>
-              {this.props.salesOrderList.Lists
-                && this.props.salesOrderList.Lists.map((row, id) => (
-                  this.showTableBody(row,id)
-                ))}
-              </TableBody>
-            </Table>
-            {this.showLoading()}
-            {/* <Loading/> */}
-          </>
-        )
-      }
+  render(){
+    return(
+      <>
+        <Table classes={{ root: 'table' }} className="table">
+        {this.showTableHead()}
+        <TableBody classes={{ root: 'table-body' }}>
+          {this.props.salesOrderList.Lists
+            && this.props.salesOrderList.Lists.map((row, id) => (
+              this.showTableBody(row,id)
+            ))}
+          </TableBody>
+        </Table>
+        {this.showLoading()}
+        {/* <Loading/> */}
+      </>
+    )
   }
-// }
+}

@@ -51,73 +51,53 @@ export default class ServiceOrderList extends React.PureComponent {
             <TableRow>
               <PlanningListHeader
                 name="Work Order"
-              //   isActive={this.props.sortJobsByState.unitModel.isActive}
                 delay={300}
                 onSearch={this.props.onSearchComp}
-              //   isAscending={this.props.sortJobsByState.unitModel.isAscending}
               />
               <PlanningListHeader
                 name="Customer"
-                // isActive={this.props.sortServiceByState.Customer.isActive}
                 delay={300}
-                // isAscending={this.props.sortServiceByState.Customer.isAscending}
                 onClick={() => this.props.onClickTabHead(SortServiceByCustomer)}
               />
               <PlanningListHeader
                 name="Site"
-                // isActive={this.props.sortServiceByState.Site.isActive}
                 delay={300}
-                // isAscending={this.props.sortServiceByState.Site.isAscending}
                 onClick={() => this.props.onClickTabHead(SortServiceBySite)}
               />
               <PlanningListHeader
                 name="Unit Model"
-                // isActive={this.props.sortServiceByState.UnitModel.isActive}
                 delay={300}
-                // isAscending={this.props.sortServiceByState.UnitModel.isAscending}
                 onClick={() => this.props.onClickTabHead(SortServiceByUnitModel)}
               />
               <PlanningListHeader
                 name="Comp Desc"
-                // isActive={this.props.sortServiceByState.CompDesc.isActive}
                 delay={300}
-                // isAscending={this.props.sortServiceByState.CompDesc.isAscending}
                 onClick={() => this.props.onClickTabHead(SortServiceByCompDesc)}
               />
               <PlanningListHeader
                 name="Part Number"
-              // //   isActive={this.props.sortJobsByState.backlogOpen.isActive}
                 delay={300}
                 onSearch={this.props.onSearchComp}
-              // //   isAscending={this.props.sortJobsByState.backlogOpen.isAscending}
               />
               <PlanningListHeader
                 name="Unit Code"
-              // //   isActive={this.props.sortJobsByState.plantExecution.isActive}
                 delay={300}
                 onSearch={this.props.onSearchComp}
-              // //   isAscending={this.props.sortJobsByState.plantExecution.isAscending}
               />
               <PlanningListHeader
                 name="Serial Number"
-              // //   isActive={this.props.sortJobsByState.status.isActive}
                 delay={300}
-                onSearch={this.props.onSearchComp}
-              // //   isAscending={this.props.sortJobsByState.status.isAscending}            
+                onSearch={this.props.onSearchComp}           
               />
           <PlanningListHeader
               name="Lifetime"
-            // //   isActive={this.props.sortJobsByState.staging.isActive}
               delay={300}
               onFilter={this.isFilterLifetime}
-            // //   isAscending={this.props.sortJobsByState.staging.isAscending}
             />
             <PlanningListHeader
               name="Plan"
-            // //   isActive={this.props.sortJobsByState.staging.isActive}
               delay={300}
               onFilter={this.isFilterDate}
-            // //   isAscending={this.props.sortJobsByState.staging.isAscending}
             />
           </TableRow>
         </TableHead>
@@ -168,8 +148,8 @@ export default class ServiceOrderList extends React.PureComponent {
   }
 
   render(){
-      return(
-        <>
+    return(
+      <>
         <Table classes={{ root: 'table' }} className="table">
         {this.showTableHead()}
         <TableBody classes={{ root: 'table-body' }}>
@@ -180,7 +160,7 @@ export default class ServiceOrderList extends React.PureComponent {
           </TableBody>
         </Table>
         {this.showLoading()}
-        </>
-       )
-    }
+      </>
+    )
   }
+}

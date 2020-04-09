@@ -143,38 +143,28 @@ export default class SalesOrderList extends React.PureComponent {
           />
           <PlanningListHeader
             name="Part Number"
-          // //   isActive={this.props.sortJobsByState.backlogOpen.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-          // //   isAscending={this.props.sortJobsByState.backlogOpen.isAscending}
           />
           <PlanningListHeader
             name="Unit Code"
-          // //   isActive={this.props.sortJobsByState.plantExecution.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-          // //   isAscending={this.props.sortJobsByState.plantExecution.isAscending}
           />
           <PlanningListHeader
             name="Serial Number"
-          // //   isActive={this.props.sortJobsByState.status.isActive}
             delay={300}
-            onSearch={this.props.onSearchComp}
-          // //   isAscending={this.props.sortJobsByState.status.isAscending}            
+            onSearch={this.props.onSearchComp}          
           />
           <PlanningListHeader
             name="Lifetime"
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
             delay={300}
             onFilter={this.isFilterLifetime}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
           />
           <PlanningListHeader
             name="Plan"
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
             delay={300}
             onFilter={this.isFilterDate}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
           />
           <PlanningListHeader
             name="SMR"
@@ -186,11 +176,6 @@ export default class SalesOrderList extends React.PureComponent {
             delay={300}
             onFilter={this.isFilterDate}
           />
-          {/* <Typography
-            name="Action" style={{marginTop: "10px"}}
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
-          >Action</Typography> */}
         </TableRow>
       </TableHead>
     )

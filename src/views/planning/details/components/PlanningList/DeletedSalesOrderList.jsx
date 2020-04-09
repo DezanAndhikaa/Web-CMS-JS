@@ -56,13 +56,6 @@ export default class DeletedSalesOrderList extends React.PureComponent {
     return isAvailable;
   }
 
-  // isChangeStat = (value,key) =>{
-  //   this.setState({
-  //     stats: 1,
-  //     lifetime: this.state.lifetime.map(el => (el.SoNumber === key ? {...el, LifeTimeComp : value} : el))
-  //   });
-  // }
-
   handleClicks = () =>{
     this.setState({
       checkedValue : !this.state.checkedValue
@@ -84,10 +77,8 @@ export default class DeletedSalesOrderList extends React.PureComponent {
           </TableCell>
           <PlanningListHeader
             name="SO"
-            // isActive={this.props.sortJobsByState.unitModel.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-            // isAscending={this.props.sortJobsByState.unitModel.isAscending}
           />
           <PlanningListHeader
             name="Customer"
@@ -147,10 +138,8 @@ export default class DeletedSalesOrderList extends React.PureComponent {
           />
           <PlanningListHeader
             name="Plan"
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
             delay={300}
             onFilter={this.isFilterDate}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
           />
           <PlanningListHeader
             name="SMR"
@@ -162,11 +151,6 @@ export default class DeletedSalesOrderList extends React.PureComponent {
             delay={300}
             onSearch={this.props.onSearchComp}
           />
-          {/* <Typography
-            name="Action" style={{marginTop: "10px"}}
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
-          >Action</Typography> */}
         </TableRow>
       </TableHead>
     )
@@ -176,8 +160,6 @@ export default class DeletedSalesOrderList extends React.PureComponent {
   showTableBody(row,id) {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
-        {/* Nanti ada if user ho atau site
-              Ini tampilan HO */}
         <TableCell padding="checkbox">
           {this.props.displaySalesCheckbox && 
           <Checkbox 
@@ -198,8 +180,6 @@ export default class DeletedSalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> Unknown </TableCell>
         <TableCell align="left" className="table-cell"> Unknowns </TableCell>
-        {/* Ini tampilan HO, site gaada action */}
-        {/* <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} /></TableCell> */}
       </TableRow>
     )
   }
@@ -237,43 +217,6 @@ export default class DeletedSalesOrderList extends React.PureComponent {
       )
       default:
     }
-    // if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
-    //   return(
-    //     <div className="loading-container">
-    //       <img 
-    //         src={Spinner}
-    //         alt="loading-spinner"
-    //         className="loading-icon"
-    //         />
-    //     </div>
-    //   )
-    // }else if(this.props.fetchStatusPutLifetime === ApiRequestActionsStatus.LOADING){
-    //   return(
-    //         <div>
-    //         <Snackbar
-    //           anchorOrigin={{ vertical: 'center',horizontal: 'right'}}
-    //           bodyStyle={{ backgroundColor: 'teal', color: 'coral' }}
-    //           open={this.state.stats}
-    //           onClose={this.handleClose}
-    //           autoHideDuration={3000}
-    //           message="Please Wait. Page will reload automatically"
-    //         />
-    //       </div>
-    //       )
-    // }
-    // else if(this.props.fetchStatusSales === ApiRequestActionsStatus.FAILED){
-    //   return(
-    //     <div className="loading-container">
-    //       OOPS THERE WAS AN ERROR :'(
-    //     </div>
-    //   )
-    // }else if(this.props.salesOrderListDeletedfetchStatusSalesDeleted.Lists.length === 0){
-    //   return(
-    //     <div className="loading-container">
-    //       DATA NOT FOUND
-    //     </div>
-    //   )
-    // }
   }
 
 render(){
