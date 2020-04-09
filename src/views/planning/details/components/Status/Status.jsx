@@ -1182,21 +1182,31 @@ export default class Status extends React.PureComponent {
 
 	_renderDownloadBtn(){
 		if (this.props.location.whichTab === "sales") {
-			return(
-				<>
+			if(this.state.whatPageIsChoosed === "Delete"){
+				return(
+					<>
+						<BaseButton titles="Download"
+							{...this.props}
+							whatTabsIsRendered={true}
+							handleSalesApprovedDownload={this.handleSalesApprovedDownload}
+						/>
+						<BaseButton titles="Permanently" 
+							{...this.props}
+							whatTabsIsRendered={true}
+							handleDeletePermanent={this.handleDeletePermanent}
+							isDisabled={this.state.isDisabled}
+						/>
+					</>
+				)
+			}else{
+				return(
 					<BaseButton titles="Download"
 						{...this.props}
 						whatTabsIsRendered={true}
 						handleSalesApprovedDownload={this.handleSalesApprovedDownload}
 					/>
-					<BaseButton titles="Permanently" 
-					{...this.props}
-					whatTabsIsRendered={true}
-					handleDeletePermanent={this.handleDeletePermanent}
-					isDisabled={this.state.isDisabled}
-					/>
-				</>
-			)
+				)
+			}			
 		}else if (this.props.location.whichTab === "service"){
 			return(
 				<>
