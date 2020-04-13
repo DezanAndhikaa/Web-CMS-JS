@@ -304,7 +304,24 @@ export default class Status extends React.PureComponent {
 				}
 			}
 		}
-	
+		
+		//FILTER RANGE DATE
+		if(prevProps.filterDate !== this.props.filterDate){
+			if (this.props.location.whichTab === "sales") {
+				switch (this.state.whatPageIsChoosed) {
+					case 'Approve':
+						return this.props.fetchApprovedSales(this.props.filterDate, this.props.token);
+					case 'Not Approve':
+						return this.props.fetchSalesOrder(this.props.filterDate,this.props.token);
+					case 'Delete':
+						return this.props.fetchDeletedSales(this.props.filterDate, this.props.token);
+					case 'SAP ISSUE':
+						return this.props.fetchSapSales(this.props.filterDate, this.props.token);
+					default:
+						break;
+				}
+			}
+		}
 
 		//sorting sales order
 		if (prevProps.sortSalesBy !== this.props.sortSalesBy) {
