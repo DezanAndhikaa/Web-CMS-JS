@@ -43,6 +43,19 @@
         border-radius: 0.4vw;
         cursor: pointer;
     }
+    .btn-non-filter-lifetime{
+        width: vw(124.22) !important;
+        height: vw(35.07) !important;
+        font-size: vw(12) !important;
+        font-weight: bold;
+        line-height: vw(16) !important;
+        font-family: 'Lato-Regular';
+        background-color: white; 
+        text-transform: none;
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        border-radius: 0.4vw;
+        cursor: pointer;
+    }
     .btn-assigns:hover {
         background-color: map-get($colors, primary-dark);
     }

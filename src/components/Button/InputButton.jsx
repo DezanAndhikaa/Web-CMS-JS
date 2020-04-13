@@ -65,7 +65,7 @@ export default class InputButton extends React.Component{
         }else if(this.props.titles === "Lifetime Comp"){
             return(
                 <div className="button-rows">
-                <Button onClick={this.isClicked} className="btn-assigns-lifetime" style={{justifyContent: "unset"}}>{this.props.titles}</Button>
+                <Button onClick={this.isClicked} className={this.props.idSales === "Data Input" ? "btn-non-filter-lifetime" : "btn-assigns-lifetime"} style={{justifyContent: "unset"}}>{this.props.titles}</Button>
                     <Modal className="modal-pos" open={this.state.isShowModal} onClose={this.isClosed}>
                         <div>
                             <FilterByLifetime 

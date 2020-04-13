@@ -34,20 +34,12 @@
         font-family: 'Lato-Bold';
         color: #DB3434;
         background-image: url('../../../assets/icons/must_revised.png');
-        background-size: vw(14);//10%;
+        background-size: vw(14);
         background-position-x: 55%;
         background-position-y: center;
         background-repeat: no-repeat;
         cursor: pointer;
     }
-    // .edit-button-unvisible{
-    //     height: vw(30);
-    //     width: vw(30);
-    //     background-image: url('../../../assets/icons/edit.png');
-    //     background-repeat: no-repeat;
-    //     background-size: contain;
-    //     visibility: hidden;
-    // }
 }
 
 .assign-mechanic-modal{

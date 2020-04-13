@@ -78,13 +78,6 @@ export default class SalesOrderList extends React.PureComponent {
     return isAvailable;
   }
 
-  // isChangeStat = (value,key) =>{
-  //   this.setState({
-  //     stats: 1,
-  //     lifetime: this.state.lifetime.map(el => (el.SoNumber === key ? {...el, LifeTimeComp : value} : el))
-  //   });
-  // }
-
   handleClickCheckbox = () =>{
     this.setState({
       checkedValue : !this.state.checkedValue

@@ -254,6 +254,58 @@ export default class Status extends React.PureComponent {
 			}
 		}
 
+		//FILTER RANGE LIFETIME
+		if(prevProps.filterLifetime !== this.props.filterLifetime){
+			if (this.props.location.whichTab === "sales") {
+				switch (this.state.whatPageIsChoosed) {
+					case 'Approve':
+						return this.props.updateSalesApprovedParameter({
+							...prevProps.salesApprovedParameter.dataFilter, Filter : this.props.filterLifetime, PageNumber: 1,
+						});
+					case 'Not Approve':
+						return this.props.updateSalesParameter({
+							...prevProps.salesParameter.dataFilter, Filter : this.props.filterLifetime, PageNumber: 1,
+						});
+					case 'Delete':
+						return this.props.updateSalesDeletedParameter({
+							...prevProps.salesDeletedParameter.dataFilter, Filter : this.props.filterLifetime, PageNumber: 1,
+						});
+					case 'SAP ISSUE':
+						return this.props.updateSalesSapParameter({
+							...prevProps.salesSapParameter.dataFilter, Filter : this.props.filterLifetime, PageNumber: 1,
+						});
+					default:
+						break;
+				}
+			}else{
+				switch (this.state.whatPageIsChoosed) {
+					case 'Approve':
+						this.props.updateServiceApprovedParameter({
+							...prevProps.serviceApprovedParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+						});
+					case 'Not Approve':
+						this.props.updateServiceParameter({
+							...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+						});
+					case 'Delete':
+						if(prevProps.searchComp !== this.props.searchComp){
+							this.props.updateServiceDeletedParameter({
+								...prevProps.serviceDeletedParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+							});
+						}
+					case 'SAP ISSUE':
+						if(prevProps.searchComp !== this.props.searchComp){
+							this.props.updateServiceSapParameter({
+								...prevProps.serviceSapParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+							});
+						}
+					default:
+						break;
+				}
+			}
+		}
+	
+
 		//sorting sales order
 		if (prevProps.sortSalesBy !== this.props.sortSalesBy) {
 			const { sortSalesBy } = this.props;
@@ -1379,7 +1431,6 @@ export default class Status extends React.PureComponent {
 		}
 	  }
 	}
-
 
 	_renderShowPerPage(){
 		return(

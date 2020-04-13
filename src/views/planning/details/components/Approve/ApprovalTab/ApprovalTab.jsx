@@ -110,7 +110,7 @@ class ApprovalTab extends React.Component {
     return(
       <div className="plannings-list-container">
         <SalesOrderList 
-        {...this.props}
+          {...this.props}
         />
       </div>
     );

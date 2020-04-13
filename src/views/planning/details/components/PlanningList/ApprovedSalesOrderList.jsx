@@ -57,13 +57,6 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
     return isAvailable;
   }
 
-  // isChangeStat = (value,key) =>{
-  //   this.setState({
-  //     stats: 1,
-  //     lifetime: this.state.lifetime.map(el => (el.SoNumber === key ? {...el, LifeTimeComp : value} : el))
-  //   });
-  // }
-
   handleClicks = () =>{
     this.setState({
       checkedValue : !this.state.checkedValue
@@ -149,7 +142,7 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
           <PlanningListHeader
             name="SMR Date"
             delay={300}
-            onSearch={this.props.onSearchComp}
+            onSearch={this.isFilterDate}
           />
         </TableRow>
       </TableHead>
