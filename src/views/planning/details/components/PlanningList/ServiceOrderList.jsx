@@ -61,15 +61,17 @@ export default class ServiceOrderList extends React.PureComponent {
       return(
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
             <TableRow>
-              <TableCell padding="checkbox">
-                {this.props.displayServiceCheckbox  && 
-                <Checkbox 
-                checked={this.state.checkedValue}
-                onChange={this.handleClick}
-                onClick={() => {this.props.serviceOrderList.Lists.map((row,id) => 
-                this.props.onChoosedService(row,id))}}
-                className="checkbox-checked-header" />}
-              </TableCell>
+              {this.props.idService === "Data Input" ? "" :
+                <TableCell padding="checkbox">
+                  {this.props.displayServiceCheckbox  && 
+                  <Checkbox 
+                  checked={this.state.checkedValue}
+                  onChange={this.handleClick}
+                  onClick={() => {this.props.serviceOrderList.Lists.map((row,id) => 
+                  this.props.onChoosedService(row,id))}}
+                  className="checkbox-checked-header" />}
+                </TableCell>
+              }
               <PlanningListHeader
                 name="Work Order"
                 delay={300}
@@ -128,14 +130,17 @@ export default class ServiceOrderList extends React.PureComponent {
   showTableBody(row,index) {
     return(
       <TableRow key={index} classes={{ root: 'table-row' }}>
-        <TableCell padding="checkbox">
-          {this.props.displayServiceCheckbox && 
-          <Checkbox 
-            disabled={this.isCheckboxAvailable(row)} 
-            checked={this.props.selectedServicePlanList.some((plans) => plans.WoNumber === row.WoNumber)} 
-            onClick={() => this.props.onChoosedService(row)} 
-            classes={{ checked: 'checkbox-checked' }} />}
-        </TableCell>
+        {this.props.idService === "Data Input" ? "" :
+          <TableCell padding="checkbox">
+            {this.props.displayServiceCheckbox && 
+            <Checkbox 
+              disabled={this.isCheckboxAvailable(row)} 
+              checked={this.props.selectedServicePlanList.some((plans) => plans.WoNumber === row.WoNumber)} 
+              onClick={() => this.props.onChoosedService(row)} 
+              classes={{ checked: 'checkbox-checked' }} 
+            />}
+          </TableCell>
+        }
         <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
