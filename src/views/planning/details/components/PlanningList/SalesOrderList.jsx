@@ -149,11 +149,17 @@ export default class SalesOrderList extends React.PureComponent {
             delay={300}
             onSearch={this.props.onSearchComp}          
           />
-          <PlanningListHeader
-            name="Lifetime"
-            delay={300}
-            onFilter={this.isFilterLifetime}
-          />
+          {this.props.idSales === "Data Input" ? 
+            <PlanningListHeader
+              name="Lifetime Comp"
+              delay={300}
+            /> : 
+            <PlanningListHeader
+              name="Lifetime"
+              delay={300}
+              onFilter={this.isFilterLifetime}
+            />
+          }
           <PlanningListHeader
             name="Plan"
             delay={300}

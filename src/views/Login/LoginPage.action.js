@@ -11,7 +11,7 @@ export function requestLoginAction(username, password) {
 
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${process.env.REACT_APP_API_URL}/api/login`,
+		url: `${process.env.REACT_APP_API_URL}/cms/api/login`,
 		data: body,
 		headers: {
 			'Content-Type': 'application/json',

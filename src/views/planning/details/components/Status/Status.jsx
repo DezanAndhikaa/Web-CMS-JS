@@ -277,31 +277,6 @@ export default class Status extends React.PureComponent {
 					default:
 						break;
 				}
-			}else{
-				switch (this.state.whatPageIsChoosed) {
-					case 'Approve':
-						this.props.updateServiceApprovedParameter({
-							...prevProps.serviceApprovedParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
-						});
-					case 'Not Approve':
-						this.props.updateServiceParameter({
-							...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
-						});
-					case 'Delete':
-						if(prevProps.searchComp !== this.props.searchComp){
-							this.props.updateServiceDeletedParameter({
-								...prevProps.serviceDeletedParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
-							});
-						}
-					case 'SAP ISSUE':
-						if(prevProps.searchComp !== this.props.searchComp){
-							this.props.updateServiceSapParameter({
-								...prevProps.serviceSapParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
-							});
-						}
-					default:
-						break;
-				}
 			}
 		}
 		
@@ -317,6 +292,19 @@ export default class Status extends React.PureComponent {
 						return this.props.fetchDeletedSales(this.props.filterDate, this.props.token);
 					case 'SAP ISSUE':
 						return this.props.fetchSapSales(this.props.filterDate, this.props.token);
+					default:
+						break;
+				}
+			}else{
+				switch (this.state.whatPageIsChoosed) {
+					case 'Approve':
+						return this.props.fetchApprovedService(this.props.filterDate, this.props.token);
+					case 'Not Approve':
+						return this.props.fetchServiceOrder(this.props.filterDate,this.props.token);
+					case 'Delete':
+						return this.props.fetchDeletedService(this.props.filterDate, this.props.token);
+					case 'SAP ISSUE':
+						return this.props.fetchSapService(this.props.filterDate, this.props.token);
 					default:
 						break;
 				}
