@@ -60,22 +60,36 @@ componentDidUpdate = (prevProps) => {
 
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
-      if(this.props.indexFilterParameter.indexTabParameter === 0){
-        this.props.updateSalesParameter({
-          ...prevProps.salesParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
-        })
-      }else{
-        this.props.updateServiceParameter({
-          ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
-        })
-      }
+    if(this.props.indexFilterParameter.indexTabParameter === 0){
+      this.props.updateSalesParameter({
+        ...prevProps.salesParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
+      })
+    }else{
+      this.props.updateServiceParameter({
+        ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
+      })
+    }
   }
 
   //FILTER RANGE LIFETIME
-  if(prevProps.filterLifetime !== this.props.filterLifetime){
-    this.props.updateSalesParameter({
-      ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterLifetime.Filter, PageNumber: 1
-    })
+  if(this.state.whichTabs){
+    if(prevProps.filterLifetime !== this.props.filterLifetime){
+      if(this.props.filterLifetime === ""){
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter: this.props.filterLifetime.Filter = "", PageNumber: 1
+        })
+      }else{
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter: this.props.filterLifetime.Filter, PageNumber: 1,
+        })
+      }
+    }
+  }else{
+    if(prevProps.filterLifetime !== this.props.filterLifetime){
+      this.props.updateServiceParameter({
+        ...prevProps.serviceParameter.dataFilter, Filter: this.props.filterLifetime.Filter, PageNumber: 1,
+      })
+    }
   }
 
   //FILTER RANGE DATE
