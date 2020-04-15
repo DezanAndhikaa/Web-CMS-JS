@@ -121,8 +121,6 @@ export default class RevisedSalesOrderList extends React.PureComponent {
     this.setState({
       openModalrevised: !this.state.openModalrevised
     })
-    // this.onClickRevisedSales()    
-    // await this.props.onClickRevisedSales();
   }
   
   renderModalRevised(){

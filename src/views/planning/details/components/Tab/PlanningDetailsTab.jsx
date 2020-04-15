@@ -141,8 +141,8 @@ class PlanningDetailsTab extends React.Component {
     return(
       <div className="plannings-list-containers">
         <SalesOrderList 
-          idSales= "Data Input"
           {...this.props}
+          idSales= "Data Input"
         />
       </div>
     );

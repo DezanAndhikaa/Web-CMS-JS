@@ -54,7 +54,6 @@
     flex-direction: row;
     position: absolute;
     width: 100%;
-    // z-index: 1;
     flex: 1;
     padding-bottom: vw(20);
     border-bottom: 1.5px solid #E0E0E0;
@@ -62,6 +61,7 @@
         display: flex;
         width: vw(153.22);
         height: vw(38.07);
+        padding-left: 2.5%;
         font-size: vw(18);
         font-weight: bold;
         line-height: vw(16) !important;
@@ -72,7 +72,7 @@
         color: #707070;
         background-image: url('../../../../../assets/icons/back.png');
         background-size: auto;
-        background-position-x: 8%;
+        background-position-x: 17%;
         background-position-y: center;
         background-repeat: no-repeat;
         cursor: pointer;

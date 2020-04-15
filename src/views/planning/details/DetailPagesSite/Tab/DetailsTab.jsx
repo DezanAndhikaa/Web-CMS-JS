@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import {AppBar, Tabs, Tab, Typography} from '@material-ui/core';
-import SalesOrderList from '../../components/PlanningList/SalesOrderListSite';
-import ServiceOrderList from '../../components/PlanningList/ServiceOrderListSite';
+import SalesOrderList from '../../components/PlanningList/SalesOrderList';
+import ServiceOrderList from '../../components/PlanningList/ServiceOrderList';
 import RevisedSalesOrderList from '../../components/PlanningList/RevisedSalesOrderList';
 import './DetailsTab.scss';
 import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
@@ -127,6 +127,7 @@ class DetailsTab extends React.Component {
       <div className="plannings-list-detail">
         <SalesOrderList 
           {...this.props}
+          idSales= "Data Input"
         />
       </div>
       </>
@@ -159,6 +160,7 @@ class DetailsTab extends React.Component {
         <div className="plannings-list-detail">
           <ServiceOrderList 
           {...this.props}
+          idService="Data Input"
           isClick={this.props.isClick}
           />
         </div>

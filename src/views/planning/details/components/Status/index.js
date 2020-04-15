@@ -59,6 +59,7 @@ import {
 	UpdateServiceSapParameterAction,
 	searchCompAction,
 	SearchCompAction,SearchCompActionService,searchCompActionService,
+	selectFilterAction, dateFilterAction
 } from '../../DetailPages-action';
 import Status from './Status';
 
@@ -97,6 +98,8 @@ const mapStateToProps = (state) => ({
 	serviceSearch: state.plansPageState.serviceSearch,
 	selectedSalesPlans: state.plansPageState.selectedSalesPlans,
 	selectedServicePlans: state.plansPageState.selectedServicePlans,
+	filterLifetime: state.plansPageState.filterLifetime,
+	filterDate: state.plansPageState.filterDate,
 	fetchStatusSales: state.plansPageState.salesOrderList.status,
 	fetchStatusSalesApproved: state.plansPageState.salesOrderListApproved.status,
 	fetchStatusSalesDeleted: state.plansPageState.salesOrderListDeleted.status,
@@ -106,13 +109,7 @@ const mapStateToProps = (state) => ({
 	fetchStatusServiceDeleted: state.plansPageState.serviceOrderListDeleted.status,
 	fetchStatusServiceSap: state.plansPageState.serviceOrderListSap.status,
 	sortSalesBy: state.plansPageState.sortSalesBy,
-	sortSalesByApproved: state.plansPageState.sortSalesByApproved,
-	sortSalesByDeleted: state.plansPageState.sortSalesByDeleted,
-	sortSalesBySap: state.plansPageState.sortSalesBySap,
 	sortServiceBy: state.plansPageState.sortServiceBy,
-	sortServiceByApproved: state.plansPageState.sortServiceByApproved,
-	sortServiceByDeleted: state.plansPageState.sortServiceByDeleted,
-	sortServiceBySap: state.plansPageState.sortServiceBySap,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -138,6 +135,8 @@ const mapDispatchToProps = (dispatch) => ({
 	selectServicePlan: (payload) => dispatch(selectServicePlansAction(SelectServicePlanAction, payload)),
 	unselectServicePlan: (payload) => dispatch(selectServicePlansAction(UnselectServicePlanAction, payload)),
 	unselectSalesPlan: (payload) => dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
+	lifetimeFilter: (type, payload, payload2, page) => dispatch(selectFilterAction(type, payload, payload2, page)),
+	dateFilter: (type, payload, payload2, page) => dispatch(dateFilterAction(type, payload, payload2, page)),
 	updateSalesParameter: (payload) => dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
 	updateSalesApprovedParameter: (payload) => dispatch(salesParameterApprovedAction(UpdateSalesApprovedParameterAction, payload)),
 	updateSalesDeletedParameter: (payload) => dispatch(salesParameterDeletedAction(UpdateSalesDeletedParameterAction, payload)),

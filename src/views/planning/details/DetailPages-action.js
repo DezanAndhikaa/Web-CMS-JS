@@ -88,12 +88,11 @@ export const SelectComponentFilterAction ='SELECT_COMPONENT_FILTER';
 export const IndexFilterAction = 'INDEX FILTER';
 export const LifetimeFilterAction = 'SELECT_LIFETIME_FILTER';
 export const DateFilterAction = 'SELECT_DATE_FILTER';
-//  `${process.env.REACT_APP_API_URL}
 
 export function approveSalesAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.PUT,
-		url: `${process.env.REACT_APP_API_URL}/v1/salesorder/approval`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/approval`,
 		headers: {
 			'Accept': 'application/json; charset=utf-8',
 			Authorization: `Bearer ${accessToken}`,
@@ -108,7 +107,7 @@ export function approveSalesAction(payload, accessToken){
 export function approveServiceAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.PUT,
-		url: `${process.env.REACT_APP_API_URL}/v1/serviceorder/approval`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/approval`,
 		headers: {
 			'Accept': 'application/json; charset=utf-8',
 			Authorization: `Bearer ${accessToken}`,
@@ -123,7 +122,7 @@ export function approveServiceAction(payload, accessToken){
 export function unapproveSalesAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.PUT,
-		url: `${process.env.REACT_APP_API_URL}/v1/salesorder/revision`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/revision`,
 		headers: {
 			'Accept': 'application/json; charset=utf-8',
 			Authorization: `Bearer ${accessToken}`,
@@ -139,7 +138,7 @@ export function approveSalesDownloadAction(soId, accessToken){
 	const requestConfig = {
 		responseType: 'blob',
 		method: RequestMethod.POST,
-		url: `${process.env.REACT_APP_API_URL}/v1/salesorder/downloadsalesorder`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/downloadsalesorder`,
 		data: { SoNumber: soId },
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
@@ -153,7 +152,7 @@ export function approveServiceDownloadAction(woId, accessToken){
 	const requestConfig = {
 		responseType: 'blob',
 		method: RequestMethod.POST,
-		url: `${process.env.REACT_APP_API_URL}/v1/serviceorder/downloadserviceorder`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/downloadserviceorder`,
 		data: { WoNumber: woId },
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
@@ -167,7 +166,7 @@ export function approveServiceDownloadAction(woId, accessToken){
 export function putLifetimeCompAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.PUT,
-		url: `${process.env.REACT_APP_API_URL}/v1/salesorder/lifetimecomponent`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/lifetimecomponent`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8',
@@ -182,9 +181,9 @@ export function putLifetimeCompAction(payload, accessToken){
 export function putSAPIssueAction(payload, accessToken, whichTabs){
 	var URL = "";
 	if(whichTabs){
-		URL = `${process.env.REACT_APP_API_URL}/v1/salesorder/sapissue`
+		URL = `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/sapissue`
 	}else{
-		URL = `${process.env.REACT_APP_API_URL}/v1/serviceorder/sapissue`
+		URL = `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/sapissue`
 	}
 	const requestConfig = {
 		method: RequestMethod.PUT,
@@ -203,7 +202,7 @@ export function putSAPIssueAction(payload, accessToken, whichTabs){
 export function deleteSalesAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.DELETE,
-		url: `${process.env.REACT_APP_API_URL}/v1/salesorder/delete`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/delete`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
@@ -218,7 +217,7 @@ export function deleteSalesAction(payload, accessToken){
 export function deletePermanentSalesAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.DELETE,
-		url: `${process.env.REACT_APP_API_URL}/v1/salesorder/deletepermanent`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/deletepermanent`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8',
@@ -233,7 +232,7 @@ export function deletePermanentSalesAction(payload, accessToken){
 export function deleteServiceAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.DELETE,
-		url: `${process.env.REACT_APP_API_URL}/v1/serviceorder/delete`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/delete`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
@@ -248,7 +247,7 @@ export function deleteServiceAction(payload, accessToken){
 export function deletePermanentServiceAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.DELETE,
-		url: `${process.env.REACT_APP_API_URL}/v1/serviceorder/deletepermanent`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/deletepermanent`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8',
@@ -264,7 +263,7 @@ export function fetchSearchSalesAction(payload, accessToken) {
 	const filter = payload;
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${process.env.REACT_APP_API_URL}/v1/salesorder/filterunapproved`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/filterunapproved`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8',
@@ -280,7 +279,7 @@ export function fetchSearchServiceAction(payload, accessToken) {
 	const filter = payload;
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${process.env.REACT_APP_API_URL}/v1/serviceorder/filterunapproved`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/filterunapproved`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8',
@@ -296,7 +295,7 @@ export function fetchSalesAction(payload, accessToken) {
 	const filter = payload;
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${process.env.REACT_APP_API_URL}/v1/salesorder/filterunapproved`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/filterunapproved`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8',
@@ -312,7 +311,7 @@ export function fetchServiceAction(payload, accessToken) {
 	const filter = payload;
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${process.env.REACT_APP_API_URL}/v1/serviceorder/filterunapproved`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/filterunapproved`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
@@ -327,7 +326,7 @@ export function fetchServiceAction(payload, accessToken) {
 export function fetchApprovedSalesAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${process.env.REACT_APP_API_URL}/v1/salesorder/filterapproved`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/filterapproved`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
@@ -342,7 +341,7 @@ export function fetchApprovedSalesAction(payload, accessToken){
 export function fetchApprovedServiceAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${process.env.REACT_APP_API_URL}/v1/serviceorder/filterapproved`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/filterapproved`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
@@ -357,7 +356,7 @@ export function fetchApprovedServiceAction(payload, accessToken){
 export function fetchDeletedSalesAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${process.env.REACT_APP_API_URL}/v1/salesorder/filterdeleted`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/filterdeleted`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
@@ -372,7 +371,7 @@ export function fetchDeletedSalesAction(payload, accessToken){
 export function fetchDeletedServiceAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${process.env.REACT_APP_API_URL}/v1/serviceorder/filterdeleted`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/filterdeleted`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
@@ -387,7 +386,7 @@ export function fetchDeletedServiceAction(payload, accessToken){
 export function fetchRevisedSalesAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${process.env.REACT_APP_API_URL}/v1/salesorder/filterunapproved`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/filterunapproved`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
@@ -402,7 +401,7 @@ export function fetchRevisedSalesAction(payload, accessToken){
 export function fetchSapSalesAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${process.env.REACT_APP_API_URL}/v1/salesorder/filterunapproved`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/filterunapproved`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
@@ -417,7 +416,7 @@ export function fetchSapSalesAction(payload, accessToken){
 export function fetchSapServiceAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${process.env.REACT_APP_API_URL}/v1/serviceorder/filterunapproved`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/filterunapproved`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
@@ -432,7 +431,7 @@ export function fetchSapServiceAction(payload, accessToken){
 export function getServiceOrderAction(payload) {
 	const requestConfig = {
 		method: RequestMethod.POST,
-		url: `${process.env.REACT_APP_API_URL}/v1/serviceorder/filterunapproved`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/filterunapproved`,
 		headers: {
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
