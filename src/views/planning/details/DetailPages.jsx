@@ -1,8 +1,6 @@
 import React from 'react';
-// import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import './DetailPages.scss';
 import PlanningDetailsTab from './components/Tab/PlanningDetailsTab';
-import { ApiRequestActionsStatus } from "../../../core/RestClientHelpers";
 import DropDownList from '../../../components/DropdownList/DropDownList';
 import SearchInput from "../../../components/Searchbar/SearchInput";
 import FilterbyDataAction from '../../../components/FilterByDataAction/FilterbyDataAction';
@@ -103,7 +101,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'CustomerName',
             Direction : 'desc'
@@ -114,7 +111,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'CustomerName',
             Direction : 'asc'
@@ -127,7 +123,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'SiteCode',
             Direction : 'desc'
@@ -138,7 +133,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'SiteCode',
             Direction : 'asc'
@@ -151,7 +145,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'UnitModel',
             Direction : 'desc'
@@ -162,7 +155,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'UnitModel',
             Direction : 'asc'
@@ -175,7 +167,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'ComponentDescription',
             Direction : 'desc'
@@ -186,7 +177,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'ComponentDescription',
             Direction : 'asc'

@@ -155,25 +155,25 @@ export default class UnapproveConfirmation extends React.PureComponent {
   _renderSapFailed(){
     return(
       <>
-      <ConfirmationModal 
-        {...this.props}
-        handleReload={this.isReload} 
-        isModal={this.state.isShowModalSapFailed} 
-        idModal="SAP-Failed"
-        idFailed="CloseBtn" 
-        isModalClosed={this.isClosedFailed}
-        backToSAP={this.isClickedCloseBtn}
-        backToConfirmModal={this.isClickedBackBtn}
-      />
-      <ConfirmationModal 
-        {...this.props}
-        handleReload={this.isReload} 
-        isModal={this.state.isShowModalSapFailed} 
-        idModal="SAP-Failed"
-        isModalClosed={this.isClosedFailed}
-        backToSAP={this.isClickedCloseBtn}
-        backToConfirmModal={this.isClickedBackBtn}
-      />
+        <ConfirmationModal 
+          {...this.props}
+          handleReload={this.isReload} 
+          isModal={this.state.isShowModalSapFailed} 
+          idModal="SAP-Failed"
+          idFailed="CloseBtn" 
+          isModalClosed={this.isClosedFailed}
+          backToSAP={this.isClickedCloseBtn}
+          backToConfirmModal={this.isClickedBackBtn}
+        />
+        <ConfirmationModal 
+          {...this.props}
+          handleReload={this.isReload} 
+          isModal={this.state.isShowModalSapFailed} 
+          idModal="SAP-Failed"
+          isModalClosed={this.isClosedFailed}
+          backToSAP={this.isClickedCloseBtn}
+          backToConfirmModal={this.isClickedBackBtn}
+        />
       </>
     )
   }

@@ -2,8 +2,6 @@ import React from 'react';
 import { ExpandMore } from '@material-ui/icons';
 import './DropDown.scss';
 
-
-
 class DropDown extends React.Component {
     constructor(props) {
       super(props);
@@ -26,11 +24,6 @@ class DropDown extends React.Component {
         document.removeEventListener('click', this.hideDropdownMenu);
       });
     }
-  
-    // selectItem = (item,Tab,head) => {
-    //   this.props.onSelectAction(this.props.onSelectActionType, item, head, this.props.salesParameter.dataFilter.PageSize);
-    //   this.props.indexFilter("INDEX FILTER",Tab);
-    // }
   
     handleJobType = (item) => {
       let newItem = item

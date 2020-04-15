@@ -4,11 +4,6 @@ import { Modal } from '@material-ui/core'
 import './EditButton.scss';
 import ApproveConfirmation from '../../ApproveConfirmation/ApproveConfirmation';
 
-// const validationSchema = Yup.object().shape({
-//     limitText: Yup.number()
-//     .typeError('Harus Angka')
-// })
-
 class EditButton extends React.PureComponent {
 
     constructor(props){
@@ -65,7 +60,6 @@ class EditButton extends React.PureComponent {
                 onCloseRev={this.isOpenModal}
                 onClose={this.isClosedModal}            
                 dataLf={this.props.lifetime}
-                // dataRev={this.props.revLifetime}
                 dataRev={this.state.putLf}
             />
         )
@@ -103,7 +97,6 @@ class EditButton extends React.PureComponent {
                                     onClosed={this.isCloseds}
                                     openConfirmModal={this.isOpenModal}
                                     dataRevLt={this.getRevLf}
-
                                 />
                             </div>
                         </Modal>

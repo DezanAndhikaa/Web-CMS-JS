@@ -1,6 +1,4 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-
-import { RequestMethod, ApiUrlBase } from '../../../constants';
+import { RequestMethod } from '../../../constants';
 import { callApi } from '../../../core/RestClientHelpers';
 
 export const ApproveSalesAction = 'APPROVE_SALES';
@@ -24,7 +22,6 @@ export const DeleteSalesAction = 'DELETE_SALES';
 export const DeletePermanentSalesAction = 'DELETE_PERMANENT_SALES';
 export const DeleteServiceAction = 'DELETE_SERVICE';
 export const DeletePermanentServiceAction = 'DELETE_PERMANENT_SERVICE';
-// export const FetchSearchValueAction = 'FETCH_SEARCH_VALUE';
 export const GetMechanicsAction = 'GET_MECHANICS';
 export const GetServiceOrderAction = 'GET_SERVICE_ORDER';
 export const GetSalesOrderAction = 'GET_SALES_ORDER';

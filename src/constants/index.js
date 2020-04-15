@@ -48,10 +48,6 @@ export const StorageKey = {
 	PLAN_DATA: 'PLAN_DATA_STORAGE_KEY',
 };
   
-export const ApiUrlBase = {
-	REACT_API_URL: process.env.REACT_APP_API_URL,
-};
-  
 export const BasePathDev = '.';
 export const BasePathProv = '../..';
 export const BasePathSec = '..';

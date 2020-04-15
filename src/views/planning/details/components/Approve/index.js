@@ -6,9 +6,9 @@ import {
 	approveSalesDownloadAction,
 	putLifetimeCompAction,
 	putSAPIssueAction,
-	approveSalesAction, //APPROVE SALES
+	approveSalesAction,
 	unapproveSalesAction, 
-	approveServiceAction, //APPROVE SERVICE
+	approveServiceAction,
 	deleteSalesAction,
 	deleteServiceAction,
 	fetchApprovedSalesAction,

@@ -22,7 +22,6 @@
     .top-row{
         display: flex;
         justify-content: space-between;
-        // flex-direction: column;
         height: vw(30);
     }
     .teks-middle{
@@ -32,19 +31,15 @@
         .teks-left{
             display: flex;
             font-size: 12px;
-            // width:50%;
         }
         .teks-right{
-            // margin-left: 48.5%;
             font-size: 12px;
             display: flex;
-            // justify-content: center;
         }
     }
     .boxa{
         margin-top: vw(1.5);
         margin-bottom: vw(10);
-        // margin-left: vw(10);
         width: vw(8);
         height: vw(20);
         background-color: map-get($colors, primary);
@@ -85,16 +80,13 @@
     }
 
     .bottom-rows{
-        // flex: 1;
         display: flex;
-        // flex-direction: row;
         margin-top: vw(20);
         .btn-search{
             display: flex;
             align-items: center;
             justify-content: center;
             margin-left: 60%;
-            // width: vw(170.22) !important;
             width: 35%;
             height: vw(33.07) !important;
             font-size: vw(13) !important;

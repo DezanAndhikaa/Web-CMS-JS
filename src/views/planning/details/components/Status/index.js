@@ -85,7 +85,7 @@ const mapStateToProps = (state) => ({
 	serviceApprovedParameter : state.plansPageState.serviceApprovedParameter,
 	serviceDeletedParameter : state.plansPageState.serviceDeletedParameter,
 	serviceSapParameter: state.plansPageState.serviceSapParameter,
-	searchSalesParameter: state.plansPageState.searchSalesParameter, //search
+	searchSalesParameter: state.plansPageState.searchSalesParameter,
 	searchSalesApprovedParam: state.plansPageState.searchSalesApprovedParam,
 	searchSalesDeletedParam: state.plansPageState.searchSalesDeletedParam,
 	searchSalesSapParam: state.plansPageState.searchSalesSapParam,
@@ -147,11 +147,11 @@ const mapDispatchToProps = (dispatch) => ({
 	updateServiceSapParameter: (payload) => dispatch(serviceParameterSapAction(UpdateServiceSapParameterAction, payload)),
 	deletePermanentSales: (payload, token) => dispatch(deletePermanentSalesAction(payload, token)),
 	deletePermanentService: (payload, token) => dispatch(deletePermanentServiceAction(payload, token)),
-	updateSearchSales: (payload) => dispatch(searchSalesParameterAction(UpdateSearchSalesAction, payload)),	//updatesearch sales
+	updateSearchSales: (payload) => dispatch(searchSalesParameterAction(UpdateSearchSalesAction, payload)),
 	updateSearchSalesApproved: (payload) => dispatch(searchSalesApprovedAction(UpdateSearchSalesApprovedAction, payload)),
 	updateSearchSalesDeleted: (payload) => dispatch(searchSalesDeletedAction(UpdateSearchSalesDeletedAction, payload)),	
 	updateSearchSalesSap: (payload) => dispatch(searchSalesSapAction(UpdateSearchSalesSapAction, payload)),  
-	updateSearchService: (payload) => dispatch(searchServiceParameterAction(UpdateSearchServiceAction, payload)),//service
+	updateSearchService: (payload) => dispatch(searchServiceParameterAction(UpdateSearchServiceAction, payload)),
 	updateSearchServiceApproved: (payload) => dispatch(searchServiceApprovedAction(UpdateSearchServiceApprovedAction, payload)),
 	updateSearchServiceDeleted: (payload) => dispatch(searchServiceDeletedAction(UpdateSearchServiceDeletedAction, payload)),
 	updateSearchServiceSap: (payload) => dispatch(searchServiceSapAction(UpdateSearchServiceSapAction, payload)),

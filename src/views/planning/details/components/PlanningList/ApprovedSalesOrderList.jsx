@@ -210,59 +210,22 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
       )
       default:
     }
-    // if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
-    //   return(
-    //     <div className="loading-container">
-    //       <img 
-    //         src={Spinner}
-    //         alt="loading-spinner"
-    //         className="loading-icon"
-    //         />
-    //     </div>
-    //   )
-    // }else if(this.props.fetchStatusPutLifetime === ApiRequestActionsStatus.LOADING){
-    //   return(
-    //         <div>
-    //         <Snackbar
-    //           anchorOrigin={{ vertical: 'center',horizontal: 'right'}}
-    //           bodyStyle={{ backgroundColor: 'teal', color: 'coral' }}
-    //           open={this.state.stats}
-    //           onClose={this.handleClose}
-    //           autoHideDuration={3000}
-    //           message="Please Wait. Page will reload automatically"
-    //         />
-    //       </div>
-    //       )
-    // }
-    // else if(this.props.fetchStatusSales === ApiRequestActionsStatus.FAILED){
-    //   return(
-    //     <div className="loading-container">
-    //       OOPS THERE WAS AN ERROR :'(
-    //     </div>
-    //   )
-    // }else if(this.props.salesOrderListApproved.Lists.length === 0){
-    //   return(
-    //     <div className="loading-container">
-    //       DATA NOT FOUND
-    //     </div>
-    //   )
-    // }
   }
 
-render(){
-        return(
-          <>
-            <Table classes={{ root: 'table' }} className="table">
-            {this.showTableHead()}
-            <TableBody classes={{ root: 'table-body' }}>
-              {this.props.salesOrderListApproved.Lists
-                && this.props.salesOrderListApproved.Lists.map((row, id) => (
-                  this.showTableBody(row,id)
-                ))}
-              </TableBody>
-            </Table>
-            {this.showLoading()}
-          </>
-        )
-      }
+  render(){
+    return(
+      <>
+        <Table classes={{ root: 'table' }} className="table">
+          {this.showTableHead()}
+          <TableBody classes={{ root: 'table-body' }}>
+            {this.props.salesOrderListApproved.Lists
+              && this.props.salesOrderListApproved.Lists.map((row, id) => (
+                this.showTableBody(row,id)
+            ))}
+          </TableBody>
+        </Table>
+        {this.showLoading()}
+      </>
+    )
   }
+}

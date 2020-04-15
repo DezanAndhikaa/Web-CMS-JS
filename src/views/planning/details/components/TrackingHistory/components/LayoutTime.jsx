@@ -38,12 +38,9 @@ const styles = theme =>({
 });
 
 class LayoutTime extends React.Component {
-// 
-// export default function LayoutTime() {
-	render(){
-		const { classes } = this.props; //const { classes, theme } = this.props;
-		// const bull = <span className={classes.bullet}>•</span>;
 
+	render(){
+		const { classes } = this.props;
 		return (
 			<Card className={classes.root} variant="outlined">
 				<CardContent>

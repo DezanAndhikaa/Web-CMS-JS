@@ -36,7 +36,6 @@ export default class SalesOrderList extends React.PureComponent {
   }
   componentDidMount = async() =>{    
     await this.props.clearSelectedSalesPlans();
-    // this.props.onClickSalesOrder();
   }
 
   componentWillMount = () =>{
@@ -101,10 +100,8 @@ export default class SalesOrderList extends React.PureComponent {
           }
           <PlanningListHeader
             name="SO"
-            // isActive={this.props.sortJobsByState.unitModel.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-            // isAscending={this.props.sortJobsByState.unitModel.isAscending}
           />
           <PlanningListHeader
             name="Customer"
@@ -187,13 +184,13 @@ export default class SalesOrderList extends React.PureComponent {
         { this.props.idSales === "Data Input" ? "" :
           <TableCell padding="checkbox">
             {this.props.displaySalesCheckbox && 
-            <Checkbox 
-            // checked={true}
-            disabled={this.isCheckboxAvailable(row)} 
-            checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
-            onClick={() => this.props.onChoosedSales(row)} 
-            classes={{ checked: 'checkbox-checked' }} 
-            />}
+              <Checkbox 
+                disabled={this.isCheckboxAvailable(row)} 
+                checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
+                onClick={() => this.props.onChoosedSales(row)} 
+                classes={{ checked: 'checkbox-checked' }} 
+             />
+            }
           </TableCell>
         }
         <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>

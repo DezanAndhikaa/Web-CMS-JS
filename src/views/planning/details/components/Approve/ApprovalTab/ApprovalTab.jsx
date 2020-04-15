@@ -41,7 +41,6 @@ const styles = theme => ({
     textTransform: 'initial',
     alignItem: 'center',
     marginLeft:0,
-    // minWidth: 72,
     fontWeight: theme.typography.fontWeightRegular,
     marginRight: theme.spacing.unit * 0,
     fontFamily: [
@@ -77,8 +76,6 @@ const styles = theme => ({
 class ApprovalTab extends React.Component {
   state = {
     value: 0,
-    // invisible1: false,
-    // invisible2: true,
     Customers: [],
     Sites: [],
     UnitModels: [],
@@ -300,37 +297,37 @@ class ApprovalTab extends React.Component {
     const { classes, theme } = this.props;
     const { value } = this.state;
     return (
-        <div className="root">
-          <div className="tab-container-approval">
-            {this.props.renderNotif}
-            {this.props.renderFilterByDataAction}
-          </div>
-        <AppBar position="static" color="default" style={{boxShadow: "none"}}>
-          <Tabs
-            classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
-            value={this.state.value}
-            onChange={this.handleChange}
-            indicatorColor="primary" >
-            <Tab 
-              centered={true}
-              onClick={() => this.props.clearSelectedSalesPlans()} 
-              classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-              label= {this.renderTotalSales()} 
-            />
-            <Tab 
-              centered={true}
-              onClick={() => this.props.clearSelectedServicePlans()} 
-              classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-              label= {this.renderTotalService()}
-            />
-          </Tabs>
-        </AppBar>
-        <div className="base-button-container">
-          {this._renderBaseBtn()}
-        </div>
-        <div className="filters-container-approval">
-          {this._renderFilter()}
-        </div>
+    <div className="root">
+      <div className="tab-container-approval">
+        {this.props.renderNotif}
+        {this.props.renderFilterByDataAction}
+      </div>
+    <AppBar position="static" color="default" style={{boxShadow: "none"}}>
+      <Tabs
+        classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
+        value={this.state.value}
+        onChange={this.handleChange}
+        indicatorColor="primary" >
+        <Tab 
+          centered={true}
+          onClick={() => this.props.clearSelectedSalesPlans()} 
+          classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+          label= {this.renderTotalSales()} 
+        />
+        <Tab 
+          centered={true}
+          onClick={() => this.props.clearSelectedServicePlans()} 
+          classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+          label= {this.renderTotalService()}
+        />
+      </Tabs>
+    </AppBar>
+    <div className="base-button-container">
+      {this._renderBaseBtn()}
+    </div>
+    <div className="filters-container-approval">
+      {this._renderFilter()}
+    </div>
     {value === 0 && <TabContainer dir={theme.direction} >
     <>{this._renderSalesOrderList()}</> 
     </TabContainer>}

@@ -4,10 +4,9 @@ import { PlansReducers } from './DetailPages-reducer';
 import {
 	approveServiceDownloadAction, approveSalesDownloadAction,
 	putLifetimeCompAction,
-	// putSAPIssueAction,
-	approveSalesAction, //APPROVE SALES
+	approveSalesAction,
 	unapproveSalesAction, 
-	approveServiceAction, //APPROVE SERVICE
+	approveServiceAction,
 	deleteSalesAction,
 	deleteServiceAction,
 	fetchApprovedSalesAction,
@@ -49,12 +48,7 @@ const mapStateToProps = (state) => ({
 	salesSearch: state.plansPageState.salesSearch,
 	searchSalesParameter: state.plansPageState.searchSalesParameter,
 	searchComp: state.plansPageState.searchComp,
-	// requestPlans: state.plansPageState.PlansAssignmentSummary.status,
-	// requestMechanics: state.plansPageState.mechanicList.status,
-	// requestUnapproveSales: state.plansPageState.unassignPlansStatus.status,
-	// unapproveSalesResponse: state.plansPageState.unassignPlansStatus.response,
 	selectedFilters: state.plansPageState.selectedFilters,
-	// selectedPlans: state.plansPageState.selectedPlans,
 	selectedSalesPlans: state.plansPageState.selectedSalesPlans,
 	selectedServicePlans: state.plansPageState.selectedServicePlans,
 	selectedLeader: state.plansPageState.selectedLeader,

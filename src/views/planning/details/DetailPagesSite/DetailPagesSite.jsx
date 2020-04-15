@@ -1,8 +1,6 @@
 import React from 'react';
-// import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import './DetailPagesSite.scss';
 import DetailsTab from './Tab/DetailsTab';
-// import { ApiRequestActionsStatus } from "../../../../core/RestClientHelpers";
 import DropDownList from '../../../../components/DropdownList/DropDownList';
 import SearchInput from "../../../../components/Searchbar/SearchInput";
 import FilterbyDataAction from '../../../../components/FilterByDataAction/FilterbyDataAction';
@@ -70,24 +68,24 @@ componentDidUpdate = (prevProps) => {
     })
   }
 
-    //FILTER RANGE DATE
-    if(prevProps.filterDate !== this.props.filterDate){
-      this.props.fetchSalesOrder(this.props.filterDate);
-    }
+  //FILTER RANGE DATE
+  if(prevProps.filterDate !== this.props.filterDate){
+    this.props.fetchSalesOrder(this.props.filterDate);
+  }
 
-    //ini untuk trigger sales global search
-    if (prevProps.salesSearch !== this.props.salesSearch) {
-      this.props.updateSearchSales({
-        ...prevProps.searchSalesParameter, Category: 'Lifetime', Keyword: this.props.salesSearch,
-      });
-    }
-    
-    //ini untuk trigger service global search
-    if(prevProps.serviceSearch !== this.props.serviceSearch){
-      this.props.updateSearchService({
-        ...prevProps.searchServiceParameter, Category: 'Approval', Keyword: this.props.serviceSearch,
-      });
-    }
+  //ini untuk trigger sales global search
+  if (prevProps.salesSearch !== this.props.salesSearch) {
+    this.props.updateSearchSales({
+      ...prevProps.searchSalesParameter, Category: 'Lifetime', Keyword: this.props.salesSearch,
+    });
+  }
+  
+  //ini untuk trigger service global search
+  if(prevProps.serviceSearch !== this.props.serviceSearch){
+    this.props.updateSearchService({
+      ...prevProps.searchServiceParameter, Category: 'Approval', Keyword: this.props.serviceSearch,
+    });
+  }
 
   //search per component
   if(this.state.whichTabs){
@@ -119,7 +117,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'CustomerName',
             Direction : 'desc'
@@ -130,7 +127,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'CustomerName',
             Direction : 'asc'
@@ -143,7 +139,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'SiteCode',
             Direction : 'desc'
@@ -154,7 +149,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'SiteCode',
             Direction : 'asc'
@@ -167,7 +161,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'UnitModel',
             Direction : 'desc'
@@ -178,7 +171,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'UnitModel',
             Direction : 'asc'
@@ -191,7 +183,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'ComponentDescription',
             Direction : 'desc'
@@ -202,7 +193,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'ComponentDescription',
             Direction : 'asc'
@@ -220,7 +210,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'CustomerName',
             Direction : 'desc'
@@ -231,7 +220,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'CustomerName',
             Direction : 'asc'
@@ -244,7 +232,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'SiteCode',
             Direction : 'desc'
@@ -255,7 +242,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'SiteCode',
             Direction : 'asc'
@@ -268,7 +254,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'UnitModel',
             Direction : 'desc'
@@ -279,7 +264,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'UnitModel',
             Direction : 'asc'
@@ -292,7 +276,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'ComponentDescription',
             Direction : 'desc'
@@ -303,7 +286,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'ComponentDescription',
             Direction : 'asc'

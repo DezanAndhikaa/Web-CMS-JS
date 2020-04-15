@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import Cards from './components/Card';
 import SearchInput from '../../../../../components/Searchbar/SearchInput';
@@ -1066,7 +1065,6 @@ export default class Status extends React.PureComponent {
 		await this.props.fetchSapSales(this.props.searchSalesSapParam, this.props.token);
 	}
 
-	//FetchService
 	fetchSearchService = async() => {
 		await this.props.fetchServiceOrder(this.props.searchServiceParameter, this.props.token);
 	} 
@@ -1085,7 +1083,6 @@ export default class Status extends React.PureComponent {
 		document.body.appendChild(link);
 		link.style = "display: none";
 		const todayDate = moment(new Date()).format('DD-MM-YYYY');
-		// const salesOrder  = this.state.selectedData.So;
 		let fileName = "Sales-Order-Planning-"+todayDate+".csv";
 		let blob = new Blob([this.props.approveSalesDownloaded.data]),
 		  url = window.URL.createObjectURL(blob);

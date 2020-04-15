@@ -1,6 +1,6 @@
 import React from 'react';
 import './FilterByPeriodeDate.scss';
-import CloseButton from '../../components/CloseButton/CloseButton';
+import CloseButton from '../../components/ActionButton/CloseButton/CloseButton';
 import { Button } from '@material-ui/core';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -17,7 +17,6 @@ class FilterByPeriodeDate extends React.Component{
     };
 
     handleChangeStart = date => {
-        // const valueOfInput = moment(date).format('YYYY.MM.DD');
         this.setState({
             startDate: date,
             startFilter: moment(date).format('YYYY-MM-DD')

@@ -33,7 +33,6 @@ const StyledBadge = withStyles(theme => ({
 const Badges = withStyles(theme => ({
   badge: {
     right: -32,
-    // top: 10,
     padding: '10px',
     borderRadius: '5px',
     fontSize: '15px'
@@ -62,7 +61,6 @@ const styles = theme => ({
     textTransform: 'initial',
     alignItem: 'center',
     marginLeft:0,
-    // minWidth: 72,
     fontWeight: theme.typography.fontWeightRegular,
     marginRight: theme.spacing.unit * 0,
     fontFamily: [

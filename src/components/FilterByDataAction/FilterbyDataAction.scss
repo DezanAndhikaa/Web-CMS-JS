@@ -2,20 +2,10 @@
 @import '../../themes/functions';
 
 .dropdown {
-    // position: absolute;
     display: flex;
-    // background-color: #ffffff;
-    // width: vw(233.22);
-    // height: vw(45.07);
-    // cursor: pointer;
-    // margin-left: 19.2vw;
-    // border-radius:vw(15) !important;
-    // box-shadow: 0px 0.2vw 0.6vw rgba(0, 0, 0, 0.161);
     .dropdown-button {
         border-radius: vw(10);
         display: flex;
-        // align-items: center;
-        // padding-left: 10%;
         height: vw(45.07);
         .dropdown-selected-item{            
             margin: 0 0 0 vw(19);
@@ -27,7 +17,6 @@
             font-size: vw(16);
             line-height: vw(17);
             font-weight: 500;
-            // overflow: hidden;
             color: black;
             cursor: pointer;
             .expand-icon-container{
@@ -52,22 +41,21 @@
                 display: flex;
                 flex-direction: row;
                 align-self: flex-end;
-                // cursor: pointer;
                 background-color: transparent;
                 align-items: center;
                 .icon-history{
-                    margin-right: 10px; //vw(10)
+                    margin-right: 10px;
                 }
                 .label-history{
                     font-family: 'Lato-Regular';
-                    font-size: 14px; //vw(20)
-                    line-height: 18px; // vw(24)
+                    font-size: 14px;
+                    line-height: 18px;
                     color: #3C3B3B;
                     text-transform: capitalize;
                 }.label-status{
                     font-family: 'Lato-Regular';
-                    font-size: 14px; //vw(20)
-                    line-height: 18px; // vw(24)
+                    font-size: 14px;
+                    line-height: 18px;
                     color: #3C3B3B;
                     text-transform: capitalize;
                     margin-right: 10px;
@@ -83,20 +71,15 @@
                 display: flex;
                 flex-direction: row;
                 align-self: flex-end;
-                // cursor: pointer;
                 background-color: transparent;
                 align-items: center;
                 .icon-lt{
-                    // height: 18px; //vw(25) !important
-                    margin-right: 10px; //vw(10)
+                    margin-right: 10px;
                 }
-                // .icon-history:hover{
-                //     background-image: url('../../assets/icons/clock.png');
-                // }
                 .label-lt{
                     font-family: 'Lato-Regular';
-                    font-size: 14px; //vw(20)
-                    line-height: 18px; // vw(24)
+                    font-size: 14px;
+                    line-height: 18px;
                     color: #3C3B3B;
                     text-transform: capitalize;
                     margin-right: 20px;
@@ -122,9 +105,6 @@
     z-index: 1;
     justify-content: center;
     text-align: center;
-    // align-items: center;
-    // align-content: center;
-    // align-self: center;
     .list-item-fbdt {
         padding: vw(6);
         color: #3C3B3B;
@@ -132,67 +112,17 @@
         font-size: vw(20);
         line-height: vw(17);
     }
-    // .list-item-fbdt:hover {
-    //     background-color: #e5e5e5;
-    //     color: #3C3B3B;
-    // }
 }
 
 .list-items-fbdt::before {
     content:"";
     position: absolute;
-    // right: 40%;
     top: -10px;
-    // width: 0;
-    // height: 0;
     border-style: solid;
     border-width: 0 15px 15px 15px;
     border-color: transparent transparent white transparent;
     z-index:0;
 }
-
-// .list-items {
-//     margin: 0;
-//     right: 0px;
-//     width: vw(233.22);
-//     height: vw(150);
-//     border-radius:vw(10) !important;
-//     background-color: white;
-//     position: absolute;
-//     z-index: 100;
-//     box-shadow: 0px 0.3vw 0.6vw 0px rgba(0,0,0,0.2);
-//     color: rgb(0, 0, 0);
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     flex-wrap: wrap;
-//     margin-top: 150px;
-//     .button{
-//         width: vw(173.22);
-//         height: vw(45.07);
-//         border-radius: vw(10) !important;
-//         font-size: 10px;
-//         text-align: center;
-//         text-transform: capitalize;
-//         margin-top: 0.5vw;
-//         padding: inherit;
-//     }
-//     .button-plan-del{
-//         width: vw(173.22);
-//         height: vw(45.07);
-//         border-radius: vw(10) !important;
-//         font-size: 10px;
-//         text-align: center;
-//         text-transform: capitalize;
-//         margin-bottom: 0.5vw;
-//         padding: inherit;
-//     }
-//     .button:focus{
-//         color: map-get($colors, primary);
-//         border-style: solid;
-//         border-color: map-get($colors, primary);
-//     }
-// }
 
 @media (min-width: 600px) and (max-width: 1025px) {
     .dropdown {

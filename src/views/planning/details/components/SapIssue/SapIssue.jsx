@@ -1,14 +1,8 @@
-import React from 'react'
-import { Button, Modal, TextField,Table, TableHead, TableRow, TableBody, TableCell, Paper } from '@material-ui/core'
-import './SapIssue.scss'
-// import * as Yup from 'yup';
-import CloseButton from '../../../../../components/CloseButton/CloseButton';
+import React from 'react';
+import { Button, Modal, TextField,Table, TableHead, TableRow, TableBody, TableCell, Paper } from '@material-ui/core';
+import './SapIssue.scss';
+import CloseButton from '../../../../../components/ActionButton/CloseButton/CloseButton';
 import moment from 'moment';
-
-// const validationSchema = Yup.object().shape({
-//     limitText: Yup.number()
-//     .typeError('Harus Angka')
-// })
 
 export default class SapIssue extends React.Component{
 
@@ -25,8 +19,8 @@ export default class SapIssue extends React.Component{
     }
 
     _showTableHead() {
-        return (
-          <TableHead className="table-head-issue" >
+      return (
+        <TableHead className="table-head-issue" >
           <TableRow className="table-row-issue">
             {this.props.whichTabs ? 
               <TableCell>SO</TableCell> : 
@@ -82,65 +76,64 @@ export default class SapIssue extends React.Component{
             <TableCell colSpan="11">{this._showDescription(id)}</TableCell>
           </TableRow>
           </>
-         
         )
     }
 
     _showDescription(id){
       return(
         <div className="teks">
-              <TextField 
-                  className="teks"
-                  type='text' 
-                  placeholder="Tuliskan Masalahnya yaa.."
-                  variant="outlined" 
-                  size="small"
-                  value={this.state.description[id]} 
-                  name={this.state.description[id]} 
-                  onChange={this.handleChange.bind(this, id)} 
-              />
+          <TextField 
+            className="teks"
+            type='text' 
+            placeholder="Tuliskan Masalahnya yaa.."
+            variant="outlined" 
+            size="small"
+            value={this.state.description[id]} 
+            name={this.state.description[id]} 
+            onChange={this.handleChange.bind(this, id)} 
+          />
         </div>
       )
     }
 
     _renderIssue(){
-        return(
-            <div className="assign-mechanic-modal-issue">
-                <div className="container-issue">
-                    <div className="top-row-issue">
-                        <div className="top-button-issue"><Button className="back_button" variant="outlined" onClick={this.props.isBack}>Back</Button></div>
-                        <div className="ut-underline-issue"/>
-                        <p className="select-input-title-issue">SAP Issue</p>
-                        <CloseButton onClose={this.props.isClose}/>
-                    </div>
-                        <div className="top-middle-issue"> 
-                        <Table size="small" component={Paper}>
-                            {this._showTableHead()}
-                            <TableBody>
-                            {this.props.selectedDataSAP
-                                && this.props.selectedDataSAP.map((row, id) => (this._showTableBody(row,id)) )
-                            }
-                            </TableBody>
-                        </Table>
-                        </div>
-                    <div className="bottom-row-issue">
-                        <p className="btn-cancel-issue">* Please check again before pressing the send button</p>
-                        <Button className="btn-input-issue" onClick={ async () => {this.props.onKelik(this.state.description);this.props.isTry()} } >Send</Button>
-                    </div>
-                </div>
+      return(
+        <div className="assign-mechanic-modal-issue">
+          <div className="container-issue">
+            <div className="top-row-issue">
+              <div className="top-button-issue"><Button className="back_button" variant="outlined" onClick={this.props.isBack}>Back</Button></div>
+              <div className="ut-underline-issue"/>
+              <p className="select-input-title-issue">SAP Issue</p>
+              <CloseButton onClose={this.props.isClose}/>
             </div>
-        )
+              <div className="top-middle-issue"> 
+                <Table size="small" component={Paper}>
+                  {this._showTableHead()}
+                  <TableBody>
+                    {this.props.selectedDataSAP
+                        && this.props.selectedDataSAP.map((row, id) => (this._showTableBody(row,id)) )
+                    }
+                  </TableBody>
+                </Table>
+              </div>
+            <div className="bottom-row-issue">
+                <p className="btn-cancel-issue">* Please check again before pressing the send button</p>
+                <Button className="btn-input-issue" onClick={ async () => {this.props.onKelik(this.state.description);this.props.isTry()} } >Send</Button>
+            </div>
+          </div>
+        </div>
+      )
     }
 
     render(){
-        return(
-            <div>
-              <Modal className="modal-pos-issue" open={this.props.isShowModal} onClose={this.props.isClosed} >
-                  <div className="body-container">
-                      {this._renderIssue()}
-                  </div>
-              </Modal>
+      return(
+        <div>
+          <Modal className="modal-pos-issue" open={this.props.isShowModal} onClose={this.props.isClosed} >
+            <div className="body-container">
+              {this._renderIssue()}
             </div>
-        )
+          </Modal>
+        </div>
+      )
     }
 }
