@@ -63,7 +63,7 @@ componentDidUpdate = (prevProps) => {
 
   //FILTER RANGE LIFETIME
   if(prevProps.filterLifetime !== this.props.filterLifetime){
-    this.props.updateSalesParameter({
+    this.props.updateServiceParameter({
       ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterLifetime.Filter, PageNumber: 1
     })
   }

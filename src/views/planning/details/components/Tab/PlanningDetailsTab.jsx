@@ -210,7 +210,6 @@ class PlanningDetailsTab extends React.Component {
   }
 
   _renderTotalDataInput() {
-    console.log('length berapa oy : ', this.props.totalSalesData.length)
     return(
       <div className="total-input-container">
         <div className="label-header-input">
