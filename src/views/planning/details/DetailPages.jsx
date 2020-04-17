@@ -64,10 +64,18 @@ componentDidUpdate = (prevProps) => {
   }
 
   //FILTER RANGE DATE
-  if(prevProps.filterDate !== this.props.filterDate){
-    this.props.updateSalesParameter({
-      ...prevProps.salesParameter.dataFilter, Filter : this.props.filterDate.Filter, PageNumber: 1
-    })
+  if(this.state.whichTabs){
+    if(prevProps.filterDate !== this.props.filterDate){
+      this.props.updateSalesParameter({
+        ...prevProps.salesParameter.dataFilter, Filter : this.props.filterDate.Filter, PageNumber: 1
+      })
+    }
+  }else{
+    if(prevProps.filterDate !== this.props.filterDate){
+      this.props.updateServiceParameter({
+        ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterDate.Filter, PageNumber: 1
+      })
+    }
   }
 
   //ini untuk trigger sales global search
