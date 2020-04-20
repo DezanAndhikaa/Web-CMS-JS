@@ -70,8 +70,7 @@ class EditButton extends React.PureComponent {
             return (
                 <div className="edit-button-row">
                     <div className="edit-button-visible" onClick={this.isClicked} />
-                        <Modal 
-                        className="modal-pos" open={this.state.isShowModal} onClose={this.isCloseds}>
+                        <Modal className="modal-pos" open={this.state.isShowModal}>
                             <div>
                                 <InputText 
                                     {...this.props}
@@ -88,7 +87,7 @@ class EditButton extends React.PureComponent {
                 <div className="edit-button-row">
                     <div className="table-cell-lt" onClick={this.isClicked}>{this.props.RowData}</div>
                     {this.state.isShowModal && (
-                        <Modal className="modal-pos" open={this.state.isShowModal} onClose={this.isCloseds}>
+                        <Modal className="modal-pos" open={this.state.isShowModal}>
                             <div>
                                 <InputText 
                                     {...this.props}

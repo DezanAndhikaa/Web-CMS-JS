@@ -35,7 +35,7 @@ export default class DeleteConfirmation extends React.PureComponent {
             <div className="confirmation-modal-delete">
               <CloseNotif onClose={this.props.onClose}/>
                 <div className="confirmation-container-delete">
-                  <p className="title-confirmation-delete">Are you sure want to</p>
+                  <p className="confirmation-title-delete">Are you sure want to</p>
                   <p className="confirmation-titles-delete">permanently delete this data ?</p>
                   <img className="confirmation-images-delete" src={DelSuccess} alt="" />
                   <div className="btn-row">

@@ -95,13 +95,6 @@ export default class UnapproveConfirmation extends React.PureComponent {
     })
   }
 
-  isClosedSap = () => {
-    this.setState({
-      isShowModalSap: !this.state.isShowModalSap,
-      isShowModalUnapprove: !this.state.isShowModalUnapprove
-    })
-  }
-
   isClosedSend = () => {
     this.setState({
       isShowModalSend: !this.state.isShowModalSend,
@@ -137,7 +130,6 @@ export default class UnapproveConfirmation extends React.PureComponent {
       <SapIssue 
         {...this.props} 
         isShowModal={open} 
-        isClosed={this.isClosedSap} 
         isTry={this.isTry} 
         onKelik={this.onKelik}
         isClose={this.isClickedCloseBtn}
@@ -180,7 +172,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
 
   _renderSendtoEdit(){
     return(
-      <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-unapprove">
+      <Modal open={this.props.openModal} className="modal-unapprove">
         <DialogContent className="unapprove-confirmation-content">
           <div className="confirmation-modal-unapprove">
             <CloseNotif onClose={this.props.onClose}/>
@@ -209,7 +201,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
         return (
           <>
            {this.state.isShowModalUnapprove && (
-            <Modal open={this.state.isShowModalUnapprove} onClose={this.props.onClose} className="modal-unapprove">
+            <Modal open={this.state.isShowModalUnapprove} className="modal-unapprove">
             <DialogContent className="unapprove-confirmation-content">
               <div className="confirmation-modal-unapprove">
                 <CloseNotif onClose={this.props.onClose}/>
@@ -250,7 +242,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
         );
     } else if(this.props.idConfirm === "Send Success"){
       return(
-        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-unapprove">
+        <Modal open={this.props.openModal} className="modal-unapprove">
         <DialogContent className="unapprove-confirmation-content">
           <div className="confirmation-modal-unapprove">
             <div className="confirmation-container-unapprove">

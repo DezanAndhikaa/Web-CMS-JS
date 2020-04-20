@@ -27,7 +27,7 @@ class FilterByLifetime extends React.Component{
                 <div className="top-row">
                     <div className="ut-underline"/>
                     <p className="select-input-title">{this.props.title}</p>
-                    <CloseButton onClose={this.props.onClosed}/>
+                    <CloseButton idBtnClose="NonConfirmModal" onClose={this.props.onClosed}/>
                 </div>
                 <div className="teks-middle">
                     <label className="teks-left">Min</label>    
