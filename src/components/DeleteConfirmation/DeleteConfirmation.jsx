@@ -10,7 +10,7 @@ export default class DeleteConfirmation extends React.PureComponent {
   render() {
     if(this.props.idDelete === "Delete"){
       return (
-        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container-delete">
+        <Modal open={this.props.openModal} className="modal-container-delete">
           <DialogContent className="delete-confirmation-content">
             <div className="confirmation-modal-delete">
               <CloseNotif onClose={this.props.onClose}/>
@@ -30,7 +30,7 @@ export default class DeleteConfirmation extends React.PureComponent {
       );
     } else if(this.props.idDelete === "Permanent"){
       return (
-        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container-delete">
+        <Modal open={this.props.openModal} className="modal-container-delete">
           <DialogContent className="delete-confirmation-content">
             <div className="confirmation-modal-delete">
               <CloseNotif onClose={this.props.onClose}/>

@@ -69,8 +69,14 @@ componentDidUpdate = (prevProps) => {
   }
 
   //FILTER RANGE DATE
-  if(prevProps.filterDate !== this.props.filterDate){
-    this.props.fetchSalesOrder(this.props.filterDate);
+  if(this.state.whichTabs){
+    if(prevProps.filterDate !== this.props.filterDate){
+      this.props.fetchSalesOrder(this.props.filterDate,this.props.token);
+    }
+  }else{
+    if(prevProps.filterDate !== this.props.filterDate){
+      this.props.fetchServiceOrder(this.props.filterDate,this.props.token);
+    }
   }
 
   //ini untuk trigger sales global search
