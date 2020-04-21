@@ -739,7 +739,7 @@ componentDidUpdate = (prevProps) => {
   }
 
   //Komponen untuk menampilkan button
-  _renderBaseButton = (value) => {
+  _renderBaseButton (){
     if (this.state.whichTabs === true) {
       return(
         <div className="header-rows">
@@ -754,6 +754,7 @@ componentDidUpdate = (prevProps) => {
           <BaseButton titles="Cancel Approve"
             {...this.props}
             whichTabs = {this.state.whichTabs}
+            idCancel="Sales"
             selectedDataSAP={this.props.selectedSalesPlans}
             whatTabsIsRendered={this.state.whichTabs}
             disabledButton = {this.props.selectedSalesPlans.length < 1 }

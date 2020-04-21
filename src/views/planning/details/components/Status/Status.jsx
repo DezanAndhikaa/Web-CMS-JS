@@ -1612,10 +1612,13 @@ export default class Status extends React.PureComponent {
 	}
 
 	salesOrderList(){
+		
+		console.log('idtabs: ', this.props.idTabs);
 		return(
 			<div className="plannings-list-containers">
 				<SalesOrderList 
 					{...this.props}
+					idTab="Status"
 					onClickTabHead={this.props.onClickSortBy}
 					displaySalesCheckbox={this.props.salesParameter.paramsData.assigmentFilter || this.props.salesParameter.paramsData.inProgressFilter}
 					sortSalesByState={this.props.sortSalesBy}

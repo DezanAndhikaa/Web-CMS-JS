@@ -69,7 +69,7 @@ class EditButton extends React.PureComponent {
         if(this.props.idEdit === "Approval"){
             return (
                 <div className="edit-button-row">
-                    <div className="edit-button-visible" onClick={this.isClicked} />
+                    <div className="edit-button-visible" disabled={this.props.idTab} onClick={this.isClicked} />
                         <Modal className="modal-pos" open={this.state.isShowModal}>
                             <div>
                                 <InputText 
