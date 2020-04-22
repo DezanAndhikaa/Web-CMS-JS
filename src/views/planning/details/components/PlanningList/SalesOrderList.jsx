@@ -215,8 +215,8 @@ export default class SalesOrderList extends React.PureComponent {
         <TableCell align="center" className="table-cell">
         {this.props.salesOrderList.Lists[id].LifeTimeComponent !== "-" ? 
           <EditButton idEdit="Approval" title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} /> :
-          this.props.salesOrderList.Lists[id].LifeTimeComponent !== "-" && this.props.idTab === "Status" ?
-          <EditButton idEdit="Approval" title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber}/> : ""}
+          this.props.salesOrderList.Lists[id].LifeTimeComponent !== "-" && this.props.idTab === "Status" ? 
+            <EditButton idEdit="Approval" /> : ""}
         </TableCell>
       </TableRow>
     )

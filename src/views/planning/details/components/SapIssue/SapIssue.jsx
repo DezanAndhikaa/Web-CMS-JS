@@ -3,6 +3,7 @@ import { Button, Modal, TextField,Table, TableHead, TableRow, TableBody, TableCe
 import './SapIssue.scss';
 import CloseButton from '../../../../../components/ActionButton/CloseButton/CloseButton';
 import moment from 'moment';
+import { Label } from '@material-ui/icons';
 
 export default class SapIssue extends React.Component{
 
@@ -21,7 +22,7 @@ export default class SapIssue extends React.Component{
     _showTableHead() {
       return (
         <TableHead className="table-head-issue" >
-          <TableRow className="table-row-issue">
+          <TableRow className="table-row-top-issue">
             {this.props.whichTabs ? 
               <TableCell>SO</TableCell> : 
               <TableCell>WO</TableCell>}
@@ -49,7 +50,7 @@ export default class SapIssue extends React.Component{
     _showTableBody(row, id) {
         return (
           <>
-          <TableRow className="table-row-issue">
+          <TableRow className="table-row-top-issue">
             {this.props.whichTabs ?
               <TableCell align="left" className="table-cell-issue"> {row.SoNumber} </TableCell> : 
               <TableCell align="left" className="table-cell-issue"> {row.WoNumber} </TableCell>
@@ -72,21 +73,44 @@ export default class SapIssue extends React.Component{
             }
           </TableRow>
           <TableRow className="table-row-bottom-issue">
-            <TableCell><label>Description &nbsp; :</label></TableCell>
+            <TableCell colSpan="12" className="table-cell-bottom">{this._showHeaderDesc()}</TableCell>
+          </TableRow>
+          <TableRow className="table-row-bottom-issue">
+            <TableCell><label>Description :</label></TableCell>
             <TableCell colSpan="11">{this._showDescription(id)}</TableCell>
           </TableRow>
-          </>
-        )
+        </>
+      )
+    }
+
+    _showHeaderDesc(){
+      return(
+        <div className="teks">
+          <div className="header">Please pick a mistake on the SAP</div>
+          <Button className="btn-reason">Customer</Button>
+          <Button className="btn-reason">Part Number</Button>
+          <Button className="btn-reason">Site</Button>
+          <Button className="btn-reason">Unit Model</Button>
+          <Button className="btn-reason">Serial Number</Button>
+          <Label>Description :</Label>
+        </div>
+      )
     }
 
     _showDescription(id){
       return(
         <div className="teks">
+          <div className="header">Please pick a mistake on the SAP</div>
+          <Button className="btn-reason">Customer</Button>
+          <Button className="btn-reason">Part Number</Button>
+          <Button className="btn-reason">Site</Button>
+          <Button className="btn-reason">Unit Model</Button>
+          <Button className="btn-reason">Serial Number</Button>
+          <Label className="input-label">Description :</Label>
           <TextField 
-            className="teks"
-            type='text' 
-            placeholder="Tuliskan Masalahnya yaa.."
-            variant="outlined" 
+            type="text"
+            className="input-description"
+            placeholder="Tuliskan masalahnya yaa.."
             size="small"
             value={this.state.description[id]} 
             name={this.state.description[id]} 

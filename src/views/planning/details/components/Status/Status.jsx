@@ -1612,8 +1612,6 @@ export default class Status extends React.PureComponent {
 	}
 
 	salesOrderList(){
-		
-		console.log('idtabs: ', this.props.idTabs);
 		return(
 			<div className="plannings-list-containers">
 				<SalesOrderList 
