@@ -642,7 +642,7 @@ componentDidUpdate = (prevProps) => {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
       }
-      await this.props.deleteService({WoNumbers : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate}, this.props.token)
+      await this.props.deleteService({WoNumbers : arr, IsDelete: true}, this.props.token)
       this.onClickServiceOrder();
       await this.props.clearSelectedServicePlans();
     }
