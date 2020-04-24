@@ -100,13 +100,6 @@ export default class SapIssue extends React.Component{
     _showDescription(id){
       return(
         <div className="teks">
-          <div className="header">Please pick a mistake on the SAP</div>
-          <Button className="btn-reason">Customer</Button>
-          <Button className="btn-reason">Part Number</Button>
-          <Button className="btn-reason">Site</Button>
-          <Button className="btn-reason">Unit Model</Button>
-          <Button className="btn-reason">Serial Number</Button>
-          <Label className="input-label">Description :</Label>
           <TextField 
             type="text"
             className="input-description"

@@ -620,34 +620,6 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  handleDeleteSales = async() => {
-    let arr = []
-    const index = this.props.selectedSalesPlans.length
-    const todayDate = moment(new Date()).format('YYYY-MM-DD');
-    if (this.props.selectedSalesPlans.length > 0) {
-      for (let i = 0; i < index; i++) {
-        arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
-      }
-      await this.props.deleteSales({SoNumbers : arr, IsDelete: true}, this.props.token)
-      this.onClickSalesOrder();
-      await this.props.clearSelectedSalesPlans();
-    }
-  }
-
-  handleDeleteService = async() => {
-    let arr = []
-    const index = this.props.selectedServicePlans.length
-    const todayDate = moment(new Date()).format('YYYY-MM-DD');
-    if (this.props.selectedServicePlans.length > 0) {
-      for (let i = 0; i < index; i++) {
-        arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
-      }
-      await this.props.deleteService({WoNumbers : arr, IsDelete: true}, this.props.token)
-      this.onClickServiceOrder();
-      await this.props.clearSelectedServicePlans();
-    }
-  }
-
   handleClickFilterByDataAction = () =>{
     this.setState({
       isApproved : !this.state.isApproved
@@ -764,14 +736,6 @@ componentDidUpdate = (prevProps) => {
             renderSakses = {this.changeSuccess}
             onClicksalesOrder = {this.onClicksalesOrder}
           />
-          <BaseButton titles="Delete" 
-            {...this.props}
-            disabledButton = {this.props.selectedSalesPlans.length < 1 }
-            totalSelectedItems ={this.props.selectedSalesPlans.length}
-            whatTabsIsRendered={this.state.whichTabs}
-            handleDeleteSales={this.handleDeleteSales}
-            renderSakses = {this.changeSuccess}
-          />
         </div>
       );
     }
@@ -796,14 +760,6 @@ componentDidUpdate = (prevProps) => {
              handleSendtoEdit={this.handleSendtoEdit}
              selectedData={this.state.selectedData}
              renderSakses = {this.changeSuccess}
-          />
-          <BaseButton titles="Delete" 
-            {...this.props}
-            disabledButton = {this.props.selectedServicePlans.length < 1 }
-            totalSelectedItems ={this.props.selectedServicePlans.length}
-            whatTabsIsRendered={this.state.whichTabs}
-            handleDeleteService={this.handleDeleteService}
-            renderSakses = {this.changeSuccess}
           />
         </div>
       );

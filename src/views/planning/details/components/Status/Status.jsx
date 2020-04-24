@@ -29,6 +29,13 @@ export default class Status extends React.PureComponent {
 		sapIssueTotalData : 0,
 		searchVal : '',
 		isDisabled: true,
+		openSuccess: false,
+	}
+
+	changeSuccess = () => {
+		this.setState({
+		  openSuccess : !this.state.openSuccess
+		})
 	}
 
 	componentDidMount = async() =>{
@@ -1234,9 +1241,54 @@ export default class Status extends React.PureComponent {
 		}
 	}
 
+	handleDeleteSales = async() => {
+		let arr = []
+		const index = this.props.selectedSalesPlans.length;
+		if (this.props.selectedSalesPlans.length > 0) {
+		  for (let i = 0; i < index; i++) {
+			arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
+		  }
+		  await this.props.deleteSales({SoNumbers : arr, IsDelete: true}, this.props.token);
+		  this.onClickSalesOrderApproved();
+		  await this.props.clearSelectedSalesPlans();
+		}
+	}
+
+	handleDeleteService = async() => {
+		let arr = []
+		const index = this.props.selectedServicePlans.length;
+		if (this.props.selectedServicePlans.length > 0) {
+		  for (let i = 0; i < index; i++) {
+			arr = [...arr, this.props.selectedServicePlans[i].WoNumber];
+		  }
+		  await this.props.deleteService({WoNumbers : arr, IsDelete: true}, this.props.token);
+		  this.onClickServiceOrderApproved();
+		  await this.props.clearSelectedServicePlans();
+		}
+	}
+
 	_renderDownloadBtn(){
 		if (this.props.location.whichTab === "sales") {
-			if(this.state.whatPageIsChoosed === "Delete"){
+			if(this.state.whatPageIsChoosed === "Approve"){
+				return(
+					<>
+						<BaseButton titles="Download"
+							{...this.props}
+							whatTabsIsRendered={true}
+							handleSalesApprovedDownload={this.handleSalesApprovedDownload}
+						/>
+						<BaseButton titles="Delete" 
+							{...this.props}
+							whatTabsIsRendered={true}
+							isDisabled={this.state.isDisabled}
+							disabledButton = {this.props.selectedSalesPlans.length < 1 }
+							totalSelectedItems ={this.props.selectedSalesPlans.length}
+							handleDeleteSales={this.handleDeleteSales}
+							renderSakses = {this.changeSuccess}
+						/>
+					</>
+				)
+			}else if(this.state.whatPageIsChoosed === "Delete"){
 				return(
 					<>
 						<BaseButton titles="Download"
@@ -1262,7 +1314,27 @@ export default class Status extends React.PureComponent {
 				)
 			}			
 		}else if (this.props.location.whichTab === "service"){
-			if(this.state.whatPageIsChoosed === "Delete"){
+			if(this.state.whatPageIsChoosed === "Approve"){
+				return(
+					<>
+						<BaseButton titles="Download"
+							{...this.props}
+							whatTabsIsRendered={false}
+							handleServiceApprovedDownload={this.handleServiceApprovedDownload}
+						/>
+						<BaseButton titles="Delete" 
+							{...this.props}
+							whatTabsIsRendered={false}
+							isDisabled={this.state.isDisabled}
+							disabledButton = {this.props.selectedServicePlans.length < 1 }
+							totalSelectedItems ={this.props.selectedServicePlans.length}
+							whatTabsIsRendered={this.state.whichTabs}
+							handleDeleteService={this.handleDeleteService}
+							renderSakses = {this.changeSuccess}
+						/>
+					</>
+				)
+			}else if(this.state.whatPageIsChoosed === "Delete"){
 				return(
 					<>
 						<BaseButton titles="Download"

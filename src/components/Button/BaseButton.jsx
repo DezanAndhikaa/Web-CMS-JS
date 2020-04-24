@@ -39,6 +39,7 @@ class BaseButton extends React.Component{
                 this.isClosed()
             }
             if (this.props.titles === "Permanently"){
+                await this.props.handleDeletePermanent()
                 this.isClosed()
             }
         }
@@ -48,6 +49,10 @@ class BaseButton extends React.Component{
             }
             if (this.props.titles === "Delete") {
                 await this.props.handleDeleteService();
+            }
+            if (this.props.titles === "Permanently"){
+                await this.props.handleDeletePermanent()
+                this.isClosed()
             }
         }
     }
