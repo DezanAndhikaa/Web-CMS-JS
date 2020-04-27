@@ -1104,7 +1104,6 @@ export default class Status extends React.PureComponent {
 		document.body.appendChild(link);
 		link.style = "display: none";
 		const todayDate = moment(new Date()).format('DD-MM-YYYY');
-		// const serviceOrder  = this.state.selectedServiceData.WoNumber;
 		let fileName = "Service-Order-Planning-"+todayDate+".csv";
 		let blob = new Blob([this.props.approveServiceDownloaded.data]),
 		  url = window.URL.createObjectURL(blob);
@@ -1112,7 +1111,7 @@ export default class Status extends React.PureComponent {
 		link.download = fileName;
 		link.click();
 		window.URL.revokeObjectURL(url);
-	  }
+	}
 
 	handleSalesApprovedDownload = async() => {
 		let arr = []
