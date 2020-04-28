@@ -108,6 +108,7 @@ class ApprovalTab extends React.Component {
       <div className="plannings-list-container">
         <SalesOrderList 
           {...this.props}
+          idTab = "Approval"
         />
       </div>
     );

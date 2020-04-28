@@ -9,8 +9,8 @@ import {
 	UpdateServiceApprovedParameterAction,
 	serviceParameterDeletedAction,
 	UpdateServiceDeletedParameterAction,
-	approveSalesDownloadAction,
-	approveServiceDownloadAction,
+	downloadSalesAction,
+	downloadServiceAction,
 	selectSalesPlansAction,
 	selectServicePlansAction,
 	fetchApprovedSalesAction,
@@ -116,8 +116,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	push: (path, whichTab) => dispatch(push(path, whichTab)),
-	downloadSalesApproved : (soId, token) => dispatch(approveSalesDownloadAction(soId, token)),
-	downloadServiceApproved : (soId, token) => dispatch(approveServiceDownloadAction(soId, token)),
+	downloadSales : (soId, token) => dispatch(downloadSalesAction(soId, token)),
+	downloadService : (soId, token) => dispatch(downloadServiceAction(soId, token)),
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
 	clearSelectedServicePlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
 	fetchApprovedSales: (payload, token) => dispatch(fetchApprovedSalesAction(payload, token)),

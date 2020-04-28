@@ -128,6 +128,7 @@ class DetailsTab extends React.Component {
         <SalesOrderList 
           {...this.props}
           idSales= "Data Input"
+          idTab= "Input"
         />
       </div>
       </>

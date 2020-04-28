@@ -59,9 +59,9 @@ class BaseButton extends React.Component{
 
     isDownloaded = async() => {
         if (this.props.whatTabsIsRendered === true) {
-            await this.props.handleSalesApprovedDownload()
+            await this.props.handleSalesDownload()
         }if (this.props.whatTabsIsRendered === false) {
-            await this.props.handleServiceApprovedDownload()
+            await this.props.handleServiceDownload()
         }
     }
 

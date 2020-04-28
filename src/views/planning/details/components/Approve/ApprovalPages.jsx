@@ -74,15 +74,15 @@ componentDidUpdate = (prevProps) => {
   //FILTER RANGE LIFETIME
   if(this.state.whichTabs){
     if(prevProps.filterLifetime !== this.props.filterLifetime){
-      if(this.props.filterLifetime === ""){
-        this.props.updateSalesParameter({
-          ...prevProps.salesParameter.dataFilter, Filter: this.props.filterLifetime.Filter = "", PageNumber: 1
-        })
-      }else{
+      // if(this.props.filterLifetime === ""){
+      //   this.props.updateSalesParameter({
+      //     ...prevProps.salesParameter.dataFilter, Filter: this.props.filterLifetime.Filter = "", PageNumber: 1
+      //   })
+      // }else{
         this.props.updateSalesParameter({
           ...prevProps.salesParameter.dataFilter, Filter: this.props.filterLifetime.Filter, PageNumber: 1,
         })
-      }
+    //   }
     }
   }else{
     if(prevProps.filterLifetime !== this.props.filterLifetime){
@@ -806,7 +806,6 @@ componentDidUpdate = (prevProps) => {
           onStats={this.isChangeStat}     
           totalSalesData={this.props.salesOrderList.TotalData}
           totalServiceData={this.props.serviceOrderList.TotalData}
-          ApprovedSalesData={this.props.salesOrderListApproved.TotalData}
           onClickTabHead={this.props.onClickSortBy}
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}

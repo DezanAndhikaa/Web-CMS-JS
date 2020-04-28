@@ -202,10 +202,10 @@ export default class SalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="center" className="table-cell"> 
-        {this.props.salesOrderList.Lists[id].LifeTimeComponent === "-" ? 
+        {this.props.salesOrderList.Lists[id].LifeTimeComponent === "-" && this.props.idTab === "Input" ? 
           <InputButton title="Input Lifetime Component" onStats={this.isPutLifetime} titles="Input" key={row.SoNumber} id={row.SoNumber} field="input"/> : 
-          this.props.salesOrderList.Lists[id].LifeTimeComponent === "-" && this.props.idTabs === "Status" ?
-          <InputButton title="Input Lifetime Component" onStats={this.isPutLifetime} titles="Input" key={row.SoNumber} id={row.SoNumber} field="input" idTab={this.props.idTabs}/> :
+          this.props.salesOrderList.Lists[id].LifeTimeComponent === "-" && this.props.idTab === "Status" ?
+          <InputButton titles="Input Status" key={row.SoNumber} id={row.SoNumber} /> :
           <div className={this.props.salesOrderList.Lists[id].IsRevised === true && this.props.salesOrderList.Lists[id].IsChanged === false ? "table-cell-rev" : ""}>{this.props.salesOrderList.Lists[id].LifeTimeComponent}</div>
         }
         </TableCell>
@@ -213,10 +213,10 @@ export default class SalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="center" className="table-cell">
-        {this.props.salesOrderList.Lists[id].LifeTimeComponent !== "-" ? 
+        {this.props.salesOrderList.Lists[id].LifeTimeComponent !== "-" && this.props.idTab === "Approval" ? 
           <EditButton idEdit="Approval" title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} /> :
           this.props.salesOrderList.Lists[id].LifeTimeComponent !== "-" && this.props.idTab === "Status" ? 
-            <EditButton idEdit="Approval" /> : ""}
+          <EditButton idEdit="Status" /> : ""}
         </TableCell>
       </TableRow>
     )

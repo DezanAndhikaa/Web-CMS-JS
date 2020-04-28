@@ -1113,14 +1113,26 @@ export default class Status extends React.PureComponent {
 		window.URL.revokeObjectURL(url);
 	}
 
-	handleSalesApprovedDownload = async() => {
+	handleSalesApprove = async() => {
 		let arr = []
 		const index = this.props.selectedSalesPlans.length
 		if (this.props.selectedSalesPlans.length > 0) {
 		  for (let i = 0; i < index; i++) {
 			arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
 		  }
-		}await this.props.downloadSalesApproved(arr, this.props.token);
+		  await this.props.approveSales({SoNumbers : arr, IsApprove: true}, this.props.token)
+		  this.onClickSalesOrder();
+		  await this.props.clearSelectedSalesPlans();
+		 }
+	}
+	handleSalesDownload = async() => {
+		let arr = []
+		const index = this.props.selectedSalesPlans.length
+		if (this.props.selectedSalesPlans.length > 0) {
+		  for (let i = 0; i < index; i++) {
+			arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
+		  }
+		}await this.props.downloadSales({SoNumbers: arr}, this.props.token);
 		if (
 		  this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.FAILED
 		) {
@@ -1128,7 +1140,7 @@ export default class Status extends React.PureComponent {
 		}
 	}
 
-	handleServiceApprovedDownload = async() => {
+	handleServiceDownload = async() => {
 		let arr = []
 		const index = this.props.selectedServicePlans.length
 		if (this.props.selectedServicePlans.length > 0) {
@@ -1136,7 +1148,7 @@ export default class Status extends React.PureComponent {
 			arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
 		  }
 		}
-		await this.props.downloadServiceApproved(arr, this.props.token);
+		await this.props.downloadService({WoNumbers: arr}, this.props.token);
 		if (
 		  this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.FAILED
 		) {
@@ -1226,7 +1238,7 @@ export default class Status extends React.PureComponent {
 					arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
 		  		}
 			}
-			await this.props.deletePermanentSales({SoNumber : arr});
+			await this.props.deletePermanentSales({SoNumbers : arr}, this.props.token);
 		}
 		if (this.props.location.whichTab === "service") {
 			let arr = []
@@ -1236,7 +1248,7 @@ export default class Status extends React.PureComponent {
 					arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
 		  		}
 			}
-			await this.props.deletePermanentService({WoNumber : arr});
+			await this.props.deletePermanentService({WoNumbers : arr}, this.props.token);
 		}
 	}
 
@@ -1248,7 +1260,7 @@ export default class Status extends React.PureComponent {
 			arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
 		  }
 		  await this.props.deleteSales({SoNumbers : arr, IsDelete: true}, this.props.token);
-		  this.onClickSalesOrderApproved();
+		//   this.onClickSalesOrderApproved();
 		  await this.props.clearSelectedSalesPlans();
 		}
 	}
@@ -1687,7 +1699,7 @@ export default class Status extends React.PureComponent {
 			<div className="plannings-list-containers">
 				<SalesOrderList 
 					{...this.props}
-					idTab="Status"
+					idTab = "Status"
 					onClickTabHead={this.props.onClickSortBy}
 					displaySalesCheckbox={this.props.salesParameter.paramsData.assigmentFilter || this.props.salesParameter.paramsData.inProgressFilter}
 					sortSalesByState={this.props.sortSalesBy}

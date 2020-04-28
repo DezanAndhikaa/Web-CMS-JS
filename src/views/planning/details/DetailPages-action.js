@@ -131,7 +131,7 @@ export function unapproveSalesAction(payload, accessToken) {
 	return async (dispatch) => dispatch(callApi(UnapproveSalesAction, requestConfig));
 }
 
-export function approveSalesDownloadAction(soId, accessToken){
+export function downloadSalesAction(soId, accessToken){
 	const requestConfig = {
 		responseType: 'blob',
 		method: RequestMethod.POST,
@@ -145,7 +145,7 @@ export function approveSalesDownloadAction(soId, accessToken){
 	  };
 	  return async (dispatch) => dispatch(callApi(PlanningApprovedSalesDownloadAction, requestConfig));
 }
-export function approveServiceDownloadAction(woId, accessToken){
+export function downloadServiceAction(woId, accessToken){
 	const requestConfig = {
 		responseType: 'blob',
 		method: RequestMethod.POST,

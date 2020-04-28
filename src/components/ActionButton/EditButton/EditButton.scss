@@ -4,7 +4,6 @@
 .edit-button-row{
     display: flex;
     justify-content: flex;
-    cursor: pointer;
     .edit-button-visible{
         height: vw(28.07);
         width: vw(30.07);
@@ -12,6 +11,19 @@
         border-radius: vw(8) !important;
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
         background-image: url('../../../assets/icons/ic_edit.png');
+        background-repeat: no-repeat;
+        background-color: white;
+        background-size: 50%;
+        background-position: center;
+        cursor: pointer;
+    }
+    .edit-button-status{
+        height: vw(28.07);
+        width: vw(30.07);
+        margin-left: vw(15);
+        border-radius: vw(8) !important;
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        background-image: url('../../../assets/icons/pencil.png');
         background-repeat: no-repeat;
         background-color: white;
         background-size: 50%;

@@ -84,7 +84,7 @@ class EditButton extends React.PureComponent {
         }else if(this.props.idEdit === "Status"){
             return (
                 <div className="edit-button-row">
-                    <div className="edit-button-visible" disabled/>
+                    <div className="edit-button-status" disabled/>
                 </div>
             );
         }else if(this.props.idEdit === "Rev"){

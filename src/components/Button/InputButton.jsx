@@ -34,7 +34,7 @@ export default class InputButton extends React.Component{
         if(this.props.titles === "Input"){
             return(
                 <div className="button-rows">
-                <Button onClick={this.isClicked} disabled={this.props.idTab} className="btn-assigns">{this.props.titles}</Button>
+                    <Button onClick={this.isClicked} className="btn-assigns">{this.props.titles}</Button>
                     <Modal className="modal-pos" open={this.state.isShowModal}>
                         <div>
                             <InputText 
@@ -44,6 +44,12 @@ export default class InputButton extends React.Component{
                             />
                         </div>
                     </Modal>
+                </div>
+            )
+        }else if(this.props.titles === "Input Status"){
+            return(
+                <div className="button-rows">
+                    <Button disabled className="btn-assigns">Input</Button>
                 </div>
             )
         }else if(this.props.titles === "SO" || this.props.titles ==="Work Order" || this.props.titles ==="SMR"){
