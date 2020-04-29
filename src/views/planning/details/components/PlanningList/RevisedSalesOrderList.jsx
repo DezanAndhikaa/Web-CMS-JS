@@ -2,7 +2,9 @@ import React from 'react';
 import {
   Table, TableBody, TableCell, TableHead, TableRow, Snackbar
 } from '@material-ui/core';
-import './PlanningList.scss';import { Spinner } from '../../../../../assets/icons'
+import './PlanningList.scss';
+import { Spinner } from '../../../../../assets/icons';
+import { Empty } from '../../../../../assets/imgs';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from 'moment';
 import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
@@ -169,12 +171,6 @@ export default class RevisedSalesOrderList extends React.PureComponent {
       return(
         <div className="loading-container">
           OOPS THERE WAS AN ERROR :'(
-        </div>
-      )
-    }else if(this.props.salesOrderRevised.Lists.length === 0){
-      return(
-        <div className="loading-container">
-          DATA NOT FOUND
         </div>
       )
     }

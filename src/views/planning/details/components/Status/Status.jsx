@@ -1125,6 +1125,7 @@ export default class Status extends React.PureComponent {
 		  await this.props.clearSelectedSalesPlans();
 		 }
 	}
+
 	handleSalesDownload = async() => {
 		let arr = []
 		const index = this.props.selectedSalesPlans.length
@@ -1286,7 +1287,7 @@ export default class Status extends React.PureComponent {
 						<BaseButton titles="Download"
 							{...this.props}
 							whatTabsIsRendered={true}
-							handleSalesApprovedDownload={this.handleSalesApprovedDownload}
+							handleSalesDownload={this.handleSalesDownload}
 						/>
 						<BaseButton titles="Delete" 
 							{...this.props}
@@ -1331,7 +1332,7 @@ export default class Status extends React.PureComponent {
 						<BaseButton titles="Download"
 							{...this.props}
 							whatTabsIsRendered={false}
-							handleServiceApprovedDownload={this.handleServiceApprovedDownload}
+							handleServiceDownload={this.handleServiceDownload}
 						/>
 						<BaseButton titles="Delete" 
 							{...this.props}
@@ -1339,7 +1340,6 @@ export default class Status extends React.PureComponent {
 							isDisabled={this.state.isDisabled}
 							disabledButton = {this.props.selectedServicePlans.length < 1 }
 							totalSelectedItems ={this.props.selectedServicePlans.length}
-							whatTabsIsRendered={this.state.whichTabs}
 							handleDeleteService={this.handleDeleteService}
 							renderSakses = {this.changeSuccess}
 						/>

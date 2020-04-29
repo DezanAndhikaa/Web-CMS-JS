@@ -7,6 +7,7 @@ import ServiceOrderList from '../../components/PlanningList/ServiceOrderList';
 import RevisedSalesOrderList from '../../components/PlanningList/RevisedSalesOrderList';
 import './DetailsTab.scss';
 import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
+import EmptyList from '../../../../../components/EmptyList/EmptyList';
 import { 
     SelectCustomerFilterAction,
     SelectSiteFilterAction, 
@@ -357,7 +358,9 @@ class DetailsTab extends React.Component {
             </Tabs>
           </AppBar>
           {value === 0 && <TabContainer dir={theme.direction} >
-            <div>{this._renderRevisionList()}</div>
+            <div>{this.props.salesOrderRevised.Lists.length === 0 ? 
+              <EmptyList /> :
+              this._renderRevisionList()}</div>
           </TabContainer>}
           <div className="site-container">
             {this._renderTotalData()}

@@ -166,6 +166,19 @@ const initialSearchCompParameter =
 	Logic   : 'AND'
 }];
 
+const intitialFiltersParameter =
+[{
+	Field   : 'LifeTimeComponent',
+	Operator: 'gte',
+	Value   : '',
+	Logic   : 'AND'
+},{
+	Field   : 'LifeTimeComponent',
+	Operator: 'lte',
+	Value   : '',
+	Logic   : 'AND'
+}]
+
 const initialDownloadState = { data: new Blob(), status: ApiRequestActionsStatus.IDLE };
 const initialSalesState = { data: initialSalesAssignment, status: ApiRequestActionsStatus.IDLE };
 const initialServiceState = { data: initialServiceAssignment, status: ApiRequestActionsStatus.IDLE };
