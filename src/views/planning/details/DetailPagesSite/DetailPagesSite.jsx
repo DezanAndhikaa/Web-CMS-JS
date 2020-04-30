@@ -594,9 +594,11 @@ componentDidUpdate = (prevProps) => {
               {this._renderTabs()}
           </div>
           <div></div>
-          <div className="bottom-row-detail-site">
-              {this._renderShowPerPage()} {this._renderPagination()}
-          </div>
+          {this.props.salesOrderList.Lists.length === 0 || this.props.serviceOrderList.Lists.length === 0 ? "" :
+            <div className="bottom-row-detail-site">
+                {this._renderShowPerPage()} {this._renderPagination()}
+            </div>
+          }
       </main>
     )
   }

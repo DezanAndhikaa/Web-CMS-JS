@@ -11,6 +11,7 @@ import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import {Snackbar} from '@material-ui/core';
 import moment from 'moment';
+import EmptyList from '../../../../../components/EmptyList/EmptyList';
 
 export default class SalesOrderList extends React.PureComponent {
   constructor(props) {
@@ -265,12 +266,6 @@ export default class SalesOrderList extends React.PureComponent {
           OOPS THERE WAS AN ERROR :'(
         </div>
       )
-    }else if(this.props.salesOrderList.Lists.length === 0){
-      return(
-        <div className="loading-container">
-          DATA NOT FOUND
-        </div>
-      )
     }
   }
 
@@ -290,7 +285,15 @@ export default class SalesOrderList extends React.PureComponent {
           {this.showLoading()}
         </>
       )
-    } else{
+    }else if(this.props.salesOrderList.Lists.length === 0 && this.props.idTab === "Approval"){
+      return(
+        <EmptyList idEmpty= "Sales" />
+      )
+    }else if(this.props.salesOrderList.Lists.length === 0 && this.props.idTab === "Input"){
+      return(
+        this.props.idTab= "Input" ? <EmptyList idEmpty= "Input" /> : ""
+      )
+    }else{
       return(
         <>
           <Table classes={{ root: 'table' }} className="table">

@@ -49,14 +49,6 @@ componentDidUpdate = (prevProps) => {
   if (prevProps.serviceParameter !== this.props.serviceParameter) {
     this.onClickServiceOrder();
   }
-  if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
-    prevProps.approveSalesDownloaded.status === ApiRequestActionsStatus.LOADING) {
-    this.onClickDownloadSalesApproved()
-  }
-  if (this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
-    prevProps.approveServiceDownloaded.status === ApiRequestActionsStatus.LOADING) {
-    this.onClickDownloadServiceApproved()
-  }
 
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
@@ -862,9 +854,11 @@ componentDidUpdate = (prevProps) => {
                 {this._renderTabs()}
             </div>
             <div></div>
-            <div className="bottom-row-approval">
-                {this._renderShowPerPage()} {this._renderPagination()}
-            </div>
+            {this.props.salesOrderList.Lists.length === 0 || this.props.serviceOrderList.Lists.length === 0 ? "" :
+              <div className="bottom-row-approval">
+                  {this._renderShowPerPage()} {this._renderPagination()}
+              </div>
+            }
       </main>
     )
   }

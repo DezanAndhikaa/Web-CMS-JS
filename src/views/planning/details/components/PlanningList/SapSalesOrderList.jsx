@@ -16,6 +16,7 @@ import {
 import { Spinner } from '../../../../../assets/icons';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from 'moment';
+import EmptyList from '../../../../../components/EmptyList/EmptyList';
 
 export default class SapSalesOrderList extends React.PureComponent {
   constructor(props) {
@@ -243,19 +244,25 @@ export default class SapSalesOrderList extends React.PureComponent {
   }
 
   render(){
-    return(
-      <>
-        <Table classes={{ root: 'table' }} className="table">
-        {this.showTableHead()}
-        <TableBody classes={{ root: 'table-body' }}>
-          {this.props.salesOrderListSap.Lists
-            && this.props.salesOrderListSap.Lists.map((row, id) => (
-              this.showTableBody(row,id)
-            ))}
-          </TableBody>
-        </Table>
-        {this.showLoading()}
-      </>
-    )
+    if(this.props.salesOrderListSap.Lists.length === 0 ){
+      return(
+        <EmptyList idEmpty= "SAP" />
+      )
+    }else{
+      return(
+        <>
+          <Table classes={{ root: 'table' }} className="table">
+          {this.showTableHead()}
+          <TableBody classes={{ root: 'table-body' }}>
+            {this.props.salesOrderListSap.Lists
+              && this.props.salesOrderListSap.Lists.map((row, id) => (
+                this.showTableBody(row,id)
+              ))}
+            </TableBody>
+          </Table>
+          {this.showLoading()}
+        </>
+      )
+    }
   }
 }

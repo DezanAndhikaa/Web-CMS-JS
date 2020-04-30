@@ -4,11 +4,11 @@ import {
 } from '@material-ui/core';
 import './PlanningList.scss';
 import { Spinner } from '../../../../../assets/icons';
-import { Empty } from '../../../../../assets/imgs';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from 'moment';
 import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
 import ConfirmationModal from '../../../../../components/ConfirmationModal/ConfirmationModal';
+import EmptyList from '../../../../../components/EmptyList/EmptyList';
 
 export default class RevisedSalesOrderList extends React.PureComponent {
   constructor(props) {
@@ -176,20 +176,26 @@ export default class RevisedSalesOrderList extends React.PureComponent {
     }
   }
 
-render(){
-        return(
-          <div> 
-            <Table classes={{ root: 'table' }} className="table-rev">
-            {this.showTableHead()}
-            <TableBody classes={{ root: 'table-body' }}>
-              {this.props.salesOrderRevised.Lists
-                && this.props.salesOrderRevised.Lists.map((row, id) => (
-                  this.showTableBody(row,id)
-                ))}
-              </TableBody>
-            </Table>
-            {this.showLoading()}
-          </div>
-        )
-      }
+  render(){
+    if(this.props.salesOrderRevised.Lists.length === 0){
+      return(
+        <EmptyList idEmpty= "Rev" />
+      )
+    }else{
+      return(
+        <div> 
+          <Table classes={{ root: 'table' }} className="table-rev">
+          {this.showTableHead()}
+          <TableBody classes={{ root: 'table-body' }}>
+            {this.props.salesOrderRevised.Lists
+              && this.props.salesOrderRevised.Lists.map((row, id) => (
+                this.showTableBody(row,id)
+              ))}
+            </TableBody>
+          </Table>
+          {this.showLoading()}
+        </div>
+      )
+    }
   }
+}

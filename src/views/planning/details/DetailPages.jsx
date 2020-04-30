@@ -447,13 +447,15 @@ fetchSearchSales = async() => {
   render(){  
     return(
       <main className="content">
-          <div className="table-container">
-                {this._renderTabs()}
-            </div>
-            <div></div>
+        <div className="table-container">
+              {this._renderTabs()}
+          </div>
+          <div></div>
+          {this.props.salesOrderList.Lists.length === 0 ? "" :
             <div className="bottom-row">
                 {this._renderShowPerPage()} {this._renderPagination()}
             </div>
+          }
       </main>
     )
   }

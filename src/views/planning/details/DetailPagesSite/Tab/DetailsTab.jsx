@@ -7,7 +7,6 @@ import ServiceOrderList from '../../components/PlanningList/ServiceOrderList';
 import RevisedSalesOrderList from '../../components/PlanningList/RevisedSalesOrderList';
 import './DetailsTab.scss';
 import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
-import EmptyList from '../../../../../components/EmptyList/EmptyList';
 import { 
     SelectCustomerFilterAction,
     SelectSiteFilterAction, 
@@ -125,7 +124,7 @@ class DetailsTab extends React.Component {
   _renderSalesOrderList(){
     return(
       <>
-      <div className="plannings-list-detail">
+      <div className={this.props.salesOrderList.Lists.length === 0 ? "list-detail-empty" :"plannings-list-detail"}>
         <SalesOrderList 
           {...this.props}
           idSales= "Data Input"
@@ -137,33 +136,38 @@ class DetailsTab extends React.Component {
   }
 
   _renderRevisionList(){
-    return(
-      <div className="paper-revision">
-        <div className="revision-container">
-          <div className="rev-title-container">
-            <div className="ut-underline-rev" />
-            <div className= "revision-title">Revision List</div>
-          </div>
-          <div className="plannings-list-detail">
-              <RevisedSalesOrderList
-                {...this.props}
-              />
-          </div>
-          <div>
-            {this.props.renderPaginationRev}
+    // if(this.props.salesOrderRevised.Lists.length === 0 ){
+
+    // }else{
+      return(
+        <div className={this.props.salesOrderRevised.Lists.length === 0 ? "list-detail-empty" : "paper-revision"}>
+          <div className="revision-container">
+            <div className="rev-title-container">
+              <div className="ut-underline-rev" />
+              {this.props.salesOrderRevised.Lists.length === 0 ? "" : 
+              <div className="revision-title">Revision List</div>}
+            </div>
+            <div className="plannings-list-detail">
+                <RevisedSalesOrderList
+                  {...this.props}
+                />
+            </div>
+            <div>
+              {this.props.salesOrderRevised.Lists.length === 0 ? "" : this.props.renderPaginationRev}
+            </div>
           </div>
         </div>
-      </div>
-    )
+      )
+    // }
   }
 
   _renderServiceOrderList(){
     return(
-        <div className="plannings-list-detail">
+        <div className={this.props.serviceOrderList.Lists.length === 0 ? "list-detail-empty" : "plannings-list-detail"}>
           <ServiceOrderList 
-          {...this.props}
-          idService="Data Input"
-          isClick={this.props.isClick}
+            {...this.props}
+            idService="Data Input"
+            isClick={this.props.isClick}
           />
         </div>
     );
@@ -358,15 +362,13 @@ class DetailsTab extends React.Component {
             </Tabs>
           </AppBar>
           {value === 0 && <TabContainer dir={theme.direction} >
-            <div>{this.props.salesOrderRevised.Lists.length === 0 ? 
-              <EmptyList /> :
-              this._renderRevisionList()}</div>
+            <div>{this._renderRevisionList()}</div>
           </TabContainer>}
           <div className="site-container">
-            {this._renderTotalData()}
+            {this.props.salesOrderList.Lists.length === 0 || this.props.serviceOrderList.Lists.length === 0 ? "" : this._renderTotalData()}
           </div>
           <div className="filters-detail-site">
-            {this._renderFilter()}
+            {this.props.salesOrderList.Lists.length === 0 || this.props.serviceOrderList.Lists.length === 0 ? "" : this._renderFilter()}
           </div>
           {value === 0 && <TabContainer dir={theme.direction} >
             <div>{this._renderSalesOrderList()}</div>

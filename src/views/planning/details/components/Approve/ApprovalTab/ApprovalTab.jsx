@@ -9,7 +9,7 @@ import SalesOrderList from '../../PlanningList/SalesOrderList';
 import ServiceOrderList from '../../PlanningList/ServiceOrderList';
 import './ApprovalTab.scss';
 import DropdownFilter from '../../../../../../components/FilterByTitle/DropdownFilter';
-import { SelectCustomerFilterAction,SelectSiteFilterAction, SelectUnitModelFilterAction, SelectComponentFilterAction } from '../../../DetailPages-action'
+import { SelectCustomerFilterAction,SelectSiteFilterAction, SelectUnitModelFilterAction, SelectComponentFilterAction } from '../../../DetailPages-action';
 
 function TabContainer({ children, dir }) {
   return (
@@ -105,7 +105,7 @@ class ApprovalTab extends React.Component {
 
   _renderSalesOrderList(){
     return(
-      <div className="plannings-list-container">
+      <div className={this.props.salesOrderList.Lists.length === 0 ? "planning-list-empty" : "plannings-list-container"}>
         <SalesOrderList 
           {...this.props}
           idTab = "Approval"
@@ -116,12 +116,12 @@ class ApprovalTab extends React.Component {
 
   _renderServiceOrderList(){
     return(
-        <div className="plannings-list-container">
-          <ServiceOrderList 
+      <div className={this.props.serviceOrderList.Lists.length === 0 ? "planning-list-empty" : "plannings-list-container"}>
+        <ServiceOrderList 
           {...this.props}
           isClick={this.props.isClick}
-          />
-        </div>
+        />
+      </div>
     );
   }
 
@@ -324,15 +324,16 @@ class ApprovalTab extends React.Component {
       </Tabs>
     </AppBar>
     <div className="base-button-container">
-      {this._renderBaseBtn()}
+      {this.props.salesOrderList.Lists.length === 0 || this.props.serviceOrderList.Lists.length === 0 ? "" : this._renderBaseBtn()}
     </div>
     <div className="filters-container-approval">
-      {this._renderFilter()}
+      {this.props.salesOrderList.Lists.length === 0 || this.props.serviceOrderList.Lists.length === 0 ? "" : this._renderFilter()}
     </div>
     {value === 0 && <TabContainer dir={theme.direction} >
     <>{this._renderSalesOrderList()}</> 
     </TabContainer>}
-        {value === 1 && <TabContainer dir={theme.direction} ><div>{this._renderServiceOrderList()}</div></TabContainer>}
+        {value === 1 && <TabContainer dir={theme.direction} >
+        <div>{this._renderServiceOrderList()}</div></TabContainer>}
       </div>
     );
   }

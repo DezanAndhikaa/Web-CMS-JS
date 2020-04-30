@@ -12,7 +12,7 @@ import {
   SelectSiteFilterAction, 
   SelectUnitModelFilterAction, 
   SelectComponentFilterAction } 
-  from '../../DetailPages-action'
+  from '../../DetailPages-action';
 
 function TabContainer({ children, dir }) {
   return (
@@ -137,24 +137,13 @@ class PlanningDetailsTab extends React.Component {
 
   _renderSalesOrderList(){
     return(
-      <div className="plannings-list-containers">
+      <div className={this.props.salesOrderList.Lists.length === 0 ? "plannings-list-empty" : "plannings-list-container"}>
         <SalesOrderList 
           {...this.props}
           idSales= "Data Input"
           idTab= "Input"
         />
       </div>
-    );
-  }
-
-  _renderServiceOrderList(){
-    return(
-        <div className="plannings-list-containers">
-          <ServiceOrderList 
-          {...this.props}
-          isClick={this.props.isClick}
-          />
-        </div>
     );
   }
 
@@ -338,15 +327,16 @@ class PlanningDetailsTab extends React.Component {
             </div>
           </div>
           <div className="data-input-container">
-            {this._renderTotalDataInput()}
+            {this.props.salesOrderList.Lists.length === 0 || this.props.serviceOrderList.Lists.length === 0 ? "" : this._renderTotalDataInput()}
           </div>
           <div className="filters-container">
-            {this._renderFilter()}
+            {this.props.salesOrderList.Lists.length === 0 || this.props.serviceOrderList.Lists.length === 0 ? "" : this._renderFilter()}
           </div>
-    {value === 0 && <TabContainer dir={theme.direction} >
-    <div>{this._renderSalesOrderList()}</div> 
-    </TabContainer>}
-        {value === 1 && <TabContainer dir={theme.direction} ><div>{this._renderServiceOrderList()}</div></TabContainer>}
+        {value === 0 && <TabContainer dir={theme.direction} >
+          <div>
+            {this._renderSalesOrderList()}
+          </div> 
+        </TabContainer>}
       </div>
     );
   }

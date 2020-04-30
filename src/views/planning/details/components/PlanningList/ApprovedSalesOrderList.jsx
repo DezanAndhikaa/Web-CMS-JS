@@ -8,6 +8,7 @@ import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesBy
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from 'moment';
+import EmptyList from '../../../../../components/EmptyList/EmptyList';
 
 export default class ApprovedSalesOrderList extends React.PureComponent {
   constructor(props) {
@@ -213,19 +214,25 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
   }
 
   render(){
-    return(
-      <>
-        <Table classes={{ root: 'table' }} className="table">
-          {this.showTableHead()}
-          <TableBody classes={{ root: 'table-body' }}>
-            {this.props.salesOrderListApproved.Lists
-              && this.props.salesOrderListApproved.Lists.map((row, id) => (
-                this.showTableBody(row,id)
-            ))}
-          </TableBody>
-        </Table>
-        {this.showLoading()}
-      </>
-    )
+    if(this.props.salesOrderListApproved.Lists.length === 0 ){
+      return(
+        <EmptyList idEmpty= "Approve" />
+      )
+    }else{
+      return(
+        <>
+          <Table classes={{ root: 'table' }} className="table">
+            {this.showTableHead()}
+            <TableBody classes={{ root: 'table-body' }}>
+              {this.props.salesOrderListApproved.Lists
+                && this.props.salesOrderListApproved.Lists.map((row, id) => (
+                  this.showTableBody(row,id)
+              ))}
+            </TableBody>
+          </Table>
+          {this.showLoading()}
+        </>
+      )
+    }
   }
 }
