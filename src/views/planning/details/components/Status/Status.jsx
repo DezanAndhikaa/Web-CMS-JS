@@ -1711,7 +1711,9 @@ export default class Status extends React.PureComponent {
 
 	salesOrderList(){
 		return(
-			<div className={this.props.salesOrderList.Lists.length === 0 ? "list-status-empty" : "plannings-list-containers"}>
+			<div className={this.props.salesOrderList.Lists.length === 0 
+				&& this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? 
+				"list-status-empty" : "plannings-list-containers"}>
 				<SalesOrderList 
 					{...this.props}
 					idTab = "Status"
@@ -1728,17 +1730,19 @@ export default class Status extends React.PureComponent {
 
 	serviceOrderList(){
 		return(
-			<div className={this.props.serviceOrderList.Lists.length === 0 ? "list-status-empty" : "plannings-list-containers"}>
-			  <ServiceOrderList 
-				{...this.props}
-				idTab="Status"
-				onClickTabHead={this.props.onClickSortBy}
-				displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
-				sortServiceByState={this.props.sortServiceBy}
-				onClickServiceOrder={this.onClickServiceOrder}
-				onChoosedService={this.updateAssignmentServiceStates}
-				selectedServicePlanList={this.props.selectedServicePlans}
-			  />
+			<div className={this.props.serviceOrderList.Lists.length === 0 
+				&& this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? 
+				"list-status-empty" : "plannings-list-containers"}>
+				<ServiceOrderList 
+					{...this.props}
+					idTab="Status"
+					onClickTabHead={this.props.onClickSortBy}
+					displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
+					sortServiceByState={this.props.sortServiceBy}
+					onClickServiceOrder={this.onClickServiceOrder}
+					onChoosedService={this.updateAssignmentServiceStates}
+					selectedServicePlanList={this.props.selectedServicePlans}
+				/>
 			</div>
 		  );
 	}
@@ -1746,7 +1750,9 @@ export default class Status extends React.PureComponent {
 
 	approvedSalesOrderList(){
 		return(
-			<div className={this.props.salesOrderListApproved.Lists.length === 0 ? "list-status-empty" : "plannings-list-containers"}>
+			<div className={this.props.salesOrderListApproved.Lists.length === 0 
+				&& this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED ? 
+				"list-status-empty" : "plannings-list-containers"}>
 				<ApprovedSalesOrderList 
 				{...this.props}
 					onClickTabHead={this.props.onClickSortBy}
@@ -1762,7 +1768,9 @@ export default class Status extends React.PureComponent {
 
 	approvedServiceOrderList(){
 		return(
-			<div className={this.props.serviceOrderListApproved.Lists.length === 0 ? "list-status-empty" : "plannings-list-containers"}>
+			<div className={this.props.serviceOrderListApproved.Lists.length === 0 
+				&& this.props.fetchStatusServiceApproved === ApiRequestActionsStatus.SUCCEEDED ? 
+				"list-status-empty" : "plannings-list-containers"}>
 				<ApprovedServiceOrderList 
 					{...this.props}
 					onClickTabHead={this.props.onClickSortBy}
@@ -1778,7 +1786,9 @@ export default class Status extends React.PureComponent {
 
 	deletedSalesOrderList(){
 		return(
-			<div className={this.props.salesOrderListDeleted.Lists.length === 0 ? "list-status-empty" : "plannings-list-containers"}>
+			<div className={this.props.salesOrderListDeleted.Lists.length === 0 
+				&& this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED ? 
+				"list-status-empty" : "plannings-list-containers"}>
 				<DeletedSalesOrderList 
 					{...this.props}
 					onClickTabHead={this.props.onClickSortBy}
@@ -1794,7 +1804,9 @@ export default class Status extends React.PureComponent {
 
 	deletedServiceOrderList(){
 		return(
-			<div className={this.props.serviceOrderListDeleted.Lists.length === 0 ? "list-status-empty" : "plannings-list-containers"}>
+			<div className={this.props.serviceOrderListDeleted.Lists.length === 0 
+				&& this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED ? 
+				"list-status-empty" : "plannings-list-containers"}>
 				<DeletedServiceOrderList 
 					{...this.props}
 					onClickTabHead={this.props.onClickSortBy}
@@ -1810,7 +1822,9 @@ export default class Status extends React.PureComponent {
 
 	sapSalesOrderList(){
 		return(
-			<div className={this.props.salesOrderListSap.Lists.length === 0 ? "list-status-empty" : "plannings-list-containers"}>
+			<div className={this.props.salesOrderListSap.Lists.length === 0 
+				&& this.props.fetchStatusSalesSap === ApiRequestActionsStatus.SUCCEEDED ? 
+				"list-status-empty" : "plannings-list-containers"}>
 				<SapSalesOrderList 
 					{...this.props}
 					onClickTabHead={this.props.onClickSortBy}
@@ -1826,7 +1840,9 @@ export default class Status extends React.PureComponent {
 
 	sapServiceOrderList(){
 		return(
-			<div className={this.props.serviceOrderListSap.Lists.length === 0 ? "list-status-empty" : "plannings-list-containers"}>
+			<div className={this.props.serviceOrderListSap.Lists.length === 0 
+				&& this.props.fetchStatusServiceSap === ApiRequestActionsStatus.SUCCEEDED ? 
+				"list-status-empty" : "plannings-list-containers"}>
 				<SapServiceOrderList 
 					{...this.props}
 					onClickTabHead={this.props.onClickSortBy}
@@ -1851,7 +1867,8 @@ export default class Status extends React.PureComponent {
 					return(
 						<>
 							{this.approvedSalesOrderList()}
-							{this.props.salesOrderListApproved.Lists.length === 0 ? "" :
+							{this.props.salesOrderListApproved.Lists.length === 0 
+								&& this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED ? "" :
 								<div className="bottom-row">
 									{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderListApproved)}
 								</div>
@@ -1862,7 +1879,8 @@ export default class Status extends React.PureComponent {
 					return(
 						<>
 							{this.approvedServiceOrderList()}
-							{this.props.serviceOrderListApproved.Lists.length === 0 ? "" :
+							{this.props.serviceOrderListApproved.Lists.length === 0 
+								&& this.props.fetchStatusServiceApproved === ApiRequestActionsStatus.SUCCEEDED ? "" :
 								<div className="bottom-row">
 									{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderListApproved)}
 								</div>
@@ -1876,7 +1894,8 @@ export default class Status extends React.PureComponent {
 					return (
 						<>
 							{this.salesOrderList()}
-							{this.props.salesOrderList.Lists.length === 0 ? "" :
+							{this.props.salesOrderList.Lists.length === 0  
+								&& this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
 								<div className="bottom-row">
 									{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderList)}
 								</div>
@@ -1887,7 +1906,8 @@ export default class Status extends React.PureComponent {
 					return (
 						<>
 							{this.serviceOrderList()}
-							{this.props.serviceOrderList.Lists.length === 0 ? "" :
+							{this.props.serviceOrderList.Lists.length === 0 
+								&& this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
 								<div className="bottom-row">
 									{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderList)}
 								</div>
@@ -1902,7 +1922,8 @@ export default class Status extends React.PureComponent {
 				return(
 					<>
 						{this.deletedSalesOrderList()}
-						{this.props.salesOrderListDeleted.Lists.length === 0 ? "" :
+						{this.props.salesOrderListDeleted.Lists.length === 0 
+							&& this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED ? "" :
 							<div className="bottom-row">
 								{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderListDeleted)}
 							</div>
@@ -1913,7 +1934,8 @@ export default class Status extends React.PureComponent {
 				return(
 					<>
 						{this.deletedServiceOrderList()}
-						{this.props.serviceOrderListDeleted.Lists.length === 0 ? "" :
+						{this.props.serviceOrderListDeleted.Lists.length === 0 
+							&& this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.SUCCEEDED ? "" :
 							<div className="bottom-row">
 								{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderListDeleted)}
 							</div>
@@ -1928,7 +1950,8 @@ export default class Status extends React.PureComponent {
 				return(
 					<>
 						{this.sapSalesOrderList()}
-						{this.props.salesOrderListSap.Lists.length === 0 ? "" :
+						{this.props.salesOrderListSap.Lists.length === 0 
+							&& this.props.fetchStatusSalesSap === ApiRequestActionsStatus.SUCCEEDED ? "" :
 							<div className="bottom-row">
 								{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderListSap)}
 							</div>
@@ -1939,7 +1962,8 @@ export default class Status extends React.PureComponent {
 				return(
 					<>
 						{this.sapServiceOrderList()}
-						{this.props.serviceOrderListSap.Lists.length === 0 ? "" :
+						{this.props.serviceOrderListSap.Lists.length === 0 
+							&& this.props.fetchStatusServiceSap=== ApiRequestActionsStatus.SUCCEEDED ? "" :
 							<div className="bottom-row">
 								{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderListSap)}
 							</div>

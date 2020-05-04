@@ -451,7 +451,7 @@ fetchSearchSales = async() => {
               {this._renderTabs()}
           </div>
           <div></div>
-          {this.props.salesOrderList.Lists.length === 0 ? "" :
+          {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
             <div className="bottom-row">
                 {this._renderShowPerPage()} {this._renderPagination()}
             </div>

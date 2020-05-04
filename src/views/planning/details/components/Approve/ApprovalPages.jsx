@@ -854,7 +854,8 @@ componentDidUpdate = (prevProps) => {
                 {this._renderTabs()}
             </div>
             <div></div>
-            {this.props.salesOrderList.Lists.length === 0 || this.props.serviceOrderList.Lists.length === 0 ? "" :
+            {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED
+              || this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
               <div className="bottom-row-approval">
                   {this._renderShowPerPage()} {this._renderPagination()}
               </div>

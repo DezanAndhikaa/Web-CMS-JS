@@ -124,7 +124,8 @@ class DetailsTab extends React.Component {
   _renderSalesOrderList(){
     return(
       <>
-      <div className={this.props.salesOrderList.Lists.length === 0 ? "list-detail-empty" :"plannings-list-detail"}>
+      <div className={this.props.salesOrderList.Lists.length === 0 
+          && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "list-detail-empty" :"plannings-list-detail"}>
         <SalesOrderList 
           {...this.props}
           idSales= "Data Input"
@@ -136,11 +137,9 @@ class DetailsTab extends React.Component {
   }
 
   _renderRevisionList(){
-    // if(this.props.salesOrderRevised.Lists.length === 0 ){
-
-    // }else{
       return(
-        <div className={this.props.salesOrderRevised.Lists.length === 0 ? "list-detail-empty" : "paper-revision"}>
+        <div className={this.props.salesOrderRevised.Lists.length === 0 
+          && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED ? "list-detail-empty" : "paper-revision"}>
           <div className="revision-container">
             <div className="rev-title-container">
               <div className="ut-underline-rev" />
@@ -153,17 +152,18 @@ class DetailsTab extends React.Component {
                 />
             </div>
             <div>
-              {this.props.salesOrderRevised.Lists.length === 0 ? "" : this.props.renderPaginationRev}
+              {this.props.salesOrderRevised.Lists.length === 0 
+                && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED ? "" : this.props.renderPaginationRev}
             </div>
           </div>
         </div>
       )
-    // }
   }
 
   _renderServiceOrderList(){
     return(
-        <div className={this.props.serviceOrderList.Lists.length === 0 ? "list-detail-empty" : "plannings-list-detail"}>
+        <div className={this.props.serviceOrderList.Lists.length === 0 
+          && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "list-detail-empty" : "plannings-list-detail"}>
           <ServiceOrderList 
             {...this.props}
             idService="Data Input"
@@ -365,10 +365,12 @@ class DetailsTab extends React.Component {
             <div>{this._renderRevisionList()}</div>
           </TabContainer>}
           <div className="site-container">
-            {this.props.salesOrderList.Lists.length === 0 || this.props.serviceOrderList.Lists.length === 0 ? "" : this._renderTotalData()}
+            {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED
+              || this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderTotalData()}
           </div>
           <div className="filters-detail-site">
-            {this.props.salesOrderList.Lists.length === 0 || this.props.serviceOrderList.Lists.length === 0 ? "" : this._renderFilter()}
+            {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED
+              || this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
           </div>
           {value === 0 && <TabContainer dir={theme.direction} >
             <div>{this._renderSalesOrderList()}</div>

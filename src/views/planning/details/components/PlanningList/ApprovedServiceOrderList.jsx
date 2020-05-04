@@ -187,7 +187,7 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
   }
 
   render(){
-    if(this.props.serviceOrderListApproved.Lists.length === 0 ){
+    if(this.props.serviceOrderListApproved.Lists.length === 0 && this.props.fetchStatusServiceApproved === ApiRequestActionsStatus.SUCCEEDED){
       return(
         <EmptyList idEmpty= "Approve" />
       )

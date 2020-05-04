@@ -137,7 +137,8 @@ class PlanningDetailsTab extends React.Component {
 
   _renderSalesOrderList(){
     return(
-      <div className={this.props.salesOrderList.Lists.length === 0 ? "plannings-list-empty" : "plannings-list-container"}>
+      <div className={this.props.salesOrderList.Lists.length === 0 
+        && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "plannings-list-empty" : "plannings-list-container"}>
         <SalesOrderList 
           {...this.props}
           idSales= "Data Input"
@@ -327,10 +328,12 @@ class PlanningDetailsTab extends React.Component {
             </div>
           </div>
           <div className="data-input-container">
-            {this.props.salesOrderList.Lists.length === 0 || this.props.serviceOrderList.Lists.length === 0 ? "" : this._renderTotalDataInput()}
+            {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED
+              || this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderTotalDataInput()}
           </div>
           <div className="filters-container">
-            {this.props.salesOrderList.Lists.length === 0 || this.props.serviceOrderList.Lists.length === 0 ? "" : this._renderFilter()}
+            {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED
+              || this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
           </div>
         {value === 0 && <TabContainer dir={theme.direction} >
           <div>

@@ -5,7 +5,7 @@ import {
 import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
-import { Spinner } from '../../../../../assets/icons'
+import { Spinner } from '../../../../../assets/icons';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from 'moment';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
@@ -214,7 +214,7 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
   }
 
   render(){
-    if(this.props.salesOrderListApproved.Lists.length === 0 ){
+    if(this.props.salesOrderListApproved.Lists.length === 0 && this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED){
       return(
         <EmptyList idEmpty= "Approve" />
       )

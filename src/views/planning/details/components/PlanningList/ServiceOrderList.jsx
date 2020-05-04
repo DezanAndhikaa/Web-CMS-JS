@@ -172,21 +172,17 @@ export default class ServiceOrderList extends React.PureComponent {
           OOPS THERE WAS AN ERROR :'(
         </div>
       )
-    }else if(this.props.serviceOrderList.Lists.length === 0){
-      return(
-        <div className="loading-container">
-          DATA NOT FOUND
-        </div>
-      )
     }
   }
 
   render(){
-    if(this.props.serviceOrderList.Lists.length === 0 && this.props.idService === "Data Input" ){
+    if(this.props.serviceOrderList.Lists.length === 0 && this.props.idService === "Data Input" 
+      && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED){
       return(
         <EmptyList />
       )
-    }else if(this.props.serviceOrderList.Lists.length === 0 && this.props.idTab === "Status"){
+    }else if(this.props.serviceOrderList.Lists.length === 0 && this.props.idTab === "Status"
+      && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED){
       return(
         <EmptyList idEmpty= "NA" />
       )

@@ -177,7 +177,7 @@ export default class RevisedSalesOrderList extends React.PureComponent {
   }
 
   render(){
-    if(this.props.salesOrderRevised.Lists.length === 0){
+    if(this.props.salesOrderRevised.Lists.length === 0 && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED){
       return(
         <EmptyList idEmpty= "Rev" />
       )

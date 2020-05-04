@@ -9,6 +9,7 @@ import SalesOrderList from '../../PlanningList/SalesOrderList';
 import ServiceOrderList from '../../PlanningList/ServiceOrderList';
 import './ApprovalTab.scss';
 import DropdownFilter from '../../../../../../components/FilterByTitle/DropdownFilter';
+import { ApiRequestActionsStatus } from '../../../../../../core/RestClientHelpers';
 import { SelectCustomerFilterAction,SelectSiteFilterAction, SelectUnitModelFilterAction, SelectComponentFilterAction } from '../../../DetailPages-action';
 
 function TabContainer({ children, dir }) {
@@ -105,7 +106,9 @@ class ApprovalTab extends React.Component {
 
   _renderSalesOrderList(){
     return(
-      <div className={this.props.salesOrderList.Lists.length === 0 ? "planning-list-empty" : "plannings-list-container"}>
+      <div className={this.props.salesOrderList.Lists.length === 0 
+        && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ?
+        "planning-list-empty" : "plannings-list-container"}>
         <SalesOrderList 
           {...this.props}
           idTab = "Approval"
@@ -116,7 +119,9 @@ class ApprovalTab extends React.Component {
 
   _renderServiceOrderList(){
     return(
-      <div className={this.props.serviceOrderList.Lists.length === 0 ? "planning-list-empty" : "plannings-list-container"}>
+      <div className={this.props.serviceOrderList.Lists.length === 0 
+        && this.props.fetchStatusServiceOrder === ApiRequestActionsStatus.SUCCEEDED ? 
+        "planning-list-empty" : "plannings-list-container"}>
         <ServiceOrderList 
           {...this.props}
           isClick={this.props.isClick}
@@ -324,10 +329,12 @@ class ApprovalTab extends React.Component {
       </Tabs>
     </AppBar>
     <div className="base-button-container">
-      {this.props.salesOrderList.Lists.length === 0 || this.props.serviceOrderList.Lists.length === 0 ? "" : this._renderBaseBtn()}
+      {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED
+      || this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderBaseBtn()}
     </div>
     <div className="filters-container-approval">
-      {this.props.salesOrderList.Lists.length === 0 || this.props.serviceOrderList.Lists.length === 0 ? "" : this._renderFilter()}
+      {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED
+        || this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
     </div>
     {value === 0 && <TabContainer dir={theme.direction} >
     <>{this._renderSalesOrderList()}</> 

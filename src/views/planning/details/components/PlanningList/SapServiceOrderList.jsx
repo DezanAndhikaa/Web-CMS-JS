@@ -232,7 +232,7 @@ export default class SapServiceOrderList extends React.PureComponent {
   }
 
   render(){
-    if(this.props.serviceOrderListSap.Lists.length === 0 ){
+    if(this.props.serviceOrderListSap.Lists.length === 0 && this.props.fetchStatusServiceSap === ApiRequestActionsStatus.SUCCEEDED){
       return(
         <EmptyList idEmpty= "SAP" />
       )

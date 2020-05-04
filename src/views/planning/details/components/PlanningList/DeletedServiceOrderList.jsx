@@ -192,7 +192,7 @@ export default class DeletedServiceOrderList extends React.PureComponent {
   }
 
   render(){
-    if(this.props.serviceOrderListDeleted.Lists.length === 0 ){
+    if(this.props.serviceOrderListDeleted.Lists.length === 0 && this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.SUCCEEDED){
       return(
         <EmptyList idEmpty= "Delete" />
       )

@@ -213,7 +213,7 @@ export default class DeletedSalesOrderList extends React.PureComponent {
   }
 
   render(){
-    if(this.props.salesOrderListDeleted.Lists.length === 0 ){
+    if(this.props.salesOrderListDeleted.Lists.length === 0 && this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED){
       return(
         <EmptyList idEmpty= "Delete" />
       )

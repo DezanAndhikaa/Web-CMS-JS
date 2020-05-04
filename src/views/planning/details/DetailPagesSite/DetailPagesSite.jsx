@@ -466,7 +466,8 @@ componentDidUpdate = (prevProps) => {
         <div className="total-data-rev">
           *There are <b>{this.props.salesOrderRevised.TotalData} items </b>of sales orders that have not been revised.
         </div>
-        {this._renderPaginationRev()}
+        {this.props.salesOrderRevised.Lists.length === 0 
+          && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderPaginationRev()}
       </div>
     )
   }
@@ -594,7 +595,8 @@ componentDidUpdate = (prevProps) => {
               {this._renderTabs()}
           </div>
           <div></div>
-          {this.props.salesOrderList.Lists.length === 0 || this.props.serviceOrderList.Lists.length === 0 ? "" :
+          {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED
+            || this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
             <div className="bottom-row-detail-site">
                 {this._renderShowPerPage()} {this._renderPagination()}
             </div>

@@ -28,8 +28,8 @@ export const GetSalesOrderAction = 'GET_SALES_ORDER';
 export const ResetAssignment = 'RESET_ASSIGNMENT';
 export const ResetSelectedMechanicsAction = 'RESET_SELECTED_MECHANICS';
 export const ResetSelectedLeaderAction = 'RESET_SELECTED_LEADER';
-export const PlanningApprovedSalesDownloadAction = 'DOWNLOAD_APPROVED_SALES';
-export const PlanningApprovedServiceDownloadAction = 'DOWNLOAD_APPROVED_SERVICE';
+export const salesDownloadAction = 'DOWNLOAD_APPROVED_SALES';
+export const serviceDownloadAction = 'DOWNLOAD_APPROVED_SERVICE';
 export const SearchSalesAction = 'SEARCH_SALES_PLANS';
 export const SearchServiceAction = 'SEARCH_SERVICE_PLANS';
 export const SearchCompAction = 'SEARCH_BY_COMP';
@@ -143,7 +143,7 @@ export function downloadSalesAction(soId, accessToken){
 		  	'Content-Type': 'application/json',
 		},
 	  };
-	  return async (dispatch) => dispatch(callApi(PlanningApprovedSalesDownloadAction, requestConfig));
+	  return async (dispatch) => dispatch(callApi(salesDownloadAction, requestConfig));
 }
 export function downloadServiceAction(woId, accessToken){
 	const requestConfig = {
@@ -157,7 +157,7 @@ export function downloadServiceAction(woId, accessToken){
 		  	'Content-Type': 'application/json',
 		},
 	  };
-	  return async (dispatch) => dispatch(callApi(PlanningApprovedServiceDownloadAction, requestConfig));
+	  return async (dispatch) => dispatch(callApi(serviceDownloadAction, requestConfig));
 }
 
 export function putLifetimeCompAction(payload, accessToken){

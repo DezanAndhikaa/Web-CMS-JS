@@ -597,7 +597,7 @@ export function salesRevisedParameterReducer(state = initialSalesParameter, acti
 	return state;
 }
 
-export function filterLifetimeReducer(state = initialSalesParameter, action){
+export function filterLifetimeReducer(state = intitialFiltersParameter, action){
 	if(action.type === LifetimeFilterAction)
 		for(let i=0; i<2; i++){
 			if( i === 0){
