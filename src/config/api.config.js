@@ -13,10 +13,9 @@ const logging = true;
 //Initial Config API
 const apiConfig = (token) => {
     // add token IBM_CLIENT_ID to Headers if token not null
-    if(IBM_CLIENT_ID)axiosConfig.headers['x-ibm-client-id'] = IBM_CLIENT_ID;
-    if(token)axiosConfig.headers.Authorization = `Bearer ${token}`;
-    // if (process.env.REACT_APP_X_IBM_CLIENT_ID) axiosConfig.header['x-ibm-client-id'] = process.env.REACT_APP_X_IBM_CLIENT_ID;
-    if(process.env.NODE_ENV === 'development') {
+    if (IBM_CLIENT_ID)axiosConfig.headers['x-ibm-client-id'] = IBM_CLIENT_ID;
+    if (token)axiosConfig.headers.Authorization = `Bearer ${token}`;
+    if (process.env.NODE_ENV === 'development') {
         console.log('configure',axiosConfig)
     }
     const axiosApi = axios.create(axiosConfig);

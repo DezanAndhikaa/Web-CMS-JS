@@ -6,8 +6,8 @@ import {
 	ApproveSalesAction,
 	ApproveServiceAction,
 	UnapproveSalesAction, 
-	PlanningApprovedSalesDownloadAction,
-	PlanningApprovedServiceDownloadAction,
+	salesDownloadAction,
+	serviceDownloadAction,
 	ClearSelectedPlans,
 	FetchApprovedSalesAction,
 	FetchApprovedServiceAction,
@@ -473,7 +473,7 @@ export function fetchRevisedSalesReducer(state = initialSalesState, action){
 }
 
 export function downloadApprovedSalesReducer(state = initialDownloadState, action) {
-	if (action.type === PlanningApprovedSalesDownloadAction) {
+	if (action.type === salesDownloadAction) {
 	  switch (action.status) {
 		case ApiRequestActionsStatus.SUCCEEDED:
 		  return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
@@ -490,7 +490,7 @@ export function downloadApprovedSalesReducer(state = initialDownloadState, actio
 	return state;
 }
 export function downloadApprovedServiceReducer(state = initialDownloadState, action) {
-	if (action.type === PlanningApprovedServiceDownloadAction) {
+	if (action.type === serviceDownloadAction) {
 	  switch (action.status) {
 		case ApiRequestActionsStatus.SUCCEEDED:
 		  return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
