@@ -52,6 +52,7 @@ export default class ConfirmationModal extends React.PureComponent {
                 <p className="confirmation-title">You have not completed</p>
                 <p className="confirmation-title">the SAP Issue form</p>
                 <img className="confirmation-image" src={DelSuccess} alt="" />
+                <p className="confirmation-caption">The system can't save your activities.</p>
                 <p className="confirmation-caption">Do you want to continue?</p>
                 <div className="btn-container">
                   {this.props.idFailed === "CloseBtn" ? 

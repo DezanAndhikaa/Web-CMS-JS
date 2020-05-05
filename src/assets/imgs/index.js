@@ -25,8 +25,10 @@ import Text2 from './text-2.png';
 import IceFace from './ice-face.png';
 import Clock from './clock.png';
 import CmsLogo from './logo-cms.png';
+import Logout from './logo-logout.png';
 
 export {
+	Logout,
 	Empty,
 	ImgApproved,
 	ImgSendtoEdit,

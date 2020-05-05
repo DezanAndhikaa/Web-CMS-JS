@@ -3,10 +3,26 @@ import './PopUpMenu.scss';
 import LogOut from '@material-ui/icons/PowerSettingsNew';
 import Setting from '@material-ui/icons/BrightnessLow';
 import HistoryIcon from '@material-ui/icons/History';
-import { Menu } from '../../constants';
+import { Menu, StorageKey } from '../../constants';
 import { ListItemIcon,MenuItem, MenuList, Modal, Paper, Typography } from '@material-ui/core';
+import LogoutModal from '../../views/Logout/Logout';
 
 export default class PopUpMenu extends React.PureComponent {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLogoutModalShown: false
+    };
+  }
+
+  handleLogout = () => {
+    localStorage.removeItem(StorageKey.USER_DATA);
+    this.props.logout();
+    this.props.onLogout();
+    this.setState({ isLogoutModalShown: false });
+    this.props.push(Menu.LOGIN);
+  };
 
   handleClick = (menu, tab) => {
     this.props.push({
@@ -34,10 +50,16 @@ export default class PopUpMenu extends React.PureComponent {
             </MenuItem>
             <MenuItem>
               <ListItemIcon>
-                <LogOut/>
+                <LogOut />
               </ListItemIcon>
               <Typography variant="inherit" noWrap>Log Out</Typography>
             </MenuItem>
+            <LogoutModal 
+              {...this.props}
+              open={this.state.isLogoutModalShown}
+              onYesClicked={this.handleLogout}
+              onNoClicked={() => this.setState({ isLogoutModalShown: false })}
+            />
           </MenuList>
         </Paper>
       </Modal>

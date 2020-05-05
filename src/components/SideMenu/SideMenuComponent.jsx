@@ -5,31 +5,14 @@ import {
   ListItem,
   List,
   Drawer,
-  Modal,
-  DialogContent,
   Collapse
 } from "@material-ui/core";
-import { AssignmentIcon, IcDbMenu, IcApproval, LogoutIcon, AllocationIcon, DeliveryIcon, TrackingIcon, 
+import { AssignmentIcon, IcDbMenu, IcApproval, AllocationIcon, DeliveryIcon, TrackingIcon, 
   ProductionIcon, ExecutionIcon, DashboardIcon, PlanningIcon } from "../../assets/icons";
-import { Menu, StorageKey } from "../../constants";
-import LogoutModal from "./Logout";
+import { Menu } from "../../constants";
 import "./SideMenuComponent.scss";
 
 class SideMenuComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLogoutModalShown: false
-    };
-  }
-
-  handleLogout = () => {
-    localStorage.removeItem(StorageKey.USER_DATA);
-    this.props.logout();
-    this.props.onLogout();
-    this.setState({ isLogoutModalShown: false });
-    this.props.push(Menu.LOGIN);
-  };
 
   handleClick(menu, subMenu) {
     this.props.clickMenu(menu, subMenu);
@@ -293,41 +276,7 @@ class SideMenuComponent extends React.Component {
                 classes={{ primary: "item-text", root: "item-text" }}
               />
             </ListItem>
-            <ListItem
-              button
-              key="logout"
-              className={
-                this.props.path === Menu.LOGOUT
-                  ? "menu-item-selected"
-                  : "menu-item"
-              }
-              onClick={() => this.setState({ isLogoutModalShown: true })}
-            >
-              <ListItemIcon classes={{ root: "icon-root" }}>
-                <img
-                  src={LogoutIcon}
-                  alt="assignment icon"
-                  className="item-icon"
-                />
-              </ListItemIcon>
-              <ListItemText
-                primary="Logout"
-                classes={{ primary: "item-text", root: "item-text" }}
-              />
-            </ListItem>
           </List>
-          <Modal
-            open={this.state.isLogoutModalShown}
-            className="modal-container"
-            onClose={() => this.setState({ isLogoutModalShown: false })}
-          >
-            <DialogContent className="modal-content">
-              <LogoutModal
-                onYesClicked={this.handleLogout}
-                onNoClicked={() => this.setState({ isLogoutModalShown: false })}
-              />
-            </DialogContent>
-          </Modal>
         </Drawer>
       );
     }
