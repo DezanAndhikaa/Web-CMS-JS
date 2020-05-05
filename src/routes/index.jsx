@@ -9,7 +9,7 @@ import { Status } from '../views/planning/details/components/Status';
 import { TrackingHistory } from '../views/planning/details/components/TrackingHistory';
 import { ApprovalPages } from '../views/planning/details/components/Approve';
 import { Notification } from '../views/planning/details/components/Notification';
-import  { LoginPage }  from '../views/Login';
+import { LoginPage }  from '../views/Login';
 import requireAuth from '../components/AuthGuardHoc';
 import Dashboard from '../views/Dashboard/';
 

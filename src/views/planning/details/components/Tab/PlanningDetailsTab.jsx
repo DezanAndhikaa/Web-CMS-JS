@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import SalesOrderList from '../PlanningList/SalesOrderList';
-import ServiceOrderList from '../PlanningList/ServiceOrderList';
 import {Badge, Button, Typography} from '@material-ui/core';
 import { Menu } from '../../../../../constants';
 import './PlanningDetailsTab.scss';
@@ -13,7 +12,7 @@ import {
   SelectUnitModelFilterAction, 
   SelectComponentFilterAction } 
   from '../../DetailPages-action';
-  import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 
 function TabContainer({ children, dir }) {
   return (
@@ -329,12 +328,12 @@ class PlanningDetailsTab extends React.Component {
             </div>
           </div>
           <div className="data-input-container">
-            {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED
-              || this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderTotalDataInput()}
+            {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+              this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderTotalDataInput()}
           </div>
           <div className="filters-container">
-            {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED
-              || this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
+            {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+              this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
           </div>
         {value === 0 && <TabContainer dir={theme.direction} >
           <div>

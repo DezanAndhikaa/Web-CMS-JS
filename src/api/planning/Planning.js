@@ -1,9 +1,9 @@
 import BaseApi from 'api/base';
 import apiConfig from 'config/api.config';
 
-export default class AssignmentApi extends BaseApi{
+export default class PlanningApi extends BaseApi{
     static newInstance = token => {
-        if(!this.api) this.api = new AssignmentApi(apiConfig(token));
+        if(!this.api) this.api = new PlanningApi(apiConfig(token));
         return this.api;
     }
 
@@ -22,15 +22,72 @@ export default class AssignmentApi extends BaseApi{
     downloadSales = (soId) => {
         return this.axios.get(`/cms/v1/salesorder/downloadsalesorder`, soId)
     }
-    
-    assignJob = (parameter) => {
-        return this.axios.post(`/dca/v1/assignment/assignjob`,parameter)
+
+    downloadService= (woId) => {
+        return this.axios.get(`/cms/v1/serviceorder/downloadserviceorder`, woId)
     }
-    unassignJob = (WoIds) => {
-        return this.axios.post(`/dca/v1/assignment/unassignjob`,{WoIds})
+
+    putLifetime= (payload) => {
+        return this.axios.get(`/cms/v1/salesorder/lifetimecomponent`, payload)
     }
-    // note : value is the request paramater to server 
-    assignmentSummary = (WoId) => {
-        return this.axios.post(`/dca/v1/assignment/summary`,{WoId})
+
+    putSapIssue= (payload, whichTabs) => {
+        if(whichTabs){
+            return this.axios.get(`/cms/v1/salesorder/sapissue`, payload)
+        }else{
+            return this.axios.get(`/cms/v1/serviceorder/sapissue`, payload)
+        }
     }
+
+    deleteSales = (payload) => {
+        return this.axios.get(`/cms/v1/salesorder/delete`, payload)
+    }
+
+    deleteService = (payload) => {
+        return this.axios.get(`/cms/v1/serviceorder/delete`, payload)
+    }
+
+    deletePermanentSales = (payload) => {
+        return this.axios.get(`/cms/v1/salesorder/deletepermanent`, payload)
+    }
+
+    deletePermanentService = (payload) => {
+        return this.axios.get(`/cms/v1/serviceorder/deletepermanent`, payload)
+    }
+
+    fetchSales = (payload) => {
+        return this.axios.get(`/cms/v1/salesorder/filterunapproved`, payload)
+    }
+
+    fetchService= (payload) => {
+        return this.axios.get(`/cms/v1/serviceorder/filterunapproved`, payload)
+    }
+
+    fetchSalesApproved = (payload) => {
+        return this.axios.get(`/cms/v1/salesorder/filterapproved`, payload)
+    }
+
+    fetchServiceApproved = (payload) => {
+        return this.axios.get(`/cms/v1/serviceorder/filterapproved`, payload)
+    }
+
+    fetchSalesDeleted = (payload) => {
+        return this.axios.get(`/cms/v1/salesorder/filterdeleted`, payload)
+    }
+
+    fetchServiceDeleted = (payload) => {
+        return this.axios.get(`/cms/v1/serviceorder/filterdeleted`, payload)
+    }
+
+    fetchSalesSap = (payload) => {
+        return this.axios.get(`/cms/v1/salesorder/filterunapproved`, payload)
+    }
+
+    fetchServiceSap = (payload) => {
+        return this.axios.get(`/cms/v1/serviceorder/filterunapproved`, payload)
+    }
+
+    fetchRevisedSales = (payload) => {
+        return this.axios.get(`/cms/v1/salesorder/filterunapproved`, payload)
+    }    
 }
