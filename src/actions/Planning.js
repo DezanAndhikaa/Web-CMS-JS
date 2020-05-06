@@ -1,4 +1,4 @@
-import {PlanningApi} from 'api';
+import {PlanningApi} from '../api';
 import {
     LOGOUT_TYPE,
     ApproveSalesAction,
@@ -98,45 +98,9 @@ import {
     IndexFilterAction,
     LifetimeFilterAction,
     DateFilterAction
-} from 'actions/actionTypes'
+} from './actionTypes'
 
 const api = token => PlanningApi.newInstance(token);
-
-export const approveSales = (token) => async dispatch => {
-    dispatch({
-        type:`${FETCH_LIST_MECHANIC}${REQUEST_TYPE}`
-    })
-	const requestConfig = {
-		method: RequestMethod.PUT,
-		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/approval`,
-		headers: {
-			'Accept': 'application/json; charset=utf-8',
-			Authorization: `Bearer ${accessToken}`,
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
-			'Content-Type': 'application/json; charset=utf-8',
-		},
-		data: payload,
-	};
-	return async (dispatch) => dispatch(callApi(ApproveSalesAction, requestConfig));
-}
-
-export const listOfMechanic = (token) => async dispatch => {
-    dispatch({
-        type:`${FETCH_LIST_MECHANIC}${REQUEST_TYPE}`
-    })
-    try {
-        const res = await api(token).listMechanic(token);
-        dispatch({
-            type:`${FETCH_LIST_MECHANIC}${SUCCESS_TYPE}`,
-            payload:{data:res.data}
-        });
-    } catch (error) {
-        console.log('errorListofMechanic:',error);
-        dispatch({
-            type:`${FETCH_LIST_MECHANIC}${FAILURE_TYPE}`
-        })
-    } 
-}
 
 export function logoutAction() {
 	return { type: LOGOUT_TYPE };
