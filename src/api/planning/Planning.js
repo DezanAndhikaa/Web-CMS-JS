@@ -63,27 +63,27 @@ export default class PlanningApi extends BaseApi{
         return this.axios.get(`/cms/v1/serviceorder/filterunapproved`, payload)
     }
 
-    fetchSalesApproved = (payload) => {
+    fetchApprovedSales = (payload) => {
         return this.axios.get(`/cms/v1/salesorder/filterapproved`, payload)
     }
 
-    fetchServiceApproved = (payload) => {
+    fetchApprovedService = (payload) => {
         return this.axios.get(`/cms/v1/serviceorder/filterapproved`, payload)
     }
 
-    fetchSalesDeleted = (payload) => {
+    fetchDeletedSales = (payload) => {
         return this.axios.get(`/cms/v1/salesorder/filterdeleted`, payload)
     }
 
-    fetchServiceDeleted = (payload) => {
+    fetchDeletedService = (payload) => {
         return this.axios.get(`/cms/v1/serviceorder/filterdeleted`, payload)
     }
 
-    fetchSalesSap = (payload) => {
+    fetchSapSales = (payload) => {
         return this.axios.get(`/cms/v1/salesorder/filterunapproved`, payload)
     }
 
-    fetchServiceSap = (payload) => {
+    fetchSapService = (payload) => {
         return this.axios.get(`/cms/v1/serviceorder/filterunapproved`, payload)
     }
 
