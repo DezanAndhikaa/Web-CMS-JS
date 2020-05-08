@@ -3,7 +3,6 @@ import {
     REQUEST_TYPE,
     SUCCESS_TYPE,
     FAILURE_TYPE,
-    LOGIN_TYPE,
     LOGOUT_TYPE,
     
     // Action type for approve function
@@ -41,68 +40,8 @@ import {
     FETCH_SAP_SALES,
     FETCH_SAP_SERVICE,
     FETCH_REVISED_SALES,
-    
-    // Action type for global search
-    SEARCH_SALES_PLANS,
-    SEARCH_SERVICE_PLANS,
-    
-    // Action type for search per component
-    SEARCH_BY_COMP,
-    SEARCH_COMP_APPROVED_SALES,
-    SEARCH_COMP_DELETED_SALES,
-    SEARCH_COMP_SAP_SALES,
-    SEARCH_COMP_SERVICE,
-    SEARCH_COMP_APPROVED_SERVICE,
-    SEARCH_COMP_DELETED_SERVICE,
-    SEARCH_COMP_SAP_SERVICE,
-    
-    // Action type for sorting
-    SORT_SALES_BY_CUSTOMER,
-    SORT_SALES_BY_SITE,
-    SORT_SALES_BY_UNIT_MODEL,
-    SORT_SALES_BY_COMP_DESC,
-    SORT_SERVICE_BY_CUSTOMER,
-    SORT_SERVICE_BY_SITE,
-    SORT_SERVICE_BY_UNIT_MODEL,
-    SORT_SERVICE_BY_COMP_DESC,
-    
-    // Action type for manage checkbox
-    CLEAR_SELECTED_PLANS,
-    STORE_SELECTED_PLAN_DATA,
-    UNSELECT_SALES_PLANS,
-    UNSELECT_SERVICE_PLANS,
-    SELECT_SERVICE_PLANS,
-    SELECT_SALES_PLANS,
-    
-    // Action type for update parameter
-    UPDATE_SEARCH_SALES,
-    UPDATE_SEARCH_SALES_APPROVED,
-    UPDATE_SEARCH_SALES_DELETED,
-    UPDATE_SEARCH_SALES_SAP,
-    UPDATE_SEARCH_SERVICE,
-    UPDATE_SEARCH_SERVICE_APPROVED,
-    UPDATE_SEARCH_SERVICE_DELETE,
-    UPDATE_SEARCHSERVICESAP,
-    UPDATE_SALES_PARAMETER,
-    UPDATE_SALES_APPROVED_PARAMETER,
-    UPDATE_SALES_DELETED_PARAMETER,
-    UPDATE_SALES_SAP_PARAMETER,
-    UPDATE_SALES_REVISED_PARAM,
-    UPDATE_SERVICE_PARAMETER,
-    UPDATE_SERVICE_APPROVED_PARAMETER,
-    UPDATE_SERVICE_DELETED_PARAMETER,
-    UPDATE_SERVICE_SAP_PARAMETER,
-    
-    //Action type for filter
-    SALES_ORDER_FILTER,
-    SELECT_CUSTOMER_FILTER,
-    SELECT_SITE_FILTER,
-    SELECT_UNIT_MODEL_FILTER,
-    SELECT_COMPONENT_FILTER,
-    INDEX_FILTER,
-    LIFETIME_FILTER,
-    DATE_FILTER
-} from './actionTypes'
+    STORE_SELECTED_PLAN_DATA
+} from './actionTypes';
 
 const api = token => PlanningApi.newInstance(token);
 
@@ -469,4 +408,103 @@ export const fetchRevisedSales = (token) => async dispatch => {
             type:`${FETCH_REVISED_SALES}${FAILURE_TYPE}`
         })
     } 
+}
+
+export function searchSalesParameterAction(type, payload) {
+	return { type, payload };
+}
+
+export function searchSalesApprovedAction(type, payload) {
+	return { type, payload };
+}
+
+export function searchSalesDeletedAction(type, payload) {
+	return { type, payload };
+}
+
+export function searchSalesSapAction(type, payload) {
+	return { type, payload };
+}
+
+export function searchServiceParameterAction(type, payload) {
+	return { type, payload };
+}
+
+export function searchServiceApprovedAction(type, payload) {
+	return { type, payload };
+}
+
+export function searchServiceDeletedAction(type, payload) {
+	return { type, payload };
+}
+
+export function searchServiceSapAction(type, payload) {
+	return { type, payload };
+}
+
+export function salesParameterAction(type, payload) {
+	return { type, payload };
+}
+export function salesParameterApprovedAction(type, payload) {
+	return { type, payload };
+}
+export function salesParameterDeletedAction(type, payload) {
+	return { type, payload };
+}
+export function salesParameterSapAction(type, payload){
+	return { type, payload };
+}
+export function serviceParameterAction(type, payload) {
+	return { type, payload };
+}
+export function serviceParameterApprovedAction(type, payload) {
+	return { type, payload };
+}
+export function serviceParameterDeletedAction(type, payload) {
+	return { type, payload };
+}
+export function serviceParameterSapAction(type, payload){
+	return { type, payload };
+}
+export function salesParameterRevAction(type, payload){
+	return { type, payload };
+}
+export function searchAction(type, payload) {
+	return { type, payload };
+}
+export function searchCompAction(type, payload, sort){
+	return { type, payload, sort };
+}
+export function searchCompActionService(type, payload, sort){
+	return { type, payload, sort };
+}
+export function dateFilterAction(type, payload, payload2, page){
+	return { type, payload, payload2, page };
+}
+export function selectFilterAction(type, payload, payload2, page) {
+	return { type, payload, payload2, page };
+}
+export function selectFilterAction2(type, payload, head, page) {
+	return { type, payload, head, page };
+}
+export function indexFilterAction(type, payload){
+	return { type, payload };
+}
+export function selectSalesPlansAction(type, payload) {
+	return { type, payload };
+}
+export function selectServicePlansAction(type, payload) {
+	return { type, payload };
+}
+export function selectLeaderAction(type, payload) {
+	return { type, payload };
+}
+export function selectMechanicAction(type, payload) {
+	return { type, payload };
+}
+export function sortByAction(type) {
+	return { type };
+}
+export function storePlanDataAction(payload) {
+	return { type: STORE_SELECTED_PLAN_DATA, payload };
 }
