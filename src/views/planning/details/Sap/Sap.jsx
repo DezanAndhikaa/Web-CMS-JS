@@ -1,13 +1,10 @@
 import React from 'react';
 import { Button, Modal, TextField, Table, TableHead, TableRow, TableBody, TableCell, Paper, FormLabel } from '@material-ui/core';
-import './SapIssue.scss';
-import CloseButton from '../../../../../components/ActionButton/CloseButton/CloseButton';
+import './Sap.scss';
 import moment from 'moment';
 
-export default class SapIssue extends React.Component{
-
+export default class Sap extends React.PureComponent {
     state={
-        isShowModal: false,
         description: [],
         sapIssue: []
     }
@@ -87,11 +84,23 @@ export default class SapIssue extends React.Component{
       return(
         <div className="teks">
           <div className="header">Please pick a mistake on the SAP</div>
-          <Button className="btn-reason">Customer</Button>
-          <Button className="btn-reason">Part Number</Button>
-          <Button className="btn-reason">Site</Button>
-          <Button className="btn-reason">Unit Model</Button>
-          <Button className="btn-reason">Serial Number</Button>
+          {this.props.whichTabs ?
+            <Button className="btn-reason" id="so">SO</Button> :
+            <Button className="btn-reason" id="wo">WO</Button>}
+          <Button className="btn-reason" id="cust">Customer</Button>
+          <Button className="btn-reason" id="site">Site</Button>
+          <Button className="btn-reason" id="unitModel">Unit Model</Button>
+          <Button className="btn-reason" id="compDesc">Component Description</Button>
+          <Button className="btn-reason" id="partNumber">Part Number</Button>
+          <Button className="btn-reason" id="unitCode">Unit Code</Button>
+          <Button className="btn-reason" id="sn">Serial Number</Button>
+          <Button className="btn-reason" id="planExec">Plan Execution</Button>
+          {this.props.whichTabs ?
+            <>
+                <Button className="btn-reason" id="smr">SMR</Button>
+                <Button className="btn-reason" id="smrDate">SMR Date</Button> 
+            </> : ""
+          }
           <FormLabel>Description :</FormLabel>
         </div>
       )
@@ -103,7 +112,7 @@ export default class SapIssue extends React.Component{
           <TextField 
             type="text"
             className="input-description"
-            placeholder="Tuliskan masalahnya yaa.."
+            placeholder="Silahkan perbaiki SAP sekarang !!"
             size="small"
             value={this.state.description[id]} 
             name={this.state.description[id]} 
@@ -115,42 +124,39 @@ export default class SapIssue extends React.Component{
 
     _renderIssue(){
       return(
-        <div className="assign-mechanic-modal-issue">
-          <div className="container-issue">
-            <div className="top-row-issue">
-              <div className="top-button-issue"><Button className="back_button" variant="outlined" onClick={this.props.isBack}>Back</Button></div>
-              <div className="ut-underline-issue"/>
-              <p className="select-input-title-issue">SAP Issue</p>
-              <CloseButton onClose={this.props.isClose}/>
-            </div>
-              <div className="top-middle-issue"> 
-                <Table size="small" component={Paper}>
-                  {this._showTableHead()}
-                  <TableBody>
-                    {this.props.selectedDataSAP
-                        && this.props.selectedDataSAP.map((row, id) => (this._showTableBody(row,id)) )
-                    }
-                  </TableBody>
-                </Table>
-              </div>
-            <div className="bottom-row-issue">
-                <p className="btn-cancel-issue">* Please check again before pressing the send button</p>
-                <Button className="btn-input-issue" onClick={ async () => {this.props.onKelik(this.state.description);this.props.isTry()} } >Send</Button>
-            </div>
-          </div>
+        <div className="planning-list-sap">
+            <Table size="small" component={Paper}>
+                {this._showTableHead()}
+                <TableBody>
+                {this.props.selectedDataSAP
+                    && this.props.selectedDataSAP.map((row, id) => (this._showTableBody(row,id)) )
+                }
+                </TableBody>
+            </Table>
         </div>
       )
     }
 
     render(){
-      return(
-        <div>
-          <Modal className="modal-pos-issue" open={this.props.isShowModal} onClose={this.props.isClosed} >
-            <div className="body-container">
-              {this._renderIssue()}
-            </div>
-          </Modal>
-        </div>
-      )
+        return(
+            <main className="content" >
+                <div className="header-container">
+                    <Button className="btn-back-to-approval" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
+                        Approval
+                    </Button>
+                </div>
+                <div className="table-containers">
+                    <div className="title-containers">
+                        <div className="title">
+                            SAP Issue
+                        </div>						
+                        <Button className="btn-send-sap" variant="outlined" onClick={this.isClicked}>Send SAP Issue</Button>
+                    </div>
+                    <div>
+                        {this._renderIssue()}
+                    </div>
+                </div>
+            </main>
+        );
     }
 }

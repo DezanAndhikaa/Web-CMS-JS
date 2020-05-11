@@ -2041,7 +2041,7 @@ export default class Status extends React.PureComponent {
 			<main className="content" >
 				<div className="head-containers">
 					<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
-						Detail
+						Approval
 					</Button>
 					<div className="notif_button">
 						<NotifButton
