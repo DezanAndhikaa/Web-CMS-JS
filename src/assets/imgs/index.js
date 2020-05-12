@@ -26,8 +26,10 @@ import IceFace from './ice-face.png';
 import Clock from './clock.png';
 import CmsLogo from './logo-cms.png';
 import Logout from './logo-logout.png';
+import ImgSapGuide from './sap-guide.png';
 
 export {
+	ImgSapGuide,
 	Logout,
 	Empty,
 	ImgApproved,

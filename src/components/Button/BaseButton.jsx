@@ -7,6 +7,7 @@ import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 import ApproveConfirmation from '../ApproveConfirmation/ApproveConfirmation';
 import UnapproveConfirmation from '../UnapproveConfirmation/UnapproveConfirmation'
 import { ApiRequestActionsStatus } from '../../core/RestClientHelpers';
+import SapGuide from '../../views/planning/details/components/Sap/private-components/SapGuide/SapGuide';
 
 class BaseButton extends React.Component{
     constructor(props){
@@ -76,13 +77,19 @@ class BaseButton extends React.Component{
             return(
                 <div className="button-inline">
                     <Button className="btn-approve" onClick={this.isClicked} disabled={this.props.disabledButton}>Approve</Button>
-                    <ApproveConfirmation
+                    {/* <ApproveConfirmation
                         {...this.props}
                         {...this.state}
                         onClose={this.isClosed}
                         openModal={this.state.isShowModal}
                         totalData={this.props.totalSelectedItems}
                         onApprove={this.isApproved}
+                    /> */}
+                    <SapGuide 
+                        {...this.props}
+                        {...this.state}
+                        onClose={this.isClosed}
+                        openModal={this.state.isShowModal}
                     />
                 </div>
             )
