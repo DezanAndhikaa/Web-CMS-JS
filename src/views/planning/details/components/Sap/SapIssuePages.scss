@@ -1,10 +1,12 @@
-@import '../../../../themes/variables';
-@import '../../../../themes/functions';
+@import '../../../../../themes/variables';
+@import '../../../../../themes/functions';
 
 .header-container{
     display: inline-flex;
     justify-content: space-between;
     width: 100%;
+    padding-bottom: vw(20);
+    border-bottom: 1.5px solid #E0E0E0;
     .btn-back-to-approval{
         display: flex;
         height: vw(38.07);
@@ -17,7 +19,7 @@
         text-transform: capitalize;
         margin-top: vw(10);
         background-color: transparent;
-        background-image: url('../../../../assets/icons/back.png');
+        background-image: url('../../../../../assets/icons/back.png');
         background-size: auto;
         background-position-x: 18%;
         background-position-y: center;
@@ -40,28 +42,28 @@
             display: flex;
             width: 50%;
             margin-bottom: 2%;
+            font-family: 'Lato-Regular';
+            font-weight: bold;
+            font-size: 30px;
+            line-height: 36px;
         }
         .btn-send-sap{
-            flex: 1;
             align-self: flex-end;
-            display: inline-flex;
-            justify-content: flex-end;
             margin-bottom: 2%;
-            display: flex;
-            // padding-right: 23%;
-            width: vw(153.22);
+            width: vw(203.22);
             height: vw(38.07);
-            font-size: vw(18);
-            font-weight: bold;
-            line-height: vw(16) !important;
-            font-family: 'Lato-Regular';
+            font-size: 14px;
+            line-height: 18px;
+            font-family: 'Lato-Bold';
             text-transform: capitalize;
             color: white;
-            background-color: map-get($colors , third);
-            box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-            background-image: url('../../../../assets/icons/send-sap.png');
+            background-color: #4DA1FF;
+            padding-right: 3%;
+            box-shadow: 2px 2px 4px rgba(77, 161, 255, 0.37);
+            border-radius: 6px;
+            background-image: url('../../../../../assets/icons/send-sap.png');
             background-size: 15%;
-            background-position-x: 82%;
+            background-position-x: 90%;
             background-position-y: center;
             background-repeat: no-repeat;
             cursor: pointer;

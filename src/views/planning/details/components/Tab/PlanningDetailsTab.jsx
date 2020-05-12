@@ -138,7 +138,7 @@ class PlanningDetailsTab extends React.Component {
   _renderSalesOrderList(){
     return(
       <div className={this.props.salesOrderList.Lists.length === 0 
-        && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "plannings-list-empty" : "plannings-list-container"}>
+        && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "plannings-list-empty" : "plannings-list-containers"}>
         <SalesOrderList 
           {...this.props}
           idSales= "Data Input"

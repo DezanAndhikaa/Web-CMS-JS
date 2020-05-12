@@ -6,6 +6,7 @@ import CloseNotif from '../CloseNotif/CloseNotif';
 import SapIssue from '../../views/planning/details/components/SapIssue/SapIssue'
 import { ApiRequestActionsStatus } from '../../core/RestClientHelpers';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal'
+import { Menu } from '../../constants';
 
 export default class UnapproveConfirmation extends React.PureComponent {
 
@@ -196,6 +197,13 @@ export default class UnapproveConfirmation extends React.PureComponent {
       return <CircularProgress size={100} className="circular-progress" />;
   }
 
+  handleClick = (menu, tab) => {
+    this.props.push({
+      pathname: menu,
+      whichTab: tab
+    });
+  }
+
 	render() {
     if(this.props.idConfirm === "Cancel"){
         return (
@@ -213,7 +221,8 @@ export default class UnapproveConfirmation extends React.PureComponent {
                   <p className="confirmation-caption-unapprove"><b>Select one</b> to continue cancel approve</p>
                   <div className="btn-row">
                     {this.props.whichTabs ? <Button className="button-edit-lt" onClick={() => this.isClickedSend()}>Edit Lifetime</Button> : null }
-                    <Button className={this.props.whichTabs ? "button-sap-issue" : "button-sap-issue-service"} onClick={() => this.isClickedSap()}>SAP Issue</Button>
+                    {/* <Button className={this.props.whichTabs ? "button-sap-issue" : "button-sap-issue-service"} onClick={() => this.isClickedSap()}>SAP Issue</Button> */}
+                    <Button className={this.props.whichTabs ? "button-sap-issue" : "button-sap-issue-service"} onClick={ () => this.handleClick(Menu.PLANNING_SAP, 'sales')}>SAP Issue</Button>
                   </div>
                   <div className={this.props.whichTabs ? "labelMax" : "labelMax-service" }>
                     <label>* Max 5 Items</label>

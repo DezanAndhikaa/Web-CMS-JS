@@ -10,6 +10,7 @@ import { TrackingHistory } from '../views/planning/details/components/TrackingHi
 import { ApprovalPages } from '../views/planning/details/components/Approve';
 import { Notification } from '../views/planning/details/components/Notification';
 import { LoginPage }  from '../views/Login';
+import { SapIssuePages } from '../views/planning/details/components/Sap';
 import requireAuth from '../components/AuthGuardHoc';
 import Dashboard from '../views/Dashboard/';
 
@@ -23,6 +24,7 @@ const routes = (
 			<Route exact path={Menu.PLANNING_TRACKING_HISTORY} component={requireAuth(TrackingHistory)} />
 			<Route exact path={Menu.PLANNING_APPROVAL} component={requireAuth(ApprovalPages)} />
 			<Route exact path={Menu.PLANNING_ALL_NOTIF} component={requireAuth(Notification)} />
+			<Route exact path={Menu.PLANNING_SAP} component={requireAuth(SapIssuePages)} />
 			<Route exact path="*" component={requireAuth(Dashboard)} />
 		</Switch>
 	</div>
