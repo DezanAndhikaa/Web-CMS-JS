@@ -1,8 +1,6 @@
 import {
-    REQUEST_TYPE,
     SUCCESS_TYPE,
     FAILURE_TYPE,
-    LOGOUT_TYPE,
     
     // Action type for approve function
     APPROVE_SALES,
@@ -50,9 +48,6 @@ import {
     SEARCH_COMP_DELETED_SALES,
     SEARCH_COMP_SAP_SALES,
     SEARCH_COMP_SERVICE,
-    SEARCH_COMP_APPROVED_SERVICE,
-    SEARCH_COMP_DELETED_SERVICE,
-    SEARCH_COMP_SAP_SERVICE,
     
     // Action type for sorting
     SORT_SALES_BY_CUSTOMER,
@@ -92,7 +87,6 @@ import {
     UPDATE_SERVICE_SAP_PARAMETER,
     
     //Action type for filter
-    SALES_ORDER_FILTER,
     SELECT_CUSTOMER_FILTER,
     SELECT_SITE_FILTER,
     SELECT_UNIT_MODEL_FILTER,
@@ -100,12 +94,7 @@ import {
     INDEX_FILTER,
     LIFETIME_FILTER,
     DATE_FILTER
-} from './actionTypes'
-import { combineReducers } from 'redux';
-
-const initialState = {
-    data:[],
-};
+} from '../actions/actionTypes';
 
 const initialSalesState = {
 	TotalData: 0,
