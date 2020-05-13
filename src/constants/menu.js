@@ -1,0 +1,16 @@
+export const MENU = {
+	LOGIN: '/webcms/',
+	PLANNING : '/webcms/planning',
+	PLANNING_DETAILS : '/webcms/planning/details',
+	PLANNING_DETAILS_SITE : '/webcms/planning/details/site',
+	PLANNING_DETAILS_STATUS: '/webcms/planning/approval/status',
+	PLANNING_APPROVAL:'/webcms/planning/approval',
+	PLANNING_TRACKING_HISTORY:'/webcms/planning/tracking-history',
+	PLANNING_DASHBOARD : '/webcms/planning/dashboard',
+	PLANNING_ALL_NOTIF : '/webcms/planning/all-notification',
+	PLANNING_SAP:'/webcmsjs/planning/approval/sap-issue',
+	DASHBOARD: '/webcms/dashboard',
+	ALLOCATION: '/webcmsjs/allocation',
+	SETTINGS: '/websmsjs/settings',
+	LOGOUT: '/websmsjs/logout',
+};
