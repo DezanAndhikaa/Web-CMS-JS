@@ -1,6 +1,6 @@
 import React from 'react';
 import './FilterByLifetime.scss';
-import CloseButton from '../../components/CloseButton/CloseButton';
+import CloseButton from '../../components/ActionButton/CloseButton/CloseButton';
 import { Button } from '@material-ui/core';
 
 class FilterByLifetime extends React.Component{
@@ -27,7 +27,7 @@ class FilterByLifetime extends React.Component{
                 <div className="top-row">
                     <div className="ut-underline"/>
                     <p className="select-input-title">{this.props.title}</p>
-                    <CloseButton onClose={this.props.onClosed}/>
+                    <CloseButton idBtnClose="NonConfirmModal" onClose={this.props.onClosed}/>
                 </div>
                 <div className="teks-middle">
                     <label className="teks-left">Min</label>    

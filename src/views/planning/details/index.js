@@ -2,23 +2,22 @@ import { push } from 'connected-react-router';
 import { connect } from 'react-redux';
 import { PlansReducers } from './DetailPages-reducer';
 import {
-	approveServiceDownloadAction, approveSalesDownloadAction,
 	putLifetimeCompAction,
-	// putSAPIssueAction,
-	approveSalesAction, //APPROVE SALES
+	approveSalesAction,
 	unapproveSalesAction, 
-	approveServiceAction, //APPROVE SERVICE
+	approveServiceAction,
 	deleteSalesAction,
 	deleteServiceAction,
 	fetchApprovedSalesAction,
 	fetchApprovedServiceAction,
 	fetchDeletedSalesAction,
 	fetchDeletedServiceAction,
+	fetchSearchSalesAction,
 	fetchSalesAction, salesParameterAction, fetchServiceAction,
 	ClearSelectedPlans, UpdateServiceParameterAction,
 	UpdateSalesParameterAction, 
-	UpdateSearchParameterAction,
-	searchParameterAction,
+	UpdateSearchSalesAction,
+	searchSalesParameterAction,
 	searchAction,
 	SearchSalesAction, SearchServiceAction,searchCompAction,
 	SearchCompAction,SearchCompActionService,searchCompActionService,
@@ -46,14 +45,9 @@ const mapStateToProps = (state) => ({
 	indexFilterParameter: state.plansPageState.indexFilterParameter,
 	serviceParameter: state.plansPageState.serviceParameter,
 	salesSearch: state.plansPageState.salesSearch,
-	serviceSearch: state.plansPageState.serviceSearch,
+	searchSalesParameter: state.plansPageState.searchSalesParameter,
 	searchComp: state.plansPageState.searchComp,
-	// requestPlans: state.plansPageState.PlansAssignmentSummary.status,
-	// requestMechanics: state.plansPageState.mechanicList.status,
-	// requestUnapproveSales: state.plansPageState.unassignPlansStatus.status,
-	// unapproveSalesResponse: state.plansPageState.unassignPlansStatus.response,
 	selectedFilters: state.plansPageState.selectedFilters,
-	// selectedPlans: state.plansPageState.selectedPlans,
 	selectedSalesPlans: state.plansPageState.selectedSalesPlans,
 	selectedServicePlans: state.plansPageState.selectedServicePlans,
 	selectedLeader: state.plansPageState.selectedLeader,
@@ -70,8 +64,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	push: (path, whichTab) => dispatch(push(path, whichTab)),
-	downloadSalesApproved : (soId) => dispatch(approveSalesDownloadAction(soId)),
-	downloadServiceApproved : (soId) => dispatch(approveServiceDownloadAction(soId)),
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
 	clearSelectedServicePlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
 	putLifetimeComp : (payload, token) => dispatch(putLifetimeCompAction(payload, token)),
@@ -86,6 +78,7 @@ const mapDispatchToProps = (dispatch) => ({
 	fetchDeletedService: (payload) => dispatch(fetchDeletedServiceAction(payload)),
 	fetchSalesOrder: (payload, token) => dispatch(fetchSalesAction(payload, token)),
 	fetchServiceOrder: (payload) => dispatch(fetchServiceAction(payload)),
+	fetchSearchSales: (payload, token) => dispatch(fetchSearchSalesAction(payload, token)),
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	onSearchSales: (keyword) => dispatch(searchAction(SearchSalesAction, keyword)),
 	onSearchService: (keyword) => dispatch(searchAction(SearchServiceAction, keyword)),
@@ -104,7 +97,7 @@ const mapDispatchToProps = (dispatch) => ({
 	unselectSalesPlan: (payload) => dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
 	updateSalesParameter: (payload) => dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
 	updateServiceParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
-	updateSearchParameter: (payload) => dispatch(searchParameterAction(UpdateSearchParameterAction, payload)),
+	updateSearchSales: (payload) => dispatch(searchSalesParameterAction(UpdateSearchSalesAction, payload)),
 });
 
 const detailPages = connect(mapStateToProps, mapDispatchToProps)(DetailPages);

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import SalesOrderList from '../PlanningList/SalesOrderList';
-import ServiceOrderList from '../PlanningList/ServiceOrderList';
 import {Badge, Button, Typography} from '@material-ui/core';
 import { Menu } from '../../../../../constants';
 import './PlanningDetailsTab.scss';
@@ -12,7 +11,8 @@ import {
   SelectSiteFilterAction, 
   SelectUnitModelFilterAction, 
   SelectComponentFilterAction } 
-  from '../../DetailPages-action'
+  from '../../DetailPages-action';
+import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 
 function TabContainer({ children, dir }) {
   return (
@@ -33,7 +33,6 @@ const StyledBadge = withStyles(theme => ({
 const Badges = withStyles(theme => ({
   badge: {
     right: -32,
-    // top: 10,
     padding: '10px',
     borderRadius: '5px',
     fontSize: '15px'
@@ -62,7 +61,6 @@ const styles = theme => ({
     textTransform: 'initial',
     alignItem: 'center',
     marginLeft:0,
-    // minWidth: 72,
     fontWeight: theme.typography.fontWeightRegular,
     marginRight: theme.spacing.unit * 0,
     fontFamily: [
@@ -139,23 +137,14 @@ class PlanningDetailsTab extends React.Component {
 
   _renderSalesOrderList(){
     return(
-      <div className="plannings-list-containers">
+      <div className={this.props.salesOrderList.Lists.length === 0 
+        && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "plannings-list-empty" : "plannings-list-containers"}>
         <SalesOrderList 
-          idSales= "Data Input"
           {...this.props}
+          idSales= "Data Input"
+          idTab= "Input"
         />
       </div>
-    );
-  }
-
-  _renderServiceOrderList(){
-    return(
-        <div className="plannings-list-containers">
-          <ServiceOrderList 
-          {...this.props}
-          isClick={this.props.isClick}
-          />
-        </div>
     );
   }
 
@@ -223,7 +212,7 @@ class PlanningDetailsTab extends React.Component {
               Sales Order
             </div>
           </div>
-          <div className="total-data-input">
+          <div className={this.props.totalSalesData.toString().length > 1 ? "total-data-inputs" : "total-data-input"}>
             {this.props.totalSalesData}
           </div>
         </div>
@@ -339,15 +328,18 @@ class PlanningDetailsTab extends React.Component {
             </div>
           </div>
           <div className="data-input-container">
-            {this._renderTotalDataInput()}
+            {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+              this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderTotalDataInput()}
           </div>
           <div className="filters-container">
-            {this._renderFilter()}
+            {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+              this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
           </div>
-    {value === 0 && <TabContainer dir={theme.direction} >
-    <div>{this._renderSalesOrderList()}</div> 
-    </TabContainer>}
-        {value === 1 && <TabContainer dir={theme.direction} ><div>{this._renderServiceOrderList()}</div></TabContainer>}
+        {value === 0 && <TabContainer dir={theme.direction} >
+          <div>
+            {this._renderSalesOrderList()}
+          </div> 
+        </TabContainer>}
       </div>
     );
   }

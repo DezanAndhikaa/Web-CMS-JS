@@ -2,11 +2,13 @@ import React from 'react';
 import {
   Table, TableBody, TableCell, TableHead, TableRow, Snackbar
 } from '@material-ui/core';
-import './PlanningList.scss';import { Spinner } from '../../../../../assets/icons'
+import './PlanningList.scss';
+import { Spinner } from '../../../../../assets/icons';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from 'moment';
 import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
 import ConfirmationModal from '../../../../../components/ConfirmationModal/ConfirmationModal';
+import EmptyList from '../../../../../components/EmptyList/EmptyList';
 
 export default class RevisedSalesOrderList extends React.PureComponent {
   constructor(props) {
@@ -121,8 +123,6 @@ export default class RevisedSalesOrderList extends React.PureComponent {
     this.setState({
       openModalrevised: !this.state.openModalrevised
     })
-    // this.onClickRevisedSales()    
-    // await this.props.onClickRevisedSales();
   }
   
   renderModalRevised(){
@@ -173,29 +173,29 @@ export default class RevisedSalesOrderList extends React.PureComponent {
           OOPS THERE WAS AN ERROR :'(
         </div>
       )
-    }else if(this.props.salesOrderRevised.Lists.length === 0){
+    }
+  }
+
+  render(){
+    if(this.props.salesOrderRevised.Lists.length === 0 && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED){
       return(
-        <div className="loading-container">
-          DATA NOT FOUND
+        <EmptyList idEmpty= "Rev" />
+      )
+    }else{
+      return(
+        <div> 
+          <Table classes={{ root: 'table' }} className="table-rev">
+          {this.showTableHead()}
+          <TableBody classes={{ root: 'table-body' }}>
+            {this.props.salesOrderRevised.Lists
+              && this.props.salesOrderRevised.Lists.map((row, id) => (
+                this.showTableBody(row,id)
+              ))}
+            </TableBody>
+          </Table>
+          {this.showLoading()}
         </div>
       )
     }
   }
-
-render(){
-        return(
-          <div> 
-            <Table classes={{ root: 'table' }} className="table-rev">
-            {this.showTableHead()}
-            <TableBody classes={{ root: 'table-body' }}>
-              {this.props.salesOrderRevised.Lists
-                && this.props.salesOrderRevised.Lists.map((row, id) => (
-                  this.showTableBody(row,id)
-                ))}
-              </TableBody>
-            </Table>
-            {this.showLoading()}
-          </div>
-        )
-      }
-  }
+}

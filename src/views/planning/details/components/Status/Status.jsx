@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import Cards from './components/Card';
 import SearchInput from '../../../../../components/Searchbar/SearchInput';
@@ -30,6 +29,13 @@ export default class Status extends React.PureComponent {
 		sapIssueTotalData : 0,
 		searchVal : '',
 		isDisabled: true,
+		openSuccess: false,
+	}
+
+	changeSuccess = () => {
+		this.setState({
+		  openSuccess : !this.state.openSuccess
+		})
 	}
 
 	componentDidMount = async() =>{
@@ -50,16 +56,1055 @@ export default class Status extends React.PureComponent {
 		}
 	}
 
+	componentWillUnmount = () => {
+		this.props.updateSalesParameter({
+			...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+		});
+		this.props.updateServiceParameter({
+			...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+		});
+		this.props.updateSalesApprovedParameter({
+			...this.props.salesApprovedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
+		})
+		this.props.updateServiceApprovedParameter({
+			...this.props.serviceApprovedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
+		})
+		this.props.updateSalesDeletedParameter({
+			...this.props.salesDeletedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
+		})
+		this.props.updateServiceDeletedParameter({
+			...this.props.serviceDeletedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
+		})
+		this.props.updateSalesSapParameter({
+			...this.props.salesSapParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
+		})
+		this.props.updateServiceSapParameter({
+			...this.props.serviceSapParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
+		})
+	  }
+
+	componentDidUpdate = (prevProps) => {
+		if (prevProps.salesParameter !== this.props.salesParameter) {
+			this.onClickSalesOrder();
+		}
+		if (prevProps.salesApprovedParameter !== this.props.salesApprovedParameter) {
+			this.onClickSalesOrderApproved();
+		}
+		if (prevProps.salesDeletedParameter !== this.props.salesDeletedParameter) {
+			this.onClickSalesOrderDeleted();
+		}
+		if (prevProps.salesSapParameter !== this.props.salesSapParameter ){
+			this.onClickSalesOrderSap();
+		}
+		if (prevProps.serviceParameter !== this.props.serviceParameter) {
+			this.onClickServiceOrder();
+		}
+		if (prevProps.serviceApprovedParameter !== this.props.serviceApprovedParameter) {
+			this.onClickServiceOrderApproved();
+		}
+		if (prevProps.serviceDeletedParameter !== this.props.serviceDeletedParameter) {
+			this.onClickServiceOrderDeleted();
+		}
+		if (prevProps.serviceSapParameter !== this.props.serviceSapParameter) {
+			this.onClickServiceOrderSap();
+		}
+		if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
+			prevProps.approveSalesDownloaded.status === ApiRequestActionsStatus.LOADING) {
+			this.onClickDownloadSalesApproved()
+		}
+		if (this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
+			prevProps.approveServiceDownloaded.status === ApiRequestActionsStatus.LOADING) {
+			this.onClickDownloadServiceApproved()
+		}
+		if(prevProps.searchSalesApprovedParam !== this.props.searchSalesApprovedParam){
+			this.fetchSearchSalesApproved();
+		}
+		if(prevProps.searchSalesParameter !== this.props.searchSalesParameter){
+			this.fetchSearchSales();
+		}
+		if(prevProps.searchSalesDeletedParam !== this.props.searchSalesDeletedParam){
+			this.fetchSearchSalesDeleted();
+		}
+		if(prevProps.searchSalesSapParam !== this.props.searchSalesSapParam){
+			this.fetchSearchSalesSap();
+		}
+		if(prevProps.searchServiceApprovedParam !== this.props.searchServiceApprovedParam){
+			this.fetchSearchServiceApproved();
+		}
+		if(prevProps.searchServiceParameter !== this.props.searchServiceParameter){
+			this.fetchSearchService();
+		}
+		if(prevProps.searchServiceDeletedParam !== this.props.searchServiceDeletedParam){
+			this.fetchSearchServiceDeleted();
+		}
+		if(prevProps.searchServiceSapParam !== this.props.searchServiceSapParam){
+			this.fetchSearchServiceSap();
+		}
+
+		//ini untuk trigger sales global search
+		if (prevProps.salesSearch !== this.props.salesSearch) {
+			switch (this.state.whatPageIsChoosed) {
+				case 'Approve':
+					return this.props.updateSearchSalesApproved(
+						{...prevProps.searchSalesApprovedParam, Category: 'SA', Keyword: this.props.salesSearch});
+				case 'Not Approve':
+					return this.props.updateSearchSales(
+						{...prevProps.searchSalesParameter, Category: 'SN', Keyword: this.props.salesSearch});
+				case 'Delete' :
+					return this.props.updateSearchSalesDeleted(
+						{...prevProps.searchSalesDeletedParam, Category: 'SD', Keyword: this.props.salesSearch});
+				case 'SAP ISSUE':
+					return this.props.updateSearchSalesSap(
+						{...prevProps.searchSalesSapParam, Category: 'SSAP', Keyword: this.props.salesSearch});
+				default:
+					break;
+			}
+		}
+		  
+		//ini untuk trigger service global search
+		if(prevProps.serviceSearch !== this.props.serviceSearch){
+			switch (this.state.whatPageIsChoosed) {
+				case 'Approve':
+					return this.props.updateServiceApprovedParameter(
+						{...prevProps.searchServiceApprovedParam, Category: 'SA', Keyword: this.props.serviceSearch});
+				case 'Not Approve':
+					return this.props.updateServiceParameter(
+						{...prevProps.searchServiceParameter, Category: 'SN', Keyword: this.props.serviceSearch});
+				case 'Delete' :
+					return this.props.updateServiceDeletedParameter(
+						{...prevProps.searchSerrviceDeletedParam, Category: 'SD', Keyword: this.props.serviceSearch});
+				case 'SAP ISSUE':
+					return this.props.updateServiceSapParameter(
+						{...prevProps.searchServiceSapParam, Category: 'SSAP', Keyword: this.props.serviceSearch});
+				default:
+					break;
+			}
+		}
+
+		//search per component
+		if(prevProps.searchComp !== this.props.searchComp){
+			if (this.props.location.whichTab === "sales") {
+				switch (this.state.whatPageIsChoosed) {
+					case 'Approve':
+						if(this.props.searchComp[0].Value === ""){
+							this.props.updateSalesApprovedParameter({
+							...prevProps.salesApprovedParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+							});  
+						}else{
+							this.props.updateSalesApprovedParameter({
+							...prevProps.salesApprovedParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+							});
+						}
+						break;
+					case 'Not Approve':
+						if(this.props.searchComp[0].Value === ""){
+							this.props.updateSalesParameter({
+							...prevProps.salesParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+							});  
+						}else{
+							this.props.updateSalesParameter({
+							...prevProps.salesParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+							});
+						}
+						break;
+					case 'Delete':
+						if(this.props.searchComp[0].Value === ""){
+							this.props.updateSalesDeletedParameter({
+							...prevProps.salesDeletedParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+							});  
+						}else{
+							this.props.updateSalesDeletedParameter({
+							...prevProps.salesDeletedParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+							});
+						}
+						break;
+					case 'SAP ISSUE':
+						if(this.props.searchComp[0].Value === ""){
+							this.props.updateSalesSapParameter({
+							...prevProps.salesSapParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+							});  
+						}else{
+							this.props.updateSalesSapParameter({
+							...prevProps.salesSapParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+							});
+						}
+						break;
+					default:
+						break;
+				}
+			}else{
+				switch (this.state.whatPageIsChoosed) {
+					case 'Approve':
+						if(prevProps.searchComp !== this.props.searchComp){
+							this.props.updateServiceApprovedParameter({
+								...prevProps.serviceApprovedParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+							});
+						}
+						break;
+					case 'Not Approve':
+						if(prevProps.searchComp !== this.props.searchComp){
+							this.props.updateServiceParameter({
+								...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+							});
+						}
+						break;
+					case 'Delete':
+						if(prevProps.searchComp !== this.props.searchComp){
+							this.props.updateServiceDeletedParameter({
+								...prevProps.serviceDeletedParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+							});
+						}
+						break;
+					case 'SAP ISSUE':
+						if(prevProps.searchComp !== this.props.searchComp){
+							this.props.updateServiceSapParameter({
+								...prevProps.serviceSapParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+							});
+						}
+						break;
+					default:
+						break;
+				}
+			}
+		}
+
+		//FILTER RANGE LIFETIME
+		if(prevProps.filterLifetime !== this.props.filterLifetime){
+			if (this.props.location.whichTab === "sales") {
+				switch (this.state.whatPageIsChoosed) {
+					case 'Approve':
+						return this.props.updateSalesApprovedParameter({
+							...prevProps.salesApprovedParameter.dataFilter, Filter : this.props.filterLifetime, PageNumber: 1,
+						});
+					case 'Not Approve':
+						return this.props.updateSalesParameter({
+							...prevProps.salesParameter.dataFilter, Filter : this.props.filterLifetime, PageNumber: 1,
+						});
+					case 'Delete':
+						return this.props.updateSalesDeletedParameter({
+							...prevProps.salesDeletedParameter.dataFilter, Filter : this.props.filterLifetime, PageNumber: 1,
+						});
+					case 'SAP ISSUE':
+						return this.props.updateSalesSapParameter({
+							...prevProps.salesSapParameter.dataFilter, Filter : this.props.filterLifetime, PageNumber: 1,
+						});
+					default:
+						break;
+				}
+			}
+		}
+		
+		//FILTER RANGE DATE
+		if(prevProps.filterDate !== this.props.filterDate){
+			if (this.props.location.whichTab === "sales") {
+				switch (this.state.whatPageIsChoosed) {
+					case 'Approve':
+						return this.props.fetchApprovedSales(this.props.filterDate, this.props.token);
+					case 'Not Approve':
+						return this.props.fetchSalesOrder(this.props.filterDate,this.props.token);
+					case 'Delete':
+						return this.props.fetchDeletedSales(this.props.filterDate, this.props.token);
+					case 'SAP ISSUE':
+						return this.props.fetchSapSales(this.props.filterDate, this.props.token);
+					default:
+						break;
+				}
+			}else{
+				switch (this.state.whatPageIsChoosed) {
+					case 'Approve':
+						return this.props.fetchApprovedService(this.props.filterDate, this.props.token);
+					case 'Not Approve':
+						return this.props.fetchServiceOrder(this.props.filterDate,this.props.token);
+					case 'Delete':
+						return this.props.fetchDeletedService(this.props.filterDate, this.props.token);
+					case 'SAP ISSUE':
+						return this.props.fetchSapService(this.props.filterDate, this.props.token);
+					default:
+						break;
+				}
+			}
+		}
+
+		//sorting sales order
+		if (prevProps.sortSalesBy !== this.props.sortSalesBy) {
+			const { sortSalesBy } = this.props;
+			let isDescending = false;
+			if (this.props.location.whichTab === "sales") {
+				switch (this.state.whatPageIsChoosed) {
+					case 'Approve':
+						if (sortSalesBy.Customer.isActive) {
+							isDescending = !sortSalesBy.Customer.isAscending;
+							this.props.updateSalesApprovedParameter({
+								...this.props.salesApprovedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'CustomerName',
+									Direction : 'desc'
+								}],      
+							});
+							if (sortSalesBy.Customer.isAscending === !sortSalesBy.Customer.isActive) {
+								isDescending = !sortSalesBy.Customer.isAscending;
+								this.props.updateSalesApprovedParameter({
+									...this.props.salesApprovedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'CustomerName',
+										Direction : 'asc'
+									}],      
+								});
+							}
+						}
+						if (sortSalesBy.Site.isActive){
+							isDescending = !sortSalesBy.Site.isAscending;
+							this.props.updateSalesApprovedParameter({
+								...this.props.salesApprovedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'SiteCode',
+									Direction : 'desc'
+								}],
+							});
+							if (sortSalesBy.Site.isAscending === !sortSalesBy.Site.isActive) {
+								isDescending = !sortSalesBy.Site.isAscending;
+								this.props.updateSalesApprovedParameter({
+									...this.props.salesApprovedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'SiteCode',
+										Direction : 'asc'
+									}],
+								});
+							}
+						} 
+						if (sortSalesBy.UnitModel.isActive) {
+							isDescending = !sortSalesBy.UnitModel.isAscending;
+							this.props.updateSalesApprovedParameter({
+								...this.props.salesApprovedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'UnitModel',
+									Direction : 'desc'
+								}],
+							});
+							if (sortSalesBy.UnitModel.isAscending === !sortSalesBy.UnitModel.isActive) {
+								isDescending = !sortSalesBy.UnitModel.isAscending;
+								this.props.updateSalesApprovedParameter({
+									...this.props.salesApprovedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'UnitModel',
+										Direction : 'asc'
+									}],
+								});
+							}
+						};
+						if (sortSalesBy.CompDesc.isActive) {
+							isDescending = !sortSalesBy.CompDesc.isAscending;
+							this.props.updateSalesApprovedParameter({
+								...this.props.salesApprovedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'ComponentDescription',
+									Direction : 'desc'
+								}],
+							});
+							if (sortSalesBy.CompDesc.isAscending === !sortSalesBy.CompDesc.isActive) {
+								isDescending = !sortSalesBy.CompDesc.isAscending;
+								this.props.updateSalesApprovedParameter({
+									...this.props.salesApprovedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'ComponentDescription',
+										Direction : 'asc'
+									}]
+								});
+							}
+						};
+						break;
+					case 'Not Approve':
+						if (sortSalesBy.Customer.isActive) {
+							isDescending = !sortSalesBy.Customer.isAscending;
+							this.props.updateSalesParameter({
+								...this.props.salesParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'CustomerName',
+									Direction : 'desc'
+								}],      
+							});
+							if (sortSalesBy.Customer.isAscending === !sortSalesBy.Customer.isActive) {
+								isDescending = !sortSalesBy.Customer.isAscending;
+								this.props.updateSalesParameter({
+									...this.props.salesParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'CustomerName',
+										Direction : 'asc'
+									}],      
+								});
+							}
+						}
+						if (sortSalesBy.Site.isActive){
+							isDescending = !sortSalesBy.Site.isAscending;
+							this.props.updateSalesParameter({
+								...this.props.salesParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'SiteCode',
+									Direction : 'desc'
+								}],
+							});
+							if (sortSalesBy.Site.isAscending === !sortSalesBy.Site.isActive) {
+								isDescending = !sortSalesBy.Site.isAscending;
+								this.props.updateSalesParameter({
+									...this.props.salesParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'SiteCode',
+										Direction : 'asc'
+									}],
+								});
+							}
+						} 
+						if (sortSalesBy.UnitModel.isActive) {
+							isDescending = !sortSalesBy.UnitModel.isAscending;
+							this.props.updateSalesParameter({
+								...this.props.salesParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'UnitModel',
+									Direction : 'desc'
+								}],
+							});
+							if (sortSalesBy.UnitModel.isAscending === !sortSalesBy.UnitModel.isActive) {
+								isDescending = !sortSalesBy.UnitModel.isAscending;
+								this.props.updateSalesParameter({
+									...this.props.salesParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'UnitModel',
+										Direction : 'asc'
+									}],
+								});
+							}
+						};
+						if (sortSalesBy.CompDesc.isActive) {
+							isDescending = !sortSalesBy.CompDesc.isAscending;
+							this.props.updateSalesParameter({
+								...this.props.salesParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'ComponentDescription',
+									Direction : 'desc'
+								}],
+							});
+							if (sortSalesBy.CompDesc.isAscending === !sortSalesBy.CompDesc.isActive) {
+								isDescending = !sortSalesBy.CompDesc.isAscending;
+								this.props.updateSalesParameter({
+									...this.props.salesParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'ComponentDescription',
+										Direction : 'asc'
+									}]
+								});
+							}
+						};
+						break;
+					case 'Deleted':
+						if (sortSalesBy.Customer.isActive) {
+							isDescending = !sortSalesBy.Customer.isAscending;
+							this.props.updateSalesDeletedParameter({
+								...this.props.salesDeletedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'CustomerName',
+									Direction : 'desc'
+								}],      
+							});
+							if (sortSalesBy.Customer.isAscending === !sortSalesBy.Customer.isActive) {
+								isDescending = !sortSalesBy.Customer.isAscending;
+								this.props.updateSalesDeletedParameter({
+									...this.props.salesDeletedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'CustomerName',
+										Direction : 'asc'
+									}],      
+								});
+							}
+						}
+						if (sortSalesBy.Site.isActive){
+							isDescending = !sortSalesBy.Site.isAscending;
+							this.props.updateSalesDeletedParameter({
+								...this.props.salesDeletedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'SiteCode',
+									Direction : 'desc'
+								}],
+							});
+							if (sortSalesBy.Site.isAscending === !sortSalesBy.Site.isActive) {
+								isDescending = !sortSalesBy.Site.isAscending;
+								this.props.updateSalesDeletedParameter({
+									...this.props.salesDeletedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'SiteCode',
+										Direction : 'asc'
+									}],
+								});
+							}
+						} 
+						if (sortSalesBy.UnitModel.isActive) {
+							isDescending = !sortSalesBy.UnitModel.isAscending;
+							this.props.updateSalesDeletedParameter({
+								...this.props.salesDeletedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'UnitModel',
+									Direction : 'desc'
+								}],
+							});
+							if (sortSalesBy.UnitModel.isAscending === !sortSalesBy.UnitModel.isActive) {
+								isDescending = !sortSalesBy.UnitModel.isAscending;
+								this.props.updateSalesDeletedParameter({
+									...this.props.salesDeletedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'UnitModel',
+										Direction : 'asc'
+									}],
+								});
+							}
+						};
+						if (sortSalesBy.CompDesc.isActive) {
+							isDescending = !sortSalesBy.CompDesc.isAscending;
+							this.props.updateSalesDeletedParameter({
+								...this.props.salesDeletedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'ComponentDescription',
+									Direction : 'desc'
+								}],
+							});
+							if (sortSalesBy.CompDesc.isAscending === !sortSalesBy.CompDesc.isActive) {
+								isDescending = !sortSalesBy.CompDesc.isAscending;
+								this.props.updateSalesDeletedParameter({
+									...this.props.salesDeletedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'ComponentDescription',
+										Direction : 'asc'
+									}]
+								});
+							}
+						};
+						break;
+					case 'SAP ISSUE':
+						if (sortSalesBy.Customer.isActive) {
+							isDescending = !sortSalesBy.Customer.isAscending;
+							this.props.updateSalesSapParameter({
+								...this.props.salesSapParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'CustomerName',
+									Direction : 'desc'
+								}],      
+							});
+							if (sortSalesBy.Customer.isAscending === !sortSalesBy.Customer.isActive) {
+								isDescending = !sortSalesBy.Customer.isAscending;
+								this.props.updateSalesSapParameter({
+									...this.props.salesSapParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'CustomerName',
+										Direction : 'asc'
+									}],      
+								});
+							}
+						}
+						if (sortSalesBy.Site.isActive){
+							isDescending = !sortSalesBy.Site.isAscending;
+							this.props.updateSalesSapParameter({
+								...this.props.salesSapParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'SiteCode',
+									Direction : 'desc'
+								}],
+							});
+							if (sortSalesBy.Site.isAscending === !sortSalesBy.Site.isActive) {
+								isDescending = !sortSalesBy.Site.isAscending;
+								this.props.updateSalesSapParameter({
+									...this.props.salesSapParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'SiteCode',
+										Direction : 'asc'
+									}],
+								});
+							}
+						} 
+						if (sortSalesBy.UnitModel.isActive) {
+							isDescending = !sortSalesBy.UnitModel.isAscending;
+							this.props.updateSalesSapParameter({
+								...this.props.salesSapParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'UnitModel',
+									Direction : 'desc'
+								}],
+							});
+							if (sortSalesBy.UnitModel.isAscending === !sortSalesBy.UnitModel.isActive) {
+								isDescending = !sortSalesBy.UnitModel.isAscending;
+								this.props.updateSalesSapParameter({
+									...this.props.salesSapParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'UnitModel',
+										Direction : 'asc'
+									}],
+								});
+							}
+						};
+						if (sortSalesBy.CompDesc.isActive) {
+							isDescending = !sortSalesBy.CompDesc.isAscending;
+							this.props.updateSalesSapParameter({
+								...this.props.salesSapParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'ComponentDescription',
+									Direction : 'desc'
+								}],
+							});
+							if (sortSalesBy.CompDesc.isAscending === !sortSalesBy.CompDesc.isActive) {
+								isDescending = !sortSalesBy.CompDesc.isAscending;
+								this.props.updateSalesSapParameter({
+									...this.props.salesSapParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'ComponentDescription',
+										Direction : 'asc'
+									}]
+								});
+							}
+						};
+						break;
+					default:
+						break;
+				}
+			}
+		}
+
+		//sorting service
+		if (prevProps.sortServiceBy !== this.props.sortServiceBy) {
+			const { sortServiceBy } = this.props;
+			let isDescending = false;
+			if (this.props.location.whichTab === "service") {
+				switch (this.state.whatPageIsChoosed) {
+					case 'Approve':
+						if (sortServiceBy.Customer.isActive) {
+							isDescending = !sortServiceBy.Customer.isAscending;
+							this.props.updateServiceApprovedParameter({
+								...this.props.serviceApprovedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'CustomerName',
+									Direction : 'desc'
+								}]   
+							});
+							if (sortServiceBy.Customer.isAscending === !sortServiceBy.Customer.isActive) {
+								isDescending = !sortServiceBy.Customer.isAscending;
+								this.props.updateServiceApprovedParameter({
+									...this.props.serviceApprovedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'CustomerName',
+										Direction : 'asc'
+									}]   
+								});
+							}
+						}
+						if (sortServiceBy.Site.isActive){
+							isDescending = !sortServiceBy.Site.isAscending;
+							this.props.updateServiceApprovedParameter({
+								...this.props.serviceApprovedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'SiteCode',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.Site.isAscending === !sortServiceBy.Site.isActive) {
+								isDescending = !sortServiceBy.Site.isAscending;
+								this.props.updateServiceApprovedParameter({
+									...this.props.serviceApprovedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'SiteCode',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						} 
+						if (sortServiceBy.UnitModel.isActive) {
+							isDescending = !sortServiceBy.UnitModel.isAscending;
+							this.props.updateServiceApprovedParameter({
+								...this.props.serviceApprovedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'UnitModel',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.UnitModel.isAscending === !sortServiceBy.UnitModel.isActive) {
+								isDescending = !sortServiceBy.UnitModel.isAscending;
+								this.props.updateServiceApprovedParameter({
+									...this.props.serviceApprovedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'UnitModel',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						};
+						if (sortServiceBy.CompDesc.isActive) {
+							isDescending = !sortServiceBy.CompDesc.isAscending;
+							this.props.updateServiceApprovedParameter({
+								...this.props.serviceApprovedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'ComponentDescription',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.CompDesc.isAscending === !sortServiceBy.CompDesc.isActive) {
+								isDescending = !sortServiceBy.CompDesc.isAscending;
+								this.props.updateServiceApprovedParameter({
+									...this.props.serviceApprovedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'ComponentDescription',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						};
+						break;
+					case 'Not Approve':
+						if (sortServiceBy.Customer.isActive) {
+							isDescending = !sortServiceBy.Customer.isAscending;
+							this.props.updateServiceParameter({
+								...this.props.serviceParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'CustomerName',
+									Direction : 'desc'
+								}]   
+							});
+							if (sortServiceBy.Customer.isAscending === !sortServiceBy.Customer.isActive) {
+								isDescending = !sortServiceBy.Customer.isAscending;
+								this.props.updateServiceParameter({
+									...this.props.serviceParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'CustomerName',
+										Direction : 'asc'
+									}]   
+								});
+							}
+						}
+						if (sortServiceBy.Site.isActive){
+							isDescending = !sortServiceBy.Site.isAscending;
+							this.props.updateServiceParameter({
+								...this.props.serviceParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'SiteCode',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.Site.isAscending === !sortServiceBy.Site.isActive) {
+								isDescending = !sortServiceBy.Site.isAscending;
+								this.props.updateServiceParameter({
+									...this.props.serviceParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'SiteCode',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						} 
+						if (sortServiceBy.UnitModel.isActive) {
+							isDescending = !sortServiceBy.UnitModel.isAscending;
+							this.props.updateServiceParameter({
+								...this.props.serviceParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'UnitModel',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.UnitModel.isAscending === !sortServiceBy.UnitModel.isActive) {
+								isDescending = !sortServiceBy.UnitModel.isAscending;
+								this.props.updateServiceParameter({
+									...this.props.serviceParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'UnitModel',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						};
+						if (sortServiceBy.CompDesc.isActive) {
+							isDescending = !sortServiceBy.CompDesc.isAscending;
+							this.props.updateServiceParameter({
+								...this.props.serviceParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'ComponentDescription',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.CompDesc.isAscending === !sortServiceBy.CompDesc.isActive) {
+								isDescending = !sortServiceBy.CompDesc.isAscending;
+								this.props.updateServiceParameter({
+									...this.props.serviceParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'ComponentDescription',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						};
+						break;
+					case 'Delete':
+						if (sortServiceBy.Customer.isActive) {
+							isDescending = !sortServiceBy.Customer.isAscending;
+							this.props.updateServiceDeletedParameter({
+								...this.props.serviceDeletedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'CustomerName',
+									Direction : 'desc'
+								}]   
+							});
+							if (sortServiceBy.Customer.isAscending === !sortServiceBy.Customer.isActive) {
+								isDescending = !sortServiceBy.Customer.isAscending;
+								this.props.updateServiceDeletedParameter({
+									...this.props.serviceDeletedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'CustomerName',
+										Direction : 'asc'
+									}]   
+								});
+							}
+						}
+						if (sortServiceBy.Site.isActive){
+							isDescending = !sortServiceBy.Site.isAscending;
+							this.props.updateServiceDeletedParameter({
+								...this.props.serviceDeletedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'SiteCode',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.Site.isAscending === !sortServiceBy.Site.isActive) {
+								isDescending = !sortServiceBy.Site.isAscending;
+								this.props.updateServiceDeletedParameter({
+									...this.props.serviceDeletedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'SiteCode',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						} 
+						if (sortServiceBy.UnitModel.isActive) {
+							isDescending = !sortServiceBy.UnitModel.isAscending;
+							this.props.updateServiceDeletedParameter({
+								...this.props.serviceDeletedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'UnitModel',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.UnitModel.isAscending === !sortServiceBy.UnitModel.isActive) {
+								isDescending = !sortServiceBy.UnitModel.isAscending;
+								this.props.updateServiceDeletedParameter({
+									...this.props.serviceDeletedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'UnitModel',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						};
+						if (sortServiceBy.CompDesc.isActive) {
+							isDescending = !sortServiceBy.CompDesc.isAscending;
+							this.props.updateServiceDeletedParameter({
+								...this.props.serviceDeletedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'ComponentDescription',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.CompDesc.isAscending === !sortServiceBy.CompDesc.isActive) {
+								isDescending = !sortServiceBy.CompDesc.isAscending;
+								this.props.updateServiceDeletedParameter({
+									...this.props.serviceDeletedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'ComponentDescription',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						};
+						break;
+					case 'SAP ISSUE':
+						if (sortServiceBy.Customer.isActive) {
+							isDescending = !sortServiceBy.Customer.isAscending;
+							this.props.updateServiceSapParameter({
+								...this.props.serviceSapParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'CustomerName',
+									Direction : 'desc'
+								}]   
+							});
+							if (sortServiceBy.Customer.isAscending === !sortServiceBy.Customer.isActive) {
+								isDescending = !sortServiceBy.Customer.isAscending;
+								this.props.updateServiceSapParameter({
+									...this.props.serviceSapParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'CustomerName',
+										Direction : 'asc'
+									}]   
+								});
+							}
+						}
+						if (sortServiceBy.Site.isActive){
+							isDescending = !sortServiceBy.Site.isAscending;
+							this.props.updateServiceSapParameter({
+								...this.props.serviceSapParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'SiteCode',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.Site.isAscending === !sortServiceBy.Site.isActive) {
+								isDescending = !sortServiceBy.Site.isAscending;
+								this.props.updateServiceSapParameter({
+									...this.props.serviceSapParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'SiteCode',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						} 
+						if (sortServiceBy.UnitModel.isActive) {
+							isDescending = !sortServiceBy.UnitModel.isAscending;
+							this.props.updateServiceSapParameter({
+								...this.props.serviceSapParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'UnitModel',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.UnitModel.isAscending === !sortServiceBy.UnitModel.isActive) {
+								isDescending = !sortServiceBy.UnitModel.isAscending;
+								this.props.updateServiceSapParameter({
+									...this.props.serviceSapParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'UnitModel',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						};
+						if (sortServiceBy.CompDesc.isActive) {
+							isDescending = !sortServiceBy.CompDesc.isAscending;
+							this.props.updateServiceSapParameter({
+								...this.props.serviceSapParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'ComponentDescription',
+									Direction : 'desc'
+								}] 
+							});
+							if (sortServiceBy.CompDesc.isAscending === !sortServiceBy.CompDesc.isActive) {
+								isDescending = !sortServiceBy.CompDesc.isAscending;
+								this.props.updateServiceSapParameter({
+									...this.props.serviceSapParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'ComponentDescription',
+										Direction : 'asc'
+									}] 
+								});
+							}
+						};
+						break;
+					default:
+						break;
+				}
+			}		
+		}
+	}
+
 	handleClick = (menu) => {
 		this.props.push(menu);
-	  }
+	}
+
+	fetchSearchSales = async() => {
+		await this.props.fetchSalesOrder(this.props.searchSalesParameter, this.props.token);
+	} 
+	fetchSearchSalesApproved = async() => {
+		await this.props.fetchApprovedSales(this.props.searchSalesApprovedParam, this.props.token);
+	}
+	fetchSearchSalesDeleted = async() => {
+		await this.props.fetchDeletedSales(this.props.searchSalesDeletedParam, this.props.token);
+	}
+	fetchSearchSalesSap = async() => {
+		await this.props.fetchSapSales(this.props.searchSalesSapParam, this.props.token);
+	}
+
+	fetchSearchService = async() => {
+		await this.props.fetchServiceOrder(this.props.searchServiceParameter, this.props.token);
+	} 
+	fetchSearchServiceApproved = async() => {
+		await this.props.fetchApprovedService(this.props.searchSerrviceApprovedParam, this.props.token);
+	}
+	fetchSearchServiceDeleted = async() => {
+		await this.props.fetchDeletedService(this.props.searchSerrviceDeletedParam, this.props.token);
+	}
+	fetchSearchServiceSap = async() => {
+		await this.props.fetchSapService(this.props.searchSerrviceSapParam, this.props.token);
+	}
 
 	onClickDownloadSalesApproved = () => {
 		let link = document.createElement("a");
 		document.body.appendChild(link);
 		link.style = "display: none";
 		const todayDate = moment(new Date()).format('DD-MM-YYYY');
-		// const salesOrder  = this.state.selectedData.So;
 		let fileName = "Sales-Order-Planning-"+todayDate+".csv";
 		let blob = new Blob([this.props.approveSalesDownloaded.data]),
 		  url = window.URL.createObjectURL(blob);
@@ -74,7 +1119,6 @@ export default class Status extends React.PureComponent {
 		document.body.appendChild(link);
 		link.style = "display: none";
 		const todayDate = moment(new Date()).format('DD-MM-YYYY');
-		// const serviceOrder  = this.state.selectedServiceData.WoNumber;
 		let fileName = "Service-Order-Planning-"+todayDate+".csv";
 		let blob = new Blob([this.props.approveServiceDownloaded.data]),
 		  url = window.URL.createObjectURL(blob);
@@ -82,16 +1126,29 @@ export default class Status extends React.PureComponent {
 		link.download = fileName;
 		link.click();
 		window.URL.revokeObjectURL(url);
-	  }
+	}
 
-	handleSalesApprovedDownload = async() => {
+	handleSalesApprove = async() => {
 		let arr = []
 		const index = this.props.selectedSalesPlans.length
 		if (this.props.selectedSalesPlans.length > 0) {
 		  for (let i = 0; i < index; i++) {
 			arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
 		  }
-		}await this.props.downloadSalesApproved(arr, this.props.token);
+		  await this.props.approveSales({SoNumbers : arr, IsApprove: true}, this.props.token)
+		  this.onClickSalesOrder();
+		  await this.props.clearSelectedSalesPlans();
+		 }
+	}
+
+	handleSalesDownload = async() => {
+		let arr = []
+		const index = this.props.selectedSalesPlans.length
+		if (this.props.selectedSalesPlans.length > 0) {
+		  for (let i = 0; i < index; i++) {
+			arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
+		  }
+		}await this.props.downloadSales({SoNumbers: arr}, this.props.token);
 		if (
 		  this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.FAILED
 		) {
@@ -99,7 +1156,7 @@ export default class Status extends React.PureComponent {
 		}
 	}
 
-	handleServiceApprovedDownload = async() => {
+	handleServiceDownload = async() => {
 		let arr = []
 		const index = this.props.selectedServicePlans.length
 		if (this.props.selectedServicePlans.length > 0) {
@@ -107,7 +1164,7 @@ export default class Status extends React.PureComponent {
 			arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
 		  }
 		}
-		await this.props.downloadServiceApproved(arr, this.props.token);
+		await this.props.downloadService({WoNumbers: arr}, this.props.token);
 		if (
 		  this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.FAILED
 		) {
@@ -122,21 +1179,69 @@ export default class Status extends React.PureComponent {
 			{...this.props}
 			webInfo="Search"
 			handleSearch={this.handleSearch}
-			// onServiceSearch={this.props.onSearchService}
 		  />
 		  </div>
 		);
 	}
+
 	handleSearch=(value)=>{
 		this.setState({ searchVal : value})
 		if (this.props.location.whichTab === "sales") {
-			setTimeout(() => {
-				this.props.onSearchSales(this.state.searchVal)
-			}, 1000);
+			switch (this.state.whatPageIsChoosed) {
+				case 'Approve':
+					return(
+						setTimeout(() => {
+							this.props.onSearchSales(this.state.searchVal)
+						}, 1000)
+					)
+				case 'Not Approve': 
+					return(
+						setTimeout(() => {
+							this.props.onSearchSales(this.state.searchVal)
+						}, 1000)
+					)
+				case 'Delete': 
+					return(
+						setTimeout(() => {
+							this.props.onSearchSales(this.state.searchVal)
+						}, 1000)
+					)
+				case 'SAP ISSUE' :
+					return(
+						setTimeout(() => {
+							this.props.onSearchSales(this.state.searchVal)
+						}, 1000)
+					)
+				default:
+			}
 		}else if (this.props.location.whichTab === "service") {
-			setTimeout(() => {
-				this.props.onSearchService(this.state.searchVal)
-			}, 1000);
+			switch (this.state.whatPageIsChoosed) {
+				case 'Approve':
+					return(
+						setTimeout(() => {
+							this.props.onSearchService(this.state.searchVal)
+						}, 1000)
+					)
+				case 'Not Approve': 
+					return(
+						setTimeout(() => {
+							this.props.onSearchService(this.state.searchVal)
+						}, 1000)
+					)
+				case 'Delete': 
+					return(
+						setTimeout(() => {
+							this.props.onSearchService(this.state.searchVal)
+						}, 1000)
+					)
+				case 'SAP ISSUE' :
+					return(
+						setTimeout(() => {
+							this.props.onSearchService(this.state.searchVal)
+						}, 1000)
+					)
+				default:
+			}
 		}
 	}
 
@@ -149,7 +1254,7 @@ export default class Status extends React.PureComponent {
 					arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
 		  		}
 			}
-			await this.props.deletePermanentSales({SoNumber : arr});
+			await this.props.deletePermanentSales({SoNumbers : arr}, this.props.token);
 		}
 		if (this.props.location.whichTab === "service") {
 			let arr = []
@@ -159,43 +1264,127 @@ export default class Status extends React.PureComponent {
 					arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
 		  		}
 			}
-			await this.props.deletePermanentService({WoNumber : arr});
+			await this.props.deletePermanentService({WoNumbers : arr}, this.props.token);
+		}
+	}
+
+	handleDeleteSales = async() => {
+		let arr = []
+		const index = this.props.selectedSalesPlans.length;
+		if (this.props.selectedSalesPlans.length > 0) {
+		  for (let i = 0; i < index; i++) {
+			arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
+		  }
+		  await this.props.deleteSales({SoNumbers : arr, IsDelete: true}, this.props.token);
+		  this.onClickSalesOrderApproved();
+		  await this.props.clearSelectedSalesPlans();
+		}
+	}
+
+	handleDeleteService = async() => {
+		let arr = []
+		const index = this.props.selectedServicePlans.length;
+		if (this.props.selectedServicePlans.length > 0) {
+		  for (let i = 0; i < index; i++) {
+			arr = [...arr, this.props.selectedServicePlans[i].WoNumber];
+		  }
+		  await this.props.deleteService({WoNumbers : arr, IsDelete: true}, this.props.token);
+		  this.onClickServiceOrderApproved();
+		  await this.props.clearSelectedServicePlans();
 		}
 	}
 
 	_renderDownloadBtn(){
 		if (this.props.location.whichTab === "sales") {
-			return(
-				<>
+			if(this.state.whatPageIsChoosed === "Approve"){
+				return(
+					<>
+						<BaseButton titles="Download"
+							{...this.props}
+							whatTabsIsRendered={true}
+							handleSalesDownload={this.handleSalesDownload}
+						/>
+						<BaseButton titles="Delete" 
+							{...this.props}
+							whatTabsIsRendered={true}
+							isDisabled={this.state.isDisabled}
+							disabledButton = {this.props.selectedSalesPlans.length < 1 }
+							totalSelectedItems ={this.props.selectedSalesPlans.length}
+							handleDeleteSales={this.handleDeleteSales}
+							renderSakses = {this.changeSuccess}
+						/>
+					</>
+				)
+			}else if(this.state.whatPageIsChoosed === "Delete"){
+				return(
+					<>
+						<BaseButton titles="Download"
+							{...this.props}
+							whatTabsIsRendered={true}
+							handleSalesApprovedDownload={this.handleSalesApprovedDownload}
+						/>
+						<BaseButton titles="Permanently" 
+							{...this.props}
+							whatTabsIsRendered={true}
+							handleDeletePermanent={this.handleDeletePermanent}
+							isDisabled={this.state.isDisabled}
+						/>
+					</>
+				)
+			}else{
+				return(
 					<BaseButton titles="Download"
 						{...this.props}
 						whatTabsIsRendered={true}
 						handleSalesApprovedDownload={this.handleSalesApprovedDownload}
 					/>
-					<BaseButton titles="Permanently" 
-					{...this.props}
-					whatTabsIsRendered={true}
-					handleDeletePermanent={this.handleDeletePermanent}
-					isDisabled={this.state.isDisabled}
-					/>
-				</>
-			)
+				)
+			}			
 		}else if (this.props.location.whichTab === "service"){
-			return(
-				<>
+			if(this.state.whatPageIsChoosed === "Approve"){
+				return(
+					<>
+						<BaseButton titles="Download"
+							{...this.props}
+							whatTabsIsRendered={false}
+							handleServiceDownload={this.handleServiceDownload}
+						/>
+						<BaseButton titles="Delete" 
+							{...this.props}
+							whatTabsIsRendered={false}
+							isDisabled={this.state.isDisabled}
+							disabledButton = {this.props.selectedServicePlans.length < 1 }
+							totalSelectedItems ={this.props.selectedServicePlans.length}
+							handleDeleteService={this.handleDeleteService}
+							renderSakses = {this.changeSuccess}
+						/>
+					</>
+				)
+			}else if(this.state.whatPageIsChoosed === "Delete"){
+				return(
+					<>
+						<BaseButton titles="Download"
+							{...this.props}
+							whatTabsIsRendered={false}
+							handleServiceApprovedDownload={this.handleServiceApprovedDownload}
+						/>
+						<BaseButton titles="Permanently" 
+							{...this.props}
+							whatTabsIsRendered={false}
+							handleDeletePermanent={this.handleDeletePermanent}
+							isDisabled={this.state.isDisabled}
+						/>
+					</>
+				)
+			}else{
+				return(
 					<BaseButton titles="Download"
 						{...this.props}
 						whatTabsIsRendered={false}
 						handleServiceApprovedDownload={this.handleServiceApprovedDownload}
 					/>
-					<BaseButton titles="Permanently" 
-					{...this.props}
-					whatTabsIsRendered={false}
-					handleDeletePermanent={this.handleDeletePermanent}
-					isDisabled={this.state.isDisabled}
-					/>
-				</>
-			)
+				)
+			}
 		}
 		
 	}
@@ -342,7 +1531,6 @@ export default class Status extends React.PureComponent {
 		}
 	  }
 	}
-
 
 	_renderShowPerPage(){
 		return(
@@ -523,14 +1711,18 @@ export default class Status extends React.PureComponent {
 
 	salesOrderList(){
 		return(
-			<div className="plannings-list-containers">
+			<div className={this.props.salesOrderList.Lists.length === 0 
+				&& this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? 
+				"list-status-empty" : "plannings-list-containers"}>
 				<SalesOrderList 
-				{...this.props}
-				displaySalesCheckbox={this.props.salesParameter.paramsData.assigmentFilter || this.props.salesParameter.paramsData.inProgressFilter}
-				sortSalesByState={this.props.sortSalesBy}
-				onClickSalesOrder={this.onClickSalesOrder}
-				onChoosedSales={this.updateAssignmentSalesStates}
-				selectedSalesPlanList={this.props.selectedSalesPlans}
+					{...this.props}
+					idTab = "Status"
+					onClickTabHead={this.props.onClickSortBy}
+					displaySalesCheckbox={this.props.salesParameter.paramsData.assigmentFilter || this.props.salesParameter.paramsData.inProgressFilter}
+					sortSalesByState={this.props.sortSalesBy}
+					onClickSalesOrder={this.onClickSalesOrder}
+					onChoosedSales={this.updateAssignmentSalesStates}
+					selectedSalesPlanList={this.props.selectedSalesPlans}
 				/>
 			</div>
 		);
@@ -538,15 +1730,19 @@ export default class Status extends React.PureComponent {
 
 	serviceOrderList(){
 		return(
-			<div className="plannings-list-containers">
-			  <ServiceOrderList 
-			  {...this.props}
-			  displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
-			  sortServiceByState={this.props.sortServiceBy}
-			  onClickServiceOrder={this.onClickServiceOrder}
-			  onChoosedService={this.updateAssignmentServiceStates}
-			  selectedServicePlanList={this.props.selectedServicePlans}
-			  />
+			<div className={this.props.serviceOrderList.Lists.length === 0 
+				&& this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? 
+				"list-status-empty" : "plannings-list-containers"}>
+				<ServiceOrderList 
+					{...this.props}
+					idTab="Status"
+					onClickTabHead={this.props.onClickSortBy}
+					displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
+					sortServiceByState={this.props.sortServiceBy}
+					onClickServiceOrder={this.onClickServiceOrder}
+					onChoosedService={this.updateAssignmentServiceStates}
+					selectedServicePlanList={this.props.selectedServicePlans}
+				/>
 			</div>
 		  );
 	}
@@ -554,14 +1750,17 @@ export default class Status extends React.PureComponent {
 
 	approvedSalesOrderList(){
 		return(
-			<div className="plannings-list-containers">
+			<div className={this.props.salesOrderListApproved.Lists.length === 0 
+				&& this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED ? 
+				"list-status-empty" : "plannings-list-containers"}>
 				<ApprovedSalesOrderList 
 				{...this.props}
-				displaySalesCheckbox={this.props.salesApprovedParameter.paramsData.assigmentFilter || this.props.salesApprovedParameter.paramsData.inProgressFilter}
-				sortSalesByState={this.props.sortSalesBy}
-				onClickSalesOrderApproved={this.onClickSalesOrderApproved}
-				onChoosedSales={this.updateAssignmentSalesStates}
-				selectedSalesPlanList={this.props.selectedSalesPlans}
+					onClickTabHead={this.props.onClickSortBy}
+					displaySalesCheckbox={this.props.salesApprovedParameter.paramsData.assigmentFilter || this.props.salesApprovedParameter.paramsData.inProgressFilter}
+					sortSalesByState={this.props.sortSalesBy}
+					onClickSalesOrderApproved={this.onClickSalesOrderApproved}
+					onChoosedSales={this.updateAssignmentSalesStates}
+					selectedSalesPlanList={this.props.selectedSalesPlans}
 				/>
 			</div>
 		);
@@ -569,14 +1768,17 @@ export default class Status extends React.PureComponent {
 
 	approvedServiceOrderList(){
 		return(
-			<div className="plannings-list-containers">
+			<div className={this.props.serviceOrderListApproved.Lists.length === 0 
+				&& this.props.fetchStatusServiceApproved === ApiRequestActionsStatus.SUCCEEDED ? 
+				"list-status-empty" : "plannings-list-containers"}>
 				<ApprovedServiceOrderList 
-				{...this.props}
-				displayServiceCheckbox={this.props.serviceApprovedParameter.paramsData.assigmentFilter || this.props.serviceApprovedParameter.paramsData.inProgressFilter}
-				sortServicesByState={this.props.sortServicesBy}
-				onClickServiceOrderApproved={this.onClickServiceOrderApproved}
-				onChoosedService={this.updateAssignmentServiceStates}
-				selectedServicePlanList={this.props.selectedServicePlans}
+					{...this.props}
+					onClickTabHead={this.props.onClickSortBy}
+					displayServiceCheckbox={this.props.serviceApprovedParameter.paramsData.assigmentFilter || this.props.serviceApprovedParameter.paramsData.inProgressFilter}
+					sortServicesByState={this.props.sortServicesBy}
+					onClickServiceOrderApproved={this.onClickServiceOrderApproved}
+					onChoosedService={this.updateAssignmentServiceStates}
+					selectedServicePlanList={this.props.selectedServicePlans}
 				/>
 			</div>
 		)
@@ -584,29 +1786,35 @@ export default class Status extends React.PureComponent {
 
 	deletedSalesOrderList(){
 		return(
-			<div className="plannings-list-containers">
+			<div className={this.props.salesOrderListDeleted.Lists.length === 0 
+				&& this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED ? 
+				"list-status-empty" : "plannings-list-containers"}>
 				<DeletedSalesOrderList 
-				{...this.props}
-				displaySalesCheckbox={this.props.salesDeletedParameter.paramsData.assigmentFilter || this.props.salesDeletedParameter.paramsData.inProgressFilter}
-				sortSalesByState={this.props.sortSalesBy}
-				onClickSalesOrderDeleted={this.onClickSalesOrderDeleted}
-				onChoosedSales={this.updateAssignmentSalesStates}
-				selectedSalesPlanList={this.props.selectedSalesPlans}
-				/>
+					{...this.props}
+					onClickTabHead={this.props.onClickSortBy}
+					displaySalesCheckbox={this.props.salesDeletedParameter.paramsData.assigmentFilter || this.props.salesDeletedParameter.paramsData.inProgressFilter}
+					sortSalesByState={this.props.sortSalesBy}
+					onClickSalesOrderDeleted={this.onClickSalesOrderDeleted}
+					onChoosedSales={this.updateAssignmentSalesStates}
+					selectedSalesPlanList={this.props.selectedSalesPlans}
+					/>
 			</div>
 		);
 	}
 
 	deletedServiceOrderList(){
 		return(
-			<div className="plannings-list-containers">
+			<div className={this.props.serviceOrderListDeleted.Lists.length === 0 
+				&& this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED ? 
+				"list-status-empty" : "plannings-list-containers"}>
 				<DeletedServiceOrderList 
-				{...this.props}
-				displayServiceCheckbox={this.props.serviceDeletedParameter.paramsData.assigmentFilter || this.props.serviceDeletedParameter.paramsData.inProgressFilter}
-				sortServiceByState={this.props.sortServiceBy}
-				onClickServiceOrderDeleted={this.onClickServiceOrderDeleted}
-				onChoosedService={this.updateAssignmentServiceStates}
-				selectedServicePlanList={this.props.selectedServicePlans}
+					{...this.props}
+					onClickTabHead={this.props.onClickSortBy}
+					displayServiceCheckbox={this.props.serviceDeletedParameter.paramsData.assigmentFilter || this.props.serviceDeletedParameter.paramsData.inProgressFilter}
+					sortServiceByState={this.props.sortServiceBy}
+					onClickServiceOrderDeleted={this.onClickServiceOrderDeleted}
+					onChoosedService={this.updateAssignmentServiceStates}
+					selectedServicePlanList={this.props.selectedServicePlans}
 				/>
 			</div>
 		);
@@ -614,14 +1822,17 @@ export default class Status extends React.PureComponent {
 
 	sapSalesOrderList(){
 		return(
-			<div className="plannings-list-containers">
+			<div className={this.props.salesOrderListSap.Lists.length === 0 
+				&& this.props.fetchStatusSalesSap === ApiRequestActionsStatus.SUCCEEDED ? 
+				"list-status-empty" : "plannings-list-containers"}>
 				<SapSalesOrderList 
-				{...this.props}
-				displaySalesCheckbox={this.props.salesSapParameter.paramsData.assigmentFilter || this.props.salesSapParameter.paramsData.inProgressFilter}
-				sortSalesByState={this.props.sortSalesBy}
-				onClickSalesOrderSap={this.onClickSalesOrderSap}
-				onChoosedSales={this.updateAssignmentSalesStates}
-				selectedSalesPlanList={this.props.selectedSalesPlans}
+					{...this.props}
+					onClickTabHead={this.props.onClickSortBy}
+					displaySalesCheckbox={this.props.salesSapParameter.paramsData.assigmentFilter || this.props.salesSapParameter.paramsData.inProgressFilter}
+					sortSalesByState={this.props.sortSalesBy}
+					onClickSalesOrderSap={this.onClickSalesOrderSap}
+					onChoosedSales={this.updateAssignmentSalesStates}
+					selectedSalesPlanList={this.props.selectedSalesPlans}
 				/>
 			</div>
 		);
@@ -629,134 +1840,51 @@ export default class Status extends React.PureComponent {
 
 	sapServiceOrderList(){
 		return(
-			<div className="plannings-list-containers">
+			<div className={this.props.serviceOrderListSap.Lists.length === 0 
+				&& this.props.fetchStatusServiceSap === ApiRequestActionsStatus.SUCCEEDED ? 
+				"list-status-empty" : "plannings-list-containers"}>
 				<SapServiceOrderList 
-				{...this.props}
-				displayServiceCheckbox={this.props.serviceSapParameter.paramsData.assigmentFilter || this.props.serviceSapParameter.paramsData.inProgressFilter}
-				sortServiceByState={this.props.sortServiceBy}
-				onClickServiceOrderSap={this.onClickServiceOrderSap}
-				onChoosedService={this.updateAssignmentserviceStates}
-				selectedServicePlanList={this.props.selectedServicePlans}
-				/>
+					{...this.props}
+					onClickTabHead={this.props.onClickSortBy}
+					displayServiceCheckbox={this.props.serviceSapParameter.paramsData.assigmentFilter || this.props.serviceSapParameter.paramsData.inProgressFilter}
+					sortServiceByState={this.props.sortServiceBy}
+					onClickServiceOrderSap={this.onClickServiceOrderSap}
+					onChoosedService={this.updateAssignmentserviceStates}
+					selectedServicePlanList={this.props.selectedServicePlans}
+					/>
 			</div>
 		);
 	}
 
-	componentWillUnmount = () => {
-		this.props.updateSalesParameter({
-			...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
-		});
-		this.props.updateServiceParameter({
-			...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
-		});
-		this.props.updateSalesApprovedParameter({
-			...this.props.salesApprovedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
-		})
-		this.props.updateServiceApprovedParameter({
-			...this.props.serviceApprovedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
-		})
-		this.props.updateSalesDeletedParameter({
-			...this.props.salesDeletedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
-		})
-		this.props.updateServiceDeletedParameter({
-			...this.props.serviceDeletedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
-		})
-		this.props.updateSalesSapParameter({
-			...this.props.salesSapParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
-		})
-		this.props.updateServiceSapParameter({
-			...this.props.serviceSapParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
-		})
-	  }
-
-	componentDidUpdate = (prevProps) => {
-		if (prevProps.salesParameter !== this.props.salesParameter) {
-			this.onClickSalesOrder();
-		}
-		if (prevProps.salesApprovedParameter !== this.props.salesApprovedParameter) {
-			this.onClickSalesOrderApproved();
-		}
-		if (prevProps.salesDeletedParameter !== this.props.salesDeletedParameter) {
-			this.onClickSalesOrderDeleted();
-		}
-		if (prevProps.salesSapParameter !== this.props.salesSapParameter ){
-			this.onClickSalesOrderSap();
-		}
-		if (prevProps.serviceParameter !== this.props.serviceParameter) {
-			this.onClickServiceOrder();
-		}
-		if (prevProps.serviceApprovedParameter !== this.props.serviceApprovedParameter) {
-			this.onClickServiceOrderApproved();
-		}
-		if (prevProps.serviceDeletedParameter !== this.props.serviceDeletedParameter) {
-			this.onClickServiceOrderDeleted();
-		}
-		if (prevProps.serviceSapParameter !== this.props.serviceSapParameter) {
-			this.onClickServiceOrderSap();
-		}
-		if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
-			prevProps.approveSalesDownloaded.status === ApiRequestActionsStatus.LOADING) {
-			this.onClickDownloadSalesApproved()
-		}
-		if (this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
-			prevProps.approveServiceDownloaded.status === ApiRequestActionsStatus.LOADING) {
-			this.onClickDownloadServiceApproved()
-		}
-		  //ini untuk trigger sales global search
-		if (prevProps.salesSearch !== this.props.salesSearch) {
-			switch (this.state.whatPageIsChoosed) {
-				case 'Approve':
-					return this.props.updateSalesApprovedParameter({...prevProps.salesApprovedParameter.dataFilter, Filter : this.props.salesSearch, PageNumber :1});
-				case 'Not Approve':
-					return this.props.updateSalesParameter({...prevProps.salesParameter.dataFilter, Filter : this.props.salesSearch, PageNumber: 1});
-				case 'Delete' :
-					return this.props.updateSalesDeletedParameter({...prevProps.salesDeletedParameter.dataFilter, Filter : this.props.salesSearch, PageNumber :1});
-				case 'SAP ISSUE':
-					return this.props.updateSalesSapParameter({...prevProps.salesSapParameter.dataFilter, Filter : this.props.salesSearch, PageNumber :1});
-				default:
-					break;
-			}
-		}
-		if (prevProps.serviceSearch !== this.props.serviceSearch) {
-			switch (this.state.whatPageIsChoosed) {
-				case 'Approve':
-					return this.props.updateServiceApprovedParameter({...prevProps.serviceApprovedParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber :1});
-				case 'Not Approve':
-					return this.props.updateServiceParameter({...prevProps.serviceParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber: 1});
-				case 'Delete' :
-					return this.props.updateServiceDeletedParameter({...prevProps.serviceDeletedParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber :1});
-				case 'SAP ISSUE':
-					return this.props.updateServiceSapParameter({...prevProps.serviceSapParameter.dataFilter, Filter : this.props.serviceSearch, PageNumber :1});
-				default:
-					break;
-			}
-		}
-	}
-
 	_renderList = (whatPageIsChoosed) =>{
-	// const whatPageIsChoosed = '';
-	this.setState({
-		whatPageIsChoosed : whatPageIsChoosed
-	})
+		this.setState({
+			whatPageIsChoosed : whatPageIsChoosed
+		})
 		switch (this.state.whatPageIsChoosed) {
 			case 'Approve':
 				this.setState({ isDisabled : true})
 				if(this.props.location.whichTab === 'sales'){
-				return(
-					<>
-						{this.approvedSalesOrderList()}
-					<div className="bottom-row">
-					{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderListApproved)}
-					</div>
-					</>
-				)
+					return(
+						<>
+							{this.approvedSalesOrderList()}
+							{this.props.salesOrderListApproved.Lists.length === 0 
+								&& this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED ? "" :
+								<div className="bottom-row">
+									{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderListApproved)}
+								</div>
+							}
+						</>
+					)
 				}else{
 					return(
 						<>
 							{this.approvedServiceOrderList()}
-						<div className="bottom-row">
-						{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderListApproved)}
-						</div>
+							{this.props.serviceOrderListApproved.Lists.length === 0 
+								&& this.props.fetchStatusServiceApproved === ApiRequestActionsStatus.SUCCEEDED ? "" :
+								<div className="bottom-row">
+									{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderListApproved)}
+								</div>
+							}
 						</>
 					)
 				}
@@ -766,19 +1894,24 @@ export default class Status extends React.PureComponent {
 					return (
 						<>
 							{this.salesOrderList()}
-							<div className="bottom-row">
-								{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderList)}
-							</div>
+							{this.props.salesOrderList.Lists.length === 0  
+								&& this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+								<div className="bottom-row">
+									{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderList)}
+								</div>
+							}
 						</>
 					)
-				// }else
 				}else if(this.props.location.whichTab === 'service'){
 					return (
 						<>
 							{this.serviceOrderList()}
-						<div className="bottom-row">
-						{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderList)}
-						</div>
+							{this.props.serviceOrderList.Lists.length === 0 
+								&& this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
+								<div className="bottom-row">
+									{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderList)}
+								</div>
+							}
 						</>
 					)
 				}
@@ -789,18 +1922,24 @@ export default class Status extends React.PureComponent {
 				return(
 					<>
 						{this.deletedSalesOrderList()}
-					<div className="bottom-row">
-					{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderListDeleted)}
-					</div>
+						{this.props.salesOrderListDeleted.Lists.length === 0 
+							&& this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED ? "" :
+							<div className="bottom-row">
+								{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderListDeleted)}
+							</div>
+						}
 					</>
 				)
 			}else if(this.props.location.whichTab === 'service'){
 				return(
 					<>
 						{this.deletedServiceOrderList()}
-					<div className="bottom-row">
-					{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderListDeleted)}
-					</div>
+						{this.props.serviceOrderListDeleted.Lists.length === 0 
+							&& this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.SUCCEEDED ? "" :
+							<div className="bottom-row">
+								{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderListDeleted)}
+							</div>
+						}
 					</>
 				)
 			}
@@ -811,18 +1950,24 @@ export default class Status extends React.PureComponent {
 				return(
 					<>
 						{this.sapSalesOrderList()}
-					<div className="bottom-row">
-					{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderListSap)}
-					</div>
+						{this.props.salesOrderListSap.Lists.length === 0 
+							&& this.props.fetchStatusSalesSap === ApiRequestActionsStatus.SUCCEEDED ? "" :
+							<div className="bottom-row">
+								{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderListSap)}
+							</div>
+						}
 					</>
 				)
 			}else if(this.props.location.whichTab === 'service'){
 				return(
 					<>
 						{this.sapServiceOrderList()}
-					<div className="bottom-row">
-					{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderListSap)}
-					</div>
+						{this.props.serviceOrderListSap.Lists.length === 0 
+							&& this.props.fetchStatusServiceSap=== ApiRequestActionsStatus.SUCCEEDED ? "" :
+							<div className="bottom-row">
+								{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderListSap)}
+							</div>
+						}
 					</>
 				)
 			}
@@ -863,7 +2008,6 @@ export default class Status extends React.PureComponent {
 				sapIssueTotalData : this.props.serviceOrderListSap.TotalData
 			})
 		}
-		
 	}
 
 	showLoading(){
@@ -895,13 +2039,10 @@ export default class Status extends React.PureComponent {
 	render(){
 		return(
 			<main className="content" >
-				{/* {this.showLoading()} */}
 				<div className="head-containers">
-					<div className="back_button">
-						<Button variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
-							Detail
-						</Button>
-					</div>
+					<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
+						Approval
+					</Button>
 					<div className="notif_button">
 						<NotifButton
 							{...this.props}

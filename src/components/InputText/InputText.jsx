@@ -1,6 +1,6 @@
 import React from 'react'
 import './InputText.scss'
-import CloseButton from '../../components/CloseButton/CloseButton'
+import CloseButton from '../../components/ActionButton/CloseButton/CloseButton'
 import { Button, TextField, FormHelperText } from '@material-ui/core'
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -54,7 +54,7 @@ class InputText extends React.Component{
                 <div className="bottom-row">
                     <Button className="btn-cancel" onClick={this.props.onClosed}>Cancel</Button>
                     {this.props.idInput === "EditSite" ? 
-                        <Button className="btn-input" onClick={ () => {this.props.openConfirmModal(); this.props.dataRevLt(this.state.limitText)}}>Input</Button> :
+                        <Button className="btn-input" onClick={ () => {this.props.onStats(this.props.id, this.state.limitText);this.props.openConfirmModal(); this.props.dataRevLt(this.state.limitText)}}>Input</Button> :
                         <Button className="btn-input" onClick={ () => {this.props.onStats(this.props.id, this.state.limitText); this.props.onClosed()} } >Input</Button>
                     }                    
                 </div>

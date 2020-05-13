@@ -15,7 +15,7 @@ export default class PlanningListHeader extends React.PureComponent {
 				>
 					{
 						this.props.name === 'Lifetime' ?
-							<InputButton titles="Lifetime Comp" title="Lifetime Component" onFilter={this.props.onFilter} /> : 
+							<InputButton titles="Lifetime Comp" title="Lifetime Component" onFilter={this.props.onFilter} /> :
 						this.props.name === 'Plan' ?
 							<InputButton titles="Plan Execution" title="Plan Execution Date" onFilter={this.props.onFilter} /> : 
 						this.props.name === 'SO' ?
@@ -32,6 +32,8 @@ export default class PlanningListHeader extends React.PureComponent {
 							<InputButton titles='SMR' placeholder="SMR" onSearch={this.props.onSearch} sort="SMR"/> :
 						this.props.name === 'SMR Date' ?
 							<InputButton titles='SMR Date' title="SMR Date" onFilter={this.props.onFilter}/> :
+						this.props.name === 'Lifetime Comp' ? 
+							<InputButton titles='NF Lifetime' headerName="Lifetime Comp" /> :
 							<TableSortLabel
 								active={this.props.isActive}
 								IconComponent={this.props.isAscending ? KeyboardArrowUp : KeyboardArrowDown}

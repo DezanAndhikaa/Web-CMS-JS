@@ -6,12 +6,10 @@ import isAccessTokenValid from '../../core/HelpersFunction';
 
 export default function (ComposedComponent) {
 	class AuthGuardHoc extends Component {
-		// eslint-disable-next-line react/no-deprecated
 		componentWillMount() {
 			if (!isAccessTokenValid()) this.props.goToLogin();
 		}
 
-		// eslint-disable-next-line react/no-deprecated
 		componentWillUpdate() {
 			if (!isAccessTokenValid()) this.props.goToLogin();
 		}

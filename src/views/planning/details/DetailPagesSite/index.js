@@ -2,13 +2,11 @@ import { connect } from 'react-redux';
 import { PlansReducers } from '../../details/DetailPages-reducer';
 import { push } from 'connected-react-router';
 import {
-	approveServiceDownloadAction, 
-	approveSalesDownloadAction,
 	putLifetimeCompAction,
 	putSAPIssueAction,
-	approveSalesAction, //APPROVE SALES
+	approveSalesAction,
 	unapproveSalesAction, 
-	approveServiceAction, //APPROVE SERVICE
+	approveServiceAction,
 	deleteSalesAction,
 	deleteServiceAction,
 	fetchApprovedSalesAction,
@@ -19,6 +17,12 @@ import {
 	salesParameterAction,
 	fetchRevisedSalesAction, 
 	fetchServiceAction,
+	fetchSearchSalesAction, 
+	fetchSearchServiceAction, 
+	searchSalesParameterAction, 
+	searchServiceParameterAction, 
+	UpdateSearchSalesAction, 
+	UpdateSearchServiceAction,
 	ClearSelectedPlans, 
 	UpdateServiceParameterAction,
 	UpdateSalesParameterAction, 
@@ -42,7 +46,8 @@ import {
 	SelectServicePlanAction,
 	sortByAction, 
 	storePlanDataAction,
-	salesParameterRevAction
+	salesParameterRevAction,
+	dateFilterAction
 } from '../../details/DetailPages-action';
 import DetailPagesSite from './DetailPagesSite';
 
@@ -60,8 +65,11 @@ const mapStateToProps = (state) => ({
 	salesRevisedParam: state.plansPageState.salesRevisedParam,
 	filterParameter: state.plansPageState.filterParameter,
 	filterLifetime: state.plansPageState.filterLifetime,
+	filterDate: state.plansPageState.filterDate,
 	indexFilterParameter: state.plansPageState.indexFilterParameter,
 	serviceParameter: state.plansPageState.serviceParameter,
+	searchSalesParameter: state.plansPageState.searchSalesParameter,
+	searchServiceParameter: state.plansPageState.searchServiceParameter,
 	salesSearch: state.plansPageState.salesSearch,
 	serviceSearch: state.plansPageState.serviceSearch,
 	searchComp: state.plansPageState.searchComp,
@@ -91,8 +99,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	push: (path, whichTab) => dispatch(push(path, whichTab)),
-	downloadSalesApproved : (soId, token) => dispatch(approveSalesDownloadAction(soId, token)),
-	downloadServiceApproved : (soId, token) => dispatch(approveServiceDownloadAction(soId, token)),
 	unapproveSales: (payload, token) => dispatch(unapproveSalesAction(payload, token)),
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
 	clearSelectedServicePlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
@@ -109,12 +115,15 @@ const mapDispatchToProps = (dispatch) => ({
 	fetchSalesOrder: (payload, token) => dispatch(fetchSalesAction(payload, token)),
 	fetchServiceOrder: (payload, token) => dispatch(fetchServiceAction(payload, token)),
 	fetchRevisedSales: (payload,token) => dispatch(fetchRevisedSalesAction(payload, token)),
+	fetchSearchSales: (payload, token) => dispatch(fetchSearchSalesAction(payload, token)),
+	fetchSearchService: (payload, token) => dispatch(fetchSearchServiceAction(payload, token)),
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	onSearchSales: (keyword) => dispatch(searchAction(SearchSalesAction, keyword)),
 	onSearchService: (keyword) => dispatch(searchAction(SearchServiceAction, keyword)),
 	onSearchComp: (keyword,sort) => dispatch(searchCompAction(SearchCompAction, keyword, sort)),
 	onSearchCompService: (keyword, sort) => dispatch(searchCompActionService(SearchCompActionService, keyword, sort)),
 	lifetimeFilter: (type, payload, payload2, page) => dispatch(selectFilterAction(type, payload, payload2, page)),
+	dateFilter: (type, payload, payload2, page) => dispatch(dateFilterAction(type, payload, payload2, page)),
 	selectFilter2: (type, payload, head, page) => dispatch(selectFilterAction2(type, payload, head, page)),
 	indexFilter: (type, payload) => dispatch(indexFilterAction(type, payload)),
 	selectSalesPlan: (payload) => dispatch(selectSalesPlansAction(SelectSalesPlanAction, payload)),
@@ -125,6 +134,8 @@ const mapDispatchToProps = (dispatch) => ({
 	updateSalesParameter: (payload) => dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
 	updateServiceParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
 	updateSalesRevParameter: (payload) => dispatch(salesParameterRevAction(UpdateSalesRevisedParamAction, payload)),
+	updateSearchSales: (payload) => dispatch(searchSalesParameterAction(UpdateSearchSalesAction, payload)),
+	updateSearchService: (payload) => dispatch(searchServiceParameterAction(UpdateSearchServiceAction, payload)),
 });
 
 const detailPagesSite = connect(mapStateToProps, mapDispatchToProps)(DetailPagesSite);

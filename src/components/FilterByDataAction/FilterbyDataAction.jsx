@@ -51,7 +51,6 @@ class FilterbyDataAction extends React.Component {
     this.setState({ displayMenu: false }, () => {
       document.removeEventListener('click', this.hideDropdownMenu);
     });
-    // await this.props.onClickButton();
   }
 
   selectItem = (item) => {
@@ -97,27 +96,11 @@ class FilterbyDataAction extends React.Component {
           <Typography className="list-item-fbdt" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
         </MenuItem>
       </MenuList>
-      {/* <div className="see-all-notif">
-        <div className="label-all-notif" onClick={ () => this.handleClick(Menu.PLANNING_ALL_NOTIF) }>See All Notification</div>
-      </div> */}
     </Paper>
     )
   }
 
   render() {
-    // if (this.props.displayMode === 'mobile') {
-    //   return (
-    //     <div>
-    //       <div className="dropdown">
-    //         {this.renderDropdown()}
-    //       </div>
-    //       {
-    //         this.state.displayMenu && this.renderDropdownList()
-    //       }
-    //     </div>
-    //   );
-    // }
-
     if(this.props.titles === "Status"){
       return (
         <div className="dropdown">
@@ -160,15 +143,10 @@ class FilterbyDataAction extends React.Component {
           <div className="dropdown-button" onClick={() => this.handleClick(Menu.PLANNING_TRACKING_HISTORY, 'tracking')}>
             <div className="dropdown-selected-item">
               <div className="tracking-history">
-                {/* <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}> */}
-                    <img src={IconHistory} className="icon-history" alt="" /><span className="label-history">Tracking History</span>
-                {/* </DotBadges> */}
+                <img src={IconHistory} className="icon-history" alt="" /><span className="label-history">Tracking History</span>
               </div>
+            </div>
           </div>
-        </div>
-          {
-            // this.state.displayMenu && this.renderDropdownApproval()  
-          }
         </div>
       );
     }

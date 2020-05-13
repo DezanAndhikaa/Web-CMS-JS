@@ -6,8 +6,8 @@ import {
 	ApproveSalesAction,
 	ApproveServiceAction,
 	UnapproveSalesAction, 
-	PlanningApprovedSalesDownloadAction,
-	PlanningApprovedServiceDownloadAction,
+	salesDownloadAction,
+	serviceDownloadAction,
 	ClearSelectedPlans,
 	FetchApprovedSalesAction,
 	FetchApprovedServiceAction,
@@ -26,9 +26,22 @@ import {
 	ResetSelectedMechanicsAction, 
 	SearchSalesAction,
 	SearchServiceAction,
-	UpdateServiceApprovedParameterAction,UpdateServiceDeletedParameterAction,
+	UpdateServiceApprovedParameterAction,
+	UpdateServiceDeletedParameterAction,
 	UpdateServiceSapParameterAction,
-	SearchCompAction,SearchCompActionService,
+	UpdateSearchSalesAction,
+	UpdateSearchSalesApprovedAction, 
+	UpdateSearchSalesDeletedAction,
+	UpdateSearchSalesSapAction,
+	UpdateSearchServiceAction ,
+	UpdateSearchServiceApprovedAction,
+	UpdateSearchServiceDeletedAction,
+	UpdateSearchServiceSapAction,
+	SearchCompAction,
+	SearchCompActionApproved,
+	SearchCompActionDeleted,
+	SearchCompActionSap,
+	SearchCompActionService,
 	SelectSalesPlanAction,
 	SelectServicePlanAction, 
 	SelectLeaderAction, SelectMechanicAction,
@@ -102,13 +115,6 @@ const initialSalesParameter = {
 	}
 };
 
-const initialSearchParameter = {
-	dataFilter:{
-		Category : '',
-		Keyword: '',
-	}
-}
-
 const initialServiceParameter = {
 	dataFilter: {
 		PageNumber : 1,
@@ -128,6 +134,11 @@ const initialServiceParameter = {
 		inProgressFilter: false,
 	}
 };
+
+const initialSearchParameter = {
+	Category : '',
+	Keyword: '',
+}
 
 const initialFilterParameter = {
 	Filter: []
@@ -154,6 +165,19 @@ const initialSearchCompParameter =
 	Value   : '',
 	Logic   : 'AND'
 }];
+
+const intitialFiltersParameter =
+[{
+	Field   : 'LifeTimeComponent',
+	Operator: 'gte',
+	Value   : '',
+	Logic   : 'AND'
+},{
+	Field   : 'LifeTimeComponent',
+	Operator: 'lte',
+	Value   : '',
+	Logic   : 'AND'
+}]
 
 const initialDownloadState = { data: new Blob(), status: ApiRequestActionsStatus.IDLE };
 const initialSalesState = { data: initialSalesAssignment, status: ApiRequestActionsStatus.IDLE };
@@ -449,7 +473,7 @@ export function fetchRevisedSalesReducer(state = initialSalesState, action){
 }
 
 export function downloadApprovedSalesReducer(state = initialDownloadState, action) {
-	if (action.type === PlanningApprovedSalesDownloadAction) {
+	if (action.type === salesDownloadAction) {
 	  switch (action.status) {
 		case ApiRequestActionsStatus.SUCCEEDED:
 		  return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
@@ -466,7 +490,7 @@ export function downloadApprovedSalesReducer(state = initialDownloadState, actio
 	return state;
 }
 export function downloadApprovedServiceReducer(state = initialDownloadState, action) {
-	if (action.type === PlanningApprovedServiceDownloadAction) {
+	if (action.type === serviceDownloadAction) {
 	  switch (action.status) {
 		case ApiRequestActionsStatus.SUCCEEDED:
 		  return { data: action.payload, status: ApiRequestActionsStatus.SUCCEEDED };
@@ -483,8 +507,6 @@ export function downloadApprovedServiceReducer(state = initialDownloadState, act
 	return state;
 }
 
-
-
 export function selectedFiltersReducer(state = initialSelectedFilter, action) {
 	switch (action.type) {
 	  case SelectCustomerFilterAction:
@@ -498,6 +520,45 @@ export function selectedFiltersReducer(state = initialSelectedFilter, action) {
 	  default:
 		return state;
 	}
+}
+
+export function searchSalesParameterReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchSalesAction) return action.payload;
+	return state;
+}
+
+export function searchSalesApprovedReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchSalesApprovedAction) return action.payload;
+	return state;
+}
+
+export function searchSalesDeletedReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchSalesDeletedAction) return action.payload;
+	return state;
+}
+export function searchSalesSapReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchSalesSapAction) return action.payload;
+	return state;
+}
+
+export function searchServiceParameterReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchServiceAction) return action.payload;
+	return state;
+}
+
+export function searchServiceApprovedReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchServiceApprovedAction) return action.payload;
+	return state;
+}
+
+export function searchServiceDeletedReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchServiceDeletedAction) return action.payload;
+	return state;
+}
+
+export function searchServiceSapReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchServiceSapAction) return action.payload;
+	return state;
 }
 
 export function salesParameterReducer(state = initialSalesParameter, action) {
@@ -536,13 +597,13 @@ export function salesRevisedParameterReducer(state = initialSalesParameter, acti
 	return state;
 }
 
-export function filterLifetimeReducer(state = initialFilterParameter, action){
+export function filterLifetimeReducer(state = intitialFiltersParameter, action){
 	if(action.type === LifetimeFilterAction)
 		for(let i=0; i<2; i++){
 			if( i === 0){
-				state ={ ...state, Filter : [...state.Filter,{Field: 'LifeTimeComponent', Operator: 'gte', Value: action.payload, Logic: 'and'}] }; 
-			}else if(i === 1 ){
-				state ={ ...state, Filter : [...state.Filter,{Field: 'LifeTimeComponent', Operator: 'lte', Value: action.payload2, Logic: 'and'}] }; 
+				state ={ ...state, Filter : [{Field: 'LifeTimeComponent', Operator: 'gte', Value: action.payload, Logic: 'and'}] }; 
+			}else if(i === 1){
+				state ={ ...state, Filter : [{Field: 'LifeTimeComponent', Operator: 'lte', Value: action.payload2, Logic: 'and'}] }; 
 			}
 		}
 	return state;
@@ -649,18 +710,60 @@ export function serviceParameterDeletedReducer(state = initialServiceParameter, 
 	return state;
 }
 
-export function searchSalesReducer(state = initialSearchParameter, action) {
+export function searchSalesReducer(state = '', action) {
 	if (action.type === SearchSalesAction) return action.payload;
 	return state;
 }
 
-export function searchServiceReducer(state = initialSearchParameter, action) {
+export function searchServiceReducer(state = '', action) {
 	if (action.type === SearchServiceAction) return action.payload;
 	return state;
 }
 
 export function searchCompReducer(state = initialSearchCompParameter, action) {
 	if (action.type === SearchCompAction) {
+		if(action.sort === 'SoNumber'){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else if(action.sort === 'PartNumber'){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else if(action.sort === 'UnitCode'){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else{
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}
+	}else if (action.type === SearchCompActionApproved) {
+		if(action.sort === 'SoNumber'){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else if(action.sort === 'PartNumber'){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else if(action.sort === 'UnitCode'){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else{
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}
+	}else if (action.type === SearchCompActionDeleted) {
+		if(action.sort === 'SoNumber'){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else if(action.sort === 'PartNumber'){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else if(action.sort === 'UnitCode'){
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}else{
+			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
+			return updatedArray;
+		}
+	}else if (action.type === SearchCompActionSap) {
 		if(action.sort === 'SoNumber'){
 			let updatedArray = update(state, {[0]: {Field:{$set: action.sort},Value:{$set: action.payload}} });
 			return updatedArray;
@@ -835,10 +938,16 @@ const PlansReducers = combineReducers({
 	indexFilterParameter: indexFilterParameterReducer,
 	sortSalesBy: sortSalesByReducer,
 	sortServiceBy: sortServiceByReducer,
-	// salesSearch: searchSalesPlansReducer,
-	// serviceSearch: searchServicePlansReducer,
 	salesSearch: searchSalesReducer,
 	serviceSearch: searchServiceReducer,
+	searchSalesParameter: searchSalesParameterReducer,
+	searchSalesApprovedParam: searchSalesApprovedReducer,
+	searchSalesDeletedParam: searchSalesDeletedReducer,
+	searchSalesSapParam: searchSalesSapReducer,
+	searchServiceParameter: searchServiceParameterReducer,
+	searchServiceApprovedParam: searchServiceApprovedReducer,
+	searchServiceDeletedParam: searchServiceDeletedReducer,
+	searchServiceSapParam: searchServiceSapReducer,
 	searchComp: searchCompReducer,
 	selectedPlanData: storePlanDataReducer,
 	approveSalesDownloaded : downloadApprovedSalesReducer,

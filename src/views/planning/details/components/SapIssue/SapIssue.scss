@@ -19,7 +19,6 @@
             width:97.8%;
             height: 100%;
             margin: 1%;
-    
             .ut-underline-issue{
                 margin-top: 2px;
                 margin-bottom: 10px;
@@ -34,33 +33,22 @@
                 height: 50%;
                 .back_button{
                     display: flex;
-                    // width: 50%;
                     background-image: url('../../../../../assets/icons/Arrow_Left.png');
-                    // background-size: 1.0%;
                     background-position-x: 5.3%;
                     background-position-y: center;
                     background-repeat: no-repeat;
                     text-transform: capitalize;
                     color: #707070;
                 }
-                // background-color: orange;
             }
             .top-row-issue{
                 display: flex;
                 justify-content: space-between;
-                // flex-direction: column;
                 height: 50px;
             }
             .top-middle-issue{
                 margin-top: 10px;
                 height: 85%;
-                // .teks-issue{
-                //     width: 100%;
-                // }
-                // .label-issue{
-                //     font-size: 9px;
-                //     width: 100%
-                // }
             }
             .select-input-title-issue{
                 margin: 0;
@@ -69,7 +57,6 @@
                 font-size: 28px; 
                 width: 60%;
             }
-    
             .bottom-row-issue{
                 flex: 1;
                 display: flex;
@@ -80,7 +67,6 @@
                     align-items: center;
                     justify-content: center;
                     margin-left: 35%;
-                    // width: vw(170.22) !important;
                     width: 13%;
                     height: vw(33.07) !important;
                     font-size: vw(13) !important;
@@ -99,58 +85,44 @@
                 .btn-cancel-issue{
                     display: flex;
                     align-items: center;
-                    // justify-content: center;
                     text-transform: none;
                     font-family: 'Lato-Regular';
                     font-weight: bold;
                     width: 50%;
                     margin-top: 0px;
                     margin-bottom: 0px;
-                    // height: 50px !important;
                     font-size: 15px;
                     border-radius: vw(5);
-                    // box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.161);
                     color: #1D1D1D;
                 }
-                // .btn-cancel-issue:hover{
-                //     // background-color: rgb(227, 227, 230);
-                // }
             }
     
         }
     }
 }
 .modal-pos-issue{
-    // outline: '0';
     display:flex;
     align-items:center;
     justify-content:center;
-    // width: 100%;
-    // height: 100%;
 }
-
-// @import '../../themes/functions';
-// @import '../../themes/variables';
-
 
 .table-head-issue{
     border-bottom: 20px solid #F4F6F8;
     padding-left: 5px;
     .table-cell-issue{
         padding: 0;
-            height: 40px;
-            font-size: 14px !important;
-            line-height: 1%px !important;
-            font-family: 'Lato-Bold';
-            color: #3C3B3B;
-            background-color: white;
-            border-bottom: 10px !important;
+        height: 40px;
+        font-size: 14px !important;
+        line-height: 1%px !important;
+        font-family: 'Lato-Bold';
+        color: #3C3B3B;
+        background-color: white;
+        border-bottom: 10px !important;
     }
     .table-body-issue{
         background-color: white;
         .table-row-top-issue{
             border-bottom: 5px solid #F4F6F8;
-            // height: 400px;
             .table-cell-issue{
                 padding: 0;
                 height: 40px;
@@ -170,6 +142,39 @@
 
 .teks{
     width: 100%;
+    .header{
+        margin: vw(15) 0 vw(15) 0;
+        font-family: 'Lato-Bold';
+        font-size: 18px;
+        line-height: 21px;
+        color: #525252;
+    }
+    .btn-reason{
+        display: inline-flex;
+        width: auto;
+        margin: 0 vw(15) vw(15) 0;
+        border-radius: 5px;
+        font-family: 'Lato-Bold';
+        font-size: 15px;
+        line-height: 19px;
+        color: #707070;
+        text-transform: capitalize;
+        border: 1px solid #000000;
+        box-sizing: border-box;
+        border-radius: 5px;
+    }
+    .btn-reason:focus{
+        background: map-get($colors, primary);
+        color: #303030;
+        border: none;
+    }
+    .input-label{
+        font-size: 13px;
+        line-height: 15px;
+        color: #525252;
+    }
+    .input-description{
+        margin-top: vw(15) vw(15) 0 vw(15);
+        // width: 100%;
+    }
 }
-
-

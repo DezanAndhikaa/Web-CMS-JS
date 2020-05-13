@@ -11,6 +11,7 @@ import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import {Snackbar} from '@material-ui/core';
 import moment from 'moment';
+import EmptyList from '../../../../../components/EmptyList/EmptyList';
 
 export default class SalesOrderList extends React.PureComponent {
   constructor(props) {
@@ -36,7 +37,6 @@ export default class SalesOrderList extends React.PureComponent {
   }
   componentDidMount = async() =>{    
     await this.props.clearSelectedSalesPlans();
-    // this.props.onClickSalesOrder();
   }
 
   componentWillMount = () =>{
@@ -78,13 +78,6 @@ export default class SalesOrderList extends React.PureComponent {
     return isAvailable;
   }
 
-  // isChangeStat = (value,key) =>{
-  //   this.setState({
-  //     stats: 1,
-  //     lifetime: this.state.lifetime.map(el => (el.SoNumber === key ? {...el, LifeTimeComp : value} : el))
-  //   });
-  // }
-
   handleClickCheckbox = () =>{
     this.setState({
       checkedValue : !this.state.checkedValue
@@ -108,10 +101,8 @@ export default class SalesOrderList extends React.PureComponent {
           }
           <PlanningListHeader
             name="SO"
-            // isActive={this.props.sortJobsByState.unitModel.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-            // isAscending={this.props.sortJobsByState.unitModel.isAscending}
           />
           <PlanningListHeader
             name="Customer"
@@ -143,38 +134,34 @@ export default class SalesOrderList extends React.PureComponent {
           />
           <PlanningListHeader
             name="Part Number"
-          // //   isActive={this.props.sortJobsByState.backlogOpen.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-          // //   isAscending={this.props.sortJobsByState.backlogOpen.isAscending}
           />
           <PlanningListHeader
             name="Unit Code"
-          // //   isActive={this.props.sortJobsByState.plantExecution.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-          // //   isAscending={this.props.sortJobsByState.plantExecution.isAscending}
           />
           <PlanningListHeader
             name="Serial Number"
-          // //   isActive={this.props.sortJobsByState.status.isActive}
             delay={300}
-            onSearch={this.props.onSearchComp}
-          // //   isAscending={this.props.sortJobsByState.status.isAscending}            
+            onSearch={this.props.onSearchComp}          
           />
-          <PlanningListHeader
-            name="Lifetime"
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
-            delay={300}
-            onFilter={this.isFilterLifetime}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
-          />
+          {this.props.idSales === "Data Input" ? 
+            <PlanningListHeader
+              name="Lifetime Comp"
+              delay={300}
+            /> : 
+            <PlanningListHeader
+              name="Lifetime"
+              delay={300}
+              onFilter={this.isFilterLifetime}
+            />
+          }
           <PlanningListHeader
             name="Plan"
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
             delay={300}
             onFilter={this.isFilterDate}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
           />
           <PlanningListHeader
             name="SMR"
@@ -186,11 +173,6 @@ export default class SalesOrderList extends React.PureComponent {
             delay={300}
             onFilter={this.isFilterDate}
           />
-          {/* <Typography
-            name="Action" style={{marginTop: "10px"}}
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
-          >Action</Typography> */}
         </TableRow>
       </TableHead>
     )
@@ -203,13 +185,13 @@ export default class SalesOrderList extends React.PureComponent {
         { this.props.idSales === "Data Input" ? "" :
           <TableCell padding="checkbox">
             {this.props.displaySalesCheckbox && 
-            <Checkbox 
-            // checked={true}
-            disabled={this.isCheckboxAvailable(row)} 
-            checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
-            onClick={() => this.props.onChoosedSales(row)} 
-            classes={{ checked: 'checkbox-checked' }} 
-            />}
+              <Checkbox 
+                disabled={this.isCheckboxAvailable(row)} 
+                checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
+                onClick={() => this.props.onChoosedSales(row)} 
+                classes={{ checked: 'checkbox-checked' }} 
+             />
+            }
           </TableCell>
         }
         <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
@@ -221,8 +203,10 @@ export default class SalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="center" className="table-cell"> 
-        {this.props.salesOrderList.Lists[id].LifeTimeComponent === "-" ? 
+        {this.props.salesOrderList.Lists[id].LifeTimeComponent === "-" && this.props.idTab === "Input" ? 
           <InputButton title="Input Lifetime Component" onStats={this.isPutLifetime} titles="Input" key={row.SoNumber} id={row.SoNumber} field="input"/> : 
+          this.props.salesOrderList.Lists[id].LifeTimeComponent === "-" && this.props.idTab === "Status" ?
+          <InputButton titles="Input Status" key={row.SoNumber} id={row.SoNumber} /> :
           <div className={this.props.salesOrderList.Lists[id].IsRevised === true && this.props.salesOrderList.Lists[id].IsChanged === false ? "table-cell-rev" : ""}>{this.props.salesOrderList.Lists[id].LifeTimeComponent}</div>
         }
         </TableCell>
@@ -230,7 +214,10 @@ export default class SalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="center" className="table-cell">
-        {this.props.salesOrderList.Lists[id].LifeTimeComponent !== "-" ? <EditButton idEdit="Approval" title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} /> : ""}
+        {this.props.salesOrderList.Lists[id].LifeTimeComponent !== "-" && this.props.idTab === "Approval" ? 
+          <EditButton idEdit="Approval" title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} /> :
+          this.props.salesOrderList.Lists[id].LifeTimeComponent !== "-" && this.props.idTab === "Status" ? 
+          <EditButton idEdit="Status" /> : ""}
         </TableCell>
       </TableRow>
     )
@@ -279,12 +266,6 @@ export default class SalesOrderList extends React.PureComponent {
           OOPS THERE WAS AN ERROR :'(
         </div>
       )
-    }else if(this.props.salesOrderList.Lists.length === 0){
-      return(
-        <div className="loading-container">
-          DATA NOT FOUND
-        </div>
-      )
     }
   }
 
@@ -304,7 +285,17 @@ export default class SalesOrderList extends React.PureComponent {
           {this.showLoading()}
         </>
       )
-    } else{
+    }else if(this.props.salesOrderList.Lists.length === 0 && this.props.idTab === "Approval" 
+      && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED){
+      return(
+        <EmptyList idEmpty= "Sales" />
+      )
+    }else if(this.props.salesOrderList.Lists.length === 0 && this.props.idTab === "Input"
+      && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED){
+      return(
+        this.props.idTab= "Input" ? <EmptyList idEmpty= "Input" /> : ""
+      )
+    }else{
       return(
         <>
           <Table classes={{ root: 'table' }} className="table">

@@ -6,6 +6,7 @@ import CloseNotif from '../CloseNotif/CloseNotif';
 import SapIssue from '../../views/planning/details/components/SapIssue/SapIssue'
 import { ApiRequestActionsStatus } from '../../core/RestClientHelpers';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal'
+import { Menu } from '../../constants';
 
 export default class UnapproveConfirmation extends React.PureComponent {
 
@@ -95,13 +96,6 @@ export default class UnapproveConfirmation extends React.PureComponent {
     })
   }
 
-  isClosedSap = () => {
-    this.setState({
-      isShowModalSap: !this.state.isShowModalSap,
-      isShowModalUnapprove: !this.state.isShowModalUnapprove
-    })
-  }
-
   isClosedSend = () => {
     this.setState({
       isShowModalSend: !this.state.isShowModalSend,
@@ -137,7 +131,6 @@ export default class UnapproveConfirmation extends React.PureComponent {
       <SapIssue 
         {...this.props} 
         isShowModal={open} 
-        isClosed={this.isClosedSap} 
         isTry={this.isTry} 
         onKelik={this.onKelik}
         isClose={this.isClickedCloseBtn}
@@ -155,32 +148,32 @@ export default class UnapproveConfirmation extends React.PureComponent {
   _renderSapFailed(){
     return(
       <>
-      <ConfirmationModal 
-        {...this.props}
-        handleReload={this.isReload} 
-        isModal={this.state.isShowModalSapFailed} 
-        idModal="SAP-Failed"
-        idFailed="CloseBtn" 
-        isModalClosed={this.isClosedFailed}
-        backToSAP={this.isClickedCloseBtn}
-        backToConfirmModal={this.isClickedBackBtn}
-      />
-      <ConfirmationModal 
-        {...this.props}
-        handleReload={this.isReload} 
-        isModal={this.state.isShowModalSapFailed} 
-        idModal="SAP-Failed"
-        isModalClosed={this.isClosedFailed}
-        backToSAP={this.isClickedCloseBtn}
-        backToConfirmModal={this.isClickedBackBtn}
-      />
+        <ConfirmationModal 
+          {...this.props}
+          handleReload={this.isReload} 
+          isModal={this.state.isShowModalSapFailed} 
+          idModal="SAP-Failed"
+          idFailed="CloseBtn" 
+          isModalClosed={this.isClosedFailed}
+          backToSAP={this.isClickedCloseBtn}
+          backToConfirmModal={this.isClickedBackBtn}
+        />
+        <ConfirmationModal 
+          {...this.props}
+          handleReload={this.isReload} 
+          isModal={this.state.isShowModalSapFailed} 
+          idModal="SAP-Failed"
+          isModalClosed={this.isClosedFailed}
+          backToSAP={this.isClickedCloseBtn}
+          backToConfirmModal={this.isClickedBackBtn}
+        />
       </>
     )
   }
 
   _renderSendtoEdit(){
     return(
-      <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-unapprove">
+      <Modal open={this.props.openModal} className="modal-unapprove">
         <DialogContent className="unapprove-confirmation-content">
           <div className="confirmation-modal-unapprove">
             <CloseNotif onClose={this.props.onClose}/>
@@ -204,23 +197,32 @@ export default class UnapproveConfirmation extends React.PureComponent {
       return <CircularProgress size={100} className="circular-progress" />;
   }
 
+  handleClick = (menu, tab) => {
+    this.props.push({
+      pathname: menu,
+      whichTab: tab
+    });
+  }
+
 	render() {
     if(this.props.idConfirm === "Cancel"){
         return (
           <>
            {this.state.isShowModalUnapprove && (
-            <Modal open={this.state.isShowModalUnapprove} onClose={this.props.onClose} className="modal-unapprove">
+            <Modal open={this.state.isShowModalUnapprove} className="modal-unapprove">
             <DialogContent className="unapprove-confirmation-content">
               <div className="confirmation-modal-unapprove">
                 <CloseNotif onClose={this.props.onClose}/>
                 <div className="confirmation-container-unapprove">
                   <p className="confirmation-title-unapprove">Cancel Approve</p>
-                  <p className="confirmation-title-unapprove">Sales Order</p>
+                  {this.props.idCancel === "Sales" ? <p className="confirmation-title-unapprove">Sales Order</p> :
+                  <p className="confirmation-title-unapprove">Service Order</p>}
                   <img className="confirmation-image-unapprove" src={ImgCancelApprove} alt="" />
                   <p className="confirmation-caption-unapprove"><b>Select one</b> to continue cancel approve</p>
                   <div className="btn-row">
                     {this.props.whichTabs ? <Button className="button-edit-lt" onClick={() => this.isClickedSend()}>Edit Lifetime</Button> : null }
-                    <Button className={this.props.whichTabs ? "button-sap-issue" : "button-sap-issue-service"} onClick={() => this.isClickedSap()}>SAP Issue</Button>
+                    {/* <Button className={this.props.whichTabs ? "button-sap-issue" : "button-sap-issue-service"} onClick={() => this.isClickedSap()}>SAP Issue</Button> */}
+                    <Button className={this.props.whichTabs ? "button-sap-issue" : "button-sap-issue-service"} onClick={ () => this.handleClick(Menu.PLANNING_SAP, 'sales')}>SAP Issue</Button>
                   </div>
                   <div className={this.props.whichTabs ? "labelMax" : "labelMax-service" }>
                     <label>* Max 5 Items</label>
@@ -250,7 +252,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
         );
     } else if(this.props.idConfirm === "Send Success"){
       return(
-        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-unapprove">
+        <Modal open={this.props.openModal} className="modal-unapprove">
         <DialogContent className="unapprove-confirmation-content">
           <div className="confirmation-modal-unapprove">
             <div className="confirmation-container-unapprove">

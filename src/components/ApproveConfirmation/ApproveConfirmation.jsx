@@ -15,7 +15,7 @@ export default class ApproveConfirmation extends React.PureComponent {
 	render() {
 		if(this.props.idApprove === "RevLt"){
 			return (
-				<Modal open={this.props.openModal} onClose={this.props.onCloseRev} className="modal-container-approve">
+				<Modal open={this.props.openModal} className="modal-container-approve">
 					<DialogContent className="approve-confirmation-content">
 						<div className="confirmation-modal-approve">
 							<CloseNotif onClose={this.props.onCloseRev}/>
@@ -36,7 +36,7 @@ export default class ApproveConfirmation extends React.PureComponent {
 		}
 		else{
 			return (
-				<Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container-approve">
+				<Modal open={this.props.openModal} className="modal-container-approve">
 					<DialogContent className="approve-confirmation-content">
 						<div className="confirmation-modal-approve">
 							<CloseNotif onClose={this.props.onClose}/>

@@ -1,33 +1,28 @@
-import React from 'react'
-import { Button, Modal, TextField,Table, TableHead, TableRow, TableBody, TableCell, Paper } from '@material-ui/core'
-import './SapIssue.scss'
-// import * as Yup from 'yup';
-import CloseButton from '../../../../../components/CloseButton/CloseButton';
+import React from 'react';
+import { Button, Modal, TextField, Table, TableHead, TableRow, TableBody, TableCell, Paper, FormLabel } from '@material-ui/core';
+import './SapIssue.scss';
+import CloseButton from '../../../../../components/ActionButton/CloseButton/CloseButton';
 import moment from 'moment';
-
-// const validationSchema = Yup.object().shape({
-//     limitText: Yup.number()
-//     .typeError('Harus Angka')
-// })
 
 export default class SapIssue extends React.Component{
 
     state={
         isShowModal: false,
         description: [],
-        SAPIssue: []
+        sapIssue: []
     }
 
     handleChange(id, e) {
       this.setState({
         description: { ...this.state.description, [id]: e.target.value },
+        sapIssue: { ...this.state.sapIssue, [id]: e.target.value}
       });
     }
 
     _showTableHead() {
-        return (
-          <TableHead className="table-head-issue" >
-          <TableRow className="table-row-issue">
+      return (
+        <TableHead className="table-head-issue" >
+          <TableRow className="table-row-top-issue">
             {this.props.whichTabs ? 
               <TableCell>SO</TableCell> : 
               <TableCell>WO</TableCell>}
@@ -55,7 +50,7 @@ export default class SapIssue extends React.Component{
     _showTableBody(row, id) {
         return (
           <>
-          <TableRow className="table-row-issue">
+          <TableRow className="table-row-top-issue">
             {this.props.whichTabs ?
               <TableCell align="left" className="table-cell-issue"> {row.SoNumber} </TableCell> : 
               <TableCell align="left" className="table-cell-issue"> {row.WoNumber} </TableCell>
@@ -78,69 +73,84 @@ export default class SapIssue extends React.Component{
             }
           </TableRow>
           <TableRow className="table-row-bottom-issue">
-            <TableCell><label>Description &nbsp; :</label></TableCell>
+            <TableCell colSpan="12" className="table-cell-bottom">{this._showHeaderDesc()}</TableCell>
+          </TableRow>
+          <TableRow className="table-row-bottom-issue">
+            <TableCell><label>Description :</label></TableCell>
             <TableCell colSpan="11">{this._showDescription(id)}</TableCell>
           </TableRow>
-          </>
-         
-        )
+        </>
+      )
+    }
+
+    _showHeaderDesc(){
+      return(
+        <div className="teks">
+          <div className="header">Please pick a mistake on the SAP</div>
+          <Button className="btn-reason">Customer</Button>
+          <Button className="btn-reason">Part Number</Button>
+          <Button className="btn-reason">Site</Button>
+          <Button className="btn-reason">Unit Model</Button>
+          <Button className="btn-reason">Serial Number</Button>
+          <FormLabel>Description :</FormLabel>
+        </div>
+      )
     }
 
     _showDescription(id){
       return(
         <div className="teks">
-              <TextField 
-                  className="teks"
-                  type='text' 
-                  placeholder="Tuliskan Masalahnya yaa.."
-                  variant="outlined" 
-                  size="small"
-                  value={this.state.description[id]} 
-                  name={this.state.description[id]} 
-                  onChange={this.handleChange.bind(this, id)} 
-              />
+          <TextField 
+            type="text"
+            className="input-description"
+            placeholder="Tuliskan masalahnya yaa.."
+            size="small"
+            value={this.state.description[id]} 
+            name={this.state.description[id]} 
+            onChange={this.handleChange.bind(this, id)} 
+          />
         </div>
       )
     }
 
     _renderIssue(){
-        return(
-            <div className="assign-mechanic-modal-issue">
-                <div className="container-issue">
-                    <div className="top-row-issue">
-                        <div className="top-button-issue"><Button className="back_button" variant="outlined" onClick={this.props.isBack}>Back</Button></div>
-                        <div className="ut-underline-issue"/>
-                        <p className="select-input-title-issue">SAP Issue</p>
-                        <CloseButton onClose={this.props.isClose}/>
-                    </div>
-                        <div className="top-middle-issue"> 
-                        <Table size="small" component={Paper}>
-                            {this._showTableHead()}
-                            <TableBody>
-                            {this.props.selectedDataSAP
-                                && this.props.selectedDataSAP.map((row, id) => (this._showTableBody(row,id)) )
-                            }
-                            </TableBody>
-                        </Table>
-                        </div>
-                    <div className="bottom-row-issue">
-                        <p className="btn-cancel-issue">* Please check again before pressing the send button</p>
-                        <Button className="btn-input-issue" onClick={ async () => {this.props.onKelik(this.state.description);this.props.isTry()} } >Send</Button>
-                    </div>
-                </div>
+      return(
+        <div className="assign-mechanic-modal-issue">
+          <div className="container-issue">
+            <div className="top-row-issue">
+              <div className="top-button-issue"><Button className="back_button" variant="outlined" onClick={this.props.isBack}>Back</Button></div>
+              <div className="ut-underline-issue"/>
+              <p className="select-input-title-issue">SAP Issue</p>
+              <CloseButton onClose={this.props.isClose}/>
             </div>
-        )
+              <div className="top-middle-issue"> 
+                <Table size="small" component={Paper}>
+                  {this._showTableHead()}
+                  <TableBody>
+                    {this.props.selectedDataSAP
+                        && this.props.selectedDataSAP.map((row, id) => (this._showTableBody(row,id)) )
+                    }
+                  </TableBody>
+                </Table>
+              </div>
+            <div className="bottom-row-issue">
+                <p className="btn-cancel-issue">* Please check again before pressing the send button</p>
+                <Button className="btn-input-issue" onClick={ async () => {this.props.onKelik(this.state.description);this.props.isTry()} } >Send</Button>
+            </div>
+          </div>
+        </div>
+      )
     }
 
     render(){
-        return(
-            <div>
-              <Modal className="modal-pos-issue" open={this.props.isShowModal} onClose={this.props.isClosed} >
-                  <div className="body-container">
-                      {this._renderIssue()}
-                  </div>
-              </Modal>
+      return(
+        <div>
+          <Modal className="modal-pos-issue" open={this.props.isShowModal} onClose={this.props.isClosed} >
+            <div className="body-container">
+              {this._renderIssue()}
             </div>
-        )
+          </Modal>
+        </div>
+      )
     }
 }

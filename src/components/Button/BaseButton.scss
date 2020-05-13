@@ -3,7 +3,6 @@
 
 .button-inline{
     display: flex;
-    // width: auto;
     .label-selected-data{
         display: flex;
         color: map-get($colors, primary-dark);
@@ -51,7 +50,7 @@
         padding-right: 23%;
         width: vw(153.22);
         height: vw(38.07);
-        font-size: vw(18); //16
+        font-size: vw(18);
         font-weight: bold;
         line-height: vw(16) !important;
         font-family: 'Lato-Regular';

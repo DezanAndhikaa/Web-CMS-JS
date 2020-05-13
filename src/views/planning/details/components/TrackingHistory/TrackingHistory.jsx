@@ -44,11 +44,9 @@ export default class TrackingHistory extends React.PureComponent {
 		return(
             <main className="content">
                 <div className="head-containers-tracking">
-                    <div className="back_button-tracking">
-                        <Button className="button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
-                            Detail
-                        </Button>
-                    </div>
+                    <Button className="back_button-tracking" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
+                        Detail
+                    </Button>
                     <div className="notif_button-tracking">
                         <FilterbyDataAction
                                 {...this.props}

@@ -6,8 +6,9 @@ import {
 import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
-import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc } from '../../DetailPages-action';
+import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons';
+import EmptyList from '../../../../../components/EmptyList/EmptyList';
 
 export default class ServiceOrderList extends React.PureComponent {
   state = {
@@ -16,7 +17,6 @@ export default class ServiceOrderList extends React.PureComponent {
 
   componentDidMount = async () => {
     await this.props.clearSelectedServicePlans();
-    // await this.props.onClickServiceOrder();
   }
   componentDidUpdate = (prevState) =>{
     if (prevState.serviceParameter !== this.props.serviceParameter || prevState.serviceSearch !== this.props.serviceSearch || 
@@ -38,6 +38,14 @@ export default class ServiceOrderList extends React.PureComponent {
       checkedValue : !this.state.checkedValue
     })
   }
+
+  isFilterLifetime = async( value1, value2 ) => {
+    this.props.lifetimeFilter( LifetimeFilterAction, value1, value2, this.props.serviceParameter.dataFilter.PageSize );
+  }
+
+  isFilterDate = async ( value1, value2) => {
+    this.props.dateFilter( DateFilterAction, value1, value2, this.props.serviceParameter.dataFilter.PageSize );
+  }
   
   isCheckboxAvailable = (data) => {
     let isAvailable = false;
@@ -53,94 +61,67 @@ export default class ServiceOrderList extends React.PureComponent {
       return(
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
             <TableRow>
-              {/* Nanti ada if user ho atau site
-              Ini tampilan HO */}
-              <TableCell padding="checkbox">
-                {this.props.displayServiceCheckbox  && 
-                <Checkbox 
-                checked={this.state.checkedValue}
-                onChange={this.handleClick}
-                onClick={() => {this.props.serviceOrderList.Lists.map((row,id) => 
-                this.props.onChoosedService(row,id))}}
-                className="checkbox-checked-header" />}
-              </TableCell>
-
-              {/* Ini tampilan Site */}
+              {this.props.idService === "Data Input" ? "" :
+                <TableCell padding="checkbox">
+                  {this.props.displayServiceCheckbox  && 
+                  <Checkbox 
+                  checked={this.state.checkedValue}
+                  onChange={this.handleClick}
+                  onClick={() => {this.props.serviceOrderList.Lists.map((row,id) => 
+                  this.props.onChoosedService(row,id))}}
+                  className="checkbox-checked-header" />}
+                </TableCell>
+              }
               <PlanningListHeader
                 name="Work Order"
-              //   isActive={this.props.sortJobsByState.unitModel.isActive}
                 delay={300}
                 onSearch={this.props.onSearchComp}
-              //   isAscending={this.props.sortJobsByState.unitModel.isAscending}
               />
               <PlanningListHeader
                 name="Customer"
-                // isActive={this.props.sortServiceByState.Customer.isActive}
                 delay={300}
-                // isAscending={this.props.sortServiceByState.Customer.isAscending}
                 onClick={() => this.props.onClickTabHead(SortServiceByCustomer)}
               />
               <PlanningListHeader
                 name="Site"
-                // isActive={this.props.sortServiceByState.Site.isActive}
                 delay={300}
-                // isAscending={this.props.sortServiceByState.Site.isAscending}
                 onClick={() => this.props.onClickTabHead(SortServiceBySite)}
               />
               <PlanningListHeader
                 name="Unit Model"
-                // isActive={this.props.sortServiceByState.UnitModel.isActive}
                 delay={300}
-                // isAscending={this.props.sortServiceByState.UnitModel.isAscending}
                 onClick={() => this.props.onClickTabHead(SortServiceByUnitModel)}
               />
               <PlanningListHeader
                 name="Comp Desc"
-                // isActive={this.props.sortServiceByState.CompDesc.isActive}
                 delay={300}
-                // isAscending={this.props.sortServiceByState.CompDesc.isAscending}
                 onClick={() => this.props.onClickTabHead(SortServiceByCompDesc)}
               />
               <PlanningListHeader
                 name="Part Number"
-              // //   isActive={this.props.sortJobsByState.backlogOpen.isActive}
                 delay={300}
                 onSearch={this.props.onSearchComp}
-              // //   isAscending={this.props.sortJobsByState.backlogOpen.isAscending}
               />
               <PlanningListHeader
                 name="Unit Code"
-              // //   isActive={this.props.sortJobsByState.plantExecution.isActive}
                 delay={300}
                 onSearch={this.props.onSearchComp}
-              // //   isAscending={this.props.sortJobsByState.plantExecution.isAscending}
               />
               <PlanningListHeader
                 name="Serial Number"
-              // //   isActive={this.props.sortJobsByState.status.isActive}
                 delay={300}
-                onSearch={this.props.onSearchComp}
-              // //   isAscending={this.props.sortJobsByState.status.isAscending}            
+                onSearch={this.props.onSearchComp}          
               />
           <PlanningListHeader
               name="Lifetime"
-            // //   isActive={this.props.sortJobsByState.staging.isActive}
               delay={300}
-            // //   isAscending={this.props.sortJobsByState.staging.isAscending}
+              onFilter={this.isFilterLifetime}
             />
             <PlanningListHeader
               name="Plan"
-            // //   isActive={this.props.sortJobsByState.staging.isActive}
               delay={300}
-            // //   isAscending={this.props.sortJobsByState.staging.isAscending}
+              onFilter={this.isFilterDate}
             />
-            {/* <PlanningListHeader
-              name="Action"
-              align="center"
-            // //   isActive={this.props.sortJobsByState.staging.isActive}
-              delay={300}
-            // //   isAscending={this.props.sortJobsByState.staging.isAscending}
-            /> */}
           </TableRow>
         </TableHead>
     )
@@ -149,16 +130,17 @@ export default class ServiceOrderList extends React.PureComponent {
   showTableBody(row,index) {
     return(
       <TableRow key={index} classes={{ root: 'table-row' }}>
-        {/* Nanti ada if user ho atau site
-              Ini tampilan HO */}
-        <TableCell padding="checkbox">
-          {this.props.displayServiceCheckbox && 
-          <Checkbox 
-            disabled={this.isCheckboxAvailable(row)} 
-            checked={this.props.selectedServicePlanList.some((plans) => plans.WoNumber === row.WoNumber)} 
-            onClick={() => this.props.onChoosedService(row)} 
-            classes={{ checked: 'checkbox-checked' }} />}
-        </TableCell>
+        {this.props.idService === "Data Input" ? "" :
+          <TableCell padding="checkbox">
+            {this.props.displayServiceCheckbox && 
+            <Checkbox 
+              disabled={this.isCheckboxAvailable(row)} 
+              checked={this.props.selectedServicePlanList.some((plans) => plans.WoNumber === row.WoNumber)} 
+              onClick={() => this.props.onChoosedService(row)} 
+              classes={{ checked: 'checkbox-checked' }} 
+            />}
+          </TableCell>
+        }
         <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
@@ -169,7 +151,6 @@ export default class ServiceOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.LifeTimeComponent}</TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
-        {/* <TableCell align="center" className="table-cell"> <EditButton /></TableCell> */}
       </TableRow>
     )
   }
@@ -191,16 +172,21 @@ export default class ServiceOrderList extends React.PureComponent {
           OOPS THERE WAS AN ERROR :'(
         </div>
       )
-    }else if(this.props.serviceOrderList.Lists.length === 0){
-      return(
-        <div className="loading-container">
-          DATA NOT FOUND
-        </div>
-      )
     }
   }
 
   render(){
+    if(this.props.serviceOrderList.Lists.length === 0 && this.props.idService === "Data Input" 
+      && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED){
+      return(
+        <EmptyList />
+      )
+    }else if(this.props.serviceOrderList.Lists.length === 0 && this.props.idTab === "Status"
+      && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED){
+      return(
+        <EmptyList idEmpty= "NA" />
+      )
+    }else{
       return(
         <>
         <Table classes={{ root: 'table' }} className="table">
@@ -214,6 +200,7 @@ export default class ServiceOrderList extends React.PureComponent {
         </Table>
         {this.showLoading()}
         </>
-       )
+      )
     }
   }
+}

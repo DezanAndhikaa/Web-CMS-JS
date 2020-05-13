@@ -1,6 +1,5 @@
 import React from 'react';
 import moment from "moment";
-// import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import './ApprovalPages.scss';
 import ApprovalTab from './ApprovalTab/ApprovalTab';
 import { ApiRequestActionsStatus } from "../../../../../core/RestClientHelpers";
@@ -41,64 +40,82 @@ componentDidUpdate = (prevProps) => {
   if (prevProps.salesParameter !== this.props.salesParameter) {
     this.onClickSalesOrder();
   }
+  if(prevProps.searchSalesParameter !== this.props.searchSalesParameter){
+    this.fetchSearchSales();
+  }
+  if(prevProps.searchServiceParameter !== this.props.searchServiceParameter){
+    this.fetchSearchService();
+  }
   if (prevProps.serviceParameter !== this.props.serviceParameter) {
     this.onClickServiceOrder();
-  }
-  if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
-    prevProps.approveSalesDownloaded.status === ApiRequestActionsStatus.LOADING) {
-    this.onClickDownloadSalesApproved()
-  }
-  if (this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
-    prevProps.approveServiceDownloaded.status === ApiRequestActionsStatus.LOADING) {
-    this.onClickDownloadServiceApproved()
   }
 
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
-      if(this.props.indexFilterParameter.indexTabParameter === 0){
-        this.props.updateSalesParameter({
-          ...prevProps.salesParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
-        })
-      }else{
-        this.props.updateServiceParameter({
-          ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
-        })
-      }
+    if(this.props.indexFilterParameter.indexTabParameter === 0){
+      this.props.updateSalesParameter({
+        ...prevProps.salesParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
+      })
+    }else{
+      this.props.updateServiceParameter({
+        ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
+      })
+    }
   }
 
   //FILTER RANGE LIFETIME
-  if(prevProps.filterLifetime !== this.props.filterLifetime){
-    this.props.updateSalesParameter({
-      ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterLifetime.Filter, PageNumber: 1
-    })
+  if(this.state.whichTabs){
+    if(prevProps.filterLifetime !== this.props.filterLifetime){
+      // if(this.props.filterLifetime === ""){
+      //   this.props.updateSalesParameter({
+      //     ...prevProps.salesParameter.dataFilter, Filter: this.props.filterLifetime.Filter = "", PageNumber: 1
+      //   })
+      // }else{
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter: this.props.filterLifetime.Filter, PageNumber: 1,
+        })
+    //   }
+    }
+  }else{
+    if(prevProps.filterLifetime !== this.props.filterLifetime){
+      this.props.updateServiceParameter({
+        ...prevProps.serviceParameter.dataFilter, Filter: this.props.filterLifetime.Filter, PageNumber: 1,
+      })
+    }
   }
 
   //FILTER RANGE DATE
-  if(prevProps.filterDate !== this.props.filterDate){
-    this.props.fetchSalesOrder(this.props.filterDate,this.props.token);
+  if(this.state.whichTabs){
+    if(prevProps.filterDate !== this.props.filterDate){
+      this.props.fetchSalesOrder(this.props.filterDate,this.props.token);
+    }
+  }else{
+    if(prevProps.filterDate !== this.props.filterDate){
+      this.props.fetchServiceOrder(this.props.filterDate,this.props.token);
+    }
   }
 
-  //ini untuk trigger sales global search
+  // Trigger sales global search
   if (prevProps.salesSearch !== this.props.salesSearch) {
-    this.props.updateSearchParameter({
-      Category: 'Approval', Keyword: this.props.salesSearch,
+    this.props.updateSearchSales({
+      ...prevProps.searchSalesParameter, Category: 'Approval', Keyword: this.props.salesSearch,
     });
   }
   
-  //ini untuk trigger service global search
+  //Trigger service global search
   if(prevProps.serviceSearch !== this.props.serviceSearch){
-    console.log('coba masuk gk: ', prevProps.serviceSearch)
-    this.props.updateSearchParameter({
-      ...prevProps.dataFilter, Category: 'Approval', Keyword: this.props.serviceSearch,
+    this.props.updateSearchService({
+      ...prevProps.searchServiceParameter, Category: 'Approval', Keyword: this.props.serviceSearch,
     });
   }
-  //search per component
+
+  //Search per component
   if(this.state.whichTabs){
     if(prevProps.searchComp !== this.props.searchComp){
       if(this.props.searchComp[0].Value === ""){
         this.props.updateSalesParameter({
-          ...prevProps.salesParameter.dataFilter // gimana cara hapus row ke 0
-        })  
+          ...prevProps.salesParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+        });  
       }else{
         this.props.updateSalesParameter({
           ...prevProps.salesParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
@@ -122,7 +139,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'CustomerName',
             Direction : 'desc'
@@ -133,7 +149,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'CustomerName',
             Direction : 'asc'
@@ -146,7 +161,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'SiteCode',
             Direction : 'desc'
@@ -157,7 +171,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'SiteCode',
             Direction : 'asc'
@@ -170,7 +183,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'UnitModel',
             Direction : 'desc'
@@ -181,7 +193,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'UnitModel',
             Direction : 'asc'
@@ -194,7 +205,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'ComponentDescription',
             Direction : 'desc'
@@ -205,7 +215,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'ComponentDescription',
             Direction : 'asc'
@@ -223,7 +232,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'CustomerName',
             Direction : 'desc'
@@ -234,7 +242,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'CustomerName',
             Direction : 'asc'
@@ -247,7 +254,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'SiteCode',
             Direction : 'desc'
@@ -258,7 +264,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'SiteCode',
             Direction : 'asc'
@@ -271,7 +276,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'UnitModel',
             Direction : 'desc'
@@ -282,7 +286,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'UnitModel',
             Direction : 'asc'
@@ -295,7 +298,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'ComponentDescription',
             Direction : 'desc'
@@ -306,7 +308,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'ComponentDescription',
             Direction : 'asc'
@@ -373,18 +374,26 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
+  fetchSearchSales = async() => {
+    await this.props.fetchSalesOrder(this.props.searchSalesParameter, this.props.token);
+  } 
+
+  fetchSearchService = async() => {
+    await this.props.fetchServiceOrder(this.props.searchServiceParameter, this.props.token);
+  } 
+
   //SAAT MENGKLIK SERVICE ORDER TAB
   onClickServiceOrder = async() => {
-   await this.props.fetchServiceOrder({
-    ...this.props.serviceParameter.dataFilter, 
-    Filter : 
-          [...this.props.serviceParameter.dataFilter.Filter, {
-            Field : 'SAPIssueMessage',
-            Operator : "eq",
-            Value : '-',
-            Logic : "AND"
-    }]
-  }, this.props.token);
+    await this.props.fetchServiceOrder({
+      ...this.props.serviceParameter.dataFilter, 
+      Filter : 
+            [...this.props.serviceParameter.dataFilter.Filter, {
+              Field : 'SAPIssueMessage',
+              Operator : "eq",
+              Value : '-',
+              Logic : "AND"
+      }]
+    }, this.props.token);
   }
 
   //SAAT MENGKLIK SALES ORDER TAB
@@ -497,16 +506,17 @@ componentDidUpdate = (prevProps) => {
   onClickDeletedSales = () => {
     this.props.fetchDeletedSales(this.props.salesParameter.dataFilter, this.props.token);
   }
+
   //FUNGSI UNTUK memanggil Data SERVICE ORDER yang telah terhapus
   onClickDeletedService = () => {
     this.props.fetchDeletedService(this.props.serviceParameter.dataFilter, this.props.token);
   }
+
   onClickDownloadSalesApproved = () => {
     let link = document.createElement("a");
     document.body.appendChild(link);
     link.style = "display: none";
     const todayDate = moment(new Date()).format('DD-MM-YYYY');
-    // const salesOrder  = this.state.selectedData.SoNumber;
     let fileName = "Sales-Order-Planning-"+todayDate+".csv";
     let blob = new Blob([this.props.approveSalesDownloaded.data]),
       url = window.URL.createObjectURL(blob);
@@ -521,7 +531,6 @@ componentDidUpdate = (prevProps) => {
     document.body.appendChild(link);
     link.style = "display: none";
     const todayDate = moment(new Date()).format('DD-MM-YYYY');
-    // const serviceOrder  = this.state.selectedServiceData.WoNumber;
     let fileName = "Service-Order-Planning-"+todayDate+".csv";
     let blob = new Blob([this.props.approveServiceDownloaded.data]),
       url = window.URL.createObjectURL(blob);
@@ -603,42 +612,13 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  handleDeleteSales = async() => {
-    let arr = []
-    const index = this.props.selectedSalesPlans.length
-    const todayDate = moment(new Date()).format('YYYY-MM-DD');
-    if (this.props.selectedSalesPlans.length > 0) {
-      for (let i = 0; i < index; i++) {
-        arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
-      }
-      await this.props.deleteSales({SoNumbers : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate}, this.props.token)
-      this.onClickSalesOrder();
-      await this.props.clearSelectedSalesPlans();
-    }
-  }
-
-  handleDeleteService = async() => {
-    let arr = []
-    const index = this.props.selectedServicePlans.length
-    const todayDate = moment(new Date()).format('YYYY-MM-DD');
-    if (this.props.selectedServicePlans.length > 0) {
-      for (let i = 0; i < index; i++) {
-        arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
-      }
-      await this.props.deleteService({WoNumbers : arr, IsDelete: true, UpdatedBy: "admin", UpdatedByName: "admin", UpdatedDate: todayDate}, this.props.token)
-      this.onClickServiceOrder();
-      await this.props.clearSelectedServicePlans();
-    }
-  }
-
   handleClickFilterByDataAction = () =>{
     this.setState({
       isApproved : !this.state.isApproved
     })
   }
 
-  //KOMPONEN UNTUK FILTER DATA ACTION
-  _renderFilterByDataAction = (value) => {
+  _renderFilterByDataAction() {
     if (this.state.whichTabs === true) {
       return(
         <>
@@ -674,7 +654,6 @@ componentDidUpdate = (prevProps) => {
       lifetime: { Lists :this.state.lifetime.Lists.map(el => (el.SoNumber === key ? {...el, LifeTimeComp : value} : el)) }
     });
   };
-
   
   changeSuccess = () => {
     this.setState({
@@ -722,24 +701,23 @@ componentDidUpdate = (prevProps) => {
     )
   }
 
-  //KOMPONEN UNTUK BUTTON DOWNLOAD, APPROVE, DAN DELETE
-  _renderBaseButton = (value) => {
+  //Komponen untuk menampilkan button
+  _renderBaseButton (){
     if (this.state.whichTabs === true) {
       return(
         <div className="header-rows">
-          {/* <BaseButton titles="Total" totalSelectedItems ={this.props.selectedSalesPlans.length}/> */}
           <BaseButton titles="Approve"
             {...this.props}
             whatTabsIsRendered={this.state.whichTabs}
             disabledButton = {this.props.selectedSalesPlans.length < 1 }
             totalSelectedItems ={this.props.selectedSalesPlans.length}
             handleSalesApprove={this.handleSalesApprove}
-            // selectedData={this.state.selectedData}
             renderSakses = {this.changeSuccess}
           />
           <BaseButton titles="Cancel Approve"
             {...this.props}
             whichTabs = {this.state.whichTabs}
+            idCancel="Sales"
             selectedDataSAP={this.props.selectedSalesPlans}
             whatTabsIsRendered={this.state.whichTabs}
             disabledButton = {this.props.selectedSalesPlans.length < 1 }
@@ -749,21 +727,12 @@ componentDidUpdate = (prevProps) => {
             renderSakses = {this.changeSuccess}
             onClicksalesOrder = {this.onClicksalesOrder}
           />
-          <BaseButton titles="Delete" 
-            {...this.props}
-            disabledButton = {this.props.selectedSalesPlans.length < 1 }
-            totalSelectedItems ={this.props.selectedSalesPlans.length}
-            whatTabsIsRendered={this.state.whichTabs}
-            handleDeleteSales={this.handleDeleteSales}
-            renderSakses = {this.changeSuccess}
-          />
         </div>
       );
     }
     if (this.state.whichTabs === false) {
       return(
 				<div className="header-rows">
-          {/* <BaseButton titles="Total" totalSelectedItems ={this.props.selectedServicePlans.length}/> */}
           <BaseButton titles="Approve"
             {...this.props}
             whatTabsIsRendered={this.state.whichTabs}
@@ -782,14 +751,6 @@ componentDidUpdate = (prevProps) => {
              handleSendtoEdit={this.handleSendtoEdit}
              selectedData={this.state.selectedData}
              renderSakses = {this.changeSuccess}
-          />
-          <BaseButton titles="Delete" 
-            {...this.props}
-            disabledButton = {this.props.selectedServicePlans.length < 1 }
-            totalSelectedItems ={this.props.selectedServicePlans.length}
-            whatTabsIsRendered={this.state.whichTabs}
-            handleDeleteService={this.handleDeleteService}
-            renderSakses = {this.changeSuccess}
           />
         </div>
       );
@@ -836,12 +797,10 @@ componentDidUpdate = (prevProps) => {
           onStats={this.isChangeStat}     
           totalSalesData={this.props.salesOrderList.TotalData}
           totalServiceData={this.props.serviceOrderList.TotalData}
-          ApprovedSalesData={this.props.salesOrderListApproved.TotalData}
           onClickTabHead={this.props.onClickSortBy}
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}
           onPage={this._renderPagination}
-          // baseButton={this._renderBaseButton}
           isApproved={this.state.isApproved}
           token={this.props.token}
         />
@@ -894,9 +853,12 @@ componentDidUpdate = (prevProps) => {
                 {this._renderTabs()}
             </div>
             <div></div>
-            <div className="bottom-row-approval">
-                {this._renderShowPerPage()} {this._renderPagination()}
-            </div>
+            {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+              this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
+              <div className="bottom-row-approval">
+                  {this._renderShowPerPage()} {this._renderPagination()}
+              </div>
+            }
       </main>
     )
   }

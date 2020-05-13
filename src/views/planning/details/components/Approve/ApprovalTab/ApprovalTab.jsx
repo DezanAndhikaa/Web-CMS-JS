@@ -9,7 +9,8 @@ import SalesOrderList from '../../PlanningList/SalesOrderList';
 import ServiceOrderList from '../../PlanningList/ServiceOrderList';
 import './ApprovalTab.scss';
 import DropdownFilter from '../../../../../../components/FilterByTitle/DropdownFilter';
-import { SelectCustomerFilterAction,SelectSiteFilterAction, SelectUnitModelFilterAction, SelectComponentFilterAction } from '../../../DetailPages-action'
+import { ApiRequestActionsStatus } from '../../../../../../core/RestClientHelpers';
+import { SelectCustomerFilterAction,SelectSiteFilterAction, SelectUnitModelFilterAction, SelectComponentFilterAction } from '../../../DetailPages-action';
 
 function TabContainer({ children, dir }) {
   return (
@@ -41,7 +42,6 @@ const styles = theme => ({
     textTransform: 'initial',
     alignItem: 'center',
     marginLeft:0,
-    // minWidth: 72,
     fontWeight: theme.typography.fontWeightRegular,
     marginRight: theme.spacing.unit * 0,
     fontFamily: [
@@ -77,8 +77,6 @@ const styles = theme => ({
 class ApprovalTab extends React.Component {
   state = {
     value: 0,
-    // invisible1: false,
-    // invisible2: true,
     Customers: [],
     Sites: [],
     UnitModels: [],
@@ -108,9 +106,12 @@ class ApprovalTab extends React.Component {
 
   _renderSalesOrderList(){
     return(
-      <div className="plannings-list-container">
+      <div className={this.props.salesOrderList.Lists.length === 0 
+        && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ?
+        "planning-list-empty" : "plannings-list-container"}>
         <SalesOrderList 
-        {...this.props}
+          {...this.props}
+          idTab = "Approval"
         />
       </div>
     );
@@ -118,12 +119,14 @@ class ApprovalTab extends React.Component {
 
   _renderServiceOrderList(){
     return(
-        <div className="plannings-list-container">
-          <ServiceOrderList 
+      <div className={this.props.serviceOrderList.Lists.length === 0 
+        && this.props.fetchStatusServiceOrder === ApiRequestActionsStatus.SUCCEEDED ? 
+        "planning-list-empty" : "plannings-list-container"}>
+        <ServiceOrderList 
           {...this.props}
           isClick={this.props.isClick}
-          />
-        </div>
+        />
+      </div>
     );
   }
 
@@ -192,7 +195,7 @@ class ApprovalTab extends React.Component {
                 Sales Order
               </div>
             </div>
-            <div className="total-container">
+            <div className={this.props.totalSalesData.toString().length > 1 ? "total-containers" : "total-container"}>
               {this.props.totalSalesData}
             </div>
           </div>
@@ -214,7 +217,7 @@ class ApprovalTab extends React.Component {
                 Service Order
               </div>
             </div>
-            <div className="total-container">
+            <div className={this.props.totalServiceData.toString().length > 1 ? "total-containers" : "total-container"}>
               {this.props.totalServiceData}
             </div>
           </div>
@@ -300,41 +303,44 @@ class ApprovalTab extends React.Component {
     const { classes, theme } = this.props;
     const { value } = this.state;
     return (
-        <div className="root">
-          <div className="tab-container-approval">
-            {this.props.renderNotif}
-            {this.props.renderFilterByDataAction}
-          </div>
-        <AppBar position="static" color="default" style={{boxShadow: "none"}}>
-          <Tabs
-            classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
-            value={this.state.value}
-            onChange={this.handleChange}
-            indicatorColor="primary" >
-            <Tab 
-              centered={true}
-              onClick={() => this.props.clearSelectedSalesPlans()} 
-              classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-              label= {this.renderTotalSales()} 
-            />
-            <Tab 
-              centered={true}
-              onClick={() => this.props.clearSelectedServicePlans()} 
-              classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-              label= {this.renderTotalService()}
-            />
-          </Tabs>
-        </AppBar>
-        <div className="base-button-container">
-          {this._renderBaseBtn()}
-        </div>
-        <div className="filters-container-approval">
-          {this._renderFilter()}
-        </div>
+    <div className="root">
+      <div className="tab-container-approval">
+        {this.props.renderNotif}
+        {this.props.renderFilterByDataAction}
+      </div>
+    <AppBar position="static" color="default" style={{boxShadow: "none"}}>
+      <Tabs
+        classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
+        value={this.state.value}
+        onChange={this.handleChange}
+        indicatorColor="primary" >
+        <Tab 
+          centered={true}
+          onClick={() => this.props.clearSelectedSalesPlans()} 
+          classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+          label= {this.renderTotalSales()} 
+        />
+        <Tab 
+          centered={true}
+          onClick={() => this.props.clearSelectedServicePlans()} 
+          classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+          label= {this.renderTotalService()}
+        />
+      </Tabs>
+    </AppBar>
+    <div className="base-button-container">
+      {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+        this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderBaseBtn()}
+    </div>
+    <div className="filters-container-approval">
+      {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+        this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
+    </div>
     {value === 0 && <TabContainer dir={theme.direction} >
     <>{this._renderSalesOrderList()}</> 
     </TabContainer>}
-        {value === 1 && <TabContainer dir={theme.direction} ><div>{this._renderServiceOrderList()}</div></TabContainer>}
+        {value === 1 && <TabContainer dir={theme.direction} >
+        <div>{this._renderServiceOrderList()}</div></TabContainer>}
       </div>
     );
   }

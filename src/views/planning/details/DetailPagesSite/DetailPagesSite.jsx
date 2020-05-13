@@ -1,12 +1,11 @@
 import React from 'react';
-// import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import './DetailPagesSite.scss';
 import DetailsTab from './Tab/DetailsTab';
-// import { ApiRequestActionsStatus } from "../../../../core/RestClientHelpers";
 import DropDownList from '../../../../components/DropdownList/DropDownList';
 import SearchInput from "../../../../components/Searchbar/SearchInput";
 import FilterbyDataAction from '../../../../components/FilterByDataAction/FilterbyDataAction';
 import NotifButton from '../../../../components/ActionButton/NotifButton/NotifButton';
+import {ApiRequestActionsStatus} from '../../../../core/RestClientHelpers';
 
 class DetailPagesSite extends React.Component{
     constructor(props) {
@@ -44,7 +43,12 @@ componentDidUpdate = (prevProps) => {
   if (prevProps.salesRevisedParam !== this.props.salesRevisedParam) {
     this.onClickRevisedSales();
   }
-
+  if(prevProps.searchSalesParameter !== this.props.searchSalesParameter){
+    this.fetchSearchSales();
+  }
+  if(prevProps.searchServiceParameter !== this.props.searchServiceParameter){
+    this.fetchSearchService();
+  }
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
       if(this.props.indexFilterParameter.indexTabParameter === 0){
@@ -60,35 +64,48 @@ componentDidUpdate = (prevProps) => {
 
   //FILTER RANGE LIFETIME
   if(prevProps.filterLifetime !== this.props.filterLifetime){
-    this.props.updateSalesParameter({
+    this.props.updateServiceParameter({
       ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterLifetime.Filter, PageNumber: 1
     })
   }
 
-    //FILTER RANGE DATE
+  //FILTER RANGE DATE
+  if(this.state.whichTabs){
     if(prevProps.filterDate !== this.props.filterDate){
-      this.props.fetchSalesOrder(this.props.filterDate);
+      this.props.fetchSalesOrder(this.props.filterDate,this.props.token);
     }
+  }else{
+    if(prevProps.filterDate !== this.props.filterDate){
+      this.props.fetchServiceOrder(this.props.filterDate,this.props.token);
+    }
+  }
 
   //ini untuk trigger sales global search
   if (prevProps.salesSearch !== this.props.salesSearch) {
-    this.props.updateSalesParameter({
-      ...prevProps.salesParameter.dataFilter, Category: 'Lifetime', Keyword: this.props.salesSearch, PageNumber: 1,
+    this.props.updateSearchSales({
+      ...prevProps.searchSalesParameter, Category: 'Lifetime', Keyword: this.props.salesSearch,
     });
   }
   
   //ini untuk trigger service global search
   if(prevProps.serviceSearch !== this.props.serviceSearch){
-    this.props.updateServiceParameter({
-      ...prevProps.serviceParameter.dataFilter, Category: 'Approval', Keyword: this.props.serviceSearch, PageNumber: 1,
+    this.props.updateSearchService({
+      ...prevProps.searchServiceParameter, Category: 'Approval', Keyword: this.props.serviceSearch,
     });
   }
+
   //search per component
   if(this.state.whichTabs){
     if(prevProps.searchComp !== this.props.searchComp){
-      this.props.updateSalesParameter({
-        ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
-      });
+      if(this.props.searchComp[0].Value === ""){
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+        });  
+      }else{
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+        });
+      }
     }
   }else{
     if(prevProps.searchComp !== this.props.searchComp){
@@ -107,7 +124,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'CustomerName',
             Direction : 'desc'
@@ -118,7 +134,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'CustomerName',
             Direction : 'asc'
@@ -131,7 +146,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'SiteCode',
             Direction : 'desc'
@@ -142,7 +156,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'SiteCode',
             Direction : 'asc'
@@ -155,7 +168,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'UnitModel',
             Direction : 'desc'
@@ -166,7 +178,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'UnitModel',
             Direction : 'asc'
@@ -179,7 +190,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'ComponentDescription',
             Direction : 'desc'
@@ -190,7 +200,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'ComponentDescription',
             Direction : 'asc'
@@ -208,7 +217,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'CustomerName',
             Direction : 'desc'
@@ -219,7 +227,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'CustomerName',
             Direction : 'asc'
@@ -232,7 +239,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'SiteCode',
             Direction : 'desc'
@@ -243,7 +249,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'SiteCode',
             Direction : 'asc'
@@ -256,7 +261,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'UnitModel',
             Direction : 'desc'
@@ -267,7 +271,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'UnitModel',
             Direction : 'asc'
@@ -280,7 +283,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'ComponentDescription',
             Direction : 'desc'
@@ -291,7 +293,6 @@ componentDidUpdate = (prevProps) => {
       this.props.updateServiceParameter({
         ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
-          // PageSize: 2,
           Sort: [{
             Field : 'ComponentDescription',
             Direction : 'asc'
@@ -389,6 +390,14 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
+  fetchSearchSales = async() => {
+    await this.props.fetchSalesOrder(this.props.searchSalesParameter, this.props.token);
+  } 
+
+  fetchSearchService = async() => {
+    await this.props.fetchServiceOrder(this.props.searchServiceParameter, this.props.token);
+  }
+
   //SAAT MENGKLIK SERVICE ORDER TAB
   onClickServiceOrder = async() => {
    await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
@@ -423,6 +432,11 @@ componentDidUpdate = (prevProps) => {
           Operator : 'eq',
           Value    : 'false',
           Logic    : "AND"
+        },{
+          Field : 'SAPIssueMessage',
+          Operator : 'eq',
+          Value : '-',
+          Logic : 'AND'
         }]
     },this.props.token);
   }
@@ -453,7 +467,8 @@ componentDidUpdate = (prevProps) => {
         <div className="total-data-rev">
           *There are <b>{this.props.salesOrderRevised.TotalData} items </b>of sales orders that have not been revised.
         </div>
-        {this._renderPaginationRev()}
+        {this.props.salesOrderRevised.Lists.length === 0 
+          && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderPaginationRev()}
       </div>
     )
   }
@@ -581,9 +596,12 @@ componentDidUpdate = (prevProps) => {
               {this._renderTabs()}
           </div>
           <div></div>
-          <div className="bottom-row-detail-site">
-              {this._renderShowPerPage()} {this._renderPagination()}
-          </div>
+          {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+            this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
+            <div className="bottom-row-detail-site">
+                {this._renderShowPerPage()} {this._renderPagination()}
+            </div>
+          }
       </main>
     )
   }
