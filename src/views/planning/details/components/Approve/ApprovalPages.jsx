@@ -9,321 +9,321 @@ import BaseButton from '../../../../../components/Button/BaseButton';
 import FilterbyDataAction from '../../../../../components/FilterByDataAction/FilterbyDataAction';
 import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton';
 import ConfirmationModal from '../../../../../components/ConfirmationModal/ConfirmationModal';
-import {CircularProgress} from '@material-ui/core';
+import { CircularProgress } from '@material-ui/core';
 import UnapproveConfirmation from '../../../../../components/UnapproveConfirmation/UnapproveConfirmation';
 
-class ApprovalPages extends React.Component{
-    constructor(props) {
-      super(props)
-      this.state = {
-        stats: true,
-        whichTabs: true,
-        isShowPerPage: true,
-        showPerPage : 0,
-        isShowApproveSucceed: false,
-        snak: true,
-        openSuccess : false,
-        openSuccessEdit : false
+class ApprovalPages extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      stats: true,
+      whichTabs: true,
+      isShowPerPage: true,
+      showPerPage: 0,
+      isShowApproveSucceed: false,
+      snak: true,
+      openSuccess: false,
+      openSuccessEdit: false
     };
-}
-
-componentWillUnmount = () => {
-  this.props.updateSalesParameter({
-    ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
-  });
-  this.props.updateServiceParameter({
-    ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
-  });
-}
-
-componentDidUpdate = (prevProps) => {
-  if (prevProps.salesParameter !== this.props.salesParameter) {
-    this.onClickSalesOrder();
-  }
-  if(prevProps.searchSalesParameter !== this.props.searchSalesParameter){
-    this.fetchSearchSales();
-  }
-  if(prevProps.searchServiceParameter !== this.props.searchServiceParameter){
-    this.fetchSearchService();
-  }
-  if (prevProps.serviceParameter !== this.props.serviceParameter) {
-    this.onClickServiceOrder();
   }
 
-  // FILTER DROPDOWN
-  if(prevProps.filterParameter !== this.props.filterParameter){
-    if(this.props.indexFilterParameter.indexTabParameter === 0){
-      this.props.updateSalesParameter({
-        ...prevProps.salesParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
-      })
-    }else{
-      this.props.updateServiceParameter({
-        ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
-      })
+  componentWillUnmount = () => {
+    this.props.updateSalesParameter({
+      ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+    });
+    this.props.updateServiceParameter({
+      ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+    });
+  }
+
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.salesParameter !== this.props.salesParameter) {
+      this.onClickSalesOrder();
     }
-  }
+    if (prevProps.searchSalesParameter !== this.props.searchSalesParameter) {
+      this.fetchSearchSales();
+    }
+    if (prevProps.searchServiceParameter !== this.props.searchServiceParameter) {
+      this.fetchSearchService();
+    }
+    if (prevProps.serviceParameter !== this.props.serviceParameter) {
+      this.onClickServiceOrder();
+    }
 
-  //FILTER RANGE LIFETIME
-  if(this.state.whichTabs){
-    if(prevProps.filterLifetime !== this.props.filterLifetime){
-      // if(this.props.filterLifetime === ""){
-      //   this.props.updateSalesParameter({
-      //     ...prevProps.salesParameter.dataFilter, Filter: this.props.filterLifetime.Filter = "", PageNumber: 1
-      //   })
-      // }else{
+    // FILTER DROPDOWN
+    if (prevProps.filterParameter !== this.props.filterParameter) {
+      if (this.props.indexFilterParameter.indexTabParameter === 0) {
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter: this.props.filterParameter.Filter, PageNumber: 1
+        })
+      } else {
+        this.props.updateServiceParameter({
+          ...prevProps.serviceParameter.dataFilter, Filter: this.props.filterParameter.Filter, PageNumber: 1
+        })
+      }
+    }
+
+    //FILTER RANGE LIFETIME
+    if (this.state.whichTabs) {
+      if (prevProps.filterLifetime !== this.props.filterLifetime) {
+        // if(this.props.filterLifetime === ""){
+        //   this.props.updateSalesParameter({
+        //     ...prevProps.salesParameter.dataFilter, Filter: this.props.filterLifetime.Filter = "", PageNumber: 1
+        //   })
+        // }else{
         this.props.updateSalesParameter({
           ...prevProps.salesParameter.dataFilter, Filter: this.props.filterLifetime.Filter, PageNumber: 1,
         })
-    //   }
+        //   }
+      }
+    } else {
+      if (prevProps.filterLifetime !== this.props.filterLifetime) {
+        this.props.updateServiceParameter({
+          ...prevProps.serviceParameter.dataFilter, Filter: this.props.filterLifetime.Filter, PageNumber: 1,
+        })
+      }
     }
-  }else{
-    if(prevProps.filterLifetime !== this.props.filterLifetime){
-      this.props.updateServiceParameter({
-        ...prevProps.serviceParameter.dataFilter, Filter: this.props.filterLifetime.Filter, PageNumber: 1,
-      })
-    }
-  }
 
-  //FILTER RANGE DATE
-  if(this.state.whichTabs){
-    if(prevProps.filterDate !== this.props.filterDate){
-      this.props.fetchSalesOrder(this.props.filterDate,this.props.token);
+    //FILTER RANGE DATE
+    if (this.state.whichTabs) {
+      if (prevProps.filterDate !== this.props.filterDate) {
+        this.props.fetchSalesOrder(this.props.filterDate, this.props.token);
+      }
+    } else {
+      if (prevProps.filterDate !== this.props.filterDate) {
+        this.props.fetchServiceOrder(this.props.filterDate, this.props.token);
+      }
     }
-  }else{
-    if(prevProps.filterDate !== this.props.filterDate){
-      this.props.fetchServiceOrder(this.props.filterDate,this.props.token);
+
+    // Trigger sales global search
+    if (prevProps.salesSearch !== this.props.salesSearch) {
+      this.props.updateSearchSales({
+        ...prevProps.searchSalesParameter, Category: 'Approval', Keyword: this.props.salesSearch,
+      });
     }
-  }
 
-  // Trigger sales global search
-  if (prevProps.salesSearch !== this.props.salesSearch) {
-    this.props.updateSearchSales({
-      ...prevProps.searchSalesParameter, Category: 'Approval', Keyword: this.props.salesSearch,
-    });
-  }
-  
-  //Trigger service global search
-  if(prevProps.serviceSearch !== this.props.serviceSearch){
-    this.props.updateSearchService({
-      ...prevProps.searchServiceParameter, Category: 'Approval', Keyword: this.props.serviceSearch,
-    });
-  }
+    //Trigger service global search
+    if (prevProps.serviceSearch !== this.props.serviceSearch) {
+      this.props.updateSearchService({
+        ...prevProps.searchServiceParameter, Category: 'Approval', Keyword: this.props.serviceSearch,
+      });
+    }
 
-  //Search per component
-  if(this.state.whichTabs){
-    if(prevProps.searchComp !== this.props.searchComp){
-      if(this.props.searchComp[0].Value === ""){
-        this.props.updateSalesParameter({
-          ...prevProps.salesParameter.dataFilter, Filter: this.props.searchComp.Value = "",
-        });  
-      }else{
-        this.props.updateSalesParameter({
-          ...prevProps.salesParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+    //Search per component
+    if (this.state.whichTabs) {
+      if (prevProps.searchComp !== this.props.searchComp) {
+        if (this.props.searchComp[0].Value === "") {
+          this.props.updateSalesParameter({
+            ...prevProps.salesParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+          });
+        } else {
+          this.props.updateSalesParameter({
+            ...prevProps.salesParameter.dataFilter, Filter: this.props.searchComp, PageNumber: 1,
+          });
+        }
+      }
+    } else {
+      if (prevProps.searchComp !== this.props.searchComp) {
+        this.props.updateServiceParameter({
+          ...prevProps.serviceParameter.dataFilter, Filter: this.props.searchComp, PageNumber: 1,
         });
       }
     }
-  }else{
-    if(prevProps.searchComp !== this.props.searchComp){
-      this.props.updateServiceParameter({
-        ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
-      });
+
+    // SALES ORDER SORTING
+    if (prevProps.sortSalesBy !== this.props.sortSalesBy) {
+      const { sortSalesBy } = this.props;
+      let isDescending = false;
+      if (sortSalesBy.Customer.isActive) {
+        isDescending = !sortSalesBy.Customer.isAscending;
+        this.props.updateSalesParameter({
+          ...this.props.salesParameter.dataFilter,
+          PageNumber: 1,
+          Sort: [{
+            Field: 'CustomerName',
+            Direction: 'desc'
+          }],
+        });
+        if (sortSalesBy.Customer.isAscending === !sortSalesBy.Customer.isActive) {
+          isDescending = !sortSalesBy.Customer.isAscending;
+          this.props.updateSalesParameter({
+            ...this.props.salesParameter.dataFilter,
+            PageNumber: 1,
+            Sort: [{
+              Field: 'CustomerName',
+              Direction: 'asc'
+            }],
+          });
+        }
+      }
+      if (sortSalesBy.Site.isActive) {
+        isDescending = !sortSalesBy.Site.isAscending;
+        this.props.updateSalesParameter({
+          ...this.props.salesParameter.dataFilter,
+          PageNumber: 1,
+          Sort: [{
+            Field: 'SiteCode',
+            Direction: 'desc'
+          }],
+        });
+        if (sortSalesBy.Site.isAscending === !sortSalesBy.Site.isActive) {
+          isDescending = !sortSalesBy.Site.isAscending;
+          this.props.updateSalesParameter({
+            ...this.props.salesParameter.dataFilter,
+            PageNumber: 1,
+            Sort: [{
+              Field: 'SiteCode',
+              Direction: 'asc'
+            }],
+          });
+        }
+      }
+      if (sortSalesBy.UnitModel.isActive) {
+        isDescending = !sortSalesBy.UnitModel.isAscending;
+        this.props.updateSalesParameter({
+          ...this.props.salesParameter.dataFilter,
+          PageNumber: 1,
+          Sort: [{
+            Field: 'UnitModel',
+            Direction: 'desc'
+          }],
+        });
+        if (sortSalesBy.UnitModel.isAscending === !sortSalesBy.UnitModel.isActive) {
+          isDescending = !sortSalesBy.UnitModel.isAscending;
+          this.props.updateSalesParameter({
+            ...this.props.salesParameter.dataFilter,
+            PageNumber: 1,
+            Sort: [{
+              Field: 'UnitModel',
+              Direction: 'asc'
+            }],
+          });
+        }
+      };
+      if (sortSalesBy.CompDesc.isActive) {
+        isDescending = !sortSalesBy.CompDesc.isAscending;
+        this.props.updateSalesParameter({
+          ...this.props.salesParameter.dataFilter,
+          PageNumber: 1,
+          Sort: [{
+            Field: 'ComponentDescription',
+            Direction: 'desc'
+          }],
+        });
+        if (sortSalesBy.CompDesc.isAscending === !sortSalesBy.CompDesc.isActive) {
+          isDescending = !sortSalesBy.CompDesc.isAscending;
+          this.props.updateSalesParameter({
+            ...this.props.salesParameter.dataFilter,
+            PageNumber: 1,
+            Sort: [{
+              Field: 'ComponentDescription',
+              Direction: 'asc'
+            }]
+          });
+        }
+      };
     }
-  }
-  
-  // SALES ORDER SORTING
-  if (prevProps.sortSalesBy !== this.props.sortSalesBy) {
-    const { sortSalesBy } = this.props;
-    let isDescending = false;
-    if (sortSalesBy.Customer.isActive) {
-      isDescending = !sortSalesBy.Customer.isAscending;
-      this.props.updateSalesParameter({
-        ...this.props.salesParameter.dataFilter,
+    // SERVICE ORDER SORTING
+    if (prevProps.sortServiceBy !== this.props.sortServiceBy) {
+      const { sortServiceBy } = this.props;
+      let isDescending = false;
+      if (sortServiceBy.Customer.isActive) {
+        isDescending = !sortServiceBy.Customer.isAscending;
+        this.props.updateServiceParameter({
+          ...this.props.serviceParameter.dataFilter,
           PageNumber: 1,
           Sort: [{
-            Field : 'CustomerName',
-            Direction : 'desc'
-          }],      
-      });
-    if (sortSalesBy.Customer.isAscending === !sortSalesBy.Customer.isActive) {
-      isDescending = !sortSalesBy.Customer.isAscending;
-      this.props.updateSalesParameter({
-        ...this.props.salesParameter.dataFilter,
-          PageNumber: 1,
-          Sort: [{
-            Field : 'CustomerName',
-            Direction : 'asc'
-          }],      
-      });
-    }
-  }
-    if (sortSalesBy.Site.isActive){
-      isDescending = !sortSalesBy.Site.isAscending;
-      this.props.updateSalesParameter({
-        ...this.props.salesParameter.dataFilter,
-          PageNumber: 1,
-          Sort: [{
-            Field : 'SiteCode',
-            Direction : 'desc'
-          }],
-      });
-    if (sortSalesBy.Site.isAscending === !sortSalesBy.Site.isActive) {
-      isDescending = !sortSalesBy.Site.isAscending;
-      this.props.updateSalesParameter({
-        ...this.props.salesParameter.dataFilter,
-          PageNumber: 1,
-          Sort: [{
-            Field : 'SiteCode',
-            Direction : 'asc'
-          }],
-      });
-    }
-    } 
-    if (sortSalesBy.UnitModel.isActive) {
-      isDescending = !sortSalesBy.UnitModel.isAscending;
-      this.props.updateSalesParameter({
-        ...this.props.salesParameter.dataFilter,
-          PageNumber: 1,
-          Sort: [{
-            Field : 'UnitModel',
-            Direction : 'desc'
-          }],
-      });
-    if (sortSalesBy.UnitModel.isAscending === !sortSalesBy.UnitModel.isActive) {
-      isDescending = !sortSalesBy.UnitModel.isAscending;
-      this.props.updateSalesParameter({
-        ...this.props.salesParameter.dataFilter,
-          PageNumber: 1,
-          Sort: [{
-            Field : 'UnitModel',
-            Direction : 'asc'
-          }],
-      });
-    }
-    };
-    if (sortSalesBy.CompDesc.isActive) {
-      isDescending = !sortSalesBy.CompDesc.isAscending;
-      this.props.updateSalesParameter({
-        ...this.props.salesParameter.dataFilter,
-          PageNumber: 1,
-          Sort: [{
-            Field : 'ComponentDescription',
-            Direction : 'desc'
-          }],
-      });
-    if (sortSalesBy.CompDesc.isAscending === !sortSalesBy.CompDesc.isActive) {
-      isDescending = !sortSalesBy.CompDesc.isAscending;
-      this.props.updateSalesParameter({
-        ...this.props.salesParameter.dataFilter,
-          PageNumber: 1,
-          Sort: [{
-            Field : 'ComponentDescription',
-            Direction : 'asc'
+            Field: 'CustomerName',
+            Direction: 'desc'
           }]
-      });
+        });
+        if (sortServiceBy.Customer.isAscending === !sortServiceBy.Customer.isActive) {
+          isDescending = !sortServiceBy.Customer.isAscending;
+          this.props.updateServiceParameter({
+            ...this.props.serviceParameter.dataFilter,
+            PageNumber: 1,
+            Sort: [{
+              Field: 'CustomerName',
+              Direction: 'asc'
+            }]
+          });
+        }
+      }
+      if (sortServiceBy.Site.isActive) {
+        isDescending = !sortServiceBy.Site.isAscending;
+        this.props.updateServiceParameter({
+          ...this.props.serviceParameter.dataFilter,
+          PageNumber: 1,
+          Sort: [{
+            Field: 'SiteCode',
+            Direction: 'desc'
+          }]
+        });
+        if (sortServiceBy.Site.isAscending === !sortServiceBy.Site.isActive) {
+          isDescending = !sortServiceBy.Site.isAscending;
+          this.props.updateServiceParameter({
+            ...this.props.serviceParameter.dataFilter,
+            PageNumber: 1,
+            Sort: [{
+              Field: 'SiteCode',
+              Direction: 'asc'
+            }]
+          });
+        }
+      }
+      if (sortServiceBy.UnitModel.isActive) {
+        isDescending = !sortServiceBy.UnitModel.isAscending;
+        this.props.updateServiceParameter({
+          ...this.props.serviceParameter.dataFilter,
+          PageNumber: 1,
+          Sort: [{
+            Field: 'UnitModel',
+            Direction: 'desc'
+          }]
+        });
+        if (sortServiceBy.UnitModel.isAscending === !sortServiceBy.UnitModel.isActive) {
+          isDescending = !sortServiceBy.UnitModel.isAscending;
+          this.props.updateServiceParameter({
+            ...this.props.serviceParameter.dataFilter,
+            PageNumber: 1,
+            Sort: [{
+              Field: 'UnitModel',
+              Direction: 'asc'
+            }]
+          });
+        }
+      };
+      if (sortServiceBy.CompDesc.isActive) {
+        isDescending = !sortServiceBy.CompDesc.isAscending;
+        this.props.updateServiceParameter({
+          ...this.props.serviceParameter.dataFilter,
+          PageNumber: 1,
+          Sort: [{
+            Field: 'ComponentDescription',
+            Direction: 'desc'
+          }]
+        });
+        if (sortServiceBy.CompDesc.isAscending === !sortServiceBy.CompDesc.isActive) {
+          isDescending = !sortServiceBy.CompDesc.isAscending;
+          this.props.updateServiceParameter({
+            ...this.props.serviceParameter.dataFilter,
+            PageNumber: 1,
+            Sort: [{
+              Field: 'ComponentDescription',
+              Direction: 'asc'
+            }]
+          });
+        }
+      };
     }
-    };
   }
-  // SERVICE ORDER SORTING
-  if (prevProps.sortServiceBy !== this.props.sortServiceBy) {
-    const { sortServiceBy } = this.props;
-    let isDescending = false;
-    if (sortServiceBy.Customer.isActive) {
-      isDescending = !sortServiceBy.Customer.isAscending;
-      this.props.updateServiceParameter({
-        ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          Sort: [{
-            Field : 'CustomerName',
-            Direction : 'desc'
-          }]   
-      });
-    if (sortServiceBy.Customer.isAscending === !sortServiceBy.Customer.isActive) {
-      isDescending = !sortServiceBy.Customer.isAscending;
-      this.props.updateServiceParameter({
-        ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          Sort: [{
-            Field : 'CustomerName',
-            Direction : 'asc'
-          }]   
-      });
-    }
-  }
-    if (sortServiceBy.Site.isActive){
-      isDescending = !sortServiceBy.Site.isAscending;
-      this.props.updateServiceParameter({
-        ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          Sort: [{
-            Field : 'SiteCode',
-            Direction : 'desc'
-          }] 
-      });
-    if (sortServiceBy.Site.isAscending === !sortServiceBy.Site.isActive) {
-      isDescending = !sortServiceBy.Site.isAscending;
-      this.props.updateServiceParameter({
-        ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          Sort: [{
-            Field : 'SiteCode',
-            Direction : 'asc'
-          }] 
-      });
-    }
-    } 
-    if (sortServiceBy.UnitModel.isActive) {
-      isDescending = !sortServiceBy.UnitModel.isAscending;
-      this.props.updateServiceParameter({
-        ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          Sort: [{
-            Field : 'UnitModel',
-            Direction : 'desc'
-          }] 
-      });
-    if (sortServiceBy.UnitModel.isAscending === !sortServiceBy.UnitModel.isActive) {
-      isDescending = !sortServiceBy.UnitModel.isAscending;
-      this.props.updateServiceParameter({
-        ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          Sort: [{
-            Field : 'UnitModel',
-            Direction : 'asc'
-          }] 
-      });
-    }
-    };
-    if (sortServiceBy.CompDesc.isActive) {
-      isDescending = !sortServiceBy.CompDesc.isAscending;
-      this.props.updateServiceParameter({
-        ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          Sort: [{
-            Field : 'ComponentDescription',
-            Direction : 'desc'
-          }] 
-      });
-    if (sortServiceBy.CompDesc.isAscending === !sortServiceBy.CompDesc.isActive) {
-      isDescending = !sortServiceBy.CompDesc.isAscending;
-      this.props.updateServiceParameter({
-        ...this.props.serviceParameter.dataFilter,
-          PageNumber: 1,
-          Sort: [{
-            Field : 'ComponentDescription',
-            Direction : 'asc'
-          }] 
-      });
-    }
-    };
-  }
-}
 
   // PAGINATION DENGAN KONDISI UNTUK TAB SALES ORDER ATAU SERVICE ORDER
-  _renderPagination= (pageValue) =>  {
+  _renderPagination = (pageValue) => {
     if (pageValue === 1) {
-      this.setState({whichTabs : true})
-    }if (pageValue === 0) {
-      this.setState({whichTabs : false})
+      this.setState({ whichTabs: true })
+    } if (pageValue === 0) {
+      this.setState({ whichTabs: false })
     }
     if (this.state.whichTabs === true) {
       const web = this.props.displayMode === 'web';
@@ -331,8 +331,8 @@ componentDidUpdate = (prevProps) => {
       // const prevSales = this.props.salesOrderList.PrevPage;
       const currentPropsSales = this.props.salesOrderList.PageNumber;
       const { TotalPages } = this.props.salesOrderList;
-      
-      return(
+
+      return (
         <div className="paginations">
           <div className="paging-approval">
             {/* {prevSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
@@ -347,15 +347,15 @@ componentDidUpdate = (prevProps) => {
           </div>
         </div>
       )
-      }
+    }
     if (this.state.whichTabs === false) {
       const web = this.props.displayMode === 'web';
       // const nextSales = this.props.serviceOrderList.NextPage;
       // const prevSales = this.props.serviceOrderList.PrevPage;
       const currentPropsService = this.props.serviceOrderList.PageNumber;
       const { TotalPages } = this.props.serviceOrderList;
-      
-      return(
+
+      return (
         <div className="paginations">
           <div className="paging-approval">
             {/* {prevSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="next-page-approval"><KeyboardArrowLeft className="arrow-icon-approval" /></div>} */}
@@ -374,121 +374,121 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  fetchSearchSales = async() => {
+  fetchSearchSales = async () => {
     await this.props.fetchSalesOrder(this.props.searchSalesParameter, this.props.token);
-  } 
+  }
 
-  fetchSearchService = async() => {
+  fetchSearchService = async () => {
     await this.props.fetchServiceOrder(this.props.searchServiceParameter, this.props.token);
-  } 
+  }
 
   //SAAT MENGKLIK SERVICE ORDER TAB
-  onClickServiceOrder = async() => {
+  onClickServiceOrder = async () => {
     await this.props.fetchServiceOrder({
-      ...this.props.serviceParameter.dataFilter, 
-      Filter : 
-            [...this.props.serviceParameter.dataFilter.Filter, {
-              Field : 'SAPIssueMessage',
-              Operator : "eq",
-              Value : '-',
-              Logic : "AND"
-      }]
+      ...this.props.serviceParameter.dataFilter,
+      Filter:
+        [...this.props.serviceParameter.dataFilter.Filter, {
+          Field: 'SAPIssueMessage',
+          Operator: "eq",
+          Value: '-',
+          Logic: "AND"
+        }]
     }, this.props.token);
   }
 
   //SAAT MENGKLIK SALES ORDER TAB
-  onClickSalesOrder = async() =>{
+  onClickSalesOrder = async () => {
     if (this.props.location.whichTab === 'lifetime') {
       await this.props.fetchSalesOrder({
-        ...this.props.salesParameter.dataFilter, 
-        Filter : 
-              [...this.props.salesParameter.dataFilter.Filter, {
-                Field : 'LifeTimeComponent',
-                Operator : "eq",
-                Value : '-',
-                Logic : "AND"
-        }]
-      }, this.props.token);
-    }else {
-      await this.props.fetchSalesOrder({
-        ...this.props.salesParameter.dataFilter, 
-        Filter : 
+        ...this.props.salesParameter.dataFilter,
+        Filter:
           [...this.props.salesParameter.dataFilter.Filter, {
-            Field : 'LifeTimeComponent',
-            Operator : "neq",
-            Value : '-',
-            Logic : "AND"
-          },{
-            Field : 'SAPIssueMessage',
-            Operator : 'eq',
-            Value : '-',
-            Logic : 'AND'
-          },{
-            Field : 'IsRevised',
-            Operator : 'eq',
-            Value : 'false',
-            Logic : 'AND'
+            Field: 'LifeTimeComponent',
+            Operator: "eq",
+            Value: '-',
+            Logic: "AND"
+          }]
+      }, this.props.token);
+    } else {
+      await this.props.fetchSalesOrder({
+        ...this.props.salesParameter.dataFilter,
+        Filter:
+          [...this.props.salesParameter.dataFilter.Filter, {
+            Field: 'LifeTimeComponent',
+            Operator: "neq",
+            Value: '-',
+            Logic: "AND"
+          }, {
+            Field: 'SAPIssueMessage',
+            Operator: 'eq',
+            Value: '-',
+            Logic: 'AND'
+          }, {
+            Field: 'IsRevised',
+            Operator: 'eq',
+            Value: 'false',
+            Logic: 'AND'
           }]
       }, this.props.token);
     }
-  }  
+  }
 
   //KOMPONEN UNTUK SHOW PER/PAGE
-  _renderShowPerPage(){
-    return(
-      <DropDownList 
+  _renderShowPerPage() {
+    return (
+      <DropDownList
         {...this.props}
         handleClickShowPerPage={this.handleClickShowPerPage}
       />
     )
   }
 
-  handleClickShowPerPage = (value) =>{
+  handleClickShowPerPage = (value) => {
     if (this.state.whichTabs === true) {
-          this.props.clearSelectedSalesPlans();
-					this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value})
-    }else{
+      this.props.clearSelectedSalesPlans();
+      this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value })
+    } else {
       this.props.clearSelectedServicePlans();
-					this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value})
+      this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value })
     }
   }
 
   //KOMPONEN UNTUK GLOBAL SEARCH
-  _renderSearchBar(){
+  _renderSearchBar() {
     return (
       <div className="bottom-row-approval">
         <SearchInput
-        {...this.props}
-        webInfo="Search"
-        handleSearch={this.handleSearch}
-      />
+          {...this.props}
+          webInfo="Search"
+          handleSearch={this.handleSearch}
+        />
       </div>
     );
   }
 
-  handleSearch=(value)=>{
-		this.setState({ searchVal : value})
-		if (this.state.whichTabs === true) {
-			setTimeout(() => {
-				this.props.onSearchSales(this.state.searchVal)
-			}, 1000);
-		}if (this.state.whichTabs === false) {
-			setTimeout(() => {
-				this.props.onSearchService(this.state.searchVal)
-			}, 1000);
-		}
-	}
+  handleSearch = (value) => {
+    this.setState({ searchVal: value })
+    if (this.state.whichTabs === true) {
+      setTimeout(() => {
+        this.props.onSearchSales(this.state.searchVal)
+      }, 1000);
+    } if (this.state.whichTabs === false) {
+      setTimeout(() => {
+        this.props.onSearchService(this.state.searchVal)
+      }, 1000);
+    }
+  }
 
-  _renderNotif(){
+  _renderNotif() {
     return (
       <>
-        <FilterbyDataAction 
+        <FilterbyDataAction
           {...this.props}
           titles="Input Lifetime"
         />
-        <NotifButton 
-        {...this.props}
-        idNotif = "Non-Status"
+        <NotifButton
+          {...this.props}
+          idNotif="Non-Status"
         />
       </>
     )
@@ -496,7 +496,7 @@ componentDidUpdate = (prevProps) => {
 
   //FUNGSI UNTUK MENGAPROVE SALES ORDER
   onClickApprovedSales = () => {
-    this.props.fetchApprovedSales(this.props.salesParameter.dataFilter,this.props.token);
+    this.props.fetchApprovedSales(this.props.salesParameter.dataFilter, this.props.token);
   }
   //FUNGSI UNTUK MENGAPROVE SERVICE ORDER
   onClickApprovedService = () => {
@@ -517,7 +517,7 @@ componentDidUpdate = (prevProps) => {
     document.body.appendChild(link);
     link.style = "display: none";
     const todayDate = moment(new Date()).format('DD-MM-YYYY');
-    let fileName = "Sales-Order-Planning-"+todayDate+".csv";
+    let fileName = "Sales-Order-Planning-" + todayDate + ".csv";
     let blob = new Blob([this.props.approveSalesDownloaded.data]),
       url = window.URL.createObjectURL(blob);
     link.href = url;
@@ -531,7 +531,7 @@ componentDidUpdate = (prevProps) => {
     document.body.appendChild(link);
     link.style = "display: none";
     const todayDate = moment(new Date()).format('DD-MM-YYYY');
-    let fileName = "Service-Order-Planning-"+todayDate+".csv";
+    let fileName = "Service-Order-Planning-" + todayDate + ".csv";
     let blob = new Blob([this.props.approveServiceDownloaded.data]),
       url = window.URL.createObjectURL(blob);
     link.href = url;
@@ -540,14 +540,14 @@ componentDidUpdate = (prevProps) => {
     window.URL.revokeObjectURL(url);
   }
 
-  handleSalesApprovedDownload = async() => {
+  handleSalesApprovedDownload = async () => {
     let arr = []
     const index = this.props.selectedSalesPlans.length
     if (this.props.selectedSalesPlans.length > 0) {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
-    }await this.props.downloadSalesApproved(arr, this.props.token);
+    } await this.props.downloadSalesApproved(arr, this.props.token);
     if (
       this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.FAILED
     ) {
@@ -555,7 +555,7 @@ componentDidUpdate = (prevProps) => {
     }
   };
 
-  handleServiceApprovedDownload = async() => {
+  handleServiceApprovedDownload = async () => {
     let arr = []
     const index = this.props.selectedServicePlans.length
     if (this.props.selectedServicePlans.length > 0) {
@@ -571,62 +571,62 @@ componentDidUpdate = (prevProps) => {
     }
   };
 
-  handleSalesApprove = async() => {
+  handleSalesApprove = async () => {
     let arr = []
     const index = this.props.selectedSalesPlans.length
     if (this.props.selectedSalesPlans.length > 0) {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
-      await this.props.approveSales({SoNumbers : arr, IsApprove: true}, this.props.token)
+      await this.props.approveSales({ SoNumbers: arr, IsApprove: true }, this.props.token)
       this.onClickSalesOrder();
       await this.props.clearSelectedSalesPlans();
-  }
-};
+    }
+  };
 
-  handleServiceApprove = async() => {
-  let arr = []
-  const index = this.props.selectedServicePlans.length
+  handleServiceApprove = async () => {
+    let arr = []
+    const index = this.props.selectedServicePlans.length
     if (this.props.selectedServicePlans.length > 0) {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
       }
-    await this.props.approveService({WoNumbers: arr, IsApprove: true}, this.props.token)
-    this.onClickServiceOrder();
-    await this.props.clearSelectedServicePlans();
+      await this.props.approveService({ WoNumbers: arr, IsApprove: true }, this.props.token)
+      this.onClickServiceOrder();
+      await this.props.clearSelectedServicePlans();
     }
   }
 
-  handleSendtoEdit = async() => {
+  handleSendtoEdit = async () => {
     let arr = []
     const index = this.props.selectedSalesPlans.length
     if (this.props.selectedSalesPlans.length > 0) {
       for (let i = 0; i < index; i++) {
         arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
       }
-      await this.props.unapproveSales({SoNumbers : arr}, this.props.token)
+      await this.props.unapproveSales({ SoNumbers: arr }, this.props.token)
       this.setState({
-        openSuccessEdit : !this.state.openSuccessEdit
+        openSuccessEdit: !this.state.openSuccessEdit
       })
       await this.props.clearSelectedSalesPlans();
     }
   }
 
-  handleClickFilterByDataAction = () =>{
+  handleClickFilterByDataAction = () => {
     this.setState({
-      isApproved : !this.state.isApproved
+      isApproved: !this.state.isApproved
     })
   }
 
   _renderFilterByDataAction() {
     if (this.state.whichTabs === true) {
-      return(
+      return (
         <>
-          <FilterbyDataAction 
+          <FilterbyDataAction
             {...this.props}
             titles="Status"
           />
-          <FilterbyDataAction 
+          <FilterbyDataAction
             {...this.props}
             titles="Tracking History"
           />
@@ -634,13 +634,13 @@ componentDidUpdate = (prevProps) => {
       );
     }
     if (this.state.whichTabs === false) {
-      return(
+      return (
         <>
-          <FilterbyDataAction 
+          <FilterbyDataAction
             {...this.props}
             titles="Status"
           />
-          <FilterbyDataAction 
+          <FilterbyDataAction
             {...this.props}
             titles="Tracking History"
           />
@@ -649,15 +649,15 @@ componentDidUpdate = (prevProps) => {
     }
   };
 
-  isChangeStat = (value,key) =>{
+  isChangeStat = (value, key) => {
     this.setState({
-      lifetime: { Lists :this.state.lifetime.Lists.map(el => (el.SoNumber === key ? {...el, LifeTimeComp : value} : el)) }
+      lifetime: { Lists: this.state.lifetime.Lists.map(el => (el.SoNumber === key ? { ...el, LifeTimeComp: value } : el)) }
     });
   };
-  
+
   changeSuccess = () => {
     this.setState({
-      openSuccess : !this.state.openSuccess
+      openSuccess: !this.state.openSuccess
     })
   }
 
@@ -673,28 +673,28 @@ componentDidUpdate = (prevProps) => {
     })
     this.onClickSalesOrder();
   }
-  
+
   renderCircularProgress() {
     return <CircularProgress size={100} className="circular-progress" />;
   }
 
   _renderSalesApproved = () => {
-    return(
+    return (
       <>
-        <ConfirmationModal idModal="Approved" openModal={this.state.openSuccess} onClose={this.closeSuccess}/>
+        <ConfirmationModal idModal="Approved" openModal={this.state.openSuccess} onClose={this.closeSuccess} />
       </>
     )
   }
 
   _renderSalesDeleted = () => {
-    return(
+    return (
       <>
-        <ConfirmationModal idModal="Delete Success" openModal={this.state.openSuccess} onClose={this.closeSuccess}/>
+        <ConfirmationModal idModal="Delete Success" openModal={this.state.openSuccess} onClose={this.closeSuccess} />
       </>
     )
   }
   _renderEditSuccess = () => {
-    return(
+    return (
       <>
         <UnapproveConfirmation idConfirm="Send Success" openModal={this.state.openSuccessEdit} onClose={this.closeSuccessEdit} />
       </>
@@ -702,55 +702,55 @@ componentDidUpdate = (prevProps) => {
   }
 
   //Komponen untuk menampilkan button
-  _renderBaseButton (){
+  _renderBaseButton() {
     if (this.state.whichTabs === true) {
-      return(
+      return (
         <div className="header-rows">
           <BaseButton titles="Approve"
             {...this.props}
             whatTabsIsRendered={this.state.whichTabs}
-            disabledButton = {this.props.selectedSalesPlans.length < 1 }
-            totalSelectedItems ={this.props.selectedSalesPlans.length}
+            disabledButton={this.props.selectedSalesPlans.length < 1}
+            totalSelectedItems={this.props.selectedSalesPlans.length}
             handleSalesApprove={this.handleSalesApprove}
-            renderSakses = {this.changeSuccess}
+            renderSakses={this.changeSuccess}
           />
           <BaseButton titles="Cancel Approve"
             {...this.props}
-            whichTabs = {this.state.whichTabs}
+            whichTabs={this.state.whichTabs}
             idCancel="Sales"
             selectedDataSAP={this.props.selectedSalesPlans}
             whatTabsIsRendered={this.state.whichTabs}
-            disabledButton = {this.props.selectedSalesPlans.length < 1 }
-            totalSelectedItems ={this.props.selectedSalesPlans.length}
+            disabledButton={this.props.selectedSalesPlans.length < 1}
+            totalSelectedItems={this.props.selectedSalesPlans.length}
             handleSendtoEdit={this.handleSendtoEdit}
             selectedData={this.state.selectedData}
-            renderSakses = {this.changeSuccess}
-            onClicksalesOrder = {this.onClicksalesOrder}
+            renderSakses={this.changeSuccess}
+            onClicksalesOrder={this.onClicksalesOrder}
           />
         </div>
       );
     }
     if (this.state.whichTabs === false) {
-      return(
-				<div className="header-rows">
+      return (
+        <div className="header-rows">
           <BaseButton titles="Approve"
             {...this.props}
             whatTabsIsRendered={this.state.whichTabs}
-            disabledButton = {this.props.selectedServicePlans.length < 1 }
-            totalSelectedItems ={this.props.selectedServicePlans.length}
+            disabledButton={this.props.selectedServicePlans.length < 1}
+            totalSelectedItems={this.props.selectedServicePlans.length}
             handleServiceApprove={this.handleServiceApprove}
-            renderSakses = {this.changeSuccess}
+            renderSakses={this.changeSuccess}
           />
           <BaseButton titles="Cancel Approve"
-             {...this.props}
-             whichTabs = {this.state.whichTabs}
-             selectedDataSAP={this.props.selectedServicePlans}
-             whatTabsIsRendered={this.state.whichTabs}
-             disabledButton = {this.props.selectedServicePlans.length < 1 }
-             totalSelectedItems ={this.props.selectedServicePlans.length}
-             handleSendtoEdit={this.handleSendtoEdit}
-             selectedData={this.state.selectedData}
-             renderSakses = {this.changeSuccess}
+            {...this.props}
+            whichTabs={this.state.whichTabs}
+            selectedDataSAP={this.props.selectedServicePlans}
+            whatTabsIsRendered={this.state.whichTabs}
+            disabledButton={this.props.selectedServicePlans.length < 1}
+            totalSelectedItems={this.props.selectedServicePlans.length}
+            handleSendtoEdit={this.handleSendtoEdit}
+            selectedData={this.state.selectedData}
+            renderSakses={this.changeSuccess}
           />
         </div>
       );
@@ -761,8 +761,7 @@ componentDidUpdate = (prevProps) => {
   updateAssignmentSalesStates = (plan) => {
     if (this.props.selectedSalesPlans
       .some((plans) => plans.SoNumber === plan.SoNumber,
-      )) 
-    { return this.props.unselectSalesPlan(plan); }
+      )) { return this.props.unselectSalesPlan(plan); }
     return this.props.selectSalesPlan(plan);
   };
 
@@ -770,22 +769,21 @@ componentDidUpdate = (prevProps) => {
   updateAssignmentServiceStates = (plan) => {
     if (this.props.selectedServicePlans
       .some((plans) => plans.WoNumber === plan.WoNumber,
-      ))
-    { return this.props.unselectServicePlan(plan); }
+      )) { return this.props.unselectServicePlan(plan); }
     return this.props.selectServicePlan(plan);
   };
 
   //KOMPONEN UNTUK RENDER PAGE SALES ORDER DAN SERVICE ORDER
-  _renderTabs(){
+  _renderTabs() {
     return (
       <>
         <ApprovalTab
           {...this.props}
           renderNotif={this._renderNotif()}
-          renderFilterByDataAction={this._renderFilterByDataAction()}  
+          renderFilterByDataAction={this._renderFilterByDataAction()}
           renderBaseButton={this._renderBaseButton()}
           renderSearch={this._renderSearchBar()}
-          onClickSalesOrder={this.onClickSalesOrder}        
+          onClickSalesOrder={this.onClickSalesOrder}
           onClickServiceOrder={this.onClickServiceOrder}
           onChoosedService={this.updateAssignmentServiceStates}
           onChoosedSales={this.updateAssignmentSalesStates}
@@ -794,8 +792,8 @@ componentDidUpdate = (prevProps) => {
           displaySalesCheckbox={this.props.salesParameter.paramsData.assigmentFilter || this.props.salesParameter.paramsData.inProgressFilter}
           displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
           stats={this.state.stats}
-          onStats={this.isChangeStat}     
-          totalSalesData={this.props.salesOrderList.TotalData}
+          onStats={this.isChangeStat}
+          totalSalesData={this.props.salesOrderList.TotalDataQuery}
           totalServiceData={this.props.serviceOrderList.TotalData}
           onClickTabHead={this.props.onClickSortBy}
           sortSalesByState={this.props.sortSalesBy}
@@ -808,57 +806,57 @@ componentDidUpdate = (prevProps) => {
     );
   };
 
-  render(){     
-    return(
+  render() {
+    return (
       <main className="content">
-          {this.props.fetchStatusApprovedSales === ApiRequestActionsStatus.LOADING &&  (
-            this.renderCircularProgress()
-          )}
-          {this.props.fetchStatusApprovedSales === ApiRequestActionsStatus.SUCCEEDED && (
-            <>
-              {this._renderSalesApproved()}
-            </>
-          )}
-          {this.props.fetchStatusApprovedService === ApiRequestActionsStatus.LOADING &&  (
-            this.renderCircularProgress()
-          )}
-          {this.props.fetchStatusApprovedService === ApiRequestActionsStatus.SUCCEEDED && (
-            <>
-              {this._renderSalesApproved()}
-            </>
-          )}
-          {this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.LOADING &&  (
-            this.renderCircularProgress()
-          )}
-          {this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED && (
-            <>
-              {this._renderSalesDeleted()}
-            </>
-          )}
-          {this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.LOADING &&  (
-            this.renderCircularProgress()
-          )}
-          {this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.SUCCEEDED && (
-            <>
-              {this._renderSalesDeleted()}
-            </>
-          )}
-          {this.props.fetchStatusUnapprove === ApiRequestActionsStatus.LOADING &&  (
-            this.renderCircularProgress()
-          )}   
-          {this.props.fetchStatusUnapprove === ApiRequestActionsStatus.SUCCEEDED && (
-            this._renderEditSuccess()
-          )} 
-          <div className="table-container-approval">
-                {this._renderTabs()}
+        {this.props.fetchStatusApprovedSales === ApiRequestActionsStatus.LOADING && (
+          this.renderCircularProgress()
+        )}
+        {this.props.fetchStatusApprovedSales === ApiRequestActionsStatus.SUCCEEDED && (
+          <>
+            {this._renderSalesApproved()}
+          </>
+        )}
+        {this.props.fetchStatusApprovedService === ApiRequestActionsStatus.LOADING && (
+          this.renderCircularProgress()
+        )}
+        {this.props.fetchStatusApprovedService === ApiRequestActionsStatus.SUCCEEDED && (
+          <>
+            {this._renderSalesApproved()}
+          </>
+        )}
+        {this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.LOADING && (
+          this.renderCircularProgress()
+        )}
+        {this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED && (
+          <>
+            {this._renderSalesDeleted()}
+          </>
+        )}
+        {this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.LOADING && (
+          this.renderCircularProgress()
+        )}
+        {this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.SUCCEEDED && (
+          <>
+            {this._renderSalesDeleted()}
+          </>
+        )}
+        {this.props.fetchStatusUnapprove === ApiRequestActionsStatus.LOADING && (
+          this.renderCircularProgress()
+        )}
+        {this.props.fetchStatusUnapprove === ApiRequestActionsStatus.SUCCEEDED && (
+          this._renderEditSuccess()
+        )}
+        <div className="table-container-approval">
+          {this._renderTabs()}
+        </div>
+        <div></div>
+        {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+          this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
+            <div className="bottom-row-approval">
+              {this._renderShowPerPage()} {this._renderPagination()}
             </div>
-            <div></div>
-            {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
-              this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
-              <div className="bottom-row-approval">
-                  {this._renderShowPerPage()} {this._renderPagination()}
-              </div>
-            }
+        }
       </main>
     )
   }
