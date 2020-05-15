@@ -6,8 +6,9 @@ import { Menu } from '../../../../../constants';
 
 class SapIssuePages extends React.PureComponent {
   state={
-      description: [],
-      sapIssue: []
+    whichTabs: true,
+    description: [],
+    sapIssue: []
   }
 
   handleChange(id, e) {
@@ -26,9 +27,9 @@ class SapIssuePages extends React.PureComponent {
 
   _showTableHead() {
     return (
-      <TableHead className="table-head-issue" >
-        <TableRow className="table-row-top-issue">
-          {this.props.whichTabs ? 
+      <TableHead className="table-head-sap" >
+        <TableRow className="table-row-top-sap">
+          {this.state.whichTabs ? 
             <TableCell>SO</TableCell> : 
             <TableCell>WO</TableCell>}
           <TableCell>Customer</TableCell>
@@ -40,7 +41,7 @@ class SapIssuePages extends React.PureComponent {
           <TableCell>Serial &nbsp; Number</TableCell>
           <TableCell>Lifetime</TableCell>
           <TableCell>Plan</TableCell>
-          {this.props.whichTabs ? 
+          {this.state.whichTabs ? 
             <div>
               <TableCell>SMR</TableCell>
               <TableCell>SMR &nbsp;Date</TableCell>
@@ -55,32 +56,32 @@ class SapIssuePages extends React.PureComponent {
   _showTableBody(row, id) {
       return (
         <>
-        <TableRow className="table-row">
-          {this.props.whichTabs ?
-            <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell> : 
-            <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell>
+        <TableRow className="table-row-top-sap">
+          {this.state.whichTabs ?
+            <TableCell align="left" className="table-cell-sap"> {row.SoNumber} </TableCell> : 
+            <TableCell align="left" className="table-cell-sap"> {row.WoNumber} </TableCell>
           }
-          <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
-          <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
-          <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
-          <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>
-          <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
-          <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
-          <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
-          <TableCell align="center" className="table-cell"> {row.LifeTimeComponent}</TableCell>
-          <TableCell align="left" className="table-cell"> {moment(row.PlanExecution).format('DD-MM-YYYY')} </TableCell>
-          {this.props.whichTabs ?
+          <TableCell align="left" className="table-cell-sap"> {row.CustomerName} </TableCell>
+          <TableCell align="left" className="table-cell-sap"> {row.SiteCode} </TableCell>
+          <TableCell align="left" className="table-cell-sap"> {row.UnitModel} </TableCell>
+          <TableCell align="left" className="table-cell-sap"> {row.ComponentDescription} </TableCell>
+          <TableCell align="left" className="table-cell-sap"> {row.PartNumber} </TableCell>
+          <TableCell align="left" className="table-cell-sap"> {row.UnitCode} </TableCell>
+          <TableCell align="left" className="table-cell-sap"> {row.SerialNumber} </TableCell>
+          <TableCell align="center" className="table-cell-sap"> {row.LifeTimeComponent}</TableCell>
+          <TableCell align="left" className="table-cell-sap"> {moment(row.PlanExecution).format('DD-MM-YYYY')} </TableCell>
+          {this.state.whichTabs ?
             <div>
-                <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
-                <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
+                <TableCell align="left" className="table-cell-sap"> {row.SMR} </TableCell>
+                <TableCell align="left" className="table-cell-sap"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
             </div> : 
             null
           }
         </TableRow>
-        <TableRow className="table-row-bottom">
-          <TableCell colSpan="12" className="table-cell-bottom">{this._showHeaderDesc()}</TableCell>
+        <TableRow className="table-row-bottom-sap">
+          <TableCell colSpan="12" className="table-cell-sap">{this._showHeaderDesc()}</TableCell>
         </TableRow>
-        <TableRow className="table-row-bottom">
+        <TableRow className="table-row-bottom-sap">
           <TableCell><label>Description :</label></TableCell>
           <TableCell colSpan="11">{this._showDescription(id)}</TableCell>
         </TableRow>
@@ -90,9 +91,8 @@ class SapIssuePages extends React.PureComponent {
 
   _showHeaderDesc(){
     return(
-      <div className="teks">
-        <div className="header">Please pick a mistake on the SAP</div>
-        {this.props.whichTabs ?
+      <div className="tag-container">
+        {this.state.whichTabs ?
           <Button className="btn-reason" id="so">SO</Button> :
           <Button className="btn-reason" id="wo">WO</Button>}
         <Button className="btn-reason" id="cust">Customer</Button>
@@ -103,20 +103,19 @@ class SapIssuePages extends React.PureComponent {
         <Button className="btn-reason" id="unitCode">Unit Code</Button>
         <Button className="btn-reason" id="sn">Serial Number</Button>
         <Button className="btn-reason" id="planExec">Plan Execution</Button>
-        {this.props.whichTabs ?
+        {this.state.whichTabs ?
           <>
               <Button className="btn-reason" id="smr">SMR</Button>
               <Button className="btn-reason" id="smrDate">SMR Date</Button> 
           </> : ""
         }
-        <FormLabel>Description :</FormLabel>
       </div>
     )
   }
 
   _showDescription(id){
     return(
-      <div className="teks">
+      <div className="tag-container">
         <TextField 
           type="text"
           className="input-description"
@@ -136,8 +135,8 @@ class SapIssuePages extends React.PureComponent {
           <Table size="small" component={Paper}>
               {this._showTableHead()}
               <TableBody>
-              {this.props.selectedDataSAP
-                  && this.props.selectedDataSAP.map((row, id) => (this._showTableBody(row,id)) )
+              {this.props.selectedSalesPlans
+                  && this.props.selectedSalesPlans.map((row, id) => (this._showTableBody(row,id)) )
               }
               </TableBody>
           </Table>
@@ -153,7 +152,7 @@ class SapIssuePages extends React.PureComponent {
               Approval
           </Button>
         </div>
-        <div className="table-containers">
+        <div className="table-container-sap">
           <div className="title-containers">
             <div className="title">
                 SAP Issue
