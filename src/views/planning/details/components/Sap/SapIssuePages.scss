@@ -40,7 +40,6 @@
         .title{
             display: flex;
             width: 50%;
-            margin-bottom: 2%;
             font-family: 'Lato-Regular';
             font-weight: bold;
             font-size: 30px;
@@ -48,7 +47,6 @@
         }
         .btn-send-sap{
             align-self: flex-end;
-            margin-bottom: 2%;
             width: vw(203.22);
             height: vw(38.07);
             font-size: 14px;
@@ -70,24 +68,27 @@
     }
     .planning-list-sap{
         margin-top: 1.5vw !important;
-        .table{
+        .table-sap{
             font-size: 0.5vw;
             .table-head-sap{
-                border-bottom: vw(20) solid #F4F6F8;
+                // border-bottom: vw(20) solid #F4F6F8;
                 padding-left: vw(5);
-                .table-cell-sap{
-                    padding: 0;
-                    height: vw(50);
-                    font-size: vw(13) !important;
-                    line-height: vw(16) !important;
-                    font-family: 'Lato-Bold';
-                    color: #3C3B3B;
+                .table-row-header{
+                    border-bottom: none;
+                    .table-cell-sap{
+                        padding: 0;
+                        height: vw(50);
+                        font-size: vw(13) !important;
+                        line-height: vw(16) !important;
+                        font-family: 'Lato-Bold';
+                        color: #3C3B3B;
+                    }
                 }
             }
             .table-body-sap{
                 background-color: white;
-                .table-row-top-sap{
-                    border-bottom: vw(5) solid #F4F6F8;
+                .table-row-body{
+                    border-bottom: none;
                     .table-cell-sap{
                         padding: 0;
                         height: vw(40);
@@ -100,6 +101,49 @@
             }
             .table-row-bottom-sap{
                 margin-bottom: 100px;
+            }
+        }
+    }
+    .tag-container{
+        width: 100%;
+        margin-top: vw(20);
+        .btn-container{
+            display: inline-flex;
+            .btn-reason{
+                display: inline-flex;
+                width: auto;
+                margin: 0 vw(15) vw(15) 0;
+                border-radius: 5px;
+                font-family: 'Lato-Bold';
+                font-size: 15px;
+                line-height: 19px;
+                color: #707070;
+                text-transform: capitalize;
+                border: 1px solid #000000;
+                box-sizing: border-box;
+                border-radius: 5px;
+            }
+            .btn-reason:focus{
+                background: map-get($colors, primary);
+                color: #303030;
+                border: none;
+            }
+        }
+        .desc-container{
+            width: 100%;
+            margin-bottom: vw(20);
+            border-bottom: vw(5) solid #F4F6F8;
+            display: inline-flex;
+            .input-label{
+                width: 10%;
+                font-size: 13px;
+                line-height: 15px;
+                color: #525252;
+            }
+            .input-description{
+                // margin-top: vw(15) vw(15) 0 vw(15);
+                font-size: 13px;
+                line-height: 15px;
             }
         }
     }
@@ -127,39 +171,7 @@
     margin-top: 1.8vw !important;
 }
 
-.tag-container{
-    width: 100%;
-    .btn-reason{
-        display: inline-flex;
-        width: auto;
-        margin: 0 vw(15) vw(15) 0;
-        border-radius: 5px;
-        font-family: 'Lato-Bold';
-        font-size: 15px;
-        line-height: 19px;
-        color: #707070;
-        text-transform: capitalize;
-        border: 1px solid #000000;
-        box-sizing: border-box;
-        border-radius: 5px;
-    }
-    .btn-reason:focus{
-        background: map-get($colors, primary);
-        color: #303030;
-        border: none;
-    }
-    .input-label{
-        font-size: 13px;
-        line-height: 15px;
-        color: #525252;
-    }
-    .input-description{
-        margin-top: vw(15) vw(15) 0 vw(15);
-        width: 100%;
-    }
-}
-
-.bottom-row{
+.bottom-row-sap{
     flex: 1;
     display: flex;
     flex-direction: row;

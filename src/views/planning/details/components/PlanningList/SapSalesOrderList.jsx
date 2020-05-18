@@ -163,13 +163,13 @@ export default class SapSalesOrderList extends React.PureComponent {
   _showDescription(row){
     return(
       <div className="teks">
-            <TextField 
-                className="teks"
-                type='text' 
-                variant="outlined" 
-                size="small"
-                value={row.SAPIssueMessage}
-            />
+        <TextField 
+          className="teks"
+          type='text' 
+          variant="outlined" 
+          size="small"
+          value={row.SAPIssueMessage}
+        />
       </div>
     )
   }
@@ -201,6 +201,7 @@ export default class SapSalesOrderList extends React.PureComponent {
       </TableRow>
       {this.state[id] ? 
         <TableRow className="table-row-bottom-issue">
+            <TableCell></TableCell>
             <TableCell><label>Description</label></TableCell>
             <TableCell colSpan="12">{this._showDescription(row)}</TableCell>
         </TableRow> : null }
