@@ -2,9 +2,7 @@
 @import '../../../../../themes/functions';
 
 .header-container{
-    display: inline-flex;
-    justify-content: space-between;
-    width: 100%;
+    width: 99%;
     padding-bottom: vw(20);
     border-bottom: 1.5px solid #E0E0E0;
     .btn-back-to-approval{
@@ -67,18 +65,15 @@
         }
     }
     .planning-list-sap{
-        margin-top: 1.5vw !important;
         .table-sap{
             font-size: 0.5vw;
             .table-head-sap{
-                // border-bottom: vw(20) solid #F4F6F8;
-                padding-left: vw(5);
                 .table-row-header{
-                    border-bottom: none;
                     .table-cell-sap{
+                        border-bottom: 0;
                         padding: 0;
                         height: vw(50);
-                        font-size: vw(13) !important;
+                        font-size: vw(18) !important;
                         line-height: vw(16) !important;
                         font-family: 'Lato-Bold';
                         color: #3C3B3B;
@@ -87,8 +82,9 @@
             }
             .table-body-sap{
                 background-color: white;
+                margin: 0 vw(10) 0 vw(10);
                 .table-row-body{
-                    border-bottom: none;
+                    margin: 0 vw(10) 0 vw(10);
                     .table-cell-sap{
                         padding: 0;
                         height: vw(40);
@@ -96,6 +92,7 @@
                         line-height: vw(17) !important;
                         font-family: 'Lato-Bold';
                         color: #3C3B3B;
+                        border-bottom: 0;
                     }
                 }
             }
@@ -106,22 +103,22 @@
     }
     .tag-container{
         width: 100%;
-        margin-top: vw(20);
         .btn-container{
             display: inline-flex;
             .btn-reason{
                 display: inline-flex;
                 width: auto;
+                height: vw(38.07);
                 margin: 0 vw(15) vw(15) 0;
-                border-radius: 5px;
                 font-family: 'Lato-Bold';
-                font-size: 15px;
-                line-height: 19px;
+                font-size: vw(18);
+                font-weight: bold;
+                line-height: vw(16) !important;
                 color: #707070;
                 text-transform: capitalize;
                 border: 1px solid #000000;
                 box-sizing: border-box;
-                border-radius: 5px;
+                border-radius: vw(5) !important;
             }
             .btn-reason:focus{
                 background: map-get($colors, primary);
@@ -130,20 +127,24 @@
             }
         }
         .desc-container{
+            display: inline-flex;
             width: 100%;
             margin-bottom: vw(20);
-            border-bottom: vw(5) solid #F4F6F8;
-            display: inline-flex;
             .input-label{
-                width: 10%;
-                font-size: 13px;
-                line-height: 15px;
+                width: 7%;
+                font-family: 'Lato-Regular';
+                font-size: vw(18) !important;
+                line-height: vw(16) !important;
                 color: #525252;
+                align-self: center;
             }
             .input-description{
-                // margin-top: vw(15) vw(15) 0 vw(15);
-                font-size: 13px;
-                line-height: 15px;
+                width: 90%;
+                height: vw(38.07);
+                font-family: 'Lato-Regular';
+                font-size: vw(14) !important;
+                line-height: vw(17) !important;
+                color: #525252;
             }
         }
     }
@@ -176,23 +177,23 @@
     display: flex;
     flex-direction: row;
     margin-top: vw(20);
-    .pagination{
+    .pagination-sap{
         display: flex;
         flex: 1;
         flex-direction: row;
         justify-content: flex-end;
         margin-bottom: vw(30);
-        .paging{
+        .paging-sap{
             display: flex;
             flex-direction: row;
             box-shadow: 0px vw(2) vw(4) rgba(0, 0, 0, 0.161);
-            .page-active{
+            border-radius: 6px;
+            .page-active-sap{
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: vw(45.99);
-                min-width: vw(45.99);
-                height: vw(35.3);
+                width: 26px;
+                height: 25px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -200,13 +201,12 @@
                 background-color: map-get($colors , primary);
                 font-size: vw(13);
                 line-height: vw(16);
-                border-radius: 0;
+                border-radius: 6px;
                 cursor: pointer
             }
-            .page-inactive{
-                width: vw(45.99);
-                min-width: vw(45.99);
-                height: vw(35.3);
+            .page-inactive-sap{
+                width: 26px;
+                height: 25px;
                 background-color: white;
                 display: flex;
                 align-items: center;
@@ -217,28 +217,24 @@
                 border-radius: 0;
                 cursor: pointer
             }
-            .page-inactive:hover{
+            .page-inactive-sap:hover{
                 background-color: map-get($colors , primary);
                 cursor: pointer
             }
-            .next-page{
-                width: vw(45.99);
-                min-width: vw(45.99);
-                height: vw(35.3);
-                width: vw(45.99);
-                min-width: vw(45.99);
-                height: vw(35.3);
+            .next-page-sap{
+                width: 26px;
+                height: 25px;
                 background-color: white;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 border-radius: 0;
                 cursor: pointer;
-                .arrow-icon{
+                .arrow-icon-sap{
                     font-size: vw(24);
                 }
             }
-            .next-page:hover{
+            .next-page-sap:hover{
                 background-color: map-get($colors , primary);
                 cursor: pointer;
             }

@@ -28,7 +28,7 @@ class SapIssuePages extends React.PureComponent {
   _showTableHead() {
     return (
       <TableHead className="table-head-sap" >
-        <TableRow classes={{ root: 'table-row' }} className="table-row-header">
+        <TableRow className="table-row-header">
           {this.state.whichTabs ? 
             <TableCell className="table-cell-sap">SO</TableCell> : 
             <TableCell className="table-cell-sap">WO</TableCell>}
@@ -53,7 +53,7 @@ class SapIssuePages extends React.PureComponent {
     )
   }
 
-  _showTableBody(row, id) {
+  _showTableBody(row) {
       return (
         <>
         <TableRow className="table-row-body">
@@ -78,13 +78,9 @@ class SapIssuePages extends React.PureComponent {
             null
           }
         </TableRow>
-        <TableRow className="table-row-top-sap">
+        <TableRow>
           <TableCell colSpan="12" className="table-cell-sap">{this._showHeaderDesc()}</TableCell>
         </TableRow>
-        {/* <TableRow className="table-row-bottom-sap">
-          <TableCell><label>Description :</label></TableCell>
-          <TableCell colSpan="11">{this._showDescription(id)}</TableCell>
-        </TableRow> */}
       </>
     )
   }
@@ -142,6 +138,37 @@ class SapIssuePages extends React.PureComponent {
         />
       </div>
     )
+  }
+
+  _renderPagination= (pageValue) =>  {
+    if (pageValue === 1) {
+      this.setState({whichTabs : true})
+    }if (pageValue === 0) {
+      this.setState({whichTabs : false})
+    }
+    if (this.state.whichTabs === true) {
+      const web = this.props.displayMode === 'web';
+      // const nextSalesRev = this.props.salesOrderRevised.NextPage;
+      // const prevSalesRev = this.props.salesOrderRevised.PrevPage;
+      const currentPropsRev = this.props.salesOrderRevised.PageNumber;
+      const { TotalPages } = this.props.salesOrderRevised;
+      
+      return(
+        <div className="paginations-rev">
+          <div className="paging-rev">
+            {/* {prevSalesRev && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
+            {web && currentPropsRev - 3 > 0 && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev - 3 })} className="page-inactive-rev">{currentPropsRev - 3}</div>}
+            {web && currentPropsRev - 2 > 0 && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev - 2 })} className="page-inactive-rev">{currentPropsRev - 2}</div>}
+            {currentPropsRev - 1 > 0 && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev - 1 })} className="page-inactive-rev">{currentPropsRev - 1}</div>}
+            <div className="page-active-rev">{currentPropsRev}</div>
+            {currentPropsRev + 1 <= TotalPages && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev + 1 })} className="page-inactive-rev">{currentPropsRev + 1}</div>}
+            {web && currentPropsRev + 2 < TotalPages && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev + 2 })} className="page-inactive-rev">{currentPropsRev + 2}</div>}
+            {web && currentPropsRev + 3 < TotalPages && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev + 3 })} className="page-inactive-rev">{currentPropsRev + 3}</div>}
+            {/* {nextSalesRev && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>} */}
+          </div>
+        </div>
+      )
+    }
   }
 
   _renderIssue(){

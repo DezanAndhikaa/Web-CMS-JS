@@ -1,6 +1,14 @@
 import React from 'react';
 import {
-  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, TextField, 
+  Checkbox, 
+  Table, 
+  TableBody, 
+  TableCell, 
+  TableHead, 
+  TableRow, 
+  TextField, 
+  FormLabel,
+  Button
 } from '@material-ui/core';
 import './PlanningList.scss';
 import '../SapIssue/SapIssue.scss'
@@ -152,14 +160,32 @@ export default class SapServiceOrderList extends React.PureComponent {
 
   _showDescription(row){
     return(
-      <div className="teks">
-        <TextField 
-            className="teks"
-            type='text' 
-            variant="outlined" 
+      <div className="tag-container">
+        <div className="btn-container">
+          <Button className="btn-reason" id="so">SO</Button>
+          <Button className="btn-reason" id="cust">Customer</Button>
+          <Button className="btn-reason" id="site">Site</Button>
+          <Button className="btn-reason" id="unitModel">Unit Model</Button>
+          <Button className="btn-reason" id="compDesc">Component Description</Button>
+          <Button className="btn-reason" id="partNumber">Part Number</Button>
+          <Button className="btn-reason" id="unitCode">Unit Code</Button>
+          <Button className="btn-reason" id="sn">Serial Number</Button>
+          <Button className="btn-reason" id="planExec">Plan Execution</Button>
+          <Button className="btn-reason" id="smr">SMR</Button>
+          <Button className="btn-reason" id="smrDate">SMR Date</Button> 
+          }
+        </div>
+        <div className="desc-container">
+          <FormLabel className="input-label">Description: </FormLabel>
+          <TextField 
+            type="text"
+            variant="outlined"
+            className="input-description"
+            placeholder="Silahkan perbaiki SAP sekarang !!"
             size="small"
             value={row.SAPIssueMessage}
-        />
+          />
+        </div>
       </div>
     )
   }
@@ -189,7 +215,6 @@ export default class SapServiceOrderList extends React.PureComponent {
       </TableRow>
       {this.state[id] ? 
         <TableRow className="table-row-bottom-issue">
-            <TableCell><label>Description</label></TableCell>
             <TableCell colSpan="12">{this._showDescription(row)}</TableCell>
         </TableRow> : null }
     </>  
