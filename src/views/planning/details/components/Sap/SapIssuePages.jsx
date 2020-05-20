@@ -28,7 +28,7 @@ class SapIssuePages extends React.PureComponent {
   _showTableHead() {
     return (
       <TableHead className="table-head-sap" >
-        <TableRow className="table-row-header">
+        <TableRow>
           {this.state.whichTabs ? 
             <TableCell className="table-cell-sap">SO</TableCell> : 
             <TableCell className="table-cell-sap">WO</TableCell>}
@@ -56,7 +56,7 @@ class SapIssuePages extends React.PureComponent {
   _showTableBody(row) {
       return (
         <>
-        <TableRow className="table-row-body">
+        <TableRow>
           {this.state.whichTabs ?
             <TableCell align="left" className="table-cell-sap"> {row.SoNumber} </TableCell> : 
             <TableCell align="left" className="table-cell-sap"> {row.WoNumber} </TableCell>
@@ -140,6 +140,25 @@ class SapIssuePages extends React.PureComponent {
     )
   }
 
+  _sendSap =  async( description) => {
+    const index = this.props.selectedDataSAP.length
+    let arr = []
+    if(this.props.whichTabs){
+      for(let i=0; i<index; i++){
+        arr = [...arr,{NumberOrder: this.props.selectedDataSAP[i].SoNumber, Message: description[i]}]
+      }
+    }else{
+      for(let i=0; i<index; i++){
+        arr = [...arr,{NumberOrder: this.props.selectedDataSAP[i].WoNumber, Message: description[i]}]
+      }
+    }
+    this.setState({
+      SAPIssue: arr
+    },
+    () => this.isSAPIssue(arr) 
+    )
+  }
+
   _renderPagination= (pageValue) =>  {
     if (pageValue === 1) {
       this.setState({whichTabs : true})
@@ -177,8 +196,8 @@ class SapIssuePages extends React.PureComponent {
           <Table classes={{ root: 'table' }} className="table-sap">
             {this._showTableHead()}
             <TableBody classes={{ root: 'table-body' }} className="table-body-sap">
-              {this.props.selectedSalesPlans
-                && this.props.selectedSalesPlans.map((row, id) => (this._showTableBody(row,id)) )
+              {this.props.selectedDataSAP
+                && this.props.selectedDataSAP.map((row, id) => (this._showTableBody(row,id)) )
               }
             </TableBody>
           </Table>
@@ -199,7 +218,7 @@ class SapIssuePages extends React.PureComponent {
             <div className="title">
                 SAP Issue
             </div>						
-            <Button className="btn-send-sap" onClick={this.isClicked}>Send SAP Issue</Button>
+            <Button className="btn-send-sap" onClick={this._sendSap}>Send SAP Issue</Button>
           </div>
           <>
             {this._renderIssue()}
