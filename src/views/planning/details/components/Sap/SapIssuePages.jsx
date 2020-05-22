@@ -1,5 +1,14 @@
 import React from 'react';
-import { Button, TextField, Table, TableHead, TableRow, TableBody, TableCell, Paper, FormLabel } from '@material-ui/core';
+import{ 
+  Button, 
+  TextField, 
+  Table, 
+  TableHead, 
+  TableRow, 
+  TableBody, 
+  TableCell, 
+  FormLabel } 
+from '@material-ui/core';
 import './SapIssuePages.scss';
 import moment from 'moment';
 import { Menu } from '../../../../../constants';
@@ -28,10 +37,10 @@ class SapIssuePages extends React.PureComponent {
   _showTableHead() {
     return (
       <TableHead className="table-head-sap" >
-        <TableRow>
+        <TableRow className="table-row-header">
           {this.state.whichTabs ? 
-            <TableCell className="table-cell-sap">SO</TableCell> : 
-            <TableCell className="table-cell-sap">WO</TableCell>}
+            <TableCell className="table-cell-left">SO</TableCell> : 
+            <TableCell className="table-cell-left">WO</TableCell>}
           <TableCell className="table-cell-sap">Customer</TableCell>
           <TableCell className="table-cell-sap">Site</TableCell>
           <TableCell className="table-cell-sap">Unit Model</TableCell>
@@ -44,7 +53,7 @@ class SapIssuePages extends React.PureComponent {
           {this.state.whichTabs ? 
             <>
               <TableCell className="table-cell-sap">SMR</TableCell>
-              <TableCell className="table-cell-sap">SMR Date</TableCell>
+              <TableCell className="table-cell-right">SMR Date</TableCell>
             </>:
             null
           }
@@ -56,10 +65,10 @@ class SapIssuePages extends React.PureComponent {
   _showTableBody(row) {
       return (
         <>
-        <TableRow>
+        <TableRow className="table-row-body">
           {this.state.whichTabs ?
-            <TableCell align="left" className="table-cell-sap"> {row.SoNumber} </TableCell> : 
-            <TableCell align="left" className="table-cell-sap"> {row.WoNumber} </TableCell>
+            <TableCell align="left" className="table-cell-left"> {row.SoNumber} </TableCell> : 
+            <TableCell align="left" className="table-cell-left"> {row.WoNumber} </TableCell>
           }
           <TableCell align="left" className="table-cell-sap"> {row.CustomerName} </TableCell>
           <TableCell align="left" className="table-cell-sap"> {row.SiteCode} </TableCell>
@@ -73,12 +82,12 @@ class SapIssuePages extends React.PureComponent {
           {this.state.whichTabs ?
             <>
                 <TableCell align="center" className="table-cell-sap"> {row.SMR} </TableCell>
-                <TableCell align="left" className="table-cell-sap"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
+                <TableCell align="left" className="table-cell-right"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
             </> : 
             null
           }
         </TableRow>
-        <TableRow>
+        <TableRow className="table-row-body">
           <TableCell colSpan="12" className="table-cell-sap">{this._showHeaderDesc()}</TableCell>
         </TableRow>
       </>
@@ -120,22 +129,6 @@ class SapIssuePages extends React.PureComponent {
             onChange={this.handleChange.bind(this, id)} 
           />
         </div>
-      </div>
-    )
-  }
-
-  _showDescription(id){
-    return(
-      <div className="tag-container">
-        <TextField 
-          type="text"
-          className="input-description"
-          placeholder="Silahkan perbaiki SAP sekarang !!"
-          size="small"
-          value={this.state.description[id]} 
-          name={this.state.description[id]} 
-          onChange={this.handleChange.bind(this, id)} 
-        />
       </div>
     )
   }
@@ -196,8 +189,8 @@ class SapIssuePages extends React.PureComponent {
           <Table classes={{ root: 'table' }} className="table-sap">
             {this._showTableHead()}
             <TableBody classes={{ root: 'table-body' }} className="table-body-sap">
-              {this.props.selectedDataSAP
-                && this.props.selectedDataSAP.map((row, id) => (this._showTableBody(row,id)) )
+              {this.props.selectedSalesPlans
+                && this.props.selectedSalesPlans.map((row, id) => (this._showTableBody(row,id)) )
               }
             </TableBody>
           </Table>

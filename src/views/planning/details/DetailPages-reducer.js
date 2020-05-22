@@ -399,7 +399,6 @@ export function fetchDeletedSalesReducer(state = initialSalesState, action) {
 	return state;
 }
 
-
 export function fetchDeletedServiceReducer(state = initialServiceState, action) {
 	if (action.type === FetchDeletedServiceAction) {
 		switch (action.status) {

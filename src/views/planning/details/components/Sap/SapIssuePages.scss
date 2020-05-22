@@ -24,7 +24,6 @@
         background-repeat: no-repeat;
         cursor: pointer;
     }
-    
 }
 
 .table-container-sap{
@@ -68,8 +67,28 @@
         .table-sap{
             font-size: 0.5vw;
             .table-head-sap{
-                margin-inline-start: vw(20);
+                background: #F4F6F8;
+                box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
+                border-radius: 6px;
                 .table-row-header{
+                    .table-cell-left{
+                        border-bottom: 0;
+                        padding: 0 0 0 vw(18);
+                        height: vw(50);
+                        font-size: vw(18) !important;
+                        line-height: vw(16) !important;
+                        font-family: 'Lato-Bold';
+                        color: #3C3B3B;
+                    }
+                    .table-cell-right{
+                        border-bottom: 0;
+                        padding: 0 vw(18) 0 0;
+                        height: vw(50);
+                        font-size: vw(18) !important;
+                        line-height: vw(16) !important;
+                        font-family: 'Lato-Bold';
+                        color: #3C3B3B;
+                    }
                     .table-cell-sap{
                         border-bottom: 0;
                         padding: 0;
@@ -83,11 +102,29 @@
             }
             .table-body-sap{
                 background-color: white;
-                margin: 0 vw(10) 0 vw(10);
+                border-radius: 6px;
                 .table-row-body{
-                    margin: 0 vw(10) 0 vw(10);
+                    margin-top: vw(15);
+                    .table-cell-left{
+                        border-bottom: 0;
+                        padding: vw(18) 0 0 vw(18);
+                        height: vw(40);
+                        font-size: vw(14) !important;
+                        line-height: vw(17) !important;
+                        font-family: 'Lato-Bold';
+                        color: #3C3B3B;
+                    }
+                    .table-cell-right{
+                        border-bottom: 0;
+                        padding: vw(18) vw(18) 0 0;
+                        height: vw(40);
+                        font-size: vw(14) !important;
+                        line-height: vw(17) !important;
+                        font-family: 'Lato-Bold';
+                        color: #3C3B3B;
+                    }
                     .table-cell-sap{
-                        padding: 0;
+                        padding: vw(18) 0 0 0;
                         height: vw(40);
                         font-size: vw(14) !important;
                         line-height: vw(17) !important;
@@ -103,14 +140,16 @@
         }
     }
     .tag-container{
-        width: 100%;
+        padding-bottom: vw(20);
+        border-bottom: 0.5px solid rgba(0, 0, 0, 0.4);
+        margin: vw(20) vw(20) 0 vw(20);
         .btn-container{
             display: inline-flex;
             .btn-reason{
                 display: inline-flex;
                 width: auto;
                 height: vw(38.07);
-                margin: 0 vw(15) vw(15) 0;
+                margin: 0 vw(15) vw(20) 0;
                 font-family: 'Lato-Bold';
                 font-size: vw(18);
                 font-weight: bold;

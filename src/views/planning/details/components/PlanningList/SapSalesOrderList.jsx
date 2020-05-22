@@ -11,7 +11,7 @@ import {
   FormLabel
 } from '@material-ui/core';
 import './PlanningList.scss';
-import '../SapIssue/SapIssue.scss'
+import '../Sap/SapIssuePages.scss'
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import { 
   SortSalesByCustomer, 
@@ -226,9 +226,8 @@ export default class SapSalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.SMRDate} </TableCell>
       </TableRow>
       {this.state[id] ? 
-        <TableRow className="table-row-bottom-issue">
-            <TableCell></TableCell>
-            <TableCell colSpan="12">{this._showDescription(row)}</TableCell>
+        <TableRow>
+          <TableCell colSpan="12" className="table-cell-sap">{this._showDescription(row)}</TableCell>
         </TableRow> : null }
     </>  
     )
@@ -277,9 +276,9 @@ export default class SapSalesOrderList extends React.PureComponent {
     }else{
       return(
         <>
-          <Table classes={{ root: 'table' }} className="table">
+          <Table classes={{ root: 'table' }} className="table-sap">
           {this.showTableHead()}
-          <TableBody classes={{ root: 'table-body' }}>
+          <TableBody classes={{ root: 'table-body' }} className="table-body-sap">
             {this.props.salesOrderListSap.Lists
               && this.props.salesOrderListSap.Lists.map((row, id) => (
                 this.showTableBody(row,id)

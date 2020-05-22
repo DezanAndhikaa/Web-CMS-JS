@@ -57,12 +57,14 @@ class NavBarComponent extends React.Component {
 					<AppBar position="fixed" className="app-bar">
 						<Toolbar variant="dense" className="toolbar">
 							<img src={UTLogoNew} alt="" className="logo-ut"/>
-							<div className="info-login" onClick={this.isClicked}>
+							<div className="info-login">
 								<p>
 									{`Hi, ${this.props.userData.firstName} ${this.props.userData.lastName}`}
 								</p>
-								<img src={AccountPic} className="account-pic" alt="" />
-								{this.renderPopUpMenu()}
+								<div onClick={this.isClicked}>
+									<img src={AccountPic} className="account-pic" alt="" />
+									{this.renderPopUpMenu()}
+								</div>
 							</div>
 						</Toolbar>
 					</AppBar>
