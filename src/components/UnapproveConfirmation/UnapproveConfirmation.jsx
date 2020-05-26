@@ -221,7 +221,6 @@ export default class UnapproveConfirmation extends React.PureComponent {
                   <p className="confirmation-caption-unapprove"><b>Select one</b> to continue cancel approve</p>
                   <div className="btn-row">
                     {this.props.whichTabs ? <Button className="button-edit-lt" onClick={() => this.isClickedSend()}>Edit Lifetime</Button> : null }
-                    {/* <Button className={this.props.whichTabs ? "button-sap-issue" : "button-sap-issue-service"} onClick={() => this.isClickedSap()}>SAP Issue</Button> */}
                     <Button className={this.props.whichTabs ? "button-sap-issue" : "button-sap-issue-service"} onClick={this.props.whichTabs? () => this.handleClick(Menu.PLANNING_SAP, 'sales') : this.handleClick(Menu.PLANNING_SAP, 'service')}>SAP Issue</Button>
                   </div>
                   <div className={this.props.whichTabs ? "labelMax" : "labelMax-service" }>

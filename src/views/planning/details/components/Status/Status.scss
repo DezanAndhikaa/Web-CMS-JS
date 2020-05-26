@@ -124,6 +124,56 @@
                 }
             }
         }
+        .table-row-bottom-sap{
+            margin-bottom: 100px;
+        }
+    }
+}
+
+.expand-container{
+    width: 100%;
+    .button-container{
+        display: inline-flex;
+        .button-reason{
+            display: inline-flex;
+            width: auto;
+            margin: 0 vw(15) vw(15) 0;
+            border-radius: 5px;
+            font-family: 'Lato-Bold';
+            font-size: 15px;
+            line-height: 19px;
+            color: #707070;
+            text-transform: capitalize;
+            border: 1px solid #000000;
+            box-sizing: border-box;
+            border-radius: 5px;
+        }
+        .button-reason:focus{
+            background: map-get($colors, primary);
+            color: #303030;
+            border: none;
+        }
+    }
+    .description{
+        display: inline-flex;
+        width: 100%;
+        margin-bottom: vw(20);
+        .exp-label{
+            width: 7%;
+            font-family: 'Lato-Regular';
+            font-size: vw(18) !important;
+            line-height: vw(16) !important;
+            color: #525252;
+            align-self: center;
+        }
+        .exp-description{
+            width: 90%;
+            height: vw(38.07);
+            font-family: 'Lato-Regular';
+            font-size: vw(14) !important;
+            line-height: vw(17) !important;
+            color: #525252;
+        }
     }
 }
 

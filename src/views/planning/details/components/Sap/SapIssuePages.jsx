@@ -17,13 +17,13 @@ class SapIssuePages extends React.PureComponent {
   state={
     whichTabs: true,
     description: [],
-    sapIssue: []
+    tag: []
   }
 
   handleChange(id, e) {
     this.setState({
       description: { ...this.state.description, [id]: e.target.value },
-      sapIssue: { ...this.state.sapIssue, [id]: e.target.value}
+      tag: { ...this.state.sapIssue, [id]: e.target.value}
     });
   }
 
@@ -65,6 +65,7 @@ class SapIssuePages extends React.PureComponent {
   _showTableBody(row) {
       return (
         <>
+        <TableRow className="tr-spasi"></TableRow>
         <TableRow className="table-row-body">
           {this.state.whichTabs ?
             <TableCell align="left" className="table-cell-left"> {row.SoNumber} </TableCell> : 
@@ -133,16 +134,20 @@ class SapIssuePages extends React.PureComponent {
     )
   }
 
-  _sendSap =  async( description) => {
+  isSAPIssue = async(data) => {
+    await this.props.putSAPIssue({SAPIssues: data }, this.props.token, this.props.whichTabs);
+  }
+
+  _sendSap =  async( description, tag) => {
     const index = this.props.selectedDataSAP.length
     let arr = []
     if(this.props.whichTabs){
       for(let i=0; i<index; i++){
-        arr = [...arr,{NumberOrder: this.props.selectedDataSAP[i].SoNumber, Message: description[i]}]
+        arr = [...arr,{NumberOrder: this.props.selectedDataSAP[i].SoNumber, Message: description[i], Tag: tag[i]}]
       }
     }else{
       for(let i=0; i<index; i++){
-        arr = [...arr,{NumberOrder: this.props.selectedDataSAP[i].WoNumber, Message: description[i]}]
+        arr = [...arr,{NumberOrder: this.props.selectedDataSAP[i].WoNumber, Message: description[i], Tag: tag[i]}]
       }
     }
     this.setState({
