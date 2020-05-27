@@ -3,7 +3,7 @@ import { DialogContent, Button, Modal, CircularProgress } from '@material-ui/cor
 import { ImgSendtoEdit, ImgCancelApprove, ImgCancelEditSucc } from '../../assets/imgs';
 import './UnapproveConfirmation.scss';
 import CloseNotif from '../CloseNotif/CloseNotif';
-import SapIssue from '../../views/planning/details/components/SapIssue/SapIssue'
+// import SapIssue from '../../views/planning/details/components/SapIssue/SapIssue';
 import { ApiRequestActionsStatus } from '../../core/RestClientHelpers';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal'
 import { Menu } from '../../constants';
@@ -126,18 +126,18 @@ export default class UnapproveConfirmation extends React.PureComponent {
     }, this.props.token);
   }
 
-  _renderSap(open){
-    return(
-      <SapIssue 
-        {...this.props} 
-        isShowModal={open} 
-        isTry={this.isTry} 
-        onKelik={this.onKelik}
-        isClose={this.isClickedCloseBtn}
-        isBack={this.isClickedCloseBtn}
-      />
-    )
-  }
+  // _renderSap(open){
+  //   return(
+  //     <SapIssue 
+  //       {...this.props} 
+  //       isShowModal={open} 
+  //       isTry={this.isTry} 
+  //       onKelik={this.onKelik}
+  //       isClose={this.isClickedCloseBtn}
+  //       isBack={this.isClickedCloseBtn}
+  //     />
+  //   )
+  // }
 
   _renderSapSucced(){
     return(

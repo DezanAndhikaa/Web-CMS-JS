@@ -11,7 +11,6 @@ import {
   Button
 } from '@material-ui/core';
 import './PlanningList.scss';
-import '../SapIssue/SapIssue.scss'
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import { 
   SortServiceByCustomer, 
@@ -160,27 +159,24 @@ export default class SapServiceOrderList extends React.PureComponent {
 
   _showDescription(row){
     return(
-      <div className="tag-container">
-        <div className="btn-container">
-          <Button className="btn-reason" id="so">SO</Button>
-          <Button className="btn-reason" id="cust">Customer</Button>
-          <Button className="btn-reason" id="site">Site</Button>
-          <Button className="btn-reason" id="unitModel">Unit Model</Button>
-          <Button className="btn-reason" id="compDesc">Component Description</Button>
-          <Button className="btn-reason" id="partNumber">Part Number</Button>
-          <Button className="btn-reason" id="unitCode">Unit Code</Button>
-          <Button className="btn-reason" id="sn">Serial Number</Button>
-          <Button className="btn-reason" id="planExec">Plan Execution</Button>
-          <Button className="btn-reason" id="smr">SMR</Button>
-          <Button className="btn-reason" id="smrDate">SMR Date</Button> 
-          }
+      <div className="expand-container">
+        <div className="button-container">
+          <Button className="button-reason" id="so">WO</Button>
+          <Button className="button-reason" id="cust">Customer</Button>
+          <Button className="button-reason" id="site">Site</Button>
+          <Button className="button-reason" id="unitModel">Unit Model</Button>
+          <Button className="button-reason" id="compDesc">Component Description</Button>
+          <Button className="button-reason" id="partNumber">Part Number</Button>
+          <Button className="button-reason" id="unitCode">Unit Code</Button>
+          <Button className="button-reason" id="sn">Serial Number</Button>
+          <Button className="button-reason" id="planExec">Plan Execution</Button>
         </div>
-        <div className="desc-container">
-          <FormLabel className="input-label">Description: </FormLabel>
+        <div className="description">
+          <FormLabel className="exp-label">Description: </FormLabel>
           <TextField 
             type="text"
             variant="outlined"
-            className="input-description"
+            className="exp-description"
             placeholder="Silahkan perbaiki SAP sekarang !!"
             size="small"
             value={row.SAPIssueMessage}
@@ -214,9 +210,9 @@ export default class SapServiceOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
       </TableRow>
       {this.state[id] ? 
-        <TableRow className="table-row-bottom-issue">
-            <TableCell colSpan="12">{this._showDescription(row)}</TableCell>
-        </TableRow> : null }
+        <TableRow>
+        <TableCell colSpan="13">{this._showDescription(row)}</TableCell>
+      </TableRow> : null }
     </>  
     )
   }

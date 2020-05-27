@@ -299,34 +299,24 @@ class DetailsTab extends React.Component {
   _renderTotalData(){
     if (this.state.value === 0) {
       return(
-        <div className="total-site-container">
-          <div className="header-site">
-            <div className="header-site-1">
-              Total Data
-            </div>
-            <div className="header-site-2">
-              Sales Order
-            </div>
-          </div>
-          <div className={this.props.totalSalesData.toString().length > 1 ? "total-sites" : "total-site"}>
+        <div className="total-data-container">
+          <div className="text-total">
             {this.props.totalSalesData}
+          </div>
+          <div className="text-tabs">
+             Total Sales Order
           </div>
         </div>
       )
     }
     else{
       return(
-        <div className="total-site-container">
-          <div className="header-site">
-            <div className="header-site-1">
-              Total Data
-            </div>
-            <div className="header-site-2">
-              Service Order
-            </div>
-          </div>
-          <div className={this.props.totalServiceData.toString().length > 1 ? "total-sites" : "total-site"}>
+        <div className="total-data-container">
+          <div className="text-total">
             {this.props.totalServiceData}
+          </div>
+          <div className="text-tabs">
+            Total Service Order
           </div>
         </div>
       )
@@ -339,6 +329,7 @@ class DetailsTab extends React.Component {
     return (
         <div className="root">
           <div className="tab-container-site">
+            {this.props.renderSearch}
             {this.props.renderNotif}
             {this.props.renderFilterByDataAction}
           </div>

@@ -135,8 +135,8 @@
 
 .tab-container-site{
     display: flex;
-    width: 70%;
-    left: 30%;
+    width: 76%;
+    left: 24%;
     position: absolute;
     z-index: 1;
     justify-content: flex-end;
@@ -152,49 +152,27 @@
         display: flex;
         flex-direction: row;
         margin-top: vw(41.93);
-        .total-site-container{
-            display: flex;
-            width: 306px;
-            height: 89px;
-            background-color: white;
+        .total-data-container{
+            display: inline-flex;
             border-radius: vw(8) !important;
-            box-shadow: 0px vw-tab(3) vw-tab(6) rgba(0, 0, 0, 0.161);
-            .header-site{
-                width: 93px;
-                flex-wrap: nowrap;
-                .header-site-1{
-                    width: 93px;
-                    display: inline-flex;
-                    margin-left: 22.94%;
-                    margin-top: 16.72%;
-                    font-size: 20px;
-                    font-family: 'Lato-Bold';
-                    line-height: vw(34); 
-                }
-                .header-site-2{
-                    width: 93px;
-                    margin-left: 22.86%;
-                    font-family: 'Lato-Regular';
-                    font-size: 15px;
-                    line-height: vw(48);
-                }
-            }
-            .total-site{                    
-                width: 153px;
-                margin-left: 54.72%;
-                margin-top: 12.8%;
+            background-color: rgba(255, 213, 0, 0.25);
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.078);
+            width: 100%;
+            height: 51px;
+            align-items: center;
+            justify-content: center;
+            .text-total{
                 font-family: 'Lato-Bold';
-                font-size: 36px;
-                line-height: vw(43);
+                font-weight: bold;
+                font-size: 25px;
+                line-height: 30px;
                 color: #3C3B3B;
             }
-            .total-sites{                    
-                width: 153px;
-                margin-left: 48.72%;
-                margin-top: 12.8%;
-                font-family: 'Lato-Bold';
-                font-size: 36px;
-                line-height: vw(43);
+            .text-tabs{
+                padding-left: vw(10);
+                font-family: 'Lato-Regular';
+                font-size: 25px;
+                line-height: 30px;
                 color: #3C3B3B;
             }
         }

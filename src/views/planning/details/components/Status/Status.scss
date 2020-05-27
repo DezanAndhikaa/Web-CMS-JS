@@ -35,7 +35,7 @@
 
 .table-containers{
     display: flex;
-    top: 8%;
+    top: 4%;
     flex-direction: column;
     position: relative;
     .title-containers{
@@ -135,10 +135,8 @@
     .button-container{
         display: inline-flex;
         .button-reason{
-            display: inline-flex;
             width: auto;
-            margin: 0 vw(15) vw(15) 0;
-            border-radius: 5px;
+            margin: 0 vw(17) vw(20) 0;
             font-family: 'Lato-Bold';
             font-size: 15px;
             line-height: 19px;
@@ -153,11 +151,28 @@
             color: #303030;
             border: none;
         }
+        .button-reason-right{
+            width: auto;
+            margin: 0 0 vw(20) 0;
+            font-family: 'Lato-Bold';
+            font-size: 15px;
+            line-height: 19px;
+            color: #707070;
+            text-transform: capitalize;
+            border: 1px solid #000000;
+            box-sizing: border-box;
+            border-radius: 5px;
+        }
+        .button-reason-right:focus{
+            background: map-get($colors, primary);
+            color: #303030;
+            border: none;
+        }
     }
     .description{
         display: inline-flex;
         width: 100%;
-        margin-bottom: vw(20);
+        margin-bottom: vw(15);
         .exp-label{
             width: 7%;
             font-family: 'Lato-Regular';

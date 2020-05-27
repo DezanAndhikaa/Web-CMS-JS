@@ -181,7 +181,7 @@ export default class SapSalesOrderList extends React.PureComponent {
           <Button className="button-reason" id="sn">Serial Number</Button>
           <Button className="button-reason" id="planExec">Plan Execution</Button>
           <Button className="button-reason" id="smr">SMR</Button>
-          <Button className="button-reason" id="smrDate">SMR Date</Button> 
+          <Button className="button-reason-right" id="smrDate">SMR Date</Button> 
         </div>
         <div className="description">
           <FormLabel className="exp-label">Description: </FormLabel>
@@ -224,8 +224,8 @@ export default class SapSalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.SMRDate} </TableCell>
       </TableRow>
       {this.state[id] ? 
-        <TableRow className="table-row-bottom-sap">
-          <TableCell className="table-cell" colSpan="12">{this._showDescription(row)}</TableCell>
+        <TableRow>
+          <TableCell colSpan="13">{this._showDescription(row)}</TableCell>
         </TableRow> : null }
     </>  
     )

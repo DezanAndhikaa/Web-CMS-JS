@@ -10,7 +10,7 @@ import { TrackingHistory } from '../views/planning/details/components/TrackingHi
 import { ApprovalPages } from '../views/planning/details/components/Approve';
 import { Notification } from '../views/planning/details/components/Notification';
 import { LoginPage }  from '../views/Login';
-import { SapIssuePages } from '../views/planning/details/components/Sap';
+import { SapIssuePages } from '../views/planning/details/components/SapIssuePages';
 import requireAuth from '../components/AuthGuardHoc';
 import Dashboard from '../views/Dashboard/';
 
