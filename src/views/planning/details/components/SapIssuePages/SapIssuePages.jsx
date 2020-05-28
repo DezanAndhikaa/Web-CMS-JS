@@ -62,10 +62,15 @@ class SapIssuePages extends React.PureComponent {
     )
   }
 
+  _showPaddingHeader(){
+    return(
+      <TableRow className="tr-spasi"></TableRow>
+    )
+  }
+
   _showTableBody(row) {
       return (
         <>
-        <TableRow className="tr-spasi"></TableRow>
         <TableRow className="table-row-body">
           {this.state.whichTabs ?
             <TableCell align="left" className="table-cell-left"> {row.SoNumber} </TableCell> : 
@@ -100,20 +105,20 @@ class SapIssuePages extends React.PureComponent {
       <div className="tag-container">
         <div className="btn-container">
           {this.state.whichTabs ?
-            <Button className="btn-reason" id="so">SO</Button> :
-            <Button className="btn-reason" id="wo">WO</Button>}
-          <Button className="btn-reason" id="cust">Customer</Button>
-          <Button className="btn-reason" id="site">Site</Button>
-          <Button className="btn-reason" id="unitModel">Unit Model</Button>
-          <Button className="btn-reason" id="compDesc">Component Description</Button>
-          <Button className="btn-reason" id="partNumber">Part Number</Button>
-          <Button className="btn-reason" id="unitCode">Unit Code</Button>
-          <Button className="btn-reason" id="sn">Serial Number</Button>
-          <Button className="btn-reason" id="planExec">Plan Execution</Button>
+            <Button className="btn-reason" id="so" value="SO">SO</Button> :
+            <Button className="btn-reason" id="wo" value="WO">WO</Button>}
+          <Button className="btn-reason" id="cust" value="Customer">Customer</Button>
+          <Button className="btn-reason" id="site" value="Site">Site</Button>
+          <Button className="btn-reason" id="unitModel" value="UnitModel">Unit Model</Button>
+          <Button className="btn-reason" id="compDesc" value="ComponentDescription">Component Description</Button>
+          <Button className="btn-reason" id="partNumber" value="PartNumber">Part Number</Button>
+          <Button className="btn-reason" id="unitCode" value="UnitCode">Unit Code</Button>
+          <Button className="btn-reason" id="sn" value="SerialNumber">Serial Number</Button>
+          <Button className="btn-reason" id="planExec" value="PlanExecution">Plan Execution</Button>
           {this.state.whichTabs ?
             <>
-              <Button className="btn-reason" id="smr">SMR</Button>
-              <Button className="btn-reason" id="smrDate">SMR Date</Button> 
+              <Button className="btn-reason" id="smr" value="SMR">SMR</Button>
+              <Button className="btn-reason" id="smrDate" value="SMRDate">SMR Date</Button> 
             </> : ""
           }
         </div>
@@ -192,7 +197,7 @@ class SapIssuePages extends React.PureComponent {
     return(
       <div className="planning-list-sap">
           <Table classes={{ root: 'table' }} className="table-sap">
-            {this._showTableHead()}
+            {this._showTableHead()} {this._showPaddingHeader()}
             <TableBody classes={{ root: 'table-body' }} className="table-body-sap">
               {this.props.selectedSalesPlans
                 && this.props.selectedSalesPlans.map((row, id) => (this._showTableBody(row,id)) )

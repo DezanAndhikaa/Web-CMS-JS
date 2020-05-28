@@ -7,7 +7,6 @@ import FilterbyDataAction from '../../../components/FilterByDataAction/FilterbyD
 import NotifButton from '../../../components/ActionButton/NotifButton/NotifButton';
 import { Menu } from '../../../constants';
 import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
-import { ContactSupportOutlined } from '@material-ui/icons';
 
 class DetailPages extends React.Component {
   constructor(props) {
