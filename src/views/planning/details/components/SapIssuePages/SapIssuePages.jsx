@@ -34,6 +34,7 @@ class SapIssuePages extends React.PureComponent {
     });
   }
 
+
   _showTableHead() {
     return (
       <TableHead className="table-head-sap" >
@@ -162,32 +163,52 @@ class SapIssuePages extends React.PureComponent {
     )
   }
 
-  _renderPagination= (pageValue) =>  {
+  _renderPagination = (pageValue) => {
     if (pageValue === 1) {
-      this.setState({whichTabs : true})
-    }if (pageValue === 0) {
-      this.setState({whichTabs : false})
+      this.setState({ whichTabs: true })
+    } if (pageValue === 0) {
+      this.setState({ whichTabs: false })
     }
     if (this.state.whichTabs === true) {
       const web = this.props.displayMode === 'web';
-      // const nextSalesRev = this.props.salesOrderRevised.NextPage;
-      // const prevSalesRev = this.props.salesOrderRevised.PrevPage;
-      const currentPropsRev = this.props.salesOrderRevised.PageNumber;
-      const { TotalPages } = this.props.salesOrderRevised;
-      
-      return(
-        <div className="paginations-rev">
-          <div className="paging-rev">
-            {/* {prevSalesRev && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
-            {web && currentPropsRev - 3 > 0 && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev - 3 })} className="page-inactive-rev">{currentPropsRev - 3}</div>}
-            {web && currentPropsRev - 2 > 0 && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev - 2 })} className="page-inactive-rev">{currentPropsRev - 2}</div>}
-            {currentPropsRev - 1 > 0 && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev - 1 })} className="page-inactive-rev">{currentPropsRev - 1}</div>}
-            <div className="page-active-rev">{currentPropsRev}</div>
-            {currentPropsRev + 1 <= TotalPages && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev + 1 })} className="page-inactive-rev">{currentPropsRev + 1}</div>}
-            {web && currentPropsRev + 2 < TotalPages && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev + 2 })} className="page-inactive-rev">{currentPropsRev + 2}</div>}
-            {web && currentPropsRev + 3 < TotalPages && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev + 3 })} className="page-inactive-rev">{currentPropsRev + 3}</div>}
-            {/* {nextSalesRev && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>} */}
-          </div>
+      // const nextSales = this.props.salesOrderList.NextPage;
+      // const prevSales = this.props.salesOrderList.PrevPage;
+      const currentPropsSales = this.props.salesOrderListSap.PageNumber;
+      const { TotalPages } = this.props.salesOrderListSap;
+      return (
+        <div className="pagination-sap">
+          <div className="paging-sap">
+							{/* {prevSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
+							{web && currentPropsSales - 3 > 0 && <div onClick={() => this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageNumber: currentPropsSales - 3 })} className="page-inactive-sap">{currentPropsSales - 3}</div>}
+							{web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive-sap">{currentPropsSales - 2}</div>}
+							{currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive-sap">{currentPropsSales - 1}</div>}
+							<div className="page-active-sap">{currentPropsSales}</div>
+							{currentPropsSales + 1 <= TotalPages && <div onClick={() => this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive-sap">{currentPropsSales + 1}</div>}
+							{web && currentPropsSales + 2 < TotalPages && <div onClick={() => this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive-sap">{currentPropsSales + 2}</div>}
+							{web && currentPropsSales + 3 < TotalPages && <div onClick={() => this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive-sap">{currentPropsSales + 3}</div>}
+							{/* {nextSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>} */}
+						</div>
+        </div>
+      )
+    }
+    if (this.state.whichTabs === false) {
+      const web = this.props.displayMode === 'web';
+      // const nextSales = this.props.serviceOrderList.NextPage;
+      // const prevSales = this.props.serviceOrderList.PrevPage;
+      const currentPropsService = this.props.serviceOrderListSap.PageNumber;
+      const { TotalPages } = this.props.serviceOrderListSap;
+
+      return (
+        <div className="pagination-sap">
+          <div className="paging-sap">
+							{web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceSapParameter({ ...this.props.serviceSapParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive-sap">{currentPropsService - 3}</div>}
+							{web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceSapParameter({ ...this.props.serviceSapParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive-sap">{currentPropsService - 2}</div>}
+							{currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceSapParameter({ ...this.props.serviceSapParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive-sap">{currentPropsService - 1}</div>}
+							<div className="page-active-sap">{currentPropsService}</div>
+							{currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateServiceSapParameter({ ...this.props.serviceSapParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive-sap">{currentPropsService + 1}</div>}
+							{web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceSapParameter({ ...this.props.serviceSapParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive-sap">{currentPropsService + 2}</div>}
+							{web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceSapParameter({ ...this.props.serviceSapParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive-sap">{currentPropsService + 3}</div>}
+						</div>
         </div>
       )
     }
@@ -226,6 +247,9 @@ class SapIssuePages extends React.PureComponent {
           <>
             {this._renderIssue()}
           </>
+        </div>
+        <div className="bottom-row-sap">
+          {this._renderPagination()}
         </div>
       </main>
     );

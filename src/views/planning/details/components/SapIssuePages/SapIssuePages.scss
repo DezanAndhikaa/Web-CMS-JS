@@ -175,6 +175,22 @@
                 box-sizing: border-box;
                 border-radius: vw(5) !important;
             }
+            .btn-reason-clicked{
+                display: inline-flex;
+                width: auto;
+                height: vw(38.07);
+                margin: 0 vw(15) vw(20) 0;
+                font-family: 'Lato-Bold';
+                font-size: vw(18);
+                font-weight: bold;
+                line-height: vw(16) !important;
+                background: map-get($colors, primary);
+                color: #303030;
+                border: none;
+                text-transform: capitalize;
+                box-sizing: border-box;
+                border-radius: vw(5) !important;
+            }
             .btn-reason:focus{
                 background: map-get($colors, primary);
                 color: #303030;
