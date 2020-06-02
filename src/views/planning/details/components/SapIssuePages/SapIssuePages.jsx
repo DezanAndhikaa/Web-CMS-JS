@@ -17,13 +17,14 @@ class SapIssuePages extends React.PureComponent {
   state={
     whichTabs: true,
     description: [],
-    tag: []
+    tag: [],
+    isClicked: false
   }
 
   handleChange(id, e) {
     this.setState({
       description: { ...this.state.description, [id]: e.target.value },
-      tag: { ...this.state.sapIssue, [id]: e.target.value}
+      tag: { ...this.state.tag, [id]: e.target.value}
     });
   }
 
@@ -34,6 +35,11 @@ class SapIssuePages extends React.PureComponent {
     });
   }
 
+  onClickBtn(id){
+    if(id === "so"){
+      this.state.tag.push("SO");
+    }
+  }
 
   _showTableHead() {
     return (
@@ -65,13 +71,16 @@ class SapIssuePages extends React.PureComponent {
 
   _showPaddingHeader(){
     return(
-      <TableRow className="tr-spasi"></TableRow>
+      <>
+        <TableRow className="tr-spasi"></TableRow>
+      </>
     )
   }
 
   _showTableBody(row) {
-      return (
-        <>
+    return (
+      <>
+        {this._showPaddingHeader()}
         <TableRow className="table-row-body">
           {this.state.whichTabs ?
             <TableCell align="left" className="table-cell-left"> {row.SoNumber} </TableCell> : 
@@ -106,7 +115,7 @@ class SapIssuePages extends React.PureComponent {
       <div className="tag-container">
         <div className="btn-container">
           {this.state.whichTabs ?
-            <Button className="btn-reason" id="so" value="SO">SO</Button> :
+            <Button className={this.state.isClicked === false ? "btn-reason" : "btn-reason-clicked"} id="so" value="SO">SO</Button> :
             <Button className="btn-reason" id="wo" value="WO">WO</Button>}
           <Button className="btn-reason" id="cust" value="Customer">Customer</Button>
           <Button className="btn-reason" id="site" value="Site">Site</Button>
@@ -218,7 +227,7 @@ class SapIssuePages extends React.PureComponent {
     return(
       <div className="planning-list-sap">
           <Table classes={{ root: 'table' }} className="table-sap">
-            {this._showTableHead()} {this._showPaddingHeader()}
+            {this._showTableHead()}
             <TableBody classes={{ root: 'table-body' }} className="table-body-sap">
               {this.props.selectedSalesPlans
                 && this.props.selectedSalesPlans.map((row, id) => (this._showTableBody(row,id)) )

@@ -12,80 +12,13 @@ export default class UnapproveConfirmation extends React.PureComponent {
 
   state={
     isShowModalUnapprove: false,
-    isShowModalSap: false,
     isShowModalSend: false,
-    isShowModalSapSucced: false,
-    isShowModalSapFailed: false
-  }
-
-  isSAPIssue = async(data) => {
-    await this.props.putSAPIssue({SAPIssues: data }, this.props.token, this.props.whichTabs);
-  }
-
-  onKelik =  async( description) => {
-    const index = this.props.selectedDataSAP.length
-    let arr = []
-    if(this.props.whichTabs){
-      for(let i=0; i<index; i++){
-        arr = [...arr,{NumberOrder: this.props.selectedDataSAP[i].SoNumber, Message: description[i]}]
-      }
-    }else{
-      for(let i=0; i<index; i++){
-        arr = [...arr,{NumberOrder: this.props.selectedDataSAP[i].WoNumber, Message: description[i]}]
-      }
-    }
-    this.setState({
-      SAPIssue: arr
-    },
-    () => this.isSAPIssue(arr) 
-    )
   }
 
   componentDidUpdate = (prevProps) =>{
     if (prevProps.openModal !== this.props.openModal)
     this.setState({
       isShowModalUnapprove: this.props.openModal
-    })
-  }
-
-  isTry = () => {
-    this.setState({
-      isShowModalSap: !this.state.isShowModalSap,
-      isShowModalSapSucced: !this.state.isShowModalSapSucced,
-      isShowModalSapFailed: !this.state.isShowModalSapFailed
-    })
-  }
-
-  isClickedCloseBtn = () => {
-    this.setState({
-      isShowModalSap: !this.state.isShowModalSap,
-      isShowModalSapFailed: !this.state.isShowModalSapFailed
-    })
-  }
-
-  isClickedBackBtn = () => {
-    this.setState({
-      isShowModalSapFailed: !this.state.isShowModalSapFailed,
-      isShowModalUnapprove: !this.state.isShowModalUnapprove
-    })
-  }
-
-  isTryClosed = () => {
-    this.setState({
-      isShowModalSapSucced: !this.state.isShowModalSapSucced,
-    })
-  }
-
-  isClosedFailed = () => {
-    this.setState({
-      isShowModalSapFailed: !this.state.isShowModalSapFailed,
-    })
-  }
-
-  isClickedSap = () => {
-    this.setState({
-      isShowModalUnapprove: !this.state.isShowModalUnapprove,
-      isShowModalSap: !this.state.isShowModalSap
     })
   }
 
@@ -101,74 +34,6 @@ export default class UnapproveConfirmation extends React.PureComponent {
       isShowModalSend: !this.state.isShowModalSend,
       isShowModalUnapprove: !this.state.isShowModalUnapprove
     })
-  }
-
-  isReload = () => {
-    this.props.fetchSalesOrder({
-      ...this.props.salesParameter.dataFilter, 
-      Filter : 
-        [...this.props.salesParameter.dataFilter.Filter, {
-          Field : 'LifeTimeComponent',
-          Operator : "neq",
-          Value : '-',
-          Logic : "AND"
-        },{
-          Field : 'SAPIssueMessage',
-          Operator : 'eq',
-          Value : '-',
-          Logic : 'AND'
-        },{
-          Field : 'IsRevised',
-          Operator : 'eq',
-          Value : 'false',
-          Logic : 'AND'
-        }]
-    }, this.props.token);
-  }
-
-  // _renderSap(open){
-  //   return(
-  //     <SapIssue 
-  //       {...this.props} 
-  //       isShowModal={open} 
-  //       isTry={this.isTry} 
-  //       onKelik={this.onKelik}
-  //       isClose={this.isClickedCloseBtn}
-  //       isBack={this.isClickedCloseBtn}
-  //     />
-  //   )
-  // }
-
-  _renderSapSucced(){
-    return(
-      <ConfirmationModal handleReload={this.isReload} isModal={this.state.isShowModalSapSucced} idModal="SAP" isModalClosed={this.isTryClosed} />
-    )
-  }
-
-  _renderSapFailed(){
-    return(
-      <>
-        <ConfirmationModal 
-          {...this.props}
-          handleReload={this.isReload} 
-          isModal={this.state.isShowModalSapFailed} 
-          idModal="SAP-Failed"
-          idFailed="CloseBtn" 
-          isModalClosed={this.isClosedFailed}
-          backToSAP={this.isClickedCloseBtn}
-          backToConfirmModal={this.isClickedBackBtn}
-        />
-        <ConfirmationModal 
-          {...this.props}
-          handleReload={this.isReload} 
-          isModal={this.state.isShowModalSapFailed} 
-          idModal="SAP-Failed"
-          isModalClosed={this.isClosedFailed}
-          backToSAP={this.isClickedCloseBtn}
-          backToConfirmModal={this.isClickedBackBtn}
-        />
-      </>
-    )
   }
 
   _renderSendtoEdit(){
@@ -232,20 +97,11 @@ export default class UnapproveConfirmation extends React.PureComponent {
           </Modal>
           )     
           }
-          {this.state.isShowModalSap && (
-            this._renderSap(this.state.isShowModalSap)
-          )}
           {this.props.fetchStatusPutSAPIssue === ApiRequestActionsStatus.LOADING &&  (
             this.renderCircularProgress()
           )}
-          {this.props.fetchStatusPutSAPIssue === ApiRequestActionsStatus.SUCCEEDED && (
-            this._renderSapSucced()
-          )}
           {this.state.isShowModalSend && (
             this._renderSendtoEdit()
-          )}
-          {this.state.isShowModalSapFailed && (
-            this._renderSapFailed()
           )}
         </>
         );

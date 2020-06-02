@@ -183,7 +183,6 @@ class ApprovalTab extends React.Component {
   }
 
   _renderBaseBtn() {
-    console.log(this.props.totalSalesData);
     if (this.state.value === 0) {
       return (
         <div className="approval-container">

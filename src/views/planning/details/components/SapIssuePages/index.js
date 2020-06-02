@@ -12,6 +12,12 @@ import {
 	SelectSalesPlanAction,
 	SelectServicePlanAction,
 	storePlanDataAction,
+	salesParameterSapAction,
+	serviceParameterSapAction,
+	fetchSapSalesAction,
+	fetchSapServiceAction,
+	UpdateSalesSapParameterAction,
+	UpdateServiceSapParameterAction,
 } from '../../DetailPages-action';
 
 const mapStateToProps = (state) => ({
@@ -21,6 +27,12 @@ const mapStateToProps = (state) => ({
 	selectedSalesPlans: state.plansPageState.selectedSalesPlans,
 	selectedServicePlans: state.plansPageState.selectedServicePlans,
 	fetchStatusPutSAPIssue: state.plansPageState.putSAPIssue.status,
+	salesOrderListSap: state.plansPageState.salesOrderListSap.data,
+	serviceOrderListSap: state.plansPageState.serviceOrderListSap.data,
+	salesSapParameter: state.plansPageState.salesSapParameter,
+	serviceSapParameter: state.plansPageState.serviceSapParameter,
+	fetchStatusSalesSap: state.plansPageState.salesOrderListSap.status,
+	fetchStatusServiceSap: state.plansPageState.serviceOrderListSap.status,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -33,6 +45,10 @@ const mapDispatchToProps = (dispatch) => ({
 	storePlanData: (payload) => dispatch(storePlanDataAction(payload)),
 	unselectServicePlan: (payload) => dispatch(selectServicePlansAction(UnselectServicePlanAction, payload)),
 	unselectSalesPlan: (payload) => dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
+	fetchSapSales: (payload,token) => dispatch(fetchSapSalesAction(payload, token)),
+	fetchSapService: (payload,token) => dispatch(fetchSapServiceAction(payload, token)),
+	updateSalesSapParameter: (payload) => dispatch(salesParameterSapAction(UpdateSalesSapParameterAction, payload)),
+	updateServiceSapParameter: (payload) => dispatch(serviceParameterSapAction(UpdateServiceSapParameterAction, payload)),	
 });
 
 const sapIssuepages = connect(mapStateToProps, mapDispatchToProps)(SapIssuePages);

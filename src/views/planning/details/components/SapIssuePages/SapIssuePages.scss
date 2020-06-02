@@ -244,16 +244,14 @@
 }
 
 .bottom-row-sap{
-    flex: 1;
     display: flex;
-    flex-direction: row;
-    margin-top: vw(20);
     .pagination-sap{
         display: flex;
         flex: 1;
         flex-direction: row;
-        justify-content: flex-end;
-        margin-bottom: vw(30);
+        justify-content: center;
+        padding: vw(30) 0 vw(30) 0;
+        background-color: white;
         .paging-sap{
             display: flex;
             flex-direction: row;
