@@ -7,7 +7,8 @@ import{
   TableRow, 
   TableBody, 
   TableCell, 
-  FormLabel } 
+  FormLabel, 
+  ButtonGroup} 
 from '@material-ui/core';
 import './SapIssuePages.scss';
 import moment from 'moment';
@@ -18,7 +19,134 @@ class SapIssuePages extends React.PureComponent {
     whichTabs: true,
     description: [],
     tag: [],
-    isClicked: false
+    isClicked: false,
+    selectedBtn: ''
+  }
+
+  onClickBtn(id){
+    this.setState({
+      isClicked: !this.state.isClicked
+    })
+    if(id === "so"){
+      if(this.state.isClicked === true){
+        this.setState(previousState => ({
+          isClicked: true,
+          tag: [...previousState.tag, 'SO']
+        }));
+      }else{
+        this.state.tag.delete("SO");
+      }
+    }
+    else if(id === "wo"){
+      if(this.state.isClicked === true){
+        this.setState(previousState => ({
+          isClicked: true,
+          tag: [...previousState.tag, 'WO']
+        }));
+      }else{
+        this.state.tag.delete("WO");
+      }
+    }
+    else if(id === "cust"){
+      if(this.state.isClicked === true){
+        this.setState(previousState => ({
+          isClicked: true,
+          tag: [...previousState.tag, 'Customer']
+        }));
+      }else{
+        this.state.tag.delete("Customer");
+      }
+    }
+    else if(id === "site"){
+      if(this.state.isClicked === true){
+        this.setState(previousState => ({
+          isClicked: true,
+          tag: [...previousState.tag, 'Site']
+        }));
+      }else{
+        this.state.tag.delete("Site");
+      }
+    }
+    else if(id === "unitModel"){
+      if(this.state.isClicked === true){
+        this.setState(previousState => ({
+          isClicked: true,
+          tag: [...previousState.tag, 'UnitModel']
+        }));
+      }else{
+        this.state.tag.delete("UnitModel");
+      }
+    }
+    else if(id === "compDesc"){
+      if(this.state.isClicked === true){
+        this.setState(previousState => ({
+          isClicked: true,
+          tag: [...previousState.tag, 'ComponentDescription']
+        }));
+      }else{
+        this.state.tag.delete("ComponentDescription");
+      }
+    }
+    else if(id === "partNumber"){
+      if(this.state.isClicked === true){
+        this.setState(previousState => ({
+          isClicked: true,
+          tag: [...previousState.tag, 'PartNumber']
+        }));
+      }else{
+        this.state.tag.delete("PartNumber");
+      }
+    }
+    else if(id === "unitCode"){
+      if(this.state.isClicked === true){
+        this.setState(previousState => ({
+          isClicked: true,
+          tag: [...previousState.tag, 'UnitCode']
+        }));
+      }else{
+        this.state.tag.delete("UnitCode");
+      }
+    }
+    else if(id === "sn"){
+      if(this.state.isClicked === true){
+        this.setState(previousState => ({
+          isClicked: true,
+          tag: [...previousState.tag, 'SerialNumber']
+        }));
+      }else{
+        this.state.tag.delete("SerialNumber");
+      }
+    }
+    else if(id === "planExec"){
+      if(this.state.isClicked === true){
+        this.setState(previousState => ({
+          isClicked: true,
+          tag: [...previousState.tag, 'PlanExecution']
+        }));
+      }else{
+        this.state.tag.delete("PlanExecution");
+      }
+    }
+    else if(id === "smr"){
+      if(this.state.isClicked === true){
+        this.setState(previousState => ({
+          isClicked: true,
+          tag: [...previousState.tag, 'SMR']
+        }));
+      }else{
+        this.state.tag.delete("SMR");
+      }
+    }
+    else if(id === "smrDate"){
+      if(this.state.isClicked === true){
+        this.setState(previousState => ({
+          isClicked: true,
+          tag: [...previousState.tag, 'SMRDate']
+        }));
+      }else{
+        this.state.tag.delete("SMRDate");
+      }
+    }
   }
 
   handleChange(id, e) {
@@ -33,12 +161,6 @@ class SapIssuePages extends React.PureComponent {
       pathname: menu,
       whichTab: tab
     });
-  }
-
-  onClickBtn(id){
-    if(id === "so"){
-      this.state.tag.push("SO");
-    }
   }
 
   _showTableHead() {
@@ -114,23 +236,29 @@ class SapIssuePages extends React.PureComponent {
     return(
       <div className="tag-container">
         <div className="btn-container">
-          {this.state.whichTabs ?
-            <Button className={this.state.isClicked === false ? "btn-reason" : "btn-reason-clicked"} id="so" value="SO">SO</Button> :
-            <Button className="btn-reason" id="wo" value="WO">WO</Button>}
-          <Button className="btn-reason" id="cust" value="Customer">Customer</Button>
-          <Button className="btn-reason" id="site" value="Site">Site</Button>
-          <Button className="btn-reason" id="unitModel" value="UnitModel">Unit Model</Button>
-          <Button className="btn-reason" id="compDesc" value="ComponentDescription">Component Description</Button>
-          <Button className="btn-reason" id="partNumber" value="PartNumber">Part Number</Button>
-          <Button className="btn-reason" id="unitCode" value="UnitCode">Unit Code</Button>
-          <Button className="btn-reason" id="sn" value="SerialNumber">Serial Number</Button>
-          <Button className="btn-reason" id="planExec" value="PlanExecution">Plan Execution</Button>
-          {this.state.whichTabs ?
-            <>
-              <Button className="btn-reason" id="smr" value="SMR">SMR</Button>
-              <Button className="btn-reason" id="smrDate" value="SMRDate">SMR Date</Button> 
-            </> : ""
-          }
+          <ButtonGroup 
+            value={this.state.tag[id]} 
+            name={this.state.tag[id]} 
+            onChange={this.handleChange.bind(this, id)} 
+          >
+            {this.state.whichTabs ?
+              <Button className={this.state.isClicked === false ? "btn-reason" : "btn-reason-clicked"} id="so" onClick={this.onClickBtn()}>SO</Button> :
+              <Button className={this.state.isClicked === false ? "btn-reason" : "btn-reason-clicked"} id="wo" onClick={this.onClickBtn()}>WO</Button>}
+            <Button className={this.state.isClicked === false ? "btn-reason" : "btn-reason-clicked"} id="cust" onClick={this.onClickBtn()}>Customer</Button>
+            <Button className={this.state.isClicked === false ? "btn-reason" : "btn-reason-clicked"} id="site" onClick={this.onClickBtn()}>Site</Button>
+            <Button className={this.state.isClicked === false ? "btn-reason" : "btn-reason-clicked"} id="unitModel" onClick={this.onClickBtn()}>Unit Model</Button>
+            <Button className={this.state.isClicked === false ? "btn-reason" : "btn-reason-clicked"} id="compDesc" onClick={this.onClickBtn()}>Component Description</Button>
+            <Button className={this.state.isClicked === false ? "btn-reason" : "btn-reason-clicked"} id="partNumber" onClick={this.onClickBtn()}>Part Number</Button>
+            <Button className={this.state.isClicked === false ? "btn-reason" : "btn-reason-clicked"} id="unitCode" onClick={this.onClickBtn()}>Unit Code</Button>
+            <Button className={this.state.isClicked === false ? "btn-reason" : "btn-reason-clicked"} id="sn" onClick={this.onClickBtn()}>Serial Number</Button>
+            <Button className={this.state.isClicked === false ? "btn-reason" : "btn-reason-clicked"} id="planExec" onClick={this.onClickBtn()}>Plan Execution</Button>
+            {this.state.whichTabs ?
+              <>
+                <Button className={this.state.isClicked === false ? "btn-reason" : "btn-reason-clicked"} id="smr" onClick={this.onClickBtn()}>SMR</Button>
+                <Button className={this.state.isClicked === false ? "btn-reason" : "btn-reason-clicked"} id="smrDate" onClick={this.onClickBtn()}>SMR Date</Button> 
+              </> : ""
+            }
+          </ButtonGroup>
         </div>
         <div className="desc-container">
           <FormLabel className="input-label">Description: </FormLabel>
