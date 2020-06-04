@@ -5,12 +5,14 @@ import './UnapproveConfirmation.scss';
 import CloseNotif from '../CloseNotif/CloseNotif';
 import { ApiRequestActionsStatus } from '../../core/RestClientHelpers';
 import { Menu } from '../../constants';
+import SapGuide from '../../views/planning/details/components/SapIssuePages/private-components/SapGuide/SapGuide';
 
 export default class UnapproveConfirmation extends React.PureComponent {
 
   state={
     isShowModalUnapprove: false,
     isShowModalSend: false,
+    isShowSapGuide: false
   }
 
   componentDidUpdate = (prevProps) =>{
@@ -31,6 +33,13 @@ export default class UnapproveConfirmation extends React.PureComponent {
     this.setState({
       isShowModalSend: !this.state.isShowModalSend,
       isShowModalUnapprove: !this.state.isShowModalUnapprove
+    })
+  }
+
+  isShowGuide = () => {
+    this.setState({
+      isShowModalUnapprove: !this.state.isShowModalUnapprove,
+      isShowSapGuide: !this.state.isShowSapGuide
     })
   }
 
@@ -56,8 +65,18 @@ export default class UnapproveConfirmation extends React.PureComponent {
     )
   }
 
+  _renderSapGuide(){
+    return(
+      <SapGuide 
+        {...this.props}
+        {...this.state}
+        openModal= {this.state.isShowSapGuide}
+      />
+    )
+  }
+
   renderCircularProgress() {
-      return <CircularProgress size={100} className="circular-progress" />;
+    return <CircularProgress size={100} className="circular-progress" />;
   }
 
   handleClick = (menu, tab) => {
