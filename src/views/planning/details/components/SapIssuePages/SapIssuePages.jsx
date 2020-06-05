@@ -357,8 +357,8 @@ class SapIssuePages extends React.PureComponent {
           <Table classes={{ root: 'table' }} className="table-sap">
             {this._showTableHead()}
             <TableBody classes={{ root: 'table-body' }} className="table-body-sap">
-              {this.props.selectedSalesPlans
-                && this.props.selectedSalesPlans.map((row, id) => (this._showTableBody(row,id)) )
+              {this.props.selectedDataSAP
+                && this.props.selectedDataSAP.map((row, id) => (this._showTableBody(row,id)) )
               }
             </TableBody>
           </Table>

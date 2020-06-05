@@ -117,9 +117,8 @@ export default class UnapproveConfirmation extends React.PureComponent {
           {this.props.fetchStatusPutSAPIssue === ApiRequestActionsStatus.LOADING &&  (
             this.renderCircularProgress()
           )}
-          {this.state.isShowModalSend && (
-            this._renderSendtoEdit()
-          )}
+          {this.state.isShowModalSend && (this._renderSendtoEdit() )}
+          {this.state.isShowSapGuide && (this._renderSapGuide() )}
         </>
         );
     } else if(this.props.idConfirm === "Send Success"){
