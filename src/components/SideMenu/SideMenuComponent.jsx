@@ -11,7 +11,9 @@ import { AssignmentIcon, IcDbMenu, IcApproval, AllocationIcon, DeliveryIcon, Tra
   ProductionIcon, ExecutionIcon, DashboardIcon, PlanningIcon } from "../../assets/icons";
 import { Menu } from "../../constants";
 import "./SideMenuComponent.scss";
+import roleService from "../../utils/roleService.helper";
 
+const RoleUser = new roleService();
 class SideMenuComponent extends React.Component {
 
   handleClick(menu, subMenu) {
@@ -115,74 +117,122 @@ class SideMenuComponent extends React.Component {
               timeout="auto"
               unmountOnExit
             >
-              <List disablePadding>
-                <ListItem
-                  button
-                  key="plans-assignment"
-                  className={
-                    this.props.path === Menu.PLANNING_DASHBOARD 
-                      ? "sub-menu-selected"
-                      : "sub-menu"
-                  }
-                  onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_DASHBOARD)}
-                >
-                  <ListItemIcon classes={{ root: "icon-root" }}>
-                    <img
-                      src={IcDbMenu}
-                      alt="assignment icon"
-                      className="item-icon"
+              {Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 
+                ? <List disablePadding>
+                    <ListItem
+                      button
+                      key="plans-assignment"
+                      className={
+                        this.props.path === Menu.PLANNING_DASHBOARD 
+                          ? "sub-menu-selected"
+                          : "sub-menu"
+                      }
+                      onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_DASHBOARD)}
+                    >
+                      <ListItemIcon classes={{ root: "icon-root" }}>
+                        <img
+                          src={IcDbMenu}
+                          alt="assignment icon"
+                          className="item-icon"
+                        />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary="Dashboard"
+                        classes={{ primary: "item-text", root: "item-text" }}
+                      />
+                    </ListItem>
+                    <ListItem
+                      button
+                      key="jobs-report"
+                      className={
+                        this.props.path === Menu.PLANNING_DETAILS_SITE
+                          ? "sub-menu-selected"
+                          : "sub-menu"
+                      }
+                      onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_DETAILS_SITE)}
+                    >
+                      <ListItemIcon classes={{ root: "icon-root" }}>
+                        <img
+                          src={AssignmentIcon}
+                          alt="assignment icon"
+                          className="item-icon"
+                        />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary="Detail"
+                        classes={{ primary: "item-text", root: "item-text" }}
+                      />
+                    </ListItem>
+                  </List>
+                : <List disablePadding>
+                  <ListItem
+                    button
+                    key="plans-assignment"
+                    className={
+                      this.props.path === Menu.PLANNING_DASHBOARD 
+                        ? "sub-menu-selected"
+                        : "sub-menu"
+                    }
+                    onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_DASHBOARD)}
+                  >
+                    <ListItemIcon classes={{ root: "icon-root" }}>
+                      <img
+                        src={IcDbMenu}
+                        alt="assignment icon"
+                        className="item-icon"
+                      />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="Dashboard"
+                      classes={{ primary: "item-text", root: "item-text" }}
                     />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Dashboard"
-                    classes={{ primary: "item-text", root: "item-text" }}
-                  />
-                </ListItem>
-                <ListItem
-                  button
-                  key="jobs-report"
-                  className={
-                    this.props.path === Menu.PLANNING_APPROVAL || this.props.path === Menu.PLANNING_TRACKING_HISTORY || this.props.path === Menu.PLANNING_DETAILS_STATUS || this.props.path === Menu.PLANNING_DETAILS || this.props.path === Menu.PLANNING_ALL_NOTIF
-                      ? "sub-menu-selected"
-                      : "sub-menu"
-                  }
-                  onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_APPROVAL)}
-                >
-                  <ListItemIcon classes={{ root: "icon-root" }}>
-                    <img
-                      src={IcApproval}
-                      alt="assignment icon"
-                      className="item-icon"
+                  </ListItem>
+                  <ListItem
+                    button
+                    key="jobs-report"
+                    className={
+                      this.props.path === Menu.PLANNING_APPROVAL || this.props.path === Menu.PLANNING_TRACKING_HISTORY || this.props.path === Menu.PLANNING_DETAILS_STATUS || this.props.path === Menu.PLANNING_DETAILS || this.props.path === Menu.PLANNING_ALL_NOTIF
+                        ? "sub-menu-selected"
+                        : "sub-menu"
+                    }
+                    onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_APPROVAL)}
+                  >
+                    <ListItemIcon classes={{ root: "icon-root" }}>
+                      <img
+                        src={IcApproval}
+                        alt="assignment icon"
+                        className="item-icon"
+                      />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="Approval"
+                      classes={{ primary: "item-text", root: "item-text" }}
                     />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Approval"
-                    classes={{ primary: "item-text", root: "item-text" }}
-                  />
-                </ListItem>
-                <ListItem
-                  button
-                  key="jobs-report"
-                  className={
-                    this.props.path === Menu.PLANNING_DETAILS_SITE
-                      ? "sub-menu-selected"
-                      : "sub-menu"
-                  }
-                  onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_DETAILS_SITE)}
-                >
-                  <ListItemIcon classes={{ root: "icon-root" }}>
-                    <img
-                      src={AssignmentIcon}
-                      alt="assignment icon"
-                      className="item-icon"
+                  </ListItem>
+                  <ListItem
+                    button
+                    key="jobs-report"
+                    className={
+                      this.props.path === Menu.PLANNING_DETAILS_SITE
+                        ? "sub-menu-selected"
+                        : "sub-menu"
+                    }
+                    onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_DETAILS_SITE)}
+                  >
+                    <ListItemIcon classes={{ root: "icon-root" }}>
+                      <img
+                        src={AssignmentIcon}
+                        alt="assignment icon"
+                        className="item-icon"
+                      />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="Detail"
+                      classes={{ primary: "item-text", root: "item-text" }}
                     />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Detail"
-                    classes={{ primary: "item-text", root: "item-text" }}
-                  />
-                </ListItem>
-              </List>
+                  </ListItem>
+                </List>
+              }
             </Collapse>
             {/* Production */}
             <ListItem

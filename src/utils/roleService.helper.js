@@ -1,5 +1,5 @@
 import jwtDecode from 'jwt-decode';
-import { clientIdData } from './userLocalService';
+import { clientIdData } from './userLocalService.helper';
 
 export default class roleService {
   constructor() {
