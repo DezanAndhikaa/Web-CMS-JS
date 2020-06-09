@@ -5,7 +5,7 @@ const INITIAL_DATA = {
 
 // For get data information from PCAR Login
 export const clientIdData = () => {
-  const clientId = localStorage.getItem(process.env.REACT_APP_CLIENT_ID);
+  const clientId = localStorage.getItem(process.env.REACT_APP_X_IBM_CLIENT_ID);
 
   if (clientId) {
     return {

@@ -117,6 +117,7 @@ class SideMenuComponent extends React.Component {
               timeout="auto"
               unmountOnExit
             >
+              {console.log('role ke: ', Number(RoleUser.role()))}
               {Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 
                 ? <List disablePadding>
                     <ListItem

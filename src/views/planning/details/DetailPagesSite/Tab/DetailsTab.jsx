@@ -13,8 +13,10 @@ import {
     SelectUnitModelFilterAction, 
     SelectComponentFilterAction } 
     from '../../DetailPages-action';
-    import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+import roleService from "../../../../../utils/roleService.helper";
 
+const RoleUser = new roleService();
 function TabContainer({ children, dir }) {
   return (
     <Typography component="div" dir={dir}>
@@ -339,18 +341,28 @@ class DetailsTab extends React.Component {
               value={this.state.value}
               onChange={this.handleChange}
               indicatorColor="primary" >
-              <Tab 
-                centered={true}
-                onClick={() => this.props.clearSelectedSalesPlans()} 
-                classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-                label= {this.renderTotalSales()} 
-              />
-              <Tab 
-                centered={true}
-                onClick={() => this.props.clearSelectedServicePlans()} 
-                classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-                label= {this.renderTotalService()}
-              />
+              {Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4
+                ? <Tab 
+                  centered={true}
+                  onClick={() => this.props.clearSelectedServicePlans()} 
+                  classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+                  label= {this.renderTotalService()}
+                  />
+                : <>
+                  <Tab 
+                    centered={true}
+                    onClick={() => this.props.clearSelectedSalesPlans()} 
+                    classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+                    label= {this.renderTotalSales()} 
+                  />
+                  <Tab 
+                    centered={true}
+                    onClick={() => this.props.clearSelectedServicePlans()} 
+                    classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+                    label= {this.renderTotalService()}
+                  />
+                </>
+              }
             </Tabs>
           </AppBar>
           {value === 0 && <TabContainer dir={theme.direction} >
