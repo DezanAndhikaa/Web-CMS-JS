@@ -523,7 +523,8 @@ componentDidUpdate = (prevProps) => {
         <>
           <FilterbyDataAction 
             {...this.props}
-            titles="Status"
+            titles= "Status"
+            idStatus= "DetailSite"
           />
         </>
       );
@@ -533,7 +534,8 @@ componentDidUpdate = (prevProps) => {
         <>
           <FilterbyDataAction 
             {...this.props}
-            titles="Status"
+            titles= "Status"
+            idStatus= "DetailSite"
           />
         </>
       );

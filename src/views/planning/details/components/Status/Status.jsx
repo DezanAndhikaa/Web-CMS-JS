@@ -2040,9 +2040,14 @@ export default class Status extends React.PureComponent {
 		return(
 			<main className="content" >
 				<div className="head-containers">
-					<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
-						Approval
-					</Button>
+					{this.props.idStatus === "DetailSite" ?
+						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_SITE) }>
+							Detail
+						</Button> :
+						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
+							Approval
+						</Button>
+					}
 					<div className="notif_button">
 						<NotifButton
 							{...this.props}

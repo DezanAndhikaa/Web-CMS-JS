@@ -66,37 +66,16 @@ class FilterbyDataAction extends React.Component {
 
   renderList(){
     return(
-      <Paper className="list-items-fbdt">
-      <MenuList>
-        <MenuItem>
-          <Typography className="list-item-fbdt" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales')}>Sales Order</Typography>
-        </MenuItem>
-        <MenuItem>
-          <Typography className="list-item-fbdt" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
-        </MenuItem>
-      </MenuList>
-    </Paper>
-    )
-  }
-
-  renderListNotif(){
-    return(
-      <Paper className="list-items-fbdt">
-      <MenuList>
-        <MenuItem>
-          <Typography className="list-item-fbdt" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales')}>Sales Order</Typography>
-        </MenuItem>
-        <MenuItem>
-          <Typography className="list-item-fbdt" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
-        </MenuItem>
-        <MenuItem>
-          <Typography className="list-item-fbdt" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
-        </MenuItem>
-        <MenuItem>
-          <Typography className="list-item-fbdt" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
-        </MenuItem>
-      </MenuList>
-    </Paper>
+      <Paper className={this.props.idStatus === "DetailSite" ? "list-status-site" : "list-status" }>
+        <MenuList>
+          <MenuItem>
+            <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales')}>Sales Order</Typography>
+          </MenuItem>
+          <MenuItem>
+            <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
+          </MenuItem>
+        </MenuList>
+      </Paper>
     )
   }
 
@@ -115,24 +94,6 @@ class FilterbyDataAction extends React.Component {
         </div>
           { 
             this.state.displayMenu && this.renderList()  
-          }
-        </div>
-      );
-    }
-    else if(this.props.titles === "Notif"){
-      return (
-        <div className="dropdown">
-          <div className="dropdown-button" onClick={this.showDropdownMenu}>
-            <div className="dropdown-selected-item">
-              <div className="tracking-history">
-                <Badges badgeContent={57} color="secondary" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
-                  <img src={IconNotif} className="icon-history" alt="" /> <span className="label-history">Notification</span>
-                </Badges>
-              </div>
-            </div>
-          </div>
-          { 
-            this.state.displayMenu && this.renderListNotif()  
           }
         </div>
       );

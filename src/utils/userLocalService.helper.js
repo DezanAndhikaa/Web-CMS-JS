@@ -1,3 +1,5 @@
+import { StorageKey } from '../constants';
+
 const INITIAL_DATA = {
   // You can put here data from localStorage like name, profile etc
   accessToken: null,
@@ -14,6 +16,18 @@ export const clientIdData = () => {
     };
   }
   return { ...INITIAL_DATA };
+};
+
+export const userIdData = () => {
+  const userData = localStorage.getItem(StorageKey.USER_DATA);
+  const userDataObject = JSON.parse(userData);
+  if (userData) {
+    return {
+      ...INITIAL_DATA,
+      accessToken: userDataObject.tokenResponse.accessToken
+    }
+  }
+	return { ...INITIAL_DATA };
 };
 
 // For get data information from Portal Login

@@ -1,5 +1,5 @@
 import jwtDecode from 'jwt-decode';
-import { clientIdData } from './userLocalService.helper';
+import { userIdData } from './userLocalService.helper';
 
 export default class roleService {
   constructor() {
@@ -8,7 +8,7 @@ export default class roleService {
 
   role = () => {
     try {
-      this.jwtDecode = jwtDecode(clientIdData().accessToken);
+      this.jwtDecode = jwtDecode(userIdData().accessToken);
       const role_name = this.jwtDecode.role_name;
       let role = null;
       if ((Array.isArray(role_name) && role_name.includes('OBD')) || role_name === 'OBD') {
