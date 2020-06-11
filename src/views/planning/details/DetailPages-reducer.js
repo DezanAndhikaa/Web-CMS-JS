@@ -599,7 +599,6 @@ export function salesRevisedParameterReducer(state = initialSalesParameter, acti
 
 export function filterLifetimeReducer(state = intitialFiltersParameter, action) {
 	if (action.type === LifetimeFilterAction)
-
 		state = { ...state, Filter: [{ Field: 'LifeTimeComponent', Operator: 'gte', Value: action.payload, Logic: 'and' }, { Field: 'LifeTimeComponent', Operator: 'lte', Value: action.payload2, Logic: 'and' }] };
 
 	return state;
@@ -607,13 +606,7 @@ export function filterLifetimeReducer(state = intitialFiltersParameter, action) 
 
 export function filterDateReducer(state = initialFilterParameter, action) {
 	if (action.type === DateFilterAction)
-		for (let i = 0; i < 2; i++) {
-			if (i === 0) {
-				state = { ...state, PageSize: action.page, Filter: [...state.Filter, { Field: 'PlanExecutionDate', Operator: 'gte', Value: action.payload, Logic: 'and' }] };
-			} else if (i === 1) {
-				state = { ...state, Filter: [...state.Filter, { Field: 'PlanExecutionDate', Operator: 'lte', Value: action.payload2, Logic: 'and' }] };
-			}
-		}
+		state = { ...state, Filter: [{ Field: 'PlanExecutionDate', Operator: 'gte', Value: action.payload, Logic: 'and' }, { Field: 'PlanExecutionDate', Operator: 'lte', Value: action.payload2, Logic: 'and' }] };
 	return state;
 }
 
