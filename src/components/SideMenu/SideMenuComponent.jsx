@@ -117,7 +117,7 @@ class SideMenuComponent extends React.Component {
               timeout="auto"
               unmountOnExit
             >
-              {Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 
+              {Number(RoleUser.role()) === 1 
                 ? <List disablePadding>
                     <ListItem
                       button
@@ -138,6 +138,28 @@ class SideMenuComponent extends React.Component {
                       </ListItemIcon>
                       <ListItemText
                         primary="Dashboard"
+                        classes={{ primary: "item-text", root: "item-text" }}
+                      />
+                    </ListItem>
+                    <ListItem
+                      button
+                      key="jobs-report"
+                      className={
+                        this.props.path === Menu.PLANNING_APPROVAL || this.props.path === Menu.PLANNING_TRACKING_HISTORY || this.props.path === Menu.PLANNING_DETAILS_STATUS || this.props.path === Menu.PLANNING_DETAILS || this.props.path === Menu.PLANNING_ALL_NOTIF
+                          ? "sub-menu-selected"
+                          : "sub-menu"
+                      }
+                      onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_APPROVAL)}
+                    >
+                      <ListItemIcon classes={{ root: "icon-root" }}>
+                        <img
+                          src={IcApproval}
+                          alt="assignment icon"
+                          className="item-icon"
+                        />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary="Approval"
                         classes={{ primary: "item-text", root: "item-text" }}
                       />
                     </ListItem>
@@ -184,28 +206,6 @@ class SideMenuComponent extends React.Component {
                     </ListItemIcon>
                     <ListItemText
                       primary="Dashboard"
-                      classes={{ primary: "item-text", root: "item-text" }}
-                    />
-                  </ListItem>
-                  <ListItem
-                    button
-                    key="jobs-report"
-                    className={
-                      this.props.path === Menu.PLANNING_APPROVAL || this.props.path === Menu.PLANNING_TRACKING_HISTORY || this.props.path === Menu.PLANNING_DETAILS_STATUS || this.props.path === Menu.PLANNING_DETAILS || this.props.path === Menu.PLANNING_ALL_NOTIF
-                        ? "sub-menu-selected"
-                        : "sub-menu"
-                    }
-                    onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_APPROVAL)}
-                  >
-                    <ListItemIcon classes={{ root: "icon-root" }}>
-                      <img
-                        src={IcApproval}
-                        alt="assignment icon"
-                        className="item-icon"
-                      />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary="Approval"
                       classes={{ primary: "item-text", root: "item-text" }}
                     />
                   </ListItem>

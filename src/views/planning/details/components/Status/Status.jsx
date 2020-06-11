@@ -19,7 +19,9 @@ import { Spinner } from '../../../../../assets/icons';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from "moment";
 import DropDownList from '../../../../../components/DropdownList/DropDownList';
+import roleService from "../../../../../utils/roleService.helper";
 
+const RoleUser = new roleService();
 export default class Status extends React.PureComponent {
 	state ={
 		whatPageIsChoosed : '',
@@ -2040,12 +2042,12 @@ export default class Status extends React.PureComponent {
 		return(
 			<main className="content" >
 				<div className="head-containers">
-					{this.props.idStatus === "DetailSite" ?
-						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_SITE) }>
-							Detail
-						</Button> :
+					{Number(RoleUser.role()) === 1 ?
 						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
 							Approval
+						</Button> :
+						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_SITE) }>
+							Detail
 						</Button>
 					}
 					<div className="notif_button">
