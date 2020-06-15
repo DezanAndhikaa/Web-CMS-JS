@@ -10,7 +10,9 @@ import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import roleService from "../../utils/roleService.helper";
 
+const RoleUser = new roleService();
 const DotBadges = withStyles(theme => ({
 	badge: {
         top: -1,
@@ -67,14 +69,21 @@ class FilterbyDataAction extends React.Component {
   renderList(){
     return(
       <Paper className={this.props.idStatus === "DetailSite" ? "list-status-site" : "list-status" }>
-        <MenuList>
-          <MenuItem>
-            <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales')}>Sales Order</Typography>
-          </MenuItem>
-          <MenuItem>
-            <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
-          </MenuItem>
-        </MenuList>
+        {Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9
+        ? <MenuList>
+            <MenuItem>
+              <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
+            </MenuItem>
+          </MenuList>
+        : <MenuList>
+            <MenuItem>
+              <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales')}>Sales Order</Typography>
+            </MenuItem>
+            <MenuItem>
+              <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
+            </MenuItem>
+          </MenuList>
+        }
       </Paper>
     )
   }

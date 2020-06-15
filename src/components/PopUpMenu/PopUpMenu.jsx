@@ -31,6 +31,17 @@ export default class PopUpMenu extends React.PureComponent {
     });
   }
 
+  onClickLogOut(){
+    return(
+      <LogoutModal 
+        {...this.props}
+        open={this.state.isLogoutModalShown}
+        onYesClicked={this.handleLogout}
+        onNoClicked={() => this.setState({ isLogoutModalShown: false })}
+    />
+    )
+  }
+
   render() {
     return (
       <Modal className="pop-up" open={this.props.openModal} onClose={this.props.closeModal}>
@@ -52,14 +63,8 @@ export default class PopUpMenu extends React.PureComponent {
               <ListItemIcon>
                 <LogOut />
               </ListItemIcon>
-              <Typography variant="inherit" noWrap>Log Out</Typography>
+              <Typography variant="inherit" noWrap onClick={this.onClickLogOut()}>Log Out</Typography>
             </MenuItem>
-            <LogoutModal 
-              {...this.props}
-              open={this.state.isLogoutModalShown}
-              onYesClicked={this.handleLogout}
-              onNoClicked={() => this.setState({ isLogoutModalShown: false })}
-            />
           </MenuList>
         </Paper>
       </Modal>
