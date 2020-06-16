@@ -748,9 +748,9 @@ class ApprovalPages extends React.Component {
             whatTabsIsRendered={this.state.whichTabs}
             disabledButton={this.props.selectedServicePlans.length < 1}
             totalSelectedItems={this.props.selectedServicePlans.length}
-            handleSendtoEdit={this.handleSendtoEdit}
+            // handleSendtoEdit={this.handleSendtoEdit}
             selectedData={this.state.selectedData}
-            renderSakses={this.changeSuccess}
+            // renderSakses={this.changeSuccess}
           />
         </div>
       );

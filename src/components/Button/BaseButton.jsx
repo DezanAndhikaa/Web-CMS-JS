@@ -7,6 +7,7 @@ import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 import ApproveConfirmation from '../ApproveConfirmation/ApproveConfirmation';
 import UnapproveConfirmation from '../UnapproveConfirmation/UnapproveConfirmation'
 import { ApiRequestActionsStatus } from '../../core/RestClientHelpers';
+import { Menu } from '../../constants';
 
 class BaseButton extends React.Component{
     constructor(props){
@@ -16,6 +17,13 @@ class BaseButton extends React.Component{
             isShowApprovedModal: false,
             index:0
         }
+    }
+
+    handleClick = (menu, tab) => {
+        this.props.push({
+          pathname: menu,
+          whichTab: tab
+        });
     }
 
     isClicked = () => {
