@@ -151,9 +151,9 @@ class DetailsTab extends React.Component {
               <div className="revision-title">Revision List</div>}
             </div>
             <div className="plannings-list-detail">
-                <RevisedSalesOrderList
-                  {...this.props}
-                />
+              <RevisedSalesOrderList
+                {...this.props}
+              />
             </div>
             <div>
               {this.props.salesOrderRevised.Lists.length === 0 
@@ -443,50 +443,41 @@ class DetailsTab extends React.Component {
           </>
         : Number(RoleUser.role() === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7) ?
           <>
-          <div className="tab-container-site">
-            {this.props.renderSearch}
-            {this.props.renderNotif}
-            {this.props.renderFilterByDataAction}
-          </div>
-          <AppBar position="static" color="default" style={{boxShadow: "none"}}>
-            <Tabs
-              classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
-              value={this.state.value}
-              onChange={this.handleChange}
-              indicatorColor="primary" >
-              <Tab 
-                centered={true}
-                onClick={() => this.props.clearSelectedSalesPlans()} 
-                classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-                label= {this.renderTabSales()} 
-              />
-              <Tab 
-                centered={true}
-                onClick={() => this.props.clearSelectedServicePlans()} 
-                classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-                label= {this.renderTabService()}
-              />
-            </Tabs>
-          </AppBar>
-          {value === 0 && <TabContainer dir={theme.direction} >
-            <div>{this._renderRevisionList()}</div>
-          </TabContainer>}
-          <div className="site-container">
-            {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
-              this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderTotalData()}
-          </div>
-          <div className="filters-detail-site">
-            {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
-              this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
-          </div>
-          {value === 0 && <TabContainer dir={theme.direction} >
-            <div>{this._renderSalesOrderList()}</div>
-          </TabContainer>}
-          {value === 1 && <TabContainer dir={theme.direction} ><div>{this._renderServiceOrderList()}</div></TabContainer>}
-        </>
+            <div className="tab-container-site">
+              {this.props.renderNotif}
+              {this.props.renderFilterByDataAction}
+            </div>
+            <AppBar position="static" color="default" style={{boxShadow: "none"}}>
+              <Tabs
+                classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
+                value={this.state.value}
+                onChange={this.handleChange}
+                indicatorColor="primary" >
+                <Tab 
+                  centered={true}
+                  onClick={() => this.props.clearSelectedSalesPlans()} 
+                  classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+                  label= {this.renderTabSales()} 
+                />
+              </Tabs>
+            </AppBar>
+            {value === 0 && <TabContainer dir={theme.direction} >
+              <div>{this._renderRevisionList()}</div>
+            </TabContainer>}
+            <div className="site-container">
+              {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                this._renderTotalData()}
+            </div>
+            <div className="filters-detail-site">
+              {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                this._renderFilter()}
+            </div>
+            {value === 0 && <TabContainer dir={theme.direction} >
+              <div>{this._renderSalesOrderList()}</div>
+            </TabContainer>}
+          </>
         : <>
             <div className="tab-container-site">
-              {this.props.renderSearch}
               {this.props.renderNotif}
               {this.props.renderFilterByDataAction}
             </div>
