@@ -4,7 +4,7 @@ import LogOut from '@material-ui/icons/PowerSettingsNew';
 import Setting from '@material-ui/icons/BrightnessLow';
 import HistoryIcon from '@material-ui/icons/History';
 import { Menu, StorageKey } from '../../constants';
-import { ListItemIcon,MenuItem, MenuList, Modal, Paper, Typography } from '@material-ui/core';
+import { ListItemIcon, MenuItem, MenuList, Modal, Paper, Typography } from '@material-ui/core';
 import LogoutModal from '../../views/Logout/Logout';
 
 export default class PopUpMenu extends React.PureComponent {
@@ -12,7 +12,7 @@ export default class PopUpMenu extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      isLogoutModalShown: false
+      isLogoutModalShown: true
     };
   }
 
@@ -31,43 +31,58 @@ export default class PopUpMenu extends React.PureComponent {
     });
   }
 
-  onClickLogOut(){
-    return(
-      <LogoutModal 
+  onClickOpenModalLogout = e => {
+
+    this.setState({
+      isLogoutModalShown: true
+    })
+
+    console.log(this.state.isLogoutModalShown);
+  }
+
+  onClickLogOut() {
+    return (
+      <LogoutModal
         {...this.props}
         open={this.state.isLogoutModalShown}
         onYesClicked={this.handleLogout}
         onNoClicked={() => this.setState({ isLogoutModalShown: false })}
-    />
+      />
     )
   }
 
   render() {
     return (
-      <Modal className="pop-up" open={this.props.openModal} onClose={this.props.closeModal}>
+      <Modal className="pop-up" open={this.props.openModal}>
         <Paper>
           <MenuList>
             <MenuItem onClick={() => this.handleClick(Menu.PLANNING_TRACKING_HISTORY)}>
               <ListItemIcon>
-                <HistoryIcon/>
+                <HistoryIcon />
               </ListItemIcon>
               <Typography variant="inherit">Tracking History</Typography>
             </MenuItem>
             <MenuItem>
               <ListItemIcon>
-                <Setting/>
+                <Setting />
               </ListItemIcon>
               <Typography variant="inherit">Setting</Typography>
             </MenuItem>
-            <MenuItem>
+            <MenuItem onClick={this.onClickOpenModalLogout}>
               <ListItemIcon>
                 <LogOut />
               </ListItemIcon>
-              <Typography variant="inherit" noWrap onClick={this.onClickLogOut()}>Log Out</Typography>
+              <Typography variant="inherit" noWrap>Log Out</Typography>
+              <LogoutModal
+                {...this.props}
+                open={this.isLogoutModalShown}
+                onYesClicked={this.handleLogout}
+                onNoClicked={() => this.setState({ isLogoutModalShown: false })}
+              />
             </MenuItem>
           </MenuList>
         </Paper>
-      </Modal>
+      </ Modal>
     );
   }
 }

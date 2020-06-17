@@ -12,11 +12,11 @@ class NavBarComponent extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-		  displayMenu: false,
-		  isShowModal: false
+			displayMenu: false,
+			isShowModal: false
 		};
 	}
-	
+
 	showMenu = (event) => {
 		event.preventDefault();
 		this.setState({ displayMenu: true }, () => {
@@ -24,24 +24,24 @@ class NavBarComponent extends React.Component {
 		});
 	}
 
-	hideMenu = async() => {
+	hideMenu = async () => {
 		this.setState({ displayMenu: false }, () => {
-		  document.removeEventListener('click', this.hideDropdownMenu);
+			document.removeEventListener('click', this.hideDropdownMenu);
 		});
 	}
 
 	isClicked = () => {
-		this.setState({isShowModal: !this.state.isShowModal})
+		this.setState({ isShowModal: !this.state.isShowModal })
 	}
 
 	isClose = () => {
-        this.setState({isShowModal: !this.state.isShowModal})
+		this.setState({ isShowModal: !this.state.isShowModal })
 	}
-	
+
 	renderPopUpMenu() {
-		return(
-			<PopUpMenu 
-				{...this.props}				
+		return (
+			<PopUpMenu
+				{...this.props}
 				{...this.state}
 				openModal={this.state.isShowModal}
 				closemodal={this.isClose}
@@ -56,7 +56,7 @@ class NavBarComponent extends React.Component {
 				navBar = (
 					<AppBar position="fixed" className="app-bar">
 						<Toolbar variant="dense" className="toolbar">
-							<img src={UTLogoNew} alt="" className="logo-ut"/>
+							<img src={UTLogoNew} alt="" className="logo-ut" />
 							<div className="info-login">
 								<p>
 									{`Hi, ${this.props.userData.firstName} ${this.props.userData.lastName}`}

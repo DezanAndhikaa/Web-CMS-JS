@@ -23,9 +23,11 @@ import {
 	UpdateSalesSapParameterAction,
 	UpdateSalesParameterAction,
 	UpdateSalesRevisedParamAction,
+	UpdateSearchSalesRevisionAction,
 	ResetSelectedMechanicsAction,
 	SearchSalesAction,
 	SearchServiceAction,
+	SearchRevisedSalesOrder,
 	UpdateServiceApprovedParameterAction,
 	UpdateServiceDeletedParameterAction,
 	UpdateServiceSapParameterAction,
@@ -218,6 +220,8 @@ export function fetchPutLifetimeReducer(state = initialSalesState, action) {
 	}
 	return state;
 }
+
+// export function SearchRevisiedSalesOrder(state = searchSalesApprovedReducer)
 
 export function PutSAPIssueReducer(state = initialSalesState, action) {
 	if (action.type === PutSAPIssue) {
@@ -531,6 +535,11 @@ export function searchSalesApprovedReducer(state = initialSearchParameter, actio
 	return state;
 }
 
+export function searchRevisionSalesReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchSalesRevisionAction) return action.payload;
+	return state;
+}
+
 export function searchSalesDeletedReducer(state = initialSearchParameter, action) {
 	if (action.type === UpdateSearchSalesDeletedAction) return action.payload;
 	return state;
@@ -590,6 +599,7 @@ export function serviceSapParameterReducer(state = initialServiceParameter, acti
 	return state;
 }
 
+// Detail reducer reviced parameter reducer
 export function salesRevisedParameterReducer(state = initialSalesParameter, action) {
 	if (action.type === UpdateSalesRevisedParamAction)
 		return { ...state, dataFilter: action.payload };
@@ -928,7 +938,9 @@ const PlansReducers = combineReducers({
 	sortServiceBy: sortServiceByReducer,
 	salesSearch: searchSalesReducer,
 	serviceSearch: searchServiceReducer,
+	salesSearchRevision: searchRevisionSalesReducer,
 	searchSalesParameter: searchSalesParameterReducer,
+	searchSalesRevisionParameter: searchRevisionSalesReducer,
 	searchSalesApprovedParam: searchSalesApprovedReducer,
 	searchSalesDeletedParam: searchSalesDeletedReducer,
 	searchSalesSapParam: searchSalesSapReducer,
