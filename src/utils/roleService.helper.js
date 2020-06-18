@@ -19,7 +19,7 @@ export default class roleService {
         role = 3;
       }else if ((Array.isArray(role_name) && role_name.includes('SPV FMC')) || role_name === 'SPV FMC') {//service
         role = 4;
-      }else if ((Array.isArray(role_name) && role_name.includes('SPV NON FMC')) || role_name === 'SPV NON FMC') {//sales site
+      }else if ((Array.isArray(role_name) && role_name.includes('SPV NON FMC')) || role_name === 'SPV NON FMC') {//sales site, view only
         role = 5;
       }else if ((Array.isArray(role_name) && role_name.includes('ASC')) || role_name === 'ASC') {//site sales
         role = 6;
@@ -31,6 +31,10 @@ export default class roleService {
         role = 9;
       }else if ((Array.isArray(role_name) && role_name.includes('PPC NON FMC')) || role_name === 'PPC NON FMC') { //sales site (view only)
         role = 10;
+      }else if ((Array.isArray(role_name) && role_name.includes('SDH FMC')) || role_name === 'SDH FMC') { //service
+        role = 11;
+      }else if ((Array.isArray(role_name) && role_name.includes('SDH NON FMC')) || role_name === 'SDH NON FMC') { //sales site (view only)
+        role = 12;
       }
 
       return role;

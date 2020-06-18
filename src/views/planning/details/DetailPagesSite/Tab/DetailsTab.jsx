@@ -191,14 +191,14 @@ class DetailsTab extends React.Component {
   }
 
   _dataFilterCustomer(){
-    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9){
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
       if(this.state.value === 0){
         let arr = this.props.serviceOrderList.Customers;
         arr.splice(0, 0, "All Customer")
         return arr
       }
     }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
-      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10){
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
       if(this.state.value === 0){
         let arr = this.props.salesOrderList.Customers;
         arr.splice(0, 0, "All Customer")
@@ -219,14 +219,14 @@ class DetailsTab extends React.Component {
   }
 
   _dataFilterSite(){
-    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9){
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
       if(this.state.value === 0){
         let arr = this.props.serviceOrderList.Sites;
         arr.splice(0, 0, "All Site")
         return arr
       }
     }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
-      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10){
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
       if(this.state.value === 0){
         let arr = this.props.salesOrderList.Sites;
         arr.splice(0, 0, "All Site")
@@ -247,14 +247,14 @@ class DetailsTab extends React.Component {
   }
 
   _dataFilterUnitModel(){
-    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9){
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
       if(this.state.value === 0){
         let arr = this.props.serviceOrderList.UnitModels;
         arr.splice(0, 0, "All Unit Model")
         return arr
       }
     }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
-      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10){
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
       if(this.state.value === 0){
         let arr = this.props.salesOrderList.UnitModels;
         arr.splice(0, 0, "All Unit Model")
@@ -275,14 +275,14 @@ class DetailsTab extends React.Component {
   }
 
   _dataFilterComponentDescription(){
-    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9){
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
       if(this.state.value === 0){
         let arr = this.props.serviceOrderList.ComponentDescriptions;
         arr.splice(0, 0, "All Component Description")
         return arr
       }
     }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
-      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10){
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
       if(this.state.value === 0){
         let arr = this.props.salesOrderList.ComponentDescriptions;
         arr.splice(0, 0, "All Component Description")
@@ -373,7 +373,7 @@ class DetailsTab extends React.Component {
   }
 
   _renderTotalData(){
-    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9){
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
       return(
         <div className="total-data-container">
           <div className="text-total">
@@ -385,7 +385,7 @@ class DetailsTab extends React.Component {
         </div>
       )
     }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
-      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10){
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
       return(
         <div className="total-data-container">
           <div className="text-total">
@@ -429,7 +429,7 @@ class DetailsTab extends React.Component {
     const { tab, value } = this.state;
     return (
       <div className="root">
-        {Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9
+        {Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
           ? <> 
             <div className="tab-container-site">
               {this.props.renderNotif}
@@ -494,7 +494,7 @@ class DetailsTab extends React.Component {
               <div>{this._renderSalesOrderList()}</div>
             </TabContainer>}
           </>
-        : Number(RoleUser.role() === 8 || Number(RoleUser.role()) === 10) ?
+        : Number(RoleUser.role() === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12) ?
           <>
             <div className="tab-container-site">
               {this.props.renderNotif}
@@ -551,21 +551,39 @@ class DetailsTab extends React.Component {
                 />
               </Tabs>
             </AppBar>
-            {value === 0 && <TabContainer dir={theme.direction} >
-              <div>{this._renderRevisionList()}</div>
-            </TabContainer>}
-            <div className="site-container">
-              {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
-                this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderTotalData()}
-            </div>
-            <div className="filters-detail-site">
-              {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
-                this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
-            </div>
-            {value === 0 && <TabContainer dir={theme.direction} >
-              <div>{this._renderSalesOrderList()}</div>
-            </TabContainer>}
-            {value === 1 && <TabContainer dir={theme.direction} ><div>{this._renderServiceOrderList()}</div></TabContainer>}
+            {Number(RoleUser.role()) === 3 ?
+              <>
+                <div className="site-container">
+                  {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                    this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderTotalData()}
+                </div>
+                <div className="filters-detail-site">
+                  {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                    this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
+                </div>
+                {value === 0 && <TabContainer dir={theme.direction} >
+                  <div>{this._renderSalesOrderList()}</div>
+                </TabContainer>}
+                {value === 1 && <TabContainer dir={theme.direction} ><div>{this._renderServiceOrderList()}</div></TabContainer>}
+              </>
+            : <>
+                {value === 0 && <TabContainer dir={theme.direction} >
+                  <div>{this._renderRevisionList()}</div>
+                </TabContainer>}
+                <div className="site-container">
+                  {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                    this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderTotalData()}
+                </div>
+                <div className="filters-detail-site">
+                  {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                    this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
+                </div>
+                {value === 0 && <TabContainer dir={theme.direction} >
+                  <div>{this._renderSalesOrderList()}</div>
+                </TabContainer>}
+                {value === 1 && <TabContainer dir={theme.direction} ><div>{this._renderServiceOrderList()}</div></TabContainer>}
+              </>
+            }
           </>
         }
       </div>

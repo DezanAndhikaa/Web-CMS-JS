@@ -53,7 +53,7 @@ componentDidUpdate = (prevProps) => {
   }
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
-    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9){
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
       console.log('tab apa: ', this.props.indexFilterParameter.indexTabParameter)
       if(this.props.indexFilterParameter.indexTabParameter === 0){
         this.props.updateServiceParameter({
@@ -61,7 +61,7 @@ componentDidUpdate = (prevProps) => {
         })
       }
     }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
-      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10){
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
       if(this.props.indexFilterParameter.indexTabParameter === 0){
         this.props.updateSalesParameter({
           ...prevProps.salesParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
@@ -113,14 +113,14 @@ componentDidUpdate = (prevProps) => {
   }
 
   //search per component
-  if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9){
+  if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
     if(this.state.whichTabs && prevProps.searchComp !== this.props.searchComp){
       this.props.updateServiceParameter({
         ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
       });
     }
   }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
-    Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10){
+    Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
     if(this.state.whichTabs && prevProps.searchComp !== this.props.searchComp){
       if(this.props.searchComp[0].Value === ""){
         this.props.updateSalesParameter({
@@ -349,7 +349,7 @@ componentDidUpdate = (prevProps) => {
     }if (pageValue === 0) {
       this.setState({whichTabs : false})
     }
-    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9){
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
       if (this.state.whichTabs === true) {
         const web = this.props.displayMode === 'web';
         // const nextSales = this.props.serviceOrderList.NextPage;
@@ -374,7 +374,7 @@ componentDidUpdate = (prevProps) => {
         )
       }
     }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
-      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10){
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
       if (this.state.whichTabs === true) {
         const web = this.props.displayMode === 'web';
         // const nextSales = this.props.salesOrderList.NextPage;
@@ -493,40 +493,27 @@ componentDidUpdate = (prevProps) => {
 
   //SAAT MENGKLIK SALES ORDER TAB
   onClickSalesOrder = async() =>{
-    if (Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10){
-      if (this.props.location.whichTab === 'lifetime') {
-        await this.props.fetchSalesOrder({
-          ...this.props.salesParameter.dataFilter,
-          Filter:
-            [...this.props.salesParameter.dataFilter.Filter, {
-              Field: 'LifeTimeComponent',
-              Operator: "eq",
-              Value: '-',
-              Logic: "AND"
-            }]
-        }, this.props.token);
-      } else {
-        await this.props.fetchSalesOrder({
-          ...this.props.salesParameter.dataFilter,
-          Filter:
-            [...this.props.salesParameter.dataFilter.Filter, {
-              Field: 'LifeTimeComponent',
-              Operator: "neq",
-              Value: '-',
-              Logic: "AND"
-            }, {
-              Field: 'SAPIssueMessage',
-              Operator: 'eq',
-              Value: '-',
-              Logic: 'AND'
-            }, {
-              Field: 'IsRevised',
-              Operator: 'eq',
-              Value: 'false',
-              Logic: 'AND'
-            }]
-        }, this.props.token);
-      }
+    if (Number(RoleUser.role()) === 3 || Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
+      await this.props.fetchSalesOrder({
+        ...this.props.salesParameter.dataFilter,
+        Filter:
+          [...this.props.salesParameter.dataFilter.Filter, {
+            Field: 'LifeTimeComponent',
+            Operator: "neq",
+            Value: '-',
+            Logic: "AND"
+          }, {
+            Field: 'SAPIssueMessage',
+            Operator: 'eq',
+            Value: '-',
+            Logic: 'AND'
+          }, {
+            Field: 'IsRevised',
+            Operator: 'eq',
+            Value: 'false',
+            Logic: 'AND'
+          }]
+      }, this.props.token);
     }else{
       await this.props.fetchSalesOrder({
         ...this.props.salesParameter.dataFilter, 
@@ -576,13 +563,13 @@ componentDidUpdate = (prevProps) => {
   }
 
   handleClickShowPerPage = (value) =>{
-    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9){
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
       if (this.state.whichTabs === true) {
         this.props.clearSelectedServicePlans();
         this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value})
       }
     }else if(Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
-      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10){
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
       if (this.state.whichTabs === true) {
         this.props.clearSelectedSalesPlans();
         this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value})
@@ -625,14 +612,14 @@ componentDidUpdate = (prevProps) => {
 
   handleSearch=(value)=>{
     this.setState({ searchVal : value})
-    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9){
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
       if (this.state.whichTabs === true) {
         setTimeout(() => {
           this.props.onSearchService(this.state.searchVal)
         }, 1000);
       }
     }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
-      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10){
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
       if (this.state.whichTabs === true) {
         setTimeout(() => {
           this.props.onSearchSales(this.state.searchVal)
@@ -751,7 +738,7 @@ componentDidUpdate = (prevProps) => {
               {this._renderTabs()}
           </div>
           <div></div>
-          {Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 
+          {Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
           ? <>
               {this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
                 <div className="bottom-row-detail-site">
@@ -760,7 +747,7 @@ componentDidUpdate = (prevProps) => {
               }
             </>
           : Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
-            Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10
+            Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12
           ? <>
               {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
                 <div className="bottom-row-detail-site">
