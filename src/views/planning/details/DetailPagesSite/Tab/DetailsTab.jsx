@@ -459,43 +459,43 @@ class DetailsTab extends React.Component {
               <div>{this._renderServiceOrderList()}</div>
             </TabContainer>}
           </>
-          : Number(RoleUser.role() === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7) ?
-          <>
-            <div className="tab-container-site">
-              {this.props.renderNotif}
-              {this.props.renderFilterByDataAction}
-            </div>
-            <AppBar position="static" color="default" style={{boxShadow: "none"}}>
-              <Tabs
-                classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
-                value={this.state.value}
-                onChange={this.handleChange}
-                indicatorColor="primary" >
-                <Tab 
-                  centered={true}
-                  onClick={() => this.props.clearSelectedSalesPlans()} 
-                  classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-                  label= {this.renderTabSales()} 
-                />
-              </Tabs>
-            </AppBar>
-            {value === 0 && <TabContainer dir={theme.direction} >
-              <div>{this._renderRevisionList()}</div>
-            </TabContainer>}
-            <div className="site-container">
-              {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
-                this._renderTotalData()}
-            </div>
-            <div className="filters-detail-site">
-              {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
-                this._renderFilter()}
-            </div>
-            {value === 0 && <TabContainer dir={theme.direction} >
-              <div>{this._renderSalesOrderList()}</div>
-            </TabContainer>}
-          </>
-        : Number(RoleUser.role() === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12) ?
-          <>
+          : Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ?
+            <>
+              <div className="tab-container-site">
+                {this.props.renderNotif}
+                {this.props.renderFilterByDataAction}
+              </div>
+              <AppBar position="static" color="default" style={{boxShadow: "none"}}>
+                <Tabs
+                  classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                  indicatorColor="primary" >
+                  <Tab 
+                    centered={true}
+                    onClick={() => this.props.clearSelectedSalesPlans()} 
+                    classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+                    label= {this.renderTabSales()} 
+                  />
+                </Tabs>
+              </AppBar>
+              {value === 0 && <TabContainer dir={theme.direction} >
+                <div>{this._renderRevisionList()}</div>
+              </TabContainer>}
+              <div className="site-container">
+                {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                  this._renderTotalData()}
+              </div>
+              <div className="filters-detail-site">
+                {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                  this._renderFilter()}
+              </div>
+              {value === 0 && <TabContainer dir={theme.direction} >
+                <div>{this._renderSalesOrderList()}</div>
+              </TabContainer>}
+            </>
+          : Number(RoleUser.role()) === 5 || Number(RoleUser.role() === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12) ?
+            <>
             <div className="tab-container-site">
               {this.props.renderNotif}
               {this.props.renderFilterByDataAction}
