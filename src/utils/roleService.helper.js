@@ -25,7 +25,7 @@ export default class roleService {
         role = 6;
       }else if ((Array.isArray(role_name) && role_name.includes('COP')) || role_name === 'COP') {//site sales
         role = 7;
-      }else if ((Array.isArray(role_name) && role_name.includes('PDH')) || role_name === 'PDH') { //sales order (view only)
+      }else if ((Array.isArray(role_name) && role_name.includes('PDH')) || role_name === 'PDH') { //sales order
         role = 8;
       }else if ((Array.isArray(role_name) && role_name.includes('PPC FMC')) || role_name === 'PPC FMC') { //service
         role = 9;
