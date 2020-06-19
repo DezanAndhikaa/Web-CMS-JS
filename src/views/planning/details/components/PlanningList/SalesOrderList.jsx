@@ -88,7 +88,7 @@ export default class SalesOrderList extends React.PureComponent {
     return (
       <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow classes={{ root: 'table-row' }}>
-          {this.props.idSales === "Data Input" ? "" :
+          {this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly" ? "" :
             <TableCell padding="checkbox">
               {this.props.displaySalesCheckbox &&
                 <Checkbox
@@ -184,7 +184,7 @@ export default class SalesOrderList extends React.PureComponent {
   showTableBody(row, id) {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
-        {this.props.idSales === "Data Input" ? "" :
+        {this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly" ? "" :
           <TableCell padding="checkbox">
             {this.props.displaySalesCheckbox &&
               <Checkbox
@@ -296,6 +296,11 @@ export default class SalesOrderList extends React.PureComponent {
       && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) {
       return (
         this.props.idTab = "Input" ? <EmptyList idEmpty="Input" /> : ""
+      )
+    } else if (this.props.salesOrderList.Lists.length === 0
+      && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) {
+      return (
+        <EmptyList idEmpty="Sales" />
       )
     } else {
       return (
