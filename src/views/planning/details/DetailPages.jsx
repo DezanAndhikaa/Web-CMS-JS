@@ -269,7 +269,7 @@ class DetailPages extends React.Component {
           [...this.props.salesParameter.dataFilter.Filter, {
             Field: 'LifeTimeComponent',
             Operator: "eq",
-            Value: '-',
+            Value: 0,
             Logic: "AND"
           }]
       }, this.props.token);
@@ -280,7 +280,7 @@ class DetailPages extends React.Component {
           [...this.props.salesParameter.dataFilter.Filter, {
             Field: 'LifeTimeComponent',
             Operator: "neq",
-            Value: '-',
+            Value: 0,
             Logic: "AND"
           }]
       }, this.props.token);
