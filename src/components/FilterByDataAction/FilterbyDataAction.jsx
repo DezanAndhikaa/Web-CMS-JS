@@ -69,7 +69,7 @@ class FilterbyDataAction extends React.Component {
   renderList(){
     return(
       <Paper className={this.props.idStatus === "DetailSite" ? "list-status-site" : "list-status" }>
-        {Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9
+        {Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
         ? <MenuList>
             <MenuItem>
               <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
