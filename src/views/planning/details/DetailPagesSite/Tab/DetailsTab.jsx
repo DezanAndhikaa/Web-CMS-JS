@@ -129,7 +129,7 @@ class DetailsTab extends React.Component {
     return(
       <>
       <div className={this.props.salesOrderList.Lists.length === 0 
-          && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "list-detail-empty" :"plannings-list-detail"}>
+          && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "list-detail-empty" : "plannings-list-detail"}>
         <SalesOrderList 
           {...this.props}
           idSales= "Data Input"

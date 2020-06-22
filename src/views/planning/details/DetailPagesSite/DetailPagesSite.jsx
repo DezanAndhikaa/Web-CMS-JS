@@ -490,7 +490,6 @@ componentDidUpdate = (prevProps) => {
   onClickServiceOrder = async() => {
    await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
   }
-
   //SAAT MENGKLIK SALES ORDER TAB
   onClickSalesOrder = async() =>{
     if (Number(RoleUser.role()) === 3 || Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
@@ -702,6 +701,7 @@ componentDidUpdate = (prevProps) => {
 
   //KOMPONEN UNTUK RENDER PAGE SALES ORDER DAN SERVICE ORDER
   _renderTabs(){
+    console.log('role ke: ', Number(RoleUser.role()))
     return (
       <>
         <DetailsTab
