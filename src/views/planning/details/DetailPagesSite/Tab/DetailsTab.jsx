@@ -204,7 +204,7 @@ class DetailsTab extends React.Component {
         arr.splice(0, 0, "All Customer")
         return arr
       }
-    }else if (Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+    }else{
       if(this.state.value === 0){
         let arr = this.props.salesOrderList.Customers;
         arr.splice(0, 0, "All Customer")
@@ -232,7 +232,7 @@ class DetailsTab extends React.Component {
         arr.splice(0, 0, "All Site")
         return arr
       }
-    }else if (Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+    }else{
       if(this.state.value === 0){
         let arr = this.props.salesOrderList.Sites;
         arr.splice(0, 0, "All Site")
@@ -260,7 +260,7 @@ class DetailsTab extends React.Component {
         arr.splice(0, 0, "All Unit Model")
         return arr
       }
-    }else if (Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+    }else{
       if(this.state.value === 0){
         let arr = this.props.salesOrderList.UnitModels;
         arr.splice(0, 0, "All Unit Model")
@@ -288,7 +288,7 @@ class DetailsTab extends React.Component {
         arr.splice(0, 0, "All Component Description")
         return arr
       }
-    }else if (Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+    }else{
       if(this.state.value === 0){
         let arr = this.props.salesOrderList.ComponentDescriptions;
         arr.splice(0, 0, "All Component Description")
@@ -396,7 +396,7 @@ class DetailsTab extends React.Component {
           </div>
         </div>
       )
-    }else if (Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+    }else{
       if (this.state.value === 0) {
         return(
           <div className="total-data-container">
@@ -553,12 +553,12 @@ class DetailsTab extends React.Component {
               </Tabs>
             </AppBar>
             <div className="site-container">
-              {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
-                this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderTotalData()}
+              {value === 0 && this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                value === 1 && this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderTotalData()}
             </div>
             <div className="filters-detail-site">
-              {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
-                this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
+              {value === 0 && this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                value === 1 && this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
             </div>
             {value === 0 && <TabContainer dir={theme.direction} >
               <div>{this._renderSalesOrderViewOnly()}</div>

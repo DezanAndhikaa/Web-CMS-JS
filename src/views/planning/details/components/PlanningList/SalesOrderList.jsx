@@ -272,7 +272,7 @@ export default class SalesOrderList extends React.PureComponent {
   }
 
   render() {
-    if (this.props.idSales === "Data Input") {
+    if (this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly") {
       return (
         <>
           <Table classes={{ root: 'table' }} className="table">

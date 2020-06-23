@@ -67,7 +67,7 @@ componentDidUpdate = (prevProps) => {
           ...prevProps.salesParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
         })
       }
-    }else if (Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+    }else{
       if(this.props.indexFilterParameter.indexTabParameter === 0){
         this.props.updateSalesParameter({
           ...prevProps.salesParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
@@ -132,7 +132,7 @@ componentDidUpdate = (prevProps) => {
         });
       }
     }
-  }else if (Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+  }else{
     if(this.state.whichTabs){
       if(prevProps.searchComp !== this.props.searchComp){
         if(this.props.searchComp[0].Value === ""){
@@ -573,7 +573,7 @@ componentDidUpdate = (prevProps) => {
         this.props.clearSelectedSalesPlans();
         this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value})
       }
-    }else if (Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+    }else{
       if (this.state.whichTabs === true) {
         this.props.clearSelectedSalesPlans();
         this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value})
@@ -624,7 +624,7 @@ componentDidUpdate = (prevProps) => {
           this.props.onSearchSales(this.state.searchVal)
         }, 1000);
       }
-    }else if (Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+    }else{
       if (this.state.whichTabs === true) {
         setTimeout(() => {
           this.props.onSearchSales(this.state.searchVal)
@@ -755,8 +755,7 @@ componentDidUpdate = (prevProps) => {
                 </div>
               }
             </>
-          : Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3
-          ? <>
+          : <>
               {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
                 this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
                 <div className="bottom-row-detail-site">
@@ -764,7 +763,6 @@ componentDidUpdate = (prevProps) => {
                 </div>
               }
             </>
-          : ""
         }
       </main>
     )
