@@ -13,7 +13,7 @@ export default class roleService {
       let role = null;
       if ((Array.isArray(role_name) && role_name.includes('OBD')) || role_name === 'OBD') {
         role = 1;
-      }else if ((Array.isArray(role_name) && role_name.includes('FMC HO')) || role_name === 'FMC HO') { //service
+      }else if ((Array.isArray(role_name) && role_name.includes('FMC Headoffice')) || role_name === 'FMC Headoffice') { //service
         role = 2;
       }else if ((Array.isArray(role_name) && role_name.includes('SDH')) || role_name === 'SDH') { // sales dan service (view only)
         role = 3;

@@ -20,6 +20,7 @@ const routes = (
 			<Route exact path={Menu.LOGIN} component={LoginPage} />
 			<Route exact path={Menu.PLANNING_DETAILS} component={requireAuth(DetailPages)} />
 			<Route exact path={Menu.PLANNING_DETAILS_SITE} component={requireAuth(DetailPagesSite)} />
+			<Route exact path={Menu.PLANNING_APPROVAL_STATUS} component={requireAuth(Status)} />
 			<Route exact path={Menu.PLANNING_DETAILS_STATUS} component={requireAuth(Status)} />
 			<Route exact path={Menu.PLANNING_TRACKING_HISTORY} component={requireAuth(TrackingHistory)} />
 			<Route exact path={Menu.PLANNING_APPROVAL} component={requireAuth(ApprovalPages)} />
