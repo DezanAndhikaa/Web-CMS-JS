@@ -29,7 +29,7 @@ export default class roleService {
         role = 8;
       }else if ((Array.isArray(role_name) && role_name.includes('PPC FMC')) || role_name === 'PPC FMC') { //service
         role = 9;
-      }else if ((Array.isArray(role_name) && role_name.includes('PPC NON FMC')) || role_name === 'PPC NON FMC') { //sales site (view only)
+      }else if ((Array.isArray(role_name) && role_name.includes('PPC Non FMC')) || role_name === 'PPC Non FMC') { //sales site (view only)
         role = 10;
       }else if ((Array.isArray(role_name) && role_name.includes('SDH FMC')) || role_name === 'SDH FMC') { //service
         role = 11;
