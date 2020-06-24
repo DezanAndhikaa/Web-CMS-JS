@@ -19,7 +19,7 @@ export default class roleService {
         role = 3;
       }else if ((Array.isArray(role_name) && role_name.includes('SPV FMC')) || role_name === 'SPV FMC') {//service
         role = 4;
-      }else if ((Array.isArray(role_name) && role_name.includes('SPV NON FMC')) || role_name === 'SPV NON FMC') {//sales site, view only
+      }else if ((Array.isArray(role_name) && role_name.includes('SPV Non FMC')) || role_name === 'SPV Non FMC') {//sales site, view only
         role = 5;
       }else if ((Array.isArray(role_name) && role_name.includes('ASC')) || role_name === 'ASC') {//site sales
         role = 6;

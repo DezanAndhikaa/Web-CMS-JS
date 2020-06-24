@@ -494,7 +494,7 @@ class DetailsTab extends React.Component {
                 <div>{this._renderSalesOrderList()}</div>
               </TabContainer>}
             </>
-          : Number(RoleUser.role()) === 5 || Number(RoleUser.role() === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12) ?
+          : Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12 ?
             <>
             <div className="tab-container-site">
               {this.props.renderNotif}
