@@ -33,7 +33,7 @@ export default class roleService {
         role = 10;
       }else if ((Array.isArray(role_name) && role_name.includes('SDH FMC')) || role_name === 'SDH FMC') { //service
         role = 11;
-      }else if ((Array.isArray(role_name) && role_name.includes('SDH NON FMC')) || role_name === 'SDH NON FMC') { //sales site (view only)
+      }else if ((Array.isArray(role_name) && role_name.includes('SDH Non FMC')) || role_name === 'SDH Non FMC') { //sales site (view only)
         role = 12;
       }
 
