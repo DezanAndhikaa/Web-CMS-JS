@@ -98,10 +98,18 @@ componentDidUpdate = (prevProps) => {
   }
 
   //ini untuk trigger sales global search
-  if (prevProps.salesSearch !== this.props.salesSearch) {
-    this.props.updateSearchSales({
-      ...prevProps.searchSalesParameter, Category: 'Lifetime', Keyword: this.props.salesSearch,
-    });
+  if(Number(RoleUser.role()) === 3 || Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){   
+    if (prevProps.salesSearch !== this.props.salesSearch) {
+      this.props.updateSearchSales({
+        ...prevProps.searchSalesParameter, Category: 'Approval', Keyword: this.props.salesSearch,
+      });
+    }
+  }else{
+    if (prevProps.salesSearch !== this.props.salesSearch) {
+      this.props.updateSearchSales({
+        ...prevProps.searchSalesParameter, Category: 'Lifetime', Keyword: this.props.salesSearch,
+      });
+    }
   }
   
   //ini untuk trigger service global search
