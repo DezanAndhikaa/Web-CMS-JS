@@ -54,7 +54,6 @@ componentDidUpdate = (prevProps) => {
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
     if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
-      console.log('tab apa: ', this.props.indexFilterParameter.indexTabParameter)
       if(this.props.indexFilterParameter.indexTabParameter === 0){
         this.props.updateServiceParameter({
           ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
@@ -701,7 +700,6 @@ componentDidUpdate = (prevProps) => {
 
   //KOMPONEN UNTUK RENDER PAGE SALES ORDER DAN SERVICE ORDER
   _renderTabs(){
-    console.log('role ke: ', Number(RoleUser.role()))
     return (
       <>
         <DetailsTab
