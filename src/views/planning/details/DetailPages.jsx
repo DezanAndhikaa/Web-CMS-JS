@@ -364,10 +364,6 @@ class DetailPages extends React.Component {
             onClickPlanningDelete={this.onClickDeletedSales}
             onClickButton={this.handleClickFilterByDataAction}
           />
-          <FilterbyDataAction
-            {...this.props}
-            titles="Tracking History"
-          />
         </>
       );
     }
@@ -380,10 +376,6 @@ class DetailPages extends React.Component {
             onClickPlanningApprove={this.onClickApprovedService}
             onClickPlanningDelete={this.onClickDeletedService}
             onClickButton={this.handleClickFilterByDataAction}
-          />
-          <FilterbyDataAction
-            {...this.props}
-            titles="Tracking History"
           />
         </>
       );

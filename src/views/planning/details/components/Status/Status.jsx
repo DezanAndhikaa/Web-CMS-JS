@@ -2055,10 +2055,6 @@ export default class Status extends React.PureComponent {
 							{...this.props}
 							idNotif = "Status"
 						/>
-						<FilterbyDataAction
-							{...this.props}
-							titles = "Tracking History"
-						/>
 					</div>
 				</div>
 				<div className="table-containers">

@@ -163,10 +163,6 @@ componentDidUpdate = (prevProps) => {
             onClickPlanningDelete={this.onClickDeletedSales}
             onClickButton={this.handleClickFilterByDataAction}
           />
-          <FilterbyDataAction 
-            {...this.props}
-            titles="Tracking History"
-          />
         </>
       );
     }
@@ -179,10 +175,6 @@ componentDidUpdate = (prevProps) => {
             onClickPlanningApprove={this.onClickApprovedService}
             onClickPlanningDelete={this.onClickDeletedService}
             onClickButton={this.handleClickFilterByDataAction}
-          />
-          <FilterbyDataAction 
-            {...this.props}
-            titles="Tracking History"
           />
         </>
       );
