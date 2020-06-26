@@ -626,10 +626,6 @@ class ApprovalPages extends React.Component {
             {...this.props}
             titles="Status"
           />
-          <FilterbyDataAction
-            {...this.props}
-            titles="Tracking History"
-          />
         </>
       );
     }
@@ -639,10 +635,6 @@ class ApprovalPages extends React.Component {
           <FilterbyDataAction
             {...this.props}
             titles="Status"
-          />
-          <FilterbyDataAction
-            {...this.props}
-            titles="Tracking History"
           />
         </>
       );
