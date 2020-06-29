@@ -106,13 +106,23 @@ componentDidUpdate = (prevProps) => {
   }
 
   //FILTER RANGE DATE
-  if(this.state.whichTabs){
+  if(Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){ 
+    if(this.state.whichTabs){
+      if(prevProps.filterDate !== this.props.filterDate){
+        this.props.fetchSalesOrder(this.props.filterDate,this.props.token);
+      }
+    }else{
+      if(prevProps.filterDate !== this.props.filterDate){
+        this.props.fetchServiceOrder(this.props.filterDate,this.props.token);
+      }
+    }
+  }if(Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
     if(prevProps.filterDate !== this.props.filterDate){
-      this.props.fetchSalesOrder(this.props.filterDate,this.props.token);
+      this.props.fetchServiceOrder(this.props.filterDate,this.props.token);
     }
   }else{
     if(prevProps.filterDate !== this.props.filterDate){
-      this.props.fetchServiceOrder(this.props.filterDate,this.props.token);
+      this.props.fetchSalesOrder(this.props.filterDate,this.props.token);
     }
   }
 
