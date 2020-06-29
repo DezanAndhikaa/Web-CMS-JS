@@ -116,7 +116,7 @@ componentDidUpdate = (prevProps) => {
         this.props.fetchServiceOrder(this.props.filterDate,this.props.token);
       }
     }
-  }if(Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
+  }else if(Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
     if(prevProps.filterDate !== this.props.filterDate){
       this.props.fetchServiceOrder(this.props.filterDate,this.props.token);
     }
