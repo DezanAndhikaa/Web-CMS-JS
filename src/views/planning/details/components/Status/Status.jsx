@@ -1299,93 +1299,129 @@ export default class Status extends React.PureComponent {
 	_renderDownloadBtn(){
 		if (this.props.location.whichTab === "sales") {
 			if(this.state.whatPageIsChoosed === "Approve"){
-				return(
-					<>
+				if (Number(RoleUser.role()) !== 1){
+					return(
 						<BaseButton titles="Download"
 							{...this.props}
 							whatTabsIsRendered={true}
 							handleSalesDownload={this.handleSalesDownload}
 						/>
-						<BaseButton titles="Delete" 
-							{...this.props}
-							whatTabsIsRendered={true}
-							isDisabled={this.state.isDisabled}
-							disabledButton = {this.props.selectedSalesPlans.length < 1 }
-							totalSelectedItems ={this.props.selectedSalesPlans.length}
-							handleDeleteSales={this.handleDeleteSales}
-							renderSakses = {this.changeSuccess}
-						/>
-					</>
-				)
+					)
+				}else{
+					return(
+						<>
+							<BaseButton titles="Download"
+								{...this.props}
+								whatTabsIsRendered={true}
+								handleSalesDownload={this.handleSalesDownload}
+							/>
+							<BaseButton titles="Delete" 
+								{...this.props}
+								whatTabsIsRendered={true}
+								isDisabled={this.state.isDisabled}
+								disabledButton = {this.props.selectedSalesPlans.length < 1 }
+								totalSelectedItems ={this.props.selectedSalesPlans.length}
+								handleDeleteSales={this.handleDeleteSales}
+								renderSakses = {this.changeSuccess}
+							/>
+						</>
+					)
+				}
 			}else if(this.state.whatPageIsChoosed === "Delete"){
-				return(
-					<>
+				if (Number(RoleUser.role()) !== 1) {
+					return("")
+				}else{
+					return(
+						<>
+							<BaseButton titles="Download"
+								{...this.props}
+								whatTabsIsRendered={true}
+								handleSalesApprovedDownload={this.handleSalesApprovedDownload}
+							/>
+							<BaseButton titles="Permanently" 
+								{...this.props}
+								whatTabsIsRendered={true}
+								handleDeletePermanent={this.handleDeletePermanent}
+								isDisabled={this.state.isDisabled}
+							/>
+						</>
+					)
+				}
+			}else{
+				if (Number(RoleUser.role()) !== 1) {
+					return("")
+				}else{
+					return(
 						<BaseButton titles="Download"
 							{...this.props}
 							whatTabsIsRendered={true}
 							handleSalesApprovedDownload={this.handleSalesApprovedDownload}
 						/>
-						<BaseButton titles="Permanently" 
-							{...this.props}
-							whatTabsIsRendered={true}
-							handleDeletePermanent={this.handleDeletePermanent}
-							isDisabled={this.state.isDisabled}
-						/>
-					</>
-				)
-			}else{
-				return(
-					<BaseButton titles="Download"
-						{...this.props}
-						whatTabsIsRendered={true}
-						handleSalesApprovedDownload={this.handleSalesApprovedDownload}
-					/>
-				)
+					)
+				}
 			}			
 		}else if (this.props.location.whichTab === "service"){
 			if(this.state.whatPageIsChoosed === "Approve"){
-				return(
-					<>
+				if (Number(RoleUser.role()) !== 1) {
+					return(
 						<BaseButton titles="Download"
 							{...this.props}
 							whatTabsIsRendered={false}
 							handleServiceDownload={this.handleServiceDownload}
 						/>
-						<BaseButton titles="Delete" 
-							{...this.props}
-							whatTabsIsRendered={false}
-							isDisabled={this.state.isDisabled}
-							disabledButton = {this.props.selectedServicePlans.length < 1 }
-							totalSelectedItems ={this.props.selectedServicePlans.length}
-							handleDeleteService={this.handleDeleteService}
-							renderSakses = {this.changeSuccess}
-						/>
-					</>
-				)
+					)
+				}else{
+					return(
+						<>
+							<BaseButton titles="Download"
+								{...this.props}
+								whatTabsIsRendered={false}
+								handleServiceDownload={this.handleServiceDownload}
+							/>
+							<BaseButton titles="Delete" 
+								{...this.props}
+								whatTabsIsRendered={false}
+								isDisabled={this.state.isDisabled}
+								disabledButton = {this.props.selectedServicePlans.length < 1 }
+								totalSelectedItems ={this.props.selectedServicePlans.length}
+								handleDeleteService={this.handleDeleteService}
+								renderSakses = {this.changeSuccess}
+							/>
+						</>
+					)
+				}
 			}else if(this.state.whatPageIsChoosed === "Delete"){
-				return(
-					<>
+				if (Number(RoleUser.role()) !== 1) {
+					return("")
+				}else{
+					return(
+						<>
+							<BaseButton titles="Download"
+								{...this.props}
+								whatTabsIsRendered={false}
+								handleServiceApprovedDownload={this.handleServiceApprovedDownload}
+							/>
+							<BaseButton titles="Permanently" 
+								{...this.props}
+								whatTabsIsRendered={false}
+								handleDeletePermanent={this.handleDeletePermanent}
+								isDisabled={this.state.isDisabled}
+							/>
+						</>
+					)
+				}
+			}else{
+				if (Number(RoleUser.role()) !== 1) {
+					return("")
+				}else{
+					return(
 						<BaseButton titles="Download"
 							{...this.props}
 							whatTabsIsRendered={false}
 							handleServiceApprovedDownload={this.handleServiceApprovedDownload}
 						/>
-						<BaseButton titles="Permanently" 
-							{...this.props}
-							whatTabsIsRendered={false}
-							handleDeletePermanent={this.handleDeletePermanent}
-							isDisabled={this.state.isDisabled}
-						/>
-					</>
-				)
-			}else{
-				return(
-					<BaseButton titles="Download"
-						{...this.props}
-						whatTabsIsRendered={false}
-						handleServiceApprovedDownload={this.handleServiceApprovedDownload}
-					/>
-				)
+					)
+				}
 			}
 		}
 		
