@@ -66,15 +66,9 @@ class ApprovalPages extends React.Component {
     //FILTER RANGE LIFETIME
     if (this.state.whichTabs) {
       if (prevProps.filterLifetime !== this.props.filterLifetime) {
-        // if(this.props.filterLifetime === ""){
-        //   this.props.updateSalesParameter({
-        //     ...prevProps.salesParameter.dataFilter, Filter: this.props.filterLifetime.Filter = "", PageNumber: 1
-        //   })
-        // }else{
         this.props.updateSalesParameter({
           ...prevProps.salesParameter.dataFilter, Filter: this.props.filterLifetime.Filter, PageNumber: 1,
         })
-        //   }
       }
     } else {
       if (prevProps.filterLifetime !== this.props.filterLifetime) {
