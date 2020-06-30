@@ -8,10 +8,11 @@ import RevisedSalesOrderList from '../../components/PlanningList/RevisedSalesOrd
 import './DetailsTab.scss';
 import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
 import { 
-    SelectCustomerFilterAction,
-    SelectSiteFilterAction, 
-    SelectUnitModelFilterAction, 
-    SelectComponentFilterAction } 
+  SelectCustomerFilterAction,
+  SelectSiteFilterAction, 
+  SelectUnitModelFilterAction, 
+  SelectComponentFilterAction 
+} 
     from '../../DetailPages-action';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import roleService from "../../../../../utils/roleService.helper";
