@@ -9,7 +9,9 @@ import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
+import roleService from "../../../../../utils/roleService.helper";
 
+const RoleUser = new roleService();
 export default class ServiceOrderList extends React.PureComponent {
   state = {
     checkedValue : false
@@ -61,7 +63,7 @@ export default class ServiceOrderList extends React.PureComponent {
       return(
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
             <TableRow>
-              {this.props.idService === "Data Input" ? "" :
+              {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? "" :
                 <TableCell padding="checkbox">
                   {this.props.displayServiceCheckbox  && 
                   <Checkbox 
@@ -130,7 +132,7 @@ export default class ServiceOrderList extends React.PureComponent {
   showTableBody(row,index) {
     return(
       <TableRow key={index} classes={{ root: 'table-row' }}>
-        {this.props.idService === "Data Input" ? "" :
+        {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? "" :
           <TableCell padding="checkbox">
             {this.props.displayServiceCheckbox && 
             <Checkbox 

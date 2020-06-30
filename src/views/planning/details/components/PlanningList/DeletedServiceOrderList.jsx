@@ -9,7 +9,9 @@ import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortS
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
+import roleService from "../../../../../utils/roleService.helper";
 
+const RoleUser = new roleService();
 export default class DeletedServiceOrderList extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -67,15 +69,17 @@ export default class DeletedServiceOrderList extends React.PureComponent {
       return (
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow classes={{ root: 'table-row' }}>
-          <TableCell padding="checkbox">
-            {this.props.displayServiceCheckbox && 
-            <Checkbox 
-              checked={this.state.checkedValue}
-              onChange={this.handleClicks}
-              onClick={() => {this.props.serviceOrderListDeleted.Lists.map((row,id) => 
-              this.props.onChoosedService(row,id))}}
-              className="checkbox-checked-header"/>}
-          </TableCell>
+          {Number(RoleUser.role()) !== 1 ? "" :
+            <TableCell padding="checkbox">
+              {this.props.displayServiceCheckbox && 
+              <Checkbox 
+                checked={this.state.checkedValue}
+                onChange={this.handleClicks}
+                onClick={() => {this.props.serviceOrderListDeleted.Lists.map((row,id) => 
+                this.props.onChoosedService(row,id))}}
+                className="checkbox-checked-header"/>}
+            </TableCell>
+          }
           <PlanningListHeader
             name="Work Order"
             delay={300}

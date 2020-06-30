@@ -14,7 +14,6 @@ import Button from '@material-ui/core/Button';
 import './Status.scss';
 import { Menu } from '../../../../../constants';
 import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton';
-import FilterbyDataAction  from '../../../../../components/FilterByDataAction/FilterbyDataAction';
 import { Spinner } from '../../../../../assets/icons';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from "moment";

@@ -12,7 +12,9 @@ import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import { Snackbar } from '@material-ui/core';
 import moment from 'moment';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
+import roleService from "../../../../../utils/roleService.helper";
 
+const RoleUser = new roleService();
 export default class SalesOrderList extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -89,7 +91,7 @@ export default class SalesOrderList extends React.PureComponent {
     return (
       <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow classes={{ root: 'table-row' }}>
-          {this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly" ? "" :
+          {this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly" || Number(RoleUser.role()) !== 1 ? "" :
             <TableCell padding="checkbox">
               {this.props.displaySalesCheckbox &&
                 <Checkbox
@@ -185,7 +187,7 @@ export default class SalesOrderList extends React.PureComponent {
   showTableBody(row, id) {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
-        {this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly" ? "" :
+        {this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly" || Number(RoleUser.role()) !== 1 ? "" :
           <TableCell padding="checkbox">
             {this.props.displaySalesCheckbox &&
               <Checkbox
