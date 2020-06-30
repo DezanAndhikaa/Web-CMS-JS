@@ -81,14 +81,18 @@ componentDidUpdate = (prevProps) => {
 
   //FILTER RANGE LIFETIME
   if(Number(RoleUser.role()) === 3){
-    if(prevProps.filterLifetime !== this.props.filterLifetime && this.state.whichTabs){
-      this.props.updateSalesParameter({
-        ...prevProps.salesParameter.dataFilter, Filter: this.props.filterLifetime.Filter, PageNumber: 1,
-      })
+    if(this.state.whichTabs){
+      if(prevProps.filterLifetime !== this.props.filterLifetime){
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter: this.props.filterLifetime.Filter, PageNumber: 1,
+        })
+      }
     }else{
-      this.props.updateServiceParameter({
-        ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterLifetime.Filter, PageNumber: 1
-      })
+      if(prevProps.filterLifetime !== this.props.filterLifetime){
+        this.props.updateServiceParameter({
+          ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterLifetime.Filter, PageNumber: 1
+        })
+      }
     }
   }else if(Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 || 
     Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){   

@@ -32,9 +32,9 @@ export default class SalesOrderList extends React.PureComponent {
       prevState.searchComp !== this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
       this.setState({ checkedValue: false })
     } 
-    // if (this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING) {
-    //   this.setState({ checkedValue: false })
-    // }
+    if (this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING) {
+      this.setState({ checkedValue: false })
+    }
   }
   componentDidMount = async () => {
     await this.props.clearSelectedSalesPlans();
