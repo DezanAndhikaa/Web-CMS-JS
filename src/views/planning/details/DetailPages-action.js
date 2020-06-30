@@ -31,6 +31,7 @@ export const ResetSelectedLeaderAction = 'RESET_SELECTED_LEADER';
 export const salesDownloadAction = 'DOWNLOAD_APPROVED_SALES';
 export const serviceDownloadAction = 'DOWNLOAD_APPROVED_SERVICE';
 export const SearchSalesAction = 'SEARCH_SALES_PLANS';
+export const SearchSalesRevisiAction = 'SEARCH_SALES_REVISI_PLANS';
 export const SearchServiceAction = 'SEARCH_SERVICE_PLANS';
 export const SearchCompAction = 'SEARCH_BY_COMP';
 export const SearchCompActionApproved = 'SEARCH_BY_COMP_APPROVED_SALES';
@@ -62,6 +63,7 @@ export const UnselectSalesPlanAction = 'UNSELECT_SALES_PLANS';
 export const UnselectServicePlanAction = 'UNSELECT_SERVICE_PLANS';
 export const UnselectMechanicAction = 'UNSELECT_MECHANIC';
 export const UpdateSearchSalesAction = 'SALES_SEARCH_PARAMETER';
+export const UpdateSearchSalesRevisiAction = 'SALES_SEARCH_REVISI_PARAMETER';
 export const UpdateSearchSalesApprovedAction = 'SALES_SEARCH_APPROVED_PARAMETER';
 export const UpdateSearchSalesDeletedAction = 'SALES_SEARCH_DELETED_PARAMETER';
 export const UpdateSearchSalesSapAction = 'SALES_SEARCH_SAP_PARAMETER';
@@ -506,6 +508,11 @@ export function salesParameterRevAction(type, payload) {
 export function searchAction(type, payload) {
 	return { type, payload };
 }
+
+export function searchRevisiGlobalAction(type, payload) {
+	return { type, payload };
+}
+
 export function searchCompAction(type, payload, sort) {
 	return { type, payload, sort };
 }

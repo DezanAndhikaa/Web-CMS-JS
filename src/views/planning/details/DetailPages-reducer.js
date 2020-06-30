@@ -22,12 +22,13 @@ import {
 	UpdateSalesDeletedParameterAction,
 	UpdateSalesSapParameterAction,
 	UpdateSalesParameterAction,
+	UpdateSearchSalesRevisiAction,
 	UpdateSalesRevisedParamAction,
 	UpdateSearchSalesRevisionAction,
 	ResetSelectedMechanicsAction,
 	SearchSalesAction,
 	SearchServiceAction,
-	SearchRevisedSalesOrder,
+	SearchSalesRevisiAction,
 	UpdateServiceApprovedParameterAction,
 	UpdateServiceDeletedParameterAction,
 	UpdateServiceSapParameterAction,
@@ -530,6 +531,11 @@ export function searchSalesParameterReducer(state = initialSearchParameter, acti
 	return state;
 }
 
+export function searchSalesRevisiParameterReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchSalesRevisiAction) return action.payload;
+	return state;
+}
+
 export function searchSalesApprovedReducer(state = initialSearchParameter, action) {
 	if (action.type === UpdateSearchSalesApprovedAction) return action.payload;
 	return state;
@@ -600,7 +606,7 @@ export function serviceSapParameterReducer(state = initialServiceParameter, acti
 }
 
 // Detail reducer reviced parameter reducer
-export function salesRevisedParameterReducer(state = initialSalesParameter, action) {
+export function salesRevisedParameterReducer(state = initialSearchParameter, action) {
 	if (action.type === UpdateSalesRevisedParamAction)
 		return { ...state, dataFilter: action.payload };
 	return state;
@@ -710,6 +716,11 @@ export function serviceParameterDeletedReducer(state = initialServiceParameter, 
 
 export function searchSalesReducer(state = '', action) {
 	if (action.type === SearchSalesAction) return action.payload;
+	return state;
+}
+
+export function searchSalesRevisiReducer(state = '', action) {
+	if (action.type === SearchSalesRevisiAction) return action.payload;
 	return state;
 }
 
@@ -940,6 +951,7 @@ const PlansReducers = combineReducers({
 	serviceSearch: searchServiceReducer,
 	salesSearchRevision: searchRevisionSalesReducer,
 	searchSalesParameter: searchSalesParameterReducer,
+	searchSalesRevisiParameter: searchSalesRevisiParameterReducer,
 	searchSalesRevisionParameter: searchRevisionSalesReducer,
 	searchSalesApprovedParam: searchSalesApprovedReducer,
 	searchSalesDeletedParam: searchSalesDeletedReducer,

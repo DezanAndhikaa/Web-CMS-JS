@@ -416,7 +416,7 @@ class ApprovalPages extends React.Component {
           [...this.props.salesParameter.dataFilter.Filter, {
             Field: 'LifeTimeComponent',
             Operator: "neq",
-            Value: '-',
+            Value: 0,
             Logic: "AND"
           }, {
             Field: 'SAPIssueMessage',
@@ -761,7 +761,7 @@ class ApprovalPages extends React.Component {
   updateAssignmentSalesStates = (plan) => {
     if (this.props.selectedSalesPlans
       .some((plans) => plans.SoNumber === plan.SoNumber,
-      )) { return this.props.unselectSalesPlan(plan); }
+    )) { return this.props.unselectSalesPlan(plan); }
     return this.props.selectSalesPlan(plan);
   };
 
@@ -769,7 +769,7 @@ class ApprovalPages extends React.Component {
   updateAssignmentServiceStates = (plan) => {
     if (this.props.selectedServicePlans
       .some((plans) => plans.WoNumber === plan.WoNumber,
-      )) { return this.props.unselectServicePlan(plan); }
+    )) { return this.props.unselectServicePlan(plan); }
     return this.props.selectServicePlan(plan);
   };
 

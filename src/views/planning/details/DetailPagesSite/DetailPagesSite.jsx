@@ -101,8 +101,8 @@ class DetailPagesSite extends React.Component {
 
     //ini untuk trigger sales global search revision
     if (prevProps.salesSearchRevision !== this.props.salesSearchRevision) {
-      this.props.updateSearchSalesRevision({
-        ...prevProps.searchSalesRevisionParameter, Category: 'SR', Keyword: this.props.salesSearch,
+      this.props.updateSalesRevParameter({
+        ...prevProps.searchSalesRevisionParameter, Category: 'SR', Keyword: this.props.salesSearchRevision,
       });
     }
 
@@ -477,26 +477,7 @@ class DetailPagesSite extends React.Component {
 
   onClickRevisedSales = async (searchData) => {
     await this.props.fetchRevisedSales({
-      ...this.props.salesRevisedParam.dataFilter,
-      Filter:
-        [...this.props.salesRevisedParam.dataFilter.Filter,
-        {
-          Field: 'IsRevised',
-          Operator: 'eq',
-          Value: 'true',
-          Logic: 'AND'
-        }, {
-          Field: 'IsChanged',
-          Operator: 'eq',
-          Value: 'false',
-          Logic: "AND"
-        }, {
-          Field: 'SAPIssueMessage',
-          Operator: 'eq',
-          Value: '-',
-          Logic: 'AND'
-        }
-        ]
+      Category: 'Lifetime', Keyword: this.props.salesSearch,
     }, this.props.token);
   }
 
@@ -559,7 +540,7 @@ class DetailPagesSite extends React.Component {
         <SearchInput
           {...this.props}
           webInfo="Search Revision ..."
-          handleSearch={this.handleSearch}
+          handleSearch={this.handleSearchRevision}
         />
       </div>
     );
@@ -588,24 +569,9 @@ class DetailPagesSite extends React.Component {
   }
 
   handleSearchRevision = (value) => {
-    this.setState({ searchVal: value })
-    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9) {
-      if (this.state.whichTabs === true) {
-        setTimeout(() => {
-          this.props.onSearchService(this.state.searchVal)
-        }, 1000);
-      }
-    } else {
-      if (this.state.whichTabs === true) {
-        setTimeout(() => {
-          this.props.onSearchSales(this.state.searchVal)
-        }, 1000);
-      } else {
-        setTimeout(() => {
-          this.props.onSearchService(this.state.searchVal)
-        }, 1000);
-      }
-    }
+    setTimeout(() => {
+      this.props.updateSalesRevParameter(this.state.searchVal)
+    }, 1000);
 
   }
 
