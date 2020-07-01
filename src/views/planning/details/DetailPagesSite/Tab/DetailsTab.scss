@@ -39,6 +39,7 @@
         .rev-title-container{
             margin-top: vw(20);
             display: inline-flex;
+            flex-direction: row;
             .ut-underline-rev{
                 margin-top: 4px;
                 margin-bottom: vw(10);
@@ -50,6 +51,13 @@
                 margin-left: vw(17);
                 font-weight: bold;
                 font-size: 20px;
+            }
+            .revision-search{
+                align-self: flex-end;
+                display: flex;
+                justify-content: flex-end;
+                position: relative;
+                margin-left: 100vh;
             }
         }
     }

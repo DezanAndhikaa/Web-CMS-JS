@@ -145,6 +145,13 @@ componentDidUpdate = (prevProps) => {
     }
   }
   
+  //ini untuk trigger sales global search revision
+  if (prevProps.salesSearchRevision !== this.props.salesSearchRevision) {
+    this.props.updateSalesRevParameter({
+      ...prevProps.searchSalesRevisionParameter, Category: 'SR', Keyword: this.props.salesSearchRevision,
+    });
+  }
+
   //ini untuk trigger service global search
   if(prevProps.serviceSearch !== this.props.serviceSearch){
     this.props.updateSearchService({
@@ -567,28 +574,34 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  onClickRevisedSales = async() => {
+  // onClickRevisedSales = async() => {
+  //   await this.props.fetchRevisedSales({
+  //     ...this.props.salesRevisedParam.dataFilter,
+  //     Filter : 
+  //       [...this.props.salesRevisedParam.dataFilter.Filter, 
+  //       {
+  //         Field 	 : 'IsRevised',
+  //         Operator : 'eq',
+  //         Value 	 : 'true',
+  //         Logic 	 : 'AND'
+  //       },{
+  //         Field    : 'IsChanged',
+  //         Operator : 'eq',
+  //         Value    : 'false',
+  //         Logic    : "AND"
+  //       },{
+  //         Field : 'SAPIssueMessage',
+  //         Operator : 'eq',
+  //         Value : '-',
+  //         Logic : 'AND'
+  //       }]
+  //   },this.props.token);
+  // }
+
+  onClickRevisedSales = async (searchData) => {
     await this.props.fetchRevisedSales({
-      ...this.props.salesRevisedParam.dataFilter,
-      Filter : 
-        [...this.props.salesRevisedParam.dataFilter.Filter, 
-        {
-          Field 	 : 'IsRevised',
-          Operator : 'eq',
-          Value 	 : 'true',
-          Logic 	 : 'AND'
-        },{
-          Field    : 'IsChanged',
-          Operator : 'eq',
-          Value    : 'false',
-          Logic    : "AND"
-        },{
-          Field : 'SAPIssueMessage',
-          Operator : 'eq',
-          Value : '-',
-          Logic : 'AND'
-        }]
-    },this.props.token);
+      Category: 'Lifetime', Keyword: this.props.salesSearch,
+    }, this.props.token);
   }
 
   //KOMPONEN UNTUK SHOW PER/PAGE
@@ -675,8 +688,27 @@ componentDidUpdate = (prevProps) => {
         }, 1000);
       }
     }
-      
-	}
+  }
+  
+  //Komponen untuk global search revision list
+  _renderSearchBarRevition() {
+    return (
+      <div className="search-site">
+        <SearchInput
+          {...this.props}
+          webInfo="Search Revision ..."
+          handleSearch={this.handleSearchRevision}
+        />
+      </div>
+    );
+  }
+
+  handleSearchRevision = (value) => {
+    setTimeout(() => {
+      this.props.updateSalesRevParameter(this.state.searchVal)
+    }, 1000);
+
+  }
 
   _renderNotif(){
     return (
@@ -748,6 +780,7 @@ componentDidUpdate = (prevProps) => {
           renderNotif={this._renderNotif()}
           renderFilterByDataAction={this._renderFilterByDataAction()} 
           renderSearch={this._renderSearchBar()}
+          renderSearchRevition={this._renderSearchBarRevition()}
           renderPaginationRev={this._renderPagingRev()}
           onClickSalesOrder={this.onClickSalesOrder}        
           onClickServiceOrder={this.onClickServiceOrder}

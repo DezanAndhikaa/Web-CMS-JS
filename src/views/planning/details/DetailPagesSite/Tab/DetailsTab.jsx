@@ -8,12 +8,11 @@ import RevisedSalesOrderList from '../../components/PlanningList/RevisedSalesOrd
 import './DetailsTab.scss';
 import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
 import { 
-  SelectCustomerFilterAction,
-  SelectSiteFilterAction, 
-  SelectUnitModelFilterAction, 
-  SelectComponentFilterAction 
-} 
-    from '../../DetailPages-action';
+    SelectCustomerFilterAction,
+    SelectSiteFilterAction, 
+    SelectUnitModelFilterAction, 
+    SelectComponentFilterAction 
+} from '../../DetailPages-action';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import roleService from "../../../../../utils/roleService.helper";
 
@@ -145,7 +144,7 @@ class DetailsTab extends React.Component {
     return (
       <div className={this.props.salesOrderList.Lists.length === 0
         && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ?
-        "list-detail-empty" :"plannings-list-detail"}>
+        "list-detail-empty" : "plannings-list-detail"}>
         <SalesOrderList
           {...this.props}
           idSales="ViewOnly"
@@ -161,8 +160,8 @@ class DetailsTab extends React.Component {
           <div className="revision-container">
             <div className="rev-title-container">
               <div className="ut-underline-rev" />
-              {this.props.salesOrderRevised.Lists.length === 0 ? "" : 
-              <div className="revision-title">Revision List</div>}
+              <div className="revision-title">Revision List</div>
+              <div className="revision-search">{this.props.renderSearchRevition}</div>
             </div>
             <div className="plannings-list-detail">
               <RevisedSalesOrderList

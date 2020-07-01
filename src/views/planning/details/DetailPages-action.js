@@ -40,6 +40,7 @@ export const SearchCompActionService = 'SEARCH_BY_COMP_SERVICE';
 export const SearchCompActionServiceApproved = 'SEARCH_BY_COMP_APPROVED_SERVICE';
 export const SearchCompActionServiceDeleted = 'SEARCH_BY_COMP__DELETED_SERVICE';
 export const SearchCompActionServiceSap = 'SEARCH_BY_COMP_SAP_SERVICE';
+export const SearchRevisedSalesOrder = 'SEARCH_REVISION_SALES';
 export const SelectAllSalesPlanAction = 'SELECT_ALL_SALES_PLANS';
 export const SelectServicePlanAction = 'SELECT_SERVICE_PLANS';
 export const SelectSalesPlanAction = 'SELECT_SALES_PLANS';
@@ -64,6 +65,7 @@ export const UpdateSearchSalesAction = 'SALES_SEARCH_PARAMETER';
 export const UpdateSearchSalesApprovedAction = 'SALES_SEARCH_APPROVED_PARAMETER';
 export const UpdateSearchSalesDeletedAction = 'SALES_SEARCH_DELETED_PARAMETER';
 export const UpdateSearchSalesSapAction = 'SALES_SEARCH_SAP_PARAMETER';
+export const UpdateSearchSalesRevisionAction = 'SALES_SEARCH_REVISED_PARAMETER';
 export const UpdateSearchServiceAction = 'SERVICE_SEARCH_PARAMETER';
 export const UpdateSearchServiceApprovedAction = 'SERVICE_SEARCH_APPROVED_PARAMETER';
 export const UpdateSearchServiceDeletedAction = 'SERVICE_SEARCH_DELETED_PARAMETER';
@@ -452,6 +454,10 @@ export function searchSalesDeletedAction(type, payload) {
 
 export function searchSalesSapAction(type, payload) {
 	return { type, payload };
+}
+
+export function searchSalesRevisionAction(type, payload) {
+	return { type, payload }
 }
 
 export function searchServiceParameterAction(type, payload) {

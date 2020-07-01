@@ -43,6 +43,7 @@ export const DELETE_PERMANENT_SERVICE = 'DELETE_PERMANENT_SERVICE';
 // Action type for global search
 export const SEARCH_SALES_PLANS = 'SEARCH_SALES_PLANS';
 export const SEARCH_SERVICE_PLANS = 'SEARCH_SERVICE_PLANS';
+export const SEARCH_REVISION_PLANS_SALES = 'SEARCH_REVISION_SALES';
 
 // Action type for search per component
 export const SEARCH_BY_COMP = 'SEARCH_BY_COMP';

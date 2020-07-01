@@ -41,7 +41,8 @@ import {
     // Action type for global search
     SEARCH_SALES_PLANS,
     SEARCH_SERVICE_PLANS,
-    
+	SEARCH_REVISION_PLANS_SALES,
+	
     // Action type for search per component
     SEARCH_BY_COMP,
     SEARCH_COMP_APPROVED_SALES,
@@ -699,6 +700,11 @@ export function indexFilterParameterReducer(state = '', action) {
 
 export function searchSalesReducer(state = '', action) {
 	if (action.type === SEARCH_SALES_PLANS) return action.payload;
+	return state;
+}
+
+export function searchRevisionSalesReducer(state = '', action) {
+	if (action.type === SEARCH_REVISION_PLANS_SALES) return action.payload;
 	return state;
 }
 
