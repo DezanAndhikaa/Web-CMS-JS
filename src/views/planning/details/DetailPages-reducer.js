@@ -34,7 +34,7 @@ import {
 	UpdateSearchSalesApprovedAction,
 	UpdateSearchSalesDeletedAction,
 	UpdateSearchSalesSapAction,
-	UpdateSearchSalesRevisionAction,
+	UpdateSearchSalesRevAction,
 	UpdateSearchServiceAction,
 	UpdateSearchServiceApprovedAction,
 	UpdateSearchServiceDeletedAction,
@@ -543,8 +543,8 @@ export function searchSalesSapReducer(state = initialSearchParameter, action) {
 	return state;
 }
 
-export function searchRevisionSalesReducer(state = initialSearchParameter, action) {
-	if (action.type === UpdateSearchSalesRevisionAction) return action.payload;
+export function searchSalesRevParamReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchSalesRevAction) return action.payload;
 	return state;
 }
 
@@ -708,6 +708,11 @@ export function serviceParameterDeletedReducer(state = initialServiceParameter, 
 
 export function searchSalesReducer(state = '', action) {
 	if (action.type === SearchSalesAction) return action.payload;
+	return state;
+}
+
+export function searchSalesRevReducer(state = '', action) {
+	if (action.type === SearchRevisedSalesOrder) return action.payload;
 	return state;
 }
 
@@ -935,13 +940,13 @@ const PlansReducers = combineReducers({
 	sortSalesBy: sortSalesByReducer,
 	sortServiceBy: sortServiceByReducer,
 	salesSearch: searchSalesReducer,
-	salesSearchRevision: searchRevisionSalesReducer,
+	salesSearchRevision: searchSalesRevReducer,
 	serviceSearch: searchServiceReducer,
 	searchSalesParameter: searchSalesParameterReducer,
 	searchSalesApprovedParam: searchSalesApprovedReducer,
 	searchSalesDeletedParam: searchSalesDeletedReducer,
 	searchSalesSapParam: searchSalesSapReducer,
-	searchSalesRevisionParameter: searchRevisionSalesReducer,
+	searchSalesRevParam: searchSalesRevParamReducer,
 	searchServiceParameter: searchServiceParameterReducer,
 	searchServiceApprovedParam: searchServiceApprovedReducer,
 	searchServiceDeletedParam: searchServiceDeletedReducer,

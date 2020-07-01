@@ -3,7 +3,7 @@
 import React from 'react';
 import './FilterbyDataAction.scss';
 import { Badge } from '@material-ui/core';
-import { IconApprove, IconHistory, IconInputLT, IconNotif } from '../../assets/icons';
+import { IconApprove, IconHistory, IconInputLT } from '../../assets/icons';
 import { withStyles } from '@material-ui/core/styles';
 import { Menu } from '../../constants';
 import MenuList from '@material-ui/core/MenuList';
@@ -22,15 +22,6 @@ const DotBadges = withStyles(theme => ({
         minWidth: '15px',
         height: '15px',
         borderRadius: '50%'
-	},
-}))(Badge);
-
-const Badges = withStyles(theme => ({
-	badge: {
-		top: -3,
-		left: -5,
-		fontSize: '10px',
-		border: '2px solid white'
 	},
 }))(Badge);
 

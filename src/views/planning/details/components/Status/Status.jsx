@@ -173,7 +173,7 @@ export default class Status extends React.PureComponent {
 						{...prevProps.searchServiceParameter, Category: 'SN', Keyword: this.props.serviceSearch});
 				case 'Delete' :
 					return this.props.updateServiceDeletedParameter(
-						{...prevProps.searchSerrviceDeletedParam, Category: 'SD', Keyword: this.props.serviceSearch});
+						{...prevProps.searchServiceDeletedParam, Category: 'SD', Keyword: this.props.serviceSearch});
 				case 'SAP ISSUE':
 					return this.props.updateServiceSapParameter(
 						{...prevProps.searchServiceSapParam, Category: 'SSAP', Keyword: this.props.serviceSearch});
@@ -1095,7 +1095,7 @@ export default class Status extends React.PureComponent {
 		await this.props.fetchApprovedService(this.props.searchSerrviceApprovedParam, this.props.token);
 	}
 	fetchSearchServiceDeleted = async() => {
-		await this.props.fetchDeletedService(this.props.searchSerrviceDeletedParam, this.props.token);
+		await this.props.fetchDeletedService(this.props.searchServiceDeletedParam, this.props.token);
 	}
 	fetchSearchServiceSap = async() => {
 		await this.props.fetchSapService(this.props.searchSerrviceSapParam, this.props.token);

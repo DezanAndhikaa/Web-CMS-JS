@@ -36,6 +36,7 @@ componentWillUnmount = () => {
 }
 
 componentDidUpdate = (prevProps) => {
+  console.log('sales search rev param : ', this.props.searchSalesRevParam)
   if (prevProps.salesParameter !== this.props.salesParameter) {
     this.onClickSalesOrder();
   }
@@ -47,6 +48,9 @@ componentDidUpdate = (prevProps) => {
   }
   if(prevProps.searchSalesParameter !== this.props.searchSalesParameter){
     this.fetchSearchSales();
+  }
+  if(prevProps.searchSalesRevParam !== this.props.searchSalesRevParam){
+    this.fetchSearchSalesRev();
   }
   if(prevProps.searchServiceParameter !== this.props.searchServiceParameter){
     this.fetchSearchService();
@@ -143,13 +147,12 @@ componentDidUpdate = (prevProps) => {
         ...prevProps.searchSalesParameter, Category: 'Lifetime', Keyword: this.props.salesSearch,
       });
     }
-  }
-  
-  //ini untuk trigger sales global search revision
-  if (prevProps.salesSearchRevision !== this.props.salesSearchRevision) {
-    this.props.updateSalesRevParameter({
-      ...prevProps.searchSalesRevisionParameter, Category: 'SR', Keyword: this.props.salesSearchRevision,
-    });
+    //ini untuk trigger sales global search revision
+    else if (prevProps.salesSearchRevision !== this.props.salesSearchRevision) {
+      this.props.updateSearchRevSales({
+        ...prevProps.searchSalesRevParam, Category: 'SR', Keyword: this.props.salesSearchRevision,
+      });
+    }
   }
 
   //ini untuk trigger service global search
@@ -533,6 +536,10 @@ componentDidUpdate = (prevProps) => {
     await this.props.fetchServiceOrder(this.props.searchServiceParameter, this.props.token);
   }
 
+  fetchSearchSalesRev = async() => {
+    await this.props.fetchRevisedSales(this.props.searchSalesRevParam, this.props.token)
+  }
+
   //SAAT MENGKLIK SERVICE ORDER TAB
   onClickServiceOrder = async() => {
    await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
@@ -574,35 +581,35 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  // onClickRevisedSales = async() => {
-  //   await this.props.fetchRevisedSales({
-  //     ...this.props.salesRevisedParam.dataFilter,
-  //     Filter : 
-  //       [...this.props.salesRevisedParam.dataFilter.Filter, 
-  //       {
-  //         Field 	 : 'IsRevised',
-  //         Operator : 'eq',
-  //         Value 	 : 'true',
-  //         Logic 	 : 'AND'
-  //       },{
-  //         Field    : 'IsChanged',
-  //         Operator : 'eq',
-  //         Value    : 'false',
-  //         Logic    : "AND"
-  //       },{
-  //         Field : 'SAPIssueMessage',
-  //         Operator : 'eq',
-  //         Value : '-',
-  //         Logic : 'AND'
-  //       }]
-  //   },this.props.token);
-  // }
-
-  onClickRevisedSales = async (searchData) => {
+  onClickRevisedSales = async() => {
     await this.props.fetchRevisedSales({
-      Category: 'Lifetime', Keyword: this.props.salesSearch,
-    }, this.props.token);
+      ...this.props.salesRevisedParam.dataFilter,
+      Filter : 
+        [...this.props.salesRevisedParam.dataFilter.Filter, 
+        {
+          Field 	 : 'IsRevised',
+          Operator : 'eq',
+          Value 	 : 'true',
+          Logic 	 : 'AND'
+        },{
+          Field    : 'IsChanged',
+          Operator : 'eq',
+          Value    : 'false',
+          Logic    : "AND"
+        },{
+          Field : 'SAPIssueMessage',
+          Operator : 'eq',
+          Value : '-',
+          Logic : 'AND'
+        }]
+    },this.props.token);
   }
+
+  // onClickRevisedSales = async (searchData) => {
+  //   await this.props.fetchRevisedSales({
+  //     Category: 'Lifetime', Keyword: this.props.salesSearch,
+  //   }, this.props.token);
+  // }
 
   //KOMPONEN UNTUK SHOW PER/PAGE
   _renderShowPerPage(){
@@ -691,12 +698,12 @@ componentDidUpdate = (prevProps) => {
   }
   
   //Komponen untuk global search revision list
-  _renderSearchBarRevition() {
+  _renderSearchBarRev() {
     return (
       <div className="search-site">
         <SearchInput
           {...this.props}
-          webInfo="Search Revision ..."
+          webInfo="Search revision"
           handleSearch={this.handleSearchRevision}
         />
       </div>
@@ -704,10 +711,15 @@ componentDidUpdate = (prevProps) => {
   }
 
   handleSearchRevision = (value) => {
-    setTimeout(() => {
-      this.props.updateSalesRevParameter(this.state.searchVal)
-    }, 1000);
-
+    this.setState({ searchVal : value})
+    if (Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3 || Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
+        if (this.state.whichTabs === true) {
+        setTimeout(() => {
+          this.props.onSearchSalesRev(this.state.searchVal)
+        }, 1000);
+      }
+    }
   }
 
   _renderNotif(){
@@ -780,7 +792,7 @@ componentDidUpdate = (prevProps) => {
           renderNotif={this._renderNotif()}
           renderFilterByDataAction={this._renderFilterByDataAction()} 
           renderSearch={this._renderSearchBar()}
-          renderSearchRevition={this._renderSearchBarRevition()}
+          renderSearchRev={this._renderSearchBarRev()}
           renderPaginationRev={this._renderPagingRev()}
           onClickSalesOrder={this.onClickSalesOrder}        
           onClickServiceOrder={this.onClickServiceOrder}
@@ -804,6 +816,7 @@ componentDidUpdate = (prevProps) => {
   };
 
   render(){     
+    console.log('sales search rev : ',this.props.salesSearchRevision)
     return(
       <main className="content">
           <div className="table-detail-site">

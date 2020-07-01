@@ -29,6 +29,7 @@ import {
 	UpdateSalesRevisedParamAction,
 	searchAction,
 	SearchSalesAction, 
+	SearchRevisedSalesOrder,
 	SearchServiceAction,
 	searchCompAction,
 	SearchCompAction,
@@ -47,7 +48,9 @@ import {
 	sortByAction, 
 	storePlanDataAction,
 	salesParameterRevAction,
-	dateFilterAction
+	dateFilterAction, 
+	searchSalesRevisionAction,
+	UpdateSearchSalesRevAction
 } from '../../details/DetailPages-action';
 import DetailPagesSite from './DetailPagesSite';
 
@@ -70,7 +73,9 @@ const mapStateToProps = (state) => ({
 	serviceParameter: state.plansPageState.serviceParameter,
 	searchSalesParameter: state.plansPageState.searchSalesParameter,
 	searchServiceParameter: state.plansPageState.searchServiceParameter,
+	searchSalesRevParam: state.plansPageState.searchSalesRevParam,
 	salesSearch: state.plansPageState.salesSearch,
+	salesSearchRevision: state.plansPageState.salesSearchRevision,
 	serviceSearch: state.plansPageState.serviceSearch,
 	searchComp: state.plansPageState.searchComp,
 	selectedFilters: state.plansPageState.selectedFilters,
@@ -115,10 +120,9 @@ const mapDispatchToProps = (dispatch) => ({
 	fetchSalesOrder: (payload, token) => dispatch(fetchSalesAction(payload, token)),
 	fetchServiceOrder: (payload, token) => dispatch(fetchServiceAction(payload, token)),
 	fetchRevisedSales: (payload,token) => dispatch(fetchRevisedSalesAction(payload, token)),
-	fetchSearchSales: (payload, token) => dispatch(fetchSearchSalesAction(payload, token)),
-	fetchSearchService: (payload, token) => dispatch(fetchSearchServiceAction(payload, token)),
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	onSearchSales: (keyword) => dispatch(searchAction(SearchSalesAction, keyword)),
+	onSearchSalesRev: (keyword) => dispatch(searchAction(SearchRevisedSalesOrder, keyword)),
 	onSearchService: (keyword) => dispatch(searchAction(SearchServiceAction, keyword)),
 	onSearchComp: (keyword,sort) => dispatch(searchCompAction(SearchCompAction, keyword, sort)),
 	onSearchCompService: (keyword, sort) => dispatch(searchCompActionService(SearchCompActionService, keyword, sort)),
@@ -136,6 +140,7 @@ const mapDispatchToProps = (dispatch) => ({
 	updateSalesRevParameter: (payload) => dispatch(salesParameterRevAction(UpdateSalesRevisedParamAction, payload)),
 	updateSearchSales: (payload) => dispatch(searchSalesParameterAction(UpdateSearchSalesAction, payload)),
 	updateSearchService: (payload) => dispatch(searchServiceParameterAction(UpdateSearchServiceAction, payload)),
+	updateSearchRevSales: (payload) => dispatch(searchSalesRevisionAction(UpdateSearchSalesRevAction, payload)),
 });
 
 const detailPagesSite = connect(mapStateToProps, mapDispatchToProps)(DetailPagesSite);

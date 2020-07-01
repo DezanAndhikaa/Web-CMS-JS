@@ -163,7 +163,7 @@ class DetailsTab extends React.Component {
                 <div className="ut-underline-rev" /> 
                 <div className="revision-title">Revision List</div>
               </div>
-              <div className="revision-search">{this.props.renderSearchRevition}</div>
+              <div className="revision-search">{this.props.renderSearchRev}</div>
             </div>
             <div className="plannings-list-detail">
               <RevisedSalesOrderList
@@ -428,7 +428,7 @@ class DetailsTab extends React.Component {
 
   render() {
     const { classes, theme } = this.props;
-    const { tab, value } = this.state;
+    const { value } = this.state;
     return (
       <div className="root">
         {Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
