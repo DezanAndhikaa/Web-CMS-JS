@@ -159,8 +159,10 @@ class DetailsTab extends React.Component {
           && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED ? "list-detail-empty" : "paper-revision"}>
           <div className="revision-container">
             <div className="rev-title-container">
-              <div className="ut-underline-rev" />
-              <div className="revision-title">Revision List</div>
+              <div className= "title-content">
+                <div className="ut-underline-rev" /> 
+                <div className="revision-title">Revision List</div>
+              </div>
               <div className="revision-search">{this.props.renderSearchRevition}</div>
             </div>
             <div className="plannings-list-detail">

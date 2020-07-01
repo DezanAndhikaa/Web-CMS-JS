@@ -39,25 +39,27 @@
         .rev-title-container{
             margin-top: vw(20);
             display: inline-flex;
-            flex-direction: row;
-            .ut-underline-rev{
-                margin-top: 4px;
-                margin-bottom: vw(10);
-                width: vw(8);
-                height: 17px;
-                background-color: map-get($colors, primary);
-            }
-            .revision-title{
-                margin-left: vw(17);
-                font-weight: bold;
-                font-size: 20px;
+            width: 100%;
+            .title-content{
+                display: inline-flex;
+                width: 70%;
+                .ut-underline-rev{
+                    margin-top: 4px;
+                    margin-bottom: vw(10);
+                    width: vw(8);
+                    height: 20px;
+                    background-color: map-get($colors, primary);
+                }
+                .revision-title{
+                    margin-left: vw(17);
+                    font-weight: bold;
+                    font-size: 20px;
+                }
             }
             .revision-search{
-                align-self: flex-end;
+                width: 40%;
                 display: flex;
-                justify-content: flex-end;
-                position: relative;
-                margin-left: 100vh;
+                align-self: flex-end;
             }
         }
     }
