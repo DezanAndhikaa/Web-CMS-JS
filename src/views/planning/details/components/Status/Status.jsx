@@ -111,11 +111,11 @@ export default class Status extends React.PureComponent {
 		}
 		if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
 			prevProps.approveSalesDownloaded.status === ApiRequestActionsStatus.LOADING) {
-			this.onClickDownloadSalesApproved()
+			this.onClickDownloadSales()
 		}
 		if (this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
 			prevProps.approveServiceDownloaded.status === ApiRequestActionsStatus.LOADING) {
-			this.onClickDownloadServiceApproved()
+			this.onClickDownloadService()
 		}
 		if(prevProps.searchSalesApprovedParam !== this.props.searchSalesApprovedParam){
 			this.fetchSearchSalesApproved();
@@ -1087,7 +1087,6 @@ export default class Status extends React.PureComponent {
 	fetchSearchSalesSap = async() => {
 		await this.props.fetchSapSales(this.props.searchSalesSapParam, this.props.token);
 	}
-
 	fetchSearchService = async() => {
 		await this.props.fetchServiceOrder(this.props.searchServiceParameter, this.props.token);
 	} 
@@ -1101,7 +1100,7 @@ export default class Status extends React.PureComponent {
 		await this.props.fetchSapService(this.props.searchSerrviceSapParam, this.props.token);
 	}
 
-	onClickDownloadSalesApproved = () => {
+	onClickDownloadSales = () => {
 		let link = document.createElement("a");
 		document.body.appendChild(link);
 		link.style = "display: none";
@@ -1115,7 +1114,7 @@ export default class Status extends React.PureComponent {
 		window.URL.revokeObjectURL(url);
 	}
 
-	onClickDownloadServiceApproved = () => {
+	onClickDownloadService = () => {
 		let link = document.createElement("a");
 		document.body.appendChild(link);
 		link.style = "display: none";
@@ -1129,19 +1128,6 @@ export default class Status extends React.PureComponent {
 		window.URL.revokeObjectURL(url);
 	}
 
-	handleSalesApprove = async() => {
-		let arr = []
-		const index = this.props.selectedSalesPlans.length
-		if (this.props.selectedSalesPlans.length > 0) {
-		  for (let i = 0; i < index; i++) {
-			arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
-		  }
-		  await this.props.approveSales({SoNumbers : arr, IsApprove: true}, this.props.token)
-		  this.onClickSalesOrder();
-		  await this.props.clearSelectedSalesPlans();
-		 }
-	}
-
 	handleSalesDownload = async() => {
 		let arr = []
 		const index = this.props.selectedSalesPlans.length
@@ -1149,7 +1135,7 @@ export default class Status extends React.PureComponent {
 		  for (let i = 0; i < index; i++) {
 			arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
 		  }
-		}await this.props.downloadSales({SoNumbers: arr}, this.props.token);
+		}await this.props.downloadSales(arr, this.props.token);
 		if (
 		  this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.FAILED
 		) {
@@ -1165,7 +1151,7 @@ export default class Status extends React.PureComponent {
 			arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
 		  }
 		}
-		await this.props.downloadService({WoNumbers: arr}, this.props.token);
+		await this.props.downloadService(arr, this.props.token);
 		if (
 		  this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.FAILED
 		) {
@@ -1334,8 +1320,8 @@ export default class Status extends React.PureComponent {
 						<>
 							<BaseButton titles="Download"
 								{...this.props}
-								whatTabsIsRendered={true}
-								handleSalesApprovedDownload={this.handleSalesApprovedDownload}
+								whatTabsIsRendered= {true}
+								handleSalesDownload= {this.handleSalesDownload} 
 							/>
 							<BaseButton titles="Permanently" 
 								{...this.props}
@@ -1353,8 +1339,8 @@ export default class Status extends React.PureComponent {
 					return(
 						<BaseButton titles="Download"
 							{...this.props}
-							whatTabsIsRendered={true}
-							handleSalesApprovedDownload={this.handleSalesApprovedDownload}
+							whatTabsIsRendered= {true}
+							handleSalesDownload= {this.handleSalesDownload}
 						/>
 					)
 				}
@@ -1374,8 +1360,8 @@ export default class Status extends React.PureComponent {
 						<>
 							<BaseButton titles="Download"
 								{...this.props}
-								whatTabsIsRendered={false}
-								handleServiceDownload={this.handleServiceDownload}
+								whatTabsIsRendered= {false}
+								handleServiceDownload= {this.handleServiceDownload}
 							/>
 							<BaseButton titles="Delete" 
 								{...this.props}
@@ -1398,7 +1384,7 @@ export default class Status extends React.PureComponent {
 							<BaseButton titles="Download"
 								{...this.props}
 								whatTabsIsRendered={false}
-								handleServiceApprovedDownload={this.handleServiceApprovedDownload}
+								handleServiceDownload={this.handleServiceDownload}
 							/>
 							<BaseButton titles="Permanently" 
 								{...this.props}
@@ -1416,8 +1402,8 @@ export default class Status extends React.PureComponent {
 					return(
 						<BaseButton titles="Download"
 							{...this.props}
-							whatTabsIsRendered={false}
-							handleServiceApprovedDownload={this.handleServiceApprovedDownload}
+							whatTabsIsRendered= {false}
+							handleServiceDownload= {this.handleServiceDownload}
 						/>
 					)
 				}

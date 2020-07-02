@@ -138,7 +138,7 @@ export function downloadSalesAction(soId, accessToken){
 		responseType: 'blob',
 		method: RequestMethod.POST,
 		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/downloadsalesorder`,
-		data: { SoNumber: soId },
+		data: { SoNumbers: soId },
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
@@ -152,7 +152,7 @@ export function downloadServiceAction(woId, accessToken){
 		responseType: 'blob',
 		method: RequestMethod.POST,
 		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/downloadserviceorder`,
-		data: { WoNumber: woId },
+		data: { WoNumbers: woId },
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
