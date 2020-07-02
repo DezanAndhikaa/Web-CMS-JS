@@ -4,24 +4,20 @@ import React from 'react';
 import './FilterbyDataAction.scss';
 import { Badge } from '@material-ui/core';
 import { IconApprove, IconHistory, IconInputLT } from '../../assets/icons';
-import { withStyles } from '@material-ui/core/styles';
+import { MenuList, MenuItem, Paper, Typography, withStyles } from '@material-ui/core';
 import { Menu } from '../../constants';
-import MenuList from '@material-ui/core/MenuList';
-import MenuItem from '@material-ui/core/MenuItem';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import roleService from "../../utils/roleService.helper";
 
 const RoleUser = new roleService();
 const DotBadges = withStyles(theme => ({
 	badge: {
-        top: -1,
+    top: -1,
 		left: 4,
-        border: '2px solid white',
-        width: 'auto',
-        minWidth: '15px',
-        height: '15px',
-        borderRadius: '50%'
+    border: '2px solid white',
+    width: 'auto',
+    minWidth: '15px',
+    height: '15px',
+    borderRadius: '50%'
 	},
 }))(Badge);
 
