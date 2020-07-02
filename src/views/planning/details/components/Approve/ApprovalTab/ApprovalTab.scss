@@ -114,6 +114,10 @@
         }
     }
     
+    .planning-list-empty{
+        margin-top: 1.8vw !important;
+    }
+
     .plannings-list-container{
         margin-top: 6vw !important;
         .table{
@@ -149,66 +153,60 @@
                         color: #3C3B3B;
                     }
                 }
-                // .table-row:hover{
-                //     background-color:map-get($colors, primary);
-                // }
             }
         }
     }
 }
 
-// @media (min-width: 600px) and (max-width: 1025px) {
-//     .table-container{
-//         display: flex;
-//         flex-direction: column;
-//         .plannings-list-container{
-//             margin-top: vw-tab(50) !important;
-//             margin-bottom: vw-tab(20) !important;
-//             overflow-x: scroll;
-//             .table{
-//                 font-size: vw(5);
-//                 width: 220%;
-//                 .table-head{
-//                     border-bottom: vw-tab(20) solid #F4F6F8;
-//                     padding-left: vw-tab(5);
-//                     .table-cell{
-//                         padding: 0;
-//                         height: vw-tab(50);
-//                         font-size: vw-tab(13) !important;
-//                         line-height: vw-tab(16) !important;
-//                         font-family: 'Lato-Bold';
-//                         color: #3C3B3B;
-//                     }
-//                 }
-//                 .table-body{
-//                     background-color: #ffffff;
-//                     .table-row{
-//                         border-bottom: vw-tab(10) solid #F4F6F8;
-//                         .table-cell{
-//                             padding: 0;
-//                             height: vw-tab(50);
-//                             font-size: vw-tab(14) !important;
-//                             line-height: vw-tab(17) !important;
-//                             font-family: 'Lato-Medium';
-//                             color: #3C3B3B;
-//                         }
-//                         .checkbox-checked{
-//                             color: #3C3B3B;
-//                         }
-//                     }
-//                     // .table-row:hover{
-//                     //     background-color:map-get($colors, primary);
-//                     // }
-//                 }
-//             }
-//         }
-//     }
-// }
+@media (min-width: 600px) and (max-width: 1025px) {
+    .table-container{
+        display: flex;
+        flex-direction: column;
+        .plannings-list-container{
+            margin-top: vw-tab(50) !important;
+            margin-bottom: vw-tab(20) !important;
+            overflow-x: scroll;
+            .table{
+                font-size: vw(5);
+                width: 220%;
+                .table-head{
+                    border-bottom: vw-tab(20) solid #F4F6F8;
+                    padding-left: vw-tab(5);
+                    .table-cell{
+                        padding: 0;
+                        height: vw-tab(50);
+                        font-size: vw-tab(13) !important;
+                        line-height: vw-tab(16) !important;
+                        font-family: 'Lato-Bold';
+                        color: #3C3B3B;
+                    }
+                }
+                .table-body{
+                    background-color: #ffffff;
+                    .table-row{
+                        border-bottom: vw-tab(10) solid #F4F6F8;
+                        .table-cell{
+                            padding: 0;
+                            height: vw-tab(50);
+                            font-size: vw-tab(14) !important;
+                            line-height: vw-tab(17) !important;
+                            font-family: 'Lato-Medium';
+                            color: #3C3B3B;
+                        }
+                        .checkbox-checked{
+                            color: #3C3B3B;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
-// @media (max-width: 599px) {
-//     .planning-list-container{
-//         display: flex;
-//         flex-direction: column;
-//         width: 100%;
-//     } 
-// }
+@media (max-width: 599px) {
+    .planning-list-container{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    } 
+}

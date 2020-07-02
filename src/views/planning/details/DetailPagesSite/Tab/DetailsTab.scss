@@ -3,7 +3,6 @@
 
 .root{
     flex-grow: 1;
-    // z-index: 0;
     justify-content: center;
     align-items: center;
     .tabsRoot {
@@ -25,13 +24,12 @@
     display: flex;
     .label-site{
         font-family: 'Lato-Bold';
-        font-size: vw(24); //vw(22)
-        line-height: vw(24); // vw(24)
+        font-size: vw(24);
+        line-height: vw(24);
     }
 }
 
 .paper-revision{
-    // display: flex;
     margin-top: vw(35);
     border: 1.5px solid #E0E0E0;
     background-color: transparent;
@@ -40,6 +38,8 @@
         margin: 0 vw(20);
         .rev-title-container{
             margin-top: vw(20);
+            display: flex;
+            flex-direction: row;
             display: inline-flex;
             .ut-underline-rev{
                 margin-top: 4px;
@@ -52,6 +52,13 @@
                 margin-left: vw(17);
                 font-weight: bold;
                 font-size: 20px;
+            }
+            .revision-search{
+                align-self: flex-end;
+                display: flex;
+                justify-content: flex-end;
+                position: relative;
+                margin-left: 100vh;
             }
         }
     }
@@ -78,7 +85,6 @@
         .paging-rev{
             display: flex;
             flex-direction: row;
-            // box-shadow: 0px vw(2) vw(4) rgba(0, 0, 0, 0.161);
             background: #D8D8D8;
             box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.07);
             border-radius: 6px;
@@ -88,9 +94,6 @@
                 justify-content: center;
                 width: 26px;
                 height: 25px;
-                // width: vw(45.99);
-                // min-width: vw(45.99);
-                // height: vw(35.3);
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -104,9 +107,6 @@
             .page-inactive-rev{
                 width: 26px;
                 height: 25px;
-                // width: vw(45.99);
-                // min-width: vw(45.99);
-                // height: vw(35.3);
                 background-color: #D8D8D8;
                 display: flex;
                 align-items: center;
@@ -124,9 +124,6 @@
             .next-page-rev{
                 width: 26px;
                 height: 25px;
-                // width: vw(45.99);
-                // min-width: vw(45.99);
-                // height: vw(35.3);
                 background-color:  #D8D8D8;
                 display: flex;
                 align-items: center;
@@ -147,8 +144,8 @@
 
 .tab-container-site{
     display: flex;
-    width: 70%;
-    left: 30%;
+    width: 76%;
+    left: 24%;
     position: absolute;
     z-index: 1;
     justify-content: flex-end;
@@ -161,56 +158,30 @@
     z-index: 3;
     width: 100%;
     .site-container{
-        // width: 100%;
         display: flex;
         flex-direction: row;
         margin-top: vw(41.93);
-        .total-site-container{
-            display: flex;
-            // position: absolute;
-            width: 306px;
-            height: 89px;
-            background-color: white;
+        .total-data-container{
+            display: inline-flex;
             border-radius: vw(8) !important;
-            box-shadow: 0px vw-tab(3) vw-tab(6) rgba(0, 0, 0, 0.161);
-            .header-site{
-                // position: absolute;
-                width: 93px;
-                flex-wrap: nowrap;
-                .header-site-1{
-                    width: 93px;
-                    display: inline-flex;
-                    margin-left: 22.94%;
-                    // margin-right: 75.26%;
-                    margin-top: 16.72%;
-                    font-size: 20px;//vw(25);
-                    font-family: 'Lato-Bold';
-                    line-height: vw(34); //24px; 
-                }
-                .header-site-2{
-                    width: 93px;
-                    margin-left: 22.86%;
-                    font-family: 'Lato-Regular';
-                    font-size: 15px;
-                    line-height: vw(48);
-                }
-            }
-            .total-site{                    
-                width: 153px;
-                margin-left: 54.72%;
-                margin-top: 12.8%;
+            background-color: rgba(255, 213, 0, 0.25);
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.078);
+            width: 100%;
+            height: 51px;
+            align-items: center;
+            justify-content: center;
+            .text-total{
                 font-family: 'Lato-Bold';
-                font-size: 36px;
-                line-height: vw(43);
+                font-weight: bold;
+                font-size: 25px;
+                line-height: 30px;
                 color: #3C3B3B;
             }
-            .total-sites{                    
-                width: 153px;
-                margin-left: 48.72%;
-                margin-top: 12.8%;
-                font-family: 'Lato-Bold';
-                font-size: 36px;
-                line-height: vw(43);
+            .text-tabs{
+                padding-left: vw(10);
+                font-family: 'Lato-Regular';
+                font-size: 25px;
+                line-height: 30px;
                 color: #3C3B3B;
             }
         }
@@ -225,7 +196,6 @@
         display: flex;
         flex-direction: row;
         .dropdowns-detail-site{
-            // position: absolute;
             width: 100%;
             display: flex;
             flex-direction: row;
@@ -244,10 +214,11 @@
             }
         }
     }
+    .list-detail-empty{
+        margin-top: 1.8vw !important;
+    }
     .plannings-list-detail{
-        // margin-top: 6vw !important;
         .table{
-            // display: block;
             font-size: 0.5vw;
             .table-head{
                 border-bottom: vw(20) solid #F4F6F8;
@@ -268,7 +239,6 @@
                 background-color: white;
                 .table-row{
                     border-bottom: vw(5) solid #F4F6F8;
-                    // cursor: pointer;
                     .table-cell{
                         padding: 0;
                         height: vw(40);
@@ -281,66 +251,7 @@
                         color: #3C3B3B;
                     }
                 }
-                // .table-row:hover{
-                //     background-color:map-get($colors, primary);
-                // }
             }
         }
     }
 }
-
-// @media (min-width: 600px) and (max-width: 1025px) {
-//     .table-container{
-//         display: flex;
-//         flex-direction: column;
-//         .plannings-list-container{
-//             margin-top: vw-tab(50) !important;
-//             margin-bottom: vw-tab(20) !important;
-//             overflow-x: scroll;
-//             .table{
-//                 font-size: vw(5);
-//                 width: 220%;
-//                 .table-head{
-//                     border-bottom: vw-tab(20) solid #F4F6F8;
-//                     padding-left: vw-tab(5);
-//                     .table-cell{
-//                         padding: 0;
-//                         height: vw-tab(50);
-//                         font-size: vw-tab(13) !important;
-//                         line-height: vw-tab(16) !important;
-//                         font-family: 'Lato-Bold';
-//                         color: #3C3B3B;
-//                     }
-//                 }
-//                 .table-body{
-//                     background-color: #ffffff;
-//                     .table-row{
-//                         border-bottom: vw-tab(10) solid #F4F6F8;
-//                         .table-cell{
-//                             padding: 0;
-//                             height: vw-tab(50);
-//                             font-size: vw-tab(14) !important;
-//                             line-height: vw-tab(17) !important;
-//                             font-family: 'Lato-Medium';
-//                             color: #3C3B3B;
-//                         }
-//                         .checkbox-checked{
-//                             color: #3C3B3B;
-//                         }
-//                     }
-//                     // .table-row:hover{
-//                     //     background-color:map-get($colors, primary);
-//                     // }
-//                 }
-//             }
-//         }
-//     }
-// }
-
-// @media (max-width: 599px) {
-//     .planning-list-container{
-//         display: flex;
-//         flex-direction: column;
-//         width: 100%;
-//     } 
-// }

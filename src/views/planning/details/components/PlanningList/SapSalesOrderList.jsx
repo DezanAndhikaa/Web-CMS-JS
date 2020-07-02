@@ -1,9 +1,16 @@
 import React from 'react';
 import {
-  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, TextField, 
+  Checkbox, 
+  Table,
+  TableBody, 
+  TableCell, 
+  TableHead, 
+  TableRow, 
+  TextField, 
+  Button,
+  FormLabel
 } from '@material-ui/core';
 import './PlanningList.scss';
-import '../SapIssue/SapIssue.scss'
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import { 
   SortSalesByCustomer, 
@@ -16,6 +23,7 @@ import {
 import { Spinner } from '../../../../../assets/icons';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from 'moment';
+import EmptyList from '../../../../../components/EmptyList/EmptyList';
 
 export default class SapSalesOrderList extends React.PureComponent {
   constructor(props) {
@@ -161,14 +169,31 @@ export default class SapSalesOrderList extends React.PureComponent {
 
   _showDescription(row){
     return(
-      <div className="teks">
-            <TextField 
-                className="teks"
-                type='text' 
-                variant="outlined" 
-                size="small"
-                value={row.SAPIssueMessage}
-            />
+      <div className="expand-container">
+        <div className="button-container">
+          <Button className="button-reason" id="so">SO</Button>
+          <Button className="button-reason" id="cust">Customer</Button>
+          <Button className="button-reason" id="site">Site</Button>
+          <Button className="button-reason" id="unitModel">Unit Model</Button>
+          <Button className="button-reason" id="compDesc">Component Description</Button>
+          <Button className="button-reason" id="partNumber">Part Number</Button>
+          <Button className="button-reason" id="unitCode">Unit Code</Button>
+          <Button className="button-reason" id="sn">Serial Number</Button>
+          <Button className="button-reason" id="planExec">Plan Execution</Button>
+          <Button className="button-reason" id="smr">SMR</Button>
+          <Button className="button-reason-right" id="smrDate">SMR Date</Button> 
+        </div>
+        <div className="description">
+          <FormLabel className="exp-label">Description: </FormLabel>
+          <TextField 
+            type="text"
+            variant="outlined"
+            className="exp-description"
+            placeholder="Silahkan perbaiki SAP sekarang !!"
+            size="small"
+            value={row.SAPIssueMessage}
+          />
+        </div>
       </div>
     )
   }
@@ -199,9 +224,8 @@ export default class SapSalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.SMRDate} </TableCell>
       </TableRow>
       {this.state[id] ? 
-        <TableRow className="table-row-bottom-issue">
-            <TableCell><label>Description</label></TableCell>
-            <TableCell colSpan="12">{this._showDescription(row)}</TableCell>
+        <TableRow>
+          <TableCell colSpan="13">{this._showDescription(row)}</TableCell>
         </TableRow> : null }
     </>  
     )
@@ -243,19 +267,25 @@ export default class SapSalesOrderList extends React.PureComponent {
   }
 
   render(){
-    return(
-      <>
-        <Table classes={{ root: 'table' }} className="table">
-        {this.showTableHead()}
-        <TableBody classes={{ root: 'table-body' }}>
-          {this.props.salesOrderListSap.Lists
-            && this.props.salesOrderListSap.Lists.map((row, id) => (
-              this.showTableBody(row,id)
-            ))}
-          </TableBody>
-        </Table>
-        {this.showLoading()}
-      </>
-    )
+    if(this.props.salesOrderListSap.Lists.length === 0 && this.props.fetchStatusSalesSap === ApiRequestActionsStatus.SUCCEEDED){
+      return(
+        <EmptyList idEmpty= "SAP" />
+      )
+    }else{
+      return(
+        <>
+          <Table classes={{ root: 'table' }} className="table">
+          {this.showTableHead()}
+          <TableBody classes={{ root: 'table-body' }}>
+            {this.props.salesOrderListSap.Lists
+              && this.props.salesOrderListSap.Lists.map((row, id) => (
+                this.showTableBody(row,id)
+              ))}
+            </TableBody>
+          </Table>
+          {this.showLoading()}
+        </>
+      )
+    }
   }
 }

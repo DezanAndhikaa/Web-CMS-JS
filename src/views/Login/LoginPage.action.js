@@ -1,4 +1,4 @@
-import { ApiUrlBase, RequestMethod } from '../../constants';
+import { RequestMethod } from '../../constants';
 import { callApi } from '../../core/RestClientHelpers';
 
 export const RequestLoginAction = 'REQUEST_LOGIN';
@@ -19,6 +19,5 @@ export function requestLoginAction(username, password) {
 		},
 	};
 
-	console.log ('test: ', requestConfig.url)
 	return async (dispatch) => dispatch(callApi(RequestLoginAction, requestConfig));
 }

@@ -37,7 +37,6 @@ class NotifButton extends React.PureComponent {
     this.setState({ displayMenu: false }, () => {
       document.removeEventListener('click', this.hideDropdownMenu);
     });
-    // await this.props.onClickButton();
   }
 
   selectItem = (item) => {

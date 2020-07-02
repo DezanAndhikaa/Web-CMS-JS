@@ -8,6 +8,7 @@ import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+import EmptyList from '../../../../../components/EmptyList/EmptyList';
 
 export default class DeletedServiceOrderList extends React.PureComponent {
   constructor(props) {
@@ -191,19 +192,25 @@ export default class DeletedServiceOrderList extends React.PureComponent {
   }
 
   render(){
-    return(
-      <>
-        <Table classes={{ root: 'table' }} className="table">
-        {this.showTableHead()}
-        <TableBody classes={{ root: 'table-body' }}>
-          {this.props.serviceOrderListDeleted.Lists
-            && this.props.serviceOrderListDeleted.Lists.map((row, id) => (
-              this.showTableBody(row,id)
-            ))}
-          </TableBody>
-        </Table>
-        {this.showLoading()}
-      </>
-    )
+    if(this.props.serviceOrderListDeleted.Lists.length === 0 && this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.SUCCEEDED){
+      return(
+        <EmptyList idEmpty= "Delete" />
+      )
+    }else{
+      return(
+        <>
+          <Table classes={{ root: 'table' }} className="table">
+          {this.showTableHead()}
+          <TableBody classes={{ root: 'table-body' }}>
+            {this.props.serviceOrderListDeleted.Lists
+              && this.props.serviceOrderListDeleted.Lists.map((row, id) => (
+                this.showTableBody(row,id)
+              ))}
+            </TableBody>
+          </Table>
+          {this.showLoading()}
+        </>
+      )
+    }
   }
 }

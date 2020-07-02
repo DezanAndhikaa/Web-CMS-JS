@@ -1,6 +1,6 @@
 import React from 'react';
 import './FilterByPeriodeDate.scss';
-import CloseButton from '../../components/CloseButton/CloseButton';
+import CloseButton from '../../components/ActionButton/CloseButton/CloseButton';
 import { Button } from '@material-ui/core';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -17,7 +17,6 @@ class FilterByPeriodeDate extends React.Component{
     };
 
     handleChangeStart = date => {
-        // const valueOfInput = moment(date).format('YYYY.MM.DD');
         this.setState({
             startDate: date,
             startFilter: moment(date).format('YYYY-MM-DD')
@@ -37,7 +36,7 @@ class FilterByPeriodeDate extends React.Component{
                 <div className="top-row">
                     <div className="ut-underline"/>
                     <p className="select-input-title">{this.props.title}</p>
-                    <CloseButton onClose={this.props.onClosed}/>
+                    <CloseButton idBtnClose="NonConfirmModal" onClose={this.props.onClosed}/>
                 </div>
                 <div className="teks-middle">
                     <label className="teks-left">From </label>

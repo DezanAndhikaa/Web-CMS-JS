@@ -8,6 +8,7 @@ import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons';
+import EmptyList from '../../../../../components/EmptyList/EmptyList';
 
 export default class ServiceOrderList extends React.PureComponent {
   state = {
@@ -16,7 +17,6 @@ export default class ServiceOrderList extends React.PureComponent {
 
   componentDidMount = async () => {
     await this.props.clearSelectedServicePlans();
-    // await this.props.onClickServiceOrder();
   }
   componentDidUpdate = (prevState) =>{
     if (prevState.serviceParameter !== this.props.serviceParameter || prevState.serviceSearch !== this.props.serviceSearch || 
@@ -172,29 +172,35 @@ export default class ServiceOrderList extends React.PureComponent {
           OOPS THERE WAS AN ERROR :'(
         </div>
       )
-    }else if(this.props.serviceOrderList.Lists.length === 0){
-      return(
-        <div className="loading-container">
-          DATA NOT FOUND
-        </div>
-      )
     }
   }
 
   render(){
-    return(
-      <>
-      <Table classes={{ root: 'table' }} className="table">
-      {this.showTableHead()}
-      <TableBody classes={{ root: 'table-body' }}>
-        {this.props.serviceOrderList.Lists
-          && this.props.serviceOrderList.Lists.map((row, id) => (
-            this.showTableBody(row,id)
-          ))}
-        </TableBody>
-      </Table>
-      {this.showLoading()}
-      </>
+    if(this.props.serviceOrderList.Lists.length === 0 && this.props.idService === "Data Input" 
+      && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED){
+      return(
+        <EmptyList />
       )
+    }else if(this.props.serviceOrderList.Lists.length === 0 && this.props.idTab === "Status"
+      && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED){
+      return(
+        <EmptyList idEmpty= "NA" />
+      )
+    }else{
+      return(
+        <>
+        <Table classes={{ root: 'table' }} className="table">
+        {this.showTableHead()}
+        <TableBody classes={{ root: 'table-body' }}>
+          {this.props.serviceOrderList.Lists
+            && this.props.serviceOrderList.Lists.map((row, id) => (
+              this.showTableBody(row,id)
+            ))}
+          </TableBody>
+        </Table>
+        {this.showLoading()}
+        </>
+      )
+    }
   }
 }

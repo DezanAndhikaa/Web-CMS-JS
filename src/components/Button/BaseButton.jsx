@@ -7,7 +7,6 @@ import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 import ApproveConfirmation from '../ApproveConfirmation/ApproveConfirmation';
 import UnapproveConfirmation from '../UnapproveConfirmation/UnapproveConfirmation'
 import { ApiRequestActionsStatus } from '../../core/RestClientHelpers';
-// import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 
 class BaseButton extends React.Component{
     constructor(props){
@@ -34,36 +33,36 @@ class BaseButton extends React.Component{
             }
             if (this.props.titles === "Delete") {
                 await this.props.handleDeleteSales()
-                // this.isClosed()
             }
             if (this.props.titles === "Cancel Approve"){
                 await this.props.handleSendtoEdit()
-                // this.showModalInfo()
                 this.isClosed()
             }
             if (this.props.titles === "Permanently"){
+                await this.props.handleDeletePermanent()
                 this.isClosed()
             }
         }
         if (this.props.whatTabsIsRendered === false) {
             if (this.props.titles === "Approve") {
                 await this.props.handleServiceApprove();
-                // this.isClosed()
             }
             if (this.props.titles === "Delete") {
                 await this.props.handleDeleteService();
-                // this.isClosed()
+            }
+            if (this.props.titles === "Permanently"){
+                await this.props.handleDeletePermanent()
+                this.isClosed()
             }
         }
     }
 
     isDownloaded = async() => {
         if (this.props.whatTabsIsRendered === true) {
-            await this.props.handleSalesApprovedDownload()
+            await this.props.handleSalesDownload()
         }if (this.props.whatTabsIsRendered === false) {
-            await this.props.handleServiceApprovedDownload()
+            await this.props.handleServiceDownload()
         }
-       
     }
 
     render(){
