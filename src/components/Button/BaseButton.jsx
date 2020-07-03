@@ -42,7 +42,7 @@ class BaseButton extends React.Component{
             if (this.props.titles === "Delete") {
                 await this.props.handleDeleteSales()
             }
-            if (this.props.titles === "Cancel Approve"){
+            if (this.props.titles === "Reject"){
                 await this.props.handleSendtoEdit()
                 this.isClosed()
             }
@@ -94,10 +94,13 @@ class BaseButton extends React.Component{
                     />
                 </div>
             )
-        }else if(this.props.titles === "Cancel Approve"){
+        }else if(this.props.titles === "Reject"){
             return(
                 <div className="button-inline">
-                    <Button className="btn-cancel-approve" onClick={this.isClicked} disabled={this.props.disabledButton}> Cancel Approve</Button>
+                    <Button className={this.props.idReject === "Sales" ? "btn-cancel-approve" : "btn-reject-service"} 
+                        onClick={this.isClicked} disabled={this.props.disabledButton}>
+                        { this.props.idReject === "Sales" ? "Reject" : "SAP Issue" }
+                    </Button>
                     <UnapproveConfirmation 
                         {...this.props}
                         idConfirm = "Cancel"

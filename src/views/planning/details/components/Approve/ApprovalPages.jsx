@@ -496,74 +496,6 @@ class ApprovalPages extends React.Component {
   onClickApprovedService = () => {
     this.props.fetchApprovedService(this.props.serviceParameter.dataFilter, this.props.token);
   }
-  //FUNGSI UNTUK memanggil Data SALES ORDER yang telah terhapus
-  onClickDeletedSales = () => {
-    this.props.fetchDeletedSales(this.props.salesParameter.dataFilter, this.props.token);
-  }
-
-  //FUNGSI UNTUK memanggil Data SERVICE ORDER yang telah terhapus
-  onClickDeletedService = () => {
-    this.props.fetchDeletedService(this.props.serviceParameter.dataFilter, this.props.token);
-  }
-
-  onClickDownloadSalesApproved = () => {
-    let link = document.createElement("a");
-    document.body.appendChild(link);
-    link.style = "display: none";
-    const todayDate = moment(new Date()).format('DD-MM-YYYY');
-    let fileName = "Sales-Order-Planning-" + todayDate + ".csv";
-    let blob = new Blob([this.props.approveSalesDownloaded.data]),
-      url = window.URL.createObjectURL(blob);
-    link.href = url;
-    link.download = fileName;
-    link.click();
-    window.URL.revokeObjectURL(url);
-  }
-
-  onClickDownloadServiceApproved = () => {
-    let link = document.createElement("a");
-    document.body.appendChild(link);
-    link.style = "display: none";
-    const todayDate = moment(new Date()).format('DD-MM-YYYY');
-    let fileName = "Service-Order-Planning-" + todayDate + ".csv";
-    let blob = new Blob([this.props.approveServiceDownloaded.data]),
-      url = window.URL.createObjectURL(blob);
-    link.href = url;
-    link.download = fileName;
-    link.click();
-    window.URL.revokeObjectURL(url);
-  }
-
-  handleSalesApprovedDownload = async () => {
-    let arr = []
-    const index = this.props.selectedSalesPlans.length
-    if (this.props.selectedSalesPlans.length > 0) {
-      for (let i = 0; i < index; i++) {
-        arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
-      }
-    } await this.props.downloadSalesApproved(arr, this.props.token);
-    if (
-      this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.FAILED
-    ) {
-      this.setState({ showError: true });
-    }
-  };
-
-  handleServiceApprovedDownload = async () => {
-    let arr = []
-    const index = this.props.selectedServicePlans.length
-    if (this.props.selectedServicePlans.length > 0) {
-      for (let i = 0; i < index; i++) {
-        arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
-      }
-    }
-    await this.props.downloadServiceApproved(arr, this.props.token);
-    if (
-      this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.FAILED
-    ) {
-      this.setState({ showError: true });
-    }
-  };
 
   handleSalesApprove = async () => {
     let arr = []
@@ -700,10 +632,11 @@ class ApprovalPages extends React.Component {
             handleSalesApprove={this.handleSalesApprove}
             renderSakses={this.changeSuccess}
           />
-          <BaseButton titles="Cancel Approve"
+          <BaseButton titles="Reject"
             {...this.props}
             whichTabs={this.state.whichTabs}
             idCancel="Sales"
+            idReject="Sales"
             selectedDataSAP={this.props.selectedSalesPlans}
             whatTabsIsRendered={this.state.whichTabs}
             disabledButton={this.props.selectedSalesPlans.length < 1}
@@ -727,16 +660,14 @@ class ApprovalPages extends React.Component {
             handleServiceApprove={this.handleServiceApprove}
             renderSakses={this.changeSuccess}
           />
-          <BaseButton titles="Cancel Approve"
+          <BaseButton titles="Reject"
             {...this.props}
             whichTabs={this.state.whichTabs}
             selectedDataSAP={this.props.selectedServicePlans}
             whatTabsIsRendered={this.state.whichTabs}
             disabledButton={this.props.selectedServicePlans.length < 1}
             totalSelectedItems={this.props.selectedServicePlans.length}
-            // handleSendtoEdit={this.handleSendtoEdit}
             selectedData={this.state.selectedData}
-            // renderSakses={this.changeSuccess}
           />
         </div>
       );

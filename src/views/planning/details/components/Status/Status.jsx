@@ -1100,6 +1100,17 @@ export default class Status extends React.PureComponent {
 		await this.props.fetchSapService(this.props.searchSerrviceSapParam, this.props.token);
 	}
 
+	
+  	//FUNGSI UNTUK memanggil Data SALES ORDER yang telah terhapus
+	onClickDeletedSales = () => {
+		this.props.fetchDeletedSales(this.props.salesParameter.dataFilter, this.props.token);
+	}
+
+	//FUNGSI UNTUK memanggil Data SERVICE ORDER yang telah terhapus
+	onClickDeletedService = () => {
+		this.props.fetchDeletedService(this.props.serviceParameter.dataFilter, this.props.token);
+	}
+
 	onClickDownloadSales = () => {
 		let link = document.createElement("a");
 		document.body.appendChild(link);
@@ -1136,9 +1147,7 @@ export default class Status extends React.PureComponent {
 			arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
 		  }
 		}await this.props.downloadSales(arr, this.props.token);
-		if (
-		  this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.FAILED
-		) {
+		if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.FAILED) {
 		  this.setState({ showError: true });
 		}
 	}
@@ -1152,9 +1161,7 @@ export default class Status extends React.PureComponent {
 		  }
 		}
 		await this.props.downloadService(arr, this.props.token);
-		if (
-		  this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.FAILED
-		) {
+		if (this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.FAILED) {
 		  this.setState({ showError: true });
 		}
 	};
@@ -1241,7 +1248,7 @@ export default class Status extends React.PureComponent {
 					arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
 		  		}
 			}
-			await this.props.deletePermanentSales({SoNumbers : arr}, this.props.token);
+			await this.props.deletePermanentSales(arr, this.props.token);
 		}
 		if (this.props.location.whichTab === "service") {
 			let arr = []
@@ -1251,7 +1258,7 @@ export default class Status extends React.PureComponent {
 					arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
 		  		}
 			}
-			await this.props.deletePermanentService({WoNumbers : arr}, this.props.token);
+			await this.props.deletePermanentService(arr, this.props.token);
 		}
 	}
 

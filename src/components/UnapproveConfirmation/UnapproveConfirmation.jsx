@@ -96,17 +96,14 @@ export default class UnapproveConfirmation extends React.PureComponent {
               <div className="confirmation-modal-unapprove">
                 <CloseNotif onClose={this.props.onClose}/>
                 <div className="confirmation-container-unapprove">
-                  <p className="confirmation-title-unapprove">Cancel Approve</p>
+                  <p className="confirmation-title-unapprove">Reject</p>
                   {this.props.idCancel === "Sales" ? <p className="confirmation-title-unapprove">Sales Order</p> :
                   <p className="confirmation-title-unapprove">Service Order</p>}
                   <img className="confirmation-image-unapprove" src={ImgCancelApprove} alt="" />
-                  <p className="confirmation-caption-unapprove"><b>Select one</b> to continue cancel approve</p>
+                  <p className="confirmation-caption-unapprove"><b>Select one</b> to continue reject</p>
                   <div className="btn-row">
                     {this.props.whichTabs ? <Button className="button-edit-lt" onClick={() => this.isClickedSend()}>Edit Lifetime</Button> : null }
-                    <Button className={this.props.whichTabs ? "button-sap-issue" : "button-sap-issue-service"} onClick={this.props.whichTabs? () => this.handleClick(Menu.PLANNING_SAP, 'sales') : this.handleClick(Menu.PLANNING_SAP, 'service')}>SAP Issue</Button>
-                  </div>
-                  <div className={this.props.whichTabs ? "labelMax" : "labelMax-service" }>
-                    <label>* Max 5 Items</label>
+                    <Button className="button-sap-issue" onClick={this.props.whichTabs? () => this.handleClick(Menu.PLANNING_SAP, 'sales') : this.handleClick(Menu.PLANNING_SAP, 'service')}>SAP Issue</Button>
                   </div>
                 </div>
               </div>
