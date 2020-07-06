@@ -49,9 +49,6 @@ componentDidUpdate = (prevProps) => {
   if(prevProps.searchSalesParameter !== this.props.searchSalesParameter){
     this.fetchSearchSales();
   }
-  if(prevProps.searchSalesRevParam !== this.props.searchSalesRevParam){
-    this.fetchSearchSalesRev();
-  }
   if(prevProps.searchServiceParameter !== this.props.searchServiceParameter){
     this.fetchSearchService();
   }
@@ -82,7 +79,9 @@ componentDidUpdate = (prevProps) => {
       }
     }
   }
-
+  if(prevProps.searchSalesRevParam !== this.props.searchSalesRevParam){
+    this.fetchSearchSalesRev();
+  }
   //FILTER RANGE LIFETIME
   if(Number(RoleUser.role()) === 3){
     if(this.state.whichTabs){
@@ -816,7 +815,6 @@ componentDidUpdate = (prevProps) => {
   };
 
   render(){     
-    console.log('sales search rev : ',this.props.salesSearchRevision)
     return(
       <main className="content">
           <div className="table-detail-site">
