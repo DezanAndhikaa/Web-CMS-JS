@@ -25,7 +25,6 @@ import {
 	UpdateSalesRevisedParamAction,
 	ResetSelectedMechanicsAction,
 	SearchSalesAction,
-	SearchRevisedSalesOrder,
 	SearchServiceAction,
 	UpdateServiceApprovedParameterAction,
 	UpdateServiceDeletedParameterAction,
@@ -34,7 +33,6 @@ import {
 	UpdateSearchSalesApprovedAction,
 	UpdateSearchSalesDeletedAction,
 	UpdateSearchSalesSapAction,
-	UpdateSearchSalesRevAction,
 	UpdateSearchServiceAction,
 	UpdateSearchServiceApprovedAction,
 	UpdateSearchServiceDeletedAction,
@@ -54,7 +52,8 @@ import {
 	SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc,
 	UnselectSalesPlanAction, UnselectServicePlanAction,
 	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, FetchServiceAction,
-	IndexFilterAction, LifetimeFilterAction, DateFilterAction
+	IndexFilterAction, LifetimeFilterAction, DateFilterAction,
+	SearchRevisedSalesOrder, UpdateSearchSalesRevAction
 } from './DetailPages-action';
 
 const initialSalesAssignment = {
