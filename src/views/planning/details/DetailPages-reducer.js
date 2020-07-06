@@ -542,11 +542,6 @@ export function searchSalesSapReducer(state = initialSearchParameter, action) {
 	return state;
 }
 
-export function searchSalesRevParamReducer(state = initialSearchParameter, action) {
-	if (action.type === UpdateSearchSalesRevAction) return action.payload;
-	return state;
-}
-
 export function searchServiceParameterReducer(state = initialSearchParameter, action) {
 	if (action.type === UpdateSearchServiceAction) return action.payload;
 	return state;
@@ -707,11 +702,6 @@ export function serviceParameterDeletedReducer(state = initialServiceParameter, 
 
 export function searchSalesReducer(state = '', action) {
 	if (action.type === SearchSalesAction) return action.payload;
-	return state;
-}
-
-export function searchSalesRevReducer(state = '', action) {
-	if (action.type === SearchRevisedSalesOrder) return action.payload;
 	return state;
 }
 
@@ -909,6 +899,16 @@ export function storePlanDataReducer(state = {}, action) {
 	return { ...state };
 }
 
+export function searchSalesRevParamReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchSalesRevAction) return action.payload;
+	return state;
+}
+
+export function searchSalesRevReducer(state = '', action) {
+	if (action.type === SearchRevisedSalesOrder) return action.payload;
+	return state;
+}
+
 const PlansReducers = combineReducers({
 	selectedLeader: selectLeaderReducer,
 	selectedFilters: selectedFiltersReducer,
@@ -939,13 +939,11 @@ const PlansReducers = combineReducers({
 	sortSalesBy: sortSalesByReducer,
 	sortServiceBy: sortServiceByReducer,
 	salesSearch: searchSalesReducer,
-	salesSearchRevision: searchSalesRevReducer,
 	serviceSearch: searchServiceReducer,
 	searchSalesParameter: searchSalesParameterReducer,
 	searchSalesApprovedParam: searchSalesApprovedReducer,
 	searchSalesDeletedParam: searchSalesDeletedReducer,
 	searchSalesSapParam: searchSalesSapReducer,
-	searchSalesRevParam: searchSalesRevParamReducer,
 	searchServiceParameter: searchServiceParameterReducer,
 	searchServiceApprovedParam: searchServiceApprovedReducer,
 	searchServiceDeletedParam: searchServiceDeletedReducer,
@@ -961,7 +959,9 @@ const PlansReducers = combineReducers({
 	salesDeleted: deletedSalesReducer,
 	serviceDeleted: deletedServiceReducer,
 	filterLifetime: filterLifetimeReducer,
-	filterDate: filterDateReducer
+	filterDate: filterDateReducer,
+	salesSearchRevision: searchSalesRevReducer,
+	searchSalesRevParam: searchSalesRevParamReducer	
 });
 
 export { PlansReducers };
