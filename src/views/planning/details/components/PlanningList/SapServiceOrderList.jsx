@@ -1,16 +1,9 @@
 import React from 'react';
 import {
-  Checkbox, 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableRow, 
-  TextField, 
-  FormLabel,
-  Button
+  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, TextField, 
 } from '@material-ui/core';
 import './PlanningList.scss';
+import '../SapIssue/SapIssue.scss'
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import { 
   SortServiceByCustomer, 
@@ -23,10 +16,7 @@ import {
 import { Spinner } from '../../../../../assets/icons';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from 'moment';
-import EmptyList from '../../../../../components/EmptyList/EmptyList';
-import roleService from "../../../../../utils/roleService.helper";
 
-const RoleUser = new roleService();
 export default class SapServiceOrderList extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -54,6 +44,7 @@ export default class SapServiceOrderList extends React.PureComponent {
       ...this.props.serviceSapParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
     });
   }
+  
 
   isFilterLifetime = async( value1, value2 ) => {
     this.props.lifetimeFilter( LifetimeFilterAction, value1, value2, this.props.serviceSapParameter.dataFilter.PageSize );
@@ -87,17 +78,15 @@ export default class SapServiceOrderList extends React.PureComponent {
       return (
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow classes={{ root: 'table-row' }}>
-          {Number(RoleUser.role()) !== 1 ? "" : 
-            <TableCell padding="checkbox">
-              {this.props.displayServiceCheckbox && 
-              <Checkbox 
-                checked={this.state.checkedValue}
-                onChange={this.handleClicks}
-                onClick={() => {this.props.serviceOrderListSap.Lists.map((row,id) => 
-                this.props.onChoosedService(row,id))}}
-                className="checkbox-checked-header"/>}
-            </TableCell>
-          }
+          <TableCell padding="checkbox">
+            {this.props.displayServiceCheckbox && 
+            <Checkbox 
+              checked={this.state.checkedValue}
+              onChange={this.handleClicks}
+              onClick={() => {this.props.serviceOrderListSap.Lists.map((row,id) => 
+              this.props.onChoosedService(row,id))}}
+              className="checkbox-checked-header"/>}
+          </TableCell>
           <PlanningListHeader
             name="WO"
             delay={300}
@@ -163,29 +152,14 @@ export default class SapServiceOrderList extends React.PureComponent {
 
   _showDescription(row){
     return(
-      <div className="expand-container">
-        <div className="button-container">
-          <Button className="button-reason" id="so">WO</Button>
-          <Button className="button-reason" id="cust">Customer</Button>
-          <Button className="button-reason" id="site">Site</Button>
-          <Button className="button-reason" id="unitModel">Unit Model</Button>
-          <Button className="button-reason" id="compDesc">Component Description</Button>
-          <Button className="button-reason" id="partNumber">Part Number</Button>
-          <Button className="button-reason" id="unitCode">Unit Code</Button>
-          <Button className="button-reason" id="sn">Serial Number</Button>
-          <Button className="button-reason" id="planExec">Plan Execution</Button>
-        </div>
-        <div className="description">
-          <FormLabel className="exp-label">Description: </FormLabel>
-          <TextField 
-            type="text"
-            variant="outlined"
-            className="exp-description"
-            placeholder="Silahkan perbaiki SAP sekarang !!"
+      <div className="teks">
+        <TextField 
+            className="teks"
+            type='text' 
+            variant="outlined" 
             size="small"
             value={row.SAPIssueMessage}
-          />
-        </div>
+        />
       </div>
     )
   }
@@ -194,16 +168,14 @@ export default class SapServiceOrderList extends React.PureComponent {
     return (
     <>
       <TableRow key={id} classes={{ root: 'table-row' }} onClick={() => this.handleExpand(id)}>
-        { Number(RoleUser.role()) !== 1 ? "" :
-          <TableCell padding="checkbox">
-            {this.props.displayServiceCheckbox && 
-            <Checkbox 
-            disabled={this.isCheckboxAvailable(row)} 
-            checked={this.props.selectedServicePlanList.some((plans) => plans.WoNumber === row.WoNumber)} 
-            onClick={() => this.props.onChoosedService(row)} 
-            classes={{ checked: 'checkbox-checked' }} />}
-          </TableCell>
-        }
+        <TableCell padding="checkbox">
+          {this.props.displayServiceCheckbox && 
+          <Checkbox 
+          disabled={this.isCheckboxAvailable(row)} 
+          checked={this.props.selectedServicePlanList.some((plans) => plans.WoNumber === row.WoNumber)} 
+          onClick={() => this.props.onChoosedService(row)} 
+          classes={{ checked: 'checkbox-checked' }} />}
+        </TableCell>
         <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
@@ -216,9 +188,10 @@ export default class SapServiceOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
       </TableRow>
       {this.state[id] ? 
-        <TableRow>
-        <TableCell colSpan="13">{this._showDescription(row)}</TableCell>
-      </TableRow> : null }
+        <TableRow className="table-row-bottom-issue">
+            <TableCell colSpan="2"><label>Description:</label></TableCell>
+            <TableCell colSpan="11">{this._showDescription(row)}</TableCell>
+        </TableRow> : null }
     </>  
     )
   }
@@ -259,25 +232,19 @@ export default class SapServiceOrderList extends React.PureComponent {
   }
 
   render(){
-    if(this.props.serviceOrderListSap.Lists.length === 0 && this.props.fetchStatusServiceSap === ApiRequestActionsStatus.SUCCEEDED){
-      return(
-        <EmptyList idEmpty= "SAP" />
-      )
-    }else{
-      return(
-        <>
-          <Table classes={{ root: 'table' }} className="table">
-          {this.showTableHead()}
-          <TableBody classes={{ root: 'table-body' }}>
-            {this.props.serviceOrderListSap.Lists
-              && this.props.serviceOrderListSap.Lists.map((row, id) => (
-                this.showTableBody(row,id)
-              ))}
-            </TableBody>
-          </Table>
-          {this.showLoading()}
-        </>
-      )
-    }
+    return(
+      <>
+        <Table classes={{ root: 'table' }} className="table">
+        {this.showTableHead()}
+        <TableBody classes={{ root: 'table-body' }}>
+          {this.props.serviceOrderListSap.Lists
+            && this.props.serviceOrderListSap.Lists.map((row, id) => (
+              this.showTableBody(row,id)
+            ))}
+          </TableBody>
+        </Table>
+        {this.showLoading()}
+      </>
+    )
   }
 }
