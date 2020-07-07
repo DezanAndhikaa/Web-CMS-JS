@@ -710,7 +710,7 @@ class ApprovalPages extends React.Component {
           displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
           stats={this.state.stats}
           onStats={this.isChangeStat}
-          totalSalesData={this.props.salesOrderList.TotalDataQuery}
+          totalSalesData={this.props.salesOrderList.TotalDataApproval}
           totalServiceData={this.props.serviceOrderList.TotalData}
           onClickTabHead={this.props.onClickSortBy}
           sortSalesByState={this.props.sortSalesBy}

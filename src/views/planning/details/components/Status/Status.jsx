@@ -2028,14 +2028,14 @@ export default class Status extends React.PureComponent {
 				approveTotalData : this.props.salesOrderListApproved.TotalData,
 				notApproveTotalData : this.props.salesOrderList.TotalData,
 				deleteTotalData : this.props.salesOrderListDeleted.TotalData,
-				sapIssueTotalData : this.props.salesOrderListSap.TotalData
+				sapIssueTotalData : this.props.salesOrderListSap.TotalDataSAPIssue
 			})
 		}else if (this.props.location.whichTab === "service") {
 			this.setState({
 				approveTotalData : this.props.serviceOrderListApproved.TotalData,
 				notApproveTotalData : this.props.serviceOrderList.TotalData,
 				deleteTotalData : this.props.serviceOrderListDeleted.TotalData,
-				sapIssueTotalData : this.props.serviceOrderListSap.TotalData
+				sapIssueTotalData : this.props.serviceOrderListSap.TotalDataSAPIssue
 			})
 		}
 	}
