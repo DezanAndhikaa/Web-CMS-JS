@@ -28,17 +28,17 @@ export default class SapIssue extends React.Component{
           <TableCell>Customer</TableCell>
           <TableCell>Site</TableCell>
           <TableCell>Unit Model</TableCell>
-          <TableCell>Component &nbsp; Description</TableCell>
-          <TableCell>Part &nbsp; Number</TableCell>
-          <TableCell>Unit &nbsp; Code</TableCell>
-          <TableCell>Serial &nbsp; Number</TableCell>
+          <TableCell>Component Description</TableCell>
+          <TableCell>Part Number</TableCell>
+          <TableCell>Unit Code</TableCell>
+          <TableCell>Serial Number</TableCell>
           <TableCell>Lifetime</TableCell>
           <TableCell>Plan</TableCell>
           {this.props.whichTabs ? 
-            <div>
+            <>
               <TableCell>SMR</TableCell>
-              <TableCell>SMR &nbsp;Date</TableCell>
-            </div>:
+              <TableCell>SMR Date</TableCell>
+            </>:
             null
           }
         </TableRow>
@@ -72,7 +72,7 @@ export default class SapIssue extends React.Component{
           }
         </TableRow>
         <TableRow className="table-row-bottom-issue">
-          <TableCell><label>Description &nbsp; :</label></TableCell>
+          <TableCell colSpan="1"><label>Description:</label></TableCell>
           <TableCell colSpan="11">{this._showDescription(id)}</TableCell>
         </TableRow>
       </>
