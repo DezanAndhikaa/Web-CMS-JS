@@ -4,7 +4,7 @@ export const RequestMethod = {
 	PUT: 'PUT',
 	DELETE: 'DELETE',
 };
-  
+
 export const Menu = {
 	LOGIN: '/webcms/',
 	PLANNING : '/webcms/planning',
@@ -22,19 +22,19 @@ export const Menu = {
 	SETTINGS: '/websmsjs/settings',
 	LOGOUT: '/websmsjs/logout',
 };
-  
+
 export const USER_DATA = 'USER_DATA';
 export const PLAN_DATA = 'SELECTED_PLAN_DATA';
 export const USER_LOGOUT = 'USER_LOGOUT';
 export const REQUEST_TIME_OUT = 50000;
-  
+
 export const StorageKey = {
 	USER_DATA: 'USER_DATA_STORAGE_KEY',
 	PLAN_DATA: 'PLAN_DATA_STORAGE_KEY',
 };
-  
+
 export const BasePathDev = '.';
 export const BasePathProv = '../..';
 export const BasePathSec = '..';
-  
+
 export const BasePath = BasePathDev;

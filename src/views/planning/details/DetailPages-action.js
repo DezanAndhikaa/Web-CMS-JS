@@ -31,6 +31,7 @@ export const ResetSelectedLeaderAction = 'RESET_SELECTED_LEADER';
 export const salesDownloadAction = 'DOWNLOAD_APPROVED_SALES';
 export const serviceDownloadAction = 'DOWNLOAD_APPROVED_SERVICE';
 export const SearchSalesAction = 'SEARCH_SALES_PLANS';
+export const SearchSalesRevisiAction = 'SEARCH_SALES_REVISI_PLANS';
 export const SearchServiceAction = 'SEARCH_SERVICE_PLANS';
 export const SearchCompAction = 'SEARCH_BY_COMP';
 export const SearchCompActionApproved = 'SEARCH_BY_COMP_APPROVED_SALES';
@@ -62,6 +63,7 @@ export const UnselectSalesPlanAction = 'UNSELECT_SALES_PLANS';
 export const UnselectServicePlanAction = 'UNSELECT_SERVICE_PLANS';
 export const UnselectMechanicAction = 'UNSELECT_MECHANIC';
 export const UpdateSearchSalesAction = 'SALES_SEARCH_PARAMETER';
+export const UpdateSearchSalesRevisiAction = 'SALES_SEARCH_REVISI_PARAMETER';
 export const UpdateSearchSalesApprovedAction = 'SALES_SEARCH_APPROVED_PARAMETER';
 export const UpdateSearchSalesDeletedAction = 'SALES_SEARCH_DELETED_PARAMETER';
 export const UpdateSearchSalesSapAction = 'SALES_SEARCH_SAP_PARAMETER';
@@ -69,6 +71,7 @@ export const UpdateSearchSalesRevAction = 'SALES_SEARCH_REVISED_PARAMETER';
 export const UpdateSearchServiceAction = 'SERVICE_SEARCH_PARAMETER';
 export const UpdateSearchServiceApprovedAction = 'SERVICE_SEARCH_APPROVED_PARAMETER';
 export const UpdateSearchServiceDeletedAction = 'SERVICE_SEARCH_DELETED_PARAMETER';
+export const UpdateSearchSalesRevisionAction = 'SALES_SEARCH_REVISED_PARAMETER';
 export const UpdateSearchServiceSapAction = 'SERVICE_SEARCH_SAP_PARAMETER';
 export const UpdateSalesParameterAction = 'SALES_PARAMETER';
 export const UpdateSalesApprovedParameterAction = 'SALES_APPROVED_PARAMETER';
@@ -82,20 +85,20 @@ export const UpdateServiceSapParameterAction = 'SERVICE_SAP_PARAMETER';
 export const SalesOrderFilterAction = 'SALES_ORDER_FILTER';
 export const SelectCustomerFilterAction = 'SELECT_CUSTOMER_FILTER';
 export const SelectSiteFilterAction = 'SELECT_SITE_FILTER';
-export const SelectUnitModelFilterAction ='SELECT_UNIT_MODEL_FILTER';
-export const SelectComponentFilterAction ='SELECT_COMPONENT_FILTER';
+export const SelectUnitModelFilterAction = 'SELECT_UNIT_MODEL_FILTER';
+export const SelectComponentFilterAction = 'SELECT_COMPONENT_FILTER';
 export const IndexFilterAction = 'INDEX FILTER';
 export const LifetimeFilterAction = 'SELECT_LIFETIME_FILTER';
 export const DateFilterAction = 'SELECT_DATE_FILTER';
 
-export function approveSalesAction(payload, accessToken){
+export function approveSalesAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.PUT,
 		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/approval`,
 		headers: {
 			'Accept': 'application/json; charset=utf-8',
 			Authorization: `Bearer ${accessToken}`,
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Content-Type': 'application/json; charset=utf-8',
 		},
 		data: payload,
@@ -103,14 +106,14 @@ export function approveSalesAction(payload, accessToken){
 	return async (dispatch) => dispatch(callApi(ApproveSalesAction, requestConfig));
 }
 
-export function approveServiceAction(payload, accessToken){
+export function approveServiceAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.PUT,
 		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/approval`,
 		headers: {
 			'Accept': 'application/json; charset=utf-8',
 			Authorization: `Bearer ${accessToken}`,
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Content-Type': 'application/json; charset=utf-8',
 		},
 		data: payload,
@@ -125,7 +128,7 @@ export function unapproveSalesAction(payload, accessToken) {
 		headers: {
 			'Accept': 'application/json; charset=utf-8',
 			Authorization: `Bearer ${accessToken}`,
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Content-Type': 'application/json; charset=utf-8',
 		},
 		data: payload,
@@ -133,7 +136,7 @@ export function unapproveSalesAction(payload, accessToken) {
 	return async (dispatch) => dispatch(callApi(UnapproveSalesAction, requestConfig));
 }
 
-export function downloadSalesAction(soId, accessToken){
+export function downloadSalesAction(soId, accessToken) {
 	const requestConfig = {
 		responseType: 'blob',
 		method: RequestMethod.POST,
@@ -141,13 +144,13 @@ export function downloadSalesAction(soId, accessToken){
 		data: { SoNumbers: soId },
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
-		  	'Content-Type': 'application/json',
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'Content-Type': 'application/json',
 		},
-	  };
-	  return async (dispatch) => dispatch(callApi(salesDownloadAction, requestConfig));
+	};
+	return async (dispatch) => dispatch(callApi(salesDownloadAction, requestConfig));
 }
-export function downloadServiceAction(woId, accessToken){
+export function downloadServiceAction(woId, accessToken) {
 	const requestConfig = {
 		responseType: 'blob',
 		method: RequestMethod.POST,
@@ -155,27 +158,27 @@ export function downloadServiceAction(woId, accessToken){
 		data: { WoNumbers: woId },
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
-		  	'Content-Type': 'application/json',
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'Content-Type': 'application/json',
 		},
-	  };
-	  return async (dispatch) => dispatch(callApi(serviceDownloadAction, requestConfig));
+	};
+	return async (dispatch) => dispatch(callApi(serviceDownloadAction, requestConfig));
 }
 
-export function putLifetimeCompAction(payload, accessToken){
+export function putLifetimeCompAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.PUT,
 		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/lifetimecomponent`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8',
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Content-Type': 'application/json; charset=utf-8',
 		},
 		data: payload,
 	};
 	return async (dispatch) => dispatch(callApi(PutLifetimeComp, requestConfig));
-} 
+}
 
 export function putSAPIssueAction(payload, accessToken){
 	const requestConfig = {
@@ -184,7 +187,7 @@ export function putSAPIssueAction(payload, accessToken){
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8; text/plain',
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Content-Type': 'application/json; charset=utf-8',
 		},
 		data: payload
@@ -192,13 +195,13 @@ export function putSAPIssueAction(payload, accessToken){
 	return async (dispatch) => dispatch(callApi(PutSAPIssue, requestConfig));
 }
 
-export function deleteSalesAction(payload, accessToken){
+export function deleteSalesAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.DELETE,
 		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/delete`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
 		},
@@ -207,14 +210,14 @@ export function deleteSalesAction(payload, accessToken){
 	return async (dispatch) => dispatch(callApi(DeleteSalesAction, requestConfig));
 }
 
-export function deletePermanentSalesAction(payload, accessToken){
+export function deletePermanentSalesAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.DELETE,
 		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/deletepermanent`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8',
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Content-Type': 'application/json; charset=utf-8',
 		},
 		data: payload,
@@ -222,13 +225,13 @@ export function deletePermanentSalesAction(payload, accessToken){
 	return async (dispatch) => dispatch(callApi(DeletePermanentSalesAction, requestConfig));
 }
 
-export function deleteServiceAction(payload, accessToken){
+export function deleteServiceAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.DELETE,
 		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/delete`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
 		},
@@ -237,14 +240,14 @@ export function deleteServiceAction(payload, accessToken){
 	return async (dispatch) => dispatch(callApi(DeleteServiceAction, requestConfig));
 }
 
-export function deletePermanentServiceAction(payload, accessToken){
+export function deletePermanentServiceAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.DELETE,
 		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/deletepermanent`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8',
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Content-Type': 'application/json; charset=utf-8',
 		},
 		data: payload,
@@ -260,7 +263,7 @@ export function fetchSearchSalesAction(payload, accessToken) {
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8',
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Content-Type': 'application/json; charset=utf-8',
 		},
 		data: filter,
@@ -276,7 +279,7 @@ export function fetchSearchServiceAction(payload, accessToken) {
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8',
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Content-Type': 'application/json; charset=utf-8',
 		},
 		data: filter,
@@ -292,7 +295,7 @@ export function fetchSalesAction(payload, accessToken) {
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8',
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Content-Type': 'application/json; charset=utf-8',
 		},
 		data: filter,
@@ -307,7 +310,7 @@ export function fetchServiceAction(payload, accessToken) {
 		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/filterunapproved`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
 		},
@@ -316,13 +319,13 @@ export function fetchServiceAction(payload, accessToken) {
 	return async (dispatch) => dispatch(callApi(FetchServiceAction, requestConfig));
 }
 
-export function fetchApprovedSalesAction(payload, accessToken){
+export function fetchApprovedSalesAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/filterapproved`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
 		},
@@ -331,13 +334,13 @@ export function fetchApprovedSalesAction(payload, accessToken){
 	return async (dispatch) => dispatch(callApi(FetchApprovedSalesAction, requestConfig));
 }
 
-export function fetchApprovedServiceAction(payload, accessToken){
+export function fetchApprovedServiceAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/filterapproved`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
 		},
@@ -346,13 +349,13 @@ export function fetchApprovedServiceAction(payload, accessToken){
 	return async (dispatch) => dispatch(callApi(FetchApprovedServiceAction, requestConfig));
 }
 
-export function fetchDeletedSalesAction(payload, accessToken){
+export function fetchDeletedSalesAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/filterdeleted`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
 		},
@@ -361,13 +364,13 @@ export function fetchDeletedSalesAction(payload, accessToken){
 	return async (dispatch) => dispatch(callApi(FetchDeletedSalesAction, requestConfig));
 }
 
-export function fetchDeletedServiceAction(payload, accessToken){
+export function fetchDeletedServiceAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/filterdeleted`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
 		},
@@ -376,13 +379,13 @@ export function fetchDeletedServiceAction(payload, accessToken){
 	return async (dispatch) => dispatch(callApi(FetchDeletedServiceAction, requestConfig));
 }
 
-export function fetchRevisedSalesAction(payload, accessToken){
+export function fetchRevisedSalesAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/filterunapproved`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
 		},
@@ -391,13 +394,13 @@ export function fetchRevisedSalesAction(payload, accessToken){
 	return async (dispatch) => dispatch(callApi(FetchRevisedSalesAction, requestConfig));
 }
 
-export function fetchSapSalesAction(payload, accessToken){
+export function fetchSapSalesAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/filterunapproved`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
 		},
@@ -406,13 +409,13 @@ export function fetchSapSalesAction(payload, accessToken){
 	return async (dispatch) => dispatch(callApi(FetchSapSalesAction, requestConfig));
 }
 
-export function fetchSapServiceAction(payload, accessToken){
+export function fetchSapServiceAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.POST,
 		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/filterunapproved`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
-			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Accept': 'application/json; charset=utf-8',
 			'Content-Type': 'application/json; charset=utf-8',
 		},
@@ -440,6 +443,10 @@ export function searchSalesParameterAction(type, payload) {
 
 export function searchSalesApprovedAction(type, payload) {
 	return { type, payload };
+}
+
+export function searchSalesRevisionAction(type, payload) {
+	return { type, payload }
 }
 
 export function searchSalesDeletedAction(type, payload) {
@@ -479,7 +486,7 @@ export function salesParameterApprovedAction(type, payload) {
 export function salesParameterDeletedAction(type, payload) {
 	return { type, payload };
 }
-export function salesParameterSapAction(type, payload){
+export function salesParameterSapAction(type, payload) {
 	return { type, payload };
 }
 export function serviceParameterAction(type, payload) {
@@ -491,22 +498,27 @@ export function serviceParameterApprovedAction(type, payload) {
 export function serviceParameterDeletedAction(type, payload) {
 	return { type, payload };
 }
-export function serviceParameterSapAction(type, payload){
+export function serviceParameterSapAction(type, payload) {
 	return { type, payload };
 }
-export function salesParameterRevAction(type, payload){
+export function salesParameterRevAction(type, payload) {
 	return { type, payload };
 }
 export function searchAction(type, payload) {
 	return { type, payload };
 }
-export function searchCompAction(type, payload, sort){
+
+export function searchRevisiGlobalAction(type, payload) {
+	return { type, payload };
+}
+
+export function searchCompAction(type, payload, sort) {
 	return { type, payload, sort };
 }
-export function searchCompActionService(type, payload, sort){
+export function searchCompActionService(type, payload, sort) {
 	return { type, payload, sort };
 }
-export function dateFilterAction(type, payload, payload2, page){
+export function dateFilterAction(type, payload, payload2, page) {
 	return { type, payload, payload2, page };
 }
 export function selectFilterAction(type, payload, payload2, page) {
@@ -515,7 +527,7 @@ export function selectFilterAction(type, payload, payload2, page) {
 export function selectFilterAction2(type, payload, head, page) {
 	return { type, payload, head, page };
 }
-export function indexFilterAction(type, payload){
+export function indexFilterAction(type, payload) {
 	return { type, payload };
 }
 export function selectSalesPlansAction(type, payload) {

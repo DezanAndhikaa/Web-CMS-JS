@@ -19,8 +19,8 @@ export default class RevisedSalesOrderList extends React.PureComponent {
       stats: false,
       openModalrevised: false,
       putLifetime: {
-        SoNumber : '',
-        LifeTimeComponent : '',
+        SoNumber: '',
+        LifeTimeComponent: '',
       }
     }
   }
@@ -29,54 +29,54 @@ export default class RevisedSalesOrderList extends React.PureComponent {
     await this.props.onClickRevisedSales();
   }
 
-  componentWillMount = () =>{
+  componentWillMount = () => {
     this.props.updateSalesRevParameter({
       ...this.props.salesRevisedParam.dataFilter, PageNumber: 1, PageSize: 5, Sort: [], Filter: [],
     });
   }
 
-  putLifetimke = async(data) => {
+  putLifetimke = async (data) => {
     await this.props.putLifetimeComp(data, this.props.token);
     this.setState({
-      openModalrevised : !this.state.openModalrevised
+      openModalrevised: !this.state.openModalrevised
     })
     await this.props.onClickRevisedSales();
   }
-  
-  isPutLifetime =  async(key, value) => {
-      this.setState({
-        putLifetime: {
-          SoNumber : key,
-          LifeTimeComponent: value
-        },
-        stats: true
-      }, 
-      () => this.putLifetimke(this.state.putLifetime) 
-      )
+
+  isPutLifetime = async (key, value) => {
+    this.setState({
+      putLifetime: {
+        SoNumber: key,
+        LifeTimeComponent: value
+      },
+      stats: true
+    },
+      () => this.putLifetimke(this.state.putLifetime)
+    )
   }
 
   showTableHead() {
-      return (
-        <TableHead className="table-head" classes={{ root: 'table-head' }}>
-          <TableRow classes={{ root: 'table-row' }}>
-            <TableCell align="left" className="table-cell">SO</TableCell>
-            <TableCell align="left" className="table-cell">Customer</TableCell>
-            <TableCell align="left" className="table-cell">Site</TableCell>
-            <TableCell align="left" className="table-cell">Unit Model</TableCell>
-            <TableCell align="left" className="table-cell">Component Description</TableCell>
-            <TableCell align="left" className="table-cell">Part Number</TableCell>
-            <TableCell align="left" className="table-cell">Unit Code</TableCell>
-            <TableCell align="left" className="table-cell">Serial Number</TableCell>
-            <TableCell align="left" className="table-cell">Lifetime Component</TableCell>
-            <TableCell align="left" className="table-cell">Plan Execution</TableCell>
-            <TableCell align="left" className="table-cell">SMR</TableCell>
-            <TableCell align="left" className="table-cell">SMR Date</TableCell>
-          </TableRow>
+    return (
+      <TableHead className="table-head" classes={{ root: 'table-head' }}>
+        <TableRow classes={{ root: 'table-row' }}>
+          <TableCell align="left" className="table-cell">SO</TableCell>
+          <TableCell align="left" className="table-cell">Customer</TableCell>
+          <TableCell align="left" className="table-cell">Site</TableCell>
+          <TableCell align="left" className="table-cell">Unit Model</TableCell>
+          <TableCell align="left" className="table-cell">Component Description</TableCell>
+          <TableCell align="left" className="table-cell">Part Number</TableCell>
+          <TableCell align="left" className="table-cell">Unit Code</TableCell>
+          <TableCell align="left" className="table-cell">Serial Number</TableCell>
+          <TableCell align="left" className="table-cell">Lifetime Component</TableCell>
+          <TableCell align="left" className="table-cell">Plan Execution</TableCell>
+          <TableCell align="left" className="table-cell">SMR</TableCell>
+          <TableCell align="left" className="table-cell">SMR Date</TableCell>
+        </TableRow>
       </TableHead>
     )
   }
 
-  showTableBody(row,id) {
+  showTableBody(row, id) {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
         <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
@@ -87,18 +87,18 @@ export default class RevisedSalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
-        <TableCell align="left" className="table-cell"> 
-        {this.props.salesOrderRevised.Lists[id].LifeTimeComponent !== "-" ? 
-        <EditButton 
-          {...this.props}
-          idEdit="Rev" 
-          title="Input Lifetime Component" 
-          RowData={row.LifeTimeComponent}
-          lifetime={row.LifeTimeComponent}
-          onStats={this.isPutLifetime} 
-          values={this.props.salesOrderRevised.Lists[id].LifeTimeComponent} 
-          field="edit" 
-          id={row.SoNumber} /> : ""}
+        <TableCell align="left" className="table-cell">
+          {this.props.salesOrderRevised.Lists[id].LifeTimeComponent !== "-" ?
+            <EditButton
+              {...this.props}
+              idEdit="Rev"
+              title="Input Lifetime Component"
+              RowData={row.LifeTimeComponent}
+              lifetime={row.LifeTimeComponent}
+              onStats={this.isPutLifetime}
+              values={this.props.salesOrderRevised.Lists[id].LifeTimeComponent}
+              field="edit"
+              id={row.SoNumber} /> : ""}
         </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
@@ -107,7 +107,7 @@ export default class RevisedSalesOrderList extends React.PureComponent {
     )
   }
 
-  handleClick = () =>{
+  handleClick = () => {
     this.setState({
       snak: true
     })
@@ -124,10 +124,10 @@ export default class RevisedSalesOrderList extends React.PureComponent {
       openModalrevised: !this.state.openModalrevised
     })
   }
-  
-  renderModalRevised(){
-    return(
-      <ConfirmationModal 
+
+  renderModalRevised() {
+    return (
+      <ConfirmationModal
         {...this.props}
         idModal="Revised"
         openModal={this.state.openModalrevised}
@@ -136,39 +136,39 @@ export default class RevisedSalesOrderList extends React.PureComponent {
     )
   }
 
-  showLoading(){
-    if(this.props.fetchStatusRevised === ApiRequestActionsStatus.LOADING){
-      return(
+  showLoading() {
+    if (this.props.fetchStatusRevised === ApiRequestActionsStatus.LOADING) {
+      return (
         <div className="loading-container">
-          <img 
+          <img
             src={Spinner}
             alt="loading-spinner"
             className="loading-icon"
-            />
+          />
         </div>
       )
     }
-    else if(this.props.fetchStatusPutLifetime === ApiRequestActionsStatus.SUCCEEDED){
-      return(
+    else if (this.props.fetchStatusPutLifetime === ApiRequestActionsStatus.SUCCEEDED) {
+      return (
         this.renderModalRevised()
       )
     }
-    else if(this.props.fetchStatusPutLifetime === ApiRequestActionsStatus.LOADING){
-      return(
-            <div>
-            <Snackbar
-              anchorOrigin={{ vertical: 'center',horizontal: 'center'}}
-              bodyStyle={{ backgroundColor: 'teal', color: 'coral' }}
-              open={this.state.stats}
-              onClose={this.handleClose}
-              autoHideDuration={3000}
-              message="Please Wait. Page will reload automatically"
-            />
-          </div>
-          )
+    else if (this.props.fetchStatusPutLifetime === ApiRequestActionsStatus.LOADING) {
+      return (
+        <div>
+          <Snackbar
+            anchorOrigin={{ vertical: 'center', horizontal: 'center' }}
+            bodyStyle={{ backgroundColor: 'teal', color: 'coral' }}
+            open={this.state.stats}
+            onClose={this.handleClose}
+            autoHideDuration={3000}
+            message="Please Wait. Page will reload automatically"
+          />
+        </div>
+      )
     }
-    else if(this.props.fetchStatusRevised === ApiRequestActionsStatus.FAILED){
-      return(
+    else if (this.props.fetchStatusRevised === ApiRequestActionsStatus.FAILED) {
+      return (
         <div className="loading-container">
           OOPS THERE WAS AN ERROR :'(
         </div>
@@ -176,21 +176,21 @@ export default class RevisedSalesOrderList extends React.PureComponent {
     }
   }
 
-  render(){
-    if(this.props.salesOrderRevised.Lists.length === 0 && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED){
-      return(
-        <EmptyList idEmpty= "Rev" />
+  render() {
+    if (this.props.salesOrderRevised.Lists.length === 0 && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED) {
+      return (
+        <EmptyList idEmpty="Rev" />
       )
-    }else{
-      return(
-        <div> 
+    } else {
+      return (
+        <div>
           <Table classes={{ root: 'table' }} className="table-rev">
-          {this.showTableHead()}
-          <TableBody classes={{ root: 'table-body' }}>
-            {this.props.salesOrderRevised.Lists
-              && this.props.salesOrderRevised.Lists.map((row, id) => (
-                this.showTableBody(row,id)
-              ))}
+            {this.showTableHead()}
+            <TableBody classes={{ root: 'table-body' }}>
+              {this.props.salesOrderRevised.Lists
+                && this.props.salesOrderRevised.Lists.map((row, id) => (
+                  this.showTableBody(row, id)
+                ))}
             </TableBody>
           </Table>
           {this.showLoading()}
