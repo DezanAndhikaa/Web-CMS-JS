@@ -2067,7 +2067,6 @@ export default class Status extends React.PureComponent {
 	  }
 
 	render(){
-		console.log('whichTab : ', this.props.location.whichTab)
 		return(
 			<main className="content" >
 				<div className="head-containers">
