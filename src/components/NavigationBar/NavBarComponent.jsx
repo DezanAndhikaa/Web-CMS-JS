@@ -7,44 +7,76 @@ import { MenuToggle } from '../../assets/icons';
 import isAccessTokenValid from '../../core/HelpersFunction';
 import './NavBarComponent.scss';
 import PopUpMenu from '../PopUpMenu/PopUpMenu';
+import { Menu, StorageKey } from '../../constants';
+import LogoutModal from '../../views/Logout/Logout';
+
 class NavBarComponent extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			displayMenu: false,
-			isShowModal: false
+		  isShowModal: false,
+		  isShowModalLogOut: false
 		};
 	}
 
-	showMenu = (event) => {
-		event.preventDefault();
-		this.setState({ displayMenu: true }, () => {
-			document.addEventListener('click', this.hideDropdownMenu);
-		});
-	}
-
-	hideMenu = async () => {
-		this.setState({ displayMenu: false }, () => {
-			document.removeEventListener('click', this.hideDropdownMenu);
-		});
-	}
-
 	isClicked = () => {
-		this.setState({ isShowModal: !this.state.isShowModal })
+		this.setState({isShowModal: !this.state.isShowModal})
 	}
 
 	isClose = () => {
-		this.setState({ isShowModal: !this.state.isShowModal })
+        this.setState({isShowModal: !this.state.isShowModal})
 	}
 
+	handleClick = (menu, tab) => {
+		this.props.push({
+		  pathname: menu,
+		  whichTab: tab
+		});
+	}
+
+	isShowModalLogout = () => {
+		this.setState({
+			isShowModal: !this.state.isShowModal,
+			isShowModalLogOut: !this.state.isShowModalLogOut
+		})
+	}
+
+	isClosed=() => {
+		this.setState({
+			isShowModalLogOut: !this.state.isShowModalLogOut,
+			// isShowModal: !this.state.isShowModal,
+			isShowModal: false
+		})
+	}
+
+	handleLogout = () => {
+		localStorage.removeItem(StorageKey.USER_DATA);
+		this.props.logout();
+		this.props.onLogout();
+		this.isClosed();
+		this.props.push(Menu.LOGIN);
+	};
+	
 	renderPopUpMenu() {
-		return (
-			<PopUpMenu
-				{...this.props}
+		return(
+			<PopUpMenu 
+				{...this.props}				
 				{...this.state}
 				openModal={this.state.isShowModal}
 				closemodal={this.isClose}
+				onClickMenuLogout={this.isShowModalLogout}
+			/>
+		)
+	}
+
+	showModalLogout(){
+		return(
+			<LogoutModal 
+                {...this.props}
+                openModal={this.state.isShowModalLogOut}
+                onYesClicked={this.handleLogout}
+                onNoClicked={this.isClosed}
 			/>
 		)
 	}
@@ -56,7 +88,7 @@ class NavBarComponent extends React.Component {
 				navBar = (
 					<AppBar position="fixed" className="app-bar">
 						<Toolbar variant="dense" className="toolbar">
-							<img src={UTLogoNew} alt="" className="logo-ut" />
+							<img src={UTLogoNew} alt="" className="logo-ut"/>
 							<div className="info-login">
 								<p>
 									{`Hi, ${this.props.userData.firstName} ${this.props.userData.lastName}`}
@@ -65,6 +97,7 @@ class NavBarComponent extends React.Component {
 									<img src={AccountPic} className="account-pic" alt="" />
 									{this.renderPopUpMenu()}
 								</div>
+								{this.state.isShowModalLogOut && this.showModalLogout()}
 							</div>
 						</Toolbar>
 					</AppBar>

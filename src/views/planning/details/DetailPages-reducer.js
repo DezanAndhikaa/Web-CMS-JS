@@ -55,7 +55,8 @@ import {
 	SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc,
 	UnselectSalesPlanAction, UnselectServicePlanAction,
 	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, FetchServiceAction,
-	IndexFilterAction, LifetimeFilterAction, DateFilterAction
+	IndexFilterAction, LifetimeFilterAction, DateFilterAction,
+	SearchRevisedSalesOrder, UpdateSearchSalesRevAction
 } from './DetailPages-action';
 
 const initialSalesAssignment = {
@@ -550,6 +551,7 @@ export function searchSalesDeletedReducer(state = initialSearchParameter, action
 	if (action.type === UpdateSearchSalesDeletedAction) return action.payload;
 	return state;
 }
+
 export function searchSalesSapReducer(state = initialSearchParameter, action) {
 	if (action.type === UpdateSearchSalesSapAction) return action.payload;
 	return state;
@@ -918,6 +920,16 @@ export function storePlanDataReducer(state = {}, action) {
 	return { ...state };
 }
 
+export function searchSalesRevParamReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchSalesRevAction) return action.payload;
+	return state;
+}
+
+export function searchSalesRevReducer(state = '', action) {
+	if (action.type === SearchRevisedSalesOrder) return action.payload;
+	return state;
+}
+
 const PlansReducers = combineReducers({
 	selectedLeader: selectLeaderReducer,
 	selectedFilters: selectedFiltersReducer,
@@ -949,7 +961,6 @@ const PlansReducers = combineReducers({
 	sortServiceBy: sortServiceByReducer,
 	salesSearch: searchSalesReducer,
 	serviceSearch: searchServiceReducer,
-	salesSearchRevision: searchRevisionSalesReducer,
 	searchSalesParameter: searchSalesParameterReducer,
 	searchSalesRevisiParameter: searchSalesRevisiParameterReducer,
 	searchSalesRevisionParameter: searchRevisionSalesReducer,
@@ -971,7 +982,9 @@ const PlansReducers = combineReducers({
 	salesDeleted: deletedSalesReducer,
 	serviceDeleted: deletedServiceReducer,
 	filterLifetime: filterLifetimeReducer,
-	filterDate: filterDateReducer
+	filterDate: filterDateReducer,
+	salesSearchRevision: searchSalesRevReducer,
+	searchSalesRevParam: searchSalesRevParamReducer	
 });
 
 export { PlansReducers };

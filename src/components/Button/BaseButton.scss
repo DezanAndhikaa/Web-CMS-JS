@@ -77,8 +77,66 @@
     }
     .btn-cancel-approve{
         display: flex;
+        padding-left: 24%;
+        width: vw(160);
+        height: vw(38.07);
+        margin-left: vw(15);
+        font-size: vw(18);
+        font-weight: bold;
+        line-height: vw(16) !important;
+        font-family: 'Lato-Regular';
+        text-transform: capitalize;
+        color: #707070;
+        background-color: transparent;
+        border: 1px solid #FF736A;
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        background-image: url('../../assets/icons/cancel_approve.png');
+        background-size: 18%;
+        background-position-x: 23%;
+        background-position-y: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+    .btn-cancel-approve:hover{
+        background-image: url('../../assets/icons/cancel_approve_hover.png');
+        background-size: 15%;
+        background-position-x: 8%;
+        background-color: map-get($colors, delete);
+        color: white;
+    }
+    .btn-reject-service{
+        display: flex;
+        padding-left: 24%;
+        width: vw(160);
+        height: vw(38.07);
+        margin-left: vw(15);
+        font-size: vw(18);
+        font-weight: bold;
+        line-height: vw(16) !important;
+        font-family: 'Lato-Regular';
+        text-transform: capitalize;
+        color: #707070;
+        background-color: transparent;
+        border: 1px solid #FF736A;
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        background-image: url('../../assets/icons/cancel_approve.png');
+        background-size: 18%;
+        background-position-x: 15%;
+        background-position-y: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+    .btn-reject-service:hover{
+        background-image: url('../../assets/icons/cancel_approve_hover.png');
+        background-size: 15%;
+        background-position-x: 8%;
+        background-color: map-get($colors, delete);
+        color: white;
+    }
+    .btn-sap{
+        display: flex;
         padding-left: 22%;
-        width: vw(203.22);
+        width: vw(153.22);
         height: vw(38.07);
         margin-left: vw(15);
         font-size: vw(18);
@@ -97,7 +155,7 @@
         background-repeat: no-repeat;
         cursor: pointer;
     }
-    .btn-cancel-approve:hover{
+    .btn-sap:hover{
         background-image: url('../../assets/icons/cancel_approve_hover.png');
         background-size: 15%;
         background-position-x: 8%;

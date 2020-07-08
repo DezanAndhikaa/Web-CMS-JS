@@ -12,7 +12,9 @@ import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import { Snackbar } from '@material-ui/core';
 import moment from 'moment';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
+import roleService from "../../../../../utils/roleService.helper";
 
+const RoleUser = new roleService();
 export default class SalesOrderList extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -31,7 +33,8 @@ export default class SalesOrderList extends React.PureComponent {
     if (prevState.salesParameter !== this.props.salesParameter || prevState.salesSearch !== this.props.salesSearch ||
       prevState.searchComp !== this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
       this.setState({ checkedValue: false })
-    } if (this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING) {
+    } 
+    if (this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING) {
       this.setState({ checkedValue: false })
     }
   }
@@ -88,7 +91,7 @@ export default class SalesOrderList extends React.PureComponent {
     return (
       <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow classes={{ root: 'table-row' }}>
-          {this.props.idSales === "Data Input" ? "" :
+          {this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly" || Number(RoleUser.role()) !== 1 ? "" :
             <TableCell padding="checkbox">
               {this.props.displaySalesCheckbox &&
                 <Checkbox
@@ -184,7 +187,7 @@ export default class SalesOrderList extends React.PureComponent {
   showTableBody(row, id) {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
-        {this.props.idSales === "Data Input" ? "" :
+        {this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly" || Number(RoleUser.role()) !== 1 ? "" :
           <TableCell padding="checkbox">
             {this.props.displaySalesCheckbox &&
               <Checkbox
@@ -205,9 +208,9 @@ export default class SalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="center" className="table-cell">
-          {this.props.salesOrderList.Lists[id].LifeTimeComponent === "-" && this.props.idTab === "Input" ?
+          {this.props.salesOrderList.Lists[id].LifeTimeComponent === 0 && this.props.idTab === "Input" ?
             <InputButton title="Input Lifetime Component" onStats={this.isPutLifetime} titles="Input" key={row.SoNumber} id={row.SoNumber} field="input" /> :
-            this.props.salesOrderList.Lists[id].LifeTimeComponent === "-" && this.props.idTab === "Status" ?
+            this.props.salesOrderList.Lists[id].LifeTimeComponent === 0 && this.props.idTab === "Status" ?
               <InputButton titles="Input Status" key={row.SoNumber} id={row.SoNumber} /> :
               <div className={this.props.salesOrderList.Lists[id].IsRevised === true && this.props.salesOrderList.Lists[id].IsChanged === false ? "table-cell-rev" : ""}>{this.props.salesOrderList.Lists[id].LifeTimeComponent}</div>
           }
@@ -216,9 +219,9 @@ export default class SalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="center" className="table-cell">
-          {this.props.salesOrderList.Lists[id].LifeTimeComponent !== "-" && this.props.idTab === "Approval" ?
+          {this.props.salesOrderList.Lists[id].LifeTimeComponent !== 0 && this.props.idTab === "Approval" ?
             <EditButton idEdit="Approval" title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} /> :
-            this.props.salesOrderList.Lists[id].LifeTimeComponent !== "-" && this.props.idTab === "Status" ?
+            this.props.salesOrderList.Lists[id].LifeTimeComponent !== 0 && this.props.idTab === "Status" ?
               <EditButton idEdit="Status" /> : ""}
         </TableCell>
       </TableRow>
@@ -272,7 +275,7 @@ export default class SalesOrderList extends React.PureComponent {
   }
 
   render() {
-    if (this.props.idSales === "Data Input") {
+    if (this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly") {
       return (
         <>
           <Table classes={{ root: 'table' }} className="table">
@@ -296,6 +299,11 @@ export default class SalesOrderList extends React.PureComponent {
       && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) {
       return (
         this.props.idTab = "Input" ? <EmptyList idEmpty="Input" /> : ""
+      )
+    } else if (this.props.salesOrderList.Lists.length === 0
+      && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) {
+      return (
+        <EmptyList idEmpty="Sales" />
       )
     } else {
       return (

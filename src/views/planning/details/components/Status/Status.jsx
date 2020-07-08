@@ -14,7 +14,6 @@ import Button from '@material-ui/core/Button';
 import './Status.scss';
 import { Menu } from '../../../../../constants';
 import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton';
-import FilterbyDataAction  from '../../../../../components/FilterByDataAction/FilterbyDataAction';
 import { Spinner } from '../../../../../assets/icons';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from "moment";
@@ -112,11 +111,11 @@ export default class Status extends React.PureComponent {
 		}
 		if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
 			prevProps.approveSalesDownloaded.status === ApiRequestActionsStatus.LOADING) {
-			this.onClickDownloadSalesApproved()
+			this.onClickDownloadSales()
 		}
 		if (this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.SUCCEEDED &&
 			prevProps.approveServiceDownloaded.status === ApiRequestActionsStatus.LOADING) {
-			this.onClickDownloadServiceApproved()
+			this.onClickDownloadService()
 		}
 		if(prevProps.searchSalesApprovedParam !== this.props.searchSalesApprovedParam){
 			this.fetchSearchSalesApproved();
@@ -174,7 +173,7 @@ export default class Status extends React.PureComponent {
 						{...prevProps.searchServiceParameter, Category: 'SN', Keyword: this.props.serviceSearch});
 				case 'Delete' :
 					return this.props.updateServiceDeletedParameter(
-						{...prevProps.searchSerrviceDeletedParam, Category: 'SD', Keyword: this.props.serviceSearch});
+						{...prevProps.searchServiceDeletedParam, Category: 'SD', Keyword: this.props.serviceSearch});
 				case 'SAP ISSUE':
 					return this.props.updateServiceSapParameter(
 						{...prevProps.searchServiceSapParam, Category: 'SSAP', Keyword: this.props.serviceSearch});
@@ -1088,7 +1087,6 @@ export default class Status extends React.PureComponent {
 	fetchSearchSalesSap = async() => {
 		await this.props.fetchSapSales(this.props.searchSalesSapParam, this.props.token);
 	}
-
 	fetchSearchService = async() => {
 		await this.props.fetchServiceOrder(this.props.searchServiceParameter, this.props.token);
 	} 
@@ -1096,13 +1094,24 @@ export default class Status extends React.PureComponent {
 		await this.props.fetchApprovedService(this.props.searchSerrviceApprovedParam, this.props.token);
 	}
 	fetchSearchServiceDeleted = async() => {
-		await this.props.fetchDeletedService(this.props.searchSerrviceDeletedParam, this.props.token);
+		await this.props.fetchDeletedService(this.props.searchServiceDeletedParam, this.props.token);
 	}
 	fetchSearchServiceSap = async() => {
-		await this.props.fetchSapService(this.props.searchSerrviceSapParam, this.props.token);
+		await this.props.fetchSapService(this.props.searchServiceSapParam, this.props.token);
 	}
 
-	onClickDownloadSalesApproved = () => {
+	
+  	//FUNGSI UNTUK memanggil Data SALES ORDER yang telah terhapus
+	onClickDeletedSales = () => {
+		this.props.fetchDeletedSales(this.props.salesParameter.dataFilter, this.props.token);
+	}
+
+	//FUNGSI UNTUK memanggil Data SERVICE ORDER yang telah terhapus
+	onClickDeletedService = () => {
+		this.props.fetchDeletedService(this.props.serviceParameter.dataFilter, this.props.token);
+	}
+
+	onClickDownloadSales = () => {
 		let link = document.createElement("a");
 		document.body.appendChild(link);
 		link.style = "display: none";
@@ -1116,7 +1125,7 @@ export default class Status extends React.PureComponent {
 		window.URL.revokeObjectURL(url);
 	}
 
-	onClickDownloadServiceApproved = () => {
+	onClickDownloadService = () => {
 		let link = document.createElement("a");
 		document.body.appendChild(link);
 		link.style = "display: none";
@@ -1130,19 +1139,6 @@ export default class Status extends React.PureComponent {
 		window.URL.revokeObjectURL(url);
 	}
 
-	handleSalesApprove = async() => {
-		let arr = []
-		const index = this.props.selectedSalesPlans.length
-		if (this.props.selectedSalesPlans.length > 0) {
-		  for (let i = 0; i < index; i++) {
-			arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
-		  }
-		  await this.props.approveSales({SoNumbers : arr, IsApprove: true}, this.props.token)
-		  this.onClickSalesOrder();
-		  await this.props.clearSelectedSalesPlans();
-		 }
-	}
-
 	handleSalesDownload = async() => {
 		let arr = []
 		const index = this.props.selectedSalesPlans.length
@@ -1150,10 +1146,8 @@ export default class Status extends React.PureComponent {
 		  for (let i = 0; i < index; i++) {
 			arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
 		  }
-		}await this.props.downloadSales({SoNumbers: arr}, this.props.token);
-		if (
-		  this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.FAILED
-		) {
+		}await this.props.downloadSales(arr, this.props.token);
+		if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.FAILED) {
 		  this.setState({ showError: true });
 		}
 	}
@@ -1166,10 +1160,8 @@ export default class Status extends React.PureComponent {
 			arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
 		  }
 		}
-		await this.props.downloadService({WoNumbers: arr}, this.props.token);
-		if (
-		  this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.FAILED
-		) {
+		await this.props.downloadService(arr, this.props.token);
+		if (this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.FAILED) {
 		  this.setState({ showError: true });
 		}
 	};
@@ -1256,7 +1248,7 @@ export default class Status extends React.PureComponent {
 					arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
 		  		}
 			}
-			await this.props.deletePermanentSales({SoNumbers : arr}, this.props.token);
+			await this.props.deletePermanentSales(arr, this.props.token);
 		}
 		if (this.props.location.whichTab === "service") {
 			let arr = []
@@ -1266,7 +1258,7 @@ export default class Status extends React.PureComponent {
 					arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
 		  		}
 			}
-			await this.props.deletePermanentService({WoNumbers : arr}, this.props.token);
+			await this.props.deletePermanentService(arr, this.props.token);
 		}
 	}
 
@@ -1299,93 +1291,129 @@ export default class Status extends React.PureComponent {
 	_renderDownloadBtn(){
 		if (this.props.location.whichTab === "sales") {
 			if(this.state.whatPageIsChoosed === "Approve"){
-				return(
-					<>
+				if (Number(RoleUser.role()) !== 1){
+					return(
 						<BaseButton titles="Download"
 							{...this.props}
 							whatTabsIsRendered={true}
 							handleSalesDownload={this.handleSalesDownload}
 						/>
-						<BaseButton titles="Delete" 
-							{...this.props}
-							whatTabsIsRendered={true}
-							isDisabled={this.state.isDisabled}
-							disabledButton = {this.props.selectedSalesPlans.length < 1 }
-							totalSelectedItems ={this.props.selectedSalesPlans.length}
-							handleDeleteSales={this.handleDeleteSales}
-							renderSakses = {this.changeSuccess}
-						/>
-					</>
-				)
+					)
+				}else{
+					return(
+						<>
+							<BaseButton titles="Download"
+								{...this.props}
+								whatTabsIsRendered={true}
+								handleSalesDownload={this.handleSalesDownload}
+							/>
+							<BaseButton titles="Delete" 
+								{...this.props}
+								whatTabsIsRendered={true}
+								isDisabled={this.state.isDisabled}
+								disabledButton = {this.props.selectedSalesPlans.length < 1 }
+								totalSelectedItems ={this.props.selectedSalesPlans.length}
+								handleDeleteSales={this.handleDeleteSales}
+								renderSakses = {this.changeSuccess}
+							/>
+						</>
+					)
+				}
 			}else if(this.state.whatPageIsChoosed === "Delete"){
-				return(
-					<>
+				if (Number(RoleUser.role()) !== 1) {
+					return("")
+				}else{
+					return(
+						<>
+							<BaseButton titles="Download"
+								{...this.props}
+								whatTabsIsRendered= {true}
+								handleSalesDownload= {this.handleSalesDownload} 
+							/>
+							<BaseButton titles="Permanently" 
+								{...this.props}
+								whatTabsIsRendered={true}
+								handleDeletePermanent={this.handleDeletePermanent}
+								isDisabled={this.state.isDisabled}
+							/>
+						</>
+					)
+				}
+			}else{
+				if (Number(RoleUser.role()) !== 1) {
+					return("")
+				}else{
+					return(
 						<BaseButton titles="Download"
 							{...this.props}
-							whatTabsIsRendered={true}
-							handleSalesApprovedDownload={this.handleSalesApprovedDownload}
+							whatTabsIsRendered= {true}
+							handleSalesDownload= {this.handleSalesDownload}
 						/>
-						<BaseButton titles="Permanently" 
-							{...this.props}
-							whatTabsIsRendered={true}
-							handleDeletePermanent={this.handleDeletePermanent}
-							isDisabled={this.state.isDisabled}
-						/>
-					</>
-				)
-			}else{
-				return(
-					<BaseButton titles="Download"
-						{...this.props}
-						whatTabsIsRendered={true}
-						handleSalesApprovedDownload={this.handleSalesApprovedDownload}
-					/>
-				)
+					)
+				}
 			}			
 		}else if (this.props.location.whichTab === "service"){
 			if(this.state.whatPageIsChoosed === "Approve"){
-				return(
-					<>
+				if (Number(RoleUser.role()) !== 1) {
+					return(
 						<BaseButton titles="Download"
 							{...this.props}
 							whatTabsIsRendered={false}
 							handleServiceDownload={this.handleServiceDownload}
 						/>
-						<BaseButton titles="Delete" 
-							{...this.props}
-							whatTabsIsRendered={false}
-							isDisabled={this.state.isDisabled}
-							disabledButton = {this.props.selectedServicePlans.length < 1 }
-							totalSelectedItems ={this.props.selectedServicePlans.length}
-							handleDeleteService={this.handleDeleteService}
-							renderSakses = {this.changeSuccess}
-						/>
-					</>
-				)
+					)
+				}else{
+					return(
+						<>
+							<BaseButton titles="Download"
+								{...this.props}
+								whatTabsIsRendered= {false}
+								handleServiceDownload= {this.handleServiceDownload}
+							/>
+							<BaseButton titles="Delete" 
+								{...this.props}
+								whatTabsIsRendered={false}
+								isDisabled={this.state.isDisabled}
+								disabledButton = {this.props.selectedServicePlans.length < 1 }
+								totalSelectedItems ={this.props.selectedServicePlans.length}
+								handleDeleteService={this.handleDeleteService}
+								renderSakses = {this.changeSuccess}
+							/>
+						</>
+					)
+				}
 			}else if(this.state.whatPageIsChoosed === "Delete"){
-				return(
-					<>
+				if (Number(RoleUser.role()) !== 1) {
+					return("")
+				}else{
+					return(
+						<>
+							<BaseButton titles="Download"
+								{...this.props}
+								whatTabsIsRendered={false}
+								handleServiceDownload={this.handleServiceDownload}
+							/>
+							<BaseButton titles="Permanently" 
+								{...this.props}
+								whatTabsIsRendered={false}
+								handleDeletePermanent={this.handleDeletePermanent}
+								isDisabled={this.state.isDisabled}
+							/>
+						</>
+					)
+				}
+			}else{
+				if (Number(RoleUser.role()) !== 1) {
+					return("")
+				}else{
+					return(
 						<BaseButton titles="Download"
 							{...this.props}
-							whatTabsIsRendered={false}
-							handleServiceApprovedDownload={this.handleServiceApprovedDownload}
+							whatTabsIsRendered= {false}
+							handleServiceDownload= {this.handleServiceDownload}
 						/>
-						<BaseButton titles="Permanently" 
-							{...this.props}
-							whatTabsIsRendered={false}
-							handleDeletePermanent={this.handleDeletePermanent}
-							isDisabled={this.state.isDisabled}
-						/>
-					</>
-				)
-			}else{
-				return(
-					<BaseButton titles="Download"
-						{...this.props}
-						whatTabsIsRendered={false}
-						handleServiceApprovedDownload={this.handleServiceApprovedDownload}
-					/>
-				)
+					)
+				}
 			}
 		}
 		
@@ -1851,7 +1879,7 @@ export default class Status extends React.PureComponent {
 					displayServiceCheckbox={this.props.serviceSapParameter.paramsData.assigmentFilter || this.props.serviceSapParameter.paramsData.inProgressFilter}
 					sortServiceByState={this.props.sortServiceBy}
 					onClickServiceOrderSap={this.onClickServiceOrderSap}
-					onChoosedService={this.updateAssignmentserviceStates}
+					onChoosedService={this.updateAssignmentServiceStates}
 					selectedServicePlanList={this.props.selectedServicePlans}
 					/>
 			</div>
@@ -2000,14 +2028,14 @@ export default class Status extends React.PureComponent {
 				approveTotalData : this.props.salesOrderListApproved.TotalData,
 				notApproveTotalData : this.props.salesOrderList.TotalData,
 				deleteTotalData : this.props.salesOrderListDeleted.TotalData,
-				sapIssueTotalData : this.props.salesOrderListSap.TotalData
+				sapIssueTotalData : this.props.salesOrderListSap.TotalDataSAPIssue
 			})
 		}else if (this.props.location.whichTab === "service") {
 			this.setState({
 				approveTotalData : this.props.serviceOrderListApproved.TotalData,
 				notApproveTotalData : this.props.serviceOrderList.TotalData,
 				deleteTotalData : this.props.serviceOrderListDeleted.TotalData,
-				sapIssueTotalData : this.props.serviceOrderListSap.TotalData
+				sapIssueTotalData : this.props.serviceOrderListSap.TotalDataSAPIssue
 			})
 		}
 	}
@@ -2039,6 +2067,7 @@ export default class Status extends React.PureComponent {
 	  }
 
 	render(){
+		console.log('whichTab : ', this.props.location.whichTab)
 		return(
 			<main className="content" >
 				<div className="head-containers">
@@ -2054,10 +2083,6 @@ export default class Status extends React.PureComponent {
 						<NotifButton
 							{...this.props}
 							idNotif = "Status"
-						/>
-						<FilterbyDataAction
-							{...this.props}
-							titles = "Tracking History"
 						/>
 					</div>
 				</div>

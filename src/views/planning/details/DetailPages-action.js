@@ -67,6 +67,7 @@ export const UpdateSearchSalesRevisiAction = 'SALES_SEARCH_REVISI_PARAMETER';
 export const UpdateSearchSalesApprovedAction = 'SALES_SEARCH_APPROVED_PARAMETER';
 export const UpdateSearchSalesDeletedAction = 'SALES_SEARCH_DELETED_PARAMETER';
 export const UpdateSearchSalesSapAction = 'SALES_SEARCH_SAP_PARAMETER';
+export const UpdateSearchSalesRevAction = 'SALES_SEARCH_REVISED_PARAMETER';
 export const UpdateSearchServiceAction = 'SERVICE_SEARCH_PARAMETER';
 export const UpdateSearchServiceApprovedAction = 'SERVICE_SEARCH_APPROVED_PARAMETER';
 export const UpdateSearchServiceDeletedAction = 'SERVICE_SEARCH_DELETED_PARAMETER';
@@ -140,7 +141,7 @@ export function downloadSalesAction(soId, accessToken) {
 		responseType: 'blob',
 		method: RequestMethod.POST,
 		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/downloadsalesorder`,
-		data: { SoNumber: soId },
+		data: { SoNumbers: soId },
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
@@ -154,7 +155,7 @@ export function downloadServiceAction(woId, accessToken) {
 		responseType: 'blob',
 		method: RequestMethod.POST,
 		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/downloadserviceorder`,
-		data: { WoNumber: woId },
+		data: { WoNumbers: woId },
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
@@ -179,16 +180,10 @@ export function putLifetimeCompAction(payload, accessToken) {
 	return async (dispatch) => dispatch(callApi(PutLifetimeComp, requestConfig));
 }
 
-export function putSAPIssueAction(payload, accessToken, whichTabs) {
-	var URL = "";
-	if (whichTabs) {
-		URL = `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/sapissue`
-	} else {
-		URL = `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/sapissue`
-	}
+export function putSAPIssueAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.PUT,
-		url: URL,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/sapissue`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8; text/plain',

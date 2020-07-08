@@ -117,7 +117,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 	push: (path, whichTab) => dispatch(push(path, whichTab)),
 	downloadSales : (soId, token) => dispatch(downloadSalesAction(soId, token)),
-	downloadService : (soId, token) => dispatch(downloadServiceAction(soId, token)),
+	downloadService : (woId, token) => dispatch(downloadServiceAction(woId, token)),
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
 	clearSelectedServicePlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
 	fetchApprovedSales: (payload, token) => dispatch(fetchApprovedSalesAction(payload, token)),

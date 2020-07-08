@@ -18,6 +18,13 @@ class BaseButton extends React.Component{
         }
     }
 
+    handleClick = (menu, tab) => {
+        this.props.push({
+          pathname: menu,
+          whichTab: tab
+        });
+    }
+
     isClicked = () => {
        this.setState({isShowModal: !this.state.isShowModal})
     }
@@ -28,22 +35,6 @@ class BaseButton extends React.Component{
 
     isApproved = async() => {
         if (this.props.whatTabsIsRendered === true) {
-            if (this.props.titles === "Approve") {
-                await this.props.handleSalesApprove()
-            }
-            if (this.props.titles === "Delete") {
-                await this.props.handleDeleteSales()
-            }
-            if (this.props.titles === "Cancel Approve"){
-                await this.props.handleSendtoEdit()
-                this.isClosed()
-            }
-            if (this.props.titles === "Permanently"){
-                await this.props.handleDeletePermanent()
-                this.isClosed()
-            }
-        }
-        if (this.props.whatTabsIsRendered === false) {
             if (this.props.titles === "Approve") {
                 await this.props.handleServiceApprove();
             }
@@ -86,10 +77,13 @@ class BaseButton extends React.Component{
                     />
                 </div>
             )
-        }else if(this.props.titles === "Cancel Approve"){
+        }else if(this.props.titles === "Reject"){
             return(
                 <div className="button-inline">
-                    <Button className="btn-cancel-approve" onClick={this.isClicked} disabled={this.props.disabledButton}> Cancel Approve</Button>
+                    <Button className={this.props.idReject === "Sales" ? "btn-cancel-approve" : "btn-reject-service"} 
+                        onClick={this.isClicked} disabled={this.props.disabledButton}>
+                        { this.props.idReject === "Sales" ? "Reject" : "SAP Issue" }
+                    </Button>
                     <UnapproveConfirmation 
                         {...this.props}
                         idConfirm = "Cancel"

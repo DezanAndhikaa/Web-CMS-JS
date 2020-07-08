@@ -1,0 +1,149 @@
+@import '../../../../../themes/variables';
+@import '../../../../../themes/functions';
+
+.body-container{
+    width: 90%;
+    height: 80%;
+    .assign-mechanic-modal-issue{
+        position: 'absolute';
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        margin: auto;
+        border-radius: vw(20);
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        padding: vw(30);
+        .container-issue{
+            width:97.8%;
+            height: 100%;
+            margin: 1%;
+            .ut-underline-issue{
+                margin: 3px 10px 10px 0;
+                width: 8px;
+                height: 60%;
+                background-color: orange;
+            }
+            .top-button-issue{
+                margin-top: 2px;
+                margin-bottom: 10px;
+                width: 8%;
+                height: 50%;
+                .back_button{
+                    display: flex;
+                    background-image: url('../../../../../assets/icons/Arrow_Left.png');
+                    background-position-x: 5.3%;
+                    background-position-y: center;
+                    background-repeat: no-repeat;
+                    text-transform: capitalize;
+                    color: #707070;
+                }
+            }
+            .top-row-issue{
+                display: flex;
+                justify-content: space-between;
+                height: 50px;
+            }
+            .top-middle-issue{
+                margin-top: 10px;
+                height: 85%;
+            }
+            .select-input-title-issue{
+                margin: 0;
+                margin-right: vw(17);
+                font-weight: bold;
+                font-size: 28px; 
+                width: 60%;
+            }
+    
+            .bottom-row-issue{
+                flex: 1;
+                display: flex;
+                flex-direction: row;
+                margin-bottom: 20px;
+                .btn-input-issue{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 10%;
+                    height: vw(43.07) !important;
+                    font-size: vw(18) !important;
+                    font-weight: bold;
+                    line-height: vw(21) !important;
+                    font-family: 'Lato-Regular';
+                    background-color: map-get($colors , primary);
+                    text-transform: none;
+                    box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+                    border-radius: 0.4vw;
+                    cursor: pointer;
+                }
+                .btn-input-issue:hover {
+                    background-color: map-get($colors, primary-dark);
+                }
+                .btn-cancel-issue{
+                    display: flex;
+                    align-items: center;
+                    text-transform: none;
+                    font-family: 'Lato-Regular';
+                    font-weight: bold;
+                    width: 90%;
+                    margin-top: 0px;
+                    margin-bottom: 0px;
+                    font-size: 15px;
+                    border-radius: vw(5);
+                    color: #1D1D1D;
+                }
+            }
+    
+        }
+    }
+}
+
+.label-required{
+    color: red;
+}
+
+.modal-pos-issue{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.table-head-issue{
+    border-bottom: 20px solid #F4F6F8;
+    padding-left: 5px;
+    .table-cell-issue{
+        padding: 0;
+        height: 40px;
+        font-size: 14px !important;
+        line-height: 1%px !important;
+        font-family: 'Lato-Bold';
+        color: #3C3B3B;
+        background-color: white;
+        border-bottom: 10px !important;
+    }
+    .table-body-issue{
+        background-color: white;
+        .table-row-top-issue{
+            border-bottom: 5px solid #F4F6F8;
+            .table-cell-issue{
+                padding: 0;
+                height: 40px;
+                font-size: 14px !important;
+                line-height: 1% !important;
+                font-family: 'Lato-Bold';
+                color: #3C3B3B;
+                background-color: white;
+                border-bottom: 10px !important;
+            }
+        }
+        .table-row-bottom-issue{
+            margin-bottom: 100px;
+        }
+    }
+}
+
+.teks{
+    width: 100%;
+}

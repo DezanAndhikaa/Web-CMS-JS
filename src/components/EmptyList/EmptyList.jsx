@@ -24,7 +24,7 @@ export default class EmptyList extends React.PureComponent {
                         this.props.idEmpty === "Approve" ? " approved list" :
                         this.props.idEmpty === "NA" ? " not approved list" :
                         this.props.idEmpty === "Delete" ? " deleted list" :
-                        this.props.idEmpty === "SAP" ? "SAP Issue" : " service order list"} record,
+                        this.props.idEmpty === "SAP" ? " SAP Issue" : " service order list"} record,
                     </p>
                     <p className="caption2">Let's keep it</p>
                 </div>

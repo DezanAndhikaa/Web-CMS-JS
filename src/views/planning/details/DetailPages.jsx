@@ -269,7 +269,7 @@ class DetailPages extends React.Component {
           [...this.props.salesParameter.dataFilter.Filter, {
             Field: 'LifeTimeComponent',
             Operator: "eq",
-            Value: '-',
+            Value: 0,
             Logic: "AND"
           }]
       }, this.props.token);
@@ -280,7 +280,7 @@ class DetailPages extends React.Component {
           [...this.props.salesParameter.dataFilter.Filter, {
             Field: 'LifeTimeComponent',
             Operator: "neq",
-            Value: '-',
+            Value: 0,
             Logic: "AND"
           }]
       }, this.props.token);
@@ -389,10 +389,6 @@ class DetailPages extends React.Component {
             onClickPlanningDelete={this.onClickDeletedSales}
             onClickButton={this.handleClickFilterByDataAction}
           />
-          <FilterbyDataAction
-            {...this.props}
-            titles="Tracking History"
-          />
         </>
       );
     }
@@ -405,10 +401,6 @@ class DetailPages extends React.Component {
             onClickPlanningApprove={this.onClickApprovedService}
             onClickPlanningDelete={this.onClickDeletedService}
             onClickButton={this.handleClickFilterByDataAction}
-          />
-          <FilterbyDataAction
-            {...this.props}
-            titles="Tracking History"
           />
         </>
       );
@@ -456,9 +448,7 @@ class DetailPages extends React.Component {
           displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
           stats={this.state.stats}
           onStats={this.isChangeStat}
-          totalSalesData={this.props.salesOrderList.TotalDataQuery}
-          totalServiceData={this.props.serviceOrderList.TotalData}
-          ApprovedSalesData={this.props.salesOrderListApproved.TotalData}
+          totalSalesData={this.props.salesOrderList.TotalDataLifetime}
           onClickTabHead={this.props.onClickSortBy}
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}
