@@ -1,13 +1,12 @@
 import React from 'react';
 import './Logout.scss';
 import { DialogContent, Button, Modal } from '@material-ui/core';
-import { Logout } from '../../assets/imgs';
+import { Logout }  from '../../assets/imgs';
 
 export default class LogoutModal extends React.PureComponent {
 	render() {
-		console.log(this.props.open)
 		return (
-			<Modal open={this.props.open} className="modal-container-logout">
+			<Modal open={this.props.openModal} className="modal-container-logout">
 				<DialogContent className="logout-confirmation-content">
 					<div className="confirmation-modal-logout">
 						<div className="confirmation-container-logout">
@@ -25,4 +24,3 @@ export default class LogoutModal extends React.PureComponent {
 		);
 	}
 }
-

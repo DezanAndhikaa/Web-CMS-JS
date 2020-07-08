@@ -21,14 +21,13 @@ class NavBarComponent extends React.Component {
 	}
 
 	isClicked = () => {
-		this.setState({ isShowModal: !this.state.isShowModal })
+		this.setState({isShowModal: !this.state.isShowModal})
 	}
 
 	isClose = () => {
-		this.setState({ isShowModal: !this.state.isShowModal })
+        this.setState({isShowModal: !this.state.isShowModal})
 	}
 
-<<<<<<< HEAD
 	handleClick = (menu, tab) => {
 		this.props.push({
 		  pathname: menu,
@@ -59,12 +58,10 @@ class NavBarComponent extends React.Component {
 		this.props.push(Menu.LOGIN);
 	};
 	
-=======
->>>>>>> 28b003a7d771fc20a9d05433516b7ccf41c78b72
 	renderPopUpMenu() {
-		return (
-			<PopUpMenu
-				{...this.props}
+		return(
+			<PopUpMenu 
+				{...this.props}				
 				{...this.state}
 				openModal={this.state.isShowModal}
 				closemodal={this.isClose}
@@ -91,7 +88,7 @@ class NavBarComponent extends React.Component {
 				navBar = (
 					<AppBar position="fixed" className="app-bar">
 						<Toolbar variant="dense" className="toolbar">
-							<img src={UTLogoNew} alt="" className="logo-ut" />
+							<img src={UTLogoNew} alt="" className="logo-ut"/>
 							<div className="info-login">
 								<p>
 									{`Hi, ${this.props.userData.firstName} ${this.props.userData.lastName}`}

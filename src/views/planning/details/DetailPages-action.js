@@ -457,10 +457,6 @@ export function searchSalesSapAction(type, payload) {
 	return { type, payload };
 }
 
-export function searchSalesRevisionAction(type, payload) {
-	return { type, payload }
-}
-
 export function searchServiceParameterAction(type, payload) {
 	return { type, payload };
 }

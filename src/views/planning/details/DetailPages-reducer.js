@@ -961,7 +961,6 @@ const PlansReducers = combineReducers({
 	sortServiceBy: sortServiceByReducer,
 	salesSearch: searchSalesReducer,
 	serviceSearch: searchServiceReducer,
-	salesSearchRevision: searchRevisionSalesReducer,
 	searchSalesParameter: searchSalesParameterReducer,
 	searchSalesRevisiParameter: searchSalesRevisiParameterReducer,
 	searchSalesRevisionParameter: searchRevisionSalesReducer,

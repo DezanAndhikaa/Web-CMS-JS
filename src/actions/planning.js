@@ -418,10 +418,6 @@ export function searchSalesRevisionParameterAction(type, payload) {
     return { type, payload };
 }
 
-export function searchSalesRevisionParameterAction(type, payload) {
-    return { type, payload };
-}
-
 export function searchSalesApprovedAction(type, payload) {
     return { type, payload };
 }

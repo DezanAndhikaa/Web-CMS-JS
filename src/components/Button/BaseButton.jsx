@@ -7,7 +7,6 @@ import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 import ApproveConfirmation from '../ApproveConfirmation/ApproveConfirmation';
 import UnapproveConfirmation from '../UnapproveConfirmation/UnapproveConfirmation'
 import { ApiRequestActionsStatus } from '../../core/RestClientHelpers';
-import { Menu } from '../../constants';
 
 class BaseButton extends React.Component{
     constructor(props){
