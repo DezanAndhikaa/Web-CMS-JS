@@ -1097,7 +1097,7 @@ export default class Status extends React.PureComponent {
 		await this.props.fetchDeletedService(this.props.searchServiceDeletedParam, this.props.token);
 	}
 	fetchSearchServiceSap = async() => {
-		await this.props.fetchSapService(this.props.searchSerrviceSapParam, this.props.token);
+		await this.props.fetchSapService(this.props.searchServiceSapParam, this.props.token);
 	}
 
 	
@@ -1879,7 +1879,7 @@ export default class Status extends React.PureComponent {
 					displayServiceCheckbox={this.props.serviceSapParameter.paramsData.assigmentFilter || this.props.serviceSapParameter.paramsData.inProgressFilter}
 					sortServiceByState={this.props.sortServiceBy}
 					onClickServiceOrderSap={this.onClickServiceOrderSap}
-					onChoosedService={this.updateAssignmentserviceStates}
+					onChoosedService={this.updateAssignmentServiceStates}
 					selectedServicePlanList={this.props.selectedServicePlans}
 					/>
 			</div>
@@ -2067,6 +2067,7 @@ export default class Status extends React.PureComponent {
 	  }
 
 	render(){
+		console.log('whichTab : ', this.props.location.whichTab)
 		return(
 			<main className="content" >
 				<div className="head-containers">

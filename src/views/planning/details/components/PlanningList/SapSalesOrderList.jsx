@@ -164,11 +164,12 @@ export default class SapSalesOrderList extends React.PureComponent {
     return(
       <div className="teks">
         <TextField 
-            className="teks"
-            type='text' 
-            variant="outlined" 
-            size="small"
-            value={row.SAPIssueMessage}
+          disabled
+          className="teks"
+          type='text' 
+          variant="outlined" 
+          size="small"
+          value={row.SAPIssueMessage}
         />
       </div>
     )

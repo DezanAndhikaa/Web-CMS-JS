@@ -193,7 +193,8 @@ class DetailsTab extends React.Component {
   }
 
   _dataFilterCustomer(){
-    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
+      || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
       if(this.state.value === 0){
         let arr = this.props.serviceOrderList.Customers;
         arr.splice(0, 0, "All Customer")
@@ -221,7 +222,8 @@ class DetailsTab extends React.Component {
   }
 
   _dataFilterSite(){
-    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
+      || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
       if(this.state.value === 0){
         let arr = this.props.serviceOrderList.Sites;
         arr.splice(0, 0, "All Site")
@@ -249,7 +251,8 @@ class DetailsTab extends React.Component {
   }
 
   _dataFilterUnitModel(){
-    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
+      || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
       if(this.state.value === 0){
         let arr = this.props.serviceOrderList.UnitModels;
         arr.splice(0, 0, "All Unit Model")
@@ -277,7 +280,8 @@ class DetailsTab extends React.Component {
   }
 
   _dataFilterComponentDescription(){
-    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
+      || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
       if(this.state.value === 0){
         let arr = this.props.serviceOrderList.ComponentDescriptions;
         arr.splice(0, 0, "All Component Description")
@@ -375,7 +379,8 @@ class DetailsTab extends React.Component {
   }
 
   _renderTotalData(){
-    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
+      || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
       return(
         <div className="total-data-container">
           <div className="text-total">
@@ -432,6 +437,7 @@ class DetailsTab extends React.Component {
     return (
       <div className="root">
         {Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
+          || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3
           ? <> 
             <div className="tab-container-site">
               {this.props.renderNotif}
@@ -527,45 +533,6 @@ class DetailsTab extends React.Component {
             {value === 0 && <TabContainer dir={theme.direction} >
               <div>{this._renderSalesOrderViewOnly()}</div>
             </TabContainer>}
-          </>
-        : Number(RoleUser.role()) === 3 ?
-          <>
-            <div className="tab-container-site">
-              {this.props.renderNotif}
-              {this.props.renderFilterByDataAction}
-            </div>
-            <AppBar position="static" color="default" style={{boxShadow: "none"}}>
-              <Tabs
-                classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
-                value={this.state.value}
-                onChange={this.handleChange}
-                indicatorColor="primary" >
-                <Tab 
-                  centered={true}
-                  onClick={() => this.props.clearSelectedSalesPlans()} 
-                  classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-                  label= {this.renderTabSales()} 
-                />
-                <Tab 
-                  centered={true}
-                  onClick={() => this.props.clearSelectedServicePlans()} 
-                  classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-                  label= {this.renderTabService()}
-                />
-              </Tabs>
-            </AppBar>
-            <div className="site-container">
-              {value === 0 && this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
-                value === 1 && this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderTotalData()}
-            </div>
-            <div className="filters-detail-site">
-              {value === 0 && this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
-                value === 1 && this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
-            </div>
-            {value === 0 && <TabContainer dir={theme.direction} >
-              <div>{this._renderSalesOrderViewOnly()}</div>
-            </TabContainer>}
-            {value === 1 && <TabContainer dir={theme.direction} ><div>{this._renderServiceOrderList()}</div></TabContainer>}
           </>
         : <>
             <div className="tab-container-site">

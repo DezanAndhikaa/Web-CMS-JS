@@ -88,7 +88,7 @@ export default class SapServiceOrderList extends React.PureComponent {
               className="checkbox-checked-header"/>}
           </TableCell>
           <PlanningListHeader
-            name="WO"
+            name="Work Order"
             delay={300}
             onSearch={this.props.onSearchComp}
           />
@@ -153,7 +153,8 @@ export default class SapServiceOrderList extends React.PureComponent {
   _showDescription(row){
     return(
       <div className="teks">
-        <TextField 
+        <TextField
+            disabled 
             className="teks"
             type='text' 
             variant="outlined" 

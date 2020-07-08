@@ -177,16 +177,10 @@ export function putLifetimeCompAction(payload, accessToken){
 	return async (dispatch) => dispatch(callApi(PutLifetimeComp, requestConfig));
 } 
 
-export function putSAPIssueAction(payload, accessToken, whichTabs){
-	var URL = "";
-	if(whichTabs){
-		URL = `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/sapissue`
-	}else{
-		URL = `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/sapissue`
-	}
+export function putSAPIssueAction(payload, accessToken){
 	const requestConfig = {
 		method: RequestMethod.PUT,
-		url: URL,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/sapissue`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8; text/plain',
