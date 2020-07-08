@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import {AppBar, Tabs, Tab, Typography} from '@material-ui/core';
+import { AppBar, Tabs, Tab, Typography } from '@material-ui/core';
 import SalesOrderList from '../../components/PlanningList/SalesOrderList';
 import ServiceOrderList from '../../components/PlanningList/ServiceOrderList';
 import RevisedSalesOrderList from '../../components/PlanningList/RevisedSalesOrderList';
@@ -46,7 +46,7 @@ const styles = theme => ({
   tabRoot: {
     textTransform: 'initial',
     alignItem: 'center',
-    marginLeft:0,
+    marginLeft: 0,
     minWidth: 72,
     fontWeight: theme.typography.fontWeightRegular,
     marginRight: theme.spacing.unit * 0,
@@ -99,23 +99,23 @@ class DetailsTab extends React.Component {
       this.props.onPage(this.state.value);
       if (this.state.invisible1) {
         this.setState({
-          invisible2 : true
+          invisible2: true
         })
       }
       this.setState({
-        invisible1 : false,
+        invisible1: false,
         value,
       })
     }
-    if (value === 1) {    
+    if (value === 1) {
       this.props.onPage(this.state.value);
       if (this.state.invisible2) {
         this.setState({
-          invisible1 : true
+          invisible1: true
         })
       }
       this.setState({
-        invisible2 : false,
+        invisible2: false,
         value
       })
     }
@@ -125,8 +125,8 @@ class DetailsTab extends React.Component {
     this.setState({ value: index });
   };
 
-  _renderSalesOrderList(){
-    return(
+  _renderSalesOrderList() {
+    return (
       <>
       <div className={this.props.salesOrderList.Lists.length === 0 
           && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "list-detail-empty" : "plannings-list-detail"}>
@@ -176,19 +176,20 @@ class DetailsTab extends React.Component {
             </div>
           </div>
         </div>
-      )
+      </div>
+    )
   }
 
-  _renderServiceOrderList(){
-    return(
-        <div className={this.props.serviceOrderList.Lists.length === 0 
-          && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "list-detail-empty" : "plannings-list-detail"}>
-          <ServiceOrderList 
-            {...this.props}
-            idService="Data Input"
-            isClick={this.props.isClick}
-          />
-        </div>
+  _renderServiceOrderList() {
+    return (
+      <div className={this.props.serviceOrderList.Lists.length === 0
+        && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "list-detail-empty" : "plannings-list-detail"}>
+        <ServiceOrderList
+          {...this.props}
+          idService="Data Input"
+          isClick={this.props.isClick}
+        />
+      </div>
     );
   }
 
@@ -213,7 +214,7 @@ class DetailsTab extends React.Component {
         arr.splice(0, 0, "All Customer")
         return arr
       }
-      else{
+      else {
         let arr = this.props.serviceOrderList.Customers;
         arr.splice(0, 0, "All Customer")
         return arr
@@ -242,7 +243,7 @@ class DetailsTab extends React.Component {
         arr.splice(0, 0, "All Site")
         return arr
       }
-      else{
+      else {
         let arr = this.props.serviceOrderList.Sites;
         arr.splice(0, 0, "All Site")
         return arr
@@ -271,7 +272,7 @@ class DetailsTab extends React.Component {
         arr.splice(0, 0, "All Unit Model")
         return arr
       }
-      else{
+      else {
         let arr = this.props.serviceOrderList.UnitModels;
         arr.splice(0, 0, "All Unit Model")
         return arr
@@ -300,7 +301,7 @@ class DetailsTab extends React.Component {
         arr.splice(0, 0, "All Component Description")
         return arr
       }
-      else{
+      else {
         let arr = this.props.serviceOrderList.ComponentDescriptions;
         arr.splice(0, 0, "All Component Description")
         return arr
@@ -313,7 +314,7 @@ class DetailsTab extends React.Component {
       <div className="dropdowns-detail-site">
         <div className="dropdown-detail-site">
           <DropdownFilter
-          {...this.props}
+            {...this.props}
             data={this._dataFilterCustomer()}
             selected={this.props.selectedFilters.customerType}
             onSelectActionType={SelectCustomerFilterAction}
@@ -362,19 +363,19 @@ class DetailsTab extends React.Component {
     );
   }
 
-  renderTabSales(){
-    return(
+  renderTabSales() {
+    return (
       <div className="tab-site">
         <div className="label-site">Sales Order</div>
-      </div>      
+      </div>
     )
   }
 
-  renderTabService(){
-    return(
+  renderTabService() {
+    return (
       <div className="tab-site">
         <div className="label-site">Service Order</div>
-      </div>      
+      </div>
     )
   }
 
@@ -405,19 +406,19 @@ class DetailsTab extends React.Component {
       )
     }else{
       if (this.state.value === 0) {
-        return(
+        return (
           <div className="total-data-container">
             <div className="text-total">
               {this.props.totalSalesData}
             </div>
             <div className="text-tabs">
-               Total Sales Order
+              Total Sales Order
             </div>
           </div>
         )
       }
-      else{
-        return(
+      else {
+        return (
           <div className="total-data-container">
             <div className="text-total">
               {this.props.totalServiceData}
@@ -443,17 +444,17 @@ class DetailsTab extends React.Component {
               {this.props.renderNotif}
               {this.props.renderFilterByDataAction}
             </div>
-            <AppBar position="static" color="default" style={{boxShadow: "none"}}>
+            <AppBar position="static" color="default" style={{ boxShadow: "none" }}>
               <Tabs
                 classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
                 value={this.state.value}
                 onChange={this.handleChange}
                 indicatorColor="primary" >
-                <Tab 
+                <Tab
                   centered={true}
-                  onClick={() => this.props.clearSelectedServicePlans()} 
-                  classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-                  label= {this.renderTabService()}
+                  onClick={() => this.props.clearSelectedServicePlans()}
+                  classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
+                  label={this.renderTabService()}
                 />
               </Tabs>
             </AppBar>
@@ -539,23 +540,23 @@ class DetailsTab extends React.Component {
               {this.props.renderNotif}
               {this.props.renderFilterByDataAction}
             </div>
-            <AppBar position="static" color="default" style={{boxShadow: "none"}}>
+            <AppBar position="static" color="default" style={{ boxShadow: "none" }}>
               <Tabs
                 classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
                 value={this.state.value}
                 onChange={this.handleChange}
                 indicatorColor="primary" >
-                <Tab 
+                <Tab
                   centered={true}
-                  onClick={() => this.props.clearSelectedSalesPlans()} 
-                  classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-                  label= {this.renderTabSales()} 
+                  onClick={() => this.props.clearSelectedSalesPlans()}
+                  classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
+                  label={this.renderTabSales()}
                 />
-                <Tab 
+                <Tab
                   centered={true}
-                  onClick={() => this.props.clearSelectedServicePlans()} 
-                  classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-                  label= {this.renderTabService()}
+                  onClick={() => this.props.clearSelectedServicePlans()}
+                  classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
+                  label={this.renderTabService()}
                 />
               </Tabs>
             </AppBar>

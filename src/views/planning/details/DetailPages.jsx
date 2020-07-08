@@ -323,7 +323,32 @@ class DetailPages extends React.Component {
     );
   }
 
+  ///Rendering revision search bar
+  _renderSearchBarRevision() {
+    return (
+      <>
+        <div className="bottom-row">
+          <SearchInput
+            {...this.props}
+            whichTabs={this.state.whichTabs}
+            webInfo="Search Revision List"
+            handleSearch={this.handleSearchRevision}
+          />
+        </div>
+      </>
+    );
+  }
+
   handleSearch = (value) => {
+    this.setState({ searchVal: value })
+    if (this.state.whichTabs === true) {
+      setTimeout(() => {
+        this.props.onSearchSales(this.state.searchVal)
+      }, 1000);
+    }
+  }
+
+  handleSearchRevision = (value) => {
     this.setState({ searchVal: value })
     if (this.state.whichTabs === true) {
       setTimeout(() => {
@@ -392,7 +417,7 @@ class DetailPages extends React.Component {
   updateAssignmentSalesStates = (plan) => {
     if (this.props.selectedSalesPlans
       .some((plans) => plans.SoNumber === plan.SoNumber,
-      )) { return this.props.unselectSalesPlan(plan); }
+    )) { return this.props.unselectSalesPlan(plan); }
     return this.props.selectSalesPlan(plan);
   };
 
@@ -400,7 +425,7 @@ class DetailPages extends React.Component {
   updateAssignmentServiceStates = (plan) => {
     if (this.props.selectedServicePlans
       .some((plans) => plans.WoNumber === plan.WoNumber,
-      )) { return this.props.unselectServicePlan(plan); }
+    )) { return this.props.unselectServicePlan(plan); }
     return this.props.selectServicePlan(plan);
   };
 
@@ -413,6 +438,7 @@ class DetailPages extends React.Component {
           renderFilterByDataAction={this._renderFilterByDataAction()}
           renderSearch={this._renderSearchBar()}
           renderNotif={this._renderNotif()}
+          renderSearchRevision={this._renderSearchBarRevision}
           onClickSalesOrder={this.onClickSalesOrder}
           onChoosedService={this.updateAssignmentServiceStates}
           onChoosedSales={this.updateAssignmentSalesStates}

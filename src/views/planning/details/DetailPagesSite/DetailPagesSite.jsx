@@ -5,21 +5,21 @@ import DropDownList from '../../../../components/DropdownList/DropDownList';
 import SearchInput from "../../../../components/Searchbar/SearchInput";
 import FilterbyDataAction from '../../../../components/FilterByDataAction/FilterbyDataAction';
 import NotifButton from '../../../../components/ActionButton/NotifButton/NotifButton';
-import {ApiRequestActionsStatus} from '../../../../core/RestClientHelpers';
+import { ApiRequestActionsStatus } from '../../../../core/RestClientHelpers';
 import roleService from '../../../../utils/roleService.helper';
 
 const RoleUser = new roleService();
-class DetailPagesSite extends React.Component{
-    constructor(props) {
-      super(props)
-      this.state = {
-        stats: true,
-        whichTabs: true,
-        isShowPerPage: true,
-        showPerPage : 0,
-        isShowApproveSucceed: false,
-        snak: true,
-        openSuccess : false,
+class DetailPagesSite extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      stats: true,
+      whichTabs: true,
+      isShowPerPage: true,
+      showPerPage: 0,
+      isShowApproveSucceed: false,
+      snak: true,
+      openSuccess: false,
     };
 }
 
@@ -109,7 +109,6 @@ componentDidUpdate = (prevProps) => {
     if(prevProps.filterDate !== this.props.filterDate){
       this.props.fetchSalesOrder(this.props.filterDate,this.props.token);
     }
-  }
 
   //ini untuk trigger sales global search
   if(Number(RoleUser.role()) === 3 || Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){   
@@ -144,8 +143,8 @@ componentDidUpdate = (prevProps) => {
     || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
     if(this.state.whichTabs && prevProps.searchComp !== this.props.searchComp){
       this.props.updateServiceParameter({
-        ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
-      });
+        ...prevProps.serviceParameter.dataFilter, Filter: this.props.filterLifetime.Filter, PageNumber: 1
+      })
     }
   }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
     Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
@@ -173,28 +172,16 @@ componentDidUpdate = (prevProps) => {
           });
         }
       }
-    }else{
-      if(prevProps.searchComp !== this.props.searchComp){
-        this.props.updateServiceParameter({
-          ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
-        });
+    } else {
+      if (prevProps.filterDate !== this.props.filterDate) {
+        this.props.fetchServiceOrder(this.props.filterDate, this.props.token);
       }
     }
-  }
-  
-  // SALES ORDER SORTING
-  if (prevProps.sortSalesBy !== this.props.sortSalesBy) {
-    const { sortSalesBy } = this.props;
-    let isDescending = false;
-    if (sortSalesBy.Customer.isActive) {
-      isDescending = !sortSalesBy.Customer.isAscending;
-      this.props.updateSalesParameter({
-        ...this.props.salesParameter.dataFilter,
-          PageNumber: 1,
-          Sort: [{
-            Field : 'CustomerName',
-            Direction : 'desc'
-          }],      
+
+    //ini untuk trigger sales global search
+    if (prevProps.salesSearch !== this.props.salesSearch) {
+      this.props.updateSearchSales({
+        ...prevProps.searchSalesParameter, Category: 'Lifetime', Keyword: this.props.salesSearch,
       });
       if (sortSalesBy.Customer.isAscending === !sortSalesBy.Customer.isActive) {
         isDescending = !sortSalesBy.Customer.isAscending;
@@ -236,8 +223,8 @@ componentDidUpdate = (prevProps) => {
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
           Sort: [{
-            Field : 'UnitModel',
-            Direction : 'desc'
+            Field: 'CustomerName',
+            Direction: 'desc'
           }],
       });
       if (sortSalesBy.UnitModel.isAscending === !sortSalesBy.UnitModel.isActive) {
@@ -258,8 +245,8 @@ componentDidUpdate = (prevProps) => {
         ...this.props.salesParameter.dataFilter,
           PageNumber: 1,
           Sort: [{
-            Field : 'ComponentDescription',
-            Direction : 'desc'
+            Field: 'UnitModel',
+            Direction: 'desc'
           }],
       });
       if (sortSalesBy.CompDesc.isAscending === !sortSalesBy.CompDesc.isActive) {
@@ -368,14 +355,13 @@ componentDidUpdate = (prevProps) => {
       }
     };
   }
-}
 
   // PAGINATION DENGAN KONDISI UNTUK TAB SALES ORDER ATAU SERVICE ORDER
-  _renderPagination= (pageValue) =>  {
+  _renderPagination = (pageValue) => {
     if (pageValue === 1) {
-      this.setState({whichTabs : true})
-    }if (pageValue === 0) {
-      this.setState({whichTabs : false})
+      this.setState({ whichTabs: true })
+    } if (pageValue === 0) {
+      this.setState({ whichTabs: false })
     }
     if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
       || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
@@ -385,7 +371,7 @@ componentDidUpdate = (prevProps) => {
         // const prevSales = this.props.serviceOrderList.PrevPage;
         const currentPropsService = this.props.serviceOrderList.PageNumber;
         const { TotalPages } = this.props.serviceOrderList;
-        return(
+        return (
           <div className="paginations">
             <div className="paging-revision">
               {/* {prevSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="next-page-revision"><KeyboardArrowLeft className="arrow-icon-revision" /></div>} */}
@@ -434,8 +420,8 @@ componentDidUpdate = (prevProps) => {
         // const prevSales = this.props.salesOrderList.PrevPage;
         const currentPropsSales = this.props.salesOrderList.PageNumber;
         const { TotalPages } = this.props.salesOrderList;
-        
-        return(
+
+        return (
           <div className="paginations">
             <div className="paging-revision">
               {/* {prevSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
@@ -450,13 +436,13 @@ componentDidUpdate = (prevProps) => {
             </div>
           </div>
         )
-      }else{
+      } else {
         const web = this.props.displayMode === 'web';
         // const nextSales = this.props.serviceOrderList.NextPage;
         // const prevSales = this.props.serviceOrderList.PrevPage;
         const currentPropsService = this.props.serviceOrderList.PageNumber;
         const { TotalPages } = this.props.serviceOrderList;
-        return(
+        return (
           <div className="paginations">
             <div className="paging-revision">
               {/* {prevSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="next-page-revision"><KeyboardArrowLeft className="arrow-icon-revision" /></div>} */}
@@ -476,11 +462,11 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  _renderPaginationRev= (pageValue) =>  {
+  _renderPaginationRev = (pageValue) => {
     if (pageValue === 1) {
-      this.setState({whichTabs : true})
-    }if (pageValue === 0) {
-      this.setState({whichTabs : false})
+      this.setState({ whichTabs: true })
+    } if (pageValue === 0) {
+      this.setState({ whichTabs: false })
     }
     if (this.state.whichTabs === true) {
       const web = this.props.displayMode === 'web';
@@ -488,8 +474,8 @@ componentDidUpdate = (prevProps) => {
       // const prevSalesRev = this.props.salesOrderRevised.PrevPage;
       const currentPropsRev = this.props.salesOrderRevised.PageNumber;
       const { TotalPages } = this.props.salesOrderRevised;
-      
-      return(
+
+      return (
         <div className="paginations-rev">
           <div className="paging-rev">
             {/* {prevSalesRev && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
@@ -507,11 +493,11 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  fetchSearchSales = async() => {
+  fetchSearchSales = async () => {
     await this.props.fetchSalesOrder(this.props.searchSalesParameter, this.props.token);
-  } 
+  }
 
-  fetchSearchService = async() => {
+  fetchSearchService = async () => {
     await this.props.fetchServiceOrder(this.props.searchServiceParameter, this.props.token);
   }
 
@@ -520,8 +506,8 @@ componentDidUpdate = (prevProps) => {
   }
 
   //SAAT MENGKLIK SERVICE ORDER TAB
-  onClickServiceOrder = async() => {
-   await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
+  onClickServiceOrder = async () => {
+    await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
   }
   //SAAT MENGKLIK SALES ORDER TAB
   onClickSalesOrder = async() =>{
@@ -560,28 +546,10 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  onClickRevisedSales = async() => {
+  onClickRevisedSales = async (searchData) => {
     await this.props.fetchRevisedSales({
-      ...this.props.salesRevisedParam.dataFilter,
-      Filter : 
-        [...this.props.salesRevisedParam.dataFilter.Filter, 
-        {
-          Field 	 : 'IsRevised',
-          Operator : 'eq',
-          Value 	 : 'true',
-          Logic 	 : 'AND'
-        },{
-          Field    : 'IsChanged',
-          Operator : 'eq',
-          Value    : 'false',
-          Logic    : "AND"
-        },{
-          Field : 'SAPIssueMessage',
-          Operator : 'eq',
-          Value : '-',
-          Logic : 'AND'
-        }]
-    },this.props.token);
+      Category: 'Lifetime', Keyword: this.props.salesSearch,
+    }, this.props.token);
   }
 
   // onClickRevisedSales = async (searchData) => {
@@ -591,9 +559,9 @@ componentDidUpdate = (prevProps) => {
   // }
 
   //KOMPONEN UNTUK SHOW PER/PAGE
-  _renderShowPerPage(){
-    return(
-      <DropDownList 
+  _renderShowPerPage() {
+    return (
+      <DropDownList
         {...this.props}
         handleClickShowPerPage={this.handleClickShowPerPage}
       />
@@ -605,7 +573,7 @@ componentDidUpdate = (prevProps) => {
       || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
       if (this.state.whichTabs === true) {
         this.props.clearSelectedServicePlans();
-        this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value})
+        this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value })
       }
     }else if(Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
       Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
@@ -616,28 +584,28 @@ componentDidUpdate = (prevProps) => {
     }else{
       if (this.state.whichTabs === true) {
         this.props.clearSelectedSalesPlans();
-        this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value})
-      }else{
+        this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value })
+      } else {
         this.props.clearSelectedServicePlans();
-        this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value})
+        this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value })
       }
     }
   }
 
-  _renderPagingRev(){
-    return(
+  _renderPagingRev() {
+    return (
       <div className="bottom-row-rev">
         <div className="total-data-rev">
-          *There are <b>{this.props.salesOrderRevised.TotalData} items </b>of sales orders that have not been revised.
+          *There are <b>{this.props.salesOrderRevised.TotalDataQuery} items </b>of sales orders that have not been revised.
         </div>
-        {this.props.salesOrderRevised.Lists.length === 0 
+        {this.props.salesOrderRevised.Lists.length === 0
           && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderPaginationRev()}
       </div>
     )
   }
 
   //KOMPONEN UNTUK GLOBAL SEARCH
-  _renderSearchBar(){
+  _renderSearchBar() {
     return (
       <div className="search-site">
         <SearchInput
@@ -670,7 +638,7 @@ componentDidUpdate = (prevProps) => {
         setTimeout(() => {
           this.props.onSearchSales(this.state.searchVal)
         }, 1000);
-      }else {
+      } else {
         setTimeout(() => {
           this.props.onSearchService(this.state.searchVal)
         }, 1000);
@@ -703,58 +671,67 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  _renderNotif(){
+  }
+
+  handleSearchRevision = (value) => {
+    setTimeout(() => {
+      this.props.updateSalesRevParameter(this.state.searchVal)
+    }, 1000);
+
+  }
+
+  _renderNotif() {
     return (
       <>
-        <NotifButton 
+        <NotifButton
           {...this.props}
-          idNotif = "DetailSite"
+          idNotif="DetailSite"
         />
       </>
     )
   }
 
-  handleClickFilterByDataAction = () =>{
+  handleClickFilterByDataAction = () => {
     this.setState({
-      isApproved : !this.state.isApproved
+      isApproved: !this.state.isApproved
     })
   }
 
   //KOMPONEN UNTUK FILTER DATA ACTION
   _renderFilterByDataAction = () => {
     if (this.state.whichTabs === true) {
-      return(
+      return (
         <>
-          <FilterbyDataAction 
+          <FilterbyDataAction
             {...this.props}
-            titles= "Status"
-            idStatus= "DetailSite"
+            titles="Status"
+            idStatus="DetailSite"
           />
         </>
       );
     }
     if (this.state.whichTabs === false) {
-      return(
+      return (
         <>
-          <FilterbyDataAction 
+          <FilterbyDataAction
             {...this.props}
-            titles= "Status"
-            idStatus= "DetailSite"
+            titles="Status"
+            idStatus="DetailSite"
           />
         </>
       );
     }
   };
 
-  isChangeStat = (value,key) =>{
+  isChangeStat = (value, key) => {
     this.setState({
-      lifetime: { Lists :this.state.lifetime.Lists.map(el => (el.SoNumber === key ? {...el, LifeTimeComp : value} : el)) }
+      lifetime: { Lists: this.state.lifetime.Lists.map(el => (el.SoNumber === key ? { ...el, LifeTimeComp: value } : el)) }
     });
   };
 
   changeSuccess = () => {
     this.setState({
-      openSuccess : !this.state.openSuccess
+      openSuccess: !this.state.openSuccess
     })
   }
 
@@ -765,17 +742,17 @@ componentDidUpdate = (prevProps) => {
   }
 
   //KOMPONEN UNTUK RENDER PAGE SALES ORDER DAN SERVICE ORDER
-  _renderTabs(){
+  _renderTabs() {
     return (
       <>
         <DetailsTab
           {...this.props}
           renderNotif={this._renderNotif()}
-          renderFilterByDataAction={this._renderFilterByDataAction()} 
+          renderFilterByDataAction={this._renderFilterByDataAction()}
           renderSearch={this._renderSearchBar()}
           renderSearchRev={this._renderSearchBarRev()}
           renderPaginationRev={this._renderPagingRev()}
-          onClickSalesOrder={this.onClickSalesOrder}        
+          onClickSalesOrder={this.onClickSalesOrder}
           onClickServiceOrder={this.onClickServiceOrder}
           onClickRevisedSales={this.onClickRevisedSales}
           onChoosedService={this.updateAssignmentServiceStates}
@@ -795,8 +772,8 @@ componentDidUpdate = (prevProps) => {
     );
   };
 
-  render(){     
-    return(
+  render() {
+    return (
       <main className="content">
           <div className="table-detail-site">
               {this._renderTabs()}
@@ -821,10 +798,10 @@ componentDidUpdate = (prevProps) => {
               }
             </>
           : <>
-              {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
-                this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
+            {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+              this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
                 <div className="bottom-row-detail-site">
-                    {this._renderShowPerPage()} {this._renderPagination()}
+                  {this._renderShowPerPage()} {this._renderPagination()}
                 </div>
               }
             </>

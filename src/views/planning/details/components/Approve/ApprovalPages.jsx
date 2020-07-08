@@ -373,7 +373,7 @@ class ApprovalPages extends React.Component {
   updateAssignmentServiceStates = (plan) => {
     if (this.props.selectedServicePlans
       .some((plans) => plans.WoNumber === plan.WoNumber,
-      )) { return this.props.unselectServicePlan(plan); }
+    )) { return this.props.unselectServicePlan(plan); }
     return this.props.selectServicePlan(plan);
   };
 

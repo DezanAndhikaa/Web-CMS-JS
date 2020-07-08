@@ -22,10 +22,13 @@ import {
 	UpdateSalesDeletedParameterAction,
 	UpdateSalesSapParameterAction,
 	UpdateSalesParameterAction,
+	UpdateSearchSalesRevisiAction,
 	UpdateSalesRevisedParamAction,
+	UpdateSearchSalesRevisionAction,
 	ResetSelectedMechanicsAction,
 	SearchSalesAction,
 	SearchServiceAction,
+	SearchSalesRevisiAction,
 	UpdateServiceApprovedParameterAction,
 	UpdateServiceDeletedParameterAction,
 	UpdateServiceSapParameterAction,
@@ -219,6 +222,8 @@ export function fetchPutLifetimeReducer(state = initialSalesState, action) {
 	}
 	return state;
 }
+
+// export function SearchRevisiedSalesOrder(state = searchSalesApprovedReducer)
 
 export function PutSAPIssueReducer(state = initialSalesState, action) {
 	if (action.type === PutSAPIssue) {
@@ -527,8 +532,18 @@ export function searchSalesParameterReducer(state = initialSearchParameter, acti
 	return state;
 }
 
+export function searchSalesRevisiParameterReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchSalesRevisiAction) return action.payload;
+	return state;
+}
+
 export function searchSalesApprovedReducer(state = initialSearchParameter, action) {
 	if (action.type === UpdateSearchSalesApprovedAction) return action.payload;
+	return state;
+}
+
+export function searchRevisionSalesReducer(state = initialSearchParameter, action) {
+	if (action.type === UpdateSearchSalesRevisionAction) return action.payload;
 	return state;
 }
 
@@ -592,7 +607,8 @@ export function serviceSapParameterReducer(state = initialServiceParameter, acti
 	return state;
 }
 
-export function salesRevisedParameterReducer(state = initialSalesParameter, action) {
+// Detail reducer reviced parameter reducer
+export function salesRevisedParameterReducer(state = initialSearchParameter, action) {
 	if (action.type === UpdateSalesRevisedParamAction)
 		return { ...state, dataFilter: action.payload };
 	return state;
@@ -702,6 +718,11 @@ export function serviceParameterDeletedReducer(state = initialServiceParameter, 
 
 export function searchSalesReducer(state = '', action) {
 	if (action.type === SearchSalesAction) return action.payload;
+	return state;
+}
+
+export function searchSalesRevisiReducer(state = '', action) {
+	if (action.type === SearchSalesRevisiAction) return action.payload;
 	return state;
 }
 
@@ -940,7 +961,10 @@ const PlansReducers = combineReducers({
 	sortServiceBy: sortServiceByReducer,
 	salesSearch: searchSalesReducer,
 	serviceSearch: searchServiceReducer,
+	salesSearchRevision: searchRevisionSalesReducer,
 	searchSalesParameter: searchSalesParameterReducer,
+	searchSalesRevisiParameter: searchSalesRevisiParameterReducer,
+	searchSalesRevisionParameter: searchRevisionSalesReducer,
 	searchSalesApprovedParam: searchSalesApprovedReducer,
 	searchSalesDeletedParam: searchSalesDeletedReducer,
 	searchSalesSapParam: searchSalesSapReducer,
