@@ -266,7 +266,7 @@ class ApprovalTab extends React.Component {
           {this.props.renderNotif}
           {this.props.renderFilterByDataAction}
         </div>
-        <AppBar position="static" color="default" style={{ boxShadow: "none" }}>
+        <AppBar position="static" color="default" style={{ boxShadow: "none", zIndex: 1000 }}>
           <Tabs
             classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
             value={this.state.value}
