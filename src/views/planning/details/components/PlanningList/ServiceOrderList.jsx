@@ -69,8 +69,10 @@ export default class ServiceOrderList extends React.PureComponent {
                   <Checkbox 
                   checked={this.state.checkedValue}
                   onChange={this.handleClick}
-                  onClick={() => {this.props.serviceOrderList.Lists.map((row,id) => 
-                  this.props.onChoosedService(row,id))}}
+                  onClick={({target: { checked }}) => {
+                    if(checked) return this.props.onChooseAllService(this.props.serviceOrderList.Lists);
+                    return this.props.onChooseAllService([]);
+                  }}
                   className="checkbox-checked-header" />}
                 </TableCell>
               }
@@ -129,16 +131,16 @@ export default class ServiceOrderList extends React.PureComponent {
     )
   }
 
-  showTableBody(row,index) {
+  showTableBody(row,id) {
     return(
-      <TableRow key={index} classes={{ root: 'table-row' }}>
+      <TableRow key={id} classes={{ root: 'table-row' }}>
         {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? "" :
           <TableCell padding="checkbox">
             {this.props.displayServiceCheckbox && 
             <Checkbox 
               disabled={this.isCheckboxAvailable(row)} 
               checked={this.props.selectedServicePlanList.some((plans) => plans.WoNumber === row.WoNumber)} 
-              onClick={() => this.props.onChoosedService(row)} 
+              onClick={() => this.props.onChoosedService(row, id, 'body')}
               classes={{ checked: 'checkbox-checked' }} 
             />}
           </TableCell>

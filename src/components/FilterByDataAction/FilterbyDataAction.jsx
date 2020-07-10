@@ -7,6 +7,7 @@ import { IconApprove, IconHistory, IconInputLT } from '../../assets/icons';
 import { MenuList, MenuItem, Paper, Typography, withStyles } from '@material-ui/core';
 import { Menu } from '../../constants';
 import roleService from "../../utils/roleService.helper";
+import { setItem } from 'storage-helper';
 
 const RoleUser = new roleService();
 const DotBadges = withStyles(theme => ({
@@ -51,6 +52,7 @@ class FilterbyDataAction extends React.Component {
       pathname: menu,
       whichTab: tab
     });
+    window.localStorage.setItem('whichTab', tab);
   }
 
   renderList(){

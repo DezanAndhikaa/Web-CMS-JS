@@ -375,6 +375,10 @@ class ApprovalPages extends React.Component {
     return this.props.selectServicePlan(plan);
   };
 
+  _updateAssignmentServiceStatesAll = (dataBoolean) => {
+    this.props.selectAllService(dataBoolean)
+  }
+
   //KOMPONEN UNTUK RENDER PAGE SALES ORDER DAN SERVICE ORDER
   _renderTabs() {
     return (
@@ -387,6 +391,7 @@ class ApprovalPages extends React.Component {
           renderSearch={this._renderSearchBar()}
           onClickServiceOrder={this.onClickServiceOrder}
           onChoosedService={this.updateAssignmentServiceStates}
+          onChooseAllService= {this._updateAssignmentServiceStatesAll}
           selectedServicePlanList={this.props.selectedServicePlans}
           displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
           stats={this.state.stats}
