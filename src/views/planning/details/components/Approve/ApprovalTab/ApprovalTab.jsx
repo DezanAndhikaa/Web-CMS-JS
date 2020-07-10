@@ -169,7 +169,7 @@ class ApprovalTab extends React.Component {
           <div className="total-data">
             <div className="header-approval">
               <div className="header1">
-                Approval
+                Available
               </div>
               <div className="header2">
                 Service Order
