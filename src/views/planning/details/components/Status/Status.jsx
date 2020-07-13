@@ -10,7 +10,7 @@ import SapSalesOrderList from '../PlanningList/SapSalesOrderList'
 import SapServiceOrderList from '../PlanningList/SapServiceOrderList'
 import ApprovedServiceOrderList from '../PlanningList/ApprovedServiceOrderList';
 import DeletedServiceOrderList from '../PlanningList/DeletedServiceOrderList';
-import Button from '@material-ui/core/Button';
+import { Button, CircularProgress} from '@material-ui/core';
 import './Status.scss';
 import { Menu } from '../../../../../constants';
 import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton';
@@ -19,6 +19,7 @@ import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from "moment";
 import DropDownList from '../../../../../components/DropdownList/DropDownList';
 import roleService from "../../../../../utils/roleService.helper";
+import ConfirmationModal from '../../../../../components/ConfirmationModal/ConfirmationModal';
 
 const RoleUser = new roleService();
 export default class Status extends React.PureComponent {
@@ -37,6 +38,18 @@ export default class Status extends React.PureComponent {
 		this.setState({
 		  openSuccess : !this.state.openSuccess
 		})
+	}
+
+	renderCircularProgress() {
+		return <CircularProgress size={100} className="circular-progress" />;
+	}
+
+	_renderDataDeleted = () => {
+		return (
+		  <>
+			<ConfirmationModal idModal="Delete Success" openModal={this.state.openSuccess} onClose={this.changeSuccess} />
+		  </>
+		)
 	}
 
 	componentDidMount = async() =>{
@@ -1249,6 +1262,8 @@ export default class Status extends React.PureComponent {
 		  		}
 			}
 			await this.props.deletePermanentSales(arr, this.props.token);
+			this.onClickSalesOrderDeleted();
+			 await this.props.clearSelectedSalesPlans();
 		}
 		if (this.props.location.whichTab === "service") {
 			let arr = []
@@ -1258,7 +1273,9 @@ export default class Status extends React.PureComponent {
 					arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
 		  		}
 			}
-			await this.props.deletePermanentService(arr, this.props.token);
+			await this.props.deletePermanentService({WoNumbers: arr}, this.props.token);
+			this.onClickServiceOrderDeleted();
+			 await this.props.clearSelectedServicePlans();
 		}
 	}
 
@@ -2085,6 +2102,11 @@ export default class Status extends React.PureComponent {
 	render(){
 		return(
 			<main className="content" >
+				{this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.SUCCEEDED && (
+				<>
+					{this._renderDataDeleted()}
+				</>
+				)}
 				<div className="head-containers">
 					{Number(RoleUser.role()) === 1 ?
 						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>

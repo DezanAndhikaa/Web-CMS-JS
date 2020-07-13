@@ -214,7 +214,7 @@ export function deleteSalesAction(payload, accessToken) {
 export function deletePermanentSalesAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.DELETE,
-		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/deletepermanent`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/permanent`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8',
@@ -244,7 +244,7 @@ export function deleteServiceAction(payload, accessToken) {
 export function deletePermanentServiceAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.DELETE,
-		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/deletepermanent`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/permanent`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8',
