@@ -428,19 +428,6 @@ class ApprovalPages extends React.Component {
         {this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.LOADING && (
           this.renderCircularProgress()
         )}
-        {this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED && (
-          <>
-            {this._renderSalesDeleted()}
-          </>
-        )}
-        {this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.LOADING && (
-          this.renderCircularProgress()
-        )}
-        {this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.SUCCEEDED && (
-          <>
-            {this._renderSalesDeleted()}
-          </>
-        )}
         {this.props.fetchStatusUnapprove === ApiRequestActionsStatus.LOADING && (
           this.renderCircularProgress()
         )}

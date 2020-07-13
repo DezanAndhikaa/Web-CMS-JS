@@ -10,7 +10,7 @@ import SapSalesOrderList from '../PlanningList/SapSalesOrderList'
 import SapServiceOrderList from '../PlanningList/SapServiceOrderList'
 import ApprovedServiceOrderList from '../PlanningList/ApprovedServiceOrderList';
 import DeletedServiceOrderList from '../PlanningList/DeletedServiceOrderList';
-import { Button, CircularProgress} from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import './Status.scss';
 import { Menu } from '../../../../../constants';
 import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton';
@@ -38,10 +38,6 @@ export default class Status extends React.PureComponent {
 		this.setState({
 		  openSuccess : !this.state.openSuccess
 		})
-	}
-
-	renderCircularProgress() {
-		return <CircularProgress size={100} className="circular-progress" />;
 	}
 
 	_renderDataDeleted = () => {
@@ -1263,7 +1259,6 @@ export default class Status extends React.PureComponent {
 			}
 			await this.props.deletePermanentSales(arr, this.props.token);
 			this.onClickSalesOrderDeleted();
-			 await this.props.clearSelectedSalesPlans();
 		}
 		if (this.props.location.whichTab === "service") {
 			let arr = []
@@ -1275,7 +1270,6 @@ export default class Status extends React.PureComponent {
 			}
 			await this.props.deletePermanentService({WoNumbers: arr}, this.props.token);
 			this.onClickServiceOrderDeleted();
-			 await this.props.clearSelectedServicePlans();
 		}
 	}
 
@@ -1352,6 +1346,7 @@ export default class Status extends React.PureComponent {
 								whatTabsIsRendered={true}
 								handleDeletePermanent={this.handleDeletePermanent}
 								isDisabled={this.state.isDisabled}
+								renderSakses = {this.changeSuccess}
 							/>
 						</>
 					)
@@ -1415,6 +1410,7 @@ export default class Status extends React.PureComponent {
 								whatTabsIsRendered={false}
 								handleDeletePermanent={this.handleDeletePermanent}
 								isDisabled={this.state.isDisabled}
+								renderSakses = {this.changeSuccess}
 							/>
 						</>
 					)
@@ -1703,7 +1699,7 @@ export default class Status extends React.PureComponent {
 
 	onClickSalesOrderDeleted = async() =>{
 		await this.props.fetchDeletedSales(this.props.salesDeletedParameter.dataFilter, this.props.token);
-		await this.props.clearSelectedSalesPlans()
+		await this.props.clearSelectedSalesPlans();
 		this.setPropsToState();
 	}
 
