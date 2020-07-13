@@ -80,15 +80,19 @@ export default class SapServiceOrderList extends React.PureComponent {
         <TableRow classes={{ root: 'table-row' }}>
           <TableCell padding="checkbox">
             {this.props.displayServiceCheckbox && 
-            <Checkbox 
-              checked={this.state.checkedValue}
-              onChange={this.handleClicks}
-              onClick={() => {this.props.serviceOrderListSap.Lists.map((row,id) => 
-              this.props.onChoosedService(row,id))}}
-              className="checkbox-checked-header"/>}
+              <Checkbox 
+                className="checkbox-checked-header"
+                checked={this.state.checkedValue}
+                onChange={this.handleClicks}
+                onClick={({target: { checked }}) => {
+                  if(checked) return this.props.onChooseAllService(this.props.serviceOrderListSap.Lists);
+                  return this.props.onChooseAllService([]);
+                }}
+              />
+            }
           </TableCell>
           <PlanningListHeader
-            name="Work Order"
+            name="WO"
             delay={300}
             onSearch={this.props.onSearchComp}
           />
@@ -153,8 +157,7 @@ export default class SapServiceOrderList extends React.PureComponent {
   _showDescription(row){
     return(
       <div className="teks">
-        <TextField
-            disabled 
+        <TextField 
             className="teks"
             type='text' 
             variant="outlined" 
@@ -171,11 +174,13 @@ export default class SapServiceOrderList extends React.PureComponent {
       <TableRow key={id} classes={{ root: 'table-row' }} onClick={() => this.handleExpand(id)}>
         <TableCell padding="checkbox">
           {this.props.displayServiceCheckbox && 
-          <Checkbox 
-          disabled={this.isCheckboxAvailable(row)} 
-          checked={this.props.selectedServicePlanList.some((plans) => plans.WoNumber === row.WoNumber)} 
-          onClick={() => this.props.onChoosedService(row)} 
-          classes={{ checked: 'checkbox-checked' }} />}
+            <Checkbox 
+              disabled={this.isCheckboxAvailable(row)} 
+              checked={this.props.selectedServicePlanList.some((plans) => plans.WoNumber === row.WoNumber)} 
+              onClick={() => this.props.onChoosedService(row, id, 'body')}
+              classes={{ checked: 'checkbox-checked' }} 
+            />
+          }
         </TableCell>
         <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>

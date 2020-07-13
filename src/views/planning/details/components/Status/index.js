@@ -60,8 +60,12 @@ import {
 	UpdateSalesSapParameterAction,
 	UpdateServiceSapParameterAction,
 	searchCompAction,
-	SearchCompAction,SearchCompActionService,searchCompActionService,
-	selectFilterAction, dateFilterAction
+	SearchCompAction,
+	SearchCompActionService,
+	searchCompActionService,
+	selectFilterAction, 
+	dateFilterAction,
+	selectAllService
 } from '../../DetailPages-action';
 import Status from './Status';
 
@@ -135,6 +139,7 @@ const mapDispatchToProps = (dispatch) => ({
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	selectSalesPlan: (payload) => dispatch(selectSalesPlansAction(SelectSalesPlanAction, payload)),
 	selectServicePlan: (payload) => dispatch(selectServicePlansAction(SelectServicePlanAction, payload)),
+	selectAllService: (payload) => dispatch(selectAllService(payload)),
 	unselectServicePlan: (payload) => dispatch(selectServicePlansAction(UnselectServicePlanAction, payload)),
 	unselectSalesPlan: (payload) => dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
 	lifetimeFilter: (type, payload, payload2, page) => dispatch(selectFilterAction(type, payload, payload2, page)),

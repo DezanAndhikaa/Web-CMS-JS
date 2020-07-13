@@ -1752,6 +1752,7 @@ export default class Status extends React.PureComponent {
 					sortSalesByState={this.props.sortSalesBy}
 					onClickSalesOrder={this.onClickSalesOrder}
 					onChoosedSales={this.updateAssignmentSalesStates}
+					onChooseSelectAll={this._updateAssignmentSalesStatesAll}
 					selectedSalesPlanList={this.props.selectedSalesPlans}
 				/>
 			</div>
@@ -1771,6 +1772,7 @@ export default class Status extends React.PureComponent {
 					sortServiceByState={this.props.sortServiceBy}
 					onClickServiceOrder={this.onClickServiceOrder}
 					onChoosedService={this.updateAssignmentServiceStates}
+					onChooseAllService= {this._updateAssignmentServiceStatesAll}
 					selectedServicePlanList={this.props.selectedServicePlans}
 				/>
 			</div>
@@ -1790,6 +1792,7 @@ export default class Status extends React.PureComponent {
 					sortSalesByState={this.props.sortSalesBy}
 					onClickSalesOrderApproved={this.onClickSalesOrderApproved}
 					onChoosedSales={this.updateAssignmentSalesStates}
+					onChooseSelectAll={this._updateAssignmentSalesStatesAll}
 					selectedSalesPlanList={this.props.selectedSalesPlans}
 				/>
 			</div>
@@ -1808,6 +1811,7 @@ export default class Status extends React.PureComponent {
 					sortServicesByState={this.props.sortServicesBy}
 					onClickServiceOrderApproved={this.onClickServiceOrderApproved}
 					onChoosedService={this.updateAssignmentServiceStates}
+					onChooseAllService= {this._updateAssignmentServiceStatesAll}
 					selectedServicePlanList={this.props.selectedServicePlans}
 				/>
 			</div>
@@ -1826,6 +1830,7 @@ export default class Status extends React.PureComponent {
 					sortSalesByState={this.props.sortSalesBy}
 					onClickSalesOrderDeleted={this.onClickSalesOrderDeleted}
 					onChoosedSales={this.updateAssignmentSalesStates}
+					onChooseSelectAll={this._updateAssignmentSalesStatesAll}
 					selectedSalesPlanList={this.props.selectedSalesPlans}
 					/>
 			</div>
@@ -1844,6 +1849,7 @@ export default class Status extends React.PureComponent {
 					sortServiceByState={this.props.sortServiceBy}
 					onClickServiceOrderDeleted={this.onClickServiceOrderDeleted}
 					onChoosedService={this.updateAssignmentServiceStates}
+					onChooseAllService= {this._updateAssignmentServiceStatesAll}
 					selectedServicePlanList={this.props.selectedServicePlans}
 				/>
 			</div>
@@ -1862,6 +1868,7 @@ export default class Status extends React.PureComponent {
 					sortSalesByState={this.props.sortSalesBy}
 					onClickSalesOrderSap={this.onClickSalesOrderSap}
 					onChoosedSales={this.updateAssignmentSalesStates}
+					onChooseSelectAll={this._updateAssignmentSalesStatesAll}
 					selectedSalesPlanList={this.props.selectedSalesPlans}
 				/>
 			</div>
@@ -1880,6 +1887,7 @@ export default class Status extends React.PureComponent {
 					sortServiceByState={this.props.sortServiceBy}
 					onClickServiceOrderSap={this.onClickServiceOrderSap}
 					onChoosedService={this.updateAssignmentServiceStates}
+					onChooseAllService= {this._updateAssignmentServiceStatesAll}
 					selectedServicePlanList={this.props.selectedServicePlans}
 					/>
 			</div>
@@ -2021,6 +2029,14 @@ export default class Status extends React.PureComponent {
 		{ return this.props.unselectServicePlan(plan); }
 		return this.props.selectServicePlan(plan);
 	};
+
+	_updateAssignmentSalesStatesAll = (dataBoolean) => {
+		this.props.selectAllSales(dataBoolean)
+	  }
+	
+	_updateAssignmentServiceStatesAll = (dataBoolean) => {
+	this.props.selectAllService(dataBoolean)
+	}
 
 	setPropsToState(){
 		if (this.props.location.whichTab === "sales") {
