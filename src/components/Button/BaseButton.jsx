@@ -36,6 +36,22 @@ class BaseButton extends React.Component{
     isApproved = async() => {
         if (this.props.whatTabsIsRendered === true) {
             if (this.props.titles === "Approve") {
+                await this.props.handleSalesApprove()
+            }
+            if (this.props.titles === "Delete") {
+                await this.props.handleDeleteSales()
+            }
+            if (this.props.titles === "Reject"){
+                await this.props.handleSendtoEdit()
+                this.isClosed()
+            }
+            if (this.props.titles === "Permanently"){
+                await this.props.handleDeletePermanent()
+                this.isClosed()
+            }
+        }
+        if (this.props.whatTabsIsRendered === false) {
+            if (this.props.titles === "Approve") {
                 await this.props.handleServiceApprove();
             }
             if (this.props.titles === "Delete") {

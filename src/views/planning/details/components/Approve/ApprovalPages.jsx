@@ -347,7 +347,7 @@ class ApprovalPages extends React.Component {
         <div className="header-rows">
           <BaseButton titles="Approve"
             {...this.props}
-            whatTabsIsRendered={this.state.whichTabs}
+            whatTabsIsRendered={false}
             disabledButton={this.props.selectedServicePlans.length < 1}
             totalSelectedItems={this.props.selectedServicePlans.length}
             handleServiceApprove={this.handleServiceApprove}
@@ -357,7 +357,7 @@ class ApprovalPages extends React.Component {
             {...this.props}
             whichTabs={this.state.whichTabs}
             selectedDataSAP={this.props.selectedServicePlans}
-            whatTabsIsRendered={this.state.whichTabs}
+            whatTabsIsRendered={false}
             disabledButton={this.props.selectedServicePlans.length < 1}
             totalSelectedItems={this.props.selectedServicePlans.length}
             selectedData={this.state.selectedData}
@@ -395,7 +395,7 @@ class ApprovalPages extends React.Component {
           selectedServicePlanList={this.props.selectedServicePlans}
           displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
           stats={this.state.stats}
-          totalServiceData={this.props.serviceOrderList.TotalData}
+          totalServiceData={this.props.serviceOrderList.TotalDataApproval}
           onClickTabHead={this.props.onClickSortBy}
           sortServiceByState={this.props.sortServiceBy}
           onPage={this._renderPagination}

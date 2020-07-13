@@ -175,7 +175,7 @@ class ApprovalTab extends React.Component {
                 Service Order
               </div>
             </div>
-            <div className={this.props.totalServiceData.toString().length > 1 ? "total-containers" : "total-container"}>
+            <div className={this.props.totalServiceData > 1 ? "total-containers" : "total-container"}>
               {this.props.totalServiceData}
             </div>
           </div>

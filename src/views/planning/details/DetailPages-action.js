@@ -199,7 +199,7 @@ export function putSAPIssueAction(payload, accessToken){
 export function deleteSalesAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.DELETE,
-		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/delete`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/deleted`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
@@ -229,7 +229,7 @@ export function deletePermanentSalesAction(payload, accessToken) {
 export function deleteServiceAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.DELETE,
-		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/delete`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/deleted`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
