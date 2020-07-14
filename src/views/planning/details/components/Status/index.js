@@ -116,10 +116,12 @@ const mapStateToProps = (state) => ({
 	fetchStatusServiceSap: state.plansPageState.serviceOrderListSap.status,
 	sortSalesBy: state.plansPageState.sortSalesBy,
 	sortServiceBy: state.plansPageState.sortServiceBy,
+	path: state.router.location.pathname
 });
 
 const mapDispatchToProps = (dispatch) => ({
 	push: (path, whichTab) => dispatch(push(path, whichTab)),
+	pushtab: (path, whichTab, token) => dispatch(push(path, whichTab, token)),
 	downloadSales : (soId, token) => dispatch(downloadSalesAction(soId, token)),
 	downloadService : (woId, token) => dispatch(downloadServiceAction(woId, token)),
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),

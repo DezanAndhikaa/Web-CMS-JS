@@ -20,11 +20,10 @@ class SideMenuComponent extends React.Component {
     this.props.clickMenu(menu, subMenu);
     if (menu === Menu.PLANNING) {
       if (subMenu !== "") this.props.push(subMenu);
-    }else if (menu === Menu.BACKLOG){
-      if (subMenu !== "") this.props.push(subMenu);
-    } else {
+    }else {
       this.props.push(menu);
     }
+    window.localStorage.setItem('subMenu', subMenu);
   }
 
   render() {

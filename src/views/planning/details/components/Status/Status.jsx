@@ -20,6 +20,7 @@ import moment from "moment";
 import DropDownList from '../../../../../components/DropdownList/DropDownList';
 import roleService from "../../../../../utils/roleService.helper";
 import ConfirmationModal from '../../../../../components/ConfirmationModal/ConfirmationModal';
+import { userIdData } from '../../../../../utils/userLocalService.helper';
 
 const RoleUser = new roleService();
 export default class Status extends React.PureComponent {
@@ -32,6 +33,7 @@ export default class Status extends React.PureComponent {
 		searchVal : '',
 		isDisabled: true,
 		openSuccess: false,
+		bearer: userIdData().accessToken
 	}
 
 	changeSuccess = () => {
@@ -50,19 +52,35 @@ export default class Status extends React.PureComponent {
 
 	componentDidMount = async() =>{
 		if(this.props.location.whichTab === "sales"){
-			this.onClickSalesOrder();
-			this.onClickSalesOrderApproved();
-			this.onClickSalesOrderDeleted();
-			this.onClickSalesOrderSap();
-			this.setPropsToState();
+			this.isReload();
 		}if(this.props.location.whichTab === "service"){
-			this.onClickServiceOrder();
-			this.onClickServiceOrderApproved();
-			this.onClickServiceOrderDeleted();
-			this.onClickServiceOrderSap();
-			this.setPropsToState();
+			this.isReload();
 		}else if(this.props.location.whichTab === undefined){
-			this.handleClick(Menu.PLANNING_APPROVAL);
+			if(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/approval"){
+				if (localStorage.getItem('whichTab') === "sales"){
+					this.handleClick(Menu.PLANNING_APPROVAL_STATUS, 'sales', this.state.bearer);
+					this.isReload();
+				} else{ 
+					this.handleClick(Menu.PLANNING_APPROVAL_STATUS, 'service', this.state.bearer);
+					this.isReload();
+				}
+			} else if(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/details/site"){
+				if (localStorage.getItem('whichTab') === "sales"){
+					this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales', this.state.bearer);
+					this.isReload();
+				} else{ 
+					this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service', this.state.bearer);
+					this.isReload();
+				}
+			}else if(Number(RoleUser.role()) !== 1){
+				if (localStorage.getItem('whichTab') === "sales"){
+					this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales', this.state.bearer);
+					this.isReload();
+				} else{ 
+					this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service', this.state.bearer);
+					this.isReload();
+				}
+			}	
 		}
 	}
 
@@ -1080,8 +1098,12 @@ export default class Status extends React.PureComponent {
 		}
 	}
 
-	handleClick = (menu) => {
-		this.props.push(menu);
+	handleClick = (menu, tab, token) => {
+		this.props.push({
+			pathname: menu,
+			whichTab: tab,
+			token: token
+		});
 	}
 
 	fetchSearchSales = async() => {
@@ -1718,6 +1740,15 @@ export default class Status extends React.PureComponent {
 		this.setPropsToState();
 	}
 
+	isReload = async() => {
+		await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.state.bearer);
+		await this.props.fetchApprovedService(this.props.serviceApprovedParameter.dataFilter, this.state.bearer);
+		await this.props.fetchDeletedService(this.props.serviceDeletedParameter.dataFilter, this.state.bearer);
+		await this.props.fetchDeletedService(this.props.serviceDeletedParameter.dataFilter, this.state.bearer);
+		this.props.clearSelectedServicePlans()
+		this.setPropsToState();
+	}
+
 	onClickServiceOrder = async() => {
 		await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
 		this.props.clearSelectedServicePlans()
@@ -2096,6 +2127,7 @@ export default class Status extends React.PureComponent {
 	  }
 
 	render(){
+		console.log("ini si kampay berber ",this.state.bearer)
 		return(
 			<main className="content" >
 				{this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.SUCCEEDED && (
@@ -2104,13 +2136,17 @@ export default class Status extends React.PureComponent {
 				</>
 				)}
 				<div className="head-containers">
-					{Number(RoleUser.role()) === 1 ?
+					{Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/approval" ?
 						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
 							Approval
 						</Button> :
+						Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/approval" ?
 						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_SITE) }>
 							Detail
-						</Button>
+						</Button> :
+						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_SITE) }>
+							Detail
+						</Button> 
 					}
 					<div className="notif_button">
 						<NotifButton
