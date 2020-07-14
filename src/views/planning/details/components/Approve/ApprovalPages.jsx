@@ -192,7 +192,7 @@ class ApprovalPages extends React.Component {
     if (this.state.whichTabs === true) {
       const web = this.props.displayMode === 'web';
       const currentPropsService = this.props.serviceOrderList.PageNumber;
-      const { TotalPages } = this.props.serviceOrderList;
+      const { TotalPages } = this.props.serviceOrderList.Lists;
 
       return (
         <div className="paginations">

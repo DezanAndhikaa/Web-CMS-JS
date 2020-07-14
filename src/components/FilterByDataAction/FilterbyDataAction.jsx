@@ -7,7 +7,6 @@ import { IconApprove, IconHistory, IconInputLT } from '../../assets/icons';
 import { MenuList, MenuItem, Paper, Typography, withStyles } from '@material-ui/core';
 import { Menu } from '../../constants';
 import roleService from "../../utils/roleService.helper";
-import { setItem } from 'storage-helper';
 
 const RoleUser = new roleService();
 const DotBadges = withStyles(theme => ({
@@ -72,16 +71,11 @@ class FilterbyDataAction extends React.Component {
                 <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales')}>Sales Order</Typography>
               </MenuItem>
             </MenuList>
-        : Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/approval"? 
+            && localStorage.getItem('subMenu') === "/webcms/planning/approval" 
+        : Number(RoleUser.role()) === 1 ? 
           <MenuList>
             <MenuItem>
-              <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL_STATUS, 'service')}>Service Order</Typography>
-            </MenuItem>
-          </MenuList>
-        : Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/details/site"? 
-          <MenuList>
-            <MenuItem>
-              <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
+              <Typography className="list-item-status" variant="inherit" onClick={ () =>{ localStorage.getItem('subMenu') === "/webcms/planning/approval" ? this.handleClick(Menu.PLANNING_APPROVAL_STATUS, 'service') : this.handleClick(Menu.PLANNING_APPROVAL_STATUS, 'service') }}>Service Order</Typography>
             </MenuItem>
           </MenuList>
         : <MenuList>

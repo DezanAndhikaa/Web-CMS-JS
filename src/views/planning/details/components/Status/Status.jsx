@@ -1458,7 +1458,7 @@ export default class Status extends React.PureComponent {
 		if (this.props.location.whichTab === "sales") {
 		  const web = this.props.displayMode === 'web';
 		  const currentPropsSales = data.PageNumber;
-		  const { TotalPages } = data;
+		  const { TotalPages } = data.Lists;
 		  switch (this.state.whatPageIsChoosed) {
 			case 'Approve':
 				return(

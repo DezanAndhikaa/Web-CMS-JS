@@ -384,7 +384,7 @@ componentDidUpdate = (prevProps) => {
         // const nextSales = this.props.serviceOrderList.NextPage;
         // const prevSales = this.props.serviceOrderList.PrevPage;
         const currentPropsService = this.props.serviceOrderList.PageNumber;
-        const { TotalPages } = this.props.serviceOrderList;
+        const { TotalPages } = this.props.serviceOrderList.Lists;
         return(
           <div className="paginations">
             <div className="paging-revision">
@@ -409,7 +409,7 @@ componentDidUpdate = (prevProps) => {
         // const nextSales = this.props.salesOrderList.NextPage;
         // const prevSales = this.props.salesOrderList.PrevPage;
         const currentPropsSales = this.props.salesOrderList.PageNumber;
-        const { TotalPages } = this.props.salesOrderList;
+        const { TotalPages } = this.props.salesOrderList.Lists;
         
         return(
           <div className="paginations">
@@ -433,7 +433,7 @@ componentDidUpdate = (prevProps) => {
         // const nextSales = this.props.salesOrderList.NextPage;
         // const prevSales = this.props.salesOrderList.PrevPage;
         const currentPropsSales = this.props.salesOrderList.PageNumber;
-        const { TotalPages } = this.props.salesOrderList;
+        const { TotalPages } = this.props.salesOrderList.Lists;
         
         return(
           <div className="paginations">
@@ -455,7 +455,7 @@ componentDidUpdate = (prevProps) => {
         // const nextSales = this.props.serviceOrderList.NextPage;
         // const prevSales = this.props.serviceOrderList.PrevPage;
         const currentPropsService = this.props.serviceOrderList.PageNumber;
-        const { TotalPages } = this.props.serviceOrderList;
+        const { TotalPages } = this.props.serviceOrderList.Lists;
         return(
           <div className="paginations">
             <div className="paging-revision">
