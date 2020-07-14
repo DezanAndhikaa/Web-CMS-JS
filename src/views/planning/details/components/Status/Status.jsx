@@ -193,16 +193,16 @@ export default class Status extends React.PureComponent {
 		if(prevProps.serviceSearch !== this.props.serviceSearch){
 			switch (this.state.whatPageIsChoosed) {
 				case 'Approve':
-					return this.props.updateServiceApprovedParameter(
+					return this.props.updateSearchServiceApproved(
 						{...prevProps.searchServiceApprovedParam, Category: 'SA', Keyword: this.props.serviceSearch});
 				case 'Not Approve':
-					return this.props.updateServiceParameter(
+					return this.props.updateSearchService(
 						{...prevProps.searchServiceParameter, Category: 'SN', Keyword: this.props.serviceSearch});
 				case 'Delete' :
-					return this.props.updateServiceDeletedParameter(
+					return this.props.updateSearchServiceDeleted(
 						{...prevProps.searchServiceDeletedParam, Category: 'SD', Keyword: this.props.serviceSearch});
 				case 'SAP ISSUE':
-					return this.props.updateServiceSapParameter(
+					return this.props.updateSearchServiceSap(
 						{...prevProps.searchServiceSapParam, Category: 'SSAP', Keyword: this.props.serviceSearch});
 				default:
 					break;
@@ -1779,7 +1779,7 @@ export default class Status extends React.PureComponent {
 					Logic 	 : 'and'
 				}]
 		},this.props.token);
-		await this.props.clearSelectedSalesPlans()
+		await this.props.clearSelectedServicePlans()
 		this.setPropsToState();
 	}
 
