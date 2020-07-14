@@ -1280,7 +1280,7 @@ export default class Status extends React.PureComponent {
 		  		}
 			}
 			await this.props.deletePermanentSales(arr, this.props.token);
-			this.onClickSalesOrderDeleted();
+			{this.state.whatPageIsChoosed === "Delete" ? this.onClickSalesOrderDeleted() : this.onClickSalesOrderSap ()};
 		}
 		if (this.props.location.whichTab === "service") {
 			let arr = []
@@ -1291,7 +1291,7 @@ export default class Status extends React.PureComponent {
 		  		}
 			}
 			await this.props.deletePermanentService({WoNumbers: arr}, this.props.token);
-			this.onClickServiceOrderDeleted();
+			{this.state.whatPageIsChoosed === "Delete" ? this.onClickServiceOrderDeleted() : this.onClickServiceOrderSap()};
 		}
 	}
 
@@ -1352,7 +1352,7 @@ export default class Status extends React.PureComponent {
 						</>
 					)
 				}
-			}else if(this.state.whatPageIsChoosed === "Delete"){
+			}else if(this.state.whatPageIsChoosed === "Delete" || this.state.whatPageIsChoosed === "SAP ISSUE"){
 				if (Number(RoleUser.role()) !== 1) {
 					return("")
 				}else{
@@ -1416,7 +1416,7 @@ export default class Status extends React.PureComponent {
 						</>
 					)
 				}
-			}else if(this.state.whatPageIsChoosed === "Delete"){
+			}else if(this.state.whatPageIsChoosed === "Delete" || this.state.whatPageIsChoosed === "SAP ISSUE"){
 				if (Number(RoleUser.role()) !== 1) {
 					return("")
 				}else{
@@ -1744,7 +1744,7 @@ export default class Status extends React.PureComponent {
 		await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.state.bearer);
 		await this.props.fetchApprovedService(this.props.serviceApprovedParameter.dataFilter, this.state.bearer);
 		await this.props.fetchDeletedService(this.props.serviceDeletedParameter.dataFilter, this.state.bearer);
-		await this.props.fetchDeletedService(this.props.serviceDeletedParameter.dataFilter, this.state.bearer);
+		await this.props.fetchSapService(this.props.serviceDeletedParameter.dataFilter, this.state.bearer);
 		this.props.clearSelectedServicePlans()
 		this.setPropsToState();
 	}
