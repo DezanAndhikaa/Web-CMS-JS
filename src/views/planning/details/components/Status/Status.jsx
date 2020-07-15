@@ -1304,7 +1304,7 @@ export default class Status extends React.PureComponent {
 		  		}
 			}
 			await this.props.deletePermanentSales(arr, this.props.token);
-			{this.state.whatPageIsChoosed === "Delete" ? this.onClickSalesOrderDeleted() : this.onClickSalesOrderSap ()};
+			this.state.whatPageIsChoosed === "Delete" ? this.onClickSalesOrderDeleted() : this.onClickSalesOrderSap ();
 		}
 		if (this.props.location.whichTab === "service") {
 			let arr = []
@@ -1315,7 +1315,7 @@ export default class Status extends React.PureComponent {
 		  		}
 			}
 			await this.props.deletePermanentService({WoNumbers: arr}, this.props.token);
-			{this.state.whatPageIsChoosed === "Delete" ? this.onClickServiceOrderDeleted() : this.onClickServiceOrderSap()};
+			this.state.whatPageIsChoosed === "Delete" ? this.onClickServiceOrderDeleted() : this.onClickServiceOrderSap();
 		}
 	}
 
