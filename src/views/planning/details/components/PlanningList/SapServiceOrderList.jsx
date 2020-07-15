@@ -92,7 +92,7 @@ export default class SapServiceOrderList extends React.PureComponent {
             }
           </TableCell>
           <PlanningListHeader
-            name="WO"
+            name="Work Order"
             delay={300}
             onSearch={this.props.onSearchComp}
           />
