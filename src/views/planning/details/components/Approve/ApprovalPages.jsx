@@ -81,9 +81,15 @@ class ApprovalPages extends React.Component {
     //Search per component
     if (this.state.whichTabs) {
       if (prevProps.searchComp !== this.props.searchComp) {
-        this.props.updateServiceParameter({
-          ...prevProps.serviceParameter.dataFilter, Filter: this.props.searchComp, PageNumber: 1,
-        });
+        if (this.props.searchComp[0].Value === "") {
+          this.props.updateServiceParameter({
+            ...prevProps.serviceParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+          });
+        } else {
+          this.props.updateServiceParameter({
+            ...prevProps.serviceParameter.dataFilter, Filter: this.props.searchComp, PageNumber: 1,
+          });
+        }
       }
     }
 
@@ -192,7 +198,7 @@ class ApprovalPages extends React.Component {
     if (this.state.whichTabs === true) {
       const web = this.props.displayMode === 'web';
       const currentPropsService = this.props.serviceOrderList.PageNumber;
-      const { TotalPages } = this.props.serviceOrderList;
+      const { TotalPages } = this.props.serviceOrderList.Lists;
 
       return (
         <div className="paginations">
@@ -347,7 +353,7 @@ class ApprovalPages extends React.Component {
         <div className="header-rows">
           <BaseButton titles="Approve"
             {...this.props}
-            whatTabsIsRendered={this.state.whichTabs}
+            whatTabsIsRendered={false}
             disabledButton={this.props.selectedServicePlans.length < 1}
             totalSelectedItems={this.props.selectedServicePlans.length}
             handleServiceApprove={this.handleServiceApprove}
@@ -357,7 +363,7 @@ class ApprovalPages extends React.Component {
             {...this.props}
             whichTabs={this.state.whichTabs}
             selectedDataSAP={this.props.selectedServicePlans}
-            whatTabsIsRendered={this.state.whichTabs}
+            whatTabsIsRendered={false}
             disabledButton={this.props.selectedServicePlans.length < 1}
             totalSelectedItems={this.props.selectedServicePlans.length}
             selectedData={this.state.selectedData}
@@ -375,6 +381,10 @@ class ApprovalPages extends React.Component {
     return this.props.selectServicePlan(plan);
   };
 
+  _updateAssignmentServiceStatesAll = (dataBoolean) => {
+    this.props.selectAllService(dataBoolean)
+  }
+
   //KOMPONEN UNTUK RENDER PAGE SALES ORDER DAN SERVICE ORDER
   _renderTabs() {
     return (
@@ -387,10 +397,11 @@ class ApprovalPages extends React.Component {
           renderSearch={this._renderSearchBar()}
           onClickServiceOrder={this.onClickServiceOrder}
           onChoosedService={this.updateAssignmentServiceStates}
+          onChooseAllService= {this._updateAssignmentServiceStatesAll}
           selectedServicePlanList={this.props.selectedServicePlans}
           displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
           stats={this.state.stats}
-          totalServiceData={this.props.serviceOrderList.TotalData}
+          totalServiceData={this.props.serviceOrderList.TotalDataApproval}
           onClickTabHead={this.props.onClickSortBy}
           sortServiceByState={this.props.sortServiceBy}
           onPage={this._renderPagination}
@@ -422,19 +433,6 @@ class ApprovalPages extends React.Component {
         )}
         {this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.LOADING && (
           this.renderCircularProgress()
-        )}
-        {this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED && (
-          <>
-            {this._renderSalesDeleted()}
-          </>
-        )}
-        {this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.LOADING && (
-          this.renderCircularProgress()
-        )}
-        {this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.SUCCEEDED && (
-          <>
-            {this._renderSalesDeleted()}
-          </>
         )}
         {this.props.fetchStatusUnapprove === ApiRequestActionsStatus.LOADING && (
           this.renderCircularProgress()

@@ -2,7 +2,7 @@
 @import '../../themes/variables';
 
 .show-per-page{
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     .dropdown-list{
         margin: 0 vw(10) 0 vw(10);
@@ -18,6 +18,7 @@
         padding: 0px 2px;
     }
     .label{
+        display: contents;
         font-size: vw(16);
         font-weight: bold;
         line-height: vw(16) !important;

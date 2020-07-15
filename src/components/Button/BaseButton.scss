@@ -99,8 +99,8 @@
     }
     .btn-cancel-approve:hover{
         background-image: url('../../assets/icons/cancel_approve_hover.png');
-        background-size: 15%;
-        background-position-x: 8%;
+        background-size: 18%;
+        background-position-x: 23%;
         background-color: map-get($colors, delete);
         color: white;
     }
@@ -128,8 +128,8 @@
     }
     .btn-reject-service:hover{
         background-image: url('../../assets/icons/cancel_approve_hover.png');
-        background-size: 15%;
-        background-position-x: 8%;
+        background-size: 18%;
+        background-position-x: 15%;
         background-color: map-get($colors, delete);
         color: white;
     }

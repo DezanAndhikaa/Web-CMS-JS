@@ -46,6 +46,7 @@ export const SelectAllSalesPlanAction = 'SELECT_ALL_SALES_PLANS';
 export const SelectServicePlanAction = 'SELECT_SERVICE_PLANS';
 export const SelectSalesPlanAction = 'SELECT_SALES_PLANS';
 export const SelectAllServicePlanAction = 'SELECT_ALL_SERVICE_PLANS';
+export const SelectAllService = 'SELECT_ALL_SERVICE';
 export const SelectPlansAssignmentFilterAction = 'SELECT_PLANS_ASSIGNMENT_FILTER';
 export const SelectPlansTypeFilterAction = 'SELECT_PLANS_TYPE_FILTER';
 export const SelectLeaderAction = 'SELECT_LEADER';
@@ -198,7 +199,7 @@ export function putSAPIssueAction(payload, accessToken){
 export function deleteSalesAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.DELETE,
-		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/delete`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/deleted`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
@@ -213,7 +214,7 @@ export function deleteSalesAction(payload, accessToken) {
 export function deletePermanentSalesAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.DELETE,
-		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/deletepermanent`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/permanent`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8',
@@ -228,7 +229,7 @@ export function deletePermanentSalesAction(payload, accessToken) {
 export function deleteServiceAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.DELETE,
-		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/delete`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/deleted`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
@@ -243,7 +244,7 @@ export function deleteServiceAction(payload, accessToken) {
 export function deletePermanentServiceAction(payload, accessToken) {
 	const requestConfig = {
 		method: RequestMethod.DELETE,
-		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/deletepermanent`,
+		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/permanent`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8',
@@ -543,4 +544,8 @@ export function sortByAction(type) {
 }
 export function storePlanDataAction(payload) {
 	return { type: StoreSelectedPlanDataAction, payload };
+}
+
+export function selectAllService(payload) {
+	return {type: SelectAllService, payload}
 }

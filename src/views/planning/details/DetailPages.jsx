@@ -211,7 +211,7 @@ class DetailPages extends React.Component {
       // const nextSales = this.props.salesOrderList.NextPage;
       // const prevSales = this.props.salesOrderList.PrevPage;
       const currentPropsSales = this.props.salesOrderList.PageNumber;
-      const { TotalPages } = this.props.salesOrderList;
+      const { TotalPages } = this.props.salesOrderList.Lists;
 
       return (
         <div className="pagination">

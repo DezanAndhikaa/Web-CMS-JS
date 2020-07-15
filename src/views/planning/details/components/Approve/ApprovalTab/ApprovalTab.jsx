@@ -169,13 +169,13 @@ class ApprovalTab extends React.Component {
           <div className="total-data">
             <div className="header-approval">
               <div className="header1">
-                Approval
+                Available
               </div>
               <div className="header2">
                 Service Order
               </div>
             </div>
-            <div className={this.props.totalServiceData.toString().length > 1 ? "total-containers" : "total-container"}>
+            <div className={this.props.totalServiceData > 1 ? "total-containers" : "total-container"}>
               {this.props.totalServiceData}
             </div>
           </div>
@@ -266,7 +266,7 @@ class ApprovalTab extends React.Component {
           {this.props.renderNotif}
           {this.props.renderFilterByDataAction}
         </div>
-        <AppBar position="static" color="default" style={{ boxShadow: "none" }}>
+        <AppBar position="static" color="default" style={{ boxShadow: "none", zIndex: 1000 }}>
           <Tabs
             classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
             value={this.state.value}

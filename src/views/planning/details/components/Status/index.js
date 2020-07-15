@@ -60,8 +60,12 @@ import {
 	UpdateSalesSapParameterAction,
 	UpdateServiceSapParameterAction,
 	searchCompAction,
-	SearchCompAction,SearchCompActionService,searchCompActionService,
-	selectFilterAction, dateFilterAction
+	SearchCompAction,
+	SearchCompActionService,
+	searchCompActionService,
+	selectFilterAction, 
+	dateFilterAction,
+	selectAllService
 } from '../../DetailPages-action';
 import Status from './Status';
 
@@ -112,10 +116,12 @@ const mapStateToProps = (state) => ({
 	fetchStatusServiceSap: state.plansPageState.serviceOrderListSap.status,
 	sortSalesBy: state.plansPageState.sortSalesBy,
 	sortServiceBy: state.plansPageState.sortServiceBy,
+	path: state.router.location.pathname
 });
 
 const mapDispatchToProps = (dispatch) => ({
 	push: (path, whichTab) => dispatch(push(path, whichTab)),
+	pushtab: (path, whichTab, token) => dispatch(push(path, whichTab, token)),
 	downloadSales : (soId, token) => dispatch(downloadSalesAction(soId, token)),
 	downloadService : (woId, token) => dispatch(downloadServiceAction(woId, token)),
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
@@ -135,6 +141,7 @@ const mapDispatchToProps = (dispatch) => ({
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	selectSalesPlan: (payload) => dispatch(selectSalesPlansAction(SelectSalesPlanAction, payload)),
 	selectServicePlan: (payload) => dispatch(selectServicePlansAction(SelectServicePlanAction, payload)),
+	selectAllService: (payload) => dispatch(selectAllService(payload)),
 	unselectServicePlan: (payload) => dispatch(selectServicePlansAction(UnselectServicePlanAction, payload)),
 	unselectSalesPlan: (payload) => dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
 	lifetimeFilter: (type, payload, payload2, page) => dispatch(selectFilterAction(type, payload, payload2, page)),

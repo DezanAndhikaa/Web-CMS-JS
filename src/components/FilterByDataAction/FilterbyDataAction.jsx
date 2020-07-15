@@ -51,13 +51,14 @@ class FilterbyDataAction extends React.Component {
       pathname: menu,
       whichTab: tab
     });
+    window.localStorage.setItem('whichTab', tab);
   }
 
   renderList(){
     return(
       <Paper className={this.props.idStatus === "DetailSite" ? "list-status-site" : "list-status" }>
         {Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
-          || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3
+          || Number(RoleUser.role()) === 3
         ? <MenuList>
             <MenuItem>
               <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
@@ -70,6 +71,13 @@ class FilterbyDataAction extends React.Component {
                 <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales')}>Sales Order</Typography>
               </MenuItem>
             </MenuList>
+            && localStorage.getItem('subMenu') === "/webcms/planning/approval" 
+        : Number(RoleUser.role()) === 1 ? 
+          <MenuList>
+            <MenuItem>
+              <Typography className="list-item-status" variant="inherit" onClick={ () =>{ localStorage.getItem('subMenu') === "/webcms/planning/approval" ? this.handleClick(Menu.PLANNING_APPROVAL_STATUS, 'service') : this.handleClick(Menu.PLANNING_APPROVAL_STATUS, 'service') }}>Service Order</Typography>
+            </MenuItem>
+          </MenuList>
         : <MenuList>
             <MenuItem>
               <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL_STATUS, 'sales')}>Sales Order</Typography>
