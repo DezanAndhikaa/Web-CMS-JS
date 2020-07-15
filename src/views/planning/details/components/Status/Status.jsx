@@ -193,7 +193,7 @@ export default class Status extends React.PureComponent {
 		if(prevProps.serviceSearch !== this.props.serviceSearch){
 			switch (this.state.whatPageIsChoosed) {
 				case 'Approve':
-					return this.props.updateSearchServiceApproved(
+					return this.props.updateServiceApprovedParameter(
 						{...prevProps.searchServiceApprovedParam, Category: 'SA', Keyword: this.props.serviceSearch});
 				case 'Not Approve':
 					return this.props.updateSearchService(
