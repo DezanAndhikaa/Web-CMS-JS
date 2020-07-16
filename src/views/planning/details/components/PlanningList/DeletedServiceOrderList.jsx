@@ -105,7 +105,7 @@ export default class DeletedServiceOrderList extends React.PureComponent {
             onClick={() => this.props.onClickTabHead(SortServiceByUnitModel)}
           />
           <PlanningListHeader
-            name="Comp Desc"
+            name="Component Description"
             delay={300}
             onClick={() => this.props.onClickTabHead(SortServiceByCompDesc)}
           />

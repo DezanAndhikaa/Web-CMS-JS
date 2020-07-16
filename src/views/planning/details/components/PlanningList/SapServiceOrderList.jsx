@@ -119,7 +119,7 @@ export default class SapServiceOrderList extends React.PureComponent {
             onClick={() => this.props.onClickTabHead(SortServiceByUnitModel)}
           />
           <PlanningListHeader
-            name="Comp Desc"
+            name="Component Description"
             isActive={this.props.sortServiceByState.CompDesc.isActive}
             delay={300}
             isAscending={this.props.sortServiceByState.CompDesc.isAscending}
