@@ -36,7 +36,6 @@ componentWillUnmount = () => {
 }
 
 componentDidUpdate = (prevProps) => {
-  console.log('sales search rev param : ', this.props.searchSalesRevParam)
   if (prevProps.salesParameter !== this.props.salesParameter) {
     this.onClickSalesOrder();
   }

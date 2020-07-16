@@ -2151,7 +2151,6 @@ export default class Status extends React.PureComponent {
 	  }
 
 	render(){
-		console.log("ini si kampay berber ",this.state.bearer)
 		return(
 			<main className="content" >
 				{this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.SUCCEEDED && (
