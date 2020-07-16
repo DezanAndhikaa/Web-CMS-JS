@@ -148,6 +148,13 @@ export default class DeletedSalesOrderList extends React.PureComponent {
             delay={300}
             onSearch={this.props.onSearchComp}
           />
+          <PlanningListHeader
+            name="Plan Type"
+            delay={300}
+            // isActive={this.props.sortSalesByState.UnitModel.isActive}
+            // isAscending={this.props.sortSalesByState.UnitModel.isAscending}
+            // onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
+          />
         </TableRow>
       </TableHead>
     )
@@ -179,6 +186,7 @@ export default class DeletedSalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
+        <TableCell align="left" className="table-cell"> Fix </TableCell>
       </TableRow>
     )
   }
