@@ -355,6 +355,17 @@ class DetailsTab extends React.Component {
             head={"ComponentDescription"}
           />
         </div>
+        <div className="dropdown-detail-site">
+          <DropdownFilter
+            {...this.props}
+            data={this._dataFilterComponentDescription()}
+            selected={this.props.selectedFilters.compType}
+            onSelectActionType={SelectComponentFilterAction}
+            onSelectAction={this.props.selectFilter2}
+            indexTab={this.state.value}
+            head={"ComponentDescription"}
+          />
+        </div>
         <div className="search-detail-site">
           {this.props.renderSearch}
         </div>

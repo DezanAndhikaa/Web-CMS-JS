@@ -234,6 +234,17 @@ class ApprovalTab extends React.Component {
             head={"ComponentDescription"}
           />
         </div>
+        <div className="dropdown-container-approval">
+          <DropdownFilter
+            {...this.props}
+            data={this._dataFilterComponentDescription()}
+            selected={this.props.selectedFilters.compType}
+            onSelectActionType={SelectComponentFilterAction}
+            onSelectAction={this.props.selectFilter2}
+            indexTab={this.state.value}
+            head={"ComponentDescription"}
+          />
+        </div>
         <div className="search-container-approval">
           {this.props.renderSearch}
         </div>
