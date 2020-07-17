@@ -162,7 +162,7 @@ class ApprovalPages extends React.Component {
             }]
           });
         }
-      };
+      }
       if (sortServiceBy.CompDesc.isActive) {
         isDescending = !sortServiceBy.CompDesc.isAscending;
         this.props.updateServiceParameter({
@@ -184,7 +184,29 @@ class ApprovalPages extends React.Component {
             }]
           });
         }
-      };
+      }
+      if (sortServiceBy.PlanType.isActive) {
+        isDescending = !sortServiceBy.PlanType.isAscending;
+        this.props.updateServiceParameter({
+          ...this.props.serviceParameter.dataFilter,
+          PageNumber: 1,
+          Sort: [{
+            Field: 'PlanType',
+            Direction: 'desc'
+          }]
+        });
+        if (sortServiceBy.PlanType.isAscending === !sortServiceBy.PlanType.isActive) {
+          isDescending = !sortServiceBy.PlanType.isAscending;
+          this.props.updateServiceParameter({
+            ...this.props.serviceParameter.dataFilter,
+            PageNumber: 1,
+            Sort: [{
+              Field: 'PlanType',
+              Direction: 'asc'
+            }]
+          });
+        }
+      }
     }
   }
 

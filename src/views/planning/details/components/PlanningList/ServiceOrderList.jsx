@@ -6,7 +6,14 @@ import {
 import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
-import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
+import { 
+  SortServiceByCustomer, 
+  SortServiceBySite, 
+  SortServiceByUnitModel, 
+  SortServiceByCompDesc, 
+  SortServiceByPlanType,
+  LifetimeFilterAction, 
+  DateFilterAction } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
 import roleService from "../../../../../utils/roleService.helper";
@@ -129,9 +136,7 @@ export default class ServiceOrderList extends React.PureComponent {
             <PlanningListHeader
             name="Plan Type"
             delay={300}
-            // isActive={this.props.sortSalesByState.UnitModel.isActive}
-            // isAscending={this.props.sortSalesByState.UnitModel.isAscending}
-            // onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
+            onClick={() => this.props.onClickTabHead(SortServiceByPlanType)}
           />
           </TableRow>
         </TableHead>

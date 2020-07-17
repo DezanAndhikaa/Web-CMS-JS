@@ -50,9 +50,10 @@ import {
 	SelectLeaderAction, SelectMechanicAction,
 	SelectCustomerFilterAction, SelectComponentFilterAction,
 	SelectSiteFilterAction, SelectUnitModelFilterAction,
-	SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, UpdateServiceParameterAction,
+	SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, 
+	SortSalesByCompDesc, SortSalesByPlanType, UpdateServiceParameterAction,
 	FetchSalesAction, PutLifetimeComp, PutSAPIssue,
-	SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc,
+	SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc, SortServiceByPlanType,
 	UnselectSalesPlanAction, UnselectServicePlanAction,
 	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, FetchServiceAction,
 	IndexFilterAction, LifetimeFilterAction, DateFilterAction,
@@ -154,12 +155,14 @@ const salesSortbyInitialState = {
 	Site: defaultState,
 	UnitModel: defaultState,
 	CompDesc: defaultState,
+	PlanType: defaultState
 };
 const serviceSortbyInitialState = {
 	Customer: defaultState,
 	Site: defaultState,
 	UnitModel: defaultState,
 	CompDesc: defaultState,
+	PlanType: defaultState
 };
 
 const initialSearchCompParameter =
@@ -888,6 +891,11 @@ export function sortSalesByReducer(state = salesSortbyInitialState, action) {
 				...salesSortbyInitialState,
 				CompDesc: { isActive: true, isAscending: !state.CompDesc.isAscending },
 			};
+		case SortSalesByPlanType:
+			return {
+				...salesSortbyInitialState,
+				PlanType: { isActive: true, isAscending: !state.PlanType.isAscending },
+			};
 		default:
 			return state;
 	}
@@ -914,6 +922,11 @@ export function sortServiceByReducer(state = serviceSortbyInitialState, action) 
 			return {
 				...serviceSortbyInitialState,
 				CompDesc: { isActive: true, isAscending: !state.CompDesc.isAscending },
+			};
+		case SortServiceByPlanType:
+			return {
+				...serviceSortbyInitialState,
+				PlanType: { isActive: true, isAscending: !state.PlanType.isAscending },
 			};
 		default:
 			return state;
