@@ -11,7 +11,8 @@ import {
   SortServiceByUnitModel, 
   SortServiceByCompDesc, 
   LifetimeFilterAction, 
-  DateFilterAction } 
+  DateFilterAction, 
+  SortServiceByPlanType} 
   from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
@@ -99,30 +100,22 @@ export default class SapServiceOrderList extends React.PureComponent {
           />
           <PlanningListHeader
             name="Customer"
-            isActive={this.props.sortServiceByState.Customer.isActive}
             delay={300}
-            isAscending={this.props.sortServiceByState.Customer.isAscending}
             onClick={() => this.props.onClickTabHead(SortServiceByCustomer)}
           />
           <PlanningListHeader
             name="Site"
-            isActive={this.props.sortServiceByState.Site.isActive}
             delay={300}
-            isAscending={this.props.sortServiceByState.Site.isAscending}
             onClick={() => this.props.onClickTabHead(SortServiceBySite)}
           />
           <PlanningListHeader
             name="Unit Model"
-            isActive={this.props.sortServiceByState.UnitModel.isActive}
             delay={300}
-            isAscending={this.props.sortServiceByState.UnitModel.isAscending}
             onClick={() => this.props.onClickTabHead(SortServiceByUnitModel)}
           />
           <PlanningListHeader
             name="Component Description"
-            isActive={this.props.sortServiceByState.CompDesc.isActive}
             delay={300}
-            isAscending={this.props.sortServiceByState.CompDesc.isAscending}
             onClick={() => this.props.onClickTabHead(SortServiceByCompDesc)}
           />
           <PlanningListHeader
@@ -153,9 +146,7 @@ export default class SapServiceOrderList extends React.PureComponent {
           <PlanningListHeader
             name="Plan Type"
             delay={300}
-            // isActive={this.props.sortSalesByState.UnitModel.isActive}
-            // isAscending={this.props.sortSalesByState.UnitModel.isAscending}
-            // onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
+            onClick={() => this.props.onClickTabHead(SortServiceByPlanType)}
           />
         </TableRow>
       </TableHead>

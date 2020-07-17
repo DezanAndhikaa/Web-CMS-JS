@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
-import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
+import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc, LifetimeFilterAction, DateFilterAction, SortServiceByPlanType } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
@@ -137,9 +137,7 @@ export default class DeletedServiceOrderList extends React.PureComponent {
           <PlanningListHeader
             name="Plan Type"
             delay={300}
-            // isActive={this.props.sortSalesByState.UnitModel.isActive}
-            // isAscending={this.props.sortSalesByState.UnitModel.isAscending}
-            // onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
+            onClick={() => this.props.onClickTabHead(SortServiceByPlanType)}
           />
         </TableRow>
       </TableHead>

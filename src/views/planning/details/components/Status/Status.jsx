@@ -844,6 +844,28 @@ export default class Status extends React.PureComponent {
 								});
 							}
 						};
+						if (sortServiceBy.PlanType.isActive) {
+							isDescending = !sortServiceBy.PlanType.isAscending;
+							this.props.updateServiceParameter({
+							  ...this.props.serviceParameter.dataFilter,
+							  PageNumber: 1,
+							  Sort: [{
+								Field: 'PlanType',
+								Direction: 'desc'
+							  }]
+							});
+							if (sortServiceBy.PlanType.isAscending === !sortServiceBy.PlanType.isActive) {
+							  isDescending = !sortServiceBy.PlanType.isAscending;
+							  this.props.updateServiceParameter({
+								...this.props.serviceParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+								  Field: 'PlanType',
+								  Direction: 'asc'
+								}]
+							  });
+							}
+						}
 						break;
 					case 'Not Approve':
 						if (sortServiceBy.Customer.isActive) {
@@ -934,6 +956,28 @@ export default class Status extends React.PureComponent {
 								});
 							}
 						};
+						if (sortServiceBy.PlanType.isActive) {
+							isDescending = !sortServiceBy.PlanType.isAscending;
+							this.props.updateServiceParameter({
+							  ...this.props.serviceParameter.dataFilter,
+							  PageNumber: 1,
+							  Sort: [{
+								Field: 'PlanType',
+								Direction: 'desc'
+							  }]
+							});
+							if (sortServiceBy.PlanType.isAscending === !sortServiceBy.PlanType.isActive) {
+							  isDescending = !sortServiceBy.PlanType.isAscending;
+							  this.props.updateServiceParameter({
+								...this.props.serviceParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+								  Field: 'PlanType',
+								  Direction: 'asc'
+								}]
+							  });
+							}
+						}
 						break;
 					case 'Delete':
 						if (sortServiceBy.Customer.isActive) {
@@ -1024,6 +1068,28 @@ export default class Status extends React.PureComponent {
 								});
 							}
 						};
+						if (sortServiceBy.PlanType.isActive) {
+							isDescending = !sortServiceBy.PlanType.isAscending;
+							this.props.updateServiceParameter({
+							  ...this.props.serviceParameter.dataFilter,
+							  PageNumber: 1,
+							  Sort: [{
+								Field: 'PlanType',
+								Direction: 'desc'
+							  }]
+							});
+							if (sortServiceBy.PlanType.isAscending === !sortServiceBy.PlanType.isActive) {
+							  isDescending = !sortServiceBy.PlanType.isAscending;
+							  this.props.updateServiceParameter({
+								...this.props.serviceParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+								  Field: 'PlanType',
+								  Direction: 'asc'
+								}]
+							  });
+							}
+						}
 						break;
 					case 'SAP ISSUE':
 						if (sortServiceBy.Customer.isActive) {
@@ -1114,6 +1180,28 @@ export default class Status extends React.PureComponent {
 								});
 							}
 						};
+						if (sortServiceBy.PlanType.isActive) {
+							isDescending = !sortServiceBy.PlanType.isAscending;
+							this.props.updateServiceParameter({
+							  ...this.props.serviceParameter.dataFilter,
+							  PageNumber: 1,
+							  Sort: [{
+								Field: 'PlanType',
+								Direction: 'desc'
+							  }]
+							});
+							if (sortServiceBy.PlanType.isAscending === !sortServiceBy.PlanType.isActive) {
+							  isDescending = !sortServiceBy.PlanType.isAscending;
+							  this.props.updateServiceParameter({
+								...this.props.serviceParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+								  Field: 'PlanType',
+								  Direction: 'asc'
+								}]
+							  });
+							}
+						}
 						break;
 					default:
 						break;
