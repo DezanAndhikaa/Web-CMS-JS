@@ -390,7 +390,7 @@ class DetailsTab extends React.Component {
             head={"ComponentDescription"}
           />
         </div>
-        <div className="dropdown-container-approval">
+        <div className="dropdown-detail-site">
           <DropdownFilter
             {...this.props}
             data={this._dataFilterPlanType()}
