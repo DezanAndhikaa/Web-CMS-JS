@@ -88,6 +88,7 @@ const initialServiceAssignment = {
 	Sites: ['ALL Site'],
 	UnitModels: ['ALL Unit Model'],
 	ComponentDescriptions: ['All Component Description'],
+	PlanType: ['All Plan Type'],
 	SerialNumbers: [],
 	LifeTimeComponents: [],
 	PlanExecutions: [],
