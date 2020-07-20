@@ -192,7 +192,7 @@ export default class SapServiceOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="center" className="table-cell"> {row.LifeTimeComponent} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
-        <TableCell align="left" className="table-cell"> Fix </TableCell>
+        <TableCell align="left" className="table-cell"> {row.PlanType} </TableCell>
       </TableRow>
       {this.state[id] ? 
         <TableRow className="table-row-bottom-issue">

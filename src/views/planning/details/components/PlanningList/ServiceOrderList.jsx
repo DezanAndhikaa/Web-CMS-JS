@@ -167,7 +167,7 @@ export default class ServiceOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.LifeTimeComponent}</TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
-        <TableCell align="left" className="table-cell"> Fix </TableCell>
+        <TableCell align="left" className="table-cell"> {row.PlanType} </TableCell>
       </TableRow>
     )
   }
