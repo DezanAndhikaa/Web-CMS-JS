@@ -11,7 +11,8 @@ import {
     SelectCustomerFilterAction,
     SelectSiteFilterAction, 
     SelectUnitModelFilterAction, 
-    SelectComponentFilterAction 
+    SelectComponentFilterAction, 
+    SelectPlanTypeFilterAction
 } from '../../DetailPages-action';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import roleService from "../../../../../utils/roleService.helper";
@@ -308,6 +309,40 @@ class DetailsTab extends React.Component {
     }
   }
 
+  _dataFilterPlanType() {
+    // if (this.state.value === 0) {
+    //   let arr = this.props.serviceOrderList.PlanTypes;
+    //   arr.splice(0, 0, "All Plan type")
+    //   return arr
+    // }
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
+      || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+      if(this.state.value === 0){
+        let arr = this.props.serviceOrderList.ComponentDescriptions;
+        arr.splice(0, 0, "All Component Description")
+        return arr
+      }
+    }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
+      if(this.state.value === 0){
+        let arr = this.props.salesOrderList.ComponentDescriptions;
+        arr.splice(0, 0, "All Component Description")
+        return arr
+      }
+    }else{
+      if(this.state.value === 0){
+        let arr = this.props.salesOrderList.ComponentDescriptions;
+        arr.splice(0, 0, "All Component Description")
+        return arr
+      }
+      else{
+        let arr = this.props.serviceOrderList.ComponentDescriptions;
+        arr.splice(0, 0, "All Component Description")
+        return arr
+      }
+    }
+  }
+
   _renderFilter() {
     return (
       <div className="dropdowns-detail-site">
@@ -355,15 +390,15 @@ class DetailsTab extends React.Component {
             head={"ComponentDescription"}
           />
         </div>
-        <div className="dropdown-detail-site">
+        <div className="dropdown-container-approval">
           <DropdownFilter
             {...this.props}
-            data={this._dataFilterComponentDescription()}
-            selected={this.props.selectedFilters.compType}
-            onSelectActionType={SelectComponentFilterAction}
+            data={this._dataFilterPlanType()}
+            selected={this.props.selectedFilters.planType}
+            onSelectActionType={SelectPlanTypeFilterAction}
             onSelectAction={this.props.selectFilter2}
             indexTab={this.state.value}
-            head={"ComponentDescription"}
+            head={"PlanType"}
           />
         </div>
         <div className="search-detail-site">
