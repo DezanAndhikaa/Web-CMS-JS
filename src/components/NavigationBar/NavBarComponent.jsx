@@ -45,7 +45,6 @@ class NavBarComponent extends React.Component {
 	isClosed=() => {
 		this.setState({
 			isShowModalLogOut: !this.state.isShowModalLogOut,
-			// isShowModal: !this.state.isShowModal,
 			isShowModal: false
 		})
 	}

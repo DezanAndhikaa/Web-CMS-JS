@@ -22,7 +22,6 @@
     .top-row{
         display: flex;
         justify-content: space-between;
-        // flex-direction: column;
         height: vw(30);
     }
     .teks-middle{
@@ -98,16 +97,13 @@
     }
 
     .bottom-rows{
-        // flex: 1;
         display: flex;
-        // flex-direction: row;
         margin-top: vw(20);
         .btn-search{
             display: flex;
             align-items: center;
             justify-content: center;
             margin-left: 60%;
-            // width: vw(170.22) !important;
             width: 35%;
             height: vw(33.07) !important;
             font-size: vw(13) !important;

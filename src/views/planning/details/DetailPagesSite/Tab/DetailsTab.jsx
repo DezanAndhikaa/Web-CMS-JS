@@ -310,11 +310,6 @@ class DetailsTab extends React.Component {
   }
 
   _dataFilterPlanType() {
-    // if (this.state.value === 0) {
-    //   let arr = this.props.serviceOrderList.PlanTypes;
-    //   arr.splice(0, 0, "All Plan type")
-    //   return arr
-    // }
     if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
       || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
       if (this.state.value === 0) {
