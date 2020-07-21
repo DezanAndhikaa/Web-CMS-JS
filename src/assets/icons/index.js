@@ -37,8 +37,10 @@ import CancelApprove from './cancel_approve.png';
 import IconInputLT from './ic_input.png';
 import IconBack from './back.png';
 import IconDate from './ic_date.png';
+import IcUnderDev from './icon-under-dev.png';
 
 export {
+	IcUnderDev,
 	IcDbMenu,
 	IcApproval,
 	IconDate,
