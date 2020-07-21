@@ -52,11 +52,11 @@ export default class InputButton extends React.Component{
                     <Button disabled className="btn-assigns">Input</Button>
                 </div>
             )
-        }else if(this.props.titles === "SO" || this.props.titles ==="Work Order" || this.props.titles ==="SMR"){
+        }else if(this.props.titles === "SO" || this.props.titles === "Work Order" || this.props.titles === "SMR"){
             return(
                 <div className="button-rows">
-                    <Paper className={this.props.className || 'global-search-pk'} elevation={1}>
-                        <InputBase className="txt-search-pk" placeholder={this.props.placeholder} onKeyUp={(e) => {this.handleKeyUp(e, this.props.sort)}} />
+                    <Paper className={this.props.position === "Status" ? "search-per-column" : "global-search-pk"} elevation={1}>
+                        <InputBase className= "txt-search-pk" placeholder={this.props.placeholder} onKeyUp={(e) => {this.handleKeyUp(e, this.props.sort)}} />
                     </Paper>
                 </div>
             )

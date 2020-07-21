@@ -186,8 +186,9 @@ class DetailsTab extends React.Component {
           && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "list-detail-empty" : "plannings-list-detail"}>
           <ServiceOrderList 
             {...this.props}
-            idService="Data Input"
-            isClick={this.props.isClick}
+            pageLoc= "Status"
+            idService= "Data Input"
+            isClick= {this.props.isClick}
           />
         </div>
     );
