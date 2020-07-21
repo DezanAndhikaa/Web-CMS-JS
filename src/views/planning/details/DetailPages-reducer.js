@@ -72,6 +72,7 @@ const initialSalesAssignment = {
 	Sites: ['All Site'],
 	UnitModels: ['All Unit Model'],
 	ComponentDescriptions: ['All Component Description'],
+	PlanType: ['All Plan Type'],
 	SerialNumbers: [],
 	LifeTimeComponents: [],
 	PlanExecutions: [],

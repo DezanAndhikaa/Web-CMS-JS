@@ -317,27 +317,27 @@ class DetailsTab extends React.Component {
     // }
     if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
       || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
-      if(this.state.value === 0){
-        let arr = this.props.serviceOrderList.ComponentDescriptions;
-        arr.splice(0, 0, "All Component Description")
+      if (this.state.value === 0) {
+        let arr = this.props.serviceOrderList.PlanType;
+        arr.splice(0, 0, "All Plan Type")
         return arr
       }
     }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
       Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
       if(this.state.value === 0){
-        let arr = this.props.salesOrderList.ComponentDescriptions;
-        arr.splice(0, 0, "All Component Description")
+        let arr = this.props.salesOrderList.PlanType;
+        arr.splice(0, 0, "All Plan Type")
         return arr
       }
     }else{
       if(this.state.value === 0){
-        let arr = this.props.salesOrderList.ComponentDescriptions;
-        arr.splice(0, 0, "All Component Description")
+        let arr = this.props.salesOrderList.PlanType;
+        arr.splice(0, 0, "All Plan Type")
         return arr
       }
       else{
-        let arr = this.props.serviceOrderList.ComponentDescriptions;
-        arr.splice(0, 0, "All Component Description")
+        let arr = this.props.serviceOrderList.PlanType;
+        arr.splice(0, 0, "All Plan Type")
         return arr
       }
     }
