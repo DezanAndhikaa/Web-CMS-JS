@@ -10,7 +10,7 @@ import ServiceOrderList from '../../PlanningList/ServiceOrderList';
 import './ApprovalTab.scss';
 import DropdownFilter from '../../../../../../components/FilterByTitle/DropdownFilter';
 import { ApiRequestActionsStatus } from '../../../../../../core/RestClientHelpers';
-import { SelectCustomerFilterAction, SelectSiteFilterAction, SelectUnitModelFilterAction, SelectComponentFilterAction } from '../../../DetailPages-action';
+import { SelectCustomerFilterAction, SelectSiteFilterAction, SelectUnitModelFilterAction, SelectComponentFilterAction, SelectPlanTypeFilterAction } from '../../../DetailPages-action';
 
 function TabContainer({ children, dir }) {
   return (
@@ -182,6 +182,18 @@ class ApprovalTab extends React.Component {
     }
   }
 
+  _dataFilterPlanType() {
+    if (this.state.value === 0) {
+      let arr = this.props.salesOrderList.PlanType;
+      arr.splice(0, 0, "All Plan Type")
+      return arr
+    } else {
+      let arr = this.props.serviceOrderList.PlanType;
+      arr.splice(0, 0, "All Plan Type")
+      return arr
+    }
+  }
+
   _renderBaseBtn() {
     if (this.state.value === 0) {
       return (
@@ -275,6 +287,17 @@ class ApprovalTab extends React.Component {
             onSelectAction={this.props.selectFilter2}
             indexTab={this.state.value}
             head={"ComponentDescription"}
+          />
+        </div>
+        <div className="dropdown-container-approval">
+          <DropdownFilter
+            {...this.props}
+            data={this._dataFilterPlanType()}
+            selected={this.props.selectedFilters.planType}
+            onSelectActionType={SelectPlanTypeFilterAction}
+            onSelectAction={this.props.selectFilter2}
+            indexTab={this.state.value}
+            head={"PlanType"}
           />
         </div>
         <div className="search-container-approval">
