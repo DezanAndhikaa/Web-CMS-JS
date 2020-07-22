@@ -71,6 +71,7 @@ export default class RevisedSalesOrderList extends React.PureComponent {
           <TableCell align="left" className="table-cell">Plan Execution</TableCell>
           <TableCell align="left" className="table-cell">SMR</TableCell>
           <TableCell align="left" className="table-cell">SMR Date</TableCell>
+          <TableCell align="left" className="table-cell">Plan Type</TableCell>
         </TableRow>
       </TableHead>
     )
@@ -103,6 +104,7 @@ export default class RevisedSalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
+        <TableCell align="left" className="table-cell"> Fix </TableCell>
       </TableRow>
     )
   }

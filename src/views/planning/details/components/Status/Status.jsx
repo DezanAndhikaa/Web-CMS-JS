@@ -844,6 +844,28 @@ export default class Status extends React.PureComponent {
 								});
 							}
 						};
+						if (sortServiceBy.PlanType.isActive) {
+							isDescending = !sortServiceBy.PlanType.isAscending;
+							this.props.updateServiceParameter({
+							  ...this.props.serviceParameter.dataFilter,
+							  PageNumber: 1,
+							  Sort: [{
+								Field: 'PlanType',
+								Direction: 'desc'
+							  }]
+							});
+							if (sortServiceBy.PlanType.isAscending === !sortServiceBy.PlanType.isActive) {
+							  isDescending = !sortServiceBy.PlanType.isAscending;
+							  this.props.updateServiceParameter({
+								...this.props.serviceParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+								  Field: 'PlanType',
+								  Direction: 'asc'
+								}]
+							  });
+							}
+						}
 						break;
 					case 'Not Approve':
 						if (sortServiceBy.Customer.isActive) {
@@ -934,6 +956,28 @@ export default class Status extends React.PureComponent {
 								});
 							}
 						};
+						if (sortServiceBy.PlanType.isActive) {
+							isDescending = !sortServiceBy.PlanType.isAscending;
+							this.props.updateServiceParameter({
+							  ...this.props.serviceParameter.dataFilter,
+							  PageNumber: 1,
+							  Sort: [{
+								Field: 'PlanType',
+								Direction: 'desc'
+							  }]
+							});
+							if (sortServiceBy.PlanType.isAscending === !sortServiceBy.PlanType.isActive) {
+							  isDescending = !sortServiceBy.PlanType.isAscending;
+							  this.props.updateServiceParameter({
+								...this.props.serviceParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+								  Field: 'PlanType',
+								  Direction: 'asc'
+								}]
+							  });
+							}
+						}
 						break;
 					case 'Delete':
 						if (sortServiceBy.Customer.isActive) {
@@ -1024,6 +1068,28 @@ export default class Status extends React.PureComponent {
 								});
 							}
 						};
+						if (sortServiceBy.PlanType.isActive) {
+							isDescending = !sortServiceBy.PlanType.isAscending;
+							this.props.updateServiceParameter({
+							  ...this.props.serviceParameter.dataFilter,
+							  PageNumber: 1,
+							  Sort: [{
+								Field: 'PlanType',
+								Direction: 'desc'
+							  }]
+							});
+							if (sortServiceBy.PlanType.isAscending === !sortServiceBy.PlanType.isActive) {
+							  isDescending = !sortServiceBy.PlanType.isAscending;
+							  this.props.updateServiceParameter({
+								...this.props.serviceParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+								  Field: 'PlanType',
+								  Direction: 'asc'
+								}]
+							  });
+							}
+						}
 						break;
 					case 'SAP ISSUE':
 						if (sortServiceBy.Customer.isActive) {
@@ -1114,6 +1180,28 @@ export default class Status extends React.PureComponent {
 								});
 							}
 						};
+						if (sortServiceBy.PlanType.isActive) {
+							isDescending = !sortServiceBy.PlanType.isAscending;
+							this.props.updateServiceParameter({
+							  ...this.props.serviceParameter.dataFilter,
+							  PageNumber: 1,
+							  Sort: [{
+								Field: 'PlanType',
+								Direction: 'desc'
+							  }]
+							});
+							if (sortServiceBy.PlanType.isAscending === !sortServiceBy.PlanType.isActive) {
+							  isDescending = !sortServiceBy.PlanType.isAscending;
+							  this.props.updateServiceParameter({
+								...this.props.serviceParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+								  Field: 'PlanType',
+								  Direction: 'asc'
+								}]
+							  });
+							}
+						}
 						break;
 					default:
 						break;
@@ -1482,7 +1570,7 @@ export default class Status extends React.PureComponent {
 		if (this.props.location.whichTab === "sales") {
 			const web = this.props.displayMode === 'web';
 			const currentPropsSales = data.PageNumber;
-			const { TotalPages } = data.Lists;
+			const { TotalPages } = data;
 			switch (this.state.whatPageIsChoosed) {
 				case 'Approve':
 					return(
@@ -1553,7 +1641,7 @@ export default class Status extends React.PureComponent {
 		}else if(this.props.location.whichTab === "service"){
 			const web = this.props.displayMode === 'web';
 			let currentPropsService = data.PageNumber;
-			const { TotalPages } = data.Lists;
+			const { TotalPages } = data;
 			switch (this.state.whatPageIsChoosed) {
 				case 'Approve':
 					return(
@@ -1835,6 +1923,7 @@ export default class Status extends React.PureComponent {
 				<ServiceOrderList 
 					{...this.props}
 					idTab="Status"
+					pageLoc= "Status"
 					onClickTabHead={this.props.onClickSortBy}
 					displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
 					sortServiceByState={this.props.sortServiceBy}
@@ -1912,6 +2001,7 @@ export default class Status extends React.PureComponent {
 				"list-status-empty" : "plannings-list-containers"}>
 				<DeletedServiceOrderList 
 					{...this.props}
+					pageLoc= "Status"
 					onClickTabHead={this.props.onClickSortBy}
 					displayServiceCheckbox={this.props.serviceDeletedParameter.paramsData.assigmentFilter || this.props.serviceDeletedParameter.paramsData.inProgressFilter}
 					sortServiceByState={this.props.sortServiceBy}
@@ -1950,6 +2040,7 @@ export default class Status extends React.PureComponent {
 				"list-status-empty" : "plannings-list-containers"}>
 				<SapServiceOrderList 
 					{...this.props}
+					pageLoc= "Status"
 					onClickTabHead={this.props.onClickSortBy}
 					displayServiceCheckbox={this.props.serviceSapParameter.paramsData.assigmentFilter || this.props.serviceSapParameter.paramsData.inProgressFilter}
 					sortServiceByState={this.props.sortServiceBy}
@@ -2151,7 +2242,6 @@ export default class Status extends React.PureComponent {
 	  }
 
 	render(){
-		console.log("ini si kampay berber ",this.state.bearer)
 		return(
 			<main className="content" >
 				{this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.SUCCEEDED && (

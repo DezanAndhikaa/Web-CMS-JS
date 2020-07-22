@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
-import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
+import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc, LifetimeFilterAction, DateFilterAction, SortServiceByPlanType } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
@@ -86,6 +86,7 @@ export default class DeletedServiceOrderList extends React.PureComponent {
           }
           <PlanningListHeader
             name="Work Order"
+            loc= {this.props.pageLoc}
             delay={300}
             onSearch={this.props.onSearchComp}
           />
@@ -105,7 +106,7 @@ export default class DeletedServiceOrderList extends React.PureComponent {
             onClick={() => this.props.onClickTabHead(SortServiceByUnitModel)}
           />
           <PlanningListHeader
-            name="Comp Desc"
+            name="Component Description"
             delay={300}
             onClick={() => this.props.onClickTabHead(SortServiceByCompDesc)}
           />
@@ -134,6 +135,11 @@ export default class DeletedServiceOrderList extends React.PureComponent {
             delay={300}
             onFilter={this.isFilterDate}
           />
+          <PlanningListHeader
+            name="Plan Type"
+            delay={300}
+            onClick={() => this.props.onClickTabHead(SortServiceByPlanType)}
+          />
         </TableRow>
       </TableHead>
     )
@@ -152,7 +158,7 @@ export default class DeletedServiceOrderList extends React.PureComponent {
             />
           }
         </TableCell>
-        <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell>
+        <TableCell align="left" className={this.props.pageLoc === "Status" ? "table-cell-pk-status" : "table-cell"}> {row.WoNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
@@ -162,6 +168,7 @@ export default class DeletedServiceOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="center" className="table-cell"> {row.LifeTimeComponent} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.PlanType} </TableCell>
       </TableRow>
     )
   }

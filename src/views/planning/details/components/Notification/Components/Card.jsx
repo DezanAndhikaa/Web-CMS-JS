@@ -1,5 +1,6 @@
 import React from 'react';
 import '../Notification.scss';
+import { IcUnderDev } from '../../../../../../assets/icons';
 
 export default class CardData extends React.Component {
 
@@ -47,7 +48,7 @@ export default class CardData extends React.Component {
     } 
     else if(this.props.idCard === "See All"){
       return(
-          <>
+        <>
           {this.state.col.map(() => (
             <div className="filters-container-notif">
               {this.state.events.map(world => (
@@ -62,7 +63,19 @@ export default class CardData extends React.Component {
               ))}
             </div>
           ))}
-          </>
+        </>
+      )
+    }
+    else if(this.props.idCard === "UnderDev"){
+      return(
+        <>
+          <div className="under-dev">
+            <img className="under-dev-image" src={IcUnderDev} alt="" /> 
+            <div className="content1">This page is currently</div>
+            <div className="main-content">Under Development !</div>
+            <div className="content2">we'll back shortly</div>
+          </div>
+        </>
       )
     }
   }

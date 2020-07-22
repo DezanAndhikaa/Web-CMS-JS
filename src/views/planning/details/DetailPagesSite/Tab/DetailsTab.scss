@@ -128,7 +128,6 @@
             .search-detail-site{
                 flex: 1;
                 align-self: flex-end;
-                margin-left: 10.3vw;
                 display: flex;
                 justify-content: flex-end;
             }
@@ -167,6 +166,14 @@
                         height: vw(40);
                         font-size: vw(14) !important;
                         line-height: vw(17) !important;
+                        font-family: 'Lato-Bold';
+                        color: #3C3B3B;
+                    }
+                    .table-cell-pk{
+                        padding: vw(0) vw(0) vw(0) vw(15);
+                        height: vw(50);
+                        font-size: vw(13) !important;
+                        line-height: vw(16) !important;
                         font-family: 'Lato-Bold';
                         color: #3C3B3B;
                     }

@@ -16,6 +16,7 @@ import {
 import { Spinner } from '../../../../../assets/icons';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from 'moment';
+import EmptyList from '../../../../../components/EmptyList/EmptyList';
 
 export default class SapSalesOrderList extends React.PureComponent {
   constructor(props) {
@@ -155,6 +156,13 @@ export default class SapSalesOrderList extends React.PureComponent {
             delay={300}
             onSearch={this.props.onSearchComp}
           />
+          <PlanningListHeader
+            name="Plan Type"
+            delay={300}
+            // isActive={this.props.sortSalesByState.UnitModel.isActive}
+            // isAscending={this.props.sortSalesByState.UnitModel.isAscending}
+            // onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
+          />
         </TableRow>
       </TableHead>
     )
@@ -199,6 +207,7 @@ export default class SapSalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
+        <TableCell align="left" className="table-cell"> Fix </TableCell>
       </TableRow>
       {this.state[id] ? 
         <TableRow className="table-row-bottom-issue">
@@ -245,19 +254,25 @@ export default class SapSalesOrderList extends React.PureComponent {
   }
 
   render(){
-    return(
-      <>
-        <Table classes={{ root: 'table' }} className="table">
-        {this.showTableHead()}
-        <TableBody classes={{ root: 'table-body' }}>
-          {this.props.salesOrderListSap.Lists
-            && this.props.salesOrderListSap.Lists.map((row, id) => (
-              this.showTableBody(row,id)
-            ))}
-          </TableBody>
-        </Table>
-        {this.showLoading()}
-      </>
-    )
+    if (this.props.salesOrderListSap.Lists.length === 0 && this.props.fetchStatusServiceSap === ApiRequestActionsStatus.SUCCEEDED) {
+      return (
+        <EmptyList idEmpty= "SAP" />
+      )
+    }else {
+      return(
+        <>
+          <Table classes={{ root: 'table' }} className="table">
+          {this.showTableHead()}
+          <TableBody classes={{ root: 'table-body' }}>
+            {this.props.salesOrderListSap.Lists
+              && this.props.salesOrderListSap.Lists.map((row, id) => (
+                this.showTableBody(row,id)
+              ))}
+            </TableBody>
+          </Table>
+          {this.showLoading()}
+        </>
+      )
+    }
   }
 }

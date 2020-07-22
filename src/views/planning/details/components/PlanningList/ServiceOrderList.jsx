@@ -6,7 +6,14 @@ import {
 import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
-import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
+import { 
+  SortServiceByCustomer, 
+  SortServiceBySite, 
+  SortServiceByUnitModel, 
+  SortServiceByCompDesc, 
+  SortServiceByPlanType,
+  LifetimeFilterAction, 
+  DateFilterAction } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
 import roleService from "../../../../../utils/roleService.helper";
@@ -78,6 +85,7 @@ export default class ServiceOrderList extends React.PureComponent {
               }
               <PlanningListHeader
                 name="Work Order"
+                loc= {this.props.pageLoc}
                 delay={300}
                 onSearch={this.props.onSearchComp}
               />
@@ -97,7 +105,7 @@ export default class ServiceOrderList extends React.PureComponent {
                 onClick={() => this.props.onClickTabHead(SortServiceByUnitModel)}
               />
               <PlanningListHeader
-                name="Comp Desc"
+                name="Component Description"
                 delay={300}
                 onClick={() => this.props.onClickTabHead(SortServiceByCompDesc)}
               />
@@ -126,6 +134,11 @@ export default class ServiceOrderList extends React.PureComponent {
               delay={300}
               onFilter={this.isFilterDate}
             />
+            <PlanningListHeader
+            name="Plan Type"
+            delay={300}
+            onClick={() => this.props.onClickTabHead(SortServiceByPlanType)}
+          />
           </TableRow>
         </TableHead>
     )
@@ -145,7 +158,12 @@ export default class ServiceOrderList extends React.PureComponent {
             />}
           </TableCell>
         }
-        <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell>
+        <TableCell 
+          align="left" 
+          className={this.props.pageLoc && this.props.idTab === "Status" ? "table-cell-pk-status"
+          : this.props.pageLoc === "Status" && this.props.idService === "Data Input" ? "table-cell-pk" : "table-cell"}> 
+          {row.WoNumber} 
+        </TableCell>
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
@@ -155,6 +173,7 @@ export default class ServiceOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.LifeTimeComponent}</TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.PlanType} </TableCell>
       </TableRow>
     )
   }

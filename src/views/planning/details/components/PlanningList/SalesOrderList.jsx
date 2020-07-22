@@ -178,6 +178,13 @@ export default class SalesOrderList extends React.PureComponent {
             delay={300}
             onFilter={this.isFilterDate}
           />
+          <PlanningListHeader
+            name="Plan Type"
+            delay={300}
+            // isActive={this.props.sortSalesByState.UnitModel.isActive}
+            // isAscending={this.props.sortSalesByState.UnitModel.isAscending}
+            // onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
+          />
         </TableRow>
       </TableHead>
     )
@@ -218,6 +225,7 @@ export default class SalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
+        <TableCell align="left" className="table-cell"> Fix </TableCell>
         <TableCell align="center" className="table-cell">
           {this.props.salesOrderList.Lists[id].LifeTimeComponent !== 0 && this.props.idTab === "Approval" ?
             <EditButton idEdit="Approval" title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} /> :

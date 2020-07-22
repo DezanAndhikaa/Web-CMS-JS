@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
-import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
+import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc, LifetimeFilterAction, DateFilterAction, SortServiceByPlanType } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
@@ -64,8 +64,8 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
   }
 
   showTableHead() {
-      return (
-        <TableHead className="table-head" classes={{ root: 'table-head' }}>
+    return (
+      <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow classes={{ root: 'table-row' }}>
           <TableCell padding="checkbox">
             {this.props.displayServiceCheckbox  && 
@@ -101,7 +101,7 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
             onClick={() => this.props.onClickTabHead(SortServiceByUnitModel)}
           />
           <PlanningListHeader
-            name="Comp Desc"
+            name="Component Description"
             delay={300}
             onClick={() => this.props.onClickTabHead(SortServiceByCompDesc)}
           />
@@ -129,6 +129,11 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
             name="Plan"
             delay={300}
             onFilter={this.isFilterDate}
+          />
+          <PlanningListHeader
+            name="Plan Type"
+            delay={300}
+            onClick={() => this.props.onClickTabHead(SortServiceByPlanType)}
           />
         </TableRow>
       </TableHead>
@@ -159,6 +164,7 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="center" className="table-cell"> {row.LifeTimeComponent} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.PlanType} </TableCell>
       </TableRow>
     )
   }

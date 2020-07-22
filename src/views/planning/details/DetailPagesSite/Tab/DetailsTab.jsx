@@ -11,7 +11,8 @@ import {
     SelectCustomerFilterAction,
     SelectSiteFilterAction, 
     SelectUnitModelFilterAction, 
-    SelectComponentFilterAction 
+    SelectComponentFilterAction, 
+    SelectPlanTypeFilterAction
 } from '../../DetailPages-action';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import roleService from "../../../../../utils/roleService.helper";
@@ -185,8 +186,9 @@ class DetailsTab extends React.Component {
           && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "list-detail-empty" : "plannings-list-detail"}>
           <ServiceOrderList 
             {...this.props}
-            idService="Data Input"
-            isClick={this.props.isClick}
+            pageLoc= "Status"
+            idService= "Data Input"
+            isClick= {this.props.isClick}
           />
         </div>
     );
@@ -308,6 +310,35 @@ class DetailsTab extends React.Component {
     }
   }
 
+  _dataFilterPlanType() {
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
+      || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+      if (this.state.value === 0) {
+        let arr = this.props.serviceOrderList.PlanType;
+        arr.splice(0, 0, "All Plan Type")
+        return arr
+      }
+    }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
+      if(this.state.value === 0){
+        let arr = this.props.salesOrderList.PlanType;
+        arr.splice(0, 0, "All Plan Type")
+        return arr
+      }
+    }else{
+      if(this.state.value === 0){
+        let arr = this.props.salesOrderList.PlanType;
+        arr.splice(0, 0, "All Plan Type")
+        return arr
+      }
+      else{
+        let arr = this.props.serviceOrderList.PlanType;
+        arr.splice(0, 0, "All Plan Type")
+        return arr
+      }
+    }
+  }
+
   _renderFilter() {
     return (
       <div className="dropdowns-detail-site">
@@ -353,6 +384,17 @@ class DetailsTab extends React.Component {
             onSelectAction={this.props.selectFilter2}
             indexTab={this.state.value}
             head={"ComponentDescription"}
+          />
+        </div>
+        <div className="dropdown-detail-site">
+          <DropdownFilter
+            {...this.props}
+            data={this._dataFilterPlanType()}
+            selected={this.props.selectedFilters.planType}
+            onSelectActionType={SelectPlanTypeFilterAction}
+            onSelectAction={this.props.selectFilter2}
+            indexTab={this.state.value}
+            head={"PlanType"}
           />
         </div>
         <div className="search-detail-site">

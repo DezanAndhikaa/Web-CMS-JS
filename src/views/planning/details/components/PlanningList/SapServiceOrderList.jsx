@@ -11,11 +11,13 @@ import {
   SortServiceByUnitModel, 
   SortServiceByCompDesc, 
   LifetimeFilterAction, 
-  DateFilterAction } 
+  DateFilterAction, 
+  SortServiceByPlanType} 
   from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from 'moment';
+import EmptyList from '../../../../../components/EmptyList/EmptyList';
 
 export default class SapServiceOrderList extends React.PureComponent {
   constructor(props) {
@@ -93,35 +95,28 @@ export default class SapServiceOrderList extends React.PureComponent {
           </TableCell>
           <PlanningListHeader
             name="Work Order"
+            loc= {this.props.pageLoc}
             delay={300}
             onSearch={this.props.onSearchComp}
           />
           <PlanningListHeader
             name="Customer"
-            isActive={this.props.sortServiceByState.Customer.isActive}
             delay={300}
-            isAscending={this.props.sortServiceByState.Customer.isAscending}
             onClick={() => this.props.onClickTabHead(SortServiceByCustomer)}
           />
           <PlanningListHeader
             name="Site"
-            isActive={this.props.sortServiceByState.Site.isActive}
             delay={300}
-            isAscending={this.props.sortServiceByState.Site.isAscending}
             onClick={() => this.props.onClickTabHead(SortServiceBySite)}
           />
           <PlanningListHeader
             name="Unit Model"
-            isActive={this.props.sortServiceByState.UnitModel.isActive}
             delay={300}
-            isAscending={this.props.sortServiceByState.UnitModel.isAscending}
             onClick={() => this.props.onClickTabHead(SortServiceByUnitModel)}
           />
           <PlanningListHeader
-            name="Comp Desc"
-            isActive={this.props.sortServiceByState.CompDesc.isActive}
+            name="Component Description"
             delay={300}
-            isAscending={this.props.sortServiceByState.CompDesc.isAscending}
             onClick={() => this.props.onClickTabHead(SortServiceByCompDesc)}
           />
           <PlanningListHeader
@@ -148,6 +143,11 @@ export default class SapServiceOrderList extends React.PureComponent {
             name="Plan"
             delay={300}
             onFilter={this.isFilterDate}
+          />
+          <PlanningListHeader
+            name="Plan Type"
+            delay={300}
+            onClick={() => this.props.onClickTabHead(SortServiceByPlanType)}
           />
         </TableRow>
       </TableHead>
@@ -183,7 +183,7 @@ export default class SapServiceOrderList extends React.PureComponent {
             />
           }
         </TableCell>
-        <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell>
+        <TableCell align="left" className={this.props.pageLoc === "Status" ? "table-cell-pk-status" : "table-cell"}> {row.WoNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
@@ -193,6 +193,7 @@ export default class SapServiceOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="center" className="table-cell"> {row.LifeTimeComponent} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.PlanType} </TableCell>
       </TableRow>
       {this.state[id] ? 
         <TableRow className="table-row-bottom-issue">
@@ -239,19 +240,26 @@ export default class SapServiceOrderList extends React.PureComponent {
   }
 
   render(){
-    return(
-      <>
-        <Table classes={{ root: 'table' }} className="table">
-        {this.showTableHead()}
-        <TableBody classes={{ root: 'table-body' }}>
-          {this.props.serviceOrderListSap.Lists
-            && this.props.serviceOrderListSap.Lists.map((row, id) => (
-              this.showTableBody(row,id)
-            ))}
-          </TableBody>
-        </Table>
-        {this.showLoading()}
-      </>
-    )
+    if (this.props.serviceOrderListSap.Lists.length === 0 && this.props.fetchStatusServiceSap === ApiRequestActionsStatus.SUCCEEDED) {
+      return (
+        <EmptyList idEmpty= "SAP" />
+      )
+    }else {
+      return(
+        <>
+          <Table classes={{ root: 'table' }} className="table">
+          {this.showTableHead()}
+          <TableBody classes={{ root: 'table-body' }}>
+            {this.props.serviceOrderListSap.Lists
+              && this.props.serviceOrderListSap.Lists.map((row, id) => (
+                this.showTableBody(row,id)
+              ))}
+            </TableBody>
+          </Table>
+          {this.showLoading()}
+        </>
+      )
+    }
+    
   }
 }

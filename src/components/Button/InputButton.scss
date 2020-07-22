@@ -147,4 +147,21 @@
             padding: vw(3) vw(10) vw(4);
         }
     }
+    .search-per-column{
+        width: vw(94.22) !important;
+        height: vw(35.07) !important;
+        background-color: white;
+        margin-left: vw(15);
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        border-radius: 0.4vw;
+        cursor: pointer;
+        .txt-search-pk{
+            flex: 1;
+            font-size: vw(12) !important;
+            line-height: vw(16) !important;
+            font-family: 'Lato-Regular';
+            font-weight: bold;
+            padding: vw(3) vw(10) vw(4);
+        }
+    }
 }
