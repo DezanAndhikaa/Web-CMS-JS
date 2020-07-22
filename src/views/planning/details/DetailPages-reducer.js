@@ -617,8 +617,7 @@ export function serviceSapParameterReducer(state = initialServiceParameter, acti
 	return state;
 }
 
-// Detail reducer reviced parameter reducer
-export function salesRevisedParameterReducer(state = initialSearchParameter, action) {
+export function salesRevisedParameterReducer(state = initialSalesParameter, action) {
 	if (action.type === UpdateSalesRevisedParamAction)
 		return { ...state, dataFilter: action.payload };
 	return state;

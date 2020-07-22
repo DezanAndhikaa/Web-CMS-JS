@@ -584,32 +584,25 @@ componentDidUpdate = (prevProps) => {
   onClickRevisedSales = async() => {
     await this.props.fetchRevisedSales({
       ...this.props.salesRevisedParam.dataFilter,
-      Filter : 
-        [...this.props.salesRevisedParam.dataFilter.Filter, 
-        {
+      Filter:
+        [...this.props.salesRevisedParam.dataFilter.Filter, {
           Field 	 : 'IsRevised',
           Operator : 'eq',
           Value 	 : 'true',
           Logic 	 : 'AND'
-        },{
+        }, {
           Field    : 'IsChanged',
           Operator : 'eq',
           Value    : 'false',
           Logic    : "AND"
-        },{
+        }, {
           Field : 'SAPIssueMessage',
           Operator : 'eq',
           Value : '-',
           Logic : 'AND'
         }]
-    },this.props.token);
+    }, this.props.token);
   }
-
-  // onClickRevisedSales = async (searchData) => {
-  //   await this.props.fetchRevisedSales({
-  //     Category: 'Lifetime', Keyword: this.props.salesSearch,
-  //   }, this.props.token);
-  // }
 
   //KOMPONEN UNTUK SHOW PER/PAGE
   _renderShowPerPage(){
