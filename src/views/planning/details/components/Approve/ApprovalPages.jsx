@@ -222,6 +222,28 @@ class ApprovalPages extends React.Component {
           });
         }
       };
+      if (sortSalesBy.PlanType.isActive) {
+        isDescending = !sortSalesBy.PlanType.isAscending;
+        this.props.updateSalesParameter({
+          ...this.props.salesParameter.dataFilter,
+          PageNumber: 1,
+          Sort: [{
+            Field: 'PlanType',
+            Direction: 'desc'
+          }],
+        });
+        if (sortSalesBy.PlanType.isAscending === !sortSalesBy.PlanType.isActive) {
+          isDescending = !sortSalesBy.PlanType.isAscending;
+          this.props.updateSalesParameter({
+            ...this.props.salesParameter.dataFilter,
+            PageNumber: 1,
+            Sort: [{
+              Field: 'PlanType',
+              Direction: 'asc'
+            }]
+          });
+        }
+      };
     }
     // SERVICE ORDER SORTING
     if (prevProps.sortServiceBy !== this.props.sortServiceBy) {
@@ -315,6 +337,28 @@ class ApprovalPages extends React.Component {
           });
         }
       };
+      if (sortServiceBy.PlanType.isActive) {
+        isDescending = !sortServiceBy.PlanType.isAscending;
+        this.props.updateServiceParameter({
+          ...this.props.serviceParameter.dataFilter,
+          PageNumber: 1,
+          Sort: [{
+            Field: 'PlanType',
+            Direction: 'desc'
+          }]
+        });
+        if (sortServiceBy.PlanType.isAscending === !sortServiceBy.PlanType.isActive) {
+          isDescending = !sortServiceBy.PlanType.isAscending;
+          this.props.updateServiceParameter({
+            ...this.props.serviceParameter.dataFilter,
+            PageNumber: 1,
+            Sort: [{
+              Field: 'PlanType',
+              Direction: 'asc'
+            }]
+          });
+        }
+      }
     }
   }
 
