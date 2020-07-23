@@ -273,7 +273,30 @@ componentDidUpdate = (prevProps) => {
         });
       }
     };
+    if (sortSalesBy.PlanType.isActive) {
+      isDescending = !sortSalesBy.PlanType.isAscending;
+      this.props.updateSalesParameter({
+        ...this.props.salesParameter.dataFilter,
+          PageNumber: 1,
+          Sort: [{
+            Field : 'PlanType',
+            Direction : 'desc'
+          }],
+      });
+      if (sortSalesBy.PlanType.isAscending === !sortSalesBy.PlanType.isActive) {
+        isDescending = !sortSalesBy.PlanType.isAscending;
+        this.props.updateSalesParameter({
+          ...this.props.salesParameter.dataFilter,
+            PageNumber: 1,
+            Sort: [{
+              Field : 'PlanType',
+              Direction : 'asc'
+            }]
+        });
+      }
+    };
   }
+
   // SERVICE ORDER SORTING
   if (prevProps.sortServiceBy !== this.props.sortServiceBy) {
     const { sortServiceBy } = this.props;
