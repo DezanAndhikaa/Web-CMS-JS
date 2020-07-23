@@ -133,6 +133,7 @@ class DetailsTab extends React.Component {
           && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "list-detail-empty" : "plannings-list-detail"}>
         <SalesOrderList 
           {...this.props}
+          pageLoc= "Status"
           idSales= "Data Input"
           idTab= "Input"
         />

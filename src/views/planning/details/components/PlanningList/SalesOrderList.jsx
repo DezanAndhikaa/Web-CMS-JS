@@ -107,6 +107,7 @@ export default class SalesOrderList extends React.PureComponent {
           <PlanningListHeader
             name="SO"
             delay={300}
+            loc= {this.props.pageLoc}
             onSearch={this.props.onSearchComp}
           />
           <PlanningListHeader
@@ -204,7 +205,11 @@ export default class SalesOrderList extends React.PureComponent {
             }
           </TableCell>
         }
-        <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
+        <TableCell 
+          align="left" 
+          className={ this.props.pageLoc === "Status" && this.props.idSales === "Data Input" ? "table-cell-pk" : "table-cell"}> 
+          {row.SoNumber} 
+        </TableCell>
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
