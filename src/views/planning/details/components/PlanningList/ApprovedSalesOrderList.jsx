@@ -4,7 +4,7 @@ import {
 } from '@material-ui/core';
 import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
-import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
+import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction, SortSalesByPlanType } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from 'moment';
@@ -148,7 +148,7 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
           <PlanningListHeader
             name="Plan Type"
             delay={300}
-            // onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
+            onClick={() => this.props.onClickTabHead(SortSalesByPlanType)}
           />
         </TableRow>
       </TableHead>

@@ -11,7 +11,8 @@ import {
   SortSalesByUnitModel, 
   SortSalesByCompDesc, 
   LifetimeFilterAction, 
-  DateFilterAction } 
+  DateFilterAction, 
+  SortSalesByPlanType} 
   from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
@@ -159,9 +160,7 @@ export default class SapSalesOrderList extends React.PureComponent {
           <PlanningListHeader
             name="Plan Type"
             delay={300}
-            // isActive={this.props.sortSalesByState.UnitModel.isActive}
-            // isAscending={this.props.sortSalesByState.UnitModel.isAscending}
-            // onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
+            onClick={() => this.props.onClickTabHead(SortSalesByPlanType)}
           />
         </TableRow>
       </TableHead>

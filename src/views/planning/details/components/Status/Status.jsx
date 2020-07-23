@@ -472,6 +472,28 @@ export default class Status extends React.PureComponent {
 								});
 							}
 						};
+						if (sortSalesBy.PlanType.isActive) {
+							isDescending = !sortSalesBy.PlanType.isAscending;
+							this.props.updateSalesApprovedParameter({
+								...this.props.salesApprovedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'PlanType',
+									Direction : 'desc'
+								}],
+							});
+							if (sortSalesBy.PlanType.isAscending === !sortSalesBy.PlanType.isActive) {
+								isDescending = !sortSalesBy.PlanType.isAscending;
+								this.props.updateSalesApprovedParameter({
+									...this.props.salesApprovedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'PlanType',
+										Direction : 'asc'
+									}]
+								});
+							}
+						};
 						break;
 					case 'Not Approve':
 						if (sortSalesBy.Customer.isActive) {
@@ -557,6 +579,28 @@ export default class Status extends React.PureComponent {
 									PageNumber: 1,
 									Sort: [{
 										Field : 'ComponentDescription',
+										Direction : 'asc'
+									}]
+								});
+							}
+						};
+						if (sortSalesBy.PlanType.isActive) {
+							isDescending = !sortSalesBy.PlanType.isAscending;
+							this.props.updateSalesParameter({
+								...this.props.salesParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'PlanType',
+									Direction : 'desc'
+								}],
+							});
+							if (sortSalesBy.PlanType.isAscending === !sortSalesBy.PlanType.isActive) {
+								isDescending = !sortSalesBy.PlanType.isAscending;
+								this.props.updateSalesParameter({
+									...this.props.salesParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'PlanType',
 										Direction : 'asc'
 									}]
 								});
@@ -652,6 +696,28 @@ export default class Status extends React.PureComponent {
 								});
 							}
 						};
+						if (sortSalesBy.PlanType.isActive) {
+							isDescending = !sortSalesBy.PlanType.isAscending;
+							this.props.updateSalesDeletedParameter({
+								...this.props.salesDeletedParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'PlanType',
+									Direction : 'desc'
+								}],
+							});
+							if (sortSalesBy.PlanType.isAscending === !sortSalesBy.PlanType.isActive) {
+								isDescending = !sortSalesBy.PlanType.isAscending;
+								this.props.updateSalesDeletedParameter({
+									...this.props.salesDeletedParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'PlanType',
+										Direction : 'asc'
+									}]
+								});
+							}
+						};
 						break;
 					case 'SAP ISSUE':
 						if (sortSalesBy.Customer.isActive) {
@@ -737,6 +803,28 @@ export default class Status extends React.PureComponent {
 									PageNumber: 1,
 									Sort: [{
 										Field : 'ComponentDescription',
+										Direction : 'asc'
+									}]
+								});
+							}
+						};
+						if (sortSalesBy.PlanType.isActive) {
+							isDescending = !sortSalesBy.PlanType.isAscending;
+							this.props.updateSalesSapParameter({
+								...this.props.salesSapParameter.dataFilter,
+								PageNumber: 1,
+								Sort: [{
+									Field : 'PlanType',
+									Direction : 'desc'
+								}],
+							});
+							if (sortSalesBy.PlanType.isAscending === !sortSalesBy.PlanType.isActive) {
+								isDescending = !sortSalesBy.PlanType.isAscending;
+								this.props.updateSalesSapParameter({
+									...this.props.salesSapParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field : 'PlanType',
 										Direction : 'asc'
 									}]
 								});
