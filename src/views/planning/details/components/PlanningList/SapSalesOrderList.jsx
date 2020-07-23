@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, TextField, 
+  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, TextField, Tooltip
 } from '@material-ui/core';
 import './PlanningList.scss';
 import '../SapIssue/SapIssue.scss'
@@ -207,7 +207,9 @@ export default class SapSalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
-        <TableCell align="left" className="table-cell"> Fix </TableCell>
+        <Tooltip arrow title={row.PlanType.charAt(0) === "B" ? "Bus" : row.PlanType.charAt(0) === "F" ? "Fix" : "Unschedule"} >
+          <TableCell align="left" className="table-cell"> {row.PlanType.charAt(0)} </TableCell>
+        </Tooltip>
       </TableRow>
       {this.state[id] ? 
         <TableRow className="table-row-bottom-issue">
