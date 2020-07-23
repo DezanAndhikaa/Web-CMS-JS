@@ -195,8 +195,7 @@ class DetailsTab extends React.Component {
   }
 
   _dataFilterCustomer(){
-    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
-      || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
       if(this.state.value === 0){
         let arr = this.props.serviceOrderList.Customers;
         arr.splice(0, 0, "All Customer")
@@ -224,8 +223,7 @@ class DetailsTab extends React.Component {
   }
 
   _dataFilterSite(){
-    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
-      || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
       if(this.state.value === 0){
         let arr = this.props.serviceOrderList.Sites;
         arr.splice(0, 0, "All Site")
@@ -253,8 +251,7 @@ class DetailsTab extends React.Component {
   }
 
   _dataFilterUnitModel(){
-    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
-      || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
       if(this.state.value === 0){
         let arr = this.props.serviceOrderList.UnitModels;
         arr.splice(0, 0, "All Unit Model")
@@ -282,8 +279,7 @@ class DetailsTab extends React.Component {
   }
 
   _dataFilterComponentDescription(){
-    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
-      || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
       if(this.state.value === 0){
         let arr = this.props.serviceOrderList.ComponentDescriptions;
         arr.splice(0, 0, "All Component Description")
@@ -311,8 +307,7 @@ class DetailsTab extends React.Component {
   }
 
   _dataFilterPlanType() {
-    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
-      || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
       if (this.state.value === 0) {
         let arr = this.props.serviceOrderList.PlanType;
         arr.splice(0, 0, "All Plan Type")
@@ -421,8 +416,7 @@ class DetailsTab extends React.Component {
   }
 
   _renderTotalData(){
-    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
-      || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
       return(
         <div className="total-data-container">
           <div className="text-total">
