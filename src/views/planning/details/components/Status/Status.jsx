@@ -1504,7 +1504,6 @@ export default class Status extends React.PureComponent {
 		  }
 		  await this.props.deleteSales({SoNumbers : arr, IsDelete: true}, this.props.token);
 		  this.onClickSalesOrderApproved();
-		  await this.props.clearSelectedSalesPlans();
 		}
 	}
 
@@ -1517,7 +1516,6 @@ export default class Status extends React.PureComponent {
 		  }
 		  await this.props.deleteService({WoNumbers : arr, IsDelete: true}, this.props.token);
 		  this.onClickServiceOrderApproved();
-		  await this.props.clearSelectedServicePlans();
 		}
 	}
 
