@@ -1479,8 +1479,8 @@ export default class Status extends React.PureComponent {
 					arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
 		  		}
 			}
-			await this.props.deletePermanentSales(arr, this.props.token);
-			this.state.whatPageIsChoosed === "Delete" ? this.onClickSalesOrderDeleted() : this.onClickSalesOrderSap ();
+			await this.props.deletePermanentSales({SoNumbers: arr}, this.props.token);
+			this.state.whatPageIsChoosed === "Delete" ? this.onClickSalesOrderDeleted() : this.onClickSalesOrderSap();
 		}
 		if (this.props.location.whichTab === "service") {
 			let arr = []
