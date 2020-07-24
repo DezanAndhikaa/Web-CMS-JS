@@ -52,33 +52,33 @@ export default class Status extends React.PureComponent {
 
 	componentDidMount = async() =>{
 		if(this.props.location.whichTab === "sales"){
-			this.isReload();
+			this.isReloadSales();
 		}if(this.props.location.whichTab === "service"){
-			this.isReload();
+			this.isReloadService();
 		}else if(this.props.location.whichTab === undefined){
 			if(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/approval"){
 				if (localStorage.getItem('whichTab') === "sales"){
 					this.handleClick(Menu.PLANNING_APPROVAL_STATUS, 'sales', this.state.bearer);
-					this.isReload();
+					this.isReloadSales();
 				} else{ 
 					this.handleClick(Menu.PLANNING_APPROVAL_STATUS, 'service', this.state.bearer);
-					this.isReload();
+					this.isReloadService();
 				}
 			} else if(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/details/site"){
 				if (localStorage.getItem('whichTab') === "sales"){
 					this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales', this.state.bearer);
-					this.isReload();
+					this.isReloadSales();
 				} else{ 
 					this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service', this.state.bearer);
-					this.isReload();
+					this.isReloadService();
 				}
 			}else if(Number(RoleUser.role()) !== 1){
 				if (localStorage.getItem('whichTab') === "sales"){
 					this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales', this.state.bearer);
-					this.isReload();
+					this.isReloadSales();
 				} else{ 
 					this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service', this.state.bearer);
-					this.isReload();
+					this.isReloadService();
 				}
 			}	
 		}
@@ -1938,11 +1938,20 @@ export default class Status extends React.PureComponent {
 		this.setPropsToState();
 	}
 
-	isReload = async() => {
+	isReloadSales = async() => {
+		await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.state.bearer);
+		await this.props.fetchApprovedSales(this.props.salesApprovedParameter.dataFilter, this.state.bearer);
+		await this.props.fetchDeletedSales(this.props.salesDeletedParameter.dataFilter, this.state.bearer);
+		await this.props.fetchSapSales(this.props.serviceDeletedParameter.dataFilter, this.state.bearer);
+		this.props.clearSelectedSalesPlans()
+		this.setPropsToState();
+	}
+
+	isReloadService = async() => {
 		await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.state.bearer);
 		await this.props.fetchApprovedService(this.props.serviceApprovedParameter.dataFilter, this.state.bearer);
 		await this.props.fetchDeletedService(this.props.serviceDeletedParameter.dataFilter, this.state.bearer);
-		await this.props.fetchSapService(this.props.serviceDeletedParameter.dataFilter, this.state.bearer);
+		await this.props.fetchSapService(this.props.serviceSapParameter.dataFilter, this.state.bearer);
 		this.props.clearSelectedServicePlans()
 		this.setPropsToState();
 	}
