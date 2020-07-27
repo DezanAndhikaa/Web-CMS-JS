@@ -4,8 +4,7 @@ import {
   Checkbox, Table, TableBody, TableCell, TableHead, TableRow
 } from '@material-ui/core';
 import './PlanningList.scss';
-import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
-import { SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc, LifetimeFilterAction, DateFilterAction, SortServiceByPlanType } from '../../DetailPages-action';
+import { LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
@@ -66,10 +65,10 @@ export default class DeletedServiceOrderList extends React.PureComponent {
   }
 
   showTableHead() {
-      return (
-        <TableHead className="table-head" classes={{ root: 'table-head' }}>
+    return (
+      <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow classes={{ root: 'table-row' }}>
-          {Number(RoleUser.role()) !== 1 ? "" :
+        {Number(RoleUser.role()) !== 1 ? "" :
             <TableCell padding="checkbox">
               {this.props.displayServiceCheckbox && 
                 <Checkbox 
@@ -84,62 +83,17 @@ export default class DeletedServiceOrderList extends React.PureComponent {
               }
             </TableCell>
           }
-          <PlanningListHeader
-            name="Work Order"
-            loc= {this.props.pageLoc}
-            delay={300}
-            onSearch={this.props.onSearchComp}
-          />
-          <PlanningListHeader
-            name="Customer"
-            delay={300}
-            onClick={() => this.props.onClickTabHead(SortServiceByCustomer)}
-          />
-          <PlanningListHeader
-            name="Site"
-            delay={300}
-            onClick={() => this.props.onClickTabHead(SortServiceBySite)}
-          />
-          <PlanningListHeader
-            name="Unit Model"
-            delay={300}
-            onClick={() => this.props.onClickTabHead(SortServiceByUnitModel)}
-          />
-          <PlanningListHeader
-            name="Component Description"
-            delay={300}
-            onClick={() => this.props.onClickTabHead(SortServiceByCompDesc)}
-          />
-          <PlanningListHeader
-            name="Part Number"
-            delay={300}
-            onSearch={this.props.onSearchComp}
-          />
-          <PlanningListHeader
-            name="Unit Code"
-            delay={300}
-            onSearch={this.props.onSearchComp}
-          />
-          <PlanningListHeader
-            name="Serial Number"
-            delay={300}
-            onSearch={this.props.onSearchComp}          
-          />
-          <PlanningListHeader
-            name="Lifetime"
-            delay={300}
-            onFilter={this.isFilterLifetime}
-          />
-          <PlanningListHeader
-            name="Plan"
-            delay={300}
-            onFilter={this.isFilterDate}
-          />
-          <PlanningListHeader
-            name="Plan Type"
-            delay={300}
-            onClick={() => this.props.onClickTabHead(SortServiceByPlanType)}
-          />
+          <TableCell align="left" className="table-cell">SO</TableCell>
+          <TableCell align="left" className="table-cell">Customer</TableCell>
+          <TableCell align="left" className="table-cell">Site</TableCell>
+          <TableCell align="left" className="table-cell">Unit Model</TableCell>
+          <TableCell align="left" className="table-cell">Component Description</TableCell>
+          <TableCell align="left" className="table-cell">Part Number</TableCell>
+          <TableCell align="left" className="table-cell">Unit Code</TableCell>
+          <TableCell align="left" className="table-cell">Serial Number</TableCell>
+          <TableCell align="left" className="table-cell">Lifetime Component</TableCell>
+          <TableCell align="left" className="table-cell">Plan Execution</TableCell>
+          <TableCell align="left" className="table-cell">Plan Type</TableCell>
         </TableRow>
       </TableHead>
     )
@@ -158,7 +112,14 @@ export default class DeletedServiceOrderList extends React.PureComponent {
             />
           }
         </TableCell>
-        <TableCell align="left" className={this.props.pageLoc === "Status" ? "table-cell-pk-status" : "table-cell"}> {row.WoNumber} </TableCell>
+        {Number(RoleUser.role()) === 1 ?
+          <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell> :
+          <TableCell 
+            align="left" 
+            className={this.props.pageLoc === "Status" ? "table-cell-pk-status" : "table-cell"}> 
+            {row.WoNumber} 
+          </TableCell>
+        }
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>

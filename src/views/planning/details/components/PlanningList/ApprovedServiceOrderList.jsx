@@ -80,61 +80,17 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
               />
             }
           </TableCell>
-          <PlanningListHeader
-            name="Work Order"
-            delay={300}
-            onSearch={this.props.onSearchComp}
-          />
-          <PlanningListHeader
-            name="Customer"
-            delay={300}
-            onClick={() => this.props.onClickTabHead(SortServiceByCustomer)}
-          />
-          <PlanningListHeader
-            name="Site"
-            delay={300}
-            onClick={() => this.props.onClickTabHead(SortServiceBySite)}
-          />
-          <PlanningListHeader
-            name="Unit Model"
-            delay={300}
-            onClick={() => this.props.onClickTabHead(SortServiceByUnitModel)}
-          />
-          <PlanningListHeader
-            name="Component Description"
-            delay={300}
-            onClick={() => this.props.onClickTabHead(SortServiceByCompDesc)}
-          />
-          <PlanningListHeader
-            name="Part Number"
-            delay={300}
-            onSearch={this.props.onSearchComp}
-          />
-          <PlanningListHeader
-            name="Unit Code"
-            delay={300}
-            onSearch={this.props.onSearchComp}
-          />
-          <PlanningListHeader
-            name="Serial Number"
-            delay={300}
-            onSearch={this.props.onSearchComp}           
-          />
-          <PlanningListHeader
-            name="Lifetime"
-            delay={300}
-            onFilter={this.isFilterLifetime}
-          />
-          <PlanningListHeader
-            name="Plan"
-            delay={300}
-            onFilter={this.isFilterDate}
-          />
-          <PlanningListHeader
-            name="Plan Type"
-            delay={300}
-            onClick={() => this.props.onClickTabHead(SortServiceByPlanType)}
-          />
+          <TableCell align="left" className="table-cell">SO</TableCell>
+          <TableCell align="left" className="table-cell">Customer</TableCell>
+          <TableCell align="left" className="table-cell">Site</TableCell>
+          <TableCell align="left" className="table-cell">Unit Model</TableCell>
+          <TableCell align="left" className="table-cell">Component Description</TableCell>
+          <TableCell align="left" className="table-cell">Part Number</TableCell>
+          <TableCell align="left" className="table-cell">Unit Code</TableCell>
+          <TableCell align="left" className="table-cell">Serial Number</TableCell>
+          <TableCell align="left" className="table-cell">Lifetime Component</TableCell>
+          <TableCell align="left" className="table-cell">Plan Execution</TableCell>
+          <TableCell align="left" className="table-cell">Plan Type</TableCell>
         </TableRow>
       </TableHead>
     )

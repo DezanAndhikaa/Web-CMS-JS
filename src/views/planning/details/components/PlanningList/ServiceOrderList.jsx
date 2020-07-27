@@ -66,68 +66,100 @@ export default class ServiceOrderList extends React.PureComponent {
 
   datePlant = (date) => moment.utc(date, ISO_8601).local().format('DD MMMM YYYY')
 
-    showTableHead() {
+  showTableHead() {
+    if(this.props.idTab === "Status"){
       return(
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
-            <TableRow>
-              {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? "" :
-                <TableCell padding="checkbox">
-                  {this.props.displayServiceCheckbox  && 
-                  <Checkbox 
-                  checked={this.state.checkedValue}
-                  onChange={this.handleClick}
-                  onClick={({target: { checked }}) => {
-                    if(checked) return this.props.onChooseAllService(this.props.serviceOrderList.Lists);
-                    return this.props.onChooseAllService([]);
-                  }}
-                  className="checkbox-checked-header" />}
-                </TableCell>
-              }
-              <PlanningListHeader
-                name="Work Order"
-                loc= {this.props.pageLoc}
-                delay={300}
-                onSearch={this.props.onSearchComp}
-              />
-              <PlanningListHeader
-                name="Customer"
-                delay={300}
-                onClick={() => this.props.onClickTabHead(SortServiceByCustomer)}
-              />
-              <PlanningListHeader
-                name="Site"
-                delay={300}
-                onClick={() => this.props.onClickTabHead(SortServiceBySite)}
-              />
-              <PlanningListHeader
-                name="Unit Model"
-                delay={300}
-                onClick={() => this.props.onClickTabHead(SortServiceByUnitModel)}
-              />
-              <PlanningListHeader
-                name="Component Description"
-                delay={300}
-                onClick={() => this.props.onClickTabHead(SortServiceByCompDesc)}
-              />
-              <PlanningListHeader
-                name="Part Number"
-                delay={300}
-                onSearch={this.props.onSearchComp}
-              />
-              <PlanningListHeader
-                name="Unit Code"
-                delay={300}
-                onSearch={this.props.onSearchComp}
-              />
-              <PlanningListHeader
-                name="Serial Number"
-                delay={300}
-                onSearch={this.props.onSearchComp}          
-              />
-          <PlanningListHeader
-              name="Lifetime"
+          <TableRow classes={{ root: 'table-row' }}>
+            {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? "" :
+              <TableCell padding="checkbox">
+                {this.props.displayServiceCheckbox  && 
+                <Checkbox 
+                checked={this.state.checkedValue}
+                onChange={this.handleClick}
+                onClick={({target: { checked }}) => {
+                  if(checked) return this.props.onChooseAllService(this.props.serviceOrderList.Lists);
+                  return this.props.onChooseAllService([]);
+                }}
+                className="checkbox-checked-header" />}
+              </TableCell>
+            }
+            <TableCell align="left" className="table-cell">SO</TableCell>
+            <TableCell align="left" className="table-cell">Customer</TableCell>
+            <TableCell align="left" className="table-cell">Site</TableCell>
+            <TableCell align="left" className="table-cell">Unit Model</TableCell>
+            <TableCell align="left" className="table-cell">Component Description</TableCell>
+            <TableCell align="left" className="table-cell">Part Number</TableCell>
+            <TableCell align="left" className="table-cell">Unit Code</TableCell>
+            <TableCell align="left" className="table-cell">Serial Number</TableCell>
+            <TableCell align="left" className="table-cell">Lifetime Component</TableCell>
+            <TableCell align="left" className="table-cell">Plan Execution</TableCell>
+            <TableCell align="left" className="table-cell">Plan Type</TableCell>
+          </TableRow>
+        </TableHead>
+      )
+    }else{
+      return(
+        <TableHead className="table-head" classes={{ root: 'table-head' }}>
+          <TableRow>
+            {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? "" :
+              <TableCell padding="checkbox">
+                {this.props.displayServiceCheckbox  && 
+                <Checkbox 
+                checked={this.state.checkedValue}
+                onChange={this.handleClick}
+                onClick={({target: { checked }}) => {
+                  if(checked) return this.props.onChooseAllService(this.props.serviceOrderList.Lists);
+                  return this.props.onChooseAllService([]);
+                }}
+                className="checkbox-checked-header" />}
+              </TableCell>
+            }
+            <PlanningListHeader
+              name="Work Order"
+              loc= {this.props.pageLoc}
               delay={300}
-              onFilter={this.isFilterLifetime}
+              onSearch={this.props.onSearchComp}
+            />
+            <PlanningListHeader
+              name="Customer"
+              delay={300}
+              onClick={() => this.props.onClickTabHead(SortServiceByCustomer)}
+            />
+            <PlanningListHeader
+              name="Site"
+              delay={300}
+              onClick={() => this.props.onClickTabHead(SortServiceBySite)}
+            />
+            <PlanningListHeader
+              name="Unit Model"
+              delay={300}
+              onClick={() => this.props.onClickTabHead(SortServiceByUnitModel)}
+            />
+            <PlanningListHeader
+              name="Component Description"
+              delay={300}
+              onClick={() => this.props.onClickTabHead(SortServiceByCompDesc)}
+            />
+            <PlanningListHeader
+              name="Part Number"
+              delay={300}
+              onSearch={this.props.onSearchComp}
+            />
+            <PlanningListHeader
+              name="Unit Code"
+              delay={300}
+              onSearch={this.props.onSearchComp}
+            />
+            <PlanningListHeader
+              name="Serial Number"
+              delay={300}
+              onSearch={this.props.onSearchComp}          
+            />
+            <PlanningListHeader
+                name="Lifetime"
+                delay={300}
+                onFilter={this.isFilterLifetime}
             />
             <PlanningListHeader
               name="Plan"
@@ -141,7 +173,8 @@ export default class ServiceOrderList extends React.PureComponent {
           />
           </TableRow>
         </TableHead>
-    )
+      )
+    }
   }
 
   showTableBody(row,id) {
@@ -158,12 +191,16 @@ export default class ServiceOrderList extends React.PureComponent {
             />}
           </TableCell>
         }
-        <TableCell 
-          align="left" 
-          className={this.props.pageLoc && this.props.idTab === "Status" ? "table-cell-pk-status"
-          : this.props.pageLoc === "Status" && this.props.idService === "Data Input" ? "table-cell-pk" : "table-cell"}> 
-          {row.WoNumber} 
-        </TableCell>
+        {Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/approval" || Number(RoleUser.role()) !== 1 ?
+          <TableCell 
+            align="left" 
+            className={this.props.pageLoc && this.props.idTab === "Status" ? "table-cell-pk-status"
+            : this.props.pageLoc === "Status" && this.props.idService === "Data Input" ? "table-cell-pk" : "table-cell"}> 
+            {row.WoNumber} 
+          </TableCell>
+          :
+          <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell>
+        }
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
