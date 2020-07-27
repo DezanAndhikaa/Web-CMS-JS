@@ -43,9 +43,26 @@
         justify-content: space-between;
         width: 100%;
         .title{
-            display: flex;
+            display: inline-flex;
             width: 50%;
             margin-bottom: 2%;
+            align-items: flex-end;
+            .title-bold{
+                display: flex;
+                font-family: 'Lato-Bold';
+                font-style: normal;
+                font-weight: bold;
+                font-size: 30px;
+                line-height: 36px;
+            }
+            .title-normal{
+                font-family: 'Lato-Regular';
+                font-style: normal;
+                font-weight: normal;
+                font-size: 25px;
+                line-height: 30px;
+                padding-left: vw(20);
+            }
         }
         .search-containers{
             flex: 1;

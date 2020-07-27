@@ -2272,7 +2272,8 @@ export default class Status extends React.PureComponent {
 				<div className="table-containers">
 					<div className="title-containers">
 						<div className="title">
-							{this.props.location.whichTab === 'sales' ? 'Status - Sales Order' : 'Status - Service Order'}
+							<div className="title-bold">{this.props.location.whichTab === 'sales' ? 'Status -' : 'Status -'}</div>
+							<div className="title-normal">{this.props.location.whichTab === 'sales' ? 'Sales Order' : 'Service Order'}</div>
 						</div>
 						<div className="search-containers">							
 							{this._renderSearchBar()}
