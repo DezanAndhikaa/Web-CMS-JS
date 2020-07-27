@@ -205,11 +205,16 @@ export default class SalesOrderList extends React.PureComponent {
             }
           </TableCell>
         }
-        <TableCell 
-          align="left" 
-          className={ this.props.pageLoc === "Status" && this.props.idSales === "Data Input" ? "table-cell-pk" : "table-cell"}> 
-          {row.SoNumber} 
-        </TableCell>
+        {Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/approval" || Number(RoleUser.role()) !== 1 ?
+          <TableCell 
+            align="left" 
+            className={this.props.pageLoc && this.props.idTab === "Status" ? "table-cell-pk-status"
+            : this.props.pageLoc === "Status" && this.props.idTab === "Input" ||  this.props.pageLoc === "Status" && this.props.idSales === "ViewOnly" ? "table-cell-pk" : "table-cell"}> 
+            {row.SoNumber} 
+          </TableCell>
+          :
+          <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
+        }
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>

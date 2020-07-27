@@ -188,9 +188,10 @@
     }
     
     .labelMax{
-        width: 150%;
+        width: 100%;
         margin-top: 5%;
-        margin-left: 190%;
+        margin-left: 18%;
+        text-align: right;
         font-size: vw(13) !important;
         font-weight: bold;
         line-height: vw(16) !important;
@@ -203,7 +204,7 @@
     }
     .labelMax-service{
         margin-top: 5%;
-        margin-left:5%;
+        margin-left: 5%;
         font-size: vw(13) !important;
         font-weight: bold;
         line-height: vw(16) !important;

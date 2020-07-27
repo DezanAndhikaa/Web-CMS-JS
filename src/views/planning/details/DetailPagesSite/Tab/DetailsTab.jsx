@@ -150,6 +150,7 @@ class DetailsTab extends React.Component {
         <SalesOrderList
           {...this.props}
           idSales="ViewOnly"
+          pageLoc= "Status"
         />
       </div>
     );

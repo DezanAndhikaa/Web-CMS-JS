@@ -158,12 +158,16 @@ export default class ServiceOrderList extends React.PureComponent {
             />}
           </TableCell>
         }
-        <TableCell 
-          align="left" 
-          className={this.props.pageLoc && this.props.idTab === "Status" ? "table-cell-pk-status"
-          : this.props.pageLoc === "Status" && this.props.idService === "Data Input" ? "table-cell-pk" : "table-cell"}> 
-          {row.WoNumber} 
-        </TableCell>
+        {Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/approval" || Number(RoleUser.role()) !== 1 ?
+          <TableCell 
+            align="left" 
+            className={this.props.pageLoc && this.props.idTab === "Status" ? "table-cell-pk-status"
+            : this.props.pageLoc === "Status" && this.props.idService === "Data Input" ? "table-cell-pk" : "table-cell"}> 
+            {row.WoNumber} 
+          </TableCell>
+          :
+          <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell>
+        }
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>

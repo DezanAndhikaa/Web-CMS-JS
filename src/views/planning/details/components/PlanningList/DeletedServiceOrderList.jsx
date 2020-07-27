@@ -158,7 +158,14 @@ export default class DeletedServiceOrderList extends React.PureComponent {
             />
           }
         </TableCell>
-        <TableCell align="left" className={this.props.pageLoc === "Status" ? "table-cell-pk-status" : "table-cell"}> {row.WoNumber} </TableCell>
+        {Number(RoleUser.role()) === 1 ?
+          <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell> :
+          <TableCell 
+            align="left" 
+            className={this.props.pageLoc === "Status" ? "table-cell-pk-status" : "table-cell"}> 
+            {row.WoNumber} 
+          </TableCell>
+        }
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>

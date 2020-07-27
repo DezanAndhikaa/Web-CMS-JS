@@ -193,64 +193,65 @@ export default class UnapproveConfirmation extends React.PureComponent {
 
 	render() {
     if(this.props.idConfirm === "Cancel"){
-        return (
-          <>
-           {this.state.isShowModalUnapprove && (
-            <Modal open={this.state.isShowModalUnapprove} onClose={this.props.onClose} className="modal-unapprove">
-            <DialogContent className="unapprove-confirmation-content">
-              <div className="confirmation-modal-unapprove">
-                <CloseNotif onClose={this.props.onClose}/>
-                <div className="confirmation-container-unapprove">
-                  <p className="confirmation-title-unapprove">Reject</p>
-                  <p className="confirmation-title-unapprove">Service Order</p>
-                  <img className="confirmation-image-unapprove" src={ImgCancelApprove} alt="" />
-                  <p className="confirmation-caption-unapprove"><b>Press SAP Issue button</b> to continue reject</p>
-                  <div className="btn-row">
-                    <Button className= "button-sap-issue-service" onClick={() => this.isClickedSap()}>SAP Issue</Button>
-                  </div>
-                  <div className="labelMax-service" >
-                    <label>* Max 5 Items</label>
-                  </div>
+      return (
+        <>
+         {this.state.isShowModalUnapprove && (
+          <Modal open={this.state.isShowModalUnapprove} onClose={this.props.onClose} className="modal-unapprove">
+          <DialogContent className="unapprove-confirmation-content">
+            <div className="confirmation-modal-unapprove">
+              <CloseNotif onClose={this.props.onClose}/>
+              <div className="confirmation-container-unapprove">
+                <p className="confirmation-title-unapprove">Reject</p>
+                <p className="confirmation-title-unapprove">{this.props.whichTabs ? "Sales Order" : "Service Order"}</p>
+                <img className="confirmation-image-unapprove" src={ImgCancelApprove} alt="" />
+                <p className="confirmation-caption-unapprove"><b>{this.props.whichTabs ? "Select one" : "Press SAP Issue button"}</b> to continue reject</p>
+                <div className="btn-row">
+                  {this.props.whichTabs ? <Button className="button-edit-lt" onClick={() => this.isClickedSend()}>Edit Lifetime</Button> : null }
+                  <Button className={this.props.whichTabs ? "button-sap-issue" : "button-sap-issue-service"} onClick={() => this.isClickedSap()}>SAP Issue</Button>
+                </div>
+                <div className={this.props.whichTabs ? "labelMax" : "labelMax-service" }>
+                  <label>* Max 5 Items</label>
                 </div>
               </div>
-            </DialogContent>
-          </Modal>
-          )     
-          }
-          {this.state.isShowModalSap && (
-            this._renderSap(this.state.isShowModalSap)
-          )}
-          {this.props.fetchStatusPutSAPIssue === ApiRequestActionsStatus.LOADING &&  (
-            this.renderCircularProgress()
-          )}
-          {this.props.fetchStatusPutSAPIssue === ApiRequestActionsStatus.SUCCEEDED && (
-            this._renderSapSucced()
-          )}
-          {this.state.isShowModalSend && (
-            this._renderSendtoEdit()
-          )}
-          {this.state.isShowModalSapFailed && (
-            this._renderSapFailed()
-          )}
-        </>
-        );
-    } else if(this.props.idConfirm === "Send Success"){
-      return(
-        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-unapprove">
-        <DialogContent className="unapprove-confirmation-content">
-          <div className="confirmation-modal-unapprove">
-            <div className="confirmation-container-unapprove">
-              <p className="title-success-unapprove">Successful</p>
-              <img className="confirmation-success-unapprove" src={ImgCancelEditSucc} alt="" />
-              <p className="confirmation-caption-unapprove">You have sent data to be repaired again</p>
-              <div className="btn-row">
-                <Button className="button-continue" onClick={ () => {this.props.onClose()} }>Continue</Button>
-              </div>
+            </div>
+          </DialogContent>
+        </Modal>
+        )     
+        }
+        {this.state.isShowModalSap && (
+          this._renderSap(this.state.isShowModalSap)
+        )}
+        {this.props.fetchStatusPutSAPIssue === ApiRequestActionsStatus.LOADING &&  (
+          this.renderCircularProgress()
+        )}
+        {this.props.fetchStatusPutSAPIssue === ApiRequestActionsStatus.SUCCEEDED && (
+          this._renderSapSucced()
+        )}
+        {this.state.isShowModalSend && (
+          this._renderSendtoEdit()
+        )}
+        {this.state.isShowModalSapFailed && (
+          this._renderSapFailed()
+        )}
+      </>
+      );
+  } else if(this.props.idConfirm === "Send Success"){
+    return(
+      <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-unapprove">
+      <DialogContent className="unapprove-confirmation-content">
+        <div className="confirmation-modal-unapprove">
+          <div className="confirmation-container-unapprove">
+            <p className="title-success-unapprove">Successful</p>
+            <img className="confirmation-success-unapprove" src={ImgCancelEditSucc} alt="" />
+            <p className="confirmation-caption-unapprove">You have sent data to be repaired again</p>
+            <div className="btn-row">
+              <Button className="button-continue" onClick={ () => {this.props.onClose()} }>Continue</Button>
             </div>
           </div>
-        </DialogContent> 
-      </Modal>
-      )
-    }
+        </div>
+      </DialogContent> 
+    </Modal>
+    )
+  }
 	}
 }

@@ -82,6 +82,7 @@ export default class DeletedSalesOrderList extends React.PureComponent {
           }
           <PlanningListHeader
             name="SO"
+            loc= {this.props.pageLoc}
             delay={300}
             onSearch={this.props.onSearchComp}
           />
@@ -172,7 +173,14 @@ export default class DeletedSalesOrderList extends React.PureComponent {
             classes={{ checked: 'checkbox-checked' }} />}
           </TableCell>
         }
-        <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
+        {Number(RoleUser.role()) === 1 ?
+          <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell> :
+          <TableCell 
+            align="left" 
+            className={this.props.pageLoc === "Status" ? "table-cell-pk-status" : "table-cell"}> 
+            {row.SoNumber} 
+          </TableCell>
+        }
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
