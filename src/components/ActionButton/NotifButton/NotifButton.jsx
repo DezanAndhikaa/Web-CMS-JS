@@ -3,7 +3,6 @@ import './NotifButton.scss';
 import {Badge, Paper } from '@material-ui/core/';
 import { IconNotif } from '../../../assets/icons';
 import { withStyles } from '@material-ui/core/styles';
-import { Menu } from '../../../constants';
 import { withRouter } from "react-router-dom";
 import CardData from '../../../views/planning/details/components/Notification/Components/Card';
 
