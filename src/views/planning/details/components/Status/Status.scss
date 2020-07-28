@@ -5,6 +5,8 @@
     display: inline-flex;
     justify-content: space-between;
     width: 100%;
+    padding-bottom: vw(20);
+    border-bottom: 1.5px solid #E0E0E0;
     .back_button{
         display: flex;
         height: vw(38.07);
