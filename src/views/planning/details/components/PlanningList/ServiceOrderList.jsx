@@ -236,7 +236,11 @@ export default class ServiceOrderList extends React.PureComponent {
   }
 
   render(){
-    if(this.props.serviceOrderList.Lists.length === 0 && this.props.idService === "Data Input" 
+    if(this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED){
+      return(
+        <EmptyList />
+      )
+    }else if(this.props.serviceOrderList.Lists.length === 0 && this.props.idService === "Data Input" 
       && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED){
       return(
         <EmptyList />

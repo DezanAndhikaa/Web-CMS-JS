@@ -56,7 +56,15 @@ export default class InputButton extends React.Component{
             return(
                 <div className="button-rows">
                     <Paper className={this.props.position === "Status" ? "search-per-column" : "global-search-pk"} elevation={1}>
-                        <InputBase className= "txt-search-pk" placeholder={this.props.placeholder} onKeyUp={(e) => {this.handleKeyUp(e, this.props.sort)}} />
+                        <InputBase type="number" className= "txt-search-pk" placeholder={this.props.placeholder} onKeyUp={(e) => {this.handleKeyUp(e, this.props.sort)}} />
+                    </Paper>
+                </div>
+            )
+        }else if(this.props.titles === "Serial Number"){
+            return(
+                <div className="button-rows">
+                    <Paper className={this.props.className || 'global-search'} elevation={1}>
+                        <InputBase type="number" className="txt-search" placeholder={this.props.placeholder} onKeyUp={(e) => {this.handleKeyUp(e, this.props.sort)}}/>
                     </Paper>
                 </div>
             )
