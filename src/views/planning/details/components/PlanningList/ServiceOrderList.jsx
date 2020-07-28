@@ -191,7 +191,7 @@ export default class ServiceOrderList extends React.PureComponent {
             />}
           </TableCell>
         }
-        {(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/approval") || Number(RoleUser.role()) !== 1 ?
+        {(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/ho") || Number(RoleUser.role()) !== 1 ?
           <TableCell 
             align="left" 
             className={this.props.pageLoc && this.props.idTab === "Status" ? "table-cell-pk-status"

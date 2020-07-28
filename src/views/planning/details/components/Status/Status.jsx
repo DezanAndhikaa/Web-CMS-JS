@@ -56,28 +56,28 @@ export default class Status extends React.PureComponent {
 		}if(this.props.location.whichTab === "service"){
 			this.isReload();
 		}else if(this.props.location.whichTab === undefined){
-			if(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/approval"){
+			if(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/ho"){
 				if (localStorage.getItem('whichTab') === "sales"){
-					this.handleClick(Menu.PLANNING_APPROVAL_STATUS, 'sales', this.state.bearer);
+					this.handleClick(Menu.PLANNING_HO_STATUS, 'sales', this.state.bearer);
 					this.isReload();
 				} else{ 
-					this.handleClick(Menu.PLANNING_APPROVAL_STATUS, 'service', this.state.bearer);
+					this.handleClick(Menu.PLANNING_HO_STATUS, 'service', this.state.bearer);
 					this.isReload();
 				}
-			} else if(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/details/site"){
+			} else if(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/site"){
 				if (localStorage.getItem('whichTab') === "sales"){
-					this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales', this.state.bearer);
+					this.handleClick(Menu.PLANNING_SITE_STATUS, 'sales', this.state.bearer);
 					this.isReload();
 				} else{ 
-					this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service', this.state.bearer);
+					this.handleClick(Menu.PLANNING_SITE_STATUS, 'service', this.state.bearer);
 					this.isReload();
 				}
 			}else if(Number(RoleUser.role()) !== 1){
 				if (localStorage.getItem('whichTab') === "sales"){
-					this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales', this.state.bearer);
+					this.handleClick(Menu.PLANNING_SITE_STATUS, 'sales', this.state.bearer);
 					this.isReload();
 				} else{ 
-					this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service', this.state.bearer);
+					this.handleClick(Menu.PLANNING_SITE_STATUS, 'service', this.state.bearer);
 					this.isReload();
 				}
 			}	
@@ -2250,16 +2250,16 @@ export default class Status extends React.PureComponent {
 				</>
 				)}
 				<div className="head-containers">
-					{Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/approval" ?
-						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
-							Approval
+					{Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/ho" ?
+						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_HO) }>
+							HO
 						</Button> :
-						Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/approval" ?
-						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_SITE) }>
-							Detail
+						Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/ho" ?
+						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_SITE) }>
+							Site
 						</Button> :
-						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_SITE) }>
-							Detail
+						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_SITE) }>
+							Site
 						</Button> 
 					}
 					<div className="notif_button">
