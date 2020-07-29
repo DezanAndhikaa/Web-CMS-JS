@@ -12,7 +12,6 @@ const RoleUser = new roleService();
 const DotBadges = withStyles(theme => ({
 	badge: {
     top: -1,
-		left: 4,
     border: '2px solid white',
     width: 'auto',
     minWidth: '15px',

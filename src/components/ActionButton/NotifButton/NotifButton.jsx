@@ -6,12 +6,14 @@ import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from "react-router-dom";
 import CardData from '../../../views/planning/details/components/Notification/Components/Card';
 
-const Badges = withStyles(theme => ({
+const DotBadges = withStyles(theme => ({
 	badge: {
-		top: -3,
-		left: -5,
-		fontSize: '10px',
-		border: '2px solid white'
+    top: -1,
+    border: '2px solid white',
+    width: 'auto',
+    minWidth: '15px',
+    height: '15px',
+    borderRadius: '50%'
 	},
 }))(Badge);
 
@@ -79,9 +81,9 @@ class NotifButton extends React.PureComponent {
         <div className="dropdown-button-notif" onClick={this.showDropdownMenu}>
           <div className="notif-selected-item">
             <div className="notif-history">
-                <Badges badgeContent={57} color="secondary" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
-                    <img src={IconNotif} className="icon-notif" alt="" /> <span className="label-notif">Notification</span>
-                </Badges>
+                <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
+                  <img src={IconNotif} className="icon-notif" alt="" /> <span className="label-notif">Notification</span>
+                </DotBadges>
             </div>
           </div>
         </div>
