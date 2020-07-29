@@ -8,6 +8,8 @@ import { LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
+import { CheckBoxOutlineBlank } from '@material-ui/icons';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 export default class ApprovedServiceOrderList extends React.PureComponent {
   constructor(props) {
@@ -69,7 +71,8 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
           <TableCell padding="checkbox">
             {this.props.displayServiceCheckbox  && 
               <Checkbox 
-                className="checkbox-checked-header"
+                icon={<CheckBoxOutlineBlank fontSize="small" />}
+                checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
                 checked={this.state.checkedValue}
                 onChange={this.handleClicks}
                 onClick={({target: { checked }}) => {
@@ -79,7 +82,7 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
               />
             }
           </TableCell>
-          <TableCell align="left" className="table-cell">SO</TableCell>
+          <TableCell align="left" className="table-cell">WO</TableCell>
           <TableCell align="left" className="table-cell">Customer</TableCell>
           <TableCell align="left" className="table-cell">Site</TableCell>
           <TableCell align="left" className="table-cell">Unit Model</TableCell>
@@ -102,10 +105,11 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
         <TableCell padding="checkbox">
           {this.props.displayServiceCheckbox && 
             <Checkbox 
+              icon={<CheckBoxOutlineBlank fontSize="small" />}
+              checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
               disabled={this.isCheckboxAvailable(row)} 
               checked={this.props.selectedServicePlanList.some((plans) => plans.WoNumber === row.WoNumber)} 
               onClick={() => this.props.onChoosedService(row, id, 'body')}
-              classes={{ checked: 'checkbox-checked' }} 
             />
           }
         </TableCell>

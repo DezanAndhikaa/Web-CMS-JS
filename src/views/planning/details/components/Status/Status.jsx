@@ -1920,18 +1920,32 @@ export default class Status extends React.PureComponent {
 			<div className={this.props.serviceOrderList.Lists.length === 0 
 				&& this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? 
 				"list-status-empty" : "plannings-list-containers"}>
-				<ServiceOrderList 
-					{...this.props}
-					idTab="Status"
-					pageLoc= "Status"
-					onClickTabHead={this.props.onClickSortBy}
-					displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
-					sortServiceByState={this.props.sortServiceBy}
-					onClickServiceOrder={this.onClickServiceOrder}
-					onChoosedService={this.updateAssignmentServiceStates}
-					onChooseAllService= {this._updateAssignmentServiceStatesAll}
-					selectedServicePlanList={this.props.selectedServicePlans}
-				/>
+				{Number(RoleUser.role()) === 1 ?
+					<ServiceOrderList 
+						{...this.props}
+						idTab="Status"
+						onClickTabHead={this.props.onClickSortBy}
+						displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
+						sortServiceByState={this.props.sortServiceBy}
+						onClickServiceOrder={this.onClickServiceOrder}
+						onChoosedService={this.updateAssignmentServiceStates}
+						onChooseAllService= {this._updateAssignmentServiceStatesAll}
+						selectedServicePlanList={this.props.selectedServicePlans}
+					/>
+					:
+					<ServiceOrderList 
+						{...this.props}
+						idTab="Status"
+						pageLoc= "Status"
+						onClickTabHead={this.props.onClickSortBy}
+						displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
+						sortServiceByState={this.props.sortServiceBy}
+						onClickServiceOrder={this.onClickServiceOrder}
+						onChoosedService={this.updateAssignmentServiceStates}
+						onChooseAllService= {this._updateAssignmentServiceStatesAll}
+						selectedServicePlanList={this.props.selectedServicePlans}
+					/>
+				}
 			</div>
 		  );
 	}
@@ -1999,17 +2013,30 @@ export default class Status extends React.PureComponent {
 			<div className={this.props.serviceOrderListDeleted.Lists.length === 0 
 				&& this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED ? 
 				"list-status-empty" : "plannings-list-containers"}>
-				<DeletedServiceOrderList 
-					{...this.props}
-					pageLoc= "Status"
-					onClickTabHead={this.props.onClickSortBy}
-					displayServiceCheckbox={this.props.serviceDeletedParameter.paramsData.assigmentFilter || this.props.serviceDeletedParameter.paramsData.inProgressFilter}
-					sortServiceByState={this.props.sortServiceBy}
-					onClickServiceOrderDeleted={this.onClickServiceOrderDeleted}
-					onChoosedService={this.updateAssignmentServiceStates}
-					onChooseAllService= {this._updateAssignmentServiceStatesAll}
-					selectedServicePlanList={this.props.selectedServicePlans}
-				/>
+				{Number(RoleUser.role()) === 1 ?
+					<DeletedServiceOrderList 
+						{...this.props}
+						onClickTabHead={this.props.onClickSortBy}
+						displayServiceCheckbox={this.props.serviceDeletedParameter.paramsData.assigmentFilter || this.props.serviceDeletedParameter.paramsData.inProgressFilter}
+						sortServiceByState={this.props.sortServiceBy}
+						onClickServiceOrderDeleted={this.onClickServiceOrderDeleted}
+						onChoosedService={this.updateAssignmentServiceStates}
+						onChooseAllService= {this._updateAssignmentServiceStatesAll}
+						selectedServicePlanList={this.props.selectedServicePlans}
+					/>
+					:
+					<DeletedServiceOrderList 
+						{...this.props}
+						pageLoc= "Status"
+						onClickTabHead={this.props.onClickSortBy}
+						displayServiceCheckbox={this.props.serviceDeletedParameter.paramsData.assigmentFilter || this.props.serviceDeletedParameter.paramsData.inProgressFilter}
+						sortServiceByState={this.props.sortServiceBy}
+						onClickServiceOrderDeleted={this.onClickServiceOrderDeleted}
+						onChoosedService={this.updateAssignmentServiceStates}
+						onChooseAllService= {this._updateAssignmentServiceStatesAll}
+						selectedServicePlanList={this.props.selectedServicePlans}
+					/>
+				}
 			</div>
 		);
 	}
@@ -2038,17 +2065,30 @@ export default class Status extends React.PureComponent {
 			<div className={this.props.serviceOrderListSap.Lists.length === 0 
 				&& this.props.fetchStatusServiceSap === ApiRequestActionsStatus.SUCCEEDED ? 
 				"list-status-empty" : "plannings-list-containers"}>
-				<SapServiceOrderList 
-					{...this.props}
-					pageLoc= "Status"
-					onClickTabHead={this.props.onClickSortBy}
-					displayServiceCheckbox={this.props.serviceSapParameter.paramsData.assigmentFilter || this.props.serviceSapParameter.paramsData.inProgressFilter}
-					sortServiceByState={this.props.sortServiceBy}
-					onClickServiceOrderSap={this.onClickServiceOrderSap}
-					onChoosedService={this.updateAssignmentServiceStates}
-					onChooseAllService= {this._updateAssignmentServiceStatesAll}
-					selectedServicePlanList={this.props.selectedServicePlans}
+				{Number(RoleUser.role()) === 1 ? 
+					<SapServiceOrderList 
+						{...this.props}
+						onClickTabHead={this.props.onClickSortBy}
+						displayServiceCheckbox={this.props.serviceSapParameter.paramsData.assigmentFilter || this.props.serviceSapParameter.paramsData.inProgressFilter}
+						sortServiceByState={this.props.sortServiceBy}
+						onClickServiceOrderSap={this.onClickServiceOrderSap}
+						onChoosedService={this.updateAssignmentServiceStates}
+						onChooseAllService= {this._updateAssignmentServiceStatesAll}
+						selectedServicePlanList={this.props.selectedServicePlans}
 					/>
+					:
+					<SapServiceOrderList 
+						{...this.props}
+						pageLoc= "Status"
+						onClickTabHead={this.props.onClickSortBy}
+						displayServiceCheckbox={this.props.serviceSapParameter.paramsData.assigmentFilter || this.props.serviceSapParameter.paramsData.inProgressFilter}
+						sortServiceByState={this.props.sortServiceBy}
+						onClickServiceOrderSap={this.onClickServiceOrderSap}
+						onChoosedService={this.updateAssignmentServiceStates}
+						onChooseAllService= {this._updateAssignmentServiceStatesAll}
+						selectedServicePlanList={this.props.selectedServicePlans}
+					/>
+				}
 			</div>
 		);
 	}
