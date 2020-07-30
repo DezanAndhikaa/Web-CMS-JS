@@ -68,15 +68,15 @@ class FilterByPeriodeDate extends React.Component{
                 {({ errors, touched }) => (
                     <Form>
                     {console.log('error: ', errors.startDate)}
-                    <div className="assign-lifetime-modal">
+                    <div className="assign-date-modal">
                         <div className="top-row">
                             <div className="ut-underline"/>
                             <p className="select-input-title">{this.props.title}</p>
                             <CloseButton idBtnClose="NonConfirmModal" onClose={this.props.onClosed}/>
                         </div>
-                        <div className="teks-middle">
-                            <label className="teks-left">From </label>
-                            <label className="teks-right">To</label>
+                        <div className="teks-middle-date">
+                            <label className="teks-left-date">From </label>
+                            <label className="teks-right-date">Up to</label>
                         </div>
                         <div className="top-midel">
                             <div className="box"/>
@@ -105,8 +105,8 @@ class FilterByPeriodeDate extends React.Component{
                             ) : null}
                             <ErrorMessage name="startDate2" />
                         </div>
-                        <div className="bottom-rows">
-                            <Button className="btn-search" onClick={ () => {this.props.onFilter(this.state.startFilter, this.state.endFilter); this.props.onClosed() }} >Search Plan</Button>
+                        <div className="bottom-rows-date">
+                            <Button className="btn-search-date" onClick={ () => {this.props.onFilter(this.state.startFilter, this.state.endFilter); this.props.onClosed() }} >Search Plan</Button>
                         </div>
                     </div></Form>
                 )}
