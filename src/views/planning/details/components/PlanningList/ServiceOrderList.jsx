@@ -1,7 +1,7 @@
 import React from 'react';
 import moment, { ISO_8601 } from 'moment';
 import {
-  Checkbox, Table, TableBody, TableCell, TableHead, TableRow,
+  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Tooltip,
 } from '@material-ui/core';
 import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
@@ -99,6 +99,8 @@ export default class ServiceOrderList extends React.PureComponent {
             <TableCell align="left" className="table-cell">Serial Number</TableCell>
             <TableCell align="left" className="table-cell">Lifetime Component</TableCell>
             <TableCell align="left" className="table-cell">Plan Execution</TableCell>
+            <TableCell align="left" className="table-cell">SMR </TableCell>
+            <TableCell align="left" className="table-cell">SMR Date</TableCell>
             <TableCell align="left" className="table-cell">Plan Type</TableCell>
           </TableRow>
         </TableHead>
@@ -175,10 +177,20 @@ export default class ServiceOrderList extends React.PureComponent {
               onFilter={this.isFilterDate}
             />
             <PlanningListHeader
-            name="Plan Type"
-            delay={300}
-            onClick={() => this.props.onClickTabHead(SortServiceByPlanType)}
-          />
+              name="SMR"
+              delay={300}
+              onSearch={this.props.onSearchComp}
+            />
+            <PlanningListHeader
+              name="SMR Date"
+              delay={300}
+              onSearch={this.isFilterDate}
+            />
+            <PlanningListHeader
+              name="Plan Type"
+              delay={300}
+              onClick={() => this.props.onClickTabHead(SortServiceByPlanType)}
+            />
           </TableRow>
         </TableHead>
       )
@@ -189,7 +201,7 @@ export default class ServiceOrderList extends React.PureComponent {
     return(
       <TableRow key={id} classes={{ root: 'table-row' }}>
         {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? "" :
-          <TableCell padding="checkbox">
+          <TableCell>
             {this.props.displayServiceCheckbox && 
             <Checkbox 
               icon={<CheckBoxOutlineBlank fontSize="small" />}
@@ -219,7 +231,11 @@ export default class ServiceOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.LifeTimeComponent}</TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.PlanType} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
+        <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
+        <Tooltip arrow title={row.PlanType.charAt(0) === "B" ? "Bus" : row.PlanType.charAt(0) === "F" ? "Fix" : "Unschedule"} >
+          <TableCell align="left" className="table-cell"> {row.PlanType.charAt(0)} </TableCell>
+        </Tooltip>
       </TableRow>
     )
   }

@@ -129,6 +129,7 @@
     }
     .plannings-list-approval{
         margin-top: 6vw !important;
+        overflow-x: scroll;
         .table-approval{
             font-size: 0.5vw;
             .table-head-approval{

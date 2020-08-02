@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, TextField, 
+  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, TextField, Tooltip, 
 } from '@material-ui/core';
 import './PlanningList.scss';
 import '../SapIssue/SapIssue.scss';
@@ -102,6 +102,8 @@ export default class SapServiceOrderList extends React.PureComponent {
           <TableCell align="left" className="table-cell">Serial Number</TableCell>
           <TableCell align="left" className="table-cell">Lifetime Component</TableCell>
           <TableCell align="left" className="table-cell">Plan Execution</TableCell>
+          <TableCell align="left" className="table-cell">SMR </TableCell>
+          <TableCell align="left" className="table-cell">SMR Date</TableCell>
           <TableCell align="left" className="table-cell">Plan Type</TableCell>
         </TableRow>
       </TableHead>
@@ -127,7 +129,7 @@ export default class SapServiceOrderList extends React.PureComponent {
     return (
     <>
       <TableRow key={id} classes={{ root: 'table-row' }} onClick={() => this.handleExpand(id)}>
-        <TableCell padding="checkbox">
+        <TableCell>
           {this.props.displayServiceCheckbox && 
             <Checkbox 
               icon={<CheckBoxOutlineBlank fontSize="small" />}
@@ -155,7 +157,11 @@ export default class SapServiceOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="center" className="table-cell"> {row.LifeTimeComponent} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.PlanType} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
+        <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
+        <Tooltip arrow title={row.PlanType.charAt(0) === "B" ? "Bus" : row.PlanType.charAt(0) === "F" ? "Fix" : "Unschedule"} >
+          <TableCell align="left" className="table-cell"> {row.PlanType.charAt(0)} </TableCell>
+        </Tooltip>
       </TableRow>
       {this.state[id] ? 
         <TableRow className="table-row-bottom-issue">
