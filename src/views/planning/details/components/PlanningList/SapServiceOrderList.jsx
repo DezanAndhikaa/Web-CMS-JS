@@ -110,26 +110,11 @@ export default class SapServiceOrderList extends React.PureComponent {
     )
   }
 
-  _showDescription(row){
-    return(
-      <div className="teks">
-        <TextField 
-          disabled
-          className="teks"
-          type='text' 
-          variant="outlined" 
-          size="small"
-          value={row.SAPIssueMessage}
-        />
-      </div>
-    )
-  }
-
   showTableBody(row,id) {
     return (
     <>
       <TableRow key={id} classes={{ root: 'table-row' }} onClick={() => this.handleExpand(id)}>
-        <TableCell>
+        <TableCell padding="checkbox">
           {this.props.displayServiceCheckbox && 
             <Checkbox 
               icon={<CheckBoxOutlineBlank fontSize="small" />}
@@ -165,8 +150,9 @@ export default class SapServiceOrderList extends React.PureComponent {
       </TableRow>
       {this.state[id] ? 
         <TableRow className="table-row-bottom-issue">
-            <TableCell colSpan="2"><label>Description:</label></TableCell>
-            <TableCell colSpan="11">{this._showDescription(row)}</TableCell>
+          <TableCell ><label></label></TableCell>
+          <TableCell className="txt-style-bold" align="left"><label>Description:</label></TableCell>
+          <TableCell colSpan="12" className="txt-style-normal" align="left">{row.SAPIssueMessage}</TableCell>
         </TableRow> : null }
     </>  
     )

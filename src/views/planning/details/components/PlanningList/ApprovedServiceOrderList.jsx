@@ -104,7 +104,7 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
   showTableBody(row,id) {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
-        <TableCell>
+        <TableCell padding="checkbox">
           {this.props.displayServiceCheckbox && 
             <Checkbox 
               icon={<CheckBoxOutlineBlank fontSize="small" />}

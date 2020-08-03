@@ -9,6 +9,26 @@
   margin-top: vw(5);
 }
 
+.table-row-bottom-issue{
+  margin-bottom: 100px;
+  .txt-style-bold{
+    padding: 0;
+    font-family: 'Lato-Regular';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+  }
+  .txt-style-normal{
+    padding: 0;
+    font-family: 'Lato-Regular';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+  }
+}
+
 .table-cell-rev{
   display: inline-flex;
   align-items: center;
