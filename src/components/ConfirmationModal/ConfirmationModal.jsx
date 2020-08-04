@@ -50,7 +50,7 @@ export default class ConfirmationModal extends React.PureComponent {
               <CloseNotif onClose={this.props.isModalClosed}/>
               <div className="confirmation-container">
                 <p className="confirmation-title">You have not completed</p>
-                <p className="confirmation-title">the SAP Issue form</p>
+                <p className="confirmation-title2">the SAP Issue form</p>
                 <img className="confirmation-image" src={DelSuccess} alt="" />
                 <p className="confirmation-caption">The system can't save your activities.</p>
                 <p className="confirmation-caption">Do you want to continue?</p>

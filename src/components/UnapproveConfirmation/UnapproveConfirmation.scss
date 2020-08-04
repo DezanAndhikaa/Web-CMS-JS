@@ -27,12 +27,22 @@
                 justify-content: center;
                 flex: 1;
                 .confirmation-title-unapprove{
-                    line-height: vw(20);
                     margin: 0;
                     padding-top: vw(20);
-                    font-size: vw(28);
-                    font-family: 'SFUIDisplay-Bold';
                     color: #3C3B3B;
+                    font-family: 'Lato-Bold';
+                    font-style: normal;
+                    font-size: 24px;
+                    line-height: 29px;
+                }
+                .confirmation-title-unapprove2{
+                    margin: 0;
+                    padding-top: vw(5);
+                    color: #3C3B3B;
+                    font-family: 'Lato-Bold';
+                    font-style: normal;
+                    font-size: 24px;
+                    line-height: 29px;
                 }
                 .confirmation-image-unapprove{
                     width: vw(175);
@@ -40,11 +50,13 @@
                     margin-bottom: vw(25);
                 }
                 .title-success-unapprove{
-                    line-height: vw(20);
-                    margin-top: vw(38);
-                    font-size: vw(28);
-                    font-family: 'SFUIDisplay-Bold';
+                    margin: 0;
+                    padding-top: vw(20);
                     color: #3C3B3B;
+                    font-family: 'Lato-Bold';
+                    font-style: normal;
+                    font-size: 24px;
+                    line-height: 29px;
                 }
                 .confirmation-success-unapprove{
                     margin-top: vw(30);
@@ -52,11 +64,14 @@
                 }
                 .confirmation-caption-unapprove{
                     margin: 0;
-                    font-size: vw(20);
-                    font-family: 'SFUIDisplay-Regular';
-                    opacity: 0.5;
+                    font-family: 'Lato-Regular';
+                    font-style: normal;
+                    font-weight: 800;
+                    font-size: 13px;
+                    line-height: 18px;
                     text-align: center;
-                    color: rgb(0, 0, 0);
+                    color: #3C3B3B;
+                    opacity: 0.51;
                 }
             }
         }
@@ -119,9 +134,9 @@
             text-transform: capitalize;
             width: 50%;
             height: vw(45.07);
-            font-size: vw(13) !important;
+            font-size: 12px;
+            line-height: 14px;
             font-weight: bold;
-            line-height: vw(16) !important;
             font-family: 'Lato-Regular';
             background-color: #F2F2F4;
             color: #1D1D1D;
@@ -140,9 +155,9 @@
             text-transform: capitalize;
             width: 40%;
             height: vw(45.07);
-            font-size: vw(13) !important;
+            font-size: 12px;
+            line-height: 14px;
             font-weight: bold;
-            line-height: vw(16) !important;
             font-family: 'Lato-Regular';
             background-color: #F2F2F4;
             color: #1D1D1D;
@@ -159,9 +174,10 @@
             text-transform: capitalize;
             width: 60%;
             height: vw(45.07);
-            font-size: vw(13) !important;
+            font-size: 12px;
+            line-height: 14px;
             font-weight: bold;
-            line-height: vw(16) !important;
+            color: #1D1D1D;
             font-family: 'Lato-Regular';
             background-color: map-get($colors , primary);
             box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
@@ -177,9 +193,10 @@
             text-transform: capitalize;
             width: 100%;
             height: vw(45.07);
-            font-size: vw(13) !important;
+            font-size: 12px;
+            line-height: 14px;
             font-weight: bold;
-            line-height: vw(16) !important;
+            color: #1D1D1D;
             font-family: 'Lato-Regular';
             background-color: map-get($colors , primary);
             box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
@@ -245,7 +262,7 @@
                     .confirmation-title-unapprove{
                         margin: 0;
                         font-size: vw-tab(33);
-                        font-family: 'SFUIDisplay-Bold';
+                        font-family: 'Lato-Bold';
                         color: #3C3B3B;
                     }
                     .confirmation-image-unapprove{
@@ -256,7 +273,7 @@
                     .confirmation-caption-unapprove{
                         margin: 0;
                         font-size: vw-tab(20);
-                        font-family: 'SFUIDisplay-Regular';
+                        font-family: 'Lato-Regular';
                         text-align: center;
                         opacity: 0.5;
                         color: #3C3B3B;
@@ -297,7 +314,7 @@
                     .confirmation-title-unapprove{
                         margin: 0;
                         font-size: vw-mobile(20);
-                        font-family: 'SFUIDisplay-Bold';
+                        font-family: 'Lato-Bold';
                         color: #3C3B3B;
                     }
                     .confirmation-image-unapprove{
@@ -308,7 +325,7 @@
                     .confirmation-caption-unapprove{
                         margin: 0;
                         font-size: vw-mobile(15);
-                        font-family: 'SFUIDisplay-Regular';
+                        font-family: 'Lato-Regular';
                         text-align: center;
                         opacity: 0.5;
                         color: #3C3B3B;

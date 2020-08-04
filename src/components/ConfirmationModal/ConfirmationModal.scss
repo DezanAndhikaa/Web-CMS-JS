@@ -35,6 +35,16 @@
                     line-height: 29px;
                     color: #3C3B3B;
                 }
+                .confirmation-title2{
+                    margin: 0;
+                    padding-top: vw(5);
+                    font-family: 'Lato-Regular';
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 24px;
+                    line-height: 29px;
+                    color: #3C3B3B;
+                }
                 .image-approved{
                     width: vw(280);
                     margin-top: vw(25);
@@ -90,9 +100,9 @@
             justify-content: center;
             width: 40%;
             height: vw(45.07);
-            font-size: vw(13) !important;
+            font-size: 12px;
+            line-height: 14px;
             font-weight: bold;
-            line-height: vw(16) !important;
             font-family: 'Lato-Regular';
             background-color: #F2F2F4;
             color: #1D1D1D;
@@ -109,9 +119,9 @@
             justify-content: center;
             width: 60%;
             height: vw(45.07);
-            font-size: vw(13) !important;
+            font-size: 12px;
+            line-height: 14px;
             font-weight: bold;
-            line-height: vw(16) !important;
             font-family: 'Lato-Regular';
             background-color: map-get($colors , primary);
             box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
@@ -153,7 +163,7 @@
                     .confirmation-title{
                         margin: 0;
                         font-size: vw-tab(33);
-                        font-family: 'SFUIDisplay-Bold';
+                        font-family: 'Lato-Bold';
                         color: #3C3B3B;
                     }
                     .confirmation-image{
@@ -164,7 +174,7 @@
                     .confirmation-caption{
                         margin: 0;
                         font-size: vw-tab(20);
-                        font-family: 'SFUIDisplay-Regular';
+                        font-family: 'Lato-Regular';
                         text-align: center;
                         opacity: 0.5;
                         color: #3C3B3B;
@@ -205,7 +215,7 @@
                     .confirmation-title{
                         margin: 0;
                         font-size: vw-mobile(20);
-                        font-family: 'SFUIDisplay-Bold';
+                        font-family: 'Lato-Bold';
                         color: #3C3B3B;
                     }
                     .confirmation-image{
@@ -216,7 +226,7 @@
                     .confirmation-caption{
                         margin: 0;
                         font-size: vw-mobile(15);
-                        font-family: 'SFUIDisplay-Regular';
+                        font-family: 'Lato-Regular';
                         text-align: center;
                         opacity: 0.5;
                         color: #3C3B3B;
