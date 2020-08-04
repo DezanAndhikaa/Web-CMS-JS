@@ -127,10 +127,12 @@
                 .table-cell{
                     padding: 0;
                     height: vw(50);
-                    font-size: vw(13) !important;
-                    line-height: vw(16) !important;
-                    font-family: 'Lato-Bold';
-                    color: #3C3B3B;
+                    font-family: 'Lato-Regular';
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 8px;
+                    line-height: 10px;
+                    color: #494949;
                 }
                 .table-cell-checkbox{
                     padding: 0;

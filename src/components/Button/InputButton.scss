@@ -15,9 +15,9 @@
         justify-content: center;
         width: vw(84.22) !important;
         height: 25px;
-        font-size: vw(13) !important;
+        font-size: 8px;
+        line-height: 10px;
         font-weight: bold;
-        line-height: vw(16) !important;
         font-family: 'Lato-Regular';
         background-color: map-get($colors, primary);
         text-transform: none;
@@ -33,9 +33,9 @@
         background-position-y: center;
         width: vw(124.22) !important;
         height: 25px;
-        font-size: vw(12) !important;
+        font-size: 8px;
+        line-height: 10px;
         font-weight: bold;
-        line-height: vw(16) !important;
         font-family: 'Lato-Regular';
         background-color: white; 
         text-transform: none;
@@ -46,9 +46,9 @@
     .btn-non-filter-lifetime{
         width: vw(124.22) !important;
         height: 25px;
-        font-size: vw(12) !important;
+        font-size: 8px;
+        line-height: 10px;
         font-weight: bold;
-        line-height: vw(16) !important;
         font-family: 'Lato-Regular';
         background-color: white; 
         text-transform: none;
@@ -67,9 +67,9 @@
         background-position-y: center;
         width: vw(124.22) !important;
         height: 25px;
-        font-size: vw(12) !important;
+        font-size: 8px;
+        line-height: 10px;
         font-weight: bold;
-        line-height: vw(16) !important;
         font-family: 'Lato-Regular';
         background-color: white; 
         text-transform: none;
@@ -85,9 +85,9 @@
         background-position-y: center;
         width: vw(104.22) !important;
         height: 25px;
-        font-size: vw(12) !important;
         font-weight: bold;
-        line-height: vw(16) !important;
+        font-size: 8px;
+        line-height: 10px;
         font-family: 'Lato-Regular';
         background-color: white; 
         text-transform: none;
@@ -102,12 +102,12 @@
         background-position-x: 90%;
         background-position-y: center;
         width: vw(124.22) !important;
-        height: vw(35.07) !important;
-        font-size: vw(12) !important;
+        height: 25px;
+        font-size: 8px;
+        line-height: 10px;
         font-weight: bold;
-        line-height: vw(16) !important;
         font-family: 'Lato-Regular';
-        background-color: white; 
+        background-color: transparent; 
         text-transform: none;
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
         border-radius: 0.4vw;
@@ -121,11 +121,11 @@
         background-position-y: center;
         width: vw(130) !important;
         height: 25px;
-        font-size: vw(12) !important;
+        font-size: 8px;
+        line-height: 10px;
         font-weight: bold;
-        line-height: vw(16) !important;
         font-family: 'Lato-Regular';
-        background-color: white; 
+        background-color: transparent; 
         text-transform: none;
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
         border-radius: 0.4vw;
@@ -140,8 +140,8 @@
         cursor: pointer;
         .txt-search{
             flex: 1;
-            font-size: vw(12) !important;
-            line-height: vw(16) !important;
+            font-size: 8px;
+            line-height: 10px;
             font-family: 'Lato-Regular';
             font-weight: bold;
             padding: vw(3) vw(10) vw(4);
@@ -156,8 +156,8 @@
         cursor: pointer;
         .txt-search{
             flex: 1;
-            font-size: vw(12) !important;
-            line-height: vw(16) !important;
+            font-size: 8px;
+            line-height: 10px;
             font-family: 'Lato-Regular';
             font-weight: bold;
             padding: vw(3) vw(10) vw(4);
@@ -172,8 +172,8 @@
         cursor: pointer;
         .txt-search-pk{
             flex: 1;
-            font-size: vw(12) !important;
-            line-height: vw(16) !important;
+            font-size: 8px;
+            line-height: 10px;
             font-family: 'Lato-Regular';
             font-weight: bold;
             padding: vw(3) vw(10) vw(4);
@@ -189,8 +189,8 @@
         cursor: pointer;
         .txt-search-pk{
             flex: 1;
-            font-size: vw(12) !important;
-            line-height: vw(16) !important;
+            font-size: 8px;
+            line-height: 10px;
             font-family: 'Lato-Regular';
             font-weight: bold;
             padding: vw(3) vw(10) vw(4);
