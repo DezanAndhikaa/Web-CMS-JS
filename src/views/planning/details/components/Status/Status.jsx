@@ -1313,10 +1313,11 @@ export default class Status extends React.PureComponent {
 		return (
 		  <div className="bottom-rows">
 			<SearchInput
-			{...this.props}
-			webInfo="Search"
-			handleSearch={this.handleSearch}
-		  />
+				{...this.props}
+				idTab= "Status"
+				webInfo="Search"
+				handleSearch={this.handleSearch}
+			/>
 		  </div>
 		);
 	}
