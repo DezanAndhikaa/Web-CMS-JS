@@ -21,12 +21,12 @@
             flex-direction: row;
             white-space: nowrap;
             align-items: center;
-            font-family: 'Lato-Medium';
-            font-size: vw(14);
-            line-height: vw(17);
+            font-family: 'Lato-Bold';
+            font-size: 9px;
+            line-height: 11px;
             font-weight: 500;
             overflow: hidden;
-            color: black;
+            color: #3C3B3B;
             cursor: pointer;
             .expand-icon-containers{
                 background-color: map-get($colors, primary);
@@ -60,17 +60,19 @@
     position: absolute;
     box-shadow: 0px 0.3vw 0.6vw 0px rgba(0,0,0,0.2);
     z-index: 1;
-    font-family: 'Lato-Bold';
-    font-size: vw(14);
-    line-height: vw(17);
     font-weight: 500;
     color: #3C3B3B;
+    font-family: 'Lato-Regular';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 9px;
+    line-height: 11px;
     .list-item-filter {
         padding: vw(6) vw(19);
         color: #3C3B3B;
         font-family: 'Lato-Bold';
-        font-size: vw(14);
-        line-height: vw(17);
+        font-size: 9px;
+        line-height: 11px;
     }
     .list-item-filter:hover {
         background-color: #e5e5e5;
