@@ -222,10 +222,10 @@ export default class ServiceOrderList extends React.PureComponent {
           :
           <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell>
         }
-        <TableCell align="left" className="table-cell-long"> {row.CustomerName} </TableCell>
+        <TableCell align="left" className={this.props.idTab === "Status" ? "table-cell" : "table-cell-long"}> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
-        <TableCell align="left" className="table-cell-long"> {row.ComponentDescription} </TableCell>
+        <TableCell align="left" className={this.props.idTab === "Status" ? "table-cell" : "table-cell-long"}> {row.ComponentDescription} </TableCell>
         <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>

@@ -116,14 +116,14 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
           }
         </TableCell>
         <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell>
-        <TableCell align="left" className="table-cell-long"> {row.CustomerName} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
-        <TableCell align="left" className="table-cell-long"> {row.ComponentDescription} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>
         <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
-        <TableCell align="center" className="table-cell"> {row.LifeTimeComponent} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.LifeTimeComponent} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>

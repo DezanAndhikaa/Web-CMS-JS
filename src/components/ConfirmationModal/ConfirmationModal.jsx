@@ -76,7 +76,7 @@ export default class ConfirmationModal extends React.PureComponent {
                   <p className="confirmation-title">Successful</p>
                   <img className="confirmation-image" src={Success} alt="" /> 
                   <p className="confirmation-caption">The data was deleted</p>
-                  <p className="confirmation-caption">successfully.</p>
+                  <p className="confirmation-caption"><b>successfully</b></p>
                   <br></br>
                   <Button className="btn-ok" onClick={ () => {this.props.onClose()} }>Continue</Button>
               </div>
@@ -93,7 +93,7 @@ export default class ConfirmationModal extends React.PureComponent {
                   <p className="confirmation-title">Successful</p>
                   <img className="confirmation-image" src={Success} alt="" /> 
                   <p className="confirmation-caption">The data was revised</p>
-                  <p className="confirmation-caption">successfully.</p>
+                  <p className="confirmation-caption"><b>successfully</b></p>
                   <br></br>
                   <Button className="btn-ok" onClick={ () => {this.props.onClose()} }>Continue</Button>
               </div>
