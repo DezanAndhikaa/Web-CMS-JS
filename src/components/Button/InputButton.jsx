@@ -63,12 +63,12 @@ export default class InputButton extends React.Component{
         }else if(this.props.titles === "Serial Number"){
             return(
                 <div className="button-rows">
-                    <Paper className={this.props.className || 'global-search'} elevation={1}>
+                    <Paper className={this.props.className || 'global-search-sn'} elevation={1}>
                         <InputBase type="number" className="txt-search" placeholder={this.props.placeholder} onKeyUp={(e) => {this.handleKeyUp(e, this.props.sort)}}/>
                     </Paper>
                 </div>
             )
-        }else if(this.props.titles === "Part Number" || this.props.titles === "Unit Code" || this.props.titles === "Serial Number"){
+        }else if(this.props.titles === "Part Number" || this.props.titles === "Unit Code"){
             return(
                 <div className="button-rows">
                     <Paper className={this.props.className || 'global-search'} elevation={1}>
@@ -108,6 +108,24 @@ export default class InputButton extends React.Component{
             return(
                 <div className="button-rows">
                     {this.props.headerName}
+                </div>
+            )
+        }
+        else if(this.props.titles === "SMR Date"){
+            return(
+                <div className="button-rows">
+                <Button onClick={this.isClicked} className="btn-smr-date" style={{justifyContent: "unset"}}>{this.props.titles}</Button>
+                    <Modal className="modal-pos" open={this.state.isShowModal}>
+                        <div>
+                            <FilterByPeriodeDate 
+                                {...this.props}
+                                {...this.state}
+                                kluk={"kluk"}
+                                title={this.props.title} 
+                                onClosed={this.isClosed}
+                            />
+                        </div>
+                    </Modal>
                 </div>
             )
         }

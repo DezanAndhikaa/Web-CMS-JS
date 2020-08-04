@@ -72,9 +72,9 @@ export default class ServiceOrderList extends React.PureComponent {
     if(this.props.idTab === "Status"){
       return(
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
-          <TableRow classes={{ root: 'table-row' }}>
+          <TableRow>
             {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? "" :
-              <TableCell padding="checkbox">
+              <TableCell className="table-cell-checkbox">
                 {this.props.displayServiceCheckbox  && 
                   <Checkbox
                     icon={<CheckBoxOutlineBlank fontSize="small" />}
@@ -110,7 +110,7 @@ export default class ServiceOrderList extends React.PureComponent {
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
           <TableRow>
             {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? "" :
-              <TableCell padding="checkbox">
+              <TableCell className= "table-cell-checkbox">
                 {this.props.displayServiceCheckbox  && 
                   <Checkbox 
                     icon={<CheckBoxOutlineBlank fontSize="small" />}
@@ -201,7 +201,7 @@ export default class ServiceOrderList extends React.PureComponent {
     return(
       <TableRow key={id} classes={{ root: 'table-row' }}>
         {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? "" :
-          <TableCell padding="checkbox">
+          <TableCell className="table-cell-checkbox">
             {this.props.displayServiceCheckbox && 
             <Checkbox 
               icon={<CheckBoxOutlineBlank fontSize="small" />}
@@ -222,10 +222,10 @@ export default class ServiceOrderList extends React.PureComponent {
           :
           <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell>
         }
-        <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
+        <TableCell align="left" className="table-cell-long"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>
+        <TableCell align="left" className="table-cell-long"> {row.ComponentDescription} </TableCell>
         <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
@@ -233,7 +233,7 @@ export default class ServiceOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
-        <Tooltip arrow title={row.PlanType.charAt(0) === "B" ? "Bus" : row.PlanType.charAt(0) === "F" ? "Fix" : "Unschedule"} >
+        <Tooltip arrow title={row.PlanType.charAt(0) === "B" ? "BUS" : row.PlanType.charAt(0) === "F" ? "FIX" : "UNSCHEDULE"} >
           <TableCell align="left" className="table-cell"> {row.PlanType.charAt(0)} </TableCell>
         </Tooltip>
       </TableRow>
@@ -278,16 +278,16 @@ export default class ServiceOrderList extends React.PureComponent {
     }else{
       return(
         <>
-        <Table classes={{ root: 'table' }} className="table">
-        {this.showTableHead()}
-        <TableBody classes={{ root: 'table-body' }}>
-          {this.props.serviceOrderList.Lists
-            && this.props.serviceOrderList.Lists.map((row, id) => (
-              this.showTableBody(row,id)
-            ))}
-          </TableBody>
-        </Table>
-        {this.showLoading()}
+          <Table classes={{ root: 'table' }} className="table">
+          {this.showTableHead()}
+          <TableBody classes={{ root: 'table-body' }}>
+            {this.props.serviceOrderList.Lists
+              && this.props.serviceOrderList.Lists.map((row, id) => (
+                this.showTableBody(row,id)
+              ))}
+            </TableBody>
+          </Table>
+          {this.showLoading()}
         </>
       )
     }

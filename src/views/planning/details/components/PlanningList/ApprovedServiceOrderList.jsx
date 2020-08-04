@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import {
-  Checkbox, Table, TableBody, TableCell, TableHead, TableRow
+  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Tooltip
 } from '@material-ui/core';
 import './PlanningList.scss';
 import { LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
@@ -67,8 +67,8 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
   showTableHead() {
     return (
       <TableHead className="table-head" classes={{ root: 'table-head' }}>
-        <TableRow classes={{ root: 'table-row' }}>
-          <TableCell padding="checkbox">
+        <TableRow>
+          <TableCell className= "table-cell-checkbox">
             {this.props.displayServiceCheckbox  && 
               <Checkbox 
                 icon={<CheckBoxOutlineBlank fontSize="small" />}
@@ -104,7 +104,7 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
   showTableBody(row,id) {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
-        <TableCell padding="checkbox">
+        <TableCell className="table-cell-checkbox">
           {this.props.displayServiceCheckbox && 
             <Checkbox 
               icon={<CheckBoxOutlineBlank fontSize="small" />}
@@ -116,10 +116,10 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
           }
         </TableCell>
         <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
+        <TableCell align="left" className="table-cell-long"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>
+        <TableCell align="left" className="table-cell-long"> {row.ComponentDescription} </TableCell>
         <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
@@ -127,10 +127,9 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
-        {/* <Tooltip arrow title={row.PlanType.charAt(0) === "B" ? "Bus" : row.PlanType.charAt(0) === "F" ? "Fix" : "Unschedule"} >
+        <Tooltip arrow title={row.PlanType.charAt(0) === "B" ? "BUS" : row.PlanType.charAt(0) === "F" ? "FIX" : "UNSCHEDULE"} >
           <TableCell align="left" className="table-cell"> {row.PlanType.charAt(0)} </TableCell>
-        </Tooltip> */}
-        <TableCell align="left" className="table-cell"> {row.PlanType} </TableCell>
+        </Tooltip>
       </TableRow>
     )
   }

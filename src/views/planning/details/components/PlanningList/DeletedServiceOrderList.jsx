@@ -69,9 +69,9 @@ export default class DeletedServiceOrderList extends React.PureComponent {
   showTableHead() {
     return (
       <TableHead className="table-head" classes={{ root: 'table-head' }}>
-        <TableRow classes={{ root: 'table-row' }}>
+        <TableRow>
         {Number(RoleUser.role()) !== 1 ? "" :
-            <TableCell padding="checkbox">
+            <TableCell className= "table-cell-checkbox">
               {this.props.displayServiceCheckbox && 
                 <Checkbox
                   icon={<CheckBoxOutlineBlank fontSize="small" />}
@@ -107,7 +107,7 @@ export default class DeletedServiceOrderList extends React.PureComponent {
   showTableBody(row,id) {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
-        <TableCell padding="checkbox">
+        <TableCell className= "table-cell-checkbox">
           {this.props.displayServiceCheckbox && 
             <Checkbox 
               icon={<CheckBoxOutlineBlank fontSize="small" />}
@@ -126,10 +126,10 @@ export default class DeletedServiceOrderList extends React.PureComponent {
             {row.WoNumber} 
           </TableCell>
         }
-        <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
+        <TableCell align="left" className="table-cell-long"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>
+        <TableCell align="left" className="table-cell-long"> {row.ComponentDescription} </TableCell>
         <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
@@ -137,7 +137,7 @@ export default class DeletedServiceOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
-        <Tooltip arrow title={row.PlanType.charAt(0) === "B" ? "Bus" : row.PlanType.charAt(0) === "F" ? "Fix" : "Unschedule"} >
+        <Tooltip arrow title={row.PlanType.charAt(0) === "B" ? "BUS" : row.PlanType.charAt(0) === "F" ? "FIX" : "UNSCHEDULE"} >
           <TableCell align="left" className="table-cell"> {row.PlanType.charAt(0)} </TableCell>
         </Tooltip>
       </TableRow>

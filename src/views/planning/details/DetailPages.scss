@@ -208,6 +208,10 @@
                     background-color: white;
                     border-bottom: vw(10) !important;
                 }
+                .table-cell-checkbox{
+                    padding: 0;
+                    width: 0;
+                }
                 .checkbox-checked-header{
                     color: #3C3B3B;
                 }
@@ -226,6 +230,10 @@
                         color: #3C3B3B;
                         background-color: white;
                         border-bottom: vw(10) !important;
+                    }
+                    .table-cell-checkbox{
+                        padding: 0;
+                        width: 38px;
                     }
                     .checkbox-checked{
                         color: #3C3B3B;

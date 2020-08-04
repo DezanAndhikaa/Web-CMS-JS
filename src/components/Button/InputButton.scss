@@ -14,7 +14,7 @@
         align-items: center;
         justify-content: center;
         width: vw(84.22) !important;
-        height: vw(35.07) !important;
+        height: 25px;
         font-size: vw(13) !important;
         font-weight: bold;
         line-height: vw(16) !important;
@@ -29,10 +29,10 @@
         background-image: url('../../assets/icons/filters.png');
         background-size: 8.5px;
         background-repeat: no-repeat;
-        background-position-x: 95%;
+        background-position-x: 90%;
         background-position-y: center;
         width: vw(124.22) !important;
-        height: vw(35.07) !important;
+        height: 25px;
         font-size: vw(12) !important;
         font-weight: bold;
         line-height: vw(16) !important;
@@ -45,7 +45,7 @@
     }
     .btn-non-filter-lifetime{
         width: vw(124.22) !important;
-        height: vw(35.07) !important;
+        height: 25px;
         font-size: vw(12) !important;
         font-weight: bold;
         line-height: vw(16) !important;
@@ -63,10 +63,10 @@
         background-image: url('../../assets/icons/ic_date.png');
         background-size: 8.5px;
         background-repeat: no-repeat;
-        background-position-x: 95%;
+        background-position-x: 90%;
         background-position-y: center;
         width: vw(124.22) !important;
-        height: vw(35.07) !important;
+        height: 25px;
         font-size: vw(12) !important;
         font-weight: bold;
         line-height: vw(16) !important;
@@ -77,7 +77,24 @@
         border-radius: 0.4vw;
         cursor: pointer;
     }
-    
+    .btn-smr-date{
+        background-image: url('../../assets/icons/ic_date.png');
+        background-size: 8.5px;
+        background-repeat: no-repeat;
+        background-position-x: 90%;
+        background-position-y: center;
+        width: vw(104.22) !important;
+        height: 25px;
+        font-size: vw(12) !important;
+        font-weight: bold;
+        line-height: vw(16) !important;
+        font-family: 'Lato-Regular';
+        background-color: white; 
+        text-transform: none;
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        border-radius: 0.4vw;
+        cursor: pointer;
+    }
     .btn-header{
         background-image: url('../../assets/icons/arrow.png');
         background-size: 8.5px;
@@ -102,8 +119,8 @@
         background-repeat: no-repeat;
         background-position-x: 90%;
         background-position-y: center;
-        width: vw(180) !important;
-        height: vw(35.07) !important;
+        width: vw(130) !important;
+        height: 25px;
         font-size: vw(12) !important;
         font-weight: bold;
         line-height: vw(16) !important;
@@ -114,10 +131,25 @@
         border-radius: 0.4vw;
         cursor: pointer;
     }
-
+    .global-search-sn{
+        width: 95px;
+        height: 25px;
+        background-color: white;
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        border-radius: 0.4vw;
+        cursor: pointer;
+        .txt-search{
+            flex: 1;
+            font-size: vw(12) !important;
+            line-height: vw(16) !important;
+            font-family: 'Lato-Regular';
+            font-weight: bold;
+            padding: vw(3) vw(10) vw(4);
+        }
+    }
     .global-search{
-        width: vw(124.22) !important;
-        height: vw(35.07) !important;
+        width: 89px;
+        height: 25px;
         background-color: white;
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
         border-radius: 0.4vw;
@@ -132,8 +164,8 @@
         }
     }
     .global-search-pk{
-        width: vw(94.22) !important;
-        height: vw(35.07) !important;
+        width: 69px;
+        height: 25px;
         background-color: white;
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
         border-radius: 0.4vw;
@@ -149,7 +181,7 @@
     }
     .search-per-column{
         width: vw(94.22) !important;
-        height: vw(35.07) !important;
+        height: 25px;
         background-color: white;
         margin-left: vw(15);
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
