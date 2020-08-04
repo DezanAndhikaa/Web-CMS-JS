@@ -1863,7 +1863,16 @@ export default class Status extends React.PureComponent {
 	}
 
 	onClickServiceOrder = async() => {
-		await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
+		await this.props.fetchServiceOrder({
+			...this.props.serviceParameter.dataFilter,
+			Filter : 
+				[...this.props.serviceParameter.dataFilter.Filter, {
+					Field 	 : 'SAPIssueMessage',
+					Operator : 'eq',
+					Value 	 : '-',
+					Logic 	 : 'and'
+				}]
+		},this.props.token);
 		this.props.clearSelectedServicePlans()
 		this.setPropsToState();
 	}
@@ -2242,14 +2251,14 @@ export default class Status extends React.PureComponent {
 		if (this.props.location.whichTab === "sales") {
 			this.setState({
 				approveTotalData : this.props.salesOrderListApproved.TotalData,
-				notApproveTotalData : this.props.salesOrderList.TotalData,
+				notApproveTotalData : this.props.salesOrderList.TotalDataApproval,
 				deleteTotalData : this.props.salesOrderListDeleted.TotalData,
 				sapIssueTotalData : this.props.salesOrderListSap.TotalDataSAPIssue
 			})
 		}else if (this.props.location.whichTab === "service") {
 			this.setState({
 				approveTotalData : this.props.serviceOrderListApproved.TotalData,
-				notApproveTotalData : this.props.serviceOrderList.TotalData,
+				notApproveTotalData : this.props.serviceOrderList.TotalDataApproval,
 				deleteTotalData : this.props.serviceOrderListDeleted.TotalData,
 				sapIssueTotalData : this.props.serviceOrderListSap.TotalDataSAPIssue
 			})

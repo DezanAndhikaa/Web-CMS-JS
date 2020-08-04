@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, TextField, Tooltip, 
+  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Tooltip, 
 } from '@material-ui/core';
 import './PlanningList.scss';
 import '../SapIssue/SapIssue.scss';
