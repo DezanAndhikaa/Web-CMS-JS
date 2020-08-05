@@ -814,7 +814,7 @@ componentDidUpdate = (prevProps) => {
           stats={this.state.stats}
           onStats={this.isChangeStat}     
           totalSalesData={this.props.salesOrderList.TotalDataLifetime}
-          totalServiceData={this.props.serviceOrderList.TotalData}
+          totalServiceData={this.props.serviceOrderList.TotalDataApproval}
           onClickTabHead={this.props.onClickSortBy}
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}
