@@ -57,7 +57,7 @@ import {
 	UnselectSalesPlanAction, UnselectServicePlanAction,
 	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, FetchServiceAction,
 	IndexFilterAction, LifetimeFilterAction, DateFilterAction,
-	SearchRevisedSalesOrder, UpdateSearchSalesRevAction, SelectAllService, SelectPlanTypeFilterAction
+	SearchRevisedSalesOrder, UpdateSearchSalesRevAction, SelectAllSales, SelectAllService, SelectPlanTypeFilterAction
 } from './DetailPages-action';
 
 const initialSalesAssignment = {
@@ -839,6 +839,11 @@ export function selectSalesPlansReducer(state = [], action) {
 			return [...state.filter(((item) => item.SoNumber !== action.payload.SoNumber))];
 		}
 		case ClearSelectedPlans:
+			return [];
+		case SelectAllSales:
+			if(action.payload.length > 0) {
+				return action.payload;
+			}
 			return [];
 		default:
 			return state;

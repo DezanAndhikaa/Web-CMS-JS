@@ -47,6 +47,7 @@ export const SelectServicePlanAction = 'SELECT_SERVICE_PLANS';
 export const SelectSalesPlanAction = 'SELECT_SALES_PLANS';
 export const SelectAllServicePlanAction = 'SELECT_ALL_SERVICE_PLANS';
 export const SelectAllService = 'SELECT_ALL_SERVICE';
+export const SelectAllSales = 'SELECT_ALL_SALES';
 export const SelectPlansAssignmentFilterAction = 'SELECT_PLANS_ASSIGNMENT_FILTER';
 export const SelectPlansTypeFilterAction = 'SELECT_PLANS_TYPE_FILTER';
 export const SelectLeaderAction = 'SELECT_LEADER';
@@ -557,4 +558,8 @@ export function storePlanDataAction(payload) {
 
 export function selectAllService(payload) {
 	return {type: SelectAllService, payload}
+}
+
+export function selectAllSales(payload) {
+	return {type: SelectAllSales, payload}
 }

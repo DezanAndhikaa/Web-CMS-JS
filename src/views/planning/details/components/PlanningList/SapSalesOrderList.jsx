@@ -19,6 +19,8 @@ import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from 'moment';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
 import roleService from "../../../../../utils/roleService.helper";
+import { CheckBoxOutlineBlank } from '@material-ui/icons';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 const RoleUser = new roleService();
 export default class SapSalesOrderList extends React.PureComponent {
@@ -84,12 +86,17 @@ export default class SapSalesOrderList extends React.PureComponent {
         <TableRow classes={{ root: 'table-row' }}>
           <TableCell padding="checkbox">
             {this.props.displaySalesCheckbox && 
-            <Checkbox 
-              checked={this.state.checkedValue}
-              onChange={this.handleClicks}
-              onClick={() => {this.props.salesOrderListSap.Lists.map((row,id) => 
-              this.props.onChoosedSales(row,id))}}
-              className="checkbox-checked-header"/>}
+              <Checkbox 
+                icon={<CheckBoxOutlineBlank fontSize="small" />}
+                checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
+                checked={this.state.checkedValue}
+                onChange={this.handleClicks}
+                onClick={({target: { checked }}) => {
+                  if(checked) return this.props.onChooseAllSales(this.props.salesOrderListSap.Lists);
+                  return this.props.onChooseAllSales([]);
+                }}
+              />
+            }
           </TableCell>
           <PlanningListHeader
             name="SO"
@@ -191,11 +198,14 @@ export default class SapSalesOrderList extends React.PureComponent {
       <TableRow key={id} classes={{ root: 'table-row' }} onClick={() => this.handleExpand(id)}>
         <TableCell padding="checkbox">
           {this.props.displaySalesCheckbox && 
-          <Checkbox 
-          disabled={this.isCheckboxAvailable(row)} 
-          checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
-          onClick={() => this.props.onChoosedSales(row)} 
-          classes={{ checked: 'checkbox-checked' }} />}
+            <Checkbox 
+              icon={<CheckBoxOutlineBlank fontSize="small" />}
+              checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
+              disabled={this.isCheckboxAvailable(row)} 
+              checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
+              onClick={() => this.props.onChoosedSales(row, id, 'body')}
+            />
+          }
         </TableCell>
         {Number(RoleUser.role()) === 1 ?
           <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell> :

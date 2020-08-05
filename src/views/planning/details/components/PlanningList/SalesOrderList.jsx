@@ -13,6 +13,8 @@ import { Snackbar } from '@material-ui/core';
 import moment from 'moment';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
 import roleService from "../../../../../utils/roleService.helper";
+import { CheckBoxOutlineBlank } from '@material-ui/icons';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 const RoleUser = new roleService();
 export default class SalesOrderList extends React.PureComponent {
@@ -95,13 +97,16 @@ export default class SalesOrderList extends React.PureComponent {
             <TableCell padding="checkbox">
               {this.props.displaySalesCheckbox &&
                 <Checkbox
+                  icon={<CheckBoxOutlineBlank fontSize="small" />}
+                  checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
                   checked={this.state.checkedValue}
                   onChange={this.handleClickCheckbox}
-                  onClick={() => {
-                    this.props.salesOrderList.Lists.map((row, id) =>
-                      this.props.onChoosedSales(row, id))
+                  onClick={({target: { checked }}) => {
+                    if(checked) return this.props.onChooseAllSales(this.props.salesOrderList.Lists);
+                    return this.props.onChooseAllSales([]);
                   }}
-                  className="checkbox-checked-header" />}
+                />
+              }
             </TableCell>
           }
           <PlanningListHeader
@@ -197,19 +202,20 @@ export default class SalesOrderList extends React.PureComponent {
           <TableCell padding="checkbox">
             {this.props.displaySalesCheckbox &&
               <Checkbox
+                icon={<CheckBoxOutlineBlank fontSize="small" />}
+                checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
                 disabled={this.isCheckboxAvailable(row)}
                 checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)}
-                onClick={() => this.props.onChoosedSales(row)}
-                classes={{ checked: 'checkbox-checked' }}
+                onClick={() => this.props.onChoosedSales(row, id, 'body')}
               />
             }
           </TableCell>
         }
-        {Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/approval" || Number(RoleUser.role()) !== 1 ?
+        {(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/approval") || Number(RoleUser.role()) !== 1 ?
           <TableCell 
             align="left" 
             className={this.props.pageLoc && this.props.idTab === "Status" ? "table-cell-pk-status"
-            : this.props.pageLoc === "Status" && this.props.idTab === "Input" ||  this.props.pageLoc === "Status" && this.props.idSales === "ViewOnly" ? "table-cell-pk" : "table-cell"}> 
+            : (this.props.pageLoc === "Status" && this.props.idTab === "Input") ||  (this.props.pageLoc === "Status" && this.props.idSales === "ViewOnly") ? "table-cell-pk" : "table-cell"}> 
             {row.SoNumber} 
           </TableCell>
           :

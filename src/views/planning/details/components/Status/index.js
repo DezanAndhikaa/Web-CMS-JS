@@ -65,7 +65,8 @@ import {
 	searchCompActionService,
 	selectFilterAction, 
 	dateFilterAction,
-	selectAllService
+	selectAllService,
+	selectAllSales
 } from '../../DetailPages-action';
 import Status from './Status';
 
@@ -140,6 +141,7 @@ const mapDispatchToProps = (dispatch) => ({
 	onSearchCompService: (keyword, sort) => dispatch(searchCompActionService(SearchCompActionService, keyword, sort)),
 	onClickSortBy: (type) => dispatch(sortByAction(type)),
 	selectSalesPlan: (payload) => dispatch(selectSalesPlansAction(SelectSalesPlanAction, payload)),
+	selectAllSales: (payload) => dispatch(selectAllSales(payload)),
 	selectServicePlan: (payload) => dispatch(selectServicePlansAction(SelectServicePlanAction, payload)),
 	selectAllService: (payload) => dispatch(selectAllService(payload)),
 	unselectServicePlan: (payload) => dispatch(selectServicePlansAction(UnselectServicePlanAction, payload)),
