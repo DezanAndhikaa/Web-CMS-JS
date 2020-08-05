@@ -43,6 +43,24 @@
         border-radius: 0.4vw;
         cursor: pointer;
     }
+    .btn-filter-smr{
+        width: 69px;
+        height: 25px;
+        background-image: url('../../assets/icons/filters.png');
+        background-size: 8.5px;
+        background-repeat: no-repeat;
+        background-position-x: 90%;
+        background-position-y: center;
+        font-size: 8px;
+        line-height: 10px;
+        font-weight: bold;
+        font-family: 'Lato-Regular';
+        background-color: white; 
+        text-transform: none;
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        border-radius: 0.4vw;
+        cursor: pointer;
+    }
     .btn-non-filter-lifetime{
         width: vw(124.22) !important;
         height: 25px;

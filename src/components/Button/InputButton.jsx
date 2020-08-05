@@ -52,7 +52,7 @@ export default class InputButton extends React.Component{
                     <Button disabled className="btn-assigns">Input</Button>
                 </div>
             )
-        }else if(this.props.titles === "SO" || this.props.titles === "Work Order" || this.props.titles === "SMR"){
+        }else if(this.props.titles === "SO" || this.props.titles === "Work Order"){
             return(
                 <div className="button-rows">
                     <Paper className={this.props.position === "Status" ? "search-per-column" : "global-search-pk"} elevation={1}>
@@ -80,6 +80,22 @@ export default class InputButton extends React.Component{
             return(
                 <div className="button-rows">
                 <Button onClick={this.isClicked} className={this.props.idInput === "Data Input" ? "btn-non-filter-lifetime" : "btn-assigns-lifetime"} style={{justifyContent: "unset"}}>{this.props.titles}</Button>
+                    <Modal className="modal-pos" open={this.state.isShowModal}>
+                        <div>
+                            <FilterByLifetime 
+                                {...this.props}
+                                {...this.state}
+                                title={this.props.title} 
+                                onClosed={this.isClosed}
+                            />
+                        </div>
+                    </Modal>
+                </div>
+            )
+        }else if(this.props.titles === "SMR"){
+            return(
+                <div className="button-rows">
+                <Button onClick={this.isClicked} className="btn-filter-smr" style={{justifyContent: "unset"}}>{this.props.titles}</Button>
                     <Modal className="modal-pos" open={this.state.isShowModal}>
                         <div>
                             <FilterByLifetime 
