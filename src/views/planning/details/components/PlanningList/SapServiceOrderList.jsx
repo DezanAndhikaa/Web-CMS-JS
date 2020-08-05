@@ -1,24 +1,22 @@
 import React from 'react';
 import {
-  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, TextField, 
+  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Tooltip, 
 } from '@material-ui/core';
 import './PlanningList.scss';
-import '../SapIssue/SapIssue.scss'
-import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
+import '../SapIssue/SapIssue.scss';
 import { 
-  SortServiceByCustomer, 
-  SortServiceBySite, 
-  SortServiceByUnitModel, 
-  SortServiceByCompDesc, 
   LifetimeFilterAction, 
-  DateFilterAction, 
-  SortServiceByPlanType} 
+  DateFilterAction} 
   from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from 'moment';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
+import roleService from "../../../../../utils/roleService.helper";
+import { CheckBoxOutlineBlank } from '@material-ui/icons';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
+const RoleUser = new roleService();
 export default class SapServiceOrderList extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -77,13 +75,14 @@ export default class SapServiceOrderList extends React.PureComponent {
   }
 
   showTableHead() {
-      return (
-        <TableHead className="table-head" classes={{ root: 'table-head' }}>
+    return (
+      <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow classes={{ root: 'table-row' }}>
-          <TableCell padding="checkbox">
-            {this.props.displayServiceCheckbox && 
-              <Checkbox 
-                className="checkbox-checked-header"
+          <TableCell className= "table-cell-checkbox"> 
+            {this.props.displayServiceCheckbox  && 
+              <Checkbox
+                icon={<CheckBoxOutlineBlank fontSize="small" />}
+                checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
                 checked={this.state.checkedValue}
                 onChange={this.handleClicks}
                 onClick={({target: { checked }}) => {
@@ -93,79 +92,21 @@ export default class SapServiceOrderList extends React.PureComponent {
               />
             }
           </TableCell>
-          <PlanningListHeader
-            name="Work Order"
-            loc= {this.props.pageLoc}
-            delay={300}
-            onSearch={this.props.onSearchComp}
-          />
-          <PlanningListHeader
-            name="Customer"
-            delay={300}
-            onClick={() => this.props.onClickTabHead(SortServiceByCustomer)}
-          />
-          <PlanningListHeader
-            name="Site"
-            delay={300}
-            onClick={() => this.props.onClickTabHead(SortServiceBySite)}
-          />
-          <PlanningListHeader
-            name="Unit Model"
-            delay={300}
-            onClick={() => this.props.onClickTabHead(SortServiceByUnitModel)}
-          />
-          <PlanningListHeader
-            name="Component Description"
-            delay={300}
-            onClick={() => this.props.onClickTabHead(SortServiceByCompDesc)}
-          />
-          <PlanningListHeader
-            name="Part Number"
-            delay={300}
-            onSearch={this.props.onSearchComp}
-          />
-          <PlanningListHeader
-            name="Unit Code"
-            delay={300}
-            onSearch={this.props.onSearchComp}
-          />
-          <PlanningListHeader
-            name="Serial Number"
-            delay={300}
-            onSearch={this.props.onSearchComp}            
-          />
-          <PlanningListHeader
-            name="Lifetime"
-            delay={300}
-            onFilter={this.isFilterLifetime}
-          />
-          <PlanningListHeader
-            name="Plan"
-            delay={300}
-            onFilter={this.isFilterDate}
-          />
-          <PlanningListHeader
-            name="Plan Type"
-            delay={300}
-            onClick={() => this.props.onClickTabHead(SortServiceByPlanType)}
-          />
+          <TableCell align="left" className="table-cell">WO</TableCell>
+          <TableCell align="left" className="table-cell">Customer</TableCell>
+          <TableCell align="left" className="table-cell">Site</TableCell>
+          <TableCell align="left" className="table-cell">Unit Model</TableCell>
+          <TableCell align="left" className="table-cell">Component Description</TableCell>
+          <TableCell align="left" className="table-cell">Part Number</TableCell>
+          <TableCell align="left" className="table-cell">Unit Code</TableCell>
+          <TableCell align="left" className="table-cell">Serial Number</TableCell>
+          <TableCell align="left" className="table-cell">Lifetime Component</TableCell>
+          <TableCell align="left" className="table-cell">Plan Execution</TableCell>
+          <TableCell align="left" className="table-cell">SMR </TableCell>
+          <TableCell align="left" className="table-cell">SMR Date</TableCell>
+          <TableCell align="left" className="table-cell">Plan Type</TableCell>
         </TableRow>
       </TableHead>
-    )
-  }
-
-  _showDescription(row){
-    return(
-      <div className="teks">
-        <TextField 
-          disabled
-          className="teks"
-          type='text' 
-          variant="outlined" 
-          size="small"
-          value={row.SAPIssueMessage}
-        />
-      </div>
     )
   }
 
@@ -173,17 +114,25 @@ export default class SapServiceOrderList extends React.PureComponent {
     return (
     <>
       <TableRow key={id} classes={{ root: 'table-row' }} onClick={() => this.handleExpand(id)}>
-        <TableCell padding="checkbox">
+        <TableCell className= "table-cell-checkbox">
           {this.props.displayServiceCheckbox && 
             <Checkbox 
+              icon={<CheckBoxOutlineBlank fontSize="small" />}
+              checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
               disabled={this.isCheckboxAvailable(row)} 
               checked={this.props.selectedServicePlanList.some((plans) => plans.WoNumber === row.WoNumber)} 
               onClick={() => this.props.onChoosedService(row, id, 'body')}
-              classes={{ checked: 'checkbox-checked' }} 
             />
           }
         </TableCell>
-        <TableCell align="left" className={this.props.pageLoc === "Status" ? "table-cell-pk-status" : "table-cell"}> {row.WoNumber} </TableCell>
+        {Number(RoleUser.role()) === 1 ?
+          <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell> :
+          <TableCell 
+            align="left" 
+            className={this.props.pageLoc === "Status" ? "table-cell-pk-status" : "table-cell"}> 
+            {row.WoNumber} 
+          </TableCell>
+        }
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
@@ -191,14 +140,19 @@ export default class SapServiceOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
-        <TableCell align="center" className="table-cell"> {row.LifeTimeComponent} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.LifeTimeComponent} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.PlanType} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
+        <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
+        <Tooltip arrow title={row.PlanType.charAt(0) === "B" ? "BUS" : row.PlanType.charAt(0) === "F" ? "FIX" : "UNSCHEDULE"} >
+          <TableCell align="left" className="table-cell"> {row.PlanType.charAt(0)} </TableCell>
+        </Tooltip>
       </TableRow>
       {this.state[id] ? 
         <TableRow className="table-row-bottom-issue">
-            <TableCell colSpan="2"><label>Description:</label></TableCell>
-            <TableCell colSpan="11">{this._showDescription(row)}</TableCell>
+          <TableCell ><label></label></TableCell>
+          <TableCell className="txt-style-bold" align="left"><label>Description:</label></TableCell>
+          <TableCell colSpan="12" className="txt-style-normal" align="left">{row.SAPIssueMessage}</TableCell>
         </TableRow> : null }
     </>  
     )

@@ -18,14 +18,14 @@ const routes = (
 	<div>
 		<Switch>
 			<Route exact path={Menu.LOGIN} component={LoginPage} />
-			<Route exact path={Menu.PLANNING_DETAILS} component={requireAuth(DetailPages)} />
-			<Route exact path={Menu.PLANNING_DETAILS_SITE} component={requireAuth(DetailPagesSite)} />
-			<Route exact path={Menu.PLANNING_APPROVAL_STATUS} component={requireAuth(Status)} />
-			<Route exact path={Menu.PLANNING_DETAILS_STATUS} component={requireAuth(Status)} />
+			<Route exact path={Menu.PLANNING_INPUT_LIFETIME} component={requireAuth(DetailPages)} />
+			<Route exact path={Menu.PLANNING_SITE} component={requireAuth(DetailPagesSite)} />
+			<Route exact path={Menu.PLANNING_HO_STATUS} component={requireAuth(Status)} />
+			<Route exact path={Menu.PLANNING_SITE_STATUS} component={requireAuth(Status)} />
 			<Route exact path={Menu.PLANNING_TRACKING_HISTORY} component={requireAuth(TrackingHistory)} />
-			<Route exact path={Menu.PLANNING_APPROVAL} component={requireAuth(ApprovalPages)} />
+			<Route exact path={Menu.PLANNING_HO} component={requireAuth(ApprovalPages)} />
 			<Route exact path={Menu.PLANNING_ALL_NOTIF} component={requireAuth(Notification)} />
-			<Route exact path={Menu.PLANNING_SAP} component={requireAuth(SapIssuePages)} />
+			<Route exact path={Menu.PLANNING_HO_SAP} component={requireAuth(SapIssuePages)} />
 			<Route exact path="*" component={requireAuth(Dashboard)} />
 		</Switch>
 	</div>

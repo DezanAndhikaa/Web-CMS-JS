@@ -29,7 +29,7 @@ class DropDownList extends React.Component{
 					<MenuItem className="dropdown-list" value="20">20</MenuItem>
 					<MenuItem className="dropdown-list" value="25">25</MenuItem>
 				</Select>
-				<FormLabel className="label">entries</FormLabel>
+				<FormLabel className="label">Entries</FormLabel>
 			</div>
 		)
 	}

@@ -1,10 +1,10 @@
 @import '../../themes/functions';
 @import '../../themes/variables';
 
-.assign-lifetime-modal{
+.assign-date-modal{
     position: 'absolute';
     width: vw(400);
-    height: vw(155);
+    height: vw(175);
     background-color: white;
     margin: auto;
     border-radius: vw(20);
@@ -24,17 +24,26 @@
         justify-content: space-between;
         height: vw(30);
     }
-    .teks-middle{
-        margin-top: vw(10);
+    .teks-middle-date{
+        margin-top: vw(20);
         display: flex;
         width:100%;
-        .teks-left{
+        .teks-left-date{
             display: flex;
-            font-size: 12px;
+            font-family: 'Lato-Regular';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 10px;
+            line-height: 12px;
         }
-        .teks-right{
-            font-size: 12px;
+        .teks-right-date{
             display: flex;
+            margin-left: 47%;
+            font-family: 'Lato-Regular';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 10px;
+            line-height: 12px;
         }
     }
     .boxa{
@@ -48,41 +57,64 @@
     .top-midel{
         margin-top: vw(5);
         display: flex;
-        height: vw(100);
         width: 100%;
         .dates{
-            font-size: 13px;
-            width: 60%;
+            width: 110.39px;
+            height: 28.84px;
             border-radius: 4px;
             box-shadow: inset 0 2px 2px #e9e9e9;
             border: 1px solid #aeaeae;
-            line-height: 16px;
-            padding: 6px 10px 5px;
+            padding-left: 30px;
+            background-image: url('../../assets/icons/ic_date.png');
+            background-size: 10px;
+            background-repeat: no-repeat;
+            background-position-x: 8%;
+            background-position-y: center;
+            font-family: 'Lato-Regular';
+            font-style: normal;
+            font-weight: bold;
+            font-size: 10px;
+            line-height: 12px;
+            color: #b9b8b8;
+            opacity: 0.5;
         }
         .dates2{
-            font-size: 13px;
-            margin-left: 15%;
-            width: 60%;
+            margin-left: 20%;
+            width: 110.39px;
+            height: 28.84px;
             border-radius: 4px;
             box-shadow: inset 0 2px 2px #e9e9e9;
             border: 1px solid #aeaeae;
-            line-height: 16px;
-            padding: 6px 10px 5px;
+            padding-left: 30px;
+            background-image: url('../../assets/icons/ic_date.png');
+            background-size: 10px;
+            background-repeat: no-repeat;
+            background-position-x: 8%;
+            background-position-y: center;
+            font-family: 'Lato-Regular';
+            font-style: normal;
+            font-weight: bold;
+            font-size: 10px;
+            line-height: 12px;
+            color: #b9b8b8;
+            opacity: 0.5;
         }
     }
     
     .select-input-title{
         margin: 0;
         margin-right: vw(17);
-        font-weight: bold;
-        font-size: 15px; 
         width: 60%;
+        font-family: 'Lato-Bold';
+        font-style: normal;
+        font-size: 16px;
+        line-height: 19px;
     }
 
-    .bottom-rows{
+    .bottom-rows-date{
         display: flex;
-        margin-top: vw(20);
-        .btn-search{
+        margin: vw(30) 0;
+        .btn-search-date{
             display: flex;
             align-items: center;
             justify-content: center;
@@ -99,7 +131,7 @@
             border-radius: 0.4vw;
             cursor: pointer;
         }
-        .btn-search:hover {
+        .btn-search-date:hover {
             background-color: map-get($colors, primary-dark);
         }
     }

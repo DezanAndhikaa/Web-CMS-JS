@@ -81,6 +81,24 @@
                 .btn-input-issue:hover {
                     background-color: map-get($colors, primary-dark);
                 }
+                .btn-input-issue-disabled{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 10%;
+                    height: vw(43.07) !important;
+                    font-size: vw(18) !important;
+                    font-weight: bold;
+                    line-height: vw(21) !important;
+                    font-family: 'Lato-Regular';
+                    background-color: map-get($colors , primary);
+                    text-transform: none;
+                    box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+                    border-radius: 0.4vw;
+                    cursor: pointer;
+                    opacity: 0.5;
+                    color: black;
+                }
                 .btn-cancel-issue{
                     display: flex;
                     align-items: center;

@@ -38,8 +38,10 @@ import IconInputLT from './ic_input.png';
 import IconBack from './back.png';
 import IconDate from './ic_date.png';
 import IcUnderDev from './icon-under-dev.png';
+import IconChecked from './icon-checked.png';
 
 export {
+	IconChecked,
 	IcUnderDev,
 	IcDbMenu,
 	IcApproval,

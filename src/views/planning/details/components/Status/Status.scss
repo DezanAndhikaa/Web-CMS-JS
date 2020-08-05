@@ -5,6 +5,8 @@
     display: inline-flex;
     justify-content: space-between;
     width: 100%;
+    padding-bottom: vw(20);
+    border-bottom: 1.5px solid #E0E0E0;
     .back_button{
         display: flex;
         height: vw(38.07);
@@ -43,9 +45,26 @@
         justify-content: space-between;
         width: 100%;
         .title{
-            display: flex;
+            display: inline-flex;
             width: 50%;
             margin-bottom: 2%;
+            align-items: flex-end;
+            .title-bold{
+                display: flex;
+                font-family: 'Lato-Bold';
+                font-style: normal;
+                font-weight: bold;
+                font-size: 30px;
+                line-height: 36px;
+            }
+            .title-normal{
+                font-family: 'Lato-Regular';
+                font-style: normal;
+                font-weight: normal;
+                font-size: 25px;
+                line-height: 30px;
+                padding-left: vw(20);
+            }
         }
         .search-containers{
             flex: 1;
@@ -103,6 +122,10 @@
                 font-family: 'Lato-Bold';
                 color: #3C3B3B;
             }
+            .table-cell-checkbox{
+                padding: 0;
+                width: 0;
+            }
             .checkbox-checked-header{
                 color: #3C3B3B;
             }
@@ -126,6 +149,19 @@
                     line-height: vw(16) !important;
                     font-family: 'Lato-Bold';
                     color: #3C3B3B;
+                }
+                .table-cell-long{
+                    width: 140px;
+                    padding: 0;
+                    height: vw(40);
+                    font-size: vw(14) !important;
+                    line-height: vw(17) !important;
+                    font-family: 'Lato-Bold';
+                    color: #3C3B3B;
+                }
+                .table-cell-checkbox{
+                    padding: 0;
+                    width: 38px;
                 }
                 .checkbox-checked{
                     color: #3C3B3B;

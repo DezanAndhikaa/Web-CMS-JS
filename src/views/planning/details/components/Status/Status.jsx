@@ -56,28 +56,28 @@ export default class Status extends React.PureComponent {
 		}if(this.props.location.whichTab === "service"){
 			this.isReload();
 		}else if(this.props.location.whichTab === undefined){
-			if(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/approval"){
+			if(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/ho"){
 				if (localStorage.getItem('whichTab') === "sales"){
-					this.handleClick(Menu.PLANNING_APPROVAL_STATUS, 'sales', this.state.bearer);
+					this.handleClick(Menu.PLANNING_HO_STATUS, 'sales', this.state.bearer);
 					this.isReload();
 				} else{ 
-					this.handleClick(Menu.PLANNING_APPROVAL_STATUS, 'service', this.state.bearer);
+					this.handleClick(Menu.PLANNING_HO_STATUS, 'service', this.state.bearer);
 					this.isReload();
 				}
-			} else if(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/details/site"){
+			} else if(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/site"){
 				if (localStorage.getItem('whichTab') === "sales"){
-					this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales', this.state.bearer);
+					this.handleClick(Menu.PLANNING_SITE_STATUS, 'sales', this.state.bearer);
 					this.isReload();
 				} else{ 
-					this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service', this.state.bearer);
+					this.handleClick(Menu.PLANNING_SITE_STATUS, 'service', this.state.bearer);
 					this.isReload();
 				}
 			}else if(Number(RoleUser.role()) !== 1){
 				if (localStorage.getItem('whichTab') === "sales"){
-					this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales', this.state.bearer);
+					this.handleClick(Menu.PLANNING_SITE_STATUS, 'sales', this.state.bearer);
 					this.isReload();
 				} else{ 
-					this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service', this.state.bearer);
+					this.handleClick(Menu.PLANNING_SITE_STATUS, 'service', this.state.bearer);
 					this.isReload();
 				}
 			}	
@@ -1313,10 +1313,11 @@ export default class Status extends React.PureComponent {
 		return (
 		  <div className="bottom-rows">
 			<SearchInput
-			{...this.props}
-			webInfo="Search"
-			handleSearch={this.handleSearch}
-		  />
+				{...this.props}
+				idTab= "Status"
+				webInfo="Search"
+				handleSearch={this.handleSearch}
+			/>
 		  </div>
 		);
 	}
@@ -1862,7 +1863,16 @@ export default class Status extends React.PureComponent {
 	}
 
 	onClickServiceOrder = async() => {
-		await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
+		await this.props.fetchServiceOrder({
+			...this.props.serviceParameter.dataFilter,
+			Filter : 
+				[...this.props.serviceParameter.dataFilter.Filter, {
+					Field 	 : 'SAPIssueMessage',
+					Operator : 'eq',
+					Value 	 : '-',
+					Logic 	 : 'and'
+				}]
+		},this.props.token);
 		this.props.clearSelectedServicePlans()
 		this.setPropsToState();
 	}
@@ -1902,7 +1912,7 @@ export default class Status extends React.PureComponent {
 				"list-status-empty" : "plannings-list-containers"}>
 				<SalesOrderList 
 					{...this.props}
-					idTab = "Status"
+					idTab= "Status"
 					onClickTabHead={this.props.onClickSortBy}
 					displaySalesCheckbox={this.props.salesParameter.paramsData.assigmentFilter || this.props.salesParameter.paramsData.inProgressFilter}
 					sortSalesByState={this.props.sortSalesBy}
@@ -1920,18 +1930,32 @@ export default class Status extends React.PureComponent {
 			<div className={this.props.serviceOrderList.Lists.length === 0 
 				&& this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? 
 				"list-status-empty" : "plannings-list-containers"}>
-				<ServiceOrderList 
-					{...this.props}
-					idTab="Status"
-					pageLoc= "Status"
-					onClickTabHead={this.props.onClickSortBy}
-					displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
-					sortServiceByState={this.props.sortServiceBy}
-					onClickServiceOrder={this.onClickServiceOrder}
-					onChoosedService={this.updateAssignmentServiceStates}
-					onChooseAllService= {this._updateAssignmentServiceStatesAll}
-					selectedServicePlanList={this.props.selectedServicePlans}
-				/>
+				{Number(RoleUser.role()) === 1 ?
+					<ServiceOrderList 
+						{...this.props}
+						idTab= "Status"
+						onClickTabHead={this.props.onClickSortBy}
+						displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
+						sortServiceByState={this.props.sortServiceBy}
+						onClickServiceOrder={this.onClickServiceOrder}
+						onChoosedService={this.updateAssignmentServiceStates}
+						onChooseAllService= {this._updateAssignmentServiceStatesAll}
+						selectedServicePlanList={this.props.selectedServicePlans}
+					/>
+					:
+					<ServiceOrderList 
+						{...this.props}
+						idTab= "Status"
+						pageLoc= "Status"
+						onClickTabHead={this.props.onClickSortBy}
+						displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
+						sortServiceByState={this.props.sortServiceBy}
+						onClickServiceOrder={this.onClickServiceOrder}
+						onChoosedService={this.updateAssignmentServiceStates}
+						onChooseAllService= {this._updateAssignmentServiceStatesAll}
+						selectedServicePlanList={this.props.selectedServicePlans}
+					/>
+				}
 			</div>
 		  );
 	}
@@ -1999,17 +2023,30 @@ export default class Status extends React.PureComponent {
 			<div className={this.props.serviceOrderListDeleted.Lists.length === 0 
 				&& this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED ? 
 				"list-status-empty" : "plannings-list-containers"}>
-				<DeletedServiceOrderList 
-					{...this.props}
-					pageLoc= "Status"
-					onClickTabHead={this.props.onClickSortBy}
-					displayServiceCheckbox={this.props.serviceDeletedParameter.paramsData.assigmentFilter || this.props.serviceDeletedParameter.paramsData.inProgressFilter}
-					sortServiceByState={this.props.sortServiceBy}
-					onClickServiceOrderDeleted={this.onClickServiceOrderDeleted}
-					onChoosedService={this.updateAssignmentServiceStates}
-					onChooseAllService= {this._updateAssignmentServiceStatesAll}
-					selectedServicePlanList={this.props.selectedServicePlans}
-				/>
+				{Number(RoleUser.role()) === 1 ?
+					<DeletedServiceOrderList 
+						{...this.props}
+						onClickTabHead={this.props.onClickSortBy}
+						displayServiceCheckbox={this.props.serviceDeletedParameter.paramsData.assigmentFilter || this.props.serviceDeletedParameter.paramsData.inProgressFilter}
+						sortServiceByState={this.props.sortServiceBy}
+						onClickServiceOrderDeleted={this.onClickServiceOrderDeleted}
+						onChoosedService={this.updateAssignmentServiceStates}
+						onChooseAllService= {this._updateAssignmentServiceStatesAll}
+						selectedServicePlanList={this.props.selectedServicePlans}
+					/>
+					:
+					<DeletedServiceOrderList 
+						{...this.props}
+						pageLoc= "Status"
+						onClickTabHead={this.props.onClickSortBy}
+						displayServiceCheckbox={this.props.serviceDeletedParameter.paramsData.assigmentFilter || this.props.serviceDeletedParameter.paramsData.inProgressFilter}
+						sortServiceByState={this.props.sortServiceBy}
+						onClickServiceOrderDeleted={this.onClickServiceOrderDeleted}
+						onChoosedService={this.updateAssignmentServiceStates}
+						onChooseAllService= {this._updateAssignmentServiceStatesAll}
+						selectedServicePlanList={this.props.selectedServicePlans}
+					/>
+				}
 			</div>
 		);
 	}
@@ -2038,17 +2075,30 @@ export default class Status extends React.PureComponent {
 			<div className={this.props.serviceOrderListSap.Lists.length === 0 
 				&& this.props.fetchStatusServiceSap === ApiRequestActionsStatus.SUCCEEDED ? 
 				"list-status-empty" : "plannings-list-containers"}>
-				<SapServiceOrderList 
-					{...this.props}
-					pageLoc= "Status"
-					onClickTabHead={this.props.onClickSortBy}
-					displayServiceCheckbox={this.props.serviceSapParameter.paramsData.assigmentFilter || this.props.serviceSapParameter.paramsData.inProgressFilter}
-					sortServiceByState={this.props.sortServiceBy}
-					onClickServiceOrderSap={this.onClickServiceOrderSap}
-					onChoosedService={this.updateAssignmentServiceStates}
-					onChooseAllService= {this._updateAssignmentServiceStatesAll}
-					selectedServicePlanList={this.props.selectedServicePlans}
+				{Number(RoleUser.role()) === 1 ? 
+					<SapServiceOrderList 
+						{...this.props}
+						onClickTabHead={this.props.onClickSortBy}
+						displayServiceCheckbox={this.props.serviceSapParameter.paramsData.assigmentFilter || this.props.serviceSapParameter.paramsData.inProgressFilter}
+						sortServiceByState={this.props.sortServiceBy}
+						onClickServiceOrderSap={this.onClickServiceOrderSap}
+						onChoosedService={this.updateAssignmentServiceStates}
+						onChooseAllService= {this._updateAssignmentServiceStatesAll}
+						selectedServicePlanList={this.props.selectedServicePlans}
 					/>
+					:
+					<SapServiceOrderList 
+						{...this.props}
+						pageLoc= "Status"
+						onClickTabHead={this.props.onClickSortBy}
+						displayServiceCheckbox={this.props.serviceSapParameter.paramsData.assigmentFilter || this.props.serviceSapParameter.paramsData.inProgressFilter}
+						sortServiceByState={this.props.sortServiceBy}
+						onClickServiceOrderSap={this.onClickServiceOrderSap}
+						onChoosedService={this.updateAssignmentServiceStates}
+						onChooseAllService= {this._updateAssignmentServiceStatesAll}
+						selectedServicePlanList={this.props.selectedServicePlans}
+					/>
+				}
 			</div>
 		);
 	}
@@ -2201,14 +2251,14 @@ export default class Status extends React.PureComponent {
 		if (this.props.location.whichTab === "sales") {
 			this.setState({
 				approveTotalData : this.props.salesOrderListApproved.TotalData,
-				notApproveTotalData : this.props.salesOrderList.TotalData,
+				notApproveTotalData : this.props.salesOrderList.TotalDataApproval,
 				deleteTotalData : this.props.salesOrderListDeleted.TotalData,
 				sapIssueTotalData : this.props.salesOrderListSap.TotalDataSAPIssue
 			})
 		}else if (this.props.location.whichTab === "service") {
 			this.setState({
 				approveTotalData : this.props.serviceOrderListApproved.TotalData,
-				notApproveTotalData : this.props.serviceOrderList.TotalData,
+				notApproveTotalData : this.props.serviceOrderList.TotalDataApproval,
 				deleteTotalData : this.props.serviceOrderListDeleted.TotalData,
 				sapIssueTotalData : this.props.serviceOrderListSap.TotalDataSAPIssue
 			})
@@ -2250,16 +2300,16 @@ export default class Status extends React.PureComponent {
 				</>
 				)}
 				<div className="head-containers">
-					{Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/approval" ?
-						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
-							Approval
+					{Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/ho" ?
+						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_HO) }>
+							HO
 						</Button> :
-						Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/approval" ?
-						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_SITE) }>
-							Detail
+						Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/ho" ?
+						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_SITE) }>
+							Site
 						</Button> :
-						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_SITE) }>
-							Detail
+						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_SITE) }>
+							Site
 						</Button> 
 					}
 					<div className="notif_button">
@@ -2272,7 +2322,8 @@ export default class Status extends React.PureComponent {
 				<div className="table-containers">
 					<div className="title-containers">
 						<div className="title">
-							{this.props.location.whichTab === 'sales' ? 'Status - Sales Order' : 'Status - Service Order'}
+							<div className="title-bold">{this.props.location.whichTab === 'sales' ? 'Status -' : 'Status -'}</div>
+							<div className="title-normal">{this.props.location.whichTab === 'sales' ? 'Sales Order' : 'Service Order'}</div>
 						</div>
 						<div className="search-containers">							
 							{this._renderSearchBar()}
