@@ -79,9 +79,11 @@ componentDidUpdate = (prevProps) => {
       }
     }
   }
+
   if(prevProps.searchSalesRevParam !== this.props.searchSalesRevParam){
     this.fetchSearchSalesRev();
   }
+
   //FILTER RANGE LIFETIME
   if(Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 || 
     Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){   
@@ -94,6 +96,22 @@ componentDidUpdate = (prevProps) => {
     if(prevProps.filterLifetime !== this.props.filterLifetime){
       this.props.updateServiceParameter({
         ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterLifetime.Filter, PageNumber: 1
+      })
+    }
+  }
+
+  //FILTER RANGE SMR
+  if(Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 || 
+    Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
+    if (prevProps.filterSmr !== this.props.filterSmr) {
+      this.props.updateSalesParameter({
+        ...prevProps.salesParameter.dataFilter, Filter: this.props.filterSmr.Filter, PageNumber: 1,
+      })
+    }
+  }else{
+    if (prevProps.filterSmr !== this.props.filterSmr) {
+      this.props.updateServiceParameter({
+        ...prevProps.serviceParameter.dataFilter, Filter: this.props.filterSmr.Filter, PageNumber: 1,
       })
     }
   }
@@ -541,9 +559,19 @@ componentDidUpdate = (prevProps) => {
   }
 
   //SAAT MENGKLIK SERVICE ORDER TAB
-  onClickServiceOrder = async() => {
-   await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
+  onClickServiceOrder = async () => {
+    await this.props.fetchServiceOrder({
+      ...this.props.serviceParameter.dataFilter,
+      Filter:
+        [...this.props.serviceParameter.dataFilter.Filter, {
+          Field: 'SAPIssueMessage',
+          Operator: "eq",
+          Value: '-',
+          Logic: "AND"
+        }]
+    }, this.props.token);
   }
+  
   //SAAT MENGKLIK SALES ORDER TAB
   onClickSalesOrder = async() =>{
     if (Number(RoleUser.role()) === 3 || Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
@@ -804,7 +832,7 @@ componentDidUpdate = (prevProps) => {
           stats={this.state.stats}
           onStats={this.isChangeStat}     
           totalSalesData={this.props.salesOrderList.TotalDataLifetime}
-          totalServiceData={this.props.serviceOrderList.TotalData}
+          totalServiceData={this.props.serviceOrderList.TotalDataApproval}
           onClickTabHead={this.props.onClickSortBy}
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}

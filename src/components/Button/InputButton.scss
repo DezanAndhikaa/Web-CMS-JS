@@ -27,12 +27,30 @@
     }
     .btn-assigns-lifetime{
         background-image: url('../../assets/icons/filters.png');
-        background-size: 8.5px;
+        background-size: 7.5px;
         background-repeat: no-repeat;
         background-position-x: 90%;
         background-position-y: center;
         width: vw(124.22) !important;
         height: 25px;
+        font-size: 8px;
+        line-height: 10px;
+        font-weight: bold;
+        font-family: 'Lato-Regular';
+        background-color: white; 
+        text-transform: none;
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        border-radius: 0.4vw;
+        cursor: pointer;
+    }
+    .btn-filter-smr{
+        width: 69px;
+        height: 25px;
+        background-image: url('../../assets/icons/filters.png');
+        background-size: 7.5px;
+        background-repeat: no-repeat;
+        background-position-x: 90%;
+        background-position-y: center;
         font-size: 8px;
         line-height: 10px;
         font-weight: bold;
@@ -61,7 +79,7 @@
     }
     .btn-filter-by-date{
         background-image: url('../../assets/icons/ic_date.png');
-        background-size: 8.5px;
+        background-size: 7.5px;
         background-repeat: no-repeat;
         background-position-x: 90%;
         background-position-y: center;
@@ -79,7 +97,7 @@
     }
     .btn-smr-date{
         background-image: url('../../assets/icons/ic_date.png');
-        background-size: 8.5px;
+        background-size: 7.5px;
         background-repeat: no-repeat;
         background-position-x: 90%;
         background-position-y: center;
@@ -97,7 +115,7 @@
     }
     .btn-header{
         background-image: url('../../assets/icons/arrow.png');
-        background-size: 8.5px;
+        background-size: 7.5px;
         background-repeat: no-repeat;
         background-position-x: 90%;
         background-position-y: center;
@@ -115,7 +133,7 @@
     }
     .btn-header-comp{
         background-image: url('../../assets/icons/arrow.png');
-        background-size: 8.5px;
+        background-size: 7.5px;
         background-repeat: no-repeat;
         background-position-x: 90%;
         background-position-y: center;

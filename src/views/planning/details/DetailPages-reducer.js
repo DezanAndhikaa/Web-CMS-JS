@@ -57,7 +57,7 @@ import {
 	UnselectSalesPlanAction, UnselectServicePlanAction,
 	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, FetchServiceAction,
 	IndexFilterAction, LifetimeFilterAction, DateFilterAction,
-	SearchRevisedSalesOrder, UpdateSearchSalesRevAction, SelectAllService, SelectPlanTypeFilterAction
+	SearchRevisedSalesOrder, UpdateSearchSalesRevAction, SelectAllService, SelectPlanTypeFilterAction, SmrFilterAction
 } from './DetailPages-action';
 
 const initialSalesAssignment = {
@@ -178,8 +178,8 @@ const initialSearchCompParameter =
 		Logic: 'AND'
 	}];
 
-const intitialFiltersParameter =
-	[{
+const intitialFiltersParameter =[
+	{
 		Field: 'LifeTimeComponent',
 		Operator: 'gte',
 		Value: '',
@@ -189,7 +189,22 @@ const intitialFiltersParameter =
 		Operator: 'lte',
 		Value: '',
 		Logic: 'AND'
-	}]
+	}
+]
+
+const intitialFilterSmrParameter =[
+	{
+		Field: 'SMR',
+		Operator: 'gte',
+		Value: '',
+		Logic: 'AND'
+	}, {
+		Field: 'SMR',
+		Operator: 'lte',
+		Value: '',
+		Logic: 'AND'
+	}
+]
 
 const initialDownloadState = { data: new Blob(), status: ApiRequestActionsStatus.IDLE };
 const initialSalesState = { data: initialSalesAssignment, status: ApiRequestActionsStatus.IDLE };
@@ -627,7 +642,12 @@ export function salesRevisedParameterReducer(state = initialSearchParameter, act
 export function filterLifetimeReducer(state = intitialFiltersParameter, action) {
 	if (action.type === LifetimeFilterAction)
 		state = { ...state, Filter: [{ Field: 'LifeTimeComponent', Operator: 'gte', Value: action.payload, Logic: 'and' }, { Field: 'LifeTimeComponent', Operator: 'lte', Value: action.payload2, Logic: 'and' }] };
+	return state;
+}
 
+export function filterSmrReducer(state = intitialFilterSmrParameter, action) {
+	if (action.type === SmrFilterAction)
+		state = { ...state, Filter: [{ Field: 'SMR', Operator: 'gte', Value: action.payload, Logic: 'and' }, { Field: 'SMR', Operator: 'lte', Value: action.payload2, Logic: 'and' }] };
 	return state;
 }
 
@@ -1022,6 +1042,7 @@ const PlansReducers = combineReducers({
 	salesDeleted: deletedSalesReducer,
 	serviceDeleted: deletedServiceReducer,
 	filterLifetime: filterLifetimeReducer,
+	filterSmr: filterSmrReducer,
 	filterDate: filterDateReducer,
 	salesSearchRevision: searchSalesRevReducer,
 	searchSalesRevParam: searchSalesRevParamReducer	

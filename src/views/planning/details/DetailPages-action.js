@@ -93,6 +93,7 @@ export const SelectComponentFilterAction = 'SELECT_COMPONENT_FILTER';
 export const SelectPlanTypeFilterAction = 'SELECT_PLAN_TYPE_FILTER';
 export const IndexFilterAction = 'INDEX FILTER';
 export const LifetimeFilterAction = 'SELECT_LIFETIME_FILTER';
+export const SmrFilterAction = "SELECT_SMR_FILTER";
 export const DateFilterAction = 'SELECT_DATE_FILTER';
 
 export function approveSalesAction(payload, accessToken) {
@@ -519,6 +520,9 @@ export function searchCompActionService(type, payload, sort) {
 	return { type, payload, sort };
 }
 export function dateFilterAction(type, payload, payload2, page) {
+	return { type, payload, payload2, page };
+}
+export function smrFilterAction(type, payload, payload2, page) {
 	return { type, payload, payload2, page };
 }
 export function selectFilterAction(type, payload, payload2, page) {

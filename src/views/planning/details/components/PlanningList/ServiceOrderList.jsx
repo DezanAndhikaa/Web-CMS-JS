@@ -13,7 +13,8 @@ import {
   SortServiceByCompDesc, 
   SortServiceByPlanType,
   LifetimeFilterAction, 
-  DateFilterAction } from '../../DetailPages-action';
+  DateFilterAction, 
+  SmrFilterAction} from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
 import roleService from "../../../../../utils/roleService.helper";
@@ -52,6 +53,10 @@ export default class ServiceOrderList extends React.PureComponent {
 
   isFilterLifetime = async( value1, value2 ) => {
     this.props.lifetimeFilter( LifetimeFilterAction, value1, value2, this.props.serviceParameter.dataFilter.PageSize );
+  }
+
+  isFilterSmr = async( value1, value2 ) => {
+    this.props.smrFilter( SmrFilterAction, value1, value2, this.props.serviceParameter.dataFilter.PageSize );
   }
 
   isFilterDate = async ( value1, value2) => {
@@ -167,9 +172,9 @@ export default class ServiceOrderList extends React.PureComponent {
               onSearch={this.props.onSearchComp}          
             />
             <PlanningListHeader
-                name="Lifetime"
-                delay={300}
-                onFilter={this.isFilterLifetime}
+              name="Lifetime"
+              delay={300}
+              onFilter={this.isFilterLifetime}
             />
             <PlanningListHeader
               name="Plan"
@@ -179,7 +184,7 @@ export default class ServiceOrderList extends React.PureComponent {
             <PlanningListHeader
               name="SMR"
               delay={300}
-              onSearch={this.props.onSearchComp}
+              onFilter= {this.isFilterSmr}
             />
             <PlanningListHeader
               name="SMR Date"
