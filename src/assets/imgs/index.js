@@ -27,8 +27,10 @@ import Clock from './clock.png';
 import CmsLogo from './logo-cms.png';
 import Logout from './logo-logout.png';
 import ImgSapGuide from './sap-guide.png';
+import ImgUnderDev from './under-dev.png';
 
 export {
+	ImgUnderDev,
 	ImgSapGuide,
 	Logout,
 	Empty,
