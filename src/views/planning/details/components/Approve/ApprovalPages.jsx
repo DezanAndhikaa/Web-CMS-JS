@@ -286,6 +286,12 @@ class ApprovalPages extends React.Component {
   _renderSearchBar() {
     return (
       <div className="bottom-row-approval">
+        <BaseButton titles= "Reset"
+            {...this.props}
+            whatTabsIsRendered={false}
+            handleServiceApprove={this.handleServiceApprove}
+            renderSakses={this.changeSuccess}
+        />
         <SearchInput
           {...this.props}
           webInfo="Search"
