@@ -9,20 +9,6 @@ import moment from 'moment';
 import { Formik, ErrorMessage, Form } from 'formik';
 import * as Yup from 'yup';
 
-const today = new Date();
-const tgl = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-const valTgl = tgl.toString();
-
-const validationSchema = Yup.object().shape({
-    startDate: Yup.date()
-    .required('Start date must be filled.')
-    .max(valTgl, 'Tanggal masuk harus sama atau sebelum hari ini.'),
-    
-    startDate2: Yup.date()
-    .required('End date must be filled.')
-    .max(valTgl, 'Tanggal masuk harus sama atau sebelum hari ini.')
-});
-
 class FilterByPeriodeDate extends React.Component{
 
     constructor(props) {
@@ -60,55 +46,69 @@ class FilterByPeriodeDate extends React.Component{
     }
 
     render(){
+        const today = new Date();
+        const validationSchema = Yup.object().shape({
+            startDate: Yup.date()
+            .required('Start date must be filled.')
+            .max(today, 'Start date must be later than today.'),
+            
+            startDate2: Yup.date()
+            .required('End date must be filled.')
+            .min(Yup.ref('startDate'))
+            .max(today, 'End date must be later than today.')
+        });
+        console.log('today: ', today)
+        console.log('startDate: ', this.state.startDate)
+        console.log('endDate: ', this.state.startDate2)
         return(
             <Formik
-                initialValues={this.state}
+                initialValues={{startDate: '', startDate2: ''}}
                 validationSchema={validationSchema}
             >
                 {({ errors, touched }) => (
                     <Form>
-                    {console.log('error: ', errors.startDate)}
-                    <div className="assign-date-modal">
-                        <div className="top-row">
-                            <div className="ut-underline"/>
-                            <p className="select-input-title">{this.props.title}</p>
-                            <CloseButton idBtnClose="NonConfirmModal" onClose={this.props.onClosed}/>
+                        <div className="assign-date-modal">
+                            <div className="top-row">
+                                <div className="ut-underline"/>
+                                <p className="select-input-title">{this.props.title}</p>
+                                <CloseButton idBtnClose="NonConfirmModal" onClose={this.props.onClosed}/>
+                            </div>
+                            <div className="teks-middle-date">
+                                <label className="teks-left-date">From </label>
+                                <label className="teks-right-date">Up to</label>
+                            </div>
+                            <div className="top-midel">
+                                <div className="box"/>
+                                <DatePicker
+                                    name= "startDate"
+                                    className= "dates"
+                                    dateFormat= "dd-MM-yyyy"
+                                    selected= {this.state.startDate}
+                                    value= {this.state.startDate}
+                                    onChange= {this.handleChangeStart}
+                                />
+                                {errors.startDate && touched.startDate ? (
+                                    <div>{errors.startDate}</div>
+                                ) : null}
+                                <ErrorMessage name="startDate" />
+                                <DatePicker
+                                    name= "startDate2"
+                                    className= "dates2"
+                                    dateFormat= "dd-MM-yyyy"
+                                    selected={this.state.startDate2}
+                                    value= {this.state.startDate2}
+                                    onChange= {this.handleChangeEnd}
+                                />
+                                {errors.startDate2 && touched.startDate2 ? (
+                                    <div>{errors.startDate2}</div>
+                                ) : null}
+                                <ErrorMessage name="startDate2" />
+                            </div>
+                            <div className="bottom-rows-date">
+                                <Button className="btn-search-date" onClick={ () => {this.props.onFilter(this.state.startFilter, this.state.endFilter); this.props.onClosed() }} >Search Plan</Button>
+                            </div>
                         </div>
-                        <div className="teks-middle-date">
-                            <label className="teks-left-date">From </label>
-                            <label className="teks-right-date">Up to</label>
-                        </div>
-                        <div className="top-midel">
-                            <div className="box"/>
-                            <DatePicker
-                                name="startDate"
-                                className="dates"
-                                dateFormat="dd-MM-yyyy"
-                                selected={this.state.startDate}
-                                value= {this.state.startDate}
-                                onChange={this.handleChangeStart}
-                            />
-                            {errors.startDate && touched.startDate ? (
-                                <div>{errors.startDate}</div>
-                            ) : null}
-                            <ErrorMessage name="startDate" />
-                            <DatePicker
-                                name= "startDate2"
-                                className="dates2"
-                                dateFormat="dd-MM-yyyy"
-                                selected={this.state.startDate2}
-                                value= {this.state.startDate}
-                                onChange={this.handleChangeEnd}
-                            />
-                            {errors.startDate2 && touched.startDate2 ? (
-                                <div>{errors.startDate2}</div>
-                            ) : null}
-                            <ErrorMessage name="startDate2" />
-                        </div>
-                        <div className="bottom-rows-date">
-                            <Button className="btn-search-date" onClick={ () => {this.props.onFilter(this.state.startFilter, this.state.endFilter); this.props.onClosed() }} >Search Plan</Button>
-                        </div>
-                    </div></Form>
+                    </Form>
                 )}
             </Formik>
         )
