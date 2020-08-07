@@ -77,6 +77,12 @@ class BaseButton extends React.Component{
                     <FormLabel className="label-selected-data"> {this.props.totalSelectedItems} items selected.</FormLabel>
                 </div>
             )
+        }else if(this.props.titles === "Reset"){
+            return(
+                <div className="button-inline">
+                    <Button className="btn-reset" onClick={this.isClicked}>Reset Filter</Button>
+                </div>
+            )
         }else if(this.props.titles === "Approve"){
             return(
                 <div className="button-inline">

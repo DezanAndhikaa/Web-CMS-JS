@@ -46,6 +46,31 @@
         background-position-y: center;
         background-repeat: no-repeat;
         cursor: pointer;
+    }.btn-reset{
+        display: flex;
+        width: 100px;
+        height: vw(38.07);
+        margin-left: 0.8vw;
+        padding-right: 25%;
+        font-family: 'Lato-Regular';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 10px;
+        line-height: 12px;
+        text-transform: capitalize;
+        color: white;
+        background-color: map-get($colors , danger);
+        box-shadow: 2px 2px 4px rgba(77, 161, 255, 0.2);
+        border-radius: 6px;
+        background-image: url('../../assets/icons/reset.png');
+        background-size: 13%;
+        background-position-x: 87%;
+        background-position-y: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+    .btn-reset:hover{
+        background-color: map-get($colors, danger-hover);
     }
     .btn-approve{
         display: flex;
