@@ -80,7 +80,7 @@ class BaseButton extends React.Component{
         }else if(this.props.titles === "Reset"){
             return(
                 <div className="button-inline">
-                    <Button className="btn-reset" onClick={this.isClicked}>Reset Filter</Button>
+                    <Button className="btn-reset" onClick={this.props.resetFilter}>Reset Filter</Button>
                 </div>
             )
         }else if(this.props.titles === "Approve"){

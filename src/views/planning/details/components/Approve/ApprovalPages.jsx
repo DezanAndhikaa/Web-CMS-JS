@@ -9,6 +9,7 @@ import FilterbyDataAction from '../../../../../components/FilterByDataAction/Fil
 import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton';
 import ConfirmationModal from '../../../../../components/ConfirmationModal/ConfirmationModal';
 import { CircularProgress } from '@material-ui/core';
+import { Menu } from '../../../../../constants';
 
 class ApprovalPages extends React.Component {
   constructor(props) {
@@ -282,15 +283,20 @@ class ApprovalPages extends React.Component {
     }
   }
 
+  resetFilter = () => {
+		this.props.updateServiceParameter({
+      ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+    });
+	}
+
   //KOMPONEN UNTUK GLOBAL SEARCH
   _renderSearchBar() {
     return (
       <div className="bottom-row-approval">
         <BaseButton titles= "Reset"
             {...this.props}
-            whatTabsIsRendered={false}
-            handleServiceApprove={this.handleServiceApprove}
-            renderSakses={this.changeSuccess}
+            whatTabsIsRendered= {false}
+            resetFilter = {this.resetFilter }
         />
         <SearchInput
           {...this.props}
