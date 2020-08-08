@@ -47,22 +47,25 @@ class FilterByPeriodeDate extends React.Component{
 
     render(){
         const today = new Date();
+        const tgl = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        const valTgl = tgl.toString();
+
         const validationSchema = Yup.object().shape({
-            startDate: Yup.date()
+            startFilter: Yup.date()
             .required('Start date must be filled.')
-            .max(today, 'Start date must be later than today.'),
+            .max(valTgl, 'Start date must be later than today.'),
             
-            startDate2: Yup.date()
+            endFilter: Yup.date()
             .required('End date must be filled.')
-            .min(Yup.ref('startDate'))
+            .min(Yup.ref('startFilter'))
             .max(today, 'End date must be later than today.')
         });
-        console.log('today: ', today)
-        console.log('startDate: ', this.state.startDate)
-        console.log('endDate: ', this.state.startDate2)
+        console.log('today: ', valTgl)
+        console.log('startDate: ', this.state.startFilter)
+        console.log('endDate: ', this.state.endFilter)
         return(
             <Formik
-                initialValues={{startDate: '', startDate2: ''}}
+                initialValues={{startFilter: '', endFilter: ''}}
                 validationSchema={validationSchema}
             >
                 {({ errors, touched }) => (

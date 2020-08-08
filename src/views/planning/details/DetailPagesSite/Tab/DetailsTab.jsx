@@ -344,7 +344,7 @@ class DetailsTab extends React.Component {
       <div className="dropdowns-detail-site">
         <div className="dropdown-detail-site">
           <DropdownFilter
-          {...this.props}
+            {...this.props}
             data={this._dataFilterCustomer()}
             selected={this.props.selectedFilters.customerType}
             onSelectActionType={SelectCustomerFilterAction}
