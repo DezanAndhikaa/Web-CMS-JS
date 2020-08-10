@@ -151,8 +151,8 @@
                     font-family: 'Lato-Regular';
                     font-style: normal;
                     font-weight: bold;
-                    font-size: 8px;
-                    line-height: 10px;
+                    font-size: vw(13) !important;
+                    line-height: vw(16) !important;
                     color: #494949;
                 }
                 .table-cell-checkbox{
@@ -175,11 +175,20 @@
                         font-family: 'Lato-Bold';
                         color: #3C3B3B;
                     }
+                    .table-cell-short{
+                        width: vw(60);
+                        padding: 0;
+                        height: vw(40);
+                        font-size: vw(14) !important;
+                        line-height: vw(17) !important;
+                        font-family: 'Lato-Bold';
+                        color: #3C3B3B;
+                    }
                     .table-cell-pk{
                         padding: vw(0) vw(0) vw(0) vw(15);
                         height: vw(50);
-                        font-size: vw(13) !important;
-                        line-height: vw(16) !important;
+                        font-size: vw(14) !important;
+                        line-height: vw(17) !important;
                         font-family: 'Lato-Bold';
                         color: #3C3B3B;
                     }
