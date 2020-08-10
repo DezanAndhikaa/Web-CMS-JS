@@ -143,7 +143,7 @@ export default class SapServiceOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.LifeTimeComponent} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell-smr"> {row.SMR} </TableCell>
-        <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
+        <TableCell align="left" className="table-cell"> {moment(row.SMRLastUpdate).format('DD-MM-YYYY')} </TableCell>
         <Tooltip arrow title={row.PlanType.charAt(0) === "U" ? "UNSCHEDULE" : ""} >
           <TableCell align="left" className="table-cell"> {row.PlanType.substring(0, 3)} </TableCell>
         </Tooltip>
