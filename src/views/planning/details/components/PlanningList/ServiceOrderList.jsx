@@ -95,18 +95,18 @@ export default class ServiceOrderList extends React.PureComponent {
               </TableCell>
             }
             <TableCell align="left" className="table-cell">WO</TableCell>
-            <TableCell align="left" className="table-cell">Customer</TableCell>
-            <TableCell align="left" className="table-cell">Site</TableCell>
-            <TableCell align="left" className="table-cell">Unit Model</TableCell>
-            <TableCell align="left" className="table-cell">Component Description</TableCell>
-            <TableCell align="left" className="table-cell">Part Number</TableCell>
-            <TableCell align="left" className="table-cell">Unit Code</TableCell>
-            <TableCell align="left" className="table-cell">Serial Number</TableCell>
-            <TableCell align="left" className="table-cell">Lifetime Component</TableCell>
-            <TableCell align="left" className="table-cell">Plan Execution</TableCell>
+            <TableCell align="left" className="table-cell">CUSTOMER</TableCell>
+            <TableCell align="left" className="table-cell">SITE</TableCell>
+            <TableCell align="left" className="table-cell">UNIT MODEL</TableCell>
+            <TableCell align="left" className="table-cell">COMPONENT DESCRIPTION</TableCell>
+            <TableCell align="left" className="table-cell">PART NUMBER</TableCell>
+            <TableCell align="left" className="table-cell">UNIT CODE</TableCell>
+            <TableCell align="left" className="table-cell">SERIAL NUMBER</TableCell>
+            <TableCell align="left" className="table-cell">LIFETIME COMPONENT</TableCell>
+            <TableCell align="left" className="table-cell">PLAN EXECUTION</TableCell>
             <TableCell align="left" className="table-cell">SMR </TableCell>
-            <TableCell align="left" className="table-cell">SMR Date</TableCell>
-            <TableCell align="left" className="table-cell">Plan Type</TableCell>
+            <TableCell align="left" className="table-cell">SMR DATE</TableCell>
+            <TableCell align="left" className="table-cell">PLAN TYPE</TableCell>
           </TableRow>
         </TableHead>
       )
@@ -137,22 +137,22 @@ export default class ServiceOrderList extends React.PureComponent {
               onSearch={this.props.onSearchComp}
             />
             <PlanningListHeader
-              name="Customer"
+              name="CUSTOMER"
               delay={300}
               onClick={() => this.props.onClickTabHead(SortServiceByCustomer)}
             />
             <PlanningListHeader
-              name="Site"
+              name="SITE"
               delay={300}
               onClick={() => this.props.onClickTabHead(SortServiceBySite)}
             />
             <PlanningListHeader
-              name="Unit Model"
+              name="UNIT MODEL"
               delay={300}
               onClick={() => this.props.onClickTabHead(SortServiceByUnitModel)}
             />
             <PlanningListHeader
-              name="Component Description"
+              name="COMPONENT DESCRIPTION"
               delay={300}
               onClick={() => this.props.onClickTabHead(SortServiceByCompDesc)}
             />
@@ -192,7 +192,7 @@ export default class ServiceOrderList extends React.PureComponent {
               onSearch={this.isFilterDate}
             />
             <PlanningListHeader
-              name="Plan Type"
+              name="PLAN TYPE"
               delay={300}
               onClick={() => this.props.onClickTabHead(SortServiceByPlanType)}
             />
@@ -228,7 +228,7 @@ export default class ServiceOrderList extends React.PureComponent {
           <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell>
         }
         <TableCell align="left" className={this.props.idTab === "Status" ? "table-cell" : "table-cell-long"}> {row.CustomerName} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
+        <TableCell align="left" className="table-cell-short"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
         <TableCell align="left" className={this.props.idTab === "Status" ? "table-cell" : "table-cell-long"}> {row.ComponentDescription} </TableCell>
         <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
@@ -238,8 +238,8 @@ export default class ServiceOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
-        <Tooltip arrow title={row.PlanType.charAt(0) === "B" ? "BUS" : row.PlanType.charAt(0) === "F" ? "FIX" : "UNSCHEDULE"} >
-          <TableCell align="left" className="table-cell"> {row.PlanType.charAt(0)} </TableCell>
+        <Tooltip arrow title={row.PlanType.charAt(0) === "U" ? "UNSCHEDULE" : ""} >
+          <TableCell align="left" className="table-cell"> {row.PlanType.substring(0, 3)} </TableCell>
         </Tooltip>
       </TableRow>
     )

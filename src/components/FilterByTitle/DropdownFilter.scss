@@ -22,8 +22,8 @@
             white-space: nowrap;
             align-items: center;
             font-family: 'Lato-Bold';
-            font-size: 9px;
-            line-height: 11px;
+            font-size: vw(14);
+            line-height: vw(17);
             font-weight: 500;
             overflow: hidden;
             color: #3C3B3B;
@@ -65,14 +65,14 @@
     font-family: 'Lato-Regular';
     font-style: normal;
     font-weight: bold;
-    font-size: 9px;
-    line-height: 11px;
+    font-size: vw(14);
+    line-height: vw(17);
     .list-item-filter {
         padding: vw(6) vw(19);
         color: #3C3B3B;
         font-family: 'Lato-Bold';
-        font-size: 9px;
-        line-height: 11px;
+        font-size: vw(14);
+        line-height: vw(17);
     }
     .list-item-filter:hover {
         background-color: #e5e5e5;
