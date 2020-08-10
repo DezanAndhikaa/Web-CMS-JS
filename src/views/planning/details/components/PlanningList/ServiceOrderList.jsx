@@ -102,7 +102,7 @@ export default class ServiceOrderList extends React.PureComponent {
             <TableCell align="left" className="table-cell">PART NUMBER</TableCell>
             <TableCell align="left" className="table-cell">UNIT CODE</TableCell>
             <TableCell align="left" className="table-cell">SERIAL NUMBER</TableCell>
-            <TableCell align="left" className="table-cell">LIFETIME COMPONENT</TableCell>
+            <TableCell align="left" className="table-cell">LIFETIME COMP</TableCell>
             <TableCell align="left" className="table-cell">PLAN EXECUTION</TableCell>
             <TableCell align="left" className="table-cell">SMR </TableCell>
             <TableCell align="left" className="table-cell">SMR DATE</TableCell>
@@ -221,16 +221,16 @@ export default class ServiceOrderList extends React.PureComponent {
           <TableCell 
             align="left" 
             className={this.props.pageLoc && this.props.idTab === "Status" ? "table-cell-pk-status"
-            : this.props.pageLoc === "Status" && this.props.idService === "Data Input" ? "table-cell-pk" : "table-cell"}> 
+            : this.props.pageLoc === "Status" && this.props.idService === "Data Input" ? "table-cell-pk" : "table-cell-smr"}> 
             {row.WoNumber} 
           </TableCell>
           :
           <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell>
         }
-        <TableCell align="left" className={this.props.idTab === "Status" ? "table-cell" : "table-cell-long"}> {row.CustomerName} </TableCell>
+        <TableCell align="left" className={this.props.idTab === "Status" ? "table-cell-cst" : "table-cell-long"}> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell-short"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
-        <TableCell align="left" className={this.props.idTab === "Status" ? "table-cell" : "table-cell-long"}> {row.ComponentDescription} </TableCell>
+        <TableCell align="left" className="table-cell-long"> {row.ComponentDescription} </TableCell>
         <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>

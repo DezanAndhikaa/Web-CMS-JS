@@ -87,18 +87,18 @@ export default class DeletedServiceOrderList extends React.PureComponent {
             </TableCell>
           }
           <TableCell align="left" className="table-cell">WO</TableCell>
-          <TableCell align="left" className="table-cell">Customer</TableCell>
-          <TableCell align="left" className="table-cell">Site</TableCell>
-          <TableCell align="left" className="table-cell">Unit Model</TableCell>
-          <TableCell align="left" className="table-cell">Component Description</TableCell>
-          <TableCell align="left" className="table-cell">Part Number</TableCell>
-          <TableCell align="left" className="table-cell">Unit Code</TableCell>
-          <TableCell align="left" className="table-cell">Serial Number</TableCell>
-          <TableCell align="left" className="table-cell">Lifetime Component</TableCell>
-          <TableCell align="left" className="table-cell">Plan Execution</TableCell>
+          <TableCell align="left" className="table-cell">CUSTOMER</TableCell>
+          <TableCell align="left" className="table-cell">SITE</TableCell>
+          <TableCell align="left" className="table-cell">UNIT MODEL</TableCell>
+          <TableCell align="left" className="table-cell">COMPONENT DESCRIPTION</TableCell>
+          <TableCell align="left" className="table-cell">PART NUMBER</TableCell>
+          <TableCell align="left" className="table-cell">UNIT CODE</TableCell>
+          <TableCell align="left" className="table-cell">SERIAL NUMBER</TableCell>
+          <TableCell align="left" className="table-cell">LIFETIME COMP</TableCell>
+          <TableCell align="left" className="table-cell">PLAN EXECUTION</TableCell>
           <TableCell align="left" className="table-cell">SMR </TableCell>
-          <TableCell align="left" className="table-cell">SMR Date</TableCell>
-          <TableCell align="left" className="table-cell">Plan Type</TableCell>
+          <TableCell align="left" className="table-cell">SMR DATE</TableCell>
+          <TableCell align="left" className="table-cell">PLAN TYPE</TableCell>
         </TableRow>
       </TableHead>
     )
@@ -122,23 +122,23 @@ export default class DeletedServiceOrderList extends React.PureComponent {
           <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell> :
           <TableCell 
             align="left" 
-            className={this.props.pageLoc === "Status" ? "table-cell-pk-status" : "table-cell"}> 
+            className={this.props.pageLoc === "Status" ? "table-cell-pk-status" : "table-cell-smr"}> 
             {row.WoNumber} 
           </TableCell>
         }
-        <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
+        <TableCell align="left" className="table-cell-cst"> {row.CustomerName} </TableCell>
+        <TableCell align="left" className="table-cell-short"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>
+        <TableCell align="left" className="table-cell-long"> {row.ComponentDescription} </TableCell>
         <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.LifeTimeComponent} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
+        <TableCell align="left" className="table-cell-smr"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
-        <Tooltip arrow title={row.PlanType.charAt(0) === "B" ? "BUS" : row.PlanType.charAt(0) === "F" ? "FIX" : "UNSCHEDULE"} >
-          <TableCell align="left" className="table-cell"> {row.PlanType.charAt(0)} </TableCell>
+        <Tooltip arrow title={row.PlanType.charAt(0) === "U" ? "UNSCHEDULE" : ""} >
+          <TableCell align="left" className="table-cell"> {row.PlanType.substring(0, 3)} </TableCell>
         </Tooltip>
       </TableRow>
     )
