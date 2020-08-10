@@ -80,7 +80,6 @@ export default class SapIssue extends React.Component{
   isDisabled() { return this.state.description.length === 0 }
 
   _renderIssue(){
-    console.log('isi desc: ', this.state.description)
     return(
       <div className="assign-mechanic-modal-issue">
         <div className="container-issue">

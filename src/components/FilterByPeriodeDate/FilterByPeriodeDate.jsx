@@ -5,9 +5,9 @@ import { Button } from '@material-ui/core';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
-import moment from 'moment';
-import { Formik, ErrorMessage, Form } from 'formik';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import moment from 'moment';
 
 class FilterByPeriodeDate extends React.Component{
 
@@ -16,59 +16,42 @@ class FilterByPeriodeDate extends React.Component{
         this.handleChangeStart = this.handleChangeStart.bind(this);
         this.handleChangeEnd = this.handleChangeEnd.bind(this);
         this.state = {
-            startDate: new Date(),
-            startDate2: new Date(),
-            startFilter: Date(),
-            endFilter: Date()
+            dateValue: {
+                startDate: new Date(), 
+                endDate: new Date()
+            }
         };
     }
 
-    handleChangeStart = date => {
-        this.setState({
-            startDate: date,
-            startFilter: moment(date).format('YYYY-MM-DD')
-        })
+    handleChangeStart = (event, props) => {
+        props.setFieldValue("startDate", event);
     }
 
-    handleChangeEnd = date => {
-        this.setState({
-            startDate2: date,
-            endFilter: moment(date).format('YYYY-MM-DD')
-        })
+    handleChangeEnd = (event, props) => {
+        props.setFieldValue("endDate", event);
     }
 
-    handleChange = (event) => {
-        event.preventDefault()
-        const {name, value} = event.target
-        this.setState({
-            [name] : value
-        })
-    }
+    // isDisabled(props) { return props.errors.startDate || props.errors.endDate }
 
     render(){
-        const today = new Date();
-        const tgl = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-        const valTgl = tgl.toString();
-
+        const today = new Date();        
         const validationSchema = Yup.object().shape({
-            startFilter: Yup.date()
+            startDate: Yup.date()
             .required('Start date must be filled.')
-            .max(valTgl, 'Start date must be later than today.'),
+            .max(today, 'Start date must be later than today.'),
             
-            endFilter: Yup.date()
+            endDate: Yup.date()
             .required('End date must be filled.')
-            .min(Yup.ref('startFilter'))
+            .min(Yup.ref('startDate'), 'End date must be later than start date.')
             .max(today, 'End date must be later than today.')
         });
-        console.log('today: ', valTgl)
-        console.log('startDate: ', this.state.startFilter)
-        console.log('endDate: ', this.state.endFilter)
         return(
             <Formik
-                initialValues={{startFilter: '', endFilter: ''}}
+                initialValues={this.state.dateValue}
                 validationSchema={validationSchema}
             >
-                {({ errors, touched }) => (
+
+                {( props ) => (
                     <Form>
                         <div className="assign-date-modal">
                             <div className="top-row">
@@ -86,29 +69,36 @@ class FilterByPeriodeDate extends React.Component{
                                     name= "startDate"
                                     className= "dates"
                                     dateFormat= "dd-MM-yyyy"
-                                    selected= {this.state.startDate}
-                                    value= {this.state.startDate}
-                                    onChange= {this.handleChangeStart}
+                                    selected= {props.values.startDate}
+                                    value= {props.values.startDate}
+                                    onChange= { e => this.handleChangeStart(e, props)}
                                 />
-                                {errors.startDate && touched.startDate ? (
-                                    <div>{errors.startDate}</div>
-                                ) : null}
-                                <ErrorMessage name="startDate" />
                                 <DatePicker
                                     name= "startDate2"
                                     className= "dates2"
                                     dateFormat= "dd-MM-yyyy"
-                                    selected={this.state.startDate2}
-                                    value= {this.state.startDate2}
-                                    onChange= {this.handleChangeEnd}
+                                    selected={props.values.endDate}
+                                    value= {props.values.endDate}
+                                    onChange= {e => this.handleChangeEnd(e, props)}
                                 />
-                                {errors.startDate2 && touched.startDate2 ? (
-                                    <div>{errors.startDate2}</div>
+                            </div>
+                            <div className="label-error">
+                                {props.errors.startDate ? (
+                                    <div className="label-error1">{props.errors.startDate}</div>
                                 ) : null}
-                                <ErrorMessage name="startDate2" />
+                                {props.errors.endDate ? (
+                                    <div className="label-error2">{props.errors.endDate}</div>
+                                ) : null}
                             </div>
                             <div className="bottom-rows-date">
-                                <Button className="btn-search-date" onClick={ () => {this.props.onFilter(this.state.startFilter, this.state.endFilter); this.props.onClosed() }} >Search Plan</Button>
+                                <Button 
+                                    disabled={props.errors.startDate || props.errors.endDate}
+                                    className={props.errors.startDate || props.errors.endDate ? "btn-search-date-disabled" : "btn-search-date" }
+                                    onClick={ () => {this.props.onFilter(moment(props.values.startDate).format('YYYY-MM-DD'), 
+                                    moment(props.values.endDate).format('YYYY-MM-DD')); this.props.onClosed() }} 
+                                >
+                                    Search Plan
+                                </Button>
                             </div>
                         </div>
                     </Form>

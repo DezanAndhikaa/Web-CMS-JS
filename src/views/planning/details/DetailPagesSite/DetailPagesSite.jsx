@@ -864,9 +864,7 @@ componentDidUpdate = (prevProps) => {
     );
   };
 
-  render(){     
-    console.log('value select cust:', this.props.filterParameter)
-    console.log('value: ', this.state)
+  render(){
     return(
       <main className="content">
           <div className="table-detail-site">

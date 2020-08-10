@@ -9,7 +9,6 @@ import FilterbyDataAction from '../../../../../components/FilterByDataAction/Fil
 import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton';
 import ConfirmationModal from '../../../../../components/ConfirmationModal/ConfirmationModal';
 import { CircularProgress } from '@material-ui/core';
-import { Menu } from '../../../../../constants';
 
 class ApprovalPages extends React.Component {
   constructor(props) {
