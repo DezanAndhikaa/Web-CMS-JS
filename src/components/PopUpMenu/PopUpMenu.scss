@@ -1,5 +1,66 @@
 .pop-up{
-    width: 20%;
-    height: fit-content;
+    position: absolute;
+    width: 414px;
+    height: 151px;
     margin: auto;
+    .paper-menu{
+        border-radius: 10px;
+        .menu-list{
+            padding: 10px 20px;
+            .menu-item1{
+                padding-bottom: 13px;
+                border-bottom: 1px solid #dddbdb;
+                .menu-label{
+                    padding-left: 15%;
+                    font-family: 'Lato-Regular';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 19px;
+                    color: #1D1D1D;
+                    background-image: url('../../assets/icons/history.png');
+                    background-size: 12%;
+                    background-position-y: center;
+                    background-repeat: no-repeat;
+                    cursor: pointer;
+                }
+            }
+            .menu-item2{
+                padding-top: 13px;
+                padding-bottom: 13px;
+                border-bottom: 1px solid #dddbdb;
+                .menu-label{
+                    padding-left: 15%;
+                    font-family: 'Lato-Regular';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 19px;
+                    color: #1D1D1D;
+                    background-image: url('../../assets/icons/ic_settings.png');
+                    background-size: 17%;
+                    background-position-y: center;
+                    background-repeat: no-repeat;
+                    cursor: pointer;
+                }
+            }
+            .menu-item3{
+                padding-top: 13px;
+                .menu-label{
+                    padding-left: 15%;
+                    font-family: 'Lato-Regular';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 19px;
+                    color: #1D1D1D;
+                    background-image: url('../../assets/icons/ic_power.png');
+                    background-size: 15%;
+                    background-position-y: center;
+                    background-repeat: no-repeat;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
 }

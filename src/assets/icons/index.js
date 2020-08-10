@@ -39,8 +39,10 @@ import IconBack from './back.png';
 import IconDate from './ic_date.png';
 import IcUnderDev from './icon-under-dev.png';
 import IconChecked from './icon-checked.png';
+import IcLogout from './ic_power.png';
 
 export {
+	IcLogout,
 	IconChecked,
 	IcUnderDev,
 	IcDbMenu,
