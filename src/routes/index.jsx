@@ -13,7 +13,9 @@ import { LoginPage }  from '../views/Login';
 import { SapIssuePages } from '../views/planning/details/components/SapIssuePages';
 import requireAuth from '../components/AuthGuardHoc';
 import Dashboard from '../views/Dashboard/';
+import roleService from '../utils/roleService.helper';
 
+const RoleUser = new roleService();
 const routes = (
 	<div>
 		<Switch>
@@ -26,7 +28,9 @@ const routes = (
 			<Route exact path={Menu.PLANNING_HO} component={requireAuth(ApprovalPages)} />
 			<Route exact path={Menu.PLANNING_ALL_NOTIF} component={requireAuth(Notification)} />
 			<Route exact path={Menu.PLANNING_HO_SAP} component={requireAuth(SapIssuePages)} />
-			<Route exact path="*" component={requireAuth(Dashboard)} />
+			<Route exact path="*" 
+				component={Number(RoleUser.role()) === 1 ? requireAuth(ApprovalPages) : requireAuth(DetailPagesSite)} 
+			/>
 		</Switch>
 	</div>
 );
