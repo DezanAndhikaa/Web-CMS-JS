@@ -1273,9 +1273,13 @@ export default class Status extends React.PureComponent {
 		document.body.appendChild(link);
 		link.style = "display: none";
 		const todayDate = moment(new Date()).format('DD-MM-YYYY');
-		let fileName = "Service-Order-Planning-"+todayDate+".csv";
+		let fileName = 
+			this.state.whatPageIsChoosed === "Approve" ? "Service-Order-Approval-"+todayDate+".csv" :
+			this.state.whatPageIsChoosed === "Not Approve" ? "Service-Order-Pending-Approval-"+todayDate+".csv" :
+			this.state.whatPageIsChoosed === "Delete" ? "Service-Order-Deleted-"+todayDate+".csv" :
+			this.state.whatPageIsChoosed === "SAP ISSUE" ? "Service-Order-SAP-Issue-"+todayDate+".csv" : "";
 		let blob = new Blob([this.props.approveServiceDownloaded.data]),
-		  url = window.URL.createObjectURL(blob);
+		url = window.URL.createObjectURL(blob);
 		link.href = url;
 		link.download = fileName;
 		link.click();
@@ -1289,7 +1293,8 @@ export default class Status extends React.PureComponent {
 		  for (let i = 0; i < index; i++) {
 			arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
 		  }
-		}await this.props.downloadSales(arr, this.props.token);
+		}
+		await this.props.downloadSales(arr, this.props.token);
 		if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.FAILED) {
 		  this.setState({ showError: true });
 		}
