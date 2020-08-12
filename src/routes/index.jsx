@@ -28,9 +28,7 @@ const routes = (
 			<Route exact path={Menu.PLANNING_HO} component={requireAuth(ApprovalPages)} />
 			<Route exact path={Menu.PLANNING_ALL_NOTIF} component={requireAuth(Notification)} />
 			<Route exact path={Menu.PLANNING_HO_SAP} component={requireAuth(SapIssuePages)} />
-			<Route exact path="*" 
-				component={Number(RoleUser.role()) === 1 ? requireAuth(ApprovalPages) : requireAuth(DetailPagesSite)} 
-			/>
+			<Route exact path="*" component={requireAuth(Dashboard)} />
 		</Switch>
 	</div>
 );
