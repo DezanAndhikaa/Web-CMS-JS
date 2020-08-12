@@ -50,6 +50,13 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: web-cms-js
+  labels:
+    app: web-cms-js
+    workstream: cms
+    version: 1.0.0
+    tier: frontend
+    usermanagementservice: "true"
+    msplanning: "true"
 spec:
   rules:
   - host: web-cms-js.proxyicp.unitedtractors.com

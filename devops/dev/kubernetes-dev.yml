@@ -1,6 +1,8 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
+  name: web-cms-js
+  namespace: devcms
   labels:
     app: web-cms-js
     workstream: cms
@@ -8,8 +10,6 @@ metadata:
     tier: frontend
     usermanagementservice: "true"
     msplanning: "true"
-  name: web-cms-js
-  namespace: devcms
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
@@ -74,6 +74,13 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: web-cms-js
+  labels:
+    app: web-cms-js
+    workstream: cms
+    version: 1.0.0
+    tier: frontend
+    usermanagementservice: "true"
+    msplanning: "true"
 spec:
   rules:
   - host: web-cms-js.dev-rke.unitedtractors.com
