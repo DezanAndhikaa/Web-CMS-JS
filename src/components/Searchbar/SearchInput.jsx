@@ -23,11 +23,11 @@ export default class SearchInput extends React.PureComponent {
   render() {
     const info = (this.props.displayMode === 'web' ? this.props.webInfo : this.props.generalInfo) || 'Search';
     return (
-      <Paper className={this.props.className || 'search-input'} elevation={1}>
-        <img src={SearchIcon} alt="" className="search-icon" />
+      <Paper className={this.props.idTab === "Status" ? "search-input-status" : "search-input"} elevation={1}>
+        <img src={SearchIcon} alt="" className= "search-icon" />
         <InputBase
-          className="search-text"
-          placeholder={info}
+          className= "search-text"
+          placeholder= {info}
           onKeyUp={this.handleKeyUp}
         />
       </Paper>

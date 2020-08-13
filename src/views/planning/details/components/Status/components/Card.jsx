@@ -3,7 +3,6 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import './Card.scss'
 
-
 class Cards extends React.Component {
 	handleClick = () =>{
 		this.props.renderList(this.props.title);

@@ -5,41 +5,25 @@ import {
   ListItem,
   List,
   Drawer,
-  Modal,
-  DialogContent,
   Collapse
 } from "@material-ui/core";
-import { AssignmentIcon, IcDbMenu, IcApproval, LogoutIcon, AllocationIcon, DeliveryIcon, TrackingIcon, 
+import { AssignmentIcon, IcDbMenu, IcApproval, AllocationIcon, DeliveryIcon, TrackingIcon, 
   ProductionIcon, ExecutionIcon, DashboardIcon, PlanningIcon } from "../../assets/icons";
-import { Menu, StorageKey } from "../../constants";
-import LogoutModal from "./Logout";
+import { Menu } from "../../constants";
 import "./SideMenuComponent.scss";
+import roleService from "../../utils/roleService.helper";
 
+const RoleUser = new roleService();
 class SideMenuComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLogoutModalShown: false
-    };
-  }
-
-  handleLogout = () => {
-    localStorage.removeItem(StorageKey.USER_DATA);
-    this.props.logout();
-    this.props.onLogout();
-    this.setState({ isLogoutModalShown: false });
-    this.props.push(Menu.LOGIN);
-  };
 
   handleClick(menu, subMenu) {
     this.props.clickMenu(menu, subMenu);
     if (menu === Menu.PLANNING) {
       if (subMenu !== "") this.props.push(subMenu);
-    }else if (menu === Menu.BACKLOG){
-      if (subMenu !== "") this.props.push(subMenu);
-    } else {
+    }else {
       this.props.push(menu);
     }
+    window.localStorage.setItem('subMenu', subMenu);
   }
 
   render() {
@@ -86,11 +70,11 @@ class SideMenuComponent extends React.Component {
               button
               key="jobs"
               className={
-                this.props.path.includes(Menu.PROBLEMLOG)
+                this.props.path.includes(Menu.TRACKING)
                   ? "menu-item-selected"
                   : "menu-item"
               }
-              onClick={() => this.handleClick(Menu.PROBLEMLOG, "")}
+              onClick={() => this.handleClick(Menu.TRACKING, "")}
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img
@@ -132,85 +116,133 @@ class SideMenuComponent extends React.Component {
               timeout="auto"
               unmountOnExit
             >
-              <List disablePadding>
-                <ListItem
-                  button
-                  key="plans-assignment"
-                  className={
-                    this.props.path === Menu.PLANNING_DASHBOARD 
-                      ? "sub-menu-selected"
-                      : "sub-menu"
-                  }
-                  onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_DASHBOARD)}
-                >
-                  <ListItemIcon classes={{ root: "icon-root" }}>
-                    <img
-                      src={IcDbMenu}
-                      alt="assignment icon"
-                      className="item-icon"
+              {Number(RoleUser.role()) === 1 
+                ? <List disablePadding>
+                    <ListItem
+                      button
+                      key="plans-assignment"
+                      className={
+                        this.props.path === Menu.PLANNING_DASHBOARD 
+                          ? "sub-menu-selected"
+                          : "sub-menu"
+                      }
+                      onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_DASHBOARD)}
+                    >
+                      <ListItemIcon classes={{ root: "icon-root" }}>
+                        <img
+                          src={IcDbMenu}
+                          alt="assignment icon"
+                          className="item-icon"
+                        />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary="Dashboard"
+                        classes={{ primary: "item-text", root: "item-text" }}
+                      />
+                    </ListItem>
+                    <ListItem
+                      button
+                      key="jobs-report"
+                      className={
+                        this.props.path === Menu.PLANNING_HO || this.props.path === Menu.PLANNING_TRACKING_HISTORY || this.props.path === Menu.PLANNING_SITE_STATUS || this.props.path === Menu.PLANNING_INPUT_LIFETIME || this.props.path === Menu.PLANNING_ALL_NOTIF
+                          ? "sub-menu-selected"
+                          : "sub-menu"
+                      }
+                      onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_HO)}
+                    >
+                      <ListItemIcon classes={{ root: "icon-root" }}>
+                        <img
+                          src={IcApproval}
+                          alt="assignment icon"
+                          className="item-icon"
+                        />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary="HO"
+                        classes={{ primary: "item-text", root: "item-text" }}
+                      />
+                    </ListItem>
+                    <ListItem
+                      button
+                      key="jobs-report"
+                      className={
+                        this.props.path === Menu.PLANNING_SITE
+                          ? "sub-menu-selected"
+                          : "sub-menu"
+                      }
+                      onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_SITE)}
+                    >
+                      <ListItemIcon classes={{ root: "icon-root" }}>
+                        <img
+                          src={AssignmentIcon}
+                          alt="assignment icon"
+                          className="item-icon"
+                        />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary="Site"
+                        classes={{ primary: "item-text", root: "item-text" }}
+                      />
+                    </ListItem>
+                  </List>
+                : <List disablePadding>
+                  <ListItem
+                    button
+                    key="plans-assignment"
+                    className={
+                      this.props.path === Menu.PLANNING_DASHBOARD 
+                        ? "sub-menu-selected"
+                        : "sub-menu"
+                    }
+                    onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_DASHBOARD)}
+                  >
+                    <ListItemIcon classes={{ root: "icon-root" }}>
+                      <img
+                        src={IcDbMenu}
+                        alt="assignment icon"
+                        className="item-icon"
+                      />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="Dashboard"
+                      classes={{ primary: "item-text", root: "item-text" }}
                     />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Dashboard"
-                    classes={{ primary: "item-text", root: "item-text" }}
-                  />
-                </ListItem>
-                <ListItem
-                  button
-                  key="jobs-report"
-                  className={
-                    this.props.path === Menu.PLANNING_APPROVAL || this.props.path === Menu.PLANNING_TRACKING_HISTORY || this.props.path === Menu.PLANNING_DETAILS_STATUS || this.props.path === Menu.PLANNING_DETAILS || this.props.path === Menu.PLANNING_ALL_NOTIF
-                      ? "sub-menu-selected"
-                      : "sub-menu"
-                  }
-                  onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_APPROVAL)}
-                >
-                  <ListItemIcon classes={{ root: "icon-root" }}>
-                    <img
-                      src={IcApproval}
-                      alt="assignment icon"
-                      className="item-icon"
+                  </ListItem>
+                  <ListItem
+                    button
+                    key="jobs-report"
+                    className={
+                      this.props.path === Menu.PLANNING_SITE
+                        ? "sub-menu-selected"
+                        : "sub-menu"
+                    }
+                    onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_SITE)}
+                  >
+                    <ListItemIcon classes={{ root: "icon-root" }}>
+                      <img
+                        src={AssignmentIcon}
+                        alt="assignment icon"
+                        className="item-icon"
+                      />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary= "Site"
+                      classes={{ primary: "item-text", root: "item-text" }}
                     />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Approval"
-                    classes={{ primary: "item-text", root: "item-text" }}
-                  />
-                </ListItem>
-                <ListItem
-                  button
-                  key="jobs-report"
-                  className={
-                    this.props.path === Menu.PLANNING_DETAILS_SITE
-                      ? "sub-menu-selected"
-                      : "sub-menu"
-                  }
-                  onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_DETAILS_SITE)}
-                >
-                  <ListItemIcon classes={{ root: "icon-root" }}>
-                    <img
-                      src={AssignmentIcon}
-                      alt="assignment icon"
-                      className="item-icon"
-                    />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Detail"
-                    classes={{ primary: "item-text", root: "item-text" }}
-                  />
-                </ListItem>
-              </List>
+                  </ListItem>
+                </List>
+              }
             </Collapse>
             {/* Production */}
             <ListItem
               button
               key="jobs"
               className={
-                this.props.path.includes(Menu.DETAIL_PI)
+                this.props.path.includes(Menu.PRODUCTION)
                   ? "menu-item-selected"
                   : "menu-item"
               }
-              onClick={() => this.handleClick(Menu.DETAIL_PI, "")}
+              onClick={() => this.handleClick(Menu.PRODUCTION, "")}
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img
@@ -252,11 +284,11 @@ class SideMenuComponent extends React.Component {
               button
               key="jobs"
               className={
-                this.props.path.includes(Menu.FC)
+                this.props.path.includes(Menu.DELIVERY)
                   ? "menu-item-selected"
                   : "menu-item"
               }
-              onClick={() => this.handleClick(Menu.FC, "")}
+              onClick={() => this.handleClick(Menu.DELIVERY, "")}
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img
@@ -275,11 +307,11 @@ class SideMenuComponent extends React.Component {
               button
               key="jobs"
               className={
-                this.props.path.includes(Menu.MASTER_DATA)
+                this.props.path.includes(Menu.EXECUTION)
                   ? "menu-item-selected"
                   : "menu-item"
               }
-              onClick={() => this.handleClick(Menu.MASTER_DATA, "")}
+              onClick={() => this.handleClick(Menu.EXECUTION, "")}
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img
@@ -293,41 +325,7 @@ class SideMenuComponent extends React.Component {
                 classes={{ primary: "item-text", root: "item-text" }}
               />
             </ListItem>
-            <ListItem
-              button
-              key="logout"
-              className={
-                this.props.path === Menu.LOGOUT
-                  ? "menu-item-selected"
-                  : "menu-item"
-              }
-              onClick={() => this.setState({ isLogoutModalShown: true })}
-            >
-              <ListItemIcon classes={{ root: "icon-root" }}>
-                <img
-                  src={LogoutIcon}
-                  alt="assignment icon"
-                  className="item-icon"
-                />
-              </ListItemIcon>
-              <ListItemText
-                primary="Logout"
-                classes={{ primary: "item-text", root: "item-text" }}
-              />
-            </ListItem>
           </List>
-          <Modal
-            open={this.state.isLogoutModalShown}
-            className="modal-container"
-            onClose={() => this.setState({ isLogoutModalShown: false })}
-          >
-            <DialogContent className="modal-content">
-              <LogoutModal
-                onYesClicked={this.handleLogout}
-                onNoClicked={() => this.setState({ isLogoutModalShown: false })}
-              />
-            </DialogContent>
-          </Modal>
         </Drawer>
       );
     }

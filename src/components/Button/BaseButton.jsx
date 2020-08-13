@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, FormLabel } from '@material-ui/core';
+import { Button, FormLabel, Tooltip } from '@material-ui/core';
 import './BaseButton.scss';
 import EditButton from '../ActionButton/EditButton/EditButton';
 import DeleteButton from '../ActionButton/DeleteButton/DeleteButton';
@@ -7,7 +7,6 @@ import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 import ApproveConfirmation from '../ApproveConfirmation/ApproveConfirmation';
 import UnapproveConfirmation from '../UnapproveConfirmation/UnapproveConfirmation'
 import { ApiRequestActionsStatus } from '../../core/RestClientHelpers';
-// import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 
 class BaseButton extends React.Component{
     constructor(props){
@@ -17,6 +16,13 @@ class BaseButton extends React.Component{
             isShowApprovedModal: false,
             index:0
         }
+    }
+
+    handleClick = (menu, tab) => {
+        this.props.push({
+          pathname: menu,
+          whichTab: tab
+        });
     }
 
     isClicked = () => {
@@ -30,40 +36,38 @@ class BaseButton extends React.Component{
     isApproved = async() => {
         if (this.props.whatTabsIsRendered === true) {
             if (this.props.titles === "Approve") {
-                await this.props.handleSalesApprove()
+                await this.props.handleSalesApprove();
             }
             if (this.props.titles === "Delete") {
-                await this.props.handleDeleteSales()
-                // this.isClosed()
+                await this.props.handleDeleteSales();
             }
-            if (this.props.titles === "Cancel Approve"){
-                await this.props.handleSendtoEdit()
-                // this.showModalInfo()
+            if (this.props.titles === "Reject"){
+                await this.props.handleSendtoEdit();
                 this.isClosed()
             }
             if (this.props.titles === "Permanently"){
-                this.isClosed()
+                await this.props.handleDeletePermanent();
             }
         }
         if (this.props.whatTabsIsRendered === false) {
             if (this.props.titles === "Approve") {
                 await this.props.handleServiceApprove();
-                // this.isClosed()
             }
             if (this.props.titles === "Delete") {
                 await this.props.handleDeleteService();
-                // this.isClosed()
+            }
+            if (this.props.titles === "Permanently"){
+                await this.props.handleDeletePermanent();
             }
         }
     }
 
     isDownloaded = async() => {
         if (this.props.whatTabsIsRendered === true) {
-            await this.props.handleSalesApprovedDownload()
+            await this.props.handleSalesDownload()
         }if (this.props.whatTabsIsRendered === false) {
-            await this.props.handleServiceApprovedDownload()
+            await this.props.handleServiceDownload()
         }
-       
     }
 
     render(){
@@ -71,6 +75,12 @@ class BaseButton extends React.Component{
             return(
                 <div className="button-inline">
                     <FormLabel className="label-selected-data"> {this.props.totalSelectedItems} items selected.</FormLabel>
+                </div>
+            )
+        }else if(this.props.titles === "Reset"){
+            return(
+                <div className="button-inline">
+                    <Button className="btn-reset" onClick={this.props.resetFilter}>Reset Filter</Button>
                 </div>
             )
         }else if(this.props.titles === "Approve"){
@@ -87,10 +97,13 @@ class BaseButton extends React.Component{
                     />
                 </div>
             )
-        }else if(this.props.titles === "Cancel Approve"){
+        }else if(this.props.titles === "Reject"){
             return(
                 <div className="button-inline">
-                    <Button className="btn-cancel-approve" onClick={this.isClicked} disabled={this.props.disabledButton}> Cancel Approve</Button>
+                    <Button className={this.props.idReject === "Sales" ? "btn-cancel-approve" : "btn-reject-service"} 
+                        onClick={this.isClicked} disabled={this.props.disabledButton}>
+                        { this.props.idReject === "Sales" ? "Reject" : "SAP Issue" }
+                    </Button>
                     <UnapproveConfirmation 
                         {...this.props}
                         idConfirm = "Cancel"
@@ -115,43 +128,47 @@ class BaseButton extends React.Component{
             )
         }else if(this.props.titles === "Delete"){
             return(
-                <div className="button-inline">
-                    <DeleteButton 
-                        {...this.props}
-                        {...this.state}
-                        onClick={this.isClicked}
-                        disabled={this.props.disabledButton}
-                    />
-                    <DeleteConfirmation
-                        {...this.props}
-                        {...this.state}
-                        idDelete="Delete"
-                        onClose={this.isClosed}
-                        openModal={this.state.isShowModal}
-                        totalData={this.props.totalSelectedItems}
-                        onDelete={this.isApproved}
-                    />
-                </div>
+                <Tooltip arrow title= "Delete">
+                    <div className="button-inline">
+                        <DeleteButton 
+                            {...this.props}
+                            {...this.state}
+                            onClick={this.isClicked}
+                            disabled={this.props.disabledButton}
+                        />
+                        <DeleteConfirmation
+                            {...this.props}
+                            {...this.state}
+                            idDelete="Delete"
+                            onClose={this.isClosed}
+                            openModal={this.state.isShowModal}
+                            totalData={this.props.totalSelectedItems}
+                            onDelete={this.isApproved}
+                        />
+                    </div>
+                </Tooltip>
             )
         }else if(this.props.titles === "Permanently"){
             return(
-                <div className="button-inline">
-                    <DeleteButton 
-                        {...this.props}
-                        {...this.state}
-                        onClick={this.isClicked}
-                        disabled={this.props.disabledButton}
-                    />
-                    <DeleteConfirmation
-                        {...this.props}
-                        {...this.state}
-                        idDelete="Permanent"
-                        onClose={this.isClosed}
-                        openModal={this.state.isShowModal}
-                        totalData={this.props.totalSelectedItems}
-                        onDelete={this.isApproved}
-                    />
-                </div>
+                <Tooltip arrow title= "Delete Permanent">
+                    <div className="button-inline">
+                        <DeleteButton 
+                            {...this.props}
+                            {...this.state}
+                            onClick={this.isClicked}
+                            disabled={this.props.disabledButton}
+                        />
+                        <DeleteConfirmation
+                            {...this.props}
+                            {...this.state}
+                            idDelete="Permanent"
+                            onClose={this.isClosed}
+                            openModal={this.state.isShowModal}
+                            totalData={this.props.totalSelectedItems}
+                            onDelete={this.isApproved}
+                        />
+                    </div>
+                </Tooltip>
             )
         }else if(this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED){
             this._renderApprovedModal()

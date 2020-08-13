@@ -1,5 +1,6 @@
 import React from 'react';
 import '../Notification.scss';
+import { IcUnderDev } from '../../../../../../assets/icons';
 
 export default class CardData extends React.Component {
 
@@ -24,13 +25,6 @@ export default class CardData extends React.Component {
         { id: 4, time: "22 Oktober 2018 - 8:00", title: "Surabaya", location: "Telah Menginput Lifetime Component", push: "dengan SO : 138580733 dan 13151973" },
         { id: 5, time: "28 November 2018 - 9:40", title: "Bekasi", location: "Telah Menginput Lifetime Component", push: "dengan SO : 138580731 dan 13451973" },
       ]
-      // nextPage: true,
-      // prevPage: false,
-      // numberOfPage: 2,
-      // currentPage: 1,
-      // filter: {
-      //   filter : {}
-      // }
     };
   }
   render(){
@@ -54,7 +48,7 @@ export default class CardData extends React.Component {
     } 
     else if(this.props.idCard === "See All"){
       return(
-          <>
+        <>
           {this.state.col.map(() => (
             <div className="filters-container-notif">
               {this.state.events.map(world => (
@@ -69,7 +63,19 @@ export default class CardData extends React.Component {
               ))}
             </div>
           ))}
-          </>
+        </>
+      )
+    }
+    else if(this.props.idCard === "UnderDev"){
+      return(
+        <>
+          <div className="under-dev">
+            <img className="under-dev-image" src={IcUnderDev} alt="" /> 
+            <div className="content1">This page is currently</div>
+            <div className="main-content">Under Development !</div>
+            <div className="content2">we'll back shortly</div>
+          </div>
+        </>
       )
     }
   }

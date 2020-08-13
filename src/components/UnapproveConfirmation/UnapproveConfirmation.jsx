@@ -26,10 +26,6 @@ export default class UnapproveConfirmation extends React.PureComponent {
     let arr = []
     if(this.props.whichTabs){
       for(let i=0; i<index; i++){
-        arr = [...arr,{NumberOrder: this.props.selectedDataSAP[i].SoNumber, Message: description[i]}]
-      }
-    }else{
-      for(let i=0; i<index; i++){
         arr = [...arr,{NumberOrder: this.props.selectedDataSAP[i].WoNumber, Message: description[i]}]
       }
     }
@@ -50,8 +46,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
   isTry = () => {
     this.setState({
       isShowModalSap: !this.state.isShowModalSap,
-      isShowModalSapSucced: !this.state.isShowModalSapSucced,
-      isShowModalSapFailed: !this.state.isShowModalSapFailed
+      isShowModalSapSucced: !this.state.isShowModalSapSucced
     })
   }
 
@@ -110,26 +105,18 @@ export default class UnapproveConfirmation extends React.PureComponent {
   }
 
   isReload = () => {
-    this.props.fetchSalesOrder({
-      ...this.props.salesParameter.dataFilter, 
-      Filter : 
-        [...this.props.salesParameter.dataFilter.Filter, {
-          Field : 'LifeTimeComponent',
-          Operator : "neq",
-          Value : '-',
-          Logic : "AND"
-        },{
-          Field : 'SAPIssueMessage',
-          Operator : 'eq',
-          Value : '-',
-          Logic : 'AND'
-        },{
-          Field : 'IsRevised',
-          Operator : 'eq',
-          Value : 'false',
-          Logic : 'AND'
-        }]
-    }, this.props.token);
+    if (this.props.whichTabs){
+      this.props.fetchServiceOrder({
+        ...this.props.serviceParameter.dataFilter,
+        Filter:
+          [...this.props.serviceParameter.dataFilter.Filter, {
+            Field: 'SAPIssueMessage',
+            Operator: "eq",
+            Value: '-',
+            Logic: "AND"
+          }]
+      }, this.props.token);
+    }
   }
 
   _renderSap(open){
@@ -186,7 +173,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
             <CloseNotif onClose={this.props.onClose}/>
             <div className="confirmation-container-unapprove">
               <p className="confirmation-title-unapprove">Send to Edit</p>
-              <p className="confirmation-title-unapprove">Lifetime Component</p>
+              <p className="confirmation-title-unapprove2">Lifetime Component</p>
               <img className="confirmation-image-unapprove" src={ImgSendtoEdit} alt="" />
               <p className="confirmation-caption-unapprove">Are you sure want to Not Approve <b>{this.props.totalData} items?</b></p>
               <div className="btn-row">
@@ -214,15 +201,14 @@ export default class UnapproveConfirmation extends React.PureComponent {
               <div className="confirmation-modal-unapprove">
                 <CloseNotif onClose={this.props.onClose}/>
                 <div className="confirmation-container-unapprove">
-                  <p className="confirmation-title-unapprove">Cancel Approve</p>
-                  <p className="confirmation-title-unapprove">Sales Order</p>
+                  <p className="confirmation-title-unapprove">Reject</p>
+                  <p className="confirmation-title-unapprove2">Service Order</p>
                   <img className="confirmation-image-unapprove" src={ImgCancelApprove} alt="" />
-                  <p className="confirmation-caption-unapprove"><b>Select one</b> to continue cancel approve</p>
+                  <p className="confirmation-caption-unapprove"><b>Press SAP Issue button</b> to continue reject</p>
                   <div className="btn-row">
-                    {this.props.whichTabs ? <Button className="button-edit-lt" onClick={() => this.isClickedSend()}>Edit Lifetime</Button> : null }
-                    <Button className={this.props.whichTabs ? "button-sap-issue" : "button-sap-issue-service"} onClick={() => this.isClickedSap()}>SAP Issue</Button>
+                    <Button className= "button-sap-issue-service" onClick={() => this.isClickedSap()}>SAP Issue</Button>
                   </div>
-                  <div className={this.props.whichTabs ? "labelMax" : "labelMax-service" }>
+                  <div className="labelMax-service" >
                     <label>* Max 5 Items</label>
                   </div>
                 </div>

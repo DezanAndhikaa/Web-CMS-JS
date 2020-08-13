@@ -18,13 +18,13 @@ code {
 
 .content{
   flex-grow: 1;
-  padding-left: 16vw;
-  padding-right: 2vw;
+  padding-left: 13.45vw;
+  padding-right: 1.5vw;
   padding-top: vw(111);
   margin: 0;
-  height: 90vh;
+  height: 80vh;
   .title{
-      margin: 0;
+    margin: 0;
   }
 }
 
@@ -32,7 +32,7 @@ code {
   flex-grow: 1;
   margin: 0;
   .title{
-      margin: 0;
+    margin: 0;
   }
 }
 
@@ -83,7 +83,7 @@ code {
     padding-right: vw-tab(20);
     padding-top: vw-tab(100);
     margin: 0;
-    height: 100vh;
+    height: 80vh;
     overflow-x: hidden;
     .title{
         margin: 0;
@@ -126,7 +126,7 @@ code {
     padding-right: vw-mobile(20);
     padding-top: vw-mobile(75);
     margin: 0;
-    height: 100vh;
+    height: 80vh;
     overflow-x: hidden;
     .title{
         margin: 0;

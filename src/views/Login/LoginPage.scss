@@ -10,7 +10,7 @@
 .left-pane{
   width: 50vw;
   background-color: #3C3B3B;
-  background-size: 50vw 100vh;
+  background-size: 10vw 100vh;
   background-repeat: no-repeat;
   display: flex;
   position: relative;
@@ -48,14 +48,14 @@
     margin-top: vw(258);
     margin-left: vw(124);
     .login-title{
-      font-family: 'Roboto'; //Open-Sans
+      font-family: 'Roboto';
       font-weight: bold;
-      font-size: 3.25vw;//vw(47);
-      line-height: 4.4vw;//vw(55);
+      font-size: 3.25vw;
+      line-height: 4.4vw;
       margin: 0 0 0.4vw 0;
     }
     .login-title-cms{
-      font-family: 'Roboto'; //Open-Sans
+      font-family: 'Roboto';
       font-weight: normal;
       font-size: 1.3vw;
       line-height: 1.8vw;
@@ -104,8 +104,8 @@
         font-size: vw(27);
         line-height: vw(32);
         border-radius: 0.65vw;
-        width: 11vw;//vw(309);
-        height: 3vw;//vw(78);
+        width: 11vw;
+        height: 3vw;
         text-transform: none;
         background-color: map-get($colors, primary);
         transition: ease;
@@ -122,8 +122,8 @@
         font-size: vw(27);
         line-height: vw(32);
         border-radius: 0.65vw;
-        width: 11vw;//vw(309);
-        height: 3vw;//vw(78);
+        width: 11vw;
+        height: 3vw;
         text-transform: none;
         opacity: 0.5;
         color: black;
@@ -406,11 +406,3 @@
     }
   }
 }
-
-// .body{
-//     margin-top: 10%;
-//     margin-left: 50%;
-//     .labels{
-//         margin-right: 15px;
-//     }
-// }

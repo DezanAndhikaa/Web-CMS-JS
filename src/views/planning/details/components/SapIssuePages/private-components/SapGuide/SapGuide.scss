@@ -1,0 +1,78 @@
+@import '../../../../../../../themes/variables';
+@import '../../../../../../../themes/functions';
+
+.modal-pos-sap-guide{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.body-container-sap{
+    align-items: center;
+    .sap-guide-modal{
+        position: 'absolute';
+        background-color: white;
+        margin: auto;
+        border-radius: vw(20);
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        padding: vw(30);
+        .sap-guide-container{
+            height: 100%;
+            .top-row-sap-guide{
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 20px;
+            }
+            .sap-guide-title{
+                margin: 0;
+                font-weight: bold;
+                font-size: 28px;
+                line-height: 34px;
+                color: #3C3B3B;
+            }
+            .sap-guide-content{
+                height: 85%;
+                .sap-guide-ket{
+                    font-family: 'Lato-Regular';
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 13px;
+                    line-height: 16px;
+                    color: #3C3B3B;
+                }
+                .sap-example-title{
+                    margin-top: 20px;
+                    font-weight: bold;
+                    font-size: 20px;
+                    line-height: 24px;
+                    color: #3C3B3B;
+                }
+                .sap-guide-image{
+                    margin-bottom: 20px;
+                }
+            }
+            .bottom-row-sap-guide{
+                flex: 1;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                .btn-go-to-sap{
+                    display: flex;
+                    text-transform: none;
+                    width: vw(203.22);
+                    height: vw(45.07);
+                    font-size: vw(16) !important;
+                    font-weight: bold;
+                    line-height: vw(16) !important;
+                    font-family: 'Lato-Regular';
+                    background-color: map-get($colors , primary);
+                    box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+                    cursor: pointer;
+                }
+            }
+    
+        }
+    }
+}

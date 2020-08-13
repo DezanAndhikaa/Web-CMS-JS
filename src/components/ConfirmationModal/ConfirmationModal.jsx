@@ -10,7 +10,7 @@ export default class ConfirmationModal extends React.PureComponent {
   render() {
     if(this.props.idModal === "Approved"){
       return (
-        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
+        <Modal open={this.props.openModal} className="modal-container">
             <DialogContent className="confirmation-modal-content">
               <div className="confirmation-modal">
               <CloseNotif onClose={this.props.onClose}/>
@@ -27,7 +27,7 @@ export default class ConfirmationModal extends React.PureComponent {
         );
     }else if(this.props.idModal === "SAP"){
       return (
-        <Modal open={this.props.isModal} onClose={this.props.onClose} className="modal-container">
+        <Modal open={this.props.isModal} className="modal-container">
             <DialogContent className="confirmation-modal-content">
               <div className="confirmation-modal">
                   <div className="confirmation-container">
@@ -44,14 +44,15 @@ export default class ConfirmationModal extends React.PureComponent {
         );
     } else if(this.props.idModal === "SAP-Failed"){
       return (
-        <Modal open={this.props.isModal} onClose={this.props.isModalClosed} className="modal-container">
+        <Modal open={this.props.isModal} className="modal-container">
 				  <DialogContent className="confirmation-modal-content">
             <div className="confirmation-modal">
               <CloseNotif onClose={this.props.isModalClosed}/>
               <div className="confirmation-container">
                 <p className="confirmation-title">You have not completed</p>
-                <p className="confirmation-title">the SAP Issue form</p>
+                <p className="confirmation-title2">the SAP Issue form</p>
                 <img className="confirmation-image" src={DelSuccess} alt="" />
+                <p className="confirmation-caption">The system can't save your activities.</p>
                 <p className="confirmation-caption">Do you want to continue?</p>
                 <div className="btn-container">
                   {this.props.idFailed === "CloseBtn" ? 
@@ -68,14 +69,14 @@ export default class ConfirmationModal extends React.PureComponent {
       );
     } else if(this.props.idModal === "Delete Success"){
       return (
-        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
+        <Modal open={this.props.openModal} className="modal-container">
           <DialogContent className="confirmation-modal-content">
             <div className="confirmation-modal">
               <div className="confirmation-container">
                   <p className="confirmation-title">Successful</p>
                   <img className="confirmation-image" src={Success} alt="" /> 
                   <p className="confirmation-caption">The data was deleted</p>
-                  <p className="confirmation-caption">successfully.</p>
+                  <p className="confirmation-caption"><b>successfully</b></p>
                   <br></br>
                   <Button className="btn-ok" onClick={ () => {this.props.onClose()} }>Continue</Button>
               </div>
@@ -85,14 +86,14 @@ export default class ConfirmationModal extends React.PureComponent {
       );
     } else if(this.props.idModal === "Revised"){
       return (
-        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container">
+        <Modal open={this.props.openModal} className="modal-container">
           <DialogContent className="confirmation-modal-content">
             <div className="confirmation-modal">
               <div className="confirmation-container">
                   <p className="confirmation-title">Successful</p>
                   <img className="confirmation-image" src={Success} alt="" /> 
                   <p className="confirmation-caption">The data was revised</p>
-                  <p className="confirmation-caption">successfully.</p>
+                  <p className="confirmation-caption"><b>successfully</b></p>
                   <br></br>
                   <Button className="btn-ok" onClick={ () => {this.props.onClose()} }>Continue</Button>
               </div>

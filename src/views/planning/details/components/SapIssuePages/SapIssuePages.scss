@@ -1,0 +1,312 @@
+@import '../../../../../themes/variables';
+@import '../../../../../themes/functions';
+
+.header-container{
+    width: 99%;
+    padding-bottom: vw(20);
+    border-bottom: 1.5px solid #E0E0E0;
+    .btn-back-to-approval{
+        display: flex;
+        height: vw(38.07);
+        padding-left: 2.5%;
+        color: #707070;
+        font-size: vw(18);
+        font-weight: bold;
+        line-height: vw(16) !important;
+        font-family: 'Lato-Regular';
+        text-transform: capitalize;
+        margin-top: vw(10);
+        background-color: transparent;
+        background-image: url('../../../../../assets/icons/back.png');
+        background-size: auto;
+        background-position-x: 18%;
+        background-position-y: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+}
+
+.table-container-sap{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    .title-containers{
+        display: inline-flex;
+        justify-content: space-between;
+        width: 100%;
+        .title{
+            display: flex;
+            width: 50%;
+            font-family: 'Lato-Regular';
+            font-weight: bold;
+            font-size: 30px;
+            line-height: 36px;
+        }
+        .btn-send-sap{
+            align-self: flex-end;
+            width: vw(203.22);
+            height: vw(38.07);
+            font-size: 14px;
+            line-height: 18px;
+            font-family: 'Lato-Bold';
+            text-transform: capitalize;
+            color: white;
+            background-color: #4DA1FF;
+            padding-right: 3%;
+            box-shadow: 2px 2px 4px rgba(77, 161, 255, 0.37);
+            border-radius: 6px;
+            background-image: url('../../../../../assets/icons/send-sap.png');
+            background-size: 15%;
+            background-position-x: 90%;
+            background-position-y: center;
+            background-repeat: no-repeat;
+            cursor: pointer;
+        }
+    }
+    .planning-list-sap{
+        .table-sap{
+            font-size: 0.5vw;
+            .table-head-sap{
+                box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
+                border-radius: 6px;
+                .table-row-header{
+                    .table-cell-left{
+                        border-bottom: 0;
+                        padding: 0 0 0 vw(18);
+                        height: vw(50);
+                        font-size: vw(18) !important;
+                        line-height: vw(16) !important;
+                        font-family: 'Lato-Bold';
+                        color: #3C3B3B;
+                    }
+                    .table-cell-right{
+                        border-bottom: 0;
+                        padding: 0 vw(18) 0 0;
+                        height: vw(50);
+                        font-size: vw(18) !important;
+                        line-height: vw(16) !important;
+                        font-family: 'Lato-Bold';
+                        color: #3C3B3B;
+                    }
+                    .table-cell-sap{
+                        border-bottom: 0;
+                        padding: 0;
+                        height: vw(50);
+                        font-size: vw(18) !important;
+                        line-height: vw(16) !important;
+                        font-family: 'Lato-Bold';
+                        color: #3C3B3B;
+                    }
+                }
+            }
+            .table-body-sap{
+                background-color: white;
+                border-radius: 6px;
+                .tr-spasi{
+                    height: vw(10);
+                    background-color: transparent;
+                }
+                .table-row-body{
+                    margin-top: vw(15);
+                    .table-cell-left{
+                        border-radius: 2px 0 2px 0;
+                        border-bottom: 0;
+                        padding: vw(18) 0 0 vw(18);
+                        height: vw(40);
+                        font-size: vw(14) !important;
+                        line-height: vw(17) !important;
+                        font-family: 'Lato-Bold';
+                        color: #3C3B3B;
+                    }
+                    .table-cell-right{
+                        border-radius: 2px 0 2px 0;
+                        border-bottom: 0;
+                        padding: vw(18) vw(18) 0 0;
+                        height: vw(40);
+                        font-size: vw(14) !important;
+                        line-height: vw(17) !important;
+                        font-family: 'Lato-Bold';
+                        color: #3C3B3B;
+                    }
+                    .table-cell-sap{
+                        border-radius: 2px 0 2px 0;
+                        padding: vw(18) 0 0 0;
+                        height: vw(40);
+                        font-size: vw(14) !important;
+                        line-height: vw(17) !important;
+                        font-family: 'Lato-Bold';
+                        color: #3C3B3B;
+                        border-bottom: 0;
+                    }
+                    .table-cell-desc{
+                        padding: vw(18) 0 0 0;
+                        height: vw(40);
+                        font-size: vw(14) !important;
+                        line-height: vw(17) !important;
+                        font-family: 'Lato-Bold';
+                        color: #3C3B3B;
+                        border-bottom: 0;
+                    }
+                }
+            }
+            .table-row-bottom-sap{
+                margin-bottom: 100px;
+            }
+        }
+    }
+    .tag-container{
+        padding-bottom: vw(20);
+        border-bottom: 0.5px solid rgba(0, 0, 0, 0.4);
+        margin: 0 vw(20) 0 vw(20);
+        .btn-container{
+            display: inline-flex;
+            .btn-reason{
+                display: inline-flex;
+                width: auto;
+                height: vw(38.07);
+                margin: 0 vw(15) vw(20) 0;
+                font-family: 'Lato-Bold';
+                font-size: vw(18);
+                font-weight: bold;
+                line-height: vw(16) !important;
+                color: #707070;
+                text-transform: capitalize;
+                border: 1px solid #000000;
+                box-sizing: border-box;
+                border-radius: vw(5) !important;
+            }
+            .btn-reason-clicked{
+                display: inline-flex;
+                width: auto;
+                height: vw(38.07);
+                margin: 0 vw(15) vw(20) 0;
+                font-family: 'Lato-Bold';
+                font-size: vw(18);
+                font-weight: bold;
+                line-height: vw(16) !important;
+                background: map-get($colors, primary);
+                color: #303030;
+                border: none;
+                text-transform: capitalize;
+                box-sizing: border-box;
+                border-radius: vw(5) !important;
+            }
+            .btn-reason:focus{
+                background: map-get($colors, primary);
+                color: #303030;
+                border: none;
+            }
+        }
+        .desc-container{
+            display: inline-flex;
+            width: 100%;
+            margin-bottom: vw(20);
+            .input-label{
+                width: 7%;
+                font-family: 'Lato-Regular';
+                font-size: vw(18) !important;
+                line-height: vw(16) !important;
+                color: #525252;
+                align-self: center;
+            }
+            .input-description{
+                width: 90%;
+                height: vw(38.07);
+                font-family: 'Lato-Regular';
+                font-size: vw(14) !important;
+                line-height: vw(17) !important;
+                color: #525252;
+            }
+        }
+    }
+}
+
+.bottom-rows{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.loading-sap-container{
+    align-items: center;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    position: fixed;
+    transition: opacity 0.3s linear;
+    width: 100%;
+    margin-top: -5%;
+    margin-left: -15%;
+}
+
+.list-sap-empty{
+    margin-top: 1.8vw !important;
+}
+
+.bottom-row-sap{
+    display: flex;
+    .pagination-sap{
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+        justify-content: center;
+        padding: vw(30) 0 vw(30) 0;
+        background-color: white;
+        .paging-sap{
+            display: flex;
+            flex-direction: row;
+            box-shadow: 0px vw(2) vw(4) rgba(0, 0, 0, 0.161);
+            border-radius: 6px;
+            .page-active-sap{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 26px;
+                height: 25px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: 'Gotham-Regular';
+                background-color: map-get($colors , primary);
+                font-size: vw(13);
+                line-height: vw(16);
+                border-radius: 6px;
+                cursor: pointer
+            }
+            .page-inactive-sap{
+                width: 26px;
+                height: 25px;
+                background-color: white;
+                display: flex;
+                align-items: center;
+                font-family: 'Gotham-Regular';
+                justify-content: center;
+                font-size: vw(13);
+                line-height: vw(16);
+                border-radius: 0;
+                cursor: pointer
+            }
+            .page-inactive-sap:hover{
+                background-color: map-get($colors , primary);
+                cursor: pointer
+            }
+            .next-page-sap{
+                width: 26px;
+                height: 25px;
+                background-color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 0;
+                cursor: pointer;
+                .arrow-icon-sap{
+                    font-size: vw(24);
+                }
+            }
+            .next-page-sap:hover{
+                background-color: map-get($colors , primary);
+                cursor: pointer;
+            }
+        }
+    }
+}

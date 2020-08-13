@@ -2,12 +2,11 @@ import { connect } from 'react-redux';
 import { PlansReducers } from '../../DetailPages-reducer';
 import { push } from 'connected-react-router';
 import {
-	approveServiceDownloadAction, approveSalesDownloadAction,
+	downloadServiceAction, downloadSalesAction,
 	putLifetimeCompAction,
-	// putSAPIssueAction,
-	approveSalesAction, //APPROVE SALES
+	approveSalesAction,
 	unapproveSalesAction, 
-	approveServiceAction, //APPROVE SERVICE
+	approveServiceAction,
 	deleteSalesAction,
 	deleteServiceAction,
 	fetchApprovedSalesAction,
@@ -45,12 +44,7 @@ const mapStateToProps = (state) => ({
 	salesSearch: state.plansPageState.salesSearch,
 	serviceSearch: state.plansPageState.serviceSearch,
 	searchComp: state.plansPageState.searchComp,
-	// requestPlans: state.plansPageState.PlansAssignmentSummary.status,
-	// requestMechanics: state.plansPageState.mechanicList.status,
-	// requestUnapproveSales: state.plansPageState.unassignPlansStatus.status,
-	// unapproveSalesResponse: state.plansPageState.unassignPlansStatus.response,
 	selectedFilters: state.plansPageState.selectedFilters,
-	// selectedPlans: state.plansPageState.selectedPlans,
 	selectedSalesPlans: state.plansPageState.selectedSalesPlans,
 	selectedServicePlans: state.plansPageState.selectedServicePlans,
 	selectedLeader: state.plansPageState.selectedLeader,
@@ -67,12 +61,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	push : (path, whichTab) => dispatch(push(path, whichTab)),
-	downloadSalesApproved : (soId) => dispatch(approveSalesDownloadAction(soId)),
-	downloadServiceApproved : (soId) => dispatch(approveServiceDownloadAction(soId)),
+	downloadSales : (soId) => dispatch(downloadSalesAction(soId)),
+	downloadService : (soId) => dispatch(downloadServiceAction(soId)),
 	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
 	clearSelectedServicePlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
 	putLifetimeComp : (payload, token) => dispatch(putLifetimeCompAction(payload, token)),
-	// putSAPIssue : (payload, so) => dispatch(putSAPIssueAction(payload, so)),
 	approveSales: (payload) => dispatch(approveSalesAction(payload)),
 	unapproveSales: (payload) => dispatch(unapproveSalesAction(payload)),
 	approveService: (payload) => dispatch(approveServiceAction(payload)),
@@ -89,8 +82,6 @@ const mapDispatchToProps = (dispatch) => ({
 	onSearchService: (keyword) => dispatch(searchAction(SearchServiceAction, keyword)),
 	onSearchComp: (keyword,sort) => dispatch(searchCompAction(SearchCompAction, keyword, sort)),
 	onSearchCompService: (keyword, sort) => dispatch(searchCompActionService(SearchCompActionService, keyword, sort)),
-	// pushTo: (url) => dispatch(push(url)),
-	// savePlanData: (data) => dispatch(storeDataAction(PLAN_DATA, StorageKey.PLAN_DATA, data)),
 	lifetimeFilter: (type, payload, payload2, page) => dispatch(selectFilterAction(type, payload, payload2, page)),
 	dateFilter: (type, payload, payload2, page) => dispatch(dateFilterAction(type, payload, payload2, page)),
 	selectFilter2: (type, payload, head, page) => dispatch(selectFilterAction2(type, payload, head, page)),
