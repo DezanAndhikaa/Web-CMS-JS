@@ -2,7 +2,7 @@ import React from 'react';
 import './ApprovalPages.scss';
 import ApprovalTab from './ApprovalTab/ApprovalTab';
 import { ApiRequestActionsStatus } from "../../../../../core/RestClientHelpers";
-import DropDownList from '../../../../../components/DropdownList/DropDownList';
+import DropDownList from "../../../../../components/DropdownList/DropDownList";
 import SearchInput from "../../../../../components/Searchbar/SearchInput";
 import BaseButton from '../../../../../components/Button/BaseButton';
 import FilterbyDataAction from '../../../../../components/FilterByDataAction/FilterbyDataAction';
@@ -72,11 +72,23 @@ class ApprovalPages extends React.Component {
         this.props.fetchServiceOrder(this.props.filterDate, this.props.token);
       }
     }
+<<<<<<< HEAD
     
     //FILTER RANGE SMR DATE
     if (this.state.whichTabs) {
       if (prevProps.filterSmrDate !== this.props.filterSmrDate) {
         this.props.fetchServiceOrder(this.props.filterSmrDate, this.props.token);
+=======
+
+
+    //FILTER RANGE SMR DATE
+    if (this.state.whichTabs) {
+      if (prevProps.filterDateSmr !== this.props.filterDateSmr) {
+        this.props.fetchServiceOrder(
+          this.props.filterDateSmr,
+          this.props.token
+        );
+>>>>>>> f9c635d203bc97d2ce4c8f314ad5c62dd9434b35
       }
     }
 
@@ -250,9 +262,9 @@ class ApprovalPages extends React.Component {
             {web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive-approval">{currentPropsService + 3}</div>}
           </div>
         </div>
-      )
+      );
     }
-  }
+  };
 
   fetchSearchService = async () => {
     await this.props.fetchServiceOrder(this.props.searchServiceParameter, this.props.token);
@@ -279,7 +291,7 @@ class ApprovalPages extends React.Component {
         {...this.props}
         handleClickShowPerPage={this.handleClickShowPerPage}
       />
-    )
+    );
   }
 
   handleClickShowPerPage = (value) => {
@@ -287,7 +299,19 @@ class ApprovalPages extends React.Component {
       this.props.clearSelectedServicePlans();
       this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value })
     }
-  }
+  };
+
+  resetFilter = () => {
+    this.props.updateServiceParameter({
+      ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+    });
+    this.props.selectedFilters.customerType= "All Customer"
+    this.props.selectedFilters.siteType= "All Site"
+    this.props.selectedFilters.unitType= "All Unit Model"
+    this.props.selectedFilters.compType= "All Component"
+    this.props.selectedFilters.planType= "All Plan Type"
+    this.props.filterParameter.Filter.length = 0
+	}
 
   resetFilter = () => {
     this.props.updateServiceParameter({
@@ -336,7 +360,7 @@ class ApprovalPages extends React.Component {
           idNotif="Non-Status"
         />
       </>
-    )
+    );
   }
 
   //FUNGSI UNTUK MENGAPROVE SERVICE ORDER
@@ -349,13 +373,17 @@ class ApprovalPages extends React.Component {
     const index = this.props.selectedServicePlans.length
     if (this.props.selectedServicePlans.length > 0) {
       for (let i = 0; i < index; i++) {
+<<<<<<< HEAD
         arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
+=======
+        arr = [...arr, this.props.selectedServicePlans[i].WoNumber];
+>>>>>>> f9c635d203bc97d2ce4c8f314ad5c62dd9434b35
       }
       await this.props.approveService({ WoNumbers: arr, IsApprove: true }, this.props.token)
       this.onClickServiceOrder();
       await this.props.clearSelectedServicePlans();
     }
-  }
+  };
 
   handleClickFilterByDataAction = () => {
     this.setState({
@@ -398,8 +426,8 @@ class ApprovalPages extends React.Component {
       <>
         <ConfirmationModal idModal="Approved" openModal={this.state.openSuccess} onClose={this.closeSuccess} />
       </>
-    )
-  }
+    );
+  };
 
   //Komponen untuk menampilkan button
   _renderBaseButton() {
@@ -465,7 +493,7 @@ class ApprovalPages extends React.Component {
         />
       </>
     );
-  };
+  }
 
   render() {
     return (
@@ -506,7 +534,7 @@ class ApprovalPages extends React.Component {
             </div>
         }
       </main>
-    )
+    );
   }
 }
 

@@ -21,6 +21,10 @@ class FilterByPeriodeDate extends React.Component{
                 endDate: new Date()
             }
         };
+<<<<<<< HEAD
+=======
+        console.log(props)
+>>>>>>> f9c635d203bc97d2ce4c8f314ad5c62dd9434b35
     }
 
     handleChangeStart = (event, props) => {
@@ -37,6 +41,7 @@ class FilterByPeriodeDate extends React.Component{
         const today = new Date();        
         const validationSchema = Yup.object().shape({
             startDate: Yup.date()
+<<<<<<< HEAD
             .required('Start date must be filled.')
             .max(today, 'Start date must be later than today.'),
             
@@ -44,6 +49,12 @@ class FilterByPeriodeDate extends React.Component{
             .required('End date must be filled.')
             .min(Yup.ref('startDate'), 'End date must be later than start date.')
             .max(today, 'End date must be later than today.')
+=======
+            .required('Start date must be filled.'),
+            
+            endDate: Yup.date()
+            .required('End date must be filled.')
+>>>>>>> f9c635d203bc97d2ce4c8f314ad5c62dd9434b35
         });
         return(
             <Formik

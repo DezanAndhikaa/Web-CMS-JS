@@ -95,7 +95,11 @@ export const IndexFilterAction = 'INDEX FILTER';
 export const LifetimeFilterAction = 'SELECT_LIFETIME_FILTER';
 export const SmrFilterAction = "SELECT_SMR_FILTER";
 export const DateFilterAction = 'SELECT_DATE_FILTER';
+<<<<<<< HEAD
 export const SMRDateFilterAction = 'SELECT_SMRDATE_FILTER';
+=======
+export const SmrDateFilterAction = "SELECT_SMRDATE_FILTER";
+>>>>>>> f9c635d203bc97d2ce4c8f314ad5c62dd9434b35
 
 export function approveSalesAction(payload, accessToken) {
 	const requestConfig = {
@@ -523,11 +527,17 @@ export function searchCompActionService(type, payload, sort) {
 export function dateFilterAction(type, payload, payload2, page) {
 	return { type, payload, payload2, page };
 }
+<<<<<<< HEAD
 
 export function smrDateFilterAction(type, payload, payload2, page) {
 	return { type, payload, payload2, page };
 }
 
+=======
+export function smrDateFilterAction(type, payload, payload2, page) {
+  return { type, payload, payload2, page };
+}
+>>>>>>> f9c635d203bc97d2ce4c8f314ad5c62dd9434b35
 export function smrFilterAction(type, payload, payload2, page) {
 	return { type, payload, payload2, page };
 }
