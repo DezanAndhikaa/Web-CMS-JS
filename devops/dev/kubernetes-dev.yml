@@ -1,7 +1,6 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: web-cms-js
   labels:
     app: web-cms-js
     workstream: cms
@@ -9,7 +8,9 @@ metadata:
     tier: frontend
     usermanagementservice: "true"
     msplanning: "true"
+  name: web-cms-js
   namespace: devcms
+  
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
