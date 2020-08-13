@@ -56,13 +56,8 @@ import {
 	SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc, SortServiceByPlanType,
 	UnselectSalesPlanAction, UnselectServicePlanAction,
 	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, FetchServiceAction,
-<<<<<<< HEAD
-	IndexFilterAction, LifetimeFilterAction, DateFilterAction,
-	SearchRevisedSalesOrder, UpdateSearchSalesRevAction, SelectAllService, SelectPlanTypeFilterAction, SmrFilterAction
-=======
 	IndexFilterAction, LifetimeFilterAction, DateFilterAction, SmrDateFilterAction,
 	SearchRevisedSalesOrder, UpdateSearchSalesRevAction, SelectAllService, SelectPlanTypeFilterAction, SmrFilterAction, smrFilterAction
->>>>>>> f9c635d203bc97d2ce4c8f314ad5c62dd9434b35
 } from './DetailPages-action';
 
 const initialSalesAssignment = {
@@ -653,23 +648,6 @@ export function filterLifetimeReducer(state = intitialFiltersParameter, action) 
 export function filterSmrReducer(state = intitialFilterSmrParameter, action) {
 	if (action.type === SmrFilterAction)
 		state = { ...state, Filter: [{ Field: 'SMR', Operator: 'gte', Value: action.payload, Logic: 'and' }, { Field: 'SMR', Operator: 'lte', Value: action.payload2, Logic: 'and' }] };
-<<<<<<< HEAD
-	return state;
-}
-
-export function filterDateReducer(state = initialFilterParameter, action) {
-	if (action.type === DateFilterAction)
-		state = { ...state, Filter: [{ Field: 'PlanExecutionDate', Operator: 'gte', Value: action.payload, Logic: 'and' }, { Field: 'PlanExecutionDate', Operator: 'lte', Value: action.payload2, Logic: 'and' }] };
-	return state;
-}
-
-export function filterSmrDateReducer(state = initialFilterParameter, action) {
-	if (action.type === DateFilterAction)
-		state = { ...state, Filter: [{ Field: 'SMRLastUpdate', Operator: 'gte', Value: action.payload, Logic: 'and' }, { Field: 'SMRLastUpdate', Operator: 'lte', Value: action.payload2, Logic: 'and' }] };
-	return state;
-}
-
-=======
 	return state;
 }
 
@@ -692,7 +670,6 @@ export function filterDateSmrReducer(state = initialFilterParameter, action) {
   return state;
 }
 
->>>>>>> f9c635d203bc97d2ce4c8f314ad5c62dd9434b35
 export function filterParameterReducer(state = initialFilterParameter, action) {
 	if (action.type === SelectCustomerFilterAction)
 		if (state.Filter.length === 0) { //IF yang pertama ini,jika filternya belum di isi apa2 (filter belum di jalankan)
@@ -1027,64 +1004,6 @@ export function searchSalesRevReducer(state = '', action) {
 }
 
 const PlansReducers = combineReducers({
-<<<<<<< HEAD
-	selectedLeader: selectLeaderReducer,
-	selectedFilters: selectedFiltersReducer,
-	serviceOrderList: fetchServiceReducer,
-	salesOrderList: fetchSalesReducer,
-	salesOrderListApproved: fetchApprovedSalesReducer,
-	serviceOrderListApproved: fetchApprovedServiceReducer,
-	salesOrderListDeleted: fetchDeletedSalesReducer,
-	serviceOrderListDeleted: fetchDeletedServiceReducer,
-	salesOrderListSap: fetchSapSalesReducer,
-	serviceOrderListSap: fetchSapServiceReducer,
-	salesOrderRevised: fetchRevisedSalesReducer,
-	selectedSalesPlans: selectSalesPlansReducer,
-	selectedServicePlans: selectServicePlansReducer,
-	selectedMechanics: selectMechanicsReducer,
-	unApprove: unapproveSalesReducer,
-	salesParameter: salesParameterReducer,
-	salesApprovedParameter: salesApprovedParameterReducer,
-	salesDeletedParameter: salesDeletedParameterReducer,
-	salesSapParameter: salesSapParameterReducer,
-	salesRevisedParam: salesRevisedParameterReducer,
-	serviceParameter: serviceParameterReducer,
-	serviceApprovedParameter: serviceParameterApprovedReducer,
-	serviceDeletedParameter: serviceParameterDeletedReducer,
-	serviceSapParameter: serviceSapParameterReducer,
-	filterParameter: filterParameterReducer,
-	indexFilterParameter: indexFilterParameterReducer,
-	sortSalesBy: sortSalesByReducer,
-	sortServiceBy: sortServiceByReducer,
-	salesSearch: searchSalesReducer,
-	serviceSearch: searchServiceReducer,
-	searchSalesParameter: searchSalesParameterReducer,
-	searchSalesRevisiParameter: searchSalesRevisiParameterReducer,
-	searchSalesRevisionParameter: searchRevisionSalesReducer,
-	searchSalesApprovedParam: searchSalesApprovedReducer,
-	searchSalesDeletedParam: searchSalesDeletedReducer,
-	searchSalesSapParam: searchSalesSapReducer,
-	searchServiceParameter: searchServiceParameterReducer,
-	searchServiceApprovedParam: searchServiceApprovedReducer,
-	searchServiceDeletedParam: searchServiceDeletedReducer,
-	searchServiceSapParam: searchServiceSapReducer,
-	searchComp: searchCompReducer,
-	selectedPlanData: storePlanDataReducer,
-	approveSalesDownloaded: downloadApprovedSalesReducer,
-	approveServiceDownloaded: downloadApprovedServiceReducer,
-	putLifetimeList: fetchPutLifetimeReducer,
-	putSAPIssue: PutSAPIssueReducer,
-	salesApproved: approvedSalesReducer,
-	serviceApproved: approvedServiceReducer,
-	salesDeleted: deletedSalesReducer,
-	serviceDeleted: deletedServiceReducer,
-	filterLifetime: filterLifetimeReducer,
-	filterSmr: filterSmrReducer,
-	filterDate: filterDateReducer,
-	filterSmrDate: filterSmrDateReducer,
-	salesSearchRevision: searchSalesRevReducer,
-	searchSalesRevParam: searchSalesRevParamReducer	
-=======
   selectedLeader: selectLeaderReducer,
   selectedFilters: selectedFiltersReducer,
   serviceOrderList: fetchServiceReducer,
@@ -1141,7 +1060,6 @@ const PlansReducers = combineReducers({
   filterDate: filterDateReducer,
   salesSearchRevision: searchSalesRevReducer,
   searchSalesRevParam: searchSalesRevParamReducer,
->>>>>>> f9c635d203bc97d2ce4c8f314ad5c62dd9434b35
 });
 
 export { PlansReducers };

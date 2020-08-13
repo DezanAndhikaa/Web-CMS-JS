@@ -100,35 +100,6 @@ componentDidUpdate = (prevProps) => {
         ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterLifetime.Filter, PageNumber: 1
       })
     }
-<<<<<<< HEAD
-  }
-
-  //FILTER RANGE SMR
-  if(Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 || 
-    Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
-    if (prevProps.filterSmr !== this.props.filterSmr) {
-      this.props.updateSalesParameter({
-        ...prevProps.salesParameter.dataFilter, Filter: this.props.filterSmr.Filter, PageNumber: 1,
-      })
-    }
-  }else{
-    if (prevProps.filterSmr !== this.props.filterSmr) {
-      this.props.updateServiceParameter({
-        ...prevProps.serviceParameter.dataFilter, Filter: this.props.filterSmr.Filter, PageNumber: 1,
-      })
-    }
-  }
-
-  //FILTER RANGE DATE
-  if(Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
-    || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
-    if(prevProps.filterDate !== this.props.filterDate){
-      this.props.fetchServiceOrder(this.props.filterDate,this.props.token);
-    }
-  }else{
-    if(prevProps.filterDate !== this.props.filterDate){
-      this.props.fetchSalesOrder(this.props.filterDate,this.props.token);
-=======
   }
 
   //FILTER RANGE SMR
@@ -168,7 +139,6 @@ componentDidUpdate = (prevProps) => {
   }else{
     if (prevProps.filterSmrDate !== this.props.filterSmrDate) {
       this.props.fetchSalesOrder(this.props.filterSmrDate, this.props.token);
->>>>>>> f9c635d203bc97d2ce4c8f314ad5c62dd9434b35
     }
   }
 

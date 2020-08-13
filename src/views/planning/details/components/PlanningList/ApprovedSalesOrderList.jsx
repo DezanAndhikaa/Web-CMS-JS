@@ -4,9 +4,6 @@ import {
 } from '@material-ui/core';
 import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
-<<<<<<< HEAD
-import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
-=======
 import {
   SortSalesByCustomer,
   SortSalesBySite,
@@ -16,7 +13,6 @@ import {
   DateFilterAction,
   SmrFilterAction,
 } from "../../DetailPages-action";
->>>>>>> f9c635d203bc97d2ce4c8f314ad5c62dd9434b35
 import { Spinner } from '../../../../../assets/icons';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from 'moment';
@@ -87,95 +83,6 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
 
   showTableHead() {
       return (
-<<<<<<< HEAD
-        <TableHead className="table-head" classes={{ root: 'table-head' }}>
-        <TableRow classes={{ root: 'table-row' }}>
-          <TableCell padding="checkbox">
-            {this.props.displaySalesCheckbox && 
-            <Checkbox 
-              checked={this.state.checkedValue}
-              onChange={this.handleClicks}
-              onClick={() => {this.props.salesOrderListApproved.Lists.map((row,id) => 
-              this.props.onChoosedSales(row,id))}}
-              className="checkbox-checked-header"/>}
-          </TableCell>
-          <PlanningListHeader
-            name="SO"
-            delay={300}
-            onSearch={this.props.onSearchComp}
-          />
-          <PlanningListHeader
-            name="Customer"
-            isActive={this.props.sortSalesByState.Customer.isActive}
-            delay={300}
-            isAscending={this.props.sortSalesByState.Customer.isAscending}
-            onClick={() => this.props.onClickTabHead(SortSalesByCustomer)}
-          />
-          <PlanningListHeader
-            name="Site"
-            isActive={this.props.sortSalesByState.Site.isActive}
-            delay={300}
-            isAscending={this.props.sortSalesByState.Site.isAscending}
-            onClick={() => this.props.onClickTabHead(SortSalesBySite)}
-          />
-          <PlanningListHeader
-            name="Unit Model"
-            isActive={this.props.sortSalesByState.UnitModel.isActive}
-            delay={300}
-            isAscending={this.props.sortSalesByState.UnitModel.isAscending}
-            onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
-          />
-          <PlanningListHeader
-            name="Comp Desc"
-            isActive={this.props.sortSalesByState.CompDesc.isActive}
-            delay={300}
-            isAscending={this.props.sortSalesByState.CompDesc.isAscending}
-            onClick={() => this.props.onClickTabHead(SortSalesByCompDesc)}
-          />
-          <PlanningListHeader
-            name="Part Number"
-            delay={300}
-            onSearch={this.props.onSearchComp}
-          />
-          <PlanningListHeader
-            name="Unit Code"
-            delay={300}
-            onSearch={this.props.onSearchComp}
-          />
-          <PlanningListHeader
-            name="Serial Number"
-            delay={300}
-            onSearch={this.props.onSearchComp}            
-          />
-          <PlanningListHeader
-            name="Lifetime"
-            delay={300}
-            onFilter={this.isFilterLifetime}
-          />
-          <PlanningListHeader
-            name="Plan"
-            delay={300}
-            onFilter={this.isFilterDate}
-          />
-          <PlanningListHeader
-            name="SMR"
-            delay={300}
-            onSearch={this.props.onSearchComp}
-          />
-          <PlanningListHeader
-            name="SMR Date"
-            delay={300}
-            onSearch={this.isFilterDate}
-          />
-          <PlanningListHeader
-            name="Plan Type"
-            delay={300}
-            // onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
-          />
-        </TableRow>
-      </TableHead>
-    )
-=======
         <TableHead className="table-head" classes={{ root: "table-head" }}>
           <TableRow classes={{ root: "table-row" }}>
             <TableCell padding="checkbox">
@@ -268,7 +175,6 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
           </TableRow>
         </TableHead>
       );
->>>>>>> f9c635d203bc97d2ce4c8f314ad5c62dd9434b35
   }
 
 

@@ -486,11 +486,7 @@ export function dateFilterAction(type, payload, payload2, page) {
     return { type, payload, payload2, page };
 }
 export function smrDateFilterAction(type, payload, payload2, page) {
-<<<<<<< HEAD
-    return { type, payload, payload2, page };
-=======
   return { type, payload, payload2, page };
->>>>>>> f9c635d203bc97d2ce4c8f314ad5c62dd9434b35
 }
 export function selectFilterAction(type, payload, payload2, page) {
     return { type, payload, payload2, page };
