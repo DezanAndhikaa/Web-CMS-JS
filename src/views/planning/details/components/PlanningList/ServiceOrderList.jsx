@@ -6,15 +6,16 @@ import {
 import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
-import { 
-  SortServiceByCustomer, 
-  SortServiceBySite, 
-  SortServiceByUnitModel, 
-  SortServiceByCompDesc, 
+import {
+  SortServiceByCustomer,
+  SortServiceBySite,
+  SortServiceByUnitModel,
+  SortServiceByCompDesc,
   SortServiceByPlanType,
-  LifetimeFilterAction, 
-  DateFilterAction, 
-  SmrFilterAction} from '../../DetailPages-action';
+  LifetimeFilterAction,
+  DateFilterAction,
+  SmrFilterAction
+} from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
 import roleService from "../../../../../utils/roleService.helper";
@@ -24,45 +25,45 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 const RoleUser = new roleService();
 export default class ServiceOrderList extends React.PureComponent {
   state = {
-    checkedValue : false
+    checkedValue: false
   }
 
   componentDidMount = async () => {
     await this.props.clearSelectedServicePlans();
   }
-  componentDidUpdate = (prevState) =>{
-    if (prevState.serviceParameter !== this.props.serviceParameter || prevState.serviceSearch !== this.props.serviceSearch || 
-      prevState.searchComp !==this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
-      this.setState({checkedValue : false})
-    }if (this.props.fetchStatusService === ApiRequestActionsStatus.LOADING) {
-      this.setState({checkedValue : false})
+  componentDidUpdate = (prevState) => {
+    if (prevState.serviceParameter !== this.props.serviceParameter || prevState.serviceSearch !== this.props.serviceSearch ||
+      prevState.searchComp !== this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
+      this.setState({ checkedValue: false })
+    } if (this.props.fetchStatusService === ApiRequestActionsStatus.LOADING) {
+      this.setState({ checkedValue: false })
     }
   }
 
-  componentWillMount = () =>{
+  componentWillMount = () => {
     this.props.updateServiceParameter({
       ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
     });
   }
 
-  handleClick = () =>{
+  handleClick = () => {
     this.setState({
-      checkedValue : !this.state.checkedValue
+      checkedValue: !this.state.checkedValue
     })
   }
 
-  isFilterLifetime = async( value1, value2 ) => {
-    this.props.lifetimeFilter( LifetimeFilterAction, value1, value2, this.props.serviceParameter.dataFilter.PageSize );
+  isFilterLifetime = async (value1, value2) => {
+    this.props.lifetimeFilter(LifetimeFilterAction, value1, value2, this.props.serviceParameter.dataFilter.PageSize);
   }
 
-  isFilterSmr = async( value1, value2 ) => {
-    this.props.smrFilter( SmrFilterAction, value1, value2, this.props.serviceParameter.dataFilter.PageSize );
+  isFilterSmr = async (value1, value2) => {
+    this.props.smrFilter(SmrFilterAction, value1, value2, this.props.serviceParameter.dataFilter.PageSize);
   }
 
-  isFilterDate = async ( value1, value2) => {
-    this.props.dateFilter( DateFilterAction, value1, value2, this.props.serviceParameter.dataFilter.PageSize );
+  isFilterDate = async (value1, value2) => {
+    this.props.dateFilter(DateFilterAction, value1, value2, this.props.serviceParameter.dataFilter.PageSize);
   }
-  
+
   isCheckboxAvailable = (data) => {
     let isAvailable = false;
     if (this.props.selectedServicePlanList.some((plan) => plan.status === 'Assigned')) {
@@ -74,20 +75,20 @@ export default class ServiceOrderList extends React.PureComponent {
   datePlant = (date) => moment.utc(date, ISO_8601).local().format('DD MMMM YYYY')
 
   showTableHead() {
-    if(this.props.idTab === "Status"){
-      return(
+    if (this.props.idTab === "Status") {
+      return (
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
           <TableRow>
             {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? "" :
               <TableCell className="table-cell-checkbox">
-                {this.props.displayServiceCheckbox  && 
+                {this.props.displayServiceCheckbox &&
                   <Checkbox
                     icon={<CheckBoxOutlineBlank fontSize="small" />}
-                    checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
+                    checkedIcon={<CheckBoxIcon style={{ color: "#FFD500" }} fontSize="small" />}
                     checked={this.state.checkedValue}
                     onChange={this.handleClick}
-                    onClick={({target: { checked }}) => {
-                      if(checked) return this.props.onChooseAllService(this.props.serviceOrderList.Lists);
+                    onClick={({ target: { checked } }) => {
+                      if (checked) return this.props.onChooseAllService(this.props.serviceOrderList.Lists);
                       return this.props.onChooseAllService([]);
                     }}
                   />
@@ -110,20 +111,20 @@ export default class ServiceOrderList extends React.PureComponent {
           </TableRow>
         </TableHead>
       )
-    }else{
-      return(
+    } else {
+      return (
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
           <TableRow>
             {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? "" :
-              <TableCell className= "table-cell-checkbox">
-                {this.props.displayServiceCheckbox  && 
-                  <Checkbox 
+              <TableCell className="table-cell-checkbox">
+                {this.props.displayServiceCheckbox &&
+                  <Checkbox
                     icon={<CheckBoxOutlineBlank fontSize="small" />}
-                    checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
+                    checkedIcon={<CheckBoxIcon style={{ color: "#FFD500" }} fontSize="small" />}
                     checked={this.state.checkedValue}
                     onChange={this.handleClick}
-                    onClick={({target: { checked }}) => {
-                      if(checked) return this.props.onChooseAllService(this.props.serviceOrderList.Lists);
+                    onClick={({ target: { checked } }) => {
+                      if (checked) return this.props.onChooseAllService(this.props.serviceOrderList.Lists);
                       return this.props.onChooseAllService([]);
                     }}
                   />
@@ -132,7 +133,7 @@ export default class ServiceOrderList extends React.PureComponent {
             }
             <PlanningListHeader
               name="Work Order"
-              loc= {this.props.pageLoc}
+              loc={this.props.pageLoc}
               delay={300}
               onSearch={this.props.onSearchComp}
             />
@@ -169,7 +170,7 @@ export default class ServiceOrderList extends React.PureComponent {
             <PlanningListHeader
               name="Serial Number"
               delay={300}
-              onSearch={this.props.onSearchComp}          
+              onSearch={this.props.onSearchComp}
             />
             <PlanningListHeader
               name="Lifetime"
@@ -184,7 +185,7 @@ export default class ServiceOrderList extends React.PureComponent {
             <PlanningListHeader
               name="SMR"
               delay={300}
-              onFilter= {this.isFilterSmr}
+              onFilter={this.isFilterSmr}
             />
             <PlanningListHeader
               name="SMR Date"
@@ -202,27 +203,27 @@ export default class ServiceOrderList extends React.PureComponent {
     }
   }
 
-  showTableBody(row,id) {
-    return(
+  showTableBody(row, id) {
+    return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
         {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? "" :
           <TableCell className="table-cell-checkbox">
-            {this.props.displayServiceCheckbox && 
-            <Checkbox 
-              icon={<CheckBoxOutlineBlank fontSize="small" />}
-              checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
-              disabled={this.isCheckboxAvailable(row)} 
-              checked={this.props.selectedServicePlanList.some((plans) => plans.WoNumber === row.WoNumber)} 
-              onClick={() => this.props.onChoosedService(row, id, 'body')}
-            />}
+            {this.props.displayServiceCheckbox &&
+              <Checkbox
+                icon={<CheckBoxOutlineBlank fontSize="small" />}
+                checkedIcon={<CheckBoxIcon style={{ color: "#FFD500" }} fontSize="small" />}
+                disabled={this.isCheckboxAvailable(row)}
+                checked={this.props.selectedServicePlanList.some((plans) => plans.WoNumber === row.WoNumber)}
+                onClick={() => this.props.onChoosedService(row, id, 'body')}
+              />}
           </TableCell>
         }
         {(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/ho") || Number(RoleUser.role()) !== 1 ?
-          <TableCell 
-            align="left" 
+          <TableCell
+            align="left"
             className={this.props.pageLoc && this.props.idTab === "Status" ? "table-cell-pk-status"
-            : this.props.pageLoc === "Status" && this.props.idService === "Data Input" ? "table-cell-pk" : "table-cell-smr"}> 
-            {row.WoNumber} 
+              : this.props.pageLoc === "Status" && this.props.idService === "Data Input" ? "table-cell-pk" : "table-cell-smr"}>
+            {row.WoNumber}
           </TableCell>
           :
           <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell>
@@ -245,19 +246,19 @@ export default class ServiceOrderList extends React.PureComponent {
     )
   }
 
-  showLoading(){
-    if(this.props.fetchStatusService === ApiRequestActionsStatus.LOADING){
-      return(
+  showLoading() {
+    if (this.props.fetchStatusService === ApiRequestActionsStatus.LOADING) {
+      return (
         <div className="loading-container">
-          <img 
+          <img
             src={Spinner}
             alt="loading-spinner"
             className="loading-icon"
-            />
+          />
         </div>
       )
-    }else if(this.props.fetchStatusService === ApiRequestActionsStatus.FAILED){
-      return(
+    } else if (this.props.fetchStatusService === ApiRequestActionsStatus.FAILED) {
+      return (
         <div className="loading-container">
           OOPS THERE WAS AN ERROR :'(
         </div>
@@ -265,31 +266,31 @@ export default class ServiceOrderList extends React.PureComponent {
     }
   }
 
-  render(){
-    if(this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED){
-      return(
+  render() {
+    if (this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED) {
+      return (
         <EmptyList />
       )
-    }else if(this.props.serviceOrderList.Lists.length === 0 && this.props.idService === "Data Input" 
-      && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED){
-      return(
+    } else if (this.props.serviceOrderList.Lists.length === 0 && this.props.idService === "Data Input"
+      && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED) {
+      return (
         <EmptyList />
       )
-    }else if(this.props.serviceOrderList.Lists.length === 0 && this.props.idTab === "Status"
-      && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED){
-      return(
-        <EmptyList idEmpty= "NA" />
+    } else if (this.props.serviceOrderList.Lists.length === 0 && this.props.idTab === "Status"
+      && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED) {
+      return (
+        <EmptyList idEmpty="NA" />
       )
-    }else{
-      return(
+    } else {
+      return (
         <>
           <Table classes={{ root: 'table' }} className="table">
-          {this.showTableHead()}
-          <TableBody classes={{ root: 'table-body' }}>
-            {this.props.serviceOrderList.Lists
-              && this.props.serviceOrderList.Lists.map((row, id) => (
-                this.showTableBody(row,id)
-              ))}
+            {this.showTableHead()}
+            <TableBody classes={{ root: 'table-body' }}>
+              {this.props.serviceOrderList.Lists
+                && this.props.serviceOrderList.Lists.map((row, id) => (
+                  this.showTableBody(row, id)
+                ))}
             </TableBody>
           </Table>
           {this.showLoading()}
