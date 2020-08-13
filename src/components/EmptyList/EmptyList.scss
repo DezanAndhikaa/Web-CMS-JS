@@ -1,0 +1,38 @@
+@import '../../themes/variables';
+@import '../../themes/functions';
+
+.paper-empty-list{
+    border: 1.5px solid #E0E0E0;
+    background-color: transparent;
+    border-radius: 8px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    .empty-image{
+        width: vw(300);
+        margin-top: vw(40);
+    }
+    .caption-image{
+        margin: 0 0 vw(40) vw(50);
+        .header-caption{
+            margin-top: vw(20);
+            font-size: vw(30) !important;
+            line-height: vw(13) !important;
+            font-family: 'Lato-Bold';
+            color: #000000;
+        }
+        .caption1{
+            font-size: vw(16) !important;
+            line-height: vw(13) !important;
+            font-family: 'Lato-Regular';
+            color: #3C3B3B;
+        }
+        .caption2{
+            font-size: vw(16) !important;
+            line-height: vw(13) !important;
+            font-family: 'Lato-Bold';
+            color: #000000;
+        }
+    }
+}

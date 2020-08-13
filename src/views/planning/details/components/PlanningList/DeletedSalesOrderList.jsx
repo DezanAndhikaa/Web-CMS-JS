@@ -8,7 +8,10 @@ import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesBy
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from 'moment';
+import EmptyList from '../../../../../components/EmptyList/EmptyList';
+import roleService from "../../../../../utils/roleService.helper";
 
+const RoleUser = new roleService();
 export default class DeletedSalesOrderList extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -56,13 +59,6 @@ export default class DeletedSalesOrderList extends React.PureComponent {
     return isAvailable;
   }
 
-  // isChangeStat = (value,key) =>{
-  //   this.setState({
-  //     stats: 1,
-  //     lifetime: this.state.lifetime.map(el => (el.SoNumber === key ? {...el, LifeTimeComp : value} : el))
-  //   });
-  // }
-
   handleClicks = () =>{
     this.setState({
       checkedValue : !this.state.checkedValue
@@ -73,21 +69,21 @@ export default class DeletedSalesOrderList extends React.PureComponent {
       return (
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow classes={{ root: 'table-row' }}>
-          <TableCell padding="checkbox">
-            {this.props.displaySalesCheckbox && 
-            <Checkbox 
-              checked={this.state.checkedValue}
-              onChange={this.handleClicks}
-              onClick={() => {this.props.salesOrderListDeleted.Lists.map((row,id) => 
-              this.props.onChoosedSales(row,id))}}
-              className="checkbox-checked-header"/>}
-          </TableCell>
+          {Number(RoleUser.role()) !== 1 ? "" :
+            <TableCell padding="checkbox">
+              {this.props.displaySalesCheckbox && 
+              <Checkbox 
+                checked={this.state.checkedValue}
+                onChange={this.handleClicks}
+                onClick={() => {this.props.salesOrderListDeleted.Lists.map((row,id) => 
+                this.props.onChoosedSales(row,id))}}
+                className="checkbox-checked-header"/>}
+            </TableCell>
+          }
           <PlanningListHeader
             name="SO"
-            // isActive={this.props.sortJobsByState.unitModel.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-            // isAscending={this.props.sortJobsByState.unitModel.isAscending}
           />
           <PlanningListHeader
             name="Customer"
@@ -119,38 +115,28 @@ export default class DeletedSalesOrderList extends React.PureComponent {
           />
           <PlanningListHeader
             name="Part Number"
-          // //   isActive={this.props.sortJobsByState.backlogOpen.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-          // //   isAscending={this.props.sortJobsByState.backlogOpen.isAscending}
           />
           <PlanningListHeader
             name="Unit Code"
-          // //   isActive={this.props.sortJobsByState.plantExecution.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-          // //   isAscending={this.props.sortJobsByState.plantExecution.isAscending}
           />
           <PlanningListHeader
             name="Serial Number"
-          // //   isActive={this.props.sortJobsByState.status.isActive}
             delay={300}
-            onSearch={this.props.onSearchComp}
-          // //   isAscending={this.props.sortJobsByState.status.isAscending}            
+            onSearch={this.props.onSearchComp}         
           />
           <PlanningListHeader
             name="Lifetime"
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
             delay={300}
             onFilter={this.isFilterLifetime}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
           />
           <PlanningListHeader
             name="Plan"
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
             delay={300}
             onFilter={this.isFilterDate}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
           />
           <PlanningListHeader
             name="SMR"
@@ -162,11 +148,11 @@ export default class DeletedSalesOrderList extends React.PureComponent {
             delay={300}
             onSearch={this.props.onSearchComp}
           />
-          {/* <Typography
-            name="Action" style={{marginTop: "10px"}}
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
-          >Action</Typography> */}
+          <PlanningListHeader
+            name="Plan Type"
+            delay={300}
+            // onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
+          />
         </TableRow>
       </TableHead>
     )
@@ -176,16 +162,16 @@ export default class DeletedSalesOrderList extends React.PureComponent {
   showTableBody(row,id) {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
-        {/* Nanti ada if user ho atau site
-              Ini tampilan HO */}
-        <TableCell padding="checkbox">
-          {this.props.displaySalesCheckbox && 
-          <Checkbox 
-          disabled={this.isCheckboxAvailable(row)} 
-          checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
-          onClick={() => this.props.onChoosedSales(row)} 
-          classes={{ checked: 'checkbox-checked' }} />}
-        </TableCell>
+        {Number(RoleUser.role()) !== 1 ? "" :
+          <TableCell padding="checkbox">
+            {this.props.displaySalesCheckbox && 
+            <Checkbox 
+            disabled={this.isCheckboxAvailable(row)} 
+            checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
+            onClick={() => this.props.onChoosedSales(row)} 
+            classes={{ checked: 'checkbox-checked' }} />}
+          </TableCell>
+        }
         <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
@@ -196,10 +182,9 @@ export default class DeletedSalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="center" className="table-cell"> {row.LifeTimeComponent} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
-        <TableCell align="left" className="table-cell"> Unknown </TableCell>
-        <TableCell align="left" className="table-cell"> Unknowns </TableCell>
-        {/* Ini tampilan HO, site gaada action */}
-        {/* <TableCell align="center" className="table-cell"> <EditButton title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} /></TableCell> */}
+        <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
+        <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
+        <TableCell align="left" className="table-cell"> Fix </TableCell>
       </TableRow>
     )
   }
@@ -237,59 +222,28 @@ export default class DeletedSalesOrderList extends React.PureComponent {
       )
       default:
     }
-    // if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
-    //   return(
-    //     <div className="loading-container">
-    //       <img 
-    //         src={Spinner}
-    //         alt="loading-spinner"
-    //         className="loading-icon"
-    //         />
-    //     </div>
-    //   )
-    // }else if(this.props.fetchStatusPutLifetime === ApiRequestActionsStatus.LOADING){
-    //   return(
-    //         <div>
-    //         <Snackbar
-    //           anchorOrigin={{ vertical: 'center',horizontal: 'right'}}
-    //           bodyStyle={{ backgroundColor: 'teal', color: 'coral' }}
-    //           open={this.state.stats}
-    //           onClose={this.handleClose}
-    //           autoHideDuration={3000}
-    //           message="Please Wait. Page will reload automatically"
-    //         />
-    //       </div>
-    //       )
-    // }
-    // else if(this.props.fetchStatusSales === ApiRequestActionsStatus.FAILED){
-    //   return(
-    //     <div className="loading-container">
-    //       OOPS THERE WAS AN ERROR :'(
-    //     </div>
-    //   )
-    // }else if(this.props.salesOrderListDeletedfetchStatusSalesDeleted.Lists.length === 0){
-    //   return(
-    //     <div className="loading-container">
-    //       DATA NOT FOUND
-    //     </div>
-    //   )
-    // }
   }
 
-render(){
-        return(
-          <>
-            <Table classes={{ root: 'table' }} className="table">
-            {this.showTableHead()}
-            <TableBody classes={{ root: 'table-body' }}>
-              {this.props.salesOrderListDeleted.Lists
-                && this.props.salesOrderListDeleted.Lists.map((row, id) => (
-                  this.showTableBody(row,id)
-                ))}
-              </TableBody>
-            </Table>
-            {this.showLoading()}
-          </>
-        )
-      }
+  render(){
+    if(this.props.salesOrderListDeleted.Lists.length === 0 && this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED){
+      return(
+        <EmptyList idEmpty= "Delete" />
+      )
+    }else{
+      return(
+        <>
+          <Table classes={{ root: 'table' }} className="table">
+          {this.showTableHead()}
+          <TableBody classes={{ root: 'table-body' }}>
+            {this.props.salesOrderListDeleted.Lists
+              && this.props.salesOrderListDeleted.Lists.map((row, id) => (
+                this.showTableBody(row,id)
+              ))}
+            </TableBody>
+          </Table>
+          {this.showLoading()}
+        </>
+      )
+    }
   }
+}

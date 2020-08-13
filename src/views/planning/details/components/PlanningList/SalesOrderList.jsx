@@ -9,9 +9,12 @@ import InputButton from '../../../../../components/Button/InputButton';
 import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
-import {Snackbar} from '@material-ui/core';
+import { Snackbar } from '@material-ui/core';
 import moment from 'moment';
+import EmptyList from '../../../../../components/EmptyList/EmptyList';
+import roleService from "../../../../../utils/roleService.helper";
 
+const RoleUser = new roleService();
 export default class SalesOrderList extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -19,55 +22,55 @@ export default class SalesOrderList extends React.PureComponent {
       checkedValue: false,
       stats: false,
       putLifetime: {
-        SoNumber : '',
-        LifeTimeComponent : '',
+        SoNumber: '',
+        LifeTimeComponent: '',
       }
     }
   }
 
-  componentDidUpdate = (prevState) =>{
+  componentDidUpdate = (prevState) => {
     //untuk menghilangkan checkbox
-    if (prevState.salesParameter !== this.props.salesParameter || prevState.salesSearch !== this.props.salesSearch || 
-      prevState.searchComp !==this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
-      this.setState({checkedValue : false})
-    }if (this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING) {
-      this.setState({checkedValue : false})
+    if (prevState.salesParameter !== this.props.salesParameter || prevState.salesSearch !== this.props.salesSearch ||
+      prevState.searchComp !== this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
+      this.setState({ checkedValue: false })
+    } 
+    if (this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING) {
+      this.setState({ checkedValue: false })
     }
   }
-  componentDidMount = async() =>{    
+  componentDidMount = async () => {
     await this.props.clearSelectedSalesPlans();
-    // this.props.onClickSalesOrder();
   }
 
-  componentWillMount = () =>{
+  componentWillMount = () => {
     this.props.updateSalesParameter({
       ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
     });
   }
 
-  putLifetimke = async(data) => {
+  putLifetimke = async (data) => {
     await this.props.putLifetimeComp(data, this.props.token);
     await this.props.onClickSalesOrder();
   }
-  
-  isPutLifetime =  async(key, value) => {
-      this.setState({
-        putLifetime: {
-          SoNumber : key,
-          LifeTimeComponent: value
-        },
-        stats: true
-      }, 
-      () => this.putLifetimke(this.state.putLifetime) 
-      )
+
+  isPutLifetime = async (key, value) => {
+    this.setState({
+      putLifetime: {
+        SoNumber: key,
+        LifeTimeComponent: value
+      },
+      stats: true
+    },
+      () => this.putLifetimke(this.state.putLifetime)
+    )
   }
 
-  isFilterLifetime = async( value1, value2 ) => {
-    this.props.lifetimeFilter( LifetimeFilterAction, value1, value2, this.props.salesParameter.dataFilter.PageSize );
+  isFilterLifetime = async (value1, value2) => {
+    this.props.lifetimeFilter(LifetimeFilterAction, value1, value2, this.props.salesParameter.dataFilter.PageSize);
   }
 
-  isFilterDate = async ( value1, value2) => {
-    this.props.dateFilter( DateFilterAction, value1, value2, this.props.salesParameter.dataFilter.PageSize );
+  isFilterDate = async (value1, value2) => {
+    this.props.dateFilter(DateFilterAction, value1, value2, this.props.salesParameter.dataFilter.PageSize);
   }
 
   isCheckboxAvailable = (data) => {
@@ -78,40 +81,33 @@ export default class SalesOrderList extends React.PureComponent {
     return isAvailable;
   }
 
-  // isChangeStat = (value,key) =>{
-  //   this.setState({
-  //     stats: 1,
-  //     lifetime: this.state.lifetime.map(el => (el.SoNumber === key ? {...el, LifeTimeComp : value} : el))
-  //   });
-  // }
-
-  handleClickCheckbox = () =>{
+  handleClickCheckbox = () => {
     this.setState({
-      checkedValue : !this.state.checkedValue
+      checkedValue: !this.state.checkedValue
     })
   }
 
   showTableHead() {
-      return (
-        <TableHead className="table-head" classes={{ root: 'table-head' }}>
+    return (
+      <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow classes={{ root: 'table-row' }}>
-          { this.props.idSales === "Data Input" ? "" :
+          {this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly" || Number(RoleUser.role()) !== 1 ? "" :
             <TableCell padding="checkbox">
-              {this.props.displaySalesCheckbox && 
-              <Checkbox 
-                checked={this.state.checkedValue}
-                onChange={this.handleClickCheckbox}
-                onClick={() => {this.props.salesOrderList.Lists.map((row,id) => 
-                this.props.onChoosedSales(row,id))}}
-                className="checkbox-checked-header"/>}
+              {this.props.displaySalesCheckbox &&
+                <Checkbox
+                  checked={this.state.checkedValue}
+                  onChange={this.handleClickCheckbox}
+                  onClick={() => {
+                    this.props.salesOrderList.Lists.map((row, id) =>
+                      this.props.onChoosedSales(row, id))
+                  }}
+                  className="checkbox-checked-header" />}
             </TableCell>
           }
           <PlanningListHeader
             name="SO"
-            // isActive={this.props.sortJobsByState.unitModel.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-            // isAscending={this.props.sortJobsByState.unitModel.isAscending}
           />
           <PlanningListHeader
             name="Customer"
@@ -143,38 +139,34 @@ export default class SalesOrderList extends React.PureComponent {
           />
           <PlanningListHeader
             name="Part Number"
-          // //   isActive={this.props.sortJobsByState.backlogOpen.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-          // //   isAscending={this.props.sortJobsByState.backlogOpen.isAscending}
           />
           <PlanningListHeader
             name="Unit Code"
-          // //   isActive={this.props.sortJobsByState.plantExecution.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-          // //   isAscending={this.props.sortJobsByState.plantExecution.isAscending}
           />
           <PlanningListHeader
             name="Serial Number"
-          // //   isActive={this.props.sortJobsByState.status.isActive}
             delay={300}
             onSearch={this.props.onSearchComp}
-          // //   isAscending={this.props.sortJobsByState.status.isAscending}            
           />
-          <PlanningListHeader
-            name="Lifetime"
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
-            delay={300}
-            onFilter={this.isFilterLifetime}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
-          />
+          {this.props.idSales === "Data Input" ?
+            <PlanningListHeader
+              name="Lifetime Comp"
+              delay={300}
+            /> :
+            <PlanningListHeader
+              name="Lifetime"
+              delay={300}
+              onFilter={this.isFilterLifetime}
+            />
+          }
           <PlanningListHeader
             name="Plan"
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
             delay={300}
             onFilter={this.isFilterDate}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
           />
           <PlanningListHeader
             name="SMR"
@@ -186,30 +178,32 @@ export default class SalesOrderList extends React.PureComponent {
             delay={300}
             onFilter={this.isFilterDate}
           />
-          {/* <Typography
-            name="Action" style={{marginTop: "10px"}}
-          // //   isActive={this.props.sortJobsByState.staging.isActive}
-          // //   isAscending={this.props.sortJobsByState.staging.isAscending}
-          >Action</Typography> */}
+          <PlanningListHeader
+            name="Plan Type"
+            delay={300}
+            // isActive={this.props.sortSalesByState.UnitModel.isActive}
+            // isAscending={this.props.sortSalesByState.UnitModel.isAscending}
+            // onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
+          />
         </TableRow>
       </TableHead>
     )
   }
 
 
-  showTableBody(row,id) {
+  showTableBody(row, id) {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
-        { this.props.idSales === "Data Input" ? "" :
+        {this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly" || Number(RoleUser.role()) !== 1 ? "" :
           <TableCell padding="checkbox">
-            {this.props.displaySalesCheckbox && 
-            <Checkbox 
-            // checked={true}
-            disabled={this.isCheckboxAvailable(row)} 
-            checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
-            onClick={() => this.props.onChoosedSales(row)} 
-            classes={{ checked: 'checkbox-checked' }} 
-            />}
+            {this.props.displaySalesCheckbox &&
+              <Checkbox
+                disabled={this.isCheckboxAvailable(row)}
+                checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)}
+                onClick={() => this.props.onChoosedSales(row)}
+                classes={{ checked: 'checkbox-checked' }}
+              />
+            }
           </TableCell>
         }
         <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
@@ -220,23 +214,29 @@ export default class SalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
-        <TableCell align="center" className="table-cell"> 
-        {this.props.salesOrderList.Lists[id].LifeTimeComponent === "-" ? 
-          <InputButton title="Input Lifetime Component" onStats={this.isPutLifetime} titles="Input" key={row.SoNumber} id={row.SoNumber} field="input"/> : 
-          <div className={this.props.salesOrderList.Lists[id].IsRevised === true && this.props.salesOrderList.Lists[id].IsChanged === false ? "table-cell-rev" : ""}>{this.props.salesOrderList.Lists[id].LifeTimeComponent}</div>
-        }
+        <TableCell align="center" className="table-cell">
+          {this.props.salesOrderList.Lists[id].LifeTimeComponent === 0 && this.props.idTab === "Input" ?
+            <InputButton title="Input Lifetime Component" onStats={this.isPutLifetime} titles="Input" key={row.SoNumber} id={row.SoNumber} field="input" /> :
+            this.props.salesOrderList.Lists[id].LifeTimeComponent === 0 && this.props.idTab === "Status" ?
+              <InputButton titles="Input Status" key={row.SoNumber} id={row.SoNumber} /> :
+              <div className={this.props.salesOrderList.Lists[id].IsRevised === true && this.props.salesOrderList.Lists[id].IsChanged === false ? "table-cell-rev" : ""}>{this.props.salesOrderList.Lists[id].LifeTimeComponent}</div>
+          }
         </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
+        <TableCell align="left" className="table-cell"> Fix </TableCell>
         <TableCell align="center" className="table-cell">
-        {this.props.salesOrderList.Lists[id].LifeTimeComponent !== "-" ? <EditButton idEdit="Approval" title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} /> : ""}
+          {this.props.salesOrderList.Lists[id].LifeTimeComponent !== 0 && this.props.idTab === "Approval" ?
+            <EditButton idEdit="Approval" title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} /> :
+            this.props.salesOrderList.Lists[id].LifeTimeComponent !== 0 && this.props.idTab === "Status" ?
+              <EditButton idEdit="Status" /> : ""}
         </TableCell>
       </TableRow>
     )
   }
 
-  handleClick = () =>{
+  handleClick = () => {
     this.setState({
       snak: true
     })
@@ -248,72 +248,81 @@ export default class SalesOrderList extends React.PureComponent {
     })
   }
 
-  showLoading(){
-    if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
-      return(
+  showLoading() {
+    if (this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING) {
+      return (
         <div className="loading-container">
-          <img 
+          <img
             src={Spinner}
             alt="loading-spinner"
             className="loading-icon"
-            />
+          />
         </div>
       )
-    }else if(this.props.fetchStatusPutLifetime === ApiRequestActionsStatus.LOADING){
-      return(
-            <div>
-            <Snackbar
-              anchorOrigin={{ vertical: 'center',horizontal: 'center'}}
-              bodyStyle={{ backgroundColor: 'teal', color: 'coral' }}
-              open={this.state.stats}
-              onClose={this.handleClose}
-              autoHideDuration={3000}
-              message="Please Wait. Page will reload automatically"
-            />
-          </div>
-          )
+    } else if (this.props.fetchStatusPutLifetime === ApiRequestActionsStatus.LOADING) {
+      return (
+        <div>
+          <Snackbar
+            anchorOrigin={{ vertical: 'center', horizontal: 'center' }}
+            bodyStyle={{ backgroundColor: 'teal', color: 'coral' }}
+            open={this.state.stats}
+            onClose={this.handleClose}
+            autoHideDuration={3000}
+            message="Please Wait. Page will reload automatically"
+          />
+        </div>
+      )
     }
-    else if(this.props.fetchStatusSales === ApiRequestActionsStatus.FAILED){
-      return(
+    else if (this.props.fetchStatusSales === ApiRequestActionsStatus.FAILED) {
+      return (
         <div className="loading-container">
           OOPS THERE WAS AN ERROR :'(
-        </div>
-      )
-    }else if(this.props.salesOrderList.Lists.length === 0){
-      return(
-        <div className="loading-container">
-          DATA NOT FOUND
         </div>
       )
     }
   }
 
-  render(){
-    if(this.props.idSales === "Data Input"){
-      return(
+  render() {
+    if (this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly") {
+      return (
         <>
           <Table classes={{ root: 'table' }} className="table">
-          {this.showTableHead()}
-          <TableBody classes={{ root: 'table-body' }}>
-            {this.props.salesOrderList.Lists
-              && this.props.salesOrderList.Lists.map((row, id) => (
-                this.showTableBody(row,id)
-              ))}
+            {this.showTableHead()}
+            <TableBody classes={{ root: 'table-body' }}>
+              {this.props.salesOrderList.Lists
+                && this.props.salesOrderList.Lists.map((row, id) => (
+                  this.showTableBody(row, id)
+                ))}
             </TableBody>
           </Table>
           {this.showLoading()}
         </>
       )
-    } else{
-      return(
+    } else if (this.props.salesOrderList.Lists.length === 0 && this.props.idTab === "Approval"
+      && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) {
+      return (
+        <EmptyList idEmpty="Sales" />
+      )
+    } else if (this.props.salesOrderList.Lists.length === 0 && this.props.idTab === "Input"
+      && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) {
+      return (
+        this.props.idTab = "Input" ? <EmptyList idEmpty="Input" /> : ""
+      )
+    } else if (this.props.salesOrderList.Lists.length === 0
+      && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) {
+      return (
+        <EmptyList idEmpty="Sales" />
+      )
+    } else {
+      return (
         <>
           <Table classes={{ root: 'table' }} className="table">
-          {this.showTableHead()}
-          <TableBody classes={{ root: 'table-body' }}>
-            {this.props.salesOrderList.Lists
-              && this.props.salesOrderList.Lists.map((row, id) => (
-                this.showTableBody(row,id)
-              ))}
+            {this.showTableHead()}
+            <TableBody classes={{ root: 'table-body' }}>
+              {this.props.salesOrderList.Lists
+                && this.props.salesOrderList.Lists.map((row, id) => (
+                  this.showTableBody(row, id)
+                ))}
             </TableBody>
           </Table>
           {this.showLoading()}

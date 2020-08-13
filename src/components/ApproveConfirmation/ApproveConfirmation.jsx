@@ -15,13 +15,13 @@ export default class ApproveConfirmation extends React.PureComponent {
 	render() {
 		if(this.props.idApprove === "RevLt"){
 			return (
-				<Modal open={this.props.openModal} onClose={this.props.onCloseRev} className="modal-container-approve">
+				<Modal open={this.props.openModal} className="modal-container-approve">
 					<DialogContent className="approve-confirmation-content">
 						<div className="confirmation-modal-approve">
 							<CloseNotif onClose={this.props.onCloseRev}/>
 							<div className="confirmation-container-approve">
 								<p className="confirmation-title-approve">Confirmation</p>
-								<p className="confirmation-title-approve">Revised</p>
+								<p className="confirmation-title-approve2">Revised</p>
 								<img className="confirmation-image-approve" src={ImgSendtoEdit} alt="" />
 								<p className="confirmation-caption-approve">Are you sure want to Edit <b>{this.props.dataLf} to {this.props.dataRev} ?</b></p>
 								<div className="btn-row">
@@ -36,13 +36,13 @@ export default class ApproveConfirmation extends React.PureComponent {
 		}
 		else{
 			return (
-				<Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container-approve">
+				<Modal open={this.props.openModal} className="modal-container-approve">
 					<DialogContent className="approve-confirmation-content">
 						<div className="confirmation-modal-approve">
 							<CloseNotif onClose={this.props.onClose}/>
 							<div className="confirmation-container-approve">
 								<p className="confirmation-title-approve">Confirmation</p>
-								<p className="confirmation-title-approve">Approved</p>
+								<p className="confirmation-title-approve2">Approved</p>
 								<img className="confirmation-image-approve" src={ImgSendtoEdit} alt="" />
 								<p className="confirmation-caption-approve">Are you sure want to Approve <b> {this.props.totalData} items</b>?</p>
 								<div className="btn-row">

@@ -10,7 +10,7 @@ export default class DeleteConfirmation extends React.PureComponent {
   render() {
     if(this.props.idDelete === "Delete"){
       return (
-        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container-delete">
+        <Modal open={this.props.openModal} className="modal-container-delete">
           <DialogContent className="delete-confirmation-content">
             <div className="confirmation-modal-delete">
               <CloseNotif onClose={this.props.onClose}/>
@@ -30,17 +30,17 @@ export default class DeleteConfirmation extends React.PureComponent {
       );
     } else if(this.props.idDelete === "Permanent"){
       return (
-        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-container-delete">
+        <Modal open={this.props.openModal} className="modal-container-delete">
           <DialogContent className="delete-confirmation-content">
             <div className="confirmation-modal-delete">
               <CloseNotif onClose={this.props.onClose}/>
                 <div className="confirmation-container-delete">
-                  <p className="title-confirmation-delete">Are you sure want to</p>
-                  <p className="confirmation-titles-delete">permanently delete this data ?</p>
+                  <p className="confirmation-title-delete">Are you sure want to</p>
+                  <p className="confirmation-titles-delete2">permanently delete this data ?</p>
                   <img className="confirmation-images-delete" src={DelSuccess} alt="" />
-                  <div className="btn-row">
-                    <Button className="btn-yes" onClick={this.props.onDelete}>Yes, Delete</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button className="btn-no" onClick={this.props.onClose}>No</Button>
+                  <div className="btn-row-permanent">
+                    <Button className="btn-yes-delete" onClick={ () => {this.props.renderSakses(); this.props.onDelete(); this.props.onClose() }}>Yes, Delete</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button className="btn-dont" onClick={this.props.onClose}>No</Button>
                     </div>
                 </div>
             </div>

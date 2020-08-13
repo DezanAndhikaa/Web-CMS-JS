@@ -4,7 +4,7 @@
 .modal-container-delete{
     width: fit-content;
     height: fit-content;
-    margin: auto;
+    margin: 12% 0 0 38%;
     .delete-confirmation-content{
         display: flex;
         justify-content: center;
@@ -30,15 +30,21 @@
                 .confirmation-title-delete{
                     margin: 0;
                     padding-top: vw(20);
-                    font-size: vw(28);
-                    font-family: 'SFUIDisplay-Bold';
+                    font-family: 'Lato-Regular';
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 24px;
+                    line-height: 29px;
                     color: #3C3B3B;
                 }
-                .confirmation-titles-delete{
+                .confirmation-titles-delete2{
                     margin: 0;
-                    font-size: vw(28);
-                    padding-top: vw(10);
-                    font-family: 'SFUIDisplay-Bold';
+                    padding-top: vw(5);
+                    font-family: 'Lato-Regular';
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 24px;
+                    line-height: 29px;
                     color: #3C3B3B;
                 }
                 .confirmation-images-delete{
@@ -53,11 +59,13 @@
                 }
                 .confirmation-caption-delete{
                     margin: 0;
-                    font-size: vw(20);
-                    font-family: 'SFUIDisplay-Regular';
-                    opacity: 0.5;
+                    font-family: 'Lato-Regular';
+                    opacity: 0.51;
                     text-align: center;
-                    color: rgb(0, 0, 0);
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 13px;
+                    line-height: 18px;
                 }
             }
         }
@@ -67,17 +75,17 @@
         display: flex;
         flex-direction: row;
         margin-top: vw(20);
-        width: 100%;
+        width: 150%;
         .btn-yes{
             display: flex;
             text-transform: capitalize;
             align-items: center;
             justify-content: center;
-            width: 40%;//w(100.22);
+            width: 40%;
             height: vw(45.07);
-            font-size: vw(13) !important;
+            font-size: 12px;
+            line-height: 14px;
             font-weight: bold;
-            line-height: vw(16) !important;
             font-family: 'Lato-Regular';
             background-color: #F2F2F4;
             color: #1D1D1D;
@@ -92,17 +100,61 @@
             text-transform: capitalize;
             align-items: center;
             justify-content: center;
-            width: 60%;//vw(170.22);
+            width: 60%;
             height: vw(45.07);
-            font-size: vw(13) !important;
+            font-size: 12px;
+            line-height: 14px;
             font-weight: bold;
-            line-height: vw(16) !important;
             font-family: 'Lato-Regular';
             background-color: map-get($colors , primary);
             box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
             cursor: pointer;
         }
         .btn-no:hover {
+            background-color: map-get($colors, primary-dark);
+        }
+    }
+    .btn-row-permanent{
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        margin-top: vw(20);
+        width: 100%;
+        .btn-yes-delete{
+            display: flex;
+            text-transform: capitalize;
+            align-items: center;
+            justify-content: center;
+            width: 40%;
+            height: vw(45.07);
+            font-size: 12px;
+            line-height: 14px;
+            font-weight: bold;
+            font-family: 'Lato-Regular';
+            background-color: #F2F2F4;
+            color: #1D1D1D;
+            box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+            cursor: pointer;
+        }
+        .btn-yes-delete:hover {
+            background-color: rgb(227, 227, 230);
+        }
+        .btn-dont{
+            display: flex;
+            text-transform: capitalize;
+            align-items: center;
+            justify-content: center;
+            width: 60%;
+            height: vw(45.07);
+            font-size: 12px;
+            line-height: 14px;
+            font-weight: bold;
+            font-family: 'Lato-Regular';
+            background-color: map-get($colors , primary);
+            box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+            cursor: pointer;
+        }
+        .btn-dont:hover {
             background-color: map-get($colors, primary-dark);
         }
     }

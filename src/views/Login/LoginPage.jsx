@@ -7,6 +7,8 @@ import isAccessTokenValid from '../../core/HelpersFunction';
 import Message from '../../components/Message/Message';
 import { Menu, BasePath } from '../../constants';
 import { ApiRequestActionsStatus } from '../../core/RestClientHelpers';
+import { Formik } from "formik";
+import * as Yup from "yup";
 
 const CssTextField = withStyles({
   root: {
@@ -23,6 +25,7 @@ const CssTextField = withStyles({
     },
   },
 })(TextField);
+
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
@@ -32,6 +35,12 @@ class LoginPage extends React.Component {
       showPassword: false,
     };
   }
+
+  //Validation Schema
+  validationSchema = Yup.object().shape({
+    userName: Yup.string(),
+    password: Yup.string()
+  });
 
   componentWillMount() {
     if (isAccessTokenValid()) { this.props.push(Menu.DASHBOARD); }
@@ -59,7 +68,13 @@ class LoginPage extends React.Component {
   isDisabled() { return this.state.username === '' || this.state.password === ''; }
 
   renderForm() {
+    const {message} = this.props;
     return (
+      <Formik
+        initialValues={{ userName: "", password: "" }}
+        validationSchema={this.validationSchema}
+        onSubmit={this._handleSubmit}
+      >
       <form noValidate autoComplete="off" className="login-form">
         <CssTextField 
           id="username" 
@@ -67,15 +82,23 @@ class LoginPage extends React.Component {
           type="text" 
           value={this.state.username} 
           onChange={this.handleUsernameChange} 
+          // value={props.values.userName}
+          // onChange={(e) => props.setFieldValue("userName",e.target.value)}
           className="username-input" 
           label="Username" 
-          classes={{ input: 'username-input-text' }} />
+          classes={{ input: 'username-input-text' }} 
+          helperText={message ? message : ''}
+        />
         <CssTextField 
           id="password" 
           variant="outlined" 
           onKeyPress={this.handleKeyPress} 
+          // onKeyPress={(event) => this._handleKeyPress(event,props.values)}
           type={this.state.showPassword ? 'text' : 'password'} 
-          value={this.state.password} onChange={this.handlePasswordChange} 
+          value={this.state.password} 
+          onChange={this.handlePasswordChange} 
+          // value={props.values.password}
+          // onChange={(e) => props.setFieldValue("password",e.target.value)}
           className="password-input" 
           label="Password" 
           classes={{ input: 'username-input-text' }} />
@@ -85,9 +108,11 @@ class LoginPage extends React.Component {
             : <VisibilityOff className="visibility-icon" onClick={() => this.setState((prevState) => ({ showPassword: !prevState.showPassword }))} />
         }
         <Button disabled={this.isDisabled()} variant="contained" className={this.isDisabled() ? 'btn-login-disabled' : 'btn-login'} onClick={this.handleLogin}>
+        {/* onClick={() => this._handleSubmit(props.values)} */}
           Log In
         </Button>
       </form>
+      </Formik>
     );
   }
 

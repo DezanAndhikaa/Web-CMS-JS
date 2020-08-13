@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { ExpandMore } from '@material-ui/icons';
 import './DropdownFilter.scss';
