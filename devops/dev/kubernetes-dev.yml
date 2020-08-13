@@ -40,7 +40,6 @@ spec:
         - containerPort: 8080
           name: http
         imagePullPolicy: IfNotPresent
-        name: web-cms-js
         resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
