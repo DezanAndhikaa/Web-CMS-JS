@@ -65,6 +65,7 @@ import {
 	searchCompActionService,
 	selectFilterAction, 
 	dateFilterAction,
+	smrDateFilterAction,
 	selectAllService
 } from '../../DetailPages-action';
 import Status from './Status';
@@ -106,6 +107,7 @@ const mapStateToProps = (state) => ({
 	selectedServicePlans: state.plansPageState.selectedServicePlans,
 	filterLifetime: state.plansPageState.filterLifetime,
 	filterDate: state.plansPageState.filterDate,
+	filterSmrDate: state.plansPageState.filterSmrDate,
 	fetchStatusSales: state.plansPageState.salesOrderList.status,
 	fetchStatusSalesApproved: state.plansPageState.salesOrderListApproved.status,
 	fetchStatusSalesDeleted: state.plansPageState.salesOrderListDeleted.status,
@@ -146,6 +148,7 @@ const mapDispatchToProps = (dispatch) => ({
 	unselectSalesPlan: (payload) => dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
 	lifetimeFilter: (type, payload, payload2, page) => dispatch(selectFilterAction(type, payload, payload2, page)),
 	dateFilter: (type, payload, payload2, page) => dispatch(dateFilterAction(type, payload, payload2, page)),
+	smrDateFilter: (type, payload, payload2, page) => dispatch(smrDateFilterAction(type, payload, payload2, page)),
 	updateSalesParameter: (payload) => dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
 	updateSalesApprovedParameter: (payload) => dispatch(salesParameterApprovedAction(UpdateSalesApprovedParameterAction, payload)),
 	updateSalesDeletedParameter: (payload) => dispatch(salesParameterDeletedAction(UpdateSalesDeletedParameterAction, payload)),

@@ -14,6 +14,7 @@ import {
   SortServiceByPlanType,
   LifetimeFilterAction,
   DateFilterAction,
+  SMRDateFilterAction,
   SmrFilterAction
 } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons';
@@ -62,6 +63,10 @@ export default class ServiceOrderList extends React.PureComponent {
 
   isFilterDate = async (value1, value2) => {
     this.props.dateFilter(DateFilterAction, value1, value2, this.props.serviceParameter.dataFilter.PageSize);
+  }
+
+  isFilterSmrDate = async (value1, value2) => {
+    this.props.smrFilter(SMRDateFilterAction, value1, value2, this.props.serviceParameter.dataFilter.PageSize);
   }
 
   isCheckboxAvailable = (data) => {
@@ -190,7 +195,7 @@ export default class ServiceOrderList extends React.PureComponent {
             <PlanningListHeader
               name="SMR Date"
               delay={300}
-              onSearch={this.isFilterDate}
+              onFilter={this.isFilterSmrDate}
             />
             <PlanningListHeader
               name="PLAN TYPE"

@@ -657,6 +657,12 @@ export function filterDateReducer(state = initialFilterParameter, action) {
 	return state;
 }
 
+export function filterSmrDateReducer(state = initialFilterParameter, action) {
+	if (action.type === DateFilterAction)
+		state = { ...state, Filter: [{ Field: 'SMRLastUpdate', Operator: 'gte', Value: action.payload, Logic: 'and' }, { Field: 'SMRLastUpdate', Operator: 'lte', Value: action.payload2, Logic: 'and' }] };
+	return state;
+}
+
 export function filterParameterReducer(state = initialFilterParameter, action) {
 	if (action.type === SelectCustomerFilterAction)
 		if (state.Filter.length === 0) { //IF yang pertama ini,jika filternya belum di isi apa2 (filter belum di jalankan)
@@ -1044,6 +1050,7 @@ const PlansReducers = combineReducers({
 	filterLifetime: filterLifetimeReducer,
 	filterSmr: filterSmrReducer,
 	filterDate: filterDateReducer,
+	filterSmrDate: filterSmrDateReducer,
 	salesSearchRevision: searchSalesRevReducer,
 	searchSalesRevParam: searchSalesRevParamReducer	
 });

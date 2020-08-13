@@ -95,6 +95,7 @@ export const IndexFilterAction = 'INDEX FILTER';
 export const LifetimeFilterAction = 'SELECT_LIFETIME_FILTER';
 export const SmrFilterAction = "SELECT_SMR_FILTER";
 export const DateFilterAction = 'SELECT_DATE_FILTER';
+export const SMRDateFilterAction = 'SELECT_SMRDATE_FILTER';
 
 export function approveSalesAction(payload, accessToken) {
 	const requestConfig = {
@@ -522,6 +523,11 @@ export function searchCompActionService(type, payload, sort) {
 export function dateFilterAction(type, payload, payload2, page) {
 	return { type, payload, payload2, page };
 }
+
+export function smrDateFilterAction(type, payload, payload2, page) {
+	return { type, payload, payload2, page };
+}
+
 export function smrFilterAction(type, payload, payload2, page) {
 	return { type, payload, payload2, page };
 }
