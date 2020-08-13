@@ -130,15 +130,15 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  //FILTER RANGE DATE
+  //FILTER RANGE SMR DATE
   if(Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
     || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
-    if (prevProps.filterSmrDate !== this.props.filterSmrDate) {
-      this.props.fetchServiceOrder(this.props.filterSmrDate, this.props.token);
+    if (prevProps.filterDateSmr !== this.props.filterDateSmr) {
+      this.props.fetchServiceOrder(this.props.filterDateSmr, this.props.token);
     }
   }else{
-    if (prevProps.filterSmrDate !== this.props.filterSmrDate) {
-      this.props.fetchSalesOrder(this.props.filterSmrDate, this.props.token);
+    if (prevProps.filterDateSmr !== this.props.filterDateSmr) {
+      this.props.fetchSalesOrder(this.props.filterDateSmr, this.props.token);
     }
   }
 
