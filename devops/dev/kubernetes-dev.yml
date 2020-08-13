@@ -1,7 +1,6 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: web-cms-js
   labels:
     app: web-cms-js
     workstream: cms
@@ -9,7 +8,9 @@ metadata:
     tier: frontend
     usermanagementservice: "true"
     msplanning: "true"
-  namespace: cms
+  name: web-cms-js
+  namespace: devcms
+  
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
@@ -40,7 +41,6 @@ spec:
         - containerPort: 8080
           name: http
         imagePullPolicy: IfNotPresent
-        name: web-cms-js
         resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
