@@ -282,15 +282,26 @@ class ApprovalPages extends React.Component {
     }
   }
 
+  resetFilter = () => {
+    this.props.updateServiceParameter({
+      ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+    });
+    this.props.selectedFilters.customerType= "All Customer"
+    this.props.selectedFilters.siteType= "All Site"
+    this.props.selectedFilters.unitType= "All Unit Model"
+    this.props.selectedFilters.compType= "All Component"
+    this.props.selectedFilters.planType= "All Plan Type"
+    this.props.filterParameter.Filter.length = 0
+	}
+
   //KOMPONEN UNTUK GLOBAL SEARCH
   _renderSearchBar() {
     return (
       <div className="bottom-row-approval">
         <BaseButton titles= "Reset"
-            {...this.props}
-            whatTabsIsRendered={false}
-            handleServiceApprove={this.handleServiceApprove}
-            renderSakses={this.changeSuccess}
+          {...this.props}
+          whatTabsIsRendered= {false}
+          resetFilter = {this.resetFilter}
         />
         <SearchInput
           {...this.props}

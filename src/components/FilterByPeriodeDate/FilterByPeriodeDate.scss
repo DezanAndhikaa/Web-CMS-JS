@@ -4,7 +4,7 @@
 .assign-date-modal{
     position: 'absolute';
     width: vw(400);
-    height: vw(175);
+    height: auto;
     background-color: white;
     margin: auto;
     border-radius: vw(20);
@@ -58,6 +58,14 @@
         margin-top: vw(5);
         display: flex;
         width: 100%;
+        .label-error{
+            font-family: 'Lato-Regular';
+            font-style: normal;
+            font-weight: bold;
+            font-size: 10px;
+            line-height: 12px;
+            color: map-get($colors, ndelete);
+        }
         .dates{
             width: 110.39px;
             height: 28.84px;
@@ -75,7 +83,7 @@
             font-weight: bold;
             font-size: 10px;
             line-height: 12px;
-            color: #b9b8b8;
+            color: #3C3B3B;
             opacity: 0.5;
         }
         .dates2{
@@ -96,8 +104,31 @@
             font-weight: bold;
             font-size: 10px;
             line-height: 12px;
-            color: #b9b8b8;
+            color: #3C3B3B;
             opacity: 0.5;
+        }
+    }
+
+    .label-error{
+        margin-top: vw(5);
+        display: flex;
+        width: 100%;
+        .label-error1{
+            font-family: 'Lato-Regular';
+            font-style: normal;
+            font-weight: bold;
+            font-size: 10px;
+            line-height: 12px;
+            color: map-get($colors, ndelete);
+        }
+        .label-error2{
+            margin-left: 12%;
+            font-family: 'Lato-Regular';
+            font-style: normal;
+            font-weight: bold;
+            font-size: 10px;
+            line-height: 12px;
+            color: map-get($colors, ndelete);
         }
     }
     
@@ -113,7 +144,7 @@
 
     .bottom-rows-date{
         display: flex;
-        margin: vw(30) 0;
+        margin-top: vw(30);
         .btn-search-date{
             display: flex;
             align-items: center;
@@ -133,6 +164,25 @@
         }
         .btn-search-date:hover {
             background-color: map-get($colors, primary-dark);
+        }
+        .btn-search-date-disabled{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 60%;
+            width: 35%;
+            height: vw(33.07) !important;
+            font-size: vw(13) !important;
+            font-weight: bold;
+            line-height: vw(16) !important;
+            font-family: 'Lato-Regular';
+            background-color: map-get($colors , primary);
+            text-transform: none;
+            box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+            border-radius: 0.4vw;
+            cursor: pointer;
+            opacity: 0.5;
+            color: black;
         }
     }
 }

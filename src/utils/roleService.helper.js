@@ -36,7 +36,6 @@ export default class roleService {
       }else if ((Array.isArray(role_name) && role_name.includes('SDH Non FMC')) || role_name === 'SDH Non FMC') { //sales site (view only)
         role = 12;
       }
-
       return role;
     } catch (error) {
       this.jwtDecode = error;

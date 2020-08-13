@@ -14,9 +14,9 @@
         align-items: center;
         justify-content: center;
         width: vw(84.22) !important;
-        height: 25px;
-        font-size: 8px;
-        line-height: 10px;
+        height: vw(35.07) !important;
+        font-size: vw(13) !important;
+        line-height: vw(16) !important;
         font-weight: bold;
         font-family: 'Lato-Regular';
         background-color: map-get($colors, primary);
@@ -26,15 +26,16 @@
         cursor: pointer;
     }
     .btn-assigns-lifetime{
+        padding-right: vw(30);
         background-image: url('../../assets/icons/filters.png');
-        background-size: 7.5px;
+        background-size: 8.5px;
         background-repeat: no-repeat;
-        background-position-x: 90%;
+        background-position-x: 88%;
         background-position-y: center;
-        width: vw(124.22) !important;
-        height: 25px;
-        font-size: 8px;
-        line-height: 10px;
+        width: vw(105) !important;
+        height: vw(35.07) !important;
+        font-size: vw(13) !important;
+        line-height: vw(16) !important;
         font-weight: bold;
         font-family: 'Lato-Regular';
         background-color: white; 
@@ -45,14 +46,14 @@
     }
     .btn-filter-smr{
         width: 69px;
-        height: 25px;
+        height: vw(35.07) !important;
         background-image: url('../../assets/icons/filters.png');
-        background-size: 7.5px;
+        background-size: 8.5px;
         background-repeat: no-repeat;
         background-position-x: 90%;
         background-position-y: center;
-        font-size: 8px;
-        line-height: 10px;
+        font-size: vw(13) !important;
+        line-height: vw(16) !important;
         font-weight: bold;
         font-family: 'Lato-Regular';
         background-color: white; 
@@ -62,10 +63,10 @@
         cursor: pointer;
     }
     .btn-non-filter-lifetime{
-        width: vw(124.22) !important;
-        height: 25px;
-        font-size: 8px;
-        line-height: 10px;
+        width: vw(145) !important;
+        height: vw(35.07) !important;
+        font-size: vw(13) !important;
+        line-height: vw(16) !important;
         font-weight: bold;
         font-family: 'Lato-Regular';
         background-color: white; 
@@ -78,15 +79,16 @@
         background-color: map-get($colors, primary-dark);
     }
     .btn-filter-by-date{
+        padding-right: vw(34);
         background-image: url('../../assets/icons/ic_date.png');
-        background-size: 7.5px;
+        background-size: 9px;
         background-repeat: no-repeat;
         background-position-x: 90%;
         background-position-y: center;
-        width: vw(124.22) !important;
-        height: 25px;
-        font-size: 8px;
-        line-height: 10px;
+        width: vw(120) !important;
+        height: vw(35.07) !important;
+        font-size: vw(13) !important;
+        line-height: vw(16) !important;
         font-weight: bold;
         font-family: 'Lato-Regular';
         background-color: white; 
@@ -97,15 +99,15 @@
     }
     .btn-smr-date{
         background-image: url('../../assets/icons/ic_date.png');
-        background-size: 7.5px;
+        background-size: 9px;
         background-repeat: no-repeat;
         background-position-x: 90%;
         background-position-y: center;
         width: vw(104.22) !important;
-        height: 25px;
+        height: vw(35.07) !important;
         font-weight: bold;
-        font-size: 8px;
-        line-height: 10px;
+        font-size: vw(13) !important;
+        line-height: vw(16) !important;
         font-family: 'Lato-Regular';
         background-color: white; 
         text-transform: none;
@@ -115,14 +117,14 @@
     }
     .btn-header{
         background-image: url('../../assets/icons/arrow.png');
-        background-size: 7.5px;
+        background-size: 8.5px;
         background-repeat: no-repeat;
         background-position-x: 90%;
         background-position-y: center;
         width: vw(124.22) !important;
-        height: 25px;
-        font-size: 8px;
-        line-height: 10px;
+        height: vw(35.07) !important;
+        font-size: vw(13) !important;
+        line-height: vw(16) !important;
         font-weight: bold;
         font-family: 'Lato-Regular';
         background-color: transparent; 
@@ -133,14 +135,14 @@
     }
     .btn-header-comp{
         background-image: url('../../assets/icons/arrow.png');
-        background-size: 7.5px;
+        background-size: 8.5px;
         background-repeat: no-repeat;
         background-position-x: 90%;
         background-position-y: center;
         width: vw(130) !important;
-        height: 25px;
-        font-size: 8px;
-        line-height: 10px;
+        height: vw(35.07) !important;
+        font-size: vw(13) !important;
+        line-height: vw(16) !important;
         font-weight: bold;
         font-family: 'Lato-Regular';
         background-color: transparent; 
@@ -150,16 +152,16 @@
         cursor: pointer;
     }
     .global-search-sn{
-        width: 95px;
-        height: 25px;
+        width: vw(140);
+        height: vw(35.07) !important;
         background-color: white;
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
         border-radius: 0.4vw;
         cursor: pointer;
         .txt-search{
             flex: 1;
-            font-size: 8px;
-            line-height: 10px;
+            font-size: vw(13) !important;
+            line-height: vw(16) !important;
             font-family: 'Lato-Regular';
             font-weight: bold;
             padding: vw(3) vw(10) vw(4);
@@ -167,15 +169,15 @@
     }
     .global-search{
         width: 89px;
-        height: 25px;
+        height: vw(35.07) !important;
         background-color: white;
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
         border-radius: 0.4vw;
         cursor: pointer;
         .txt-search{
             flex: 1;
-            font-size: 8px;
-            line-height: 10px;
+            font-size: vw(13) !important;
+            line-height: vw(16) !important;
             font-family: 'Lato-Regular';
             font-weight: bold;
             padding: vw(3) vw(10) vw(4);
@@ -183,15 +185,15 @@
     }
     .global-search-pk{
         width: 69px;
-        height: 25px;
+        height: vw(35.07) !important;
         background-color: white;
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
         border-radius: 0.4vw;
         cursor: pointer;
         .txt-search-pk{
             flex: 1;
-            font-size: 8px;
-            line-height: 10px;
+            font-size: vw(13) !important;
+            line-height: vw(16) !important;
             font-family: 'Lato-Regular';
             font-weight: bold;
             padding: vw(3) vw(10) vw(4);
@@ -199,7 +201,7 @@
     }
     .search-per-column{
         width: vw(94.22) !important;
-        height: 25px;
+        height: vw(35.07) !important;
         background-color: white;
         margin-left: vw(15);
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
@@ -207,8 +209,8 @@
         cursor: pointer;
         .txt-search-pk{
             flex: 1;
-            font-size: 8px;
-            line-height: 10px;
+            font-size: vw(13) !important;
+            line-height: vw(16) !important;
             font-family: 'Lato-Regular';
             font-weight: bold;
             padding: vw(3) vw(10) vw(4);

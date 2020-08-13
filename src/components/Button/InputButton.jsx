@@ -76,7 +76,7 @@ export default class InputButton extends React.Component{
                     </Paper>
                 </div>
             )
-        }else if(this.props.titles === "Lifetime Comp"){
+        }else if(this.props.titles === "LIFETIME COMP"){
             return(
                 <div className="button-rows">
                 <Button onClick={this.isClicked} className={this.props.idInput === "Data Input" ? "btn-non-filter-lifetime" : "btn-assigns-lifetime"} style={{justifyContent: "unset"}}>{this.props.titles}</Button>
@@ -127,7 +127,7 @@ export default class InputButton extends React.Component{
                 </div>
             )
         }
-        else if(this.props.titles === "SMR Date"){
+        else if(this.props.titles === "SMR DATE"){
             return(
                 <div className="button-rows">
                 <Button onClick={this.isClicked} className="btn-smr-date" style={{justifyContent: "unset"}}>{this.props.titles}</Button>

@@ -7,12 +7,14 @@ import FilterbyDataAction from '../../../../components/FilterByDataAction/Filter
 import NotifButton from '../../../../components/ActionButton/NotifButton/NotifButton';
 import {ApiRequestActionsStatus} from '../../../../core/RestClientHelpers';
 import roleService from '../../../../utils/roleService.helper';
+import BaseButton from '../../../../components/Button/BaseButton';
 
 const RoleUser = new roleService();
 class DetailPagesSite extends React.Component{
     constructor(props) {
       super(props)
       this.state = {
+        value: 0,
         stats: true,
         whichTabs: true,
         isShowPerPage: true,
@@ -633,12 +635,6 @@ componentDidUpdate = (prevProps) => {
     },this.props.token);
   }
 
-  // onClickRevisedSales = async (searchData) => {
-  //   await this.props.fetchRevisedSales({
-  //     Category: 'Lifetime', Keyword: this.props.salesSearch,
-  //   }, this.props.token);
-  // }
-
   //KOMPONEN UNTUK SHOW PER/PAGE
   _renderShowPerPage(){
     return(
@@ -685,10 +681,34 @@ componentDidUpdate = (prevProps) => {
     )
   }
 
+  handleClick = (menu, tab) => {
+    this.props.push({
+      pathname: menu,
+      whichTab: tab
+    });
+  }
+
+  resetFilter = () => {
+    this.props.updateServiceParameter({
+      ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+    });
+    this.props.selectedFilters.customerType= "All Customer"
+    this.props.selectedFilters.siteType= "All Site"
+    this.props.selectedFilters.unitType= "All Unit Model"
+    this.props.selectedFilters.compType= "All Component"
+    this.props.selectedFilters.planType= "All Plan Type"
+    this.props.filterParameter.Filter.length = 0
+	}
+
   //KOMPONEN UNTUK GLOBAL SEARCH
   _renderSearchBar(){
     return (
-      <div className="search-site">
+      <div className= "bottom-row-detail-site">
+        <BaseButton titles= "Reset"
+          {...this.props}
+          whatTabsIsRendered= {false}
+          resetFilter = {this.resetFilter}
+        />
         <SearchInput
           {...this.props}
           webInfo="Search"
@@ -844,7 +864,7 @@ componentDidUpdate = (prevProps) => {
     );
   };
 
-  render(){     
+  render(){
     return(
       <main className="content">
           <div className="table-detail-site">
