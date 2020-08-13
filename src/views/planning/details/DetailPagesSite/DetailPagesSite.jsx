@@ -130,6 +130,18 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
+  //FILTER RANGE DATE
+  if(Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
+    || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+    if (prevProps.filterSmrDate !== this.props.filterSmrDate) {
+      this.props.fetchServiceOrder(this.props.filterSmrDate, this.props.token);
+    }
+  }else{
+    if (prevProps.filterSmrDate !== this.props.filterSmrDate) {
+      this.props.fetchSalesOrder(this.props.filterSmrDate, this.props.token);
+    }
+  }
+
   //ini untuk trigger sales global search
   if(Number(RoleUser.role()) === 3 || Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){   
     if (prevProps.salesSearch !== this.props.salesSearch) {

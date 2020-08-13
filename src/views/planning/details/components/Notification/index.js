@@ -23,7 +23,7 @@ import {
 	UnselectServicePlanAction, selectSalesPlansAction, selectServicePlansAction, selectLeaderAction, SelectSalesPlanAction,
 	SelectServicePlanAction,
 	selectMechanicAction, sortByAction, 
-	storePlanDataAction,dateFilterAction
+	storePlanDataAction,dateFilterAction,smrDateFilterAction
 } from '../../DetailPages-action';
 import Notification from './Notification';
 
@@ -60,41 +60,65 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	push : (path, whichTab) => dispatch(push(path, whichTab)),
-	downloadSales : (soId) => dispatch(downloadSalesAction(soId)),
-	downloadService : (soId) => dispatch(downloadServiceAction(soId)),
-	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
-	clearSelectedServicePlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
-	putLifetimeComp : (payload, token) => dispatch(putLifetimeCompAction(payload, token)),
-	approveSales: (payload) => dispatch(approveSalesAction(payload)),
-	unapproveSales: (payload) => dispatch(unapproveSalesAction(payload)),
-	approveService: (payload) => dispatch(approveServiceAction(payload)),
-	deleteSales: (payload) => dispatch(deleteSalesAction(payload)),
-	deleteService: (payload) => dispatch(deleteServiceAction(payload)),
-	fetchApprovedSales: (payload) => dispatch(fetchApprovedSalesAction(payload)),
-	fetchApprovedService: (payload) => dispatch(fetchApprovedServiceAction(payload)),
-	fetchDeletedSales: (payload) => dispatch(fetchDeletedSalesAction(payload)),
-	fetchDeletedService: (payload) => dispatch(fetchDeletedServiceAction(payload)),
-	fetchSalesOrder: (payload, token) => dispatch(fetchSalesAction(payload, token)),
-	fetchServiceOrder: (payload) => dispatch(fetchServiceAction(payload)),
-	onClickSortBy: (type) => dispatch(sortByAction(type)),
-	onSearchSales: (keyword) => dispatch(searchAction(SearchSalesAction, keyword)),
-	onSearchService: (keyword) => dispatch(searchAction(SearchServiceAction, keyword)),
-	onSearchComp: (keyword,sort) => dispatch(searchCompAction(SearchCompAction, keyword, sort)),
-	onSearchCompService: (keyword, sort) => dispatch(searchCompActionService(SearchCompActionService, keyword, sort)),
-	lifetimeFilter: (type, payload, payload2, page) => dispatch(selectFilterAction(type, payload, payload2, page)),
-	dateFilter: (type, payload, payload2, page) => dispatch(dateFilterAction(type, payload, payload2, page)),
-	selectFilter2: (type, payload, head, page) => dispatch(selectFilterAction2(type, payload, head, page)),
-	indexFilter: (type, payload) => dispatch(indexFilterAction(type, payload)),
-	selectLeader: (type, payload) => dispatch(selectLeaderAction(type, payload)),
-	selectMechanic: (type, payload) => dispatch(selectMechanicAction(type, payload)),
-	selectSalesPlan: (payload) => dispatch(selectSalesPlansAction(SelectSalesPlanAction, payload)),
-	selectServicePlan: (payload) => dispatch(selectServicePlansAction(SelectServicePlanAction, payload)),
-	storePlanData: (payload) => dispatch(storePlanDataAction(payload)),
-	unselectServicePlan: (payload) => dispatch(selectServicePlansAction(UnselectServicePlanAction, payload)),
-	unselectSalesPlan: (payload) => dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
-	updateSalesParameter: (payload) => dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
-	updateServiceParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
+  push: (path, whichTab) => dispatch(push(path, whichTab)),
+  downloadSales: (soId) => dispatch(downloadSalesAction(soId)),
+  downloadService: (soId) => dispatch(downloadServiceAction(soId)),
+  clearSelectedSalesPlans: (payload) =>
+    dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
+  clearSelectedServicePlans: (payload) =>
+    dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
+  putLifetimeComp: (payload, token) =>
+    dispatch(putLifetimeCompAction(payload, token)),
+  approveSales: (payload) => dispatch(approveSalesAction(payload)),
+  unapproveSales: (payload) => dispatch(unapproveSalesAction(payload)),
+  approveService: (payload) => dispatch(approveServiceAction(payload)),
+  deleteSales: (payload) => dispatch(deleteSalesAction(payload)),
+  deleteService: (payload) => dispatch(deleteServiceAction(payload)),
+  fetchApprovedSales: (payload) => dispatch(fetchApprovedSalesAction(payload)),
+  fetchApprovedService: (payload) =>
+    dispatch(fetchApprovedServiceAction(payload)),
+  fetchDeletedSales: (payload) => dispatch(fetchDeletedSalesAction(payload)),
+  fetchDeletedService: (payload) =>
+    dispatch(fetchDeletedServiceAction(payload)),
+  fetchSalesOrder: (payload, token) =>
+    dispatch(fetchSalesAction(payload, token)),
+  fetchServiceOrder: (payload) => dispatch(fetchServiceAction(payload)),
+  onClickSortBy: (type) => dispatch(sortByAction(type)),
+  onSearchSales: (keyword) =>
+    dispatch(searchAction(SearchSalesAction, keyword)),
+  onSearchService: (keyword) =>
+    dispatch(searchAction(SearchServiceAction, keyword)),
+  onSearchComp: (keyword, sort) =>
+    dispatch(searchCompAction(SearchCompAction, keyword, sort)),
+  onSearchCompService: (keyword, sort) =>
+    dispatch(searchCompActionService(SearchCompActionService, keyword, sort)),
+  lifetimeFilter: (type, payload, payload2, page) =>
+    dispatch(selectFilterAction(type, payload, payload2, page)),
+  dateFilter: (type, payload, payload2, page) =>
+	dispatch(dateFilterAction(type, payload, payload2, page)),
+	
+  filterSmrDate: (type, payload, payload2, page) =>
+	dispatch(smrDateFilterAction(type, payload, payload2, page)),
+	
+  selectFilter2: (type, payload, head, page) =>
+    dispatch(selectFilterAction2(type, payload, head, page)),
+  indexFilter: (type, payload) => dispatch(indexFilterAction(type, payload)),
+  selectLeader: (type, payload) => dispatch(selectLeaderAction(type, payload)),
+  selectMechanic: (type, payload) =>
+    dispatch(selectMechanicAction(type, payload)),
+  selectSalesPlan: (payload) =>
+    dispatch(selectSalesPlansAction(SelectSalesPlanAction, payload)),
+  selectServicePlan: (payload) =>
+    dispatch(selectServicePlansAction(SelectServicePlanAction, payload)),
+  storePlanData: (payload) => dispatch(storePlanDataAction(payload)),
+  unselectServicePlan: (payload) =>
+    dispatch(selectServicePlansAction(UnselectServicePlanAction, payload)),
+  unselectSalesPlan: (payload) =>
+    dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
+  updateSalesParameter: (payload) =>
+    dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
+  updateServiceParameter: (payload) =>
+    dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
 });
 
 const notification = connect(mapStateToProps, mapDispatchToProps)(Notification);

@@ -14,8 +14,9 @@ import {
   SortServiceByPlanType,
   LifetimeFilterAction,
   DateFilterAction,
-  SmrFilterAction
-} from '../../DetailPages-action';
+  SmrFilterAction,
+  SmrDateFilterAction,
+} from "../../DetailPages-action";
 import { Spinner } from '../../../../../assets/icons';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
 import roleService from "../../../../../utils/roleService.helper";
@@ -62,6 +63,16 @@ export default class ServiceOrderList extends React.PureComponent {
 
   isFilterDate = async (value1, value2) => {
     this.props.dateFilter(DateFilterAction, value1, value2, this.props.serviceParameter.dataFilter.PageSize);
+  }
+
+  
+  isFilterSmrDate = async (value1, value2) => {
+    this.props.filterSmrDate(
+      SmrDateFilterAction,
+      value1,
+      value2,
+      this.props.serviceParameter.dataFilter.PageSize
+    );
   }
 
   isCheckboxAvailable = (data) => {
@@ -113,24 +124,35 @@ export default class ServiceOrderList extends React.PureComponent {
       )
     } else {
       return (
-        <TableHead className="table-head" classes={{ root: 'table-head' }}>
+        <TableHead className="table-head" classes={{ root: "table-head" }}>
           <TableRow>
-            {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? "" :
+            {this.props.idService === "Data Input" ||
+            Number(RoleUser.role()) !== 1 ? (
+              ""
+            ) : (
               <TableCell className="table-cell-checkbox">
-                {this.props.displayServiceCheckbox &&
+                {this.props.displayServiceCheckbox && (
                   <Checkbox
                     icon={<CheckBoxOutlineBlank fontSize="small" />}
-                    checkedIcon={<CheckBoxIcon style={{ color: "#FFD500" }} fontSize="small" />}
+                    checkedIcon={
+                      <CheckBoxIcon
+                        style={{ color: "#FFD500" }}
+                        fontSize="small"
+                      />
+                    }
                     checked={this.state.checkedValue}
                     onChange={this.handleClick}
                     onClick={({ target: { checked } }) => {
-                      if (checked) return this.props.onChooseAllService(this.props.serviceOrderList.Lists);
+                      if (checked)
+                        return this.props.onChooseAllService(
+                          this.props.serviceOrderList.Lists
+                        );
                       return this.props.onChooseAllService([]);
                     }}
                   />
-                }
+                )}
               </TableCell>
-            }
+            )}
             <PlanningListHeader
               name="Work Order"
               loc={this.props.pageLoc}
@@ -190,7 +212,7 @@ export default class ServiceOrderList extends React.PureComponent {
             <PlanningListHeader
               name="SMR Date"
               delay={300}
-              onSearch={this.isFilterDate}
+              onFilter={this.isFilterSmrDate}
             />
             <PlanningListHeader
               name="PLAN TYPE"
@@ -199,7 +221,7 @@ export default class ServiceOrderList extends React.PureComponent {
             />
           </TableRow>
         </TableHead>
-      )
+      );
     }
   }
 

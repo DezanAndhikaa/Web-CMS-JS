@@ -73,6 +73,17 @@ class ApprovalPages extends React.Component {
       }
     }
 
+
+    //FILTER RANGE SMR DATE
+    if (this.state.whichTabs) {
+      if (prevProps.filterDateSmr !== this.props.filterDateSmr) {
+        this.props.fetchServiceOrder(
+          this.props.filterDateSmr,
+          this.props.token
+        );
+      }
+    }
+
     // Trigger sales global search
     if (prevProps.salesSearch !== this.props.salesSearch) {
       this.props.updateSearchSales({
