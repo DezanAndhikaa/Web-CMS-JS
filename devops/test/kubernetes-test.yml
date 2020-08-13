@@ -9,7 +9,7 @@ metadata:
     tier: frontend
     usermanagementservice: "true"
     msplanning: "true"
-  namespace: cms
+  namespace: test-cms
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
