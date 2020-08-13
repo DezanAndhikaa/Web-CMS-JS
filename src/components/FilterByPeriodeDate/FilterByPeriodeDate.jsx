@@ -37,13 +37,10 @@ class FilterByPeriodeDate extends React.Component{
         const today = new Date();        
         const validationSchema = Yup.object().shape({
             startDate: Yup.date()
-            .required('Start date must be filled.')
-            .max(today, 'Start date must be later than today.'),
+            .required('Start date must be filled.'),
             
             endDate: Yup.date()
             .required('End date must be filled.')
-            .min(Yup.ref('startDate'), 'End date must be later than start date.')
-            .max(today, 'End date must be later than today.')
         });
         return(
             <Formik
