@@ -1,18 +1,8 @@
 import React from 'react';
 import {
-  Checkbox, Table, TableBody, TableCell, TableHead, TableRow
+  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Tooltip
 } from '@material-ui/core';
 import './PlanningList.scss';
-import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
-import {
-  SortSalesByCustomer,
-  SortSalesBySite,
-  SortSalesByUnitModel,
-  SortSalesByCompDesc,
-  LifetimeFilterAction,
-  DateFilterAction,
-  SmrFilterAction,
-} from "../../DetailPages-action";
 import { Spinner } from '../../../../../assets/icons';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from 'moment';
@@ -45,26 +35,8 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
     this.props.onClickSalesOrderApproved();
   }
 
-    componentWillMount = ()=>{
-      this.props.updateSalesApprovedParameter({ ...this.props.salesApprovedParameter.dataFilter,  PageNumber: 1, PageSize: 10, Sort: [], Filter: []})
-    }
-  
-
-  isFilterLifetime = async( value1, value2 ) => {
-    this.props.lifetimeFilter( LifetimeFilterAction, value1, value2, this.props.salesApprovedParameter.dataFilter.PageSize );
-  }
-
-  isFilterDate = async ( value1, value2) => {
-    this.props.dateFilter( DateFilterAction, value1, value2, this.props.salesApprovedParameter.dataFilter.PageSize );
-  }
-
-  isFilterSMRDate = async ( value1, value2) => {
-    this.props.dateFilter(
-      SmrFilterAction,
-      value1,
-      value2,
-      this.props.salesApprovedParameter.dataFilter.PageSize
-    );
+  componentWillMount = ()=>{
+    this.props.updateSalesApprovedParameter({ ...this.props.salesApprovedParameter.dataFilter,  PageNumber: 1, PageSize: 10, Sort: [], Filter: []})
   }
 
   isCheckboxAvailable = (data) => {
@@ -140,7 +112,9 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
           <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
           <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
           <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
-          <TableCell align="left" className="table-cell"> Fix </TableCell>
+          <Tooltip arrow title={row.PlanType.charAt(0) === "U" ? "UNSCHEDULE" : ""} >
+            <TableCell align="left" className="table-cell"> {row.PlanType.substring(0, 3)} </TableCell>
+          </Tooltip>
         </TableRow>
       )
   }

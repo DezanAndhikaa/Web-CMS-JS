@@ -1,11 +1,9 @@
 import React from 'react';
 import {
-  Checkbox, Table, TableBody, TableCell, TableHead, TableRow
+  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Tooltip
 } from '@material-ui/core';
 import './PlanningList.scss';
-import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
-import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
-import { Spinner } from '../../../../../assets/icons'
+import { Spinner } from '../../../../../assets/icons';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from 'moment';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
@@ -32,6 +30,7 @@ export default class DeletedSalesOrderList extends React.PureComponent {
       this.setState({checkedValue : false})
     }
   }
+  
   componentDidMount = () =>{
     this.props.onClickSalesOrderDeleted();
   }
@@ -40,15 +39,6 @@ export default class DeletedSalesOrderList extends React.PureComponent {
     this.props.updateSalesDeletedParameter({ 
       ...this.props.salesDeletedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
     });
-  }
-  
-
-  isFilterLifetime = async( value1, value2 ) => {
-    this.props.lifetimeFilter( LifetimeFilterAction, value1, value2, this.props.salesDeletedParameter.dataFilter.PageSize );
-  }
-
-  isFilterDate = async ( value1, value2) => {
-    this.props.dateFilter( DateFilterAction, value1, value2, this.props.salesDeletedParameter.dataFilter.PageSize );
   }
 
   isCheckboxAvailable = (data) => {
@@ -124,7 +114,9 @@ export default class DeletedSalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
-        <TableCell align="left" className="table-cell"> Fix </TableCell>
+        <Tooltip arrow title={row.PlanType.charAt(0) === "U" ? "UNSCHEDULE" : ""} >
+          <TableCell align="left" className="table-cell"> {row.PlanType.substring(0, 3)} </TableCell>
+        </Tooltip>
       </TableRow>
     )
   }

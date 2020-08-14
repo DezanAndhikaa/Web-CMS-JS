@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Checkbox, Table, TableBody, TableCell, TableHead, TableRow
+  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Tooltip
 } from '@material-ui/core';
 import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
@@ -261,7 +261,9 @@ export default class SalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
-        <TableCell align="left" className="table-cell"> Fix </TableCell>
+        <Tooltip arrow title={row.PlanType.charAt(0) === "U" ? "UNSCHEDULE" : ""} >
+          <TableCell align="left" className="table-cell"> {row.PlanType.substring(0, 3)} </TableCell>
+        </Tooltip>
         <TableCell align="center" className="table-cell">
           {this.props.salesOrderList.Lists[id].LifeTimeComponent !== 0 && this.props.idTab === "Approval" ?
             <EditButton idEdit="Approval" title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} /> :
