@@ -12,7 +12,6 @@ const RoleUser = new roleService();
 const DotBadges = withStyles(theme => ({
 	badge: {
     top: -1,
-		left: 4,
     border: '2px solid white',
     width: 'auto',
     minWidth: '15px',
@@ -60,36 +59,36 @@ class FilterbyDataAction extends React.Component {
         {Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
         ? <MenuList>
             <MenuItem>
-              <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
+              <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_SITE_STATUS, 'service')}>Service Order</Typography>
             </MenuItem>
           </MenuList>
         : Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 || Number(RoleUser.role()) === 8 ||
           Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12
           ? <MenuList>
               <MenuItem>
-                <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales')}>Sales Order</Typography>
+                <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_SITE_STATUS, 'sales')}>Sales Order</Typography>
               </MenuItem>
             </MenuList>
-            && localStorage.getItem('subMenu') === "/webcms/planning/approval" 
+            && localStorage.getItem('subMenu') === "/webcms/planning/ho" 
         : Number(RoleUser.role()) === 1 ? 
           <MenuList>
             <MenuItem>
-              <Typography className="list-item-status" variant="inherit" onClick={ () =>{ localStorage.getItem('subMenu') === "/webcms/planning/approval" 
-                ? this.handleClick(Menu.PLANNING_APPROVAL_STATUS, 'sales') 
-                : this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales') }}>Sales Order</Typography>
+              <Typography className="list-item-status" variant="inherit" onClick={ () =>{ localStorage.getItem('subMenu') === "/webcms/planning/ho" 
+                ? this.handleClick(Menu.PLANNING_HO_STATUS, 'sales') 
+                : this.handleClick(Menu.PLANNING_SITE_STATUS, 'sales') }}>Sales Order</Typography>
             </MenuItem>
             <MenuItem>
-              <Typography className="list-item-status" variant="inherit" onClick={ () =>{ localStorage.getItem('subMenu') === "/webcms/planning/approval" 
-              ? this.handleClick(Menu.PLANNING_APPROVAL_STATUS, 'service') 
-              : this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service') }}>Service Order</Typography>
+              <Typography className="list-item-status" variant="inherit" onClick={ () =>{ localStorage.getItem('subMenu') === "/webcms/planning/ho" 
+              ? this.handleClick(Menu.PLANNING_HO_STATUS, 'service') 
+              : this.handleClick(Menu.PLANNING_SITE_STATUS, 'service') }}>Service Order</Typography>
             </MenuItem>
           </MenuList>
         : <MenuList>
             <MenuItem>
-              <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales')}>Sales Order</Typography>
+              <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_SITE_STATUS, 'sales')}>Sales Order</Typography>
             </MenuItem>
             <MenuItem>
-              <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service')}>Service Order</Typography>
+              <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_SITE_STATUS, 'service')}>Service Order</Typography>
             </MenuItem>
           </MenuList>
         }
@@ -134,7 +133,7 @@ class FilterbyDataAction extends React.Component {
         <div className="dropdown">
           <div className="dropdown-button">
             <div className="dropdown-selected-item">
-              <div className="input-lt" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS, 'lifetime') }>
+              <div className="input-lt" onClick={ () => this.handleClick(Menu.PLANNING_INPUT_LIFETIME, 'lifetime') }>
                 <img src={IconInputLT} className="icon-lt" alt="" /><span className="label-lt">Input Lifetime</span>
               </div>
             </div>

@@ -2455,16 +2455,16 @@ export default class Status extends React.PureComponent {
 				</>
 				)}
 				<div className="head-containers">
-					{Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/approval" ?
-						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL) }>
-							Approval
+					{Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/ho" ?
+						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_HO) }>
+							HO
 						</Button> :
-						Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/approval" ?
-						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_SITE) }>
-							Detail
+						Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/ho" ?
+						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_SITE) }>
+							Site
 						</Button> :
-						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_DETAILS_SITE) }>
-							Detail
+						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_SITE) }>
+							Site
 						</Button> 
 					}
 					<div className="notif_button">

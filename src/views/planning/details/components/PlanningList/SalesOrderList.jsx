@@ -1,20 +1,18 @@
 import React from 'react';
 import {
-  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Tooltip
+  Checkbox, Table, TableBody, TableCell, TableHead, TableRow
 } from '@material-ui/core';
 import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
 import InputButton from '../../../../../components/Button/InputButton';
-import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction, SortSalesByPlanType } from '../../DetailPages-action';
+import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import { Snackbar } from '@material-ui/core';
 import moment from 'moment';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
 import roleService from "../../../../../utils/roleService.helper";
-import { CheckBoxOutlineBlank } from '@material-ui/icons';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 const RoleUser = new roleService();
 export default class SalesOrderList extends React.PureComponent {
@@ -97,22 +95,18 @@ export default class SalesOrderList extends React.PureComponent {
             <TableCell padding="checkbox">
               {this.props.displaySalesCheckbox &&
                 <Checkbox
-                  icon={<CheckBoxOutlineBlank fontSize="small" />}
-                  checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
                   checked={this.state.checkedValue}
                   onChange={this.handleClickCheckbox}
-                  onClick={({target: { checked }}) => {
-                    if(checked) return this.props.onChooseAllSales(this.props.salesOrderList.Lists);
-                    return this.props.onChooseAllSales([]);
+                  onClick={() => {
+                    this.props.salesOrderList.Lists.map((row, id) =>
+                      this.props.onChoosedSales(row, id))
                   }}
-                />
-              }
+                  className="checkbox-checked-header" />}
             </TableCell>
           }
           <PlanningListHeader
             name="SO"
             delay={300}
-            loc= {this.props.pageLoc}
             onSearch={this.props.onSearchComp}
           />
           <PlanningListHeader
@@ -187,7 +181,9 @@ export default class SalesOrderList extends React.PureComponent {
           <PlanningListHeader
             name="Plan Type"
             delay={300}
-            onClick={() => this.props.onClickTabHead(SortSalesByPlanType)}
+            // isActive={this.props.sortSalesByState.UnitModel.isActive}
+            // isAscending={this.props.sortSalesByState.UnitModel.isAscending}
+            // onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
           />
         </TableRow>
       </TableHead>
@@ -202,25 +198,15 @@ export default class SalesOrderList extends React.PureComponent {
           <TableCell padding="checkbox">
             {this.props.displaySalesCheckbox &&
               <Checkbox
-                icon={<CheckBoxOutlineBlank fontSize="small" />}
-                checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
                 disabled={this.isCheckboxAvailable(row)}
                 checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)}
-                onClick={() => this.props.onChoosedSales(row, id, 'body')}
+                onClick={() => this.props.onChoosedSales(row)}
+                classes={{ checked: 'checkbox-checked' }}
               />
             }
           </TableCell>
         }
-        {(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/approval") || Number(RoleUser.role()) !== 1 ?
-          <TableCell 
-            align="left" 
-            className={this.props.pageLoc && this.props.idTab === "Status" ? "table-cell-pk-status"
-            : (this.props.pageLoc === "Status" && this.props.idTab === "Input") ||  (this.props.pageLoc === "Status" && this.props.idSales === "ViewOnly") ? "table-cell-pk" : "table-cell"}> 
-            {row.SoNumber} 
-          </TableCell>
-          :
-          <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
-        }
+        <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
@@ -239,9 +225,7 @@ export default class SalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
-        <Tooltip arrow title={row.PlanType.charAt(0) === "B" ? "Bus" : row.PlanType.charAt(0) === "F" ? "Fix" : "Unschedule"} >
-          <TableCell align="left" className="table-cell"> {row.PlanType.charAt(0)} </TableCell>
-        </Tooltip>
+        <TableCell align="left" className="table-cell"> Fix </TableCell>
         <TableCell align="center" className="table-cell">
           {this.props.salesOrderList.Lists[id].LifeTimeComponent !== 0 && this.props.idTab === "Approval" ?
             <EditButton idEdit="Approval" title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} /> :

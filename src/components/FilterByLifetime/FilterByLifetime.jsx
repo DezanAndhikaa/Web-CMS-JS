@@ -21,6 +21,8 @@ class FilterByLifetime extends React.Component {
         })
     }
 
+    isDisabled() { return this.state.value1 === '' || this.state.value2 === '' }
+
     render() {
         return (
             <div className="assign-lifetime-modal">
@@ -34,12 +36,18 @@ class FilterByLifetime extends React.Component {
                     <label className="teks-right">Max</label>
                 </div>
                 <div className="top-midel">
-                    <input className="input-left" name="value1" onChange={this.handleChange} value={this.state.value1}></input>
-                    <input className="input-right" name="value2" onChange={this.handleChange} value={this.state.value2}></input>
+                    <input type="number" className="input-left" name="value1" onChange={this.handleChange} value={this.state.value1}></input>
+                    <input type="number" className="input-right" name="value2" onChange={this.handleChange} value={this.state.value2}></input>
                 </div>
 
                 <div className="bottom-rows">
-                    <Button className="btn-search" onClick={() => { this.props.onFilter(this.state.value1, this.state.value2); this.props.onClosed() }} >Search Lifetime</Button>
+                    <Button 
+                        disabled={this.isDisabled()}
+                        className={this.isDisabled() ? "btn-search-disabled" : "btn-search"}
+                        onClick={() => { this.props.onFilter(this.state.value1, this.state.value2); this.props.onClosed() }} 
+                    >
+                        {this.props.titles === "Lifetime Comp" ? "Search Lifetime" : "Search SMR"}
+                    </Button>
                 </div>
             </div>
         )

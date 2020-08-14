@@ -95,6 +95,8 @@ export const SelectPlanTypeFilterAction = 'SELECT_PLAN_TYPE_FILTER';
 export const IndexFilterAction = 'INDEX FILTER';
 export const LifetimeFilterAction = 'SELECT_LIFETIME_FILTER';
 export const DateFilterAction = 'SELECT_DATE_FILTER';
+export const SmrDateFilterAction = "SELECT_SMRDATE_FILTER";
+export const SmrFilterAction = "SELECT_SMR_FILTER";
 
 export function approveSalesAction(payload, accessToken) {
 	const requestConfig = {

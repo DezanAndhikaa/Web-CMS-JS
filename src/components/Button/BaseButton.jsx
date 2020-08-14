@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, FormLabel } from '@material-ui/core';
+import { Button, FormLabel, Tooltip } from '@material-ui/core';
 import './BaseButton.scss';
 import EditButton from '../ActionButton/EditButton/EditButton';
 import DeleteButton from '../ActionButton/DeleteButton/DeleteButton';
@@ -77,6 +77,12 @@ class BaseButton extends React.Component{
                     <FormLabel className="label-selected-data"> {this.props.totalSelectedItems} items selected.</FormLabel>
                 </div>
             )
+        }else if(this.props.titles === "Reset"){
+            return(
+                <div className="button-inline">
+                    <Button className="btn-reset" onClick={this.props.resetFilter}>Reset Filter</Button>
+                </div>
+            )
         }else if(this.props.titles === "Approve"){
             return(
                 <div className="button-inline">
@@ -122,43 +128,47 @@ class BaseButton extends React.Component{
             )
         }else if(this.props.titles === "Delete"){
             return(
-                <div className="button-inline">
-                    <DeleteButton 
-                        {...this.props}
-                        {...this.state}
-                        onClick={this.isClicked}
-                        disabled={this.props.disabledButton}
-                    />
-                    <DeleteConfirmation
-                        {...this.props}
-                        {...this.state}
-                        idDelete="Delete"
-                        onClose={this.isClosed}
-                        openModal={this.state.isShowModal}
-                        totalData={this.props.totalSelectedItems}
-                        onDelete={this.isApproved}
-                    />
-                </div>
+                <Tooltip arrow title= "Delete">
+                    <div className="button-inline">
+                        <DeleteButton 
+                            {...this.props}
+                            {...this.state}
+                            onClick={this.isClicked}
+                            disabled={this.props.disabledButton}
+                        />
+                        <DeleteConfirmation
+                            {...this.props}
+                            {...this.state}
+                            idDelete="Delete"
+                            onClose={this.isClosed}
+                            openModal={this.state.isShowModal}
+                            totalData={this.props.totalSelectedItems}
+                            onDelete={this.isApproved}
+                        />
+                    </div>
+                </Tooltip>
             )
         }else if(this.props.titles === "Permanently"){
             return(
-                <div className="button-inline">
-                    <DeleteButton 
-                        {...this.props}
-                        {...this.state}
-                        onClick={this.isClicked}
-                        disabled={this.props.disabledButton}
-                    />
-                    <DeleteConfirmation
-                        {...this.props}
-                        {...this.state}
-                        idDelete="Permanent"
-                        onClose={this.isClosed}
-                        openModal={this.state.isShowModal}
-                        totalData={this.props.totalSelectedItems}
-                        onDelete={this.isApproved}
-                    />
-                </div>
+                <Tooltip arrow title= "Delete Permanent">
+                    <div className="button-inline">
+                        <DeleteButton 
+                            {...this.props}
+                            {...this.state}
+                            onClick={this.isClicked}
+                            disabled={this.props.disabledButton}
+                        />
+                        <DeleteConfirmation
+                            {...this.props}
+                            {...this.state}
+                            idDelete="Permanent"
+                            onClose={this.isClosed}
+                            openModal={this.state.isShowModal}
+                            totalData={this.props.totalSelectedItems}
+                            onDelete={this.isApproved}
+                        />
+                    </div>
+                </Tooltip>
             )
         }else if(this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED){
             this._renderApprovedModal()

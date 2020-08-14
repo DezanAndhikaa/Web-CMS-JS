@@ -1,17 +1,15 @@
 import React from 'react';
 import {
-  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Tooltip
+  Checkbox, Table, TableBody, TableCell, TableHead, TableRow
 } from '@material-ui/core';
 import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
-import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction, SortSalesByPlanType } from '../../DetailPages-action';
+import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from 'moment';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
 import roleService from "../../../../../utils/roleService.helper";
-import { CheckBoxOutlineBlank } from '@material-ui/icons';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 const RoleUser = new roleService();
 export default class DeletedSalesOrderList extends React.PureComponent {
@@ -74,22 +72,16 @@ export default class DeletedSalesOrderList extends React.PureComponent {
           {Number(RoleUser.role()) !== 1 ? "" :
             <TableCell padding="checkbox">
               {this.props.displaySalesCheckbox && 
-                <Checkbox 
-                  icon={<CheckBoxOutlineBlank fontSize="small" />}
-                  checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
-                  checked={this.state.checkedValue}
-                  onChange={this.handleClicks}
-                  onClick={({target: { checked }}) => {
-                    if(checked) return this.props.onChooseAllSales(this.props.salesOrderListDeleted.Lists);
-                    return this.props.onChooseAllSales([]);
-                  }}
-                />
-              }
+              <Checkbox 
+                checked={this.state.checkedValue}
+                onChange={this.handleClicks}
+                onClick={() => {this.props.salesOrderListDeleted.Lists.map((row,id) => 
+                this.props.onChoosedSales(row,id))}}
+                className="checkbox-checked-header"/>}
             </TableCell>
           }
           <PlanningListHeader
             name="SO"
-            loc= {this.props.pageLoc}
             delay={300}
             onSearch={this.props.onSearchComp}
           />
@@ -159,7 +151,7 @@ export default class DeletedSalesOrderList extends React.PureComponent {
           <PlanningListHeader
             name="Plan Type"
             delay={300}
-            onClick={() => this.props.onClickTabHead(SortSalesByPlanType)}
+            // onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
           />
         </TableRow>
       </TableHead>
@@ -173,24 +165,14 @@ export default class DeletedSalesOrderList extends React.PureComponent {
         {Number(RoleUser.role()) !== 1 ? "" :
           <TableCell padding="checkbox">
             {this.props.displaySalesCheckbox && 
-              <Checkbox 
-                icon={<CheckBoxOutlineBlank fontSize="small" />}
-                checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
-                salesOrderListDeleteddisabled={this.isCheckboxAvailable(row)} 
-                checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
-                onClick={() => this.props.onChoosedSales(row, id, 'body')}
-              />
-            }
+            <Checkbox 
+            disabled={this.isCheckboxAvailable(row)} 
+            checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
+            onClick={() => this.props.onChoosedSales(row)} 
+            classes={{ checked: 'checkbox-checked' }} />}
           </TableCell>
         }
-        {Number(RoleUser.role()) === 1 ?
-          <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell> :
-          <TableCell 
-            align="left" 
-            className={this.props.pageLoc === "Status" ? "table-cell-pk-status" : "table-cell"}> 
-            {row.SoNumber} 
-          </TableCell>
-        }
+        <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
@@ -202,9 +184,7 @@ export default class DeletedSalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
-        <Tooltip arrow title={row.PlanType.charAt(0) === "B" ? "Bus" : row.PlanType.charAt(0) === "F" ? "Fix" : "Unschedule"} >
-          <TableCell align="left" className="table-cell"> {row.PlanType.charAt(0)} </TableCell>
-        </Tooltip>
+        <TableCell align="left" className="table-cell"> Fix </TableCell>
       </TableRow>
     )
   }

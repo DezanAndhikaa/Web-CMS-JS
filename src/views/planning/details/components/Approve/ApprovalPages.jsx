@@ -786,6 +786,7 @@ class ApprovalPages extends React.Component {
   };
 
   render() {
+    console.log('status: ', localStorage.getItem('subMenu'))
     return (
       <main className="content">
         {this.props.fetchStatusApprovedSales === ApiRequestActionsStatus.LOADING && (
