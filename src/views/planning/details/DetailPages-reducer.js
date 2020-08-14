@@ -56,8 +56,8 @@ import {
 	SortServiceByCustomer, SortServiceBySite, SortServiceByUnitModel, SortServiceByCompDesc, SortServiceByPlanType,
 	UnselectSalesPlanAction, UnselectServicePlanAction,
 	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, FetchServiceAction,
-	IndexFilterAction, LifetimeFilterAction, DateFilterAction,
-	SearchRevisedSalesOrder, UpdateSearchSalesRevAction, SelectAllService, SelectPlanTypeFilterAction, SmrFilterAction
+	IndexFilterAction, LifetimeFilterAction, DateFilterAction, SmrDateFilterAction,
+	SearchRevisedSalesOrder, UpdateSearchSalesRevAction, SelectAllService, SelectPlanTypeFilterAction, SmrFilterAction, smrFilterAction
 } from './DetailPages-action';
 
 const initialSalesAssignment = {
@@ -657,6 +657,19 @@ export function filterDateReducer(state = initialFilterParameter, action) {
 	return state;
 }
 
+export function filterDateSmrReducer(state = initialFilterParameter, action) {
+  if (action.type === SmrDateFilterAction)
+		state = {
+      ...state,
+      Filter: [
+        { Field: "SMRLastUpdate", Operator: "gte", Value: action.payload, Logic: "and" },
+        { Field: "SMRLastUpdate", Operator: "lte", Value: action.payload2, Logic: "and" },
+      ],
+    };
+
+  return state;
+}
+
 export function filterParameterReducer(state = initialFilterParameter, action) {
 	if (action.type === SelectCustomerFilterAction)
 		if (state.Filter.length === 0) { //IF yang pertama ini,jika filternya belum di isi apa2 (filter belum di jalankan)
@@ -991,61 +1004,62 @@ export function searchSalesRevReducer(state = '', action) {
 }
 
 const PlansReducers = combineReducers({
-	selectedLeader: selectLeaderReducer,
-	selectedFilters: selectedFiltersReducer,
-	serviceOrderList: fetchServiceReducer,
-	salesOrderList: fetchSalesReducer,
-	salesOrderListApproved: fetchApprovedSalesReducer,
-	serviceOrderListApproved: fetchApprovedServiceReducer,
-	salesOrderListDeleted: fetchDeletedSalesReducer,
-	serviceOrderListDeleted: fetchDeletedServiceReducer,
-	salesOrderListSap: fetchSapSalesReducer,
-	serviceOrderListSap: fetchSapServiceReducer,
-	salesOrderRevised: fetchRevisedSalesReducer,
-	selectedSalesPlans: selectSalesPlansReducer,
-	selectedServicePlans: selectServicePlansReducer,
-	selectedMechanics: selectMechanicsReducer,
-	unApprove: unapproveSalesReducer,
-	salesParameter: salesParameterReducer,
-	salesApprovedParameter: salesApprovedParameterReducer,
-	salesDeletedParameter: salesDeletedParameterReducer,
-	salesSapParameter: salesSapParameterReducer,
-	salesRevisedParam: salesRevisedParameterReducer,
-	serviceParameter: serviceParameterReducer,
-	serviceApprovedParameter: serviceParameterApprovedReducer,
-	serviceDeletedParameter: serviceParameterDeletedReducer,
-	serviceSapParameter: serviceSapParameterReducer,
-	filterParameter: filterParameterReducer,
-	indexFilterParameter: indexFilterParameterReducer,
-	sortSalesBy: sortSalesByReducer,
-	sortServiceBy: sortServiceByReducer,
-	salesSearch: searchSalesReducer,
-	serviceSearch: searchServiceReducer,
-	searchSalesParameter: searchSalesParameterReducer,
-	searchSalesRevisiParameter: searchSalesRevisiParameterReducer,
-	searchSalesRevisionParameter: searchRevisionSalesReducer,
-	searchSalesApprovedParam: searchSalesApprovedReducer,
-	searchSalesDeletedParam: searchSalesDeletedReducer,
-	searchSalesSapParam: searchSalesSapReducer,
-	searchServiceParameter: searchServiceParameterReducer,
-	searchServiceApprovedParam: searchServiceApprovedReducer,
-	searchServiceDeletedParam: searchServiceDeletedReducer,
-	searchServiceSapParam: searchServiceSapReducer,
-	searchComp: searchCompReducer,
-	selectedPlanData: storePlanDataReducer,
-	approveSalesDownloaded: downloadApprovedSalesReducer,
-	approveServiceDownloaded: downloadApprovedServiceReducer,
-	putLifetimeList: fetchPutLifetimeReducer,
-	putSAPIssue: PutSAPIssueReducer,
-	salesApproved: approvedSalesReducer,
-	serviceApproved: approvedServiceReducer,
-	salesDeleted: deletedSalesReducer,
-	serviceDeleted: deletedServiceReducer,
-	filterLifetime: filterLifetimeReducer,
-	filterSmr: filterSmrReducer,
-	filterDate: filterDateReducer,
-	salesSearchRevision: searchSalesRevReducer,
-	searchSalesRevParam: searchSalesRevParamReducer	
+  selectedLeader: selectLeaderReducer,
+  selectedFilters: selectedFiltersReducer,
+  serviceOrderList: fetchServiceReducer,
+  salesOrderList: fetchSalesReducer,
+  salesOrderListApproved: fetchApprovedSalesReducer,
+  serviceOrderListApproved: fetchApprovedServiceReducer,
+  salesOrderListDeleted: fetchDeletedSalesReducer,
+  serviceOrderListDeleted: fetchDeletedServiceReducer,
+  salesOrderListSap: fetchSapSalesReducer,
+  serviceOrderListSap: fetchSapServiceReducer,
+  salesOrderRevised: fetchRevisedSalesReducer,
+  selectedSalesPlans: selectSalesPlansReducer,
+  selectedServicePlans: selectServicePlansReducer,
+  selectedMechanics: selectMechanicsReducer,
+  unApprove: unapproveSalesReducer,
+  salesParameter: salesParameterReducer,
+  salesApprovedParameter: salesApprovedParameterReducer,
+  salesDeletedParameter: salesDeletedParameterReducer,
+  salesSapParameter: salesSapParameterReducer,
+  salesRevisedParam: salesRevisedParameterReducer,
+  serviceParameter: serviceParameterReducer,
+  serviceApprovedParameter: serviceParameterApprovedReducer,
+  serviceDeletedParameter: serviceParameterDeletedReducer,
+  serviceSapParameter: serviceSapParameterReducer,
+  filterParameter: filterParameterReducer,
+  indexFilterParameter: indexFilterParameterReducer,
+  sortSalesBy: sortSalesByReducer,
+  sortServiceBy: sortServiceByReducer,
+  salesSearch: searchSalesReducer,
+  serviceSearch: searchServiceReducer,
+  searchSalesParameter: searchSalesParameterReducer,
+  searchSalesRevisiParameter: searchSalesRevisiParameterReducer,
+  searchSalesRevisionParameter: searchRevisionSalesReducer,
+  searchSalesApprovedParam: searchSalesApprovedReducer,
+  searchSalesDeletedParam: searchSalesDeletedReducer,
+  searchSalesSapParam: searchSalesSapReducer,
+  searchServiceParameter: searchServiceParameterReducer,
+  searchServiceApprovedParam: searchServiceApprovedReducer,
+  searchServiceDeletedParam: searchServiceDeletedReducer,
+  searchServiceSapParam: searchServiceSapReducer,
+  searchComp: searchCompReducer,
+  selectedPlanData: storePlanDataReducer,
+  approveSalesDownloaded: downloadApprovedSalesReducer,
+  approveServiceDownloaded: downloadApprovedServiceReducer,
+  putLifetimeList: fetchPutLifetimeReducer,
+  putSAPIssue: PutSAPIssueReducer,
+  salesApproved: approvedSalesReducer,
+  serviceApproved: approvedServiceReducer,
+  salesDeleted: deletedSalesReducer,
+  serviceDeleted: deletedServiceReducer,
+  filterLifetime: filterLifetimeReducer,
+  filterSmr: filterSmrReducer,
+  filterDateSmr: filterDateSmrReducer,
+  filterDate: filterDateReducer,
+  salesSearchRevision: searchSalesRevReducer,
+  searchSalesRevParam: searchSalesRevParamReducer,
 });
 
 export { PlansReducers };
