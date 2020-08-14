@@ -70,11 +70,11 @@ class SideMenuComponent extends React.Component {
               button
               key="jobs"
               className={
-                this.props.path.includes(Menu.PROBLEMLOG)
+                this.props.path.includes(Menu.TRACKING)
                   ? "menu-item-selected"
                   : "menu-item"
               }
-              onClick={() => this.handleClick(Menu.PROBLEMLOG, "")}
+              onClick={() => this.handleClick(Menu.TRACKING, "")}
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img
@@ -144,11 +144,11 @@ class SideMenuComponent extends React.Component {
                       button
                       key="jobs-report"
                       className={
-                        this.props.path === Menu.PLANNING_APPROVAL || this.props.path === Menu.PLANNING_TRACKING_HISTORY || this.props.path === Menu.PLANNING_DETAILS_STATUS || this.props.path === Menu.PLANNING_DETAILS || this.props.path === Menu.PLANNING_ALL_NOTIF
+                        this.props.path === Menu.PLANNING_HO || this.props.path === Menu.PLANNING_TRACKING_HISTORY || this.props.path === Menu.PLANNING_SITE_STATUS || this.props.path === Menu.PLANNING_INPUT_LIFETIME || this.props.path === Menu.PLANNING_ALL_NOTIF
                           ? "sub-menu-selected"
                           : "sub-menu"
                       }
-                      onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_APPROVAL)}
+                      onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_HO)}
                     >
                       <ListItemIcon classes={{ root: "icon-root" }}>
                         <img
@@ -158,7 +158,7 @@ class SideMenuComponent extends React.Component {
                         />
                       </ListItemIcon>
                       <ListItemText
-                        primary="Approval"
+                        primary="HO"
                         classes={{ primary: "item-text", root: "item-text" }}
                       />
                     </ListItem>
@@ -166,11 +166,11 @@ class SideMenuComponent extends React.Component {
                       button
                       key="jobs-report"
                       className={
-                        this.props.path === Menu.PLANNING_DETAILS_SITE
+                        this.props.path === Menu.PLANNING_SITE
                           ? "sub-menu-selected"
                           : "sub-menu"
                       }
-                      onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_DETAILS_SITE)}
+                      onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_SITE)}
                     >
                       <ListItemIcon classes={{ root: "icon-root" }}>
                         <img
@@ -180,7 +180,7 @@ class SideMenuComponent extends React.Component {
                         />
                       </ListItemIcon>
                       <ListItemText
-                        primary="Detail"
+                        primary="Site"
                         classes={{ primary: "item-text", root: "item-text" }}
                       />
                     </ListItem>
@@ -212,11 +212,11 @@ class SideMenuComponent extends React.Component {
                     button
                     key="jobs-report"
                     className={
-                      this.props.path === Menu.PLANNING_DETAILS_SITE
+                      this.props.path === Menu.PLANNING_SITE
                         ? "sub-menu-selected"
                         : "sub-menu"
                     }
-                    onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_DETAILS_SITE)}
+                    onClick={() => this.handleClick(Menu.PLANNING, Menu.PLANNING_SITE)}
                   >
                     <ListItemIcon classes={{ root: "icon-root" }}>
                       <img
@@ -226,7 +226,7 @@ class SideMenuComponent extends React.Component {
                       />
                     </ListItemIcon>
                     <ListItemText
-                      primary="Detail"
+                      primary= "Site"
                       classes={{ primary: "item-text", root: "item-text" }}
                     />
                   </ListItem>
@@ -238,11 +238,11 @@ class SideMenuComponent extends React.Component {
               button
               key="jobs"
               className={
-                this.props.path.includes(Menu.DETAIL_PI)
+                this.props.path.includes(Menu.PRODUCTION)
                   ? "menu-item-selected"
                   : "menu-item"
               }
-              onClick={() => this.handleClick(Menu.DETAIL_PI, "")}
+              onClick={() => this.handleClick(Menu.PRODUCTION, "")}
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img
@@ -284,11 +284,11 @@ class SideMenuComponent extends React.Component {
               button
               key="jobs"
               className={
-                this.props.path.includes(Menu.FC)
+                this.props.path.includes(Menu.DELIVERY)
                   ? "menu-item-selected"
                   : "menu-item"
               }
-              onClick={() => this.handleClick(Menu.FC, "")}
+              onClick={() => this.handleClick(Menu.DELIVERY, "")}
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img
@@ -307,11 +307,11 @@ class SideMenuComponent extends React.Component {
               button
               key="jobs"
               className={
-                this.props.path.includes(Menu.MASTER_DATA)
+                this.props.path.includes(Menu.EXECUTION)
                   ? "menu-item-selected"
                   : "menu-item"
               }
-              onClick={() => this.handleClick(Menu.MASTER_DATA, "")}
+              onClick={() => this.handleClick(Menu.EXECUTION, "")}
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img

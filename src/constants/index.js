@@ -8,19 +8,23 @@ export const RequestMethod = {
 export const Menu = {
 	LOGIN: '/webcms/',
 	PLANNING : '/webcms/planning',
-	PLANNING_DETAILS : '/webcms/planning/details',
-	PLANNING_DETAILS_SITE : '/webcms/planning/details/site',
-	PLANNING_APPROVAL_STATUS: '/webcms/planning/approval/status',
-	PLANNING_DETAILS_STATUS: '/webcms/planning/detail/status',
-	PLANNING_APPROVAL:'/webcms/planning/approval',
+	PLANNING_INPUT_LIFETIME : '/webcms/planning/input-lifetime',
+	PLANNING_SITE : '/webcms/planning/site',
+	PLANNING_HO_STATUS: '/webcms/planning/ho/status',
+	PLANNING_SITE_STATUS: '/webcms/planning/site/status',
+	PLANNING_HO: '/webcms/planning/ho',
 	PLANNING_TRACKING_HISTORY:'/webcms/planning/tracking-history',
 	PLANNING_DASHBOARD : '/webcms/planning/dashboard',
 	PLANNING_ALL_NOTIF : '/webcms/planning/all-notification',
-	PLANNING_SAP:'/webcmsjs/planning/approval/sap-issue',
+	PLANNING_HO_SAP: '/webcmsjs/planning/ho/sap-issue',
 	DASHBOARD: '/webcms/dashboard',
 	ALLOCATION: '/webcmsjs/allocation',
 	SETTINGS: '/websmsjs/settings',
 	LOGOUT: '/websmsjs/logout',
+	TRACKING: '/webcms/tracking',
+	PRODUCTION: '/webcms/production',
+	DELIVERY: '/webcms/delivery',
+	EXECUTION: '/webcms/execution'
 };
 
 export const USER_DATA = 'USER_DATA';
