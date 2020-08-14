@@ -88,106 +88,142 @@ export default class SalesOrderList extends React.PureComponent {
   }
 
   showTableHead() {
-    return (
-      <TableHead className="table-head" classes={{ root: 'table-head' }}>
-        <TableRow classes={{ root: 'table-row' }}>
-          {this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly" || Number(RoleUser.role()) !== 1 ? "" :
-            <TableCell padding="checkbox">
-              {this.props.displaySalesCheckbox &&
-                <Checkbox
-                  checked={this.state.checkedValue}
-                  onChange={this.handleClickCheckbox}
-                  onClick={() => {
-                    this.props.salesOrderList.Lists.map((row, id) =>
-                      this.props.onChoosedSales(row, id))
-                  }}
-                  className="checkbox-checked-header" />}
-            </TableCell>
-          }
-          <PlanningListHeader
-            name="SO"
-            delay={300}
-            onSearch={this.props.onSearchComp}
-          />
-          <PlanningListHeader
-            name="Customer"
-            isActive={this.props.sortSalesByState.Customer.isActive}
-            delay={300}
-            isAscending={this.props.sortSalesByState.Customer.isAscending}
-            onClick={() => this.props.onClickTabHead(SortSalesByCustomer)}
-          />
-          <PlanningListHeader
-            name="Site"
-            isActive={this.props.sortSalesByState.Site.isActive}
-            delay={300}
-            isAscending={this.props.sortSalesByState.Site.isAscending}
-            onClick={() => this.props.onClickTabHead(SortSalesBySite)}
-          />
-          <PlanningListHeader
-            name="Unit Model"
-            isActive={this.props.sortSalesByState.UnitModel.isActive}
-            delay={300}
-            isAscending={this.props.sortSalesByState.UnitModel.isAscending}
-            onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
-          />
-          <PlanningListHeader
-            name="Comp Desc"
-            isActive={this.props.sortSalesByState.CompDesc.isActive}
-            delay={300}
-            isAscending={this.props.sortSalesByState.CompDesc.isAscending}
-            onClick={() => this.props.onClickTabHead(SortSalesByCompDesc)}
-          />
-          <PlanningListHeader
-            name="Part Number"
-            delay={300}
-            onSearch={this.props.onSearchComp}
-          />
-          <PlanningListHeader
-            name="Unit Code"
-            delay={300}
-            onSearch={this.props.onSearchComp}
-          />
-          <PlanningListHeader
-            name="Serial Number"
-            delay={300}
-            onSearch={this.props.onSearchComp}
-          />
-          {this.props.idSales === "Data Input" ?
+    if (this.props.idTab === "Status"){
+      return(
+        <TableHead className="table-head" classes={{ root: 'table-head' }}>
+          <TableRow classes={{ root: 'table-row' }}>
+            {this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly" || Number(RoleUser.role()) !== 1 ? "" :
+              <TableCell padding="checkbox">
+                {this.props.displaySalesCheckbox &&
+                  <Checkbox
+                    checked={this.state.checkedValue}
+                    onChange={this.handleClickCheckbox}
+                    onClick={() => {
+                      this.props.salesOrderList.Lists.map((row, id) =>
+                        this.props.onChoosedSales(row, id))
+                    }}
+                    className="checkbox-checked-header" />}
+              </TableCell>
+            }
+            <TableCell align="left" className="table-cell">SO</TableCell>
+            <TableCell align="left" className="table-cell">CUSTOMER</TableCell>
+            <TableCell align="left" className="table-cell">SITE</TableCell>
+            <TableCell align="left" className="table-cell">UNIT MODEL</TableCell>
+            <TableCell align="left" className="table-cell">COMPONENT DESCRIPTION</TableCell>
+            <TableCell align="left" className="table-cell">PART NUMBER</TableCell>
+            <TableCell align="left" className="table-cell">UNIT CODE</TableCell>
+            <TableCell align="left" className="table-cell">SERIAL NUMBER</TableCell>
+            <TableCell align="left" className="table-cell">LIFETIME COMP</TableCell>
+            <TableCell align="left" className="table-cell">PLAN EXECUTION</TableCell>
+            <TableCell align="left" className="table-cell">SMR </TableCell>
+            <TableCell align="left" className="table-cell">SMR DATE</TableCell>
+            <TableCell align="left" className="table-cell">PLAN TYPE</TableCell>
+          </TableRow>
+        </TableHead>
+      )
+    }
+    else {
+      return (
+        <TableHead className="table-head" classes={{ root: 'table-head' }}>
+          <TableRow classes={{ root: 'table-row' }}>
+            {this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly" || Number(RoleUser.role()) !== 1 ? "" :
+              <TableCell padding="checkbox">
+                {this.props.displaySalesCheckbox &&
+                  <Checkbox
+                    checked={this.state.checkedValue}
+                    onChange={this.handleClickCheckbox}
+                    onClick={() => {
+                      this.props.salesOrderList.Lists.map((row, id) =>
+                        this.props.onChoosedSales(row, id))
+                    }}
+                    className="checkbox-checked-header" />}
+              </TableCell>
+            }
             <PlanningListHeader
-              name="Lifetime Comp"
+              name="SO"
               delay={300}
-            /> :
-            <PlanningListHeader
-              name="Lifetime"
-              delay={300}
-              onFilter={this.isFilterLifetime}
+              onSearch={this.props.onSearchComp}
             />
-          }
-          <PlanningListHeader
-            name="Plan"
-            delay={300}
-            onFilter={this.isFilterDate}
-          />
-          <PlanningListHeader
-            name="SMR"
-            delay={300}
-            onSearch={this.props.onSearchComp}
-          />
-          <PlanningListHeader
-            name="SMR Date"
-            delay={300}
-            onFilter={this.isFilterDate}
-          />
-          <PlanningListHeader
-            name="Plan Type"
-            delay={300}
-            // isActive={this.props.sortSalesByState.UnitModel.isActive}
-            // isAscending={this.props.sortSalesByState.UnitModel.isAscending}
-            // onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
-          />
-        </TableRow>
-      </TableHead>
-    )
+            <PlanningListHeader
+              name="Customer"
+              isActive={this.props.sortSalesByState.Customer.isActive}
+              delay={300}
+              isAscending={this.props.sortSalesByState.Customer.isAscending}
+              onClick={() => this.props.onClickTabHead(SortSalesByCustomer)}
+            />
+            <PlanningListHeader
+              name="Site"
+              isActive={this.props.sortSalesByState.Site.isActive}
+              delay={300}
+              isAscending={this.props.sortSalesByState.Site.isAscending}
+              onClick={() => this.props.onClickTabHead(SortSalesBySite)}
+            />
+            <PlanningListHeader
+              name="Unit Model"
+              isActive={this.props.sortSalesByState.UnitModel.isActive}
+              delay={300}
+              isAscending={this.props.sortSalesByState.UnitModel.isAscending}
+              onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
+            />
+            <PlanningListHeader
+              name="Comp Desc"
+              isActive={this.props.sortSalesByState.CompDesc.isActive}
+              delay={300}
+              isAscending={this.props.sortSalesByState.CompDesc.isAscending}
+              onClick={() => this.props.onClickTabHead(SortSalesByCompDesc)}
+            />
+            <PlanningListHeader
+              name="Part Number"
+              delay={300}
+              onSearch={this.props.onSearchComp}
+            />
+            <PlanningListHeader
+              name="Unit Code"
+              delay={300}
+              onSearch={this.props.onSearchComp}
+            />
+            <PlanningListHeader
+              name="Serial Number"
+              delay={300}
+              onSearch={this.props.onSearchComp}
+            />
+            {this.props.idSales === "Data Input" ?
+              <PlanningListHeader
+                name="Lifetime Comp"
+                delay={300}
+              /> :
+              <PlanningListHeader
+                name="Lifetime"
+                delay={300}
+                onFilter={this.isFilterLifetime}
+              />
+            }
+            <PlanningListHeader
+              name="Plan"
+              delay={300}
+              onFilter={this.isFilterDate}
+            />
+            <PlanningListHeader
+              name="SMR"
+              delay={300}
+              onSearch={this.props.onSearchComp}
+            />
+            <PlanningListHeader
+              name="SMR Date"
+              delay={300}
+              onFilter={this.isFilterDate}
+            />
+            <PlanningListHeader
+              name="Plan Type"
+              delay={300}
+              // isActive={this.props.sortSalesByState.UnitModel.isActive}
+              // isAscending={this.props.sortSalesByState.UnitModel.isAscending}
+              // onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
+            />
+          </TableRow>
+        </TableHead>
+      )
+    }
   }
 
 
