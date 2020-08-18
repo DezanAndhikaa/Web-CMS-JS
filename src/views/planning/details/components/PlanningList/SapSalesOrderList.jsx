@@ -10,7 +10,9 @@ import moment from 'moment';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
 import { CheckBoxOutlineBlank } from '@material-ui/icons';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import roleService from "../../../../../utils/roleService.helper";
 
+const RoleUser = new roleService();
 export default class SapSalesOrderList extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -63,7 +65,7 @@ export default class SapSalesOrderList extends React.PureComponent {
       return (
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow classes={{ root: 'table-row' }}>
-          <TableCell padding="checkbox">
+          <TableCell className= "table-cell-checkbox">
             {this.props.displaySalesCheckbox && 
               <Checkbox 
                 icon={<CheckBoxOutlineBlank fontSize="small" />}
@@ -114,7 +116,7 @@ export default class SapSalesOrderList extends React.PureComponent {
     return (
     <>
       <TableRow key={id} classes={{ root: 'table-row' }} onClick={() => this.handleExpand(id)}>
-        <TableCell padding="checkbox">
+        <TableCell className= "table-cell-checkbox">
           {this.props.displaySalesCheckbox && 
             <Checkbox 
               icon={<CheckBoxOutlineBlank fontSize="small" />}
@@ -125,17 +127,24 @@ export default class SapSalesOrderList extends React.PureComponent {
             />
           }
         </TableCell>
-        <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
+        {Number(RoleUser.role()) === 1 ?
+          <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell> :
+          <TableCell 
+            align="left" 
+            className={this.props.pageLoc === "Status" ? "table-cell-pk-status" : "table-cell-smr"}> 
+            {row.SoNumber} 
+          </TableCell>
+        }
+        <TableCell align="left" className="table-cell-cst"> {row.CustomerName} </TableCell>
+        <TableCell align="left" className="table-cell-short"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>
+        <TableCell align="left" className="table-cell-long"> {row.ComponentDescription} </TableCell>
         <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
-        <TableCell align="center" className="table-cell"> {row.LifeTimeComponent} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.LifeTimeComponent} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
+        <TableCell align="left" className="table-cell-smr"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
         <Tooltip arrow title={row.PlanType.charAt(0) === "U" ? "UNSCHEDULE" : ""} >
           <TableCell align="left" className="table-cell"> {row.PlanType.substring(0, 3)} </TableCell>

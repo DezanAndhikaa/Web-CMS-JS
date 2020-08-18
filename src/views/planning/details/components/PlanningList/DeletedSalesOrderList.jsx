@@ -60,9 +60,9 @@ export default class DeletedSalesOrderList extends React.PureComponent {
   showTableHead() {
       return (
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
-        <TableRow classes={{ root: 'table-row' }}>
+        <TableRow>
           {Number(RoleUser.role()) !== 1 ? "" :
-            <TableCell padding="checkbox">
+            <TableCell className= "table-cell-checkbox">
               {this.props.displaySalesCheckbox && 
                 <Checkbox 
                   icon={<CheckBoxOutlineBlank fontSize="small" />}
@@ -100,7 +100,7 @@ export default class DeletedSalesOrderList extends React.PureComponent {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
         {Number(RoleUser.role()) !== 1 ? "" :
-          <TableCell padding="checkbox">
+          <TableCell className= "table-cell-checkbox">
             {this.props.displaySalesCheckbox && 
               <Checkbox
                 icon={<CheckBoxOutlineBlank fontSize="small" />}
@@ -112,17 +112,24 @@ export default class DeletedSalesOrderList extends React.PureComponent {
             }
           </TableCell>
         }
-        <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
+        {Number(RoleUser.role()) === 1 ?
+          <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell> :
+          <TableCell 
+            align="left" 
+            className={this.props.pageLoc === "Status" ? "table-cell-pk-status" : "table-cell-smr"}> 
+            {row.SoNumber} 
+          </TableCell>
+        }
+        <TableCell align="left" className="table-cell-cst"> {row.CustomerName} </TableCell>
+        <TableCell align="left" className="table-cell-short"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>
+        <TableCell align="left" className="table-cell-long"> {row.ComponentDescription} </TableCell>
         <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
-        <TableCell align="center" className="table-cell"> {row.LifeTimeComponent} </TableCell>
+        <TableCell align="left" className="table-cell"> {row.LifeTimeComponent} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
+        <TableCell align="left" className="table-cell-smr"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
         <Tooltip arrow title={row.PlanType.charAt(0) === "U" ? "UNSCHEDULE" : ""} >
           <TableCell align="left" className="table-cell"> {row.PlanType.substring(0, 3)} </TableCell>

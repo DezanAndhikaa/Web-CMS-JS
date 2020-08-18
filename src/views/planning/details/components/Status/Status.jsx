@@ -1998,7 +1998,7 @@ export default class Status extends React.PureComponent {
 				{Number(RoleUser.role()) === 1 ?
 					<SalesOrderList 
 						{...this.props}
-						idTab = "Status"
+						idTab= "Status"
 						onClickTabHead={this.props.onClickSortBy}
 						displaySalesCheckbox={this.props.salesParameter.paramsData.assigmentFilter || this.props.salesParameter.paramsData.inProgressFilter}
 						sortSalesByState={this.props.sortSalesBy}
@@ -2033,7 +2033,7 @@ export default class Status extends React.PureComponent {
 				{Number(RoleUser.role()) === 1 ?
 					<ServiceOrderList 
 						{...this.props}
-						idTab="Status"
+						idTab= "Status"
 						onClickTabHead={this.props.onClickSortBy}
 						displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
 						sortServiceByState={this.props.sortServiceBy}
@@ -2045,7 +2045,7 @@ export default class Status extends React.PureComponent {
 					:
 					<ServiceOrderList 
 						{...this.props}
-						idTab="Status"
+						idTab= "Status"
 						pageLoc= "Status"
 						onClickTabHead={this.props.onClickSortBy}
 						displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
