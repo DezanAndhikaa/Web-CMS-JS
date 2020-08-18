@@ -66,12 +66,10 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
                 checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
                 checked={this.state.checkedValue}
                 onChange={this.handleClicks}
-                onClick={() => {
-                  this.props.salesOrderListApproved.Lists.map((row, id) =>
-                    this.props.onChoosedSales(row, id)
-                  );
+                onClick={({target: { checked }}) => {
+                  if(checked) return this.props.onChooseAllSales(this.props.salesOrderListApproved.Lists);
+                  return this.props.onChooseAllSales([]);
                 }}
-                className="checkbox-checked-header"
               />
             )}
           </TableCell>
@@ -103,8 +101,7 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
                 checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
                 disabled={this.isCheckboxAvailable(row)} 
                 checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
-                onClick={() => this.props.onChoosedSales(row)} 
-                classes={{ checked: 'checkbox-checked' }} 
+                onClick={() => this.props.onChoosedSales(row, id, 'body')}
               />
             }
           </TableCell>

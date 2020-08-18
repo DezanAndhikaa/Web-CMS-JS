@@ -64,14 +64,17 @@ export default class DeletedSalesOrderList extends React.PureComponent {
           {Number(RoleUser.role()) !== 1 ? "" :
             <TableCell padding="checkbox">
               {this.props.displaySalesCheckbox && 
-              <Checkbox 
-                icon={<CheckBoxOutlineBlank fontSize="small" />}
-                checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
-                checked={this.state.checkedValue}
-                onChange={this.handleClicks}
-                onClick={() => {this.props.salesOrderListDeleted.Lists.map((row,id) => 
-                this.props.onChoosedSales(row,id))}}
-                className="checkbox-checked-header"/>}
+                <Checkbox 
+                  icon={<CheckBoxOutlineBlank fontSize="small" />}
+                  checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
+                  checked={this.state.checkedValue}
+                  onChange={this.handleClicks}
+                  onClick={({target: { checked }}) => {
+                    if(checked) return this.props.onChooseAllSales(this.props.salesOrderListDeleted.Lists);
+                    return this.props.onChooseAllSales([]);
+                  }}
+                />
+              }
             </TableCell>
           }
           <TableCell align="left" className="table-cell">SO</TableCell>
@@ -104,8 +107,7 @@ export default class DeletedSalesOrderList extends React.PureComponent {
                 checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />} 
                 disabled={this.isCheckboxAvailable(row)} 
                 checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
-                onClick={() => this.props.onChoosedSales(row)} 
-                classes={{ checked: 'checkbox-checked' }} 
+                onClick={() => this.props.onChoosedSales(row, id, 'body')}
               />
             }
           </TableCell>
