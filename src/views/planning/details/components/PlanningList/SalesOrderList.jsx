@@ -139,11 +139,12 @@ export default class SalesOrderList extends React.PureComponent {
                     checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
                     checked={this.state.checkedValue}
                     onChange={this.handleClickCheckbox}
-                    onClick={() => {
-                      this.props.salesOrderList.Lists.map((row, id) =>
-                        this.props.onChoosedSales(row, id))
-                    }}
-                    className="checkbox-checked-header" />}
+                    onClick={({target: { checked }}) => {
+                      if(checked) return this.props.onChooseAllSales(this.props.salesOrderList.Lists);
+                      return this.props.onChooseAllSales([]);
+                    }} 
+                  />
+                }
               </TableCell>
             }
             <PlanningListHeader
@@ -266,7 +267,7 @@ export default class SalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
-        <TableCell align="center" className="table-cell">
+        <TableCell align="left" className="table-cell">
           {this.props.salesOrderList.Lists[id].LifeTimeComponent === 0 && this.props.idTab === "Input" ?
             <InputButton title="Input Lifetime Component" onStats={this.isPutLifetime} titles="Input" key={row.SoNumber} id={row.SoNumber} field="input" /> :
             this.props.salesOrderList.Lists[id].LifeTimeComponent === 0 && this.props.idTab === "Status" ?
