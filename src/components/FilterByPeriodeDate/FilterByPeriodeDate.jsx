@@ -34,8 +34,7 @@ class FilterByPeriodeDate extends React.Component{
 
     // isDisabled(props) { return props.errors.startDate || props.errors.endDate }
 
-    render(){
-        const today = new Date();        
+    render(){      
         const validationSchema = Yup.object().shape({
             startDate: Yup.date()
             .required('Start date must be filled.'),

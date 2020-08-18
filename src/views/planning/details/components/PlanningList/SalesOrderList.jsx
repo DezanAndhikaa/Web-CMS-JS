@@ -13,6 +13,8 @@ import { Snackbar } from '@material-ui/core';
 import moment from 'moment';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
 import roleService from "../../../../../utils/roleService.helper";
+import { CheckBoxOutlineBlank } from '@material-ui/icons';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 const RoleUser = new roleService();
 export default class SalesOrderList extends React.PureComponent {
@@ -96,13 +98,17 @@ export default class SalesOrderList extends React.PureComponent {
               <TableCell padding="checkbox">
                 {this.props.displaySalesCheckbox &&
                   <Checkbox
+                    icon={<CheckBoxOutlineBlank fontSize="small" />}
+                    checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
                     checked={this.state.checkedValue}
                     onChange={this.handleClickCheckbox}
                     onClick={() => {
                       this.props.salesOrderList.Lists.map((row, id) =>
                         this.props.onChoosedSales(row, id))
                     }}
-                    className="checkbox-checked-header" />}
+                    className="checkbox-checked-header" 
+                  />
+                }
               </TableCell>
             }
             <TableCell align="left" className="table-cell">SO</TableCell>
@@ -234,6 +240,8 @@ export default class SalesOrderList extends React.PureComponent {
           <TableCell padding="checkbox">
             {this.props.displaySalesCheckbox &&
               <Checkbox
+                icon={<CheckBoxOutlineBlank fontSize="small" />}
+                checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
                 disabled={this.isCheckboxAvailable(row)}
                 checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)}
                 onClick={() => this.props.onChoosedSales(row)}

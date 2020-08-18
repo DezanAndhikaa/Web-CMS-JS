@@ -8,6 +8,8 @@ import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import moment from 'moment';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
 import roleService from "../../../../../utils/roleService.helper";
+import { CheckBoxOutlineBlank } from '@material-ui/icons';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 const RoleUser = new roleService();
 export default class DeletedSalesOrderList extends React.PureComponent {
@@ -63,6 +65,8 @@ export default class DeletedSalesOrderList extends React.PureComponent {
             <TableCell padding="checkbox">
               {this.props.displaySalesCheckbox && 
               <Checkbox 
+                icon={<CheckBoxOutlineBlank fontSize="small" />}
+                checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
                 checked={this.state.checkedValue}
                 onChange={this.handleClicks}
                 onClick={() => {this.props.salesOrderListDeleted.Lists.map((row,id) => 
@@ -95,11 +99,15 @@ export default class DeletedSalesOrderList extends React.PureComponent {
         {Number(RoleUser.role()) !== 1 ? "" :
           <TableCell padding="checkbox">
             {this.props.displaySalesCheckbox && 
-            <Checkbox 
-            disabled={this.isCheckboxAvailable(row)} 
-            checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
-            onClick={() => this.props.onChoosedSales(row)} 
-            classes={{ checked: 'checkbox-checked' }} />}
+              <Checkbox
+                icon={<CheckBoxOutlineBlank fontSize="small" />}
+                checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />} 
+                disabled={this.isCheckboxAvailable(row)} 
+                checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
+                onClick={() => this.props.onChoosedSales(row)} 
+                classes={{ checked: 'checkbox-checked' }} 
+              />
+            }
           </TableCell>
         }
         <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
