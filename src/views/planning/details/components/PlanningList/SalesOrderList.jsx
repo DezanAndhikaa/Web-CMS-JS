@@ -135,6 +135,8 @@ export default class SalesOrderList extends React.PureComponent {
               <TableCell padding="checkbox">
                 {this.props.displaySalesCheckbox &&
                   <Checkbox
+                    icon={<CheckBoxOutlineBlank fontSize="small" />}
+                    checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
                     checked={this.state.checkedValue}
                     onChange={this.handleClickCheckbox}
                     onClick={() => {
