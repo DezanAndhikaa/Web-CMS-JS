@@ -153,28 +153,28 @@ export default class SalesOrderList extends React.PureComponent {
               onSearch={this.props.onSearchComp}
             />
             <PlanningListHeader
-              name="Customer"
+              name="CUSTOMER"
               isActive={this.props.sortSalesByState.Customer.isActive}
               delay={300}
               isAscending={this.props.sortSalesByState.Customer.isAscending}
               onClick={() => this.props.onClickTabHead(SortSalesByCustomer)}
             />
             <PlanningListHeader
-              name="Site"
+              name="SITE"
               isActive={this.props.sortSalesByState.Site.isActive}
               delay={300}
               isAscending={this.props.sortSalesByState.Site.isAscending}
               onClick={() => this.props.onClickTabHead(SortSalesBySite)}
             />
             <PlanningListHeader
-              name="Unit Model"
+              name="UNIT MODEL"
               isActive={this.props.sortSalesByState.UnitModel.isActive}
               delay={300}
               isAscending={this.props.sortSalesByState.UnitModel.isAscending}
               onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
             />
             <PlanningListHeader
-              name="Comp Desc"
+              name="COMP DESC"
               isActive={this.props.sortSalesByState.CompDesc.isActive}
               delay={300}
               isAscending={this.props.sortSalesByState.CompDesc.isAscending}
@@ -222,7 +222,7 @@ export default class SalesOrderList extends React.PureComponent {
               onFilter={this.isFilterDate}
             />
             <PlanningListHeader
-              name="Plan Type"
+              name="PLAN TYPE"
               delay={300}
               // isActive={this.props.sortSalesByState.UnitModel.isActive}
               // isAscending={this.props.sortSalesByState.UnitModel.isAscending}
