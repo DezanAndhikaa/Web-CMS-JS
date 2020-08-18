@@ -132,7 +132,7 @@ export default class SalesOrderList extends React.PureComponent {
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
           <TableRow classes={{ root: 'table-row' }}>
             {this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly" || Number(RoleUser.role()) !== 1 ? "" :
-              <TableCell padding="checkbox">
+              <TableCell className= "table-cell-checkbox">
                 {this.props.displaySalesCheckbox &&
                   <Checkbox
                     icon={<CheckBoxOutlineBlank fontSize="small" />}
@@ -281,7 +281,7 @@ export default class SalesOrderList extends React.PureComponent {
         <Tooltip arrow title={row.PlanType.charAt(0) === "U" ? "UNSCHEDULE" : ""} >
           <TableCell align="left" className="table-cell"> {row.PlanType.substring(0, 3)} </TableCell>
         </Tooltip>
-        <TableCell align="left" className={this.props.idTab === "Status" ? "table-cell-icon" : "table-cell"}>
+        <TableCell align="left" className= "table-cell-icon">
           {this.props.salesOrderList.Lists[id].LifeTimeComponent !== 0 && this.props.idTab === "Approval" ?
             <EditButton idEdit="Approval" title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} /> :
             this.props.salesOrderList.Lists[id].LifeTimeComponent !== 0 && this.props.idTab === "Status" ?

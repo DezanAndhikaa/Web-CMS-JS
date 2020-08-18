@@ -78,7 +78,7 @@ export default class SapServiceOrderList extends React.PureComponent {
     return (
       <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow classes={{ root: 'table-row' }}>
-          <TableCell className= "table-cell-checkbox"> 
+          <TableCell className= "table-cell-checkbox">
             {this.props.displayServiceCheckbox  && 
               <Checkbox
                 icon={<CheckBoxOutlineBlank fontSize="small" />}
