@@ -1536,7 +1536,13 @@ export default class Status extends React.PureComponent {
 				}
 			}else if(this.state.whatPageIsChoosed === "Delete" || this.state.whatPageIsChoosed === "SAP ISSUE"){
 				if (Number(RoleUser.role()) !== 1) {
-					return("")
+					return(
+						<BaseButton titles="Download"
+							{...this.props}
+							whatTabsIsRendered={false}
+							handleServiceDownload={this.handleServiceDownload}
+						/>
+					)
 				}else{
 					return(
 						<>
@@ -1556,17 +1562,13 @@ export default class Status extends React.PureComponent {
 					)
 				}
 			}else{
-				if (Number(RoleUser.role()) !== 1) {
-					return("")
-				}else{
-					return(
-						<BaseButton titles="Download"
-							{...this.props}
-							whatTabsIsRendered= {false}
-							handleServiceDownload= {this.handleServiceDownload}
-						/>
-					)
-				}
+				return(
+					<BaseButton titles="Download"
+						{...this.props}
+						whatTabsIsRendered= {false}
+						handleServiceDownload= {this.handleServiceDownload}
+					/>
+				)
 			}
 		}
 		

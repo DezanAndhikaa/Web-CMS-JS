@@ -70,22 +70,20 @@ export default class DeletedServiceOrderList extends React.PureComponent {
     return (
       <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow>
-        {Number(RoleUser.role()) !== 1 ? "" :
-            <TableCell className= "table-cell-checkbox">
-              {this.props.displayServiceCheckbox && 
-                <Checkbox
-                  icon={<CheckBoxOutlineBlank fontSize="small" />}
-                  checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
-                  checked={this.state.checkedValue}
-                  onChange={this.handleClicks}
-                  onClick={({target: { checked }}) => {
-                    if(checked) return this.props.onChooseAllService(this.props.serviceOrderListDeleted.Lists);
-                    return this.props.onChooseAllService([]);
-                  }}
-                />
-              }
-            </TableCell>
-          }
+          <TableCell className= "table-cell-checkbox">
+            {this.props.displayServiceCheckbox && 
+              <Checkbox
+                icon={<CheckBoxOutlineBlank fontSize="small" />}
+                checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
+                checked={this.state.checkedValue}
+                onChange={this.handleClicks}
+                onClick={({target: { checked }}) => {
+                  if(checked) return this.props.onChooseAllService(this.props.serviceOrderListDeleted.Lists);
+                  return this.props.onChooseAllService([]);
+                }}
+              />
+            }
+          </TableCell>
           <TableCell align="left" className="table-cell">WO</TableCell>
           <TableCell align="left" className="table-cell">CUSTOMER</TableCell>
           <TableCell align="left" className="table-cell">SITE</TableCell>

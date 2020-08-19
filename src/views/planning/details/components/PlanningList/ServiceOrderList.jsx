@@ -90,7 +90,7 @@ export default class ServiceOrderList extends React.PureComponent {
       return (
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
           <TableRow>
-            {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? "" :
+            {this.props.idService === "Data Input" ? "" :
               <TableCell className="table-cell-checkbox">
                 {this.props.displayServiceCheckbox &&
                   <Checkbox
@@ -228,7 +228,7 @@ export default class ServiceOrderList extends React.PureComponent {
   showTableBody(row, id) {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
-        {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? "" :
+        {this.props.idService === "Data Input" ? "" :
           <TableCell className="table-cell-checkbox">
             {this.props.displayServiceCheckbox &&
               <Checkbox
