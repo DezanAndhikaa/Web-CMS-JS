@@ -120,7 +120,7 @@ export default class DeletedServiceOrderList extends React.PureComponent {
           <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell> :
           <TableCell 
             align="left" 
-            className={this.props.pageLoc === "Status" ? "table-cell-pk-status" : "table-cell-smr"}> 
+            className= "table-cell-smr"> 
             {row.WoNumber} 
           </TableCell>
         }

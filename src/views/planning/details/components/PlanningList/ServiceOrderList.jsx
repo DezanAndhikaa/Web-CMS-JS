@@ -243,8 +243,7 @@ export default class ServiceOrderList extends React.PureComponent {
         {(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/ho") || Number(RoleUser.role()) !== 1 ?
           <TableCell
             align="left"
-            className={this.props.pageLoc && this.props.idTab === "Status" ? "table-cell-pk-status"
-              : this.props.pageLoc === "Status" && this.props.idService === "Data Input" ? "table-cell-pk" : "table-cell-smr"}>
+            className={this.props.idService === "Data Input" ? "table-cell-pk" : "table-cell-smr"}>
             {row.WoNumber}
           </TableCell>
           :
