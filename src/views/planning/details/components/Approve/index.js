@@ -37,7 +37,7 @@ import {
 	SelectSalesPlanAction,
 	SelectServicePlanAction,
 	sortByAction,
-	storePlanDataAction, dateFilterAction, selectAllService
+	storePlanDataAction, dateFilterAction, selectAllService, smrFilterAction
 } from '../../DetailPages-action';
 import ApprovalPages from './ApprovalPages';
 
@@ -49,6 +49,7 @@ const mapStateToProps = (state) => ({
 	salesParameter: state.plansPageState.salesParameter,
 	filterParameter: state.plansPageState.filterParameter,
 	filterLifetime: state.plansPageState.filterLifetime,
+	filterSmr: state.plansPageState.filterSmr,
 	filterDate: state.plansPageState.filterDate,
 	indexFilterParameter: state.plansPageState.indexFilterParameter,
 	serviceParameter: state.plansPageState.serviceParameter,
@@ -96,6 +97,7 @@ const mapDispatchToProps = (dispatch) => ({
 	onSearchComp: (keyword, sort) => dispatch(searchCompAction(SearchCompAction, keyword, sort)),
 	onSearchCompService: (keyword, sort) => dispatch(searchCompActionService(SearchCompActionService, keyword, sort)),
 	lifetimeFilter: (type, payload, payload2, page) => dispatch(selectFilterAction(type, payload, payload2, page)),
+	smrFilter: (type, payload, payload2, page) => dispatch(smrFilterAction(type, payload, payload2, page)),
 	dateFilter: (type, payload, payload2, page) => dispatch(dateFilterAction(type, payload, payload2, page)),
 	selectFilter2: (type, payload, head, page) => dispatch(selectFilterAction2(type, payload, head, page)),
 	indexFilter: (type, payload) => dispatch(indexFilterAction(type, payload)),
