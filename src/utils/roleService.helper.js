@@ -11,7 +11,7 @@ export default class roleService {
       this.jwtDecode = jwtDecode(userIdData().accessToken);
       const role_name = this.jwtDecode.role_name;
       let role = null;
-      if ((Array.isArray(role_name) && role_name.includes('OBD')) || role_name === 'OBD') {
+      if ((Array.isArray(role_name) && role_name.includes('OBD')) || role_name === 'OBD HO') {
         role = 1;
       }else if ((Array.isArray(role_name) && role_name.includes('FMC Headoffice')) || role_name === 'FMC Headoffice') { //service
         role = 2;
