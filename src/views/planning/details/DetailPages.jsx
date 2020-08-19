@@ -64,6 +64,15 @@ class DetailPages extends React.Component {
       })
     }
 
+    //FILTER RANGE SMR
+    if(this.state.whichTabs){
+      if (prevProps.filterSmr !== this.props.filterSmr) {
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter: this.props.filterSmr.Filter, PageNumber: 1,
+        })
+      }
+    }
+
     //FILTER RANGE DATE
     if (this.state.whichTabs) {
       if (prevProps.filterDate !== this.props.filterDate) {
