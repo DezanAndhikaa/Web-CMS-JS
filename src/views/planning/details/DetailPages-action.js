@@ -530,6 +530,12 @@ export function searchCompActionService(type, payload, sort) {
 export function dateFilterAction(type, payload, payload2, page) {
 	return { type, payload, payload2, page };
 }
+export function smrDateFilterAction(type, payload, payload2, page) {
+  return { type, payload, payload2, page };
+}
+export function smrFilterAction(type, payload, payload2, page) {
+	return { type, payload, payload2, page };
+}
 export function selectFilterAction(type, payload, payload2, page) {
 	return { type, payload, payload2, page };
 }
