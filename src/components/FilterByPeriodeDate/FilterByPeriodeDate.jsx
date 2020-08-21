@@ -21,7 +21,6 @@ class FilterByPeriodeDate extends React.Component{
                 endDate: new Date()
             }
         };
-        console.log(props)
     }
 
     handleChangeStart = (event, props) => {
@@ -31,9 +30,7 @@ class FilterByPeriodeDate extends React.Component{
     handleChangeEnd = (event, props) => {
         props.setFieldValue("endDate", event);
     }
-
-    // isDisabled(props) { return props.errors.startDate || props.errors.endDate }
-
+    
     render(){      
         const validationSchema = Yup.object().shape({
             startDate: Yup.date()
