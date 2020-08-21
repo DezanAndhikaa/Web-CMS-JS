@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import {AppBar, Tabs, Tab, Typography} from '@material-ui/core';
-import SalesOrderList from '../../components/PlanningList/SalesOrderListSite';
-import ServiceOrderList from '../../components/PlanningList/ServiceOrderListSite';
+import SalesOrderList from '../../components/PlanningList/SalesOrderList';
+import ServiceOrderList from '../../components/PlanningList/ServiceOrderList';
 import RevisedSalesOrderList from '../../components/PlanningList/RevisedSalesOrderList';
 import './DetailsTab.scss';
 import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
@@ -11,9 +11,13 @@ import {
     SelectCustomerFilterAction,
     SelectSiteFilterAction, 
     SelectUnitModelFilterAction, 
-    SelectComponentFilterAction } 
-    from '../../DetailPages-action';
+    SelectComponentFilterAction, 
+    SelectPlanTypeFilterAction
+} from '../../DetailPages-action';
+import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+import roleService from "../../../../../utils/roleService.helper";
 
+const RoleUser = new roleService();
 function TabContainer({ children, dir }) {
   return (
     <Typography component="div" dir={dir}>
@@ -80,6 +84,7 @@ const styles = theme => ({
 class DetailsTab extends React.Component {
   state = {
     value: 0,
+    tab: 'sales',
     invisible1: false,
     invisible2: true,
     whichTabs: true,
@@ -124,96 +129,213 @@ class DetailsTab extends React.Component {
   _renderSalesOrderList(){
     return(
       <>
-      <div className="plannings-list-detail">
+      <div className={this.props.salesOrderList.Lists.length === 0 
+          && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "list-detail-empty" : "plannings-list-detail"}>
         <SalesOrderList 
           {...this.props}
+          idSales= "Data Input"
+          idTab= "Input"
         />
       </div>
       </>
     );
   }
 
+  _renderSalesOrderViewOnly() {
+    return (
+      <div className={this.props.salesOrderList.Lists.length === 0
+        && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ?
+        "list-detail-empty" : "plannings-list-detail"}>
+        <SalesOrderList
+          {...this.props}
+          idSales="ViewOnly"
+        />
+      </div>
+    );
+  }
+
   _renderRevisionList(){
-    return(
-      <div className="paper-revision">
-        <div className="revision-container">
-          <div className="rev-title-container">
-            <div className="ut-underline-rev" />
-            <div className= "revision-title">Revision List</div>
-          </div>
-          <div className="plannings-list-detail">
+      return(
+        <div className={this.props.salesOrderRevised.Lists.length === 0 
+          && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED ? "list-detail-empty" : "paper-revision"}>
+          <div className="revision-container">
+            <div className="rev-title-container">
+              <div className= "title-content">
+                <div className="ut-underline-rev" /> 
+                <div className="revision-title">Revision List</div>
+              </div>
+              <div className="revision-search">{this.props.renderSearchRev}</div>
+            </div>
+            <div className="plannings-list-detail">
               <RevisedSalesOrderList
                 {...this.props}
               />
-          </div>
-          <div>
-            {this.props.renderPaginationRev}
+            </div>
+            <div>
+              {this.props.salesOrderRevised.Lists.length === 0 
+                && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED ? "" : this.props.renderPaginationRev}
+            </div>
           </div>
         </div>
-      </div>
-    )
+      )
   }
 
   _renderServiceOrderList(){
     return(
-        <div className="plannings-list-detail">
+        <div className={this.props.serviceOrderList.Lists.length === 0 
+          && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "list-detail-empty" : "plannings-list-detail"}>
           <ServiceOrderList 
-          {...this.props}
-          isClick={this.props.isClick}
+            {...this.props}
+            pageLoc= "Status"
+            idService= "Data Input"
+            isClick= {this.props.isClick}
           />
         </div>
     );
   }
 
   _dataFilterCustomer(){
-    if(this.state.value === 0){
-      let arr = this.props.salesOrderList.Customers;
-      arr.splice(0, 0, "All Customer")
-      return arr
-    }
-    else{
-      let arr = this.props.serviceOrderList.Customers;
-      arr.splice(0, 0, "All Customer")
-      return arr
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
+      || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+      if(this.state.value === 0){
+        let arr = this.props.serviceOrderList.Customers;
+        arr.splice(0, 0, "All Customer")
+        return arr
+      }
+    }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
+      if(this.state.value === 0){
+        let arr = this.props.salesOrderList.Customers;
+        arr.splice(0, 0, "All Customer")
+        return arr
+      }
+    }else{
+      if(this.state.value === 0){
+        let arr = this.props.salesOrderList.Customers;
+        arr.splice(0, 0, "All Customer")
+        return arr
+      }
+      else{
+        let arr = this.props.serviceOrderList.Customers;
+        arr.splice(0, 0, "All Customer")
+        return arr
+      }
     }
   }
 
   _dataFilterSite(){
-    if(this.state.value === 0){
-      let arr = this.props.salesOrderList.Sites;
-      arr.splice(0, 0, "All Site")
-      return arr
-    }
-    else{
-      let arr = this.props.serviceOrderList.Sites;
-      arr.splice(0, 0, "All Site")
-      return arr
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
+      || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+      if(this.state.value === 0){
+        let arr = this.props.serviceOrderList.Sites;
+        arr.splice(0, 0, "All Site")
+        return arr
+      }
+    }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
+      if(this.state.value === 0){
+        let arr = this.props.salesOrderList.Sites;
+        arr.splice(0, 0, "All Site")
+        return arr
+      }
+    }else{
+      if(this.state.value === 0){
+        let arr = this.props.salesOrderList.Sites;
+        arr.splice(0, 0, "All Site")
+        return arr
+      }
+      else{
+        let arr = this.props.serviceOrderList.Sites;
+        arr.splice(0, 0, "All Site")
+        return arr
+      }
     }
   }
 
   _dataFilterUnitModel(){
-    if(this.state.value === 0){
-      let arr = this.props.salesOrderList.UnitModels;
-      arr.splice(0, 0, "All Unit Model")
-      return arr
-    }
-    else{
-      let arr = this.props.serviceOrderList.UnitModels;
-      arr.splice(0, 0, "All Unit Model")
-      return arr
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
+      || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+      if(this.state.value === 0){
+        let arr = this.props.serviceOrderList.UnitModels;
+        arr.splice(0, 0, "All Unit Model")
+        return arr
+      }
+    }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
+      if(this.state.value === 0){
+        let arr = this.props.salesOrderList.UnitModels;
+        arr.splice(0, 0, "All Unit Model")
+        return arr
+      }
+    }else{
+      if(this.state.value === 0){
+        let arr = this.props.salesOrderList.UnitModels;
+        arr.splice(0, 0, "All Unit Model")
+        return arr
+      }
+      else{
+        let arr = this.props.serviceOrderList.UnitModels;
+        arr.splice(0, 0, "All Unit Model")
+        return arr
+      }
     }
   }
 
   _dataFilterComponentDescription(){
-    if(this.state.value === 0){
-      let arr = this.props.salesOrderList.ComponentDescriptions;
-      arr.splice(0, 0, "All Component Description")
-      return arr
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
+      || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+      if(this.state.value === 0){
+        let arr = this.props.serviceOrderList.ComponentDescriptions;
+        arr.splice(0, 0, "All Component Description")
+        return arr
+      }
+    }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
+      if(this.state.value === 0){
+        let arr = this.props.salesOrderList.ComponentDescriptions;
+        arr.splice(0, 0, "All Component Description")
+        return arr
+      }
+    }else{
+      if(this.state.value === 0){
+        let arr = this.props.salesOrderList.ComponentDescriptions;
+        arr.splice(0, 0, "All Component Description")
+        return arr
+      }
+      else{
+        let arr = this.props.serviceOrderList.ComponentDescriptions;
+        arr.splice(0, 0, "All Component Description")
+        return arr
+      }
     }
-    else{
-      let arr = this.props.serviceOrderList.ComponentDescriptions;
-      arr.splice(0, 0, "All Component Description")
-      return arr
+  }
+
+  _dataFilterPlanType() {
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
+      || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+      if (this.state.value === 0) {
+        let arr = this.props.serviceOrderList.PlanType;
+        arr.splice(0, 0, "All Plan Type")
+        return arr
+      }
+    }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
+      if(this.state.value === 0){
+        let arr = this.props.salesOrderList.PlanType;
+        arr.splice(0, 0, "All Plan Type")
+        return arr
+      }
+    }else{
+      if(this.state.value === 0){
+        let arr = this.props.salesOrderList.PlanType;
+        arr.splice(0, 0, "All Plan Type")
+        return arr
+      }
+      else{
+        let arr = this.props.serviceOrderList.PlanType;
+        arr.splice(0, 0, "All Plan Type")
+        return arr
+      }
     }
   }
 
@@ -222,7 +344,7 @@ class DetailsTab extends React.Component {
       <div className="dropdowns-detail-site">
         <div className="dropdown-detail-site">
           <DropdownFilter
-          {...this.props}
+            {...this.props}
             data={this._dataFilterCustomer()}
             selected={this.props.selectedFilters.customerType}
             onSelectActionType={SelectCustomerFilterAction}
@@ -264,6 +386,17 @@ class DetailsTab extends React.Component {
             head={"ComponentDescription"}
           />
         </div>
+        <div className="dropdown-detail-site">
+          <DropdownFilter
+            {...this.props}
+            data={this._dataFilterPlanType()}
+            selected={this.props.selectedFilters.planType}
+            onSelectActionType={SelectPlanTypeFilterAction}
+            onSelectAction={this.props.selectFilter2}
+            indexTab={this.state.value}
+            head={"PlanType"}
+          />
+        </div>
         <div className="search-detail-site">
           {this.props.renderSearch}
         </div>
@@ -271,7 +404,7 @@ class DetailsTab extends React.Component {
     );
   }
 
-  renderTotalSales(){
+  renderTabSales(){
     return(
       <div className="tab-site">
         <div className="label-site">Sales Order</div>
@@ -279,7 +412,7 @@ class DetailsTab extends React.Component {
     )
   }
 
-  renderTotalService(){
+  renderTabService(){
     return(
       <div className="tab-site">
         <div className="label-site">Service Order</div>
@@ -288,39 +421,55 @@ class DetailsTab extends React.Component {
   }
 
   _renderTotalData(){
-    if (this.state.value === 0) {
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
+      || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
       return(
-        <div className="total-site-container">
-          <div className="header-site">
-            <div className="header-site-1">
-              Total Data
-            </div>
-            <div className="header-site-2">
-              Sales Order
-            </div>
-          </div>
-          <div className="total-site">
-            {this.props.totalSalesData}
-          </div>
-        </div>
-      )
-    }
-    else{
-      return(
-        <div className="total-site-container">
-          <div className="header-site">
-            <div className="header-site-1">
-              Total Data
-            </div>
-            <div className="header-site-2">
-              Service Order
-            </div>
-          </div>
-          <div className="total-site">
+        <div className="total-data-container">
+          <div className="text-total">
             {this.props.totalServiceData}
           </div>
+          <div className="text-tabs">
+            Total Service Order
+          </div>
         </div>
       )
+    }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
+      return(
+        <div className="total-data-container">
+          <div className="text-total">
+            {this.props.totalSalesData}
+          </div>
+          <div className="text-tabs">
+             Total Sales Order
+          </div>
+        </div>
+      )
+    }else{
+      if (this.state.value === 0) {
+        return(
+          <div className="total-data-container">
+            <div className="text-total">
+              {this.props.totalSalesData}
+            </div>
+            <div className="text-tabs">
+               Total Sales Order
+            </div>
+          </div>
+        )
+      }
+      else{
+        return(
+          <div className="total-data-container">
+            <div className="text-total">
+              {this.props.totalServiceData}
+            </div>
+            <div className="text-tabs">
+              Total Service Order
+            </div>
+          </div>
+        )
+      }
     }
   }
 
@@ -328,44 +477,147 @@ class DetailsTab extends React.Component {
     const { classes, theme } = this.props;
     const { value } = this.state;
     return (
-        <div className="root">
-          <div className="tab-container-site">
-            {this.props.renderNotif}
-            {this.props.renderFilterByDataAction}
-          </div>
-          <AppBar position="static" color="default" style={{boxShadow: "none"}}>
-            <Tabs
-              classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
-              value={this.state.value}
-              onChange={this.handleChange}
-              indicatorColor="primary" >
-              <Tab 
-                centered={true}
-                onClick={() => this.props.clearSelectedSalesPlans()} 
-                classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-                label= {this.renderTotalSales()} 
-              />
-              <Tab 
-                centered={true}
-                onClick={() => this.props.clearSelectedServicePlans()} 
-                classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
-                label= {this.renderTotalService()}
-              />
-            </Tabs>
-          </AppBar>
-          {value === 0 && <TabContainer dir={theme.direction} >
-            <div>{this._renderRevisionList()}</div>
-          </TabContainer>}
-          <div className="site-container">
-            {this._renderTotalData()}
-          </div>
-          <div className="filters-detail-site">
-            {this._renderFilter()}
-          </div>
-          {value === 0 && <TabContainer dir={theme.direction} >
-            <div>{this._renderSalesOrderList()}</div>
-          </TabContainer>}
-        {value === 1 && <TabContainer dir={theme.direction} ><div>{this._renderServiceOrderList()}</div></TabContainer>}
+      <div className="root">
+        {Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
+          || Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3
+          ? <> 
+            <div className="tab-container-site">
+              {this.props.renderNotif}
+              {this.props.renderFilterByDataAction}
+            </div>
+            <AppBar position="static" color="default" style={{boxShadow: "none", zIndex: 1000 }}>
+              <Tabs
+                classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
+                value={this.state.value}
+                onChange={this.handleChange}
+                indicatorColor="primary" >
+                <Tab 
+                  centered={true}
+                  onClick={() => this.props.clearSelectedServicePlans()} 
+                  classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+                  label= {this.renderTabService()}
+                />
+              </Tabs>
+            </AppBar>
+            <div className="site-container">
+              {this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderTotalData()}
+            </div>
+            <div className="filters-detail-site">
+              {this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
+            </div>
+            {value === 0 && <TabContainer dir={theme.direction} >
+              <div>{this._renderServiceOrderList()}</div>
+            </TabContainer>}
+          </>
+          : Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 || Number(RoleUser.role()) === 8 ?
+            <>
+              <div className="tab-container-site">
+                {this.props.renderNotif}
+                {this.props.renderFilterByDataAction}
+              </div>
+              <AppBar position="static" color="default" style={{boxShadow: "none", zIndex: 1000 }}>
+                <Tabs
+                  classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                  indicatorColor="primary" >
+                  <Tab 
+                    centered={true}
+                    onClick={() => this.props.clearSelectedSalesPlans()} 
+                    classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+                    label= {this.renderTabSales()} 
+                  />
+                </Tabs>
+              </AppBar>
+              {value === 0 && <TabContainer dir={theme.direction} >
+                <div>{this._renderRevisionList()}</div>
+              </TabContainer>}
+              <div className="site-container">
+                {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                  this._renderTotalData()}
+              </div>
+              <div className="filters-detail-site">
+                {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                  this._renderFilter()}
+              </div>
+              {value === 0 && <TabContainer dir={theme.direction} >
+                <div>{this._renderSalesOrderList()}</div>
+              </TabContainer>}
+            </>
+          : Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12 ?
+            <>
+            <div className="tab-container-site">
+              {this.props.renderNotif}
+              {this.props.renderFilterByDataAction}
+            </div>
+            <AppBar position="static" color="default" style={{boxShadow: "none", zIndex: 1000 }}>
+              <Tabs
+                classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
+                value={this.state.value}
+                onChange={this.handleChange}
+                indicatorColor="primary" >
+                <Tab 
+                  centered={true}
+                  onClick={() => this.props.clearSelectedSalesPlans()} 
+                  classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+                  label= {this.renderTabSales()} 
+                />
+              </Tabs>
+            </AppBar>
+            <div className="site-container">
+              {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                this._renderTotalData()}
+            </div>
+            <div className="filters-detail-site">
+              {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                this._renderFilter()}
+            </div>
+            {value === 0 && <TabContainer dir={theme.direction} >
+              <div>{this._renderSalesOrderViewOnly()}</div>
+            </TabContainer>}
+          </>
+        : <>
+            <div className="tab-container-site">
+              {this.props.renderNotif}
+              {this.props.renderFilterByDataAction}
+            </div>
+            <AppBar position="static" color="default" style={{boxShadow: "none", zIndex: 1000 }}>
+              <Tabs
+                classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
+                value={this.state.value}
+                onChange={this.handleChange}
+                indicatorColor="primary" >
+                <Tab 
+                  centered={true}
+                  onClick={() => this.props.clearSelectedSalesPlans()} 
+                  classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+                  label= {this.renderTabSales()} 
+                />
+                <Tab 
+                  centered={true}
+                  onClick={() => this.props.clearSelectedServicePlans()} 
+                  classes={{ root: classes.tabRoot, selected: classes.tabSelected }} 
+                  label= {this.renderTabService()}
+                />
+              </Tabs>
+            </AppBar>
+            {value === 0 && <TabContainer dir={theme.direction} >
+              <div>{this._renderRevisionList()}</div>
+            </TabContainer>}
+            <div className="site-container">
+              {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderTotalData()}
+            </div>
+            <div className="filters-detail-site">
+              {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
+            </div>
+            {value === 0 && <TabContainer dir={theme.direction} >
+              <div>{this._renderSalesOrderList()}</div>
+            </TabContainer>}
+            {value === 1 && <TabContainer dir={theme.direction} ><div>{this._renderServiceOrderList()}</div></TabContainer>}
+          </>
+        }
       </div>
     );
   }

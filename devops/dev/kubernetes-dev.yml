@@ -3,9 +3,14 @@ kind: Deployment
 metadata:
   labels:
     app: web-cms-js
+    workstream: cms
+    version: 1.0.0
+    tier: frontend
+    usermanagementservice: "true"
+    msplanning: "true"
   name: web-cms-js
   namespace: devcms
-
+  
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
@@ -23,6 +28,11 @@ spec:
       creationTimestamp: null
       labels:
         app: web-cms-js
+        workstream: cms
+        version: 1.0.0
+        tier: frontend
+        usermanagementservice: "true"
+        msplanning: "true"
     spec:
       containers:
       - name: web-cms-js
@@ -31,7 +41,6 @@ spec:
         - containerPort: 8080
           name: http
         imagePullPolicy: IfNotPresent
-        name: web-cms-js
         resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
@@ -47,6 +56,13 @@ kind: Service
 apiVersion: v1
 metadata:
   name: web-cms-js
+  labels:
+    app: web-cms-js
+    workstream: cms
+    version: 1.0.0
+    tier: frontend
+    usermanagementservice: "true"
+    msplanning: "true"
 spec:
   ports:
   - port: 8080
@@ -58,6 +74,13 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: web-cms-js
+  labels:
+    app: web-cms-js
+    workstream: cms
+    version: 1.0.0
+    tier: frontend
+    usermanagementservice: "true"
+    msplanning: "true"
 spec:
   rules:
   - host: web-cms-js.dev-rke.unitedtractors.com

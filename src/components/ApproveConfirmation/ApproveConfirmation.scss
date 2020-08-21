@@ -4,7 +4,7 @@
 .modal-container-approve{
     width: fit-content;
     height: fit-content;
-    margin: auto;
+    margin: 12% 0 0 38%;
     .approve-confirmation-content{
         display: flex;
         justify-content: center;
@@ -12,7 +12,6 @@
         padding: 0;
         .confirmation-modal-approve{
             width: vw(519);
-            // height: vh(481);
             background-color: white;
             margin: auto;
             border-radius: vw(15);
@@ -30,22 +29,34 @@
                 .confirmation-title-approve{
                     margin: 0;
                     padding-top: vw(20);
-                    font-size: vw(28);
-                    font-family: 'SFUIDisplay-Bold';
                     color: #3C3B3B;
+                    font-family: 'Lato-Bold';
+                    font-style: normal;
+                    font-size: 24px;
+                    line-height: 29px;
+                }
+                .confirmation-title-approve2{
+                    margin: 0;
+                    padding-top: vw(5);
+                    color: #3C3B3B;
+                    font-family: 'Lato-Bold';
+                    font-style: normal;
+                    font-size: 24px;
+                    line-height: 29px;
                 }
                 .confirmation-image-approve{
-                    width: vw(175);
+                    width: vw(200);
                     margin-top: vw(16);
                     margin-bottom: vw(25);
                 }
                 .confirmation-caption-approve{
                     margin: 0;
-                    font-size: vw(20);
-                    font-family: 'SFUIDisplay-Regular';
-                    opacity: 0.5;
-                    text-align: center;
-                    color: rgb(0, 0, 0);
+                    font-family: 'Lato-Regular';
+                    opacity: 0.51;
+                    color: #3C3B3B;
+                    font-weight: 500;
+                    font-size: 13px;
+                    line-height: 18px;
                 }
             }
         }
@@ -63,9 +74,9 @@
             justify-content: center;
             width: 40%;
             height: vw(45.07);
-            font-size: vw(13) !important;
+            font-size: 12px;
+            line-height: 14px;
             font-weight: bold;
-            line-height: vw(16) !important;
             font-family: 'Lato-Regular';
             background-color: #F2F2F4;
             color: #1D1D1D;
@@ -80,11 +91,11 @@
             text-transform: capitalize;
             align-items: center;
             justify-content: center;
-            width: 60%;//vw(170.22);
+            width: 60%;
             height: vw(45.07);
-            font-size: vw(13) !important;
+            font-size: 12px;
+            line-height: 14px;
             font-weight: bold;
-            line-height: vw(16) !important;
             font-family: 'Lato-Regular';
             background-color: map-get($colors , primary);
             box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);

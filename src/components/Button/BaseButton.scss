@@ -3,7 +3,6 @@
 
 .button-inline{
     display: flex;
-    // width: auto;
     .label-selected-data{
         display: flex;
         color: map-get($colors, primary-dark);
@@ -27,41 +26,70 @@
     }
     .btn-download{
         display: flex;
-        padding-left: 10%;
+        padding-left: 18%;
         padding-right: 0%;
-        width: vw(153.22);
-        height: vw(38.07);
-        margin-left: vw(15);
-        font-size: vw(16);
+        width: 131px;
+        height: 35px;
+        margin-left: vw(25);
+        font-style: normal;
         font-weight: bold;
-        line-height: vw(16) !important;
+        font-size: 13px;
+        line-height: 16px;
         font-family: 'Lato-Regular';
         text-transform: capitalize;
         background-color: white;
-        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 6px;
         background-image: url('../../assets/icons/ic_download.png');
-        background-size: 10%;
-        background-position-x: 18%;
+        background-size: 8%;
+        background-position-x: 17%;
+        background-position-y: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }.btn-reset{
+        display: flex;
+        width: 100px;
+        height: vw(38.07);
+        margin-left: 0.8vw;
+        padding-right: 25%;
+        font-family: 'Lato-Regular';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 10px;
+        line-height: 12px;
+        text-transform: capitalize;
+        color: white;
+        background-color: map-get($colors , danger);
+        box-shadow: 2px 2px 4px rgba(77, 161, 255, 0.2);
+        border-radius: 6px;
+        background-image: url('../../assets/icons/reset.png');
+        background-size: 13%;
+        background-position-x: 87%;
         background-position-y: center;
         background-repeat: no-repeat;
         cursor: pointer;
     }
+    .btn-reset:hover{
+        background-color: map-get($colors, danger-hover);
+    }
     .btn-approve{
         display: flex;
-        padding-right: 23%;
-        width: vw(153.22);
-        height: vw(38.07);
-        font-size: vw(18); //16
-        font-weight: bold;
-        line-height: vw(16) !important;
+        width: 127.23px;
+        height: 34px;
+        padding-right: 32%;
         font-family: 'Lato-Regular';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 15px;
+        line-height: 18px;
         text-transform: capitalize;
         color: white;
         background-color: map-get($colors , third);
-        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-        background-image: url('../../assets/icons/send.png');
-        background-size: 15%;
-        background-position-x: 82%;
+        box-shadow: 2px 2px 4px rgba(77, 161, 255, 0.2);
+        border-radius: 6px;
+        background-image: url('../../assets/icons/sends.png');
+        background-size: 10%;
+        background-position-x: 87%;
         background-position-y: center;
         background-repeat: no-repeat;
         cursor: pointer;
@@ -71,15 +99,75 @@
     }
     .btn-approve:disabled{
         background-image: url('../../assets/icons/send-disabled.png');
-        background-size: 15%;
-        background-position-x: 82%;
+        background-size: 13%;
+        background-position-x: 87%;
         background-position-y: center;
         background-repeat: no-repeat;
     }
     .btn-cancel-approve{
         display: flex;
+        padding-left: 24%;
+        width: vw(160);
+        height: vw(38.07);
+        margin-left: vw(15);
+        font-family: 'Lato-Regular';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 19px;
+        text-transform: capitalize;
+        color: #707070;
+        background-color: transparent;
+        border: 1px solid #FF736A;
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        background-image: url('../../assets/icons/cancel_approve.png');
+        background-size: 18%;
+        background-position-x: 23%;
+        background-position-y: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+    .btn-cancel-approve:hover{
+        background-image: url('../../assets/icons/cancel_approve_hover.png');
+        background-size: 18%;
+        background-position-x: 23%;
+        background-color: map-get($colors, delete);
+        color: white;
+    }
+    .btn-reject-service{
+        display: flex;
+        padding-left: 27%;
+        width: 130.23px;
+        height: 34px;
+        margin-left: vw(15);
+        font-family: 'Lato-Regular';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 15px;
+        line-height: 18px;
+        text-transform: capitalize;
+        color: #707070;
+        background-color: transparent;
+        border: 1px solid #FF736A;
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        background-image: url('../../assets/icons/cancel_approve.png');
+        background-size: 18%;
+        background-position-x: 11%;
+        background-position-y: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+    .btn-reject-service:hover{
+        background-image: url('../../assets/icons/cancel_approve_hover.png');
+        background-size: 18%;
+        background-position-x: 15%;
+        background-color: map-get($colors, delete);
+        color: white;
+    }
+    .btn-sap{
+        display: flex;
         padding-left: 22%;
-        width: vw(203.22);
+        width: vw(153.22);
         height: vw(38.07);
         margin-left: vw(15);
         font-size: vw(18);
@@ -98,7 +186,7 @@
         background-repeat: no-repeat;
         cursor: pointer;
     }
-    .btn-cancel-approve:hover{
+    .btn-sap:hover{
         background-image: url('../../assets/icons/cancel_approve_hover.png');
         background-size: 15%;
         background-position-x: 8%;
@@ -109,7 +197,7 @@
         display: flex;
         padding-left: 15%;
         width: vw(223.22);
-        height: vw(38.07);
+        height: 35px;
         margin-left: vw(15);
         font-size: vw(16);
         font-weight: bold;

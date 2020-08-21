@@ -4,11 +4,6 @@ import { Modal } from '@material-ui/core'
 import './EditButton.scss';
 import ApproveConfirmation from '../../ApproveConfirmation/ApproveConfirmation';
 
-// const validationSchema = Yup.object().shape({
-//     limitText: Yup.number()
-//     .typeError('Harus Angka')
-// })
-
 class EditButton extends React.PureComponent {
 
     constructor(props){
@@ -65,7 +60,6 @@ class EditButton extends React.PureComponent {
                 onCloseRev={this.isOpenModal}
                 onClose={this.isClosedModal}            
                 dataLf={this.props.lifetime}
-                // dataRev={this.props.revLifetime}
                 dataRev={this.state.putLf}
             />
         )
@@ -76,8 +70,7 @@ class EditButton extends React.PureComponent {
             return (
                 <div className="edit-button-row">
                     <div className="edit-button-visible" onClick={this.isClicked} />
-                        <Modal 
-                        className="modal-pos" open={this.state.isShowModal} onClose={this.isCloseds}>
+                        <Modal className="modal-pos" open={this.state.isShowModal}>
                             <div>
                                 <InputText 
                                     {...this.props}
@@ -88,13 +81,18 @@ class EditButton extends React.PureComponent {
                         </Modal>
                 </div>
             );
-        }
-		else if(this.props.idEdit === "Rev"){
+        }else if(this.props.idEdit === "Status"){
+            return (
+                <div className="edit-button-row">
+                    <div className="edit-button-status" disabled/>
+                </div>
+            );
+        }else if(this.props.idEdit === "Rev"){
             return (
                 <div className="edit-button-row">
                     <div className="table-cell-lt" onClick={this.isClicked}>{this.props.RowData}</div>
                     {this.state.isShowModal && (
-                        <Modal className="modal-pos" open={this.state.isShowModal} onClose={this.isCloseds}>
+                        <Modal className="modal-pos" open={this.state.isShowModal}>
                             <div>
                                 <InputText 
                                     {...this.props}
@@ -103,7 +101,6 @@ class EditButton extends React.PureComponent {
                                     onClosed={this.isCloseds}
                                     openConfirmModal={this.isOpenModal}
                                     dataRevLt={this.getRevLf}
-
                                 />
                             </div>
                         </Modal>

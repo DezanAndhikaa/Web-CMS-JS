@@ -13,19 +13,11 @@ class Notification extends React.Component{
       super(props)
       this.state = {
         stats: true,
-        // isPaging: true,
         isShowPerPage: true,
         showPerPage : 0,
         whichTabs: true,
         isApproved: false,
         snak: true,
-        // nextPage: true,
-        // prevPage: false,
-        // numberOfPage: 2,
-        // currentPage: 1,
-        // filter: {
-        //   filter : {}
-        // }
     };
 }
 
@@ -56,8 +48,6 @@ componentDidUpdate = (prevProps) => {
     }
     if (this.state.whichTabs === true) {
       const web = this.props.displayMode === 'web';
-      // const nextSales = this.props.salesOrderList.NextPage;
-      // const prevSales = this.props.salesOrderList.PrevPage;
       const currentPropsSales = this.props.salesOrderList.PageNumber;
       const { TotalPages } = this.props.salesOrderList;
       
@@ -92,7 +82,6 @@ componentDidUpdate = (prevProps) => {
             {web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive">{currentPropsService - 2}</div>}
             {currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive">{currentPropsService - 1}</div>}
             <div className="page-active">{currentPropsService}</div>
-            {/* <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService })} className="page-active">{currentPropsService}</div> */}
             {currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive">{currentPropsService + 1}</div>}
             {web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive">{currentPropsService + 2}</div>}
             {web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive">{currentPropsService + 3}</div>}
@@ -108,7 +97,6 @@ componentDidUpdate = (prevProps) => {
     return(
       <DropDownList 
       {...this.props}
-      // onPageSize={()=>this.handlePageSize()}
       handleClickShowPerPage={this.handleClickShowPerPage}
       />
     )
@@ -175,10 +163,6 @@ componentDidUpdate = (prevProps) => {
             onClickPlanningDelete={this.onClickDeletedSales}
             onClickButton={this.handleClickFilterByDataAction}
           />
-          <FilterbyDataAction 
-            {...this.props}
-            titles="Tracking History"
-          />
         </>
       );
     }
@@ -191,10 +175,6 @@ componentDidUpdate = (prevProps) => {
             onClickPlanningApprove={this.onClickApprovedService}
             onClickPlanningDelete={this.onClickDeletedService}
             onClickButton={this.handleClickFilterByDataAction}
-          />
-          <FilterbyDataAction 
-            {...this.props}
-            titles="Tracking History"
           />
         </>
       );

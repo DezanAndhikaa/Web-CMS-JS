@@ -6,23 +6,8 @@
   .dropdown-button-notif {
       border-radius: vw(10);
       display: flex;
-      // align-items: center;
-      // padding-left: 10%;
       height: vw(45.07);
-      .notif-selected-item{            
-          // margin: 0 0 0 vw(19);
-          // z-index: 2;
-          // display: flex;
-          // flex-direction: row;
-          // white-space: nowrap;
-          // align-items: center;
-          // font-family: 'Lato-Medium';
-          // font-size: vw(16);
-          // line-height: vw(17);
-          // font-weight: 500;
-          // overflow: hidden;
-          // color: black;
-          // cursor: pointer;
+      .notif-selected-item{        
           margin: 0 0 0 vw(19);
           display: flex;
           flex-direction: row;
@@ -32,33 +17,23 @@
           font-size: vw(16);
           line-height: vw(17);
           font-weight: 500;
-          // overflow: hidden;
           color: black;
           cursor: pointer;
           .notif-history{
-            // display: flex;
-            // flex-direction: row;
-            // align-self: flex-end;
-            // cursor: pointer;
-            // background-color: transparent;
-            // align-items: center;
-            // margin-left: 25px;
               display: flex;
               flex-direction: row;
               align-self: flex-end;
-              // cursor: pointer;
               background-color: transparent;
               align-items: center;
             .icon-notif{
-                // height: 18px; //vw(25) !important
-                margin-right: 10px; //vw(10)
+                margin-right: 10px;
             }
             .label-notif{
                 font-family: 'Lato-Regular';
-                font-size: 14px; //vw(20)
-                line-height: 18px; // vw(24)
+                font-size: 14px;
+                line-height: 18px;
                 color: #3C3B3B;
-                margin-right: 10px;//44px; // vw(50)
+                margin-right: 10px;
                 text-transform: capitalize;
             }
             .label-notif:hover{
@@ -72,6 +47,133 @@
       border-color: map-get($colors, third);
   }
 }
+
+.list-under-dev{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  top: vw(60);
+  right: 0px;
+  width: 306px;
+  height: 274px;
+  border-radius: vw(10) !important;
+  background-color: white;
+  position: absolute;
+  z-index: 5;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  .under-dev {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    .under-dev-image{
+        width: vw(100);
+        margin-bottom: vw(27);
+    }
+    .content1{
+        margin: 0;
+        font-family: 'Lato-Regular';
+        line-height: vw(18) !important;
+        font-size: vw(15);
+        color: #777474;
+    }
+    .main-content{
+      margin: 0;
+      padding-top: vw(10);
+      font-size: vw(23);
+      font-family: 'Lato-Bold';
+      line-height: vw(26) !important;
+      color: #000000;
+    }
+    .content2{
+      margin: 0;
+      padding-top: vw(10);
+      font-family: 'Lato-Regular';
+      line-height: vw(17) !important;
+      font-size: vw(14);
+      color: #000000;
+    }
+  }
+}
+
+.list-under-dev::before{
+  content:"";
+  position: absolute;
+  left: 35%;
+  top: -10px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 8px 20px 8px;
+  border-color: transparent transparent white transparent;
+  z-index:1;
+}
+
+.list-under-dev-status{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  top: vw(60);
+  right: 0px;
+  width: 306px;
+  height: 274px;
+  border-radius: vw(10) !important;
+  background-color: white;
+  position: absolute;
+  z-index: 5;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  .under-dev {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    .under-dev-image{
+        width: vw(100);
+        margin-bottom: vw(27);
+    }
+    .content1{
+        margin: 0;
+        font-family: 'Lato-Regular';
+        line-height: vw(18) !important;
+        font-size: vw(15);
+        color: #777474;
+    }
+    .main-content{
+      margin: 0;
+      padding-top: vw(10);
+      font-size: vw(23);
+      font-family: 'Lato-Bold';
+      line-height: vw(26) !important;
+      color: #000000;
+    }
+    .content2{
+      margin: 0;
+      padding-top: vw(10);
+      font-family: 'Lato-Regular';
+      line-height: vw(17) !important;
+      font-size: vw(14);
+      color: #000000;
+    }
+  }
+}
+
+.list-under-dev-status::before{
+  content:"";
+  position: absolute;
+  right: 30%;
+  top: -10px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 8px 20px 8px;
+  border-color: transparent transparent white transparent;
+  z-index:1;
+}
+
 .list-notif {
   margin: 0;
   top: vw(60);
@@ -88,13 +190,13 @@
   align-items: center;
   justify-content: center;
   .list-container{
-      z-index: 5;
-      width: 345px;
-      height: 325px;
-      flex: 1;
-      overflow-y: scroll;
-      margin-bottom: 25px;
-      .list-item-notif {
+    z-index: 5;
+    width: 345px;
+    height: 325px;
+    flex: 1;
+    overflow-y: scroll;
+    margin-bottom: 25px;
+    .list-item-notif {
       position: relative;
       margin-bottom: 5%;
       background-color: white;
@@ -105,44 +207,39 @@
       background-position-y: center;
       background-repeat: no-repeat;
       border: none;
-        .listnya{
-          position: relative;
-          .kartu-judul{
-            display: absolute;
-            flex-direction: column;
-            justify-content: left;
-            margin-bottom: 1%;
-            margin-top: 1%;
-            margin-left: 25%;
-            font-size: 12px;
-          }
-          .kartu-nama-site{
-            display: absolute;
-            flex-direction: column;
-            justify-content: left;
-            margin-bottom: 1%;
-            margin-left: 25%;
-            font-size: 14px;
-            font-weight: 800;
-          }
+      .listnya{
+        position: relative;
+        .kartu-judul{
+          display: absolute;
+          flex-direction: column;
+          justify-content: left;
+          margin-bottom: 1%;
+          margin-top: 1%;
+          margin-left: 25%;
+          font-size: 12px;
+        }
+        .kartu-nama-site{
+          display: absolute;
+          flex-direction: column;
+          justify-content: left;
+          margin-bottom: 1%;
+          margin-left: 25%;
+          font-size: 14px;
+          font-weight: 800;
         }
       }
-      // .list-item-notif:hover {
-      //     background-color: #e5e5e5;
-      //     color: #3C3B3B;
-      // }
+    }
   }
   .see-all-notif{
-      position: absolute;
-      // left: 50%;
-      bottom: 5%;
-      .label-notif{
+    position: absolute;
+    bottom: 5%;
+    .label-notif{
       color: #FFD500;
       font-family: 'Lato-Bold';
       font-size: vw(16);
       line-height: vw(20);
       cursor: pointer;
-      }
+    }
   }
 }
 
@@ -175,13 +272,13 @@
   align-items: center;
   justify-content: center;
   .list-container{
-      z-index: 5;
-      width: 345px;
-      height: 325px;
-      flex: 1;
-      overflow-y: scroll;
-      margin-bottom: 25px;
-      .list-item-notif {
+    z-index: 5;
+    width: 345px;
+    height: 325px;
+    flex: 1;
+    overflow-y: scroll;
+    margin-bottom: 25px;
+    .list-item-notif {
       position: relative;
       margin-bottom: 5%;
       background-color: white;
@@ -192,44 +289,39 @@
       background-position-y: center;
       background-repeat: no-repeat;
       border: none;
-        .listnya{
-          position: relative;
-          .kartu-judul{
-            display: absolute;
-            flex-direction: column;
-            justify-content: left;
-            margin-bottom: 1%;
-            margin-top: 1%;
-            margin-left: 25%;
-            font-size: 12px;
-          }
-          .kartu-nama-site{
-            display: absolute;
-            flex-direction: column;
-            justify-content: left;
-            margin-bottom: 1%;
-            margin-left: 25%;
-            font-size: 14px;
-            font-weight: 800;
-          }
+      .listnya{
+        position: relative;
+        .kartu-judul{
+          display: absolute;
+          flex-direction: column;
+          justify-content: left;
+          margin-bottom: 1%;
+          margin-top: 1%;
+          margin-left: 25%;
+          font-size: 12px;
+        }
+        .kartu-nama-site{
+          display: absolute;
+          flex-direction: column;
+          justify-content: left;
+          margin-bottom: 1%;
+          margin-left: 25%;
+          font-size: 14px;
+          font-weight: 800;
         }
       }
-      // .list-item-notif:hover {
-      //     background-color: #e5e5e5;
-      //     color: #3C3B3B;
-      // }
+    }
   }
   .see-all-notif{
-      position: absolute;
-      // left: 50%;
-      bottom: 5%;
-      .label-notif{
+    position: absolute;
+    bottom: 5%;
+    .label-notif{
       color: #FFD500;
       font-family: 'Lato-Bold';
       font-size: vw(16);
       line-height: vw(20);
-      cursor: pointer;
-      }
+    cursor: pointer;
+    }
   }
 }
 
@@ -261,61 +353,56 @@
   align-items: center;
   justify-content: center;
   .list-container{
-      z-index: 5;
-      width: 345px;
-      height: 325px;
-      flex: 1;
-      overflow-y: scroll;
-      margin-bottom: 25px;
-      .list-item-notif {
-      position: relative;
-      margin-bottom: 5%;
-      background-color: white;
-      box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-      background-image: url('../../../assets/icons/notif_input.png');
-      background-size: 10%;
-      background-position-x: 5%;
-      background-position-y: center;
-      background-repeat: no-repeat;
-      border: none;
-        .listnya{
-          position: relative;
-          .kartu-judul{
-            display: absolute;
-            flex-direction: column;
-            justify-content: left;
-            margin-bottom: 1%;
-            margin-top: 1%;
-            margin-left: 25%;
-            font-size: 12px;
-          }
-          .kartu-nama-site{
-            display: absolute;
-            flex-direction: column;
-            justify-content: left;
-            margin-bottom: 1%;
-            margin-left: 25%;
-            font-size: 14px;
-            font-weight: 800;
-          }
+    z-index: 5;
+    width: 345px;
+    height: 325px;
+    flex: 1;
+    overflow-y: scroll;
+    margin-bottom: 25px;
+    .list-item-notif {
+    position: relative;
+    margin-bottom: 5%;
+    background-color: white;
+    box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+    background-image: url('../../../assets/icons/notif_input.png');
+    background-size: 10%;
+    background-position-x: 5%;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    border: none;
+      .listnya{
+        position: relative;
+        .kartu-judul{
+          display: absolute;
+          flex-direction: column;
+          justify-content: left;
+          margin-bottom: 1%;
+          margin-top: 1%;
+          margin-left: 25%;
+          font-size: 12px;
+        }
+        .kartu-nama-site{
+          display: absolute;
+          flex-direction: column;
+          justify-content: left;
+          margin-bottom: 1%;
+          margin-left: 25%;
+          font-size: 14px;
+          font-weight: 800;
         }
       }
-      // .list-item-notif:hover {
-      //     background-color: #e5e5e5;
-      //     color: #3C3B3B;
-      // }
+    }
   }
   .see-all-notif{
-      position: absolute;
-      // left: 50%;
-      bottom: 5%;
-      .label-notif{
-      color: #FFD500;
-      font-family: 'Lato-Bold';
-      font-size: vw(16);
-      line-height: vw(20);
-      cursor: pointer;
-      }
+    position: absolute;
+    bottom: 5%;
+    .label-notif{
+    color: #FFD500;
+    font-family: 'Lato-Bold';
+    font-size: vw(16);
+    line-height: vw(20);
+    cursor: pointer;
+    }
   }
 }
 

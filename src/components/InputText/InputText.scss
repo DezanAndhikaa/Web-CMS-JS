@@ -22,7 +22,6 @@
     .top-row{
         display: flex;
         justify-content: space-between;
-        // flex-direction: column;
         height: vw(30);
     }
     .top-middle{
@@ -43,7 +42,6 @@
         font-size: 15px; 
         width: 60%;
     }
-    
 }
 
 .bottom-row{
@@ -56,7 +54,6 @@
         align-items: center;
         justify-content: center;
         margin-left: vw(15);
-        // width: vw(170.22) !important;
         width: 50%;
         height: vw(33.07) !important;
         font-size: vw(13) !important;

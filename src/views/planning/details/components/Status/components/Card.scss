@@ -7,7 +7,6 @@
     width: 23%;
     height: vw(138.07);
     padding: 0.10px;
-    // margin-right: 1vw;
     .card-title{
         display: absolute;
         flex-direction: column;
@@ -27,7 +26,6 @@
         padding-right: 0%;
         width: 100%;
         height: 100%;
-        // margin-left: 0.8vw;
         font-size: vw(25);
         font-weight: bold;
         line-height: vw(16) !important;
@@ -89,7 +87,6 @@
         padding-left: 6%;
         width: 100%;
         height: 100%;
-        // margin-left: vw(15);
         margin-left: 23%;
         font-size: vw(25);
         font-weight: bold;
@@ -116,13 +113,11 @@
         color: white;
     }
 
-    .card-SAP{
-        // margin-left: 30px;   
+    .card-SAP{   
         display: flex;
         padding-left: 6%;
         width: 100%;
         height: 100%;
-        // margin-left: vw(15);
         margin-left: 34%;
         font-size: vw(25);
         font-weight: bold;

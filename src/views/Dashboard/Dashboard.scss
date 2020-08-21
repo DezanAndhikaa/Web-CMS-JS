@@ -1,0 +1,35 @@
+.db-under-dev{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .img-under-dev{
+        padding-top: 4%;
+        width: 50%;
+    }
+    .main-contents{
+        margin: 0;
+        padding-top: 15px;
+        font-size: 30px;
+        font-family: 'Lato-Bold';
+        line-height: 33px;
+        color: #000000;
+    }
+    .content-1{
+        margin: 0;
+        padding-top: 20px;
+        font-size: 15px;
+        font-family: 'Lato-Bold';
+        line-height: 18px;
+        color: #777474;
+    }
+    .content-2{
+        margin: 0;
+        padding-top: 15px;
+        font-size: 15px;
+        font-family: 'Lato-Bold';
+        line-height: 18px;
+        color: #000000;
+    }
+}
