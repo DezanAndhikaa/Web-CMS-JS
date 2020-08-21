@@ -6,7 +6,7 @@ import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
 import InputButton from '../../../../../components/Button/InputButton';
-import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction, SmrFilterAction } from '../../DetailPages-action';
+import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction, SmrFilterAction, SortSalesByPlanType } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import { Snackbar } from '@material-ui/core';
@@ -228,9 +228,7 @@ export default class SalesOrderList extends React.PureComponent {
             <PlanningListHeader
               name="PLAN TYPE"
               delay={300}
-              // isActive={this.props.sortSalesByState.UnitModel.isActive}
-              // isAscending={this.props.sortSalesByState.UnitModel.isAscending}
-              // onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
+              onClick={() => this.props.onClickTabHead(SortSalesByPlanType)}
             />
           </TableRow>
         </TableHead>
