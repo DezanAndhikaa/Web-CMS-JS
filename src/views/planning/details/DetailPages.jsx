@@ -7,6 +7,7 @@ import FilterbyDataAction from '../../../components/FilterByDataAction/FilterbyD
 import NotifButton from '../../../components/ActionButton/NotifButton/NotifButton';
 import { Menu } from '../../../constants';
 import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
+import BaseButton from '../../../components/Button/BaseButton';
 
 class DetailPages extends React.Component {
   constructor(props) {
@@ -316,11 +317,28 @@ class DetailPages extends React.Component {
     }
   }
 
+  resetFilter = () => {
+    this.props.updateSalesParameter({
+      ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+    });
+    this.props.selectedFilters.customerType= "All Customer"
+    this.props.selectedFilters.siteType= "All Site"
+    this.props.selectedFilters.unitType= "All Unit Model"
+    this.props.selectedFilters.compType= "All Component"
+    this.props.selectedFilters.planType= "All Plan Type"
+    this.props.filterParameter.Filter.length = 0
+	}
+
   //KOMPONEN UNTUK GLOBAL SEARCH
   _renderSearchBar() {
     return (
       <>
         <div className="bottom-row">
+          <BaseButton titles= "Reset"
+            {...this.props}
+            whatTabsIsRendered= {this.state.whichTabs}
+            resetFilter = {this.resetFilter}
+          />
           <SearchInput
             {...this.props}
             whichTabs={this.state.whichTabs}
