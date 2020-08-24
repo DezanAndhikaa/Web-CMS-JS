@@ -137,8 +137,9 @@
         }
     }
     .list-detail-empty{
-        margin-top: 1.8vw !important;
+        width: auto;
     }
+    
     .plannings-list-detail{
         .table{
             font-size: 0.5vw;
@@ -148,10 +149,16 @@
                 .table-cell{
                     padding: 0;
                     height: vw(50);
+                    font-family: 'Lato-Regular';
+                    font-style: normal;
+                    font-weight: bold;
                     font-size: vw(13) !important;
                     line-height: vw(16) !important;
-                    font-family: 'Lato-Bold';
-                    color: #3C3B3B;
+                    color: #494949;
+                }
+                .table-cell-checkbox{
+                    padding: 0;
+                    width: 0;
                 }
                 .checkbox-checked-header{
                     color: #3C3B3B;
@@ -169,13 +176,35 @@
                         font-family: 'Lato-Bold';
                         color: #3C3B3B;
                     }
+                    .table-cell-short{
+                        width: vw(60);
+                        padding: 0;
+                        height: vw(40);
+                        font-size: vw(14) !important;
+                        line-height: vw(17) !important;
+                        font-family: 'Lato-Bold';
+                        color: #3C3B3B;
+                    }
                     .table-cell-pk{
                         padding: vw(0) vw(0) vw(0) vw(15);
                         height: vw(50);
-                        font-size: vw(13) !important;
-                        line-height: vw(16) !important;
+                        font-size: vw(14) !important;
+                        line-height: vw(17) !important;
                         font-family: 'Lato-Bold';
                         color: #3C3B3B;
+                    }
+                    .table-cell-long{
+                        width: 150px;
+                        padding: 0;
+                        height: vw(40);
+                        font-size: vw(14) !important;
+                        line-height: vw(17) !important;
+                        font-family: 'Lato-Bold';
+                        color: #3C3B3B;
+                    }
+                    .table-cell-checkbox{
+                        padding: 0;
+                        width: 38px;
                     }
                     .checkbox-checked{
                         color: #3C3B3B;
