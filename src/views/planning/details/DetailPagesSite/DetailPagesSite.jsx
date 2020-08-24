@@ -7,6 +7,7 @@ import FilterbyDataAction from '../../../../components/FilterByDataAction/Filter
 import NotifButton from '../../../../components/ActionButton/NotifButton/NotifButton';
 import {ApiRequestActionsStatus} from '../../../../core/RestClientHelpers';
 import roleService from '../../../../utils/roleService.helper';
+import BaseButton from '../../../../components/Button/BaseButton';
 
 const RoleUser = new roleService();
 class DetailPagesSite extends React.Component{
@@ -709,10 +710,66 @@ componentDidUpdate = (prevProps) => {
     )
   }
 
+  resetFilter = () => {
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
+      if (this.state.whichTabs === true) {
+        this.props.updateServiceParameter({
+          ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+        });
+        this.props.selectedFilters.customerType= "All Customer"
+        this.props.selectedFilters.siteType= "All Site"
+        this.props.selectedFilters.unitType= "All Unit Model"
+        this.props.selectedFilters.compType= "All Component"
+        this.props.selectedFilters.planType= "All Plan Type"
+        this.props.filterParameter.Filter.length = 0
+      }
+    } else if(Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
+      if (this.state.whichTabs === true) {
+        this.props.updateSalesParameter({
+          ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+        });
+        this.props.selectedFilters.customerType= "All Customer"
+        this.props.selectedFilters.siteType= "All Site"
+        this.props.selectedFilters.unitType= "All Unit Model"
+        this.props.selectedFilters.compType= "All Component"
+        this.props.selectedFilters.planType= "All Plan Type"
+        this.props.filterParameter.Filter.length = 0
+      }
+    } else {
+      if (this.state.whichTabs === true) {
+        this.props.updateSalesParameter({
+          ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+        });
+        this.props.selectedFilters.customerType= "All Customer"
+        this.props.selectedFilters.siteType= "All Site"
+        this.props.selectedFilters.unitType= "All Unit Model"
+        this.props.selectedFilters.compType= "All Component"
+        this.props.selectedFilters.planType= "All Plan Type"
+        this.props.filterParameter.Filter.length = 0
+      }else{
+        this.props.updateServiceParameter({
+          ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+        });
+        this.props.selectedFilters.customerType= "All Customer"
+        this.props.selectedFilters.siteType= "All Site"
+        this.props.selectedFilters.unitType= "All Unit Model"
+        this.props.selectedFilters.compType= "All Component"
+        this.props.selectedFilters.planType= "All Plan Type"
+        this.props.filterParameter.Filter.length = 0
+      }
+    }
+	}
+
   //KOMPONEN UNTUK GLOBAL SEARCH
   _renderSearchBar(){
     return (
       <div className="bottom-row-detail-site">
+        <BaseButton titles= "Reset"
+          {...this.props}
+          whatTabsIsRendered= {false}
+          resetFilter = {this.resetFilter}
+        />
         <SearchInput
           {...this.props}
           webInfo="Search"
