@@ -712,7 +712,7 @@ componentDidUpdate = (prevProps) => {
   //KOMPONEN UNTUK GLOBAL SEARCH
   _renderSearchBar(){
     return (
-      <div className="search-site">
+      <div className="bottom-row-detail-site">
         <SearchInput
           {...this.props}
           webInfo="Search"
