@@ -142,8 +142,8 @@ class PlanningDetailsTab extends React.Component {
         && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "plannings-list-empty" : "plannings-list-containers"}>
         <SalesOrderList
           {...this.props}
-          idSales="Data Input"
-          idTab="Input"
+          idSales= "Data Input"
+          idTab= "Input"
         />
       </div>
     );

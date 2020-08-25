@@ -358,17 +358,17 @@ export default class SalesOrderList extends React.PureComponent {
     } else if (this.props.salesOrderList.Lists.length === 0 && this.props.idTab === "Approval"
       && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) {
       return (
-        <EmptyList idEmpty="Sales" />
+        <EmptyList idEmpty= "Sales" />
       )
     } else if (this.props.salesOrderList.Lists.length === 0 && this.props.idTab === "Input"
       && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) {
       return (
-        this.props.idTab = "Input" ? <EmptyList idEmpty="Input" /> : ""
+        <EmptyList idEmpty= "Input" />
       )
     } else if (this.props.salesOrderList.Lists.length === 0
       && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) {
       return (
-        <EmptyList idEmpty="Sales" />
+        <EmptyList idEmpty= "Sales" />
       )
     } else {
       return (
