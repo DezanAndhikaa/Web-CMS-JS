@@ -153,7 +153,8 @@ export default class SapServiceOrderList extends React.PureComponent {
           <TableCell ><label></label></TableCell>
           <TableCell className="txt-style-bold" align="left"><label>Description:</label></TableCell>
           <TableCell colSpan="12" className="txt-style-normal" align="left">{row.SAPIssueMessage}</TableCell>
-        </TableRow> : null }
+        </TableRow> : null 
+      }
     </>  
     )
   }
