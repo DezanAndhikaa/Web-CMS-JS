@@ -111,7 +111,7 @@ class ApprovalTab extends React.Component {
         "planning-list-empty" : "plannings-list-container"}>
         <SalesOrderList
           {...this.props}
-          idTab="Approval"
+          idTab= "Approval"
         />
       </div>
     );
@@ -352,8 +352,8 @@ class ApprovalTab extends React.Component {
             />
           </Tabs>
         </AppBar>
-        <div className="base-button-container">
-          {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+        <div className="base-button-container">          
+          {this.state.value === 0 ? this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderBaseBtn() :
             this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderBaseBtn()}
         </div>
         <div className="filters-container-approval">
