@@ -126,8 +126,7 @@ export default class ServiceOrderList extends React.PureComponent {
       return (
         <TableHead className="table-head" classes={{ root: "table-head" }}>
           <TableRow>
-            {this.props.idService === "Data Input" ||
-            Number(RoleUser.role()) !== 1 ? (
+            {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? (
               ""
             ) : (
               <TableCell className="table-cell-checkbox">
