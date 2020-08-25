@@ -195,7 +195,7 @@ export default class SapSalesOrderList extends React.PureComponent {
   }
 
   render(){
-    if (this.props.salesOrderListSap.Lists.length === 0 && this.props.fetchStatusServiceSap === ApiRequestActionsStatus.SUCCEEDED) {
+    if (this.props.salesOrderListSap.Lists.length === 0 && this.props.fetchStatusSalesSap === ApiRequestActionsStatus.SUCCEEDED) {
       return (
         <EmptyList idEmpty= "SAP" />
       )
