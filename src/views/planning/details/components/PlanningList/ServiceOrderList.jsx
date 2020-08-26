@@ -64,7 +64,6 @@ export default class ServiceOrderList extends React.PureComponent {
   isFilterDate = async (value1, value2) => {
     this.props.dateFilter(DateFilterAction, value1, value2, this.props.serviceParameter.dataFilter.PageSize);
   }
-
   
   isFilterSmrDate = async (value1, value2) => {
     this.props.filterSmrDate(

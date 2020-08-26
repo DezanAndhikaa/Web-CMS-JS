@@ -10,8 +10,9 @@ export default class roleService {
     try {
       this.jwtDecode = jwtDecode(userIdData().accessToken);
       const role_name = this.jwtDecode.role_name;
+      console.log('ho bukan ?', role_name.includes('HO'))
       let role = null;
-      if ((Array.isArray(role_name) && role_name.includes('HO'))) {
+      if (role_name.includes('HO')) {
         return role = 1;
       }else{
         return role = 2;
