@@ -90,27 +90,6 @@ componentDidUpdate = (prevProps) => {
     this.props.fetchServiceOrder(this.props.filterDateSmr, this.props.token);
   }
 
-  //ini untuk trigger sales global search
-  // if(Number(RoleUser.role()) === 3 || Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){   
-  //   if (prevProps.salesSearch !== this.props.salesSearch) {
-  //     this.props.updateSearchSales({
-  //       ...prevProps.searchSalesParameter, Category: 'Approval', Keyword: this.props.salesSearch,
-  //     });
-  //   }
-  // }else{
-  //   if (prevProps.salesSearch !== this.props.salesSearch) {
-  //     this.props.updateSearchSales({
-  //       ...prevProps.searchSalesParameter, Category: 'Lifetime', Keyword: this.props.salesSearch,
-  //     });
-  //   }
-  //   //ini untuk trigger sales global search revision
-  //   else if (prevProps.salesSearchRevision !== this.props.salesSearchRevision) {
-  //     this.props.updateSearchRevSales({
-  //       ...prevProps.searchSalesRevParam, Category: 'SR', Keyword: this.props.salesSearchRevision,
-  //     });
-  //   }
-  // }
-
   //ini untuk trigger service global search
   if(prevProps.serviceSearch !== this.props.serviceSearch){
     this.props.updateSearchService({
