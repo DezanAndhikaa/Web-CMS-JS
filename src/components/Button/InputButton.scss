@@ -183,6 +183,22 @@
             padding: vw(3) vw(10) vw(4);
         }
     }
+    .global-search-pn{
+        width: vw(125);
+        height: vw(35.07) !important;
+        background-color: white;
+        box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
+        border-radius: 0.4vw;
+        cursor: pointer;
+        .txt-search{
+            flex: 1;
+            font-size: vw(13) !important;
+            line-height: vw(16) !important;
+            font-family: 'Lato-Regular';
+            font-weight: bold;
+            padding: vw(3) vw(10) vw(4);
+        }
+    }
     .global-search-pk{
         width: 69px;
         height: vw(35.07) !important;

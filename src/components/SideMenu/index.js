@@ -7,6 +7,7 @@ import { toggleMenuAction } from '../NavigationBar/NavbarComponent.actions';
 import { removeDataAction } from '../../core/StorageHelper';
 import { USER_DATA } from '../../constants';
 import SideMenuComponent from './SideMenuComponent';
+import { serviceParameterAction, UpdateServiceParameterAction } from '../../views/planning/details/DetailPages-action';
 
 const mapStateToProps = (state) => ({
 	path: state.router.location.pathname,
@@ -16,9 +17,14 @@ const mapStateToProps = (state) => ({
 	activeSubMenu: state.sideMenuComponentState.activeSubMenu,
 	displayMode: state.displayMode,
 	menuDrawerState: state.menuDrawerState,
+	serviceParameter: state.plansPageState.serviceParameter,
+	selectedFilters: state.plansPageState.selectedFilters,
+	filterParameter: state.plansPageState.filterParameter
 });
 
 const mapDispatchToProps = (dispatch) => ({
+	updateServiceParameter: (payload) =>
+	  dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
 	clickMenu: (menu, subMenu) => dispatch(clickMenuAction({ menu, subMenu })),
 	push: (path) => dispatch(push(path)),
 	closeDrawer: () => dispatch(toggleMenuAction(false)),
