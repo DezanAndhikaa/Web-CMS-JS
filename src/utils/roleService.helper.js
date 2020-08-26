@@ -12,7 +12,7 @@ export default class roleService {
       const role_name = this.jwtDecode.role_name;
       console.log('ho bukan ?', role_name.includes('HO'))
       let role = null;
-      if (role_name.includes('HO')) {
+      if (role_name.includes('OBD') || role_name.includes('DAD HO')) {
         return role = 1;
       }else{
         return role = 2;
