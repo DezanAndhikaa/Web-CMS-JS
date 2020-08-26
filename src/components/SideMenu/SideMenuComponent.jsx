@@ -24,9 +24,6 @@ class SideMenuComponent extends React.Component {
       this.props.push(menu);
     }
     window.localStorage.setItem('subMenu', subMenu);
-  }
-
-  resetFilter = () => {
     this.props.updateServiceParameter({
       ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
     });
@@ -36,7 +33,7 @@ class SideMenuComponent extends React.Component {
     this.props.selectedFilters.compType= "All Component"
     this.props.selectedFilters.planType= "All Plan Type"
     this.props.filterParameter.Filter.length = 0
-	}
+  }
 
   render() {
     let drawer = null;
