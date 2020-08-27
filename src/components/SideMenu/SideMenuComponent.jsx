@@ -24,6 +24,15 @@ class SideMenuComponent extends React.Component {
       this.props.push(menu);
     }
     window.localStorage.setItem('subMenu', subMenu);
+    this.props.updateSalesParameter({
+      ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+    });
+    this.props.selectedFilters.customerType= "All Customer"
+    this.props.selectedFilters.siteType= "All Site"
+    this.props.selectedFilters.unitType= "All Unit Model"
+    this.props.selectedFilters.compType= "All Component"
+    this.props.selectedFilters.planType= "All Plan Type"
+    this.props.filterParameter.Filter.length = 0
   }
 
   render() {
