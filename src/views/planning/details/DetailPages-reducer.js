@@ -652,7 +652,10 @@ export function filterSmrReducer(state = intitialFilterSmrParameter, action) {
 
 export function filterDateReducer(state = initialFilterParameter, action) {
 	if (action.type === DateFilterAction)
-		state = { ...state, Filter: [{ Field: 'PlanExecutionDate', Operator: 'gte', Value: action.payload, Logic: 'and' }, { Field: 'PlanExecutionDate', Operator: 'lte', Value: action.payload2, Logic: 'and' }] };
+		state = { ...state, Filter: [{Field: 'SAPIssueMessage', Operator: 'eq', Value: '-', Logic: 'and'}, 
+		{ Field: 'PlanExecutionDate', Operator: 'gte', Value: action.payload, Logic: 'and' }, 
+		{ Field: 'PlanExecutionDate', Operator: 'lte', Value: action.payload2, Logic: 'and' }] 
+	};
 	return state;
 }
 
