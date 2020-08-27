@@ -57,7 +57,7 @@ import {
 	UnselectSalesPlanAction, UnselectServicePlanAction,
 	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, FetchServiceAction,
 	IndexFilterAction, LifetimeFilterAction, DateFilterAction,
-	SearchRevisedSalesOrder, UpdateSearchSalesRevAction, SelectAllSales, SelectAllService, SelectPlanTypeFilterAction, SmrFilterAction
+	SearchRevisedSalesOrder, UpdateSearchSalesRevAction, SelectAllSales, SelectAllService, SelectPlanTypeFilterAction, SmrFilterAction, SmrDateFilterAction
 } from './DetailPages-action';
 
 const initialSalesAssignment = {
@@ -659,6 +659,19 @@ export function filterDateReducer(state = initialFilterParameter, action) {
 	return state;
 }
 
+export function filterDateSmrReducer(state = initialFilterParameter, action) {
+	if (action.type === SmrDateFilterAction)
+		state = {
+		...state,
+		Filter: [
+			{ Field: 'SAPIssueMessage', Operator: 'eq', Value: '-', Logic: 'and' },
+			{ Field: "SMRLastUpdate", Operator: "gte", Value: action.payload, Logic: "and" },
+			{ Field: "SMRLastUpdate", Operator: "lte", Value: action.payload2, Logic: "and" },
+		],
+  	};
+	return state;
+}
+
 export function filterParameterReducer(state = initialFilterParameter, action) {
 	if (action.type === SelectCustomerFilterAction)
 		if (state.Filter.length === 0) { //IF yang pertama ini,jika filternya belum di isi apa2 (filter belum di jalankan)
@@ -1050,6 +1063,7 @@ const PlansReducers = combineReducers({
 	serviceDeleted: deletedServiceReducer,
 	filterLifetime: filterLifetimeReducer,
 	filterSmr: filterSmrReducer,
+	filterDateSmr: filterDateSmrReducer,
 	filterDate: filterDateReducer,
 	salesSearchRevision: searchSalesRevReducer,
 	searchSalesRevParam: searchSalesRevParamReducer	
