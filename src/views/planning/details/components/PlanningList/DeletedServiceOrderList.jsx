@@ -8,11 +8,9 @@ import { LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
-import roleService from "../../../../../utils/roleService.helper";
 import { CheckBoxOutlineBlank } from '@material-ui/icons';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
-const RoleUser = new roleService();
 export default class DeletedServiceOrderList extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -116,14 +114,7 @@ export default class DeletedServiceOrderList extends React.PureComponent {
             />
           }
         </TableCell>
-        {Number(RoleUser.role()) === 1 ?
-          <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell> :
-          <TableCell 
-            align="left" 
-            className= "table-cell-smr"> 
-            {row.WoNumber} 
-          </TableCell>
-        }
+        <TableCell align="left" className="table-cell-smr"> {row.WoNumber} </TableCell>
         <TableCell align="left" className="table-cell-cst"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell-short"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>

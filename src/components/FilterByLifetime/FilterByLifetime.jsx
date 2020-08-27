@@ -46,7 +46,7 @@ class FilterByLifetime extends React.Component {
                         className={this.isDisabled() ? "btn-search-disabled" : "btn-search"}
                         onClick={() => { this.props.onFilter(this.state.value1, this.state.value2); this.props.onClosed() }} 
                     >
-                        {this.props.titles === "Lifetime Comp" ? "Search Lifetime" : "Search SMR"}
+                        {this.props.titles === "LIFETIME COMP" ? "Search Lifetime" : "Search SMR"}
                     </Button>
                 </div>
             </div>
