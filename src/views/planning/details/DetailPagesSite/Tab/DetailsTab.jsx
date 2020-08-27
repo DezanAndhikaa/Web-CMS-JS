@@ -159,7 +159,7 @@ class DetailsTab extends React.Component {
   _renderRevisionList(){
       return(
         <div className={this.props.salesOrderRevised.Lists.length === 0 
-          && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED ? "list-detail-empty" : "paper-revision"}>
+          && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED ? "empty-list-rev" : "paper-revision"}>
           <div className="revision-container">
             <div className="rev-title-container">
               <div className= "title-content">
@@ -168,7 +168,7 @@ class DetailsTab extends React.Component {
                 && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED ? "" : "Revision List"}</div>
               </div>
               <div className="revision-search">{this.props.salesOrderRevised.Lists.length === 0 
-                && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED ? "" :this.props.renderSearchRev}</div>
+                && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED ? "" : this.props.renderSearchRev}</div>
             </div>
             <div className="plannings-list-detail">
               <RevisedSalesOrderList

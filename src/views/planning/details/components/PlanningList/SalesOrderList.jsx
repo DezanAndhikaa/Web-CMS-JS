@@ -340,27 +340,12 @@ export default class SalesOrderList extends React.PureComponent {
   }
 
   render() {
-    if (this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly") {
-      return (
-        <>
-          <Table classes={{ root: 'table' }} className="table">
-            {this.showTableHead()}
-            <TableBody classes={{ root: 'table-body' }}>
-              {this.props.salesOrderList.Lists
-                && this.props.salesOrderList.Lists.map((row, id) => (
-                  this.showTableBody(row, id)
-                ))}
-            </TableBody>
-          </Table>
-          {this.showLoading()}
-        </>
-      )
-    } else if (this.props.salesOrderList.Lists.length === 0 && this.props.idTab === "Approval"
+    if (this.props.salesOrderList.Lists.length === 0 && this.props.idTab === "Approval"
       && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) {
       return (
         <EmptyList idEmpty= "Sales" />
       )
-    } else if (this.props.salesOrderList.Lists.length === 0 && this.props.idTab === "Input"
+    } else if (this.props.salesOrderList.Lists.length === 0 && this.props.idSales === "Data Input"
       && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) {
       return (
         <EmptyList idEmpty= "Input" />
