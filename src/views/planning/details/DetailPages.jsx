@@ -81,11 +81,12 @@ class DetailPages extends React.Component {
           ...prevProps.salesParameter.dataFilter, Filter: this.props.filterDate.Filter, PageNumber: 1
         })
       }
-    } else {
-      if (prevProps.filterDate !== this.props.filterDate) {
-        this.props.updateServiceParameter({
-          ...prevProps.serviceParameter.dataFilter, Filter: this.props.filterDate.Filter, PageNumber: 1
-        })
+    }
+
+    //FILTER RANGE SMR DATE
+    if (this.state.whichTabs) {
+      if (prevProps.filterDateSmr !== this.props.filterDateSmr) {
+        this.props.fetchSalesOrder(this.props.filterDateSmr, this.props.token);
       }
     }
 
