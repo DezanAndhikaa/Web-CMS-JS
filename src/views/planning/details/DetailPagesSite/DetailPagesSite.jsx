@@ -813,7 +813,8 @@ componentDidUpdate = (prevProps) => {
       <div className="search-site">
         <SearchInput
           {...this.props}
-          webInfo="Search revision"
+          idSearch= "Rev"
+          webInfo= "Search revision"
           handleSearch={this.handleSearchRevision}
         />
       </div>
