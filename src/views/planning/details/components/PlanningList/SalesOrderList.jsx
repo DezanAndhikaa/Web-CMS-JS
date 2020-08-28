@@ -6,7 +6,7 @@ import './PlanningList.scss';
 import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
 import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
 import InputButton from '../../../../../components/Button/InputButton';
-import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction, SmrFilterAction, SortSalesByPlanType } from '../../DetailPages-action';
+import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction, SmrFilterAction, SortSalesByPlanType, SmrDateFilterAction } from '../../DetailPages-action';
 import { Spinner } from '../../../../../assets/icons'
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import { Snackbar } from '@material-ui/core';
@@ -77,6 +77,15 @@ export default class SalesOrderList extends React.PureComponent {
 
   isFilterDate = async (value1, value2) => {
     this.props.dateFilter(DateFilterAction, value1, value2, this.props.salesParameter.dataFilter.PageSize);
+  }
+
+  isFilterSmrDate = async (value1, value2) => {
+    this.props.filterSmrDate(
+      SmrDateFilterAction,
+      value1,
+      value2,
+      this.props.serviceParameter.dataFilter.PageSize
+    );
   }
 
   isCheckboxAvailable = (data) => {
@@ -223,7 +232,7 @@ export default class SalesOrderList extends React.PureComponent {
             <PlanningListHeader
               name="SMR Date"
               delay={300}
-              onFilter={this.isFilterDate}
+              onFilter={this.isFilterSmrDate}
             />
             <PlanningListHeader
               name="PLAN TYPE"
