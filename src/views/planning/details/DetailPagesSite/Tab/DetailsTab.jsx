@@ -8,11 +8,11 @@ import RevisedSalesOrderList from '../../components/PlanningList/RevisedSalesOrd
 import './DetailsTab.scss';
 import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
 import { 
-    SelectCustomerFilterAction,
-    SelectSiteFilterAction, 
-    SelectUnitModelFilterAction, 
-    SelectComponentFilterAction, 
-    SelectPlanTypeFilterAction
+  SelectCustomerFilterAction,
+  SelectSiteFilterAction, 
+  SelectUnitModelFilterAction, 
+  SelectComponentFilterAction, 
+  SelectPlanTypeFilterAction
 } from '../../DetailPages-action';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import roleService from "../../../../../utils/roleService.helper";
@@ -94,7 +94,6 @@ class DetailsTab extends React.Component {
     GroupComponentDescription: []
   };
 
-
   handleChange = (event, value) => {
     if (value === 0) {
       this.props.onPage(this.state.value);
@@ -129,15 +128,17 @@ class DetailsTab extends React.Component {
   _renderSalesOrderList(){
     return(
       <>
-      <div className={this.props.salesOrderList.Lists.length === 0 
-          && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "list-detail-empty" : "plannings-list-detail"}>
-        <SalesOrderList 
-          {...this.props}
-          pageLoc= "Status"
-          idSales= "Data Input"
-          idTab= "Input"
-        />
-      </div>
+        <div className={this.props.salesOrderList.Lists.length === 0 
+            && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? 
+            "list-detail-empty" : "plannings-list-detail"}
+        >
+          <SalesOrderList 
+            {...this.props}
+            pageLoc= "Status"
+            idSales= "Data Input"
+            idTab= "Input"
+          />
+        </div>
       </>
     );
   }

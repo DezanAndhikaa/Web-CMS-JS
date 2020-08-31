@@ -626,6 +626,7 @@ componentDidUpdate = (prevProps) => {
   onClickServiceOrder = async() => {
    await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
   }
+  
   //SAAT MENGKLIK SALES ORDER TAB
   onClickSalesOrder = async() =>{
     if (Number(RoleUser.role()) === 3 || Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
