@@ -27,7 +27,7 @@ import {
 	UnselectServicePlanAction, selectSalesPlansAction, selectServicePlansAction, selectLeaderAction, SelectSalesPlanAction,
 	SelectServicePlanAction,
 	selectMechanicAction, sortByAction,
-	storePlanDataAction, dateFilterAction, smrFilterAction
+	storePlanDataAction, dateFilterAction, smrFilterAction, smrDateFilterAction
 } from './DetailPages-action';
 import DetailPages from './DetailPages';
 
