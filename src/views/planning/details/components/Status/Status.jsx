@@ -1860,11 +1860,24 @@ export default class Status extends React.PureComponent {
 		this.setPropsToState();
 	}
 
+	reloadServiceOrderSap = async() => {
+		await this.props.fetchSapService({
+			...this.props.serviceSapParameter.dataFilter,
+			Filter : 
+				[...this.props.serviceSapParameter.dataFilter.Filter, {
+					Field 	 : 'SAPIssueMessage',
+					Operator : 'neq',
+					Value 	 : '-',
+					Logic 	 : 'and'
+				}]
+		},this.state.bearer);
+	}
+
 	isReload = async() => {
 		await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.state.bearer);
 		await this.props.fetchApprovedService(this.props.serviceApprovedParameter.dataFilter, this.state.bearer);
 		await this.props.fetchDeletedService(this.props.serviceDeletedParameter.dataFilter, this.state.bearer);
-		await this.props.fetchSapService(this.props.serviceDeletedParameter.dataFilter, this.state.bearer);
+		this.reloadServiceOrderSap()
 		this.props.clearSelectedServicePlans()
 		this.setPropsToState();
 	}
@@ -1951,7 +1964,6 @@ export default class Status extends React.PureComponent {
 			</div>
 		);
 	}
-
 
 	approvedSalesOrderList(){
 		return(

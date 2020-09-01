@@ -21,7 +21,6 @@ class FilterByPeriodeDate extends React.Component{
                 endDate: new Date()
             }
         };
-        console.log(props)
     }
 
     handleChangeStart = (event, props) => {
