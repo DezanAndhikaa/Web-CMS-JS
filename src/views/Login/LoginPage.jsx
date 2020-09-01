@@ -82,8 +82,6 @@ class LoginPage extends React.Component {
           type="text" 
           value={this.state.username} 
           onChange={this.handleUsernameChange} 
-          // value={props.values.userName}
-          // onChange={(e) => props.setFieldValue("userName",e.target.value)}
           className="username-input" 
           label="Username" 
           classes={{ input: 'username-input-text' }} 
@@ -93,12 +91,9 @@ class LoginPage extends React.Component {
           id="password" 
           variant="outlined" 
           onKeyPress={this.handleKeyPress} 
-          // onKeyPress={(event) => this._handleKeyPress(event,props.values)}
           type={this.state.showPassword ? 'text' : 'password'} 
           value={this.state.password} 
           onChange={this.handlePasswordChange} 
-          // value={props.values.password}
-          // onChange={(e) => props.setFieldValue("password",e.target.value)}
           className="password-input" 
           label="Password" 
           classes={{ input: 'username-input-text' }} />
@@ -108,7 +103,6 @@ class LoginPage extends React.Component {
             : <VisibilityOff className="visibility-icon" onClick={() => this.setState((prevState) => ({ showPassword: !prevState.showPassword }))} />
         }
         <Button disabled={this.isDisabled()} variant="contained" className={this.isDisabled() ? 'btn-login-disabled' : 'btn-login'} onClick={this.handleLogin}>
-        {/* onClick={() => this._handleSubmit(props.values)} */}
           Log In
         </Button>
       </form>

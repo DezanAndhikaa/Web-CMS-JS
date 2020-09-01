@@ -73,7 +73,6 @@ class LayoutTime extends React.Component {
 									primary={row.key}
 									classes={{ primary : 'item-text-tracking', root: 'item-text-tracking'}}
 								>
-									{/* {row.key} */}
 								</ListItemText>
 							</ListItem>
 						)}

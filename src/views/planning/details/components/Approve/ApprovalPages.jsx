@@ -83,13 +83,6 @@ class ApprovalPages extends React.Component {
       }
     }
 
-    // Trigger sales global search
-    if (prevProps.salesSearch !== this.props.salesSearch) {
-      this.props.updateSearchSales({
-        ...prevProps.searchSalesParameter, Category: 'Approval', Keyword: this.props.salesSearch,
-      });
-    }
-
     //Trigger service global search
     if (prevProps.serviceSearch !== this.props.serviceSearch) {
       this.props.updateSearchService({
@@ -473,14 +466,6 @@ class ApprovalPages extends React.Component {
   render() {
     return (
       <main className="content">
-        {/* {this.props.fetchStatusApprovedSales === ApiRequestActionsStatus.LOADING && (
-          this.renderCircularProgress()
-        )}
-        {this.props.fetchStatusApprovedSales === ApiRequestActionsStatus.SUCCEEDED && (
-          <>
-            {this._renderSalesApproved()}
-          </>
-        )} */}
         {this.props.fetchStatusApprovedService === ApiRequestActionsStatus.LOADING && (
           this.renderCircularProgress()
         )}

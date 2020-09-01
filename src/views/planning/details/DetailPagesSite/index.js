@@ -174,7 +174,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
   updateServiceParameter: (payload) =>
     dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
-  // index revision
   updateSalesRevParameter: (payload) =>
     dispatch(salesParameterRevAction(UpdateSalesRevisedParamAction, payload)),
   updateSearchSales: (payload) =>
