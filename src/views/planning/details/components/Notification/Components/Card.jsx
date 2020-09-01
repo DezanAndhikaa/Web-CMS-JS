@@ -53,12 +53,10 @@ export default class CardData extends React.Component {
             <div className="filters-container-notif">
               {this.state.events.map(world => (
                 <div className="kartu">
-                {/* <Card className="kartu"> */}
                   <div className="kartu-title">{world.time}</div>
                   <div className="kartu-site">{world.title}</div>
                   <div className="kartu-title">{world.location}</div>
                   <div className="kartu-title">{world.push}</div>
-                {/* </Card> */}
                 </div>
               ))}
             </div>

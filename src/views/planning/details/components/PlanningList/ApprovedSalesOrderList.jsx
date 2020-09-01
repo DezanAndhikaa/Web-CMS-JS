@@ -170,7 +170,6 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
             <PlanningListHeader
               name="Plan Type"
               delay={300}
-              // onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
             />
           </TableRow>
         </TableHead>

@@ -159,9 +159,6 @@ export default class SapSalesOrderList extends React.PureComponent {
           <PlanningListHeader
             name="Plan Type"
             delay={300}
-            // isActive={this.props.sortSalesByState.UnitModel.isActive}
-            // isAscending={this.props.sortSalesByState.UnitModel.isAscending}
-            // onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
           />
         </TableRow>
       </TableHead>
