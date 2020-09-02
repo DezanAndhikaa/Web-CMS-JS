@@ -128,17 +128,18 @@ class DetailsTab extends React.Component {
   _renderSalesOrderList(){
     return(
       <>
-        <div className={this.props.salesOrderList.Lists.length === 0 
-            && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? 
-            "list-detail-empty" : "plannings-list-detail"}
-        >
-          <SalesOrderList 
-            {...this.props}
-            pageLoc= "Status"
-            idSales= "Data Input"
-            idTab= "Input"
-          />
-        </div>
+      <div 
+        className={this.props.salesOrderList.Lists.length === 0 
+        && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? 
+        "list-detail-empty" : "plannings-list-detail"}
+      >
+        <SalesOrderList 
+          {...this.props}
+          pageLoc= "Status"
+          idSales= "Data Input"
+          idTab= "Input"
+        />
+      </div>
       </>
     );
   }

@@ -42,9 +42,11 @@ class DetailPages extends React.Component {
     if (prevProps.salesParameter !== this.props.salesParameter) {
       this.onClickSalesOrder()
     }
+
     if (prevProps.searchSalesParameter !== this.props.searchSalesParameter) {
       this.fetchSearchSales();
     }
+    
     // FILTER DROPDOWN
     if (prevProps.filterParameter !== this.props.filterParameter) {
       if (this.props.indexFilterParameter.indexTabParameter === 0) {
