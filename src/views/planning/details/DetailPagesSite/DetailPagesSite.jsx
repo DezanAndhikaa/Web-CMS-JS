@@ -587,8 +587,6 @@ componentDidUpdate = (prevProps) => {
     }
     if (this.state.whichTabs === true) {
       const web = this.props.displayMode === 'web';
-      // const nextSalesRev = this.props.salesOrderRevised.NextPage;
-      // const prevSalesRev = this.props.salesOrderRevised.PrevPage;
       const currentPropsRev = this.props.salesOrderRevised.PageNumber;
       const { TotalPages } = this.props.salesOrderRevised;
       
