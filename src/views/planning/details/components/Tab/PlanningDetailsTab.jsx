@@ -340,9 +340,9 @@ class PlanningDetailsTab extends React.Component {
     return (
       <div className="root">
         <div className="tab-container">
-          <Button className="btn-approval" variant="outlined" onClick={() => this.handleClick(Menu.PLANNING_APPROVAL)}>
-            Approval
-            </Button>
+          <Button className="btn-back-to-ho" variant="outlined" onClick={() => this.handleClick(Menu.PLANNING_HO)}>
+            HO
+          </Button>
           <div className="btn-header">
             {this.props.renderNotif}
             {this.props.renderFilterByDataAction}
