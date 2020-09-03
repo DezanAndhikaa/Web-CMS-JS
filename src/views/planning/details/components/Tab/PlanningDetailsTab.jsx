@@ -10,7 +10,8 @@ import {
   SelectCustomerFilterAction,
   SelectSiteFilterAction,
   SelectUnitModelFilterAction,
-  SelectComponentFilterAction
+  SelectComponentFilterAction,
+  SelectPlanTypeFilterAction
 }
   from '../../DetailPages-action';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
@@ -201,6 +202,14 @@ class PlanningDetailsTab extends React.Component {
     }
   }
 
+  _dataFilterPlanType() {
+    if (this.state.value === 0) {
+      let arr = this.props.salesOrderList.PlanType;
+      arr.splice(0, 0, "All Plan Type")
+      return arr
+    }
+  }
+
   _renderTotalDataInput() {
     return (
       <div className="total-input-container">
@@ -266,6 +275,17 @@ class PlanningDetailsTab extends React.Component {
             onSelectAction={this.props.selectFilter2}
             indexTab={this.state.value}
             head={"ComponentDescription"}
+          />
+        </div>
+        <div className="dropdown-container">
+          <DropdownFilter
+            {...this.props}
+            data={this._dataFilterPlanType()}
+            selected={this.props.selectedFilters.planType}
+            onSelectActionType={SelectPlanTypeFilterAction}
+            onSelectAction={this.props.selectFilter2}
+            indexTab={this.state.value}
+            head={"PlanType"}
           />
         </div>
         <div className="search-container">

@@ -80,6 +80,7 @@ componentDidUpdate = (prevProps) => {
       }
     }
   }
+  
   if(prevProps.searchSalesRevParam !== this.props.searchSalesRevParam){
     this.fetchSearchSalesRev();
   }
