@@ -206,6 +206,28 @@ class DetailPages extends React.Component {
           });
         }
       };
+      if (sortSalesBy.PlanType.isActive) {
+        isDescending = !sortSalesBy.PlanType.isAscending;
+        this.props.updateSalesParameter({
+          ...this.props.salesParameter.dataFilter,
+            PageNumber: 1,
+            Sort: [{
+              Field : 'PlanType',
+              Direction : 'desc'
+            }],
+        });
+        if (sortSalesBy.PlanType.isAscending === !sortSalesBy.PlanType.isActive) {
+          isDescending = !sortSalesBy.PlanType.isAscending;
+          this.props.updateSalesParameter({
+            ...this.props.salesParameter.dataFilter,
+              PageNumber: 1,
+              Sort: [{
+                Field : 'PlanType',
+                Direction : 'asc'
+              }]
+          });
+        }
+      };
     }
   }
 
