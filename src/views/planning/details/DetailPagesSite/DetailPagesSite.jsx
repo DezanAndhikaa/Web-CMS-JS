@@ -593,7 +593,6 @@ componentDidUpdate = (prevProps) => {
       return(
         <div className="paginations-rev">
           <div className="paging-rev">
-            {/* {prevSalesRev && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
             {web && currentPropsRev - 3 > 0 && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev - 3 })} className="page-inactive-rev">{currentPropsRev - 3}</div>}
             {web && currentPropsRev - 2 > 0 && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev - 2 })} className="page-inactive-rev">{currentPropsRev - 2}</div>}
             {currentPropsRev - 1 > 0 && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev - 1 })} className="page-inactive-rev">{currentPropsRev - 1}</div>}
@@ -601,7 +600,6 @@ componentDidUpdate = (prevProps) => {
             {currentPropsRev + 1 <= TotalPages && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev + 1 })} className="page-inactive-rev">{currentPropsRev + 1}</div>}
             {web && currentPropsRev + 2 < TotalPages && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev + 2 })} className="page-inactive-rev">{currentPropsRev + 2}</div>}
             {web && currentPropsRev + 3 < TotalPages && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev + 3 })} className="page-inactive-rev">{currentPropsRev + 3}</div>}
-            {/* {nextSalesRev && <div onClick={() => this.props.updateSalesRevParameter({ ...this.props.salesRevisedParam.dataFilter, PageNumber: currentPropsRev + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>} */}
           </div>
         </div>
       )
