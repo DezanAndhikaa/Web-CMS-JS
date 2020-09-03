@@ -34,7 +34,7 @@ class DetailPages extends React.Component {
 
   componentDidMount = () => {
     if (this.props.location.whichTab === undefined) {
-      this.handleClick(Menu.PLANNING_APPROVAL)
+      this.handleClick(Menu.PLANNING_INPUT_LIFETIME)
     }
   }
 
@@ -297,29 +297,16 @@ class DetailPages extends React.Component {
 
   //SAAT MENGKLIK sales ORDER TAB
   onClickSalesOrder = async () => {
-    if (this.props.location.whichTab === 'lifetime') {
-      await this.props.fetchSalesOrder({
-        ...this.props.salesParameter.dataFilter,
-        Filter:
-          [...this.props.salesParameter.dataFilter.Filter, {
-            Field: 'LifeTimeComponent',
-            Operator: "eq",
-            Value: 0,
-            Logic: "AND"
-          }]
-      }, this.props.token);
-    } else {
-      await this.props.fetchSalesOrder({
-        ...this.props.salesParameter.dataFilter,
-        Filter:
-          [...this.props.salesParameter.dataFilter.Filter, {
-            Field: 'LifeTimeComponent',
-            Operator: "neq",
-            Value: 0,
-            Logic: "AND"
-          }]
-      }, this.props.token);
-    }
+    await this.props.fetchSalesOrder({
+      ...this.props.salesParameter.dataFilter,
+      Filter:
+        [...this.props.salesParameter.dataFilter.Filter, {
+          Field: 'LifeTimeComponent',
+          Operator: "eq",
+          Value: 0,
+          Logic: "AND"
+        }]
+    }, this.props.token);
   }
 
   //KOMPONEN UNTUK SHOW PER/PAGE
