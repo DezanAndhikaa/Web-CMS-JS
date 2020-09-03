@@ -18,13 +18,6 @@ class BaseButton extends React.Component{
         }
     }
 
-    handleClick = (menu, tab) => {
-        this.props.push({
-          pathname: menu,
-          whichTab: tab
-        });
-    }
-
     isClicked = () => {
        this.setState({isShowModal: !this.state.isShowModal})
     }
