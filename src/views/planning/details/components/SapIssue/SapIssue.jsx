@@ -7,9 +7,8 @@ import moment from 'moment';
 export default class SapIssue extends React.Component{
 
   state={
-      isShowModal: false,
-      description: [],
-      SAPIssue: []
+    isShowModal: false,
+    description: []
   }
 
   handleChange(id, e) {
@@ -19,10 +18,13 @@ export default class SapIssue extends React.Component{
   }
 
   _showTableHead() {
-      return (
-        <TableHead className="table-head-issue" >
+    return (
+      <TableHead className="table-head-issue" >
         <TableRow className="table-row-issue">
-          <TableCell>WO</TableCell>
+          {this.props.whichTabs ? 
+            <TableCell>SO</TableCell> : 
+            <TableCell>WO</TableCell>
+          }
           <TableCell>Customer</TableCell>
           <TableCell>Site</TableCell>
           <TableCell>Unit Model</TableCell>
@@ -32,16 +34,22 @@ export default class SapIssue extends React.Component{
           <TableCell>Serial Number</TableCell>
           <TableCell>Lifetime</TableCell>
           <TableCell>Plan</TableCell>
+          <TableCell>SMR</TableCell>
+          <TableCell>SMR Date</TableCell>
+          <TableCell>Plan Type</TableCell>
         </TableRow>
       </TableHead>
     )
   }
 
   _showTableBody(row, id) {
-      return (
-        <>
+    return (
+      <>
         <TableRow className="table-row-issue">
-          <TableCell align="left" className="table-cell-issue"> {row.WoNumber} </TableCell>
+          {this.props.whichTabs ?
+            <TableCell align="left" className="table-cell-issue"> {row.SoNumber} </TableCell> : 
+            <TableCell align="left" className="table-cell-issue"> {row.WoNumber} </TableCell>
+          }
           <TableCell align="left" className="table-cell-issue"> {row.CustomerName} </TableCell>
           <TableCell align="left" className="table-cell-issue"> {row.SiteCode} </TableCell>
           <TableCell align="left" className="table-cell-issue"> {row.UnitModel} </TableCell>
@@ -49,8 +57,10 @@ export default class SapIssue extends React.Component{
           <TableCell align="left" className="table-cell-issue"> {row.PartNumber} </TableCell>
           <TableCell align="left" className="table-cell-issue"> {row.UnitCode} </TableCell>
           <TableCell align="left" className="table-cell-issue"> {row.SerialNumber} </TableCell>
-          <TableCell align="center" className="table-cell-issue"> {row.LifeTimeComponent}</TableCell>
+          <TableCell align="left" className="table-cell-issue"> {row.LifeTimeComponent}</TableCell>
           <TableCell align="left" className="table-cell-issue"> {moment(row.PlanExecution).format('DD-MM-YYYY')} </TableCell>
+          <TableCell align="left" className="table-cell-issue"> {row.SMR} </TableCell>
+          <TableCell align="left" className="table-cell-issue"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
         </TableRow>
         <TableRow className="table-row-bottom-issue">
           <TableCell colSpan="1"><label>Description<label className="label-required">*</label></label></TableCell>
