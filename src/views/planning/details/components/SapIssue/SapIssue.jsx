@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, TextField,Table, TableHead, TableRow, TableBody, TableCell, Paper } from '@material-ui/core';
+import { Button, Modal, TextField,Table, TableHead, TableRow, TableBody, TableCell, Paper, Tooltip } from '@material-ui/core';
 import './SapIssue.scss';
 import CloseButton from '../../../../../components/CloseButton/CloseButton';
 import moment from 'moment';
@@ -61,6 +61,9 @@ export default class SapIssue extends React.Component{
           <TableCell align="left" className="table-cell-issue"> {moment(row.PlanExecution).format('DD-MM-YYYY')} </TableCell>
           <TableCell align="left" className="table-cell-issue"> {row.SMR} </TableCell>
           <TableCell align="left" className="table-cell-issue"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
+          <Tooltip arrow title={row.PlanType.charAt(0) === "U" ? "UNSCHEDULE" : ""} >
+            <TableCell align="left" className="table-cell"> {row.PlanType.substring(0, 3)} </TableCell>
+          </Tooltip>
         </TableRow>
         <TableRow className="table-row-bottom-issue">
           <TableCell colSpan="1"><label>Description<label className="label-required">*</label></label></TableCell>
