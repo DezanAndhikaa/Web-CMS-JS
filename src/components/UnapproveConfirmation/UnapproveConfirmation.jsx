@@ -112,8 +112,8 @@ export default class UnapproveConfirmation extends React.PureComponent {
   isReload = () => {
     this.props.fetchSalesOrder({
       ...this.props.salesParameter.dataFilter, 
-      Filter : 
-        [...this.props.salesParameter.dataFilter.Filter, {
+      Filter :[
+        ...this.props.salesParameter.dataFilter.Filter, {
           Field : 'LifeTimeComponent',
           Operator : "neq",
           Value : '-',
@@ -128,7 +128,8 @@ export default class UnapproveConfirmation extends React.PureComponent {
           Operator : 'eq',
           Value : 'false',
           Logic : 'AND'
-        }]
+        }
+      ]
     }, this.props.token);
   }
 
