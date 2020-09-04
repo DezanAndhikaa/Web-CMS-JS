@@ -67,7 +67,7 @@ export default class SapIssue extends React.Component{
         </TableRow>
         <TableRow className="table-row-bottom-issue">
           <TableCell colSpan="1"><label>Description<label className="label-required">*</label></label></TableCell>
-          <TableCell colSpan="11">{this._showDescription(id)}</TableCell>
+          <TableCell colSpan="12">{this._showDescription(id)}</TableCell>
         </TableRow>
       </>
     )
