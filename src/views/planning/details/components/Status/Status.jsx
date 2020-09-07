@@ -56,28 +56,28 @@ export default class Status extends React.PureComponent {
 		}if(this.props.location.whichTab === "service"){
 			this.isReloadService();
 		}else if(this.props.location.whichTab === undefined){
-			if(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/approval"){
+			if(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/ho"){
 				if (localStorage.getItem('whichTab') === "sales"){
-					this.handleClick(Menu.PLANNING_APPROVAL_STATUS, 'sales', this.state.bearer);
+					this.handleClick(Menu.PLANNING_HO_STATUS, 'sales', this.state.bearer);
 					this.isReloadSales();
 				} else{ 
-					this.handleClick(Menu.PLANNING_APPROVAL_STATUS, 'service', this.state.bearer);
+					this.handleClick(Menu.PLANNING_HO_STATUS, 'service', this.state.bearer);
 					this.isReloadService();
 				}
-			} else if(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/details/site"){
+			} else if(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/site"){
 				if (localStorage.getItem('whichTab') === "sales"){
-					this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales', this.state.bearer);
+					this.handleClick(Menu.PLANNING_SITE_STATUS, 'sales', this.state.bearer);
 					this.isReloadSales();
 				} else{ 
-					this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service', this.state.bearer);
+					this.handleClick(Menu.PLANNING_SITE_STATUS, 'service', this.state.bearer);
 					this.isReloadService();
 				}
 			}else if(Number(RoleUser.role()) !== 1){
 				if (localStorage.getItem('whichTab') === "sales"){
-					this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'sales', this.state.bearer);
+					this.handleClick(Menu.PLANNING_SITE_STATUS, 'sales', this.state.bearer);
 					this.isReloadSales();
 				} else{ 
-					this.handleClick(Menu.PLANNING_DETAILS_STATUS, 'service', this.state.bearer);
+					this.handleClick(Menu.PLANNING_SITE_STATUS, 'service', this.state.bearer);
 					this.isReloadService();
 				}
 			}	
