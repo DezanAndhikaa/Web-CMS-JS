@@ -1939,6 +1939,37 @@ export default class Status extends React.PureComponent {
 		this.setPropsToState();
 	}
 
+	reloadSalesOrderNA = async() => {
+		await this.props.fetchSalesOrder({
+			...this.props.salesParameter.dataFilter, 
+			Filter : 
+			  [...this.props.salesParameter.dataFilter.Filter, {
+				Field : 'IsApproved',
+				Operator : "eq",
+				Value : false,
+				Logic : "AND"
+			  },{
+				Field : 'SAPIssueMessage',
+				Operator : 'eq',
+				Value : '-',
+				Logic : 'AND'
+			  }]
+		  }, this.state.bearer);
+	}
+
+	reloadServiceOrderNA = async() => {
+		await this.props.fetchServiceOrder({
+			...this.props.serviceParameter.dataFilter,
+			Filter : 
+				[...this.props.serviceParameter.dataFilter.Filter, {
+					Field 	 : 'SAPIssueMessage',
+					Operator : 'eq',
+					Value 	 : '-',
+					Logic 	 : 'and'
+				}]
+		}, this.state.bearer);
+	}
+
 	reloadSalesOrderSap = async() => {
 		await this.props.fetchSalesOrder({
 			...this.props.salesParameter.dataFilter, 
@@ -1971,7 +2002,7 @@ export default class Status extends React.PureComponent {
 	}
 
 	isReloadSales = async() => {
-		await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.state.bearer);
+		this.reloadSalesOrderNA()
 		await this.props.fetchApprovedSales(this.props.salesApprovedParameter.dataFilter, this.state.bearer);
 		await this.props.fetchDeletedSales(this.props.salesDeletedParameter.dataFilter, this.state.bearer);
 		this.reloadSalesOrderSap()
@@ -1980,7 +2011,7 @@ export default class Status extends React.PureComponent {
 	}
 
 	isReloadService = async() => {
-		await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.state.bearer);
+		this.reloadServiceOrderNA()
 		await this.props.fetchApprovedService(this.props.serviceApprovedParameter.dataFilter, this.state.bearer);
 		await this.props.fetchDeletedService(this.props.serviceDeletedParameter.dataFilter, this.state.bearer);
 		this.reloadServiceOrderSap()
