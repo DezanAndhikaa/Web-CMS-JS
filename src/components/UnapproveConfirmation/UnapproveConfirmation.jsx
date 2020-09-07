@@ -215,7 +215,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
                 <CloseNotif onClose={this.props.onClose}/>
                 <div className="confirmation-container-unapprove">
                   <p className="confirmation-title-unapprove">Cancel Approve</p>
-                  <p className="confirmation-title-unapprove">Sales Order</p>
+                  <p className="confirmation-title-unapprove">{this.props.whichTabs ? "Sales Order" : "Service Order"}</p>
                   <img className="confirmation-image-unapprove" src={ImgCancelApprove} alt="" />
                   <p className="confirmation-caption-unapprove"><b>Select one</b> to continue cancel approve</p>
                   <div className="btn-row">
