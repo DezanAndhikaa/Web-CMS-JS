@@ -161,6 +161,7 @@ export default class SalesOrderList extends React.PureComponent {
               </TableCell>
             }
             <PlanningListHeader
+              loc={this.props.pageLoc}
               name="SO"
               delay={300}
               onSearch={this.props.onSearchComp}
