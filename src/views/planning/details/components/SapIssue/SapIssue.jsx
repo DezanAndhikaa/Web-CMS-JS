@@ -22,21 +22,21 @@ export default class SapIssue extends React.Component{
       <TableHead className="table-head-issue" >
         <TableRow className="table-row-issue">
           {this.props.whichTabs ? 
-            <TableCell>SO</TableCell> : 
-            <TableCell>WO</TableCell>
+            <TableCell align="left" className="table-cell">SO</TableCell> : 
+            <TableCell align="left" className="table-cell">WO</TableCell>
           }
-          <TableCell>Customer</TableCell>
-          <TableCell>Site</TableCell>
-          <TableCell>Unit Model</TableCell>
-          <TableCell>Component Description</TableCell>
-          <TableCell>Part Number</TableCell>
-          <TableCell>Unit Code</TableCell>
-          <TableCell>Serial Number</TableCell>
-          <TableCell>Lifetime</TableCell>
-          <TableCell>Plan</TableCell>
-          <TableCell>SMR</TableCell>
-          <TableCell>SMR Date</TableCell>
-          <TableCell>Plan Type</TableCell>
+          <TableCell align="left" className="table-cell">CUSTOMER</TableCell>
+          <TableCell align="left" className="table-cell">SITE</TableCell>
+          <TableCell align="left" className="table-cell">UNIT MODEL</TableCell>
+          <TableCell align="left" className="table-cell">COMPONENT DESCRIPTION</TableCell>
+          <TableCell align="left" className="table-cell">PART NUMBER</TableCell>
+          <TableCell align="left" className="table-cell">UNIT CODE</TableCell>
+          <TableCell align="left" className="table-cell">SERIAL NUMBER</TableCell>
+          <TableCell align="left" className="table-cell">LIFETIME COMP</TableCell>
+          <TableCell align="left" className="table-cell">PLAN EXECUTION</TableCell>
+          <TableCell align="left" className="table-cell">SMR </TableCell>
+          <TableCell align="left" className="table-cell">SMR DATE</TableCell>
+          <TableCell align="left" className="table-cell">PLAN TYPE</TableCell>
         </TableRow>
       </TableHead>
     )
