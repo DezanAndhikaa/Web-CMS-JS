@@ -1989,7 +1989,16 @@ export default class Status extends React.PureComponent {
 	}
 
 	onClickServiceOrder = async() => {
-		await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
+		await this.props.fetchServiceOrder({
+			...this.props.serviceParameter.dataFilter,
+			Filter : 
+				[...this.props.serviceParameter.dataFilter.Filter, {
+					Field 	 : 'SAPIssueMessage',
+					Operator : 'eq',
+					Value 	 : '-',
+					Logic 	 : 'and'
+				}]
+		},this.props.token);
 		this.props.clearSelectedServicePlans()
 		this.setPropsToState();
 	}
