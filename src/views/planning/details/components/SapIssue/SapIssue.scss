@@ -118,29 +118,81 @@
         font-family: 'Lato-Regular';
         font-style: normal;
         font-weight: bold;
-        font-size: vw(13) !important;
-        line-height: vw(16) !important;
+        font-size: vw(16) !important;
+        line-height: vw(19) !important;
         color: #494949;
-        border-bottom: 10px !important;
     }
-    .table-body-issue{
-        background-color: white;
-        .table-row-top-issue{
-            border-bottom: 5px solid #F4F6F8;
-            .table-cell-issue{
-                padding: 0;
-                height: 40px;
-                font-size: 14px !important;
-                line-height: 1% !important;
-                font-family: 'Lato-Bold';
-                color: #3C3B3B;
-                background-color: white;
-                border-bottom: 10px !important;
-            }
+    .tc-pk-head{
+        padding: vw(0) vw(0) vw(0) vw(15);
+        width: vw(40);
+        height: vw(40);
+        font-size: vw(16) !important;
+        line-height: vw(19) !important;
+        font-family: 'Lato-Regular';
+        font-style: normal;
+        font-weight: bold;
+        color: #494949;
+    }
+}
+.table-body-issue{
+    background-color: white;
+    .table-row-top-issue{
+        border-bottom: 5px solid #F4F6F8;
+        .table-cell-issue{
+            padding: 0;
+            height: vw(40);
+            font-size: vw(15) !important;
+            line-height: vw(18) !important;
+            font-family: 'Lato-Bold';
+            color: #3C3B3B;
+        }.tc-smr{
+            width: vw(60);
+            padding: 0;
+            height: vw(40);
+            font-size: vw(15) !important;
+            line-height: vw(18) !important;
+            font-family: 'Lato-Bold';
+            color: #3C3B3B;
         }
-        .table-row-bottom-issue{
-            margin-bottom: 100px;
+        .tc-pk-body{
+            padding: vw(0) vw(0) vw(0) vw(15);
+            width: vw(40);
+            height: vw(40);
+            font-size: vw(15) !important;
+            line-height: vw(18) !important;
+            font-family: 'Lato-Bold';
+            color: #3C3B3B;
         }
+        .tc-short{
+            width: vw(50);
+            padding: 0;
+            height: vw(40);
+            font-size: vw(15) !important;
+            line-height: vw(18) !important;
+            font-family: 'Lato-Bold';
+            color: #3C3B3B;
+        }
+        .tc-long{
+            width: vw(180);
+            padding: 0;
+            height: vw(40);
+            font-size: vw(15) !important;
+            line-height: vw(18) !important;
+            font-family: 'Lato-Bold';
+            color: #3C3B3B;
+        }
+        .tc-cst{
+            width: vw(260);
+            padding: 0;
+            height: vw(40);
+            font-size: vw(15) !important;
+            line-height: vw(18) !important;
+            font-family: 'Lato-Bold';
+            color: #3C3B3B;
+        }
+    }
+    .table-row-bottom-issue{
+        margin-bottom: 100px;
     }
 }
 
