@@ -396,15 +396,12 @@ class ApprovalPages extends React.Component {
     }
     if (this.state.whichTabs === true) {
       const web = this.props.displayMode === 'web';
-      // const nextSales = this.props.salesOrderList.NextPage;
-      // const prevSales = this.props.salesOrderList.PrevPage;
       const currentPropsSales = this.props.salesOrderList.PageNumber;
       const { TotalPages } = this.props.salesOrderList.Lists;
 
       return (
         <div className="paginations">
           <div className="paging-approval">
-            {/* {prevSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="next-page"><KeyboardArrowLeft className="arrow-icon" /></div>} */}
             {web && currentPropsSales - 3 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 3 })} className="page-inactive-approval">{currentPropsSales - 3}</div>}
             {web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive-approval">{currentPropsSales - 2}</div>}
             {currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive-approval">{currentPropsSales - 1}</div>}
@@ -412,31 +409,25 @@ class ApprovalPages extends React.Component {
             {currentPropsSales + 1 <= TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive-approval">{currentPropsSales + 1}</div>}
             {web && currentPropsSales + 2 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive-approval">{currentPropsSales + 2}</div>}
             {web && currentPropsSales + 3 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive-approval">{currentPropsSales + 3}</div>}
-            {/* {nextSales && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="next-page"><KeyboardArrowRight className="arrow-icon" /></div>} */}
           </div>
         </div>
       )
     }
     if (this.state.whichTabs === false) {
       const web = this.props.displayMode === 'web';
-      // const nextSales = this.props.serviceOrderList.NextPage;
-      // const prevSales = this.props.serviceOrderList.PrevPage;
       const currentPropsService = this.props.serviceOrderList.PageNumber;
       const { TotalPages } = this.props.serviceOrderList.Lists;
 
       return (
         <div className="paginations">
           <div className="paging-approval">
-            {/* {prevSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="next-page-approval"><KeyboardArrowLeft className="arrow-icon-approval" /></div>} */}
             {web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive-approval">{currentPropsService - 3}</div>}
             {web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive-approval">{currentPropsService - 2}</div>}
             {currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive-approval">{currentPropsService - 1}</div>}
             <div className="page-active-approval">{currentPropsService}</div>
-            {/* <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService })} className="page-active">{currentPropsService}</div> */}
             {currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive-approval">{currentPropsService + 1}</div>}
             {web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive-approval">{currentPropsService + 2}</div>}
             {web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive-approval">{currentPropsService + 3}</div>}
-            {/* {nextSales && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="next-page-approval"><KeyboardArrowRight className="arrow-icon-approval" /></div>} */}
           </div>
         </div>
       )

@@ -602,13 +602,6 @@ export function serviceSapParameterReducer(state = initialServiceParameter, acti
 export function filterLifetimeReducer(state = intitialFiltersParameter, action) {
 	if (action.type === LIFETIME_FILTER)
 		state = { ...state, Filter: [{ Field: 'LifeTimeComponent', Operator: 'gte', Value: action.payload, Logic: 'and' }] }
-	// for(let i=0; i<2; i++){
-	// 	if( i === 0){
-	// 		state ={ ...state, Filter : [{Field: 'LifeTimeComponent', Operator: 'gte', Value: action.payload, Logic: 'and'}] }; 
-	// 	}else if(i === 1){
-	// 		state ={ ...state, Filter : [{Field: 'LifeTimeComponent', Operator: 'lte', Value: action.payload2, Logic: 'and'}] }; 
-	// 	}
-	// }
 	return state;
 }
 

@@ -245,8 +245,6 @@ export function fetchPutLifetimeReducer(state = initialSalesState, action) {
 	return state;
 }
 
-// export function SearchRevisiedSalesOrder(state = searchSalesApprovedReducer)
-
 export function PutSAPIssueReducer(state = initialSalesState, action) {
 	if (action.type === PutSAPIssue) {
 		switch (action.status) {
