@@ -37,7 +37,7 @@ import {
 	SelectSalesPlanAction,
 	SelectServicePlanAction,
 	sortByAction,
-	storePlanDataAction, dateFilterAction, selectAllService, smrFilterAction, smrDateFilterAction
+	storePlanDataAction, dateFilterAction, selectAllService, smrFilterAction, smrDateFilterAction, selectAllSales
 } from '../../DetailPages-action';
 import ApprovalPages from './ApprovalPages';
 
@@ -106,6 +106,7 @@ const mapDispatchToProps = (dispatch) => ({
 	selectSalesPlan: (payload) => dispatch(selectSalesPlansAction(SelectSalesPlanAction, payload)),
 	selectServicePlan: (payload) => dispatch(selectServicePlansAction(SelectServicePlanAction, payload)),
 	storePlanData: (payload) => dispatch(storePlanDataAction(payload)),
+	selectAllSales: (payload) => dispatch(selectAllSales(payload)),
 	selectAllService: (payload) => dispatch(selectAllService(payload)),
 	unselectServicePlan: (payload) => dispatch(selectServicePlansAction(UnselectServicePlanAction, payload)),
 	unselectSalesPlan: (payload) => dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),

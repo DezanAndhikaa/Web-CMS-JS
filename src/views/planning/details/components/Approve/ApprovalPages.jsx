@@ -818,7 +818,7 @@ class ApprovalPages extends React.Component {
           onClickServiceOrder={this.onClickServiceOrder}
           onChoosedService={this.updateAssignmentServiceStates}
           onChoosedSales={this.updateAssignmentSalesStates}
-          onChooseSelectAll={this._updateAssignmentSalesStatesAll}
+          onChooseAllSales={this._updateAssignmentSalesStatesAll}
           onChooseAllService= {this._updateAssignmentServiceStatesAll}
           selectedSalesPlanList={this.props.selectedSalesPlans}
           selectedServicePlanList={this.props.selectedServicePlans}
