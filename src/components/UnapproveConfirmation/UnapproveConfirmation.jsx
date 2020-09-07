@@ -109,27 +109,41 @@ export default class UnapproveConfirmation extends React.PureComponent {
   }
 
   isReload = () => {
-    this.props.fetchSalesOrder({
-      ...this.props.salesParameter.dataFilter, 
-      Filter :[
-        ...this.props.salesParameter.dataFilter.Filter, {
-          Field : 'LifeTimeComponent',
-          Operator : "neq",
-          Value : '-',
-          Logic : "AND"
-        },{
-          Field : 'SAPIssueMessage',
-          Operator : 'eq',
-          Value : '-',
-          Logic : 'AND'
-        },{
-          Field : 'IsRevised',
-          Operator : 'eq',
-          Value : 'false',
-          Logic : 'AND'
-        }
-      ]
-    }, this.props.token);
+    if (this.props.whichTabs){
+      this.props.fetchSalesOrder({
+        ...this.props.salesParameter.dataFilter, 
+        Filter :[
+          ...this.props.salesParameter.dataFilter.Filter, {
+            Field : 'LifeTimeComponent',
+            Operator : "neq",
+            Value : 0,
+            Logic : "AND"
+          },{
+            Field : 'SAPIssueMessage',
+            Operator : 'eq',
+            Value : '-',
+            Logic : 'AND'
+          },{
+            Field : 'IsRevised',
+            Operator : 'eq',
+            Value : 'false',
+            Logic : 'AND'
+          }
+        ]
+      }, this.props.token);
+    } else {
+      this.props.fetchServiceOrder({
+        ...this.props.serviceParameter.dataFilter,
+        Filter:[
+          ...this.props.serviceParameter.dataFilter.Filter, {
+            Field: 'SAPIssueMessage',
+            Operator: "eq",
+            Value: '-',
+            Logic: "AND"
+          }
+        ]
+      }, this.props.token);
+    }
   }
 
   _renderSap(open){
