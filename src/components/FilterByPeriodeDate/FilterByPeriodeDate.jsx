@@ -91,7 +91,7 @@ class FilterByPeriodeDate extends React.Component{
                                     onClick={ () => {this.props.onFilter(moment(props.values.startDate).format('YYYY-MM-DD'), 
                                     moment(props.values.endDate).format('YYYY-MM-DD')); this.props.onClosed() }} 
                                 >
-                                    Search Plan
+                                    {this.props.titles === "SMR DATE" ? "Search SMR Date" : "Search Plan" }
                                 </Button>
                             </div>
                         </div>
