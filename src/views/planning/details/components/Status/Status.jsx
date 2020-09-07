@@ -1939,11 +1939,42 @@ export default class Status extends React.PureComponent {
 		this.setPropsToState();
 	}
 
+	reloadSalesOrderSap = async() => {
+		await this.props.fetchSalesOrder({
+			...this.props.salesParameter.dataFilter, 
+			Filter : 
+			  [...this.props.salesParameter.dataFilter.Filter, {
+				Field : 'IsApproved',
+				Operator : "eq",
+				Value : false,
+				Logic : "AND"
+			  },{
+				Field : 'SAPIssueMessage',
+				Operator : 'eq',
+				Value : '-',
+				Logic : 'AND'
+			  }]
+		  }, this.state.bearer);
+	}
+
+	reloadServiceOrderSap = async() => {
+		await this.props.fetchSapService({
+			...this.props.serviceSapParameter.dataFilter,
+			Filter : 
+				[...this.props.serviceSapParameter.dataFilter.Filter, {
+					Field 	 : 'SAPIssueMessage',
+					Operator : 'neq',
+					Value 	 : '-',
+					Logic 	 : 'and'
+				}]
+		},this.state.bearer);
+	}
+
 	isReloadSales = async() => {
 		await this.props.fetchSalesOrder(this.props.salesParameter.dataFilter, this.state.bearer);
 		await this.props.fetchApprovedSales(this.props.salesApprovedParameter.dataFilter, this.state.bearer);
 		await this.props.fetchDeletedSales(this.props.salesDeletedParameter.dataFilter, this.state.bearer);
-		await this.props.fetchSapSales(this.props.serviceDeletedParameter.dataFilter, this.state.bearer);
+		this.reloadSalesOrderSap()
 		this.props.clearSelectedSalesPlans()
 		this.setPropsToState();
 	}
@@ -1952,7 +1983,7 @@ export default class Status extends React.PureComponent {
 		await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.state.bearer);
 		await this.props.fetchApprovedService(this.props.serviceApprovedParameter.dataFilter, this.state.bearer);
 		await this.props.fetchDeletedService(this.props.serviceDeletedParameter.dataFilter, this.state.bearer);
-		await this.props.fetchSapService(this.props.serviceSapParameter.dataFilter, this.state.bearer);
+		this.reloadServiceOrderSap()
 		this.props.clearSelectedServicePlans()
 		this.setPropsToState();
 	}
@@ -2414,7 +2445,7 @@ export default class Status extends React.PureComponent {
 		}else if (this.props.location.whichTab === "service") {
 			this.setState({
 				approveTotalData : this.props.serviceOrderListApproved.TotalData,
-				notApproveTotalData : this.props.serviceOrderList.TotalData,
+				notApproveTotalData : this.props.serviceOrderList.TotalDataApproval,
 				deleteTotalData : this.props.serviceOrderListDeleted.TotalData,
 				sapIssueTotalData : this.props.serviceOrderListSap.TotalDataSAPIssue
 			})
