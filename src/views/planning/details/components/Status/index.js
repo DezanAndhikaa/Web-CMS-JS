@@ -65,8 +65,8 @@ import {
 	searchCompActionService,
 	selectFilterAction, 
 	dateFilterAction,
-	smrDateFilterAction,
-	selectAllService
+	selectAllService,
+	selectAllSales
 } from '../../DetailPages-action';
 import Status from './Status';
 
@@ -124,118 +124,53 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  push: (path, whichTab) => dispatch(push(path, whichTab)),
-  pushtab: (path, whichTab, token) => dispatch(push(path, whichTab, token)),
-  downloadSales: (soId, token) => dispatch(downloadSalesAction(soId, token)),
-  downloadService: (woId, token) =>
-    dispatch(downloadServiceAction(woId, token)),
-  clearSelectedSalesPlans: (payload) =>
-    dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
-  clearSelectedServicePlans: (payload) =>
-    dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
-  fetchApprovedSales: (payload, token) =>
-    dispatch(fetchApprovedSalesAction(payload, token)),
-  fetchApprovedService: (payload, token) =>
-    dispatch(fetchApprovedServiceAction(payload, token)),
-  fetchDeletedSales: (payload, token) =>
-    dispatch(fetchDeletedSalesAction(payload, token)),
-  fetchDeletedService: (payload, token) =>
-    dispatch(fetchDeletedServiceAction(payload, token)),
-  fetchSalesOrder: (payload, token) =>
-    dispatch(fetchSalesAction(payload, token)),
-  fetchServiceOrder: (payload, token) =>
-    dispatch(fetchServiceAction(payload, token)),
-  fetchSapSales: (payload, token) =>
-    dispatch(fetchSapSalesAction(payload, token)),
-  fetchSapService: (payload, token) =>
-    dispatch(fetchSapServiceAction(payload, token)),
-  onSearchSales: (keyword) =>
-    dispatch(searchAction(SearchSalesAction, keyword)),
-  onSearchService: (keyword) =>
-    dispatch(searchAction(SearchServiceAction, keyword)),
-  onSearchComp: (keyword, sort) =>
-    dispatch(searchCompAction(SearchCompAction, keyword, sort)),
-  onSearchCompService: (keyword, sort) =>
-    dispatch(searchCompActionService(SearchCompActionService, keyword, sort)),
-  onClickSortBy: (type) => dispatch(sortByAction(type)),
-  selectSalesPlan: (payload) =>
-    dispatch(selectSalesPlansAction(SelectSalesPlanAction, payload)),
-  selectServicePlan: (payload) =>
-    dispatch(selectServicePlansAction(SelectServicePlanAction, payload)),
-  selectAllService: (payload) => dispatch(selectAllService(payload)),
-  unselectServicePlan: (payload) =>
-    dispatch(selectServicePlansAction(UnselectServicePlanAction, payload)),
-  unselectSalesPlan: (payload) =>
-    dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
-  lifetimeFilter: (type, payload, payload2, page) =>
-    dispatch(selectFilterAction(type, payload, payload2, page)),
-  dateFilter: (type, payload, payload2, page) =>
-    dispatch(dateFilterAction(type, payload, payload2, page)),
-
-  filterSmrDate: (type, payload, payload2, page) =>
-    dispatch(smrDateFilterAction(type, payload, payload2, page)),
-
-  updateSalesParameter: (payload) =>
-    dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
-  updateSalesApprovedParameter: (payload) =>
-    dispatch(
-      salesParameterApprovedAction(UpdateSalesApprovedParameterAction, payload)
-    ),
-  updateSalesDeletedParameter: (payload) =>
-    dispatch(
-      salesParameterDeletedAction(UpdateSalesDeletedParameterAction, payload)
-    ),
-  updateSalesSapParameter: (payload) =>
-    dispatch(salesParameterSapAction(UpdateSalesSapParameterAction, payload)),
-  updateServiceParameter: (payload) =>
-    dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
-  updateServiceApprovedParameter: (payload) =>
-    dispatch(
-      serviceParameterApprovedAction(
-        UpdateServiceApprovedParameterAction,
-        payload
-      )
-    ),
-  updateServiceDeletedParameter: (payload) =>
-    dispatch(
-      serviceParameterDeletedAction(
-        UpdateServiceDeletedParameterAction,
-        payload
-      )
-    ),
-  updateServiceSapParameter: (payload) =>
-    dispatch(
-      serviceParameterSapAction(UpdateServiceSapParameterAction, payload)
-    ),
-  deleteSales: (payload, token) => dispatch(deleteSalesAction(payload, token)),
-  deleteService: (payload, token) =>
-    dispatch(deleteServiceAction(payload, token)),
-  deletePermanentSales: (payload, token) =>
-    dispatch(deletePermanentSalesAction(payload, token)),
-  deletePermanentService: (payload, token) =>
-    dispatch(deletePermanentServiceAction(payload, token)),
-  updateSearchSales: (payload) =>
-    dispatch(searchSalesParameterAction(UpdateSearchSalesAction, payload)),
-  updateSearchSalesApproved: (payload) =>
-    dispatch(
-      searchSalesApprovedAction(UpdateSearchSalesApprovedAction, payload)
-    ),
-  updateSearchSalesDeleted: (payload) =>
-    dispatch(searchSalesDeletedAction(UpdateSearchSalesDeletedAction, payload)),
-  updateSearchSalesSap: (payload) =>
-    dispatch(searchSalesSapAction(UpdateSearchSalesSapAction, payload)),
-  updateSearchService: (payload) =>
-    dispatch(searchServiceParameterAction(UpdateSearchServiceAction, payload)),
-  updateSearchServiceApproved: (payload) =>
-    dispatch(
-      searchServiceApprovedAction(UpdateSearchServiceApprovedAction, payload)
-    ),
-  updateSearchServiceDeleted: (payload) =>
-    dispatch(
-      searchServiceDeletedAction(UpdateSearchServiceDeletedAction, payload)
-    ),
-  updateSearchServiceSap: (payload) =>
-    dispatch(searchServiceSapAction(UpdateSearchServiceSapAction, payload)),
+	push: (path, whichTab) => dispatch(push(path, whichTab)),
+	pushtab: (path, whichTab, token) => dispatch(push(path, whichTab, token)),
+	downloadSales : (soId, token) => dispatch(downloadSalesAction(soId, token)),
+	downloadService : (woId, token) => dispatch(downloadServiceAction(woId, token)),
+	clearSelectedSalesPlans: (payload) => dispatch(selectSalesPlansAction(ClearSelectedPlans, payload)),
+	clearSelectedServicePlans: (payload) => dispatch(selectServicePlansAction(ClearSelectedPlans, payload)),
+	fetchApprovedSales: (payload, token) => dispatch(fetchApprovedSalesAction(payload, token)),
+	fetchApprovedService: (payload, token) => dispatch(fetchApprovedServiceAction(payload, token)),
+	fetchDeletedSales: (payload, token) => dispatch(fetchDeletedSalesAction(payload, token)),
+	fetchDeletedService: (payload, token) => dispatch(fetchDeletedServiceAction(payload, token)),
+	fetchSalesOrder: (payload, token) => dispatch(fetchSalesAction(payload, token)),
+	fetchServiceOrder: (payload, token) => dispatch(fetchServiceAction(payload, token)),
+	fetchSapSales: (payload,token) => dispatch(fetchSapSalesAction(payload, token)),
+	fetchSapService: (payload,token) => dispatch(fetchSapServiceAction(payload, token)),
+	onSearchSales: (keyword) => dispatch(searchAction(SearchSalesAction, keyword)),
+	onSearchService: (keyword) => dispatch(searchAction(SearchServiceAction, keyword)),
+	onSearchComp: (keyword,sort) => dispatch(searchCompAction(SearchCompAction, keyword, sort)),
+	onSearchCompService: (keyword, sort) => dispatch(searchCompActionService(SearchCompActionService, keyword, sort)),
+	onClickSortBy: (type) => dispatch(sortByAction(type)),
+	selectSalesPlan: (payload) => dispatch(selectSalesPlansAction(SelectSalesPlanAction, payload)),
+	selectAllSales: (payload) => dispatch(selectAllSales(payload)),
+	selectServicePlan: (payload) => dispatch(selectServicePlansAction(SelectServicePlanAction, payload)),
+	selectAllService: (payload) => dispatch(selectAllService(payload)),
+	unselectServicePlan: (payload) => dispatch(selectServicePlansAction(UnselectServicePlanAction, payload)),
+	unselectSalesPlan: (payload) => dispatch(selectSalesPlansAction(UnselectSalesPlanAction, payload)),
+	lifetimeFilter: (type, payload, payload2, page) => dispatch(selectFilterAction(type, payload, payload2, page)),
+	dateFilter: (type, payload, payload2, page) => dispatch(dateFilterAction(type, payload, payload2, page)),
+	updateSalesParameter: (payload) => dispatch(salesParameterAction(UpdateSalesParameterAction, payload)),
+	updateSalesApprovedParameter: (payload) => dispatch(salesParameterApprovedAction(UpdateSalesApprovedParameterAction, payload)),
+	updateSalesDeletedParameter: (payload) => dispatch(salesParameterDeletedAction(UpdateSalesDeletedParameterAction, payload)),
+	updateSalesSapParameter: (payload) => dispatch(salesParameterSapAction(UpdateSalesSapParameterAction, payload)),
+	updateServiceParameter: (payload) => dispatch(serviceParameterAction(UpdateServiceParameterAction, payload)),
+	updateServiceApprovedParameter: (payload) => dispatch(serviceParameterApprovedAction(UpdateServiceApprovedParameterAction, payload)),
+	updateServiceDeletedParameter: (payload) => dispatch(serviceParameterDeletedAction(UpdateServiceDeletedParameterAction, payload)),
+	updateServiceSapParameter: (payload) => dispatch(serviceParameterSapAction(UpdateServiceSapParameterAction, payload)),	
+	deleteSales: (payload, token) => dispatch(deleteSalesAction(payload, token)),
+	deleteService: (payload, token) => dispatch(deleteServiceAction(payload, token)),
+	deletePermanentSales: (payload, token) => dispatch(deletePermanentSalesAction(payload, token)),
+	deletePermanentService: (payload, token) => dispatch(deletePermanentServiceAction(payload, token)),
+	updateSearchSales: (payload) => dispatch(searchSalesParameterAction(UpdateSearchSalesAction, payload)),
+	updateSearchSalesApproved: (payload) => dispatch(searchSalesApprovedAction(UpdateSearchSalesApprovedAction, payload)),
+	updateSearchSalesDeleted: (payload) => dispatch(searchSalesDeletedAction(UpdateSearchSalesDeletedAction, payload)),	
+	updateSearchSalesSap: (payload) => dispatch(searchSalesSapAction(UpdateSearchSalesSapAction, payload)),  
+	updateSearchService: (payload) => dispatch(searchServiceParameterAction(UpdateSearchServiceAction, payload)),
+	updateSearchServiceApproved: (payload) => dispatch(searchServiceApprovedAction(UpdateSearchServiceApprovedAction, payload)),
+	updateSearchServiceDeleted: (payload) => dispatch(searchServiceDeletedAction(UpdateSearchServiceDeletedAction, payload)),
+	updateSearchServiceSap: (payload) => dispatch(searchServiceSapAction(UpdateSearchServiceSapAction, payload)),
 });
 
 const status = connect(mapStateToProps, mapDispatchToProps)(Status);

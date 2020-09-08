@@ -5,12 +5,14 @@ import {
 } from '@material-ui/core';
 import './PlanningList.scss';
 import { LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
-import { Spinner } from '../../../../../assets/icons'
+import { Spinner } from '../../../../../assets/icons';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
+import roleService from "../../../../../utils/roleService.helper";
 import { CheckBoxOutlineBlank } from '@material-ui/icons';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
+const RoleUser = new roleService();
 export default class DeletedServiceOrderList extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -68,20 +70,22 @@ export default class DeletedServiceOrderList extends React.PureComponent {
     return (
       <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow>
-          <TableCell className= "table-cell-checkbox">
-            {this.props.displayServiceCheckbox && 
-              <Checkbox
-                icon={<CheckBoxOutlineBlank fontSize="small" />}
-                checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
-                checked={this.state.checkedValue}
-                onChange={this.handleClicks}
-                onClick={({target: { checked }}) => {
-                  if(checked) return this.props.onChooseAllService(this.props.serviceOrderListDeleted.Lists);
-                  return this.props.onChooseAllService([]);
-                }}
-              />
-            }
-          </TableCell>
+        {Number(RoleUser.role()) !== 1 ? "" :
+            <TableCell className= "table-cell-checkbox">
+              {this.props.displayServiceCheckbox && 
+                <Checkbox
+                  icon={<CheckBoxOutlineBlank fontSize="small" />}
+                  checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
+                  checked={this.state.checkedValue}
+                  onChange={this.handleClicks}
+                  onClick={({target: { checked }}) => {
+                    if(checked) return this.props.onChooseAllService(this.props.serviceOrderListDeleted.Lists);
+                    return this.props.onChooseAllService([]);
+                  }}
+                />
+              }
+            </TableCell>
+          }
           <TableCell align="left" className="table-cell">WO</TableCell>
           <TableCell align="left" className="table-cell">CUSTOMER</TableCell>
           <TableCell align="left" className="table-cell">SITE</TableCell>
@@ -114,7 +118,14 @@ export default class DeletedServiceOrderList extends React.PureComponent {
             />
           }
         </TableCell>
-        <TableCell align="left" className="table-cell-smr"> {row.WoNumber} </TableCell>
+        {Number(RoleUser.role()) === 1 ?
+          <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell> :
+          <TableCell 
+            align="left" 
+            className={this.props.pageLoc === "Status" ? "table-cell-pk-status" : "table-cell-smr"}> 
+            {row.WoNumber} 
+          </TableCell>
+        }
         <TableCell align="left" className="table-cell-cst"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell-short"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>

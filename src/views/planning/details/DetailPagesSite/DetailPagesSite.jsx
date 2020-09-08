@@ -14,7 +14,6 @@ class DetailPagesSite extends React.Component{
     constructor(props) {
       super(props)
       this.state = {
-        value: 0,
         stats: true,
         whichTabs: true,
         isShowPerPage: true,
@@ -53,41 +52,145 @@ componentDidUpdate = (prevProps) => {
   if(prevProps.searchServiceParameter !== this.props.searchServiceParameter){
     this.fetchSearchService();
   }
+  
   // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
-    if(this.props.indexFilterParameter.indexTabParameter === 0){
-      this.props.updateServiceParameter({
-        ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
-      })
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
+      if(this.props.indexFilterParameter.indexTabParameter === 0){
+        this.props.updateServiceParameter({
+          ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
+        })
+      }
+    }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
+      if(this.props.indexFilterParameter.indexTabParameter === 0){
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
+        })
+      }
+    }else{
+      if(this.props.indexFilterParameter.indexTabParameter === 0){
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
+        })
+      }else{
+        this.props.updateServiceParameter({
+          ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterParameter.Filter, PageNumber: 1
+        })
+      }
     }
   }
-
+  
   if(prevProps.searchSalesRevParam !== this.props.searchSalesRevParam){
     this.fetchSearchSalesRev();
   }
 
   //FILTER RANGE LIFETIME
-  if(prevProps.filterLifetime !== this.props.filterLifetime){
-    this.props.updateServiceParameter({
-      ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterLifetime.Filter, PageNumber: 1
-    })
+  if(Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 || 
+    Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){   
+    if(prevProps.filterLifetime !== this.props.filterLifetime){
+      this.props.updateSalesParameter({
+        ...prevProps.salesParameter.dataFilter, Filter: this.props.filterLifetime.Filter, PageNumber: 1,
+      })
+    }
+  }else{
+    if(prevProps.filterLifetime !== this.props.filterLifetime){
+      this.props.updateServiceParameter({
+        ...prevProps.serviceParameter.dataFilter, Filter : this.props.filterLifetime.Filter, PageNumber: 1
+      })
+    }
   }
 
   //FILTER RANGE SMR
-  if (prevProps.filterSmr !== this.props.filterSmr) {
-    this.props.updateServiceParameter({
-      ...prevProps.serviceParameter.dataFilter, Filter: this.props.filterSmr.Filter, PageNumber: 1,
-    })
+  if(Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){ 
+    if(this.state.whichTabs){
+      if (prevProps.filterSmr !== this.props.filterSmr) {
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter: this.props.filterSmr.Filter, PageNumber: 1,
+        })
+      }
+    }else{
+      if (prevProps.filterSmr !== this.props.filterSmr) {
+        this.props.updateServiceParameter({
+          ...prevProps.serviceParameter.dataFilter, Filter: this.props.filterSmr.Filter, PageNumber: 1,
+        })
+      }
+    }
+  }else if(Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
+    if (prevProps.filterSmr !== this.props.filterSmr) {
+      this.props.updateServiceParameter({
+        ...prevProps.serviceParameter.dataFilter, Filter: this.props.filterSmr.Filter, PageNumber: 1,
+      })
+    }
+  }else{
+    if (prevProps.filterSmr !== this.props.filterSmr) {
+      this.props.updateSalesParameter({
+        ...prevProps.salesParameter.dataFilter, Filter: this.props.filterSmr.Filter, PageNumber: 1,
+      })
+    }
   }
 
   //FILTER RANGE DATE
-  if(prevProps.filterDate !== this.props.filterDate){
-    this.props.fetchServiceOrder(this.props.filterDate,this.props.token);
+  if(Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){ 
+    if(this.state.whichTabs){
+      if(prevProps.filterDate !== this.props.filterDate){
+        this.props.fetchSalesOrder(this.props.filterDate,this.props.token);
+      }
+    }else{
+      if(prevProps.filterDate !== this.props.filterDate){
+        this.props.fetchServiceOrder(this.props.filterDate,this.props.token);
+      }
+    }
+  }else if(Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
+    if(prevProps.filterDate !== this.props.filterDate){
+      this.props.fetchServiceOrder(this.props.filterDate,this.props.token);
+    }
+  }else{
+    if(prevProps.filterDate !== this.props.filterDate){
+      this.props.fetchSalesOrder(this.props.filterDate,this.props.token);
+    }
   }
 
   //FILTER RANGE SMR DATE
-  if (prevProps.filterDateSmr !== this.props.filterDateSmr) {
-    this.props.fetchServiceOrder(this.props.filterDateSmr, this.props.token);
+  if(Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){ 
+    if(this.state.whichTabs){
+      if(prevProps.filterDateSmr !== this.props.filterDateSmr){
+        this.props.fetchSalesOrder(this.props.filterDateSmr,this.props.token);
+      }
+    }else{
+      if(prevProps.filterDateSmr !== this.props.filterDateSmr){
+        this.props.fetchServiceOrder(this.props.filterDateSmr,this.props.token);
+      }
+    }
+  }else if(Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
+    if(prevProps.filterDateSmr !== this.props.filterDateSmr){
+      this.props.fetchServiceOrder(this.props.filterDateSmr,this.props.token);
+    }
+  }else{
+    if(prevProps.filterDateSmr !== this.props.filterDateSmr){
+      this.props.fetchSalesOrder(this.props.filterDateSmr,this.props.token);
+    }
+  }
+
+  //ini untuk trigger sales global search
+  if(Number(RoleUser.role()) === 3 || Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){   
+    if (prevProps.salesSearch !== this.props.salesSearch) {
+      this.props.updateSearchSales({
+        ...prevProps.searchSalesParameter, Category: 'Approval', Keyword: this.props.salesSearch,
+      });
+    }
+  }else{
+    if (prevProps.salesSearch !== this.props.salesSearch) {
+      this.props.updateSearchSales({
+        ...prevProps.searchSalesParameter, Category: 'Lifetime', Keyword: this.props.salesSearch,
+      });
+    }
+    //ini untuk trigger sales global search revision
+    else if (prevProps.salesSearchRevision !== this.props.salesSearchRevision) {
+      this.props.updateSearchRevSales({
+        ...prevProps.searchSalesRevParam, Category: 'SR', Keyword: this.props.salesSearchRevision,
+      });
+    }
   }
 
   //ini untuk trigger service global search
@@ -98,10 +201,45 @@ componentDidUpdate = (prevProps) => {
   }
 
   //search per component
-  if(this.state.whichTabs && prevProps.searchComp !== this.props.searchComp){
-    this.props.updateServiceParameter({
-      ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
-    });
+  if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
+    if(this.state.whichTabs && prevProps.searchComp !== this.props.searchComp){
+      this.props.updateServiceParameter({
+        ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+      });
+    }
+  }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
+    Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
+    if(this.state.whichTabs && prevProps.searchComp !== this.props.searchComp){
+      if(this.props.searchComp[0].Value === ""){
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+        });  
+      }else{
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+        });
+      }
+    }
+  }else{
+    if(this.state.whichTabs){
+      if(prevProps.searchComp !== this.props.searchComp){
+        if(this.props.searchComp[0].Value === ""){
+          this.props.updateSalesParameter({
+            ...prevProps.salesParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+          });  
+        }else{
+          this.props.updateSalesParameter({
+            ...prevProps.salesParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+          });
+        }
+      }
+    }else{
+      if(prevProps.searchComp !== this.props.searchComp){
+        this.props.updateServiceParameter({
+          ...prevProps.serviceParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+        });
+      }
+    }
   }
   
   // SALES ORDER SORTING
@@ -191,6 +329,28 @@ componentDidUpdate = (prevProps) => {
             PageNumber: 1,
             Sort: [{
               Field : 'ComponentDescription',
+              Direction : 'asc'
+            }]
+        });
+      }
+    };
+    if (sortSalesBy.PlanType.isActive) {
+      isDescending = !sortSalesBy.PlanType.isAscending;
+      this.props.updateSalesParameter({
+        ...this.props.salesParameter.dataFilter,
+          PageNumber: 1,
+          Sort: [{
+            Field : 'PlanType',
+            Direction : 'desc'
+          }],
+      });
+      if (sortSalesBy.PlanType.isAscending === !sortSalesBy.PlanType.isActive) {
+        isDescending = !sortSalesBy.PlanType.isAscending;
+        this.props.updateSalesParameter({
+          ...this.props.salesParameter.dataFilter,
+            PageNumber: 1,
+            Sort: [{
+              Field : 'PlanType',
               Direction : 'asc'
             }]
         });
@@ -322,23 +482,83 @@ componentDidUpdate = (prevProps) => {
     }if (pageValue === 0) {
       this.setState({whichTabs : false})
     }
-    if (this.state.whichTabs === true) {
-      const web = this.props.displayMode === 'web';
-      const currentPropsService = this.props.serviceOrderList.PageNumber;
-      const { TotalPages } = this.props.serviceOrderList;
-      return(
-        <div className="paginations">
-          <div className="paging-revision">
-            {web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive-revision">{currentPropsService - 3}</div>}
-            {web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive-revision">{currentPropsService - 2}</div>}
-            {currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive-revision">{currentPropsService - 1}</div>}
-            <div className="page-active-revision">{currentPropsService}</div>
-            {currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive-revision">{currentPropsService + 1}</div>}
-            {web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive-revision">{currentPropsService + 2}</div>}
-            {web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive-revision">{currentPropsService + 3}</div>}
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
+      if (this.state.whichTabs === true) {
+        const web = this.props.displayMode === 'web';
+        const currentPropsService = this.props.serviceOrderList.PageNumber;
+        const { TotalPages } = this.props.serviceOrderList;
+        return(
+          <div className="paginations">
+            <div className="paging-revision">
+              {web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive-revision">{currentPropsService - 3}</div>}
+              {web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive-revision">{currentPropsService - 2}</div>}
+              {currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive-revision">{currentPropsService - 1}</div>}
+              <div className="page-active-revision">{currentPropsService}</div>
+              {currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive-revision">{currentPropsService + 1}</div>}
+              {web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive-revision">{currentPropsService + 2}</div>}
+              {web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive-revision">{currentPropsService + 3}</div>}
+            </div>
           </div>
-        </div>
-      )
+        )
+      }
+    }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
+      if (this.state.whichTabs === true) {
+        const web = this.props.displayMode === 'web';
+        const currentPropsSales = this.props.salesOrderList.PageNumber;
+        const { TotalPages } = this.props.salesOrderList;
+        
+        return(
+          <div className="paginations">
+            <div className="paging-revision">
+              {web && currentPropsSales - 3 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 3 })} className="page-inactive-revision">{currentPropsSales - 3}</div>}
+              {web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive-revision">{currentPropsSales - 2}</div>}
+              {currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive-revision">{currentPropsSales - 1}</div>}
+              <div className="page-active-revision">{currentPropsSales}</div>
+              {currentPropsSales + 1 <= TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive-revision">{currentPropsSales + 1}</div>}
+              {web && currentPropsSales + 2 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive-revision">{currentPropsSales + 2}</div>}
+              {web && currentPropsSales + 3 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive-revision">{currentPropsSales + 3}</div>}
+            </div>
+          </div>
+        )
+      }
+    }else if(Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){
+      if (this.state.whichTabs === true) {
+        const web = this.props.displayMode === 'web';
+        const currentPropsSales = this.props.salesOrderList.PageNumber;
+        const { TotalPages } = this.props.salesOrderList;
+        
+        return(
+          <div className="paginations">
+            <div className="paging-revision">
+              {web && currentPropsSales - 3 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 3 })} className="page-inactive-revision">{currentPropsSales - 3}</div>}
+              {web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive-revision">{currentPropsSales - 2}</div>}
+              {currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive-revision">{currentPropsSales - 1}</div>}
+              <div className="page-active-revision">{currentPropsSales}</div>
+              {currentPropsSales + 1 <= TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive-revision">{currentPropsSales + 1}</div>}
+              {web && currentPropsSales + 2 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive-revision">{currentPropsSales + 2}</div>}
+              {web && currentPropsSales + 3 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive-revision">{currentPropsSales + 3}</div>}
+            </div>
+          </div>
+        )
+      }else{
+        const web = this.props.displayMode === 'web';
+        const currentPropsService = this.props.serviceOrderList.PageNumber;
+        const { TotalPages } = this.props.serviceOrderList;
+        return(
+          <div className="paginations">
+            <div className="paging-revision">
+              {web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive-revision">{currentPropsService - 3}</div>}
+              {web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive-revision">{currentPropsService - 2}</div>}
+              {currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive-revision">{currentPropsService - 1}</div>}
+              <div className="page-active-revision">{currentPropsService}</div>
+              {currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive-revision">{currentPropsService + 1}</div>}
+              {web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive-revision">{currentPropsService + 2}</div>}
+              {web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive-revision">{currentPropsService + 3}</div>}
+            </div>
+          </div>
+        )
+      }
     }
   }
 
@@ -435,25 +655,24 @@ componentDidUpdate = (prevProps) => {
   onClickRevisedSales = async() => {
     await this.props.fetchRevisedSales({
       ...this.props.salesRevisedParam.dataFilter,
-      Filter : 
-        [...this.props.salesRevisedParam.dataFilter.Filter, 
-        {
+      Filter:
+        [...this.props.salesRevisedParam.dataFilter.Filter, {
           Field 	 : 'IsRevised',
           Operator : 'eq',
           Value 	 : 'true',
           Logic 	 : 'AND'
-        },{
+        }, {
           Field    : 'IsChanged',
           Operator : 'eq',
           Value    : 'false',
           Logic    : "AND"
-        },{
+        }, {
           Field : 'SAPIssueMessage',
           Operator : 'eq',
           Value : '-',
           Logic : 'AND'
         }]
-    },this.props.token);
+    }, this.props.token);
   }
 
   //KOMPONEN UNTUK SHOW PER/PAGE
@@ -467,9 +686,25 @@ componentDidUpdate = (prevProps) => {
   }
 
   handleClickShowPerPage = (value) =>{
-    if (this.state.whichTabs === true) {
-      this.props.clearSelectedServicePlans();
-      this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value})
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
+      if (this.state.whichTabs === true) {
+        this.props.clearSelectedServicePlans();
+        this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value})
+      }
+    }else if(Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
+      if (this.state.whichTabs === true) {
+        this.props.clearSelectedSalesPlans();
+        this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value})
+      }
+    }else{
+      if (this.state.whichTabs === true) {
+        this.props.clearSelectedSalesPlans();
+        this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value})
+      }else{
+        this.props.clearSelectedServicePlans();
+        this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value})
+      }
     }
   }
 
@@ -485,29 +720,61 @@ componentDidUpdate = (prevProps) => {
     )
   }
 
-  handleClick = (menu, tab) => {
-    this.props.push({
-      pathname: menu,
-      whichTab: tab
-    });
-  }
-
   resetFilter = () => {
-    this.props.updateServiceParameter({
-      ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
-    });
-    this.props.selectedFilters.customerType= "All Customer"
-    this.props.selectedFilters.siteType= "All Site"
-    this.props.selectedFilters.unitType= "All Unit Model"
-    this.props.selectedFilters.compType= "All Component"
-    this.props.selectedFilters.planType= "All Plan Type"
-    this.props.filterParameter.Filter.length = 0
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
+      if (this.state.whichTabs === true) {
+        this.props.updateServiceParameter({
+          ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+        });
+        this.props.selectedFilters.customerType= "All Customer"
+        this.props.selectedFilters.siteType= "All Site"
+        this.props.selectedFilters.unitType= "All Unit Model"
+        this.props.selectedFilters.compType= "All Component"
+        this.props.selectedFilters.planType= "All Plan Type"
+        this.props.filterParameter.Filter.length = 0
+      }
+    } else if(Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
+      if (this.state.whichTabs === true) {
+        this.props.updateSalesParameter({
+          ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+        });
+        this.props.selectedFilters.customerType= "All Customer"
+        this.props.selectedFilters.siteType= "All Site"
+        this.props.selectedFilters.unitType= "All Unit Model"
+        this.props.selectedFilters.compType= "All Component"
+        this.props.selectedFilters.planType= "All Plan Type"
+        this.props.filterParameter.Filter.length = 0
+      }
+    } else {
+      if (this.state.whichTabs === true) {
+        this.props.updateSalesParameter({
+          ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+        });
+        this.props.selectedFilters.customerType= "All Customer"
+        this.props.selectedFilters.siteType= "All Site"
+        this.props.selectedFilters.unitType= "All Unit Model"
+        this.props.selectedFilters.compType= "All Component"
+        this.props.selectedFilters.planType= "All Plan Type"
+        this.props.filterParameter.Filter.length = 0
+      }else{
+        this.props.updateServiceParameter({
+          ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+        });
+        this.props.selectedFilters.customerType= "All Customer"
+        this.props.selectedFilters.siteType= "All Site"
+        this.props.selectedFilters.unitType= "All Unit Model"
+        this.props.selectedFilters.compType= "All Component"
+        this.props.selectedFilters.planType= "All Plan Type"
+        this.props.filterParameter.Filter.length = 0
+      }
+    }
 	}
 
   //KOMPONEN UNTUK GLOBAL SEARCH
   _renderSearchBar(){
     return (
-      <div className= "bottom-row-detail-site">
+      <div className="bottom-row-detail-site">
         <BaseButton titles= "Reset"
           {...this.props}
           whatTabsIsRendered= {false}
@@ -524,11 +791,30 @@ componentDidUpdate = (prevProps) => {
 
   handleSearch=(value)=>{
     this.setState({ searchVal : value})
-    if (this.state.whichTabs === true) {
-      setTimeout(() => {
-        this.props.onSearchService(this.state.searchVal)
-      }, 1000);
-    } 
+    if (Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11){
+      if (this.state.whichTabs === true) {
+        setTimeout(() => {
+          this.props.onSearchService(this.state.searchVal)
+        }, 1000);
+      }
+    }else if (Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
+      Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12){
+      if (this.state.whichTabs === true) {
+        setTimeout(() => {
+          this.props.onSearchSales(this.state.searchVal)
+        }, 1000);
+      }
+    }else{
+      if (this.state.whichTabs === true) {
+        setTimeout(() => {
+          this.props.onSearchSales(this.state.searchVal)
+        }, 1000);
+      }else {
+        setTimeout(() => {
+          this.props.onSearchService(this.state.searchVal)
+        }, 1000);
+      }
+    }
   }
   
   //Komponen untuk global search revision list
@@ -537,7 +823,8 @@ componentDidUpdate = (prevProps) => {
       <div className="search-site">
         <SearchInput
           {...this.props}
-          webInfo="Search revision"
+          idSearch= "Rev"
+          webInfo= "Search revision"
           handleSearch={this.handleSearchRevision}
         />
       </div>
@@ -636,7 +923,7 @@ componentDidUpdate = (prevProps) => {
           stats={this.state.stats}
           onStats={this.isChangeStat}     
           totalSalesData={this.props.salesOrderList.TotalDataLifetime}
-          totalServiceData={this.props.serviceOrderList.TotalDataApproval}
+          totalServiceData={this.props.serviceOrderList.TotalData}
           onClickTabHead={this.props.onClickSortBy}
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}
@@ -648,18 +935,39 @@ componentDidUpdate = (prevProps) => {
     );
   };
 
-  render(){
+  render(){     
     return(
       <main className="content">
           <div className="table-detail-site">
               {this._renderTabs()}
           </div>
           <div></div>
-          {this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
-            <div className="bottom-row-detail-site">
-                {this._renderShowPerPage()} {this._renderPagination()}
-            </div>
-          }
+          {Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
+          ? <>
+              {this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                <div className="bottom-row-detail-site">
+                    {this._renderShowPerPage()} {this._renderPagination()}
+                </div>
+              }
+            </>
+          : Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 ||
+            Number(RoleUser.role()) === 8 || Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12
+          ? <>
+              {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                <div className="bottom-row-detail-site">
+                    {this._renderShowPerPage()} {this._renderPagination()}
+                </div>
+              }
+            </>
+          : <>
+              {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                <div className="bottom-row-detail-site">
+                    {this._renderShowPerPage()} {this._renderPagination()}
+                </div>
+              }
+            </>
+        }
       </main>
     )
   }

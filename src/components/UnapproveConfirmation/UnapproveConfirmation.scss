@@ -205,12 +205,12 @@
     }
     
     .labelMax{
-        width: 150%;
+        display: flex;
+        align-self: flex-end;
         margin-top: 5%;
-        margin-left: 190%;
-        font-size: vw(13) !important;
+        font-size: 0.67708vw !important;
         font-weight: bold;
-        line-height: vw(16) !important;
+        line-height: 0.83333vw !important;
         font-family: 'Lato-Regular';
         color: red;
         .label{

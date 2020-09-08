@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, TextField,Table, TableHead, TableRow, TableBody, TableCell, Paper } from '@material-ui/core';
+import { Button, Modal, TextField,Table, TableHead, TableRow, TableBody, TableCell, Paper, Tooltip } from '@material-ui/core';
 import './SapIssue.scss';
 import CloseButton from '../../../../../components/CloseButton/CloseButton';
 import moment from 'moment';
@@ -7,9 +7,8 @@ import moment from 'moment';
 export default class SapIssue extends React.Component{
 
   state={
-      isShowModal: false,
-      description: [],
-      SAPIssue: []
+    isShowModal: false,
+    description: []
   }
 
   handleChange(id, e) {
@@ -19,44 +18,58 @@ export default class SapIssue extends React.Component{
   }
 
   _showTableHead() {
-      return (
-        <TableHead className="table-head-issue" >
+    return (
+      <TableHead className="table-head-issue" >
         <TableRow className="table-row-issue">
-          <TableCell>WO</TableCell>
-          <TableCell>Customer</TableCell>
-          <TableCell>Site</TableCell>
-          <TableCell>Unit Model</TableCell>
-          <TableCell>Component Description</TableCell>
-          <TableCell>Part Number</TableCell>
-          <TableCell>Unit Code</TableCell>
-          <TableCell>Serial Number</TableCell>
-          <TableCell>Lifetime</TableCell>
-          <TableCell>Plan</TableCell>
+          {this.props.whichTabs ? 
+            <TableCell align="left" className="tc-pk-head">SO</TableCell> : 
+            <TableCell align="left" className="tc-pk-head">WO</TableCell>
+          }
+          <TableCell align="left" className="table-cell-issue">CUSTOMER</TableCell>
+          <TableCell align="left" className="table-cell-issue">SITE</TableCell>
+          <TableCell align="left" className="table-cell-issue">UNIT MODEL</TableCell>
+          <TableCell align="left" className="table-cell-issue">COMPONENT DESC</TableCell>
+          <TableCell align="left" className="table-cell-issue">PART NUMBER</TableCell>
+          <TableCell align="left" className="table-cell-issue">UNIT CODE</TableCell>
+          <TableCell align="left" className="table-cell-issue">SERIAL NUMBER</TableCell>
+          <TableCell align="left" className="table-cell-issue">LIFETIME COMP</TableCell>
+          <TableCell align="left" className="table-cell-issue">PLAN EXECUTION</TableCell>
+          <TableCell align="left" className="table-cell-issue">SMR </TableCell>
+          <TableCell align="left" className="table-cell-issue">SMR DATE</TableCell>
+          <TableCell align="left" className="table-cell-issue">PLAN TYPE</TableCell>
         </TableRow>
       </TableHead>
     )
   }
 
   _showTableBody(row, id) {
-      return (
-        <>
-        <TableRow className="table-row-issue">
-          <TableCell align="left" className="table-cell-issue"> {row.WoNumber} </TableCell>
-          <TableCell align="left" className="table-cell-issue"> {row.CustomerName} </TableCell>
-          <TableCell align="left" className="table-cell-issue"> {row.SiteCode} </TableCell>
+    return (
+      <TableBody className= "table-body-issue">
+        <TableRow className="table-row-top-issue">
+          {this.props.whichTabs ?
+            <TableCell align="left" className="tc-pk-body"> {row.SoNumber} </TableCell> : 
+            <TableCell align="left" className="tc-pk-body"> {row.WoNumber} </TableCell>
+          }
+          <TableCell align="left" className="tc-cst"> {row.CustomerName} </TableCell>
+          <TableCell align="left" className="tc-short"> {row.SiteCode} </TableCell>
           <TableCell align="left" className="table-cell-issue"> {row.UnitModel} </TableCell>
-          <TableCell align="left" className="table-cell-issue"> {row.ComponentDescription} </TableCell>
+          <TableCell align="left" className="tc-long"> {row.ComponentDescription} </TableCell>
           <TableCell align="left" className="table-cell-issue"> {row.PartNumber} </TableCell>
           <TableCell align="left" className="table-cell-issue"> {row.UnitCode} </TableCell>
           <TableCell align="left" className="table-cell-issue"> {row.SerialNumber} </TableCell>
-          <TableCell align="center" className="table-cell-issue"> {row.LifeTimeComponent}</TableCell>
+          <TableCell align="left" className="table-cell-issue"> {row.LifeTimeComponent}</TableCell>
           <TableCell align="left" className="table-cell-issue"> {moment(row.PlanExecution).format('DD-MM-YYYY')} </TableCell>
+          <TableCell align="left" className="tc-smr"> {row.SMR} </TableCell>
+          <TableCell align="left" className="table-cell-issue"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
+          <Tooltip arrow title={row.PlanType.charAt(0) === "U" ? "UNSCHEDULE" : ""} >
+            <TableCell align="left" className="table-cell-issue"> {row.PlanType.substring(0, 3)} </TableCell>
+          </Tooltip>
         </TableRow>
         <TableRow className="table-row-bottom-issue">
           <TableCell colSpan="1"><label>Description<label className="label-required">*</label></label></TableCell>
-          <TableCell colSpan="11">{this._showDescription(id)}</TableCell>
+          <TableCell colSpan="12">{this._showDescription(id)}</TableCell>
         </TableRow>
-      </>
+      </TableBody>
     )
   }
 
@@ -64,14 +77,14 @@ export default class SapIssue extends React.Component{
     return(
       <div className="teks">
         <TextField 
-            className="teks"
-            type='text' 
-            placeholder="Tuliskan Masalahnya yaa.."
-            variant="outlined" 
-            size="small"
-            value={this.state.description[id]} 
-            name={this.state.description[id]} 
-            onChange={this.handleChange.bind(this, id)} 
+          className="teks"
+          type='text' 
+          placeholder="Tuliskan Masalahnya yaa.."
+          variant="outlined" 
+          size="small"
+          value={this.state.description[id]} 
+          name={this.state.description[id]} 
+          onChange={this.handleChange.bind(this, id)} 
         />
       </div>
     )
@@ -91,12 +104,10 @@ export default class SapIssue extends React.Component{
           </div>
           <div className="top-middle-issue"> 
             <Table size="small" component={Paper}>
-                {this._showTableHead()}
-                <TableBody>
-                  {this.props.selectedDataSAP
-                      && this.props.selectedDataSAP.map((row, id) => (this._showTableBody(row,id)) )
-                  }
-                </TableBody>
+              {this._showTableHead()}
+              {this.props.selectedDataSAP
+                && this.props.selectedDataSAP.map((row, id) => (this._showTableBody(row,id)) )
+              }
             </Table>
           </div>
           <div className="bottom-row-issue">

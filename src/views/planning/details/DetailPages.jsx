@@ -7,6 +7,7 @@ import FilterbyDataAction from '../../../components/FilterByDataAction/FilterbyD
 import NotifButton from '../../../components/ActionButton/NotifButton/NotifButton';
 import { Menu } from '../../../constants';
 import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
+import BaseButton from '../../../components/Button/BaseButton';
 
 class DetailPages extends React.Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class DetailPages extends React.Component {
 
   componentDidMount = () => {
     if (this.props.location.whichTab === undefined) {
-      this.handleClick(Menu.PLANNING_APPROVAL)
+      this.handleClick(Menu.PLANNING_INPUT_LIFETIME)
     }
   }
 
@@ -41,9 +42,11 @@ class DetailPages extends React.Component {
     if (prevProps.salesParameter !== this.props.salesParameter) {
       this.onClickSalesOrder()
     }
+
     if (prevProps.searchSalesParameter !== this.props.searchSalesParameter) {
       this.fetchSearchSales();
     }
+    
     // FILTER DROPDOWN
     if (prevProps.filterParameter !== this.props.filterParameter) {
       if (this.props.indexFilterParameter.indexTabParameter === 0) {
@@ -64,18 +67,28 @@ class DetailPages extends React.Component {
       })
     }
 
-    // FILTER RANGE DATE
+    //FILTER RANGE SMR
+    if(this.state.whichTabs){
+      if (prevProps.filterSmr !== this.props.filterSmr) {
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter: this.props.filterSmr.Filter, PageNumber: 1,
+        })
+      }
+    }
+
+    //FILTER RANGE DATE
     if (this.state.whichTabs) {
       if (prevProps.filterDate !== this.props.filterDate) {
         this.props.updateSalesParameter({
           ...prevProps.salesParameter.dataFilter, Filter: this.props.filterDate.Filter, PageNumber: 1
         })
       }
-    } else {
-      if (prevProps.filterDate !== this.props.filterDate) {
-        this.props.updateServiceParameter({
-          ...prevProps.serviceParameter.dataFilter, Filter: this.props.filterDate.Filter, PageNumber: 1
-        })
+    }
+
+    //FILTER RANGE SMR DATE
+    if (this.state.whichTabs) {
+      if (prevProps.filterDateSmr !== this.props.filterDateSmr) {
+        this.props.fetchSalesOrder(this.props.filterDateSmr, this.props.token);
       }
     }
 
@@ -193,6 +206,28 @@ class DetailPages extends React.Component {
           });
         }
       };
+      if (sortSalesBy.PlanType.isActive) {
+        isDescending = !sortSalesBy.PlanType.isAscending;
+        this.props.updateSalesParameter({
+          ...this.props.salesParameter.dataFilter,
+            PageNumber: 1,
+            Sort: [{
+              Field : 'PlanType',
+              Direction : 'desc'
+            }],
+        });
+        if (sortSalesBy.PlanType.isAscending === !sortSalesBy.PlanType.isActive) {
+          isDescending = !sortSalesBy.PlanType.isAscending;
+          this.props.updateSalesParameter({
+            ...this.props.salesParameter.dataFilter,
+              PageNumber: 1,
+              Sort: [{
+                Field : 'PlanType',
+                Direction : 'asc'
+              }]
+          });
+        }
+      };
     }
   }
 
@@ -253,29 +288,16 @@ class DetailPages extends React.Component {
 
   // SAAT MENGKLIK SALES ORDER TAB
   onClickSalesOrder = async () => {
-    if (this.props.location.whichTab === 'lifetime') {
-      await this.props.fetchSalesOrder({
-        ...this.props.salesParameter.dataFilter,
-        Filter:
-          [...this.props.salesParameter.dataFilter.Filter, {
-            Field: 'LifeTimeComponent',
-            Operator: "eq",
-            Value: 0,
-            Logic: "AND"
-          }]
-      }, this.props.token);
-    } else {
-      await this.props.fetchSalesOrder({
-        ...this.props.salesParameter.dataFilter,
-        Filter:
-          [...this.props.salesParameter.dataFilter.Filter, {
-            Field: 'LifeTimeComponent',
-            Operator: "neq",
-            Value: 0,
-            Logic: "AND"
-          }]
-      }, this.props.token);
-    }
+    await this.props.fetchSalesOrder({
+      ...this.props.salesParameter.dataFilter,
+      Filter:
+        [...this.props.salesParameter.dataFilter.Filter, {
+          Field: 'LifeTimeComponent',
+          Operator: "eq",
+          Value: 0,
+          Logic: "AND"
+        }]
+    }, this.props.token);
   }
 
   // KOMPONEN UNTUK SHOW PER/PAGE
@@ -298,11 +320,28 @@ class DetailPages extends React.Component {
     }
   }
 
-  // KOMPONEN UNTUK GLOBAL SEARCH
+  resetFilter = () => {
+    this.props.updateSalesParameter({
+      ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+    });
+    this.props.selectedFilters.customerType= "All Customer"
+    this.props.selectedFilters.siteType= "All Site"
+    this.props.selectedFilters.unitType= "All Unit Model"
+    this.props.selectedFilters.compType= "All Component"
+    this.props.selectedFilters.planType= "All Plan Type"
+    this.props.filterParameter.Filter.length = 0
+	}
+
+  //KOMPONEN UNTUK GLOBAL SEARCH
   _renderSearchBar() {
     return (
       <>
         <div className="bottom-row">
+          <BaseButton titles= "Reset"
+            {...this.props}
+            whatTabsIsRendered= {this.state.whichTabs}
+            resetFilter = {this.resetFilter}
+          />
           <SearchInput
             {...this.props}
             whichTabs={this.state.whichTabs}

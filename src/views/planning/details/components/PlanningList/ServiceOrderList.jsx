@@ -64,6 +64,7 @@ export default class ServiceOrderList extends React.PureComponent {
   isFilterDate = async (value1, value2) => {
     this.props.dateFilter(DateFilterAction, value1, value2, this.props.serviceParameter.dataFilter.PageSize);
   }
+
   
   isFilterSmrDate = async (value1, value2) => {
     this.props.filterSmrDate(
@@ -89,7 +90,7 @@ export default class ServiceOrderList extends React.PureComponent {
       return (
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
           <TableRow>
-            {this.props.idService === "Data Input" ? "" :
+            {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? "" :
               <TableCell className="table-cell-checkbox">
                 {this.props.displayServiceCheckbox &&
                   <Checkbox
@@ -125,7 +126,8 @@ export default class ServiceOrderList extends React.PureComponent {
       return (
         <TableHead className="table-head" classes={{ root: "table-head" }}>
           <TableRow>
-            {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? (
+            {this.props.idService === "Data Input" ||
+            Number(RoleUser.role()) !== 1 ? (
               ""
             ) : (
               <TableCell className="table-cell-checkbox">
@@ -226,7 +228,7 @@ export default class ServiceOrderList extends React.PureComponent {
   showTableBody(row, id) {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
-        {this.props.idService === "Data Input" ? "" :
+        {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? "" :
           <TableCell className="table-cell-checkbox">
             {this.props.displayServiceCheckbox &&
               <Checkbox
@@ -241,7 +243,8 @@ export default class ServiceOrderList extends React.PureComponent {
         {(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/ho") || Number(RoleUser.role()) !== 1 ?
           <TableCell
             align="left"
-            className={this.props.idService === "Data Input" ? "table-cell-pk" : "table-cell-smr"}>
+            className={this.props.pageLoc && this.props.idTab === "Status" ? "table-cell-pk-status"
+              : this.props.pageLoc === "Status" && this.props.idService === "Data Input" ? "table-cell-pk" : "table-cell-smr"}>
             {row.WoNumber}
           </TableCell>
           :
