@@ -119,9 +119,8 @@ class ApprovalTab extends React.Component {
 
   _renderServiceOrderList() {
     return (
-      <div className={this.props.serviceOrderList.Lists.length === 0
-        && this.props.fetchStatusServiceOrder === ApiRequestActionsStatus.SUCCEEDED ?
-        "planning-list-empty" : "plannings-list-container"}>
+      <div className={this.props.serviceOrderList.Lists.length === 0 
+        && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "planning-list-empty" : "plannings-list-container"}>
         <ServiceOrderList
           {...this.props}
           isClick={this.props.isClick}

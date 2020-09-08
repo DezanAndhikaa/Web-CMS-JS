@@ -103,7 +103,6 @@ class LoginPage extends React.Component {
             : <VisibilityOff className="visibility-icon" onClick={() => this.setState((prevState) => ({ showPassword: !prevState.showPassword }))} />
         }
         <Button disabled={this.isDisabled()} variant="contained" className={this.isDisabled() ? 'btn-login-disabled' : 'btn-login'} onClick={this.handleLogin}>
-        {/* onClick={() => this._handleSubmit(props.values)} */}
           Log In
         </Button>
       </form>

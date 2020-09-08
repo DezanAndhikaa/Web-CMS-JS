@@ -60,7 +60,7 @@ class DetailPages extends React.Component {
       }
     }
 
-    //FILTER RANGE LIFETIME
+    // FILTER RANGE LIFETIME
     if (prevProps.filterLifetime !== this.props.filterLifetime) {
       this.props.updateSalesParameter({
         ...prevProps.serviceParameter.dataFilter, Filter: this.props.filterLifetime.Filter, PageNumber: 1
@@ -92,14 +92,14 @@ class DetailPages extends React.Component {
       }
     }
 
-    //ini untuk trigger sales global search
+    // TRIGGER SEARCH GLOBAL SALES
     if (prevProps.salesSearch !== this.props.salesSearch) {
       this.props.updateSearchSales({
         ...prevProps.searchSalesParameter, Category: 'Lifetime', Keyword: this.props.salesSearch,
       });
     }
 
-    //search per component
+    // SEARCH PER COMPONENT
     if (this.state.whichTabs) {
       if (prevProps.searchComp !== this.props.searchComp) {
         if (this.props.searchComp[0].Value === "") {
@@ -281,12 +281,12 @@ class DetailPages extends React.Component {
     }
   }
 
-  //SAAT MENGKLIK service ORDER TAB
+  // SAAT MENGKLIK SERVICE ORDER TAB
   onClickServiceOrder = async () => {
     await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
   }
 
-  //SAAT MENGKLIK sales ORDER TAB
+  // SAAT MENGKLIK SALES ORDER TAB
   onClickSalesOrder = async () => {
     await this.props.fetchSalesOrder({
       ...this.props.salesParameter.dataFilter,
@@ -300,7 +300,7 @@ class DetailPages extends React.Component {
     }, this.props.token);
   }
 
-  //KOMPONEN UNTUK SHOW PER/PAGE
+  // KOMPONEN UNTUK SHOW PER/PAGE
   _renderShowPerPage = () => {
     return (
       <DropDownList
@@ -353,7 +353,6 @@ class DetailPages extends React.Component {
     );
   }
 
-  ///Rendering revision search bar
   _renderSearchBarRevision() {
     return (
       <>
@@ -402,7 +401,7 @@ class DetailPages extends React.Component {
     })
   }
 
-  //KOMPONEN UNTUK FILTER DATA ACTION
+  // KOMPONEN UNTUK FILTER DATA ACTION
   _renderFilterByDataAction = (value) => {
     if (value === 1) {
       this.setState({ whichTabs: true })
@@ -443,7 +442,7 @@ class DetailPages extends React.Component {
     });
   };
 
-  //FUNGSI UNTUK MULTI SELECT SALES ORDER
+  // FUNGSI UNTUK MULTI SELECT SALES ORDER
   updateAssignmentSalesStates = (plan) => {
     if (this.props.selectedSalesPlans
       .some((plans) => plans.SoNumber === plan.SoNumber,
@@ -451,7 +450,7 @@ class DetailPages extends React.Component {
     return this.props.selectSalesPlan(plan);
   };
 
-  //FUNGSI UNTUK MULTI SELECT SERVICE ORDER
+  // FUNGSI UNTUK MULTI SELECT SERVICE ORDER
   updateAssignmentServiceStates = (plan) => {
     if (this.props.selectedServicePlans
       .some((plans) => plans.WoNumber === plan.WoNumber,
@@ -459,7 +458,7 @@ class DetailPages extends React.Component {
     return this.props.selectServicePlan(plan);
   };
 
-  //KOMPONEN UNTUK RENDER PAGE SALES ORDER DAN SERVICE ORDER
+  // KOMPONEN UNTUK RENDER PAGE SALES ORDER DAN SERVICE ORDER
   _renderTabs() {
     return (
       <>

@@ -47,10 +47,10 @@ import {
 	storePlanDataAction,
 	salesParameterRevAction,
 	dateFilterAction, 
+	smrDateFilterAction,
 	searchSalesRevisionAction,
 	UpdateSearchSalesRevAction,
-	smrFilterAction,
-	smrDateFilterAction
+	smrFilterAction
 } from '../../details/DetailPages-action';
 import DetailPagesSite from './DetailPagesSite';
 

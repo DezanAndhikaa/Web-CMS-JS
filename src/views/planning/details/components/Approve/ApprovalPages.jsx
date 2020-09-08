@@ -2,7 +2,7 @@ import React from 'react';
 import './ApprovalPages.scss';
 import ApprovalTab from './ApprovalTab/ApprovalTab';
 import { ApiRequestActionsStatus } from "../../../../../core/RestClientHelpers";
-import DropDownList from '../../../../../components/DropdownList/DropDownList';
+import DropDownList from "../../../../../components/DropdownList/DropDownList";
 import SearchInput from "../../../../../components/Searchbar/SearchInput";
 import BaseButton from '../../../../../components/Button/BaseButton';
 import FilterbyDataAction from '../../../../../components/FilterByDataAction/FilterbyDataAction';
@@ -430,9 +430,9 @@ class ApprovalPages extends React.Component {
             {web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive-approval">{currentPropsService + 3}</div>}
           </div>
         </div>
-      )
+      );
     }
-  }
+  };
 
   fetchSearchSales = async () => {
     await this.props.fetchSalesOrder(this.props.searchSalesParameter, this.props.token);
@@ -500,7 +500,7 @@ class ApprovalPages extends React.Component {
         {...this.props}
         handleClickShowPerPage={this.handleClickShowPerPage}
       />
-    )
+    );
   }
 
   handleClickShowPerPage = (value) => {
@@ -511,7 +511,19 @@ class ApprovalPages extends React.Component {
       this.props.clearSelectedServicePlans();
       this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value })
     }
-  }
+  };
+
+  resetFilter = () => {
+    this.props.updateServiceParameter({
+      ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+    });
+    this.props.selectedFilters.customerType= "All Customer"
+    this.props.selectedFilters.siteType= "All Site"
+    this.props.selectedFilters.unitType= "All Unit Model"
+    this.props.selectedFilters.compType= "All Component"
+    this.props.selectedFilters.planType= "All Plan Type"
+    this.props.filterParameter.Filter.length = 0
+	}
 
   resetFilter = () => {
     if (this.state.whichTabs === true){
@@ -580,7 +592,7 @@ class ApprovalPages extends React.Component {
           idNotif="Non-Status"
         />
       </>
-    )
+    );
   }
 
   //FUNGSI UNTUK MENGAPROVE SALES ORDER
@@ -610,13 +622,13 @@ class ApprovalPages extends React.Component {
     const index = this.props.selectedServicePlans.length
     if (this.props.selectedServicePlans.length > 0) {
       for (let i = 0; i < index; i++) {
-        arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
+        arr = [...arr, this.props.selectedServicePlans[i].WoNumber];
       }
       await this.props.approveService({ WoNumbers: arr, IsApprove: true }, this.props.token)
       this.onClickServiceOrder();
       await this.props.clearSelectedServicePlans();
     }
-  }
+  };
 
   handleSendtoEdit = async () => {
     let arr = []
@@ -704,8 +716,8 @@ class ApprovalPages extends React.Component {
       <>
         <ConfirmationModal idModal="Approved" openModal={this.state.openSuccess} onClose={this.closeSuccess} />
       </>
-    )
-  }
+    );
+  };
 
   _renderSalesDeleted = () => {
     return (
@@ -828,7 +840,7 @@ class ApprovalPages extends React.Component {
         />
       </>
     );
-  };
+  }
 
   render() {
     return (
@@ -882,7 +894,7 @@ class ApprovalPages extends React.Component {
             </div>
         }
       </main>
-    )
+    );
   }
 }
 

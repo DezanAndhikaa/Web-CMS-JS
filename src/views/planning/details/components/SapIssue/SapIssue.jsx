@@ -90,6 +90,8 @@ export default class SapIssue extends React.Component{
     )
   }
 
+  isDisabled() { return this.state.description.length === 0 }
+
   _renderIssue(){
     return(
       <div className="assign-mechanic-modal-issue">
@@ -110,7 +112,10 @@ export default class SapIssue extends React.Component{
           </div>
           <div className="bottom-row-issue">
               <p className="btn-cancel-issue">* Please check again before pressing the send button</p>
-              <Button className="btn-input-issue" onClick={ async () => {this.props.onKelik(this.state.description);this.props.isTry()} } >Send</Button>
+              <Button 
+                disabled={this.isDisabled()}
+                className={this.isDisabled() ? 'btn-input-issue-disabled' : 'btn-input-issue'} 
+                onClick={ async () => {this.props.onKelik(this.state.description); this.props.isTry()} } > Send</Button>
           </div>
         </div>
       </div>

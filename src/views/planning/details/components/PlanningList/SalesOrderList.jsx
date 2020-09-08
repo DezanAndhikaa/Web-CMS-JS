@@ -188,7 +188,7 @@ export default class SalesOrderList extends React.PureComponent {
               onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
             />
             <PlanningListHeader
-              name="COMP DESC"
+              name="COMPONENT DESC"
               isActive={this.props.sortSalesByState.CompDesc.isActive}
               delay={300}
               isAscending={this.props.sortSalesByState.CompDesc.isAscending}
@@ -262,7 +262,7 @@ export default class SalesOrderList extends React.PureComponent {
             }
           </TableCell>
         }
-        {(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/ho") || Number(RoleUser.role()) !== 1 ?
+        {(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/ho") || this.props.idSales === "Data Input" || Number(RoleUser.role()) !== 1 ?
           <TableCell
             align="left"
             className={this.props.pageLoc && this.props.idTab === "Status" ? "table-cell-pk-status"
@@ -293,12 +293,15 @@ export default class SalesOrderList extends React.PureComponent {
         <Tooltip arrow title={row.PlanType.charAt(0) === "U" ? "UNSCHEDULE" : ""} >
           <TableCell align="left" className="table-cell"> {row.PlanType.substring(0, 3)} </TableCell>
         </Tooltip>
-        <TableCell align="left" className= "table-cell-icon">
-          {this.props.salesOrderList.Lists[id].LifeTimeComponent !== 0 && this.props.idTab === "Approval" ?
-            <EditButton idEdit="Approval" title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} /> :
-            this.props.salesOrderList.Lists[id].LifeTimeComponent !== 0 && this.props.idTab === "Status" ?
-              <EditButton idEdit="Status" /> : ""}
-        </TableCell>
+        {this.props.salesOrderList.Lists[id].LifeTimeComponent !== 0 && this.props.idTab === "Approval" ?
+          <TableCell align="left" className= "table-cell-icon">
+            <EditButton idEdit="Approval" title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} />
+          </TableCell>
+        : this.props.salesOrderList.Lists[id].LifeTimeComponent !== 0 && this.props.idTab === "Status" ?
+          <TableCell align="left" className= "table-cell-icon">
+            <EditButton idEdit="Status" />
+          </TableCell>
+        : "" }
       </TableRow>
     )
   }

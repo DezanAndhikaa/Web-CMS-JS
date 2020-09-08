@@ -602,8 +602,17 @@ componentDidUpdate = (prevProps) => {
   }
 
   //SAAT MENGKLIK SERVICE ORDER TAB
-  onClickServiceOrder = async() => {
-   await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
+  onClickServiceOrder = async () => {
+    await this.props.fetchServiceOrder({
+      ...this.props.serviceParameter.dataFilter,
+      Filter:
+        [...this.props.serviceParameter.dataFilter.Filter, {
+          Field: 'SAPIssueMessage',
+          Operator: "eq",
+          Value: '-',
+          Logic: "AND"
+        }]
+    }, this.props.token);
   }
   
   //SAAT MENGKLIK SALES ORDER TAB

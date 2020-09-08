@@ -1,13 +1,26 @@
-kind: Deployment
 apiVersion: apps/v1beta1
+kind: Deployment
 metadata:
   name: web-cms-js
+  labels:
+    app: web-cms-js
+    workstream: cms
+    version: 1.0.0
+    tier: frontend
+    usermanagementservice: "true"
+    msplanning: "true"
+  namespace: cms
 spec:
   replicas: 1
   template:
     metadata:
       labels:
         app: web-cms-js
+        workstream: cms
+        version: 1.0.0
+        tier: frontend
+        usermanagementservice: "true"
+        msplanning: "true"
     spec:
       containers:
       - name: web-cms-js
@@ -20,6 +33,13 @@ kind: Service
 apiVersion: v1
 metadata:
   name: web-cms-js
+  labels:
+    app: web-cms-js
+    workstream: cms
+    version: 1.0.0
+    tier: frontend
+    usermanagementservice: "true"
+    msplanning: "true"
 spec:
    ports:
    - port: 8080
@@ -31,6 +51,13 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: web-cms-js
+  labels:
+    app: web-cms-js
+    workstream: cms
+    version: 1.0.0
+    tier: frontend
+    usermanagementservice: "true"
+    msplanning: "true"
 spec:
   rules:
   - host: web-cms-js.proxyicp.unitedtractors.com

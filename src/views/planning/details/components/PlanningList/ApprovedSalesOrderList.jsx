@@ -9,6 +9,7 @@ import moment from 'moment';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
 import { CheckBoxOutlineBlank } from '@material-ui/icons';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import { SmrFilterAction } from '../../DetailPages-action';
 
 export default class ApprovedSalesOrderList extends React.PureComponent {
   constructor(props) {
@@ -39,6 +40,15 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
 
   componentWillMount = ()=>{
     this.props.updateSalesApprovedParameter({ ...this.props.salesApprovedParameter.dataFilter,  PageNumber: 1, PageSize: 10, Sort: [], Filter: []})
+  }
+
+  isFilterSMRDate = async ( value1, value2) => {
+    this.props.dateFilter(
+      SmrFilterAction,
+      value1,
+      value2,
+      this.props.salesApprovedParameter.dataFilter.PageSize
+    );
   }
 
   isCheckboxAvailable = (data) => {

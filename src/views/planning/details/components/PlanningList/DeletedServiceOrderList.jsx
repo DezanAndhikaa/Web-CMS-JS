@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import './PlanningList.scss';
 import { LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
-import { Spinner } from '../../../../../assets/icons'
+import { Spinner } from '../../../../../assets/icons';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
 import roleService from "../../../../../utils/roleService.helper";
