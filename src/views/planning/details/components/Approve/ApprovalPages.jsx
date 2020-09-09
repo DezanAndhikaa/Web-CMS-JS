@@ -514,18 +514,6 @@ class ApprovalPages extends React.Component {
   };
 
   resetFilter = () => {
-    this.props.updateServiceParameter({
-      ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
-    });
-    this.props.selectedFilters.customerType= "All Customer"
-    this.props.selectedFilters.siteType= "All Site"
-    this.props.selectedFilters.unitType= "All Unit Model"
-    this.props.selectedFilters.compType= "All Component"
-    this.props.selectedFilters.planType= "All Plan Type"
-    this.props.filterParameter.Filter.length = 0
-	}
-
-  resetFilter = () => {
     if (this.state.whichTabs === true){
       this.props.updateSalesParameter({
         ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
@@ -887,11 +875,15 @@ class ApprovalPages extends React.Component {
           {this._renderTabs()}
         </div>
         <div></div>
-        {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
-          this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
-            <div className="bottom-row-approval">
-              {this._renderShowPerPage()} {this._renderPagination()}
-            </div>
+        {this.state.value === 0 ? (this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) ? "" :
+          <div className="bottom-row-approval">
+            {this._renderShowPerPage()} {this._renderPagination()}
+          </div>
+          :
+          (this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED) ? "" :
+          <div className="bottom-row-approval">
+            {this._renderShowPerPage()} {this._renderPagination()}
+          </div>
         }
       </main>
     );
