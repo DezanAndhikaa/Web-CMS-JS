@@ -397,7 +397,7 @@ class ApprovalPages extends React.Component {
     if (this.state.whichTabs === true) {
       const web = this.props.displayMode === 'web';
       const currentPropsSales = this.props.salesOrderList.PageNumber;
-      const { TotalPages } = this.props.salesOrderList.Lists;
+      const { TotalPages } = this.props.salesOrderList;
 
       return (
         <div className="paginations">
@@ -416,7 +416,7 @@ class ApprovalPages extends React.Component {
     if (this.state.whichTabs === false) {
       const web = this.props.displayMode === 'web';
       const currentPropsService = this.props.serviceOrderList.PageNumber;
-      const { TotalPages } = this.props.serviceOrderList.Lists;
+      const { TotalPages } = this.props.serviceOrderList;
 
       return (
         <div className="paginations">
