@@ -712,7 +712,7 @@ componentDidUpdate = (prevProps) => {
     return(
       <div className="bottom-row-rev">
         <div className="total-data-rev">
-          *There are <b>{this.props.salesOrderRevised.TotalData} items </b>of sales orders that have not been revised.
+          *There are <b>{this.props.salesOrderRevised.TotalDataRevision} items </b>of sales orders that have not been revised.
         </div>
         {this.props.salesOrderRevised.Lists.length === 0 
           && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderPaginationRev()}
