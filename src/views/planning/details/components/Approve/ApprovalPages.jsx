@@ -105,8 +105,8 @@ class ApprovalPages extends React.Component {
 
     //FILTER RANGE SMR DATE
     if (this.state.whichTabs) {
-      if (prevProps.filterDateSmr !== this.props.filterDateSmr) {
-        this.props.fetchSalesOrder(this.props.filterDateSmr, this.props.token);
+      if (prevProps.filterDateSmrSalesHO !== this.props.filterDateSmrSalesHO) {
+        this.props.fetchSalesOrder(this.props.filterDateSmrSalesHO, this.props.token);
       }
     } else {
       if (prevProps.filterDateSmr !== this.props.filterDateSmr) {
@@ -875,12 +875,12 @@ class ApprovalPages extends React.Component {
           {this._renderTabs()}
         </div>
         <div></div>
-        {this.state.value === 0 ? (this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) ? "" :
+        {this.state.whichTabs === true ? this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
           <div className="bottom-row-approval">
             {this._renderShowPerPage()} {this._renderPagination()}
           </div>
           :
-          (this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED) ? "" :
+          this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
           <div className="bottom-row-approval">
             {this._renderShowPerPage()} {this._renderPagination()}
           </div>

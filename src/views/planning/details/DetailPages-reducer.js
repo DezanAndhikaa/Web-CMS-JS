@@ -704,8 +704,8 @@ export function filterDateSmrSalesHOReducer(state = initialFilterParameter, acti
 			{ Field: 'LifeTimeComponent',Operator: 'neq', Value: 0, Logic: 'and' },
 			{ Field: 'SAPIssueMessage', Operator: 'eq', Value: '-', Logic: 'and' },
 			{ Field: 'IsRevised', Operator: 'eq', Value: 'false', Logic: 'and' },
-			{ Field: "SMRLastUpdate", Operator: "gte", Value: action.payload, Logic: "and" },
-			{ Field: "SMRLastUpdate", Operator: "lte", Value: action.payload2, Logic: "and" },
+			{ Field: "SMRDate", Operator: "gte", Value: action.payload, Logic: "and" },
+			{ Field: "SMRDate", Operator: "lte", Value: action.payload2, Logic: "and" },
 		],
   	};
 	return state;
@@ -717,8 +717,8 @@ export function filterDateSmrSalesSiteReducer(state = initialFilterParameter, ac
 		...state,
 		Filter: [
 			{ Field: 'LifeTimeComponent',Operator: 'neq', Value: 0, Logic: 'and' },
-			{ Field: "SMRLastUpdate", Operator: "gte", Value: action.payload, Logic: "and" },
-			{ Field: "SMRLastUpdate", Operator: "lte", Value: action.payload2, Logic: "and" },
+			{ Field: "SMRDate", Operator: "gte", Value: action.payload, Logic: "and" },
+			{ Field: "SMRDate", Operator: "lte", Value: action.payload2, Logic: "and" },
 		],
   	};
 	return state;
