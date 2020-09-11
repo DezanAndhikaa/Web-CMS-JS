@@ -657,6 +657,32 @@ export function filterDateReducer(state = initialFilterParameter, action) {
 	return state;
 }
 
+export function filterDateSalesHOReducer(state = initialFilterParameter, action) {
+	if (action.type === DateFilterAction)
+		state = { ...state, 
+		Filter: [
+			{Field: 'LifeTimeComponent',Operator: 'neq', Value: 0, Logic: 'and'},
+			{Field: 'SAPIssueMessage', Operator: 'eq', Value: '-', Logic: 'and'},
+			{Field: 'IsRevised', Operator: 'eq', Value: 'false', Logic: 'and'},
+			{ Field: 'PlanExecutionDate', Operator: 'gte', Value: action.payload, Logic: 'and' }, 
+			{ Field: 'PlanExecutionDate', Operator: 'lte', Value: action.payload2, Logic: 'and' }
+		] 
+	};
+	return state;
+}
+
+export function filterDateSalesSiteReducer(state = initialFilterParameter, action) {
+	if (action.type === DateFilterAction)
+		state = { ...state, 
+		Filter: [
+			{Field: 'LifeTimeComponent',Operator: 'eq', Value: 0, Logic: 'and'},
+			{ Field: 'PlanExecutionDate', Operator: 'gte', Value: action.payload, Logic: 'and' }, 
+			{ Field: 'PlanExecutionDate', Operator: 'lte', Value: action.payload2, Logic: 'and' }
+		] 
+	};
+	return state;
+}
+
 export function filterDateSmrReducer(state = initialFilterParameter, action) {
 	if (action.type === SmrDateFilterAction)
 		state = {
@@ -1063,6 +1089,8 @@ const PlansReducers = combineReducers({
 	filterSmr: filterSmrReducer,
 	filterDateSmr: filterDateSmrReducer,
 	filterDate: filterDateReducer,
+	filterDateSalesHO: filterDateSalesHOReducer,
+	filterDateSalesSite: filterDateSalesSiteReducer,
 	salesSearchRevision: searchSalesRevReducer,
 	searchSalesRevParam: searchSalesRevParamReducer	
 });
