@@ -133,8 +133,8 @@ componentDidUpdate = (prevProps) => {
   //FILTER RANGE DATE
   if(Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){ 
     if(this.state.whichTabs){
-      if(prevProps.filterDate !== this.props.filterDate){
-        this.props.fetchSalesOrder(this.props.filterDate,this.props.token);
+      if(prevProps.filterDateSalesSite !== this.props.filterDateSalesSite){
+        this.props.fetchSalesOrder(this.props.filterDateSalesSite,this.props.token);
       }
     }else{
       if(prevProps.filterDate !== this.props.filterDate){
@@ -146,8 +146,8 @@ componentDidUpdate = (prevProps) => {
       this.props.fetchServiceOrder(this.props.filterDate,this.props.token);
     }
   }else{
-    if(prevProps.filterDate !== this.props.filterDate){
-      this.props.fetchSalesOrder(this.props.filterDate,this.props.token);
+    if(prevProps.filterDateSalesSite !== this.props.filterDateSalesSite){
+      this.props.fetchSalesOrder(this.props.filterDateSalesSite,this.props.token);
     }
   }
 
@@ -960,7 +960,7 @@ componentDidUpdate = (prevProps) => {
               }
             </>
           : <>
-              {this.state.value === 0 ? (this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) ? "" :
+              {this.state.whichTabs === true ? (this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) ? "" :
                 <div className="bottom-row-approval">
                   {this._renderShowPerPage()} {this._renderPagination()}
                 </div>
