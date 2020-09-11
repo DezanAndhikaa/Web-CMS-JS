@@ -94,8 +94,8 @@ class ApprovalPages extends React.Component {
 
     //FILTER RANGE DATE
     if (this.state.whichTabs) {
-      if (prevProps.filterDate !== this.props.filterDate) {
-        this.props.fetchSalesOrder(this.props.filterDate, this.props.token);
+      if (prevProps.filterDateSalesHO !== this.props.filterDateSalesHO) {
+        this.props.fetchSalesOrder(this.props.filterDateSalesHO, this.props.token);
       }
     } else {
       if (prevProps.filterDate !== this.props.filterDate) {
