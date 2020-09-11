@@ -154,8 +154,8 @@ componentDidUpdate = (prevProps) => {
   //FILTER RANGE SMR DATE
   if(Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){ 
     if(this.state.whichTabs){
-      if(prevProps.filterDateSmr !== this.props.filterDateSmr){
-        this.props.fetchSalesOrder(this.props.filterDateSmr,this.props.token);
+      if(prevProps.filterDateSmrSalesSite !== this.props.filterDateSmrSalesSite){
+        this.props.fetchSalesOrder(this.props.filterDateSmrSalesSite,this.props.token);
       }
     }else{
       if(prevProps.filterDateSmr !== this.props.filterDateSmr){
@@ -167,8 +167,8 @@ componentDidUpdate = (prevProps) => {
       this.props.fetchServiceOrder(this.props.filterDateSmr,this.props.token);
     }
   }else{
-    if(prevProps.filterDateSmr !== this.props.filterDateSmr){
-      this.props.fetchSalesOrder(this.props.filterDateSmr,this.props.token);
+    if(prevProps.filterDateSmrSalesSite !== this.props.filterDateSmrSalesSite){
+      this.props.fetchSalesOrder(this.props.filterDateSmrSalesSite,this.props.token);
     }
   }
 
