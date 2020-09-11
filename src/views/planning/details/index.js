@@ -45,7 +45,7 @@ const mapStateToProps = (state) => ({
 	filterLifetime: state.plansPageState.filterLifetime,
 	filterSmr: state.plansPageState.filterSmr,
 	filterDateSalesSite: state.plansPageState.filterDateSalesSite,
-	filterDateSmr: state.plansPageState.filterDateSmr,
+	filterDateSmrSalesSite: state.plansPageState.filterDateSmrSalesSite,
 	indexFilterParameter: state.plansPageState.indexFilterParameter,
 	serviceParameter: state.plansPageState.serviceParameter,
 	salesSearch: state.plansPageState.salesSearch,
