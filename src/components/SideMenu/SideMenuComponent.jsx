@@ -153,7 +153,7 @@ class SideMenuComponent extends React.Component {
                       button
                       key="jobs-report"
                       className={
-                        this.props.path === Menu.PLANNING_HO || this.props.path === Menu.PLANNING_TRACKING_HISTORY || this.props.path === Menu.PLANNING_SITE_STATUS || this.props.path === Menu.PLANNING_INPUT_LIFETIME || this.props.path === Menu.PLANNING_ALL_NOTIF
+                        this.props.path === Menu.PLANNING_HO || this.props.path === Menu.PLANNING_TRACKING_HISTORY || this.props.path === Menu.PLANNING_ALL_NOTIF
                           ? "sub-menu-selected"
                           : "sub-menu"
                       }
