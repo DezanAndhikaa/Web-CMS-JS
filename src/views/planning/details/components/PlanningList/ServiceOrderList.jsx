@@ -90,7 +90,7 @@ export default class ServiceOrderList extends React.PureComponent {
       return (
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
           <TableRow>
-            {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? "" :
+            {this.props.idService === "Data Input" ? "" :
               <TableCell className="table-cell-checkbox">
                 {this.props.displayServiceCheckbox &&
                   <Checkbox
@@ -126,10 +126,7 @@ export default class ServiceOrderList extends React.PureComponent {
       return (
         <TableHead className="table-head" classes={{ root: "table-head" }}>
           <TableRow>
-            {this.props.idService === "Data Input" ||
-            Number(RoleUser.role()) !== 1 ? (
-              ""
-            ) : (
+            {this.props.idService === "Data Input" ? ( "" ) : (
               <TableCell className="table-cell-checkbox">
                 {this.props.displayServiceCheckbox && (
                   <Checkbox
@@ -228,7 +225,7 @@ export default class ServiceOrderList extends React.PureComponent {
   showTableBody(row, id) {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
-        {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? "" :
+        {this.props.idService === "Data Input" ? "" :
           <TableCell className="table-cell-checkbox">
             {this.props.displayServiceCheckbox &&
               <Checkbox
@@ -248,7 +245,7 @@ export default class ServiceOrderList extends React.PureComponent {
             {row.WoNumber}
           </TableCell>
           :
-          <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell>
+          <TableCell align="left" className="table-cell-smr"> {row.WoNumber} </TableCell>
         }
         <TableCell align="left" className={this.props.idTab === "Status" ? "table-cell-cst" : "table-cell-long"}> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell-short"> {row.SiteCode} </TableCell>

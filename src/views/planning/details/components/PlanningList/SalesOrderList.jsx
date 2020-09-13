@@ -107,7 +107,7 @@ export default class SalesOrderList extends React.PureComponent {
       return(
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
           <TableRow classes={{ root: 'table-row' }}>
-            {this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly" || Number(RoleUser.role()) !== 1 ? "" :
+            {this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly" ? "" :
               <TableCell className="table-cell-checkbox">
                 {this.props.displaySalesCheckbox &&
                   <Checkbox
@@ -144,7 +144,7 @@ export default class SalesOrderList extends React.PureComponent {
       return (
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
           <TableRow classes={{ root: 'table-row' }}>
-            {this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly" || Number(RoleUser.role()) !== 1 ? "" :
+            {this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly" ? "" :
               <TableCell className= "table-cell-checkbox">
                 {this.props.displaySalesCheckbox &&
                   <Checkbox
@@ -249,7 +249,7 @@ export default class SalesOrderList extends React.PureComponent {
   showTableBody(row, id) {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
-        {this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly" || Number(RoleUser.role()) !== 1 ? "" :
+        {this.props.idSales === "Data Input" || this.props.idSales === "ViewOnly" ? "" :
           <TableCell className="table-cell-checkbox">
             {this.props.displaySalesCheckbox &&
               <Checkbox
@@ -270,7 +270,7 @@ export default class SalesOrderList extends React.PureComponent {
             {row.SoNumber}
           </TableCell>
           :
-          <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
+          <TableCell align="left" className="table-cell-smr"> {row.SoNumber} </TableCell>
         }
         <TableCell align="left" className={this.props.idTab === "Status" ? "table-cell-cst" : "table-cell-long"}> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell-short"> {row.SiteCode} </TableCell>
