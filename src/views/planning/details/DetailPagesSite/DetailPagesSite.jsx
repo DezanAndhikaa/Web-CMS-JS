@@ -571,7 +571,7 @@ componentDidUpdate = (prevProps) => {
     if (this.state.whichTabs === true) {
       const web = this.props.displayMode === 'web';
       const currentPropsRev = this.props.salesOrderRevised.PageNumber;
-      const { TotalPages } = this.props.salesOrderRevised;
+      const { TotalPages } = this.props.salesOrderRevised.Lists;
       
       return(
         <div className="paginations-rev">
