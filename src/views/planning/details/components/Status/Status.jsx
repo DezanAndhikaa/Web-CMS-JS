@@ -168,6 +168,26 @@ export default class Status extends React.PureComponent {
 		if(prevProps.searchServiceSapParam !== this.props.searchServiceSapParam){
 			this.fetchSearchServiceSap();
 		}
+
+		//ini untuk trigger sales global search
+		if (prevProps.salesSearch !== this.props.salesSearch) {
+			switch (this.state.whatPageIsChoosed) {
+				case 'Approve':
+					return this.props.updateSearchSalesApproved(
+						{...prevProps.searchSalesApprovedParam, Category: 'SA', Keyword: this.props.salesSearch});
+				case 'Not Approve':
+					return this.props.updateSearchSales(
+						{...prevProps.searchSalesParameter, Category: 'SN', Keyword: this.props.salesSearch});
+				case 'Delete' :
+					return this.props.updateSearchSalesDeleted(
+						{...prevProps.searchSalesDeletedParam, Category: 'SD', Keyword: this.props.salesSearch});
+				case 'SAP ISSUE':
+					return this.props.updateSearchSalesSap(
+						{...prevProps.searchSalesSapParam, Category: 'SSAP', Keyword: this.props.salesSearch});
+				default:
+					break;
+			}
+		}
 		  
 		//ini untuk trigger service global search
 		if(prevProps.serviceSearch !== this.props.serviceSearch){
