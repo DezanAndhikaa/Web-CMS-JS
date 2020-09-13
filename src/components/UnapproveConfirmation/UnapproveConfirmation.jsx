@@ -50,21 +50,24 @@ export default class UnapproveConfirmation extends React.PureComponent {
   isTry = () => {
     this.setState({
       isShowModalSap: !this.state.isShowModalSap,
-      isShowModalSapSucced: !this.state.isShowModalSapSucced
+      isShowModalSapSucced: !this.state.isShowModalSapSucced,
+      isShowModalSend: false
     })
   }
 
   isClickedCloseBtn = () => {
     this.setState({
       isShowModalSap: !this.state.isShowModalSap,
-      isShowModalSapFailed: !this.state.isShowModalSapFailed
+      isShowModalSapFailed: !this.state.isShowModalSapFailed,
+      isShowModalSend: false
     })
   }
 
   isClickedBackBtn = () => {
     this.setState({
       isShowModalSapFailed: !this.state.isShowModalSapFailed,
-      isShowModalUnapprove: !this.state.isShowModalUnapprove
+      isShowModalUnapprove: !this.state.isShowModalUnapprove,
+      isShowModalSend: false
     })
   }
 
@@ -97,7 +100,8 @@ export default class UnapproveConfirmation extends React.PureComponent {
   isClosedSap = () => {
     this.setState({
       isShowModalSap: !this.state.isShowModalSap,
-      isShowModalUnapprove: !this.state.isShowModalUnapprove
+      isShowModalUnapprove: !this.state.isShowModalUnapprove,
+      isShowModalSend: false
     })
   }
 
