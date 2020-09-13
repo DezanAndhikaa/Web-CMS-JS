@@ -2451,7 +2451,7 @@ export default class Status extends React.PureComponent {
 		if (this.props.location.whichTab === "sales") {
 			this.setState({
 				approveTotalData : this.props.salesOrderListApproved.TotalData,
-				notApproveTotalData : this.props.salesOrderList.TotalDataApproval,
+				notApproveTotalData : this.props.salesOrderList.TotalDataNotApprove,
 				deleteTotalData : this.props.salesOrderListDeleted.TotalData,
 				sapIssueTotalData : this.props.salesOrderListSap.TotalDataSAPIssue
 			})
