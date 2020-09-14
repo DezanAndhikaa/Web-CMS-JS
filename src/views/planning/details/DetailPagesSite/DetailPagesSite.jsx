@@ -955,7 +955,7 @@ componentDidUpdate = (prevProps) => {
           ? <>
               {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
                 <div className="bottom-row-detail-site">
-                    {this._renderShowPerPage()} {this._renderPagination()}
+                  {this._renderShowPerPage()} {this._renderPagination()}
                 </div>
               }
             </>
