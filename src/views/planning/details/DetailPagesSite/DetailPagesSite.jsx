@@ -923,7 +923,7 @@ componentDidUpdate = (prevProps) => {
           stats={this.state.stats}
           onStats={this.isChangeStat}     
           totalSalesData={this.props.salesOrderList.TotalDataLifetime}
-          totalServiceData={this.props.serviceOrderList.TotalData}
+          totalServiceData={this.props.serviceOrderList.TotalDataApproval}
           onClickTabHead={this.props.onClickSortBy}
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}
@@ -961,12 +961,12 @@ componentDidUpdate = (prevProps) => {
             </>
           : <>
               {this.state.whichTabs === true ? (this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) ? "" :
-                <div className="bottom-row-approval">
+                <div className="bottom-row-detail-site">
                   {this._renderShowPerPage()} {this._renderPagination()}
                 </div>
                 :
                 (this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED) ? "" :
-                <div className="bottom-row-approval">
+                <div className="bottom-row-detail-site">
                   {this._renderShowPerPage()} {this._renderPagination()}
                 </div>
               }
