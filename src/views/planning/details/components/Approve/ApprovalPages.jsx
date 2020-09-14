@@ -94,8 +94,8 @@ class ApprovalPages extends React.Component {
 
     //FILTER RANGE DATE
     if (this.state.whichTabs) {
-      if (prevProps.filterDate !== this.props.filterDate) {
-        this.props.fetchSalesOrder(this.props.filterDate, this.props.token);
+      if (prevProps.filterDateSalesHO !== this.props.filterDateSalesHO) {
+        this.props.fetchSalesOrder(this.props.filterDateSalesHO, this.props.token);
       }
     } else {
       if (prevProps.filterDate !== this.props.filterDate) {
@@ -105,8 +105,8 @@ class ApprovalPages extends React.Component {
 
     //FILTER RANGE SMR DATE
     if (this.state.whichTabs) {
-      if (prevProps.filterDateSmr !== this.props.filterDateSmr) {
-        this.props.fetchSalesOrder(this.props.filterDateSmr, this.props.token);
+      if (prevProps.filterDateSmrSalesHO !== this.props.filterDateSmrSalesHO) {
+        this.props.fetchSalesOrder(this.props.filterDateSmrSalesHO, this.props.token);
       }
     } else {
       if (prevProps.filterDateSmr !== this.props.filterDateSmr) {
@@ -397,7 +397,7 @@ class ApprovalPages extends React.Component {
     if (this.state.whichTabs === true) {
       const web = this.props.displayMode === 'web';
       const currentPropsSales = this.props.salesOrderList.PageNumber;
-      const { TotalPages } = this.props.salesOrderList.Lists;
+      const { TotalPages } = this.props.salesOrderList;
 
       return (
         <div className="paginations">
@@ -416,7 +416,7 @@ class ApprovalPages extends React.Component {
     if (this.state.whichTabs === false) {
       const web = this.props.displayMode === 'web';
       const currentPropsService = this.props.serviceOrderList.PageNumber;
-      const { TotalPages } = this.props.serviceOrderList.Lists;
+      const { TotalPages } = this.props.serviceOrderList;
 
       return (
         <div className="paginations">
@@ -512,18 +512,6 @@ class ApprovalPages extends React.Component {
       this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value })
     }
   };
-
-  resetFilter = () => {
-    this.props.updateServiceParameter({
-      ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
-    });
-    this.props.selectedFilters.customerType= "All Customer"
-    this.props.selectedFilters.siteType= "All Site"
-    this.props.selectedFilters.unitType= "All Unit Model"
-    this.props.selectedFilters.compType= "All Component"
-    this.props.selectedFilters.planType= "All Plan Type"
-    this.props.filterParameter.Filter.length = 0
-	}
 
   resetFilter = () => {
     if (this.state.whichTabs === true){
@@ -887,11 +875,15 @@ class ApprovalPages extends React.Component {
           {this._renderTabs()}
         </div>
         <div></div>
-        {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+        {this.state.whichTabs === true ? this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+          <div className="bottom-row-approval">
+            {this._renderShowPerPage()} {this._renderPagination()}
+          </div>
+          :
           this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
-            <div className="bottom-row-approval">
-              {this._renderShowPerPage()} {this._renderPagination()}
-            </div>
+          <div className="bottom-row-approval">
+            {this._renderShowPerPage()} {this._renderPagination()}
+          </div>
         }
       </main>
     );

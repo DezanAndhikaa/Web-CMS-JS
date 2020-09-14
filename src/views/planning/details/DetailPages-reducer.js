@@ -657,6 +657,32 @@ export function filterDateReducer(state = initialFilterParameter, action) {
 	return state;
 }
 
+export function filterDateSalesHOReducer(state = initialFilterParameter, action) {
+	if (action.type === DateFilterAction)
+		state = { ...state, 
+		Filter: [
+			{ Field: 'LifeTimeComponent',Operator: 'neq', Value: 0, Logic: 'and' },
+			{ Field: 'SAPIssueMessage', Operator: 'eq', Value: '-', Logic: 'and' },
+			{ Field: 'IsRevised', Operator: 'eq', Value: 'false', Logic: 'and' },
+			{ Field: 'PlanExecutionDate', Operator: 'gte', Value: action.payload, Logic: 'and' }, 
+			{ Field: 'PlanExecutionDate', Operator: 'lte', Value: action.payload2, Logic: 'and' }
+		] 
+	};
+	return state;
+}
+
+export function filterDateSalesSiteReducer(state = initialFilterParameter, action) {
+	if (action.type === DateFilterAction)
+		state = { ...state, 
+		Filter: [
+			{ Field: 'LifeTimeComponent',Operator: 'eq', Value: 0, Logic: 'and' },
+			{ Field: 'PlanExecutionDate', Operator: 'gte', Value: action.payload, Logic: 'and' }, 
+			{ Field: 'PlanExecutionDate', Operator: 'lte', Value: action.payload2, Logic: 'and' }
+		] 
+	};
+	return state;
+}
+
 export function filterDateSmrReducer(state = initialFilterParameter, action) {
 	if (action.type === SmrDateFilterAction)
 		state = {
@@ -665,6 +691,34 @@ export function filterDateSmrReducer(state = initialFilterParameter, action) {
 			{ Field: 'SAPIssueMessage', Operator: 'eq', Value: '-', Logic: 'and' },
 			{ Field: "SMRLastUpdate", Operator: "gte", Value: action.payload, Logic: "and" },
 			{ Field: "SMRLastUpdate", Operator: "lte", Value: action.payload2, Logic: "and" },
+		],
+  	};
+	return state;
+}
+
+export function filterDateSmrSalesHOReducer(state = initialFilterParameter, action) {
+	if (action.type === SmrDateFilterAction)
+		state = {
+		...state,
+		Filter: [
+			{ Field: 'LifeTimeComponent',Operator: 'neq', Value: 0, Logic: 'and' },
+			{ Field: 'SAPIssueMessage', Operator: 'eq', Value: '-', Logic: 'and' },
+			{ Field: 'IsRevised', Operator: 'eq', Value: 'false', Logic: 'and' },
+			{ Field: "SMRDate", Operator: "gte", Value: action.payload, Logic: "and" },
+			{ Field: "SMRDate", Operator: "lte", Value: action.payload2, Logic: "and" },
+		],
+  	};
+	return state;
+}
+
+export function filterDateSmrSalesSiteReducer(state = initialFilterParameter, action) {
+	if (action.type === SmrDateFilterAction)
+		state = {
+		...state,
+		Filter: [
+			{ Field: 'LifeTimeComponent',Operator: 'neq', Value: 0, Logic: 'and' },
+			{ Field: "SMRDate", Operator: "gte", Value: action.payload, Logic: "and" },
+			{ Field: "SMRDate", Operator: "lte", Value: action.payload2, Logic: "and" },
 		],
   	};
 	return state;
@@ -1062,7 +1116,11 @@ const PlansReducers = combineReducers({
 	filterLifetime: filterLifetimeReducer,
 	filterSmr: filterSmrReducer,
 	filterDateSmr: filterDateSmrReducer,
+	filterDateSmrSalesHO: filterDateSmrSalesHOReducer,
+	filterDateSmrSalesSite: filterDateSmrSalesSiteReducer,
 	filterDate: filterDateReducer,
+	filterDateSalesHO: filterDateSalesHOReducer,
+	filterDateSalesSite: filterDateSalesSiteReducer,
 	salesSearchRevision: searchSalesRevReducer,
 	searchSalesRevParam: searchSalesRevParamReducer	
 });

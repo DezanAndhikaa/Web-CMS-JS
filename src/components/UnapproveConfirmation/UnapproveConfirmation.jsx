@@ -50,21 +50,24 @@ export default class UnapproveConfirmation extends React.PureComponent {
   isTry = () => {
     this.setState({
       isShowModalSap: !this.state.isShowModalSap,
-      isShowModalSapSucced: !this.state.isShowModalSapSucced
+      isShowModalSapSucced: !this.state.isShowModalSapSucced,
+      isShowModalSend: false
     })
   }
 
   isClickedCloseBtn = () => {
     this.setState({
       isShowModalSap: !this.state.isShowModalSap,
-      isShowModalSapFailed: !this.state.isShowModalSapFailed
+      isShowModalSapFailed: !this.state.isShowModalSapFailed,
+      isShowModalSend: false
     })
   }
 
   isClickedBackBtn = () => {
     this.setState({
       isShowModalSapFailed: !this.state.isShowModalSapFailed,
-      isShowModalUnapprove: !this.state.isShowModalUnapprove
+      isShowModalUnapprove: !this.state.isShowModalUnapprove,
+      isShowModalSend: false
     })
   }
 
@@ -97,7 +100,8 @@ export default class UnapproveConfirmation extends React.PureComponent {
   isClosedSap = () => {
     this.setState({
       isShowModalSap: !this.state.isShowModalSap,
-      isShowModalUnapprove: !this.state.isShowModalUnapprove
+      isShowModalUnapprove: !this.state.isShowModalUnapprove,
+      isShowModalSend: false
     })
   }
 
@@ -194,7 +198,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
 
   _renderSendtoEdit(){
     return(
-      <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-unapprove">
+      <Modal open={this.props.openModal} className="modal-unapprove">
         <DialogContent className="unapprove-confirmation-content">
           <div className="confirmation-modal-unapprove">
             <CloseNotif onClose={this.props.onClose}/>
@@ -223,7 +227,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
       return (
         <>
           {this.state.isShowModalUnapprove && (
-            <Modal open={this.state.isShowModalUnapprove} onClose={this.props.onClose} className="modal-unapprove">
+            <Modal open={this.state.isShowModalUnapprove} className="modal-unapprove">
             <DialogContent className="unapprove-confirmation-content">
               <div className="confirmation-modal-unapprove">
                 <CloseNotif onClose={this.props.onClose}/>
@@ -263,7 +267,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
       );
     } else if(this.props.idConfirm === "Send Success"){
       return(
-        <Modal open={this.props.openModal} onClose={this.props.onClose} className="modal-unapprove">
+        <Modal open={this.props.openModal} className="modal-unapprove">
           <DialogContent className="unapprove-confirmation-content">
             <div className="confirmation-modal-unapprove">
               <div className="confirmation-container-unapprove">

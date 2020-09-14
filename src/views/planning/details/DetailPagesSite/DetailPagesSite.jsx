@@ -133,8 +133,8 @@ componentDidUpdate = (prevProps) => {
   //FILTER RANGE DATE
   if(Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){ 
     if(this.state.whichTabs){
-      if(prevProps.filterDate !== this.props.filterDate){
-        this.props.fetchSalesOrder(this.props.filterDate,this.props.token);
+      if(prevProps.filterDateSalesSite !== this.props.filterDateSalesSite){
+        this.props.fetchSalesOrder(this.props.filterDateSalesSite,this.props.token);
       }
     }else{
       if(prevProps.filterDate !== this.props.filterDate){
@@ -146,16 +146,16 @@ componentDidUpdate = (prevProps) => {
       this.props.fetchServiceOrder(this.props.filterDate,this.props.token);
     }
   }else{
-    if(prevProps.filterDate !== this.props.filterDate){
-      this.props.fetchSalesOrder(this.props.filterDate,this.props.token);
+    if(prevProps.filterDateSalesSite !== this.props.filterDateSalesSite){
+      this.props.fetchSalesOrder(this.props.filterDateSalesSite,this.props.token);
     }
   }
 
   //FILTER RANGE SMR DATE
   if(Number(RoleUser.role()) === 1 || Number(RoleUser.role()) === 3){ 
     if(this.state.whichTabs){
-      if(prevProps.filterDateSmr !== this.props.filterDateSmr){
-        this.props.fetchSalesOrder(this.props.filterDateSmr,this.props.token);
+      if(prevProps.filterDateSmrSalesSite !== this.props.filterDateSmrSalesSite){
+        this.props.fetchSalesOrder(this.props.filterDateSmrSalesSite,this.props.token);
       }
     }else{
       if(prevProps.filterDateSmr !== this.props.filterDateSmr){
@@ -167,8 +167,8 @@ componentDidUpdate = (prevProps) => {
       this.props.fetchServiceOrder(this.props.filterDateSmr,this.props.token);
     }
   }else{
-    if(prevProps.filterDateSmr !== this.props.filterDateSmr){
-      this.props.fetchSalesOrder(this.props.filterDateSmr,this.props.token);
+    if(prevProps.filterDateSmrSalesSite !== this.props.filterDateSmrSalesSite){
+      this.props.fetchSalesOrder(this.props.filterDateSmrSalesSite,this.props.token);
     }
   }
 
@@ -571,7 +571,7 @@ componentDidUpdate = (prevProps) => {
     if (this.state.whichTabs === true) {
       const web = this.props.displayMode === 'web';
       const currentPropsRev = this.props.salesOrderRevised.PageNumber;
-      const { TotalPages } = this.props.salesOrderRevised;
+      const { TotalPages } = this.props.salesOrderRevised.Lists;
       
       return(
         <div className="paginations-rev">
@@ -712,7 +712,7 @@ componentDidUpdate = (prevProps) => {
     return(
       <div className="bottom-row-rev">
         <div className="total-data-rev">
-          *There are <b>{this.props.salesOrderRevised.TotalData} items </b>of sales orders that have not been revised.
+          *There are <b>{this.props.salesOrderRevised.TotalDataRevision} items </b>of sales orders that have not been revised.
         </div>
         {this.props.salesOrderRevised.Lists.length === 0 
           && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderPaginationRev()}
@@ -923,7 +923,7 @@ componentDidUpdate = (prevProps) => {
           stats={this.state.stats}
           onStats={this.isChangeStat}     
           totalSalesData={this.props.salesOrderList.TotalDataLifetime}
-          totalServiceData={this.props.serviceOrderList.TotalData}
+          totalServiceData={this.props.serviceOrderList.TotalDataApproval}
           onClickTabHead={this.props.onClickSortBy}
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}
@@ -955,15 +955,19 @@ componentDidUpdate = (prevProps) => {
           ? <>
               {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
                 <div className="bottom-row-detail-site">
-                    {this._renderShowPerPage()} {this._renderPagination()}
+                  {this._renderShowPerPage()} {this._renderPagination()}
                 </div>
               }
             </>
           : <>
-              {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
-                this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
+              {this.state.whichTabs === true ? (this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) ? "" :
                 <div className="bottom-row-detail-site">
-                    {this._renderShowPerPage()} {this._renderPagination()}
+                  {this._renderShowPerPage()} {this._renderPagination()}
+                </div>
+                :
+                (this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED) ? "" :
+                <div className="bottom-row-detail-site">
+                  {this._renderShowPerPage()} {this._renderPagination()}
                 </div>
               }
             </>

@@ -59,7 +59,7 @@ export default class RevisedSalesOrderList extends React.PureComponent {
     return (
       <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow classes={{ root: 'table-row' }}>
-          <TableCell align="left" className="table-cell">SO</TableCell>
+          <TableCell align="left" className="table-cell-pk">SO</TableCell>
           <TableCell align="left" className="table-cell">CUSTOMER</TableCell>
           <TableCell align="left" className="table-cell">SITE</TableCell>
           <TableCell align="left" className="table-cell">UNIT MODEL</TableCell>
@@ -80,8 +80,8 @@ export default class RevisedSalesOrderList extends React.PureComponent {
   showTableBody(row, id) {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
-        <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
+        <TableCell align="left" className="table-cell-pk"> {row.SoNumber} </TableCell>
+        <TableCell align="left" className="table-cell-cust"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
         <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>
@@ -92,14 +92,14 @@ export default class RevisedSalesOrderList extends React.PureComponent {
           {this.props.salesOrderRevised.Lists[id].LifeTimeComponent !== "-" ?
             <EditButton
               {...this.props}
-              idEdit="Rev"
-              title="Input Lifetime Component"
-              RowData={row.LifeTimeComponent}
-              lifetime={row.LifeTimeComponent}
-              onStats={this.isPutLifetime}
-              values={this.props.salesOrderRevised.Lists[id].LifeTimeComponent}
-              field="edit"
-              id={row.SoNumber} /> : ""}
+              idEdit= "Rev"
+              title= "Input Lifetime Component"
+              RowData= {row.LifeTimeComponent}
+              lifetime= {row.LifeTimeComponent}
+              onStats= {this.isPutLifetime}
+              values= {this.props.salesOrderRevised.Lists[id].LifeTimeComponent}
+              field= "edit"
+              id= {row.SoNumber} /> : ""}
         </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>

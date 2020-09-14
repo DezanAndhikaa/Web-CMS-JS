@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, TextField, Tooltip, 
+  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Tooltip, 
 } from '@material-ui/core';
 import './PlanningList.scss';
 import '../SapIssue/SapIssue.scss';
@@ -10,9 +10,7 @@ import moment from 'moment';
 import EmptyList from '../../../../../components/EmptyList/EmptyList';
 import { CheckBoxOutlineBlank } from '@material-ui/icons';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import roleService from "../../../../../utils/roleService.helper";
 
-const RoleUser = new roleService();
 export default class SapSalesOrderList extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -112,14 +110,7 @@ export default class SapSalesOrderList extends React.PureComponent {
             />
           }
         </TableCell>
-        {Number(RoleUser.role()) === 1 ?
-          <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell> :
-          <TableCell 
-            align="left" 
-            className={this.props.pageLoc === "Status" ? "table-cell-pk-status" : "table-cell-smr"}> 
-            {row.SoNumber} 
-          </TableCell>
-        }
+        <TableCell align="left" className="table-cell-smr"> {row.SoNumber} </TableCell>
         <TableCell align="left" className="table-cell-cst"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell-short"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
