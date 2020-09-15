@@ -9,7 +9,6 @@ metadata:
     tier: frontend
     usermanagementservice: "true"
     msplanning: "true"
-  namespace: cms
 spec:
   replicas: 1
   template:
