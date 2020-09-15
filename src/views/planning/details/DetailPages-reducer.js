@@ -57,7 +57,7 @@ import {
 	UnselectSalesPlanAction, UnselectServicePlanAction,
 	UnselectMechanicAction, StoreSelectedPlanDataAction, ResetSelectedLeaderAction, FetchServiceAction,
 	IndexFilterAction, LifetimeFilterAction, DateFilterAction, SmrDateFilterAction,
-	SearchRevisedSalesOrder, UpdateSearchSalesRevAction, SelectAllService, SelectPlanTypeFilterAction, SmrFilterAction, smrFilterAction
+	SearchRevisedSalesOrder, UpdateSearchSalesRevAction, SelectAllService, SelectPlanTypeFilterAction, SmrFilterAction
 } from './DetailPages-action';
 
 const initialSalesAssignment = {
