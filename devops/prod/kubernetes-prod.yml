@@ -1,5 +1,5 @@
-apiVersion: apps/v1beta1
 kind: Deployment
+apiVersion: apps/v1beta1
 metadata:
   name: web-cms-js
   labels:
@@ -22,11 +22,11 @@ spec:
         msplanning: "true"
     spec:
       containers:
-      - name: web-cms-js
-        image: myicp.unitedtractors.com:8500/cms/web-cms-js:#{Build.BuildId}#
-        ports:
-        - containerPort: 8080
-          name: http
+        - name: web-cms-js
+          image: myicp.unitedtractors.com:8500/cms/web-cms-js:#{Build.BuildId}#
+          ports:
+            - containerPort: 8080
+              name: http
 ---
 kind: Service
 apiVersion: v1
@@ -40,11 +40,11 @@ metadata:
     usermanagementservice: "true"
     msplanning: "true"
 spec:
-   ports:
-   - port: 8080
-   selector:
-     app: web-cms-js
-   type: NodePort
+  ports:
+    - port: 8080
+  selector:
+    app: web-cms-js
+  type: NodePort
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -59,9 +59,9 @@ metadata:
     msplanning: "true"
 spec:
   rules:
-  - host: web-cms-js.proxyicp.unitedtractors.com
-    http:
-      paths:
-      - backend:
-          serviceName: web-cms-js
-          servicePort: 8080
+    - host: web-cms-js.proxyicp.unitedtractors.com
+      http:
+        paths:
+          - backend:
+              serviceName: web-cms-js
+              servicePort: 8080
