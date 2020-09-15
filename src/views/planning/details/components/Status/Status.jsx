@@ -1347,9 +1347,13 @@ export default class Status extends React.PureComponent {
 		document.body.appendChild(link);
 		link.style = "display: none";
 		const todayDate = moment(new Date()).format('DD-MM-YYYY');
-		let fileName = "Sales-Order-Planning-"+todayDate+".csv";
+		let fileName = 
+			this.state.whatPageIsChoosed === "Approve" ? "Sales-Order-Approval-"+todayDate+".csv" :
+			this.state.whatPageIsChoosed === "Not Approve" ? "Sales-Order-Pending-Approval-"+todayDate+".csv" :
+			this.state.whatPageIsChoosed === "Delete" ? "Sales-Order-Deleted-"+todayDate+".csv" :
+			this.state.whatPageIsChoosed === "SAP ISSUE" ? "Sales-Order-SAP-Issue-"+todayDate+".csv" : "";
 		let blob = new Blob([this.props.approveSalesDownloaded.data]),
-		  url = window.URL.createObjectURL(blob);
+		url = window.URL.createObjectURL(blob);
 		link.href = url;
 		link.download = fileName;
 		link.click();
