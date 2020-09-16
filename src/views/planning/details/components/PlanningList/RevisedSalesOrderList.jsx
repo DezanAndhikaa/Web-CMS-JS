@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Table, TableBody, TableCell, TableHead, TableRow, Snackbar
+  Table, TableBody, TableCell, TableHead, TableRow, Snackbar, Tooltip
 } from '@material-ui/core';
 import './PlanningList.scss';
 import { Spinner } from '../../../../../assets/icons';
@@ -59,19 +59,19 @@ export default class RevisedSalesOrderList extends React.PureComponent {
     return (
       <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow classes={{ root: 'table-row' }}>
-          <TableCell align="left" className="table-cell">SO</TableCell>
-          <TableCell align="left" className="table-cell">Customer</TableCell>
-          <TableCell align="left" className="table-cell">Site</TableCell>
-          <TableCell align="left" className="table-cell">Unit Model</TableCell>
-          <TableCell align="left" className="table-cell">Component Description</TableCell>
-          <TableCell align="left" className="table-cell">Part Number</TableCell>
-          <TableCell align="left" className="table-cell">Unit Code</TableCell>
-          <TableCell align="left" className="table-cell">Serial Number</TableCell>
-          <TableCell align="left" className="table-cell">Lifetime Component</TableCell>
-          <TableCell align="left" className="table-cell">Plan Execution</TableCell>
+          <TableCell align="left" className="table-cell-pk">SO</TableCell>
+          <TableCell align="left" className="table-cell">CUSTOMER</TableCell>
+          <TableCell align="left" className="table-cell">SITE</TableCell>
+          <TableCell align="left" className="table-cell">UNIT MODEL</TableCell>
+          <TableCell align="left" className="table-cell">COMPONENT DESCRIPTION</TableCell>
+          <TableCell align="left" className="table-cell">PART NUMBER</TableCell>
+          <TableCell align="left" className="table-cell">UNIT CODE</TableCell>
+          <TableCell align="left" className="table-cell">SERIAL NUMBER</TableCell>
+          <TableCell align="left" className="table-cell">LIFETIME COMPONENT</TableCell>
+          <TableCell align="left" className="table-cell">PLAN EXECUTION</TableCell>
           <TableCell align="left" className="table-cell">SMR</TableCell>
-          <TableCell align="left" className="table-cell">SMR Date</TableCell>
-          <TableCell align="left" className="table-cell">Plan Type</TableCell>
+          <TableCell align="left" className="table-cell">SMR DATE</TableCell>
+          <TableCell align="left" className="table-cell">PLAN TYPE</TableCell>
         </TableRow>
       </TableHead>
     )
@@ -80,8 +80,8 @@ export default class RevisedSalesOrderList extends React.PureComponent {
   showTableBody(row, id) {
     return (
       <TableRow key={id} classes={{ root: 'table-row' }}>
-        <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
+        <TableCell align="left" className="table-cell-pk"> {row.SoNumber} </TableCell>
+        <TableCell align="left" className="table-cell-cust"> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
         <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>
@@ -92,19 +92,21 @@ export default class RevisedSalesOrderList extends React.PureComponent {
           {this.props.salesOrderRevised.Lists[id].LifeTimeComponent !== "-" ?
             <EditButton
               {...this.props}
-              idEdit="Rev"
-              title="Input Lifetime Component"
-              RowData={row.LifeTimeComponent}
-              lifetime={row.LifeTimeComponent}
-              onStats={this.isPutLifetime}
-              values={this.props.salesOrderRevised.Lists[id].LifeTimeComponent}
-              field="edit"
-              id={row.SoNumber} /> : ""}
+              idEdit= "Rev"
+              title= "Input Lifetime Component"
+              RowData= {row.LifeTimeComponent}
+              lifetime= {row.LifeTimeComponent}
+              onStats= {this.isPutLifetime}
+              values= {this.props.salesOrderRevised.Lists[id].LifeTimeComponent}
+              field= "edit"
+              id= {row.SoNumber} /> : ""}
         </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
-        <TableCell align="left" className="table-cell"> Fix </TableCell>
+        <Tooltip arrow title={row.PlanType.charAt(0) === "U" ? "UNSCHEDULE" : ""} >
+          <TableCell align="left" className="table-cell"> {row.PlanType.substring(0, 3)} </TableCell>
+        </Tooltip>
       </TableRow>
     )
   }

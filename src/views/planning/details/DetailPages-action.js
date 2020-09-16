@@ -47,6 +47,7 @@ export const SelectServicePlanAction = 'SELECT_SERVICE_PLANS';
 export const SelectSalesPlanAction = 'SELECT_SALES_PLANS';
 export const SelectAllServicePlanAction = 'SELECT_ALL_SERVICE_PLANS';
 export const SelectAllService = 'SELECT_ALL_SERVICE';
+export const SelectAllSales = 'SELECT_ALL_SALES';
 export const SelectPlansAssignmentFilterAction = 'SELECT_PLANS_ASSIGNMENT_FILTER';
 export const SelectPlansTypeFilterAction = 'SELECT_PLANS_TYPE_FILTER';
 export const SelectLeaderAction = 'SELECT_LEADER';
@@ -93,9 +94,9 @@ export const SelectComponentFilterAction = 'SELECT_COMPONENT_FILTER';
 export const SelectPlanTypeFilterAction = 'SELECT_PLAN_TYPE_FILTER';
 export const IndexFilterAction = 'INDEX FILTER';
 export const LifetimeFilterAction = 'SELECT_LIFETIME_FILTER';
-export const SmrFilterAction = "SELECT_SMR_FILTER";
 export const DateFilterAction = 'SELECT_DATE_FILTER';
 export const SmrDateFilterAction = "SELECT_SMRDATE_FILTER";
+export const SmrFilterAction = "SELECT_SMR_FILTER";
 
 export function approveSalesAction(payload, accessToken) {
 	const requestConfig = {
@@ -186,14 +187,20 @@ export function putLifetimeCompAction(payload, accessToken) {
 	return async (dispatch) => dispatch(callApi(PutLifetimeComp, requestConfig));
 }
 
-export function putSAPIssueAction(payload, accessToken){
+export function putSAPIssueAction(payload, accessToken, whichTabs){
+	var URL = "";
+	if(whichTabs){
+		URL = `${process.env.REACT_APP_API_URL}/cms/v1/salesorder/sapissue`
+	}else{
+		URL = `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/sapissue`
+	}
 	const requestConfig = {
 		method: RequestMethod.PUT,
-		url: `${process.env.REACT_APP_API_URL}/cms/v1/serviceorder/sapissue`,
+		url: URL,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 			'Accept': 'application/json; charset=utf-8; text/plain',
-			'x-ibm-client-id': process.env.REACT_APP_X_IBM_CLIENT_ID,
+			'x-ibm-client-id' : process.env.REACT_APP_X_IBM_CLIENT_ID,
 			'Content-Type': 'application/json; charset=utf-8',
 		},
 		data: payload
@@ -559,4 +566,8 @@ export function storePlanDataAction(payload) {
 
 export function selectAllService(payload) {
 	return {type: SelectAllService, payload}
+}
+
+export function selectAllSales(payload) {
+	return {type: SelectAllSales, payload}
 }

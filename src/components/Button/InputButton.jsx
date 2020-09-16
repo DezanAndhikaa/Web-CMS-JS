@@ -68,7 +68,7 @@ export default class InputButton extends React.Component {
                     </Paper>
                 </div>
             )
-        }else if (this.props.titles === "Part Number") {
+        } else if (this.props.titles === "Part Number") {
             return (
                 <div className="button-rows">
                     <Paper className={this.props.className || 'global-search-pn'} elevation={1}>

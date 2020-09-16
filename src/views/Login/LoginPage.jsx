@@ -81,7 +81,7 @@ class LoginPage extends React.Component {
           variant="outlined" 
           type="text" 
           value={this.state.username} 
-          onChange={this.handleUsernameChange} 
+          onChange={this.handleUsernameChange}
           className="username-input" 
           label="Username" 
           classes={{ input: 'username-input-text' }} 
@@ -90,10 +90,10 @@ class LoginPage extends React.Component {
         <CssTextField 
           id="password" 
           variant="outlined" 
-          onKeyPress={this.handleKeyPress} 
+          onKeyPress={this.handleKeyPress}
           type={this.state.showPassword ? 'text' : 'password'} 
           value={this.state.password} 
-          onChange={this.handlePasswordChange} 
+          onChange={this.handlePasswordChange}
           className="password-input" 
           label="Password" 
           classes={{ input: 'username-input-text' }} />

@@ -36,7 +36,7 @@ const styles = theme => ({
     alignItem: 'center'
   },
   tabsIndicator: {
-    backgroundColor: '#1890ff',
+    backgroundColor: '#1890ff'
   },
   tabRoot: {
     textTransform: 'initial',
@@ -111,7 +111,7 @@ class ApprovalTab extends React.Component {
         "planning-list-empty" : "plannings-list-container"}>
         <SalesOrderList
           {...this.props}
-          idTab="Approval"
+          idTab= "Approval"
         />
       </div>
     );
@@ -131,6 +131,11 @@ class ApprovalTab extends React.Component {
 
   _dataFilterCustomer() {
     if (this.state.value === 0) {
+      let arr = this.props.salesOrderList.Customers;
+      arr.splice(0, 0, "All Customer")
+      return arr
+    }
+    else {
       let arr = this.props.serviceOrderList.Customers;
       arr.splice(0, 0, "All Customer")
       return arr
@@ -139,6 +144,11 @@ class ApprovalTab extends React.Component {
 
   _dataFilterSite() {
     if (this.state.value === 0) {
+      let arr = this.props.salesOrderList.Sites;
+      arr.splice(0, 0, "All Site")
+      return arr
+    }
+    else {
       let arr = this.props.serviceOrderList.Sites;
       arr.splice(0, 0, "All Site")
       return arr
@@ -147,6 +157,11 @@ class ApprovalTab extends React.Component {
 
   _dataFilterUnitModel() {
     if (this.state.value === 0) {
+      let arr = this.props.salesOrderList.UnitModels;
+      arr.splice(0, 0, "All Unit Model")
+      return arr
+    }
+    else {
       let arr = this.props.serviceOrderList.UnitModels;
       arr.splice(0, 0, "All Unit Model")
       return arr
@@ -155,6 +170,11 @@ class ApprovalTab extends React.Component {
 
   _dataFilterComponentDescription() {
     if (this.state.value === 0) {
+      let arr = this.props.salesOrderList.ComponentDescriptions;
+      arr.splice(0, 0, "All Component Description")
+      return arr
+    }
+    else {
       let arr = this.props.serviceOrderList.ComponentDescriptions;
       arr.splice(0, 0, "All Component Description")
       return arr
@@ -163,6 +183,10 @@ class ApprovalTab extends React.Component {
 
   _dataFilterPlanType() {
     if (this.state.value === 0) {
+      let arr = this.props.salesOrderList.PlanType;
+      arr.splice(0, 0, "All Plan Type")
+      return arr
+    } else {
       let arr = this.props.serviceOrderList.PlanType;
       arr.splice(0, 0, "All Plan Type")
       return arr
@@ -171,6 +195,29 @@ class ApprovalTab extends React.Component {
 
   _renderBaseBtn() {
     if (this.state.value === 0) {
+      return (
+        <div className="approval-container">
+          <div className="total-data">
+            <div className="header-approval">
+              <div className="header1">
+                Available
+              </div>
+              <div className="header2">
+                Sales Order
+              </div>
+            </div>
+            <div className={this.props.totalSalesData > 1 ? "total-containers" : "total-container"}>
+              {this.props.totalSalesData}
+
+            </div>
+          </div>
+          <div className="base-button">
+            {this.props.renderBaseButton}
+          </div>
+        </div>
+      )
+    }
+    else {
       return (
         <div className="approval-container">
           <div className="total-data">
@@ -292,19 +339,30 @@ class ApprovalTab extends React.Component {
             indicatorColor="primary" >
             <Tab
               centered={true}
+              onClick={() => this.props.clearSelectedSalesPlans()}
+              classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
+              label={this.renderTotalSales()}
+            />
+            <Tab
+              centered={true}
               onClick={() => this.props.clearSelectedServicePlans()}
               classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
               label={this.renderTotalService()}
             />
           </Tabs>
         </AppBar>
-        <div className="base-button-container">
-          {this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderBaseBtn()}
+        <div className="base-button-container">          
+          {this.state.value === 0 ? (this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) ? "" : this._renderBaseBtn() :
+            (this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED) ? "" : this._renderBaseBtn()}
         </div>
         <div className="filters-container-approval">
-          {this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
+          {this.state.value === 0 ? (this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) ? "" : this._renderFilter() :
+            (this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED) ? "" : this._renderFilter()}
         </div>
         {value === 0 && <TabContainer dir={theme.direction} >
+          <>{this._renderSalesOrderList()}</>
+        </TabContainer>}
+        {value === 1 && <TabContainer dir={theme.direction} >
           <div>{this._renderServiceOrderList()}</div></TabContainer>}
       </div>
     );
