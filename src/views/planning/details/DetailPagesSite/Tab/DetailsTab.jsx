@@ -15,7 +15,9 @@ import {
   SelectPlanTypeFilterAction
 } from '../../DetailPages-action';
 import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+import roleService from "../../../../../utils/roleService.helper";
 
+const RoleUser = new roleService();
 function TabContainer({ children, dir }) {
   return (
     <Typography component="div" dir={dir}>
