@@ -1,4 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
+/*eslint-disable no-unused-vars*/
+/*eslint-disable no-useless-computed-key*/
 import { combineReducers } from 'redux';
 import update from 'immutability-helper';
 import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';

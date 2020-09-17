@@ -1,3 +1,4 @@
+/*eslint-disable no-unused-vars*/
 import React from 'react';
 import Cards from './components/Card';
 import SearchInput from '../../../../../components/Searchbar/SearchInput';

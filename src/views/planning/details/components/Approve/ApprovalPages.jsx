@@ -1,3 +1,4 @@
+/*eslint-disable no-unused-vars*/
 import React from 'react';
 import './ApprovalPages.scss';
 import ApprovalTab from './ApprovalTab/ApprovalTab';
