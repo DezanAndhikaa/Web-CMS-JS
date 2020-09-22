@@ -1,12 +1,12 @@
 import React from 'react';
 import Enzyme, { shallow } from "enzyme";
 import Adapter from 'enzyme-adapter-react-16';
-import CloseButton from "../../../components/ActionButton/CloseButton/CloseButton";
+import EditButton from "../../../components/ActionButton/EditButton/EditButton";
 
 Enzyme.configure({adapter:new Adapter()});
-it("render close button correctly", () => {
+it("render edit button correctly", () => {
     const wrapper = shallow (
-      <CloseButton />
+      <EditButton />
     )
     expect(wrapper).toMatchSnapshot();
 
