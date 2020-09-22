@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import BaseButton from "../../../components/Button/BaseButton";
 
 Enzyme.configure({adapter:new Adapter()});
-it("render modal approve confirmation correctly", () => {
+it("render base button correctly", () => {
     const wrapper = shallow (
       <BaseButton />
     )
