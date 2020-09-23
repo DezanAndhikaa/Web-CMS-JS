@@ -5,9 +5,8 @@ import CloseButton from "../../../components/ActionButton/CloseButton/CloseButto
 
 Enzyme.configure({adapter:new Adapter()});
 it("render close button correctly", () => {
-    const wrapper = shallow (
-      <CloseButton />
-    )
-    expect(wrapper).toMatchSnapshot();
-
+  const wrapper = shallow (
+    <CloseButton />
+  )
+  expect(wrapper).toMatchSnapshot();
 })

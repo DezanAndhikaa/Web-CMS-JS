@@ -5,9 +5,8 @@ import NotifButton from "../../../components/ActionButton/NotifButton/NotifButto
 
 Enzyme.configure({adapter:new Adapter()});
 it("render notif button correctly", () => {
-    const wrapper = shallow (
-      <NotifButton />
-    )
-    expect(wrapper).toMatchSnapshot();
-
+  const wrapper = shallow (
+    <NotifButton />
+  )
+  expect(wrapper).toMatchSnapshot();
 })

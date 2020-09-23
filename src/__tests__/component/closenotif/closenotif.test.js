@@ -5,9 +5,8 @@ import CloseNotif from '../../../components/CloseNotif/CloseNotif';
 
 Enzyme.configure({adapter:new Adapter()});
 it("render button close notif correctly", () => {
-    const wrapper = shallow (
-      <CloseNotif />
-    )
-    expect(wrapper).toMatchSnapshot();
-
+  const wrapper = shallow (
+    <CloseNotif />
+  )
+  expect(wrapper).toMatchSnapshot();
 })

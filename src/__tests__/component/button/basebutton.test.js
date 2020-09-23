@@ -5,9 +5,8 @@ import BaseButton from "../../../components/Button/BaseButton";
 
 Enzyme.configure({adapter:new Adapter()});
 it("render base button correctly", () => {
-    const wrapper = shallow (
-      <BaseButton />
-    )
-    expect(wrapper).toMatchSnapshot();
-
+  const wrapper = shallow (
+    <BaseButton />
+  )
+  expect(wrapper).toMatchSnapshot();
 })

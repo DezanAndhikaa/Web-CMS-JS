@@ -5,9 +5,8 @@ import InputButton from "../../../components/Button/InputButton";
 
 Enzyme.configure({adapter:new Adapter()});
 it("render input button correctly", () => {
-    const wrapper = shallow (
-      <InputButton />
-    )
-    expect(wrapper).toMatchSnapshot();
-
+  const wrapper = shallow (
+    <InputButton />
+  )
+  expect(wrapper).toMatchSnapshot();
 })

@@ -5,9 +5,8 @@ import ApproveConfirmation from "../../../components/ApproveConfirmation/Approve
 
 Enzyme.configure({adapter:new Adapter()});
 it("render modal approve confirmation correctly", () => {
-    const wrapper = shallow (
-      <ApproveConfirmation />
-    )
-    expect(wrapper).toMatchSnapshot();
-
+  const wrapper = shallow (
+    <ApproveConfirmation />
+  )
+  expect(wrapper).toMatchSnapshot();
 })

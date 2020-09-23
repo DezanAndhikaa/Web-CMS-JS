@@ -5,9 +5,8 @@ import EditButton from "../../../components/ActionButton/EditButton/EditButton";
 
 Enzyme.configure({adapter:new Adapter()});
 it("render edit button correctly", () => {
-    const wrapper = shallow (
-      <EditButton />
-    )
-    expect(wrapper).toMatchSnapshot();
-
+  const wrapper = shallow (
+    <EditButton />
+  )
+  expect(wrapper).toMatchSnapshot();
 })

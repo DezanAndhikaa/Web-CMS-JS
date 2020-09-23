@@ -5,9 +5,8 @@ import DeleteButton from "../../../components/ActionButton/DeleteButton/DeleteBu
 
 Enzyme.configure({adapter:new Adapter()});
 it("render delete button correctly", () => {
-    const wrapper = shallow (
-      <DeleteButton />
-    )
-    expect(wrapper).toMatchSnapshot();
-
+  const wrapper = shallow (
+    <DeleteButton />
+  )
+  expect(wrapper).toMatchSnapshot();
 })
