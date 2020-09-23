@@ -1,12 +1,12 @@
 import React from 'react';
 import Enzyme, { shallow } from "enzyme";
 import Adapter from 'enzyme-adapter-react-16';
-import UnapproveConfirmation from '../../../components/UnapproveConfirmation/UnapproveConfirmation';
+import SideMenu from '../../../components/SideMenu/SideMenuComponent';
 
 Enzyme.configure({adapter:new Adapter()});
-it("render modal unapprove confirmation correctly", () => {
+it("render side menu correctly", () => {
     const wrapper = shallow (
-        <UnapproveConfirmation />
+        <SideMenu />
     )
     expect(wrapper).toMatchSnapshot();
 })
