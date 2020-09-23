@@ -5,9 +5,8 @@ import SearchInput from "../../../components/Searchbar/SearchInput";
 
 Enzyme.configure({adapter:new Adapter()});
 it("render searchbar correctly", () => {
-    const wrapper = shallow (
-      <SearchInput />
-    )
-    expect(wrapper).toMatchSnapshot();
-
+  const wrapper = shallow (
+    <SearchInput />
+  )
+  expect(wrapper).toMatchSnapshot();
 })
