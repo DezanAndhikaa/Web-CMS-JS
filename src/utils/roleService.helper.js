@@ -11,32 +11,15 @@ export default class roleService {
       this.jwtDecode = jwtDecode(userIdData().accessToken);
       const role_name = this.jwtDecode.role_name;
       let role = null;
-      if ((Array.isArray(role_name) && role_name.includes('OBD')) || role_name === 'OBD HO') {
+      if (role_name.includes('OBD') || role_name.includes('DAD HO')) {
         role = 1;
-      }else if ((Array.isArray(role_name) && role_name.includes('FMC Headoffice')) || role_name === 'FMC Headoffice') { //service
+      }else if (role_name.includes('ASC') || role_name.includes('COP') || role_name.includes('NFMC') || role_name.includes('PDH')
+        || role_name.includes('PPC') || role_name.includes('PSC') || role_name.includes('PTO') || role_name.includes('SDH')
+        || role_name.includes('SPV') || role_name.includes('Tarakan')) {
         role = 2;
-      }else if ((Array.isArray(role_name) && role_name.includes('SDH')) || role_name === 'SDH') { // sales dan service (view only)
-        role = 3;
-      }else if ((Array.isArray(role_name) && role_name.includes('SPV FMC')) || role_name === 'SPV FMC') {//service
-        role = 4;
-      }else if ((Array.isArray(role_name) && role_name.includes('SPV Non FMC')) || role_name === 'SPV Non FMC') {//sales site, view only
-        role = 5;
-      }else if ((Array.isArray(role_name) && role_name.includes('ASC')) || role_name === 'ASC') {//site sales
-        role = 6;
-      }else if ((Array.isArray(role_name) && role_name.includes('COP')) || role_name === 'COP') {//site sales
-        role = 7;
-      }else if ((Array.isArray(role_name) && role_name.includes('PDH')) || role_name === 'PDH') { //sales order
-        role = 8;
-      }else if (role_name.includes('PPC') || role_name === 'PPC FMC') { //service
-        role = 9;
-      }else if ((Array.isArray(role_name) && role_name.includes('PPC Non FMC')) || role_name === 'PPC Non FMC') { //sales site (view only)
-        role = 10;
-      }else if ((Array.isArray(role_name) && role_name.includes('SDH FMC')) || role_name === 'SDH FMC') { //service
-        role = 11;
-      }else if ((Array.isArray(role_name) && role_name.includes('SDH Non FMC')) || role_name === 'SDH Non FMC') { //sales site (view only)
-        role = 12;
+      } else{
+        role = 3
       }
-
       return role;
     } catch (error) {
       this.jwtDecode = error;
