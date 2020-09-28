@@ -48,7 +48,7 @@ class DetailPages extends React.Component {
       this.fetchSearchSales();
     }
     
-    // FILTER DROPDOWN
+    //Dropdown Filter
     if (prevProps.filterParameter !== this.props.filterParameter) {
       if (this.props.indexFilterParameter.indexTabParameter === 0) {
         this.props.updateSalesParameter({
@@ -61,14 +61,14 @@ class DetailPages extends React.Component {
       }
     }
 
-    // FILTER RANGE LIFETIME
+    //Filter Range Lifetime
     if (prevProps.filterLifetime !== this.props.filterLifetime) {
       this.props.updateSalesParameter({
         ...prevProps.serviceParameter.dataFilter, Filter: this.props.filterLifetime.Filter, PageNumber: 1
       })
     }
 
-    //FILTER RANGE SMR
+    //Fiter Range SMR
     if(this.state.whichTabs){
       if (prevProps.filterSmr !== this.props.filterSmr) {
         this.props.updateSalesParameter({
@@ -77,7 +77,7 @@ class DetailPages extends React.Component {
       }
     }
 
-    //FILTER RANGE DATE
+    //Fiter Range Date
     if (this.state.whichTabs) {
       if (prevProps.filterDateSalesSite !== this.props.filterDateSalesSite) {
         this.props.updateSalesParameter({
@@ -86,21 +86,21 @@ class DetailPages extends React.Component {
       }
     }
 
-    //FILTER RANGE SMR DATE
+    //Fiter Range SMR Date
     if (this.state.whichTabs) {
       if (prevProps.filterDateSmrSalesSite !== this.props.filterDateSmrSalesSite) {
         this.props.fetchSalesOrder(this.props.filterDateSmrSalesSite, this.props.token);
       }
     }
 
-    // TRIGGER SEARCH GLOBAL SALES
+    //Trigger Global Search Sales
     if (prevProps.salesSearch !== this.props.salesSearch) {
       this.props.updateSearchSales({
         ...prevProps.searchSalesParameter, Category: 'Lifetime', Keyword: this.props.salesSearch,
       });
     }
 
-    // SEARCH PER COMPONENT
+    //Search per Component
     if (this.state.whichTabs) {
       if (prevProps.searchComp !== this.props.searchComp) {
         if (this.props.searchComp[0].Value === "") {
@@ -115,7 +115,7 @@ class DetailPages extends React.Component {
       }
     }
 
-    // SALES ORDER SORTING
+    //Sales Order Sorting
     if (prevProps.sortSalesBy !== this.props.sortSalesBy) {
       const { sortSalesBy } = this.props;
       let isDescending = false;
@@ -235,7 +235,7 @@ class DetailPages extends React.Component {
   fetchSearchSales = async () => {
     await this.props.fetchSalesOrder(this.props.searchSalesParameter, this.props.token);
   }
-  // PAGINATION DENGAN KONDISI UNTUK TAB SALES ORDER ATAU SERVICE ORDER
+  //Pagination
   _renderPagination = (pageValue) => {
     if (pageValue === 1) {
       this.setState({ whichTabs: true })
@@ -282,12 +282,12 @@ class DetailPages extends React.Component {
     }
   }
 
-  // SAAT MENGKLIK SERVICE ORDER TAB
+  //Saat user menekan tab Service
   onClickServiceOrder = async () => {
     await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
   }
 
-  // SAAT MENGKLIK SALES ORDER TAB
+  //Saat user menekan tab Sales
   onClickSalesOrder = async () => {
     await this.props.fetchSalesOrder({
       ...this.props.salesParameter.dataFilter,
