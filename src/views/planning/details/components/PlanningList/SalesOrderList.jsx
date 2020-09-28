@@ -31,7 +31,7 @@ export default class SalesOrderList extends React.PureComponent {
   }
 
   componentDidUpdate = (prevState) => {
-    //untuk menghilangkan checkbox
+    //Fungsi untuk menghilangkan checkbox
     if (prevState.salesParameter !== this.props.salesParameter || prevState.salesSearch !== this.props.salesSearch ||
       prevState.searchComp !== this.props.searchComp || prevState.selectedFilters !== this.props.selectedFilters) {
       this.setState({ checkedValue: false })

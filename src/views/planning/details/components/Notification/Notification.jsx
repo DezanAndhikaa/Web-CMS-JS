@@ -39,7 +39,7 @@ componentDidUpdate = (prevProps) => {
   }
 }
 
-  // PAGINATION DENGAN KONDISI UNTUK TAB SALES ORDER ATAU SERVICE ORDER
+  //Pagination
   _renderPagination= (pageValue) =>  {
     if (pageValue === 1) {
       this.setState({whichTabs : true})
@@ -90,7 +90,7 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  //KOMPONEN UNTUK SHOW PER/PAGE
+  //Komponen show per page
   _renderShowPerPage = () =>{
     return(
       <DropDownList 
@@ -135,7 +135,7 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  //RENDER KOMPONEN BUTTON NOTIF
+  //Render komponen button notif
   _renderNotif(){
     return (
       <NotifButton 
@@ -144,7 +144,7 @@ componentDidUpdate = (prevProps) => {
     )
   }
 
-  //KOMPONEN UNTUK FILTER DATA ACTION
+  //Komponen filter by data action
   _renderFilterByDataAction = (value) => {
     if (value === 1) {
       this.setState({whichTabs : true})

@@ -39,7 +39,7 @@ export default class SapIssueList extends React.PureComponent {
   }
 
   componentDidUpdate = (prevState) =>{
-    //untuk menghilangkan checkbox
+    //Fungsi untuk menghilangkan checkbox
     if (prevState.salesSapParameter !== this.props.salesSapParameter || prevState.salesSearch !== this.props.salesSearch || 
       prevState.searchComp !==this.props.searchComp) {
       this.setState({checkedValue : false})
@@ -249,7 +249,7 @@ export default class SapIssueList extends React.PureComponent {
     })
   }
 
-  //LOADING SCENE
+  //Loading scene
   showLoading(){
     switch (this.props.fetchStatusSalesSap) {
       case ApiRequestActionsStatus.LOADING:

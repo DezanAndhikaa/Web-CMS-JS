@@ -50,7 +50,7 @@ class ApprovalPages extends React.Component {
       this.onClickServiceOrder();
     }
 
-    // FILTER DROPDOWN
+    //Dropdown filter
     if (prevProps.filterParameter !== this.props.filterParameter) {
       if (this.props.indexFilterParameter.indexTabParameter === 0) {
         this.props.updateSalesParameter({
@@ -63,7 +63,7 @@ class ApprovalPages extends React.Component {
       }
     }
 
-    //FILTER RANGE LIFETIME
+    //Filter range lifetime
     if (this.state.whichTabs) {
       if (prevProps.filterLifetime !== this.props.filterLifetime) {
         this.props.updateSalesParameter({
@@ -78,7 +78,7 @@ class ApprovalPages extends React.Component {
       }
     }
 
-    //FILTER RANGE SMR
+    //Filter range SMR
     if (this.state.whichTabs) {
       if (prevProps.filterSmr !== this.props.filterSmr) {
         this.props.updateSalesParameter({
@@ -93,7 +93,7 @@ class ApprovalPages extends React.Component {
       }
     }
 
-    //FILTER RANGE DATE
+    //Filter range Date
     if (this.state.whichTabs) {
       if (prevProps.filterDateSalesHO !== this.props.filterDateSalesHO) {
         this.props.fetchSalesOrder(this.props.filterDateSalesHO, this.props.token);
@@ -104,7 +104,7 @@ class ApprovalPages extends React.Component {
       }
     }
 
-    //FILTER RANGE SMR DATE
+    //Filter range SMR Date
     if (this.state.whichTabs) {
       if (prevProps.filterDateSmrSalesHO !== this.props.filterDateSmrSalesHO) {
         this.props.fetchSalesOrder(this.props.filterDateSmrSalesHO, this.props.token);
@@ -115,7 +115,7 @@ class ApprovalPages extends React.Component {
       }
     }
 
-    // Trigger sales global search
+    //Trigger sales global search
     if (prevProps.salesSearch !== this.props.salesSearch) {
       this.props.updateSearchSales({
         ...prevProps.searchSalesParameter, Category: 'Approval', Keyword: this.props.salesSearch,
@@ -156,7 +156,7 @@ class ApprovalPages extends React.Component {
       }
     }
 
-    // SALES ORDER SORTING
+    //Sales order sorting
     if (prevProps.sortSalesBy !== this.props.sortSalesBy) {
       const { sortSalesBy } = this.props;
       let isDescending = false;
@@ -271,7 +271,7 @@ class ApprovalPages extends React.Component {
         }
       };
     }
-    // SERVICE ORDER SORTING
+    //Service order sorting
     if (prevProps.sortServiceBy !== this.props.sortServiceBy) {
       const { sortServiceBy } = this.props;
       let isDescending = false;
@@ -388,7 +388,7 @@ class ApprovalPages extends React.Component {
     }
   }
 
-  // PAGINATION DENGAN KONDISI UNTUK TAB SALES ORDER ATAU SERVICE ORDER
+  //Pagination
   _renderPagination = (pageValue) => {
     if (pageValue === 1) {
       this.setState({ whichTabs: true })
@@ -443,7 +443,7 @@ class ApprovalPages extends React.Component {
     await this.props.fetchServiceOrder(this.props.searchServiceParameter, this.props.token);
   }
 
-  //SAAT MENGKLIK SERVICE ORDER TAB
+  //Saat user menekan tab Service
   onClickServiceOrder = async () => {
     await this.props.fetchServiceOrder({
       ...this.props.serviceParameter.dataFilter,
@@ -457,7 +457,7 @@ class ApprovalPages extends React.Component {
     }, this.props.token);
   }
 
-  //SAAT MENGKLIK SALES ORDER TAB
+  //Saat user menekan tab Sales
   onClickSalesOrder = async () => {
     if (this.props.location.whichTab === 'lifetime') {
       await this.props.fetchSalesOrder({
@@ -494,7 +494,7 @@ class ApprovalPages extends React.Component {
     }
   }
 
-  //KOMPONEN UNTUK SHOW PER/PAGE
+  //Komponen show per page dan fungsinya
   _renderShowPerPage() {
     return (
       <DropDownList
@@ -538,7 +538,7 @@ class ApprovalPages extends React.Component {
     }
   }
   
-  //KOMPONEN UNTUK GLOBAL SEARCH
+  //Komponen global search
   _renderSearchBar() {
     return (
       <div className="bottom-row-approval">
@@ -583,16 +583,16 @@ class ApprovalPages extends React.Component {
       </>
     );
   }
-
-  //FUNGSI UNTUK MENGAPROVE SALES ORDER
+ 
   onClickApprovedSales = () => {
     this.props.fetchApprovedSales(this.props.salesParameter.dataFilter, this.props.token);
   }
-  //FUNGSI UNTUK MENGAPROVE SERVICE ORDER
+  
   onClickApprovedService = () => {
     this.props.fetchApprovedService(this.props.serviceParameter.dataFilter, this.props.token);
   }
 
+  //Fungsi approve Sales Order
   handleSalesApprove = async () => {
     let arr = []
     const index = this.props.selectedSalesPlans.length
@@ -606,6 +606,7 @@ class ApprovalPages extends React.Component {
     }
   };
 
+  //Fungsi approve Service Order
   handleServiceApprove = async () => {
     let arr = []
     const index = this.props.selectedServicePlans.length
@@ -780,7 +781,7 @@ class ApprovalPages extends React.Component {
     }
   };
 
-  //FUNGSI UNTUK MULTI SELECT SALES ORDER
+  //Fungsi multiple select Sales Order
   updateAssignmentSalesStates = (plan) => {
     if (this.props.selectedSalesPlans
       .some((plans) => plans.SoNumber === plan.SoNumber,
@@ -788,7 +789,7 @@ class ApprovalPages extends React.Component {
     return this.props.selectSalesPlan(plan);
   };
 
-  //FUNGSI UNTUK MULTI SELECT SERVICE ORDER
+  //Fungsi multiple select Service Order
   updateAssignmentServiceStates = (plan) => {
     if (this.props.selectedServicePlans
       .some((plans) => plans.WoNumber === plan.WoNumber,
@@ -796,7 +797,7 @@ class ApprovalPages extends React.Component {
     return this.props.selectServicePlan(plan);
   };
 
-  //KOMPONEN UNTUK RENDER PAGE SALES ORDER DAN SERVICE ORDER
+  //Komponen untuk render page Sales dan Service Order
   _renderTabs() {
     return (
       <>

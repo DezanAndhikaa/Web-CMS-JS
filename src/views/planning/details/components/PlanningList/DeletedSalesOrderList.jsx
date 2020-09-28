@@ -24,7 +24,7 @@ export default class DeletedSalesOrderList extends React.PureComponent {
   }
 
   componentDidUpdate = (prevState) =>{
-    //untuk menghilangkan checkbox
+    //Fungsi untuk menghilangkan checkbox
     if (prevState.salesDeletedParameter !== this.props.salesDeletedParameter || prevState.salesSearch !== this.props.salesSearch || 
       prevState.searchComp !==this.props.searchComp) {
       this.setState({checkedValue : false})
@@ -137,7 +137,7 @@ export default class DeletedSalesOrderList extends React.PureComponent {
     })
   }
 
-  //LOADING SCENE
+  //Loading scene
   showLoading(){
     switch (this.props.fetchStatusSalesDeleted) {
       case ApiRequestActionsStatus.LOADING:

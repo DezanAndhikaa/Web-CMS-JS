@@ -25,7 +25,7 @@ export default class DeletedServiceOrderList extends React.PureComponent {
   }
 
   componentDidUpdate = (prevState) =>{
-    //untuk menghilangkan checkbox
+    //Fungsi untuk menghilangkan checkbox
     if (prevState.serviceDeletedParameter !== this.props.serviceDeletedParameter || prevState.serviceSearch !== this.props.serviceSearch || 
       prevState.searchComp !==this.props.searchComp) {
       this.setState({checkedValue : false})
@@ -145,7 +145,7 @@ export default class DeletedServiceOrderList extends React.PureComponent {
     })
   }
 
-  //LOADING SCENE
+  //Loading scene
   showLoading(){
     switch (this.props.fetchStatusServiceDeleted) {
       case ApiRequestActionsStatus.LOADING:

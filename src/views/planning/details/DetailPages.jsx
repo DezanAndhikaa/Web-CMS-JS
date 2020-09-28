@@ -48,7 +48,7 @@ class DetailPages extends React.Component {
       this.fetchSearchSales();
     }
     
-    //Dropdown Filter
+    //Dropdown filter
     if (prevProps.filterParameter !== this.props.filterParameter) {
       if (this.props.indexFilterParameter.indexTabParameter === 0) {
         this.props.updateSalesParameter({
@@ -61,14 +61,14 @@ class DetailPages extends React.Component {
       }
     }
 
-    //Filter Range Lifetime
+    //Filter range lifetime
     if (prevProps.filterLifetime !== this.props.filterLifetime) {
       this.props.updateSalesParameter({
         ...prevProps.serviceParameter.dataFilter, Filter: this.props.filterLifetime.Filter, PageNumber: 1
       })
     }
 
-    //Fiter Range SMR
+    //Filter range SMR
     if(this.state.whichTabs){
       if (prevProps.filterSmr !== this.props.filterSmr) {
         this.props.updateSalesParameter({
@@ -77,7 +77,7 @@ class DetailPages extends React.Component {
       }
     }
 
-    //Fiter Range Date
+    //Filter range date
     if (this.state.whichTabs) {
       if (prevProps.filterDateSalesSite !== this.props.filterDateSalesSite) {
         this.props.updateSalesParameter({
@@ -86,21 +86,21 @@ class DetailPages extends React.Component {
       }
     }
 
-    //Fiter Range SMR Date
+    //Filter range SMR date
     if (this.state.whichTabs) {
       if (prevProps.filterDateSmrSalesSite !== this.props.filterDateSmrSalesSite) {
         this.props.fetchSalesOrder(this.props.filterDateSmrSalesSite, this.props.token);
       }
     }
 
-    //Trigger Global Search Sales
+    //Trigger global search Sales
     if (prevProps.salesSearch !== this.props.salesSearch) {
       this.props.updateSearchSales({
         ...prevProps.searchSalesParameter, Category: 'Lifetime', Keyword: this.props.salesSearch,
       });
     }
 
-    //Search per Component
+    //Search per component
     if (this.state.whichTabs) {
       if (prevProps.searchComp !== this.props.searchComp) {
         if (this.props.searchComp[0].Value === "") {
@@ -115,7 +115,7 @@ class DetailPages extends React.Component {
       }
     }
 
-    //Sales Order Sorting
+    //Sales order sorting
     if (prevProps.sortSalesBy !== this.props.sortSalesBy) {
       const { sortSalesBy } = this.props;
       let isDescending = false;
@@ -301,7 +301,7 @@ class DetailPages extends React.Component {
     }, this.props.token);
   }
 
-  // KOMPONEN UNTUK SHOW PER/PAGE
+  //Komponen show per page dan fungsinya
   _renderShowPerPage = () => {
     return (
       <DropDownList
@@ -333,7 +333,7 @@ class DetailPages extends React.Component {
     this.props.filterParameter.Filter.length = 0
 	}
 
-  //KOMPONEN UNTUK GLOBAL SEARCH
+  //Komponen global search
   _renderSearchBar() {
     return (
       <>
@@ -402,7 +402,7 @@ class DetailPages extends React.Component {
     })
   }
 
-  // KOMPONEN UNTUK FILTER DATA ACTION
+  //Komponen filter by data action
   _renderFilterByDataAction = (value) => {
     if (value === 1) {
       this.setState({ whichTabs: true })
@@ -443,7 +443,7 @@ class DetailPages extends React.Component {
     });
   };
 
-  // FUNGSI UNTUK MULTI SELECT SALES ORDER
+  //Fungsi multiple select Sales Order
   updateAssignmentSalesStates = (plan) => {
     if (this.props.selectedSalesPlans
       .some((plans) => plans.SoNumber === plan.SoNumber,
@@ -451,7 +451,7 @@ class DetailPages extends React.Component {
     return this.props.selectSalesPlan(plan);
   };
 
-  // FUNGSI UNTUK MULTI SELECT SERVICE ORDER
+  // Fungsi multiple select Service Order
   updateAssignmentServiceStates = (plan) => {
     if (this.props.selectedServicePlans
       .some((plans) => plans.WoNumber === plan.WoNumber,
@@ -459,7 +459,7 @@ class DetailPages extends React.Component {
     return this.props.selectServicePlan(plan);
   };
 
-  // KOMPONEN UNTUK RENDER PAGE SALES ORDER DAN SERVICE ORDER
+  //Komponen untuk render page Sales dan Service Order
   _renderTabs() {
     return (
       <>
