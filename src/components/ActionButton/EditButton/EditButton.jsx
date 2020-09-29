@@ -1,8 +1,8 @@
 import React from 'react';
-import InputText from '../../InputText/InputText'
+import InputText from 'components/InputText/InputText'
 import { Modal } from '@material-ui/core'
 import './EditButton.scss';
-import ApproveConfirmation from '../../ApproveConfirmation/ApproveConfirmation';
+import ApproveConfirmation from 'components/ApproveConfirmation/ApproveConfirmation';
 
 class EditButton extends React.PureComponent {
 
