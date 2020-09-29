@@ -1,10 +1,10 @@
 import React from 'react';
 import './NotifButton.scss';
 import {Badge, Paper } from '@material-ui/core/';
-import { IconNotif } from '../../../assets/icons';
+import { IconNotif } from 'assets/icons';
 import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from "react-router-dom";
-import CardData from '../../../views/planning/details/components/Notification/Components/Card';
+import CardData from 'views/planning/details/components/Notification/Components/Card';
 
 const DotBadges = withStyles(theme => ({
 	badge: {

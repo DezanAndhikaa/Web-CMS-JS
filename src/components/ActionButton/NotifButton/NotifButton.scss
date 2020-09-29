@@ -1,5 +1,5 @@
-@import '../../../themes/variables';
-@import '../../../themes/functions';
+@import 'themes/variables';
+@import 'themes/functions';
 
 .dropdown-notif {
   display: flex;
@@ -201,7 +201,7 @@
       margin-bottom: 5%;
       background-color: white;
       box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-      background-image: url('../../../assets/icons/notif_input.png');
+      background-image: url('assets/icons/notif_input.png');
       background-size: 10%;
       background-position-x: 5%;
       background-position-y: center;
@@ -283,7 +283,7 @@
       margin-bottom: 5%;
       background-color: white;
       box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-      background-image: url('../../../assets/icons/notif_input.png');
+      background-image: url('assets/icons/notif_input.png');
       background-size: 10%;
       background-position-x: 5%;
       background-position-y: center;
@@ -364,7 +364,7 @@
     margin-bottom: 5%;
     background-color: white;
     box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-    background-image: url('../../../assets/icons/notif_input.png');
+    background-image: url('assets/icons/notif_input.png');
     background-size: 10%;
     background-position-x: 5%;
     background-position-y: center;
