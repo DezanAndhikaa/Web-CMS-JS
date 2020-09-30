@@ -1,8 +1,8 @@
 import React from 'react';
 import { DialogContent, Button, Modal } from '@material-ui/core';
-import { ImgSendtoEdit } from '../../assets/imgs';
+import { ImgSendtoEdit } from 'assets/imgs';
 import './ApproveConfirmation.scss';
-import CloseNotif from '../CloseNotif/CloseNotif';
+import CloseNotif from 'components/CloseNotif/CloseNotif';
 
 export default class ApproveConfirmation extends React.PureComponent {
 	constructor(props){
