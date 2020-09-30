@@ -1,5 +1,5 @@
-@import '../../themes/variables';
-@import '../../themes/functions';
+@import 'themes/variables';
+@import 'themes/functions';
 
 .modal-pos{
     outline: '0';
@@ -27,7 +27,7 @@
     }
     .btn-assigns-lifetime{
         padding-right: vw(30);
-        background-image: url('../../assets/icons/filters.png');
+        background-image: url('assets/icons/filters.png');
         background-size: 8.5px;
         background-repeat: no-repeat;
         background-position-x: 88%;
@@ -47,7 +47,7 @@
     .btn-filter-smr{
         width: 69px;
         height: vw(35.07) !important;
-        background-image: url('../../assets/icons/filters.png');
+        background-image: url('assets/icons/filters.png');
         background-size: 8.5px;
         background-repeat: no-repeat;
         background-position-x: 90%;
@@ -80,7 +80,7 @@
     }
     .btn-filter-by-date{
         padding-right: vw(34);
-        background-image: url('../../assets/icons/ic_date.png');
+        background-image: url('assets/icons/ic_date.png');
         background-size: 9px;
         background-repeat: no-repeat;
         background-position-x: 90%;
@@ -98,7 +98,7 @@
         cursor: pointer;
     }
     .btn-smr-date{
-        background-image: url('../../assets/icons/ic_date.png');
+        background-image: url('assets/icons/ic_date.png');
         background-size: 9px;
         background-repeat: no-repeat;
         background-position-x: 90%;
@@ -116,7 +116,7 @@
         cursor: pointer;
     }
     .btn-header{
-        background-image: url('../../assets/icons/arrow.png');
+        background-image: url('assets/icons/arrow.png');
         background-size: 8.5px;
         background-repeat: no-repeat;
         background-position-x: 90%;
@@ -134,7 +134,7 @@
         cursor: pointer;
     }
     .btn-header-comp{
-        background-image: url('../../assets/icons/arrow.png');
+        background-image: url('assets/icons/arrow.png');
         background-size: 8.5px;
         background-repeat: no-repeat;
         background-position-x: 90%;
