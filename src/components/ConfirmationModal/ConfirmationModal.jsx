@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { DialogContent, Button, Modal } from '@material-ui/core';
-import { ImgApproved, DelSuccess, Success } from '../../assets/imgs';
+import { ImgApproved, DelSuccess, Success } from 'assets/imgs';
 import './ConfirmationModal.scss';
-import CloseNotif from '../CloseNotif/CloseNotif';
+import CloseNotif from 'components/CloseNotif/CloseNotif';
 
 export default class ConfirmationModal extends React.PureComponent {
   render() {
