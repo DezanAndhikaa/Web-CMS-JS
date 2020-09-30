@@ -1,5 +1,5 @@
-@import '../../themes/functions';
-@import '../../themes/variables';
+@import 'themes/functions';
+@import 'themes/variables';
 
 .button-inline{
     display: flex;
@@ -18,7 +18,7 @@
         margin-left: vw(15);
         border-radius: vw(10) !important;
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-        background-image: url('../../assets/icons/ic_download.png');
+        background-image: url('assets/icons/ic_download.png');
         background-color: white;
         background-repeat: no-repeat;
         background-size: 45%;
@@ -40,7 +40,7 @@
         background-color: white;
         box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
         border-radius: 6px;
-        background-image: url('../../assets/icons/ic_download.png');
+        background-image: url('assets/icons/ic_download.png');
         background-size: 8%;
         background-position-x: 17%;
         background-position-y: center;
@@ -62,7 +62,7 @@
         background-color: map-get($colors , danger);
         box-shadow: 2px 2px 4px rgba(77, 161, 255, 0.2);
         border-radius: 6px;
-        background-image: url('../../assets/icons/reset.png');
+        background-image: url('assets/icons/reset.png');
         background-size: 13%;
         background-position-x: 87%;
         background-position-y: center;
@@ -87,7 +87,7 @@
         background-color: map-get($colors , third);
         box-shadow: 2px 2px 4px rgba(77, 161, 255, 0.2);
         border-radius: 6px;
-        background-image: url('../../assets/icons/sends.png');
+        background-image: url('assets/icons/sends.png');
         background-size: 10%;
         background-position-x: 87%;
         background-position-y: center;
@@ -98,7 +98,7 @@
         background-color: map-get($colors, third-dark);
     }
     .btn-approve:disabled{
-        background-image: url('../../assets/icons/send-disabled.png');
+        background-image: url('assets/icons/send-disabled.png');
         background-size: 13%;
         background-position-x: 87%;
         background-position-y: center;
@@ -120,7 +120,7 @@
         background-color: transparent;
         border: 1px solid #FF736A;
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-        background-image: url('../../assets/icons/cancel_approve.png');
+        background-image: url('assets/icons/cancel_approve.png');
         background-size: 21%;
         background-position-x: 16%;
         background-position-y: center;
@@ -128,7 +128,7 @@
         cursor: pointer;
     }
     .btn-cancel-approve:hover{
-        background-image: url('../../assets/icons/cancel_approve_hover.png');
+        background-image: url('assets/icons/cancel_approve_hover.png');
         background-size: 18%;
         background-position-x: 16%;
         background-color: map-get($colors, delete);
@@ -150,7 +150,7 @@
         background-color: transparent;
         border: 1px solid #FF736A;
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-        background-image: url('../../assets/icons/cancel_approve.png');
+        background-image: url('assets/icons/cancel_approve.png');
         background-size: 18%;
         background-position-x: 11%;
         background-position-y: center;
@@ -158,7 +158,7 @@
         cursor: pointer;
     }
     .btn-reject-service:hover{
-        background-image: url('../../assets/icons/cancel_approve_hover.png');
+        background-image: url('assets/icons/cancel_approve_hover.png');
         background-size: 18%;
         background-position-x: 11%;
         background-color: map-get($colors, delete);
@@ -179,7 +179,7 @@
         background-color: transparent;
         border: 1px solid #FF736A;
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-        background-image: url('../../assets/icons/cancel_approve.png');
+        background-image: url('assets/icons/cancel_approve.png');
         background-size: 15%;
         background-position-x: 8%;
         background-position-y: center;
@@ -187,7 +187,7 @@
         cursor: pointer;
     }
     .btn-sap:hover{
-        background-image: url('../../assets/icons/cancel_approve_hover.png');
+        background-image: url('assets/icons/cancel_approve_hover.png');
         background-size: 15%;
         background-position-x: 8%;
         background-color: map-get($colors, delete);
@@ -207,7 +207,7 @@
         color: white;
         background-color: map-get($colors, delete);
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-        background-image: url('../../assets/icons/bin.png');
+        background-image: url('assets/icons/bin.png');
         background-size: 8%;
         background-position-x: 10%;
         background-position-y: center;
