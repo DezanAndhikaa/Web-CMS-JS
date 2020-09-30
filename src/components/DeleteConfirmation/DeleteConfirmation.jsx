@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { DialogContent, Button, Modal } from '@material-ui/core';
-import { Delete, DelSuccess } from '../../assets/imgs';
+import { Delete, DelSuccess } from 'assets/imgs';
 import './DeleteConfirmation.scss';
-import CloseNotif from '../CloseNotif/CloseNotif';
+import CloseNotif from 'components/CloseNotif/CloseNotif';
 
 export default class DeleteConfirmation extends React.PureComponent {
   render() {
