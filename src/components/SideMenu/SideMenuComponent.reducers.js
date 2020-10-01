@@ -1,4 +1,4 @@
-import { Menu } from '../../constants/index';
+import { Menu } from '../../constants';
 import { CLICK_MENU } from './SideMenuComponent.actions';
 
 const initialState = {

@@ -8,10 +8,10 @@ import {
   Collapse
 } from "@material-ui/core";
 import { AssignmentIcon, IcDbMenu, IcApproval, AllocationIcon, DeliveryIcon, TrackingIcon, 
-  ProductionIcon, ExecutionIcon, DashboardIcon, PlanningIcon } from "../../assets/icons";
+  ProductionIcon, ExecutionIcon, DashboardIcon, PlanningIcon } from "assets/icons";
 import { Menu } from "../../constants";
 import "./SideMenuComponent.scss";
-import roleService from "../../utils/roleService.helper";
+import roleService from "utils/roleService.helper";
 
 const RoleUser = new roleService();
 class SideMenuComponent extends React.Component {

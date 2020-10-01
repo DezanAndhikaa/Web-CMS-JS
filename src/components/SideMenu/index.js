@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { clickMenuAction, logoutAction } from './SideMenuComponent.actions';
 import { toggleMenuAction } from '../NavigationBar/NavbarComponent.actions';
-import { removeDataAction } from '../../core/StorageHelper';
+import { removeDataAction } from 'core/StorageHelper';
 import { USER_DATA } from '../../constants';
 import SideMenuComponent from './SideMenuComponent';
-import { salesParameterAction, UpdateSalesParameterAction } from '../../views/planning/details/DetailPages-action';
+import { salesParameterAction, UpdateSalesParameterAction } from 'views/planning/details/DetailPages-action';
 
 const mapStateToProps = (state) => ({
 	path: state.router.location.pathname,
