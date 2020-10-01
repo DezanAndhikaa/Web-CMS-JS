@@ -36,7 +36,6 @@ class LoginPage extends React.Component {
     };
   }
 
-  //Validation Schema
   validationSchema = Yup.object().shape({
     userName: Yup.string(),
     password: Yup.string()

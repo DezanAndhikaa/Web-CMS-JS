@@ -9,37 +9,36 @@ import { Menu } from '../../../../../constants';
 import CardData from './Components/Card';
 
 class Notification extends React.Component{
-    constructor(props) {
-      super(props)
-      this.state = {
-        stats: true,
-        isShowPerPage: true,
-        showPerPage : 0,
-        whichTabs: true,
-        isApproved: false,
-        snak: true,
+  constructor(props) {
+    super(props)
+    this.state = {
+      stats: true,
+      isShowPerPage: true,
+      showPerPage : 0,
+      whichTabs: true,
+      isApproved: false,
+      snak: true,
     };
-}
-
-componentWillUnmount = () => {
-  this.props.updateSalesParameter({
-    ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
-  });
-  this.props.updateServiceParameter({
-    ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
-  });
-}
-
-componentDidUpdate = (prevProps) => {
-  if (prevProps.salesParameter !== this.props.salesParameter) {
-    this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
   }
-  if (prevProps.serviceParameter !== this.props.serviceParameter) {
-    this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
-  }
-}
 
-  //Pagination
+  componentWillUnmount = () => {
+    this.props.updateSalesParameter({
+      ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+    });
+    this.props.updateServiceParameter({
+      ...this.props.serviceParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+    });
+  }
+
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.salesParameter !== this.props.salesParameter) {
+      this.props.fetchSalesOrder(this.props.salesParameter.dataFilter);
+    }
+    if (prevProps.serviceParameter !== this.props.serviceParameter) {
+      this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter);
+    }
+  }
+
   _renderPagination= (pageValue) =>  {
     if (pageValue === 1) {
       this.setState({whichTabs : true})
@@ -64,7 +63,7 @@ componentDidUpdate = (prevProps) => {
           </div>
         </div>
       )
-      }
+    }
     if (this.state.whichTabs === false) {
       const web = this.props.displayMode === 'web';
       const nextSales = this.props.serviceOrderList.NextPage;
@@ -90,7 +89,6 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  //Komponen show per page
   _renderShowPerPage = () =>{
     return(
       <DropDownList 
@@ -119,8 +117,8 @@ componentDidUpdate = (prevProps) => {
   _renderData(){
     return(
       <CardData 
-      {...this.props}
-      idCard = "See All"
+        {...this.props}
+        idCard = "See All"
       />
     )
   }
@@ -135,16 +133,14 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  //Render komponen button notif
   _renderNotif(){
     return (
       <NotifButton 
-      {... this.props}
+        {... this.props}
       />
     )
   }
 
-  //Komponen filter by data action
   _renderFilterByDataAction = (value) => {
     if (value === 1) {
       this.setState({whichTabs : true})
@@ -195,31 +191,30 @@ componentDidUpdate = (prevProps) => {
   render(){ 
     return(
       <main className="content">
-            <div className="table-container">
-                <div className="tab-header-notif">  
-                    <Button className="btn-approval" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL, 'sales') }>
-                    Approval
-                    </Button>
-                    <div className="btn-header">
-                        {this._renderNotif()}
-                        {this._renderFilterByDataAction()}
-                    </div>
-                </div>
-                <div className="title-container">
-                  {this._renderTitle()}
-                  {this._renderTitleTab()}
-                </div>
-                <div className="mid-container">
-                <Paper className="paper">
-                  {this._renderData()}
-                  <div className="bottom-row-notif">
-                   {this._renderShowPerPage()} {this._renderPagination()}
-                  </div>
-                </Paper>
-                  
-                </div>   
+        <div className="table-container">
+          <div className="tab-header-notif">  
+            <Button className="btn-approval" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_APPROVAL, 'sales') }>
+              Approval
+            </Button>
+            <div className="btn-header">
+                {this._renderNotif()}
+                {this._renderFilterByDataAction()}
             </div>
-        </main>
+          </div>
+          <div className="title-container">
+            {this._renderTitle()}
+            {this._renderTitleTab()}
+          </div>
+          <div className="mid-container">
+          <Paper className="paper">
+            {this._renderData()}
+            <div className="bottom-row-notif">
+              {this._renderShowPerPage()} {this._renderPagination()}
+            </div>
+          </Paper>
+          </div>   
+        </div>
+      </main>
     )
   }
 }

@@ -25,7 +25,6 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
   }
 
   componentDidUpdate = (prevState) =>{
-    //Fungsi untuk menghilangkan checkbox
     if (prevState.serviceApprovedParameter !== this.props.serviceApprovedParameter || prevState.serviceSearch !== this.props.serviceSearch || 
       prevState.searchComp !==this.props.searchComp) {
       this.setState({checkedValue : false})
@@ -140,7 +139,6 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
     })
   }
 
-  //Loading scene
   showLoading(){
     switch (this.props.fetchStatusServiceApproved) {
       case ApiRequestActionsStatus.LOADING:

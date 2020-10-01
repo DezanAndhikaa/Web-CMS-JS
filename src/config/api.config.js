@@ -7,12 +7,9 @@ const axiosConfig = {
         Accept: 'application/json,application/pdf,application/octet-stream'
     },
 };
-//Set to true for enabling logging axios request and response
-const logging = true;
 
-//Initial Config API
+const logging = true;
 const apiConfig = (token) => {
-    // add token IBM_CLIENT_ID to Headers if token not null
     if (IBM_CLIENT_ID) axiosConfig.headers['x-ibm-client-id'] = IBM_CLIENT_ID;
     if (token) axiosConfig.headers.Authorization = `Bearer ${token}`;
     if (process.env.NODE_ENV === 'development') {
