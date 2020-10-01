@@ -27,7 +27,6 @@ export default class SapServiceOrderList extends React.PureComponent {
   }
 
   componentDidUpdate = (prevState) =>{
-    //untuk menghilangkan checkbox
     if (prevState.serviceSapParameter !== this.props.serviceSapParameter || prevState.serviceSearch !== this.props.serviceSearch || 
       prevState.searchComp !==this.props.searchComp) {
       this.setState({checkedValue : false})
@@ -162,7 +161,6 @@ export default class SapServiceOrderList extends React.PureComponent {
     })
   }
 
-  //LOADING SCENE
   showLoading(){
     switch (this.props.fetchStatusServiceSap) {
       case ApiRequestActionsStatus.LOADING:

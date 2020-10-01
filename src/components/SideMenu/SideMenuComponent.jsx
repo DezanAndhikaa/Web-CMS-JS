@@ -79,7 +79,7 @@ class SideMenuComponent extends React.Component {
               button
               key="jobs"
               className={
-                this.props.path.includes(Menu.TRACKING)
+                this.props.path === (Menu.TRACKING)
                   ? "menu-item-selected"
                   : "menu-item"
               }
@@ -102,7 +102,7 @@ class SideMenuComponent extends React.Component {
               button
               key="plans"
               className={
-                this.props.path.includes(Menu.PLANNING)
+                this.props.path === (Menu.PLANNING)
                   ? "menu-item-selected"
                   : "menu-item"
               }
@@ -247,7 +247,7 @@ class SideMenuComponent extends React.Component {
               button
               key="jobs"
               className={
-                this.props.path.includes(Menu.PRODUCTION)
+                this.props.path === (Menu.PRODUCTION)
                   ? "menu-item-selected"
                   : "menu-item"
               }
@@ -270,7 +270,7 @@ class SideMenuComponent extends React.Component {
               button
               key="jobs"
               className={
-                this.props.path.includes(Menu.ALLOCATION)
+                this.props.path === (Menu.ALLOCATION)
                   ? "menu-item-selected"
                   : "menu-item"
               }
@@ -293,7 +293,7 @@ class SideMenuComponent extends React.Component {
               button
               key="jobs"
               className={
-                this.props.path.includes(Menu.DELIVERY)
+                this.props.path === (Menu.DELIVERY)
                   ? "menu-item-selected"
                   : "menu-item"
               }
@@ -316,7 +316,7 @@ class SideMenuComponent extends React.Component {
               button
               key="jobs"
               className={
-                this.props.path.includes(Menu.EXECUTION)
+                this.props.path === (Menu.EXECUTION)
                   ? "menu-item-selected"
                   : "menu-item"
               }

@@ -56,20 +56,18 @@ class FilterbyDataAction extends React.Component {
   renderList(){
     return(
       <Paper className={this.props.idStatus === "DetailSite" ? "list-status-site" : "list-status" }>
-        {Number(RoleUser.role()) === 2 || Number(RoleUser.role()) === 4 || Number(RoleUser.role()) === 9 || Number(RoleUser.role()) === 11
-        ? <MenuList>
+        {Number(RoleUser.role()) === 2 ?
+          <MenuList>
             <MenuItem>
-              <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_SITE_STATUS, 'service')}>Service Order</Typography>
+              <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_SITE_STATUS, 'sales')}>Sales Order</Typography>
             </MenuItem>
           </MenuList>
-        : Number(RoleUser.role()) === 5 || Number(RoleUser.role()) === 6 || Number(RoleUser.role()) === 7 || Number(RoleUser.role()) === 8 ||
-          Number(RoleUser.role()) === 10 || Number(RoleUser.role()) === 12
-          ? <MenuList>
+        : Number(RoleUser.role()) === 3 ? 
+          <MenuList>
               <MenuItem>
-                <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_SITE_STATUS, 'sales')}>Sales Order</Typography>
+              <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_SITE_STATUS, 'service')}>Service Order</Typography>
               </MenuItem>
-            </MenuList>
-            && localStorage.getItem('subMenu') === "/webcms/planning/ho" 
+          </MenuList>
         : Number(RoleUser.role()) === 1 ? 
           <MenuList>
             <MenuItem>

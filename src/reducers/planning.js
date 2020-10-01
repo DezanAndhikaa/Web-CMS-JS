@@ -1,33 +1,15 @@
 import {
   SUCCESS_TYPE,
   FAILURE_TYPE,
-
-  // Action type for approve function
   APPROVE_SALES,
   APPROVE_SERVICE,
-
-  // Action type for unapprove function
   UNAPPROVE_SALES,
-
-  // Action type for download function
   DOWNLOAD_SALES,
   DOWNLOAD_SERVICE,
-
-  // Action type for edit lifetime
   PUT_LIFETIME_COMP,
-
-  // Action type for submit sap issue
   PUT_SAP_ISSUE,
-
-  // Action type for delete function
   DELETE_SALES,
   DELETE_SERVICE,
-
-  // Action type for delete permanent
-  DELETE_PERMANENT_SALES,
-  DELETE_PERMANENT_SERVICE,
-
-  // Action type for fetch data
   FETCH_SALES_ORDER,
   FETCH_SERVICE_ORDER,
   FETCH_APPROVED_SALES,
@@ -37,20 +19,14 @@ import {
   FETCH_SAP_SALES,
   FETCH_SAP_SERVICE,
   FETCH_REVISED_SALES,
-
-  // Action type for global search
   SEARCH_SALES_PLANS,
   SEARCH_SERVICE_PLANS,
   SEARCH_REVISION_PLANS_SALES,
-
-  // Action type for search per component
   SEARCH_BY_COMP,
   SEARCH_COMP_APPROVED_SALES,
   SEARCH_COMP_DELETED_SALES,
   SEARCH_COMP_SAP_SALES,
   SEARCH_COMP_SERVICE,
-
-  // Action type for sorting
   SORT_SALES_BY_CUSTOMER,
   SORT_SALES_BY_SITE,
   SORT_SALES_BY_UNIT_MODEL,
@@ -59,16 +35,12 @@ import {
   SORT_SERVICE_BY_SITE,
   SORT_SERVICE_BY_UNIT_MODEL,
   SORT_SERVICE_BY_COMP_DESC,
-
-  // Action type for manage checkbox
   CLEAR_SELECTED_PLANS,
   STORE_SELECTED_PLAN_DATA,
   UNSELECT_SALES_PLANS,
   UNSELECT_SERVICE_PLANS,
   SELECT_SERVICE_PLANS,
   SELECT_SALES_PLANS,
-
-  // Action type for update parameter
   UPDATE_SEARCH_SALES,
   UPDATE_SEARCH_APPROVED_SALES,
   UPDATE_SEARCH_DELETED_SALES,
@@ -86,8 +58,6 @@ import {
   UPDATE_SERVICE_APPROVED_PARAMETER,
   UPDATE_SERVICE_DELETED_PARAMETER,
   UPDATE_SERVICE_SAP_PARAMETER,
-
-  //Action type for filter
   SELECT_CUSTOMER_FILTER,
   SELECT_SITE_FILTER,
   SELECT_UNIT_MODEL_FILTER,
@@ -649,11 +619,11 @@ export function filterSMRDateReducer(state = initialFilterParameter, action) {
 
 export function filterParameterReducer(state = initialFilterParameter, action) {
 	if (action.type === SELECT_CUSTOMER_FILTER)
-		if (state.Filter.length === 0) { //IF yang pertama ini,jika filternya belum di isi apa2 (filter belum di jalankan)
+		if (state.Filter.length === 0) {
 			return { ...state, Filter: [{ Field: 'CustomerName', Operator: 'eq', Value: action.payload, Logic: 'and' }] };
 		} else {
-			for (let i = 0; i < state.Filter.length; i++) { //FOR di sini untuk mengecek pada objek sebelumnya
-				if (state.Filter[i].Field === action.head) { //JIKA pada objek sebelumnya pada "field" ada yang sama, maka akan merubah nilai pada "value" tersebut tanpa menambah array
+			for (let i = 0; i < state.Filter.length; i++) {
+				if (state.Filter[i].Field === action.head) {
 					if (action.payload.includes('All')) {
 						state.Filter.splice(i, 1);
 						return { ...state, Filter: state.Filter };

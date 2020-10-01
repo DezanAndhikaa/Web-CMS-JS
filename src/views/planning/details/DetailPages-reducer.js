@@ -1,4 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
+/*eslint-disable no-unused-vars*/
+/*eslint-disable no-useless-computed-key*/
 import { combineReducers } from 'redux';
 import update from 'immutability-helper';
 import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
@@ -726,11 +728,11 @@ export function filterDateSmrSalesSiteReducer(state = initialFilterParameter, ac
 
 export function filterParameterReducer(state = initialFilterParameter, action) {
 	if (action.type === SelectCustomerFilterAction)
-		if (state.Filter.length === 0) { //IF yang pertama ini,jika filternya belum di isi apa2 (filter belum di jalankan)
+		if (state.Filter.length === 0) {
 			return { ...state, Filter: [{ Field: 'CustomerName', Operator: 'eq', Value: action.payload, Logic: 'and' }] };
 		} else {
-			for (let i = 0; i < state.Filter.length; i++) { //FOR di sini untuk mengecek pada objek sebelumnya
-				if (state.Filter[i].Field === action.head) { //JIKA pada objek sebelumnya pada "field" ada yang sama, maka akan merubah nilai pada "value" tersebut tanpa menambah array
+			for (let i = 0; i < state.Filter.length; i++) {
+				if (state.Filter[i].Field === action.head) {
 					if (action.payload.includes('All')) {
 						state.Filter.splice(i, 1);
 						return { ...state, Filter: state.Filter };

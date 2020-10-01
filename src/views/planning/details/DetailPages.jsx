@@ -1,3 +1,4 @@
+/*eslint-disable no-unused-vars*/
 import React from 'react';
 import './DetailPages.scss';
 import PlanningDetailsTab from './components/Tab/PlanningDetailsTab';
@@ -47,7 +48,6 @@ class DetailPages extends React.Component {
       this.fetchSearchSales();
     }
     
-    // FILTER DROPDOWN
     if (prevProps.filterParameter !== this.props.filterParameter) {
       if (this.props.indexFilterParameter.indexTabParameter === 0) {
         this.props.updateSalesParameter({
@@ -60,14 +60,12 @@ class DetailPages extends React.Component {
       }
     }
 
-    // FILTER RANGE LIFETIME
     if (prevProps.filterLifetime !== this.props.filterLifetime) {
       this.props.updateSalesParameter({
         ...prevProps.serviceParameter.dataFilter, Filter: this.props.filterLifetime.Filter, PageNumber: 1
       })
     }
 
-    //FILTER RANGE SMR
     if(this.state.whichTabs){
       if (prevProps.filterSmr !== this.props.filterSmr) {
         this.props.updateSalesParameter({
@@ -76,7 +74,6 @@ class DetailPages extends React.Component {
       }
     }
 
-    //FILTER RANGE DATE
     if (this.state.whichTabs) {
       if (prevProps.filterDateSalesSite !== this.props.filterDateSalesSite) {
         this.props.updateSalesParameter({
@@ -85,21 +82,18 @@ class DetailPages extends React.Component {
       }
     }
 
-    //FILTER RANGE SMR DATE
     if (this.state.whichTabs) {
       if (prevProps.filterDateSmrSalesSite !== this.props.filterDateSmrSalesSite) {
         this.props.fetchSalesOrder(this.props.filterDateSmrSalesSite, this.props.token);
       }
     }
 
-    // TRIGGER SEARCH GLOBAL SALES
     if (prevProps.salesSearch !== this.props.salesSearch) {
       this.props.updateSearchSales({
         ...prevProps.searchSalesParameter, Category: 'Lifetime', Keyword: this.props.salesSearch,
       });
     }
 
-    // SEARCH PER COMPONENT
     if (this.state.whichTabs) {
       if (prevProps.searchComp !== this.props.searchComp) {
         if (this.props.searchComp[0].Value === "") {
@@ -114,7 +108,6 @@ class DetailPages extends React.Component {
       }
     }
 
-    // SALES ORDER SORTING
     if (prevProps.sortSalesBy !== this.props.sortSalesBy) {
       const { sortSalesBy } = this.props;
       let isDescending = false;
@@ -234,7 +227,7 @@ class DetailPages extends React.Component {
   fetchSearchSales = async () => {
     await this.props.fetchSalesOrder(this.props.searchSalesParameter, this.props.token);
   }
-  // PAGINATION DENGAN KONDISI UNTUK TAB SALES ORDER ATAU SERVICE ORDER
+  
   _renderPagination = (pageValue) => {
     if (pageValue === 1) {
       this.setState({ whichTabs: true })
@@ -281,12 +274,10 @@ class DetailPages extends React.Component {
     }
   }
 
-  // SAAT MENGKLIK SERVICE ORDER TAB
   onClickServiceOrder = async () => {
     await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
   }
 
-  // SAAT MENGKLIK SALES ORDER TAB
   onClickSalesOrder = async () => {
     await this.props.fetchSalesOrder({
       ...this.props.salesParameter.dataFilter,
@@ -300,7 +291,6 @@ class DetailPages extends React.Component {
     }, this.props.token);
   }
 
-  // KOMPONEN UNTUK SHOW PER/PAGE
   _renderShowPerPage = () => {
     return (
       <DropDownList
@@ -332,7 +322,6 @@ class DetailPages extends React.Component {
     this.props.filterParameter.Filter.length = 0
 	}
 
-  //KOMPONEN UNTUK GLOBAL SEARCH
   _renderSearchBar() {
     return (
       <>
@@ -401,7 +390,6 @@ class DetailPages extends React.Component {
     })
   }
 
-  // KOMPONEN UNTUK FILTER DATA ACTION
   _renderFilterByDataAction = (value) => {
     if (value === 1) {
       this.setState({ whichTabs: true })
@@ -442,7 +430,6 @@ class DetailPages extends React.Component {
     });
   };
 
-  // FUNGSI UNTUK MULTI SELECT SALES ORDER
   updateAssignmentSalesStates = (plan) => {
     if (this.props.selectedSalesPlans
       .some((plans) => plans.SoNumber === plan.SoNumber,
@@ -450,7 +437,6 @@ class DetailPages extends React.Component {
     return this.props.selectSalesPlan(plan);
   };
 
-  // FUNGSI UNTUK MULTI SELECT SERVICE ORDER
   updateAssignmentServiceStates = (plan) => {
     if (this.props.selectedServicePlans
       .some((plans) => plans.WoNumber === plan.WoNumber,
@@ -458,7 +444,6 @@ class DetailPages extends React.Component {
     return this.props.selectServicePlan(plan);
   };
 
-  // KOMPONEN UNTUK RENDER PAGE SALES ORDER DAN SERVICE ORDER
   _renderTabs() {
     return (
       <>

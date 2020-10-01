@@ -4,33 +4,17 @@ import {
     SUCCESS_TYPE,
     FAILURE_TYPE,
     LOGOUT_TYPE,
-
-    // Action type for approve function
     APPROVE_SALES,
     APPROVE_SERVICE,
-
-    // Action type for unapprove function
     UNAPPROVE_SALES,
-
-    // Action type for download function
     DOWNLOAD_SALES,
     DOWNLOAD_SERVICE,
-
-    // Action type for edit lifetime
     PUT_LIFETIME_COMP,
-
-    // Action type for submit sap issue
     PUT_SAP_ISSUE,
-
-    // Action type for delete function
     DELETE_SALES,
     DELETE_SERVICE,
-
-    // Action type for delete permanent
     DELETE_PERMANENT_SALES,
     DELETE_PERMANENT_SERVICE,
-
-    // Action type for fetch data
     FETCH_SALES_ORDER,
     FETCH_SERVICE_ORDER,
     FETCH_APPROVED_SALES,
