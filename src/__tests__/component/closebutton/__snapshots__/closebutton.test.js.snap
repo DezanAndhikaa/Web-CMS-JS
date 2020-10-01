@@ -1,3 +1,1 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
 exports[`render button close correctly 1`] = `ShallowWrapper {}`;

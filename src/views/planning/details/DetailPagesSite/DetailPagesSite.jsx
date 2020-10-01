@@ -54,7 +54,6 @@ componentDidUpdate = (prevProps) => {
     this.fetchSearchService();
   }
   
-  // FILTER DROPDOWN
   if(prevProps.filterParameter !== this.props.filterParameter){
     if (Number(RoleUser.role()) === 2 ){
       if(this.props.indexFilterParameter.indexTabParameter === 0){
@@ -85,7 +84,6 @@ componentDidUpdate = (prevProps) => {
     this.fetchSearchSalesRev();
   }
 
-  //FILTER RANGE LIFETIME
   if(Number(RoleUser.role()) === 2){   
     if(prevProps.filterLifetime !== this.props.filterLifetime){
       this.props.updateSalesParameter({
@@ -100,7 +98,6 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  //FILTER RANGE SMR
   if(Number(RoleUser.role()) === 1){ 
     if(this.state.whichTabs){
       if (prevProps.filterSmr !== this.props.filterSmr) {
@@ -129,7 +126,6 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  //FILTER RANGE DATE
   if(Number(RoleUser.role()) === 1){ 
     if(this.state.whichTabs){
       if(prevProps.filterDateSalesSite !== this.props.filterDateSalesSite){
@@ -150,7 +146,6 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  //FILTER RANGE SMR DATE
   if(Number(RoleUser.role()) === 1){ 
     if(this.state.whichTabs){
       if(prevProps.filterDateSmrSalesSite !== this.props.filterDateSmrSalesSite){
@@ -171,7 +166,6 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  //ini untuk trigger sales global search
   if(Number(RoleUser.role()) === 2){   
     if (prevProps.salesSearch !== this.props.salesSearch) {
       this.props.updateSearchSales({
@@ -184,7 +178,6 @@ componentDidUpdate = (prevProps) => {
         ...prevProps.searchSalesParameter, Category: 'Lifetime', Keyword: this.props.salesSearch,
       });
     }
-    //ini untuk trigger sales global search revision
     else if (prevProps.salesSearchRevision !== this.props.salesSearchRevision) {
       this.props.updateSearchRevSales({
         ...prevProps.searchSalesRevParam, Category: 'SR', Keyword: this.props.salesSearchRevision,
@@ -192,14 +185,12 @@ componentDidUpdate = (prevProps) => {
     }
   }
 
-  //ini untuk trigger service global search
   if(prevProps.serviceSearch !== this.props.serviceSearch){
     this.props.updateSearchService({
       ...prevProps.searchServiceParameter, Category: 'Approval', Keyword: this.props.serviceSearch,
     });
   }
 
-  //search per component
   if (Number(RoleUser.role()) === 3){
     if(this.state.whichTabs && prevProps.searchComp !== this.props.searchComp){
       this.props.updateServiceParameter({
@@ -240,7 +231,6 @@ componentDidUpdate = (prevProps) => {
     }
   }
   
-  // SALES ORDER SORTING
   if (prevProps.sortSalesBy !== this.props.sortSalesBy) {
     const { sortSalesBy } = this.props;
     let isDescending = false;
@@ -356,7 +346,6 @@ componentDidUpdate = (prevProps) => {
     };
   }
 
-  // SERVICE ORDER SORTING
   if (prevProps.sortServiceBy !== this.props.sortServiceBy) {
     const { sortServiceBy } = this.props;
     let isDescending = false;
@@ -473,7 +462,6 @@ componentDidUpdate = (prevProps) => {
   }
 }
 
-  // PAGINATION DENGAN KONDISI UNTUK TAB SALES ORDER ATAU SERVICE ORDER
   _renderPagination= (pageValue) =>  {
     if (pageValue === 1) {
       this.setState({whichTabs : true})
@@ -598,7 +586,6 @@ componentDidUpdate = (prevProps) => {
     await this.props.fetchRevisedSales(this.props.searchSalesRevParam, this.props.token)
   }
 
-  //SAAT MENGKLIK SERVICE ORDER TAB
   onClickServiceOrder = async () => {
     await this.props.fetchServiceOrder({
       ...this.props.serviceParameter.dataFilter,
@@ -612,7 +599,6 @@ componentDidUpdate = (prevProps) => {
     }, this.props.token);
   }
   
-  //SAAT MENGKLIK SALES ORDER TAB
   onClickSalesOrder = async() =>{
     await this.props.fetchSalesOrder({
       ...this.props.salesParameter.dataFilter, 
@@ -649,7 +635,6 @@ componentDidUpdate = (prevProps) => {
     }, this.props.token);
   }
 
-  //KOMPONEN UNTUK SHOW PER/PAGE
   _renderShowPerPage(){
     return(
       <DropDownList 
@@ -743,7 +728,6 @@ componentDidUpdate = (prevProps) => {
     }
 	}
 
-  //KOMPONEN UNTUK GLOBAL SEARCH
   _renderSearchBar(){
     return (
       <div className="bottom-row-detail-site">
@@ -788,7 +772,6 @@ componentDidUpdate = (prevProps) => {
     }
   }
   
-  //Komponen untuk global search revision list
   _renderSearchBarRev() {
     return (
       <div className="search-site">
@@ -830,7 +813,6 @@ componentDidUpdate = (prevProps) => {
     })
   }
 
-  //KOMPONEN UNTUK FILTER DATA ACTION
   _renderFilterByDataAction = () => {
     if (this.state.whichTabs === true) {
       return(
@@ -874,7 +856,6 @@ componentDidUpdate = (prevProps) => {
     })
   }
 
-  //KOMPONEN UNTUK RENDER PAGE SALES ORDER DAN SERVICE ORDER
   _renderTabs(){
     return (
       <>

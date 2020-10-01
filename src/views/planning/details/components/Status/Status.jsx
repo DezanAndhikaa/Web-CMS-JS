@@ -170,7 +170,6 @@ export default class Status extends React.PureComponent {
 			this.fetchSearchServiceSap();
 		}
 
-		//ini untuk trigger sales global search
 		if (prevProps.salesSearch !== this.props.salesSearch) {
 			switch (this.state.whatPageIsChoosed) {
 				case 'Approve':
@@ -190,7 +189,6 @@ export default class Status extends React.PureComponent {
 			}
 		}
 		  
-		//ini untuk trigger service global search
 		if(prevProps.serviceSearch !== this.props.serviceSearch){
 			switch (this.state.whatPageIsChoosed) {
 				case 'Approve':
@@ -210,7 +208,6 @@ export default class Status extends React.PureComponent {
 			}
 		}
 
-		//search per component
 		if(prevProps.searchComp !== this.props.searchComp){
 			if (this.props.location.whichTab === "sales") {
 				switch (this.state.whatPageIsChoosed) {
@@ -321,7 +318,6 @@ export default class Status extends React.PureComponent {
 			}
 		}
 
-		//FILTER RANGE LIFETIME
 		if(prevProps.filterLifetime !== this.props.filterLifetime){
 			if (this.props.location.whichTab === "sales") {
 				switch (this.state.whatPageIsChoosed) {
@@ -347,7 +343,6 @@ export default class Status extends React.PureComponent {
 			}
 		}
 		
-		//FILTER RANGE DATE
 		if(prevProps.filterDate !== this.props.filterDate){
 			if (this.props.location.whichTab === "sales") {
 				switch (this.state.whatPageIsChoosed) {
@@ -378,7 +373,6 @@ export default class Status extends React.PureComponent {
 			}
 		}
 
-		//sorting sales order
 		if (prevProps.sortSalesBy !== this.props.sortSalesBy) {
 			const { sortSalesBy } = this.props;
 			let isDescending = false;
@@ -838,7 +832,6 @@ export default class Status extends React.PureComponent {
 			}
 		}
 
-		//sorting service
 		if (prevProps.sortServiceBy !== this.props.sortServiceBy) {
 			const { sortServiceBy } = this.props;
 			let isDescending = false;
@@ -1331,14 +1324,11 @@ export default class Status extends React.PureComponent {
 	fetchSearchServiceSap = async() => {
 		await this.props.fetchSapService(this.props.searchServiceSapParam, this.props.token);
 	}
-
 	
-  	//FUNGSI UNTUK memanggil Data SALES ORDER yang telah terhapus
 	onClickDeletedSales = () => {
 		this.props.fetchDeletedSales(this.props.salesParameter.dataFilter, this.props.token);
 	}
 
-	//FUNGSI UNTUK memanggil Data SERVICE ORDER yang telah terhapus
 	onClickDeletedService = () => {
 		this.props.fetchDeletedService(this.props.serviceParameter.dataFilter, this.props.token);
 	}
