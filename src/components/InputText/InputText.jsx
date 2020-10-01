@@ -1,6 +1,6 @@
 import React from 'react'
 import './InputText.scss'
-import CloseButton from '../../components/ActionButton/CloseButton/CloseButton'
+import CloseButton from 'components/ActionButton/CloseButton/CloseButton'
 import { Button, TextField, FormHelperText } from '@material-ui/core'
 import * as Yup from 'yup';
 import { Formik } from 'formik';
