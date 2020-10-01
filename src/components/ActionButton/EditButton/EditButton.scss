@@ -1,5 +1,5 @@
-@import 'themes/functions';
-@import 'themes/variables';
+@import '~themes/functions';
+@import '~themes/variables';
 
 .edit-button-row{
     display: flex;
@@ -10,7 +10,7 @@
         margin-right: vw(10);
         border-radius: vw(8) !important;
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-        background-image: url('assets/icons/ic_edit.png');
+        background-image: url('~assets/icons/ic_edit.png');
         background-repeat: no-repeat;
         background-color: white;
         background-size: 50%;
@@ -22,7 +22,7 @@
         width: vw(30.07);
         border-radius: vw(8) !important;
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-        background-image: url('assets/icons/pencil.png');
+        background-image: url('~assets/icons/pencil.png');
         background-repeat: no-repeat;
         background-color: white;
         background-size: 50%;
@@ -38,7 +38,7 @@
         line-height: vw(17) !important;
         font-family: 'Lato-Bold';
         color: #DB3434;
-        background-image: url('assets/icons/must_revised.png');
+        background-image: url('~assets/icons/must_revised.png');
         background-size: vw(14);
         background-position-x: 55%;
         background-position-y: center;
@@ -143,7 +143,7 @@
         .edit-button{
             height: vw-tab(30);
             width: vw-tab(30);
-            background-image: url('assets/icons/edit.png');
+            background-image: url('~assets/icons/edit.png');
             background-repeat: no-repeat;
             background-size: contain;
         }
@@ -159,7 +159,7 @@
         .edit-button{
             height: vw-mobile(20);
             width: vw-mobile(20);
-            background-image: url('assets/icons/edit.png');
+            background-image: url('~assets/icons/edit.png');
             background-repeat: no-repeat;
             background-size: contain;
         }

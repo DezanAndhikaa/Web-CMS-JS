@@ -1,5 +1,5 @@
-@import 'themes/functions';
-@import 'themes/variables';
+@import '~themes/functions';
+@import '~themes/variables';
 
 .del-button-row{
     display: flex;
@@ -10,7 +10,7 @@
         margin-left: vw(25);
         border-radius: vw(8) !important;
         box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
-        background-image: url('assets/icons/ic_delete.png');
+        background-image: url('~assets/icons/ic_delete.png');
         background-color: white;
         background-repeat: no-repeat;
         background-size: 50%;
@@ -29,7 +29,7 @@
             height: vw-tab(30);
             width: vw-tab(30);
             box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-            background-image: url('assets/icons/ic_delete.png');
+            background-image: url('~assets/icons/ic_delete.png');
             background-repeat: no-repeat;
             background-size: contain;
         }
@@ -46,7 +46,7 @@
             height: vw-mobile(20);
             width: vw-mobile(20);
             box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-            background-image: url('assets/icons/ic_delete.png');
+            background-image: url('~assets/icons/ic_delete.png');
             background-repeat: no-repeat;
             background-size: contain;
         }

@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { DialogContent, Button, Modal } from '@material-ui/core';
 import { ImgApproved, DelSuccess, Success } from 'assets/imgs';
