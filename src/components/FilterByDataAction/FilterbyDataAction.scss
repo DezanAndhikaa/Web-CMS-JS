@@ -1,5 +1,5 @@
-@import '../../themes/variables';
-@import '../../themes/functions';
+@import '~themes/variables';
+@import '~themes/functions';
 
 .dropdown {
     display: flex;
@@ -20,7 +20,7 @@
             color: black;
             cursor: pointer;
             .expand-icon-container{
-                background-image: url('../../assets/icons/folder.png');
+                background-image: url('~assets/icons/folder.png');
                 background-color: map-get($colors, third);
                 background-size: 50%;
                 background-repeat: no-repeat;
