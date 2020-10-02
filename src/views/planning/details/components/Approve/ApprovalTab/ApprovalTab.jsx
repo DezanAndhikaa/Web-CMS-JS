@@ -5,12 +5,18 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
-import SalesOrderList from '../../PlanningList/SalesOrderList';
-import ServiceOrderList from '../../PlanningList/ServiceOrderList';
+import SalesOrderList from 'views/planning/details/components/PlanningList/SalesOrderList';
+import ServiceOrderList from 'views/planning/details/components/PlanningList/ServiceOrderList';
 import './ApprovalTab.scss';
-import DropdownFilter from '../../../../../../components/FilterByTitle/DropdownFilter';
-import { ApiRequestActionsStatus } from '../../../../../../core/RestClientHelpers';
-import { SelectCustomerFilterAction, SelectSiteFilterAction, SelectUnitModelFilterAction, SelectComponentFilterAction, SelectPlanTypeFilterAction } from '../../../DetailPages-action';
+import DropdownFilter from 'components/FilterByTitle/DropdownFilter';
+import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
+import { 
+  SelectCustomerFilterAction, 
+  SelectSiteFilterAction, 
+  SelectUnitModelFilterAction, 
+  SelectComponentFilterAction, 
+  SelectPlanTypeFilterAction 
+} from 'views/planning/details/DetailPages-action';
 
 function TabContainer({ children, dir }) {
   return (

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { PlansReducers } from '../../DetailPages-reducer';
+import { PlansReducers } from 'views/planning/details/DetailPages-reducer';
 import { push } from 'connected-react-router';
 import {
 	putLifetimeCompAction,
@@ -38,7 +38,7 @@ import {
 	SelectServicePlanAction,
 	sortByAction,
 	storePlanDataAction, dateFilterAction, selectAllService, smrFilterAction, smrDateFilterAction, selectAllSales
-} from '../../DetailPages-action';
+} from 'views/planning/details/DetailPages-action';
 import ApprovalPages from './ApprovalPages';
 
 const mapStateToProps = (state) => ({

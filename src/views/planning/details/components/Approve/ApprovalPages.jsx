@@ -1,16 +1,16 @@
-/*eslint-disable no-unused-vars*/
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import './ApprovalPages.scss';
 import ApprovalTab from './ApprovalTab/ApprovalTab';
-import { ApiRequestActionsStatus } from "../../../../../core/RestClientHelpers";
-import DropDownList from "../../../../../components/DropdownList/DropDownList";
-import SearchInput from "../../../../../components/Searchbar/SearchInput";
-import BaseButton from '../../../../../components/Button/BaseButton';
-import FilterbyDataAction from '../../../../../components/FilterByDataAction/FilterbyDataAction';
-import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton';
-import ConfirmationModal from '../../../../../components/ConfirmationModal/ConfirmationModal';
+import { ApiRequestActionsStatus } from "core/RestClientHelpers";
+import DropDownList from "components/DropdownList/DropDownList";
+import SearchInput from "components/Searchbar/SearchInput";
+import BaseButton from 'components/Button/BaseButton';
+import FilterbyDataAction from 'components/FilterByDataAction/FilterbyDataAction';
+import NotifButton from 'components/ActionButton/NotifButton/NotifButton';
+import ConfirmationModal from 'components/ConfirmationModal/ConfirmationModal';
 import { CircularProgress } from '@material-ui/core';
-import UnapproveConfirmation from '../../../../../components/UnapproveConfirmation/UnapproveConfirmation';
+import UnapproveConfirmation from 'components/UnapproveConfirmation/UnapproveConfirmation';
 
 class ApprovalPages extends React.Component {
   constructor(props) {
