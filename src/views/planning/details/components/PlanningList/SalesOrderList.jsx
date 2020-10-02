@@ -3,16 +3,16 @@ import {
   Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Tooltip
 } from '@material-ui/core';
 import './PlanningList.scss';
-import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
-import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
-import InputButton from '../../../../../components/Button/InputButton';
+import PlanningListHeader from 'views/planning/details/components/PlanningListHeader/PlanningListHeader';
+import EditButton from 'components/ActionButton/EditButton/EditButton';
+import InputButton from 'components/Button/InputButton';
 import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction, SmrFilterAction, SortSalesByPlanType, SmrDateFilterAction } from '../../DetailPages-action';
-import { Spinner } from '../../../../../assets/icons'
-import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+import { Spinner } from 'assets/icons'
+import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
 import { Snackbar } from '@material-ui/core';
 import moment from 'moment';
-import EmptyList from '../../../../../components/EmptyList/EmptyList';
-import roleService from "../../../../../utils/roleService.helper";
+import EmptyList from 'components/EmptyList/EmptyList';
+import roleService from "utils/roleService.helper";
 import { CheckBoxOutlineBlank } from '@material-ui/icons';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
