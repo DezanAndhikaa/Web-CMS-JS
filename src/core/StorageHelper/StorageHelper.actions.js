@@ -1,5 +1,3 @@
-
-
 export const STORAGE_ACTIONS = {
 	STORE_DATA: 'STORE_',
 	REMOVE_DATA: 'REMOVE_',

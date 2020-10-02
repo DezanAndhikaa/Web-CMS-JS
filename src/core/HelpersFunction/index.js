@@ -1,5 +1,3 @@
-
-
 import decodeJwt from 'jwt-decode';
 import { StorageKey } from '../../constants';
 

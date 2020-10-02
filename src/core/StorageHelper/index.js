@@ -1,5 +1,3 @@
-
-
 import {
 	STORAGE_ACTIONS, getDataAction, removeDataAction, storeDataAction,
 } from './StorageHelper.actions';

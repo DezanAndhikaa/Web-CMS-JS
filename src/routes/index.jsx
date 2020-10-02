@@ -1,18 +1,16 @@
-
-
 import React from 'react';
 import { Route, Switch } from 'react-router';
 import { Menu } from '../constants';
-import { DetailPages } from '../views/planning/details';
-import { DetailPagesSite } from '../views/planning/details/DetailPagesSite';
-import { Status } from '../views/planning/details/components/Status';
-import { TrackingHistory } from '../views/planning/details/components/TrackingHistory';
-import { ApprovalPages } from '../views/planning/details/components/Approve';
-import { Notification } from '../views/planning/details/components/Notification';
-import { LoginPage }  from '../views/Login';
-import { SapIssuePages } from '../views/planning/details/components/SapIssuePages';
-import requireAuth from '../components/AuthGuardHoc';
-import Dashboard from '../views/Dashboard/';
+import { DetailPages } from 'views/planning/details';
+import { DetailPagesSite } from 'views/planning/details/DetailPagesSite';
+import { Status } from 'views/planning/details/components/Status';
+import { TrackingHistory } from 'views/planning/details/components/TrackingHistory';
+import { ApprovalPages } from 'views/planning/details/components/Approve';
+import { Notification } from 'views/planning/details/components/Notification';
+import { LoginPage }  from 'views/Login';
+import { SapIssuePages } from 'views/planning/details/components/SapIssuePages';
+import requireAuth from 'components/AuthGuardHoc';
+import Dashboard from 'views/Dashboard/';
 
 const routes = (
 	<div>
