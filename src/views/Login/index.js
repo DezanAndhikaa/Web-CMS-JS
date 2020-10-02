@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { requestLoginAction } from './LoginPage.action';
-import { storeDataAction } from '../../core/StorageHelper';
+import { storeDataAction } from 'core/StorageHelper';
 import { USER_DATA, StorageKey } from '../../constants';
 import LoginPageReducers from './LoginPage.reducer';
 import LoginPage from './LoginPage';
