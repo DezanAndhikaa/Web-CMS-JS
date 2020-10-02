@@ -2,9 +2,9 @@
 import React from 'react';
 import moment from 'moment-timezone';
 import { ConnectedRouter } from 'connected-react-router';
-import NavBarComponent from '../components/NavigationBar';
-import routes from '../routes';
-import SideMenuComponent from '../components/SideMenu';
+import NavBarComponent from 'components/NavigationBar';
+import routes from 'routes';
+import SideMenuComponent from 'components/SideMenu';
 
 class App extends React.Component {
   componentWillMount() {
