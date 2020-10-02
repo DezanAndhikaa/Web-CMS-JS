@@ -1,4 +1,4 @@
-import {AccountApi} from '../api';
+import {AccountApi} from 'api';
 import {
     FAILURE_TYPE,
     GET_USER_TYPE,
@@ -8,10 +8,10 @@ import {
 } from './actionTypes';
 import {
     setStorage
-} from '../utils/storage.helper';
+} from 'utils/storage.helper';
 import {USER_STORAGE} from '../constants/storage';
-import { getErrorApiDesc } from '../utils/error.helper';
-import {getStorage} from '../utils/storage.helper';
+import { getErrorApiDesc } from 'utils/error.helper';
+import {getStorage} from 'utils/storage.helper';
 
 export const getUser = () => dispatch => {
     dispatch({type:`${GET_USER_TYPE}${REQUEST_TYPE}`});
