@@ -3,12 +3,12 @@ import {
   Table, TableBody, TableCell, TableHead, TableRow, Snackbar, Tooltip
 } from '@material-ui/core';
 import './PlanningList.scss';
-import { Spinner } from '../../../../../assets/icons';
-import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+import { Spinner } from 'assets/icons';
+import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
 import moment from 'moment';
-import EditButton from '../../../../../components/ActionButton/EditButton/EditButton';
-import ConfirmationModal from '../../../../../components/ConfirmationModal/ConfirmationModal';
-import EmptyList from '../../../../../components/EmptyList/EmptyList';
+import EditButton from 'components/ActionButton/EditButton/EditButton';
+import ConfirmationModal from 'components/ConfirmationModal/ConfirmationModal';
+import EmptyList from 'components/EmptyList/EmptyList';
 
 export default class RevisedSalesOrderList extends React.PureComponent {
   constructor(props) {
