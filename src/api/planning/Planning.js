@@ -1,5 +1,5 @@
-import BaseApi from '../base/index';
-import apiConfig from '../../config/api.config';
+import BaseApi from 'base/index';
+import apiConfig from 'config/api.config';
 
 export default class PlanningApi extends BaseApi{
     static newInstance = token => {
