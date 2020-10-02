@@ -1,7 +1,7 @@
 import React from 'react';
 import './Logout.scss';
 import { DialogContent, Button, Modal } from '@material-ui/core';
-import { Logout }  from '../../assets/imgs';
+import { Logout }  from 'assets/imgs';
 
 export default class LogoutModal extends React.PureComponent {
 	render() {
