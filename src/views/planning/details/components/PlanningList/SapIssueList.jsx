@@ -11,7 +11,7 @@ import {
   FormLabel
 } from '@material-ui/core';
 import './PlanningList.scss';
-import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
+import PlanningListHeader from 'views/planning/details/components/PlanningListHeader/PlanningListHeader';
 import { 
   SortSalesByCustomer, 
   SortSalesBySite, 
@@ -19,12 +19,12 @@ import {
   SortSalesByCompDesc, 
   LifetimeFilterAction, 
   DateFilterAction } 
-  from '../../DetailPages-action';
-import { Spinner } from '../../../../../assets/icons';
-import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+  from 'views/planning/details/DetailPages-action';
+import { Spinner } from 'assets/icons';
+import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
 import moment from 'moment';
-import EmptyList from '../../../../../components/EmptyList/EmptyList';
-import roleService from "../../../../../utils/roleService.helper";
+import EmptyList from 'components/EmptyList/EmptyList';
+import roleService from "utils/roleService.helper";
 
 const RoleUser = new roleService();
 export default class SapIssueList extends React.PureComponent {
