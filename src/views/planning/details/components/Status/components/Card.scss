@@ -1,5 +1,5 @@
-@import '../../../../../../themes/functions';
-@import '../../../../../../themes/variables';
+@import '~themes/functions';
+@import '~themes/variables';
 
 .card-container{
     position: relative;
@@ -33,7 +33,7 @@
         text-transform: capitalize;
         background-color: map-get($colors , page-background);
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-        background-image: url('../../../../../../assets/icons/card_approve.png');
+        background-image: url('~assets/icons/card_approve.png');
         background-size: 20%;
         background-position-x: 80%;
         background-position-y: center;
@@ -43,7 +43,7 @@
     }
     .card-approve:focus{
         background-color: map-get($colors , third-dark);
-        background-image: url('../../../../../../assets/icons/card_approve_selected.png');
+        background-image: url('~assets/icons/card_approve_selected.png');
         background-size: 20%;
         background-position-x: 80%;
         background-position-y: center;
@@ -64,7 +64,7 @@
         text-transform: capitalize;
         background-color: map-get($colors , page-background);
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-        background-image: url('../../../../../../assets/icons/card_notapprove.png');
+        background-image: url('~assets/icons/card_notapprove.png');
         background-size: 20%;
         background-position-x: 80%;
         background-position-y: center;
@@ -74,7 +74,7 @@
     }
     .card-not-approve:focus{
         background-color: map-get($colors, nyellow);
-        background-image: url('../../../../../../assets/icons/card_notapprove_selected.png');
+        background-image: url('~assets/icons/card_notapprove_selected.png');
         background-size: 20%;
         background-position-x: 80%;
         background-position-y: center;
@@ -95,7 +95,7 @@
         text-transform: capitalize;
         background-color: map-get($colors, page-background);
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-        background-image: url('../../../../../../assets/icons/card_delete.png');
+        background-image: url('~assets/icons/card_delete.png');
         background-size: 20%;
         background-position-x: 80%;
         background-position-y: center;
@@ -105,7 +105,7 @@
     }
     .card-delete:focus{
         background-color: map-get($colors, ndelete);
-        background-image: url('../../../../../../assets/icons/card_delete_selected.png');
+        background-image: url('~assets/icons/card_delete_selected.png');
         background-size: 20%;
         background-position-x: 80%;
         background-position-y: center;
@@ -126,7 +126,7 @@
         text-transform: capitalize;
         background-color: map-get($colors, page-background);
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-        background-image: url('../../../../../../assets/icons/card_sap.png');
+        background-image: url('~assets/icons/card_sap.png');
         background-size: 20%;
         background-position-x: 80%;
         background-position-y: center;
@@ -136,7 +136,7 @@
     }
     .card-SAP:focus{
         background-color: map-get($colors, norange);
-        background-image: url('../../../../../../assets/icons/card_sap_selected.png');
+        background-image: url('~assets/icons/card_sap_selected.png');
         background-size: 20%;
         background-position-x: 80%;
         background-position-y: center;
