@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { PlansReducers } from '../../DetailPages-reducer';
+import { PlansReducers } from 'views/planning/details/DetailPages-reducer';
 import { push } from 'connected-react-router';
 import TrackingHistory from './TrackingHistory';
 
