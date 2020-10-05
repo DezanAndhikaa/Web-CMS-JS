@@ -2,7 +2,7 @@ import React from 'react';
 import { DialogContent, Button, Modal, CircularProgress } from '@material-ui/core';
 import { ImgSendtoEdit, ImgCancelApprove, ImgCancelEditSucc } from 'assets/imgs';
 import './UnapproveConfirmation.scss';
-import CloseNotif from '../CloseNotif/CloseNotif';
+import CloseNotif from 'components/CloseNotif/CloseNotif';
 import SapIssue from 'views/planning/details/components/SapIssue/SapIssue'
 import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
 import ConfirmationModal from 'components/ConfirmationModal/ConfirmationModal'

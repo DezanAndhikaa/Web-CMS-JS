@@ -6,7 +6,17 @@ import './PlanningList.scss';
 import PlanningListHeader from 'views/planning/details/components/PlanningListHeader/PlanningListHeader';
 import EditButton from 'components/ActionButton/EditButton/EditButton';
 import InputButton from 'components/Button/InputButton';
-import { SortSalesByCustomer, SortSalesBySite, SortSalesByUnitModel, SortSalesByCompDesc, LifetimeFilterAction, DateFilterAction, SmrFilterAction, SortSalesByPlanType, SmrDateFilterAction } from '../../DetailPages-action';
+import { 
+  SortSalesByCustomer,
+  SortSalesBySite,
+  SortSalesByUnitModel,
+  SortSalesByCompDesc,
+  LifetimeFilterAction,
+  DateFilterAction,
+  SmrFilterAction,
+  SortSalesByPlanType,
+  SmrDateFilterAction 
+} from 'views/planning/details/DetailPages-action';
 import { Spinner } from 'assets/icons'
 import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
 import { Snackbar } from '@material-ui/core';
