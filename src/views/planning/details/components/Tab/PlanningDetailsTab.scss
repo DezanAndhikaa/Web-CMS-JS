@@ -1,5 +1,5 @@
-@import '../../../../../themes/variables';
-@import '../../../../../themes/functions';
+@import '~themes/variables';
+@import '~themes/functions';
 
 .badge{
     right: -20px;
@@ -68,7 +68,7 @@
         margin-top: vw(10);
         background-color: transparent;
         color: #707070;
-        background-image: url('../../../../../assets/icons/back.png');
+        background-image: url('~assets/icons/back.png');
         background-size: auto;
         background-position-x: 17%;
         background-position-y: center;

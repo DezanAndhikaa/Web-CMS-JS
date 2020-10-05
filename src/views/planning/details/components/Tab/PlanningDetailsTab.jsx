@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import SalesOrderList from '../PlanningList/SalesOrderList';
+import SalesOrderList from 'views/planning/details/components/PlanningList/SalesOrderList';
 import { Badge, Button, Typography } from '@material-ui/core';
-import { Menu } from '../../../../../constants';
+import { Menu } from 'constants/index';
 import './PlanningDetailsTab.scss';
-import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
+import DropdownFilter from 'components/FilterByTitle/DropdownFilter';
 import {
   SelectCustomerFilterAction,
   SelectSiteFilterAction,
@@ -13,8 +13,8 @@ import {
   SelectComponentFilterAction,
   SelectPlanTypeFilterAction
 }
-  from '../../DetailPages-action';
-import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+  from 'views/planning/details/DetailPages-action';
+import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
 
 function TabContainer({ children, dir }) {
   return (

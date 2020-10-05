@@ -2,13 +2,13 @@
 import React from 'react';
 import './DetailPages.scss';
 import PlanningDetailsTab from './components/Tab/PlanningDetailsTab';
-import DropDownList from '../../../components/DropdownList/DropDownList';
-import SearchInput from "../../../components/Searchbar/SearchInput";
-import FilterbyDataAction from '../../../components/FilterByDataAction/FilterbyDataAction';
-import NotifButton from '../../../components/ActionButton/NotifButton/NotifButton';
-import { Menu } from '../../../constants';
-import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
-import BaseButton from '../../../components/Button/BaseButton';
+import DropDownList from 'components/DropdownList/DropDownList';
+import SearchInput from "components/Searchbar/SearchInput";
+import FilterbyDataAction from 'components/FilterByDataAction/FilterbyDataAction';
+import NotifButton from 'components/ActionButton/NotifButton/NotifButton';
+import { Menu } from 'constants/index';
+import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
+import BaseButton from 'components/Button/BaseButton';
 
 class DetailPages extends React.Component {
   constructor(props) {
