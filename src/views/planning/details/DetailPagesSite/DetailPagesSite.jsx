@@ -2,13 +2,13 @@
 import React from 'react';
 import './DetailPagesSite.scss';
 import DetailsTab from './Tab/DetailsTab';
-import DropDownList from '../../../../components/DropdownList/DropDownList';
-import SearchInput from "../../../../components/Searchbar/SearchInput";
-import FilterbyDataAction from '../../../../components/FilterByDataAction/FilterbyDataAction';
-import NotifButton from '../../../../components/ActionButton/NotifButton/NotifButton';
-import {ApiRequestActionsStatus} from '../../../../core/RestClientHelpers';
-import roleService from '../../../../utils/roleService.helper';
-import BaseButton from '../../../../components/Button/BaseButton';
+import DropDownList from 'components/DropdownList/DropDownList';
+import SearchInput from "components/Searchbar/SearchInput";
+import FilterbyDataAction from 'components/FilterByDataAction/FilterbyDataAction';
+import NotifButton from 'components/ActionButton/NotifButton/NotifButton';
+import {ApiRequestActionsStatus} from 'core/RestClientHelpers';
+import roleService from 'utils/roleService.helper';
+import BaseButton from 'components/Button/BaseButton';
 
 const RoleUser = new roleService();
 class DetailPagesSite extends React.Component{

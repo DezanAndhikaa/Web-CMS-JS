@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { PlansReducers } from '../../details/DetailPages-reducer';
+import { PlansReducers } from 'views/planning/details/DetailPages-reducer';
 import { push } from 'connected-react-router';
 import {
 	putLifetimeCompAction,
@@ -51,7 +51,7 @@ import {
 	searchSalesRevisionAction,
 	UpdateSearchSalesRevAction,
 	smrFilterAction
-} from '../../details/DetailPages-action';
+} from 'views/planning/details/DetailPages-action';
 import DetailPagesSite from './DetailPagesSite';
 
 const mapStateToProps = (state) => ({
