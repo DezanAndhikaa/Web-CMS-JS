@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Modal, TextField,Table, TableHead, TableRow, TableBody, TableCell, Paper, Tooltip } from '@material-ui/core';
 import './SapIssue.scss';
-import CloseButton from '../../../../../components/CloseButton/CloseButton';
+import CloseButton from 'components/CloseButton/CloseButton';
 import moment from 'moment';
 
 export default class SapIssue extends React.Component{
