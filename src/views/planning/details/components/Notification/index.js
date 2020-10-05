@@ -24,7 +24,7 @@ import {
 	SelectServicePlanAction,
 	selectMechanicAction, sortByAction, 
 	storePlanDataAction,dateFilterAction,smrDateFilterAction
-} from '../../DetailPages-action';
+} from 'views/planning/details/DetailPages-action';
 import Notification from './Notification';
 
 const mapStateToProps = (state) => ({

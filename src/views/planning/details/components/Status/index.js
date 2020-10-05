@@ -67,7 +67,7 @@ import {
 	dateFilterAction,
 	selectAllService,
 	selectAllSales
-} from '../../DetailPages-action';
+} from 'views/planning/details/DetailPages-action';
 import Status from './Status';
 
 const mapStateToProps = (state) => ({
