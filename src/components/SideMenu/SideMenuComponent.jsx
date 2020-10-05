@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { AssignmentIcon, IcDbMenu, IcApproval, AllocationIcon, DeliveryIcon, TrackingIcon, 
   ProductionIcon, ExecutionIcon, DashboardIcon, PlanningIcon } from "assets/icons";
-import { Menu } from "../../constants";
+import { Menu } from 'constants/index';
 import "./SideMenuComponent.scss";
 import roleService from "utils/roleService.helper";
 

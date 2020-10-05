@@ -5,7 +5,7 @@ import './FilterbyDataAction.scss';
 import { Badge } from '@material-ui/core';
 import { IconApprove, IconHistory, IconInputLT } from 'assets/icons';
 import { MenuList, MenuItem, Paper, Typography, withStyles } from '@material-ui/core';
-import { Menu } from '../../constants';
+import { Menu } from 'constants/index';
 import roleService from "utils/roleService.helper";
 
 const RoleUser = new roleService();

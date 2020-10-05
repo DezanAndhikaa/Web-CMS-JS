@@ -5,7 +5,7 @@ import { UTLogo, CmsLogo, CmsLoginBg, MovingAsOneInverse, LoginBg, UTLogoBlack }
 import './LoginPage.scss';
 import isAccessTokenValid from 'core/HelpersFunction';
 import Message from 'components/Message/Message';
-import { Menu, BasePath } from '../../constants';
+import { Menu, BasePath } from 'constants/index';
 import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
 import { Formik } from "formik";
 import * as Yup from "yup";

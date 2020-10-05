@@ -7,7 +7,7 @@ import { MenuToggle } from 'assets/icons';
 import isAccessTokenValid from 'core/HelpersFunction';
 import './NavBarComponent.scss';
 import PopUpMenu from 'components/PopUpMenu/PopUpMenu';
-import { Menu, StorageKey } from '../../constants';
+import { Menu, StorageKey } from 'constants/index';
 import LogoutModal from 'views/Logout/Logout';
 
 class NavBarComponent extends React.Component {

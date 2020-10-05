@@ -1,4 +1,4 @@
-import { RequestMethod } from '../../../constants';
+import { RequestMethod } from 'constants/index';
 import { callApi } from 'core/RestClientHelpers';
 
 export const ApproveSalesAction = 'APPROVE_SALES';

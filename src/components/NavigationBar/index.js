@@ -3,7 +3,7 @@ import NavBarComponent from './NavBarComponent';
 import { toggleMenuAction } from './NavbarComponent.actions';
 import { push } from 'connected-react-router';
 import { removeDataAction } from 'core/StorageHelper';
-import { USER_DATA } from '../../constants';
+import { USER_DATA } from 'constants/index';
 import { logoutAction } from 'actions/planning';
 
 const mapStateToProps = (state) => ({

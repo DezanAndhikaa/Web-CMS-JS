@@ -9,7 +9,7 @@ import {
 import {
     setStorage
 } from 'utils/storage.helper';
-import {USER_STORAGE} from '../constants/storage';
+import {USER_STORAGE} from 'constants/storage';
 import { getErrorApiDesc } from 'utils/error.helper';
 import {getStorage} from 'utils/storage.helper';
 

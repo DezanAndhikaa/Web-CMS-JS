@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
-import { Menu } from '../constants';
+import { Menu } from 'constants/index';
 import { DetailPages } from 'views/planning/details';
 import { DetailPagesSite } from 'views/planning/details/DetailPagesSite';
 import { Status } from 'views/planning/details/components/Status';

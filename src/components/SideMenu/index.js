@@ -3,9 +3,9 @@
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { clickMenuAction, logoutAction } from './SideMenuComponent.actions';
-import { toggleMenuAction } from '../NavigationBar/NavbarComponent.actions';
+import { toggleMenuAction } from 'components/NavigationBar/NavbarComponent.actions';
 import { removeDataAction } from 'core/StorageHelper';
-import { USER_DATA } from '../../constants';
+import { USER_DATA } from 'constants/index';
 import SideMenuComponent from './SideMenuComponent';
 import { salesParameterAction, UpdateSalesParameterAction } from 'views/planning/details/DetailPages-action';
 

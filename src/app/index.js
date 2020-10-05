@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { AppReducer } from './App.reducers';
 import { getDataAction } from 'core/StorageHelper';
-import { USER_DATA, StorageKey } from '../constants';
+import { USER_DATA, StorageKey } from 'constants/index';
 import { setPageDisplayModeAction } from 'core/PageHelpers/Page.actions';
 import setTimezoneAction from 'core/TimezoneHelpers/Timezone.actions';
 import App from './App';

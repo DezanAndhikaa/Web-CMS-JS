@@ -4,7 +4,7 @@ import { history } from 'configure-store';
 import { LoginPageReducers } from 'views/Login';
 import { PlansReducers } from 'views/planning/details/DetailPages-reducer';
 import { STORAGE_ACTIONS } from 'core/StorageHelper';
-import { USER_DATA, PLAN_DATA } from '../constants';
+import { USER_DATA, PLAN_DATA } from 'constants/index';
 import { LOGOUT_ACTION } from 'components/SideMenu/SideMenuComponent.actions';
 import setTimezoneReducer from 'core/TimezoneHelpers/Timezone.reducers';
 import clickMenuReducer from 'components/SideMenu/SideMenuComponent.reducers';
