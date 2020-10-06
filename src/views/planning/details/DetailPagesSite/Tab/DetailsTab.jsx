@@ -2,20 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import {AppBar, Tabs, Tab, Typography} from '@material-ui/core';
-import SalesOrderList from '../../components/PlanningList/SalesOrderList';
-import ServiceOrderList from '../../components/PlanningList/ServiceOrderList';
-import RevisedSalesOrderList from '../../components/PlanningList/RevisedSalesOrderList';
+import SalesOrderList from 'views/planning/details/components/PlanningList/SalesOrderList';
+import ServiceOrderList from 'views/planning/details/components/PlanningList/ServiceOrderList';
+import RevisedSalesOrderList from 'views/planning/details/components/PlanningList/RevisedSalesOrderList';
 import './DetailsTab.scss';
-import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
+import DropdownFilter from 'components/FilterByTitle/DropdownFilter';
 import { 
   SelectCustomerFilterAction,
   SelectSiteFilterAction, 
   SelectUnitModelFilterAction, 
   SelectComponentFilterAction, 
   SelectPlanTypeFilterAction
-} from '../../DetailPages-action';
-import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
-import roleService from "../../../../../utils/roleService.helper";
+} from 'views/planning/details/DetailPages-action';
+import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
+import roleService from "utils/roleService.helper";
 
 const RoleUser = new roleService();
 function TabContainer({ children, dir }) {

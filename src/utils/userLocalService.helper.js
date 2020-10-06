@@ -1,4 +1,4 @@
-import { StorageKey } from '../constants';
+import { StorageKey } from 'constants/index';
 
 const INITIAL_DATA = {
   accessToken: null,

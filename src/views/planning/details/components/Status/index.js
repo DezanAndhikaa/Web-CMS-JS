@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { PlansReducers } from '../../DetailPages-reducer';
+import { PlansReducers } from 'views/planning/details/DetailPages-reducer';
 import { push } from 'connected-react-router';
 import {
 	salesParameterDeletedAction,
@@ -67,7 +67,7 @@ import {
 	dateFilterAction,
 	selectAllService,
 	selectAllSales
-} from '../../DetailPages-action';
+} from 'views/planning/details/DetailPages-action';
 import Status from './Status';
 
 const mapStateToProps = (state) => ({

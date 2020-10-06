@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button, Modal, InputBase, Paper } from '@material-ui/core'
 import './InputButton.scss'
-import InputText from '../InputText/InputText'
-import FilterByLifetime from '../FilterByLifetime/FilterByLifetime'
-import FilterByPeriodeDate from '../FilterByPeriodeDate/FilterByPeriodeDate'
+import InputText from 'components/InputText/InputText'
+import FilterByLifetime from 'components/FilterByLifetime/FilterByLifetime'
+import FilterByPeriodeDate from 'components/FilterByPeriodeDate/FilterByPeriodeDate'
 
 export default class InputButton extends React.Component {
 

@@ -3,10 +3,10 @@ import React from 'react';
 import LayoutRecorded from './components/LayoutRecorded/LayoutRecorded';
 import LayoutSite from './components/LayoutSite';
 import LayoutTime from './components/LayoutTime';
-import { Menu } from '../../../../../constants';
+import { Menu } from 'constants/index';
 import Button from '@material-ui/core/Button';
-import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton';
-import FilterbyDataAction  from '../../../../../components/FilterByDataAction/FilterbyDataAction';
+import NotifButton from 'components/ActionButton/NotifButton/NotifButton';
+import FilterbyDataAction  from 'components/FilterByDataAction/FilterbyDataAction';
 import './TrackingHistory.scss';
 
 export default class TrackingHistory extends React.PureComponent {

@@ -1,6 +1,6 @@
 import React from 'react';
-import '../Notification.scss';
-import { IcUnderDev } from '../../../../../../assets/icons';
+import 'views/planning/details/components/Notification/Notification.scss';
+import { IcUnderDev } from 'assets/icons';
 
 export default class CardData extends React.Component {
 

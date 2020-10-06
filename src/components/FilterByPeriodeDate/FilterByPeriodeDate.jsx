@@ -1,6 +1,6 @@
 import React from 'react';
 import './FilterByPeriodeDate.scss';
-import CloseButton from '../../components/ActionButton/CloseButton/CloseButton';
+import CloseButton from 'components/ActionButton/CloseButton/CloseButton';
 import { Button } from '@material-ui/core';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";

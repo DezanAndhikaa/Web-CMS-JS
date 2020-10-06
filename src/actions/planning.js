@@ -1,4 +1,4 @@
-import { PlanningApi } from '../api';
+import { PlanningApi } from 'api';
 import {
     REQUEST_TYPE,
     SUCCESS_TYPE,

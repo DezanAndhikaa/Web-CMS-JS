@@ -3,10 +3,10 @@ import {
   Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Tooltip
 } from '@material-ui/core';
 import './PlanningList.scss';
-import { Spinner } from '../../../../../assets/icons';
-import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+import { Spinner } from 'assets/icons';
+import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
 import moment from 'moment';
-import EmptyList from '../../../../../components/EmptyList/EmptyList';
+import EmptyList from 'components/EmptyList/EmptyList';
 import { CheckBoxOutlineBlank } from '@material-ui/icons';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 

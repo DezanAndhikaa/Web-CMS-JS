@@ -66,7 +66,7 @@ import {
   LIFETIME_FILTER,
   DATE_FILTER,
   SMR_DATE_FILTER,
-} from "../actions/actionTypes";
+} from "actions/actionTypes";
 
 const initialSalesState = {
 	TotalData: 0,

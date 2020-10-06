@@ -3,15 +3,15 @@ import {
   Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Tooltip, 
 } from '@material-ui/core';
 import './PlanningList.scss';
-import '../SapIssue/SapIssue.scss';
+import 'views/planning/details/components/SapIssue/SapIssue.scss';
 import { 
   LifetimeFilterAction, 
   DateFilterAction} 
-  from '../../DetailPages-action';
-import { Spinner } from '../../../../../assets/icons';
-import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+  from 'views/planning/details/DetailPages-action';
+import { Spinner } from 'assets/icons';
+import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
 import moment from 'moment';
-import EmptyList from '../../../../../components/EmptyList/EmptyList';
+import EmptyList from 'components/EmptyList/EmptyList';
 import { CheckBoxOutlineBlank } from '@material-ui/icons';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 

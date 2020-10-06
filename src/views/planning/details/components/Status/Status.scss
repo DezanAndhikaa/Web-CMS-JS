@@ -1,5 +1,5 @@
-@import '../../../../../themes/variables';
-@import '../../../../../themes/functions';
+@import '~themes/variables';
+@import '~themes/functions';
 
 .head-containers{
     display: inline-flex;
@@ -19,7 +19,7 @@
         text-transform: capitalize;
         margin-top: vw(10);
         background-color: transparent;
-        background-image: url('../../../../../assets/icons/back.png');
+        background-image: url('~assets/icons/back.png');
         background-size: auto;
         background-position-x: 18%;
         background-position-y: center;

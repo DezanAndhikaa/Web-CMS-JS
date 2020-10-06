@@ -1,5 +1,3 @@
-
-
 import { SetPageDisplayModeActionType } from './Page.actions';
 
 let initialPageDisplayMode = 'web';

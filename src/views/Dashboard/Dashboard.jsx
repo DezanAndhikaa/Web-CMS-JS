@@ -1,7 +1,5 @@
-
-
 import React from 'react';
-import { ImgUnderDev } from '../../assets/imgs';
+import { ImgUnderDev } from 'assets/imgs';
 import './Dashboard.scss';
 
 class Dashboard extends React.PureComponent {

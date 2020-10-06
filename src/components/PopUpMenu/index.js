@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import PopUpMenu from './PopUpMenu';
-import { removeDataAction } from '../../core/StorageHelper';
-import { USER_DATA } from '../../constants';
-import { logoutAction } from '../../actions/Planning';
+import { removeDataAction } from 'core/StorageHelper';
+import { USER_DATA } from 'constants/index';
+import { logoutAction } from 'actions/Planning';
 
 const mapStateToProps = (state) => ({
 	path: state.router.location.pathname,

@@ -1,5 +1,5 @@
-@import '../../../themes/variables';
-@import '../../../themes/functions';
+@import '~themes/variables';
+@import '~themes/functions';
 
 .work-highlight-container{
     display: flex;
@@ -35,7 +35,7 @@
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
     }
     .btn-planning-assignment:hover{
-        background-image: url('../../../assets/imgs/btn-background.png');
+        background-image: url('~assets/imgs/btn-background.png');
         background-repeat: no-repeat;
         background-size: vw(210) vw(57);
         background-position-x: -0.2vw;
@@ -43,7 +43,7 @@
         @extend .btn-planning-assignment;
     }
     .btn-planning-assignment-active{
-        background-image: url('../../../assets/imgs/btn-background.png');
+        background-image: url('~assets/imgs/btn-background.png');
         background-repeat: no-repeat;
         background-size: vw(210) vw(57);
         background-position-x: -0.2vw;

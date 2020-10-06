@@ -1,5 +1,5 @@
-@import '../../../../../themes/variables';
-@import '../../../../../themes/functions';
+@import '~themes/variables';
+@import '~themes/functions';
 
 .body-container{
     width: 96%;
@@ -31,7 +31,7 @@
                 height: 50%;
                 .back_button{
                     display: flex;
-                    background-image: url('../../../../../assets/icons/Arrow_Left.png');
+                    background-image: url('~assets/icons/Arrow_Left.png');
                     background-position-x: 5.3%;
                     background-position-y: center;
                     background-repeat: no-repeat;

@@ -2,10 +2,10 @@ import React from 'react';
 import { Paper, Button } from '@material-ui/core'
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import './Notification.scss';
-import DropDownList from '../../../../../components/DropdownList/DropDownList';
-import FilterbyDataAction from '../../../../../components/FilterByDataAction/FilterbyDataAction';
-import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton';
-import { Menu } from '../../../../../constants';
+import DropDownList from 'components/DropdownList/DropDownList';
+import FilterbyDataAction from 'components/FilterByDataAction/FilterbyDataAction';
+import NotifButton from 'components/ActionButton/NotifButton/NotifButton';
+import { Menu } from 'constants/index';
 import CardData from './Components/Card';
 
 class Notification extends React.Component{

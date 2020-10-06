@@ -4,8 +4,8 @@ import {
   Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Tooltip,
 } from '@material-ui/core';
 import './PlanningList.scss';
-import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
-import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+import PlanningListHeader from 'views/planning/details/components//PlanningListHeader/PlanningListHeader';
+import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
 import {
   SortServiceByCustomer,
   SortServiceBySite,
@@ -16,10 +16,10 @@ import {
   DateFilterAction,
   SmrFilterAction,
   SmrDateFilterAction,
-} from "../../DetailPages-action";
-import { Spinner } from '../../../../../assets/icons';
-import EmptyList from '../../../../../components/EmptyList/EmptyList';
-import roleService from "../../../../../utils/roleService.helper";
+} from "views/planning/details/DetailPages-action";
+import { Spinner } from 'assets/icons';
+import EmptyList from 'components/EmptyList/EmptyList';
+import roleService from "utils/roleService.helper";
 import { CheckBoxOutlineBlank } from '@material-ui/icons';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 

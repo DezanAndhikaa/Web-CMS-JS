@@ -1,5 +1,5 @@
-@import '../../../../../themes/variables';
-@import '../../../../../themes/functions';
+@import '~themes/variables';
+@import '~themes/functions';
 
 .header-container{
     width: 99%;
@@ -17,7 +17,7 @@
         text-transform: capitalize;
         margin-top: vw(10);
         background-color: transparent;
-        background-image: url('../../../../../assets/icons/back.png');
+        background-image: url('~assets/icons/back.png');
         background-size: auto;
         background-position-x: 18%;
         background-position-y: center;
@@ -55,7 +55,7 @@
             padding-right: 3%;
             box-shadow: 2px 2px 4px rgba(77, 161, 255, 0.37);
             border-radius: 6px;
-            background-image: url('../../../../../assets/icons/send-sap.png');
+            background-image: url('~assets/icons/send-sap.png');
             background-size: 15%;
             background-position-x: 90%;
             background-position-y: center;

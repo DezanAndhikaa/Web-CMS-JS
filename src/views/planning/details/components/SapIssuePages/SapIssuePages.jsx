@@ -12,7 +12,7 @@ import{
 from '@material-ui/core';
 import './SapIssuePages.scss';
 import moment from 'moment';
-import { Menu } from '../../../../../constants';
+import { Menu } from 'constants/index';
 
 class SapIssuePages extends React.PureComponent {
   state={

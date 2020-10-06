@@ -1,5 +1,3 @@
-
-
 export const CLICK_MENU = 'CLICK_MENU';
 export const LOGOUT_ACTION = 'USER_LOGOUT';
 

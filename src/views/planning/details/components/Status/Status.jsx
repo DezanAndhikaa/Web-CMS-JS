@@ -1,27 +1,27 @@
 /*eslint-disable no-unused-vars*/
 import React from 'react';
 import Cards from './components/Card';
-import SearchInput from '../../../../../components/Searchbar/SearchInput';
-import BaseButton from '../../../../../components/Button/BaseButton';
-import SalesOrderList from '../PlanningList/SalesOrderList';
-import ServiceOrderList from '../PlanningList/ServiceOrderList';
-import ApprovedSalesOrderList from '../PlanningList/ApprovedSalesOrderList';
-import DeletedSalesOrderList from '../PlanningList/DeletedSalesOrderList';
-import SapSalesOrderList from '../PlanningList/SapSalesOrderList'
-import SapServiceOrderList from '../PlanningList/SapServiceOrderList'
-import ApprovedServiceOrderList from '../PlanningList/ApprovedServiceOrderList';
-import DeletedServiceOrderList from '../PlanningList/DeletedServiceOrderList';
+import SearchInput from 'components/Searchbar/SearchInput';
+import BaseButton from 'components/Button/BaseButton';
+import SalesOrderList from 'views/planning/details/components/PlanningList/SalesOrderList';
+import ServiceOrderList from 'views/planning/details/components/PlanningList/ServiceOrderList';
+import ApprovedSalesOrderList from 'views/planning/details/components/PlanningList/ApprovedSalesOrderList';
+import DeletedSalesOrderList from 'views/planning/details/components/PlanningList/DeletedSalesOrderList';
+import SapSalesOrderList from 'views/planning/details/components/PlanningList/SapSalesOrderList'
+import SapServiceOrderList from 'views/planning/details/components/PlanningList/SapServiceOrderList'
+import ApprovedServiceOrderList from 'views/planning/details/components/PlanningList/ApprovedServiceOrderList';
+import DeletedServiceOrderList from 'views/planning/details/components/PlanningList/DeletedServiceOrderList';
 import { Button } from '@material-ui/core';
 import './Status.scss';
-import { Menu } from '../../../../../constants';
-import NotifButton from '../../../../../components/ActionButton/NotifButton/NotifButton';
-import { Spinner } from '../../../../../assets/icons';
-import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+import { Menu } from 'constants/index';
+import NotifButton from 'components/ActionButton/NotifButton/NotifButton';
+import { Spinner } from 'assets/icons';
+import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
 import moment from "moment";
-import DropDownList from '../../../../../components/DropdownList/DropDownList';
-import roleService from "../../../../../utils/roleService.helper";
-import ConfirmationModal from '../../../../../components/ConfirmationModal/ConfirmationModal';
-import { userIdData } from '../../../../../utils/userLocalService.helper';
+import DropDownList from 'components/DropdownList/DropDownList';
+import roleService from "utils/roleService.helper";
+import ConfirmationModal from 'components/ConfirmationModal/ConfirmationModal';
+import { userIdData } from 'utils/userLocalService.helper';
 
 const RoleUser = new roleService();
 export default class Status extends React.PureComponent {

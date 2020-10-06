@@ -1,5 +1,3 @@
-
-
 import { ToggleMenuActionType } from './NavbarComponent.actions';
 
 const initialMenuIsOpen = false;

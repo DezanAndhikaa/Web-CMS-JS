@@ -3,10 +3,10 @@
 import React from 'react';
 import './FilterbyDataAction.scss';
 import { Badge } from '@material-ui/core';
-import { IconApprove, IconHistory, IconInputLT } from '../../assets/icons';
+import { IconApprove, IconHistory, IconInputLT } from 'assets/icons';
 import { MenuList, MenuItem, Paper, Typography, withStyles } from '@material-ui/core';
-import { Menu } from '../../constants';
-import roleService from "../../utils/roleService.helper";
+import { Menu } from 'constants/index';
+import roleService from "utils/roleService.helper";
 
 const RoleUser = new roleService();
 const DotBadges = withStyles(theme => ({

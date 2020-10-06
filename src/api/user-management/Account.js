@@ -1,7 +1,7 @@
-import BaseApi from '../base/index';
-import apiConfig from '../../config/api.config';
+import BaseApi from 'base/index';
+import apiConfig from 'config/api.config';
 
-const userManagementService = '/dca/api/login';
+const userManagementService = '/cms/api/login';
 
 class AccountApi extends BaseApi {
     static newInstance = () => {

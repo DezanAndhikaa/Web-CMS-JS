@@ -1,8 +1,6 @@
-
-
 import React from 'react';
 import { InputBase, Paper } from '@material-ui/core';
-import { SearchIcon } from '../../assets/icons';
+import { SearchIcon } from 'assets/icons';
 import './SearchInput.scss';
 
 export default class SearchInput extends React.PureComponent {

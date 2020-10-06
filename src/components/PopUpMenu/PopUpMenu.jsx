@@ -1,6 +1,6 @@
 import React from 'react';
 import './PopUpMenu.scss';
-import { Menu } from '../../constants';
+import { Menu } from 'constants/index';
 import { MenuItem, MenuList, Modal, Paper, Typography } from '@material-ui/core';
 
 export default class PopUpMenu extends React.PureComponent {
