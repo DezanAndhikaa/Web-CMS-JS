@@ -4,8 +4,8 @@ exports[`render filter by period date correctly 1`] = `
 <Formik
   initialValues={
     Object {
-      "endDate": 2020-10-08T02:36:18.960Z,
-      "startDate": 2020-10-08T02:36:18.960Z,
+      "endDate": 2020-10-08T02:49:59.990Z,
+      "startDate": 2020-10-08T02:49:59.990Z,
     }
   }
   validationSchema={

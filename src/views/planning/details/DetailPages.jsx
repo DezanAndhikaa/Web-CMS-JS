@@ -237,7 +237,7 @@ class DetailPages extends React.Component {
     if (this.state.whichTabs === true) {
       const web = this.props.displayMode === 'web';
       const currentPropsSales = this.props.salesOrderList.PageNumber;
-      const { TotalPages } = this.props.salesOrderList.Lists;
+      const { TotalPages } = this.props.salesOrderList;
 
       return (
         <div className="pagination">
