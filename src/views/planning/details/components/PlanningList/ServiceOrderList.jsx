@@ -4,7 +4,7 @@ import {
   Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Tooltip,
 } from '@material-ui/core';
 import './PlanningList.scss';
-import PlanningListHeader from 'views/planning/details/components//PlanningListHeader/PlanningListHeader';
+import PlanningListHeader from 'views/planning/details/components/PlanningListHeader/PlanningListHeader';
 import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
 import {
   SortServiceByCustomer,

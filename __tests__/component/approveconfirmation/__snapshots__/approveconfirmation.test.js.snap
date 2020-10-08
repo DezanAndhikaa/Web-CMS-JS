@@ -1,5 +1,3 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
 exports[`render modal approve confirmation correctly 1`] = `
 <ForwardRef(Modal)
   className="modal-container-approve"
