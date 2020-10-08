@@ -1,1 +1,19 @@
-exports[`render searchbar correctly 1`] = `ShallowWrapper {}`;
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render searchbar correctly 1`] = `
+<WithStyles(ForwardRef(Paper))
+  className="search-input"
+  elevation={1}
+>
+  <img
+    alt=""
+    className="search-icon"
+    src={null}
+  />
+  <WithStyles(ForwardRef(InputBase))
+    className="search-text"
+    onKeyUp={[Function]}
+    placeholder="Search"
+  />
+</WithStyles(ForwardRef(Paper))>
+`;

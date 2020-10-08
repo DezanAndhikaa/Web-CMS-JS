@@ -1,25 +1,29 @@
-module.exports = { 
-    setupFilesAfterEnv : ["<rootDir>/setupTest.js"],
-    testPathIgnorePatterns: [
-        "/node_modules/"
-    ],
+module.exports = {
+  setupFilesAfterEnv: ["./src/setupTest.js"],
+  testPathIgnorePatterns: ["/node_modules/"],
+
   clearMocks: true,
 
-  collectCoverageFrom: ['<rootDir>/**/*.{js,jsx,mjs}'],
+  collectCoverageFrom: ["src/**/*.{js,jsx,mjs}"],
 
-  coverageDirectory: 'coverage',
+  coverageDirectory: "coverage",
 
-  moduleFileExtensions: ['js', 'json', 'jsx'],
+  testEnvironment: "jsdom",
 
-  testEnvironment: 'jsdom',
+  testMatch: ["**/__tests__/**/*.js?(x)", "/?(*.)+(spec|test).js?(x)"],
 
-  testMatch: ['**/__tests__/**/*.js?(x)', '**/?(*.)+(spec|test).js?(x)'],
+  testPathIgnorePatterns: ["\\\\node_modules\\\\"],
 
-  testPathIgnorePatterns: ['\\\\node_modules\\\\'],
+  testURL: "http://localhost",
 
-  testURL: 'http://localhost',
+  transformIgnorePatterns: ["<rootDir>/node_modules/"],
 
-  transformIgnorePatterns: ['<rootDir>/node_modules/'],
-  
   verbose: false,
-}
+  moduleNameMapper: {
+    ".+\\.(css|style|less|sass|scss|png|jpg|ttf|woff|woff2|gif)$":
+      "identity-obj-proxy",
+  },
+  transform: {
+    "^.+\\.(js|jsx)?$": "babel-jest",
+  },
+};

@@ -1,1 +1,11 @@
-exports[`render delete button correctly 1`] = `ShallowWrapper {}`;
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render delete button correctly 1`] = `
+<div
+  className="del-button-row"
+>
+  <div
+    className="del-button"
+  />
+</div>
+`;

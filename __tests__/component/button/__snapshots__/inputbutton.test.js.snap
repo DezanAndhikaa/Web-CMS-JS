@@ -1,1 +1,30 @@
-exports[`render input button correctly 1`] = `ShallowWrapper {}`;
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render input button correctly 1`] = `
+<div
+  className="button-rows"
+>
+  <WithStyles(ForwardRef(Button))
+    className="btn-filter-by-date"
+    onClick={[Function]}
+    style={
+      Object {
+        "justifyContent": "unset",
+      }
+    }
+  />
+  <ForwardRef(Modal)
+    className="modal-pos"
+    open={false}
+  >
+    <div>
+      <FilterByPeriodeDate
+        isShowModal={false}
+        kluk="kluk"
+        onClosed={[Function]}
+        value=""
+      />
+    </div>
+  </ForwardRef(Modal)>
+</div>
+`;

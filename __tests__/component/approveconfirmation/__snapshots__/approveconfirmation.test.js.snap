@@ -1,1 +1,62 @@
-exports[`render modal approve confirmation correctly 1`] = `ShallowWrapper {}`;
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render modal approve confirmation correctly 1`] = `
+<ForwardRef(Modal)
+  className="modal-container-approve"
+>
+  <WithStyles(ForwardRef(DialogContent))
+    className="approve-confirmation-content"
+  >
+    <div
+      className="confirmation-modal-approve"
+    >
+      <CloseNotif />
+      <div
+        className="confirmation-container-approve"
+      >
+        <p
+          className="confirmation-title-approve"
+        >
+          Confirmation
+        </p>
+        <p
+          className="confirmation-title-approve2"
+        >
+          Approved
+        </p>
+        <img
+          alt=""
+          className="confirmation-image-approve"
+          src={null}
+        />
+        <p
+          className="confirmation-caption-approve"
+        >
+          Are you sure want to Approve 
+          <b>
+             
+             items
+          </b>
+          ?
+        </p>
+        <div
+          className="btn-row"
+        >
+          <WithStyles(ForwardRef(Button))
+            className="button-rejected"
+          >
+            No
+          </WithStyles(ForwardRef(Button))>
+                 
+          <WithStyles(ForwardRef(Button))
+            className="button-approved"
+            onClick={[Function]}
+          >
+            Yes
+          </WithStyles(ForwardRef(Button))>
+        </div>
+      </div>
+    </div>
+  </WithStyles(ForwardRef(DialogContent))>
+</ForwardRef(Modal)>
+`;
