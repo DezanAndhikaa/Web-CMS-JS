@@ -1,1 +1,5 @@
-exports[`render notif button correctly 1`] = `ShallowWrapper {}`;
+exports[`render notif button correctly 1`] = `
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
+`;

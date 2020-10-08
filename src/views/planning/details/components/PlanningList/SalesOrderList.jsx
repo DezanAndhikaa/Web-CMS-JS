@@ -306,10 +306,6 @@ export default class SalesOrderList extends React.PureComponent {
           <TableCell align="left" className= "table-cell-icon">
             <EditButton idEdit="Approval" title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} />
           </TableCell>
-        : this.props.salesOrderList.Lists[id].LifeTimeComponent !== 0 && this.props.idTab === "Status" ?
-          <TableCell align="left" className= "table-cell-icon">
-            <EditButton idEdit="Status" />
-          </TableCell>
         : "" }
       </TableRow>
     )

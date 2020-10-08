@@ -1,1 +1,287 @@
-exports[`render side menu correctly 1`] = `ShallowWrapper {}`;
+exports[`render side menu correctly 1`] = `
+<WithStyles(ForwardRef(Drawer))
+  anchor="left"
+  className="menu"
+  classes={
+    Object {
+      "docked": "docked",
+      "paper": "drawer-paper",
+    }
+  }
+  onClose={[Function]}
+  variant="temporary"
+>
+  <WithStyles(ForwardRef(List))>
+    <WithStyles(ForwardRef(ListItem))
+      button={true}
+      className="menu-item"
+      key="dashboard"
+      onClick={[Function]}
+    >
+      <WithStyles(ForwardRef(ListItemIcon))
+        classes={
+          Object {
+            "root": "icon-root",
+          }
+        }
+      >
+        <img
+          alt="assignment icon"
+          className="item-icon"
+          src={null}
+        />
+      </WithStyles(ForwardRef(ListItemIcon))>
+      <WithStyles(ForwardRef(ListItemText))
+        classes={
+          Object {
+            "primary": "item-text",
+            "root": "item-text",
+          }
+        }
+        primary="Dashboard"
+      />
+    </WithStyles(ForwardRef(ListItem))>
+    <WithStyles(ForwardRef(ListItem))
+      button={true}
+      className="menu-item"
+      key="jobs"
+      onClick={[Function]}
+    >
+      <WithStyles(ForwardRef(ListItemIcon))
+        classes={
+          Object {
+            "root": "icon-root",
+          }
+        }
+      >
+        <img
+          alt="assignment icon"
+          className="item-icon"
+          src={null}
+        />
+      </WithStyles(ForwardRef(ListItemIcon))>
+      <WithStyles(ForwardRef(ListItemText))
+        classes={
+          Object {
+            "primary": "item-text",
+            "root": "item-text",
+          }
+        }
+        primary="Tracking"
+      />
+    </WithStyles(ForwardRef(ListItem))>
+    <WithStyles(ForwardRef(ListItem))
+      button={true}
+      className="menu-item"
+      key="plans"
+      onClick={[Function]}
+    >
+      <WithStyles(ForwardRef(ListItemIcon))
+        classes={
+          Object {
+            "root": "icon-root",
+          }
+        }
+      >
+        <img
+          alt="assignment icon"
+          className="item-icon"
+          src={null}
+        />
+      </WithStyles(ForwardRef(ListItemIcon))>
+      <WithStyles(ForwardRef(ListItemText))
+        classes={
+          Object {
+            "primary": "item-text",
+            "root": "item-text",
+          }
+        }
+        primary="Planning"
+      />
+    </WithStyles(ForwardRef(ListItem))>
+    <WithStyles(ForwardRef(Collapse))
+      timeout="auto"
+      unmountOnExit={true}
+    >
+      <WithStyles(ForwardRef(List))
+        disablePadding={true}
+      >
+        <WithStyles(ForwardRef(ListItem))
+          button={true}
+          className="sub-menu"
+          key="plans-assignment"
+          onClick={[Function]}
+        >
+          <WithStyles(ForwardRef(ListItemIcon))
+            classes={
+              Object {
+                "root": "icon-root",
+              }
+            }
+          >
+            <img
+              alt="assignment icon"
+              className="item-icon"
+              src={null}
+            />
+          </WithStyles(ForwardRef(ListItemIcon))>
+          <WithStyles(ForwardRef(ListItemText))
+            classes={
+              Object {
+                "primary": "item-text",
+                "root": "item-text",
+              }
+            }
+            primary="Dashboard"
+          />
+        </WithStyles(ForwardRef(ListItem))>
+        <WithStyles(ForwardRef(ListItem))
+          button={true}
+          className="sub-menu"
+          key="jobs-report"
+          onClick={[Function]}
+        >
+          <WithStyles(ForwardRef(ListItemIcon))
+            classes={
+              Object {
+                "root": "icon-root",
+              }
+            }
+          >
+            <img
+              alt="assignment icon"
+              className="item-icon"
+              src={null}
+            />
+          </WithStyles(ForwardRef(ListItemIcon))>
+          <WithStyles(ForwardRef(ListItemText))
+            classes={
+              Object {
+                "primary": "item-text",
+                "root": "item-text",
+              }
+            }
+            primary="Site"
+          />
+        </WithStyles(ForwardRef(ListItem))>
+      </WithStyles(ForwardRef(List))>
+    </WithStyles(ForwardRef(Collapse))>
+    <WithStyles(ForwardRef(ListItem))
+      button={true}
+      className="menu-item"
+      key="jobs"
+      onClick={[Function]}
+    >
+      <WithStyles(ForwardRef(ListItemIcon))
+        classes={
+          Object {
+            "root": "icon-root",
+          }
+        }
+      >
+        <img
+          alt="assignment icon"
+          className="item-icon"
+          src={null}
+        />
+      </WithStyles(ForwardRef(ListItemIcon))>
+      <WithStyles(ForwardRef(ListItemText))
+        classes={
+          Object {
+            "primary": "item-text",
+            "root": "item-text",
+          }
+        }
+        primary="Production"
+      />
+    </WithStyles(ForwardRef(ListItem))>
+    <WithStyles(ForwardRef(ListItem))
+      button={true}
+      className="menu-item"
+      key="jobs"
+      onClick={[Function]}
+    >
+      <WithStyles(ForwardRef(ListItemIcon))
+        classes={
+          Object {
+            "root": "icon-root",
+          }
+        }
+      >
+        <img
+          alt="assignment icon"
+          className="item-icon"
+          src={null}
+        />
+      </WithStyles(ForwardRef(ListItemIcon))>
+      <WithStyles(ForwardRef(ListItemText))
+        classes={
+          Object {
+            "primary": "item-text",
+            "root": "item-text",
+          }
+        }
+        primary="Allocation"
+      />
+    </WithStyles(ForwardRef(ListItem))>
+    <WithStyles(ForwardRef(ListItem))
+      button={true}
+      className="menu-item"
+      key="jobs"
+      onClick={[Function]}
+    >
+      <WithStyles(ForwardRef(ListItemIcon))
+        classes={
+          Object {
+            "root": "icon-root",
+          }
+        }
+      >
+        <img
+          alt="assignment icon"
+          className="item-icon"
+          src={null}
+        />
+      </WithStyles(ForwardRef(ListItemIcon))>
+      <WithStyles(ForwardRef(ListItemText))
+        classes={
+          Object {
+            "primary": "item-text",
+            "root": "item-text",
+          }
+        }
+        primary="Delivery"
+      />
+    </WithStyles(ForwardRef(ListItem))>
+    <WithStyles(ForwardRef(ListItem))
+      button={true}
+      className="menu-item"
+      key="jobs"
+      onClick={[Function]}
+    >
+      <WithStyles(ForwardRef(ListItemIcon))
+        classes={
+          Object {
+            "root": "icon-root",
+          }
+        }
+      >
+        <img
+          alt="assignment icon"
+          className="item-icon"
+          src={null}
+        />
+      </WithStyles(ForwardRef(ListItemIcon))>
+      <WithStyles(ForwardRef(ListItemText))
+        classes={
+          Object {
+            "primary": "item-text",
+            "root": "item-text",
+          }
+        }
+        primary="Execution"
+      />
+    </WithStyles(ForwardRef(ListItem))>
+  </WithStyles(ForwardRef(List))>
+</WithStyles(ForwardRef(Drawer))>
+`;

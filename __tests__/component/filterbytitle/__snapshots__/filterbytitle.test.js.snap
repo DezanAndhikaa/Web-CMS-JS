@@ -1,1 +1,22 @@
-exports[`render filter by title correctly 1`] = `ShallowWrapper {}`;
+exports[`render filter by title correctly 1`] = `
+<div
+  className="dropdown-filter"
+>
+  <div
+    className="dropdown-filter-button"
+    onClick={[Function]}
+  >
+    <div
+      className="dropdown-selected-items"
+    >
+      <div
+        className="expand-icon-containers"
+      >
+        <ExpandMoreIcon
+          className="expand-icons"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

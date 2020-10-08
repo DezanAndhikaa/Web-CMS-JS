@@ -1,1 +1,9 @@
-exports[`render button close notif correctly 1`] = `ShallowWrapper {}`;
+exports[`render button close notif correctly 1`] = `
+<div
+  className="close-btn-row"
+>
+  <div
+    className="close-btn"
+  />
+</div>
+`;

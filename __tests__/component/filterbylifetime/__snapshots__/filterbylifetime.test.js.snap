@@ -1,1 +1,62 @@
-exports[`render filter by lifetime correctly 1`] = `ShallowWrapper {}`;
+exports[`render filter by lifetime correctly 1`] = `
+<div
+  className="assign-lifetime-modal"
+>
+  <div
+    className="top-row"
+  >
+    <div
+      className="ut-underline"
+    />
+    <p
+      className="select-input-title"
+    />
+    <CloseButton
+      idBtnClose="NonConfirmModal"
+    />
+  </div>
+  <div
+    className="teks-middle"
+  >
+    <label
+      className="teks-left"
+    >
+      Min
+    </label>
+    <label
+      className="teks-right"
+    >
+      Max
+    </label>
+  </div>
+  <div
+    className="top-midel"
+  >
+    <input
+      className="input-left"
+      name="value1"
+      onChange={[Function]}
+      type="number"
+      value=""
+    />
+    <input
+      className="input-right"
+      name="value2"
+      onChange={[Function]}
+      type="number"
+      value=""
+    />
+  </div>
+  <div
+    className="bottom-rows"
+  >
+    <WithStyles(ForwardRef(Button))
+      className="btn-search-disabled"
+      disabled={true}
+      onClick={[Function]}
+    >
+      Search SMR
+    </WithStyles(ForwardRef(Button))>
+  </div>
+</div>
+`;

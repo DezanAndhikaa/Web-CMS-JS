@@ -1,1 +1,9 @@
-exports[`render button close correctly 1`] = `ShallowWrapper {}`;
+exports[`render button close correctly 1`] = `
+<div
+  className="close-button-row"
+>
+  <div
+    className="close-button"
+  />
+</div>
+`;
