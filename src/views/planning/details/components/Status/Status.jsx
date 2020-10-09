@@ -1890,17 +1890,18 @@ export default class Status extends React.PureComponent {
 		  ...this.props.salesRevisedParam.dataFilter,
 		  Filter : 
 			[...this.props.salesRevisedParam.dataFilter.Filter, 
-			{
-			  Field 	 : 'IsRevised',
-			  Operator : 'eq',
-			  Value 	 : 'true',
-			  Logic 	 : 'AND'
-			},{
-			  Field    : 'IsChanged',
-			  Operator : 'eq',
-			  Value    : 'false',
-			  Logic    : "AND"
-			}]
+				{
+				Field 	 : 'IsRevised',
+				Operator : 'eq',
+				Value 	 : 'true',
+				Logic 	 : 'AND'
+				},{
+				Field    : 'IsChanged',
+				Operator : 'eq',
+				Value    : 'false',
+				Logic    : "AND"
+				}
+			]
 		},this.props.token);
 	}
 
