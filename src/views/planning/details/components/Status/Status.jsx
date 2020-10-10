@@ -1662,6 +1662,7 @@ export default class Status extends React.PureComponent {
 			const web = this.props.displayMode === 'web';
 			const currentPropsSales = data.PageNumber;
 			const { TotalPages } = data;
+			const { PaginationSapIssue } = data;
 			switch (this.state.whatPageIsChoosed) {
 				case 'Approve':
 					return(
@@ -1713,9 +1714,9 @@ export default class Status extends React.PureComponent {
 								{web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive-status">{currentPropsSales - 2}</div>}
 								{currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive-status">{currentPropsSales - 1}</div>}
 								<div className="page-active-status">{currentPropsSales}</div>
-								{currentPropsSales + 1 <= TotalPages && <div onClick={() => this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive-status">{currentPropsSales + 1}</div>}
-								{web && currentPropsSales + 2 < TotalPages && <div onClick={() => this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive-status">{currentPropsSales + 2}</div>}
-								{web && currentPropsSales + 3 < TotalPages && <div onClick={() => this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive-status">{currentPropsSales + 3}</div>}
+								{currentPropsSales + 1 <= PaginationSapIssue && <div onClick={() => this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive-status">{currentPropsSales + 1}</div>}
+								{web && currentPropsSales + 2 < PaginationSapIssue && <div onClick={() => this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive-status">{currentPropsSales + 2}</div>}
+								{web && currentPropsSales + 3 < PaginationSapIssue && <div onClick={() => this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive-status">{currentPropsSales + 3}</div>}
 							</div>
 						</div>
 					)
@@ -1889,17 +1890,18 @@ export default class Status extends React.PureComponent {
 		  ...this.props.salesRevisedParam.dataFilter,
 		  Filter : 
 			[...this.props.salesRevisedParam.dataFilter.Filter, 
-			{
-			  Field 	 : 'IsRevised',
-			  Operator : 'eq',
-			  Value 	 : 'true',
-			  Logic 	 : 'AND'
-			},{
-			  Field    : 'IsChanged',
-			  Operator : 'eq',
-			  Value    : 'false',
-			  Logic    : "AND"
-			}]
+				{
+				Field 	 : 'IsRevised',
+				Operator : 'eq',
+				Value 	 : 'true',
+				Logic 	 : 'AND'
+				},{
+				Field    : 'IsChanged',
+				Operator : 'eq',
+				Value    : 'false',
+				Logic    : "AND"
+				}
+			]
 		},this.props.token);
 	}
 

@@ -134,7 +134,6 @@
         display: flex;
         width: vw-tab(722);
     }
-
     .header-row{
         display: flex;
         flex-direction: row;
@@ -330,18 +329,17 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    width: vw-tab(45.99);
-                    min-width: vw-tab(45.99);
-                    height: vw-tab(37);
+                    width: 26px;
+                    height: 25px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     font-family: 'Gotham-Regular';
                     background-color: map-get($colors , primary);
-                    font-size: vw-tab(13);
-                    line-height: vw-tab(16);
+                    font-size: vw(13);
+                    line-height: vw(16);
                     border-radius: 0;
-                    cursor: pointer;
+                    cursor: pointer
                 }
                 .page-inactive{
                     width: vw-tab(45.99);

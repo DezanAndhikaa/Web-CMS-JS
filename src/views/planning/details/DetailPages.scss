@@ -101,17 +101,17 @@
     .btn-unassign:hover{
         background-color: rgb(233, 105, 73);
     }
-    .pagination{
+    .pagination-input{
         display: flex;
         flex: 1;
         flex-direction: row;
         justify-content: flex-end;
         margin-bottom: vw(30);
-        .paging{
+        .paging-input{
             display: flex;
             flex-direction: row;
             box-shadow: 0px vw(2) vw(4) rgba(0, 0, 0, 0.161);
-            .page-active{
+            .page-active-input{
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -127,7 +127,7 @@
                 border-radius: 0;
                 cursor: pointer
             }
-            .page-inactive{
+            .page-inactive-input{
                 width: 26px;
                 height: 25px;
                 background-color: white;
