@@ -1,5 +1,5 @@
-@import '../../../../../themes/variables';
-@import '../../../../../themes/functions';
+@import '~themes/variables';
+@import '~themes/functions';
 
 @media (min-width: 1025px) {
 .head-containers-tracking{
@@ -18,7 +18,7 @@
         text-transform: capitalize;
         margin-top: vw(10);
         background-color: transparent;
-        background-image: url('../../../../../assets/icons/back.png');
+        background-image: url('~assets/icons/back.png');
         background-size: auto;
         background-position-x: 20%;
         background-position-y: center;
@@ -230,9 +230,8 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: vw(45.99);
-                min-width: vw(45.99);
-                height: vw(35.3);
+                width: 26px;
+                height: 25px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -244,8 +243,8 @@
                 cursor: pointer
             }
             .page-inactive{
-                width: vw(45.99);
-                min-width: vw(45.99);
+                width: 26px;
+                height: 25px;
                 height: vw(35.3);
                 background-color: white;
                 display: flex;

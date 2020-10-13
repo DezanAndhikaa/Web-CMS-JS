@@ -1,12 +1,14 @@
+/*eslint-disable no-unused-vars*/
 import React from 'react';
 import './DetailPages.scss';
 import PlanningDetailsTab from './components/Tab/PlanningDetailsTab';
-import DropDownList from '../../../components/DropdownList/DropDownList';
-import SearchInput from "../../../components/Searchbar/SearchInput";
-import FilterbyDataAction from '../../../components/FilterByDataAction/FilterbyDataAction';
-import NotifButton from '../../../components/ActionButton/NotifButton/NotifButton';
-import { Menu } from '../../../constants';
-import { ApiRequestActionsStatus } from '../../../core/RestClientHelpers';
+import DropDownList from 'components/DropdownList/DropDownList';
+import SearchInput from "components/Searchbar/SearchInput";
+import FilterbyDataAction from 'components/FilterByDataAction/FilterbyDataAction';
+import NotifButton from 'components/ActionButton/NotifButton/NotifButton';
+import { Menu } from 'constants/index';
+import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
+import BaseButton from 'components/Button/BaseButton';
 
 class DetailPages extends React.Component {
   constructor(props) {
@@ -33,7 +35,7 @@ class DetailPages extends React.Component {
 
   componentDidMount = () => {
     if (this.props.location.whichTab === undefined) {
-      this.handleClick(Menu.PLANNING_APPROVAL)
+      this.handleClick(Menu.PLANNING_INPUT_LIFETIME)
     }
   }
 
@@ -41,10 +43,11 @@ class DetailPages extends React.Component {
     if (prevProps.salesParameter !== this.props.salesParameter) {
       this.onClickSalesOrder()
     }
+
     if (prevProps.searchSalesParameter !== this.props.searchSalesParameter) {
       this.fetchSearchSales();
     }
-    // FILTER DROPDOWN
+    
     if (prevProps.filterParameter !== this.props.filterParameter) {
       if (this.props.indexFilterParameter.indexTabParameter === 0) {
         this.props.updateSalesParameter({
@@ -57,36 +60,40 @@ class DetailPages extends React.Component {
       }
     }
 
-    // FILTER RANGE LIFETIME
     if (prevProps.filterLifetime !== this.props.filterLifetime) {
       this.props.updateSalesParameter({
         ...prevProps.serviceParameter.dataFilter, Filter: this.props.filterLifetime.Filter, PageNumber: 1
       })
     }
 
-    // FILTER RANGE DATE
-    if (this.state.whichTabs) {
-      if (prevProps.filterDate !== this.props.filterDate) {
+    if(this.state.whichTabs){
+      if (prevProps.filterSmr !== this.props.filterSmr) {
         this.props.updateSalesParameter({
-          ...prevProps.salesParameter.dataFilter, Filter: this.props.filterDate.Filter, PageNumber: 1
-        })
-      }
-    } else {
-      if (prevProps.filterDate !== this.props.filterDate) {
-        this.props.updateServiceParameter({
-          ...prevProps.serviceParameter.dataFilter, Filter: this.props.filterDate.Filter, PageNumber: 1
+          ...prevProps.salesParameter.dataFilter, Filter: this.props.filterSmr.Filter, PageNumber: 1,
         })
       }
     }
 
-    // TRIGGER SEARCH GLOBAL SALES
+    if (this.state.whichTabs) {
+      if (prevProps.filterDateSalesSite !== this.props.filterDateSalesSite) {
+        this.props.updateSalesParameter({
+          ...prevProps.salesParameter.dataFilter, Filter: this.props.filterDateSalesSite.Filter, PageNumber: 1
+        })
+      }
+    }
+
+    if (this.state.whichTabs) {
+      if (prevProps.filterDateSmrSalesSite !== this.props.filterDateSmrSalesSite) {
+        this.props.fetchSalesOrder(this.props.filterDateSmrSalesSite, this.props.token);
+      }
+    }
+
     if (prevProps.salesSearch !== this.props.salesSearch) {
       this.props.updateSearchSales({
         ...prevProps.searchSalesParameter, Category: 'Lifetime', Keyword: this.props.salesSearch,
       });
     }
 
-    // SEARCH PER COMPONENT
     if (this.state.whichTabs) {
       if (prevProps.searchComp !== this.props.searchComp) {
         if (this.props.searchComp[0].Value === "") {
@@ -101,7 +108,6 @@ class DetailPages extends React.Component {
       }
     }
 
-    // SALES ORDER SORTING
     if (prevProps.sortSalesBy !== this.props.sortSalesBy) {
       const { sortSalesBy } = this.props;
       let isDescending = false;
@@ -193,13 +199,35 @@ class DetailPages extends React.Component {
           });
         }
       };
+      if (sortSalesBy.PlanType.isActive) {
+        isDescending = !sortSalesBy.PlanType.isAscending;
+        this.props.updateSalesParameter({
+          ...this.props.salesParameter.dataFilter,
+            PageNumber: 1,
+            Sort: [{
+              Field : 'PlanType',
+              Direction : 'desc'
+            }],
+        });
+        if (sortSalesBy.PlanType.isAscending === !sortSalesBy.PlanType.isActive) {
+          isDescending = !sortSalesBy.PlanType.isAscending;
+          this.props.updateSalesParameter({
+            ...this.props.salesParameter.dataFilter,
+              PageNumber: 1,
+              Sort: [{
+                Field : 'PlanType',
+                Direction : 'asc'
+              }]
+          });
+        }
+      };
     }
   }
 
   fetchSearchSales = async () => {
     await this.props.fetchSalesOrder(this.props.searchSalesParameter, this.props.token);
   }
-  // PAGINATION DENGAN KONDISI UNTUK TAB SALES ORDER ATAU SERVICE ORDER
+  
   _renderPagination = (pageValue) => {
     if (pageValue === 1) {
       this.setState({ whichTabs: true })
@@ -209,7 +237,7 @@ class DetailPages extends React.Component {
     if (this.state.whichTabs === true) {
       const web = this.props.displayMode === 'web';
       const currentPropsSales = this.props.salesOrderList.PageNumber;
-      const { TotalPages } = this.props.salesOrderList.Lists;
+      const { PaginationLifetime } = this.props.salesOrderList;
 
       return (
         <div className="pagination">
@@ -218,67 +246,32 @@ class DetailPages extends React.Component {
             {web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive">{currentPropsSales - 2}</div>}
             {currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive">{currentPropsSales - 1}</div>}
             <div className="page-active">{currentPropsSales}</div>
-            {currentPropsSales + 1 <= TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive">{currentPropsSales + 1}</div>}
-            {web && currentPropsSales + 2 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive">{currentPropsSales + 2}</div>}
-            {web && currentPropsSales + 3 < TotalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive">{currentPropsSales + 3}</div>}
-          </div>
-        </div>
-      )
-    }
-    if (this.state.whichTabs === false) {
-      const web = this.props.displayMode === 'web';
-      const currentPropsService = this.props.serviceOrderList.PageNumber;
-      const { TotalPages } = this.props.serviceOrderList;
-
-      return (
-        <div className="pagination">
-          <div className="paging">
-            {web && currentPropsService - 3 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 3 })} className="page-inactive">{currentPropsService - 3}</div>}
-            {web && currentPropsService - 2 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 2 })} className="page-inactive">{currentPropsService - 2}</div>}
-            {currentPropsService - 1 > 0 && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService - 1 })} className="page-inactive">{currentPropsService - 1}</div>}
-            <div className="page-active">{currentPropsService}</div>
-            {currentPropsService + 1 <= TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 1 })} className="page-inactive">{currentPropsService + 1}</div>}
-            {web && currentPropsService + 2 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 2 })} className="page-inactive">{currentPropsService + 2}</div>}
-            {web && currentPropsService + 3 < TotalPages && <div onClick={() => this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageNumber: currentPropsService + 3 })} className="page-inactive">{currentPropsService + 3}</div>}
+            {currentPropsSales + 1 <= PaginationLifetime && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive">{currentPropsSales + 1}</div>}
+            {web && currentPropsSales + 2 < PaginationLifetime && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive">{currentPropsSales + 2}</div>}
+            {web && currentPropsSales + 3 < PaginationLifetime && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive">{currentPropsSales + 3}</div>}
           </div>
         </div>
       )
     }
   }
 
-  // SAAT MENGKLIK SERVICE ORDER TAB
   onClickServiceOrder = async () => {
     await this.props.fetchServiceOrder(this.props.serviceParameter.dataFilter, this.props.token);
   }
 
-  // SAAT MENGKLIK SALES ORDER TAB
   onClickSalesOrder = async () => {
-    if (this.props.location.whichTab === 'lifetime') {
-      await this.props.fetchSalesOrder({
-        ...this.props.salesParameter.dataFilter,
-        Filter:
-          [...this.props.salesParameter.dataFilter.Filter, {
-            Field: 'LifeTimeComponent',
-            Operator: "eq",
-            Value: 0,
-            Logic: "AND"
-          }]
-      }, this.props.token);
-    } else {
-      await this.props.fetchSalesOrder({
-        ...this.props.salesParameter.dataFilter,
-        Filter:
-          [...this.props.salesParameter.dataFilter.Filter, {
-            Field: 'LifeTimeComponent',
-            Operator: "neq",
-            Value: 0,
-            Logic: "AND"
-          }]
-      }, this.props.token);
-    }
+    await this.props.fetchSalesOrder({
+      ...this.props.salesParameter.dataFilter,
+      Filter:
+        [...this.props.salesParameter.dataFilter.Filter, {
+          Field: 'LifeTimeComponent',
+          Operator: "eq",
+          Value: 0,
+          Logic: "AND"
+        }]
+    }, this.props.token);
   }
 
-  // KOMPONEN UNTUK SHOW PER/PAGE
   _renderShowPerPage = () => {
     return (
       <DropDownList
@@ -298,11 +291,27 @@ class DetailPages extends React.Component {
     }
   }
 
-  // KOMPONEN UNTUK GLOBAL SEARCH
+  resetFilter = () => {
+    this.props.updateSalesParameter({
+      ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
+    });
+    this.props.selectedFilters.customerType= "All Customer"
+    this.props.selectedFilters.siteType= "All Site"
+    this.props.selectedFilters.unitType= "All Unit Model"
+    this.props.selectedFilters.compType= "All Component"
+    this.props.selectedFilters.planType= "All Plan Type"
+    this.props.filterParameter.Filter.length = 0
+	}
+
   _renderSearchBar() {
     return (
       <>
         <div className="bottom-row">
+          <BaseButton titles= "Reset"
+            {...this.props}
+            whatTabsIsRendered= {this.state.whichTabs}
+            resetFilter = {this.resetFilter}
+          />
           <SearchInput
             {...this.props}
             whichTabs={this.state.whichTabs}
@@ -362,7 +371,6 @@ class DetailPages extends React.Component {
     })
   }
 
-  // KOMPONEN UNTUK FILTER DATA ACTION
   _renderFilterByDataAction = (value) => {
     if (value === 1) {
       this.setState({ whichTabs: true })
@@ -403,7 +411,6 @@ class DetailPages extends React.Component {
     });
   };
 
-  // FUNGSI UNTUK MULTI SELECT SALES ORDER
   updateAssignmentSalesStates = (plan) => {
     if (this.props.selectedSalesPlans
       .some((plans) => plans.SoNumber === plan.SoNumber,
@@ -411,7 +418,6 @@ class DetailPages extends React.Component {
     return this.props.selectSalesPlan(plan);
   };
 
-  // FUNGSI UNTUK MULTI SELECT SERVICE ORDER
   updateAssignmentServiceStates = (plan) => {
     if (this.props.selectedServicePlans
       .some((plans) => plans.WoNumber === plan.WoNumber,
@@ -419,7 +425,6 @@ class DetailPages extends React.Component {
     return this.props.selectServicePlan(plan);
   };
 
-  // KOMPONEN UNTUK RENDER PAGE SALES ORDER DAN SERVICE ORDER
   _renderTabs() {
     return (
       <>

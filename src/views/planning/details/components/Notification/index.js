@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { PlansReducers } from '../../DetailPages-reducer';
+import { PlansReducers } from 'views/planning/details/DetailPages-reducer';
 import { push } from 'connected-react-router';
 import {
 	downloadServiceAction, downloadSalesAction,
@@ -24,7 +24,7 @@ import {
 	SelectServicePlanAction,
 	selectMechanicAction, sortByAction, 
 	storePlanDataAction,dateFilterAction,smrDateFilterAction
-} from '../../DetailPages-action';
+} from 'views/planning/details/DetailPages-action';
 import Notification from './Notification';
 
 const mapStateToProps = (state) => ({

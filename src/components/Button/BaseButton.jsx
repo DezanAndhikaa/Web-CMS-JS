@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button, FormLabel, Tooltip } from '@material-ui/core';
 import './BaseButton.scss';
-import EditButton from '../ActionButton/EditButton/EditButton';
-import DeleteButton from '../ActionButton/DeleteButton/DeleteButton';
-import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
-import ApproveConfirmation from '../ApproveConfirmation/ApproveConfirmation';
-import UnapproveConfirmation from '../UnapproveConfirmation/UnapproveConfirmation'
-import { ApiRequestActionsStatus } from '../../core/RestClientHelpers';
+import EditButton from 'components/ActionButton/EditButton/EditButton';
+import DeleteButton from 'components/ActionButton/DeleteButton/DeleteButton';
+import DeleteConfirmation from 'components/DeleteConfirmation/DeleteConfirmation';
+import ApproveConfirmation from 'components/ApproveConfirmation/ApproveConfirmation';
+import UnapproveConfirmation from 'components/UnapproveConfirmation/UnapproveConfirmation'
+import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
 
 class BaseButton extends React.Component{
     constructor(props){
@@ -16,13 +16,6 @@ class BaseButton extends React.Component{
             isShowApprovedModal: false,
             index:0
         }
-    }
-
-    handleClick = (menu, tab) => {
-        this.props.push({
-          pathname: menu,
-          whichTab: tab
-        });
     }
 
     isClicked = () => {

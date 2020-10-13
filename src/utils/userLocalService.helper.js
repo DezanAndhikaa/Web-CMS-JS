@@ -1,11 +1,9 @@
-import { StorageKey } from '../constants';
+import { StorageKey } from 'constants/index';
 
 const INITIAL_DATA = {
-  // You can put here data from localStorage like name, profile etc
   accessToken: null,
 };
 
-// For get data information from PCAR Login
 export const clientIdData = () => {
   const clientId = localStorage.getItem(process.env.REACT_APP_X_IBM_CLIENT_ID);
 
@@ -30,13 +28,11 @@ export const userIdData = () => {
 	return { ...INITIAL_DATA };
 };
 
-// For get data information from Portal Login
 export const userData = () => {
   const user = localStorage.getItem('userData');
 
   if (user) {
     return {
-      // You can put here data from localStorage like name, profile etc
       accessToken: JSON.parse(user).tokenResponse.accessToken,
     };
   }

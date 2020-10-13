@@ -1,5 +1,5 @@
-import { RequestMethod } from '../../constants';
-import { callApi } from '../../core/RestClientHelpers';
+import { RequestMethod } from 'constants/index';
+import { callApi } from 'core/RestClientHelpers';
 
 export const RequestLoginAction = 'REQUEST_LOGIN';
 

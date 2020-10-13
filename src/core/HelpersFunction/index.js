@@ -1,7 +1,5 @@
-
-
 import decodeJwt from 'jwt-decode';
-import { StorageKey } from '../../constants';
+import { StorageKey } from 'constants/index';
 
 export default function isAccessTokenValid() {
 	const userDataString = localStorage.getItem(StorageKey.USER_DATA);

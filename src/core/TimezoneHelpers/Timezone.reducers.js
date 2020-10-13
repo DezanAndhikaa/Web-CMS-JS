@@ -1,5 +1,3 @@
-
-
 import { SetTimezoneActionType } from './Timezone.actions';
 
 const initialTimezoneState = { timezone: '00:00', indonesianTimezone: '' };

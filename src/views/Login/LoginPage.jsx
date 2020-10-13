@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button, TextField, withStyles, LinearProgress } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-import { UTLogo, CmsLogo, CmsLoginBg, MovingAsOneInverse, LoginBg, UTLogoBlack } from '../../assets/imgs';
+import { UTLogo, CmsLogo, CmsLoginBg, MovingAsOneInverse, LoginBg, UTLogoBlack } from 'assets/imgs';
 import './LoginPage.scss';
-import isAccessTokenValid from '../../core/HelpersFunction';
-import Message from '../../components/Message/Message';
-import { Menu, BasePath } from '../../constants';
-import { ApiRequestActionsStatus } from '../../core/RestClientHelpers';
+import isAccessTokenValid from 'core/HelpersFunction';
+import Message from 'components/Message/Message';
+import { Menu, BasePath } from 'constants/index';
+import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
 import { Formik } from "formik";
 import * as Yup from "yup";
 
@@ -36,7 +36,6 @@ class LoginPage extends React.Component {
     };
   }
 
-  //Validation Schema
   validationSchema = Yup.object().shape({
     userName: Yup.string(),
     password: Yup.string()
@@ -81,7 +80,7 @@ class LoginPage extends React.Component {
           variant="outlined" 
           type="text" 
           value={this.state.username} 
-          onChange={this.handleUsernameChange} 
+          onChange={this.handleUsernameChange}
           className="username-input" 
           label="Username" 
           classes={{ input: 'username-input-text' }} 
@@ -90,10 +89,10 @@ class LoginPage extends React.Component {
         <CssTextField 
           id="password" 
           variant="outlined" 
-          onKeyPress={this.handleKeyPress} 
+          onKeyPress={this.handleKeyPress}
           type={this.state.showPassword ? 'text' : 'password'} 
           value={this.state.password} 
-          onChange={this.handlePasswordChange} 
+          onChange={this.handlePasswordChange}
           className="password-input" 
           label="Password" 
           classes={{ input: 'username-input-text' }} />

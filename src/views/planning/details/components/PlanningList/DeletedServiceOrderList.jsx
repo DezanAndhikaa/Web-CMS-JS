@@ -4,10 +4,10 @@ import {
   Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Tooltip
 } from '@material-ui/core';
 import './PlanningList.scss';
-import { LifetimeFilterAction, DateFilterAction } from '../../DetailPages-action';
-import { Spinner } from '../../../../../assets/icons'
-import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
-import EmptyList from '../../../../../components/EmptyList/EmptyList';
+import { LifetimeFilterAction, DateFilterAction } from 'views/planning/details/DetailPages-action';
+import { Spinner } from 'assets/icons';
+import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
+import EmptyList from 'components/EmptyList/EmptyList';
 import { CheckBoxOutlineBlank } from '@material-ui/icons';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
@@ -25,7 +25,6 @@ export default class DeletedServiceOrderList extends React.PureComponent {
   }
 
   componentDidUpdate = (prevState) =>{
-    //untuk menghilangkan checkbox
     if (prevState.serviceDeletedParameter !== this.props.serviceDeletedParameter || prevState.serviceSearch !== this.props.serviceSearch || 
       prevState.searchComp !==this.props.searchComp) {
       this.setState({checkedValue : false})
@@ -145,7 +144,6 @@ export default class DeletedServiceOrderList extends React.PureComponent {
     })
   }
 
-  //LOADING SCENE
   showLoading(){
     switch (this.props.fetchStatusServiceDeleted) {
       case ApiRequestActionsStatus.LOADING:

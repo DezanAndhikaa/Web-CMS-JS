@@ -4,7 +4,7 @@ import {
   LOGOUT_TYPE,
   SUCCESS_TYPE,
   FAILURE_TYPE,
-} from '../actions/actionTypes';
+} from 'actions/actionTypes';
 
 const initialState = {
   isUser: false,

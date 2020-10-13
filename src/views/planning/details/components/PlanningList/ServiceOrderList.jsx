@@ -4,8 +4,8 @@ import {
   Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Tooltip,
 } from '@material-ui/core';
 import './PlanningList.scss';
-import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
-import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+import PlanningListHeader from 'views/planning/details/components/PlanningListHeader/PlanningListHeader';
+import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
 import {
   SortServiceByCustomer,
   SortServiceBySite,
@@ -16,10 +16,10 @@ import {
   DateFilterAction,
   SmrFilterAction,
   SmrDateFilterAction,
-} from "../../DetailPages-action";
-import { Spinner } from '../../../../../assets/icons';
-import EmptyList from '../../../../../components/EmptyList/EmptyList';
-import roleService from "../../../../../utils/roleService.helper";
+} from "views/planning/details/DetailPages-action";
+import { Spinner } from 'assets/icons';
+import EmptyList from 'components/EmptyList/EmptyList';
+import roleService from "utils/roleService.helper";
 import { CheckBoxOutlineBlank } from '@material-ui/icons';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
@@ -64,6 +64,7 @@ export default class ServiceOrderList extends React.PureComponent {
   isFilterDate = async (value1, value2) => {
     this.props.dateFilter(DateFilterAction, value1, value2, this.props.serviceParameter.dataFilter.PageSize);
   }
+
   
   isFilterSmrDate = async (value1, value2) => {
     this.props.filterSmrDate(
@@ -125,9 +126,7 @@ export default class ServiceOrderList extends React.PureComponent {
       return (
         <TableHead className="table-head" classes={{ root: "table-head" }}>
           <TableRow>
-            {this.props.idService === "Data Input" || Number(RoleUser.role()) !== 1 ? (
-              ""
-            ) : (
+            {this.props.idService === "Data Input" ? ( "" ) : (
               <TableCell className="table-cell-checkbox">
                 {this.props.displayServiceCheckbox && (
                   <Checkbox
@@ -241,11 +240,12 @@ export default class ServiceOrderList extends React.PureComponent {
         {(Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/ho") || Number(RoleUser.role()) !== 1 ?
           <TableCell
             align="left"
-            className={this.props.idService === "Data Input" ? "table-cell-pk" : "table-cell-smr"}>
+            className={this.props.pageLoc && this.props.idTab === "Status" ? "table-cell-pk-status"
+              : this.props.pageLoc === "Status" && this.props.idService === "Data Input" ? "table-cell-pk" : "table-cell-smr"}>
             {row.WoNumber}
           </TableCell>
           :
-          <TableCell align="left" className="table-cell"> {row.WoNumber} </TableCell>
+          <TableCell align="left" className="table-cell-smr"> {row.WoNumber} </TableCell>
         }
         <TableCell align="left" className={this.props.idTab === "Status" ? "table-cell-cst" : "table-cell-long"}> {row.CustomerName} </TableCell>
         <TableCell align="left" className="table-cell-short"> {row.SiteCode} </TableCell>

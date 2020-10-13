@@ -1,5 +1,5 @@
-@import '../../../../../themes/variables';
-@import '../../../../../themes/functions';
+@import '~themes/variables';
+@import '~themes/functions';
 
 .work-highlight-container{
     display: flex;
@@ -65,9 +65,8 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: vw(45.99);
-                min-width: vw(45.99);
-                height: vw(35.3);
+                width: 26px;
+                height: 25px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -79,8 +78,8 @@
                 cursor: pointer
             }
             .page-inactive{
-                width: vw(45.99);
-                min-width: vw(45.99);
+                width: 26px;
+                height: 25px;
                 height: vw(35.3);
                 background-color: white;
                 display: flex;
@@ -141,7 +140,7 @@
         margin-top: vw(10);
         background-color: transparent;
         color: #707070;
-        background-image: url('../../../../../assets/icons/back.png');
+        background-image: url('~assets/icons/back.png');
         background-size: auto;
         background-position-x: 8%;
         background-position-y: center;
@@ -244,7 +243,7 @@
             width: 25%;
             height: 90px;
             box-shadow: 0px vw(1)  rgba(0, 0, 0, 0.161);
-            background-image: url('../../../../../assets/icons/notif_input.png');
+            background-image: url('~assets/icons/notif_input.png');
             background-size: 15%;
             background-position-x: 5%;
             background-position-y: center;
@@ -345,7 +344,7 @@
         margin-bottom: 5%;
         background-color: white;
         box-shadow: 0px vw(3) vw(6) rgba(0, 0, 0, 0.161);
-        background-image: url('../../../../../assets/icons/notif_input.png');
+        background-image: url('~assets/icons/notif_input.png');
         background-size: 10%;
         background-position-x: 5%;
         background-position-y: center;
@@ -383,6 +382,3 @@
         }
     }
 }
-
-
-

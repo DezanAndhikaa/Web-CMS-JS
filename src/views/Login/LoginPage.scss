@@ -1,5 +1,5 @@
-@import '../../themes/functions';
-@import '../../themes/variables';
+@import '~themes/functions';
+@import '~themes/variables';
 
 .login-page{
   display: flex;
@@ -133,7 +133,6 @@
   }
 }
 
-//mobile version
 @media (max-width: 599px){
   .login-page-mobile{
     display: flex;
@@ -270,7 +269,6 @@
   }
 }
 
-//tab version
 @media (min-width: 600px) and (max-width: 1025px){
   .login-page-mobile{
     display: flex;

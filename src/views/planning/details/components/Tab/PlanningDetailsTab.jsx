@@ -1,19 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import SalesOrderList from '../PlanningList/SalesOrderList';
+import SalesOrderList from 'views/planning/details/components/PlanningList/SalesOrderList';
 import { Badge, Button, Typography } from '@material-ui/core';
-import { Menu } from '../../../../../constants';
+import { Menu } from 'constants/index';
 import './PlanningDetailsTab.scss';
-import DropdownFilter from '../../../../../components/FilterByTitle/DropdownFilter';
+import DropdownFilter from 'components/FilterByTitle/DropdownFilter';
 import {
   SelectCustomerFilterAction,
   SelectSiteFilterAction,
   SelectUnitModelFilterAction,
-  SelectComponentFilterAction
+  SelectComponentFilterAction,
+  SelectPlanTypeFilterAction
 }
-  from '../../DetailPages-action';
-import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+  from 'views/planning/details/DetailPages-action';
+import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
 
 function TabContainer({ children, dir }) {
   return (
@@ -142,8 +143,9 @@ class PlanningDetailsTab extends React.Component {
         && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "plannings-list-empty" : "plannings-list-containers"}>
         <SalesOrderList
           {...this.props}
-          idSales="Data Input"
-          idTab="Input"
+          pageLoc= "Status"
+          idSales= "Data Input"
+          idTab= "Input"
         />
       </div>
     );
@@ -197,6 +199,14 @@ class PlanningDetailsTab extends React.Component {
     else {
       let arr = this.props.serviceOrderList.ComponentDescriptions;
       arr.splice(0, 0, "All Component Description")
+      return arr
+    }
+  }
+
+  _dataFilterPlanType() {
+    if (this.state.value === 0) {
+      let arr = this.props.salesOrderList.PlanType;
+      arr.splice(0, 0, "All Plan Type")
       return arr
     }
   }
@@ -268,6 +278,17 @@ class PlanningDetailsTab extends React.Component {
             head={"ComponentDescription"}
           />
         </div>
+        <div className="dropdown-container">
+          <DropdownFilter
+            {...this.props}
+            data={this._dataFilterPlanType()}
+            selected={this.props.selectedFilters.planType}
+            onSelectActionType={SelectPlanTypeFilterAction}
+            onSelectAction={this.props.selectFilter2}
+            indexTab={this.state.value}
+            head={"PlanType"}
+          />
+        </div>
         <div className="search-container">
           {this.props.renderSearch}
         </div>
@@ -320,21 +341,19 @@ class PlanningDetailsTab extends React.Component {
     return (
       <div className="root">
         <div className="tab-container">
-          <Button className="btn-approval" variant="outlined" onClick={() => this.handleClick(Menu.PLANNING_APPROVAL)}>
-            Approval
-            </Button>
+          <Button className="btn-back-to-ho" variant="outlined" onClick={() => this.handleClick(Menu.PLANNING_HO)}>
+            HO
+          </Button>
           <div className="btn-header">
             {this.props.renderNotif}
             {this.props.renderFilterByDataAction}
           </div>
         </div>
         <div className="data-input-container">
-          {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
-            this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderTotalDataInput()}
+          {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderTotalDataInput()}
         </div>
         <div className="filters-container">
-          {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
-            this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
+          {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
         </div>
         {value === 0 && <TabContainer dir={theme.direction} >
           <div>

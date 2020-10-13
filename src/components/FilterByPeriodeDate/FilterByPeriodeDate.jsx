@@ -1,6 +1,6 @@
 import React from 'react';
 import './FilterByPeriodeDate.scss';
-import CloseButton from '../../components/ActionButton/CloseButton/CloseButton';
+import CloseButton from 'components/ActionButton/CloseButton/CloseButton';
 import { Button } from '@material-ui/core';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -31,8 +31,7 @@ class FilterByPeriodeDate extends React.Component{
         props.setFieldValue("endDate", event);
     }
     
-    render(){
-        const today = new Date();        
+    render(){      
         const validationSchema = Yup.object().shape({
             startDate: Yup.date()
             .required('Start date must be filled.'),

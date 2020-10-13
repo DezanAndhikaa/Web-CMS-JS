@@ -1,0 +1,9 @@
+exports[`render delete button correctly 1`] = `
+<div
+  className="del-button-row"
+>
+  <div
+    className="del-button"
+  />
+</div>
+`;

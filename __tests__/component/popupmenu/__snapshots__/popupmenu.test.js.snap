@@ -1,0 +1,46 @@
+exports[`render pop up menu correctly 1`] = `
+<ForwardRef(Modal)
+  className="pop-up"
+>
+  <WithStyles(ForwardRef(Paper))
+    className="paper-menu"
+  >
+    <ForwardRef(MenuList)
+      className="menu-list"
+    >
+      <WithStyles(ForwardRef(MenuItem))
+        className="menu-item1"
+        onClick={[Function]}
+      >
+        <WithStyles(ForwardRef(Typography))
+          className="menu-label"
+          variant="inherit"
+        >
+          Tracking History
+        </WithStyles(ForwardRef(Typography))>
+      </WithStyles(ForwardRef(MenuItem))>
+      <WithStyles(ForwardRef(MenuItem))
+        className="menu-item2"
+      >
+        <WithStyles(ForwardRef(Typography))
+          className="menu-label"
+          variant="inherit"
+        >
+          Setting
+        </WithStyles(ForwardRef(Typography))>
+      </WithStyles(ForwardRef(MenuItem))>
+      <WithStyles(ForwardRef(MenuItem))
+        className="menu-item3"
+      >
+        <WithStyles(ForwardRef(Typography))
+          className="menu-label"
+          noWrap={true}
+          variant="inherit"
+        >
+          Log Out
+        </WithStyles(ForwardRef(Typography))>
+      </WithStyles(ForwardRef(MenuItem))>
+    </ForwardRef(MenuList)>
+  </WithStyles(ForwardRef(Paper))>
+</ForwardRef(Modal)>
+`;

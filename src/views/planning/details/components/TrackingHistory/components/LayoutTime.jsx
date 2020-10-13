@@ -11,7 +11,7 @@ import {
 	ListItem,
 	List
 } from '@material-ui/core';
-import { Clock } from '../../../../../../assets/imgs';
+import { Clock } from 'assets/imgs';
 
 
 const styles = theme =>({

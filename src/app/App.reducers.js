@@ -1,15 +1,15 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-import { history } from '../configure-store';
-import { LoginPageReducers } from '../views/Login';
-import { PlansReducers } from '../views/planning/details/DetailPages-reducer';
-import { STORAGE_ACTIONS } from '../core/StorageHelper';
-import { USER_DATA, PLAN_DATA } from '../constants';
-import { LOGOUT_ACTION } from '../components/SideMenu/SideMenuComponent.actions';
-import setTimezoneReducer from '../core/TimezoneHelpers/Timezone.reducers';
-import clickMenuReducer from '../components/SideMenu/SideMenuComponent.reducers';
-import setPageDisplayModeReducer from '../core/PageHelpers';
-import toggleMenuReducer from '../components/NavigationBar/NavbarComponent.reducers';
+import { history } from 'configure-store';
+import { LoginPageReducers } from 'views/Login';
+import { PlansReducers } from 'views/planning/details/DetailPages-reducer';
+import { STORAGE_ACTIONS } from 'core/StorageHelper';
+import { USER_DATA, PLAN_DATA } from 'constants/index';
+import { LOGOUT_ACTION } from 'components/SideMenu/SideMenuComponent.actions';
+import setTimezoneReducer from 'core/TimezoneHelpers/Timezone.reducers';
+import clickMenuReducer from 'components/SideMenu/SideMenuComponent.reducers';
+import setPageDisplayModeReducer from 'core/PageHelpers';
+import toggleMenuReducer from 'components/NavigationBar/NavbarComponent.reducers';
 
 const initialState = { tokenResponse: {} };
 

@@ -1,0 +1,32 @@
+exports[`render empty list correctly 1`] = `
+<div
+  className="paper-empty-list"
+>
+  <img
+    alt=""
+    className="empty-image"
+    src={null}
+  />
+  <div
+    className="caption-image"
+  >
+    <p
+      className="header-caption"
+    >
+      Service Order List
+    </p>
+    <p
+      className="caption1"
+    >
+      You still don't have the
+       service order list
+       record,
+    </p>
+    <p
+      className="caption2"
+    >
+      Let's keep it
+    </p>
+  </div>
+</div>
+`;

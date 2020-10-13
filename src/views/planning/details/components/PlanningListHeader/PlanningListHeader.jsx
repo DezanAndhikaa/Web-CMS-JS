@@ -2,7 +2,7 @@ import React from 'react';
 import { TableSortLabel, Tooltip, TableCell } from '@material-ui/core';
 import './PlanningListHeader.scss';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
-import InputButton from '../../../../../components/Button/InputButton'
+import InputButton from 'components/Button/InputButton'
 
 export default class PlanningListHeader extends React.PureComponent {
 	render() {
@@ -33,7 +33,7 @@ export default class PlanningListHeader extends React.PureComponent {
 														this.props.name === 'SMR Date' ?
 															<InputButton titles='SMR DATE' title="SMR Date" onFilter={this.props.onFilter} /> :
 															this.props.name === 'Lifetime Comp' ?
-																<InputButton titles='NF Lifetime' headerName="Lifetime Comp" /> :
+																<InputButton titles='NF Lifetime' headerName="LIFETIME COMP" /> :
 																<TableSortLabel
 																	active={true}
 																	IconComponent={this.props.isAscending ? KeyboardArrowUp : KeyboardArrowDown}

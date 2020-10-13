@@ -1,0 +1,12 @@
+exports[`render error message component correctly 1`] = `
+<div
+  className="error-message"
+>
+  <h4
+    className="message-title"
+  />
+  <p
+    className="message-content"
+  />
+</div>
+`;

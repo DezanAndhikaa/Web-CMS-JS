@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { PlansReducers } from '../../DetailPages-reducer';
+import { PlansReducers } from 'views/planning/details/DetailPages-reducer';
 import { push } from 'connected-react-router';
 import SapIssuePages from './SapIssuePages';
 import {
@@ -18,7 +18,7 @@ import {
 	fetchSapServiceAction,
 	UpdateSalesSapParameterAction,
 	UpdateServiceSapParameterAction,
-} from '../../DetailPages-action';
+} from 'views/planning/details/DetailPages-action';
 
 const mapStateToProps = (state) => ({
 	token: state.userData.tokenResponse.accessToken,

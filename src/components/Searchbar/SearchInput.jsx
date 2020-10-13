@@ -1,8 +1,6 @@
-
-
 import React from 'react';
 import { InputBase, Paper } from '@material-ui/core';
-import { SearchIcon } from '../../assets/icons';
+import { SearchIcon } from 'assets/icons';
 import './SearchInput.scss';
 
 export default class SearchInput extends React.PureComponent {
@@ -23,7 +21,7 @@ export default class SearchInput extends React.PureComponent {
   render() {
     const info = (this.props.displayMode === 'web' ? this.props.webInfo : this.props.generalInfo) || 'Search';
     return (
-      <Paper className={this.props.idTab === "Status" ? "search-input-status" : "search-input"} elevation={1}>
+      <Paper className={this.props.idTab === "Status" ? "search-input-status" : this.props.idSearch === "Rev" ? "search-input-rev" : "search-input"} elevation={1}>
         <img src={SearchIcon} alt="" className= "search-icon" />
         <InputBase
           className= "search-text"

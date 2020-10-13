@@ -1,22 +1,15 @@
 import React from 'react';
 import {
-  Checkbox, Table, TableBody, TableCell, TableHead, TableRow
+  Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Tooltip
 } from '@material-ui/core';
 import './PlanningList.scss';
-import PlanningListHeader from '../PlanningListHeader/PlanningListHeader';
-import {
-  SortSalesByCustomer,
-  SortSalesBySite,
-  SortSalesByUnitModel,
-  SortSalesByCompDesc,
-  LifetimeFilterAction,
-  DateFilterAction,
-  SmrFilterAction,
-} from "../../DetailPages-action";
-import { Spinner } from '../../../../../assets/icons';
-import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+import { Spinner } from 'assets/icons';
+import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
 import moment from 'moment';
-import EmptyList from '../../../../../components/EmptyList/EmptyList';
+import EmptyList from 'components/EmptyList/EmptyList';
+import { CheckBoxOutlineBlank } from '@material-ui/icons';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import { SmrFilterAction } from 'views/planning/details/DetailPages-action';
 
 export default class ApprovedSalesOrderList extends React.PureComponent {
   constructor(props) {
@@ -32,7 +25,6 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
   }
 
   componentDidUpdate = (prevState) =>{
-    //untuk menghilangkan checkbox
     if (prevState.salesApprovedParameter !== this.props.salesApprovedParameter || prevState.salesSearch !== this.props.salesSearch || 
       prevState.searchComp !==this.props.searchComp) {
       this.setState({checkedValue : false})
@@ -45,17 +37,8 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
     this.props.onClickSalesOrderApproved();
   }
 
-    componentWillMount = ()=>{
-      this.props.updateSalesApprovedParameter({ ...this.props.salesApprovedParameter.dataFilter,  PageNumber: 1, PageSize: 10, Sort: [], Filter: []})
-    }
-  
-
-  isFilterLifetime = async( value1, value2 ) => {
-    this.props.lifetimeFilter( LifetimeFilterAction, value1, value2, this.props.salesApprovedParameter.dataFilter.PageSize );
-  }
-
-  isFilterDate = async ( value1, value2) => {
-    this.props.dateFilter( DateFilterAction, value1, value2, this.props.salesApprovedParameter.dataFilter.PageSize );
+  componentWillMount = ()=>{
+    this.props.updateSalesApprovedParameter({ ...this.props.salesApprovedParameter.dataFilter,  PageNumber: 1, PageSize: 10, Sort: [], Filter: []})
   }
 
   isFilterSMRDate = async ( value1, value2) => {
@@ -82,127 +65,72 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
   }
 
   showTableHead() {
-      return (
-        <TableHead className="table-head" classes={{ root: "table-head" }}>
-          <TableRow classes={{ root: "table-row" }}>
-            <TableCell padding="checkbox">
-              {this.props.displaySalesCheckbox && (
-                <Checkbox
-                  checked={this.state.checkedValue}
-                  onChange={this.handleClicks}
-                  onClick={() => {
-                    this.props.salesOrderListApproved.Lists.map((row, id) =>
-                      this.props.onChoosedSales(row, id)
-                    );
-                  }}
-                  className="checkbox-checked-header"
-                />
-              )}
-            </TableCell>
-            <PlanningListHeader
-              name="SO"
-              delay={300}
-              onSearch={this.props.onSearchComp}
-            />
-            <PlanningListHeader
-              name="Customer"
-              isActive={this.props.sortSalesByState.Customer.isActive}
-              delay={300}
-              isAscending={this.props.sortSalesByState.Customer.isAscending}
-              onClick={() => this.props.onClickTabHead(SortSalesByCustomer)}
-            />
-            <PlanningListHeader
-              name="Site"
-              isActive={this.props.sortSalesByState.Site.isActive}
-              delay={300}
-              isAscending={this.props.sortSalesByState.Site.isAscending}
-              onClick={() => this.props.onClickTabHead(SortSalesBySite)}
-            />
-            <PlanningListHeader
-              name="Unit Model"
-              isActive={this.props.sortSalesByState.UnitModel.isActive}
-              delay={300}
-              isAscending={this.props.sortSalesByState.UnitModel.isAscending}
-              onClick={() => this.props.onClickTabHead(SortSalesByUnitModel)}
-            />
-            <PlanningListHeader
-              name="Comp Desc"
-              isActive={this.props.sortSalesByState.CompDesc.isActive}
-              delay={300}
-              isAscending={this.props.sortSalesByState.CompDesc.isAscending}
-              onClick={() => this.props.onClickTabHead(SortSalesByCompDesc)}
-            />
-            <PlanningListHeader
-              name="Part Number"
-              delay={300}
-              onSearch={this.props.onSearchComp}
-            />
-            <PlanningListHeader
-              name="Unit Code"
-              delay={300}
-              onSearch={this.props.onSearchComp}
-            />
-            <PlanningListHeader
-              name="Serial Number"
-              delay={300}
-              onSearch={this.props.onSearchComp}
-            />
-            <PlanningListHeader
-              name="Lifetime"
-              delay={300}
-              onFilter={this.isFilterLifetime}
-            />
-            <PlanningListHeader
-              name="Plan"
-              delay={300}
-              onFilter={this.isFilterDate}
-            />
-            <PlanningListHeader
-              name="SMR"
-              delay={300}
-              onSearch={this.props.onSearchComp}
-            />
-            <PlanningListHeader
-              name="SMR Date"
-              delay={300}
-              onFilter={this.isFilterDate}
-            />
-            <PlanningListHeader
-              name="Plan Type"
-              delay={300}
-            />
-          </TableRow>
-        </TableHead>
-      );
+    return (
+      <TableHead className="table-head" classes={{ root: "table-head" }}>
+        <TableRow>
+          <TableCell className= "table-cell-checkbox">
+            {this.props.displaySalesCheckbox && (
+              <Checkbox
+                icon={<CheckBoxOutlineBlank fontSize="small" />}
+                checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
+                checked={this.state.checkedValue}
+                onChange={this.handleClicks}
+                onClick={({target: { checked }}) => {
+                  if(checked) return this.props.onChooseAllSales(this.props.salesOrderListApproved.Lists);
+                  return this.props.onChooseAllSales([]);
+                }}
+              />
+            )}
+          </TableCell>
+          <TableCell align="left" className="table-cell">SO</TableCell>
+          <TableCell align="left" className="table-cell">CUSTOMER</TableCell>
+          <TableCell align="left" className="table-cell">SITE</TableCell>
+          <TableCell align="left" className="table-cell">UNIT MODEL</TableCell>
+          <TableCell align="left" className="table-cell">COMPONENT DESCRIPTION</TableCell>
+          <TableCell align="left" className="table-cell">PART NUMBER</TableCell>
+          <TableCell align="left" className="table-cell">UNIT CODE</TableCell>
+          <TableCell align="left" className="table-cell">SERIAL NUMBER</TableCell>
+          <TableCell align="left" className="table-cell">LIFETIME COMP</TableCell>
+          <TableCell align="left" className="table-cell">PLAN EXECUTION</TableCell>
+          <TableCell align="left" className="table-cell">SMR </TableCell>
+          <TableCell align="left" className="table-cell">SMR DATE</TableCell>
+          <TableCell align="left" className="table-cell">PLAN TYPE</TableCell>
+        </TableRow>
+      </TableHead>
+    );
   }
 
-
-  showTableBody(row,id) {
-    return (
-      <TableRow key={id} classes={{ root: 'table-row' }}>
-        <TableCell padding="checkbox">
-          {this.props.displaySalesCheckbox && 
-          <Checkbox 
-          disabled={this.isCheckboxAvailable(row)} 
-          checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
-          onClick={() => this.props.onChoosedSales(row)} 
-          classes={{ checked: 'checkbox-checked' }} />}
-        </TableCell>
-        <TableCell align="left" className="table-cell"> {row.SoNumber} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.CustomerName} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.SiteCode} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.ComponentDescription} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
-        <TableCell align="center" className="table-cell"> {row.LifeTimeComponent} </TableCell>
-        <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.SMR} </TableCell>
-        <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
-        <TableCell align="left" className="table-cell"> Fix </TableCell>
-      </TableRow>
-    )
+    showTableBody(row,id) {
+      return (
+        <TableRow key={id} classes={{ root: 'table-row' }}>
+          <TableCell className="table-cell-checkbox">
+            {this.props.displaySalesCheckbox && 
+              <Checkbox 
+                icon={<CheckBoxOutlineBlank fontSize="small" />}
+                checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
+                disabled={this.isCheckboxAvailable(row)} 
+                checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
+                onClick={() => this.props.onChoosedSales(row, id, 'body')}
+              />
+            }
+          </TableCell>
+          <TableCell align="left" className="table-cell-smr"> {row.SoNumber} </TableCell>
+          <TableCell align="left" className="table-cell-cst"> {row.CustomerName} </TableCell>
+          <TableCell align="left" className="table-cell-short"> {row.SiteCode} </TableCell>
+          <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
+          <TableCell align="left" className="table-cell-long"> {row.ComponentDescription} </TableCell>
+          <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
+          <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
+          <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
+          <TableCell align="left" className="table-cell"> {row.LifeTimeComponent} </TableCell>
+          <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
+          <TableCell align="left" className="table-cell-smr"> {row.SMR} </TableCell>
+          <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
+          <Tooltip arrow title={row.PlanType.charAt(0) === "U" ? "UNSCHEDULE" : ""} >
+            <TableCell align="left" className="table-cell"> {row.PlanType.substring(0, 3)} </TableCell>
+          </Tooltip>
+        </TableRow>
+      )
   }
 
   handleClick = () =>{
@@ -217,7 +145,6 @@ export default class ApprovedSalesOrderList extends React.PureComponent {
     })
   }
 
-  //LOADING SCENE
   showLoading(){
     switch (this.props.fetchStatusSalesApproved) {
       case ApiRequestActionsStatus.LOADING:

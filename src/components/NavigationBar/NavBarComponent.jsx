@@ -2,13 +2,13 @@
 
 import React from 'react';
 import { AppBar, Toolbar } from '@material-ui/core';
-import { UTLogoNew, AccountPic, CmsLogo } from '../../assets/imgs';
-import { MenuToggle } from '../../assets/icons';
-import isAccessTokenValid from '../../core/HelpersFunction';
+import { UTLogoNew, AccountPic, CmsLogo } from 'assets/imgs';
+import { MenuToggle } from 'assets/icons';
+import isAccessTokenValid from 'core/HelpersFunction';
 import './NavBarComponent.scss';
-import PopUpMenu from '../PopUpMenu/PopUpMenu';
-import { Menu, StorageKey } from '../../constants';
-import LogoutModal from '../../views/Logout/Logout';
+import PopUpMenu from 'components/PopUpMenu/PopUpMenu';
+import { Menu, StorageKey } from 'constants/index';
+import LogoutModal from 'views/Logout/Logout';
 
 class NavBarComponent extends React.Component {
 

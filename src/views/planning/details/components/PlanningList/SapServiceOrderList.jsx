@@ -3,15 +3,15 @@ import {
   Checkbox, Table, TableBody, TableCell, TableHead, TableRow, Tooltip, 
 } from '@material-ui/core';
 import './PlanningList.scss';
-import '../SapIssue/SapIssue.scss';
+import 'views/planning/details/components/SapIssue/SapIssue.scss';
 import { 
   LifetimeFilterAction, 
   DateFilterAction} 
-  from '../../DetailPages-action';
-import { Spinner } from '../../../../../assets/icons';
-import { ApiRequestActionsStatus } from '../../../../../core/RestClientHelpers';
+  from 'views/planning/details/DetailPages-action';
+import { Spinner } from 'assets/icons';
+import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
 import moment from 'moment';
-import EmptyList from '../../../../../components/EmptyList/EmptyList';
+import EmptyList from 'components/EmptyList/EmptyList';
 import { CheckBoxOutlineBlank } from '@material-ui/icons';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
@@ -27,7 +27,6 @@ export default class SapServiceOrderList extends React.PureComponent {
   }
 
   componentDidUpdate = (prevState) =>{
-    //untuk menghilangkan checkbox
     if (prevState.serviceSapParameter !== this.props.serviceSapParameter || prevState.serviceSearch !== this.props.serviceSearch || 
       prevState.searchComp !==this.props.searchComp) {
       this.setState({checkedValue : false})
@@ -76,7 +75,7 @@ export default class SapServiceOrderList extends React.PureComponent {
     return (
       <TableHead className="table-head" classes={{ root: 'table-head' }}>
         <TableRow classes={{ root: 'table-row' }}>
-          <TableCell className= "table-cell-checkbox"> 
+          <TableCell className= "table-cell-checkbox">
             {this.props.displayServiceCheckbox  && 
               <Checkbox
                 icon={<CheckBoxOutlineBlank fontSize="small" />}
@@ -144,7 +143,8 @@ export default class SapServiceOrderList extends React.PureComponent {
           <TableCell ><label></label></TableCell>
           <TableCell className="txt-style-bold" align="left"><label>Description:</label></TableCell>
           <TableCell colSpan="12" className="txt-style-normal" align="left">{row.SAPIssueMessage}</TableCell>
-        </TableRow> : null }
+        </TableRow> : null 
+      }
     </>  
     )
   }
@@ -161,7 +161,6 @@ export default class SapServiceOrderList extends React.PureComponent {
     })
   }
 
-  //LOADING SCENE
   showLoading(){
     switch (this.props.fetchStatusServiceSap) {
       case ApiRequestActionsStatus.LOADING:

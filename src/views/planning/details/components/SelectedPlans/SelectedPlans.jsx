@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import './SelectedPlans.scss';
 
@@ -21,7 +19,7 @@ export default class SelectedPlansComponent extends React.PureComponent {
 									<div className="selected-plans-info">{item.unitCode}</div>
 								</div>
 								<div className="selected-plans-detail">
-									<div className="selected-plans-label">Tipe Pekerjaan</div>
+									<div className="selected-plans-label">Plan Type</div>
 									<div className="selected-plans-info">{item.planType}</div>
 								</div>
 							</div>

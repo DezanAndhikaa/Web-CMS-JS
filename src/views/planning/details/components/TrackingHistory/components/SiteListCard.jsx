@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
 import { withStyles } from '@material-ui/core/styles';
-import { IceFace } from '../../../../../../assets/imgs';
+import { IceFace } from 'assets/imgs';
 import './SiteListCard.scss';
 
 const styles = theme =>({

@@ -8,6 +8,10 @@ import { AppReducer } from './app';
 export const history = createBrowserHistory();
 
 export default function configureStore(preloadedState) {
+	const middlewares = []
+    if (process.env.NODE_ENV === 'development') {
+        middlewares.push(logger)
+    }
 	const composeEnhancer = (window).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 	const store = createStore(
 		AppReducer,
@@ -16,7 +20,7 @@ export default function configureStore(preloadedState) {
 			applyMiddleware(
 				routerMiddleware(history),
 				thunk,
-				logger,
+                ...middlewares
 			),
 		),
 	);

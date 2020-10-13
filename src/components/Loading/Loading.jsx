@@ -1,7 +1,7 @@
 import React from 'react'
 import {Snackbar} from '@material-ui/core';
-import { Spinner } from '../../assets/icons'
-import { ApiRequestActionsStatus } from '../../core/RestClientHelpers';
+import { Spinner } from 'assets/icons'
+import { ApiRequestActionsStatus } from 'core/RestClientHelpers';
 import './Loading.scss'
 
 class Loading extends React.Component{

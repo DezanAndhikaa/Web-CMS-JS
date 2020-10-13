@@ -1,0 +1,55 @@
+exports[`render dropdown list correctly 1`] = `
+<div
+  className="show-per-page"
+>
+  <WithStyles(ForwardRef(FormLabel))
+    className="label"
+  >
+    Show
+  </WithStyles(ForwardRef(FormLabel))>
+  <WithStyles(ForwardRef(Select))
+    className="dropdown-list"
+    defaultValue={10}
+    id="select"
+    labelId="label"
+    onChange={[Function]}
+    variant="outlined"
+  >
+    <WithStyles(ForwardRef(MenuItem))
+      className="dropdown-list"
+      value="5"
+    >
+      5
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem))
+      className="dropdown-list"
+      value="10"
+    >
+      10
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem))
+      className="dropdown-list"
+      value="15"
+    >
+      15
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem))
+      className="dropdown-list"
+      value="20"
+    >
+      20
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem))
+      className="dropdown-list"
+      value="25"
+    >
+      25
+    </WithStyles(ForwardRef(MenuItem))>
+  </WithStyles(ForwardRef(Select))>
+  <WithStyles(ForwardRef(FormLabel))
+    className="label"
+  >
+    Entries
+  </WithStyles(ForwardRef(FormLabel))>
+</div>
+`;

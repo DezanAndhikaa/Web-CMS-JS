@@ -3,10 +3,10 @@
 import React from 'react';
 import './FilterbyDataAction.scss';
 import { Badge } from '@material-ui/core';
-import { IconApprove, IconHistory, IconInputLT } from '../../assets/icons';
+import { IconApprove, IconHistory, IconInputLT } from 'assets/icons';
 import { MenuList, MenuItem, Paper, Typography, withStyles } from '@material-ui/core';
-import { Menu } from '../../constants';
-import roleService from "../../utils/roleService.helper";
+import { Menu } from 'constants/index';
+import roleService from "utils/roleService.helper";
 
 const RoleUser = new roleService();
 const DotBadges = withStyles(theme => ({
@@ -56,20 +56,35 @@ class FilterbyDataAction extends React.Component {
   renderList(){
     return(
       <Paper className={this.props.idStatus === "DetailSite" ? "list-status-site" : "list-status" }>
-        {Number(RoleUser.role()) === 1 ? 
+        {Number(RoleUser.role()) === 2 ?
           <MenuList>
             <MenuItem>
-              <Typography 
-                className="list-item-status"
-                variant="inherit"
-                onClick={ () =>{ localStorage.getItem('subMenu') === "/webcms/planning/ho" ? this.handleClick(Menu.PLANNING_HO_STATUS, 'service') 
-                : this.handleClick(Menu.PLANNING_SITE_STATUS, 'service') }}
-              >
-                Service Order
-              </Typography>
+              <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_SITE_STATUS, 'sales')}>Sales Order</Typography>
+            </MenuItem>
+          </MenuList>
+        : Number(RoleUser.role()) === 3 ? 
+          <MenuList>
+              <MenuItem>
+              <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_SITE_STATUS, 'service')}>Service Order</Typography>
+              </MenuItem>
+          </MenuList>
+        : Number(RoleUser.role()) === 1 ? 
+          <MenuList>
+            <MenuItem>
+              <Typography className="list-item-status" variant="inherit" onClick={ () =>{ localStorage.getItem('subMenu') === "/webcms/planning/ho" 
+                ? this.handleClick(Menu.PLANNING_HO_STATUS, 'sales') 
+                : this.handleClick(Menu.PLANNING_SITE_STATUS, 'sales') }}>Sales Order</Typography>
+            </MenuItem>
+            <MenuItem>
+              <Typography className="list-item-status" variant="inherit" onClick={ () =>{ localStorage.getItem('subMenu') === "/webcms/planning/ho" 
+              ? this.handleClick(Menu.PLANNING_HO_STATUS, 'service') 
+              : this.handleClick(Menu.PLANNING_SITE_STATUS, 'service') }}>Service Order</Typography>
             </MenuItem>
           </MenuList>
         : <MenuList>
+            <MenuItem>
+              <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_SITE_STATUS, 'sales')}>Sales Order</Typography>
+            </MenuItem>
             <MenuItem>
               <Typography className="list-item-status" variant="inherit" onClick={ () => this.handleClick(Menu.PLANNING_SITE_STATUS, 'service')}>Service Order</Typography>
             </MenuItem>

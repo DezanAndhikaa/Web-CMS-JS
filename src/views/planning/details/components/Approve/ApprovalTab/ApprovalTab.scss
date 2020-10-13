@@ -1,6 +1,5 @@
-@import '../../../../../../themes/variables';
-@import '../../../../../../themes/functions';
-
+@import '~themes/variables';
+@import '~themes/functions';
 
 .tab-approval{
     display: flex;
@@ -155,15 +154,6 @@
                         font-family: 'Lato-Bold';
                         color: #3C3B3B;
                     }
-                    .table-cell-smr{
-                        width: vw(60);
-                        padding: 0;
-                        height: vw(40);
-                        font-size: vw(13) !important;
-                        line-height: vw(16) !important;
-                        font-family: 'Lato-Bold';
-                        color: #3C3B3B;
-                    }
                     .table-cell-short{
                         width: vw(60);
                         padding: 0;
@@ -179,6 +169,20 @@
                         height: vw(40);
                         font-size: vw(14) !important;
                         line-height: vw(17) !important;
+                        font-family: 'Lato-Bold';
+                        color: #3C3B3B;
+                    }
+                    .table-cell-icon{
+                        width: vw(35);
+                        padding: 0;
+                        height: vw(40);
+                    }
+                    .table-cell-smr{
+                        width: vw(60);
+                        padding: 0;
+                        height: vw(40);
+                        font-size: vw(13) !important;
+                        line-height: vw(16) !important;
                         font-family: 'Lato-Bold';
                         color: #3C3B3B;
                     }

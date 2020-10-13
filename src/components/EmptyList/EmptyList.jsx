@@ -1,5 +1,5 @@
 import React from 'react';
-import { Empty } from '../../assets/imgs';
+import { Empty } from 'assets/imgs';
 import './EmptyList.scss';
 
 export default class EmptyList extends React.PureComponent {
