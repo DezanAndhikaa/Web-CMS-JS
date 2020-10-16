@@ -6,7 +6,7 @@ export const RequestMethod = {
 };
 
 export const Menu = {
-	LOGIN: '/webcms/',
+	LOGIN: '/webcms',
 	PLANNING : '/webcms/planning',
 	PLANNING_INPUT_LIFETIME : '/webcms/planning/input-lifetime',
 	PLANNING_SITE : '/webcms/planning/site',
