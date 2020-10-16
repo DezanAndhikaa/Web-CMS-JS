@@ -10,12 +10,12 @@ import { Notification } from 'views/planning/details/components/Notification';
 import { LoginPage }  from 'views/Login';
 import { SapIssuePages } from 'views/planning/details/components/SapIssuePages';
 import requireAuth from 'components/AuthGuardHoc';
-import Dashboard from 'views/Dashboard/';
+import Dashboard from 'views/Dashboard';
 
 const routes = (
 	<div>
 		<Switch>
-			<Route exact path={Menu.LOGIN} component={LoginPage} />
+			<Route exact strict path={Menu.LOGIN} component={LoginPage} />
 			<Route exact path={Menu.PLANNING_INPUT_LIFETIME} component={requireAuth(DetailPages)} />
 			<Route exact path={Menu.PLANNING_SITE} component={requireAuth(DetailPagesSite)} />
 			<Route exact path={Menu.PLANNING_HO_STATUS} component={requireAuth(Status)} />
