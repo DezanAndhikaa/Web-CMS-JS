@@ -15,7 +15,7 @@ import Dashboard from 'views/Dashboard';
 const routes = (
 	<div>
 		<Switch>
-			<Route exact strict path={Menu.LOGIN} component={LoginPage} />
+			<Route exact path={Menu.LOGIN} component={LoginPage} />
 			<Route exact path={Menu.PLANNING_INPUT_LIFETIME} component={requireAuth(DetailPages)} />
 			<Route exact path={Menu.PLANNING_SITE} component={requireAuth(DetailPagesSite)} />
 			<Route exact path={Menu.PLANNING_HO_STATUS} component={requireAuth(Status)} />
