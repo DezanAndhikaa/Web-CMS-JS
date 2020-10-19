@@ -87,7 +87,7 @@ class NavBarComponent extends React.Component {
 				navBar = (
 					<AppBar position="fixed" className="app-bar">
 						<Toolbar variant="dense" className="toolbar">
-							<img src={UTLogoNew} alt="logo-ut" className="logo-ut"/>
+							<img src={`${UTLogoNew}`} alt="logo-ut" className="logo-ut"/>
 							<div className="info-login">
 								<p>
 									{`Hi, ${this.props.userData.firstName} ${this.props.userData.lastName}`}
