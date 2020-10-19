@@ -14,7 +14,7 @@ export default class DeleteConfirmation extends React.PureComponent {
               <CloseNotif onClose={this.props.onClose}/>
                 <div className="confirmation-container-delete">
                   <p className="confirmation-title-delete">Delete Planning</p>
-                  <img className="confirmation-image-delete" src={process.env.PUBLIC_URL +Delete} alt="" />
+                  <img className="confirmation-image-delete" src={Delete} alt="" />
                   <p className="confirmation-caption-delete">Are you sure want to</p>
                   <p className="confirmation-caption-delete">delete {this.props.totalData} items?</p>
                   <div className="btn-row">
@@ -35,7 +35,7 @@ export default class DeleteConfirmation extends React.PureComponent {
                 <div className="confirmation-container-delete">
                   <p className="confirmation-title-delete">Are you sure want to</p>
                   <p className="confirmation-titles-delete2">permanently delete this data ?</p>
-                  <img className="confirmation-images-delete" src={process.env.PUBLIC_URL +DelSuccess} alt="" />
+                  <img className="confirmation-images-delete" src={DelSuccess} alt="" />
                   <div className="btn-row-permanent">
                     <Button className="btn-yes-delete" onClick={ () => {this.props.renderSakses(); this.props.onDelete(); this.props.onClose() }}>Yes, Delete</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Button className="btn-dont" onClick={this.props.onClose}>No</Button>

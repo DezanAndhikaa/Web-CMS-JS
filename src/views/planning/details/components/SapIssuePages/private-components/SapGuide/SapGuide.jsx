@@ -24,7 +24,7 @@ export default class SapGuide extends React.Component{
               <p className="sap-guide-ket"> 3. Isi <i>description</i> (sesuai dengan kebutuhan)</p>
               <p className="sap-guide-ket"> 4. Setelah itu, klik tombol <i>send SAP Issue untuk mengirimkan email pengajuan revisi SAP</i></p>
               <p className="sap-example-title">Example: </p>
-              <img className="sap-guide-image" src={process.env.PUBLIC_URL +ImgSapGuide} alt="" />
+              <img className="sap-guide-image" src={ImgSapGuide} alt="" />
           </div>
           <div className="bottom-row-sap-guide">
               <Button className="btn-go-to-sap" variant="outlined" onClick={ () => {this.props.onClose()} } >Go to SAP Issue Page</Button>

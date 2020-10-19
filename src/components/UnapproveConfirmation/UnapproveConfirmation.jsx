@@ -205,7 +205,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
             <div className="confirmation-container-unapprove">
               <p className="confirmation-title-unapprove">Send to Edit</p>
               <p className="confirmation-title-unapprove2">Lifetime Component</p>
-              <img className="confirmation-image-unapprove" src={process.env.PUBLIC_URL +ImgSendtoEdit} alt="" />
+              <img className="confirmation-image-unapprove" src={ImgSendtoEdit} alt="" />
               <p className="confirmation-caption-unapprove">Are you sure want to Not Approve <b>{this.props.totalData} items?</b></p>
               <div className="btn-row">
                 <Button className="button-yes" onClick={this.props.onSendtoEdit}>Yes</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -234,7 +234,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
                 <div className="confirmation-container-unapprove">
                   <p className="confirmation-title-unapprove">Cancel Approve</p>
                   <p className="confirmation-title-unapprove2">{this.props.whichTabs ? "Sales Order" : "Service Order"}</p>
-                  <img className="confirmation-image-unapprove" src={process.env.PUBLIC_URL +ImgCancelApprove} alt="" />
+                  <img className="confirmation-image-unapprove" src={ImgCancelApprove} alt="" />
                   <p className="confirmation-caption-unapprove"><b>Select one</b> to continue cancel approve</p>
                   <div className="btn-row">
                     {this.props.whichTabs ? <Button className="button-edit-lt" onClick={() => this.isClickedSend()}>Edit Lifetime</Button> : null }
@@ -272,7 +272,7 @@ export default class UnapproveConfirmation extends React.PureComponent {
             <div className="confirmation-modal-unapprove">
               <div className="confirmation-container-unapprove">
                 <p className="title-success-unapprove">Successful</p>
-                <img className="confirmation-success-unapprove" src={process.env.PUBLIC_URL +ImgCancelEditSucc} alt="" />
+                <img className="confirmation-success-unapprove" src={ImgCancelEditSucc} alt="" />
                 <p className="confirmation-caption-unapprove">You have sent data to be repaired again</p>
                 <div className="btn-row">
                   <Button className="button-continue" onClick={ () => {this.props.onClose()} }>Continue</Button>

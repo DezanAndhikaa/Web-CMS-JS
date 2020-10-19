@@ -2376,7 +2376,7 @@ export default class Status extends React.PureComponent {
 		  return(
 			<div className="loading-tracking-container">
 			  <img 
-				src={process.env.PUBLIC_URL +Spinner}
+				src={Spinner}
 				alt="loading-spinner"
 				className="loading-icon"
 				/>

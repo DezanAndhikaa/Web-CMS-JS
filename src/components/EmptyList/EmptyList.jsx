@@ -6,7 +6,7 @@ export default class EmptyList extends React.PureComponent {
     render() {
         return(
             <div className="paper-empty-list">
-                <img className="empty-image" src={process.env.PUBLIC_URL +Empty} alt="" />
+                <img className="empty-image" src={Empty} alt="" />
                 <div className="caption-image">
                     <p className="header-caption">
                         {this.props.idEmpty === "Sales" ? "Sales Order List" :
