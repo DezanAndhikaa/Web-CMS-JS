@@ -102,7 +102,7 @@ class FilterbyDataAction extends React.Component {
           <div className="dropdown-selected-item">
             <div className="tracking-history">
               <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
-                  <img src={process.env.PUBLIC_URL +IconApprove} className="icon-history" alt="" /><span className="label-status">Status</span>
+                  <img src={IconApprove} className="icon-history" alt="" /><span className="label-status">Status</span>
               </DotBadges>
             </div>
           </div>
@@ -119,7 +119,7 @@ class FilterbyDataAction extends React.Component {
           <div className="dropdown-button" onClick={() => this.handleClick(Menu.PLANNING_TRACKING_HISTORY, 'tracking')}>
             <div className="dropdown-selected-item">
               <div className="tracking-history">
-                <img src={process.env.PUBLIC_URL +IconHistory} className="icon-history" alt="" /><span className="label-history">Tracking History</span>
+                <img src={IconHistory} className="icon-history" alt="" /><span className="label-history">Tracking History</span>
               </div>
             </div>
           </div>
@@ -132,7 +132,7 @@ class FilterbyDataAction extends React.Component {
           <div className="dropdown-button">
             <div className="dropdown-selected-item">
               <div className="input-lt" onClick={ () => this.handleClick(Menu.PLANNING_INPUT_LIFETIME, 'lifetime') }>
-                <img src={process.env.PUBLIC_URL +IconInputLT} className="icon-lt" alt="" /><span className="label-lt">Input Lifetime</span>
+                <img src={IconInputLT} className="icon-lt" alt="" /><span className="label-lt">Input Lifetime</span>
               </div>
             </div>
           </div>

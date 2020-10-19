@@ -11,7 +11,7 @@ export default class LogoutModal extends React.PureComponent {
 					<div className="confirmation-modal-logout">
 						<div className="confirmation-container-logout">
 							<p className="confirmation-title-logout">Log Out</p>
-							<img className="confirmation-image-logout" src={process.env.PUBLIC_URL +Logout} alt="" />
+							<img className="confirmation-image-logout" src={Logout} alt="" />
 							<p className="confirmation-caption-logout">Are you sure want to Log Out ?</p>
 							<div className="btn-row">
 								<Button className="button-yes" onClick={this.props.onYesClicked}>Yes</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

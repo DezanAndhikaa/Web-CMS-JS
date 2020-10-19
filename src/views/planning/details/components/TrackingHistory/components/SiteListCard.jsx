@@ -56,7 +56,7 @@ class SiteListCard extends React.Component {
 			<div>
 				{this.state.dataSite.map( (row) => (
 					<Card className="site-text-content" onClick={()=>this.handleClick(row.site)}>
-						<img className="ice-face" src={process.env.PUBLIC_URL +IceFace} alt=""/>
+						<img className="ice-face" src={IceFace} alt=""/>
 						{row.site}
 					</Card>
 				))}

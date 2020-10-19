@@ -22,7 +22,7 @@ export default class ApproveConfirmation extends React.PureComponent {
 							<div className="confirmation-container-approve">
 								<p className="confirmation-title-approve">Confirmation</p>
 								<p className="confirmation-title-approve2">Revised</p>
-								<img className="confirmation-image-approve" src={process.env.PUBLIC_URL +ImgSendtoEdit} alt="" />
+								<img className="confirmation-image-approve" src={ImgSendtoEdit} alt="" />
 								<p className="confirmation-caption-approve">Are you sure want to Edit <b>{this.props.dataLf} to {this.props.dataRev} ?</b></p>
 								<div className="btn-row">
 									<Button className="button-rejected" onClick={this.props.onCloseRev}>No</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -43,7 +43,7 @@ export default class ApproveConfirmation extends React.PureComponent {
 							<div className="confirmation-container-approve">
 								<p className="confirmation-title-approve">Confirmation</p>
 								<p className="confirmation-title-approve2">Approved</p>
-								<img className="confirmation-image-approve" src={process.env.PUBLIC_URL +ImgSendtoEdit} alt="" />
+								<img className="confirmation-image-approve" src={ImgSendtoEdit} alt="" />
 								<p className="confirmation-caption-approve">Are you sure want to Approve <b> {this.props.totalData} items</b>?</p>
 								<div className="btn-row">
 									<Button className="button-rejected" onClick={this.props.onClose}>No</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

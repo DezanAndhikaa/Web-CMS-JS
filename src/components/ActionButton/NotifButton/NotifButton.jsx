@@ -82,7 +82,7 @@ class NotifButton extends React.PureComponent {
           <div className="notif-selected-item">
             <div className="notif-history">
                 <DotBadges color="secondary" badgeContent="" anchorOrigin={{ vertical: 'top', horizontal: 'left', }}>
-                  <img src={process.env.PUBLIC_URL +IconNotif} className="icon-notif" alt="" /> <span className="label-notif">Notification</span>
+                  <img src={IconNotif} className="icon-notif" alt="" /> <span className="label-notif">Notification</span>
                 </DotBadges>
             </div>
           </div>
