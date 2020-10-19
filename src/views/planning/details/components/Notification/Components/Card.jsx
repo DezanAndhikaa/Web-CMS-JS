@@ -68,7 +68,7 @@ export default class CardData extends React.Component {
       return(
         <>
           <div className="under-dev">
-            <img className="under-dev-image" src={IcUnderDev} alt="" /> 
+            <img className="under-dev-image" src={process.env.PUBLIC_URL +IcUnderDev} alt="" /> 
             <div className="content1">This page is currently</div>
             <div className="main-content">Under Development !</div>
             <div className="content2">we'll back shortly</div>

@@ -38,9 +38,9 @@ class LayoutRecorded extends React.Component {
 					<Typography className={classes.title} color="textSecondary" gutterBottom>
           				RECORDED
 					</Typography>
-					<img className="mid-woman" src={Woman} alt=""/>
-					<img className="text-1-tracking" alt="" src={Text1}/>
-					<img className="text-2-tracking" alt="" src={Text2}/>
+					<img className="mid-woman" src={process.env.PUBLIC_URL +Woman} alt=""/>
+					<img className="text-1-tracking" alt="" src={process.env.PUBLIC_URL +Text1}/>
+					<img className="text-2-tracking" alt="" src={process.env.PUBLIC_URL +Text2}/>
 				</CardContent>
 			</Card>
 		);

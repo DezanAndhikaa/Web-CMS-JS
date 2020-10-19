@@ -167,7 +167,7 @@ export default class SapServiceOrderList extends React.PureComponent {
         return(
           <div className="loading-container">
             <img 
-              src={`${Spinner}`}
+              src={process.env.PUBLIC_URL +`${Spinner}`}
               alt="loading-spinner"
               className="loading-icon"
               />

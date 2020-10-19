@@ -66,7 +66,7 @@ class LayoutTime extends React.Component {
 							>
 								<ListItemIcon classes={{ root: 'icon-root' }}>
 									<img alt=""
-										src={Clock}
+										src={process.env.PUBLIC_URL +Clock}
 									/>
 								</ListItemIcon>
 								<ListItemText 
