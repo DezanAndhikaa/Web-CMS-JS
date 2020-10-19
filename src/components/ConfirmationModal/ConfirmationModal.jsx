@@ -14,7 +14,7 @@ export default class ConfirmationModal extends React.PureComponent {
               <CloseNotif onClose={this.props.onClose}/>
                   <div className="confirmation-container">
                     <p className="confirmation-title">Successful</p>
-                    <img className="image-approved" src={ImgApproved} alt="" />
+                    <img className="image-approved" src={process.env.PUBLIC_URL +ImgApproved} alt="" />
                     <p className="confirmation-caption">Please resume your activities</p>
                     <br></br>
                     <Button className="btn-ok" onClick={ () => {this.props.onClose()} }>Continue</Button>
@@ -30,7 +30,7 @@ export default class ConfirmationModal extends React.PureComponent {
               <div className="confirmation-modal">
                   <div className="confirmation-container">
                     <p className="confirmation-title">Successful</p>
-                    <img className="confirmation-image" src={Success} alt="" />
+                    <img className="confirmation-image" src={process.env.PUBLIC_URL +Success} alt="" />
                     <p className="confirmation-caption">You can see the data SAP Issue</p>
                     <p className="confirmation-caption">to the <b>Status</b></p>
                     <br></br>
@@ -49,7 +49,7 @@ export default class ConfirmationModal extends React.PureComponent {
               <div className="confirmation-container">
                 <p className="confirmation-title">You have not completed</p>
                 <p className="confirmation-title2">the SAP Issue form</p>
-                <img className="confirmation-image" src={DelSuccess} alt="" />
+                <img className="confirmation-image" src={process.env.PUBLIC_URL +DelSuccess} alt="" />
                 <p className="confirmation-caption">The system can't save your activities.</p>
                 <p className="confirmation-caption">Do you want to continue?</p>
                 <div className="btn-container">
@@ -72,7 +72,7 @@ export default class ConfirmationModal extends React.PureComponent {
             <div className="confirmation-modal">
               <div className="confirmation-container">
                   <p className="confirmation-title">Successful</p>
-                  <img className="confirmation-image" src={Success} alt="" /> 
+                  <img className="confirmation-image" src={process.env.PUBLIC_URL +Success} alt="" /> 
                   <p className="confirmation-caption">The data was deleted</p>
                   <p className="confirmation-caption"><b>successfully</b></p>
                   <br></br>
@@ -89,7 +89,7 @@ export default class ConfirmationModal extends React.PureComponent {
             <div className="confirmation-modal">
               <div className="confirmation-container">
                   <p className="confirmation-title">Successful</p>
-                  <img className="confirmation-image" src={Success} alt="" /> 
+                  <img className="confirmation-image" src={process.env.PUBLIC_URL +Success} alt="" /> 
                   <p className="confirmation-caption">The data was revised</p>
                   <p className="confirmation-caption"><b>successfully</b></p>
                   <br></br>

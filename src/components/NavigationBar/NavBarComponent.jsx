@@ -87,13 +87,13 @@ class NavBarComponent extends React.Component {
 				navBar = (
 					<AppBar position="fixed" className="app-bar">
 						<Toolbar variant="dense" className="toolbar">
-							<img src={`${UTLogoNew}`} alt="logo-ut" className="logo-ut"/>
+							<img src={process.env.PUBLIC_URL +`${UTLogoNew}`} alt="logo-ut" className="logo-ut"/>
 							<div className="info-login">
 								<p>
 									{`Hi, ${this.props.userData.firstName} ${this.props.userData.lastName}`}
 								</p>
 								<div onClick={this.isClicked}>
-									<img src={AccountPic} className="account-pic" alt="" />
+									<img src={process.env.PUBLIC_URL +AccountPic} className="account-pic" alt="" />
 									{this.renderPopUpMenu()}
 								</div>
 								{this.state.isShowModalLogOut && this.showModalLogout()}
@@ -105,10 +105,10 @@ class NavBarComponent extends React.Component {
 				navBar = (
 					<AppBar position="fixed" className="app-bar-tab">
 						<div onClick={() => this.props.toggleMenu(!this.props.menuDrawerState)}>
-							<img src={MenuToggle} alt="menu" className="menu-toggle" />
+							<img src={process.env.PUBLIC_URL +MenuToggle} alt="menu" className="menu-toggle" />
 						</div>
 						<Toolbar variant="dense" className="toolbar">
-							<img src={CmsLogo} className="logo-dca" alt="" />
+							<img src={process.env.PUBLIC_URL +CmsLogo} className="logo-dca" alt="" />
 						</Toolbar>
 					</AppBar>
 				);

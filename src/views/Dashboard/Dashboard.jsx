@@ -7,7 +7,7 @@ class Dashboard extends React.PureComponent {
 		return (
 			<main className="content">
 				<div className= "db-under-dev">
-					<img className="img-under-dev" src={`${ImgUnderDev}`} alt="" /> 
+					<img className="img-under-dev" src={process.env.PUBLIC_URL +`${ImgUnderDev}`} alt="" /> 
 					<div className="content-1">This page is currently</div>
 					<div className="main-contents">Under Development !</div>
 					<div className="content-2">We'll back shortly</div>

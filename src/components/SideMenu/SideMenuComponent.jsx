@@ -64,7 +64,7 @@ class SideMenuComponent extends React.Component {
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img
-                  src={DashboardIcon}
+                  src={process.env.PUBLIC_URL +DashboardIcon}
                   alt="assignment icon"
                   className="item-icon"
                 />
@@ -87,7 +87,7 @@ class SideMenuComponent extends React.Component {
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img
-                  src={TrackingIcon}
+                  src={process.env.PUBLIC_URL +TrackingIcon}
                   alt="assignment icon"
                   className="item-icon"
                 />
@@ -110,7 +110,7 @@ class SideMenuComponent extends React.Component {
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img
-                  src={PlanningIcon}
+                  src={process.env.PUBLIC_URL +PlanningIcon}
                   alt="assignment icon"
                   className="item-icon"
                 />
@@ -139,7 +139,7 @@ class SideMenuComponent extends React.Component {
                     >
                       <ListItemIcon classes={{ root: "icon-root" }}>
                         <img
-                          src={IcDbMenu}
+                          src={process.env.PUBLIC_URL +IcDbMenu}
                           alt="assignment icon"
                           className="item-icon"
                         />
@@ -161,7 +161,7 @@ class SideMenuComponent extends React.Component {
                     >
                       <ListItemIcon classes={{ root: "icon-root" }}>
                         <img
-                          src={IcApproval}
+                          src={process.env.PUBLIC_URL +IcApproval}
                           alt="assignment icon"
                           className="item-icon"
                         />
@@ -183,7 +183,7 @@ class SideMenuComponent extends React.Component {
                     >
                       <ListItemIcon classes={{ root: "icon-root" }}>
                         <img
-                          src={AssignmentIcon}
+                          src={process.env.PUBLIC_URL +AssignmentIcon}
                           alt="assignment icon"
                           className="item-icon"
                         />
@@ -207,7 +207,7 @@ class SideMenuComponent extends React.Component {
                   >
                     <ListItemIcon classes={{ root: "icon-root" }}>
                       <img
-                        src={IcDbMenu}
+                        src={process.env.PUBLIC_URL +IcDbMenu}
                         alt="assignment icon"
                         className="item-icon"
                       />
@@ -229,7 +229,7 @@ class SideMenuComponent extends React.Component {
                   >
                     <ListItemIcon classes={{ root: "icon-root" }}>
                       <img
-                        src={AssignmentIcon}
+                        src={process.env.PUBLIC_URL +AssignmentIcon}
                         alt="assignment icon"
                         className="item-icon"
                       />
@@ -255,7 +255,7 @@ class SideMenuComponent extends React.Component {
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img
-                  src={ProductionIcon}
+                  src={process.env.PUBLIC_URL +ProductionIcon}
                   alt="assignment icon"
                   className="item-icon"
                 />
@@ -278,7 +278,7 @@ class SideMenuComponent extends React.Component {
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img
-                  src={AllocationIcon}
+                  src={process.env.PUBLIC_URL +AllocationIcon}
                   alt="assignment icon"
                   className="item-icon"
                 />
@@ -301,7 +301,7 @@ class SideMenuComponent extends React.Component {
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img
-                  src={DeliveryIcon}
+                  src={process.env.PUBLIC_URL +DeliveryIcon}
                   alt="assignment icon"
                   className="item-icon"
                 />
@@ -324,7 +324,7 @@ class SideMenuComponent extends React.Component {
             >
               <ListItemIcon classes={{ root: "icon-root" }}>
                 <img
-                  src={ExecutionIcon}
+                  src={process.env.PUBLIC_URL +ExecutionIcon}
                   alt="assignment icon"
                   className="item-icon"
                 />
