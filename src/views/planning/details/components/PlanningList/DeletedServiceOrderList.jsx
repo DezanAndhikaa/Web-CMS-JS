@@ -150,7 +150,7 @@ export default class DeletedServiceOrderList extends React.PureComponent {
         return(
           <div className="loading-container">
             <img 
-              src={process.env.PUBLIC_URL +`${Spinner}`}
+              src={`${Spinner}`}
               alt="loading-spinner"
               className="loading-icon"
               />
