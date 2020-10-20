@@ -47,7 +47,6 @@
     "typeface-roboto": "0.0.75",
     "yup": "^0.27.0"
   },
-  "homepage": "webcms/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
