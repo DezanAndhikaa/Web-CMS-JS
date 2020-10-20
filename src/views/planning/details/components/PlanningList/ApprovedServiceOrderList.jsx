@@ -148,7 +148,7 @@ export default class ApprovedServiceOrderList extends React.PureComponent {
               src={`${Spinner}`}
               alt="loading-spinner"
               className="loading-icon"
-              />
+            />
           </div>
         )
         case ApiRequestActionsStatus.FAILED:

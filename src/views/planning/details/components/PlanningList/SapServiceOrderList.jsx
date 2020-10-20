@@ -170,7 +170,7 @@ export default class SapServiceOrderList extends React.PureComponent {
               src={`${Spinner}`}
               alt="loading-spinner"
               className="loading-icon"
-              />
+            />
           </div>
         )
         case ApiRequestActionsStatus.FAILED:
