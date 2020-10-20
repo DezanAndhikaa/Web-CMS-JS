@@ -9,9 +9,9 @@ export const MENU = {
 	PLANNING_TRACKING_HISTORY:'/webcms/planning/tracking-history',
 	PLANNING_DASHBOARD : '/webcms/planning/dashboard',
 	PLANNING_ALL_NOTIF : '/webcms/planning/all-notification',
-	PLANNING_HO_SAP: '/webcmsjs/planning/ho/sap-issue',
+	PLANNING_HO_SAP: '/webcms/planning/ho/sap-issue',
 	DASHBOARD: '/webcms/dashboard',
-	ALLOCATION: '/webcmsjs/allocation',
-	SETTINGS: '/websmsjs/settings',
-	LOGOUT: '/websmsjs/logout',
+	ALLOCATION: '/webcms/allocation',
+	SETTINGS: '/webcms/settings',
+	LOGOUT: '/webcms/logout',
 };
