@@ -145,7 +145,7 @@ export default class RevisedSalesOrderList extends React.PureComponent {
       return (
         <div className="loading-container">
           <img
-            src={Spinner}
+            src={`${Spinner}`}
             alt="loading-spinner"
             className="loading-icon"
           />

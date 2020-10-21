@@ -10,7 +10,7 @@ import { Notification } from 'views/planning/details/components/Notification';
 import { LoginPage }  from 'views/Login';
 import { SapIssuePages } from 'views/planning/details/components/SapIssuePages';
 import requireAuth from 'components/AuthGuardHoc';
-import Dashboard from 'views/Dashboard/';
+import Dashboard from 'views/Dashboard';
 
 const routes = (
 	<div>
