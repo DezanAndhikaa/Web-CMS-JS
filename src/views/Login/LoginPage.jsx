@@ -120,10 +120,10 @@ class LoginPage extends React.Component {
           {this.renderLinearProgress()}
           <div className="login-page">
             <div className="left-pane">
-              <img src={`${CmsLoginBg}`} className="login-bg" alt="background-login" />
+              <img src={CmsLoginBg} className="login-bg" alt="background-login" />
             </div>
             <div className="right-pane">
-              <img src={`${UTLogoBlack}`} className="logo-ut-login" alt="logo-ut" />
+              <img src={UTLogoBlack} className="logo-ut-login" alt="logo-ut" />
               <div className="login-form-container">
                 <div className="login-form-inner">
                   {this.renderError()}
@@ -141,14 +141,14 @@ class LoginPage extends React.Component {
       <div>
         {this.renderLinearProgress()}
         <div className="login-page-mobile">
-          <img src={`${BasePath + LoginBg}`} className="login-bg" alt="" />
-          <img src={`${UTLogo}`} className="logo-ut" alt="united tractors" />
+          <img src={BasePath + LoginBg} className="login-bg" alt="" />
+          <img src={UTLogo} className="logo-ut" alt="united tractors" />
           <div className="login-form-container">
-            <img alt="logo" src={`${CmsLogo}`} className="dca-logo" />
+            <img alt="logo" src={CmsLogo} className="dca-logo" />
             {this.renderError()}
             {this.renderForm()}
           </div>
-          <img alt="" src={`${BasePath + MovingAsOneInverse}`} className="logo-ut" />
+          <img alt="" src={BasePath + MovingAsOneInverse} className="logo-ut" />
         </div>
       </div>
     );
