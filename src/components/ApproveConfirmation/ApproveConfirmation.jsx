@@ -4,14 +4,7 @@ import { ImgSendtoEdit } from 'assets/imgs';
 import './ApproveConfirmation.scss';
 import CloseNotif from 'components/CloseNotif/CloseNotif';
 
-export default class ApproveConfirmation extends React.PureComponent {
-	constructor(props){
-        super(props);
-        this.state ={ 
-            limitText: (this.props.field === "edit" ? this.props.values : '')
-        }
-	}
-	
+export default class ApproveConfirmation extends React.PureComponent {	
 	render() {
 		if(this.props.idApprove === "RevLt"){
 			return (
@@ -26,7 +19,7 @@ export default class ApproveConfirmation extends React.PureComponent {
 								<p className="confirmation-caption-approve">Are you sure want to Edit <b>{this.props.dataLf} to {this.props.dataRev} ?</b></p>
 								<div className="btn-row">
 									<Button className="button-rejected" onClick={this.props.onCloseRev}>No</Button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<Button className="button-approved" onClick={ () => {this.props.onStats(this.props.id, this.state.limitText); this.props.onClose()} }>Yes</Button>
+									<Button className="button-approved" onClick={ () => {this.props.onStats(this.props.id, this.props.dataRev); this.props.onClose()} }>Yes</Button>
 								</div>
 							</div>
 						</div>

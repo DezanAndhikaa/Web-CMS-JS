@@ -1326,11 +1326,11 @@ export default class Status extends React.PureComponent {
 	}
 	
 	onClickDeletedSales = () => {
-		this.props.fetchDeletedSales(this.props.salesParameter.dataFilter, this.props.token);
+		this.props.fetchDeletedSales(this.props.salesDeletedParameter.dataFilter, this.props.token);
 	}
 
 	onClickDeletedService = () => {
-		this.props.fetchDeletedService(this.props.serviceParameter.dataFilter, this.props.token);
+		this.props.fetchDeletedService(this.props.serviceDeletedParameter.dataFilter, this.props.token);
 	}
 
 	onClickDownloadSales = () => {
@@ -2155,7 +2155,7 @@ export default class Status extends React.PureComponent {
 	deletedServiceOrderList(){
 		return(
 			<div className={this.props.serviceOrderListDeleted.Lists.length === 0 
-				&& this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED ? 
+				&& this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.SUCCEEDED ? 
 				"list-status-empty" : "plannings-list-containers"}>
 				<DeletedServiceOrderList 
 					{...this.props}
