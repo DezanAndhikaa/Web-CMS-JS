@@ -2406,11 +2406,23 @@ export default class Status extends React.PureComponent {
 				</>
 				)}
 				<div className="head-containers">
-					{Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/ho" ?
+					{/* {Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') === "/webcms/planning/ho" ?
 						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_HO) }>
 							HO
 						</Button> :
 						Number(RoleUser.role()) === 1 && localStorage.getItem('subMenu') !== "/webcms/planning/ho" ?
+						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_SITE) }>
+							Site
+						</Button> :
+						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_SITE) }>
+							Site
+						</Button> 
+					} */}
+					{Number(RoleUser.role()) === 1 && this.props.path === Menu.PLANNING_HO_STATUS ?
+						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_HO) }>
+							HO
+						</Button> :
+						Number(RoleUser.role()) === 1 && this.props.path === Menu.PLANNING_SITE_STATUS ?
 						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_SITE) }>
 							Site
 						</Button> :
