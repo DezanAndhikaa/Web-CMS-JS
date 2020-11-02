@@ -24,9 +24,6 @@ class SideMenuComponent extends React.Component {
       this.props.push(menu);
     }
     window.localStorage.setItem('subMenu', subMenu);
-    this.props.updateSalesParameter({
-      ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
-    });
     this.props.selectedFilters.customerType= "All Customer"
     this.props.selectedFilters.siteType= "All Site"
     this.props.selectedFilters.unitType= "All Unit Model"
@@ -175,7 +172,7 @@ class SideMenuComponent extends React.Component {
                       button
                       key="jobs-report"
                       className={
-                        this.props.path === Menu.PLANNING_SITE
+                        this.props.path === Menu.PLANNING_SITE || this.props.path === Menu.PLANNING_SITE_STATUS
                           ? "sub-menu-selected"
                           : "sub-menu"
                       }
