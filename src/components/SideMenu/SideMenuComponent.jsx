@@ -48,7 +48,6 @@ class SideMenuComponent extends React.Component {
           onClose={() => this.props.closeDrawer()}
         >
           <List>
-            {/* Dashboard */}
             <ListItem
               button
               key="dashboard"
@@ -71,7 +70,6 @@ class SideMenuComponent extends React.Component {
                 classes={{ primary: "item-text", root: "item-text" }}
               />
             </ListItem>
-            {/* Tracking */}
             <ListItem
               button
               key="jobs"
@@ -94,7 +92,6 @@ class SideMenuComponent extends React.Component {
                 classes={{ primary: "item-text", root: "item-text" }}
               />
             </ListItem>
-            {/* Planning */}
             <ListItem
               button
               key="plans"
@@ -239,7 +236,6 @@ class SideMenuComponent extends React.Component {
                 </List>
               }
             </Collapse>
-            {/* Production */}
             <ListItem
               button
               key="jobs"
@@ -262,7 +258,6 @@ class SideMenuComponent extends React.Component {
                 classes={{ primary: "item-text", root: "item-text" }}
               />
             </ListItem>
-            {/* Allocation */}
             <ListItem
               button
               key="jobs"
@@ -285,7 +280,6 @@ class SideMenuComponent extends React.Component {
                 classes={{ primary: "item-text", root: "item-text" }}
               />
             </ListItem>
-            {/* Delivery */}
             <ListItem
               button
               key="jobs"
@@ -308,7 +302,6 @@ class SideMenuComponent extends React.Component {
                 classes={{ primary: "item-text", root: "item-text" }}
               />
             </ListItem>
-            {/* Execution */}
             <ListItem
               button
               key="jobs"
