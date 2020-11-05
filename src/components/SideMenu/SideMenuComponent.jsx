@@ -24,9 +24,6 @@ class SideMenuComponent extends React.Component {
       this.props.push(menu);
     }
     window.localStorage.setItem('subMenu', subMenu);
-    this.props.updateSalesParameter({
-      ...this.props.salesParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: [],
-    });
     this.props.selectedFilters.customerType= "All Customer"
     this.props.selectedFilters.siteType= "All Site"
     this.props.selectedFilters.unitType= "All Unit Model"
@@ -51,7 +48,6 @@ class SideMenuComponent extends React.Component {
           onClose={() => this.props.closeDrawer()}
         >
           <List>
-            {/* Dashboard */}
             <ListItem
               button
               key="dashboard"
@@ -74,7 +70,6 @@ class SideMenuComponent extends React.Component {
                 classes={{ primary: "item-text", root: "item-text" }}
               />
             </ListItem>
-            {/* Tracking */}
             <ListItem
               button
               key="jobs"
@@ -97,7 +92,6 @@ class SideMenuComponent extends React.Component {
                 classes={{ primary: "item-text", root: "item-text" }}
               />
             </ListItem>
-            {/* Planning */}
             <ListItem
               button
               key="plans"
@@ -175,7 +169,7 @@ class SideMenuComponent extends React.Component {
                       button
                       key="jobs-report"
                       className={
-                        this.props.path === Menu.PLANNING_SITE
+                        this.props.path === Menu.PLANNING_SITE || this.props.path === Menu.PLANNING_SITE_STATUS
                           ? "sub-menu-selected"
                           : "sub-menu"
                       }
@@ -242,7 +236,6 @@ class SideMenuComponent extends React.Component {
                 </List>
               }
             </Collapse>
-            {/* Production */}
             <ListItem
               button
               key="jobs"
@@ -265,7 +258,6 @@ class SideMenuComponent extends React.Component {
                 classes={{ primary: "item-text", root: "item-text" }}
               />
             </ListItem>
-            {/* Allocation */}
             <ListItem
               button
               key="jobs"
@@ -288,7 +280,6 @@ class SideMenuComponent extends React.Component {
                 classes={{ primary: "item-text", root: "item-text" }}
               />
             </ListItem>
-            {/* Delivery */}
             <ListItem
               button
               key="jobs"
@@ -311,7 +302,6 @@ class SideMenuComponent extends React.Component {
                 classes={{ primary: "item-text", root: "item-text" }}
               />
             </ListItem>
-            {/* Execution */}
             <ListItem
               button
               key="jobs"
