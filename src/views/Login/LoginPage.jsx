@@ -120,7 +120,7 @@ class LoginPage extends React.Component {
           {this.renderLinearProgress()}
           <div className="login-page">
             <div className="left-pane">
-              <img src={CmsLoginBg} className="login-bg" alt="background-login" />
+              <img src={BasePath + CmsLoginBg} className="login-bg" alt="background-login" />
             </div>
             <div className="right-pane">
               <img src={UTLogoBlack} className="logo-ut-login" alt="logo-ut" />

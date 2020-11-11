@@ -1,5 +1,5 @@
 import CmsLoginBg from './background-login.png';
-import LoginBg from './android-login.png';
+import LoginBg from './bg-login.png';
 import MovingAsOneLogo from './movingasone.png';
 import MovingAsOneInverse from './movingasone-inverse.png';
 import AccountPic from './account-pic.png';
