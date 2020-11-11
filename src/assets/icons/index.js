@@ -9,7 +9,7 @@ import IconSort from './sort.png';
 import Delete from './ic_delete.png';
 import DeleteWhite from './delete-white.png';
 import Bin from './bin.png';
-import Spinner from './spinner.gif';
+import Spinner from './loading.gif';
 import AllocationIcon from './allocation.png';
 import PlanningIcon from './planning.png';
 import DashboardIcon from './dashboard.png';
