@@ -1,5 +1,5 @@
-import CmsLoginBg from './bg-login.png';
-import LoginBg from './background-login.png';
+import CmsLoginBg from './background-login.png';
+import LoginBg from './bg-login.png';
 import MovingAsOneLogo from './movingasone.png';
 import MovingAsOneInverse from './movingasone-inverse.png';
 import AccountPic from './account-pic.png';
@@ -27,7 +27,7 @@ import Clock from './clock.png';
 import CmsLogo from './logo-cms.png';
 import Logout from './logo-logout.png';
 import ImgSapGuide from './sap-guide.png';
-import ImgUnderDev from './under-dev.png';
+import ImgUnderDev from './under-development.png';
 
 export {
 	ImgUnderDev,

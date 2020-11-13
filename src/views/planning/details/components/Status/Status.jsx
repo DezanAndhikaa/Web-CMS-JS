@@ -2401,9 +2401,14 @@ export default class Status extends React.PureComponent {
 		return(
 			<main className="content" >
 				{this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.SUCCEEDED && (
-				<>
-					{this._renderDataDeleted()}
-				</>
+					<>
+						{this._renderDataDeleted()}
+					</>
+				)}
+				{this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED && (
+					<>
+						{this._renderDataDeleted()}
+					</>
 				)}
 				<div className="head-containers">
 					{Number(RoleUser.role()) === 1 && this.props.path === Menu.PLANNING_HO_STATUS ?

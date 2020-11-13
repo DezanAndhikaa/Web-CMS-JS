@@ -120,7 +120,11 @@ class LoginPage extends React.Component {
           {this.renderLinearProgress()}
           <div className="login-page">
             <div className="left-pane">
-              <img src={CmsLoginBg} className="login-bg" alt="background-login" />
+              {process.env.NODE_ENV === 'development' ?
+                <img src={CmsLoginBg} className="login-bg" alt="background-login" />
+                : 
+                <img src={BasePath + CmsLoginBg} className="login-bg" alt="background-login" />
+              }
             </div>
             <div className="right-pane">
               <img src={UTLogoBlack} className="logo-ut-login" alt="logo-ut" />
@@ -140,16 +144,29 @@ class LoginPage extends React.Component {
     return (
       <div>
         {this.renderLinearProgress()}
-        <div className="login-page-mobile">
-          <img src={BasePath + LoginBg} className="login-bg" alt="" />
-          <img src={UTLogo} className="logo-ut" alt="united tractors" />
-          <div className="login-form-container">
-            <img alt="logo" src={CmsLogo} className="dca-logo" />
-            {this.renderError()}
-            {this.renderForm()}
+        {process.env.NODE_ENV === 'development' ?
+          <div className="login-page-mobile">
+            <img src={LoginBg} className="login-bg" alt="" />
+            <img src={UTLogo} className="logo-ut" alt="united tractors" />
+            <div className="login-form-container">
+              <img alt="logo" src={CmsLogo} className="dca-logo" />
+              {this.renderError()}
+              {this.renderForm()}
+            </div>
+            <img alt="" src={MovingAsOneInverse} className="logo-ut" />
           </div>
-          <img alt="" src={BasePath + MovingAsOneInverse} className="logo-ut" />
-        </div>
+          :
+          <div className="login-page-mobile">
+            <img src={BasePath + LoginBg} className="login-bg" alt="" />
+            <img src={UTLogo} className="logo-ut" alt="united tractors" />
+            <div className="login-form-container">
+              <img alt="logo" src={CmsLogo} className="dca-logo" />
+              {this.renderError()}
+              {this.renderForm()}
+            </div>
+            <img alt="" src={BasePath + MovingAsOneInverse} className="logo-ut" />
+          </div>
+        }
       </div>
     );
   }
