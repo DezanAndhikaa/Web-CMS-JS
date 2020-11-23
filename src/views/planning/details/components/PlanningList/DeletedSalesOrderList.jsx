@@ -24,18 +24,18 @@ export default class DeletedSalesOrderList extends React.PureComponent {
   }
 
   componentDidUpdate = (prevState) =>{
-    if (prevState.salesDeletedParameter !== this.props.salesDeletedParameter || prevState.salesSearch !== this.props.salesSearch || 
-      prevState.searchComp !==this.props.searchComp) {
+    if (prevState.salesDeletedParameter !== this.props.salesDeletedParameter || prevState.salesSearch !== this.props.salesSearch ||
+        prevState.searchComp !==this.props.searchComp) {
       this.setState({checkedValue : false})
     }
   }
-  
+
   componentDidMount = () =>{
     this.props.onClickSalesOrderDeleted();
   }
 
   componentWillMount = () =>{
-    this.props.updateSalesDeletedParameter({ 
+    this.props.updateSalesDeletedParameter({
       ...this.props.salesDeletedParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
     });
   }
@@ -55,72 +55,72 @@ export default class DeletedSalesOrderList extends React.PureComponent {
   }
 
   showTableHead() {
-      return (
+    return (
         <TableHead className="table-head" classes={{ root: 'table-head' }}>
-        <TableRow>
-          <TableCell className= "table-cell-checkbox">
-            {this.props.displaySalesCheckbox && 
-              <Checkbox 
-                icon={<CheckBoxOutlineBlank fontSize="small" />}
-                checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
-                checked={this.state.checkedValue}
-                onChange={this.handleClicks}
-                onClick={({target: { checked }}) => {
-                  if(checked) return this.props.onChooseAllSales(this.props.salesOrderListDeleted.Lists);
-                  return this.props.onChooseAllSales([]);
-                }}
+          <TableRow>
+            <TableCell className= "table-cell-checkbox">
+              {this.props.displaySalesCheckbox &&
+              <Checkbox
+                  icon={<CheckBoxOutlineBlank fontSize="small" />}
+                  checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
+                  checked={this.state.checkedValue}
+                  onChange={this.handleClicks}
+                  onClick={({target: { checked }}) => {
+                    if(checked) return this.props.onChooseAllSales(this.props.salesOrderListDeleted.Data.Lists);
+                    return this.props.onChooseAllSales([]);
+                  }}
               />
-            }
-          </TableCell>
-          <TableCell align="left" className="table-cell">SO</TableCell>
-          <TableCell align="left" className="table-cell">CUSTOMER</TableCell>
-          <TableCell align="left" className="table-cell">SITE</TableCell>
-          <TableCell align="left" className="table-cell">UNIT MODEL</TableCell>
-          <TableCell align="left" className="table-cell">COMPONENT DESCRIPTION</TableCell>
-          <TableCell align="left" className="table-cell">PART NUMBER</TableCell>
-          <TableCell align="left" className="table-cell">UNIT CODE</TableCell>
-          <TableCell align="left" className="table-cell">SERIAL NUMBER</TableCell>
-          <TableCell align="left" className="table-cell">LIFETIME COMP</TableCell>
-          <TableCell align="left" className="table-cell">PLAN EXECUTION</TableCell>
-          <TableCell align="left" className="table-cell">SMR </TableCell>
-          <TableCell align="left" className="table-cell">SMR DATE</TableCell>
-          <TableCell align="left" className="table-cell">PLAN TYPE</TableCell>
-        </TableRow>
-      </TableHead>
+              }
+            </TableCell>
+            <TableCell align="left" className="table-cell">SO</TableCell>
+            <TableCell align="left" className="table-cell">CUSTOMER</TableCell>
+            <TableCell align="left" className="table-cell">SITE</TableCell>
+            <TableCell align="left" className="table-cell">UNIT MODEL</TableCell>
+            <TableCell align="left" className="table-cell">COMPONENT DESCRIPTION</TableCell>
+            <TableCell align="left" className="table-cell">PART NUMBER</TableCell>
+            <TableCell align="left" className="table-cell">UNIT CODE</TableCell>
+            <TableCell align="left" className="table-cell">SERIAL NUMBER</TableCell>
+            <TableCell align="left" className="table-cell">LIFETIME COMP</TableCell>
+            <TableCell align="left" className="table-cell">PLAN EXECUTION</TableCell>
+            <TableCell align="left" className="table-cell">SMR </TableCell>
+            <TableCell align="left" className="table-cell">SMR DATE</TableCell>
+            <TableCell align="left" className="table-cell">PLAN TYPE</TableCell>
+          </TableRow>
+        </TableHead>
     )
   }
 
 
   showTableBody(row,id) {
     return (
-      <TableRow key={id} classes={{ root: 'table-row' }}>
-        <TableCell className= "table-cell-checkbox">
-          {this.props.displaySalesCheckbox && 
+        <TableRow key={id} classes={{ root: 'table-row' }}>
+          <TableCell className= "table-cell-checkbox">
+            {this.props.displaySalesCheckbox &&
             <Checkbox
-              icon={<CheckBoxOutlineBlank fontSize="small" />}
-              checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />} 
-              disabled={this.isCheckboxAvailable(row)} 
-              checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)} 
-              onClick={() => this.props.onChoosedSales(row, id, 'body')}
+                icon={<CheckBoxOutlineBlank fontSize="small" />}
+                checkedIcon={<CheckBoxIcon style={{color: "#FFD500"}} fontSize="small" />}
+                disabled={this.isCheckboxAvailable(row)}
+                checked={this.props.selectedSalesPlanList.some((plans) => plans.SoNumber === row.SoNumber)}
+                onClick={() => this.props.onChoosedSales(row, id, 'body')}
             />
-          }
-        </TableCell>
-        <TableCell align="left" className="table-cell-smr"> {row.SoNumber} </TableCell>
-        <TableCell align="left" className="table-cell-cst"> {row.CustomerName} </TableCell>
-        <TableCell align="left" className="table-cell-short"> {row.SiteCode} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
-        <TableCell align="left" className="table-cell-long"> {row.ComponentDescription} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
-        <TableCell align="left" className="table-cell"> {row.LifeTimeComponent} </TableCell>
-        <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
-        <TableCell align="left" className="table-cell-smr"> {row.SMR} </TableCell>
-        <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
-        <Tooltip arrow title={row.PlanType.charAt(0) === "U" ? "UNSCHEDULE" : ""} >
-          <TableCell align="left" className="table-cell"> {row.PlanType.substring(0, 3)} </TableCell>
-        </Tooltip>
-      </TableRow>
+            }
+          </TableCell>
+          <TableCell align="left" className="table-cell-smr"> {row.SoNumber} </TableCell>
+          <TableCell align="left" className="table-cell-cst"> {row.CustomerName} </TableCell>
+          <TableCell align="left" className="table-cell-short"> {row.SiteCode} </TableCell>
+          <TableCell align="left" className="table-cell"> {row.UnitModel} </TableCell>
+          <TableCell align="left" className="table-cell-long"> {row.ComponentDescription} </TableCell>
+          <TableCell align="left" className="table-cell"> {row.PartNumber} </TableCell>
+          <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
+          <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
+          <TableCell align="left" className="table-cell"> {row.LifeTimeComponent} </TableCell>
+          <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
+          <TableCell align="left" className="table-cell-smr"> {row.SMR} </TableCell>
+          <TableCell align="left" className="table-cell"> {moment(row.SMRDate).format('DD-MM-YYYY')} </TableCell>
+          <Tooltip arrow title={row.PlanType.charAt(0) === "U" ? "UNSCHEDULE" : ""} >
+            <TableCell align="left" className="table-cell"> {row.PlanType.substring(0, 3)} </TableCell>
+          </Tooltip>
+        </TableRow>
     )
   }
 
@@ -140,43 +140,43 @@ export default class DeletedSalesOrderList extends React.PureComponent {
     switch (this.props.fetchStatusSalesDeleted) {
       case ApiRequestActionsStatus.LOADING:
         return(
-          <div className="loading-container">
-            <img 
-              src={Spinner}
-              alt="loading-spinner"
-              className="loading-icon"
-            />
-          </div>
+            <div className="loading-container">
+              <img
+                  src={Spinner}
+                  alt="loading-spinner"
+                  className="loading-icon"
+              />
+            </div>
         )
-        case ApiRequestActionsStatus.FAILED:
-          return(
+      case ApiRequestActionsStatus.FAILED:
+        return(
             <div className="loading-container">
               OOPS THERE WAS AN ERROR :'(
             </div>
-      )
+        )
       default:
     }
   }
 
   render(){
-    if(this.props.salesOrderListDeleted.Lists.length === 0 && this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED){
+    if(this.props.salesOrderListDeleted.Data.Lists.length === 0 && this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED){
       return(
-        <EmptyList idEmpty= "Delete" />
+          <EmptyList idEmpty= "Delete" />
       )
     }else{
       return(
-        <>
-          <Table classes={{ root: 'table' }} className="table">
-          {this.showTableHead()}
-          <TableBody classes={{ root: 'table-body' }}>
-            {this.props.salesOrderListDeleted.Lists
-              && this.props.salesOrderListDeleted.Lists.map((row, id) => (
-                this.showTableBody(row,id)
-              ))}
-            </TableBody>
-          </Table>
-          {this.showLoading()}
-        </>
+          <>
+            <Table classes={{ root: 'table' }} className="table">
+              {this.showTableHead()}
+              <TableBody classes={{ root: 'table-body' }}>
+                {this.props.salesOrderListDeleted.Data.Lists
+                && this.props.salesOrderListDeleted.Data.Lists.map((row, id) => (
+                    this.showTableBody(row,id)
+                ))}
+              </TableBody>
+            </Table>
+            {this.showLoading()}
+          </>
       )
     }
   }

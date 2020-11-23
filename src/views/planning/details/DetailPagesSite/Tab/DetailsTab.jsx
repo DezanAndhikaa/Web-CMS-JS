@@ -129,7 +129,7 @@ class DetailsTab extends React.Component {
     return(
       <>
       <div 
-        className={this.props.salesOrderList.Lists.length === 0 
+        className={this.props.salesOrderList.Data.Lists.length === 0
         && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? 
         "list-detail-empty" : "plannings-list-detail"}
       >
@@ -146,7 +146,7 @@ class DetailsTab extends React.Component {
 
   _renderSalesOrderViewOnly() {
     return (
-      <div className={this.props.salesOrderList.Lists.length === 0
+      <div className={this.props.salesOrderList.Data.Lists.length === 0
         && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ?
         "list-detail-empty" : "plannings-list-detail"}>
         <SalesOrderList
@@ -160,16 +160,16 @@ class DetailsTab extends React.Component {
 
   _renderRevisionList(){
       return(
-        <div className={this.props.salesOrderRevised.Lists.length === 0 
+        <div className={this.props.salesOrderRevised.Data.Lists.length === 0
           && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED ? "empty-list-rev" : "paper-revision"}>
           <div className="revision-container">
             <div className="rev-title-container">
               <div className= "title-content">
                 <div className="ut-underline-rev" /> 
-                <div className="revision-title">{this.props.salesOrderRevised.Lists.length === 0 
+                <div className="revision-title">{this.props.salesOrderRevised.Data.Lists.length === 0
                 && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED ? "" : "Revision List"}</div>
               </div>
-              <div className="revision-search">{this.props.salesOrderRevised.Lists.length === 0 
+              <div className="revision-search">{this.props.salesOrderRevised.Data.Lists.length === 0
                 && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED ? "" : this.props.renderSearchRev}</div>
             </div>
             <div className="plannings-list-detail">
@@ -178,7 +178,7 @@ class DetailsTab extends React.Component {
               />
             </div>
             <div>
-              {this.props.salesOrderRevised.Lists.length === 0 
+              {this.props.salesOrderRevised.Data.Lists.length === 0
                 && this.props.fetchStatusRevised === ApiRequestActionsStatus.SUCCEEDED ? "" : this.props.renderPaginationRev}
             </div>
           </div>
@@ -188,7 +188,7 @@ class DetailsTab extends React.Component {
 
   _renderServiceOrderList(){
     return(
-        <div className={this.props.serviceOrderList.Lists.length === 0 
+        <div className={this.props.serviceOrderList.Data.Lists.length === 0
           && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "list-detail-empty" : "plannings-list-detail"}>
           <ServiceOrderList 
             {...this.props}
@@ -203,24 +203,24 @@ class DetailsTab extends React.Component {
   _dataFilterCustomer(){
     if (Number(RoleUser.role()) === 3){
       if(this.state.value === 0){
-        let arr = this.props.serviceOrderList.Customers;
+        let arr = this.props.serviceOrderList.Meta.Customers;
         arr.splice(0, 0, "All Customer")
         return arr
       }
     }else if (Number(RoleUser.role()) === 2){
       if(this.state.value === 0){
-        let arr = this.props.salesOrderList.Customers;
+        let arr = this.props.salesOrderList.Meta.filter.Customers;
         arr.splice(0, 0, "All Customer")
         return arr
       }
     }else{
       if(this.state.value === 0){
-        let arr = this.props.salesOrderList.Customers;
+        let arr = this.props.salesOrderList.Meta.filter.Customers;
         arr.splice(0, 0, "All Customer")
         return arr
       }
       else{
-        let arr = this.props.serviceOrderList.Customers;
+        let arr = this.props.serviceOrderList.Meta.filter.Customers;
         arr.splice(0, 0, "All Customer")
         return arr
       }
@@ -230,24 +230,24 @@ class DetailsTab extends React.Component {
   _dataFilterSite(){
     if (Number(RoleUser.role()) === 3){
       if(this.state.value === 0){
-        let arr = this.props.serviceOrderList.Sites;
+        let arr = this.props.serviceOrderList.Meta.filter.Sites;
         arr.splice(0, 0, "All Site")
         return arr
       }
     }else if (Number(RoleUser.role()) === 2){
       if(this.state.value === 0){
-        let arr = this.props.salesOrderList.Sites;
+        let arr = this.props.salesOrderList.Meta.filter.Sites;
         arr.splice(0, 0, "All Site")
         return arr
       }
     }else{
       if(this.state.value === 0){
-        let arr = this.props.salesOrderList.Sites;
+        let arr = this.props.salesOrderList.Meta.filter.Sites;
         arr.splice(0, 0, "All Site")
         return arr
       }
       else{
-        let arr = this.props.serviceOrderList.Sites;
+        let arr = this.props.serviceOrderList.Meta.filter.Sites;
         arr.splice(0, 0, "All Site")
         return arr
       }
@@ -257,24 +257,24 @@ class DetailsTab extends React.Component {
   _dataFilterUnitModel(){
     if (Number(RoleUser.role()) === 3){
       if(this.state.value === 0){
-        let arr = this.props.serviceOrderList.UnitModels;
+        let arr = this.props.serviceOrderList.Meta.filter.UnitModels;
         arr.splice(0, 0, "All Unit Model")
         return arr
       }
     }else if (Number(RoleUser.role()) === 2){
       if(this.state.value === 0){
-        let arr = this.props.salesOrderList.UnitModels;
+        let arr = this.props.salesOrderList.Meta.filter.UnitModels;
         arr.splice(0, 0, "All Unit Model")
         return arr
       }
     }else{
       if(this.state.value === 0){
-        let arr = this.props.salesOrderList.UnitModels;
+        let arr = this.props.salesOrderList.Meta.filter.UnitModels;
         arr.splice(0, 0, "All Unit Model")
         return arr
       }
       else{
-        let arr = this.props.serviceOrderList.UnitModels;
+        let arr = this.props.serviceOrderList.Meta.filter.UnitModels;
         arr.splice(0, 0, "All Unit Model")
         return arr
       }
@@ -284,24 +284,24 @@ class DetailsTab extends React.Component {
   _dataFilterComponentDescription(){
     if (Number(RoleUser.role()) === 3){
       if(this.state.value === 0){
-        let arr = this.props.serviceOrderList.ComponentDescriptions;
+        let arr = this.props.serviceOrderList.Meta.filter.ComponentDescriptions;
         arr.splice(0, 0, "All Component Description")
         return arr
       }
     }else if (Number(RoleUser.role()) === 2){
       if(this.state.value === 0){
-        let arr = this.props.salesOrderList.ComponentDescriptions;
+        let arr = this.props.salesOrderList.Meta.filter.ComponentDescriptions;
         arr.splice(0, 0, "All Component Description")
         return arr
       }
     }else{
       if(this.state.value === 0){
-        let arr = this.props.salesOrderList.ComponentDescriptions;
+        let arr = this.props.salesOrderList.Meta.filter.ComponentDescriptions;
         arr.splice(0, 0, "All Component Description")
         return arr
       }
       else{
-        let arr = this.props.serviceOrderList.ComponentDescriptions;
+        let arr = this.props.serviceOrderList.Meta.filter.ComponentDescriptions;
         arr.splice(0, 0, "All Component Description")
         return arr
       }
@@ -311,24 +311,24 @@ class DetailsTab extends React.Component {
   _dataFilterPlanType() {
     if (Number(RoleUser.role()) === 3){
       if (this.state.value === 0) {
-        let arr = this.props.serviceOrderList.PlanType;
+        let arr = this.props.serviceOrderList.Meta.filter.PlanType;
         arr.splice(0, 0, "All Plan Type")
         return arr
       }
     }else if (Number(RoleUser.role()) === 2){
       if(this.state.value === 0){
-        let arr = this.props.salesOrderList.PlanType;
+        let arr = this.props.salesOrderList.Meta.filter.PlanType;
         arr.splice(0, 0, "All Plan Type")
         return arr
       }
     }else{
       if(this.state.value === 0){
-        let arr = this.props.salesOrderList.PlanType;
+        let arr = this.props.salesOrderList.Meta.filter.PlanType;
         arr.splice(0, 0, "All Plan Type")
         return arr
       }
       else{
-        let arr = this.props.serviceOrderList.PlanType;
+        let arr = this.props.serviceOrderList.Meta.filter.PlanType;
         arr.splice(0, 0, "All Plan Type")
         return arr
       }
@@ -493,10 +493,10 @@ class DetailsTab extends React.Component {
               </Tabs>
             </AppBar>
             <div className="site-container">
-              {this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderTotalData()}
+              {this.props.serviceOrderList.Data.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderTotalData()}
             </div>
             <div className="filters-detail-site">
-              {this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
+              {this.props.serviceOrderList.Data.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
             </div>
             {value === 0 && <TabContainer dir={theme.direction} >
               <div>{this._renderServiceOrderList()}</div>
@@ -526,11 +526,11 @@ class DetailsTab extends React.Component {
                 <div>{this._renderRevisionList()}</div>
               </TabContainer>}
               <div className="site-container">
-                {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                {this.props.salesOrderList.Data.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
                   this._renderTotalData()}
               </div>
               <div className="filters-detail-site">
-                {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+                {this.props.salesOrderList.Data.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
                   this._renderFilter()}
               </div>
               {value === 0 && <TabContainer dir={theme.direction} >
@@ -566,12 +566,12 @@ class DetailsTab extends React.Component {
               <div>{this._renderRevisionList()}</div>
             </TabContainer>}
             <div className="site-container">
-              {value === 0 ? (this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) ? "" : this._renderTotalData() :
-                (this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED) ? "" : this._renderTotalData()}
+              {value === 0 ? (this.props.salesOrderList.Data.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) ? "" : this._renderTotalData() :
+                (this.props.serviceOrderList.Data.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED) ? "" : this._renderTotalData()}
             </div>
             <div className="filters-detail-site">
-              {value === 0 ? (this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) ? "" : this._renderFilter() :
-                (this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED) ? "" : this._renderFilter()}
+              {value === 0 ? (this.props.salesOrderList.Data.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) ? "" : this._renderFilter() :
+                (this.props.serviceOrderList.Data.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED) ? "" : this._renderFilter()}
             </div>
             {value === 0 && <TabContainer dir={theme.direction} >
               <div>{this._renderSalesOrderList()}</div>

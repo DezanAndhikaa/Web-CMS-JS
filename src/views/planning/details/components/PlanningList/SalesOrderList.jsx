@@ -125,7 +125,7 @@ export default class SalesOrderList extends React.PureComponent {
                     checked={this.state.checkedValue}
                     onChange={this.handleClickCheckbox}
                     onClick={({target: { checked }}) => {
-                      if(checked) return this.props.onChooseAllSales(this.props.salesOrderList.Lists);
+                      if(checked) return this.props.onChooseAllSales(this.props.salesOrderList.Data.Lists);
                       return this.props.onChooseAllSales([]);
                     }}
                   />
@@ -162,7 +162,7 @@ export default class SalesOrderList extends React.PureComponent {
                     checked={this.state.checkedValue}
                     onChange={this.handleClickCheckbox}
                     onClick={({target: { checked }}) => {
-                      if(checked) return this.props.onChooseAllSales(this.props.salesOrderList.Lists);
+                      if(checked) return this.props.onChooseAllSales(this.props.salesOrderList.Data.Lists);
                       return this.props.onChooseAllSales([]);
                     }} 
                   />
@@ -289,11 +289,11 @@ export default class SalesOrderList extends React.PureComponent {
         <TableCell align="left" className="table-cell"> {row.UnitCode} </TableCell>
         <TableCell align="left" className="table-cell"> {row.SerialNumber} </TableCell>
         <TableCell align="left" className="table-cell">
-          {this.props.salesOrderList.Lists[id].LifeTimeComponent === 0 && this.props.idTab === "Input" ?
+          {this.props.salesOrderList.Data.Lists[id].LifeTimeComponent === 0 && this.props.idTab === "Input" ?
             <InputButton title="Input Lifetime Component" onStats={this.isPutLifetime} titles="Input" key={row.SoNumber} id={row.SoNumber} field="input" /> :
-            this.props.salesOrderList.Lists[id].LifeTimeComponent === 0 && this.props.idTab === "Status" ?
+            this.props.salesOrderList.Data.Lists[id].LifeTimeComponent === 0 && this.props.idTab === "Status" ?
               <InputButton titles="Input Status" key={row.SoNumber} id={row.SoNumber} /> :
-              <div className={this.props.salesOrderList.Lists[id].IsRevised === true && this.props.salesOrderList.Lists[id].IsChanged === false ? "table-cell-rev" : ""}>{this.props.salesOrderList.Lists[id].LifeTimeComponent}</div>
+              <div className={this.props.salesOrderList.Data.Lists[id].IsRevised === true && this.props.salesOrderList.Data.Lists[id].IsChanged === false ? "table-cell-rev" : ""}>{this.props.salesOrderList.Data.Lists[id].LifeTimeComponent}</div>
           }
         </TableCell>
         <TableCell align="left" className="table-cell"> {moment(row.PlanExecutionDate).format('DD-MM-YYYY')} </TableCell>
@@ -302,9 +302,9 @@ export default class SalesOrderList extends React.PureComponent {
         <Tooltip arrow title={row.PlanType.charAt(0) === "U" ? "UNSCHEDULE" : ""} >
           <TableCell align="left" className="table-cell"> {row.PlanType.substring(0, 3)} </TableCell>
         </Tooltip>
-        {this.props.salesOrderList.Lists[id].LifeTimeComponent !== 0 && this.props.idTab === "Approval" ?
+        {this.props.salesOrderList.Data.Lists[id].LifeTimeComponent !== 0 && this.props.idTab === "Approval" ?
           <TableCell align="left" className= "table-cell-icon">
-            <EditButton idEdit="Approval" title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} />
+            <EditButton idEdit="Approval" title="Input Lifetime Component" onStats={this.isPutLifetime} values={this.props.salesOrderList.Data.Lists[id].LifeTimeComponent} field="edit" id={row.SoNumber} />
           </TableCell>
         : "" }
       </TableRow>
@@ -358,17 +358,17 @@ export default class SalesOrderList extends React.PureComponent {
   }
 
   render() {
-    if (this.props.salesOrderList.Lists.length === 0 && this.props.idTab === "Approval"
+    if (this.props.salesOrderList.Data.Lists.length === 0 && this.props.idTab === "Approval"
       && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) {
       return (
         <EmptyList idEmpty= "Sales" />
       )
-    } else if (this.props.salesOrderList.Lists.length === 0 && this.props.idSales === "Data Input"
+    } else if (this.props.salesOrderList.Data.Lists.length === 0 && this.props.idSales === "Data Input"
       && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) {
       return (
         <EmptyList idEmpty= "Input" />
       )
-    } else if (this.props.salesOrderList.Lists.length === 0
+    } else if (this.props.salesOrderList.Data.Lists.length === 0
       && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED) {
       return (
         <EmptyList idEmpty= "Sales" />
@@ -379,8 +379,8 @@ export default class SalesOrderList extends React.PureComponent {
           <Table classes={{ root: 'table' }} className="table">
             {this.showTableHead()}
             <TableBody classes={{ root: 'table-body' }}>
-              {this.props.salesOrderList.Lists
-                && this.props.salesOrderList.Lists.map((row, id) => (
+              {this.props.salesOrderList.Data.Lists
+                && this.props.salesOrderList.Data.Lists.map((row, id) => (
                   this.showTableBody(row, id)
                 ))}
             </TableBody>

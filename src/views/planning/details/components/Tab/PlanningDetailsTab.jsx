@@ -139,7 +139,7 @@ class PlanningDetailsTab extends React.Component {
 
   _renderSalesOrderList() {
     return (
-      <div className={this.props.salesOrderList.Lists.length === 0
+      <div className={this.props.salesOrderList.Data.Lists.length === 0
         && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "plannings-list-empty" : "plannings-list-containers"}>
         <SalesOrderList
           {...this.props}
@@ -153,12 +153,12 @@ class PlanningDetailsTab extends React.Component {
 
   _dataFilterCustomer() {
     if (this.state.value === 0) {
-      let arr = this.props.salesOrderList.Customers;
+      let arr = this.props.salesOrderList.Meta.filter.Customers;
       arr.splice(0, 0, "All Customer")
       return arr
     }
     else {
-      let arr = this.props.serviceOrderList.Customers;
+      let arr = this.props.serviceOrderList.Meta.filter.Customers;
       arr.splice(0, 0, "All Customer")
       return arr
     }
@@ -166,12 +166,12 @@ class PlanningDetailsTab extends React.Component {
 
   _dataFilterSite() {
     if (this.state.value === 0) {
-      let arr = this.props.salesOrderList.Sites;
+      let arr = this.props.salesOrderList.Meta.filter.Sites;
       arr.splice(0, 0, "All Site")
       return arr
     }
     else {
-      let arr = this.props.serviceOrderList.Sites;
+      let arr = this.props.serviceOrderList.Meta.filter.Sites;
       arr.splice(0, 0, "All Site")
       return arr
     }
@@ -179,12 +179,12 @@ class PlanningDetailsTab extends React.Component {
 
   _dataFilterUnitModel() {
     if (this.state.value === 0) {
-      let arr = this.props.salesOrderList.UnitModels;
+      let arr = this.props.salesOrderList.Meta.filter.UnitModels;
       arr.splice(0, 0, "All Unit Model")
       return arr
     }
     else {
-      let arr = this.props.serviceOrderList.UnitModels;
+      let arr = this.props.serviceOrderList.Meta.filter.UnitModels;
       arr.splice(0, 0, "All Unit Model")
       return arr
     }
@@ -192,12 +192,12 @@ class PlanningDetailsTab extends React.Component {
 
   _dataFilterComponentDescription() {
     if (this.state.value === 0) {
-      let arr = this.props.salesOrderList.ComponentDescriptions;
+      let arr = this.props.salesOrderList.Meta.filter.ComponentDescriptions;
       arr.splice(0, 0, "All Component Description")
       return arr
     }
     else {
-      let arr = this.props.serviceOrderList.ComponentDescriptions;
+      let arr = this.props.serviceOrderList.Meta.filter.ComponentDescriptions;
       arr.splice(0, 0, "All Component Description")
       return arr
     }
@@ -205,7 +205,7 @@ class PlanningDetailsTab extends React.Component {
 
   _dataFilterPlanType() {
     if (this.state.value === 0) {
-      let arr = this.props.salesOrderList.PlanType;
+      let arr = this.props.salesOrderList.Meta.filter.PlanType;
       arr.splice(0, 0, "All Plan Type")
       return arr
     }
@@ -350,10 +350,10 @@ class PlanningDetailsTab extends React.Component {
           </div>
         </div>
         <div className="data-input-container">
-          {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderTotalDataInput()}
+          {this.props.salesOrderList.Data.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderTotalDataInput()}
         </div>
         <div className="filters-container">
-          {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
+          {this.props.salesOrderList.Data.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" : this._renderFilter()}
         </div>
         {value === 0 && <TabContainer dir={theme.direction} >
           <div>

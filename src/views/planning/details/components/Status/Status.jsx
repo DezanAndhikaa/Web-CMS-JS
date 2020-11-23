@@ -39,15 +39,15 @@ export default class Status extends React.PureComponent {
 
 	changeSuccess = () => {
 		this.setState({
-		  openSuccess : !this.state.openSuccess
+			openSuccess : !this.state.openSuccess
 		})
 	}
 
 	_renderDataDeleted = () => {
 		return (
-		  <>
-			<ConfirmationModal idModal="Delete Success" openModal={this.state.openSuccess} onClose={this.changeSuccess} />
-		  </>
+			<>
+				<ConfirmationModal idModal="Delete Success" openModal={this.state.openSuccess} onClose={this.changeSuccess} />
+			</>
 		)
 	}
 
@@ -61,7 +61,7 @@ export default class Status extends React.PureComponent {
 				if (localStorage.getItem('whichTab') === "sales"){
 					this.handleClick(Menu.PLANNING_HO_STATUS, 'sales', this.state.bearer);
 					this.isReloadSales();
-				} else{ 
+				} else{
 					this.handleClick(Menu.PLANNING_HO_STATUS, 'service', this.state.bearer);
 					this.isReloadService();
 				}
@@ -69,7 +69,7 @@ export default class Status extends React.PureComponent {
 				if (localStorage.getItem('whichTab') === "sales"){
 					this.handleClick(Menu.PLANNING_SITE_STATUS, 'sales', this.state.bearer);
 					this.isReloadSales();
-				} else{ 
+				} else{
 					this.handleClick(Menu.PLANNING_SITE_STATUS, 'service', this.state.bearer);
 					this.isReloadService();
 				}
@@ -77,11 +77,11 @@ export default class Status extends React.PureComponent {
 				if (localStorage.getItem('whichTab') === "sales"){
 					this.handleClick(Menu.PLANNING_SITE_STATUS, 'sales', this.state.bearer);
 					this.isReloadSales();
-				} else{ 
+				} else{
 					this.handleClick(Menu.PLANNING_SITE_STATUS, 'service', this.state.bearer);
 					this.isReloadService();
 				}
-			}	
+			}
 		}
 	}
 
@@ -110,7 +110,7 @@ export default class Status extends React.PureComponent {
 		this.props.updateServiceSapParameter({
 			...this.props.serviceSapParameter.dataFilter, PageNumber: 1, PageSize: 10, Sort: [], Filter: []
 		})
-	  }
+	}
 
 	componentDidUpdate = (prevProps) => {
 		if (prevProps.salesParameter !== this.props.salesParameter) {
@@ -188,7 +188,7 @@ export default class Status extends React.PureComponent {
 					break;
 			}
 		}
-		  
+
 		if(prevProps.serviceSearch !== this.props.serviceSearch){
 			switch (this.state.whatPageIsChoosed) {
 				case 'Approve':
@@ -214,44 +214,44 @@ export default class Status extends React.PureComponent {
 					case 'Approve':
 						if(this.props.searchComp[0].Value === ""){
 							this.props.updateSalesApprovedParameter({
-							...prevProps.salesApprovedParameter.dataFilter, Filter: this.props.searchComp.Value = "",
-							});  
+								...prevProps.salesApprovedParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+							});
 						}else{
 							this.props.updateSalesApprovedParameter({
-							...prevProps.salesApprovedParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+								...prevProps.salesApprovedParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
 							});
 						}
 						break;
 					case 'Not Approve':
 						if(this.props.searchComp[0].Value === ""){
 							this.props.updateSalesParameter({
-							...prevProps.salesParameter.dataFilter, Filter: this.props.searchComp.Value = "",
-							});  
+								...prevProps.salesParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+							});
 						}else{
 							this.props.updateSalesParameter({
-							...prevProps.salesParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+								...prevProps.salesParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
 							});
 						}
 						break;
 					case 'Delete':
 						if(this.props.searchComp[0].Value === ""){
 							this.props.updateSalesDeletedParameter({
-							...prevProps.salesDeletedParameter.dataFilter, Filter: this.props.searchComp.Value = "",
-							});  
+								...prevProps.salesDeletedParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+							});
 						}else{
 							this.props.updateSalesDeletedParameter({
-							...prevProps.salesDeletedParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+								...prevProps.salesDeletedParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
 							});
 						}
 						break;
 					case 'SAP ISSUE':
 						if(this.props.searchComp[0].Value === ""){
 							this.props.updateSalesSapParameter({
-							...prevProps.salesSapParameter.dataFilter, Filter: this.props.searchComp.Value = "",
-							});  
+								...prevProps.salesSapParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+							});
 						}else{
 							this.props.updateSalesSapParameter({
-							...prevProps.salesSapParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
+								...prevProps.salesSapParameter.dataFilter, Filter : this.props.searchComp, PageNumber: 1,
 							});
 						}
 						break;
@@ -264,7 +264,7 @@ export default class Status extends React.PureComponent {
 						if(prevProps.searchComp !== this.props.searchComp){
 							if (this.props.searchComp[0].Value === "") {
 								this.props.updateServiceApprovedParameter({
-								  ...prevProps.serviceApprovedParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+									...prevProps.serviceApprovedParameter.dataFilter, Filter: this.props.searchComp.Value = "",
 								});
 							} else {
 								this.props.updateServiceApprovedParameter({
@@ -277,11 +277,11 @@ export default class Status extends React.PureComponent {
 						if(prevProps.searchComp !== this.props.searchComp){
 							if (this.props.searchComp[0].Value === "") {
 								this.props.updateServiceParameter({
-								  ...prevProps.serviceParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+									...prevProps.serviceParameter.dataFilter, Filter: this.props.searchComp.Value = "",
 								});
 							} else {
 								this.props.updateServiceParameter({
-								  ...prevProps.serviceParameter.dataFilter, Filter: this.props.searchComp, PageNumber: 1,
+									...prevProps.serviceParameter.dataFilter, Filter: this.props.searchComp, PageNumber: 1,
 								});
 							}
 						}
@@ -290,11 +290,11 @@ export default class Status extends React.PureComponent {
 						if(prevProps.searchComp !== this.props.searchComp){
 							if (this.props.searchComp[0].Value === "") {
 								this.props.updateServiceDeletedParameter({
-								  ...prevProps.serviceDeletedParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+									...prevProps.serviceDeletedParameter.dataFilter, Filter: this.props.searchComp.Value = "",
 								});
 							} else {
 								this.props.updateServiceDeletedParameter({
-								  ...prevProps.serviceDeletedParameter.dataFilter, Filter: this.props.searchComp, PageNumber: 1,
+									...prevProps.serviceDeletedParameter.dataFilter, Filter: this.props.searchComp, PageNumber: 1,
 								});
 							}
 						}
@@ -303,11 +303,11 @@ export default class Status extends React.PureComponent {
 						if(prevProps.searchComp !== this.props.searchComp){
 							if (this.props.searchComp[0].Value === "") {
 								this.props.updateServiceSapParameter({
-								  ...prevProps.serviceSapParameter.dataFilter, Filter: this.props.searchComp.Value = "",
+									...prevProps.serviceSapParameter.dataFilter, Filter: this.props.searchComp.Value = "",
 								});
 							} else {
 								this.props.updateServiceSapParameter({
-								  ...prevProps.serviceSapParameter.dataFilter, Filter: this.props.searchComp, PageNumber: 1,
+									...prevProps.serviceSapParameter.dataFilter, Filter: this.props.searchComp, PageNumber: 1,
 								});
 							}
 						}
@@ -342,7 +342,7 @@ export default class Status extends React.PureComponent {
 				}
 			}
 		}
-		
+
 		if(prevProps.filterDate !== this.props.filterDate){
 			if (this.props.location.whichTab === "sales") {
 				switch (this.state.whatPageIsChoosed) {
@@ -387,7 +387,7 @@ export default class Status extends React.PureComponent {
 								Sort: [{
 									Field : 'CustomerName',
 									Direction : 'desc'
-								}],      
+								}],
 							});
 							if (sortSalesBy.Customer.isAscending === !sortSalesBy.Customer.isActive) {
 								isDescending = !sortSalesBy.Customer.isAscending;
@@ -397,7 +397,7 @@ export default class Status extends React.PureComponent {
 									Sort: [{
 										Field : 'CustomerName',
 										Direction : 'asc'
-									}],      
+									}],
 								});
 							}
 						}
@@ -422,7 +422,7 @@ export default class Status extends React.PureComponent {
 									}],
 								});
 							}
-						} 
+						}
 						if (sortSalesBy.UnitModel.isActive) {
 							isDescending = !sortSalesBy.UnitModel.isAscending;
 							this.props.updateSalesApprovedParameter({
@@ -499,7 +499,7 @@ export default class Status extends React.PureComponent {
 								Sort: [{
 									Field : 'CustomerName',
 									Direction : 'desc'
-								}],      
+								}],
 							});
 							if (sortSalesBy.Customer.isAscending === !sortSalesBy.Customer.isActive) {
 								isDescending = !sortSalesBy.Customer.isAscending;
@@ -509,7 +509,7 @@ export default class Status extends React.PureComponent {
 									Sort: [{
 										Field : 'CustomerName',
 										Direction : 'asc'
-									}],      
+									}],
 								});
 							}
 						}
@@ -534,7 +534,7 @@ export default class Status extends React.PureComponent {
 									}],
 								});
 							}
-						} 
+						}
 						if (sortSalesBy.UnitModel.isActive) {
 							isDescending = !sortSalesBy.UnitModel.isAscending;
 							this.props.updateSalesParameter({
@@ -611,7 +611,7 @@ export default class Status extends React.PureComponent {
 								Sort: [{
 									Field : 'CustomerName',
 									Direction : 'desc'
-								}],      
+								}],
 							});
 							if (sortSalesBy.Customer.isAscending === !sortSalesBy.Customer.isActive) {
 								isDescending = !sortSalesBy.Customer.isAscending;
@@ -621,7 +621,7 @@ export default class Status extends React.PureComponent {
 									Sort: [{
 										Field : 'CustomerName',
 										Direction : 'asc'
-									}],      
+									}],
 								});
 							}
 						}
@@ -646,7 +646,7 @@ export default class Status extends React.PureComponent {
 									}],
 								});
 							}
-						} 
+						}
 						if (sortSalesBy.UnitModel.isActive) {
 							isDescending = !sortSalesBy.UnitModel.isAscending;
 							this.props.updateSalesDeletedParameter({
@@ -723,7 +723,7 @@ export default class Status extends React.PureComponent {
 								Sort: [{
 									Field : 'CustomerName',
 									Direction : 'desc'
-								}],      
+								}],
 							});
 							if (sortSalesBy.Customer.isAscending === !sortSalesBy.Customer.isActive) {
 								isDescending = !sortSalesBy.Customer.isAscending;
@@ -733,7 +733,7 @@ export default class Status extends React.PureComponent {
 									Sort: [{
 										Field : 'CustomerName',
 										Direction : 'asc'
-									}],      
+									}],
 								});
 							}
 						}
@@ -758,7 +758,7 @@ export default class Status extends React.PureComponent {
 									}],
 								});
 							}
-						} 
+						}
 						if (sortSalesBy.UnitModel.isActive) {
 							isDescending = !sortSalesBy.UnitModel.isAscending;
 							this.props.updateSalesSapParameter({
@@ -846,7 +846,7 @@ export default class Status extends React.PureComponent {
 								Sort: [{
 									Field : 'CustomerName',
 									Direction : 'desc'
-								}]   
+								}]
 							});
 							if (sortServiceBy.Customer.isAscending === !sortServiceBy.Customer.isActive) {
 								isDescending = !sortServiceBy.Customer.isAscending;
@@ -856,7 +856,7 @@ export default class Status extends React.PureComponent {
 									Sort: [{
 										Field : 'CustomerName',
 										Direction : 'asc'
-									}]   
+									}]
 								});
 							}
 						}
@@ -868,7 +868,7 @@ export default class Status extends React.PureComponent {
 								Sort: [{
 									Field : 'SiteCode',
 									Direction : 'desc'
-								}] 
+								}]
 							});
 							if (sortServiceBy.Site.isAscending === !sortServiceBy.Site.isActive) {
 								isDescending = !sortServiceBy.Site.isAscending;
@@ -878,10 +878,10 @@ export default class Status extends React.PureComponent {
 									Sort: [{
 										Field : 'SiteCode',
 										Direction : 'asc'
-									}] 
+									}]
 								});
 							}
-						} 
+						}
 						if (sortServiceBy.UnitModel.isActive) {
 							isDescending = !sortServiceBy.UnitModel.isAscending;
 							this.props.updateServiceApprovedParameter({
@@ -890,7 +890,7 @@ export default class Status extends React.PureComponent {
 								Sort: [{
 									Field : 'UnitModel',
 									Direction : 'desc'
-								}] 
+								}]
 							});
 							if (sortServiceBy.UnitModel.isAscending === !sortServiceBy.UnitModel.isActive) {
 								isDescending = !sortServiceBy.UnitModel.isAscending;
@@ -900,7 +900,7 @@ export default class Status extends React.PureComponent {
 									Sort: [{
 										Field : 'UnitModel',
 										Direction : 'asc'
-									}] 
+									}]
 								});
 							}
 						};
@@ -912,7 +912,7 @@ export default class Status extends React.PureComponent {
 								Sort: [{
 									Field : 'ComponentDescription',
 									Direction : 'desc'
-								}] 
+								}]
 							});
 							if (sortServiceBy.CompDesc.isAscending === !sortServiceBy.CompDesc.isActive) {
 								isDescending = !sortServiceBy.CompDesc.isAscending;
@@ -922,30 +922,30 @@ export default class Status extends React.PureComponent {
 									Sort: [{
 										Field : 'ComponentDescription',
 										Direction : 'asc'
-									}] 
+									}]
 								});
 							}
 						};
 						if (sortServiceBy.PlanType.isActive) {
 							isDescending = !sortServiceBy.PlanType.isAscending;
 							this.props.updateServiceParameter({
-							  ...this.props.serviceParameter.dataFilter,
-							  PageNumber: 1,
-							  Sort: [{
-								Field: 'PlanType',
-								Direction: 'desc'
-							  }]
-							});
-							if (sortServiceBy.PlanType.isAscending === !sortServiceBy.PlanType.isActive) {
-							  isDescending = !sortServiceBy.PlanType.isAscending;
-							  this.props.updateServiceParameter({
 								...this.props.serviceParameter.dataFilter,
 								PageNumber: 1,
 								Sort: [{
-								  Field: 'PlanType',
-								  Direction: 'asc'
+									Field: 'PlanType',
+									Direction: 'desc'
 								}]
-							  });
+							});
+							if (sortServiceBy.PlanType.isAscending === !sortServiceBy.PlanType.isActive) {
+								isDescending = !sortServiceBy.PlanType.isAscending;
+								this.props.updateServiceParameter({
+									...this.props.serviceParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field: 'PlanType',
+										Direction: 'asc'
+									}]
+								});
 							}
 						}
 						break;
@@ -958,7 +958,7 @@ export default class Status extends React.PureComponent {
 								Sort: [{
 									Field : 'CustomerName',
 									Direction : 'desc'
-								}]   
+								}]
 							});
 							if (sortServiceBy.Customer.isAscending === !sortServiceBy.Customer.isActive) {
 								isDescending = !sortServiceBy.Customer.isAscending;
@@ -968,7 +968,7 @@ export default class Status extends React.PureComponent {
 									Sort: [{
 										Field : 'CustomerName',
 										Direction : 'asc'
-									}]   
+									}]
 								});
 							}
 						}
@@ -980,7 +980,7 @@ export default class Status extends React.PureComponent {
 								Sort: [{
 									Field : 'SiteCode',
 									Direction : 'desc'
-								}] 
+								}]
 							});
 							if (sortServiceBy.Site.isAscending === !sortServiceBy.Site.isActive) {
 								isDescending = !sortServiceBy.Site.isAscending;
@@ -990,10 +990,10 @@ export default class Status extends React.PureComponent {
 									Sort: [{
 										Field : 'SiteCode',
 										Direction : 'asc'
-									}] 
+									}]
 								});
 							}
-						} 
+						}
 						if (sortServiceBy.UnitModel.isActive) {
 							isDescending = !sortServiceBy.UnitModel.isAscending;
 							this.props.updateServiceParameter({
@@ -1002,7 +1002,7 @@ export default class Status extends React.PureComponent {
 								Sort: [{
 									Field : 'UnitModel',
 									Direction : 'desc'
-								}] 
+								}]
 							});
 							if (sortServiceBy.UnitModel.isAscending === !sortServiceBy.UnitModel.isActive) {
 								isDescending = !sortServiceBy.UnitModel.isAscending;
@@ -1012,7 +1012,7 @@ export default class Status extends React.PureComponent {
 									Sort: [{
 										Field : 'UnitModel',
 										Direction : 'asc'
-									}] 
+									}]
 								});
 							}
 						};
@@ -1024,7 +1024,7 @@ export default class Status extends React.PureComponent {
 								Sort: [{
 									Field : 'ComponentDescription',
 									Direction : 'desc'
-								}] 
+								}]
 							});
 							if (sortServiceBy.CompDesc.isAscending === !sortServiceBy.CompDesc.isActive) {
 								isDescending = !sortServiceBy.CompDesc.isAscending;
@@ -1034,30 +1034,30 @@ export default class Status extends React.PureComponent {
 									Sort: [{
 										Field : 'ComponentDescription',
 										Direction : 'asc'
-									}] 
+									}]
 								});
 							}
 						};
 						if (sortServiceBy.PlanType.isActive) {
 							isDescending = !sortServiceBy.PlanType.isAscending;
 							this.props.updateServiceParameter({
-							  ...this.props.serviceParameter.dataFilter,
-							  PageNumber: 1,
-							  Sort: [{
-								Field: 'PlanType',
-								Direction: 'desc'
-							  }]
-							});
-							if (sortServiceBy.PlanType.isAscending === !sortServiceBy.PlanType.isActive) {
-							  isDescending = !sortServiceBy.PlanType.isAscending;
-							  this.props.updateServiceParameter({
 								...this.props.serviceParameter.dataFilter,
 								PageNumber: 1,
 								Sort: [{
-								  Field: 'PlanType',
-								  Direction: 'asc'
+									Field: 'PlanType',
+									Direction: 'desc'
 								}]
-							  });
+							});
+							if (sortServiceBy.PlanType.isAscending === !sortServiceBy.PlanType.isActive) {
+								isDescending = !sortServiceBy.PlanType.isAscending;
+								this.props.updateServiceParameter({
+									...this.props.serviceParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field: 'PlanType',
+										Direction: 'asc'
+									}]
+								});
 							}
 						}
 						break;
@@ -1070,7 +1070,7 @@ export default class Status extends React.PureComponent {
 								Sort: [{
 									Field : 'CustomerName',
 									Direction : 'desc'
-								}]   
+								}]
 							});
 							if (sortServiceBy.Customer.isAscending === !sortServiceBy.Customer.isActive) {
 								isDescending = !sortServiceBy.Customer.isAscending;
@@ -1080,7 +1080,7 @@ export default class Status extends React.PureComponent {
 									Sort: [{
 										Field : 'CustomerName',
 										Direction : 'asc'
-									}]   
+									}]
 								});
 							}
 						}
@@ -1092,7 +1092,7 @@ export default class Status extends React.PureComponent {
 								Sort: [{
 									Field : 'SiteCode',
 									Direction : 'desc'
-								}] 
+								}]
 							});
 							if (sortServiceBy.Site.isAscending === !sortServiceBy.Site.isActive) {
 								isDescending = !sortServiceBy.Site.isAscending;
@@ -1102,10 +1102,10 @@ export default class Status extends React.PureComponent {
 									Sort: [{
 										Field : 'SiteCode',
 										Direction : 'asc'
-									}] 
+									}]
 								});
 							}
-						} 
+						}
 						if (sortServiceBy.UnitModel.isActive) {
 							isDescending = !sortServiceBy.UnitModel.isAscending;
 							this.props.updateServiceDeletedParameter({
@@ -1114,7 +1114,7 @@ export default class Status extends React.PureComponent {
 								Sort: [{
 									Field : 'UnitModel',
 									Direction : 'desc'
-								}] 
+								}]
 							});
 							if (sortServiceBy.UnitModel.isAscending === !sortServiceBy.UnitModel.isActive) {
 								isDescending = !sortServiceBy.UnitModel.isAscending;
@@ -1124,7 +1124,7 @@ export default class Status extends React.PureComponent {
 									Sort: [{
 										Field : 'UnitModel',
 										Direction : 'asc'
-									}] 
+									}]
 								});
 							}
 						};
@@ -1136,7 +1136,7 @@ export default class Status extends React.PureComponent {
 								Sort: [{
 									Field : 'ComponentDescription',
 									Direction : 'desc'
-								}] 
+								}]
 							});
 							if (sortServiceBy.CompDesc.isAscending === !sortServiceBy.CompDesc.isActive) {
 								isDescending = !sortServiceBy.CompDesc.isAscending;
@@ -1146,30 +1146,30 @@ export default class Status extends React.PureComponent {
 									Sort: [{
 										Field : 'ComponentDescription',
 										Direction : 'asc'
-									}] 
+									}]
 								});
 							}
 						};
 						if (sortServiceBy.PlanType.isActive) {
 							isDescending = !sortServiceBy.PlanType.isAscending;
 							this.props.updateServiceParameter({
-							  ...this.props.serviceParameter.dataFilter,
-							  PageNumber: 1,
-							  Sort: [{
-								Field: 'PlanType',
-								Direction: 'desc'
-							  }]
-							});
-							if (sortServiceBy.PlanType.isAscending === !sortServiceBy.PlanType.isActive) {
-							  isDescending = !sortServiceBy.PlanType.isAscending;
-							  this.props.updateServiceParameter({
 								...this.props.serviceParameter.dataFilter,
 								PageNumber: 1,
 								Sort: [{
-								  Field: 'PlanType',
-								  Direction: 'asc'
+									Field: 'PlanType',
+									Direction: 'desc'
 								}]
-							  });
+							});
+							if (sortServiceBy.PlanType.isAscending === !sortServiceBy.PlanType.isActive) {
+								isDescending = !sortServiceBy.PlanType.isAscending;
+								this.props.updateServiceParameter({
+									...this.props.serviceParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field: 'PlanType',
+										Direction: 'asc'
+									}]
+								});
 							}
 						}
 						break;
@@ -1182,7 +1182,7 @@ export default class Status extends React.PureComponent {
 								Sort: [{
 									Field : 'CustomerName',
 									Direction : 'desc'
-								}]   
+								}]
 							});
 							if (sortServiceBy.Customer.isAscending === !sortServiceBy.Customer.isActive) {
 								isDescending = !sortServiceBy.Customer.isAscending;
@@ -1192,7 +1192,7 @@ export default class Status extends React.PureComponent {
 									Sort: [{
 										Field : 'CustomerName',
 										Direction : 'asc'
-									}]   
+									}]
 								});
 							}
 						}
@@ -1204,7 +1204,7 @@ export default class Status extends React.PureComponent {
 								Sort: [{
 									Field : 'SiteCode',
 									Direction : 'desc'
-								}] 
+								}]
 							});
 							if (sortServiceBy.Site.isAscending === !sortServiceBy.Site.isActive) {
 								isDescending = !sortServiceBy.Site.isAscending;
@@ -1214,10 +1214,10 @@ export default class Status extends React.PureComponent {
 									Sort: [{
 										Field : 'SiteCode',
 										Direction : 'asc'
-									}] 
+									}]
 								});
 							}
-						} 
+						}
 						if (sortServiceBy.UnitModel.isActive) {
 							isDescending = !sortServiceBy.UnitModel.isAscending;
 							this.props.updateServiceSapParameter({
@@ -1226,7 +1226,7 @@ export default class Status extends React.PureComponent {
 								Sort: [{
 									Field : 'UnitModel',
 									Direction : 'desc'
-								}] 
+								}]
 							});
 							if (sortServiceBy.UnitModel.isAscending === !sortServiceBy.UnitModel.isActive) {
 								isDescending = !sortServiceBy.UnitModel.isAscending;
@@ -1236,7 +1236,7 @@ export default class Status extends React.PureComponent {
 									Sort: [{
 										Field : 'UnitModel',
 										Direction : 'asc'
-									}] 
+									}]
 								});
 							}
 						};
@@ -1248,7 +1248,7 @@ export default class Status extends React.PureComponent {
 								Sort: [{
 									Field : 'ComponentDescription',
 									Direction : 'desc'
-								}] 
+								}]
 							});
 							if (sortServiceBy.CompDesc.isAscending === !sortServiceBy.CompDesc.isActive) {
 								isDescending = !sortServiceBy.CompDesc.isAscending;
@@ -1258,37 +1258,37 @@ export default class Status extends React.PureComponent {
 									Sort: [{
 										Field : 'ComponentDescription',
 										Direction : 'asc'
-									}] 
+									}]
 								});
 							}
 						};
 						if (sortServiceBy.PlanType.isActive) {
 							isDescending = !sortServiceBy.PlanType.isAscending;
 							this.props.updateServiceParameter({
-							  ...this.props.serviceParameter.dataFilter,
-							  PageNumber: 1,
-							  Sort: [{
-								Field: 'PlanType',
-								Direction: 'desc'
-							  }]
-							});
-							if (sortServiceBy.PlanType.isAscending === !sortServiceBy.PlanType.isActive) {
-							  isDescending = !sortServiceBy.PlanType.isAscending;
-							  this.props.updateServiceParameter({
 								...this.props.serviceParameter.dataFilter,
 								PageNumber: 1,
 								Sort: [{
-								  Field: 'PlanType',
-								  Direction: 'asc'
+									Field: 'PlanType',
+									Direction: 'desc'
 								}]
-							  });
+							});
+							if (sortServiceBy.PlanType.isAscending === !sortServiceBy.PlanType.isActive) {
+								isDescending = !sortServiceBy.PlanType.isAscending;
+								this.props.updateServiceParameter({
+									...this.props.serviceParameter.dataFilter,
+									PageNumber: 1,
+									Sort: [{
+										Field: 'PlanType',
+										Direction: 'asc'
+									}]
+								});
 							}
 						}
 						break;
 					default:
 						break;
 				}
-			}		
+			}
 		}
 	}
 
@@ -1302,7 +1302,7 @@ export default class Status extends React.PureComponent {
 
 	fetchSearchSales = async() => {
 		await this.props.fetchSalesOrder(this.props.searchSalesParameter, this.props.token);
-	} 
+	}
 	fetchSearchSalesApproved = async() => {
 		await this.props.fetchApprovedSales(this.props.searchSalesApprovedParam, this.props.token);
 	}
@@ -1314,7 +1314,7 @@ export default class Status extends React.PureComponent {
 	}
 	fetchSearchService = async() => {
 		await this.props.fetchServiceOrder(this.props.searchServiceParameter, this.props.token);
-	} 
+	}
 	fetchSearchServiceApproved = async() => {
 		await this.props.fetchApprovedService(this.props.searchSerrviceApprovedParam, this.props.token);
 	}
@@ -1324,7 +1324,7 @@ export default class Status extends React.PureComponent {
 	fetchSearchServiceSap = async() => {
 		await this.props.fetchSapService(this.props.searchServiceSapParam, this.props.token);
 	}
-	
+
 	onClickDeletedSales = () => {
 		this.props.fetchDeletedSales(this.props.salesDeletedParameter.dataFilter, this.props.token);
 	}
@@ -1338,13 +1338,13 @@ export default class Status extends React.PureComponent {
 		document.body.appendChild(link);
 		link.style = "display: none";
 		const todayDate = moment(new Date()).format('DD-MM-YYYY');
-		let fileName = 
+		let fileName =
 			this.state.whatPageIsChoosed === "Approve" ? "Sales-Order-Approval-"+todayDate+".csv" :
-			this.state.whatPageIsChoosed === "Not Approve" ? "Sales-Order-Pending-Approval-"+todayDate+".csv" :
-			this.state.whatPageIsChoosed === "Delete" ? "Sales-Order-Deleted-"+todayDate+".csv" :
-			this.state.whatPageIsChoosed === "SAP ISSUE" ? "Sales-Order-SAP-Issue-"+todayDate+".csv" : "";
+				this.state.whatPageIsChoosed === "Not Approve" ? "Sales-Order-Pending-Approval-"+todayDate+".csv" :
+					this.state.whatPageIsChoosed === "Delete" ? "Sales-Order-Deleted-"+todayDate+".csv" :
+						this.state.whatPageIsChoosed === "SAP ISSUE" ? "Sales-Order-SAP-Issue-"+todayDate+".csv" : "";
 		let blob = new Blob([this.props.approveSalesDownloaded.data]),
-		url = window.URL.createObjectURL(blob);
+			url = window.URL.createObjectURL(blob);
 		link.href = url;
 		link.download = fileName;
 		link.click();
@@ -1356,13 +1356,13 @@ export default class Status extends React.PureComponent {
 		document.body.appendChild(link);
 		link.style = "display: none";
 		const todayDate = moment(new Date()).format('DD-MM-YYYY');
-		let fileName = 
+		let fileName =
 			this.state.whatPageIsChoosed === "Approve" ? "Service-Order-Approval-"+todayDate+".csv" :
-			this.state.whatPageIsChoosed === "Not Approve" ? "Service-Order-Pending-Approval-"+todayDate+".csv" :
-			this.state.whatPageIsChoosed === "Delete" ? "Service-Order-Deleted-"+todayDate+".csv" :
-			this.state.whatPageIsChoosed === "SAP ISSUE" ? "Service-Order-SAP-Issue-"+todayDate+".csv" : "";
+				this.state.whatPageIsChoosed === "Not Approve" ? "Service-Order-Pending-Approval-"+todayDate+".csv" :
+					this.state.whatPageIsChoosed === "Delete" ? "Service-Order-Deleted-"+todayDate+".csv" :
+						this.state.whatPageIsChoosed === "SAP ISSUE" ? "Service-Order-SAP-Issue-"+todayDate+".csv" : "";
 		let blob = new Blob([this.props.approveServiceDownloaded.data]),
-		url = window.URL.createObjectURL(blob);
+			url = window.URL.createObjectURL(blob);
 		link.href = url;
 		link.download = fileName;
 		link.click();
@@ -1373,13 +1373,13 @@ export default class Status extends React.PureComponent {
 		let arr = []
 		const index = this.props.selectedSalesPlans.length
 		if (this.props.selectedSalesPlans.length > 0) {
-		  for (let i = 0; i < index; i++) {
-			arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
-		  }
+			for (let i = 0; i < index; i++) {
+				arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
+			}
 		}
 		await this.props.downloadSales(arr, this.props.token);
 		if (this.props.approveSalesDownloaded.status === ApiRequestActionsStatus.FAILED) {
-		  this.setState({ showError: true });
+			this.setState({ showError: true });
 		}
 	}
 
@@ -1387,26 +1387,26 @@ export default class Status extends React.PureComponent {
 		let arr = []
 		const index = this.props.selectedServicePlans.length
 		if (this.props.selectedServicePlans.length > 0) {
-		  for (let i = 0; i < index; i++) {
-			arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
-		  }
+			for (let i = 0; i < index; i++) {
+				arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
+			}
 		}
 		await this.props.downloadService(arr, this.props.token);
 		if (this.props.approveServiceDownloaded.status === ApiRequestActionsStatus.FAILED) {
-		  this.setState({ showError: true });
+			this.setState({ showError: true });
 		}
 	};
 
 	_renderSearchBar(){
 		return (
-		  <div className="bottom-rows">
-			<SearchInput
-				{...this.props}
-				idTab= "Status"
-				webInfo="Search"
-				handleSearch={this.handleSearch}
-			/>
-		  </div>
+			<div className="bottom-rows">
+				<SearchInput
+					{...this.props}
+					idTab= "Status"
+					webInfo="Search"
+					handleSearch={this.handleSearch}
+				/>
+			</div>
 		);
 	}
 
@@ -1420,13 +1420,13 @@ export default class Status extends React.PureComponent {
 							this.props.onSearchSales(this.state.searchVal)
 						}, 1000)
 					)
-				case 'Not Approve': 
+				case 'Not Approve':
 					return(
 						setTimeout(() => {
 							this.props.onSearchSales(this.state.searchVal)
 						}, 1000)
 					)
-				case 'Delete': 
+				case 'Delete':
 					return(
 						setTimeout(() => {
 							this.props.onSearchSales(this.state.searchVal)
@@ -1448,13 +1448,13 @@ export default class Status extends React.PureComponent {
 							this.props.onSearchService(this.state.searchVal)
 						}, 1000)
 					)
-				case 'Not Approve': 
+				case 'Not Approve':
 					return(
 						setTimeout(() => {
 							this.props.onSearchService(this.state.searchVal)
 						}, 1000)
 					)
-				case 'Delete': 
+				case 'Delete':
 					return(
 						setTimeout(() => {
 							this.props.onSearchService(this.state.searchVal)
@@ -1476,9 +1476,9 @@ export default class Status extends React.PureComponent {
 			let arr = []
 			const index = this.props.selectedSalesPlans.length
 			if (this.props.selectedSalesPlans.length > 0) {
-		  		for (let i = 0; i < index; i++) {
+				for (let i = 0; i < index; i++) {
 					arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
-		  		}
+				}
 			}
 			await this.props.deletePermanentSales({SoNumbers: arr}, this.props.token);
 			this.state.whatPageIsChoosed === "Delete" ? this.onClickSalesOrderDeleted() : this.onClickSalesOrderSap();
@@ -1487,9 +1487,9 @@ export default class Status extends React.PureComponent {
 			let arr = []
 			const index = this.props.selectedServicePlans.length
 			if (this.props.selectedServicePlans.length > 0) {
-		  		for (let i = 0; i < index; i++) {
+				for (let i = 0; i < index; i++) {
 					arr = [...arr, this.props.selectedServicePlans[i].WoNumber]
-		  		}
+				}
 			}
 			await this.props.deletePermanentService({WoNumbers: arr}, this.props.token);
 			this.state.whatPageIsChoosed === "Delete" ? this.onClickServiceOrderDeleted() : this.onClickServiceOrderSap();
@@ -1500,11 +1500,11 @@ export default class Status extends React.PureComponent {
 		let arr = []
 		const index = this.props.selectedSalesPlans.length;
 		if (this.props.selectedSalesPlans.length > 0) {
-		  for (let i = 0; i < index; i++) {
-			arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
-		  }
-		  await this.props.deleteSales({SoNumbers : arr, IsDelete: true}, this.props.token);
-		  this.onClickSalesOrderApproved();
+			for (let i = 0; i < index; i++) {
+				arr = [...arr, this.props.selectedSalesPlans[i].SoNumber]
+			}
+			await this.props.deleteSales({SoNumbers : arr, IsDelete: true}, this.props.token);
+			this.onClickSalesOrderApproved();
 		}
 	}
 
@@ -1512,11 +1512,11 @@ export default class Status extends React.PureComponent {
 		let arr = []
 		const index = this.props.selectedServicePlans.length;
 		if (this.props.selectedServicePlans.length > 0) {
-		  for (let i = 0; i < index; i++) {
-			arr = [...arr, this.props.selectedServicePlans[i].WoNumber];
-		  }
-		  await this.props.deleteService({WoNumbers : arr, IsDelete: true}, this.props.token);
-		  this.onClickServiceOrderApproved();
+			for (let i = 0; i < index; i++) {
+				arr = [...arr, this.props.selectedServicePlans[i].WoNumber];
+			}
+			await this.props.deleteService({WoNumbers : arr, IsDelete: true}, this.props.token);
+			this.onClickServiceOrderApproved();
 		}
 	}
 
@@ -1526,27 +1526,27 @@ export default class Status extends React.PureComponent {
 				if (Number(RoleUser.role()) !== 1){
 					return(
 						<BaseButton titles="Download"
-							{...this.props}
-							whatTabsIsRendered={true}
-							handleSalesDownload={this.handleSalesDownload}
+									{...this.props}
+									whatTabsIsRendered={true}
+									handleSalesDownload={this.handleSalesDownload}
 						/>
 					)
 				}else{
 					return(
 						<>
 							<BaseButton titles="Download"
-								{...this.props}
-								whatTabsIsRendered={true}
-								handleSalesDownload={this.handleSalesDownload}
+										{...this.props}
+										whatTabsIsRendered={true}
+										handleSalesDownload={this.handleSalesDownload}
 							/>
-							<BaseButton titles="Delete" 
-								{...this.props}
-								whatTabsIsRendered={true}
-								isDisabled={this.state.isDisabled}
-								disabledButton = {this.props.selectedSalesPlans.length < 1 }
-								totalSelectedItems ={this.props.selectedSalesPlans.length}
-								handleDeleteSales={this.handleDeleteSales}
-								renderSakses = {this.changeSuccess}
+							<BaseButton titles="Delete"
+										{...this.props}
+										whatTabsIsRendered={true}
+										isDisabled={this.state.isDisabled}
+										disabledButton = {this.props.selectedSalesPlans.length < 1 }
+										totalSelectedItems ={this.props.selectedSalesPlans.length}
+										handleDeleteSales={this.handleDeleteSales}
+										renderSakses = {this.changeSuccess}
 							/>
 						</>
 					)
@@ -1555,25 +1555,25 @@ export default class Status extends React.PureComponent {
 				if (Number(RoleUser.role()) !== 1) {
 					return(
 						<BaseButton titles="Download"
-							{...this.props}
-							whatTabsIsRendered= {true}
-							handleSalesDownload= {this.handleSalesDownload} 
+									{...this.props}
+									whatTabsIsRendered= {true}
+									handleSalesDownload= {this.handleSalesDownload}
 						/>
 					)
 				}else{
 					return(
 						<>
 							<BaseButton titles="Download"
-								{...this.props}
-								whatTabsIsRendered= {true}
-								handleSalesDownload= {this.handleSalesDownload} 
+										{...this.props}
+										whatTabsIsRendered= {true}
+										handleSalesDownload= {this.handleSalesDownload}
 							/>
-							<BaseButton titles="Permanently" 
-								{...this.props}
-								whatTabsIsRendered={true}
-								handleDeletePermanent={this.handleDeletePermanent}
-								isDisabled={this.state.isDisabled}
-								renderSakses = {this.changeSuccess}
+							<BaseButton titles="Permanently"
+										{...this.props}
+										whatTabsIsRendered={true}
+										handleDeletePermanent={this.handleDeletePermanent}
+										isDisabled={this.state.isDisabled}
+										renderSakses = {this.changeSuccess}
 							/>
 						</>
 					)
@@ -1581,38 +1581,38 @@ export default class Status extends React.PureComponent {
 			}else{
 				return(
 					<BaseButton titles="Download"
-						{...this.props}
-						whatTabsIsRendered= {true}
-						handleSalesDownload= {this.handleSalesDownload}
+								{...this.props}
+								whatTabsIsRendered= {true}
+								handleSalesDownload= {this.handleSalesDownload}
 					/>
 				)
-			}			
+			}
 		}else if (this.props.location.whichTab === "service"){
 			if(this.state.whatPageIsChoosed === "Approve"){
 				if (Number(RoleUser.role()) !== 1) {
 					return(
 						<BaseButton titles="Download"
-							{...this.props}
-							whatTabsIsRendered={false}
-							handleServiceDownload={this.handleServiceDownload}
+									{...this.props}
+									whatTabsIsRendered={false}
+									handleServiceDownload={this.handleServiceDownload}
 						/>
 					)
 				}else{
 					return(
 						<>
 							<BaseButton titles="Download"
-								{...this.props}
-								whatTabsIsRendered= {false}
-								handleServiceDownload= {this.handleServiceDownload}
+										{...this.props}
+										whatTabsIsRendered= {false}
+										handleServiceDownload= {this.handleServiceDownload}
 							/>
-							<BaseButton titles="Delete" 
-								{...this.props}
-								whatTabsIsRendered={false}
-								isDisabled={this.state.isDisabled}
-								disabledButton = {this.props.selectedServicePlans.length < 1 }
-								totalSelectedItems ={this.props.selectedServicePlans.length}
-								handleDeleteService={this.handleDeleteService}
-								renderSakses = {this.changeSuccess}
+							<BaseButton titles="Delete"
+										{...this.props}
+										whatTabsIsRendered={false}
+										isDisabled={this.state.isDisabled}
+										disabledButton = {this.props.selectedServicePlans.length < 1 }
+										totalSelectedItems ={this.props.selectedServicePlans.length}
+										handleDeleteService={this.handleDeleteService}
+										renderSakses = {this.changeSuccess}
 							/>
 						</>
 					)
@@ -1621,25 +1621,25 @@ export default class Status extends React.PureComponent {
 				if (Number(RoleUser.role()) !== 1) {
 					return(
 						<BaseButton titles="Download"
-							{...this.props}
-							whatTabsIsRendered={false}
-							handleServiceDownload={this.handleServiceDownload}
+									{...this.props}
+									whatTabsIsRendered={false}
+									handleServiceDownload={this.handleServiceDownload}
 						/>
 					)
 				}else{
 					return(
 						<>
 							<BaseButton titles="Download"
-								{...this.props}
-								whatTabsIsRendered={false}
-								handleServiceDownload={this.handleServiceDownload}
+										{...this.props}
+										whatTabsIsRendered={false}
+										handleServiceDownload={this.handleServiceDownload}
 							/>
-							<BaseButton titles="Permanently" 
-								{...this.props}
-								whatTabsIsRendered={false}
-								handleDeletePermanent={this.handleDeletePermanent}
-								isDisabled={this.state.isDisabled}
-								renderSakses = {this.changeSuccess}
+							<BaseButton titles="Permanently"
+										{...this.props}
+										whatTabsIsRendered={false}
+										handleDeletePermanent={this.handleDeletePermanent}
+										isDisabled={this.state.isDisabled}
+										renderSakses = {this.changeSuccess}
 							/>
 						</>
 					)
@@ -1647,14 +1647,14 @@ export default class Status extends React.PureComponent {
 			}else{
 				return(
 					<BaseButton titles="Download"
-						{...this.props}
-						whatTabsIsRendered= {false}
-						handleServiceDownload= {this.handleServiceDownload}
+								{...this.props}
+								whatTabsIsRendered= {false}
+								handleServiceDownload= {this.handleServiceDownload}
 					/>
 				)
 			}
 		}
-		
+
 	}
 
 	_renderPagination= (data) =>  {
@@ -1678,7 +1678,7 @@ export default class Status extends React.PureComponent {
 							</div>
 						</div>
 					)
-				case 'Not Approve': 
+				case 'Not Approve':
 					return(
 						<div className="pagination-status">
 							<div className="paging-status">
@@ -1741,7 +1741,7 @@ export default class Status extends React.PureComponent {
 							</div>
 						</div>
 					)
-				case 'Not Approve': 
+				case 'Not Approve':
 					return(
 						<div className="pagination-status">
 							<div className="paging-status">
@@ -1790,118 +1790,118 @@ export default class Status extends React.PureComponent {
 
 	_renderShowPerPage(){
 		return(
-			<DropDownList 
-			{...this.props}
-			handleClickShowPerPage={this.handleClickShowPerPage}
+			<DropDownList
+				{...this.props}
+				handleClickShowPerPage={this.handleClickShowPerPage}
 			/>
 		)
 	}
 
 	handleClickShowPerPage = (value) =>{
 		if (this.props.location.whichTab === 'sales') {
-			 switch (this.state.whatPageIsChoosed) {
-				 case 'Approve':
-					 return(
+			switch (this.state.whatPageIsChoosed) {
+				case 'Approve':
+					return(
 						<>
 							{this.props.clearSelectedSalesPlans()};
 							{this.props.updateSalesApprovedParameter({ ...this.props.salesApprovedParameter.dataFilter, PageSize: value})}
 						</>
-					 )
-				 case 'Not Approve':
-					 return(
-						 <>
+					)
+				case 'Not Approve':
+					return(
+						<>
 							{this.props.clearSelectedSalesPlans()};
 							{this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageSize: value})}
-					 	</>
-					 )
-				 case 'Delete':
+						</>
+					)
+				case 'Delete':
 					return(
 						<>
 							{this.props.clearSelectedSalesPlans()};
 							{this.props.updateSalesDeletedParameter({ ...this.props.salesDeletedParameter.dataFilter, PageSize: value})}
 						</>
 					)
-				 case 'SAP ISSUE':
-					 return(
+				case 'SAP ISSUE':
+					return(
 						<>
 							{this.props.clearSelectedSalesPlans()};
 							{this.props.updateSalesSapParameter({ ...this.props.salesSapParameter.dataFilter, PageSize: value })}
 						</>
-					 )
-				 default:
-			 }
+					)
+				default:
+			}
 		}else if (this.props.location.whichTab === 'service') {
-		  switch (this.state.whatPageIsChoosed) {
-			case 'Approve':
-				return(
-				   	<>
-						{this.props.clearSelectedServicePlans()};
-						{this.props.updateServiceApprovedParameter({ ...this.props.serviceApprovedParameter.dataFilter, PageSize: value})}
-			   		</>
-				)
-			case 'Not Approve':
-				return(
-					<>
-						{this.props.clearSelectedServicePlans()};
-						{this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value})}
-					</>
-				)
-			case 'Delete':
-			   return(
-				   <>
-						{this.props.clearSelectedServicePlans()};
-						{this.props.updateServiceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageSize: value})}
-				   </>
-			   )
-			case 'SAP ISSUE':
-				return(
-					<>
-						{this.props.clearSelectedServicePlans()};
-						{this.props.updateServiceSapParameter({ ...this.props.serviceSapParameter.dataFilter, PageSize: value})}
-					</>
-				)
-			default:
-		}
+			switch (this.state.whatPageIsChoosed) {
+				case 'Approve':
+					return(
+						<>
+							{this.props.clearSelectedServicePlans()};
+							{this.props.updateServiceApprovedParameter({ ...this.props.serviceApprovedParameter.dataFilter, PageSize: value})}
+						</>
+					)
+				case 'Not Approve':
+					return(
+						<>
+							{this.props.clearSelectedServicePlans()};
+							{this.props.updateServiceParameter({ ...this.props.serviceParameter.dataFilter, PageSize: value})}
+						</>
+					)
+				case 'Delete':
+					return(
+						<>
+							{this.props.clearSelectedServicePlans()};
+							{this.props.updateServiceDeletedParameter({ ...this.props.serviceDeletedParameter.dataFilter, PageSize: value})}
+						</>
+					)
+				case 'SAP ISSUE':
+					return(
+						<>
+							{this.props.clearSelectedServicePlans()};
+							{this.props.updateServiceSapParameter({ ...this.props.serviceSapParameter.dataFilter, PageSize: value})}
+						</>
+					)
+				default:
+			}
 		}
 	}
 
 	onClickSalesOrder = async() =>{
 		await this.props.fetchSalesOrder({
-			...this.props.salesParameter.dataFilter, 
-			Filter : 
-			  [...this.props.salesParameter.dataFilter.Filter, {
-				Field : 'IsApproved',
-				Operator : "eq",
-				Value : false,
-				Logic : "AND"
-			  },{
-				Field : 'SAPIssueMessage',
-				Operator : 'eq',
-				Value : '-',
-				Logic : 'AND'
-			  }]
-		  }, this.props.token);
+			...this.props.salesParameter.dataFilter,
+			Filter :
+				[...this.props.salesParameter.dataFilter.Filter, {
+					Field : 'IsApproved',
+					Operator : "eq",
+					Value : false,
+					Logic : "AND"
+				},{
+					Field : 'SAPIssueMessage',
+					Operator : 'eq',
+					Value : '-',
+					Logic : 'AND'
+				}]
+		}, this.props.token);
 		await this.props.clearSelectedSalesPlans()
 		this.setPropsToState();
 	}
-	
+
 	onClickRevisedSales = async() => {
 		await this.props.fetchRevisedSales({
-		  ...this.props.salesRevisedParam.dataFilter,
-		  Filter : 
-			[...this.props.salesRevisedParam.dataFilter.Filter, 
-				{
-				Field 	 : 'IsRevised',
-				Operator : 'eq',
-				Value 	 : 'true',
-				Logic 	 : 'AND'
-				},{
-				Field    : 'IsChanged',
-				Operator : 'eq',
-				Value    : 'false',
-				Logic    : "AND"
+			...this.props.salesRevisedParam.dataFilter,
+			Filter :
+				[...this.props.salesRevisedParam.dataFilter.Filter,
+					{
+						Field 	 : 'IsRevised',
+						Operator : 'eq',
+						Value 	 : 'true',
+						Logic 	 : 'AND'
+					},{
+					Field    : 'IsChanged',
+					Operator : 'eq',
+					Value    : 'false',
+					Logic    : "AND"
 				}
-			]
+				]
 		},this.props.token);
 	}
 
@@ -1920,7 +1920,7 @@ export default class Status extends React.PureComponent {
 	onClickSalesOrderSap = async() => {
 		await this.props.fetchSapSales({
 			...this.props.salesSapParameter.dataFilter,
-			Filter : 
+			Filter :
 				[...this.props.salesSapParameter.dataFilter.Filter, {
 					Field 	 : 'SAPIssueMessage',
 					Operator : 'neq',
@@ -1934,26 +1934,26 @@ export default class Status extends React.PureComponent {
 
 	reloadSalesOrderNA = async() => {
 		await this.props.fetchSalesOrder({
-			...this.props.salesParameter.dataFilter, 
-			Filter : 
-			  [...this.props.salesParameter.dataFilter.Filter, {
-				Field : 'IsApproved',
-				Operator : "eq",
-				Value : false,
-				Logic : "AND"
-			  },{
-				Field : 'SAPIssueMessage',
-				Operator : 'eq',
-				Value : '-',
-				Logic : 'AND'
-			  }]
-		  }, this.state.bearer);
+			...this.props.salesParameter.dataFilter,
+			Filter :
+				[...this.props.salesParameter.dataFilter.Filter, {
+					Field : 'IsApproved',
+					Operator : "eq",
+					Value : false,
+					Logic : "AND"
+				},{
+					Field : 'SAPIssueMessage',
+					Operator : 'eq',
+					Value : '-',
+					Logic : 'AND'
+				}]
+		}, this.state.bearer);
 	}
 
 	reloadServiceOrderNA = async() => {
 		await this.props.fetchServiceOrder({
 			...this.props.serviceParameter.dataFilter,
-			Filter : 
+			Filter :
 				[...this.props.serviceParameter.dataFilter.Filter, {
 					Field 	 : 'SAPIssueMessage',
 					Operator : 'eq',
@@ -1965,26 +1965,26 @@ export default class Status extends React.PureComponent {
 
 	reloadSalesOrderSap = async() => {
 		await this.props.fetchSalesOrder({
-			...this.props.salesParameter.dataFilter, 
-			Filter : 
-			  [...this.props.salesParameter.dataFilter.Filter, {
-				Field : 'IsApproved',
-				Operator : "eq",
-				Value : false,
-				Logic : "AND"
-			  },{
-				Field : 'SAPIssueMessage',
-				Operator : 'eq',
-				Value : '-',
-				Logic : 'AND'
-			  }]
-		  }, this.state.bearer);
+			...this.props.salesParameter.dataFilter,
+			Filter :
+				[...this.props.salesParameter.dataFilter.Filter, {
+					Field : 'IsApproved',
+					Operator : "eq",
+					Value : false,
+					Logic : "AND"
+				},{
+					Field : 'SAPIssueMessage',
+					Operator : 'eq',
+					Value : '-',
+					Logic : 'AND'
+				}]
+		}, this.state.bearer);
 	}
 
 	reloadServiceOrderSap = async() => {
 		await this.props.fetchSapService({
 			...this.props.serviceSapParameter.dataFilter,
-			Filter : 
+			Filter :
 				[...this.props.serviceSapParameter.dataFilter.Filter, {
 					Field 	 : 'SAPIssueMessage',
 					Operator : 'neq',
@@ -2015,7 +2015,7 @@ export default class Status extends React.PureComponent {
 	onClickServiceOrder = async() => {
 		await this.props.fetchServiceOrder({
 			...this.props.serviceParameter.dataFilter,
-			Filter : 
+			Filter :
 				[...this.props.serviceParameter.dataFilter.Filter, {
 					Field 	 : 'SAPIssueMessage',
 					Operator : 'eq',
@@ -2043,7 +2043,7 @@ export default class Status extends React.PureComponent {
 	onClickServiceOrderSap = async() => {
 		await this.props.fetchSapService({
 			...this.props.serviceSapParameter.dataFilter,
-			Filter : 
+			Filter :
 				[...this.props.serviceSapParameter.dataFilter.Filter, {
 					Field 	 : 'SAPIssueMessage',
 					Operator : 'neq',
@@ -2057,10 +2057,10 @@ export default class Status extends React.PureComponent {
 
 	salesOrderList(){
 		return(
-			<div className={this.props.salesOrderList.Lists.length === 0 
-				&& this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? 
+			<div className={this.props.salesOrderList.Data.Lists.length === 0
+			&& this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ?
 				"list-status-empty" : "plannings-list-containers"}>
-				<SalesOrderList 
+				<SalesOrderList
 					{...this.props}
 					idTab= "Status"
 					onClickTabHead={this.props.onClickSortBy}
@@ -2077,10 +2077,10 @@ export default class Status extends React.PureComponent {
 
 	serviceOrderList(){
 		return(
-			<div className={this.props.serviceOrderList.Lists.length === 0 
-				&& this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? 
+			<div className={this.props.serviceOrderList.Data.Lists.length === 0
+			&& this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ?
 				"list-status-empty" : "plannings-list-containers"}>
-				<ServiceOrderList 
+				<ServiceOrderList
 					{...this.props}
 					idTab= "Status"
 					onClickTabHead={this.props.onClickSortBy}
@@ -2097,10 +2097,10 @@ export default class Status extends React.PureComponent {
 
 	approvedSalesOrderList(){
 		return(
-			<div className={this.props.salesOrderListApproved.Lists.length === 0 
-				&& this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED ? 
+			<div className={this.props.salesOrderListApproved.Data.Lists.length === 0
+			&& this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED ?
 				"list-status-empty" : "plannings-list-containers"}>
-				<ApprovedSalesOrderList 
+				<ApprovedSalesOrderList
 					{...this.props}
 					onClickTabHead={this.props.onClickSortBy}
 					displaySalesCheckbox={this.props.salesApprovedParameter.paramsData.assigmentFilter || this.props.salesApprovedParameter.paramsData.inProgressFilter}
@@ -2116,10 +2116,10 @@ export default class Status extends React.PureComponent {
 
 	approvedServiceOrderList(){
 		return(
-			<div className={this.props.serviceOrderListApproved.Lists.length === 0 
-				&& this.props.fetchStatusServiceApproved === ApiRequestActionsStatus.SUCCEEDED ? 
+			<div className={this.props.serviceOrderListApproved.Data.Lists.length === 0
+			&& this.props.fetchStatusServiceApproved === ApiRequestActionsStatus.SUCCEEDED ?
 				"list-status-empty" : "plannings-list-containers"}>
-				<ApprovedServiceOrderList 
+				<ApprovedServiceOrderList
 					{...this.props}
 					onClickTabHead={this.props.onClickSortBy}
 					displayServiceCheckbox={this.props.serviceApprovedParameter.paramsData.assigmentFilter || this.props.serviceApprovedParameter.paramsData.inProgressFilter}
@@ -2135,10 +2135,10 @@ export default class Status extends React.PureComponent {
 
 	deletedSalesOrderList(){
 		return(
-			<div className={this.props.salesOrderListDeleted.Lists.length === 0 
-				&& this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED ? 
+			<div className={this.props.salesOrderListDeleted.Data.Lists.length === 0
+			&& this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED ?
 				"list-status-empty" : "plannings-list-containers"}>
-				<DeletedSalesOrderList 
+				<DeletedSalesOrderList
 					{...this.props}
 					onClickTabHead={this.props.onClickSortBy}
 					displaySalesCheckbox={this.props.salesDeletedParameter.paramsData.assigmentFilter || this.props.salesDeletedParameter.paramsData.inProgressFilter}
@@ -2154,10 +2154,10 @@ export default class Status extends React.PureComponent {
 
 	deletedServiceOrderList(){
 		return(
-			<div className={this.props.serviceOrderListDeleted.Lists.length === 0 
-				&& this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.SUCCEEDED ? 
+			<div className={this.props.serviceOrderListDeleted.Data.Lists.length === 0
+			&& this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.SUCCEEDED ?
 				"list-status-empty" : "plannings-list-containers"}>
-				<DeletedServiceOrderList 
+				<DeletedServiceOrderList
 					{...this.props}
 					onClickTabHead={this.props.onClickSortBy}
 					displayServiceCheckbox={this.props.serviceDeletedParameter.paramsData.assigmentFilter || this.props.serviceDeletedParameter.paramsData.inProgressFilter}
@@ -2173,10 +2173,10 @@ export default class Status extends React.PureComponent {
 
 	sapSalesOrderList(){
 		return(
-			<div className={this.props.salesOrderListSap.Lists.length === 0 
-				&& this.props.fetchStatusSalesSap === ApiRequestActionsStatus.SUCCEEDED ? 
+			<div className={this.props.salesOrderListSap.Data.Lists.length === 0
+			&& this.props.fetchStatusSalesSap === ApiRequestActionsStatus.SUCCEEDED ?
 				"list-status-empty" : "plannings-list-containers"}>
-				<SapSalesOrderList 
+				<SapSalesOrderList
 					{...this.props}
 					onClickTabHead={this.props.onClickSortBy}
 					displaySalesCheckbox={this.props.salesSapParameter.paramsData.assigmentFilter || this.props.salesSapParameter.paramsData.inProgressFilter}
@@ -2192,10 +2192,10 @@ export default class Status extends React.PureComponent {
 
 	sapServiceOrderList(){
 		return(
-			<div className={this.props.serviceOrderListSap.Lists.length === 0 
-				&& this.props.fetchStatusServiceSap === ApiRequestActionsStatus.SUCCEEDED ? 
+			<div className={this.props.serviceOrderListSap.Data.Lists.length === 0
+			&& this.props.fetchStatusServiceSap === ApiRequestActionsStatus.SUCCEEDED ?
 				"list-status-empty" : "plannings-list-containers"}>
-				<SapServiceOrderList 
+				<SapServiceOrderList
 					{...this.props}
 					onClickTabHead={this.props.onClickSortBy}
 					displayServiceCheckbox={this.props.serviceSapParameter.paramsData.assigmentFilter || this.props.serviceSapParameter.paramsData.inProgressFilter}
@@ -2220,8 +2220,8 @@ export default class Status extends React.PureComponent {
 					return(
 						<>
 							{this.approvedSalesOrderList()}
-							{this.props.salesOrderListApproved.Lists.length === 0 
-								&& this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED ? "" :
+							{this.props.salesOrderListApproved.Data.Lists.length === 0
+							&& this.props.fetchStatusSalesApproved === ApiRequestActionsStatus.SUCCEEDED ? "" :
 								<div className="bottom-row">
 									{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderListApproved)}
 								</div>
@@ -2232,8 +2232,8 @@ export default class Status extends React.PureComponent {
 					return(
 						<>
 							{this.approvedServiceOrderList()}
-							{this.props.serviceOrderListApproved.Lists.length === 0 
-								&& this.props.fetchStatusServiceApproved === ApiRequestActionsStatus.SUCCEEDED ? "" :
+							{this.props.serviceOrderListApproved.Data.Lists.length === 0
+							&& this.props.fetchStatusServiceApproved === ApiRequestActionsStatus.SUCCEEDED ? "" :
 								<div className="bottom-row">
 									{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderListApproved)}
 								</div>
@@ -2241,14 +2241,14 @@ export default class Status extends React.PureComponent {
 						</>
 					)
 				}
-			case 'Not Approve': 
-			this.setState({ isDisabled : true})
+			case 'Not Approve':
+				this.setState({ isDisabled : true})
 				if(this.props.location.whichTab === 'sales'){
 					return (
 						<>
 							{this.salesOrderList()}
-							{this.props.salesOrderList.Lists.length === 0  
-								&& this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+							{this.props.salesOrderList.Data.Lists.length === 0
+							&& this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
 								<div className="bottom-row">
 									{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderList)}
 								</div>
@@ -2259,8 +2259,8 @@ export default class Status extends React.PureComponent {
 					return (
 						<>
 							{this.serviceOrderList()}
-							{this.props.serviceOrderList.Lists.length === 0 
-								&& this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
+							{this.props.serviceOrderList.Data.Lists.length === 0
+							&& this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
 								<div className="bottom-row">
 									{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderList)}
 								</div>
@@ -2269,62 +2269,62 @@ export default class Status extends React.PureComponent {
 					)
 				}
 				break;
-			case 'Delete': 
-			this.setState({ isDisabled : false})
-			if(this.props.location.whichTab === 'sales'){
-				return(
-					<>
-						{this.deletedSalesOrderList()}
-						{this.props.salesOrderListDeleted.Lists.length === 0 
+			case 'Delete':
+				this.setState({ isDisabled : false})
+				if(this.props.location.whichTab === 'sales'){
+					return(
+						<>
+							{this.deletedSalesOrderList()}
+							{this.props.salesOrderListDeleted.Data.Lists.length === 0
 							&& this.props.fetchStatusSalesDeleted === ApiRequestActionsStatus.SUCCEEDED ? "" :
-							<div className="bottom-row">
-								{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderListDeleted)}
-							</div>
-						}
-					</>
-				)
-			}else if(this.props.location.whichTab === 'service'){
-				return(
-					<>
-						{this.deletedServiceOrderList()}
-						{this.props.serviceOrderListDeleted.Lists.length === 0 
+								<div className="bottom-row">
+									{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderListDeleted)}
+								</div>
+							}
+						</>
+					)
+				}else if(this.props.location.whichTab === 'service'){
+					return(
+						<>
+							{this.deletedServiceOrderList()}
+							{this.props.serviceOrderListDeleted.Data.Lists.length === 0
 							&& this.props.fetchStatusServiceDeleted === ApiRequestActionsStatus.SUCCEEDED ? "" :
-							<div className="bottom-row">
-								{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderListDeleted)}
-							</div>
-						}
-					</>
-				)
-			}
-			break;
-			case 'SAP ISSUE': 
-			this.setState({ isDisabled : true})
-			if(this.props.location.whichTab === 'sales'){
-				return(
-					<>
-						{this.sapSalesOrderList()}
-						{this.props.salesOrderListSap.Lists.length === 0 
+								<div className="bottom-row">
+									{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderListDeleted)}
+								</div>
+							}
+						</>
+					)
+				}
+				break;
+			case 'SAP ISSUE':
+				this.setState({ isDisabled : true})
+				if(this.props.location.whichTab === 'sales'){
+					return(
+						<>
+							{this.sapSalesOrderList()}
+							{this.props.salesOrderListSap.Data.Lists.length === 0
 							&& this.props.fetchStatusSalesSap === ApiRequestActionsStatus.SUCCEEDED ? "" :
-							<div className="bottom-row">
-								{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderListSap)}
-							</div>
-						}
-					</>
-				)
-			}else if(this.props.location.whichTab === 'service'){
-				return(
-					<>
-						{this.sapServiceOrderList()}
-						{this.props.serviceOrderListSap.Lists.length === 0 
+								<div className="bottom-row">
+									{this._renderShowPerPage()} {this._renderPagination(this.props.salesOrderListSap)}
+								</div>
+							}
+						</>
+					)
+				}else if(this.props.location.whichTab === 'service'){
+					return(
+						<>
+							{this.sapServiceOrderList()}
+							{this.props.serviceOrderListSap.Data.Lists.length === 0
 							&& this.props.fetchStatusServiceSap=== ApiRequestActionsStatus.SUCCEEDED ? "" :
-							<div className="bottom-row">
-								{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderListSap)}
-							</div>
-						}
-					</>
-				)
-			}
-			break;			
+								<div className="bottom-row">
+									{this._renderShowPerPage()} {this._renderPagination(this.props.serviceOrderListSap)}
+								</div>
+							}
+						</>
+					)
+				}
+				break;
 			default:
 		}
 	}
@@ -2332,7 +2332,7 @@ export default class Status extends React.PureComponent {
 	updateAssignmentSalesStates = (plan) => {
 		if (this.props.selectedSalesPlans
 			.some((plans) => plans.SoNumber === plan.SoNumber,
-			)) 
+			))
 		{ return this.props.unselectSalesPlan(plan); }
 		return this.props.selectSalesPlan(plan);
 	};
@@ -2340,15 +2340,15 @@ export default class Status extends React.PureComponent {
 	updateAssignmentServiceStates = (plan) => {
 		if (this.props.selectedServicePlans
 			.some((plans) => plans.WoNumber === plan.WoNumber,
-			)) 
+			))
 		{ return this.props.unselectServicePlan(plan); }
 		return this.props.selectServicePlan(plan);
 	};
 
 	_updateAssignmentSalesStatesAll = (dataBoolean) => {
 		this.props.selectAllSales(dataBoolean)
-	  }
-	
+	}
+
 	_updateAssignmentServiceStatesAll = (dataBoolean) => {
 		this.props.selectAllService(dataBoolean)
 	}
@@ -2356,46 +2356,46 @@ export default class Status extends React.PureComponent {
 	setPropsToState(){
 		if (this.props.location.whichTab === "sales") {
 			this.setState({
-				approveTotalData : this.props.salesOrderListApproved.TotalData,
-				notApproveTotalData : this.props.salesOrderList.TotalDataQuery,
-				deleteTotalData : this.props.salesOrderListDeleted.TotalData,
-				sapIssueTotalData : this.props.salesOrderListSap.TotalDataSAPIssue
+				approveTotalData : this.props.salesOrderListApproved.Meta.totalItems,
+				notApproveTotalData : this.props.salesOrderList.Meta.TotalDataQuery,
+				deleteTotalData : this.props.salesOrderListDeleted.Meta.totalItems,
+				sapIssueTotalData : this.props.salesOrderListSap.Meta.TotalDataSAPIssue
 			})
 		}else if (this.props.location.whichTab === "service") {
 			this.setState({
-				approveTotalData : this.props.serviceOrderListApproved.TotalData,
-				notApproveTotalData : this.props.serviceOrderList.TotalDataApproval,
-				deleteTotalData : this.props.serviceOrderListDeleted.TotalData,
-				sapIssueTotalData : this.props.serviceOrderListSap.TotalDataSAPIssue
+				approveTotalData : this.props.serviceOrderListApproved.Meta.totalItems,
+				notApproveTotalData : this.props.serviceOrderList.Meta.TotalDataApproval,
+				deleteTotalData : this.props.serviceOrderListDeleted.Meta.totalItems,
+				sapIssueTotalData : this.props.serviceOrderListSap.Meta.TotalDataSAPIssue
 			})
 		}
 	}
 
 	showLoading(){
 		if(this.props.fetchStatusSales === ApiRequestActionsStatus.LOADING){
-		  return(
-			<div className="loading-tracking-container">
-			  <img 
-				src={Spinner}
-				alt="loading-spinner"
-				className="loading-icon"
-				/>
-			</div>
-		  )
+			return(
+				<div className="loading-tracking-container">
+					<img
+						src={Spinner}
+						alt="loading-spinner"
+						className="loading-icon"
+					/>
+				</div>
+			)
 		}else if(this.props.fetchStatusSales === ApiRequestActionsStatus.FAILED){
-		  return(
-			<div className="loading-tracking-container">
-			  OOPS THERE WAS AN ERROR :'(
-			</div>
-		  )
-		}else if(this.props.salesOrderList.Lists.length === 0){
-		  return(
-			<div className="loading-tracking-container">
-			  DATA NOT FOUND
-			</div>
-		  )
+			return(
+				<div className="loading-tracking-container">
+					OOPS THERE WAS AN ERROR :'(
+				</div>
+			)
+		}else if(this.props.salesOrderList.Data.Lists.length === 0){
+			return(
+				<div className="loading-tracking-container">
+					DATA NOT FOUND
+				</div>
+			)
 		}
-	  }
+	}
 
 	render(){
 		return(
@@ -2416,12 +2416,12 @@ export default class Status extends React.PureComponent {
 							HO
 						</Button> :
 						Number(RoleUser.role()) === 1 && this.props.path === Menu.PLANNING_SITE_STATUS ?
-						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_SITE) }>
-							Site
-						</Button> :
-						<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_SITE) }>
-							Site
-						</Button> 
+							<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_SITE) }>
+								Site
+							</Button> :
+							<Button className="back_button" variant="outlined" onClick={ () => this.handleClick(Menu.PLANNING_SITE) }>
+								Site
+							</Button>
 					}
 					<div className="notif_button">
 						<NotifButton
@@ -2436,13 +2436,13 @@ export default class Status extends React.PureComponent {
 							<div className="title-bold">{this.props.location.whichTab === 'sales' ? 'Status -' : 'Status -'}</div>
 							<div className="title-normal">{this.props.location.whichTab === 'sales' ? 'Sales Order' : 'Service Order'}</div>
 						</div>
-						<div className="search-containers">							
+						<div className="search-containers">
 							{this._renderSearchBar()}
 							{this._renderDownloadBtn()}
 						</div>
 					</div>
 					<div className="filters-containers">
-						{this.props.location.whichTab === "sales" ? 
+						{this.props.location.whichTab === "sales" ?
 							<div className="dropdowns-containers">
 								<Cards title="Approve" totalData={this.state.approveTotalData} renderList={this._renderList} />
 								<Cards title="Not Approve" totalData={this.state.notApproveTotalData} renderList={this._renderList} />

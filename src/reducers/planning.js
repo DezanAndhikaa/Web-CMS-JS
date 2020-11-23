@@ -69,36 +69,54 @@ import {
 } from "actions/actionTypes";
 
 const initialSalesState = {
-	TotalData: 0,
-	TotalPage: 1,
-	PageNumber: 1,
-	PageSize: 10,
-	Lists: [],
-	NextPage: false,
-	PrevPage: false,
-	Customers: ['All Customer'],
-	Sites: ['All Site'],
-	UnitModels: ['All Unit Model'],
-	ComponentDescriptions: ['All Component Description'],
-	SerialNumbers: [],
-	LifeTimeComponents: [],
-	PlanExecutions: [],
+	Meta:{
+		totalItems: 0,
+		totalPage: 1,
+		pageNumber: 1,
+		pageSize: 10,
+		Customers: ['All Customer'],
+		Sites: ['All Site'],
+		UnitModels: ['All Unit Model'],
+		ComponentDescriptions: ['All Component Description'],
+		PlanType: ['All Plan Type'],
+		SerialNumbers: [],
+		LifeTimeComponents: [],
+		PlanExecutions: [],
+		NextPage: false,
+		PrevPage: false,
+	},
+	Data: {
+		Lists: []
+	},
 };
 const initialServiceState = {
-	TotalData: 0,
-	TotalPage: 1,
-	PageNumber: 1,
-	PageSize: 10,
-	Lists: [],
-	NextPage: false,
-	PrevPage: false,
-	Customers: ['ALL Customer'],
-	Sites: ['ALL Site'],
-	UnitModels: ['ALL Unit Model'],
-	ComponentDescriptions: ['All Component Description'],
-	SerialNumbers: [],
-	LifeTimeComponents: [],
-	PlanExecutions: [],
+	Meta:{
+		totalItems: 0,
+		totalPages: 1,
+		pageNumber: 1,
+		pageSize: 10,
+		hasNextPage: false,
+		hasPreviousPage: false,
+		TotalDataApproval: 0,
+		TotalDataSAPIssue: 0,
+		TotalDataRevision: 0,
+		TotalDataLifetime: 0,
+		filter: {
+			Customers: ['All Customer'],
+			Sites: ['All Site'],
+			UnitModels: ['All Unit Model'],
+			ComponentDescriptions: ['All Component Description'],
+			PlanType: ['All Plan Type'],
+			PartNumbers: [],
+			UnitCodes: [],
+			SerialNumbers: [],
+			LifeTimeComponents: [],
+			PlanExecutions: [],
+		}
+	},
+	Data: {
+		Lists: []
+	}
 };
 
 const initialSelectedFilter = {

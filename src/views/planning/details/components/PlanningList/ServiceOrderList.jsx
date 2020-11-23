@@ -142,7 +142,7 @@ export default class ServiceOrderList extends React.PureComponent {
                     onClick={({ target: { checked } }) => {
                       if (checked)
                         return this.props.onChooseAllService(
-                          this.props.serviceOrderList.Lists
+                          this.props.serviceOrderList.Data.Lists
                         );
                       return this.props.onChooseAllService([]);
                     }}
@@ -286,16 +286,16 @@ export default class ServiceOrderList extends React.PureComponent {
   }
 
   render() {
-    if (this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED) {
+    if (this.props.serviceOrderList.Data.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED) {
       return (
         <EmptyList />
       )
-    } else if (this.props.serviceOrderList.Lists.length === 0 && this.props.idService === "Data Input"
+    } else if (this.props.serviceOrderList.Data.Lists.length === 0 && this.props.idService === "Data Input"
       && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED) {
       return (
         <EmptyList />
       )
-    } else if (this.props.serviceOrderList.Lists.length === 0 && this.props.idTab === "Status"
+    } else if (this.props.serviceOrderList.Data.Lists.length === 0 && this.props.idTab === "Status"
       && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED) {
       return (
         <EmptyList idEmpty="NA" />
@@ -306,8 +306,8 @@ export default class ServiceOrderList extends React.PureComponent {
           <Table classes={{ root: 'table' }} className="table">
             {this.showTableHead()}
             <TableBody classes={{ root: 'table-body' }}>
-              {this.props.serviceOrderList.Lists
-                && this.props.serviceOrderList.Lists.map((row, id) => (
+              {this.props.serviceOrderList.Data.Lists
+                && this.props.serviceOrderList.Data.Lists.map((row, id) => (
                   this.showTableBody(row, id)
                 ))}
             </TableBody>

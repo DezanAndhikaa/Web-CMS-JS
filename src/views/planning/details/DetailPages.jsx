@@ -236,8 +236,8 @@ class DetailPages extends React.Component {
     }
     if (this.state.whichTabs === true) {
       const web = this.props.displayMode === 'web';
-      const currentPropsSales = this.props.salesOrderList.PageNumber;
-      const { PaginationLifetime } = this.props.salesOrderList;
+      const currentPropsSales = this.props.salesOrderList.Meta.pageNumber;
+      const { PaginationLifetime } = this.props.salesOrderList.Data.Lists;
 
       return (
         <div className="pagination">
@@ -443,7 +443,7 @@ class DetailPages extends React.Component {
           displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
           stats={this.state.stats}
           onStats={this.isChangeStat}
-          totalSalesData={this.props.salesOrderList.TotalDataLifetime}
+          totalSalesData={this.props.salesOrderList.Meta.TotalDataLifetime}
           onClickTabHead={this.props.onClickSortBy}
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}
@@ -463,7 +463,7 @@ class DetailPages extends React.Component {
           {this._renderTabs()}
         </div>
         <div></div>
-        {this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+        {this.props.salesOrderList.Data.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
           <div className="bottom-row">
             {this._renderShowPerPage()} {this._renderPagination()}
           </div>

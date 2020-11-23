@@ -388,7 +388,7 @@ class ApprovalPages extends React.Component {
     if (this.state.whichTabs === true) {
       const web = this.props.displayMode === 'web';
       const currentPropsSales = this.props.salesOrderList.PageNumber;
-      const { PaginationApproval } = this.props.salesOrderList;
+      const { totalPages } = this.props.salesOrderList.Meta;
 
       return (
         <div className="paginations">
@@ -397,9 +397,9 @@ class ApprovalPages extends React.Component {
             {web && currentPropsSales - 2 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 2 })} className="page-inactive-approval">{currentPropsSales - 2}</div>}
             {currentPropsSales - 1 > 0 && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales - 1 })} className="page-inactive-approval">{currentPropsSales - 1}</div>}
             <div className="page-active-approval">{currentPropsSales}</div>
-            {currentPropsSales + 1 <= PaginationApproval && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive-approval">{currentPropsSales + 1}</div>}
-            {web && currentPropsSales + 2 < PaginationApproval && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive-approval">{currentPropsSales + 2}</div>}
-            {web && currentPropsSales + 3 < PaginationApproval && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive-approval">{currentPropsSales + 3}</div>}
+            {currentPropsSales + 1 <= totalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 1 })} className="page-inactive-approval">{currentPropsSales + 1}</div>}
+            {web && currentPropsSales + 2 < totalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 2 })} className="page-inactive-approval">{currentPropsSales + 2}</div>}
+            {web && currentPropsSales + 3 < totalPages && <div onClick={() => this.props.updateSalesParameter({ ...this.props.salesParameter.dataFilter, PageNumber: currentPropsSales + 3 })} className="page-inactive-approval">{currentPropsSales + 3}</div>}
           </div>
         </div>
       )
@@ -797,8 +797,8 @@ class ApprovalPages extends React.Component {
           displayServiceCheckbox={this.props.serviceParameter.paramsData.assigmentFilter || this.props.serviceParameter.paramsData.inProgressFilter}
           stats={this.state.stats}
           onStats={this.isChangeStat}
-          totalSalesData={this.props.salesOrderList.TotalDataApproval}
-          totalServiceData={this.props.serviceOrderList.TotalDataApproval}
+          totalSalesData={this.props.salesOrderList.Meta.totalItems}
+          totalServiceData={this.props.serviceOrderList.Meta.totalItems}
           onClickTabHead={this.props.onClickSortBy}
           sortSalesByState={this.props.sortSalesBy}
           sortServiceByState={this.props.sortServiceBy}
@@ -855,12 +855,12 @@ class ApprovalPages extends React.Component {
           {this._renderTabs()}
         </div>
         <div></div>
-        {this.state.whichTabs === true ? this.props.salesOrderList.Lists.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
+        {this.state.whichTabs === true ? this.props.salesOrderList.Data.length === 0 && this.props.fetchStatusSales === ApiRequestActionsStatus.SUCCEEDED ? "" :
           <div className="bottom-row-approval">
             {this._renderShowPerPage()} {this._renderPagination()}
           </div>
           :
-          this.props.serviceOrderList.Lists.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
+          this.props.serviceOrderList.Data.length === 0 && this.props.fetchStatusService === ApiRequestActionsStatus.SUCCEEDED ? "" :
           <div className="bottom-row-approval">
             {this._renderShowPerPage()} {this._renderPagination()}
           </div>

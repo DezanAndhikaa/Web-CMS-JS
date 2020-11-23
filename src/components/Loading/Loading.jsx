@@ -35,10 +35,10 @@ class Loading extends React.Component{
     else if(this.props.fetchStatusSales === ApiRequestActionsStatus.FAILED){
       return(
         <div className="loading-container">
-          OOPS THERE WAS AN ERROR :'(
+          OOPS THERE WAS AN ERROR
         </div>
       )
-    }else if(this.props.salesOrderList.Lists.length === 0){
+    }else if(this.props.salesOrderList.Meta.totalItems === 0){
       return(
         <div className="loading-container">
           DATA NOT FOUND
